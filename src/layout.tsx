@@ -1,5 +1,6 @@
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./i18next";
 
 interface Props {
   children: React.ReactNode;
