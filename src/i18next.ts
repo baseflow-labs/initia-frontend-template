@@ -1,7 +1,10 @@
-import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
+
+import i18n from "i18next";
+
 import ar from "./assets/locales/ar.json";
-import en from "./assets/locales/en.json";
+
+// import en from "./assets/locales/en.json";
 
 // don't want to use this?
 // have a look at the Quick start guide
@@ -18,9 +21,9 @@ i18n
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
     resources: {
-      en: {
-        translations: en,
-      },
+      // en: {
+      //   translations: en,
+      // },
       ar: {
         translations: ar,
       },

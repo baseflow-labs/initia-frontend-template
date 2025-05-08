@@ -5,15 +5,17 @@
       "Welcome": "Welcome To Dashboard"
     }
   },
-  "Global": {
-    "Errors": {
-      "WrongMsg": "Something Went Wrong"
-    }
-  },
   "Public": {
     "Login": {
-      "Title": "Login",
-      "Welcome": "Welcome To Login"
+      "Labels": {
+        "Password": "Public.Login.Labels.Password",
+        "PhoneNo": "Public.Login.Labels.PhoneNo"
+      },
+      "Login": "Public.Login.Login",
+      "Title": "Login"
+    },
+    "Register": {
+      "Title": "Register"
     }
   }
 }
