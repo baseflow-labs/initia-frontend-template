@@ -164,7 +164,7 @@ const Form: React.FC<Props> = ({
             );
           })}
 
-          <Button type="submit" color="info" className="w-100">
+          <Button type="submit" color="info" className="w-100 p-2" rounded={4}>
             {submitText}
           </Button>
         </form>

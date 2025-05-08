@@ -22,17 +22,18 @@ const AuthLayout = () => {
     <main>
       <div className="vh-100 vw-100 d-flex justify-content-center align-items-center public-bg-image">
         <div
-          className="card shadow p-4"
+          className="card shadow p-4 rounded-5"
           style={{ maxWidth: "400px", width: "100%" }}
         >
           <div className="card-body text-center">
-            <img src={bgImage} className="w-100 px-5" />
+            <img src={bgImage} className="w-50 px-1" />
 
-            <div className="my-2 p-1 bg-light">
+            <div className="my-4 p-2 bg-light w-fit mx-auto rounded-5">
               {publicRoutes.map(({ name, route, view }, i) => (
                 <Button
                   color="info"
                   className="mx-1"
+                  rounded={5}
                   onClick={() => navigate(route)}
                   key={i}
                 >

@@ -29,3 +29,7 @@ body {
 .phone-number-input {
   direction: ltr;
 }
+
+.w-fit {
+  width: fit-content;
+}
