@@ -20,9 +20,15 @@ interface Input {
 interface Props extends React.FormHTMLAttributes<HTMLFormElement> {
   onFormSubmit?: (values: Record<string, any>) => void;
   inputs: Input[];
+  submitText?: string;
 }
 
-const Form: React.FC<Props> = ({ onFormSubmit, inputs, ...rest }) => {
+const Form: React.FC<Props> = ({
+  onFormSubmit,
+  inputs,
+  submitText,
+  ...rest
+}) => {
   const { t } = useTranslation();
 
   const initialValues = inputs.reduce<Record<string, any>>((acc, input) => {
@@ -159,7 +165,7 @@ const Form: React.FC<Props> = ({ onFormSubmit, inputs, ...rest }) => {
           })}
 
           <Button type="submit" color="info" className="w-100">
-            {t("Public.Login.Login")}
+            {submitText}
           </Button>
         </form>
       )}

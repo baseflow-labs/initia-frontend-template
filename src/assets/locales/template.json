@@ -8,13 +8,20 @@
   "Public": {
     "Login": {
       "Labels": {
-        "Password": "Public.Login.Labels.Password",
-        "PhoneNo": "Public.Login.Labels.PhoneNo"
+        "Login": "Login",
+        "Password": "Password",
+        "PhoneNo": "PhoneNo"
       },
-      "Login": "Public.Login.Login",
       "Title": "Login"
     },
     "Register": {
+      "Labels": {
+        "Name": "Name",
+        "Password": "Password",
+        "PasswordConfirmation": "PasswordConfirmation",
+        "PhoneNo": "PhoneNo",
+        "Register": "Register"
+      },
       "Title": "Register"
     }
   }

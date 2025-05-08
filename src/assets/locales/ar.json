@@ -8,13 +8,20 @@
   "Public": {
     "Login": {
       "Labels": {
+        "Login": "تسجيل الدخول",
         "Password": "كلمة السر",
         "PhoneNo": "رقم الهاتف"
       },
-      "Login": "تسجيل الدخول",
       "Title": "تسجيل الدخول"
     },
     "Register": {
+      "Labels": {
+        "Name": "الاسم",
+        "Password": "كلمة السر",
+        "PasswordConfirmation": "تأكيد كلمة السر",
+        "PhoneNo": "رقم الهاتف",
+        "Register": "إنشاء حساب"
+      },
       "Title": "إنشاء حساب"
     }
   }

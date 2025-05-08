@@ -21,8 +21,8 @@ const LoginView = () => {
   ];
 
   return (
-    <div className="text-success">
-      <Form inputs={formInputs} />
+    <div>
+      <Form inputs={formInputs} submitText={t("Public.Login.Labels.Login")} />
     </div>
   );
 };
