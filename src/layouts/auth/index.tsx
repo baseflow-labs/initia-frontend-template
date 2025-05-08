@@ -14,7 +14,7 @@ const AuthLayout = () => {
   ];
 
   return (
-    <main className="layout">
+    <main>
       Auth Layout
       <Routes>
         {authRoutes.map(({ name, route, view }, i) => (
