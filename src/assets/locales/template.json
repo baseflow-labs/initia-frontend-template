@@ -1,6 +1,19 @@
 {
-  "Home": {
-    "Welcome": "Home.Welcome",
-    "Welcomes": "Home.Welcomes"
+  "Auth": {
+    "Dashboard": {
+      "Title": "Dashboard",
+      "Welcome": "Welcome To Dashboard"
+    }
+  },
+  "Global": {
+    "Errors": {
+      "WrongMsg": "Something Went Wrong"
+    }
+  },
+  "Public": {
+    "Login": {
+      "Title": "Login",
+      "Welcome": "Welcome To Login"
+    }
   }
 }

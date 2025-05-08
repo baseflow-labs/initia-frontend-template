@@ -18,7 +18,7 @@ const initialState: AuthState = {
   refreshToken: localStorage.getItem("refreshToken") || "null",
   user: localStorage.getItem("user")?.length
     ? JSON.parse(localStorage.getItem("user")!)
-    : { id: 1, name: "x", email: "@hotmail.com" },
+    : {},
 };
 
 const auth = (

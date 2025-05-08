@@ -1,14 +1,12 @@
 import axios, {
   AxiosError,
-  AxiosRequestConfig,
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from "axios";
-import { addNotification } from "../store/actions/notifications";
-import store, { RootState } from "../store/store";
-import { t } from "i18next";
 import { logout } from "../store/actions/auth";
 import { endLoading, startLoading } from "../store/actions/loading";
+import { addNotification } from "../store/actions/notifications";
+import store, { RootState } from "../store/store";
 
 export const baseURL =
   (process.env.REACT_APP_BACKEND_URL || "http://127.0.0.1:8000") + "/api";
@@ -36,10 +34,10 @@ service.interceptors.request.use(
   }
 );
 
+const fallbackMessage = "Something Went Wrong";
+
 const errorHandle = (res?: AxiosResponse): Promise<never> => {
   if (!res) {
-    const fallbackMessage = t("Global.Errors.Something Went Wrong");
-
     store.dispatch(
       addNotification({
         id: 1,
@@ -54,9 +52,7 @@ const errorHandle = (res?: AxiosResponse): Promise<never> => {
     store.dispatch(logout());
   }
 
-  const msg =
-    (res.data as { message?: string })?.message ||
-    t("Global.Errors.Something Went Wrong");
+  const msg = (res.data as { message?: string })?.message || fallbackMessage;
 
   store.dispatch(
     addNotification({
@@ -85,8 +81,6 @@ service.interceptors.response.use(
     if (err.response) {
       return errorHandle(err.response);
     }
-
-    const fallbackMessage = t("Global.Errors.Something Went Wrong");
 
     store.dispatch(
       addNotification({
