@@ -5,7 +5,7 @@ export interface NotificationProps {
   [key: string]: any;
 }
 
-export const addNotification = (notification: Notification) => ({
+export const addNotification = (notification: NotificationProps) => ({
   type: "addNotification" as const,
   notification,
 });

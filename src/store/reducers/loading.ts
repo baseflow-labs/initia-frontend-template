@@ -3,6 +3,7 @@ interface LoadingState {
 }
 
 type LoadingAction = { type: "startLoading" } | { type: "endLoading" };
+
 const initialState: LoadingState = {
   loading: [],
 };
@@ -19,7 +20,7 @@ const loading = (
 
     case "endLoading":
       return {
-        loading: state.loading.slice(1), // or use your filter version
+        loading: state.loading.slice(1),
       };
 
     default:

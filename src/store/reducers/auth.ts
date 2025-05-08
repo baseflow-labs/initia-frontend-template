@@ -11,8 +11,7 @@ export type AuthAction =
       type: "login";
       resp: { jwt: string; refreshToken: string; user: UserProps };
     }
-  | { type: "logout" }
-  | { type: "updateUser"; data: Partial<UserProps> };
+  | { type: "logout" };
 
 const initialState: AuthState = {
   token: localStorage.getItem("token") || "null",
