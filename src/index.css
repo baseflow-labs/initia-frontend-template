@@ -6,3 +6,26 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.public-bg-image {
+  background-image: url("../src/assets/images/public-bg.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.public-bg-image::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* 50% black overlay */
+  z-index: 1;
+}
+
+.public-bg-image > .card {
+  z-index: 2;
+  position: relative;
+}
+
+.phone-number-input {
+  direction: ltr;
+}
