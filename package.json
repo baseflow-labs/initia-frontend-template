@@ -1,5 +1,6 @@
 {
-  "name": "fe",
+  "name": "mustaheq-fe",
+  "description": "Mustaheq React.Js Typescipt Frontend App",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
