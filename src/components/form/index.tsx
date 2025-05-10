@@ -34,25 +34,38 @@ const Form: React.FC<Props> = ({
 }) => {
   const { t } = useTranslation();
 
-  const initialValues = inputs.reduce<Record<string, any>>((acc, input) => {
-    acc[input.name] = input.defaultValue ?? "";
-    return acc;
-  }, {});
+  const initialValues = inputs
+    .map((input) =>
+      input.type === "radio"
+        ? {
+            ...input,
+            defaultValue: input.options ? input.options[0]?.value : "",
+          }
+        : input
+    )
+    .reduce<Record<string, any>>((acc, input) => {
+      acc[input.name] = input.defaultValue ?? "";
+      return acc;
+    }, {});
 
   const validate = (values: Record<string, any>) => {
     const errors: FormikErrors<Record<string, any>> = {};
-    inputs.forEach((input) => {
-      if (input.required && !values[input.name]) {
-        errors[input.name] = "Required";
-      }
-
-      if (input.type === "email" && values[input.name]) {
-        const validEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-        if (!validEmail.test(values[input.name])) {
-          errors[input.name] = "Invalid email address";
+    inputs
+      .map((input) =>
+        input.type === "radio" ? { ...input, required: false } : input
+      )
+      .forEach((input) => {
+        if (input.required && !values[input.name]) {
+          errors[input.name] = "Required";
         }
-      }
-    });
+
+        if (input.type === "email" && values[input.name]) {
+          const validEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+          if (!validEmail.test(values[input.name])) {
+            errors[input.name] = "Invalid email address";
+          }
+        }
+      });
     return errors;
   };
 
@@ -97,7 +110,10 @@ const Form: React.FC<Props> = ({
 
             return (
               <div key={input.name} className="mb-3">
-                <label className="form-label">{input.label}</label>
+                <label className="form-label">
+                  {input.label}{" "}
+                  {input.required ? <span className="text-danger">*</span> : ""}
+                </label>
 
                 {input.aboveComp}
 

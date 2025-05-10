@@ -1,4 +1,5 @@
-import React, { ChangeEvent, FocusEvent } from "react";
+import React, { ChangeEvent, FocusEvent, Fragment } from "react";
+import { useTranslation } from "react-i18next";
 import { InputProps } from ".";
 
 interface ValidatedInput {
@@ -15,22 +16,42 @@ interface ValidatedInput {
   };
 }
 
-type finalInput = ValidatedInput &
+type FinalInput = ValidatedInput &
   InputProps &
-  React.InputHTMLAttributes<HTMLInputElement>;
+  React.InputHTMLAttributes<HTMLInputElement> &
+  React.SelectHTMLAttributes<HTMLSelectElement>;
 
-const InputComp: React.FC<finalInput> = (input) => {
-  if (input.type === "select" && input.options) {
+const InputComp: React.FC<FinalInput> = ({
+  name,
+  value,
+  handleChange,
+  handleBlur,
+  type,
+  ...input
+}) => {
+  const { t } = useTranslation();
+
+  const commonClasses = "rounded-2 p-3";
+
+  // To Do
+  // - Date: RTL & Icon & Placeholder
+  // - Multiselect
+
+  if (type === "select" && input.options) {
     return (
       <select
-        name={input.name}
-        value={input.value}
-        onChange={input.handleChange}
-        onBlur={input.handleBlur}
-        className="form-select rounded-2 px-3 py-2"
-        key={input.name}
+        {...input}
+        name={name}
+        value={value}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        className={`form-select form-select-sm ${commonClasses}`}
+        key={name}
       >
-        <option value="">Select...</option>
+        <option value="">
+          {input.placeholder || t("Global.Labels.PleaseSelect")}
+        </option>
+
         {input.options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label ?? option.value}
@@ -40,29 +61,83 @@ const InputComp: React.FC<finalInput> = (input) => {
     );
   }
 
-  if (input.type === "phoneNumber") {
+  if (type === "radio" && input.options) {
+    return (
+      <Fragment>
+        {input.options.map((option) => (
+          <div className="form-check" key={option.value}>
+            <input
+              {...input}
+              type="radio"
+              name={name}
+              value={value}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className="form-check-input"
+              required={false}
+            />
+
+            <label className="form-check-label">
+              {option.label || option.value}
+            </label>
+          </div>
+        ))}
+      </Fragment>
+    );
+  }
+
+  if (type === "phoneNumber") {
     return (
       <input
+        {...input}
         type="number"
-        name={input.name}
-        onChange={input.handleChange}
-        onBlur={input.handleBlur}
-        value={input.value}
-        className="form-control rounded-2 px-3 py-2"
-        key={input.name}
+        name={name}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        value={value}
+        placeholder={input.placeholder || input.label}
+        className={`form-control form-control-sm ${commonClasses}`}
+        key={name}
+      />
+    );
+  }
+
+  if (type === "date") {
+    return (
+      <input
+        {...input}
+        type="date"
+        dir="rtl"
+        placeholder="اختر التاريخ"
+        name={name}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        value={value}
+        className={`form-control form-control-sm ${commonClasses}`}
+        // style={{
+        //   position: "relative",
+        //   backgroundImage: `url('/calendar-icon.svg')`,
+        //   backgroundRepeat: "no-repeat",
+        //   backgroundPosition: "left center",
+        //   paddingLeft: "2rem",
+        //   paddingRight: "2rem",
+        // }}
+        key={name}
       />
     );
   }
 
   return (
     <input
-      type={input.type}
-      name={input.name}
-      onChange={input.handleChange}
-      onBlur={input.handleBlur}
-      value={input.value}
-      className="form-control rounded-2 px-3 py-2"
-      key={input.name}
+      {...input}
+      type={type}
+      name={name}
+      onChange={handleChange}
+      onBlur={handleBlur}
+      value={value}
+      placeholder={input.placeholder || input.label}
+      className={`form-control form-control-sm ${commonClasses}`}
+      key={name}
     />
   );
 };
