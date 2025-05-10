@@ -1,16 +1,22 @@
 import React, { ChangeEvent, FocusEvent, Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import { InputProps } from ".";
+import DateInput from "./inputs/date";
+import SelectInput from "./inputs/select";
+import RadioInput from "./inputs/radio";
+import PhoneNoInput from "./inputs/phoneNo";
+import DefaultInput from "./inputs/default";
+import PasswordInput from "./inputs/password";
 
-interface ValidatedInput {
+export interface ValidatedInput {
   value?: string | number;
-  handleChange?: {
+  handleChange: {
     (e: ChangeEvent<any>): void;
     <T = string | ChangeEvent<any>>(field: T): T extends ChangeEvent<any>
       ? void
       : (e: string | ChangeEvent<any>) => void;
   };
-  handleBlur?: {
+  handleBlur: {
     (e: FocusEvent<any, Element>): void;
     <T = any>(fieldOrEvent: T): T extends string ? (e: any) => void : void;
   };
@@ -31,72 +37,39 @@ const InputComp: React.FC<FinalInput> = ({
 }) => {
   const { t } = useTranslation();
 
-  const commonClasses = "rounded-2 p-3";
-
-  // To Do
-  // - Date: RTL & Icon & Placeholder
-  // - Multiselect
-
   if (type === "select" && input.options) {
     return (
-      <select
+      <SelectInput
         {...input}
         name={name}
         value={value}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        className={`form-select form-select-sm ${commonClasses}`}
+        handleChange={handleChange}
+        handleBlur={handleBlur}
         key={name}
-      >
-        <option value="">
-          {input.placeholder || t("Global.Labels.PleaseSelect")}
-        </option>
-
-        {input.options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label ?? option.value}
-          </option>
-        ))}
-      </select>
+      />
     );
   }
 
   if (type === "radio" && input.options) {
     return (
-      <Fragment>
-        {input.options.map((option) => (
-          <div className="form-check" key={option.value}>
-            <input
-              {...input}
-              type="radio"
-              name={name}
-              value={value}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              className="form-check-input"
-              required={false}
-            />
-
-            <label className="form-check-label">
-              {option.label || option.value}
-            </label>
-          </div>
-        ))}
-      </Fragment>
+      <RadioInput
+        {...input}
+        name={name}
+        value={value}
+        handleChange={handleChange}
+        handleBlur={handleBlur}
+      />
     );
   }
 
   if (type === "phoneNumber") {
     return (
-      <input
+      <PhoneNoInput
         {...input}
-        type="number"
         name={name}
-        onChange={handleChange}
-        onBlur={handleBlur}
+        handleChange={handleChange}
+        handleBlur={handleBlur}
         value={value}
-        placeholder={input.placeholder || input.label}
-        className={`form-control form-control-sm ${commonClasses}`}
         key={name}
       />
     );
@@ -104,39 +77,39 @@ const InputComp: React.FC<FinalInput> = ({
 
   if (type === "date") {
     return (
-      <input
+      <DateInput
         {...input}
-        type="date"
-        dir="rtl"
-        placeholder="اختر التاريخ"
         name={name}
-        onChange={handleChange}
-        onBlur={handleBlur}
+        handleChange={handleChange}
+        handleBlur={handleBlur}
         value={value}
-        className={`form-control form-control-sm ${commonClasses}`}
-        // style={{
-        //   position: "relative",
-        //   backgroundImage: `url('/calendar-icon.svg')`,
-        //   backgroundRepeat: "no-repeat",
-        //   backgroundPosition: "left center",
-        //   paddingLeft: "2rem",
-        //   paddingRight: "2rem",
-        // }}
+        key={name}
+      />
+    );
+  }
+
+  if (type === "password") {
+    return (
+      <PasswordInput
+        {...input}
+        type={type}
+        name={name}
+        handleChange={handleChange}
+        handleBlur={handleBlur}
+        value={value}
         key={name}
       />
     );
   }
 
   return (
-    <input
+    <DefaultInput
       {...input}
       type={type}
       name={name}
-      onChange={handleChange}
-      onBlur={handleBlur}
+      handleChange={handleChange}
+      handleBlur={handleBlur}
       value={value}
-      placeholder={input.placeholder || input.label}
-      className={`form-control form-control-sm ${commonClasses}`}
       key={name}
     />
   );

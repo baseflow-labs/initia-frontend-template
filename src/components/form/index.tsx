@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import InputComp from "./Input";
 
 export interface InputProps {
-  type: string;
+  type?: string;
   name: string;
   label: string;
   required?: boolean;
