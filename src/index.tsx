@@ -8,6 +8,7 @@ import i18n from "./i18next";
 import reportWebVitals from "./reportWebVitals";
 import store from "./store/store";
 
+import "@fontsource/cairo";
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/css/bootstrap.rtl.min.css";

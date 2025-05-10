@@ -1362,6 +1362,11 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.57.1.tgz#de633db3ec2ef6a3c89e2f19038063e8a122e2c2"
   integrity sha512-d9zaMRSTIKDLhctzH12MtXvJKSSUhaHcjV+2Z+GK+EEY7XKpP5yR4x+N3TAcHTcu963nIr+TMcCb4DBCYX1z6Q==
 
+"@fontsource/cairo@^5.2.5":
+  version "5.2.5"
+  resolved "https://registry.yarnpkg.com/@fontsource/cairo/-/cairo-5.2.5.tgz#de2ac9ff330de651d7f07bcf8f5d9de4cebcd86d"
+  integrity sha512-heOniC/iVChIJ7ldoBtqEjDHilZsp4RqO41HwD5ssdjswDYJoMO8HyM0h/jfZuwiedAc9XqMappfC2YH6D+B8g==
+
 "@gulpjs/to-absolute-glob@^4.0.0":
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@gulpjs/to-absolute-glob/-/to-absolute-glob-4.0.0.tgz#1fc2460d3953e1d9b9f2dfdb4bcc99da4710c021"
