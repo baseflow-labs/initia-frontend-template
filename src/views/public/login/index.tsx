@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import Button from "../../../components/core/button";
 import Form from "../../../components/form";
 
 const LoginView = () => {
@@ -16,6 +17,13 @@ const LoginView = () => {
       type: "password",
       name: "password",
       label: t("Public.Login.Labels.Password"),
+      belowComp: (
+        <div className="d-block">
+          <Button color="ghost" route="/forgot-password" size="sm">
+            {t("Public.Login.Labels.DidUForgotPassword")}
+          </Button>
+        </div>
+      ),
       required: true,
     },
   ];

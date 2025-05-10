@@ -1,13 +1,13 @@
 import { useTranslation } from "react-i18next";
-import LoginView from "../../views/public/login";
-import { Route, Routes, useNavigate } from "react-router";
+import { Route, Routes, useLocation } from "react-router";
 import bgImage from "../../assets/images/brand/logo-full.png";
-import RegisterView from "../../views/public/register";
 import Button from "../../components/core/button";
+import LoginView from "../../views/public/login";
+import RegisterView from "../../views/public/register";
 
 const AuthLayout = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const location = useLocation();
 
   const publicRoutes = [
     { name: t("Public.Login.Title"), route: "/", view: <LoginView /> },
@@ -27,14 +27,13 @@ const AuthLayout = () => {
         >
           <div className="card-body text-center">
             <img src={bgImage} className="w-50 px-1" />
-
             <div className="my-4 p-2 bg-light w-fit mx-auto rounded-5">
               {publicRoutes.map(({ name, route, view }, i) => (
                 <Button
-                  color="info"
+                  color={location.pathname == route ? "info" : "ghost"}
                   className="mx-1"
                   rounded={5}
-                  onClick={() => navigate(route)}
+                  route={route}
                   key={i}
                 >
                   {name}
