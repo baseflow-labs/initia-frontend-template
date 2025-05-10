@@ -15,7 +15,7 @@ const RegisterView = () => {
       type: "phoneNumber",
       name: "phoneNo",
       label: t("Public.Register.Labels.PhoneNo"),
-      prefix: "+966",
+      prefixText: "+966",
       required: true,
     },
     {
