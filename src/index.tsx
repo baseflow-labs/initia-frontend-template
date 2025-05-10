@@ -2,13 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { I18nextProvider } from "react-i18next";
 import { Provider } from "react-redux";
+
 import App from "./App";
 import i18n from "./i18next";
 import reportWebVitals from "./reportWebVitals";
 import store from "./store/store";
 
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.rtl.min.css";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

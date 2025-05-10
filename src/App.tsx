@@ -10,8 +10,8 @@ const App = () => {
   const { token } = useAppSelector((state) => state.auth);
   const { i18n } = useTranslation();
 
-  document.dir = i18n.dir();
-  // document.lang = i18n.language;
+  document.documentElement.dir = i18n.dir();
+  document.documentElement.lang = i18n.language;
 
   return (
     <BrowserRouter>
