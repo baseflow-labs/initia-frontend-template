@@ -11,6 +11,8 @@ interface Input {
   defaultValue?: string | number;
   prefix?: string | number;
   postfix?: string | number;
+  aboveComp?: React.ReactNode;
+  belowComp?: React.ReactNode;
   options?: {
     value: string | number;
     label?: string;
@@ -78,6 +80,8 @@ const Form: React.FC<Props> = ({
                 <div key={input.name} className="mb-3">
                   <label className="form-label">{input.label}</label>
 
+                  {input.aboveComp}
+
                   <select
                     name={input.name}
                     id={input.name}
@@ -94,6 +98,8 @@ const Form: React.FC<Props> = ({
                     ))}
                   </select>
 
+                  {input.belowComp}
+
                   {errors[input.name] && touched[input.name] && (
                     <div className="text-danger">
                       {errors[input.name] as any}
@@ -107,6 +113,8 @@ const Form: React.FC<Props> = ({
               return (
                 <div key={input.name} className="mb-3">
                   <label className="form-label">{input.label}</label>
+
+                  {input.aboveComp}
 
                   <div className="input-group phone-number-input">
                     <span className="input-group-text bg-white">
@@ -124,6 +132,8 @@ const Form: React.FC<Props> = ({
                     />
                   </div>
 
+                  {input.belowComp}
+
                   {errors[input.name] && touched[input.name] && (
                     <div className="text-danger">
                       {errors[input.name] as any}
@@ -136,6 +146,8 @@ const Form: React.FC<Props> = ({
             return (
               <div key={input.name} className="mb-3">
                 <label className="form-label">{input.label}</label>
+
+                {input.aboveComp}
 
                 <div className="input-group">
                   {input.prefix && (
@@ -157,6 +169,8 @@ const Form: React.FC<Props> = ({
                   )}
                 </div>
 
+                {input.belowComp}
+
                 {errors[input.name] && touched[input.name] && (
                   <div className="text-danger">{errors[input.name] as any}</div>
                 )}
@@ -164,7 +178,7 @@ const Form: React.FC<Props> = ({
             );
           })}
 
-          <Button type="submit" color="info" className="w-100 p-2" rounded={4}>
+          <Button type="submit" color="info" className="w-100 p-2" rounded={3}>
             {submitText}
           </Button>
         </form>
