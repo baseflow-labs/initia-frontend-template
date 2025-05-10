@@ -2,15 +2,16 @@ import React from "react";
 import { Formik, FormikErrors } from "formik";
 import Button from "../core/button";
 import { useTranslation } from "react-i18next";
+import InputComp from "./Input";
 
-interface Input {
+export interface InputProps {
   type: string;
   name: string;
   label: string;
   required?: boolean;
   defaultValue?: string | number;
-  prefix?: string | number;
-  postfix?: string | number;
+  prefixText?: string | number;
+  postfixText?: string | number;
   aboveComp?: React.ReactNode;
   belowComp?: React.ReactNode;
   options?: {
@@ -21,7 +22,7 @@ interface Input {
 
 interface Props extends React.FormHTMLAttributes<HTMLFormElement> {
   onFormSubmit?: (values: Record<string, any>) => void;
-  inputs: Input[];
+  inputs: InputProps[];
   submitText?: string;
 }
 
@@ -75,73 +76,24 @@ const Form: React.FC<Props> = ({
       }) => (
         <form onSubmit={handleSubmit} className="text-start" {...rest}>
           {inputs.map((input) => {
-            if (input.type === "select" && input.options) {
-              return (
-                <div key={input.name} className="mb-3">
-                  <label className="form-label">{input.label}</label>
-
-                  {input.aboveComp}
-
-                  <select
-                    name={input.name}
-                    id={input.name}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values[input.name]}
-                    className="form-select"
-                  >
-                    <option value="">Select...</option>
-                    {input.options.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label ?? option.value}
-                      </option>
-                    ))}
-                  </select>
-
-                  {input.belowComp}
-
-                  {errors[input.name] && touched[input.name] && (
-                    <div className="text-danger">
-                      {errors[input.name] as any}
-                    </div>
-                  )}
-                </div>
+            const FixElement = ({
+              flip,
+              content,
+            }: {
+              flip?: boolean;
+              content?: string | number;
+            }) =>
+              content ? (
+                <span
+                  className={`input-group-text bg-white rounded-2 px-3 py-2 ${
+                    flip ? "ms-2 me-0" : "ms-0 me-2"
+                  }`}
+                >
+                  {content}
+                </span>
+              ) : (
+                <></>
               );
-            }
-
-            if (input.type === "phoneNumber") {
-              return (
-                <div key={input.name} className="mb-3">
-                  <label className="form-label">{input.label}</label>
-
-                  {input.aboveComp}
-
-                  <div className="input-group phone-number-input">
-                    <span className="input-group-text bg-white">
-                      {input.prefix}
-                    </span>
-
-                    <input
-                      type={input.type}
-                      name={input.name}
-                      id={input.name}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values[input.name]}
-                      className="form-control"
-                    />
-                  </div>
-
-                  {input.belowComp}
-
-                  {errors[input.name] && touched[input.name] && (
-                    <div className="text-danger">
-                      {errors[input.name] as any}
-                    </div>
-                  )}
-                </div>
-              );
-            }
 
             return (
               <div key={input.name} className="mb-3">
@@ -149,24 +101,21 @@ const Form: React.FC<Props> = ({
 
                 {input.aboveComp}
 
-                <div className="input-group">
-                  {input.prefix && (
-                    <span className="input-group-text">{input.prefix}</span>
-                  )}
+                <div
+                  className={`input-group ${
+                    input.type === "phoneNumber" ? "phone-number-input" : ""
+                  }`}
+                >
+                  <FixElement content={input.prefixText} flip />
 
-                  <input
-                    type={input.type}
-                    name={input.name}
-                    id={input.name}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
+                  <InputComp
                     value={values[input.name]}
-                    className="form-control"
+                    handleChange={handleChange}
+                    handleBlur={handleBlur}
+                    {...input}
                   />
 
-                  {input.postfix && (
-                    <span className="input-group-text">{input.postfix}</span>
-                  )}
+                  <FixElement content={input.postfixText} />
                 </div>
 
                 {input.belowComp}
