@@ -3,6 +3,8 @@ import { useTranslation } from "react-i18next";
 import { InputProps } from "..";
 import { ValidatedInput } from "../Input";
 import { commonInputClasses } from "../../../utils/consts";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 type FinalInput = ValidatedInput &
   InputProps &
@@ -39,7 +41,7 @@ const PasswordInput: React.FC<FinalInput> = ({
         role="button"
         onClick={() => setShow((current) => !current)}
       >
-        {show ? "Hi" : "Sh"}
+        <FontAwesomeIcon icon={show ? faEyeSlash : faEye} />
       </span>
     </Fragment>
   );

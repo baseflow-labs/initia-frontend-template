@@ -1,8 +1,10 @@
+import { faLocationPin } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { InputProps } from "..";
-import { ValidatedInput } from "../Input";
 import { commonInputClasses } from "../../../utils/consts";
+import { ValidatedInput } from "../Input";
 
 type FinalInput = ValidatedInput &
   InputProps &
@@ -75,7 +77,7 @@ const LocationInput: React.FC<FinalInput> = ({
         role="button"
         onClick={handleGetLocation}
       >
-        L
+        <FontAwesomeIcon icon={faLocationPin} />
       </span>
 
       {location?.lng && (

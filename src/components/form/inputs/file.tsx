@@ -1,6 +1,7 @@
+import { faUpload } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-
 import { InputProps } from "..";
 import { ValidatedInput } from "../Input";
 
@@ -55,7 +56,8 @@ const FileInput: React.FC<FinalInput> = ({
         className="btn btn-outline-success p-3 w-100 rounded-3"
         onClick={handleClick}
       >
-        {t("Global.Labels.UploadAttachment")} <img src="/upload-icon.svg" />
+        {t("Global.Labels.UploadAttachment")}{" "}
+        <FontAwesomeIcon icon={faUpload} />
       </button>
 
       <div
