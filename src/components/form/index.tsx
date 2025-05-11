@@ -158,7 +158,7 @@ const Form: React.FC<Props> = ({
           </div>
 
           <Button type="submit" color="info" className="w-100 p-2" rounded={3}>
-            {submitText}
+            {submitText || t("Global.Labels.Submit")}
           </Button>
         </form>
       )}

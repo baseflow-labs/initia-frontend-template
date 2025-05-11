@@ -14,7 +14,7 @@ const App = () => {
   document.documentElement.lang = i18n.language;
 
   return (
-    <main>
+    <body>
       <BrowserRouter>
         <Suspense fallback={<>Loading...</>}>
           <Routes>
@@ -26,7 +26,7 @@ const App = () => {
           </Routes>
         </Suspense>
       </BrowserRouter>
-    </main>
+    </body>
   );
 };
 
