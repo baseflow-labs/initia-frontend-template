@@ -40,7 +40,7 @@ const FileInput: React.FC<FinalInput> = ({
   };
 
   return (
-    <div className="w-100" dir="rtl">
+    <div className="w-100">
       <input
         type="file"
         ref={inputRef}
@@ -52,15 +52,19 @@ const FileInput: React.FC<FinalInput> = ({
 
       <button
         type="button"
-        className="btn btn-outline-success p-3 w-100"
+        className="btn btn-outline-success p-3 w-100 rounded-3"
         onClick={handleClick}
       >
-        {t("Global.Labels.UploadAttachment")}
-        {"  "}
-        <img src="/upload-icon.svg" />
+        {t("Global.Labels.UploadAttachment")} <img src="/upload-icon.svg" />
       </button>
 
-      <div className="mt-3 small text-muted">{selectedFile?.name}</div>
+      <div
+        className={`mt-1 small ${
+          selectedFile?.name ? "text-muted" : "text-white"
+        }`}
+      >
+        {selectedFile?.name || "."}
+      </div>
     </div>
   );
 };
