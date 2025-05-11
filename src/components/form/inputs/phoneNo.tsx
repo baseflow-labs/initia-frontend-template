@@ -26,6 +26,8 @@ const PhoneNoInput: React.FC<FinalInput> = ({
         const val = e.target.value;
         if (/^\d*$/.test(val)) handleChange(e); // allow only digits
       }}
+      minLength={9}
+      maxLength={9}
       onBlur={handleBlur}
       value={value}
       placeholder={input.placeholder || "501234567" || input.label}

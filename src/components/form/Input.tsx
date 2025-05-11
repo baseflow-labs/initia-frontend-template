@@ -11,6 +11,7 @@ import RadioInput from "./inputs/radio";
 import SelectInput from "./inputs/select";
 import LocationInput from "./inputs/location";
 import SelectManyInput from "./inputs/selectMany";
+import OtpInput from "./inputs/otp";
 
 export interface ValidatedInput {
   value?: string | number;
@@ -135,6 +136,19 @@ const InputComp: React.FC<FinalInput> = ({
   if (type === "location") {
     return (
       <LocationInput
+        {...input}
+        name={name}
+        handleChange={handleChange}
+        handleBlur={handleBlur}
+        value={value}
+        key={name}
+      />
+    );
+  }
+
+  if (type === "otp") {
+    return (
+      <OtpInput
         {...input}
         name={name}
         handleChange={handleChange}
