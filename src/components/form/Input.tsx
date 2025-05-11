@@ -1,12 +1,14 @@
 import React, { ChangeEvent, FocusEvent, Fragment } from "react";
 import { useTranslation } from "react-i18next";
+
 import { InputProps } from ".";
 import DateInput from "./inputs/date";
-import SelectInput from "./inputs/select";
-import RadioInput from "./inputs/radio";
-import PhoneNoInput from "./inputs/phoneNo";
 import DefaultInput from "./inputs/default";
+import FileInput from "./inputs/file";
 import PasswordInput from "./inputs/password";
+import PhoneNoInput from "./inputs/phoneNo";
+import RadioInput from "./inputs/radio";
+import SelectInput from "./inputs/select";
 
 export interface ValidatedInput {
   value?: string | number;
@@ -93,6 +95,19 @@ const InputComp: React.FC<FinalInput> = ({
       <PasswordInput
         {...input}
         type={type}
+        name={name}
+        handleChange={handleChange}
+        handleBlur={handleBlur}
+        value={value}
+        key={name}
+      />
+    );
+  }
+
+  if (type === "file") {
+    return (
+      <FileInput
+        {...input}
         name={name}
         handleChange={handleChange}
         handleBlur={handleBlur}

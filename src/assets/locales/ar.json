@@ -5,9 +5,16 @@
       "Welcome": "Welcome To Dashboard"
     }
   },
+  "Global": {
+    "Labels": {
+      "PleaseSelect": "نرجو الاختيار...",
+      "UploadAttachment": "إضافة مرفق"
+    }
+  },
   "Public": {
     "Login": {
       "Labels": {
+        "DidUForgotPassword": "هل نسيت كلمة السر؟",
         "Login": "تسجيل الدخول",
         "Password": "كلمة السر",
         "PhoneNo": "رقم الهاتف"

@@ -5,9 +5,16 @@
       "Welcome": "Welcome To Dashboard"
     }
   },
+  "Global": {
+    "Labels": {
+      "PleaseSelect": "Please Select...",
+      "UploadAttachment": "Upload Attachment"
+    }
+  },
   "Public": {
     "Login": {
       "Labels": {
+        "DidUForgotPassword": "Did You Forgot Password?",
         "Login": "Login",
         "Password": "Password",
         "PhoneNo": "PhoneNo"
@@ -18,7 +25,7 @@
       "Labels": {
         "Name": "Name",
         "Password": "Password",
-        "PasswordConfirmation": "PasswordConfirmation",
+        "PasswordConfirmation": "Password Confirmation",
         "PhoneNo": "PhoneNo",
         "Register": "Register"
       },
