@@ -10,6 +10,7 @@ import PhoneNoInput from "./inputs/phoneNo";
 import RadioInput from "./inputs/radio";
 import SelectInput from "./inputs/select";
 import LocationInput from "./inputs/location";
+import SelectManyInput from "./inputs/selectMany";
 
 export interface ValidatedInput {
   value?: string | number;
@@ -43,6 +44,19 @@ const InputComp: React.FC<FinalInput> = ({
   if (type === "select" && input.options) {
     return (
       <SelectInput
+        {...input}
+        name={name}
+        value={value}
+        handleChange={handleChange}
+        handleBlur={handleBlur}
+        key={name}
+      />
+    );
+  }
+
+  if (type === "selectMany" && input.options) {
+    return (
+      <SelectManyInput
         {...input}
         name={name}
         value={value}

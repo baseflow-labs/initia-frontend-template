@@ -18,9 +18,6 @@ const SelectInput: React.FC<FinalInput> = ({
 }) => {
   const { t } = useTranslation();
 
-  // To Do
-  // - Multiselect
-
   return (
     <select
       {...input}
