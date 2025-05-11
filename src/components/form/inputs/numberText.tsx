@@ -8,7 +8,7 @@ type FinalInput = ValidatedInput &
   InputProps &
   React.InputHTMLAttributes<HTMLInputElement>;
 
-const DefaultInput: React.FC<FinalInput> = ({
+const NumberTextInput: React.FC<FinalInput> = ({
   name,
   value,
   handleChange,
@@ -32,4 +32,4 @@ const DefaultInput: React.FC<FinalInput> = ({
   );
 };
 
-export default DefaultInput;
+export default NumberTextInput;

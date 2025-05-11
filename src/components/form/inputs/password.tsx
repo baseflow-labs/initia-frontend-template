@@ -8,8 +8,7 @@ import { ValidatedInput } from "../Input";
 
 type FinalInput = ValidatedInput &
   InputProps &
-  React.InputHTMLAttributes<HTMLInputElement> &
-  React.SelectHTMLAttributes<HTMLSelectElement>;
+  React.InputHTMLAttributes<HTMLInputElement>;
 
 const PasswordInput: React.FC<FinalInput> = ({
   name,
