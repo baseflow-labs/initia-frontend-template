@@ -1,8 +1,28 @@
+:root {
+  --bs-primary: #007bff !important;
+  --bs-secondary: #6c757d !important;
+  --bs-success: #8ec156 !important;
+  --bs-danger: #dc3545 !important;
+  --bs-warning: #ffc107 !important;
+  --bs-info: #18b4bf !important;
+  --bs-light: #f8f9fa !important;
+  --bs-dark: #343a40 !important;
+}
+
 body {
   margin: 0;
   font-family: Calibri, "Segoe UI", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+input[type="radio"]:checked {
+  background-color: var(--bs-info);
+  border-color: var(--bs-info);
+}
+
+input[type="radio"]:checked:focus {
+  box-shadow: 0 0 0 0.2rem rgba(24, 180, 191, 0.25);
 }
 
 :lang(ar) {
@@ -20,7 +40,7 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* 50% black overlay */
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 1;
 }
 

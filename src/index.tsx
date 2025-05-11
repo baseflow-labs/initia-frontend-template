@@ -9,9 +9,9 @@ import reportWebVitals from "./reportWebVitals";
 import store from "./store/store";
 
 import "@fontsource/cairo";
-import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/css/bootstrap.rtl.min.css";
+import "./index.css";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
