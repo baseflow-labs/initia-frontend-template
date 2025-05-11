@@ -28,17 +28,36 @@ const AuthLayout = () => {
           <div className="card-body text-center">
             <img src={bgImage} className="w-50 px-1" />
             <div className="my-4 p-2 bg-light w-fit mx-auto rounded-5">
-              {publicRoutes.map(({ name, route, view }, i) => (
-                <Button
-                  color={location.pathname == route ? "info" : "ghost"}
-                  className="mx-1"
-                  rounded={5}
-                  route={route}
-                  key={i}
-                >
-                  {name}
-                </Button>
-              ))}
+              {publicRoutes.map(({ name, route, view }, i) => {
+                const isSelected = location.pathname == route;
+
+                const settings = isSelected
+                  ? {
+                      color: "info",
+                      style: {
+                        backgroundColor: "rgba(24,180,191,0.15)",
+                      },
+                      className: "text-info",
+                    }
+                  : {
+                      color: "ghost",
+                      style: {},
+                      className: "text-black",
+                    };
+
+                return (
+                  <Button
+                    color={settings.color}
+                    style={settings.style}
+                    className={`mx-1 border-0 ${settings.className}`}
+                    rounded={5}
+                    route={route}
+                    key={i}
+                  >
+                    <span className={settings.className}>{name}</span>
+                  </Button>
+                );
+              })}
             </div>
 
             <p className="card-text">
