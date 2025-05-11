@@ -1,10 +1,10 @@
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { InputProps } from "..";
-import { ValidatedInput } from "../Input";
 import { commonInputClasses } from "../../../utils/consts";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { ValidatedInput } from "../Input";
 
 type FinalInput = ValidatedInput &
   InputProps &

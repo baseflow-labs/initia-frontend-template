@@ -1,7 +1,7 @@
 import React from "react";
 import { InputProps } from "..";
-import { ValidatedInput } from "../Input";
 import { commonInputClasses } from "../../../utils/consts";
+import { ValidatedInput } from "../Input";
 
 type FinalInput = ValidatedInput &
   InputProps &

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FocusEvent, Fragment } from "react";
+import React, { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import { InputProps } from "..";
 import { ValidatedInput } from "../Input";

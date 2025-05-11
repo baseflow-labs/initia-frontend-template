@@ -1,8 +1,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { InputProps } from "..";
-import { ValidatedInput } from "../Input";
 import { commonInputClasses } from "../../../utils/consts";
+import { ValidatedInput } from "../Input";
 
 type FinalInput = ValidatedInput &
   InputProps &

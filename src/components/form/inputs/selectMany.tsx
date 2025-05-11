@@ -1,16 +1,11 @@
+import { faPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { InputProps } from "..";
-import { ValidatedInput } from "../Input";
-import { commonInputClasses } from "../../../utils/consts";
 import Select, { components, StylesConfig } from "react-select";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faPlug,
-  faPlus,
-  faX,
-  faXmark,
-} from "@fortawesome/free-solid-svg-icons";
+import { InputProps } from "..";
+import { commonInputClasses } from "../../../utils/consts";
+import { ValidatedInput } from "../Input";
 
 type FinalInput = ValidatedInput &
   InputProps &

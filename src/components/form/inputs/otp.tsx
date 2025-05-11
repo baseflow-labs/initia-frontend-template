@@ -1,8 +1,7 @@
-import React, { ChangeEvent, FocusEvent, Fragment } from "react";
+import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { InputProps } from "..";
 import { ValidatedInput } from "../Input";
-import { useRef, useState } from "react";
 
 type FinalInput = ValidatedInput &
   InputProps &
