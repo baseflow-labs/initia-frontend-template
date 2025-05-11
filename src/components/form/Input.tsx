@@ -9,6 +9,7 @@ import PasswordInput from "./inputs/password";
 import PhoneNoInput from "./inputs/phoneNo";
 import RadioInput from "./inputs/radio";
 import SelectInput from "./inputs/select";
+import LocationInput from "./inputs/location";
 
 export interface ValidatedInput {
   value?: string | number;
@@ -107,6 +108,19 @@ const InputComp: React.FC<FinalInput> = ({
   if (type === "file") {
     return (
       <FileInput
+        {...input}
+        name={name}
+        handleChange={handleChange}
+        handleBlur={handleBlur}
+        value={value}
+        key={name}
+      />
+    );
+  }
+
+  if (type === "location") {
+    return (
+      <LocationInput
         {...input}
         name={name}
         handleChange={handleChange}
