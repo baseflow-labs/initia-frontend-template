@@ -13,6 +13,23 @@
     }
   },
   "Public": {
+    "ForgotPassword": {
+      "GotOtp": {
+        "Title": "Got Otp"
+      },
+      "ResetPassword": {
+        "NewPassword": "New Password",
+        "NewPasswordConfirmation": "New Password Confirmation",
+        "ResetPassword": "Reset Password",
+        "Title": "Reset Password"
+      },
+      "SendOtp": {
+        "ConfirmOTP": "Confirm OTP",
+        "RememberPassword": "Remember Password?",
+        "SendOtp": "Send OTP"
+      },
+      "Title": "Forgot Password"
+    },
     "Login": {
       "Labels": {
         "DidUForgotPassword": "Did You Forgot Password?",

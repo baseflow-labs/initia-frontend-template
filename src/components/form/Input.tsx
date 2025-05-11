@@ -145,6 +145,10 @@ const InputComp: React.FC<FinalInput> = ({
     );
   }
 
+  if (type === "title") {
+    return <div {...input}>{input.defaultValue}</div>;
+  }
+
   return (
     <DefaultInput
       {...input}

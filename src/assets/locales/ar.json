@@ -13,6 +13,23 @@
     }
   },
   "Public": {
+    "ForgotPassword": {
+      "GotOtp": {
+        "Title": "استلام رمز التحقق OTP"
+      },
+      "ResetPassword": {
+        "NewPassword": "كلمة السر الجديدة",
+        "NewPasswordConfirmation": "تأكيد كلمة السر الجديدة",
+        "ResetPassword": "إعادة تعيين كلمة السر",
+        "Title": "إعادة تعيين كلمة السر"
+      },
+      "SendOtp": {
+        "ConfirmOTP": "تأكيد رمز التحقق OTP",
+        "RememberPassword": "هل تتذكر كلمة السر؟",
+        "SendOtp": "ارسل رمز التحقق OTP"
+      },
+      "Title": "نسيت كلمة السر"
+    },
     "Login": {
       "Labels": {
         "DidUForgotPassword": "هل نسيت كلمة السر؟",
