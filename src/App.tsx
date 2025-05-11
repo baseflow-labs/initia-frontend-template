@@ -17,7 +17,7 @@ const App = () => {
     <BrowserRouter>
       <Suspense fallback={<>Loading...</>}>
         <Routes>
-          {false ? (
+          {token !== "null" ? (
             <Route path="*" element={<AuthLayout />} />
           ) : (
             <Route path="*" element={<PublicLayout />} />

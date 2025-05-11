@@ -31,6 +31,8 @@ const auth = (
       localStorage.setItem("refreshToken", action.resp.refreshToken);
       localStorage.setItem("user", JSON.stringify(action.resp.user));
 
+      window.location.reload();
+
       return {
         token: action.resp.jwt,
         refreshToken: action.resp.refreshToken,

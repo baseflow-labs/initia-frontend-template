@@ -1,9 +1,12 @@
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import Form from "../../../components/form";
+import { useDispatch } from "react-redux";
+import { login } from "../../../store/actions/auth";
 
 const RegistrationOtpView = () => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const formInputs = [
@@ -16,6 +19,18 @@ const RegistrationOtpView = () => {
 
   const onSubmit = (values = {}) => {
     console.log({ values });
+
+    dispatch(
+      login({
+        jwt: "thisIsFakeToken",
+        refreshToken: "thisIsFakeRefreshToken",
+        user: {
+          id: "1",
+          name: "Suhaib Ahmad",
+          email: "SuhaibAhmadAi@hotmail.com",
+        },
+      })
+    );
 
     navigate("/");
   };

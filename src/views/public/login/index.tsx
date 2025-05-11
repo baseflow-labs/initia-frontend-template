@@ -2,9 +2,12 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import Button from "../../../components/core/button";
 import Form from "../../../components/form";
+import { useDispatch } from "react-redux";
+import { login } from "../../../store/actions/auth";
 
 const LoginView = () => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const formInputs = [
@@ -37,6 +40,18 @@ const LoginView = () => {
 
   const onSubmit = (values = {}) => {
     console.log({ values });
+
+    dispatch(
+      login({
+        jwt: "thisIsFakeToken",
+        refreshToken: "thisIsFakeRefreshToken",
+        user: {
+          id: "1",
+          name: "Suhaib Ahmad",
+          email: "SuhaibAhmadAi@hotmail.com",
+        },
+      })
+    );
 
     navigate("/");
   };
