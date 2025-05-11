@@ -3,12 +3,61 @@
     "Dashboard": {
       "Title": "Dashboard",
       "Welcome": "Welcome To Dashboard"
+    },
+    "MembershipRegistration": {
+      "Form": {
+        "AbsherDocument": "لوحة المعلومات من موقع ابشر - المركبات - العمالة",
+        "ApartmentNo": "رقم الشقة",
+        "BackupMobile": "رقم الجوال الاحتياطي",
+        "BankAccountNumber": "الحساب البنكي",
+        "BeneficiaryMobile": "رقم جوال المستفيد",
+        "City": "المدينة",
+        "ComprehensiveRehabilitation": "التأهيل الشامل",
+        "CreditStatement": "التقرير الائتماني من موقع فلم (في حال وجود ديون رسمية)",
+        "Diseases": "نوع المرض",
+        "District": "الحي",
+        "Dob": "تاريخ الميلاد",
+        "EducationLevel": "المستوى التعليمي",
+        "Email": "البريد الإلكتروني",
+        "FamilyRecordPhoto": "سجل الأسرة",
+        "FullName": "الاسم الرباعي باللغة العربية",
+        "Gender": "الجنس",
+        "Governorate": "المحافظة",
+        "GuardianIdPhoto": "هوية رب الأسرة",
+        "HealthStatementPhoto": "الكشف الطبي للأمراض التي تعاني منها",
+        "HealthStatus": "الحالة الصحية",
+        "HomeLocation": "موقع المنزل",
+        "HomeOwnership": "ملكية المنزل",
+        "HomeType": "نوع السكن",
+        "IbanPhoto": "صورة رقم الآييبان",
+        "IdExpiryDate": "تاريخ انتهاء الهوية",
+        "IdNumber": "رقم الهوية",
+        "IncomeDocument": "مصادر الدخل للموظفين (من يسكنون نفس البيت)",
+        "IncurableDisease": "هل المرض مستعص؟",
+        "Insurances": "تأمينات",
+        "MasrefDocument": "شهادة الآيبان من تطبيق المصرف",
+        "NationalAddressDocument": "إثبات العنوان الوطني",
+        "Nationality": "الجنسية",
+        "Occupation": "المهنة",
+        "PaymentFrequency": "طريقة الدفعة",
+        "RentalCharge": "قيمة الإيجار كما في العقد",
+        "RentalContractPhoto": "عقد إيجار",
+        "RentalDocument": "للمستأجر عقد إيجار إلكتروني ساري المدة من موقع إيجار",
+        "Retirement": "تقاعد",
+        "Salary": "راتب",
+        "SecondaryMobile": "رقم الجوال الثانوي",
+        "SocialSecurity": "ضمان اجتماعي",
+        "SocialStatus": "الحالة الاجتماعية",
+        "StudentsDocument": "تعريف طالب منتظم (من موقع نور أو من موقع الجامعة)",
+        "TawakkalnaDocument": "صورة بطاقة الهوية وسجل الأسرة من تطبيق توكلنا"
+      }
     }
   },
   "Global": {
     "Labels": {
       "Location": "Google Map رابط",
       "PleaseSelect": "نرجو الاختيار...",
+      "Submit": "إرسال",
       "UploadAttachment": "إضافة مرفق"
     }
   },
