@@ -8,6 +8,7 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   p?: number;
   route?: string;
   size?: string;
+  outline?: boolean;
 }
 
 const Button = ({
@@ -18,6 +19,7 @@ const Button = ({
   p = 2,
   route,
   size = "",
+  outline,
   ...rest
 }: Props) => {
   const navigate = useNavigate();
@@ -37,9 +39,9 @@ const Button = ({
 
   return (
     <button
-      className={`btn btn-${color} text-${textColor()} btn-${size} ${className} rounded-${rounded} py-${p} px-${
-        p + 1
-      }`}
+      className={`btn btn-${outline ? "outline-" : ""}${color} text-${
+        outline ? "" : textColor()
+      } btn-${size} ${className} rounded-${rounded} py-${p} px-${p + 1}`}
       onClick={route ? () => navigate(route) : rest.onClick}
       {...rest}
     >
