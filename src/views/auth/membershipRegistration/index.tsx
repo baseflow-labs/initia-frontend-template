@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-import Placeholder from "react-select/dist/declarations/src/components/Placeholder";
 import { Fragment } from "react/jsx-runtime";
 
 import absherLogo from "../../../assets/images/partners/absher.svg";

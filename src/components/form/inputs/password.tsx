@@ -1,7 +1,6 @@
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Fragment, useState } from "react";
-import { useTranslation } from "react-i18next";
 import { InputProps } from "..";
 import { commonInputClasses } from "../../../utils/consts";
 import { ValidatedInput } from "../Input";
@@ -18,8 +17,6 @@ const PasswordInput: React.FC<FinalInput> = ({
   type,
   ...input
 }) => {
-  const { t } = useTranslation();
-
   const [show, setShow] = useState(false);
 
   return (

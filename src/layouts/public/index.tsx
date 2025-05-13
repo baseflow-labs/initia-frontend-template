@@ -107,13 +107,13 @@ const AuthLayout = () => {
               </div>
             )}
 
-            <p className="card-text">
+            <div className="card-text">
               <Routes>
                 {publicRoutes.map(({ name, route, view }, i) => (
                   <Route path={route} element={view} key={i} />
                 ))}
               </Routes>
-            </p>
+            </div>
           </div>
         </div>
       </div>

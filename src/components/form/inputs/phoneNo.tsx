@@ -1,5 +1,4 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
 import { InputProps } from "..";
 import { commonInputClasses } from "../../../utils/consts";
 import { ValidatedInput } from "../Input";
@@ -16,8 +15,6 @@ const PhoneNoInput: React.FC<FinalInput> = ({
   type,
   ...input
 }) => {
-  const { t } = useTranslation();
-
   return (
     <input
       {...input}

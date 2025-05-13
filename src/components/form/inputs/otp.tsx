@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
 import { InputProps } from "..";
 import { ValidatedInput } from "../Input";
 
@@ -17,7 +16,6 @@ const OtpInput: React.FC<FinalInput> = ({
   type,
   ...input
 }) => {
-  const { t } = useTranslation();
   const [otp, setOtp] = useState<string[]>(Array(OTP_LENGTH).fill(""));
   const inputsRef = useRef<Array<HTMLInputElement | null>>([]);
 

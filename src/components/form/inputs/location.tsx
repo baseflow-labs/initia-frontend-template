@@ -88,6 +88,7 @@ const LocationInput: React.FC<FinalInput> = ({
           <a
             href={location.link}
             target="_blank"
+            rel="noreferrer"
             className="d-block mt-2 text-success small"
           >
             استعرض الموقع

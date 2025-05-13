@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-import { useTranslation } from "react-i18next";
 import { InputProps } from "..";
 import { ValidatedInput } from "../Input";
 
@@ -15,8 +14,6 @@ const RadioInput: React.FC<FinalInput> = ({
   type,
   ...input
 }) => {
-  const { t } = useTranslation();
-
   return (
     <Fragment>
       {input.options?.map((option) => (

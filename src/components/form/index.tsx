@@ -6,22 +6,22 @@ import Button from "../core/button";
 import InputComp from "./Input";
 
 export interface InputProps {
-  type?: string;
   name: string;
   label?: string;
   labelNote?: string;
-  logo?: string;
+  type?: string;
   required?: boolean;
-  halfCol?: boolean;
   defaultValue?: string | number;
-  prefixText?: string | number;
-  postfixText?: string | number;
-  aboveComp?: React.ReactNode;
-  belowComp?: React.ReactNode;
   options?: {
     value: string | number;
     label?: string;
   }[];
+  logo?: string;
+  halfCol?: boolean;
+  prefixText?: string | number;
+  postfixText?: string | number;
+  aboveComp?: React.ReactNode;
+  belowComp?: React.ReactNode;
 }
 
 interface Props extends React.FormHTMLAttributes<HTMLFormElement> {
@@ -110,16 +110,24 @@ const Form: React.FC<Props> = ({
         handleSubmit,
         isSubmitting,
       }) => {
-        const InputView = (input: InputProps) => (
+        const InputView = ({
+          prefixText,
+          postfixText,
+          aboveComp,
+          belowComp,
+          labelNote,
+          logo,
+          ...input
+        }: InputProps) => (
           <Fragment>
-            {input.aboveComp}
+            {aboveComp}
 
             <div
               className={`input-group ${
                 input.type === "phoneNumber" ? "phone-number-input" : ""
               }`}
             >
-              <FixElement content={input.prefixText} flip />
+              <FixElement content={prefixText} flip />
 
               <InputComp
                 value={values[input.name]}
@@ -128,10 +136,10 @@ const Form: React.FC<Props> = ({
                 {...input}
               />
 
-              <FixElement content={input.postfixText} />
+              <FixElement content={postfixText} />
             </div>
 
-            {input.belowComp}
+            {belowComp}
 
             {errors[input.name] && touched[input.name] && (
               <div className="text-danger">{errors[input.name] as any}</div>
@@ -139,13 +147,13 @@ const Form: React.FC<Props> = ({
           </Fragment>
         );
 
-        const LabelView = (input: InputProps) => (
+        const LabelView = ({ labelNote, ...input }: InputProps) => (
           <label className={`form-label ${input.label ? "" : "text-white"}`}>
             {input.label ? input.label : "."}{" "}
-            {input.labelNote && (
+            {labelNote && (
               <span className="text-muted">
                 {"("}
-                {input.labelNote}
+                {labelNote}
                 {")"}{" "}
               </span>
             )}
@@ -160,8 +168,8 @@ const Form: React.FC<Props> = ({
         return (
           <form onSubmit={handleSubmit} className="text-start" {...rest}>
             <div className="row">
-              {inputs.map((input) => {
-                if (input.logo) {
+              {inputs.map(({ logo, halfCol, ...input }) => {
+                if (logo) {
                   return (
                     <Fragment key={input.name}>
                       <div className="col-12">
@@ -173,7 +181,11 @@ const Form: React.FC<Props> = ({
                           className="btn btn-outline-success p-2 w-100 rounded-3 no-interaction
                       "
                         >
-                          <img src={input.logo} height="40px" />
+                          <img
+                            alt={input.name + "Logo"}
+                            src={logo}
+                            height="40px"
+                          />
                         </button>
                       </div>
 
@@ -187,11 +199,7 @@ const Form: React.FC<Props> = ({
                 return (
                   <div
                     className={`mb-3 ${
-                      input.halfCol
-                        ? "col-md-6"
-                        : input.logo
-                        ? "col-6"
-                        : "col-md-12"
+                      halfCol ? "col-md-6" : logo ? "col-6" : "col-md-12"
                     }`}
                     key={input.name}
                   >
