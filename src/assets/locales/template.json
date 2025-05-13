@@ -140,11 +140,17 @@
     }
   },
   "Global": {
+    "Form": {
+      "Labels": {
+        "InvalidEmail": "Invalid Email",
+        "Required": "Required",
+        "Submit": "Submit"
+      }
+    },
     "Labels": {
       "Location": "Google Map URL",
       "No": "No",
       "PleaseSelect": "Please Select...",
-      "Submit": "Submit",
       "UploadAttachment": "Upload Attachment",
       "Yes": "Yes"
     }

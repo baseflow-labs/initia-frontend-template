@@ -94,38 +94,6 @@ const Form: React.FC<Props> = ({
       </span>
     ) : null;
 
-  const InputView = ({
-    prefixText,
-    postfixText,
-    aboveComp,
-    belowComp,
-    labelNote,
-    logo,
-    ...input
-  }: InputProps) => (
-    <Fragment>
-      {aboveComp}
-
-      <div
-        className={`input-group ${
-          input.type === "phoneNumber" ? "phone-number-input" : ""
-        }`}
-      >
-        <InlineElement content={prefixText} flip />
-
-        <InputComp {...input} />
-
-        <InlineElement content={postfixText} />
-      </div>
-
-      {belowComp}
-
-      {formik.errors[input.name] && formik.touched[input.name] && (
-        <div className="text-danger">{formik.errors[input.name] as any}</div>
-      )}
-    </Fragment>
-  );
-
   const LabelView = ({ labelNote, ...input }: InputProps) => (
     <label className={`form-label ${input.label ? "" : "text-white"}`}>
       {input.label ? input.label : "."}{" "}
@@ -146,43 +114,101 @@ const Form: React.FC<Props> = ({
     <FormikProvider value={formik}>
       <FormikForm className="text-start" {...rest}>
         <div className="row">
-          {inputs.map(({ logo, halfCol, ...input }) => {
-            if (logo) {
+          {inputs.map(
+            ({
+              prefixText,
+              postfixText,
+              aboveComp,
+              belowComp,
+              labelNote,
+              logo,
+              halfCol,
+              ...input
+            }) => {
+              if (logo) {
+                return (
+                  <Fragment key={input.name}>
+                    <div className="col-12">
+                      <LabelView {...input} />
+                    </div>
+
+                    <div className="col-md-6 mb-3">
+                      <button
+                        type="button"
+                        className="btn btn-outline-success p-2 w-100 rounded-3 no-interaction"
+                      >
+                        <img
+                          alt={`${input.name}Logo`}
+                          src={logo}
+                          height="40px"
+                        />
+                      </button>
+                    </div>
+
+                    <div className="col-md-6 mb-3">
+                      {aboveComp}
+
+                      <div
+                        className={`input-group ${
+                          input.type === "phoneNumber"
+                            ? "phone-number-input"
+                            : ""
+                        }`}
+                      >
+                        <InlineElement content={prefixText} flip />
+
+                        <InputComp {...input} />
+
+                        <InlineElement content={postfixText} />
+                      </div>
+
+                      {belowComp}
+
+                      {formik.errors[input.name] &&
+                        formik.touched[input.name] && (
+                          <div className="text-danger">
+                            {formik.errors[input.name] as any}
+                          </div>
+                        )}
+                    </div>
+                  </Fragment>
+                );
+              }
+
               return (
-                <Fragment key={input.name}>
-                  <div className="col-12">
-                    <LabelView {...input} />
+                <div
+                  className={`mb-3 ${
+                    halfCol ? "col-md-6" : logo ? "col-6" : "col-md-12"
+                  }`}
+                  key={input.name}
+                >
+                  <LabelView {...input} />
+
+                  {aboveComp}
+
+                  <div
+                    className={`input-group ${
+                      input.type === "phoneNumber" ? "phone-number-input" : ""
+                    }`}
+                  >
+                    <InlineElement content={prefixText} flip />
+
+                    <InputComp {...input} />
+
+                    <InlineElement content={postfixText} />
                   </div>
 
-                  <div className="col-md-6 mb-3">
-                    <button
-                      type="button"
-                      className="btn btn-outline-success p-2 w-100 rounded-3 no-interaction"
-                    >
-                      <img alt={`${input.name}Logo`} src={logo} height="40px" />
-                    </button>
-                  </div>
+                  {belowComp}
 
-                  <div className="col-md-6 mb-3">
-                    <InputView {...input} />
-                  </div>
-                </Fragment>
+                  {formik.errors[input.name] && formik.touched[input.name] && (
+                    <div className="text-danger">
+                      {formik.errors[input.name] as any}
+                    </div>
+                  )}
+                </div>
               );
             }
-
-            return (
-              <div
-                className={`mb-3 ${
-                  halfCol ? "col-md-6" : logo ? "col-6" : "col-md-12"
-                }`}
-                key={input.name}
-              >
-                <LabelView {...input} />
-
-                <InputView {...input} />
-              </div>
-            );
-          })}
+          )}
         </div>
 
         <Button type="submit" color="info" className="w-100 p-2" rounded={3}>

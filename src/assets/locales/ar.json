@@ -140,11 +140,17 @@
     }
   },
   "Global": {
+    "Form": {
+      "Labels": {
+        "InvalidEmail": "بريد إلكتروني غير صالح",
+        "Required": "هذا الحقل إلزامي",
+        "Submit": "إرسال"
+      }
+    },
     "Labels": {
       "Location": "Google Map رابط",
       "No": "لا",
       "PleaseSelect": "نرجو الاختيار...",
-      "Submit": "إرسال",
       "UploadAttachment": "إضافة مرفق",
       "Yes": "نعم"
     }
