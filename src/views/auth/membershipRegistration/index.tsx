@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
 import { Fragment } from "react/jsx-runtime";
-
 import absherLogo from "../../../assets/images/partners/absher.svg";
 import eduMinistryLogo from "../../../assets/images/partners/eduMinistry.svg";
 import ejarLogo from "../../../assets/images/partners/ejar.svg";
@@ -9,11 +8,12 @@ import ministryLogo from "../../../assets/images/partners/ministry.svg";
 import molimLogo from "../../../assets/images/partners/molim.svg";
 import tawakkalnaLogo from "../../../assets/images/partners/Tawakkalna.svg";
 import Form from "../../../components/form";
+import WizardFormStepper from "../../../components/form/wizard/stepper";
 
 const MembershipRegistrationView = () => {
   const { t } = useTranslation();
 
-  const inputs = [
+  const basicDataInputs = [
     {
       type: "select",
       options: [
@@ -205,6 +205,9 @@ const MembershipRegistrationView = () => {
       required: true,
       halfCol: true,
     },
+  ];
+
+  const contactDataInputs = [
     {
       type: "phoneNumber",
       name: "secondaryMobile",
@@ -243,6 +246,9 @@ const MembershipRegistrationView = () => {
       required: true,
       halfCol: true,
     },
+  ];
+
+  const qualificationDataInputs = [
     {
       type: "text",
       name: "occupation",
@@ -377,6 +383,9 @@ const MembershipRegistrationView = () => {
       required: true,
       halfCol: true,
     },
+  ];
+
+  const hostelDataInputs = [
     {
       type: "title",
       name: "title2",
@@ -574,6 +583,9 @@ const MembershipRegistrationView = () => {
       label: t("Auth.MembershipRegistration.Form.PaymentFrequency.Title"),
       required: true,
     },
+  ];
+
+  const attachmentInputs = [
     {
       type: "file",
       logo: absherLogo,
@@ -628,9 +640,42 @@ const MembershipRegistrationView = () => {
     },
   ];
 
+  const formSteps = [
+    {
+      label: t("Auth.MembershipRegistration.Form.BasicData"),
+      name: "BasicData",
+      contents: <Form inputs={basicDataInputs} />,
+    },
+    {
+      label: t("Auth.MembershipRegistration.Form.ContactData"),
+      name: "ContactData",
+      contents: <Form inputs={contactDataInputs} />,
+    },
+    {
+      label: t("Auth.MembershipRegistration.Form.QualificationData"),
+      name: "QualificationData",
+      contents: <Form inputs={qualificationDataInputs} />,
+    },
+    {
+      label: t("Auth.MembershipRegistration.Form.HostelData"),
+      name: "HostelData",
+      contents: <Form inputs={hostelDataInputs} />,
+    },
+    {
+      label: t("Auth.MembershipRegistration.Form.DependantData"),
+      name: "DependantData",
+      contents: <Form inputs={attachmentInputs} />,
+    },
+    {
+      label: t("Auth.MembershipRegistration.Form.Attachments"),
+      name: "Attachments",
+      contents: <Form inputs={attachmentInputs} />,
+    },
+  ];
+
   return (
     <Fragment>
-      <Form inputs={inputs} />
+      <WizardFormStepper steps={formSteps} />
     </Fragment>
   );
 };
