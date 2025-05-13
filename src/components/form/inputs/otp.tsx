@@ -1,23 +1,15 @@
 import React, { useRef, useState } from "react";
 import { InputProps } from "..";
-import { ValidatedInput } from "../Input";
+import { useField } from "formik";
 
-type FinalInput = ValidatedInput &
-  InputProps &
-  React.InputHTMLAttributes<HTMLInputElement>;
+type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 
 const OTP_LENGTH = 6;
 
-const OtpInput: React.FC<FinalInput> = ({
-  name,
-  value,
-  handleChange,
-  handleBlur,
-  type,
-  ...input
-}) => {
+const OtpInput: React.FC<FinalInput> = ({ name, value, type, ...input }) => {
   const [otp, setOtp] = useState<string[]>(Array(OTP_LENGTH).fill(""));
   const inputsRef = useRef<Array<HTMLInputElement | null>>([]);
+  const [, , helpers] = useField(name);
 
   const focusInput = (index: number) => {
     const input = inputsRef.current[index];
@@ -34,7 +26,7 @@ const OtpInput: React.FC<FinalInput> = ({
     if (value && index < OTP_LENGTH - 1) {
       focusInput(index + 1);
     } else {
-      handleChange({ target: { name, value: newOtp.join("") } });
+      helpers.setValue(newOtp.join(""));
     }
   };
 
@@ -93,7 +85,6 @@ const OtpInput: React.FC<FinalInput> = ({
           value={digit}
           onChange={(e) => handleOtpChange(e.target.value, i)}
           onKeyDown={(e) => handleKeyDown(e, i)}
-          onBlur={handleBlur}
           className="form-check-input"
           required={true}
           style={{

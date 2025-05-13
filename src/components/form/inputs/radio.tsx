@@ -1,19 +1,9 @@
 import React, { Fragment } from "react";
 import { InputProps } from "..";
-import { ValidatedInput } from "../Input";
 
-type FinalInput = ValidatedInput &
-  InputProps &
-  React.InputHTMLAttributes<HTMLInputElement>;
+type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 
-const RadioInput: React.FC<FinalInput> = ({
-  name,
-  value,
-  handleChange,
-  handleBlur,
-  type,
-  ...input
-}) => {
+const RadioInput: React.FC<FinalInput> = ({ type, ...input }) => {
   return (
     <Fragment>
       {input.options?.map((option) => (
@@ -21,10 +11,6 @@ const RadioInput: React.FC<FinalInput> = ({
           <input
             {...input}
             type="radio"
-            name={name}
-            value={value}
-            onChange={handleChange}
-            onBlur={handleBlur}
             className="form-check-input"
             required={false}
           />

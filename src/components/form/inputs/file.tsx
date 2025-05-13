@@ -3,27 +3,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { InputProps } from "..";
-import { ValidatedInput } from "../Input";
+import { useField } from "formik";
 
 interface FileUploadProps {
   accept?: string;
   label?: string;
 }
 
-type FinalInput = ValidatedInput &
-  InputProps &
+type FinalInput = InputProps &
   React.InputHTMLAttributes<HTMLInputElement> &
   FileUploadProps;
 
-const FileInput: React.FC<FinalInput> = ({
-  name,
-  value,
-  handleChange,
-  handleBlur,
-  type,
-  ...input
-}) => {
+const FileInput: React.FC<FinalInput> = ({ name, ...input }) => {
   const { t } = useTranslation();
+  const [field, , helpers] = useField(name);
 
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -34,21 +27,19 @@ const FileInput: React.FC<FinalInput> = ({
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
-    console.log({ file });
 
     setSelectedFile(file);
-    handleChange(e);
+    helpers.setValue(file);
   };
 
   return (
     <div className="w-100">
       <input
+        {...input}
         type="file"
         ref={inputRef}
-        name={name}
         style={{ display: "none" }}
         onChange={handleFileChange}
-        {...input}
       />
 
       <button

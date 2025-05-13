@@ -1,20 +1,10 @@
 import React from "react";
 import { InputProps } from "..";
 import { commonInputClasses } from "../../../utils/consts";
-import { ValidatedInput } from "../Input";
 
-type FinalInput = ValidatedInput &
-  InputProps &
-  React.InputHTMLAttributes<HTMLInputElement>;
+type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 
-const DateInput: React.FC<FinalInput> = ({
-  name,
-  value,
-  handleChange,
-  handleBlur,
-  type,
-  ...input
-}) => {
+const DateInput: React.FC<FinalInput> = (input) => {
   // To Do
   // - Date: RTL & Icon & Placeholder
 
@@ -24,10 +14,6 @@ const DateInput: React.FC<FinalInput> = ({
       type="date"
       dir="rtl"
       placeholder="اختر التاريخ"
-      name={name}
-      onChange={handleChange}
-      onBlur={handleBlur}
-      value={value}
       className={`form-control form-control-sm ${commonInputClasses}`}
       // style={{
       //   position: "relative",

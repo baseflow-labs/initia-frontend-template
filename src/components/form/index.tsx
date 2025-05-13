@@ -1,4 +1,9 @@
-import { Formik, FormikErrors } from "formik";
+import {
+  useFormik,
+  FormikErrors,
+  FormikProvider,
+  Form as FormikForm,
+} from "formik";
 import React, { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -16,6 +21,7 @@ export interface InputProps {
     value: string | number;
     label?: string;
   }[];
+
   logo?: string;
   halfCol?: boolean;
   prefixText?: string | number;
@@ -38,42 +44,40 @@ const Form: React.FC<Props> = ({
 }) => {
   const { t } = useTranslation();
 
-  const initialValues = inputs
-    .map((input) =>
-      input.type === "radio"
-        ? {
-            ...input,
-            defaultValue: input.options ? input.options[0]?.value : "",
-          }
-        : input
-    )
-    .reduce<Record<string, any>>((acc, input) => {
-      acc[input.name] = input.defaultValue ?? "";
-      return acc;
-    }, {});
+  const initialValues = inputs.reduce<Record<string, any>>((acc, input) => {
+    acc[input.name] =
+      input.defaultValue ??
+      (input.type === "radio" ? input.options?.[0]?.value ?? "" : "");
+    return acc;
+  }, {});
 
   const validate = (values: Record<string, any>) => {
     const errors: FormikErrors<Record<string, any>> = {};
-    inputs
-      .map((input) =>
-        input.type === "radio" ? { ...input, required: false } : input
-      )
-      .forEach((input) => {
-        if (input.required && !values[input.name]) {
-          errors[input.name] = "Required";
-        }
 
-        if (input.type === "email" && values[input.name]) {
-          const validEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-          if (!validEmail.test(values[input.name])) {
-            errors[input.name] = "Invalid email address";
-          }
+    inputs.forEach((input) => {
+      if (input.required && !values[input.name]) {
+        errors[input.name] = t("Global.Form.Labels.Required");
+      }
+
+      if (input.type === "email" && values[input.name]) {
+        const validEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+        if (!validEmail.test(values[input.name])) {
+          errors[input.name] = t("Global.Form.Labels.InvalidEmail");
         }
-      });
+      }
+    });
     return errors;
   };
 
-  const FixElement = ({
+  const formik = useFormik({
+    initialValues,
+    validate,
+    onSubmit: (values) => {
+      onFormSubmit?.(values);
+    },
+  });
+
+  const InlineElement = ({
     flip,
     content,
   }: {
@@ -88,141 +92,104 @@ const Form: React.FC<Props> = ({
       >
         {content}
       </span>
-    ) : (
-      <></>
-    );
+    ) : null;
+
+  const InputView = ({
+    prefixText,
+    postfixText,
+    aboveComp,
+    belowComp,
+    labelNote,
+    logo,
+    ...input
+  }: InputProps) => (
+    <Fragment>
+      {aboveComp}
+
+      <div
+        className={`input-group ${
+          input.type === "phoneNumber" ? "phone-number-input" : ""
+        }`}
+      >
+        <InlineElement content={prefixText} flip />
+
+        <InputComp {...input} />
+
+        <InlineElement content={postfixText} />
+      </div>
+
+      {belowComp}
+
+      {formik.errors[input.name] && formik.touched[input.name] && (
+        <div className="text-danger">{formik.errors[input.name] as any}</div>
+      )}
+    </Fragment>
+  );
+
+  const LabelView = ({ labelNote, ...input }: InputProps) => (
+    <label className={`form-label ${input.label ? "" : "text-white"}`}>
+      {input.label ? input.label : "."}{" "}
+      {labelNote && (
+        <span className="text-muted">
+          {"("}
+          {labelNote}
+          {")"}{" "}
+        </span>
+      )}
+      {input.label && input.required ? (
+        <span className="text-danger">*</span>
+      ) : null}
+    </label>
+  );
 
   return (
-    <Formik
-      initialValues={initialValues}
-      validate={validate}
-      onSubmit={(values, { setSubmitting }) => {
-        onFormSubmit?.(values);
-        setSubmitting(false);
-      }}
-    >
-      {({
-        values,
-        errors,
-        touched,
-        handleChange,
-        handleBlur,
-        handleSubmit,
-        isSubmitting,
-      }) => {
-        const InputView = ({
-          prefixText,
-          postfixText,
-          aboveComp,
-          belowComp,
-          labelNote,
-          logo,
-          ...input
-        }: InputProps) => (
-          <Fragment>
-            {aboveComp}
-
-            <div
-              className={`input-group ${
-                input.type === "phoneNumber" ? "phone-number-input" : ""
-              }`}
-            >
-              <FixElement content={prefixText} flip />
-
-              <InputComp
-                value={values[input.name]}
-                handleChange={handleChange}
-                handleBlur={handleBlur}
-                {...input}
-              />
-
-              <FixElement content={postfixText} />
-            </div>
-
-            {belowComp}
-
-            {errors[input.name] && touched[input.name] && (
-              <div className="text-danger">{errors[input.name] as any}</div>
-            )}
-          </Fragment>
-        );
-
-        const LabelView = ({ labelNote, ...input }: InputProps) => (
-          <label className={`form-label ${input.label ? "" : "text-white"}`}>
-            {input.label ? input.label : "."}{" "}
-            {labelNote && (
-              <span className="text-muted">
-                {"("}
-                {labelNote}
-                {")"}{" "}
-              </span>
-            )}
-            {input.label && input.required ? (
-              <span className="text-danger">*</span>
-            ) : (
-              ""
-            )}
-          </label>
-        );
-
-        return (
-          <form onSubmit={handleSubmit} className="text-start" {...rest}>
-            <div className="row">
-              {inputs.map(({ logo, halfCol, ...input }) => {
-                if (logo) {
-                  return (
-                    <Fragment key={input.name}>
-                      <div className="col-12">
-                        <LabelView {...input} />
-                      </div>
-
-                      <div className="col-md-6 mb-3">
-                        <button
-                          className="btn btn-outline-success p-2 w-100 rounded-3 no-interaction
-                      "
-                        >
-                          <img
-                            alt={input.name + "Logo"}
-                            src={logo}
-                            height="40px"
-                          />
-                        </button>
-                      </div>
-
-                      <div className="col-md-6 mb-3">
-                        <InputView {...input} />
-                      </div>
-                    </Fragment>
-                  );
-                }
-
-                return (
-                  <div
-                    className={`mb-3 ${
-                      halfCol ? "col-md-6" : logo ? "col-6" : "col-md-12"
-                    }`}
-                    key={input.name}
-                  >
+    <FormikProvider value={formik}>
+      <FormikForm className="text-start" {...rest}>
+        <div className="row">
+          {inputs.map(({ logo, halfCol, ...input }) => {
+            if (logo) {
+              return (
+                <Fragment key={input.name}>
+                  <div className="col-12">
                     <LabelView {...input} />
+                  </div>
 
+                  <div className="col-md-6 mb-3">
+                    <button
+                      type="button"
+                      className="btn btn-outline-success p-2 w-100 rounded-3 no-interaction"
+                    >
+                      <img alt={`${input.name}Logo`} src={logo} height="40px" />
+                    </button>
+                  </div>
+
+                  <div className="col-md-6 mb-3">
                     <InputView {...input} />
                   </div>
-                );
-              })}
-            </div>
+                </Fragment>
+              );
+            }
 
-            <Button
-              type="submit"
-              color="info"
-              className="w-100 p-2"
-              rounded={3}
-            >
-              {submitText || t("Global.Labels.Submit")}
-            </Button>
-          </form>
-        );
-      }}
-    </Formik>
+            return (
+              <div
+                className={`mb-3 ${
+                  halfCol ? "col-md-6" : logo ? "col-6" : "col-md-12"
+                }`}
+                key={input.name}
+              >
+                <LabelView {...input} />
+
+                <InputView {...input} />
+              </div>
+            );
+          })}
+        </div>
+
+        <Button type="submit" color="info" className="w-100 p-2" rounded={3}>
+          {submitText || t("Global.Form.Labels.Submit")}
+        </Button>
+      </FormikForm>
+    </FormikProvider>
   );
 };
 

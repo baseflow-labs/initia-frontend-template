@@ -4,21 +4,13 @@ import React, { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { InputProps } from "..";
 import { commonInputClasses } from "../../../utils/consts";
-import { ValidatedInput } from "../Input";
+import { useField } from "formik";
 
-type FinalInput = ValidatedInput &
-  InputProps &
-  React.InputHTMLAttributes<HTMLInputElement>;
+type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 
-const LocationInput: React.FC<FinalInput> = ({
-  name,
-  value,
-  handleChange,
-  handleBlur,
-  type,
-  ...input
-}) => {
+const LocationInput: React.FC<FinalInput> = ({ name, ...input }) => {
   const { t } = useTranslation();
+  const [field, , helpers] = useField(name);
 
   const [location, setLocation] = useState<{
     lat: number;
@@ -48,8 +40,8 @@ const LocationInput: React.FC<FinalInput> = ({
           ...coords,
           link,
         });
+        helpers.setValue(link);
 
-        handleChange({ target: { value: link, name } });
         setError(null);
       },
       () => {
@@ -62,11 +54,7 @@ const LocationInput: React.FC<FinalInput> = ({
     <Fragment>
       <input
         {...input}
-        name={name}
         type="url"
-        onChange={handleChange}
-        onBlur={handleBlur}
-        value={value}
         placeholder={input.placeholder || t("Global.Labels.Location")}
         className={`form-control form-control-sm ${commonInputClasses}`}
       />

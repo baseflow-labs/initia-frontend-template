@@ -1,5 +1,5 @@
-import React, { ChangeEvent, FocusEvent } from "react";
-import { useTranslation } from "react-i18next";
+import { useField } from "formik";
+import React from "react";
 import { InputProps } from ".";
 import DateInput from "./inputs/date";
 import DefaultInput from "./inputs/default";
@@ -12,171 +12,54 @@ import RadioInput from "./inputs/radio";
 import SelectInput from "./inputs/select";
 import SelectManyInput from "./inputs/selectMany";
 
-export interface ValidatedInput {
-  value?: string | number;
-  handleChange: {
-    (e: ChangeEvent<any>): void;
-    <T = string | ChangeEvent<any>>(field: T): T extends ChangeEvent<any>
-      ? void
-      : (e: string | ChangeEvent<any>) => void;
-  };
-  handleBlur: {
-    (e: FocusEvent<any, Element>): void;
-    <T = any>(fieldOrEvent: T): T extends string ? (e: any) => void : void;
-  };
-}
-
-type FinalInput = ValidatedInput &
-  InputProps &
+type FinalInput = InputProps &
   React.InputHTMLAttributes<HTMLInputElement> &
   React.SelectHTMLAttributes<HTMLSelectElement>;
 
-const InputComp: React.FC<FinalInput> = ({
-  name,
-  value,
-  handleChange,
-  handleBlur,
-  type,
-  ...input
-}) => {
-  const { t } = useTranslation();
+const InputComp: React.FC<FinalInput> = ({ name, type, ...input }) => {
+  const [field] = useField<string>(name);
 
   if (type === "select" && input.options) {
-    return (
-      <SelectInput
-        {...input}
-        name={name}
-        value={value}
-        handleChange={handleChange}
-        handleBlur={handleBlur}
-        key={name}
-      />
-    );
+    return <SelectInput {...input} {...field} />;
   }
 
   if (type === "selectMany" && input.options) {
-    return (
-      <SelectManyInput
-        {...input}
-        name={name}
-        value={value}
-        handleChange={handleChange}
-        handleBlur={handleBlur}
-        key={name}
-      />
-    );
+    return <SelectManyInput {...input} {...field} />;
   }
 
   if (type === "radio" && input.options) {
-    return (
-      <RadioInput
-        {...input}
-        name={name}
-        value={value}
-        handleChange={handleChange}
-        handleBlur={handleBlur}
-      />
-    );
+    return <RadioInput {...input} {...field} />;
   }
 
   if (type === "phoneNumber") {
-    return (
-      <PhoneNoInput
-        {...input}
-        name={name}
-        handleChange={handleChange}
-        handleBlur={handleBlur}
-        value={value}
-        key={name}
-      />
-    );
+    return <PhoneNoInput {...input} {...field} />;
   }
 
   if (type === "date") {
-    return (
-      <DateInput
-        {...input}
-        name={name}
-        handleChange={handleChange}
-        handleBlur={handleBlur}
-        value={value}
-        key={name}
-      />
-    );
+    return <DateInput {...input} {...field} />;
   }
 
   if (type === "password") {
-    return (
-      <PasswordInput
-        {...input}
-        type={type}
-        name={name}
-        handleChange={handleChange}
-        handleBlur={handleBlur}
-        value={value}
-        key={name}
-      />
-    );
+    return <PasswordInput {...input} {...field} />;
   }
 
   if (type === "file") {
-    return (
-      <FileInput
-        {...input}
-        name={name}
-        handleChange={handleChange}
-        handleBlur={handleBlur}
-        value={value}
-        key={name}
-      />
-    );
+    return <FileInput {...input} {...field} />;
   }
 
   if (type === "location") {
-    return (
-      <LocationInput
-        {...input}
-        name={name}
-        handleChange={handleChange}
-        handleBlur={handleBlur}
-        value={value}
-        key={name}
-      />
-    );
+    return <LocationInput {...input} {...field} />;
   }
 
   if (type === "otp") {
-    return (
-      <OtpInput
-        {...input}
-        name={name}
-        handleChange={handleChange}
-        handleBlur={handleBlur}
-        value={value}
-        key={name}
-      />
-    );
+    return <OtpInput {...input} {...field} />;
   }
 
   if (type === "title") {
-    return (
-      <div className="h4 text-success" {...input}>
-        {input.defaultValue}
-      </div>
-    );
+    return <div className="h4 text-success">{input.defaultValue}</div>;
   }
 
-  return (
-    <DefaultInput
-      {...input}
-      type={type}
-      name={name}
-      handleChange={handleChange}
-      handleBlur={handleBlur}
-      value={value}
-      key={name}
-    />
-  );
+  return <DefaultInput type={type} {...input} {...field} />;
 };
 
 export default InputComp;

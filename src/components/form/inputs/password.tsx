@@ -3,35 +3,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Fragment, useState } from "react";
 import { InputProps } from "..";
 import { commonInputClasses } from "../../../utils/consts";
-import { ValidatedInput } from "../Input";
 
-type FinalInput = ValidatedInput &
-  InputProps &
-  React.InputHTMLAttributes<HTMLInputElement>;
+type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 
-const PasswordInput: React.FC<FinalInput> = ({
-  name,
-  value,
-  handleChange,
-  handleBlur,
-  type,
-  ...input
-}) => {
+const PasswordInput: React.FC<FinalInput> = ({ placeholder, ...rest }) => {
   const [show, setShow] = useState(false);
 
   return (
     <Fragment>
       <input
-        {...input}
+        {...rest}
         type={show ? "text" : "password"}
-        name={name}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        value={value}
-        placeholder={input.placeholder || input.label}
+        placeholder={rest.label}
         className={`form-control form-control-sm ${commonInputClasses}`}
       />
-
       <span
         className="input-group-text bg-white rounded-2 px-3 py-2 ms-2 me-0"
         role="button"

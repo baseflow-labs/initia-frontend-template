@@ -5,18 +5,14 @@ import { useTranslation } from "react-i18next";
 import Select, { components, StylesConfig } from "react-select";
 import { InputProps } from "..";
 import { commonInputClasses } from "../../../utils/consts";
-import { ValidatedInput } from "../Input";
 
-type FinalInput = ValidatedInput &
-  InputProps &
+type FinalInput = InputProps &
   React.InputHTMLAttributes<HTMLInputElement> &
   React.SelectHTMLAttributes<HTMLSelectElement>;
 
 const SelectManyInput: React.FC<FinalInput> = ({
   name,
   value,
-  handleChange,
-  handleBlur,
   defaultValue,
   ...input
 }) => {
@@ -107,7 +103,6 @@ const SelectManyInput: React.FC<FinalInput> = ({
       name={name}
       isMulti
       onChange={onChange}
-      onBlur={handleBlur}
       styles={customStyles}
       placeholder={input.placeholder || t("Global.Labels.PleaseSelect")}
       className={`w-100 px-0 ${commonInputClasses}`}
