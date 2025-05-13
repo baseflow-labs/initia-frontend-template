@@ -2,25 +2,43 @@ import { faPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import Select, { components, StylesConfig } from "react-select";
+import Select, { components, StylesConfig, MultiValue } from "react-select";
+import { useField } from "formik";
 import { InputProps } from "..";
 import { commonInputClasses } from "../../../utils/consts";
 
-type FinalInput = InputProps &
-  React.InputHTMLAttributes<HTMLInputElement> &
-  React.SelectHTMLAttributes<HTMLSelectElement>;
+interface OptionType {
+  value: string;
+  label: string;
+}
 
-const SelectManyInput: React.FC<FinalInput> = ({
+interface SelectManyInputProps extends InputProps {
+  placeholder?: string;
+}
+
+const SelectManyInput: React.FC<SelectManyInputProps> = ({
   name,
-  value,
-  defaultValue,
-  ...input
+  options,
+  placeholder,
 }) => {
   const { t } = useTranslation();
-  interface OptionType {
-    value: string;
-    label: string;
-  }
+  const [field, , helpers] = useField<string[]>(name);
+
+  const reactSelectOptions =
+    options?.map(({ value, label }) => ({
+      value: String(value),
+      label: label || String(value),
+    })) || [];
+
+  const valueAsArray = field.value
+    ? reactSelectOptions.filter((opt) =>
+        (field.value as string[]).includes(opt.value)
+      )
+    : [];
+
+  const handleChange = (selected: MultiValue<OptionType>) => {
+    helpers.setValue(selected.map((opt) => opt.value));
+  };
 
   const DropdownIndicator = (props: any) => (
     <components.DropdownIndicator {...props}>
@@ -61,7 +79,7 @@ const SelectManyInput: React.FC<FinalInput> = ({
   );
 
   const customStyles: StylesConfig<OptionType> = {
-    control: (base, state) => ({
+    control: (base) => ({
       ...base,
       padding: 6,
       borderRadius: 7,
@@ -73,7 +91,7 @@ const SelectManyInput: React.FC<FinalInput> = ({
     multiValue: (base) => ({
       ...base,
       backgroundColor: "transparent",
-      border: `1px solid ${"var(--bs-info)"}`,
+      border: `1px solid var(--bs-info)`,
       borderRadius: 6,
       padding: "2px 4px",
       display: "flex",
@@ -95,21 +113,16 @@ const SelectManyInput: React.FC<FinalInput> = ({
     }),
   };
 
-  const onChange = (e: any) => console.log({ e });
-
   return (
     <Select
-      {...input}
       name={name}
       isMulti
-      onChange={onChange}
+      value={valueAsArray}
+      onChange={handleChange}
       styles={customStyles}
-      placeholder={input.placeholder || t("Global.Labels.PleaseSelect")}
+      placeholder={placeholder || t("Global.Labels.PleaseSelect")}
       className={`w-100 px-0 ${commonInputClasses}`}
-      options={input.options?.map(({ label, value }) => ({
-        value: String(value),
-        label: label || String(value),
-      }))}
+      options={reactSelectOptions}
       components={{
         DropdownIndicator,
         MultiValueRemove,
