@@ -159,7 +159,11 @@ const InputComp: React.FC<FinalInput> = ({
   }
 
   if (type === "title") {
-    return <div {...input}>{input.defaultValue}</div>;
+    return (
+      <div className="h4 text-success" {...input}>
+        {input.defaultValue}
+      </div>
+    );
   }
 
   return (

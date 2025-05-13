@@ -156,6 +156,11 @@ const MembershipRegistrationView = () => {
       required: true,
     },
     {
+      type: "title",
+      name: "title1",
+      defaultValue: t("Auth.MembershipRegistration.Form.IncomeResources"),
+    },
+    {
       type: "number",
       name: "salary",
       label: t("Auth.MembershipRegistration.Form.Salary"),
@@ -219,6 +224,11 @@ const MembershipRegistrationView = () => {
       name: "socialSecurityFile",
       required: true,
       half: true,
+    },
+    {
+      type: "title",
+      name: "title2",
+      defaultValue: t("Auth.MembershipRegistration.Form.Address"),
     },
     {
       type: "text",

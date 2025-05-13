@@ -7,6 +7,7 @@
     "MembershipRegistration": {
       "Form": {
         "AbsherDocument": "لوحة المعلومات من موقع ابشر - المركبات - العمالة",
+        "Address": "عنوان السكن",
         "ApartmentNo": "رقم الشقة",
         "BackupMobile": "رقم الجوال الاحتياطي",
         "BankAccountNumber": "الحساب البنكي",
@@ -37,6 +38,7 @@
         "IdNumberNote": "مكون من 10 أرقام",
         "IncomeDocument": "مصادر الدخل للموظفين",
         "IncomeDocumentNote": "من يسكنون نفس البيت",
+        "IncomeResources": "مصادر الدخل",
         "IncurableDisease": "هل المرض مستعص؟",
         "Insurances": "تأمينات",
         "MasrefDocument": "شهادة الآيبان من تطبيق المصرف",

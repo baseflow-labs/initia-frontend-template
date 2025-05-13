@@ -7,6 +7,7 @@
     "MembershipRegistration": {
       "Form": {
         "AbsherDocument": "Absher Document",
+        "Address": "Home Address",
         "ApartmentNo": "Apartment No",
         "BackupMobile": "Backup Mobile",
         "BankAccountNumber": "Bank Account Number",
@@ -37,6 +38,7 @@
         "IdNumberNote": "10 Digits Number",
         "IncomeDocument": "Income Document",
         "IncomeDocumentNote": "For family members staying at same home",
+        "IncomeResources": "Income Resources",
         "IncurableDisease": "Incurable Disease",
         "Insurances": "Insurances",
         "MasrefDocument": "Masref Document",
