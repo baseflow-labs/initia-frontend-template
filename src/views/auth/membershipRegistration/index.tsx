@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import Placeholder from "react-select/dist/declarations/src/components/Placeholder";
 import { Fragment } from "react/jsx-runtime";
 
 import absherLogo from "../../../assets/images/partners/absher.svg";
@@ -16,9 +17,26 @@ const MembershipRegistrationView = () => {
   const inputs = [
     {
       type: "select",
-      options: [{ value: "Single" }, { value: "Married" }],
+      options: [
+        {
+          value: "Single",
+          label: t("Auth.MembershipRegistration.Form.SocialStatus.Single"),
+        },
+        {
+          value: "Married",
+          label: t("Auth.MembershipRegistration.Form.SocialStatus.Married"),
+        },
+        {
+          value: "Divorced",
+          label: t("Auth.MembershipRegistration.Form.SocialStatus.Divorced"),
+        },
+        {
+          value: "Widower",
+          label: t("Auth.MembershipRegistration.Form.SocialStatus.Widower"),
+        },
+      ],
       name: "socialStatus",
-      label: t("Auth.MembershipRegistration.Form.SocialStatus"),
+      label: t("Auth.MembershipRegistration.Form.SocialStatus.Title"),
       required: true,
     },
     {
@@ -29,9 +47,18 @@ const MembershipRegistrationView = () => {
     },
     {
       type: "select",
-      options: [{ value: "Saudi" }, { value: "Jordan" }],
+      options: [
+        {
+          value: "Saudi",
+          label: t("Auth.MembershipRegistration.Form.Nationality.Saudi"),
+        },
+        {
+          value: "Non Saudi",
+          label: t("Auth.MembershipRegistration.Form.Nationality.NonSaudi"),
+        },
+      ],
       name: "nationality",
-      label: t("Auth.MembershipRegistration.Form.Nationality"),
+      label: t("Auth.MembershipRegistration.Form.Nationality.Title"),
       required: true,
     },
     {
@@ -58,41 +85,116 @@ const MembershipRegistrationView = () => {
       name: "familyRecordPhoto",
       label: t("Auth.MembershipRegistration.Form.FamilyRecordPhoto"),
       required: true,
-      half: true,
+      halfCol: true,
     },
     {
       type: "file",
       name: "guardianIdPhoto",
       label: t("Auth.MembershipRegistration.Form.GuardianIdPhoto"),
       required: true,
-      half: true,
+      halfCol: true,
     },
     {
       type: "radio",
-      options: [{ value: "Male" }, { value: "Female" }],
+      options: [
+        {
+          value: "Male",
+          label: t("Auth.MembershipRegistration.Form.Gender.Male"),
+        },
+        {
+          value: "Female",
+          label: t("Auth.MembershipRegistration.Form.Gender.Female"),
+        },
+      ],
       name: "gender",
-      label: t("Auth.MembershipRegistration.Form.Gender"),
+      label: t("Auth.MembershipRegistration.Form.Gender.Title"),
       required: true,
-      half: true,
+      halfCol: true,
     },
     {
       type: "radio",
-      options: [{ value: "Healthy" }, { value: "Sick" }],
+      options: [
+        {
+          value: "Healthy",
+          label: t("Auth.MembershipRegistration.Form.HealthStatus.Healthy"),
+        },
+        {
+          value: "Sick",
+          label: t("Auth.MembershipRegistration.Form.HealthStatus.Sick"),
+        },
+      ],
       name: "healthStatus",
-      label: t("Auth.MembershipRegistration.Form.HealthStatus"),
+      label: t("Auth.MembershipRegistration.Form.HealthStatus.Title"),
       required: true,
-      half: true,
+      halfCol: true,
     },
     {
       type: "selectMany",
-      options: [{ value: "COVID" }, { value: "Flu" }],
+      options: [
+        {
+          value: "Disability",
+          label: t("Auth.MembershipRegistration.Form.Diseases.Disability"),
+        },
+        {
+          value: "Hearing Impairment",
+          label: t(
+            "Auth.MembershipRegistration.Form.Diseases.HearingImpairment"
+          ),
+        },
+        {
+          value: "Visual Impairment",
+          label: t(
+            "Auth.MembershipRegistration.Form.Diseases.VisualImpairment"
+          ),
+        },
+        {
+          value: "Mental Disability",
+          label: t(
+            "Auth.MembershipRegistration.Form.Diseases.MentalDisability"
+          ),
+        },
+        {
+          value: "Chronic Diseases",
+          label: t("Auth.MembershipRegistration.Form.Diseases.ChronicDiseases"),
+        },
+        {
+          value: "Neurological Diseases",
+          label: t(
+            "Auth.MembershipRegistration.Form.Diseases.NeurologicalDiseases"
+          ),
+        },
+        {
+          value: "Genetic Diseases",
+          label: t("Auth.MembershipRegistration.Form.Diseases.GeneticDiseases"),
+        },
+        {
+          value: "Cancerous",
+          label: t("Auth.MembershipRegistration.Form.Diseases.Cancerous"),
+        },
+        {
+          value: "Chest Diseases",
+          label: t("Auth.MembershipRegistration.Form.Diseases.ChestDiseases"),
+        },
+        {
+          value: "Liver Diseases",
+          label: t("Auth.MembershipRegistration.Form.Diseases.LiverDiseases"),
+        },
+        {
+          value: "Skin Diseases",
+          label: t("Auth.MembershipRegistration.Form.Diseases.SkinDiseases"),
+        },
+      ],
+      Placeholder: t("Auth.MembershipRegistration.Form.Diseases.None"),
       name: "diseases",
-      label: t("Auth.MembershipRegistration.Form.Diseases"),
-      required: true,
+      label: t("Auth.MembershipRegistration.Form.Diseases.Title"),
+      required: false,
     },
     {
-      type: "select",
-      options: [{ value: "Yes" }, { value: "No" }],
+      type: "radio",
+      options: [
+        { value: "Yes", label: t("Global.Labels.Yes") },
+        { value: "No", label: t("Global.Labels.No") },
+      ],
       name: "incurableDisease",
       label: t("Auth.MembershipRegistration.Form.IncurableDisease"),
       required: true,
@@ -102,7 +204,7 @@ const MembershipRegistrationView = () => {
       name: "healthStatementPhoto",
       label: t("Auth.MembershipRegistration.Form.HealthStatementPhoto"),
       required: true,
-      half: true,
+      halfCol: true,
     },
     {
       type: "phoneNumber",
@@ -140,7 +242,7 @@ const MembershipRegistrationView = () => {
       name: "ibanPhoto",
       label: t("Auth.MembershipRegistration.Form.IbanPhoto"),
       required: true,
-      half: true,
+      halfCol: true,
     },
     {
       type: "text",
@@ -150,9 +252,60 @@ const MembershipRegistrationView = () => {
     },
     {
       type: "select",
-      options: [{ value: "High School" }, { value: "Degree" }],
+      options: [
+        {
+          value: "Illiterate",
+          label: t(
+            "Auth.MembershipRegistration.Form.EducationLevel.Illiterate"
+          ),
+        },
+        {
+          value: "Literate",
+          label: t("Auth.MembershipRegistration.Form.EducationLevel.Literate"),
+        },
+        {
+          value: "Primary School",
+          label: t(
+            "Auth.MembershipRegistration.Form.EducationLevel.PrimarySchool"
+          ),
+        },
+        {
+          value: "Intermediate School",
+          label: t(
+            "Auth.MembershipRegistration.Form.EducationLevel.IntermediateSchool"
+          ),
+        },
+        {
+          value: "High School",
+          label: t(
+            "Auth.MembershipRegistration.Form.EducationLevel.HighSchool"
+          ),
+        },
+        {
+          value: "Diploma",
+          label: t("Auth.MembershipRegistration.Form.EducationLevel.Diploma"),
+        },
+        {
+          value: "Degree",
+          label: t("Auth.MembershipRegistration.Form.EducationLevel.Degree"),
+        },
+        {
+          value: "Higher Diploma",
+          label: t(
+            "Auth.MembershipRegistration.Form.EducationLevel.HigherDiploma"
+          ),
+        },
+        {
+          value: "Master",
+          label: t("Auth.MembershipRegistration.Form.EducationLevel.Master"),
+        },
+        {
+          value: "Phd",
+          label: t("Auth.MembershipRegistration.Form.EducationLevel.Phd"),
+        },
+      ],
       name: "educationLevel",
-      label: t("Auth.MembershipRegistration.Form.EducationLevel"),
+      label: t("Auth.MembershipRegistration.Form.EducationLevel.Title"),
       required: true,
     },
     {
@@ -165,65 +318,65 @@ const MembershipRegistrationView = () => {
       name: "salary",
       label: t("Auth.MembershipRegistration.Form.Salary"),
       required: true,
-      half: true,
+      halfCol: true,
     },
     {
       type: "file",
       name: "salaryFile",
       required: true,
-      half: true,
+      halfCol: true,
     },
     {
       type: "number",
       name: "insurances",
       label: t("Auth.MembershipRegistration.Form.Insurances"),
       required: true,
-      half: true,
+      halfCol: true,
     },
     {
       type: "file",
       name: "insurancesFile",
       required: true,
-      half: true,
+      halfCol: true,
     },
     {
       type: "number",
       name: "comprehensiveRehabilitation",
       label: t("Auth.MembershipRegistration.Form.ComprehensiveRehabilitation"),
       required: true,
-      half: true,
+      halfCol: true,
     },
     {
       type: "file",
       name: "comprehensiveRehabilitationFile",
       required: true,
-      half: true,
+      halfCol: true,
     },
     {
       type: "number",
       name: "retirement",
       label: t("Auth.MembershipRegistration.Form.Retirement"),
       required: true,
-      half: true,
+      halfCol: true,
     },
     {
       type: "file",
       name: "retirementFile",
       required: true,
-      half: true,
+      halfCol: true,
     },
     {
       type: "number",
       name: "socialSecurity",
       label: t("Auth.MembershipRegistration.Form.SocialSecurity"),
       required: true,
-      half: true,
+      halfCol: true,
     },
     {
       type: "file",
       name: "socialSecurityFile",
       required: true,
-      half: true,
+      halfCol: true,
     },
     {
       type: "title",
@@ -231,16 +384,77 @@ const MembershipRegistrationView = () => {
       defaultValue: t("Auth.MembershipRegistration.Form.Address"),
     },
     {
-      type: "text",
-      name: "city",
-      label: t("Auth.MembershipRegistration.Form.City"),
+      type: "select",
+      options: [
+        {
+          value: "Riyadh",
+          label: t("Auth.MembershipRegistration.Form.Province.Riyadh"),
+        },
+        {
+          value: "Makkah",
+          label: t("Auth.MembershipRegistration.Form.Province.Makkah"),
+        },
+        {
+          value: "Madinah",
+          label: t("Auth.MembershipRegistration.Form.Province.Madinah"),
+        },
+        {
+          value: "Eastern Province",
+          label: t(
+            "Auth.MembershipRegistration.Form.Province.Eastern Province"
+          ),
+        },
+        {
+          value: "Asir",
+          label: t("Auth.MembershipRegistration.Form.Province.Asir"),
+        },
+        {
+          value: "Tabuk",
+          label: t("Auth.MembershipRegistration.Form.Province.Tabuk"),
+        },
+        {
+          value: "Hail",
+          label: t("Auth.MembershipRegistration.Form.Province.Hail"),
+        },
+        {
+          value: "Northern Borders",
+          label: t("Auth.MembershipRegistration.Form.Province.NorthernBorders"),
+        },
+        {
+          value: "Jazan",
+          label: t("Auth.MembershipRegistration.Form.Province.Jazan"),
+        },
+        {
+          value: "Najran",
+          label: t("Auth.MembershipRegistration.Form.Province.Najran"),
+        },
+        {
+          value: "Al-Bahah",
+          label: t("Auth.MembershipRegistration.Form.Province.AlBahah"),
+        },
+        {
+          value: "Al-Jawf",
+          label: t("Auth.MembershipRegistration.Form.Province.AlJawf"),
+        },
+        {
+          value: "Al-Qassim",
+          label: t("Auth.MembershipRegistration.Form.Province.AlQassim"),
+        },
+      ],
+      name: "province",
+      label: t("Auth.MembershipRegistration.Form.Province.Title"),
       required: true,
     },
     {
-      type: "select",
-      options: [{ value: "Makkah" }, { value: "Madinah" }],
+      type: "text",
       name: "governorate",
       label: t("Auth.MembershipRegistration.Form.Governorate"),
+      required: true,
+    },
+    {
+      type: "text",
+      name: "city",
+      label: t("Auth.MembershipRegistration.Form.City"),
       required: true,
     },
     {
@@ -251,9 +465,18 @@ const MembershipRegistrationView = () => {
     },
     {
       type: "radio",
-      options: [{ value: "Rent" }, { value: "Ownership" }],
+      options: [
+        {
+          value: "Rental",
+          label: t("Auth.MembershipRegistration.Form.HomeOwnership.Rental"),
+        },
+        {
+          value: "Ownership",
+          label: t("Auth.MembershipRegistration.Form.HomeOwnership.Ownership"),
+        },
+      ],
       name: "homeOwnership",
-      label: t("Auth.MembershipRegistration.Form.HomeOwnership"),
+      label: t("Auth.MembershipRegistration.Form.HomeOwnership.Title"),
       required: true,
     },
     {
@@ -261,14 +484,14 @@ const MembershipRegistrationView = () => {
       name: "rentalContractPhoto",
       label: t("Auth.MembershipRegistration.Form.RentalContractPhoto"),
       required: true,
-      half: true,
+      halfCol: true,
     },
     {
       type: "file",
       name: "nationalAddressDocument",
       label: t("Auth.MembershipRegistration.Form.NationalAddressDocument"),
       required: true,
-      half: true,
+      halfCol: true,
     },
     {
       type: "location",
@@ -278,18 +501,57 @@ const MembershipRegistrationView = () => {
     },
     {
       type: "select",
-      options: [{ value: "Apartment" }, { value: "Independent Home" }],
+      options: [
+        {
+          value: "Apartment",
+          label: t("Auth.MembershipRegistration.Form.HomeType.Apartment"),
+        },
+        {
+          value: "Villa",
+          label: t("Auth.MembershipRegistration.Form.HomeType.Villa"),
+        },
+        {
+          value: "Independent Home",
+          label: t("Auth.MembershipRegistration.Form.HomeType.IndependentHome"),
+        },
+        {
+          value: "Folk House",
+          label: t("Auth.MembershipRegistration.Form.HomeType.FolkHouse"),
+        },
+        {
+          value: "Room(s) in Shared House",
+          label: t("Auth.MembershipRegistration.Form.HomeType.SharedHouse"),
+        },
+        {
+          value: "Roof",
+          label: t("Auth.MembershipRegistration.Form.HomeType.Roof"),
+        },
+        {
+          value: "Caravan",
+          label: t("Auth.MembershipRegistration.Form.HomeType.Caravan"),
+        },
+        {
+          value: "Incomplete Building",
+          label: t(
+            "Auth.MembershipRegistration.Form.HomeType.IncompleteBuilding"
+          ),
+        },
+        {
+          value: "No Permenant Home",
+          label: t("Auth.MembershipRegistration.Form.HomeType.NoPermanentHome"),
+        },
+      ],
       name: "homeType",
-      label: t("Auth.MembershipRegistration.Form.HomeType"),
+      label: t("Auth.MembershipRegistration.Form.HomeType.Title"),
       required: true,
-      half: true,
+      halfCol: true,
     },
     {
       type: "text",
       name: "apartmentNo",
       label: t("Auth.MembershipRegistration.Form.ApartmentNo"),
       required: true,
-      half: true,
+      halfCol: true,
     },
     {
       type: "number",
@@ -299,9 +561,18 @@ const MembershipRegistrationView = () => {
     },
     {
       type: "select",
-      options: [{ value: "Monthly" }, { value: "Yearly" }],
+      options: [
+        {
+          value: "Monthly",
+          label: t("Auth.MembershipRegistration.Form.PaymentFrequency.Monthly"),
+        },
+        {
+          value: "Yearly",
+          label: t("Auth.MembershipRegistration.Form.PaymentFrequency.Yearly"),
+        },
+      ],
       name: "paymentFrequency",
-      label: t("Auth.MembershipRegistration.Form.PaymentFrequency"),
+      label: t("Auth.MembershipRegistration.Form.PaymentFrequency.Title"),
       required: true,
     },
     {

@@ -17,21 +17,70 @@
         "ComprehensiveRehabilitation": "التأهيل الشامل",
         "CreditStatement": "التقرير الائتماني من موقع فلم",
         "CreditStatementNote": "في حال وجود ديون رسمية",
-        "Diseases": "نوع المرض",
+        "Diseases": {
+          "Cancerous": "أمراض سرطانية",
+          "ChestDiseases": "أمراض صدرية وتنفسية",
+          "ChronicDiseases": "أمراض مزمنة (سكر / ضغط / أمراض قلب)",
+          "Disability": "إعاقة حركية",
+          "GeneticDiseases": "أمراض جينية / وراثية",
+          "HearingImpairment": "إعاقة سمعية",
+          "LiverDiseases": "أمراض كبد وكلى",
+          "MentalDisability": "إعاقة ذهنية / تطورية",
+          "NeurologicalDiseases": "أمراض نفسية وعصبية",
+          "None": "لا يجود",
+          "SkinDiseases": "أمراض جلدية",
+          "Title": "نوع المرض / الأمراض",
+          "VisualImpairment": "إعاقة بصرية"
+        },
         "District": "الحي",
         "Dob": "تاريخ الميلاد",
-        "EducationLevel": "المستوى التعليمي",
+        "EducationLevel": {
+          "Degree": "بكالوريوس",
+          "Diploma": "دبلوم",
+          "HighSchool": "مدرسة ثانوية",
+          "HigherDiploma": "دبلوم عالي",
+          "Illiterate": "لا يقرأ ولا يتكب",
+          "IntermediateSchool": "مدرسة متوسطة",
+          "Literate": "يقرأ ويكتب دون مؤهل",
+          "Master": "ماجستير",
+          "Phd": "دكتوراه",
+          "PrimarySchool": "مدرسة ابتدائية",
+          "Title": "المستوي التعليمي"
+        },
         "Email": "البريد الإلكتروني",
         "FamilyRecordPhoto": "سجل الأسرة",
         "FullName": "الاسم الرباعي باللغة العربية",
-        "Gender": "الجنس",
+        "Gender": {
+          "Female": "أنثى",
+          "Male": "ذكر",
+          "Title": "الجنس"
+        },
         "Governorate": "المحافظة",
         "GuardianIdPhoto": "هوية رب الأسرة",
         "HealthStatementPhoto": "الكشف الطبي للأمراض التي تعاني منها",
-        "HealthStatus": "الحالة الصحية",
+        "HealthStatus": {
+          "Healthy": "سليم",
+          "Sick": "مريض",
+          "Title": "الحالة الصحية"
+        },
         "HomeLocation": "موقع المنزل",
-        "HomeOwnership": "ملكية المنزل",
-        "HomeType": "نوع السكن",
+        "HomeOwnership": {
+          "Ownership": "ملك",
+          "Rental": "إيجار",
+          "Title": "ملكية المنزل"
+        },
+        "HomeType": {
+          "Apartment": "شقة",
+          "Caravan": "كرفان / خيمة",
+          "FolkHouse": "منزل شعبي",
+          "IncompleteBuilding": "بناء غير مكتمل",
+          "IndependentHome": "منزل مستقل",
+          "NoPermanentHome": "لا يوجد منزل دائم",
+          "Roof": "ملحق",
+          "SharedHouse": "غرفة / غرف ضمن منزل مشترك",
+          "Title": "نوع المنزل",
+          "Villa": "فيلا"
+        },
         "IbanPhoto": "صورة رقم الآييبان",
         "IdExpiryDate": "تاريخ انتهاء الهوية",
         "IdNumber": "رقم الهوية",
@@ -43,9 +92,33 @@
         "Insurances": "تأمينات",
         "MasrefDocument": "شهادة الآيبان من تطبيق المصرف",
         "NationalAddressDocument": "إثبات العنوان الوطني",
-        "Nationality": "الجنسية",
+        "Nationality": {
+          "NonSaudi": "غير سعودي",
+          "Saudi": "سعودي",
+          "Title": "الجنسية"
+        },
         "Occupation": "المهنة",
-        "PaymentFrequency": "طريقة الدفعة",
+        "PaymentFrequency": {
+          "Monthly": "شهري",
+          "Title": "طريقة الدفع",
+          "Yearly": "سنوي"
+        },
+        "Province": {
+          "AlBahah": "الباحة",
+          "AlJawf": "الجوف",
+          "AlQassim": "القصيم",
+          "Asir": "عسير",
+          "Eastern Province": "المنطقة الشرقية",
+          "Hail": "حائل",
+          "Jazan": "جازن",
+          "Madinah": "المدينة المنورة",
+          "Makkah": "مكة المكرمة",
+          "Najran": "نجران",
+          "NorthernBorders": "المنطقة الشمالية",
+          "Riyadh": "الرياض",
+          "Tabuk": "تبوك",
+          "Title": "المنطقة"
+        },
         "RentalCharge": "قيمة الإيجار كما في العقد",
         "RentalContractPhoto": "عقد إيجار",
         "RentalDocument": "للمستأجر عقد إيجار إلكتروني ساري المدة من موقع إيجار",
@@ -53,7 +126,13 @@
         "Salary": "راتب",
         "SecondaryMobile": "رقم الجوال الثانوي",
         "SocialSecurity": "ضمان اجتماعي",
-        "SocialStatus": "الحالة الاجتماعية",
+        "SocialStatus": {
+          "Divorced": "مطلق(ة)",
+          "Married": "متزوج(ة)",
+          "Single": "أعزب / عزباء",
+          "Title": "الحالة الاجتماعية",
+          "Widower": "أرمل(ة)"
+        },
         "StudentsDocument": "تعريف طالب منتظم",
         "StudentsDocumentNote": "من موقع نور أو من موقع الجامعة",
         "TawakkalnaDocument": "صورة بطاقة الهوية وسجل الأسرة من تطبيق توكلنا"
@@ -63,9 +142,11 @@
   "Global": {
     "Labels": {
       "Location": "Google Map رابط",
+      "No": "لا",
       "PleaseSelect": "نرجو الاختيار...",
       "Submit": "إرسال",
-      "UploadAttachment": "إضافة مرفق"
+      "UploadAttachment": "إضافة مرفق",
+      "Yes": "نعم"
     }
   },
   "Public": {

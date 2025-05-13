@@ -12,7 +12,7 @@ export interface InputProps {
   labelNote?: string;
   logo?: string;
   required?: boolean;
-  half?: boolean;
+  halfCol?: boolean;
   defaultValue?: string | number;
   prefixText?: string | number;
   postfixText?: string | number;
@@ -187,16 +187,17 @@ const Form: React.FC<Props> = ({
                 return (
                   <div
                     className={`mb-3 ${
-                      input.half
+                      input.halfCol
                         ? "col-md-6"
                         : input.logo
                         ? "col-6"
                         : "col-md-12"
                     }`}
+                    key={input.name}
                   >
                     <LabelView {...input} />
 
-                    <InputView {...input} key={input.name} />
+                    <InputView {...input} />
                   </div>
                 );
               })}
