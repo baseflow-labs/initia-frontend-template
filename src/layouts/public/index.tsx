@@ -63,6 +63,7 @@ const AuthLayout = () => {
         >
           <div className="card-body text-center">
             <img
+              alt="bg-image"
               src={bgImage}
               className="w-50 px-1 mb-4"
               role="button"

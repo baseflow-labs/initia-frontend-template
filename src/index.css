@@ -30,6 +30,17 @@ input[type="radio"]:checked:focus {
   font-weight: 400;
 }
 
+.no-interaction {
+  pointer-events: none;
+  opacity: 1;
+  cursor: default;
+}
+
+.no-interaction:hover {
+  background-color: inherit;
+  filter: none;
+}
+
 .public-bg-image {
   background-image: url("../src/assets/images/public-bg.jpg");
   background-size: cover;

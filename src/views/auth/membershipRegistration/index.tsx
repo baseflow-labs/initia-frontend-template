@@ -1,5 +1,13 @@
 import { useTranslation } from "react-i18next";
 import { Fragment } from "react/jsx-runtime";
+
+import absherLogo from "../../../assets/images/partners/absher.svg";
+import eduMinistryLogo from "../../../assets/images/partners/eduMinistry.svg";
+import ejarLogo from "../../../assets/images/partners/ejar.svg";
+import masrafLogo from "../../../assets/images/partners/Masraf.svg";
+import ministryLogo from "../../../assets/images/partners/ministry.svg";
+import molimLogo from "../../../assets/images/partners/molim.svg";
+import tawakkalnaLogo from "../../../assets/images/partners/Tawakkalna.svg";
 import Form from "../../../components/form";
 
 const MembershipRegistrationView = () => {
@@ -286,49 +294,49 @@ const MembershipRegistrationView = () => {
     },
     {
       type: "file",
-      logo: "",
+      logo: absherLogo,
       name: "absherDocument",
       label: t("Auth.MembershipRegistration.Form.AbsherDocument"),
       required: true,
     },
     {
       type: "file",
-      logo: "",
+      logo: tawakkalnaLogo,
       name: "tawakkalnaDocument",
       label: t("Auth.MembershipRegistration.Form.TawakkalnaDocument"),
       required: true,
     },
     {
       type: "file",
-      logo: "",
+      logo: ministryLogo,
       name: "incomeDocument",
       label: t("Auth.MembershipRegistration.Form.IncomeDocument"),
       required: true,
     },
     {
       type: "file",
-      logo: "",
+      logo: eduMinistryLogo,
       name: "studentsDocument",
       label: t("Auth.MembershipRegistration.Form.StudentsDocument"),
       required: true,
     },
     {
       type: "file",
-      logo: "",
+      logo: ejarLogo,
       name: "rentalDocument",
       label: t("Auth.MembershipRegistration.Form.RentalDocument"),
       required: true,
     },
     {
       type: "file",
-      logo: "",
+      logo: masrafLogo,
       name: "masrefDocument",
       label: t("Auth.MembershipRegistration.Form.MasrefDocument"),
       required: true,
     },
     {
       type: "file",
-      logo: "",
+      logo: molimLogo,
       name: "creditStatement",
       label: t("Auth.MembershipRegistration.Form.CreditStatement"),
       required: true,
