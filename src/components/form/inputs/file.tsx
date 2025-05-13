@@ -1,8 +1,8 @@
-import { faUpload } from "@fortawesome/free-solid-svg-icons";
+import { faUpload, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useRef } from "react";
-import { useTranslation } from "react-i18next";
 import { useField } from "formik";
+import React, { Fragment, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { InputProps } from "..";
 
 interface FileUploadProps {
@@ -28,6 +28,30 @@ const FileInput: React.FC<FinalInput> = ({ name, accept, ...rest }) => {
     helpers.setValue(file);
   };
 
+  const handleRemoveFile = () => {
+    helpers.setValue(null);
+
+    if (inputRef.current) {
+      inputRef.current.value = "";
+    }
+  };
+
+  const RemoveButton = () => (
+    <div
+      role="button"
+      className="bg-danger text-white p-1 align-items-center justify-content-center text-center"
+      style={{
+        borderRadius: "50%",
+        display: "inline-flex",
+        fontSize: 8,
+        width: "20px",
+      }}
+      onClick={handleRemoveFile}
+    >
+      <FontAwesomeIcon icon={faXmark} />
+    </div>
+  );
+
   return (
     <div className="w-100">
       <input
@@ -52,7 +76,13 @@ const FileInput: React.FC<FinalInput> = ({ name, accept, ...rest }) => {
       <div
         className={`mt-1 small ${field.value ? "text-muted" : "text-white"}`}
       >
-        {field.value instanceof File ? field.value.name : "."}
+        {field.value instanceof File ? (
+          <Fragment>
+            {field.value.name} <RemoveButton />
+          </Fragment>
+        ) : (
+          "."
+        )}
       </div>
 
       {meta.error && meta.touched && (
