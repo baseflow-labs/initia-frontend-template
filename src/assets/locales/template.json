@@ -3,11 +3,85 @@
     "Dashboard": {
       "Title": "Dashboard",
       "Welcome": "Welcome To Dashboard"
+    },
+    "MembershipRegistration": {
+      "Form": {
+        "AbsherDocument": "Absher Document",
+        "ApartmentNo": "Apartment No",
+        "BackupMobile": "Backup Mobile",
+        "BankAccountNumber": "Bank Account Number",
+        "BeneficiaryMobile": "Beneficiary Mobile",
+        "City": "City",
+        "ComprehensiveRehabilitation": "Comprehensive Rehabilitation",
+        "CreditStatement": "Credit Statement",
+        "Diseases": "Diseases",
+        "District": "District",
+        "Dob": "Date of Birth",
+        "EducationLevel": "Education Level",
+        "Email": "Email",
+        "FamilyRecordPhoto": "Family Record Photo",
+        "FullName": "Full Name",
+        "Gender": "Gender",
+        "Governorate": "Governorate",
+        "GuardianIdPhoto": "Guardian ID Photo",
+        "HealthStatementPhoto": "Health Statement Photo",
+        "HealthStatus": "Health Status",
+        "HomeLocation": "Home Location",
+        "HomeOwnership": "Home Ownership",
+        "HomeType": "Home Type",
+        "IbanPhoto": "IBAN Photo",
+        "IdExpiryDate": "ID Expiry Date",
+        "IdNumber": "ID Number",
+        "IncomeDocument": "Income Document",
+        "IncurableDisease": "Incurable Disease",
+        "Insurances": "Insurances",
+        "MasrefDocument": "Masref Document",
+        "NationalAddressDocument": "National Address Document",
+        "Nationality": "Nationality",
+        "Occupation": "Occupation",
+        "PaymentFrequency": "Payment Frequency",
+        "RentalCharge": "Rental Charge",
+        "RentalContractPhoto": "Rental Contract Photo",
+        "RentalDocument": "Rental Document",
+        "Retirement": "Retirement",
+        "Salary": "Salary",
+        "SecondaryMobile": "Secondary Mobile",
+        "SocialSecurity": "Social Security",
+        "SocialStatus": "Social Status",
+        "StudentsDocument": "Students Document",
+        "TawakkalnaDocument": "Tawakkalna Document"
+      }
+    }
+  },
+  "Global": {
+    "Labels": {
+      "Location": "Google Map URL",
+      "PleaseSelect": "Please Select...",
+      "Submit": "Submit",
+      "UploadAttachment": "Upload Attachment"
     }
   },
   "Public": {
+    "ForgotPassword": {
+      "GotOtp": {
+        "Title": "Got Otp"
+      },
+      "ResetPassword": {
+        "NewPassword": "New Password",
+        "NewPasswordConfirmation": "New Password Confirmation",
+        "ResetPassword": "Reset Password",
+        "Title": "Reset Password"
+      },
+      "SendOtp": {
+        "ConfirmOTP": "Confirm OTP",
+        "RememberPassword": "Remember Password?",
+        "SendOtp": "Send OTP"
+      },
+      "Title": "Forgot Password"
+    },
     "Login": {
       "Labels": {
+        "DidUForgotPassword": "Did You Forgot Password?",
         "Login": "Login",
         "Password": "Password",
         "PhoneNo": "PhoneNo"
@@ -18,7 +92,7 @@
       "Labels": {
         "Name": "Name",
         "Password": "Password",
-        "PasswordConfirmation": "PasswordConfirmation",
+        "PasswordConfirmation": "Password Confirmation",
         "PhoneNo": "PhoneNo",
         "Register": "Register"
       },

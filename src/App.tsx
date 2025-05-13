@@ -14,17 +14,19 @@ const App = () => {
   document.documentElement.lang = i18n.language;
 
   return (
-    <BrowserRouter>
-      <Suspense fallback={<>Loading...</>}>
-        <Routes>
-          {false ? (
-            <Route path="*" element={<AuthLayout />} />
-          ) : (
-            <Route path="*" element={<PublicLayout />} />
-          )}
-        </Routes>
-      </Suspense>
-    </BrowserRouter>
+    <body>
+      <BrowserRouter>
+        <Suspense fallback={<>Loading...</>}>
+          <Routes>
+            {token !== "null" ? (
+              <Route path="*" element={<AuthLayout />} />
+            ) : (
+              <Route path="*" element={<PublicLayout />} />
+            )}
+          </Routes>
+        </Suspense>
+      </BrowserRouter>
+    </body>
   );
 };
 

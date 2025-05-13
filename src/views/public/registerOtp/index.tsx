@@ -1,39 +1,18 @@
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
-import Button from "../../../components/core/button";
 import Form from "../../../components/form";
 import { useDispatch } from "react-redux";
 import { login } from "../../../store/actions/auth";
 
-const LoginView = () => {
+const RegistrationOtpView = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const formInputs = [
     {
-      type: "phoneNumber",
+      type: "otp",
       name: "phoneNo",
-      label: t("Public.Login.Labels.PhoneNo"),
-      prefixText: "+966",
-      required: true,
-    },
-    {
-      type: "password",
-      name: "password",
-      label: t("Public.Login.Labels.Password"),
-      belowComp: (
-        <div className="d-block">
-          <Button
-            color="ghost"
-            route="/forgot-password"
-            size="sm"
-            onClick={() => navigate("/forgot-password")}
-          >
-            {t("Public.Login.Labels.DidUForgotPassword")}
-          </Button>
-        </div>
-      ),
       required: true,
     },
   ];
@@ -58,13 +37,19 @@ const LoginView = () => {
 
   return (
     <div>
+      <h4>رمز التحقق OTP</h4>
+
+      <div className="text-center mt-2 mb-5">
+        <small>تحقق من رسائل هاتفك وادخل رقم التحقق (OTP)</small>
+      </div>
+
       <Form
         inputs={formInputs}
-        submitText={t("Public.Login.Labels.Login")}
         onFormSubmit={onSubmit}
+        submitText={t("Public.ForgotPassword.SendOtp.ConfirmOTP")}
       />
     </div>
   );
 };
 
-export default LoginView;
+export default RegistrationOtpView;

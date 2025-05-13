@@ -31,6 +31,8 @@ const auth = (
       localStorage.setItem("refreshToken", action.resp.refreshToken);
       localStorage.setItem("user", JSON.stringify(action.resp.user));
 
+      window.location.reload();
+
       return {
         token: action.resp.jwt,
         refreshToken: action.resp.refreshToken,
@@ -42,6 +44,8 @@ const auth = (
       localStorage.removeItem("token");
       localStorage.removeItem("refreshToken");
       localStorage.removeItem("user");
+
+      window.location.reload();
 
       return {
         token: null,

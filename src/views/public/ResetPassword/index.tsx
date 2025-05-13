@@ -2,34 +2,21 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import Form from "../../../components/form";
 
-const RegisterView = () => {
+const ResetPasswordView = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
   const formInputs = [
     {
-      type: "text",
-      name: "name",
-      label: t("Public.Register.Labels.Name"),
-      required: true,
-    },
-    {
-      type: "phoneNumber",
-      name: "phoneNo",
-      label: t("Public.Register.Labels.PhoneNo"),
-      prefixText: "+966",
-      required: true,
-    },
-    {
       type: "password",
       name: "password",
-      label: t("Public.Register.Labels.Password"),
+      label: t("Public.ForgotPassword.ResetPassword.NewPassword"),
       required: true,
     },
     {
       type: "password",
       name: "passwordConfirmation",
-      label: t("Public.Register.Labels.PasswordConfirmation"),
+      label: t("Public.ForgotPassword.ResetPassword.NewPasswordConfirmation"),
       required: true,
     },
   ];
@@ -37,18 +24,18 @@ const RegisterView = () => {
   const onSubmit = (values = {}) => {
     console.log({ values });
 
-    navigate("/register/otp");
+    navigate("/");
   };
 
   return (
     <div>
       <Form
         inputs={formInputs}
-        submitText={t("Public.Register.Labels.Register")}
+        submitText={t("Public.ForgotPassword.ResetPassword.ResetPassword")}
         onFormSubmit={onSubmit}
       />
     </div>
   );
 };
 
-export default RegisterView;
+export default ResetPasswordView;
