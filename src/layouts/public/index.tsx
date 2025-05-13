@@ -1,13 +1,14 @@
 import { useTranslation } from "react-i18next";
 import { Route, Routes, useLocation, useNavigate } from "react-router";
+
 import bgImage from "../../assets/images/brand/logo-full.png";
 import Button from "../../components/core/button";
 import ForgotPasswordView from "../../views/public/forgotPassword";
 import LoginView from "../../views/public/login";
 import OtpView from "../../views/public/otp";
 import RegisterView from "../../views/public/register";
-import ResetPasswordView from "../../views/public/ResetPassword";
 import RegistrationOtpView from "../../views/public/registerOtp";
+import ResetPasswordView from "../../views/public/ResetPassword";
 
 const AuthLayout = () => {
   const { t } = useTranslation();
@@ -67,12 +68,13 @@ const AuthLayout = () => {
               role="button"
               onClick={() => navigate("/")}
             />
-            {(location.pathname == "/" || location.pathname == "/register") && (
+            {(location.pathname === "/" ||
+              location.pathname === "/register") && (
               <div className="my-4 p-2 bg-light w-fit mx-auto rounded-5">
                 {publicRoutes
                   .filter(({ show }) => show)
                   .map(({ name, route, view }, i) => {
-                    const isSelected = location.pathname == route;
+                    const isSelected = location.pathname === route;
 
                     const settings = isSelected
                       ? {
