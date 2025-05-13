@@ -30,6 +30,10 @@ input[type="radio"]:checked:focus {
   font-weight: 400;
 }
 
+.px-50 {
+  padding: inherit 50vw;
+}
+
 .no-interaction {
   pointer-events: none;
   opacity: 1;

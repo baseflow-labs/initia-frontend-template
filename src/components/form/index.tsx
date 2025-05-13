@@ -34,12 +34,14 @@ interface Props extends React.FormHTMLAttributes<HTMLFormElement> {
   onFormSubmit?: (values: Record<string, any>) => void;
   inputs: InputProps[];
   submitText?: string;
+  customButton?: React.ReactNode;
 }
 
 const Form: React.FC<Props> = ({
   onFormSubmit,
   inputs,
   submitText,
+  customButton,
   ...rest
 }) => {
   const { t } = useTranslation();
@@ -125,6 +127,19 @@ const Form: React.FC<Props> = ({
               halfCol,
               ...input
             }) => {
+              const triggerError =
+                formik.errors[input.name] && formik.touched[input.name];
+
+              const prefixTexts =
+                prefixText ||
+                (input.type == "phoneNumber" ? "+966" : undefined);
+
+              const ErrorView = () => (
+                <small className={triggerError ? "text-danger" : "text-white"}>
+                  {triggerError ? (formik.errors[input.name] as any) : "."}
+                </small>
+              );
+
               if (logo) {
                 return (
                   <Fragment key={input.name}>
@@ -155,7 +170,7 @@ const Form: React.FC<Props> = ({
                             : ""
                         }`}
                       >
-                        <InlineElement content={prefixText} flip />
+                        <InlineElement content={prefixTexts} flip />
 
                         <InputComp {...input} />
 
@@ -164,12 +179,7 @@ const Form: React.FC<Props> = ({
 
                       {belowComp}
 
-                      {formik.errors[input.name] &&
-                        formik.touched[input.name] && (
-                          <div className="text-danger">
-                            {formik.errors[input.name] as any}
-                          </div>
-                        )}
+                      <ErrorView />
                     </div>
                   </Fragment>
                 );
@@ -191,7 +201,7 @@ const Form: React.FC<Props> = ({
                       input.type === "phoneNumber" ? "phone-number-input" : ""
                     }`}
                   >
-                    <InlineElement content={prefixText} flip />
+                    <InlineElement content={prefixTexts} flip />
 
                     <InputComp {...input} />
 
@@ -200,18 +210,21 @@ const Form: React.FC<Props> = ({
 
                   {belowComp}
 
-                  {formik.errors[input.name] && formik.touched[input.name] && (
-                    <div className="text-danger">
-                      {formik.errors[input.name] as any}
-                    </div>
-                  )}
+                  <ErrorView />
                 </div>
               );
             }
           )}
         </div>
 
-        <Button type="submit" color="info" className="w-100 p-2" rounded={3}>
+        {customButton}
+
+        <Button
+          type="submit"
+          color="info"
+          className={`w-${customButton ? "50" : "100"} p-2`}
+          rounded={3}
+        >
           {submitText || t("Global.Form.Labels.Submit")}
         </Button>
       </FormikForm>

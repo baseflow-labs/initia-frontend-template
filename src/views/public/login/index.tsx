@@ -15,7 +15,6 @@ const LoginView = () => {
       type: "phoneNumber",
       name: "phoneNo",
       label: t("Public.Login.Labels.PhoneNo"),
-      prefixText: "+966",
       required: true,
     },
     {

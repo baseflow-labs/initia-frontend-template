@@ -1,11 +1,11 @@
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Fragment } from "react/jsx-runtime";
-import Button from "../../../components/core/button";
 
 interface Props {
+  currentStep: number;
+  setCurrentStep: (current: any) => any;
   steps: {
     label: string;
     name: string;
@@ -13,13 +13,8 @@ interface Props {
   }[];
 }
 
-const WizardFormStepper = ({ steps }: Props) => {
+const WizardFormStepper = ({ steps, currentStep, setCurrentStep }: Props) => {
   const { t } = useTranslation();
-
-  const [currentStep, setCurrentStep] = useState(0);
-
-  const onNextStep = () => setCurrentStep((current) => current + 1);
-  const onPreviousStep = () => setCurrentStep((current) => current - 1);
 
   const onStepJump = (i = 0) => {
     i < currentStep ? setCurrentStep(i) : console.log("Can't Jump Forward");
@@ -34,22 +29,16 @@ const WizardFormStepper = ({ steps }: Props) => {
               <div className="step" data-target={`#step-${i + 1}`}>
                 <button
                   type="button"
-                  className="step-trigger"
+                  className={`step-trigger ${
+                    currentStep === i ? "active" : currentStep > i ? "done" : ""
+                  }`}
                   role="tab"
                   disabled={i > currentStep}
                   id={`trigger-${i + 1}`}
                   aria-controls={`step-${i + 1}`}
                   onClick={() => onStepJump(i)}
                 >
-                  <span
-                    className={`bs-stepper-circle ${
-                      currentStep === i
-                        ? "active"
-                        : currentStep > i
-                        ? "done"
-                        : ""
-                    }`}
-                  >
+                  <span className={`bs-stepper-circle`}>
                     {currentStep > i ? (
                       <FontAwesomeIcon icon={faCheck} />
                     ) : (
@@ -61,29 +50,19 @@ const WizardFormStepper = ({ steps }: Props) => {
                 </button>
               </div>
 
-              <div
-                className={`bs-stepper-line ${
-                  currentStep >= i ? "active" : ""
-                }`}
-              />
+              {i != steps.length - 1 && (
+                <div
+                  className={`bs-stepper-line ${
+                    currentStep >= i ? "active" : ""
+                  }`}
+                />
+              )}
             </Fragment>
           ))}
         </div>
 
-        <div className="bs-stepper-content">{steps[currentStep]?.contents}</div>
-
-        <div className="text-center">
-          <Button
-            disabled={currentStep === 0}
-            onClick={() => onPreviousStep()}
-            outline
-          >
-            {t("Global.Labels.Previous")}
-          </Button>
-
-          <Button className="ms-4" onClick={() => onNextStep()}>
-            {t("Global.Labels.SaveContinue")}
-          </Button>
+        <div className="bs-stepper-content border border-gray rounded-5 py-5 px-5 mt-5">
+          {steps[currentStep]?.contents}
         </div>
       </div>
     </Fragment>

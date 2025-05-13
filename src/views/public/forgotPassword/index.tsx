@@ -12,7 +12,6 @@ const ForgotPasswordView = () => {
       type: "phoneNumber",
       name: "phoneNo",
       label: t("Public.Login.Labels.PhoneNo"),
-      prefixText: "+966",
       belowComp: (
         <div className="d-block">
           <Button color="ghost" route="/" size="sm">

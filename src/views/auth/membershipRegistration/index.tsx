@@ -9,9 +9,22 @@ import molimLogo from "../../../assets/images/partners/molim.svg";
 import tawakkalnaLogo from "../../../assets/images/partners/Tawakkalna.svg";
 import Form from "../../../components/form";
 import WizardFormStepper from "../../../components/form/wizard/stepper";
+import Button from "../../../components/core/button";
+import { useState } from "react";
 
 const MembershipRegistrationView = () => {
   const { t } = useTranslation();
+  const [currentStep, setCurrentStep] = useState(0);
+  const [formData, setFormData] = useState({});
+
+  const onNextStep = (values = {}) => {
+    setFormData((current) => ({ ...current, ...values }));
+    setCurrentStep((current = 0) => current + 1);
+  };
+
+  const onPreviousStep = () => {
+    setCurrentStep((current = 0) => current - 1);
+  };
 
   const basicDataInputs = [
     {
@@ -203,7 +216,6 @@ const MembershipRegistrationView = () => {
       name: "healthStatementPhoto",
       label: t("Auth.MembershipRegistration.Form.HealthStatementPhoto"),
       required: true,
-      halfCol: true,
     },
   ];
 
@@ -640,42 +652,99 @@ const MembershipRegistrationView = () => {
     },
   ];
 
+  const BackButton = () => (
+    <Button
+      className="w-50 p-2"
+      rounded={3}
+      onClick={() => onPreviousStep()}
+      outline
+    >
+      {t("Global.Labels.Previous")}
+    </Button>
+  );
+
   const formSteps = [
     {
       label: t("Auth.MembershipRegistration.Form.BasicData"),
       name: "BasicData",
-      contents: <Form inputs={basicDataInputs} />,
+      contents: (
+        <Form
+          inputs={basicDataInputs}
+          submitText={t("Global.Labels.SaveContinue")}
+          onFormSubmit={(e) => onNextStep(e)}
+        />
+      ),
     },
     {
       label: t("Auth.MembershipRegistration.Form.ContactData"),
       name: "ContactData",
-      contents: <Form inputs={contactDataInputs} />,
+      contents: (
+        <Form
+          inputs={contactDataInputs}
+          submitText={t("Global.Labels.SaveContinue")}
+          customButton={<BackButton />}
+          onFormSubmit={(e) => onNextStep(e)}
+        />
+      ),
     },
     {
       label: t("Auth.MembershipRegistration.Form.QualificationData"),
       name: "QualificationData",
-      contents: <Form inputs={qualificationDataInputs} />,
+      contents: (
+        <Form
+          inputs={qualificationDataInputs}
+          submitText={t("Global.Labels.SaveContinue")}
+          customButton={<BackButton />}
+          onFormSubmit={(e) => onNextStep(e)}
+        />
+      ),
     },
     {
       label: t("Auth.MembershipRegistration.Form.HostelData"),
       name: "HostelData",
-      contents: <Form inputs={hostelDataInputs} />,
+      contents: (
+        <Form
+          inputs={hostelDataInputs}
+          submitText={t("Global.Labels.SaveContinue")}
+          customButton={<BackButton />}
+          onFormSubmit={(e) => onNextStep(e)}
+        />
+      ),
     },
     {
       label: t("Auth.MembershipRegistration.Form.DependantData"),
       name: "DependantData",
-      contents: <Form inputs={attachmentInputs} />,
+      contents: (
+        <Form
+          inputs={attachmentInputs}
+          submitText={t("Global.Labels.SaveContinue")}
+          customButton={<BackButton />}
+          onFormSubmit={(e) => onNextStep(e)}
+        />
+      ),
     },
     {
       label: t("Auth.MembershipRegistration.Form.Attachments"),
       name: "Attachments",
-      contents: <Form inputs={attachmentInputs} />,
+      contents: (
+        <Form
+          inputs={attachmentInputs}
+          customButton={<BackButton />}
+          onFormSubmit={(e) => console.log({ e })}
+        />
+      ),
     },
   ];
 
   return (
     <Fragment>
-      <WizardFormStepper steps={formSteps} />
+      <div className="px-1 mx-1 px-lg-5 mx-lg-5">
+        <WizardFormStepper
+          steps={formSteps}
+          currentStep={currentStep}
+          setCurrentStep={setCurrentStep}
+        />
+      </div>
     </Fragment>
   );
 };

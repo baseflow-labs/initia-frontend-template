@@ -10,12 +10,11 @@
 }
 
 .bs-stepper .step-trigger {
-  display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   padding: 20px;
-  font-size: 1rem;
+  font-size: clamp(10px, 0.9vw, 13px);
   font-weight: 700;
   line-height: 1.5;
   color: #6c757d;
@@ -60,11 +59,13 @@
 .bs-stepper-label {
   display: block;
   margin: 0.25rem;
+  width: min-content;
 }
 
 .bs-stepper-header {
   display: flex;
-  overflow-x: hidden;
+  min-width: 500px;
+  overflow-x: auto;
   align-items: center;
 }
 
@@ -106,25 +107,42 @@
   border-radius: 1em;
 }
 
-.bs-stepper-circle.active,
+.active .bs-stepper-circle,
+.active .bs-stepper-label,
+.done .bs-stepper-label,
 .bs-stepper-line.active {
   color: var(--bs-info);
-  border: 1px solid var(--bs-info);
 }
 
-.bs-stepper-circle.done {
+.active .bs-stepper-circle,
+.bs-stepper-line.active {
+  border: 1px solid var(--bs-info);
+}
+.done .bs-stepper-circle {
   color: var(--bs-white);
   border: 1px solid var(--bs-info);
   background-color: var(--bs-info);
 }
 
 .bs-stepper-content {
-  padding: 0 20px 20px;
+  margin: 0 20vw;
 }
 
-@media (max-width: 520px) {
+@media (max-width: 1200px) {
   .bs-stepper-content {
-    padding: 0;
+    margin: 0 15vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .bs-stepper-content {
+    margin: 0 7.5vw;
+  }
+}
+
+@media (max-width: 576px) {
+  .bs-stepper-content {
+    margin: 0 1vw;
   }
 }
 
