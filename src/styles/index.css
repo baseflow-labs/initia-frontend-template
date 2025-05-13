@@ -42,7 +42,7 @@ input[type="radio"]:checked:focus {
 }
 
 .public-bg-image {
-  background-image: url("../src/assets/images/public-bg.jpg");
+  background-image: url("../assets/images/public-bg.jpg");
   background-size: cover;
   background-position: center;
 }

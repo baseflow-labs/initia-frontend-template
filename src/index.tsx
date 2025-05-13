@@ -12,7 +12,7 @@ import "@fontsource/cairo";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/css/bootstrap.rtl.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import "./index.css";
+import "./styles/index.css";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
