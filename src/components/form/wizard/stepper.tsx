@@ -1,6 +1,5 @@
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useTranslation } from "react-i18next";
 import { Fragment } from "react/jsx-runtime";
 
 interface Props {
@@ -14,8 +13,6 @@ interface Props {
 }
 
 const WizardFormStepper = ({ steps, currentStep, setCurrentStep }: Props) => {
-  const { t } = useTranslation();
-
   const onStepJump = (i = 0) => {
     i < currentStep ? setCurrentStep(i) : console.log("Can't Jump Forward");
   };
@@ -50,7 +47,7 @@ const WizardFormStepper = ({ steps, currentStep, setCurrentStep }: Props) => {
                 </button>
               </div>
 
-              {i != steps.length - 1 && (
+              {i !== steps.length - 1 && (
                 <div
                   className={`bs-stepper-line ${
                     currentStep >= i ? "active" : ""

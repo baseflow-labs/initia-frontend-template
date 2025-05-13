@@ -1,12 +1,11 @@
 import {
-  useFormik,
   FormikErrors,
-  FormikProvider,
   Form as FormikForm,
+  FormikProvider,
+  useFormik,
 } from "formik";
 import React, { Fragment } from "react";
 import { useTranslation } from "react-i18next";
-
 import Button from "../core/button";
 import InputComp from "./Input";
 
@@ -34,14 +33,14 @@ interface Props extends React.FormHTMLAttributes<HTMLFormElement> {
   onFormSubmit?: (values: Record<string, any>) => void;
   inputs: InputProps[];
   submitText?: string;
-  customButton?: React.ReactNode;
+  customButtons?: React.ReactNode;
 }
 
 const Form: React.FC<Props> = ({
   onFormSubmit,
   inputs,
   submitText,
-  customButton,
+  customButtons,
   ...rest
 }) => {
   const { t } = useTranslation();
@@ -132,7 +131,7 @@ const Form: React.FC<Props> = ({
 
               const prefixTexts =
                 prefixText ||
-                (input.type == "phoneNumber" ? "+966" : undefined);
+                (input.type === "phoneNumber" ? "+966" : undefined);
 
               const ErrorView = () => (
                 <small className={triggerError ? "text-danger" : "text-white"}>
@@ -217,12 +216,12 @@ const Form: React.FC<Props> = ({
           )}
         </div>
 
-        {customButton}
+        {customButtons}
 
         <Button
           type="submit"
           color="info"
-          className={`w-${customButton ? "50" : "100"} p-2`}
+          className={`w-${customButtons ? "50" : "100"} p-2`}
           rounded={3}
         >
           {submitText || t("Global.Form.Labels.Submit")}

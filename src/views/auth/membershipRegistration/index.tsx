@@ -1,3 +1,6 @@
+import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Fragment } from "react/jsx-runtime";
 import absherLogo from "../../../assets/images/partners/absher.svg";
@@ -7,10 +10,9 @@ import masrafLogo from "../../../assets/images/partners/Masraf.svg";
 import ministryLogo from "../../../assets/images/partners/ministry.svg";
 import molimLogo from "../../../assets/images/partners/molim.svg";
 import tawakkalnaLogo from "../../../assets/images/partners/Tawakkalna.svg";
+import Button from "../../../components/core/button";
 import Form from "../../../components/form";
 import WizardFormStepper from "../../../components/form/wizard/stepper";
-import Button from "../../../components/core/button";
-import { useState } from "react";
 
 const MembershipRegistrationView = () => {
   const { t } = useTranslation();
@@ -652,15 +654,30 @@ const MembershipRegistrationView = () => {
     },
   ];
 
-  const BackButton = () => (
+  const HelpButton = () => (
     <Button
-      className="w-50 p-2"
+      className="w-100 p-2 ps-0 mb-3 text-start"
       rounded={3}
-      onClick={() => onPreviousStep()}
-      outline
+      color="ghost"
     >
-      {t("Global.Labels.Previous")}
+      <FontAwesomeIcon icon={faInfoCircle} />{" "}
+      {t("Auth.MembershipRegistration.Form.ClickForHelp")}
     </Button>
+  );
+
+  const BackButton = () => (
+    <Fragment>
+      <HelpButton />
+
+      <Button
+        className="w-50 p-2"
+        rounded={3}
+        onClick={() => onPreviousStep()}
+        outline
+      >
+        {t("Global.Labels.Previous")}
+      </Button>
+    </Fragment>
   );
 
   const formSteps = [
@@ -671,6 +688,7 @@ const MembershipRegistrationView = () => {
         <Form
           inputs={basicDataInputs}
           submitText={t("Global.Labels.SaveContinue")}
+          customButtons={<HelpButton />}
           onFormSubmit={(e) => onNextStep(e)}
         />
       ),
@@ -682,7 +700,7 @@ const MembershipRegistrationView = () => {
         <Form
           inputs={contactDataInputs}
           submitText={t("Global.Labels.SaveContinue")}
-          customButton={<BackButton />}
+          customButtons={<BackButton />}
           onFormSubmit={(e) => onNextStep(e)}
         />
       ),
@@ -694,7 +712,7 @@ const MembershipRegistrationView = () => {
         <Form
           inputs={qualificationDataInputs}
           submitText={t("Global.Labels.SaveContinue")}
-          customButton={<BackButton />}
+          customButtons={<BackButton />}
           onFormSubmit={(e) => onNextStep(e)}
         />
       ),
@@ -706,7 +724,7 @@ const MembershipRegistrationView = () => {
         <Form
           inputs={hostelDataInputs}
           submitText={t("Global.Labels.SaveContinue")}
-          customButton={<BackButton />}
+          customButtons={<BackButton />}
           onFormSubmit={(e) => onNextStep(e)}
         />
       ),
@@ -718,7 +736,7 @@ const MembershipRegistrationView = () => {
         <Form
           inputs={attachmentInputs}
           submitText={t("Global.Labels.SaveContinue")}
-          customButton={<BackButton />}
+          customButtons={<BackButton />}
           onFormSubmit={(e) => onNextStep(e)}
         />
       ),
@@ -729,7 +747,7 @@ const MembershipRegistrationView = () => {
       contents: (
         <Form
           inputs={attachmentInputs}
-          customButton={<BackButton />}
+          customButtons={<BackButton />}
           onFormSubmit={(e) => console.log({ e })}
         />
       ),
