@@ -50,6 +50,7 @@ const MembershipRegistrationView = () => {
       type: "numberText",
       name: "idNumber",
       label: t("Auth.MembershipRegistration.Form.IdNumber"),
+      labelNote: t("Auth.MembershipRegistration.Form.IdNumberNote"),
       required: true,
     },
     {
@@ -131,6 +132,7 @@ const MembershipRegistrationView = () => {
       type: "numberText",
       name: "bankAccountNumber",
       label: t("Auth.MembershipRegistration.Form.BankAccountNumber"),
+      labelNote: t("Auth.MembershipRegistration.Form.BankAccountNumberNote"),
       required: true,
     },
     {
@@ -311,6 +313,7 @@ const MembershipRegistrationView = () => {
       logo: ministryLogo,
       name: "incomeDocument",
       label: t("Auth.MembershipRegistration.Form.IncomeDocument"),
+      labelNote: t("Auth.MembershipRegistration.Form.IncomeDocumentNote"),
       required: true,
     },
     {
@@ -318,6 +321,7 @@ const MembershipRegistrationView = () => {
       logo: eduMinistryLogo,
       name: "studentsDocument",
       label: t("Auth.MembershipRegistration.Form.StudentsDocument"),
+      labelNote: t("Auth.MembershipRegistration.Form.StudentsDocumentNote"),
       required: true,
     },
     {
@@ -339,6 +343,7 @@ const MembershipRegistrationView = () => {
       logo: molimLogo,
       name: "creditStatement",
       label: t("Auth.MembershipRegistration.Form.CreditStatement"),
+      labelNote: t("Auth.MembershipRegistration.Form.CreditStatementNote"),
       required: true,
     },
   ];

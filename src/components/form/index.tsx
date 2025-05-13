@@ -9,6 +9,7 @@ export interface InputProps {
   type?: string;
   name: string;
   label?: string;
+  labelNote?: string;
   logo?: string;
   required?: boolean;
   half?: boolean;
@@ -141,6 +142,13 @@ const Form: React.FC<Props> = ({
         const LabelView = (input: InputProps) => (
           <label className={`form-label ${input.label ? "" : "text-white"}`}>
             {input.label ? input.label : "."}{" "}
+            {input.labelNote && (
+              <span className="text-muted">
+                {"("}
+                {input.labelNote}
+                {")"}{" "}
+              </span>
+            )}
             {input.label && input.required ? (
               <span className="text-danger">*</span>
             ) : (

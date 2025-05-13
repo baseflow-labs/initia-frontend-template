@@ -10,10 +10,12 @@
         "ApartmentNo": "Apartment No",
         "BackupMobile": "Backup Mobile",
         "BankAccountNumber": "Bank Account Number",
+        "BankAccountNumberNote": "12 Digits Number",
         "BeneficiaryMobile": "Beneficiary Mobile",
         "City": "City",
         "ComprehensiveRehabilitation": "Comprehensive Rehabilitation",
         "CreditStatement": "Credit Statement",
+        "CreditStatementNote": "In case of having officially documented debts",
         "Diseases": "Diseases",
         "District": "District",
         "Dob": "Date of Birth",
@@ -32,7 +34,9 @@
         "IbanPhoto": "IBAN Photo",
         "IdExpiryDate": "ID Expiry Date",
         "IdNumber": "ID Number",
+        "IdNumberNote": "10 Digits Number",
         "IncomeDocument": "Income Document",
+        "IncomeDocumentNote": "For family members staying at same home",
         "IncurableDisease": "Incurable Disease",
         "Insurances": "Insurances",
         "MasrefDocument": "Masref Document",
@@ -49,6 +53,7 @@
         "SocialSecurity": "Social Security",
         "SocialStatus": "Social Status",
         "StudentsDocument": "Students Document",
+        "StudentsDocumentNote": "Noor or university website",
         "TawakkalnaDocument": "Tawakkalna Document"
       }
     }
