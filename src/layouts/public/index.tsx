@@ -63,6 +63,7 @@ const AuthLayout = () => {
         >
           <div className="card-body text-center">
             <img
+              alt="bg-image"
               src={bgImage}
               className="w-50 px-1 mb-4"
               role="button"
@@ -106,13 +107,13 @@ const AuthLayout = () => {
               </div>
             )}
 
-            <p className="card-text">
+            <div className="card-text">
               <Routes>
                 {publicRoutes.map(({ name, route, view }, i) => (
                   <Route path={route} element={view} key={i} />
                 ))}
               </Routes>
-            </p>
+            </div>
           </div>
         </div>
       </div>

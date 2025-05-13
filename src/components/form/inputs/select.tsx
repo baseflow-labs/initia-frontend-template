@@ -2,29 +2,17 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { InputProps } from "..";
 import { commonInputClasses } from "../../../utils/consts";
-import { ValidatedInput } from "../Input";
 
-type FinalInput = ValidatedInput &
-  InputProps &
+type FinalInput = InputProps &
   React.InputHTMLAttributes<HTMLInputElement> &
   React.SelectHTMLAttributes<HTMLSelectElement>;
 
-const SelectInput: React.FC<FinalInput> = ({
-  name,
-  value,
-  handleChange,
-  handleBlur,
-  ...input
-}) => {
+const SelectInput: React.FC<FinalInput> = (input) => {
   const { t } = useTranslation();
 
   return (
     <select
       {...input}
-      name={name}
-      value={value}
-      onChange={handleChange}
-      onBlur={handleBlur}
       className={`form-select form-select-sm ${commonInputClasses}`}
     >
       <option value="">

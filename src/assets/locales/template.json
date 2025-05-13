@@ -7,39 +7,118 @@
     "MembershipRegistration": {
       "Form": {
         "AbsherDocument": "Absher Document",
+        "Address": "Home Address",
         "ApartmentNo": "Apartment No",
         "BackupMobile": "Backup Mobile",
         "BankAccountNumber": "Bank Account Number",
+        "BankAccountNumberNote": "12 Digits Number",
         "BeneficiaryMobile": "Beneficiary Mobile",
         "City": "City",
         "ComprehensiveRehabilitation": "Comprehensive Rehabilitation",
         "CreditStatement": "Credit Statement",
-        "Diseases": "Diseases",
+        "CreditStatementNote": "In case of having officially documented debts",
+        "Diseases": {
+          "Cancerous": "Cancerous",
+          "ChestDiseases": "Chest Diseases",
+          "ChronicDiseases": "Chronic Diseases",
+          "Disability": "Disability",
+          "GeneticDiseases": "Genetic Diseases",
+          "HearingImpairment": "Hearing Impairment",
+          "LiverDiseases": "Liver Diseases",
+          "MentalDisability": "Mental Disability",
+          "NeurologicalDiseases": "Neurological Diseases",
+          "None": "None",
+          "SkinDiseases": "Skin Diseases",
+          "Title": "Diseases",
+          "VisualImpairment": "Visual Impairment"
+        },
         "District": "District",
         "Dob": "Date of Birth",
-        "EducationLevel": "Education Level",
+        "EducationLevel": {
+          "Degree": "Degree",
+          "Diploma": "Diploma",
+          "HighSchool": "High School",
+          "HigherDiploma": "Higher Diploma",
+          "Illiterate": "Illiterate",
+          "IntermediateSchool": "Intermediate School",
+          "Literate": "Literate",
+          "Master": "Master",
+          "Phd": "Phd",
+          "PrimarySchool": "Primary School",
+          "Title": "Education Level"
+        },
         "Email": "Email",
         "FamilyRecordPhoto": "Family Record Photo",
         "FullName": "Full Name",
-        "Gender": "Gender",
+        "Gender": {
+          "Female": "Female",
+          "Male": "Male",
+          "Title": "Gender"
+        },
         "Governorate": "Governorate",
         "GuardianIdPhoto": "Guardian ID Photo",
         "HealthStatementPhoto": "Health Statement Photo",
-        "HealthStatus": "Health Status",
+        "HealthStatus": {
+          "Healthy": "Healthy",
+          "Sick": "Sick",
+          "Title": "Health Status"
+        },
         "HomeLocation": "Home Location",
-        "HomeOwnership": "Home Ownership",
-        "HomeType": "Home Type",
+        "HomeOwnership": {
+          "Ownership": "Ownership",
+          "Rental": "Rental",
+          "Title": "Home Ownership"
+        },
+        "HomeType": {
+          "Apartment": "Apartment",
+          "Caravan": "Caravan",
+          "FolkHouse": "FolkHouse",
+          "IncompleteBuilding": "Incomplete Building",
+          "IndependentHome": "Independent Home",
+          "NoPermanentHome": "No Permanent Home",
+          "Roof": "Roof",
+          "SharedHouse": "Shared House",
+          "Title": "Title",
+          "Villa": "Villa"
+        },
         "IbanPhoto": "IBAN Photo",
         "IdExpiryDate": "ID Expiry Date",
         "IdNumber": "ID Number",
+        "IdNumberNote": "10 Digits Number",
         "IncomeDocument": "Income Document",
+        "IncomeDocumentNote": "For family members staying at same home",
+        "IncomeResources": "Income Resources",
         "IncurableDisease": "Incurable Disease",
         "Insurances": "Insurances",
         "MasrefDocument": "Masref Document",
         "NationalAddressDocument": "National Address Document",
-        "Nationality": "Nationality",
+        "Nationality": {
+          "NonSaudi": "NonSaudi",
+          "Saudi": "Saudi",
+          "Title": "Nationality"
+        },
         "Occupation": "Occupation",
-        "PaymentFrequency": "Payment Frequency",
+        "PaymentFrequency": {
+          "Monthly": "Monthly",
+          "Title": "Payment Frequency",
+          "Yearly": "Yearly"
+        },
+        "Province": {
+          "AlBahah": "AlBahah",
+          "AlJawf": "AlJawf",
+          "AlQassim": "AlQassim",
+          "Asir": "Asir",
+          "Eastern Province": "Eastern Province",
+          "Hail": "Hail",
+          "Jazan": "Jazan",
+          "Madinah": "Madinah",
+          "Makkah": "Makkah",
+          "Najran": "Najran",
+          "NorthernBorders": "NorthernBorders",
+          "Riyadh": "Riyadh",
+          "Tabuk": "Tabuk",
+          "Title": "Province"
+        },
         "RentalCharge": "Rental Charge",
         "RentalContractPhoto": "Rental Contract Photo",
         "RentalDocument": "Rental Document",
@@ -47,8 +126,15 @@
         "Salary": "Salary",
         "SecondaryMobile": "Secondary Mobile",
         "SocialSecurity": "Social Security",
-        "SocialStatus": "Social Status",
+        "SocialStatus": {
+          "Divorced": "Divorced",
+          "Married": "Married",
+          "Single": "Single",
+          "Title": "Social Status",
+          "Widower": "Widower"
+        },
         "StudentsDocument": "Students Document",
+        "StudentsDocumentNote": "Noor or university website",
         "TawakkalnaDocument": "Tawakkalna Document"
       }
     }
@@ -56,9 +142,11 @@
   "Global": {
     "Labels": {
       "Location": "Google Map URL",
+      "No": "No",
       "PleaseSelect": "Please Select...",
       "Submit": "Submit",
-      "UploadAttachment": "Upload Attachment"
+      "UploadAttachment": "Upload Attachment",
+      "Yes": "Yes"
     }
   },
   "Public": {
