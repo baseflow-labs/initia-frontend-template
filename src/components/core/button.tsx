@@ -4,6 +4,7 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   className?: string;
   color?: string;
+  text?: string;
   rounded?: number;
   p?: number;
   route?: string;
@@ -15,6 +16,7 @@ const Button = ({
   children,
   className,
   color = "info",
+  text = "info",
   rounded = 0,
   p = 2,
   route,
@@ -28,9 +30,10 @@ const Button = ({
     switch (color) {
       case "primary":
       case "info":
+      case "danger":
         return "white";
       case "ghost":
-        return "info";
+        return text;
 
       default:
         return "dark";

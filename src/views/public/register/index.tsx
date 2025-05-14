@@ -1,12 +1,13 @@
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
+
 import Form from "../../../components/form";
 
 const RegisterView = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const formInputs = [
+  const formInputs = () => [
     {
       type: "text",
       name: "name",

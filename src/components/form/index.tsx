@@ -1,15 +1,17 @@
 import {
   FormikErrors,
   Form as FormikForm,
+  FormikProps,
   FormikProvider,
   useFormik,
 } from "formik";
 import React, { Fragment } from "react";
 import { useTranslation } from "react-i18next";
+
 import Button from "../core/button";
 import InputComp from "./Input";
 
-export interface InputProps {
+interface InputBasicProps {
   name: string;
   label?: string;
   labelNote?: string;
@@ -20,7 +22,20 @@ export interface InputProps {
     value: string | number;
     label?: string;
   }[];
+}
 
+interface InputSingleProps extends InputBasicProps {
+  logo?: string;
+  halfCol?: boolean;
+  prefixText?: string | number;
+  postfixText?: string | number;
+  aboveComp?: React.ReactNode;
+  belowComp?: React.ReactNode;
+}
+
+export interface InputProps extends InputSingleProps {
+  inputs?: InputSingleProps[];
+  addLabel?: string | React.ReactNode;
   logo?: string;
   halfCol?: boolean;
   prefixText?: string | number;
@@ -31,7 +46,7 @@ export interface InputProps {
 
 interface Props extends React.FormHTMLAttributes<HTMLFormElement> {
   onFormSubmit?: (values: Record<string, any>) => void;
-  inputs: InputProps[];
+  inputs: (formik: FormikProps<Record<string, any>>) => InputProps[];
   submitText?: string;
   customButtons?: React.ReactNode;
 }
@@ -45,38 +60,39 @@ const Form: React.FC<Props> = ({
 }) => {
   const { t } = useTranslation();
 
-  const initialValues = inputs.reduce<Record<string, any>>((acc, input) => {
-    acc[input.name] =
-      input.defaultValue ??
-      (input.type === "radio" ? input.options?.[0]?.value ?? "" : "");
-    return acc;
-  }, {});
+  const formik = useFormik<Record<string, any>>({
+    initialValues: {},
+    validate: (values: Record<string, any>) => {
+      const errors: FormikErrors<Record<string, any>> = {};
+      const dynamicInputs = inputs(formik);
 
-  const validate = (values: Record<string, any>) => {
-    const errors: FormikErrors<Record<string, any>> = {};
-
-    inputs.forEach((input) => {
-      if (input.required && !values[input.name]) {
-        errors[input.name] = t("Global.Form.Labels.Required");
-      }
-
-      if (input.type === "email" && values[input.name]) {
-        const validEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-        if (!validEmail.test(values[input.name])) {
-          errors[input.name] = t("Global.Form.Labels.InvalidEmail");
+      dynamicInputs.forEach((input) => {
+        if (input.required && !values[input.name]) {
+          errors[input.name] = t("Global.Form.Labels.Required");
         }
-      }
-    });
-    return errors;
-  };
-
-  const formik = useFormik({
-    initialValues,
-    validate,
+        if (input.type === "email" && values[input.name]) {
+          const validEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+          if (!validEmail.test(values[input.name])) {
+            errors[input.name] = t("Global.Form.Labels.InvalidEmail");
+          }
+        }
+      });
+      return errors;
+    },
     onSubmit: (values) => {
       onFormSubmit?.(values);
     },
   });
+
+  formik.initialValues = inputs(formik).reduce<Record<string, any>>(
+    (acc, input) => {
+      acc[input.name] =
+        input.defaultValue ??
+        (input.type === "radio" ? input.options?.[0]?.value ?? "" : "");
+      return acc;
+    },
+    {}
+  );
 
   const InlineElement = ({
     flip,
@@ -115,7 +131,7 @@ const Form: React.FC<Props> = ({
     <FormikProvider value={formik}>
       <FormikForm className="text-start" {...rest}>
         <div className="row">
-          {inputs.map(
+          {inputs(formik).map(
             ({
               prefixText,
               postfixText,

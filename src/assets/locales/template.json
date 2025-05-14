@@ -21,7 +21,7 @@
         "ContactData": "Contact Data",
         "CreditStatement": "Credit Statement",
         "CreditStatementNote": "In case of having officially documented debts",
-        "DependantData": "Dependant Data",
+        "DependentsData": "Dependents Data",
         "Diseases": {
           "Cancerous": "Cancerous",
           "ChestDiseases": "Chest Diseases",
@@ -104,10 +104,15 @@
           "Title": "Nationality"
         },
         "Occupation": "Occupation",
-        "PaymentFrequency": {
-          "Monthly": "Monthly",
-          "Title": "Payment Frequency",
-          "Yearly": "Yearly"
+        "OwnershipDocumentPhoto": "Home Ownership Document Photo",
+        "Payee": {
+          "Free": "Free",
+          "Government": "Government",
+          "Installment": "Installment",
+          "Relative": "Relative",
+          "Self": "Self",
+          "Society": "Society",
+          "Title": "Payee"
         },
         "Province": {
           "AlBahah": "AlBahah",

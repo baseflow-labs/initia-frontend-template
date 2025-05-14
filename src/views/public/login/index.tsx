@@ -1,8 +1,9 @@
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
+
 import Button from "../../../components/core/button";
 import Form from "../../../components/form";
-import { useDispatch } from "react-redux";
 import { login } from "../../../store/actions/auth";
 
 const LoginView = () => {
@@ -10,7 +11,7 @@ const LoginView = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const formInputs = [
+  const formInputs = () => [
     {
       type: "phoneNumber",
       name: "phoneNo",

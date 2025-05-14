@@ -21,7 +21,7 @@
         "ContactData": "بيانات الاتصال والبيانات البنكية",
         "CreditStatement": "التقرير الائتماني من موقع فلم",
         "CreditStatementNote": "في حال وجود ديون رسمية",
-        "DependantData": "بيانات التابعين",
+        "DependentsData": "بيانات التابعين",
         "Diseases": {
           "Cancerous": "أمراض سرطانية",
           "ChestDiseases": "أمراض صدرية وتنفسية",
@@ -104,10 +104,15 @@
           "Title": "الجنسية"
         },
         "Occupation": "المهنة",
-        "PaymentFrequency": {
-          "Monthly": "شهري",
-          "Title": "طريقة الدفع",
-          "Yearly": "سنوي"
+        "OwnershipDocumentPhoto": "صك الملكية",
+        "Payee": {
+          "Free": "لا يتم دفع الإيجار (سكن مجاني)",
+          "Government": "تتحمله جهة حكومية",
+          "Installment": "يتم التقسيط مع المالك",
+          "Relative": "يدفعه أحد الأقارب",
+          "Self": "يدفعه المستفيد بنقسه",
+          "Society": "تتحمله جهة خيرية / جمعية",
+          "Title": "الجهة المتكفلة بالإيجار"
         },
         "Province": {
           "AlBahah": "الباحة",
