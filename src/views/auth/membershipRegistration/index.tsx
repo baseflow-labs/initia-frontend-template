@@ -613,20 +613,32 @@ const MembershipRegistrationView = () => {
             type: "select",
             options: [
               {
-                value: "Monthly",
-                label: t(
-                  "Auth.MembershipRegistration.Form.PaymentFrequency.Monthly"
-                ),
+                value: "Self",
+                label: t("Auth.MembershipRegistration.Form.Payee.Self"),
               },
               {
-                value: "Yearly",
-                label: t(
-                  "Auth.MembershipRegistration.Form.PaymentFrequency.Yearly"
-                ),
+                value: "Relative",
+                label: t("Auth.MembershipRegistration.Form.Payee.Relative"),
+              },
+              {
+                value: "Society",
+                label: t("Auth.MembershipRegistration.Form.Payee.Society"),
+              },
+              {
+                value: "Government",
+                label: t("Auth.MembershipRegistration.Form.Payee.Government"),
+              },
+              {
+                value: "Installment",
+                label: t("Auth.MembershipRegistration.Form.Payee.Installment"),
+              },
+              {
+                value: "Free",
+                label: t("Auth.MembershipRegistration.Form.Payee.Free"),
               },
             ],
             name: "paymentFrequency",
-            label: t("Auth.MembershipRegistration.Form.PaymentFrequency.Title"),
+            label: t("Auth.MembershipRegistration.Form.Payee.Title"),
             required: true,
           },
         ]

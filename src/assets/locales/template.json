@@ -105,10 +105,14 @@
         },
         "Occupation": "Occupation",
         "OwnershipDocumentPhoto": "Home Ownership Document Photo",
-        "PaymentFrequency": {
-          "Monthly": "Monthly",
-          "Title": "Payment Frequency",
-          "Yearly": "Yearly"
+        "Payee": {
+          "Free": "Free",
+          "Government": "Government",
+          "Installment": "Installment",
+          "Relative": "Relative",
+          "Self": "Self",
+          "Society": "Society",
+          "Title": "Payee"
         },
         "Province": {
           "AlBahah": "AlBahah",

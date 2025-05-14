@@ -105,10 +105,14 @@
         },
         "Occupation": "المهنة",
         "OwnershipDocumentPhoto": "صك الملكية",
-        "PaymentFrequency": {
-          "Monthly": "شهري",
-          "Title": "طريقة الدفع",
-          "Yearly": "سنوي"
+        "Payee": {
+          "Free": "لا يتم دفع الإيجار (سكن مجاني)",
+          "Government": "تتحمله جهة حكومية",
+          "Installment": "يتم التقسيط مع المالك",
+          "Relative": "يدفعه أحد الأقارب",
+          "Self": "يدفعه المستفيد بنقسه",
+          "Society": "تتحمله جهة خيرية / جمعية",
+          "Title": "الجهة المتكفلة بالإيجار"
         },
         "Province": {
           "AlBahah": "الباحة",
