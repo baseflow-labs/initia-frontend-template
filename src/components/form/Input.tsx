@@ -11,10 +11,12 @@ import PhoneNoInput from "./inputs/phoneNo";
 import RadioInput from "./inputs/radio";
 import SelectInput from "./inputs/select";
 import SelectManyInput from "./inputs/selectMany";
+import TextareaInput from "./inputs/textarea";
 
 type FinalInput = InputProps &
   React.InputHTMLAttributes<HTMLInputElement> &
-  React.SelectHTMLAttributes<HTMLSelectElement>;
+  React.SelectHTMLAttributes<HTMLSelectElement> &
+  React.TextareaHTMLAttributes<HTMLTextAreaElement>;
 
 const InputComp: React.FC<FinalInput> = ({ name, type, ...input }) => {
   const [field] = useField<string>(name);
@@ -53,6 +55,10 @@ const InputComp: React.FC<FinalInput> = ({ name, type, ...input }) => {
 
   if (type === "otp") {
     return <OtpInput {...input} {...field} />;
+  }
+
+  if (type === "textarea") {
+    return <TextareaInput {...input} {...field} />;
   }
 
   if (type === "title") {
