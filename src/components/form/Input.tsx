@@ -11,6 +11,7 @@ import PhoneNoInput from "./inputs/phoneNo";
 import RadioInput from "./inputs/radio";
 import SelectInput from "./inputs/select";
 import SelectManyInput from "./inputs/selectMany";
+import MultipleEntriesInput from "./inputs/multipleEntries";
 import TextareaInput from "./inputs/textarea";
 
 type FinalInput = InputProps &
@@ -59,6 +60,10 @@ const InputComp: React.FC<FinalInput> = ({ name, type, ...input }) => {
 
   if (type === "textarea") {
     return <TextareaInput {...input} {...field} />;
+  }
+
+  if (type === "multipleEntries") {
+    return <MultipleEntriesInput {...input} {...field} />;
   }
 
   if (type === "title") {

@@ -21,7 +21,7 @@
         "ContactData": "بيانات الاتصال والبيانات البنكية",
         "CreditStatement": "التقرير الائتماني من موقع فلم",
         "CreditStatementNote": "في حال وجود ديون رسمية",
-        "DependantData": "بيانات التابعين",
+        "DependentsData": "بيانات التابعين",
         "Diseases": {
           "Cancerous": "أمراض سرطانية",
           "ChestDiseases": "أمراض صدرية وتنفسية",

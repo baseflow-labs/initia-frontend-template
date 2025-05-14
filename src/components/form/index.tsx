@@ -1,7 +1,6 @@
 import {
   FormikErrors,
   Form as FormikForm,
-  FormikHandlers,
   FormikProps,
   FormikProvider,
   useFormik,
@@ -12,7 +11,7 @@ import { useTranslation } from "react-i18next";
 import Button from "../core/button";
 import InputComp from "./Input";
 
-export interface InputProps {
+interface InputBasicProps {
   name: string;
   label?: string;
   labelNote?: string;
@@ -23,7 +22,20 @@ export interface InputProps {
     value: string | number;
     label?: string;
   }[];
+}
 
+interface InputSingleProps extends InputBasicProps {
+  logo?: string;
+  halfCol?: boolean;
+  prefixText?: string | number;
+  postfixText?: string | number;
+  aboveComp?: React.ReactNode;
+  belowComp?: React.ReactNode;
+}
+
+export interface InputProps extends InputSingleProps {
+  inputs?: InputSingleProps[];
+  addLabel?: string | React.ReactNode;
   logo?: string;
   halfCol?: boolean;
   prefixText?: string | number;

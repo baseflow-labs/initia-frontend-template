@@ -1,11 +1,10 @@
-import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import { faInfoCircle, faPerson } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FormikProps } from "formik";
 import moment from "moment";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Fragment } from "react/jsx-runtime";
-
 import absherLogo from "../../../assets/images/partners/absher.svg";
 import eduMinistryLogo from "../../../assets/images/partners/eduMinistry.svg";
 import ejarLogo from "../../../assets/images/partners/ejar.svg";
@@ -20,7 +19,7 @@ import { dataDateFormat } from "../../../utils/consts";
 
 const MembershipRegistrationView = () => {
   const { t } = useTranslation();
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStep, setCurrentStep] = useState(4);
   const [formData, setFormData] = useState({});
 
   const onNextStep = (values = {}) => {
@@ -97,6 +96,8 @@ const MembershipRegistrationView = () => {
     {
       type: "numberText",
       name: "idNumber",
+      minLength: 10,
+      maxLength: 10,
       label: t("Auth.MembershipRegistration.Form.IdNumber"),
       labelNote: t("Auth.MembershipRegistration.Form.IdNumberNote"),
       required: true,
@@ -645,6 +646,242 @@ const MembershipRegistrationView = () => {
       : []),
   ];
 
+  const dependentsDataInputs = (formik: FormikProps<Record<string, any>>) => [
+    {
+      type: "multipleEntries",
+      addLabel: (
+        <Fragment>
+          {t("Auth.MembershipRegistration.Form.Dependents.AddNew")}{" "}
+          <FontAwesomeIcon icon={faPerson} />
+        </Fragment>
+      ),
+      name: "dependentsList",
+      label: t("Auth.MembershipRegistration.Form.Dependents.Title"),
+      required: true,
+      inputs: [
+        {
+          type: "select",
+          options: [
+            {
+              value: "Single",
+              label: t("Auth.MembershipRegistration.Form.SocialStatus.Single"),
+            },
+            {
+              value: "Married",
+              label: t("Auth.MembershipRegistration.Form.SocialStatus.Married"),
+            },
+            {
+              value: "Divorced",
+              label: t(
+                "Auth.MembershipRegistration.Form.SocialStatus.Divorced"
+              ),
+            },
+            {
+              value: "Widower",
+              label: t("Auth.MembershipRegistration.Form.SocialStatus.Widower"),
+            },
+          ],
+          name: "socialStatus",
+          label: t("Auth.MembershipRegistration.Form.SocialStatus.Title"),
+          required: true,
+        },
+        {
+          type: "text",
+          name: "fullName",
+          label: t("Auth.MembershipRegistration.Form.FullName"),
+          required: true,
+        },
+        {
+          type: "select",
+          options: [
+            {
+              value: "Saudi",
+              label: t("Auth.MembershipRegistration.Form.Nationality.Saudi"),
+            },
+            {
+              value: "Non Saudi",
+              label: t("Auth.MembershipRegistration.Form.Nationality.NonSaudi"),
+            },
+          ],
+          name: "nationality",
+          label: t("Auth.MembershipRegistration.Form.Nationality.Title"),
+          required: true,
+        },
+        {
+          type: "date",
+          name: "dob",
+          min: moment().subtract(125, "y").format(dataDateFormat),
+          max: moment().subtract(17, "y").format(dataDateFormat),
+          label: t("Auth.MembershipRegistration.Form.Dob"),
+          required: true,
+        },
+        {
+          type: "date",
+          name: "idExpiryDate",
+          max: moment().add(10, "y").format(dataDateFormat),
+          label: t("Auth.MembershipRegistration.Form.IdExpiryDate"),
+          required: true,
+        },
+        {
+          type: "numberText",
+          name: "idNumber",
+          minLength: 10,
+          maxLength: 10,
+          label: t("Auth.MembershipRegistration.Form.IdNumber"),
+          labelNote: t("Auth.MembershipRegistration.Form.IdNumberNote"),
+          required: true,
+        },
+        {
+          type: "file",
+          name: "familyRecordPhoto",
+          label: t("Auth.MembershipRegistration.Form.FamilyRecordPhoto"),
+          required: true,
+          halfCol: true,
+        },
+        {
+          type: "file",
+          name: "guardianIdPhoto",
+          label: t("Auth.MembershipRegistration.Form.GuardianIdPhoto"),
+          required: true,
+          halfCol: true,
+        },
+        {
+          type: "radio",
+          options: [
+            {
+              value: "Male",
+              label: t("Auth.MembershipRegistration.Form.Gender.Male"),
+            },
+            {
+              value: "Female",
+              label: t("Auth.MembershipRegistration.Form.Gender.Female"),
+            },
+          ],
+          name: "gender",
+          label: t("Auth.MembershipRegistration.Form.Gender.Title"),
+          required: true,
+          halfCol: true,
+        },
+        {
+          type: "radio",
+          options: [
+            {
+              value: "Healthy",
+              label: t("Auth.MembershipRegistration.Form.HealthStatus.Healthy"),
+            },
+            {
+              value: "Sick",
+              label: t("Auth.MembershipRegistration.Form.HealthStatus.Sick"),
+            },
+          ],
+          name: "healthStatus",
+          label: t("Auth.MembershipRegistration.Form.HealthStatus.Title"),
+          required: true,
+          halfCol: true,
+        },
+        ...(formik.values.healthStatus === "Sick"
+          ? [
+              {
+                type: "selectMany",
+                options: [
+                  {
+                    value: "Disability",
+                    label: t(
+                      "Auth.MembershipRegistration.Form.Diseases.Disability"
+                    ),
+                  },
+                  {
+                    value: "Hearing Impairment",
+                    label: t(
+                      "Auth.MembershipRegistration.Form.Diseases.HearingImpairment"
+                    ),
+                  },
+                  {
+                    value: "Visual Impairment",
+                    label: t(
+                      "Auth.MembershipRegistration.Form.Diseases.VisualImpairment"
+                    ),
+                  },
+                  {
+                    value: "Mental Disability",
+                    label: t(
+                      "Auth.MembershipRegistration.Form.Diseases.MentalDisability"
+                    ),
+                  },
+                  {
+                    value: "Chronic Diseases",
+                    label: t(
+                      "Auth.MembershipRegistration.Form.Diseases.ChronicDiseases"
+                    ),
+                  },
+                  {
+                    value: "Neurological Diseases",
+                    label: t(
+                      "Auth.MembershipRegistration.Form.Diseases.NeurologicalDiseases"
+                    ),
+                  },
+                  {
+                    value: "Genetic Diseases",
+                    label: t(
+                      "Auth.MembershipRegistration.Form.Diseases.GeneticDiseases"
+                    ),
+                  },
+                  {
+                    value: "Cancerous",
+                    label: t(
+                      "Auth.MembershipRegistration.Form.Diseases.Cancerous"
+                    ),
+                  },
+                  {
+                    value: "Chest Diseases",
+                    label: t(
+                      "Auth.MembershipRegistration.Form.Diseases.ChestDiseases"
+                    ),
+                  },
+                  {
+                    value: "Liver Diseases",
+                    label: t(
+                      "Auth.MembershipRegistration.Form.Diseases.LiverDiseases"
+                    ),
+                  },
+                  {
+                    value: "Skin Diseases",
+                    label: t(
+                      "Auth.MembershipRegistration.Form.Diseases.SkinDiseases"
+                    ),
+                  },
+                ],
+                Placeholder: t(
+                  "Auth.MembershipRegistration.Form.Diseases.None"
+                ),
+                name: "diseases",
+                label: t("Auth.MembershipRegistration.Form.Diseases.Title"),
+                required: false,
+              },
+              {
+                type: "radio",
+                options: [
+                  { value: "Yes", label: t("Global.Labels.Yes") },
+                  { value: "No", label: t("Global.Labels.No") },
+                ],
+                name: "incurableDisease",
+                label: t("Auth.MembershipRegistration.Form.IncurableDisease"),
+                required: true,
+              },
+              {
+                type: "file",
+                name: "healthStatementPhoto",
+                label: t(
+                  "Auth.MembershipRegistration.Form.HealthStatementPhoto"
+                ),
+                required: true,
+              },
+            ]
+          : []),
+      ],
+    },
+  ];
+
   const attachmentInputs = () => [
     {
       type: "file",
@@ -702,9 +939,10 @@ const MembershipRegistrationView = () => {
 
   const HelpButton = () => (
     <Button
-      className="w-100 p-2 ps-0 mb-3 text-start"
+      className="w-100 p-2 ps-1 mb-3 text-start"
       rounded={3}
       color="ghost"
+      type="button"
     >
       <FontAwesomeIcon icon={faInfoCircle} />{" "}
       {t("Auth.MembershipRegistration.Form.ClickForHelp")}
@@ -776,11 +1014,11 @@ const MembershipRegistrationView = () => {
       ),
     },
     {
-      label: t("Auth.MembershipRegistration.Form.DependantData"),
-      name: "DependantData",
+      label: t("Auth.MembershipRegistration.Form.DependentsData"),
+      name: "DependentsData",
       contents: (
         <Form
-          inputs={attachmentInputs}
+          inputs={dependentsDataInputs}
           submitText={t("Global.Labels.SaveContinue")}
           customButtons={<BackButton />}
           onFormSubmit={(e) => onNextStep(e)}
