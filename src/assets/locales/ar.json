@@ -104,6 +104,7 @@
           "Title": "الجنسية"
         },
         "Occupation": "المهنة",
+        "OwnershipDocumentPhoto": "صك الملكية",
         "PaymentFrequency": {
           "Monthly": "شهري",
           "Title": "طريقة الدفع",

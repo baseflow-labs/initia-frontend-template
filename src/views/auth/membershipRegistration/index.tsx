@@ -1,5 +1,6 @@
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FormikProps } from "formik";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Fragment } from "react/jsx-runtime";
@@ -29,7 +30,7 @@ const MembershipRegistrationView = () => {
     setCurrentStep((current = 0) => current - 1);
   };
 
-  const basicDataInputs = () => [
+  const basicDataInputs = (formik: FormikProps<Record<string, any>>) => [
     {
       type: "select",
       options: [
@@ -143,83 +144,99 @@ const MembershipRegistrationView = () => {
       required: true,
       halfCol: true,
     },
-    {
-      type: "selectMany",
-      options: [
-        {
-          value: "Disability",
-          label: t("Auth.MembershipRegistration.Form.Diseases.Disability"),
-        },
-        {
-          value: "Hearing Impairment",
-          label: t(
-            "Auth.MembershipRegistration.Form.Diseases.HearingImpairment"
-          ),
-        },
-        {
-          value: "Visual Impairment",
-          label: t(
-            "Auth.MembershipRegistration.Form.Diseases.VisualImpairment"
-          ),
-        },
-        {
-          value: "Mental Disability",
-          label: t(
-            "Auth.MembershipRegistration.Form.Diseases.MentalDisability"
-          ),
-        },
-        {
-          value: "Chronic Diseases",
-          label: t("Auth.MembershipRegistration.Form.Diseases.ChronicDiseases"),
-        },
-        {
-          value: "Neurological Diseases",
-          label: t(
-            "Auth.MembershipRegistration.Form.Diseases.NeurologicalDiseases"
-          ),
-        },
-        {
-          value: "Genetic Diseases",
-          label: t("Auth.MembershipRegistration.Form.Diseases.GeneticDiseases"),
-        },
-        {
-          value: "Cancerous",
-          label: t("Auth.MembershipRegistration.Form.Diseases.Cancerous"),
-        },
-        {
-          value: "Chest Diseases",
-          label: t("Auth.MembershipRegistration.Form.Diseases.ChestDiseases"),
-        },
-        {
-          value: "Liver Diseases",
-          label: t("Auth.MembershipRegistration.Form.Diseases.LiverDiseases"),
-        },
-        {
-          value: "Skin Diseases",
-          label: t("Auth.MembershipRegistration.Form.Diseases.SkinDiseases"),
-        },
-      ],
-      Placeholder: t("Auth.MembershipRegistration.Form.Diseases.None"),
-      name: "diseases",
-      label: t("Auth.MembershipRegistration.Form.Diseases.Title"),
-      required: false,
-    },
-    {
-      type: "radio",
-      options: [
-        { value: "Yes", label: t("Global.Labels.Yes") },
-        { value: "No", label: t("Global.Labels.No") },
-      ],
-      name: "incurableDisease",
-      label: t("Auth.MembershipRegistration.Form.IncurableDisease"),
-      required: true,
-    },
-    {
-      type: "file",
-      name: "healthStatementPhoto",
-      label: t("Auth.MembershipRegistration.Form.HealthStatementPhoto"),
-      required: true,
-    },
+    ...(formik.values.healthStatus === "Sick"
+      ? [
+          {
+            type: "selectMany",
+            options: [
+              {
+                value: "Disability",
+                label: t(
+                  "Auth.MembershipRegistration.Form.Diseases.Disability"
+                ),
+              },
+              {
+                value: "Hearing Impairment",
+                label: t(
+                  "Auth.MembershipRegistration.Form.Diseases.HearingImpairment"
+                ),
+              },
+              {
+                value: "Visual Impairment",
+                label: t(
+                  "Auth.MembershipRegistration.Form.Diseases.VisualImpairment"
+                ),
+              },
+              {
+                value: "Mental Disability",
+                label: t(
+                  "Auth.MembershipRegistration.Form.Diseases.MentalDisability"
+                ),
+              },
+              {
+                value: "Chronic Diseases",
+                label: t(
+                  "Auth.MembershipRegistration.Form.Diseases.ChronicDiseases"
+                ),
+              },
+              {
+                value: "Neurological Diseases",
+                label: t(
+                  "Auth.MembershipRegistration.Form.Diseases.NeurologicalDiseases"
+                ),
+              },
+              {
+                value: "Genetic Diseases",
+                label: t(
+                  "Auth.MembershipRegistration.Form.Diseases.GeneticDiseases"
+                ),
+              },
+              {
+                value: "Cancerous",
+                label: t("Auth.MembershipRegistration.Form.Diseases.Cancerous"),
+              },
+              {
+                value: "Chest Diseases",
+                label: t(
+                  "Auth.MembershipRegistration.Form.Diseases.ChestDiseases"
+                ),
+              },
+              {
+                value: "Liver Diseases",
+                label: t(
+                  "Auth.MembershipRegistration.Form.Diseases.LiverDiseases"
+                ),
+              },
+              {
+                value: "Skin Diseases",
+                label: t(
+                  "Auth.MembershipRegistration.Form.Diseases.SkinDiseases"
+                ),
+              },
+            ],
+            Placeholder: t("Auth.MembershipRegistration.Form.Diseases.None"),
+            name: "diseases",
+            label: t("Auth.MembershipRegistration.Form.Diseases.Title"),
+            required: false,
+          },
+          {
+            type: "radio",
+            options: [
+              { value: "Yes", label: t("Global.Labels.Yes") },
+              { value: "No", label: t("Global.Labels.No") },
+            ],
+            name: "incurableDisease",
+            label: t("Auth.MembershipRegistration.Form.IncurableDisease"),
+            required: true,
+          },
+          {
+            type: "file",
+            name: "healthStatementPhoto",
+            label: t("Auth.MembershipRegistration.Form.HealthStatementPhoto"),
+            required: true,
+          },
+        ]
+      : []),
   ];
 
   const contactDataInputs = () => [
@@ -343,7 +360,7 @@ const MembershipRegistrationView = () => {
     {
       type: "file",
       name: "salaryFile",
-      required: true,
+      required: false,
       halfCol: true,
     },
     {
@@ -356,7 +373,7 @@ const MembershipRegistrationView = () => {
     {
       type: "file",
       name: "insurancesFile",
-      required: true,
+      required: false,
       halfCol: true,
     },
     {
@@ -369,7 +386,7 @@ const MembershipRegistrationView = () => {
     {
       type: "file",
       name: "comprehensiveRehabilitationFile",
-      required: true,
+      required: false,
       halfCol: true,
     },
     {
@@ -382,7 +399,7 @@ const MembershipRegistrationView = () => {
     {
       type: "file",
       name: "retirementFile",
-      required: true,
+      required: false,
       halfCol: true,
     },
     {
@@ -395,12 +412,12 @@ const MembershipRegistrationView = () => {
     {
       type: "file",
       name: "socialSecurityFile",
-      required: true,
+      required: false,
       halfCol: true,
     },
   ];
 
-  const hostelDataInputs = () => [
+  const hostelDataInputs = (formik: FormikProps<Record<string, any>>) => [
     {
       type: "title",
       name: "title2",
@@ -541,6 +558,12 @@ const MembershipRegistrationView = () => {
       halfCol: true,
     },
     {
+      type: "location",
+      name: "homeLocation",
+      label: t("Auth.MembershipRegistration.Form.HomeLocation"),
+      required: true,
+    },
+    {
       type: "radio",
       options: [
         {
@@ -559,7 +582,10 @@ const MembershipRegistrationView = () => {
     {
       type: "file",
       name: "rentalContractPhoto",
-      label: t("Auth.MembershipRegistration.Form.RentalContractPhoto"),
+      label:
+        formik.values.homeOwnership === "Rental"
+          ? t("Auth.MembershipRegistration.Form.RentalContractPhoto")
+          : t("Auth.MembershipRegistration.Form.OwnershipDocumentPhoto"),
       required: true,
       halfCol: true,
     },
@@ -570,34 +596,36 @@ const MembershipRegistrationView = () => {
       required: true,
       halfCol: true,
     },
-    {
-      type: "location",
-      name: "homeLocation",
-      label: t("Auth.MembershipRegistration.Form.HomeLocation"),
-      required: true,
-    },
-    {
-      type: "number",
-      name: "rentalCharge",
-      label: t("Auth.MembershipRegistration.Form.RentalCharge"),
-      required: true,
-    },
-    {
-      type: "select",
-      options: [
-        {
-          value: "Monthly",
-          label: t("Auth.MembershipRegistration.Form.PaymentFrequency.Monthly"),
-        },
-        {
-          value: "Yearly",
-          label: t("Auth.MembershipRegistration.Form.PaymentFrequency.Yearly"),
-        },
-      ],
-      name: "paymentFrequency",
-      label: t("Auth.MembershipRegistration.Form.PaymentFrequency.Title"),
-      required: true,
-    },
+    ...(formik.values.homeOwnership === "Rental"
+      ? [
+          {
+            type: "number",
+            name: "rentalCharge",
+            label: t("Auth.MembershipRegistration.Form.RentalCharge"),
+            required: true,
+          },
+          {
+            type: "select",
+            options: [
+              {
+                value: "Monthly",
+                label: t(
+                  "Auth.MembershipRegistration.Form.PaymentFrequency.Monthly"
+                ),
+              },
+              {
+                value: "Yearly",
+                label: t(
+                  "Auth.MembershipRegistration.Form.PaymentFrequency.Yearly"
+                ),
+              },
+            ],
+            name: "paymentFrequency",
+            label: t("Auth.MembershipRegistration.Form.PaymentFrequency.Title"),
+            required: true,
+          },
+        ]
+      : []),
   ];
 
   const attachmentInputs = () => [
