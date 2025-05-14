@@ -1,6 +1,8 @@
+import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Fragment } from "react/jsx-runtime";
-
 import absherLogo from "../../../assets/images/partners/absher.svg";
 import eduMinistryLogo from "../../../assets/images/partners/eduMinistry.svg";
 import ejarLogo from "../../../assets/images/partners/ejar.svg";
@@ -8,12 +10,25 @@ import masrafLogo from "../../../assets/images/partners/Masraf.svg";
 import ministryLogo from "../../../assets/images/partners/ministry.svg";
 import molimLogo from "../../../assets/images/partners/molim.svg";
 import tawakkalnaLogo from "../../../assets/images/partners/Tawakkalna.svg";
+import Button from "../../../components/core/button";
 import Form from "../../../components/form";
+import WizardFormStepper from "../../../components/form/wizard/stepper";
 
 const MembershipRegistrationView = () => {
   const { t } = useTranslation();
+  const [currentStep, setCurrentStep] = useState(0);
+  const [formData, setFormData] = useState({});
 
-  const inputs = [
+  const onNextStep = (values = {}) => {
+    setFormData((current) => ({ ...current, ...values }));
+    setCurrentStep((current = 0) => current + 1);
+  };
+
+  const onPreviousStep = () => {
+    setCurrentStep((current = 0) => current - 1);
+  };
+
+  const basicDataInputs = [
     {
       type: "select",
       options: [
@@ -203,8 +218,10 @@ const MembershipRegistrationView = () => {
       name: "healthStatementPhoto",
       label: t("Auth.MembershipRegistration.Form.HealthStatementPhoto"),
       required: true,
-      halfCol: true,
     },
+  ];
+
+  const contactDataInputs = [
     {
       type: "phoneNumber",
       name: "secondaryMobile",
@@ -243,6 +260,9 @@ const MembershipRegistrationView = () => {
       required: true,
       halfCol: true,
     },
+  ];
+
+  const qualificationDataInputs = [
     {
       type: "text",
       name: "occupation",
@@ -377,6 +397,9 @@ const MembershipRegistrationView = () => {
       required: true,
       halfCol: true,
     },
+  ];
+
+  const hostelDataInputs = [
     {
       type: "title",
       name: "title2",
@@ -574,6 +597,9 @@ const MembershipRegistrationView = () => {
       label: t("Auth.MembershipRegistration.Form.PaymentFrequency.Title"),
       required: true,
     },
+  ];
+
+  const attachmentInputs = [
     {
       type: "file",
       logo: absherLogo,
@@ -628,9 +654,115 @@ const MembershipRegistrationView = () => {
     },
   ];
 
+  const HelpButton = () => (
+    <Button
+      className="w-100 p-2 ps-0 mb-3 text-start"
+      rounded={3}
+      color="ghost"
+    >
+      <FontAwesomeIcon icon={faInfoCircle} />{" "}
+      {t("Auth.MembershipRegistration.Form.ClickForHelp")}
+    </Button>
+  );
+
+  const BackButton = () => (
+    <Fragment>
+      <HelpButton />
+
+      <Button
+        className="w-50 p-2"
+        rounded={3}
+        onClick={() => onPreviousStep()}
+        outline
+      >
+        {t("Global.Labels.Previous")}
+      </Button>
+    </Fragment>
+  );
+
+  const formSteps = [
+    {
+      label: t("Auth.MembershipRegistration.Form.BasicData"),
+      name: "BasicData",
+      contents: (
+        <Form
+          inputs={basicDataInputs}
+          submitText={t("Global.Labels.SaveContinue")}
+          customButtons={<HelpButton />}
+          onFormSubmit={(e) => onNextStep(e)}
+        />
+      ),
+    },
+    {
+      label: t("Auth.MembershipRegistration.Form.ContactData"),
+      name: "ContactData",
+      contents: (
+        <Form
+          inputs={contactDataInputs}
+          submitText={t("Global.Labels.SaveContinue")}
+          customButtons={<BackButton />}
+          onFormSubmit={(e) => onNextStep(e)}
+        />
+      ),
+    },
+    {
+      label: t("Auth.MembershipRegistration.Form.QualificationData"),
+      name: "QualificationData",
+      contents: (
+        <Form
+          inputs={qualificationDataInputs}
+          submitText={t("Global.Labels.SaveContinue")}
+          customButtons={<BackButton />}
+          onFormSubmit={(e) => onNextStep(e)}
+        />
+      ),
+    },
+    {
+      label: t("Auth.MembershipRegistration.Form.HostelData"),
+      name: "HostelData",
+      contents: (
+        <Form
+          inputs={hostelDataInputs}
+          submitText={t("Global.Labels.SaveContinue")}
+          customButtons={<BackButton />}
+          onFormSubmit={(e) => onNextStep(e)}
+        />
+      ),
+    },
+    {
+      label: t("Auth.MembershipRegistration.Form.DependantData"),
+      name: "DependantData",
+      contents: (
+        <Form
+          inputs={attachmentInputs}
+          submitText={t("Global.Labels.SaveContinue")}
+          customButtons={<BackButton />}
+          onFormSubmit={(e) => onNextStep(e)}
+        />
+      ),
+    },
+    {
+      label: t("Auth.MembershipRegistration.Form.Attachments"),
+      name: "Attachments",
+      contents: (
+        <Form
+          inputs={attachmentInputs}
+          customButtons={<BackButton />}
+          onFormSubmit={(e) => console.log({ e })}
+        />
+      ),
+    },
+  ];
+
   return (
     <Fragment>
-      <Form inputs={inputs} />
+      <div className="px-1 mx-1 px-lg-5 mx-lg-5">
+        <WizardFormStepper
+          steps={formSteps}
+          currentStep={currentStep}
+          setCurrentStep={setCurrentStep}
+        />
+      </div>
     </Fragment>
   );
 };

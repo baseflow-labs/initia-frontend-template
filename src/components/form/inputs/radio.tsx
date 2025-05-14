@@ -3,13 +3,14 @@ import { InputProps } from "..";
 
 type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 
-const RadioInput: React.FC<FinalInput> = ({ type, ...input }) => {
+const RadioInput: React.FC<FinalInput> = ({ type, options, ...input }) => {
   return (
     <Fragment>
-      {input.options?.map((option) => (
+      {options?.map((option) => (
         <div className="form-check" key={option.value}>
           <input
             {...input}
+            defaultChecked={input.value === option.value}
             type="radio"
             className="form-check-input"
             required={false}

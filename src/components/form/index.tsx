@@ -1,12 +1,11 @@
 import {
-  useFormik,
   FormikErrors,
-  FormikProvider,
   Form as FormikForm,
+  FormikProvider,
+  useFormik,
 } from "formik";
 import React, { Fragment } from "react";
 import { useTranslation } from "react-i18next";
-
 import Button from "../core/button";
 import InputComp from "./Input";
 
@@ -34,12 +33,14 @@ interface Props extends React.FormHTMLAttributes<HTMLFormElement> {
   onFormSubmit?: (values: Record<string, any>) => void;
   inputs: InputProps[];
   submitText?: string;
+  customButtons?: React.ReactNode;
 }
 
 const Form: React.FC<Props> = ({
   onFormSubmit,
   inputs,
   submitText,
+  customButtons,
   ...rest
 }) => {
   const { t } = useTranslation();
@@ -94,38 +95,6 @@ const Form: React.FC<Props> = ({
       </span>
     ) : null;
 
-  const InputView = ({
-    prefixText,
-    postfixText,
-    aboveComp,
-    belowComp,
-    labelNote,
-    logo,
-    ...input
-  }: InputProps) => (
-    <Fragment>
-      {aboveComp}
-
-      <div
-        className={`input-group ${
-          input.type === "phoneNumber" ? "phone-number-input" : ""
-        }`}
-      >
-        <InlineElement content={prefixText} flip />
-
-        <InputComp {...input} />
-
-        <InlineElement content={postfixText} />
-      </div>
-
-      {belowComp}
-
-      {formik.errors[input.name] && formik.touched[input.name] && (
-        <div className="text-danger">{formik.errors[input.name] as any}</div>
-      )}
-    </Fragment>
-  );
-
   const LabelView = ({ labelNote, ...input }: InputProps) => (
     <label className={`form-label ${input.label ? "" : "text-white"}`}>
       {input.label ? input.label : "."}{" "}
@@ -146,46 +115,115 @@ const Form: React.FC<Props> = ({
     <FormikProvider value={formik}>
       <FormikForm className="text-start" {...rest}>
         <div className="row">
-          {inputs.map(({ logo, halfCol, ...input }) => {
-            if (logo) {
+          {inputs.map(
+            ({
+              prefixText,
+              postfixText,
+              aboveComp,
+              belowComp,
+              labelNote,
+              logo,
+              halfCol,
+              ...input
+            }) => {
+              const triggerError =
+                formik.errors[input.name] && formik.touched[input.name];
+
+              const prefixTexts =
+                prefixText ||
+                (input.type === "phoneNumber" ? "+966" : undefined);
+
+              const ErrorView = () => (
+                <small className={triggerError ? "text-danger" : "text-white"}>
+                  {triggerError ? (formik.errors[input.name] as any) : "."}
+                </small>
+              );
+
+              if (logo) {
+                return (
+                  <Fragment key={input.name}>
+                    <div className="col-12">
+                      <LabelView {...input} />
+                    </div>
+
+                    <div className="col-md-6 mb-3">
+                      <button
+                        type="button"
+                        className="btn btn-outline-success p-2 w-100 rounded-3 no-interaction"
+                      >
+                        <img
+                          alt={`${input.name}Logo`}
+                          src={logo}
+                          height="40px"
+                        />
+                      </button>
+                    </div>
+
+                    <div className="col-md-6 mb-3">
+                      {aboveComp}
+
+                      <div
+                        className={`input-group ${
+                          input.type === "phoneNumber"
+                            ? "phone-number-input"
+                            : ""
+                        }`}
+                      >
+                        <InlineElement content={prefixTexts} flip />
+
+                        <InputComp {...input} />
+
+                        <InlineElement content={postfixText} />
+                      </div>
+
+                      {belowComp}
+
+                      <ErrorView />
+                    </div>
+                  </Fragment>
+                );
+              }
+
               return (
-                <Fragment key={input.name}>
-                  <div className="col-12">
-                    <LabelView {...input} />
+                <div
+                  className={`mb-3 ${
+                    halfCol ? "col-md-6" : logo ? "col-6" : "col-md-12"
+                  }`}
+                  key={input.name}
+                >
+                  <LabelView {...input} />
+
+                  {aboveComp}
+
+                  <div
+                    className={`input-group ${
+                      input.type === "phoneNumber" ? "phone-number-input" : ""
+                    }`}
+                  >
+                    <InlineElement content={prefixTexts} flip />
+
+                    <InputComp {...input} />
+
+                    <InlineElement content={postfixText} />
                   </div>
 
-                  <div className="col-md-6 mb-3">
-                    <button
-                      type="button"
-                      className="btn btn-outline-success p-2 w-100 rounded-3 no-interaction"
-                    >
-                      <img alt={`${input.name}Logo`} src={logo} height="40px" />
-                    </button>
-                  </div>
+                  {belowComp}
 
-                  <div className="col-md-6 mb-3">
-                    <InputView {...input} />
-                  </div>
-                </Fragment>
+                  <ErrorView />
+                </div>
               );
             }
-
-            return (
-              <div
-                className={`mb-3 ${
-                  halfCol ? "col-md-6" : logo ? "col-6" : "col-md-12"
-                }`}
-                key={input.name}
-              >
-                <LabelView {...input} />
-
-                <InputView {...input} />
-              </div>
-            );
-          })}
+          )}
         </div>
 
-        <Button type="submit" color="info" className="w-100 p-2" rounded={3}>
+        {customButtons}
+
+        <Button
+          type="submit"
+          color="info"
+          className={`w-${customButtons ? "50" : "100"} p-2`}
+          rounded={3}
+        >
           {submitText || t("Global.Form.Labels.Submit")}
         </Button>
       </FormikForm>

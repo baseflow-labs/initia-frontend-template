@@ -30,6 +30,10 @@ input[type="radio"]:checked:focus {
   font-weight: 400;
 }
 
+.px-50 {
+  padding: inherit 50vw;
+}
+
 .no-interaction {
   pointer-events: none;
   opacity: 1;
@@ -42,7 +46,7 @@ input[type="radio"]:checked:focus {
 }
 
 .public-bg-image {
-  background-image: url("../src/assets/images/public-bg.jpg");
+  background-image: url("../assets/images/public-bg.jpg");
   background-size: cover;
   background-position: center;
 }

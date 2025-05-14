@@ -9,14 +9,19 @@
         "AbsherDocument": "Absher Document",
         "Address": "Home Address",
         "ApartmentNo": "Apartment No",
+        "Attachments": "Attachments",
         "BackupMobile": "Backup Mobile",
         "BankAccountNumber": "Bank Account Number",
         "BankAccountNumberNote": "12 Digits Number",
+        "BasicData": "Basic Data",
         "BeneficiaryMobile": "Beneficiary Mobile",
         "City": "City",
+        "ClickForHelp": "Click Here For Form Fill Up Help",
         "ComprehensiveRehabilitation": "Comprehensive Rehabilitation",
+        "ContactData": "Contact Data",
         "CreditStatement": "Credit Statement",
         "CreditStatementNote": "In case of having officially documented debts",
+        "DependantData": "Dependant Data",
         "Diseases": {
           "Cancerous": "Cancerous",
           "ChestDiseases": "Chest Diseases",
@@ -81,6 +86,7 @@
           "Title": "Title",
           "Villa": "Villa"
         },
+        "HostelData": "Hostel Data",
         "IbanPhoto": "IBAN Photo",
         "IdExpiryDate": "ID Expiry Date",
         "IdNumber": "ID Number",
@@ -119,6 +125,7 @@
           "Tabuk": "Tabuk",
           "Title": "Province"
         },
+        "QualificationData": "Qualification Data",
         "RentalCharge": "Rental Charge",
         "RentalContractPhoto": "Rental Contract Photo",
         "RentalDocument": "Rental Document",
@@ -140,11 +147,19 @@
     }
   },
   "Global": {
+    "Form": {
+      "Labels": {
+        "InvalidEmail": "Invalid Email",
+        "Required": "Required",
+        "Submit": "Submit"
+      }
+    },
     "Labels": {
       "Location": "Google Map URL",
       "No": "No",
       "PleaseSelect": "Please Select...",
-      "Submit": "Submit",
+      "Previous": "Previous",
+      "SaveContinue": "Save & Continue",
       "UploadAttachment": "Upload Attachment",
       "Yes": "Yes"
     }

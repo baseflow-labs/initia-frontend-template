@@ -9,14 +9,19 @@
         "AbsherDocument": "لوحة المعلومات من موقع ابشر - المركبات - العمالة",
         "Address": "عنوان السكن",
         "ApartmentNo": "رقم الشقة",
+        "Attachments": "المرفقات",
         "BackupMobile": "رقم الجوال الاحتياطي",
         "BankAccountNumber": "الحساب البنكي",
         "BankAccountNumberNote": "مكون من 12 رقم",
+        "BasicData": "البيانات الأساسية",
         "BeneficiaryMobile": "رقم جوال المستفيد",
         "City": "المدينة",
+        "ClickForHelp": "اضغط هنا للمساعدة في تعبئة النموذج",
         "ComprehensiveRehabilitation": "التأهيل الشامل",
+        "ContactData": "بيانات الاتصال والبيانات البنكية",
         "CreditStatement": "التقرير الائتماني من موقع فلم",
         "CreditStatementNote": "في حال وجود ديون رسمية",
+        "DependantData": "بيانات التابعين",
         "Diseases": {
           "Cancerous": "أمراض سرطانية",
           "ChestDiseases": "أمراض صدرية وتنفسية",
@@ -81,6 +86,7 @@
           "Title": "نوع المنزل",
           "Villa": "فيلا"
         },
+        "HostelData": "بيانات السكن",
         "IbanPhoto": "صورة رقم الآييبان",
         "IdExpiryDate": "تاريخ انتهاء الهوية",
         "IdNumber": "رقم الهوية",
@@ -119,6 +125,7 @@
           "Tabuk": "تبوك",
           "Title": "المنطقة"
         },
+        "QualificationData": "بيانات المؤهل والوظيفة",
         "RentalCharge": "قيمة الإيجار كما في العقد",
         "RentalContractPhoto": "عقد إيجار",
         "RentalDocument": "للمستأجر عقد إيجار إلكتروني ساري المدة من موقع إيجار",
@@ -140,11 +147,19 @@
     }
   },
   "Global": {
+    "Form": {
+      "Labels": {
+        "InvalidEmail": "بريد إلكتروني غير صالح",
+        "Required": "هذا الحقل إلزامي",
+        "Submit": "إرسال"
+      }
+    },
     "Labels": {
       "Location": "Google Map رابط",
       "No": "لا",
       "PleaseSelect": "نرجو الاختيار...",
-      "Submit": "إرسال",
+      "Previous": "السابق",
+      "SaveContinue": "حفظ ومتابعة",
       "UploadAttachment": "إضافة مرفق",
       "Yes": "نعم"
     }
