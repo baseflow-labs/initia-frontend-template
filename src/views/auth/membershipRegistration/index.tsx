@@ -1,6 +1,7 @@
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FormikProps } from "formik";
+import moment from "moment";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Fragment } from "react/jsx-runtime";
@@ -15,6 +16,7 @@ import tawakkalnaLogo from "../../../assets/images/partners/Tawakkalna.svg";
 import Button from "../../../components/core/button";
 import Form from "../../../components/form";
 import WizardFormStepper from "../../../components/form/wizard/stepper";
+import { dataDateFormat } from "../../../utils/consts";
 
 const MembershipRegistrationView = () => {
   const { t } = useTranslation();
@@ -80,12 +82,15 @@ const MembershipRegistrationView = () => {
     {
       type: "date",
       name: "dob",
+      min: moment().subtract(125, "y").format(dataDateFormat),
+      max: moment().subtract(17, "y").format(dataDateFormat),
       label: t("Auth.MembershipRegistration.Form.Dob"),
       required: true,
     },
     {
       type: "date",
       name: "idExpiryDate",
+      max: moment().add(10, "y").format(dataDateFormat),
       label: t("Auth.MembershipRegistration.Form.IdExpiryDate"),
       required: true,
     },
