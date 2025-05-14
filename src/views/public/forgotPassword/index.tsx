@@ -1,13 +1,14 @@
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
-import Form from "../../../components/form";
+
 import Button from "../../../components/core/button";
+import Form from "../../../components/form";
 
 const ForgotPasswordView = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const formInputs = [
+  const formInputs = () => [
     {
       type: "phoneNumber",
       name: "phoneNo",

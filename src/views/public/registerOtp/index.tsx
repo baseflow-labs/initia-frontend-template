@@ -1,7 +1,8 @@
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router";
-import Form from "../../../components/form";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
+
+import Form from "../../../components/form";
 import { login } from "../../../store/actions/auth";
 
 const RegistrationOtpView = () => {
@@ -9,7 +10,7 @@ const RegistrationOtpView = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const formInputs = [
+  const formInputs = () => [
     {
       type: "otp",
       name: "phoneNo",

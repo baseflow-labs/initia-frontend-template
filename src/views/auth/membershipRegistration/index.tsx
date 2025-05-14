@@ -29,7 +29,7 @@ const MembershipRegistrationView = () => {
     setCurrentStep((current = 0) => current - 1);
   };
 
-  const basicDataInputs = [
+  const basicDataInputs = () => [
     {
       type: "select",
       options: [
@@ -222,7 +222,7 @@ const MembershipRegistrationView = () => {
     },
   ];
 
-  const contactDataInputs = [
+  const contactDataInputs = () => [
     {
       type: "phoneNumber",
       name: "beneficiaryMobile",
@@ -263,7 +263,7 @@ const MembershipRegistrationView = () => {
     },
   ];
 
-  const qualificationDataInputs = [
+  const qualificationDataInputs = () => [
     {
       type: "text",
       name: "occupation",
@@ -400,7 +400,7 @@ const MembershipRegistrationView = () => {
     },
   ];
 
-  const hostelDataInputs = [
+  const hostelDataInputs = () => [
     {
       type: "title",
       name: "title2",
@@ -600,7 +600,7 @@ const MembershipRegistrationView = () => {
     },
   ];
 
-  const attachmentInputs = [
+  const attachmentInputs = () => [
     {
       type: "file",
       logo: absherLogo,
