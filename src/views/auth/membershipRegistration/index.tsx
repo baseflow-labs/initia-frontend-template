@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Fragment } from "react/jsx-runtime";
+
 import absherLogo from "../../../assets/images/partners/absher.svg";
 import eduMinistryLogo from "../../../assets/images/partners/eduMinistry.svg";
 import ejarLogo from "../../../assets/images/partners/ejar.svg";
@@ -224,40 +225,40 @@ const MembershipRegistrationView = () => {
   const contactDataInputs = [
     {
       type: "phoneNumber",
-      name: "secondaryMobile",
-      label: t("Auth.MembershipRegistration.Form.SecondaryMobile"),
-      required: true,
-    },
-    {
-      type: "phoneNumber",
       name: "beneficiaryMobile",
       label: t("Auth.MembershipRegistration.Form.BeneficiaryMobile"),
       required: true,
     },
     {
       type: "phoneNumber",
+      name: "secondaryMobile",
+      label: t("Auth.MembershipRegistration.Form.SecondaryMobile"),
+      required: false,
+    },
+    {
+      type: "phoneNumber",
       name: "backupMobile",
       label: t("Auth.MembershipRegistration.Form.BackupMobile"),
-      required: true,
+      required: false,
     },
     {
       type: "email",
       name: "email",
       label: t("Auth.MembershipRegistration.Form.Email"),
-      required: true,
+      required: false,
     },
     {
       type: "numberText",
       name: "bankAccountNumber",
       label: t("Auth.MembershipRegistration.Form.BankAccountNumber"),
       labelNote: t("Auth.MembershipRegistration.Form.BankAccountNumberNote"),
-      required: true,
+      required: false,
     },
     {
       type: "file",
       name: "ibanPhoto",
       label: t("Auth.MembershipRegistration.Form.IbanPhoto"),
-      required: true,
+      required: false,
       halfCol: true,
     },
   ];
@@ -486,42 +487,6 @@ const MembershipRegistrationView = () => {
       required: true,
     },
     {
-      type: "radio",
-      options: [
-        {
-          value: "Rental",
-          label: t("Auth.MembershipRegistration.Form.HomeOwnership.Rental"),
-        },
-        {
-          value: "Ownership",
-          label: t("Auth.MembershipRegistration.Form.HomeOwnership.Ownership"),
-        },
-      ],
-      name: "homeOwnership",
-      label: t("Auth.MembershipRegistration.Form.HomeOwnership.Title"),
-      required: true,
-    },
-    {
-      type: "file",
-      name: "rentalContractPhoto",
-      label: t("Auth.MembershipRegistration.Form.RentalContractPhoto"),
-      required: true,
-      halfCol: true,
-    },
-    {
-      type: "file",
-      name: "nationalAddressDocument",
-      label: t("Auth.MembershipRegistration.Form.NationalAddressDocument"),
-      required: true,
-      halfCol: true,
-    },
-    {
-      type: "location",
-      name: "homeLocation",
-      label: t("Auth.MembershipRegistration.Form.HomeLocation"),
-      required: true,
-    },
-    {
       type: "select",
       options: [
         {
@@ -559,7 +524,7 @@ const MembershipRegistrationView = () => {
           ),
         },
         {
-          value: "No Permenant Home",
+          value: "No Permanent Home",
           label: t("Auth.MembershipRegistration.Form.HomeType.NoPermanentHome"),
         },
       ],
@@ -574,6 +539,42 @@ const MembershipRegistrationView = () => {
       label: t("Auth.MembershipRegistration.Form.ApartmentNo"),
       required: true,
       halfCol: true,
+    },
+    {
+      type: "radio",
+      options: [
+        {
+          value: "Rental",
+          label: t("Auth.MembershipRegistration.Form.HomeOwnership.Rental"),
+        },
+        {
+          value: "Ownership",
+          label: t("Auth.MembershipRegistration.Form.HomeOwnership.Ownership"),
+        },
+      ],
+      name: "homeOwnership",
+      label: t("Auth.MembershipRegistration.Form.HomeOwnership.Title"),
+      required: true,
+    },
+    {
+      type: "file",
+      name: "rentalContractPhoto",
+      label: t("Auth.MembershipRegistration.Form.RentalContractPhoto"),
+      required: true,
+      halfCol: true,
+    },
+    {
+      type: "file",
+      name: "nationalAddressDocument",
+      label: t("Auth.MembershipRegistration.Form.NationalAddressDocument"),
+      required: true,
+      halfCol: true,
+    },
+    {
+      type: "location",
+      name: "homeLocation",
+      label: t("Auth.MembershipRegistration.Form.HomeLocation"),
+      required: true,
     },
     {
       type: "number",
