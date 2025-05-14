@@ -111,6 +111,7 @@ const SelectManyInput: React.FC<SelectManyInputProps> = ({
       ...base,
       padding: 6,
     }),
+    menu: (base) => ({ ...base, zIndex: 3 }),
   };
 
   return (
