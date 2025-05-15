@@ -19,7 +19,7 @@ import { dataDateFormat } from "../../../utils/consts";
 
 const MembershipRegistrationView = () => {
   const { t } = useTranslation();
-  const [currentStep, setCurrentStep] = useState(4);
+  const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({});
 
   const onNextStep = (values = {}) => {
