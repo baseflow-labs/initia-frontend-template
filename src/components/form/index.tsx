@@ -36,6 +36,7 @@ interface InputSingleProps extends InputBasicProps {
 export interface InputProps extends InputSingleProps {
   inputs?: InputSingleProps[];
   addLabel?: string | React.ReactNode;
+  singleRecordLabel?: string;
   logo?: string;
   halfCol?: boolean;
   prefixText?: string | number;
@@ -86,9 +87,23 @@ const Form: React.FC<Props> = ({
 
   formik.initialValues = inputs(formik).reduce<Record<string, any>>(
     (acc, input) => {
-      acc[input.name] =
-        input.defaultValue ??
-        (input.type === "radio" ? input.options?.[0]?.value ?? "" : "");
+      if (input.defaultValue) {
+        acc[input.name] = input.defaultValue;
+        return acc;
+      }
+
+      switch (input.type) {
+        case "radio":
+          acc[input.name] = input.options?.[0]?.value;
+          break;
+        case "multipleEntries":
+          acc[input.name] = [];
+          break;
+        default:
+          acc[input.name] = "";
+          break;
+      }
+
       return acc;
     },
     {}

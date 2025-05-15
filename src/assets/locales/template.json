@@ -21,6 +21,11 @@
         "ContactData": "Contact Data",
         "CreditStatement": "Credit Statement",
         "CreditStatementNote": "In case of having officially documented debts",
+        "Dependents": {
+          "AddNew": "Add New Dependant",
+          "Dependant": "Dependant",
+          "Title": "Dependents"
+        },
         "DependentsData": "Dependents Data",
         "Diseases": {
           "Cancerous": "Cancerous",
@@ -154,19 +159,19 @@
   "Global": {
     "Form": {
       "Labels": {
+        "AddNew": "Add New Record",
         "InvalidEmail": "Invalid Email",
+        "Location": "Google Map URL",
+        "No": "No",
+        "PickDate": "Pick Date",
+        "PleaseSelect": "Please Select...",
+        "Previous": "Previous",
         "Required": "Required",
-        "Submit": "Submit"
+        "SaveContinue": "Save & Continue",
+        "Submit": "Submit",
+        "UploadAttachment": "Upload Attachment",
+        "Yes": "Yes"
       }
-    },
-    "Labels": {
-      "Location": "Google Map URL",
-      "No": "No",
-      "PleaseSelect": "Please Select...",
-      "Previous": "Previous",
-      "SaveContinue": "Save & Continue",
-      "UploadAttachment": "Upload Attachment",
-      "Yes": "Yes"
     }
   },
   "Public": {

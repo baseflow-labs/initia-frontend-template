@@ -10,7 +10,7 @@ type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 
 const LocationInput: React.FC<FinalInput> = ({ name, ...input }) => {
   const { t } = useTranslation();
-  const [field, , helpers] = useField(name);
+  const [, , helpers] = useField(name);
 
   const [location, setLocation] = useState<{
     lat: number;
@@ -55,7 +55,7 @@ const LocationInput: React.FC<FinalInput> = ({ name, ...input }) => {
       <input
         {...input}
         type="url"
-        placeholder={input.placeholder || t("Global.Labels.Location")}
+        placeholder={input.placeholder || t("Global.Form.Labels.Location")}
         className={`form-control form-control-sm ${commonInputClasses}`}
       />
 

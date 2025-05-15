@@ -228,8 +228,8 @@ const MembershipRegistrationView = () => {
           {
             type: "radio",
             options: [
-              { value: "Yes", label: t("Global.Labels.Yes") },
-              { value: "No", label: t("Global.Labels.No") },
+              { value: "Yes", label: t("Global.Form.Labels.Yes") },
+              { value: "No", label: t("Global.Form.Labels.No") },
             ],
             name: "incurableDisease",
             label: t("Auth.MembershipRegistration.Form.IncurableDisease"),
@@ -649,14 +649,18 @@ const MembershipRegistrationView = () => {
   const dependentsDataInputs = (formik: FormikProps<Record<string, any>>) => [
     {
       type: "multipleEntries",
+      name: "dependentsList",
+      label: t("Auth.MembershipRegistration.Form.Dependents.Title"),
+      singleRecordLabel: t(
+        "Auth.MembershipRegistration.Form.Dependents.Dependant"
+      ),
       addLabel: (
         <Fragment>
           {t("Auth.MembershipRegistration.Form.Dependents.AddNew")}{" "}
           <FontAwesomeIcon icon={faPerson} />
         </Fragment>
       ),
-      name: "dependentsList",
-      label: t("Auth.MembershipRegistration.Form.Dependents.Title"),
+      recordDynamicLabelKey: "fullName",
       required: true,
       inputs: [
         {
@@ -861,8 +865,8 @@ const MembershipRegistrationView = () => {
               {
                 type: "radio",
                 options: [
-                  { value: "Yes", label: t("Global.Labels.Yes") },
-                  { value: "No", label: t("Global.Labels.No") },
+                  { value: "Yes", label: t("Global.Form.Labels.Yes") },
+                  { value: "No", label: t("Global.Form.Labels.No") },
                 ],
                 name: "incurableDisease",
                 label: t("Auth.MembershipRegistration.Form.IncurableDisease"),
@@ -959,7 +963,7 @@ const MembershipRegistrationView = () => {
         onClick={() => onPreviousStep()}
         outline
       >
-        {t("Global.Labels.Previous")}
+        {t("Global.Form.Labels.Previous")}
       </Button>
     </Fragment>
   );
@@ -971,7 +975,7 @@ const MembershipRegistrationView = () => {
       contents: (
         <Form
           inputs={basicDataInputs}
-          submitText={t("Global.Labels.SaveContinue")}
+          submitText={t("Global.Form.Labels.SaveContinue")}
           customButtons={<HelpButton />}
           onFormSubmit={(e) => onNextStep(e)}
         />
@@ -983,7 +987,7 @@ const MembershipRegistrationView = () => {
       contents: (
         <Form
           inputs={contactDataInputs}
-          submitText={t("Global.Labels.SaveContinue")}
+          submitText={t("Global.Form.Labels.SaveContinue")}
           customButtons={<BackButton />}
           onFormSubmit={(e) => onNextStep(e)}
         />
@@ -995,7 +999,7 @@ const MembershipRegistrationView = () => {
       contents: (
         <Form
           inputs={qualificationDataInputs}
-          submitText={t("Global.Labels.SaveContinue")}
+          submitText={t("Global.Form.Labels.SaveContinue")}
           customButtons={<BackButton />}
           onFormSubmit={(e) => onNextStep(e)}
         />
@@ -1007,7 +1011,7 @@ const MembershipRegistrationView = () => {
       contents: (
         <Form
           inputs={hostelDataInputs}
-          submitText={t("Global.Labels.SaveContinue")}
+          submitText={t("Global.Form.Labels.SaveContinue")}
           customButtons={<BackButton />}
           onFormSubmit={(e) => onNextStep(e)}
         />
@@ -1019,7 +1023,7 @@ const MembershipRegistrationView = () => {
       contents: (
         <Form
           inputs={dependentsDataInputs}
-          submitText={t("Global.Labels.SaveContinue")}
+          submitText={t("Global.Form.Labels.SaveContinue")}
           customButtons={<BackButton />}
           onFormSubmit={(e) => onNextStep(e)}
         />

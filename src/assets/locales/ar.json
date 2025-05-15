@@ -21,6 +21,11 @@
         "ContactData": "بيانات الاتصال والبيانات البنكية",
         "CreditStatement": "التقرير الائتماني من موقع فلم",
         "CreditStatementNote": "في حال وجود ديون رسمية",
+        "Dependents": {
+          "AddNew": "إضافة تابع جديد",
+          "Dependant": "تابع",
+          "Title": "التابعين"
+        },
         "DependentsData": "بيانات التابعين",
         "Diseases": {
           "Cancerous": "أمراض سرطانية",
@@ -154,19 +159,19 @@
   "Global": {
     "Form": {
       "Labels": {
+        "AddNew": "إضافة بيانات جديدة",
         "InvalidEmail": "بريد إلكتروني غير صالح",
+        "Location": "Google Map رابط",
+        "No": "لا",
+        "PickDate": "اختر التاريخ",
+        "PleaseSelect": "نرجو الاختيار...",
+        "Previous": "السابق",
         "Required": "هذا الحقل إلزامي",
-        "Submit": "إرسال"
+        "SaveContinue": "حفظ ومتابعة",
+        "Submit": "إرسال",
+        "UploadAttachment": "إضافة مرفق",
+        "Yes": "نعم"
       }
-    },
-    "Labels": {
-      "Location": "Google Map رابط",
-      "No": "لا",
-      "PleaseSelect": "نرجو الاختيار...",
-      "Previous": "السابق",
-      "SaveContinue": "حفظ ومتابعة",
-      "UploadAttachment": "إضافة مرفق",
-      "Yes": "نعم"
     }
   },
   "Public": {
