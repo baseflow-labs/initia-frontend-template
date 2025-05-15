@@ -8,6 +8,16 @@
       "Form": {
         "AbsherDocument": "Absher Document",
         "Address": "Home Address",
+        "AgeGroup": {
+          "AboveSixty": "Above Sixty",
+          "BelowFive": "Below Five",
+          "EighteenToThirty": "Eighteen To Thirty",
+          "FiveToTwelve": "Five To Twelve",
+          "FortyFiveToSixty": "Forty Five To Sixty",
+          "ThirtyToFortyFive": "Thirty To Forty Five",
+          "Title": "Age Group",
+          "TwelveToEighteen": "Twelve To Eighteen"
+        },
         "ApartmentNo": "Apartment No",
         "Attachments": "Attachments",
         "BackupMobile": "Backup Mobile",
@@ -21,6 +31,8 @@
         "ContactData": "Contact Data",
         "CreditStatement": "Credit Statement",
         "CreditStatementNote": "In case of having officially documented debts",
+        "DependentMobile": "Dependent Mobile",
+        "DependentMobileNote": "If Any",
         "Dependents": {
           "AddNew": "Add New Dependant",
           "Dependant": "Dependant",
@@ -136,6 +148,19 @@
           "Title": "Province"
         },
         "QualificationData": "Qualification Data",
+        "Relation": {
+          "Child": "Child",
+          "Grandchild": "Grandchild",
+          "Grandparent": "Grandparent",
+          "InLow": "In-Low",
+          "MaternalUncleAunt": "Maternal Uncle Aunt",
+          "None": "None",
+          "Parent": "Parent",
+          "PaternalUncleAunt": "Paternal Uncle Aunt",
+          "Sibling": "Sibling",
+          "Spouse": "Spouse",
+          "Title": "Title"
+        },
         "RentalCharge": "Rental Charge",
         "RentalContractPhoto": "Rental Contract Photo",
         "RentalDocument": "Rental Document",
@@ -166,8 +191,10 @@
         "PickDate": "Pick Date",
         "PleaseSelect": "Please Select...",
         "Previous": "Previous",
+        "Record": "Record",
         "Required": "Required",
         "SaveContinue": "Save & Continue",
+        "SaveData": "Save Data",
         "Submit": "Submit",
         "UploadAttachment": "Upload Attachment",
         "Yes": "Yes"

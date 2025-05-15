@@ -661,54 +661,12 @@ const MembershipRegistrationView = () => {
         </Fragment>
       ),
       recordDynamicLabelKey: "fullName",
-      required: true,
+      required: false,
       inputs: [
-        {
-          type: "select",
-          options: [
-            {
-              value: "Single",
-              label: t("Auth.MembershipRegistration.Form.SocialStatus.Single"),
-            },
-            {
-              value: "Married",
-              label: t("Auth.MembershipRegistration.Form.SocialStatus.Married"),
-            },
-            {
-              value: "Divorced",
-              label: t(
-                "Auth.MembershipRegistration.Form.SocialStatus.Divorced"
-              ),
-            },
-            {
-              value: "Widower",
-              label: t("Auth.MembershipRegistration.Form.SocialStatus.Widower"),
-            },
-          ],
-          name: "socialStatus",
-          label: t("Auth.MembershipRegistration.Form.SocialStatus.Title"),
-          required: true,
-        },
         {
           type: "text",
           name: "fullName",
           label: t("Auth.MembershipRegistration.Form.FullName"),
-          required: true,
-        },
-        {
-          type: "select",
-          options: [
-            {
-              value: "Saudi",
-              label: t("Auth.MembershipRegistration.Form.Nationality.Saudi"),
-            },
-            {
-              value: "Non Saudi",
-              label: t("Auth.MembershipRegistration.Form.Nationality.NonSaudi"),
-            },
-          ],
-          name: "nationality",
-          label: t("Auth.MembershipRegistration.Form.Nationality.Title"),
           required: true,
         },
         {
@@ -736,20 +694,6 @@ const MembershipRegistrationView = () => {
           required: true,
         },
         {
-          type: "file",
-          name: "familyRecordPhoto",
-          label: t("Auth.MembershipRegistration.Form.FamilyRecordPhoto"),
-          required: true,
-          halfCol: true,
-        },
-        {
-          type: "file",
-          name: "guardianIdPhoto",
-          label: t("Auth.MembershipRegistration.Form.GuardianIdPhoto"),
-          required: true,
-          halfCol: true,
-        },
-        {
           type: "radio",
           options: [
             {
@@ -767,6 +711,111 @@ const MembershipRegistrationView = () => {
           halfCol: true,
         },
         {
+          type: "phoneNumber",
+          name: "mobile",
+          label: t("Auth.MembershipRegistration.Form.DependentMobile"),
+          labelNote: t("Auth.MembershipRegistration.Form.DependentMobileNote"),
+          required: false,
+        },
+        {
+          type: "select",
+          options: [
+            {
+              value: "Spouse",
+              label: t("Auth.MembershipRegistration.Form.Relation.Spouse"),
+            },
+            {
+              value: "Parent",
+              label: t("Auth.MembershipRegistration.Form.Relation.Parent"),
+            },
+            {
+              value: "Child",
+              label: t("Auth.MembershipRegistration.Form.Relation.Child"),
+            },
+            {
+              value: "Sibling",
+              label: t("Auth.MembershipRegistration.Form.Relation.Sibling"),
+            },
+            {
+              value: "Grandparent",
+              label: t("Auth.MembershipRegistration.Form.Relation.Grandparent"),
+            },
+            {
+              value: "Grandchild",
+              label: t("Auth.MembershipRegistration.Form.Relation.Grandchild"),
+            },
+            {
+              value: "Paternal Uncle / Aunt",
+              label: t(
+                "Auth.MembershipRegistration.Form.Relation.PaternalUncleAunt"
+              ),
+            },
+            {
+              value: "Maternal Uncle / Aunt",
+              label: t(
+                "Auth.MembershipRegistration.Form.Relation.MaternalUncleAunt"
+              ),
+            },
+            {
+              value: "InLow",
+              label: t("Auth.MembershipRegistration.Form.Relation.InLow"),
+            },
+            {
+              value: "None",
+              label: t("Auth.MembershipRegistration.Form.Relation.None"),
+            },
+          ],
+          name: "relation",
+          label: t("Auth.MembershipRegistration.Form.Relation.Title"),
+          required: true,
+        },
+        {
+          type: "select",
+          options: [
+            {
+              value: "Below 5",
+              label: t("Auth.MembershipRegistration.Form.AgeGroup.BelowFive"),
+            },
+            {
+              value: "5 - 12",
+              label: t(
+                "Auth.MembershipRegistration.Form.AgeGroup.FiveToTwelve"
+              ),
+            },
+            {
+              value: "12 - 18",
+              label: t(
+                "Auth.MembershipRegistration.Form.AgeGroup.TwelveToEighteen"
+              ),
+            },
+            {
+              value: "18 - 30",
+              label: t(
+                "Auth.MembershipRegistration.Form.AgeGroup.EighteenToThirty"
+              ),
+            },
+            {
+              value: "30 - 45",
+              label: t(
+                "Auth.MembershipRegistration.Form.AgeGroup.ThirtyToFortyFive"
+              ),
+            },
+            {
+              value: "45 - 60",
+              label: t(
+                "Auth.MembershipRegistration.Form.AgeGroup.FortyFiveToSixty"
+              ),
+            },
+            {
+              value: "Above 60",
+              label: t("Auth.MembershipRegistration.Form.AgeGroup.AboveSixty"),
+            },
+          ],
+          name: "ageGroup",
+          label: t("Auth.MembershipRegistration.Form.AgeGroup.Title"),
+          required: true,
+        },
+        {
           type: "radio",
           options: [
             {
@@ -781,107 +830,88 @@ const MembershipRegistrationView = () => {
           name: "healthStatus",
           label: t("Auth.MembershipRegistration.Form.HealthStatus.Title"),
           required: true,
-          halfCol: true,
         },
-        ...(formik.values.healthStatus === "Sick"
-          ? [
-              {
-                type: "selectMany",
-                options: [
-                  {
-                    value: "Disability",
-                    label: t(
-                      "Auth.MembershipRegistration.Form.Diseases.Disability"
-                    ),
-                  },
-                  {
-                    value: "Hearing Impairment",
-                    label: t(
-                      "Auth.MembershipRegistration.Form.Diseases.HearingImpairment"
-                    ),
-                  },
-                  {
-                    value: "Visual Impairment",
-                    label: t(
-                      "Auth.MembershipRegistration.Form.Diseases.VisualImpairment"
-                    ),
-                  },
-                  {
-                    value: "Mental Disability",
-                    label: t(
-                      "Auth.MembershipRegistration.Form.Diseases.MentalDisability"
-                    ),
-                  },
-                  {
-                    value: "Chronic Diseases",
-                    label: t(
-                      "Auth.MembershipRegistration.Form.Diseases.ChronicDiseases"
-                    ),
-                  },
-                  {
-                    value: "Neurological Diseases",
-                    label: t(
-                      "Auth.MembershipRegistration.Form.Diseases.NeurologicalDiseases"
-                    ),
-                  },
-                  {
-                    value: "Genetic Diseases",
-                    label: t(
-                      "Auth.MembershipRegistration.Form.Diseases.GeneticDiseases"
-                    ),
-                  },
-                  {
-                    value: "Cancerous",
-                    label: t(
-                      "Auth.MembershipRegistration.Form.Diseases.Cancerous"
-                    ),
-                  },
-                  {
-                    value: "Chest Diseases",
-                    label: t(
-                      "Auth.MembershipRegistration.Form.Diseases.ChestDiseases"
-                    ),
-                  },
-                  {
-                    value: "Liver Diseases",
-                    label: t(
-                      "Auth.MembershipRegistration.Form.Diseases.LiverDiseases"
-                    ),
-                  },
-                  {
-                    value: "Skin Diseases",
-                    label: t(
-                      "Auth.MembershipRegistration.Form.Diseases.SkinDiseases"
-                    ),
-                  },
-                ],
-                Placeholder: t(
-                  "Auth.MembershipRegistration.Form.Diseases.None"
-                ),
-                name: "diseases",
-                label: t("Auth.MembershipRegistration.Form.Diseases.Title"),
-                required: false,
-              },
-              {
-                type: "radio",
-                options: [
-                  { value: "Yes", label: t("Global.Form.Labels.Yes") },
-                  { value: "No", label: t("Global.Form.Labels.No") },
-                ],
-                name: "incurableDisease",
-                label: t("Auth.MembershipRegistration.Form.IncurableDisease"),
-                required: true,
-              },
-              {
-                type: "file",
-                name: "healthStatementPhoto",
-                label: t(
-                  "Auth.MembershipRegistration.Form.HealthStatementPhoto"
-                ),
-                required: true,
-              },
-            ]
-          : []),
+        {
+          type: "selectMany",
+          options: [
+            {
+              value: "Disability",
+              label: t("Auth.MembershipRegistration.Form.Diseases.Disability"),
+            },
+            {
+              value: "Hearing Impairment",
+              label: t(
+                "Auth.MembershipRegistration.Form.Diseases.HearingImpairment"
+              ),
+            },
+            {
+              value: "Visual Impairment",
+              label: t(
+                "Auth.MembershipRegistration.Form.Diseases.VisualImpairment"
+              ),
+            },
+            {
+              value: "Mental Disability",
+              label: t(
+                "Auth.MembershipRegistration.Form.Diseases.MentalDisability"
+              ),
+            },
+            {
+              value: "Chronic Diseases",
+              label: t(
+                "Auth.MembershipRegistration.Form.Diseases.ChronicDiseases"
+              ),
+            },
+            {
+              value: "Neurological Diseases",
+              label: t(
+                "Auth.MembershipRegistration.Form.Diseases.NeurologicalDiseases"
+              ),
+            },
+            {
+              value: "Genetic Diseases",
+              label: t(
+                "Auth.MembershipRegistration.Form.Diseases.GeneticDiseases"
+              ),
+            },
+            {
+              value: "Cancerous",
+              label: t("Auth.MembershipRegistration.Form.Diseases.Cancerous"),
+            },
+            {
+              value: "Chest Diseases",
+              label: t(
+                "Auth.MembershipRegistration.Form.Diseases.ChestDiseases"
+              ),
+            },
+            {
+              value: "Liver Diseases",
+              label: t(
+                "Auth.MembershipRegistration.Form.Diseases.LiverDiseases"
+              ),
+            },
+            {
+              value: "Skin Diseases",
+              label: t(
+                "Auth.MembershipRegistration.Form.Diseases.SkinDiseases"
+              ),
+            },
+          ],
+          Placeholder: t("Auth.MembershipRegistration.Form.Diseases.None"),
+          name: "diseases",
+          label: t("Auth.MembershipRegistration.Form.Diseases.Title"),
+          required: false,
+        },
+        {
+          type: "radio",
+          options: [
+            { value: "Yes", label: t("Global.Form.Labels.Yes") },
+            { value: "No", label: t("Global.Form.Labels.No") },
+          ],
+          name: "incurableDisease",
+          label: t("Auth.MembershipRegistration.Form.IncurableDisease"),
+          required: false,
+        },
       ],
     },
   ];

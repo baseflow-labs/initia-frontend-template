@@ -8,6 +8,16 @@
       "Form": {
         "AbsherDocument": "لوحة المعلومات من موقع ابشر - المركبات - العمالة",
         "Address": "عنوان السكن",
+        "AgeGroup": {
+          "AboveSixty": "60 سنة فأكثر",
+          "BelowFive": "أقل من 5 سنوات",
+          "EighteenToThirty": "من 18 إلى 29",
+          "FiveToTwelve": "من 5 إلى 11",
+          "FortyFiveToSixty": "من 45 إلى 59",
+          "ThirtyToFortyFive": "من 30 إلى 44",
+          "Title": "المرحلة العمرية",
+          "TwelveToEighteen": "من 12 إلى 17"
+        },
         "ApartmentNo": "رقم الشقة",
         "Attachments": "المرفقات",
         "BackupMobile": "رقم الجوال الاحتياطي",
@@ -21,6 +31,8 @@
         "ContactData": "بيانات الاتصال والبيانات البنكية",
         "CreditStatement": "التقرير الائتماني من موقع فلم",
         "CreditStatementNote": "في حال وجود ديون رسمية",
+        "DependentMobile": "رقم جوال التابع",
+        "DependentMobileNote": "إن وجد",
         "Dependents": {
           "AddNew": "إضافة تابع جديد",
           "Dependant": "تابع",
@@ -136,6 +148,19 @@
           "Title": "المنطقة"
         },
         "QualificationData": "بيانات المؤهل والوظيفة",
+        "Relation": {
+          "Child": "ابن(ة)",
+          "Grandchild": "حفيد(ة)",
+          "Grandparent": "جد(ة)",
+          "InLow": "In-Low",
+          "MaternalUncleAunt": "خال(ة)",
+          "None": "لا يوجد صلة قرابة",
+          "Parent": "والد(ة)",
+          "PaternalUncleAunt": "عم(ة)",
+          "Sibling": "أخ(ت)",
+          "Spouse": "زوج(ة)",
+          "Title": "صلة القرابة"
+        },
         "RentalCharge": "قيمة الإيجار كما في العقد",
         "RentalContractPhoto": "عقد إيجار",
         "RentalDocument": "للمستأجر عقد إيجار إلكتروني ساري المدة من موقع إيجار",
@@ -166,8 +191,10 @@
         "PickDate": "اختر التاريخ",
         "PleaseSelect": "نرجو الاختيار...",
         "Previous": "السابق",
+        "Record": "سجل",
         "Required": "هذا الحقل إلزامي",
         "SaveContinue": "حفظ ومتابعة",
+        "SaveData": "حفظ البيانات",
         "Submit": "إرسال",
         "UploadAttachment": "إضافة مرفق",
         "Yes": "نعم"
