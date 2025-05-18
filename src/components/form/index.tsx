@@ -15,7 +15,24 @@ interface InputBasicProps {
   name: string;
   label?: string;
   labelNote?: string;
-  type?: string;
+  type?:
+    | "text"
+    | "email"
+    | "number"
+    | "textarea"
+    | "date"
+    | "file"
+    | "radio"
+    | "select"
+    | "password"
+    | "otp"
+    | "title"
+    | "location"
+    | "numberText"
+    | "selectMany"
+    | "phoneNumber"
+    | "multipleEntries"
+    | string;
   required?: boolean;
   defaultValue?: string | number;
   options?: {
@@ -36,6 +53,8 @@ interface InputSingleProps extends InputBasicProps {
 export interface InputProps extends InputSingleProps {
   inputs?: InputSingleProps[];
   addLabel?: string | React.ReactNode;
+  singleRecordLabel?: string;
+  recordDynamicLabelKey?: string;
   logo?: string;
   halfCol?: boolean;
   prefixText?: string | number;
@@ -67,9 +86,14 @@ const Form: React.FC<Props> = ({
       const dynamicInputs = inputs(formik);
 
       dynamicInputs.forEach((input) => {
-        if (input.required && !values[input.name]) {
+        if (
+          input.required &&
+          ((input.type === "multipleEntries" && !values[input.name].length) ||
+            !values[input.name])
+        ) {
           errors[input.name] = t("Global.Form.Labels.Required");
         }
+
         if (input.type === "email" && values[input.name]) {
           const validEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
           if (!validEmail.test(values[input.name])) {
@@ -86,9 +110,23 @@ const Form: React.FC<Props> = ({
 
   formik.initialValues = inputs(formik).reduce<Record<string, any>>(
     (acc, input) => {
-      acc[input.name] =
-        input.defaultValue ??
-        (input.type === "radio" ? input.options?.[0]?.value ?? "" : "");
+      if (input.defaultValue) {
+        acc[input.name] = input.defaultValue;
+        return acc;
+      }
+
+      switch (input.type) {
+        case "radio":
+          acc[input.name] = input.options?.[0]?.value;
+          break;
+        case "multipleEntries":
+          acc[input.name] = [];
+          break;
+        default:
+          acc[input.name] = "";
+          break;
+      }
+
       return acc;
     },
     {}

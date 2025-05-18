@@ -69,7 +69,7 @@ const FileInput: React.FC<FinalInput> = ({ name, accept, ...rest }) => {
         className="btn btn-outline-success p-3 w-100 rounded-3"
         onClick={handleClick}
       >
-        {t("Global.Labels.UploadAttachment")}{" "}
+        {t("Global.Form.Labels.UploadAttachment")}{" "}
         <FontAwesomeIcon icon={faUpload} />
       </button>
 

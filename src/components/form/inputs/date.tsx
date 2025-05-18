@@ -1,10 +1,12 @@
 import React from "react";
 import { InputProps } from "..";
 import { commonInputClasses } from "../../../utils/consts";
+import { useTranslation } from "react-i18next";
 
 type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 
 const DateInput: React.FC<FinalInput> = (input) => {
+  const { t } = useTranslation();
   // To Do
   // - Date: RTL & Icon & Placeholder
 
@@ -13,7 +15,7 @@ const DateInput: React.FC<FinalInput> = (input) => {
       {...input}
       type="date"
       dir="rtl"
-      placeholder="اختر التاريخ"
+      placeholder={input.placeholder || t("Global.Form.Labels.PickDate")}
       className={`form-control form-control-sm ${commonInputClasses}`}
       // style={{
       //   position: "relative",
