@@ -5,6 +5,7 @@ import moment from "moment";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Fragment } from "react/jsx-runtime";
+
 import absherLogo from "../../../assets/images/partners/absher.svg";
 import eduMinistryLogo from "../../../assets/images/partners/eduMinistry.svg";
 import ejarLogo from "../../../assets/images/partners/ejar.svg";
@@ -288,9 +289,55 @@ const MembershipRegistrationView = () => {
 
   const qualificationDataInputs = () => [
     {
-      type: "text",
+      type: "select",
+      options: [
+        {
+          value: "Government Employee",
+          label: t(
+            "Auth.MembershipRegistration.Form.Occupation.GovernmentEmployee"
+          ),
+        },
+        {
+          value: "Private-Sector Employee",
+          label: t(
+            "Auth.MembershipRegistration.Form.Occupation.PrivateSectorEmployee"
+          ),
+        },
+        {
+          value: "Per-Day Worker",
+          label: t("Auth.MembershipRegistration.Form.Occupation.PerDayWorker"),
+        },
+        {
+          value: "No Fixed",
+          label: t("Auth.MembershipRegistration.Form.Occupation.NoFixed"),
+        },
+        {
+          value: "Looking For Job",
+          label: t("Auth.MembershipRegistration.Form.Occupation.LookingForJob"),
+        },
+        {
+          value: "Retiree",
+          label: t("Auth.MembershipRegistration.Form.Occupation.Retiree"),
+        },
+        {
+          value: "Student",
+          label: t("Auth.MembershipRegistration.Form.Occupation.Student"),
+        },
+        {
+          value: "Housewife",
+          label: t("Auth.MembershipRegistration.Form.Occupation.Housewife"),
+        },
+        {
+          value: "Unemployed",
+          label: t("Auth.MembershipRegistration.Form.Occupation.Unemployed"),
+        },
+        {
+          value: "Unable To Work",
+          label: t("Auth.MembershipRegistration.Form.Occupation.UnableToWork"),
+        },
+      ],
       name: "occupation",
-      label: t("Auth.MembershipRegistration.Form.Occupation"),
+      label: t("Auth.MembershipRegistration.Form.Occupation.Title"),
       required: true,
     },
     {
@@ -360,6 +407,8 @@ const MembershipRegistrationView = () => {
       type: "number",
       name: "salary",
       label: t("Auth.MembershipRegistration.Form.Salary"),
+      min: 0,
+      step: 0.1,
       required: true,
       halfCol: true,
     },
@@ -373,6 +422,8 @@ const MembershipRegistrationView = () => {
       type: "number",
       name: "insurances",
       label: t("Auth.MembershipRegistration.Form.Insurances"),
+      min: 0,
+      step: 0.1,
       required: true,
       halfCol: true,
     },
@@ -386,6 +437,8 @@ const MembershipRegistrationView = () => {
       type: "number",
       name: "comprehensiveRehabilitation",
       label: t("Auth.MembershipRegistration.Form.ComprehensiveRehabilitation"),
+      min: 0,
+      step: 0.1,
       required: true,
       halfCol: true,
     },
@@ -399,6 +452,8 @@ const MembershipRegistrationView = () => {
       type: "number",
       name: "retirement",
       label: t("Auth.MembershipRegistration.Form.Retirement"),
+      min: 0,
+      step: 0.1,
       required: true,
       halfCol: true,
     },
@@ -412,6 +467,8 @@ const MembershipRegistrationView = () => {
       type: "number",
       name: "socialSecurity",
       label: t("Auth.MembershipRegistration.Form.SocialSecurity"),
+      min: 0,
+      step: 0.1,
       required: true,
       halfCol: true,
     },
@@ -587,7 +644,7 @@ const MembershipRegistrationView = () => {
     },
     {
       type: "file",
-      name: "rentalContractPhoto",
+      name: "homeDocumentPhoto",
       label:
         formik.values.homeOwnership === "Rental"
           ? t("Auth.MembershipRegistration.Form.RentalContractPhoto")
@@ -608,6 +665,8 @@ const MembershipRegistrationView = () => {
             type: "number",
             name: "rentalCharge",
             label: t("Auth.MembershipRegistration.Form.RentalCharge"),
+            min: 0,
+            step: 0.1,
             required: true,
           },
           {
@@ -638,7 +697,7 @@ const MembershipRegistrationView = () => {
                 label: t("Auth.MembershipRegistration.Form.Payee.Free"),
               },
             ],
-            name: "paymentFrequency",
+            name: "payee",
             label: t("Auth.MembershipRegistration.Form.Payee.Title"),
             required: true,
           },
