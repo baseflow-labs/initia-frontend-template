@@ -43,7 +43,7 @@ const errorHandle = (res?: AxiosResponse): Promise<never> => {
   if (!res) {
     store.dispatch(
       addNotification({
-        type: "error",
+        type: "err",
         msg: fallbackMessage,
       })
     );
@@ -58,7 +58,7 @@ const errorHandle = (res?: AxiosResponse): Promise<never> => {
 
   store.dispatch(
     addNotification({
-      type: "error",
+      type: "err",
       msg,
     })
   );
@@ -74,23 +74,24 @@ service.interceptors.response.use(
       return res.data;
     }
 
-    return errorHandle(res);
+    return { __error: true, ...res.data };
   },
   (err: AxiosError) => {
     store.dispatch(endLoading());
 
-    if (err.response) {
-      return errorHandle(err.response);
-    }
+    console.log({ err });
+
+    const errMsg =
+      (err?.response?.data as any)?.message || err.message || fallbackMessage;
 
     store.dispatch(
       addNotification({
-        type: "error",
-        msg: fallbackMessage,
+        type: "err",
+        msg: errMsg,
       })
     );
 
-    return Promise.reject(fallbackMessage);
+    return Promise.resolve({ __error: true, message: errMsg });
   }
 );
 
