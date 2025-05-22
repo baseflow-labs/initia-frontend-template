@@ -47,9 +47,12 @@ const RegisterView = () => {
   ];
 
   const onRegisterSubmit = (values = { identifier: "" }) => {
-    authApi.otpSend("+966" + values.identifier).then(() => {
-      setData(values);
-    });
+    authApi
+      .otpSend("+966" + values.identifier)
+      .then(() => {
+        setData(values);
+      })
+      .catch((err) => console.log({ err }));
   };
 
   const onOtpSubmit = (values: authApi.registerProps) => {
@@ -57,7 +60,8 @@ const RegisterView = () => {
       .register({ ...values, ...data, username: "+966" + data.identifier })
       .then((res: any) => {
         navigate("/");
-      });
+      })
+      .catch((err) => console.log({ err }));
   };
 
   return (

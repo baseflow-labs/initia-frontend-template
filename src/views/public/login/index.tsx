@@ -46,7 +46,8 @@ const LoginView = () => {
       .login({ ...values, identifier: "+966" + values.identifier })
       .then((res: any) => {
         dispatch(login(res.payload));
-      });
+      })
+      .catch((err) => console.log({ err }));
   };
 
   return (
