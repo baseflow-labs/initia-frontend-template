@@ -36,6 +36,7 @@
         "Dependents": {
           "AddNew": "Add New Dependant",
           "Dependant": "Dependant",
+          "SaveDependent": "Save Dependent Data",
           "Title": "Dependents"
         },
         "DependentsData": "Dependents Data",

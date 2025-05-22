@@ -36,6 +36,7 @@
         "Dependents": {
           "AddNew": "إضافة تابع جديد",
           "Dependant": "تابع",
+          "SaveDependent": "حفظ بيانات التابع",
           "Title": "التابعين"
         },
         "DependentsData": "بيانات التابعين",

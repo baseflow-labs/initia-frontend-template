@@ -20,7 +20,7 @@ import { dataDateFormat } from "../../../utils/consts";
 
 const MembershipRegistrationView = () => {
   const { t } = useTranslation();
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStep, setCurrentStep] = useState(4);
   const [formData, setFormData] = useState({});
 
   const onNextStep = (values = {}) => {
@@ -721,6 +721,10 @@ const MembershipRegistrationView = () => {
       ),
       recordDynamicLabelKey: "fullName",
       required: false,
+      onRecordSubmit: (values = {}) => console.log({ values }),
+      recordSubmitButtonText: t(
+        "Auth.MembershipRegistration.Form.Dependents.SaveDependent"
+      ),
       inputs: [
         {
           type: "text",

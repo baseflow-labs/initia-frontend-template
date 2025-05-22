@@ -59,6 +59,8 @@ export interface InputProps extends InputSingleProps {
   recordDynamicLabelKey?: string;
   logo?: string;
   halfCol?: boolean;
+  onRecordSubmit?: (formik?: any) => any;
+  recordSubmitButtonText?: string;
   prefixText?: string | number;
   postfixText?: string | number;
   aboveComp?: React.ReactNode;
