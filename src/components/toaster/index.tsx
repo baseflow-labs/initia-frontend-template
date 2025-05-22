@@ -1,10 +1,9 @@
-import { Toast } from "bootstrap";
+import { faCheck, faInfo, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { removeNotification } from "../../store/actions/notifications";
 import { useAppSelector } from "../../store/hooks";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faInfo, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const NotificationsToaster = () => {
   const { notifications } = useAppSelector((_) => _.notifications);
@@ -14,15 +13,17 @@ const NotificationsToaster = () => {
     notifications.forEach(({ id }) => {
       const toastEl = document.getElementById(`toast-${id}`);
       if (toastEl) {
-        const toast = new Toast(toastEl, { delay: 5000 });
-        toast.show();
+        import("bootstrap").then(({ Toast }) => {
+          const toast = new Toast(toastEl, { delay: 5000 });
+          toast.show();
 
-        const handler = () => dispatch(removeNotification(id));
-        toastEl.addEventListener("hidden.bs.toast", handler);
+          const handler = () => dispatch(removeNotification(id));
+          toastEl.addEventListener("hidden.bs.toast", handler);
 
-        return () => {
-          toastEl.removeEventListener("hidden.bs.toast", handler);
-        };
+          return () => {
+            toastEl.removeEventListener("hidden.bs.toast", handler);
+          };
+        });
       }
     });
   }, [notifications]);
