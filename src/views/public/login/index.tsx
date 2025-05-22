@@ -1,7 +1,9 @@
+import { AxiosResponse } from "axios";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
+import * as authApi from "../../../api/auth";
 import Button from "../../../components/core/button";
 import Form from "../../../components/form";
 import { login } from "../../../store/actions/auth";
@@ -14,7 +16,7 @@ const LoginView = () => {
   const formInputs = () => [
     {
       type: "phoneNumber",
-      name: "phoneNo",
+      name: "identifier",
       label: t("Public.Login.Labels.PhoneNo"),
       required: true,
     },
@@ -38,22 +40,24 @@ const LoginView = () => {
     },
   ];
 
-  const onSubmit = (values = {}) => {
-    console.log({ values });
+  const onSubmit = (values: authApi.loginCredentials) => {
+    authApi
+      .login({ ...values, identifier: "+966" + values.identifier })
+      .then((res: any) => {
+        console.log({ res });
 
-    dispatch(
-      login({
-        jwt: "thisIsFakeToken",
-        refreshToken: "thisIsFakeRefreshToken",
-        user: {
-          id: "1",
-          name: "Suhaib Ahmad",
-          email: "SuhaibAhmadAi@hotmail.com",
-        },
-      })
-    );
-
-    navigate("/");
+        dispatch(
+          login({
+            jwt: res.payload.token,
+            refreshToken: "thisIsFakeRefreshToken",
+            user: res.payload.user || {
+              id: "1",
+              name: "Suhaib Ahmad",
+              email: "SuhaibAhmadAi@hotmail.com",
+            },
+          })
+        );
+      });
   };
 
   return (
