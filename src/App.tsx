@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { useTranslation } from "react-i18next";
 import { BrowserRouter, Route, Routes } from "react-router";
 
+import NotificationsToaster from "./components/toaster";
 import AuthLayout from "./layouts/auth";
 import PublicLayout from "./layouts/public";
 import { useAppSelector } from "./store/hooks";
@@ -16,6 +17,8 @@ const App = () => {
   return (
     <BrowserRouter>
       <Suspense fallback={<>Loading...</>}>
+        <NotificationsToaster />
+
         <Routes>
           {token !== "null" ? (
             <Route path="*" element={<AuthLayout />} />

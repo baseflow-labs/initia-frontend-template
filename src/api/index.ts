@@ -43,9 +43,8 @@ const errorHandle = (res?: AxiosResponse): Promise<never> => {
   if (!res) {
     store.dispatch(
       addNotification({
-        id: 1,
         type: "error",
-        message: fallbackMessage,
+        msg: fallbackMessage,
       })
     );
     return Promise.reject(fallbackMessage);
@@ -59,9 +58,8 @@ const errorHandle = (res?: AxiosResponse): Promise<never> => {
 
   store.dispatch(
     addNotification({
-      id: 1,
       type: "error",
-      message: msg,
+      msg,
     })
   );
 
@@ -87,9 +85,8 @@ service.interceptors.response.use(
 
     store.dispatch(
       addNotification({
-        id: 1,
         type: "error",
-        message: fallbackMessage,
+        msg: fallbackMessage,
       })
     );
 
