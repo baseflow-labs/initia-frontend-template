@@ -151,17 +151,19 @@ const Form: React.FC<Props> = ({
 
   const LabelView = ({ labelNote, ...input }: InputProps) => (
     <label className={`form-label ${input.label ? "" : "text-white"}`}>
-      {input.label ? input.label : "."}{" "}
-      {labelNote && (
-        <span className="text-muted">
-          {"("}
-          {labelNote}
-          {")"}{" "}
-        </span>
-      )}
-      {input.label && input.required ? (
-        <span className="text-danger">*</span>
-      ) : null}
+      <small>
+        {input.label ? input.label : "."}{" "}
+        {labelNote && (
+          <span className="text-muted">
+            {"("}
+            {labelNote}
+            {")"}{" "}
+          </span>
+        )}
+        {input.label && input.required ? (
+          <span className="text-danger">*</span>
+        ) : null}
+      </small>
     </label>
   );
 
@@ -213,7 +215,7 @@ const Form: React.FC<Props> = ({
                       </button>
                     </div>
 
-                    <div className="col-md-6 mb-3">
+                    <div className="col-md-6 mb-2">
                       {aboveComp}
 
                       <div
@@ -240,7 +242,7 @@ const Form: React.FC<Props> = ({
 
               return (
                 <div
-                  className={`mb-3 ${
+                  className={`mb-2 ${
                     halfCol ? "col-md-6" : logo ? "col-6" : "col-md-12"
                   }`}
                   key={input.name}

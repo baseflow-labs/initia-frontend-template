@@ -62,7 +62,7 @@ const AuthLayout = () => {
           style={
             location.pathname === "/terms-conditions"
               ? { height: "100vh", width: "100%" }
-              : { maxWidth: "400px", width: "100%" }
+              : { maxWidth: "500px", width: "100%" }
           }
         >
           <div className="card-body text-center">
