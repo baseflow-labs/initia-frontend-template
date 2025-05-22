@@ -59,13 +59,18 @@ const AuthLayout = () => {
       <div className="vh-100 vw-100 d-flex justify-content-center align-items-center public-bg-image">
         <div
           className="card shadow p-4 rounded-5"
-          style={{ maxWidth: "400px", width: "100%" }}
+          style={
+            location.pathname === "/terms-conditions"
+              ? { height: "100vh", width: "100%" }
+              : { maxWidth: "400px", width: "100%" }
+          }
         >
           <div className="card-body text-center">
             <img
               alt="bg-image"
               src={bgImage}
               className="w-50 px-1 mb-4"
+              style={{ maxWidth: "350px" }}
               role="button"
               onClick={() => navigate("/")}
             />
