@@ -5,9 +5,12 @@ export interface loginCredentials {
   password: string;
 }
 
-interface registerProps {
+export interface registerProps {
   identifier: string;
+  username?: string;
   password: string;
+  passwordConfirmation: string;
+  code: string;
 }
 
 interface resetPasswordProps {
@@ -27,8 +30,8 @@ const login = async (credentials: loginCredentials) => {
 //   return await api.post(mainPath + "/logout");
 // };
 
-const otpResend = async (identifier: string) => {
-  return await api.post(mainPath + "/otp", identifier);
+const otpSend = async (identifier: string) => {
+  return await api.post(mainPath + "/otp", { identifier });
 };
 
 const requestPasswordReset = async (identifier: string) => {
@@ -44,12 +47,12 @@ const isAuthorized = async () => {
 };
 
 const register = async (userData: registerProps) => {
-  return await api.post("/user");
+  return await api.post("/user", userData);
 };
 
 export {
   login,
-  otpResend,
+  otpSend,
   requestPasswordReset,
   resetPassword,
   //  logout,

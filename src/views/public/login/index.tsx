@@ -28,6 +28,7 @@ const LoginView = () => {
         <div className="d-block">
           <Button
             color="ghost"
+            type="button"
             route="/forgot-password"
             size="sm"
             onClick={() => navigate("/forgot-password")}
