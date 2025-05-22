@@ -6,10 +6,13 @@ import * as authApi from "../../../api/auth";
 import Form from "../../../components/form";
 import Button from "../../../components/core/button";
 import BelowInputButton from "../../../components/button/belowInput";
+import { useDispatch } from "react-redux";
+import { addNotification } from "../../../store/actions/notifications";
 
 const RegisterView = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [data, setData] = useState({ identifier: "" });
 
   const onRegisterSubmit = (values = { identifier: "" }) => {
@@ -25,6 +28,7 @@ const RegisterView = () => {
     authApi
       .register({ ...values, ...data, username: "+966" + data.identifier })
       .then((res: any) => {
+        dispatch(addNotification({ msg: t("Public.Register.Labels.Success") }));
         navigate("/");
       })
       .catch((err) => console.log({ err }));

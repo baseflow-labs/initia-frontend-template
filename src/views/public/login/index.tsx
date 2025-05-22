@@ -8,6 +8,7 @@ import Button from "../../../components/core/button";
 import Form from "../../../components/form";
 import { login } from "../../../store/actions/auth";
 import BelowInputButton from "../../../components/button/belowInput";
+import { addNotification } from "../../../store/actions/notifications";
 
 const LoginView = () => {
   const { t } = useTranslation();
@@ -40,6 +41,13 @@ const LoginView = () => {
     authApi
       .login({ ...values, identifier: "+966" + values.identifier })
       .then((res: any) => {
+        dispatch(
+          addNotification({
+            msg: t("Public.Login.Labels.Success", {
+              name: res.payload.user.name,
+            }),
+          })
+        );
         dispatch(login(res.payload));
       })
       .catch((err) => console.log({ err }));

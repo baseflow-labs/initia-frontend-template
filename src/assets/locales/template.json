@@ -239,7 +239,8 @@
         "DidUForgotPassword": "Did You Forgot Password?",
         "Login": "Login",
         "Password": "Password",
-        "PhoneNo": "PhoneNo"
+        "PhoneNo": "PhoneNo",
+        "Success": "Welcome Back {{name}}"
       },
       "Title": "Login"
     },
@@ -253,7 +254,8 @@
         "PhoneNo": "PhoneNo",
         "PrivacyPolicyTermsConditions": "Privacy Policy and Terms & Conditions",
         "Register": "Register",
-        "ResendOtp": "Resend Otp"
+        "ResendOtp": "Resend Otp",
+        "Success": "Registration Has Been Successful. Now You May Login."
       },
       "Title": "Register"
     }
