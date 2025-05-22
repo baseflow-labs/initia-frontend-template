@@ -3,13 +3,14 @@ import axios, {
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from "axios";
+
 import { logout } from "../store/actions/auth";
 import { endLoading, startLoading } from "../store/actions/loading";
 import { addNotification } from "../store/actions/notifications";
 import store, { RootState } from "../store/store";
 
 export const baseURL =
-  (process.env.REACT_APP_BACKEND_URL || "http://127.0.0.1:8000") + "/api";
+  process.env.REACT_APP_BACKEND_URL || "http://127.0.0.1:8000";
 
 const service = axios.create({
   baseURL,
@@ -25,7 +26,9 @@ service.interceptors.request.use(
 
     const { token } = (store.getState() as RootState).auth;
 
-    config.headers.Authorization = `Bearer ${token}`;
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
 
     return config;
   },
