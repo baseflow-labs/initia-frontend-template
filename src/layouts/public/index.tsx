@@ -8,6 +8,7 @@ import LoginView from "../../views/public/login";
 import OtpView from "../../views/public/otp";
 import RegisterView from "../../views/public/register";
 import ResetPasswordView from "../../views/public/ResetPassword";
+import TermsConditions from "../../views/public/termsConditions";
 
 const AuthLayout = () => {
   const { t } = useTranslation();
@@ -31,6 +32,12 @@ const AuthLayout = () => {
       name: t("Public.ForgotPassword.Title"),
       route: "/forgot-password",
       view: <ForgotPasswordView />,
+      show: false,
+    },
+    {
+      name: t("Public.ForgotPassword.GotOtp.Title"),
+      route: "/terms-conditions",
+      view: <TermsConditions />,
       show: false,
     },
     {
