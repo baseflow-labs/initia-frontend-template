@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import * as authApi from "../../../api/auth";
 import Form from "../../../components/form";
 import Button from "../../../components/core/button";
+import BelowInputButton from "../../../components/button/belowInput";
 
 const RegisterView = () => {
   const { t } = useTranslation();
@@ -55,18 +56,11 @@ const RegisterView = () => {
       label: t("Public.Register.Labels.PasswordConfirmation"),
       required: true,
       belowComp: (
-        <div className="pb-0 mb-0 mt-3">
-          <small className="pt-2">
-            {t("Public.Register.Labels.ByClickYouAccept")}{" "}
-            <span
-              role="button"
-              onClick={() => navigate("/terms-conditions")}
-              className="text-decoration-underline text-info"
-            >
-              {t("Public.Register.Labels.PrivacyPolicyTermsConditions")}
-            </span>
-          </small>
-        </div>
+        <BelowInputButton
+          introText={t("Public.Register.Labels.ByClickYouAccept")}
+          buttonText={t("Public.Register.Labels.PrivacyPolicyTermsConditions")}
+          action={() => navigate("/terms-conditions")}
+        />
       ),
     },
   ];
@@ -77,18 +71,11 @@ const RegisterView = () => {
       name: "code",
       required: true,
       belowComp: (
-        <div className="d-block">
-          <small className="pt-2">
-            {t("Public.Register.Labels.DidNotGetOtp")}{" "}
-            <span
-              role="button"
-              onClick={() => onRegisterSubmit(data)}
-              className="text-decoration-underline text-info"
-            >
-              {t("Public.Register.Labels.ResendOtp")}
-            </span>
-          </small>
-        </div>
+        <BelowInputButton
+          introText={t("Public.Register.Labels.DidNotGetOtp")}
+          buttonText={t("Public.Register.Labels.ResendOtp")}
+          action={() => onRegisterSubmit(data)}
+        />
       ),
     },
   ];

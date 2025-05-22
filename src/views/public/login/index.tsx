@@ -7,6 +7,7 @@ import * as authApi from "../../../api/auth";
 import Button from "../../../components/core/button";
 import Form from "../../../components/form";
 import { login } from "../../../store/actions/auth";
+import BelowInputButton from "../../../components/button/belowInput";
 
 const LoginView = () => {
   const { t } = useTranslation();
@@ -25,15 +26,11 @@ const LoginView = () => {
       name: "password",
       label: t("Public.Login.Labels.Password"),
       belowComp: (
-        <div className="d-block mt-3 mb-0 pb-0">
-          <small
-            role="button"
-            onClick={() => navigate("/forgot-password")}
-            className="text-decoration-underline text-info"
-          >
-            {t("Public.Login.Labels.DidUForgotPassword")}
-          </small>
-        </div>
+        <BelowInputButton
+          introText=""
+          buttonText={t("Public.Login.Labels.DidUForgotPassword")}
+          action={() => navigate("/forgot-password")}
+        />
       ),
       required: true,
     },
