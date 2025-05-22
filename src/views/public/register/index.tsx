@@ -2,12 +2,12 @@ import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
-import * as authApi from "../../../api/auth";
-import Form from "../../../components/form";
-import Button from "../../../components/core/button";
-import BelowInputButton from "../../../components/button/belowInput";
 import { useDispatch } from "react-redux";
+import * as authApi from "../../../api/auth";
+import BelowInputButton from "../../../components/button/belowInput";
+import Form from "../../../components/form";
 import { addNotification } from "../../../store/actions/notifications";
+import { apiCatchGlobalHandler } from "../../../utils/fucntions";
 
 const RegisterView = () => {
   const { t } = useTranslation();
@@ -21,7 +21,7 @@ const RegisterView = () => {
       .then(() => {
         setData(values);
       })
-      .catch((err) => console.log({ err }));
+      .catch(apiCatchGlobalHandler);
   };
 
   const onOtpSubmit = (values: authApi.registerProps) => {
@@ -31,7 +31,7 @@ const RegisterView = () => {
         dispatch(addNotification({ msg: t("Public.Register.Labels.Success") }));
         navigate("/");
       })
-      .catch((err) => console.log({ err }));
+      .catch(apiCatchGlobalHandler);
   };
 
   const registerInputs = () => [
