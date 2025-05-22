@@ -1,7 +1,6 @@
 import { Toast } from "bootstrap";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-
 import { removeNotification } from "../../store/actions/notifications";
 import { useAppSelector } from "../../store/hooks";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,10 +11,19 @@ const NotificationsToaster = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const toastElList = document.querySelectorAll(".toast");
-    toastElList.forEach((toastEl) => {
-      const toast = new Toast(toastEl, { delay: 5000 });
-      toast.show();
+    notifications.forEach(({ id }) => {
+      const toastEl = document.getElementById(`toast-${id}`);
+      if (toastEl) {
+        const toast = new Toast(toastEl, { delay: 5000 });
+        toast.show();
+
+        const handler = () => dispatch(removeNotification(id));
+        toastEl.addEventListener("hidden.bs.toast", handler);
+
+        return () => {
+          toastEl.removeEventListener("hidden.bs.toast", handler);
+        };
+      }
     });
   }, [notifications]);
 
@@ -24,9 +32,10 @@ const NotificationsToaster = () => {
       className="toast-container position-fixed top-0 start-50 translate-middle-x p-2"
       style={{ zIndex: 1055 }}
     >
-      {notifications.map(({ msg, type }, i) => (
+      {notifications.map(({ msg, type, id }) => (
         <div
-          key={i}
+          key={id}
+          id={`toast-${id}`}
           className={`toast text-white rounded-4 bg-${
             type === "err"
               ? "danger"
@@ -37,10 +46,11 @@ const NotificationsToaster = () => {
           role="alert"
           aria-live="assertive"
           aria-atomic="true"
-          onClick={() => dispatch(removeNotification(i))}
         >
           <div className="toast-body d-flex align-middle">
             <div
+              role="button"
+              onClick={() => dispatch(removeNotification(id))}
               className="me-2 rounded-3 p-1 text-white text-center"
               style={{
                 backgroundColor: "rgba(0,0,0,0.5)",
@@ -57,14 +67,11 @@ const NotificationsToaster = () => {
                     ? faInfo
                     : faCheck
                 }
-                role="button"
                 className="text-white"
                 data-bs-dismiss="toast"
                 aria-label="Close"
-                onClick={() => dispatch(removeNotification(i))}
               />
             </div>
-
             <div className="my-auto">{msg}</div>
           </div>
         </div>
