@@ -120,7 +120,19 @@
           "Saudi": "سعودي",
           "Title": "الجنسية"
         },
-        "Occupation": "المهنة",
+        "Occupation": {
+          "GovernmentEmployee": "موظف حكومي",
+          "Housewife": "ربة منزل",
+          "LookingForJob": "باحث عن عمل",
+          "NoFixed": "بدون عمل ثابت",
+          "PerDayWorker": "عامل باليوم",
+          "PrivateSectorEmployee": "موظف قطاع خاص",
+          "Retiree": "متقاعد",
+          "Student": "طالب",
+          "Title": "الوظيفة",
+          "UnableToWork": "غير قادر على العمل",
+          "Unemployed": "عاطل عن العمل"
+        },
         "OwnershipDocumentPhoto": "صك الملكية",
         "Payee": {
           "Free": "لا يتم دفع الإيجار (سكن مجاني)",
@@ -199,6 +211,9 @@
         "UploadAttachment": "إضافة مرفق",
         "Yes": "نعم"
       }
+    },
+    "Labels": {
+      "Back": "عودة"
     }
   },
   "Public": {
@@ -230,11 +245,15 @@
     },
     "Register": {
       "Labels": {
+        "ByClickYouAccept": "بالضغط على \"إنشاء حساب\", فإنك توافق على",
+        "DidNotGetOtp": "لم تصلك الرسالة؟",
         "Name": "الاسم",
         "Password": "كلمة السر",
         "PasswordConfirmation": "تأكيد كلمة السر",
         "PhoneNo": "رقم الهاتف",
-        "Register": "إنشاء حساب"
+        "PrivacyPolicyTermsConditions": "سياسة الخصوصية وشروط الاستخدام",
+        "Register": "إنشاء حساب",
+        "ResendOtp": "إعادة الإرسال"
       },
       "Title": "إنشاء حساب"
     }

@@ -4,11 +4,30 @@ import { useNavigate } from "react-router";
 
 import * as authApi from "../../../api/auth";
 import Form from "../../../components/form";
+import Button from "../../../components/core/button";
 
 const RegisterView = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [data, setData] = useState({ identifier: "" });
+
+  const onRegisterSubmit = (values = { identifier: "" }) => {
+    authApi
+      .otpSend("+966" + values.identifier)
+      .then(() => {
+        setData(values);
+      })
+      .catch((err) => console.log({ err }));
+  };
+
+  const onOtpSubmit = (values: authApi.registerProps) => {
+    authApi
+      .register({ ...values, ...data, username: "+966" + data.identifier })
+      .then((res: any) => {
+        navigate("/");
+      })
+      .catch((err) => console.log({ err }));
+  };
 
   const registerInputs = () => [
     {
@@ -35,6 +54,20 @@ const RegisterView = () => {
       name: "passwordConfirmation",
       label: t("Public.Register.Labels.PasswordConfirmation"),
       required: true,
+      belowComp: (
+        <div className="pb-0 mb-0 mt-3">
+          <small className="pt-2">
+            {t("Public.Register.Labels.ByClickYouAccept")}{" "}
+            <span
+              role="button"
+              onClick={() => navigate("/terms-conditions")}
+              className="text-decoration-underline text-info"
+            >
+              {t("Public.Register.Labels.PrivacyPolicyTermsConditions")}
+            </span>
+          </small>
+        </div>
+      ),
     },
   ];
 
@@ -43,26 +76,22 @@ const RegisterView = () => {
       type: "otp",
       name: "code",
       required: true,
+      belowComp: (
+        <div className="d-block">
+          <small className="pt-2">
+            {t("Public.Register.Labels.DidNotGetOtp")}{" "}
+            <span
+              role="button"
+              onClick={() => onRegisterSubmit(data)}
+              className="text-decoration-underline text-info"
+            >
+              {t("Public.Register.Labels.ResendOtp")}
+            </span>
+          </small>
+        </div>
+      ),
     },
   ];
-
-  const onRegisterSubmit = (values = { identifier: "" }) => {
-    authApi
-      .otpSend("+966" + values.identifier)
-      .then(() => {
-        setData(values);
-      })
-      .catch((err) => console.log({ err }));
-  };
-
-  const onOtpSubmit = (values: authApi.registerProps) => {
-    authApi
-      .register({ ...values, ...data, username: "+966" + data.identifier })
-      .then((res: any) => {
-        navigate("/");
-      })
-      .catch((err) => console.log({ err }));
-  };
 
   return (
     <div>
@@ -70,7 +99,7 @@ const RegisterView = () => {
         <Fragment>
           <h4>رمز التحقق OTP</h4>
 
-          <div className="text-center mt-2 mb-5">
+          <div className="text-center mt-2">
             <small>تحقق من رسائل هاتفك وادخل رقم التحقق (OTP)</small>
           </div>
 

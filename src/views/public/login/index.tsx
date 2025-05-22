@@ -25,16 +25,14 @@ const LoginView = () => {
       name: "password",
       label: t("Public.Login.Labels.Password"),
       belowComp: (
-        <div className="d-block">
-          <Button
-            color="ghost"
-            type="button"
-            route="/forgot-password"
-            size="sm"
+        <div className="d-block mt-3 mb-0 pb-0">
+          <small
+            role="button"
             onClick={() => navigate("/forgot-password")}
+            className="text-decoration-underline text-info"
           >
             {t("Public.Login.Labels.DidUForgotPassword")}
-          </Button>
+          </small>
         </div>
       ),
       required: true,
