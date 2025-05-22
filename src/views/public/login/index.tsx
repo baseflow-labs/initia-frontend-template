@@ -44,19 +44,7 @@ const LoginView = () => {
     authApi
       .login({ ...values, identifier: "+966" + values.identifier })
       .then((res: any) => {
-        console.log({ res });
-
-        dispatch(
-          login({
-            jwt: res.payload.token,
-            refreshToken: "thisIsFakeRefreshToken",
-            user: res.payload.user || {
-              id: "1",
-              name: "Suhaib Ahmad",
-              email: "SuhaibAhmadAi@hotmail.com",
-            },
-          })
-        );
+        dispatch(login(res.payload));
       });
   };
 

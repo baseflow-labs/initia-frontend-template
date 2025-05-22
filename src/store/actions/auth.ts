@@ -6,14 +6,21 @@ export interface UserProps {
 }
 
 export interface AuthResponse {
-  jwt: string;
-  refreshToken: string;
+  token: string;
   user: UserProps;
 }
 
 export const login = (resp: AuthResponse) => ({
   type: "login" as const,
-  resp,
+  resp: {
+    jwt: resp.token,
+    refreshToken: "thisIsFakeRefreshToken",
+    user: resp.user || {
+      id: "1",
+      name: "Suhaib Ahmad",
+      email: "SuhaibAhmadAi@hotmail.com",
+    },
+  },
 });
 
 export const logout = () => ({
