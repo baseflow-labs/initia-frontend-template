@@ -5,7 +5,12 @@ import moment from "moment";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Fragment } from "react/jsx-runtime";
-
+import * as BeneficiaryApi from "../../../api/profile/beneficiary";
+import * as ContactApi from "../../../api/profile/contact";
+import * as DependentApi from "../../../api/profile/dependent";
+import * as HousingApi from "../../../api/profile/housing";
+import * as IncomeApi from "../../../api/profile/income";
+import * as NationalRecordApi from "../../../api/profile/nationalRecord";
 import absherLogo from "../../../assets/images/partners/absher.svg";
 import eduMinistryLogo from "../../../assets/images/partners/eduMinistry.svg";
 import ejarLogo from "../../../assets/images/partners/ejar.svg";
@@ -17,10 +22,11 @@ import Button from "../../../components/core/button";
 import Form from "../../../components/form";
 import WizardFormStepper from "../../../components/form/wizard/stepper";
 import { dataDateFormat } from "../../../utils/consts";
+import { apiCatchGlobalHandler } from "../../../utils/fucntions";
 
 const MembershipRegistrationView = () => {
   const { t } = useTranslation();
-  const [currentStep, setCurrentStep] = useState(4);
+  const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({});
 
   const onNextStep = (values = {}) => {
@@ -721,7 +727,12 @@ const MembershipRegistrationView = () => {
       ),
       recordDynamicLabelKey: "fullName",
       required: false,
-      onRecordSubmit: (values = {}) => console.log({ values }),
+      onRecordSubmit: (e: any) =>
+        DependentApi.createOrUpdate(e)
+          .then(() => {
+            onNextStep(e);
+          })
+          .catch(apiCatchGlobalHandler),
       recordSubmitButtonText: t(
         "Auth.MembershipRegistration.Form.Dependents.SaveDependent"
       ),
@@ -1070,7 +1081,13 @@ const MembershipRegistrationView = () => {
           inputs={basicDataInputs}
           submitText={t("Global.Form.Labels.SaveContinue")}
           customButtons={<HelpButton />}
-          onFormSubmit={(e) => onNextStep(e)}
+          onFormSubmit={(e) => {
+            BeneficiaryApi.createOrUpdate(e)
+              .then(() => {
+                onNextStep(e);
+              })
+              .catch(apiCatchGlobalHandler);
+          }}
         />
       ),
     },
@@ -1082,7 +1099,13 @@ const MembershipRegistrationView = () => {
           inputs={contactDataInputs}
           submitText={t("Global.Form.Labels.SaveContinue")}
           customButtons={<BackButton />}
-          onFormSubmit={(e) => onNextStep(e)}
+          onFormSubmit={(e) => {
+            ContactApi.createOrUpdate(e)
+              .then(() => {
+                onNextStep(e);
+              })
+              .catch(apiCatchGlobalHandler);
+          }}
         />
       ),
     },
@@ -1094,7 +1117,13 @@ const MembershipRegistrationView = () => {
           inputs={qualificationDataInputs}
           submitText={t("Global.Form.Labels.SaveContinue")}
           customButtons={<BackButton />}
-          onFormSubmit={(e) => onNextStep(e)}
+          onFormSubmit={(e) => {
+            IncomeApi.createOrUpdate(e)
+              .then(() => {
+                onNextStep(e);
+              })
+              .catch(apiCatchGlobalHandler);
+          }}
         />
       ),
     },
@@ -1106,7 +1135,13 @@ const MembershipRegistrationView = () => {
           inputs={hostelDataInputs}
           submitText={t("Global.Form.Labels.SaveContinue")}
           customButtons={<BackButton />}
-          onFormSubmit={(e) => onNextStep(e)}
+          onFormSubmit={(e) => {
+            HousingApi.createOrUpdate(e)
+              .then(() => {
+                onNextStep(e);
+              })
+              .catch(apiCatchGlobalHandler);
+          }}
         />
       ),
     },
@@ -1129,7 +1164,13 @@ const MembershipRegistrationView = () => {
         <Form
           inputs={attachmentInputs}
           customButtons={<BackButton />}
-          onFormSubmit={(e) => console.log({ e })}
+          onFormSubmit={(e) => {
+            NationalRecordApi.createOrUpdate(e)
+              .then(() => {
+                onNextStep(e);
+              })
+              .catch(apiCatchGlobalHandler);
+          }}
         />
       ),
     },
