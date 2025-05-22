@@ -39,33 +39,6 @@ service.interceptors.request.use(
 
 const fallbackMessage = "Something Went Wrong";
 
-const errorHandle = (res?: AxiosResponse): Promise<never> => {
-  if (!res) {
-    store.dispatch(
-      addNotification({
-        type: "err",
-        msg: fallbackMessage,
-      })
-    );
-    return Promise.reject(fallbackMessage);
-  }
-
-  if (res.status === 401 || res.status === 403) {
-    store.dispatch(logout());
-  }
-
-  const msg = (res.data as { message?: string })?.message || fallbackMessage;
-
-  store.dispatch(
-    addNotification({
-      type: "err",
-      msg,
-    })
-  );
-
-  return Promise.reject(msg);
-};
-
 service.interceptors.response.use(
   (res: AxiosResponse) => {
     store.dispatch(endLoading());
@@ -74,12 +47,19 @@ service.interceptors.response.use(
       return res.data;
     }
 
-    return { __error: true, ...res.data };
+    const msg = (res.data as { message?: string })?.message || fallbackMessage;
+
+    store.dispatch(
+      addNotification({
+        type: "err",
+        msg,
+      })
+    );
+
+    return Promise.reject(new Error(msg));
   },
   (err: AxiosError) => {
     store.dispatch(endLoading());
-
-    console.log({ err });
 
     const errMsg =
       (err?.response?.data as any)?.message || err.message || fallbackMessage;
@@ -91,7 +71,7 @@ service.interceptors.response.use(
       })
     );
 
-    return Promise.resolve({ __error: true, message: errMsg });
+    return Promise.reject(new Error(errMsg));
   }
 );
 

@@ -54,7 +54,7 @@ const NotificationsToaster = () => {
               onClick={() => dispatch(removeNotification(id))}
               className="me-2 rounded-3 p-1 text-white text-center"
               style={{
-                backgroundColor: "rgba(0,0,0,0.5)",
+                backgroundColor: "rgba(0, 0, 0, 0.35)",
                 fontSize: 10,
                 width: 25,
                 height: 25,
