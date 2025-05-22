@@ -7,7 +7,6 @@ import ForgotPasswordView from "../../views/public/forgotPassword";
 import LoginView from "../../views/public/login";
 import OtpView from "../../views/public/otp";
 import RegisterView from "../../views/public/register";
-import RegistrationOtpView from "../../views/public/registerOtp";
 import ResetPasswordView from "../../views/public/ResetPassword";
 
 const AuthLayout = () => {
@@ -38,12 +37,6 @@ const AuthLayout = () => {
       name: t("Public.ForgotPassword.GotOtp.Title"),
       route: "/otp",
       view: <OtpView />,
-      show: false,
-    },
-    {
-      name: t("Public.ForgotPassword.GotOtp.Title"),
-      route: "/register/otp",
-      view: <RegistrationOtpView />,
       show: false,
     },
     {
