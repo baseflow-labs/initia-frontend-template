@@ -10,6 +10,8 @@ import { useTranslation } from "react-i18next";
 
 import Button from "../core/button";
 import InputComp from "./Input";
+import { useAppSelector } from "../../store/hooks";
+import Spinner from "../core/spinner";
 
 interface InputBasicProps {
   name: string;
@@ -78,6 +80,7 @@ const Form: React.FC<Props> = ({
   ...rest
 }) => {
   const { t } = useTranslation();
+  const { loading } = useAppSelector((state) => state.loading);
 
   const formik = useFormik<Record<string, any>>({
     initialValues: {},
@@ -276,11 +279,20 @@ const Form: React.FC<Props> = ({
 
         <Button
           type="submit"
+          disabled={loading.length > 0}
           color="info"
           className={`w-${customButtons ? "50" : "100"} p-2`}
           rounded={3}
         >
-          {submitText || t("Global.Form.Labels.Submit")}
+          {loading.length > 0 ? (
+            <small>
+              <Spinner />
+            </small>
+          ) : (
+            <div className="my-auto">
+              {submitText || t("Global.Form.Labels.Submit")}
+            </div>
+          )}
         </Button>
       </FormikForm>
     </FormikProvider>
