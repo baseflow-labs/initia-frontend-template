@@ -1,41 +1,22 @@
 import api from "..";
 
 interface Props {
-  socialStatus: string;
-  fullName: string;
-  nationality: string;
-  dob: string;
-  idExpiryDate: string;
-  idNumber: string;
-  familyRecordPhoto: string;
-  guardianIdPhoto: string;
-  gender: string;
-  healthStatus: string;
-  diseases: string;
-  incurableDisease?: string[];
-  healthStatementPhoto: string;
-  nationalRecord: string;
-  housing: string;
-  income: string;
-  contactsBank: string;
+  beneficiaryMobile: string;
+  secondaryMobile: string;
+  backupMobile: string;
+  email: string;
+  bankAccountNumber: string;
+  ibanPhoto: string;
 }
 
 const mainPath = "/contactsBank";
 
-const get = async () => {
-  return await api.get(mainPath);
-};
-
-const getById = async (id: string) => {
-  return await api.get(mainPath + "/" + id);
-};
-
 const createOrUpdate = async (data: Props) => {
-  return await api.post(mainPath, data, {
+  return await api.post(mainPath + "/create-update", data, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
   });
 };
 
-export { get, getById, createOrUpdate };
+export { createOrUpdate };
