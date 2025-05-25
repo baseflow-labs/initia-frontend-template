@@ -2,9 +2,10 @@ import { faInfoCircle, faPerson } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FormikProps } from "formik";
 import moment from "moment";
-import { useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Fragment } from "react/jsx-runtime";
+
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import * as ContactApi from "../../../api/profile/contact";
 import * as DependentApi from "../../../api/profile/dependent";
@@ -29,7 +30,14 @@ const MembershipRegistrationView = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({});
 
+  useLayoutEffect(() => {
+    BeneficiaryApi.getByUserId()
+      .then((res) => setFormData(res))
+      .catch(apiCatchGlobalHandler);
+  }, []);
+
   const onNextStep = (values = {}) => {
+    window.scrollTo(0, 0);
     setFormData((current) => ({ ...current, ...values }));
     setCurrentStep((current = 0) => current + 1);
   };
@@ -1081,6 +1089,7 @@ const MembershipRegistrationView = () => {
           inputs={basicDataInputs}
           submitText={t("Global.Form.Labels.SaveContinue")}
           customButtons={<HelpButton />}
+          initialValues={formData}
           onFormSubmit={(e) => {
             BeneficiaryApi.createOrUpdate(e)
               .then(() => {
@@ -1099,6 +1108,7 @@ const MembershipRegistrationView = () => {
           inputs={contactDataInputs}
           submitText={t("Global.Form.Labels.SaveContinue")}
           customButtons={<BackButton />}
+          initialValues={formData}
           onFormSubmit={(e) => {
             ContactApi.createOrUpdate(e)
               .then(() => {
@@ -1117,6 +1127,7 @@ const MembershipRegistrationView = () => {
           inputs={qualificationDataInputs}
           submitText={t("Global.Form.Labels.SaveContinue")}
           customButtons={<BackButton />}
+          initialValues={formData}
           onFormSubmit={(e) => {
             IncomeApi.createOrUpdate(e)
               .then(() => {
@@ -1135,6 +1146,7 @@ const MembershipRegistrationView = () => {
           inputs={hostelDataInputs}
           submitText={t("Global.Form.Labels.SaveContinue")}
           customButtons={<BackButton />}
+          initialValues={formData}
           onFormSubmit={(e) => {
             HousingApi.createOrUpdate(e)
               .then(() => {
@@ -1153,6 +1165,7 @@ const MembershipRegistrationView = () => {
           inputs={dependentsDataInputs}
           submitText={t("Global.Form.Labels.SaveContinue")}
           customButtons={<BackButton />}
+          initialValues={formData}
           onFormSubmit={(e) => onNextStep(e)}
         />
       ),
@@ -1164,6 +1177,7 @@ const MembershipRegistrationView = () => {
         <Form
           inputs={attachmentInputs}
           customButtons={<BackButton />}
+          initialValues={formData}
           onFormSubmit={(e) => {
             NationalRecordApi.createOrUpdate(e)
               .then(() => {

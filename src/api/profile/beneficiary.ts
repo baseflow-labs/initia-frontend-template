@@ -1,4 +1,5 @@
 import api from "..";
+import store, { RootState } from "../../store/store";
 
 interface Props {
   socialStatus: string;
@@ -21,21 +22,23 @@ interface Props {
 }
 
 const mainPath = "/beneficiary";
+const { user } = (store.getState() as RootState).auth;
 
-const get = async () => {
-  return await api.get(mainPath);
-};
-
-const getById = async (id: string) => {
-  return await api.get(mainPath + "/" + id);
+const getByUserId = async () => {
+  const res = await api.get(mainPath + "/by-user/" + user.id);
+  return res;
 };
 
 const createOrUpdate = async (data: Props) => {
-  return await api.post(mainPath, data, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  });
+  return await api.post(
+    mainPath + "/create-update",
+    { user: user.id, ...data },
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
 };
 
-export { get, getById, createOrUpdate };
+export { createOrUpdate, getByUserId };
