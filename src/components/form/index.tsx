@@ -8,10 +8,10 @@ import {
 import React, { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 
-import Button from "../core/button";
-import InputComp from "./Input";
 import { useAppSelector } from "../../store/hooks";
+import Button from "../core/button";
 import Spinner from "../core/spinner";
+import InputComp from "./Input";
 
 interface InputBasicProps {
   name: string;
@@ -71,6 +71,7 @@ interface Props extends React.FormHTMLAttributes<HTMLFormElement> {
   onFormSubmit?: (values: any) => void;
   inputs: (formik: FormikProps<Record<string, any>>) => InputProps[];
   submitText?: string;
+  initialValues?: object;
   customButtons?: React.ReactNode;
 }
 
@@ -79,13 +80,15 @@ const Form: React.FC<Props> = ({
   inputs,
   submitText,
   customButtons,
+  initialValues,
   ...rest
 }) => {
   const { t } = useTranslation();
   const { loading } = useAppSelector((state) => state.loading);
 
   const formik = useFormik<Record<string, any>>({
-    initialValues: {},
+    initialValues: { ...initialValues },
+    enableReinitialize: true,
     validate: (values: Record<string, any>) => {
       const errors: FormikErrors<Record<string, any>> = {};
       const dynamicInputs = inputs(formik);
