@@ -43,11 +43,11 @@ const LoginView = () => {
         dispatch(
           addNotification({
             msg: t("Public.Login.Labels.Success", {
-              name: res.payload.user.name,
+              name: res.user.name,
             }),
           })
         );
-        dispatch(login(res.payload));
+        dispatch(login(res));
       })
       .catch(apiCatchGlobalHandler);
   };

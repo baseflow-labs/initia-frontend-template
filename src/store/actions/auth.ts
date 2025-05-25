@@ -2,6 +2,7 @@ export interface UserProps {
   id?: string;
   name?: string;
   email?: string;
+  username?: string;
   // [key: string]: any;
 }
 

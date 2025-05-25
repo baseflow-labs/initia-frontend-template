@@ -44,7 +44,7 @@ service.interceptors.response.use(
     store.dispatch(endLoading());
 
     if ([200, 201, 204].includes(res.status)) {
-      return res.data;
+      return res.data.payload;
     }
 
     const msg = (res.data as { message?: string })?.message || fallbackMessage;
