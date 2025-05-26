@@ -28,17 +28,27 @@ import { apiCatchGlobalHandler } from "../../../utils/fucntions";
 const MembershipRegistrationView = () => {
   const { t } = useTranslation();
   const [currentStep, setCurrentStep] = useState(0);
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    beneficiary: { id: "" },
+    contactsBank: {},
+    housing: {},
+    income: {},
+    dependents: [],
+    nationalData: {},
+  });
 
   useLayoutEffect(() => {
     BeneficiaryApi.getByUserId()
-      .then((res) => setFormData(res))
+      .then((res: any) => setFormData({ ...res, beneficiary: { ...res } }))
       .catch(apiCatchGlobalHandler);
   }, []);
 
-  const onNextStep = (values = {}) => {
+  const onNextStep = (values = {}, service = "") => {
     window.scrollTo(0, 0);
-    setFormData((current) => ({ ...current, ...values }));
+    setFormData((current) => ({
+      ...current,
+      [service]: { ...(current as any)[service], ...values },
+    }));
     setCurrentStep((current = 0) => current + 1);
   };
 
@@ -738,7 +748,7 @@ const MembershipRegistrationView = () => {
       onRecordSubmit: (e: any) =>
         DependentApi.createOrUpdate(e)
           .then(() => {
-            onNextStep(e);
+            onNextStep(e, "dependents");
           })
           .catch(apiCatchGlobalHandler),
       recordSubmitButtonText: t(
@@ -1089,11 +1099,11 @@ const MembershipRegistrationView = () => {
           inputs={basicDataInputs}
           submitText={t("Global.Form.Labels.SaveContinue")}
           customButtons={<HelpButton />}
-          initialValues={formData}
+          initialValues={formData.beneficiary}
           onFormSubmit={(e) => {
             BeneficiaryApi.createOrUpdate(e)
               .then(() => {
-                onNextStep(e);
+                onNextStep(e, "beneficiary");
               })
               .catch(apiCatchGlobalHandler);
           }}
@@ -1108,11 +1118,14 @@ const MembershipRegistrationView = () => {
           inputs={contactDataInputs}
           submitText={t("Global.Form.Labels.SaveContinue")}
           customButtons={<BackButton />}
-          initialValues={formData}
+          initialValues={formData.contactsBank}
           onFormSubmit={(e) => {
-            ContactApi.createOrUpdate(e)
+            ContactApi.createOrUpdate({
+              ...e,
+              beneficiary: formData.beneficiary.id,
+            })
               .then(() => {
-                onNextStep(e);
+                onNextStep(e, "contactsBank");
               })
               .catch(apiCatchGlobalHandler);
           }}
@@ -1127,11 +1140,14 @@ const MembershipRegistrationView = () => {
           inputs={qualificationDataInputs}
           submitText={t("Global.Form.Labels.SaveContinue")}
           customButtons={<BackButton />}
-          initialValues={formData}
+          initialValues={formData.income}
           onFormSubmit={(e) => {
-            IncomeApi.createOrUpdate(e)
+            IncomeApi.createOrUpdate({
+              ...e,
+              beneficiary: formData.beneficiary.id,
+            })
               .then(() => {
-                onNextStep(e);
+                onNextStep(e, "income");
               })
               .catch(apiCatchGlobalHandler);
           }}
@@ -1146,11 +1162,14 @@ const MembershipRegistrationView = () => {
           inputs={hostelDataInputs}
           submitText={t("Global.Form.Labels.SaveContinue")}
           customButtons={<BackButton />}
-          initialValues={formData}
+          initialValues={formData.housing}
           onFormSubmit={(e) => {
-            HousingApi.createOrUpdate(e)
+            HousingApi.createOrUpdate({
+              ...e,
+              beneficiary: formData.beneficiary.id,
+            })
               .then(() => {
-                onNextStep(e);
+                onNextStep(e, "housing");
               })
               .catch(apiCatchGlobalHandler);
           }}
@@ -1165,7 +1184,7 @@ const MembershipRegistrationView = () => {
           inputs={dependentsDataInputs}
           submitText={t("Global.Form.Labels.SaveContinue")}
           customButtons={<BackButton />}
-          initialValues={formData}
+          initialValues={formData.dependents}
           onFormSubmit={(e) => onNextStep(e)}
         />
       ),
@@ -1177,11 +1196,14 @@ const MembershipRegistrationView = () => {
         <Form
           inputs={attachmentInputs}
           customButtons={<BackButton />}
-          initialValues={formData}
+          initialValues={formData.nationalData}
           onFormSubmit={(e) => {
-            NationalRecordApi.createOrUpdate(e)
+            NationalRecordApi.createOrUpdate({
+              ...e,
+              beneficiary: formData.beneficiary.id,
+            })
               .then(() => {
-                onNextStep(e);
+                onNextStep(e, "nationalData");
               })
               .catch(apiCatchGlobalHandler);
           }}
