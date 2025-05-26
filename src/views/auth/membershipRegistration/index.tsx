@@ -39,7 +39,7 @@ const MembershipRegistrationView = () => {
 
   useLayoutEffect(() => {
     BeneficiaryApi.getByUserId()
-      .then((res: any) => setFormData({ ...res, beneficiary: { ...res } }))
+      .then((res: any) => setFormData(res))
       .catch(apiCatchGlobalHandler);
   }, []);
 
