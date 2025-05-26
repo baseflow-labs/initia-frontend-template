@@ -157,10 +157,10 @@ const Form: React.FC<Props> = ({
       </span>
     ) : null;
 
-  const LabelView = ({ labelNote, ...input }: InputProps) => (
-    <label className={`form-label ${input.label ? "" : "text-white"}`}>
+  const LabelView = ({ labelNote, label, required }: InputProps) => (
+    <label className={`form-label ${label ? "" : "text-white"}`}>
       <small>
-        {input.label ? input.label : "."}{" "}
+        {label ? label : "."}{" "}
         {labelNote && (
           <span className="text-muted">
             {"("}
@@ -168,9 +168,7 @@ const Form: React.FC<Props> = ({
             {")"}{" "}
           </span>
         )}
-        {input.label && input.required ? (
-          <span className="text-danger">*</span>
-        ) : null}
+        {label && required ? <span className="text-danger">*</span> : null}
       </small>
     </label>
   );
@@ -185,7 +183,6 @@ const Form: React.FC<Props> = ({
               postfixText,
               aboveComp,
               belowComp,
-              labelNote,
               logo,
               halfCol,
               ...input

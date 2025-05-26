@@ -1,4 +1,4 @@
-import { faPerson, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faPerson, faTrash, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FormikProps } from "formik";
 import moment from "moment";
@@ -276,11 +276,11 @@ const DependentsFormView = ({
   return (
     <Fragment>
       {dependents.map((dependent: any, i: number) => (
-        <div className="accordion-item border border-1 px-3" key={i}>
-          <h2 className="accordion-header" id={"heading" + String(i)}>
-            <div className="d-flex align-items-center justify-content-between">
+        <div className="accordion-item mb-3" key={i}>
+          <h2 className="accordion-header mb-3" id={"heading" + String(i)}>
+            <div className="d-flex align-items-center justify-content-between ">
               <button
-                className="btn btn-ghost p-4 w-100 text-start collapsed"
+                className="btn btn-ghost p-3 w-100 text-start collapsed bg-info rounded-4 text-white"
                 data-bs-toggle="collapse"
                 data-bs-target={"#collapse" + String(i)}
                 aria-expanded="false"
@@ -288,6 +288,7 @@ const DependentsFormView = ({
                 aria-controls={"collapse" + String(i)}
                 onClick={() => {}}
               >
+                <FontAwesomeIcon icon={faUser} className="me-2" />{" "}
                 {dependent.fullName ||
                   t("Auth.MembershipRegistration.Form.Dependents.Dependant") +
                     " " +
@@ -299,6 +300,7 @@ const DependentsFormView = ({
                 text="danger"
                 size="sm"
                 type="button"
+                className="border border-1 rounded-4 py-3 ms-2"
                 onClick={() => remove(i)}
               >
                 <FontAwesomeIcon icon={faTrash} />

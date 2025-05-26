@@ -1,4 +1,4 @@
-import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import { faCheckCircle, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FormikProps } from "formik";
 import moment from "moment";
@@ -27,7 +27,7 @@ import DependentsFormView from "./Dependents";
 
 const MembershipRegistrationView = () => {
   const { t } = useTranslation();
-  const [currentStep, setCurrentStep] = useState(4);
+  const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({
     beneficiary: { id: "" },
     contactsBank: {},
@@ -433,7 +433,7 @@ const MembershipRegistrationView = () => {
       label: t("Auth.MembershipRegistration.Form.Salary"),
       min: 0,
       step: 0.1,
-      required: true,
+      required: false,
       halfCol: true,
     },
     {
@@ -448,7 +448,7 @@ const MembershipRegistrationView = () => {
       label: t("Auth.MembershipRegistration.Form.Insurances"),
       min: 0,
       step: 0.1,
-      required: true,
+      required: false,
       halfCol: true,
     },
     {
@@ -463,7 +463,7 @@ const MembershipRegistrationView = () => {
       label: t("Auth.MembershipRegistration.Form.ComprehensiveRehabilitation"),
       min: 0,
       step: 0.1,
-      required: true,
+      required: false,
       halfCol: true,
     },
     {
@@ -478,7 +478,7 @@ const MembershipRegistrationView = () => {
       label: t("Auth.MembershipRegistration.Form.Retirement"),
       min: 0,
       step: 0.1,
-      required: true,
+      required: false,
       halfCol: true,
     },
     {
@@ -493,7 +493,7 @@ const MembershipRegistrationView = () => {
       label: t("Auth.MembershipRegistration.Form.SocialSecurity"),
       min: 0,
       step: 0.1,
-      required: true,
+      required: false,
       halfCol: true,
     },
     {
@@ -923,14 +923,30 @@ const MembershipRegistrationView = () => {
               beneficiary: formData.beneficiary.id,
             })
               .then(() => {
-                setFormData((current) => ({
-                  ...current,
-                  nationalRecord: { ...current.nationalRecord, ...e },
-                }));
+                onNextStep(e, "nationalRecord");
               })
               .catch(apiCatchGlobalHandler);
           }}
         />
+      ),
+    },
+    {
+      label: "",
+      name: "Success",
+      contents: (
+        <div className="text-center">
+          <h2>
+            <FontAwesomeIcon icon={faCheckCircle} className="text-success" />
+            <br />
+            {t("Auth.MembershipRegistration.Form.Success.Title")}
+          </h2>
+
+          <h6 className="text-muted my-4">
+            {t("Auth.MembershipRegistration.Form.Success.Text")}
+          </h6>
+
+          <Button color="info">{t("Global.Labels.Ok")}</Button>
+        </div>
       ),
     },
   ];

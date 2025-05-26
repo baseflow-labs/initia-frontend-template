@@ -36,8 +36,7 @@
         "Dependents": {
           "AddNew": "Add New Dependant",
           "Dependant": "Dependant",
-          "SaveDependent": "Save Dependent Data",
-          "Title": "Dependents"
+          "SaveDependent": "Save Dependent Data"
         },
         "DependentsData": "Dependents Data",
         "Diseases": {
@@ -190,6 +189,10 @@
         },
         "StudentsDocument": "Students Document",
         "StudentsDocumentNote": "Noor or university website",
+        "Success": {
+          "Text": "Soon you will be reached out via What'sApp and messages section of this dashboard",
+          "Title": "Application Has Been Submitted Successfully"
+        },
         "TawakkalnaDocument": "Tawakkalna Document"
       }
     }
@@ -214,7 +217,8 @@
       }
     },
     "Labels": {
-      "Back": "Back"
+      "Back": "Back",
+      "Ok": "Ok"
     }
   },
   "Public": {
