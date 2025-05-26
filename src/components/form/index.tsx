@@ -8,7 +8,9 @@ import {
 import React, { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 
+import { useAppSelector } from "../../store/hooks";
 import Button from "../core/button";
+import Spinner from "../core/spinner";
 import InputComp from "./Input";
 
 interface InputBasicProps {
@@ -57,6 +59,8 @@ export interface InputProps extends InputSingleProps {
   recordDynamicLabelKey?: string;
   logo?: string;
   halfCol?: boolean;
+  onRecordSubmit?: (formik?: any) => any;
+  recordSubmitButtonText?: string;
   prefixText?: string | number;
   postfixText?: string | number;
   aboveComp?: React.ReactNode;
@@ -64,9 +68,10 @@ export interface InputProps extends InputSingleProps {
 }
 
 interface Props extends React.FormHTMLAttributes<HTMLFormElement> {
-  onFormSubmit?: (values: Record<string, any>) => void;
+  onFormSubmit?: (values: any) => void;
   inputs: (formik: FormikProps<Record<string, any>>) => InputProps[];
   submitText?: string;
+  initialValues?: object;
   customButtons?: React.ReactNode;
 }
 
@@ -75,12 +80,15 @@ const Form: React.FC<Props> = ({
   inputs,
   submitText,
   customButtons,
+  initialValues,
   ...rest
 }) => {
   const { t } = useTranslation();
+  const { loading } = useAppSelector((state) => state.loading);
 
   const formik = useFormik<Record<string, any>>({
-    initialValues: {},
+    initialValues: { ...initialValues },
+    enableReinitialize: true,
     validate: (values: Record<string, any>) => {
       const errors: FormikErrors<Record<string, any>> = {};
       const dynamicInputs = inputs(formik);
@@ -149,19 +157,19 @@ const Form: React.FC<Props> = ({
       </span>
     ) : null;
 
-  const LabelView = ({ labelNote, ...input }: InputProps) => (
-    <label className={`form-label ${input.label ? "" : "text-white"}`}>
-      {input.label ? input.label : "."}{" "}
-      {labelNote && (
-        <span className="text-muted">
-          {"("}
-          {labelNote}
-          {")"}{" "}
-        </span>
-      )}
-      {input.label && input.required ? (
-        <span className="text-danger">*</span>
-      ) : null}
+  const LabelView = ({ labelNote, label, required }: InputProps) => (
+    <label className={`form-label ${label ? "" : "text-white"}`}>
+      <small>
+        {label ? label : "."}{" "}
+        {labelNote && (
+          <span className="text-muted">
+            {"("}
+            {labelNote}
+            {")"}{" "}
+          </span>
+        )}
+        {label && required ? <span className="text-danger">*</span> : null}
+      </small>
     </label>
   );
 
@@ -175,7 +183,6 @@ const Form: React.FC<Props> = ({
               postfixText,
               aboveComp,
               belowComp,
-              labelNote,
               logo,
               halfCol,
               ...input
@@ -213,7 +220,7 @@ const Form: React.FC<Props> = ({
                       </button>
                     </div>
 
-                    <div className="col-md-6 mb-3">
+                    <div className="col-md-6 mb-2">
                       {aboveComp}
 
                       <div
@@ -240,7 +247,7 @@ const Form: React.FC<Props> = ({
 
               return (
                 <div
-                  className={`mb-3 ${
+                  className={`mb-2 ${
                     halfCol ? "col-md-6" : logo ? "col-6" : "col-md-12"
                   }`}
                   key={input.name}
@@ -274,11 +281,19 @@ const Form: React.FC<Props> = ({
 
         <Button
           type="submit"
+          disabled={loading.length > 0}
           color="info"
           className={`w-${customButtons ? "50" : "100"} p-2`}
-          rounded={3}
         >
-          {submitText || t("Global.Form.Labels.Submit")}
+          {loading.length > 0 ? (
+            <small>
+              <Spinner />
+            </small>
+          ) : (
+            <div className="my-auto">
+              {submitText || t("Global.Form.Labels.Submit")}
+            </div>
+          )}
         </Button>
       </FormikForm>
     </FormikProvider>

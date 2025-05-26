@@ -64,6 +64,7 @@ const OtpInput: React.FC<FinalInput> = ({ name, value, type, ...input }) => {
   return (
     <div
       onPaste={handlePaste}
+      className="w-100"
       style={{
         display: "flex",
         gap: "10px",

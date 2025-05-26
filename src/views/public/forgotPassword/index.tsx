@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
-import Button from "../../../components/core/button";
 import Form from "../../../components/form";
+import BelowInputButton from "../../../components/button/belowInput";
 
 const ForgotPasswordView = () => {
   const { t } = useTranslation();
@@ -14,11 +14,11 @@ const ForgotPasswordView = () => {
       name: "phoneNo",
       label: t("Public.Login.Labels.PhoneNo"),
       belowComp: (
-        <div className="d-block">
-          <Button color="ghost" route="/" size="sm">
-            {t("Public.ForgotPassword.SendOtp.RememberPassword")}
-          </Button>
-        </div>
+        <BelowInputButton
+          introText={t("Public.ForgotPassword.SendOtp.RememberPassword")}
+          buttonText={t("Public.Login.Labels.Login")}
+          action={() => navigate("/")}
+        />
       ),
       required: true,
     },

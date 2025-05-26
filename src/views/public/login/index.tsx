@@ -2,9 +2,12 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
-import Button from "../../../components/core/button";
+import * as authApi from "../../../api/auth";
+import BelowInputButton from "../../../components/button/belowInput";
 import Form from "../../../components/form";
 import { login } from "../../../store/actions/auth";
+import { addNotification } from "../../../store/actions/notifications";
+import { apiCatchGlobalHandler } from "../../../utils/fucntions";
 
 const LoginView = () => {
   const { t } = useTranslation();
@@ -14,7 +17,7 @@ const LoginView = () => {
   const formInputs = () => [
     {
       type: "phoneNumber",
-      name: "phoneNo",
+      name: "identifier",
       label: t("Public.Login.Labels.PhoneNo"),
       required: true,
     },
@@ -23,37 +26,30 @@ const LoginView = () => {
       name: "password",
       label: t("Public.Login.Labels.Password"),
       belowComp: (
-        <div className="d-block">
-          <Button
-            color="ghost"
-            route="/forgot-password"
-            size="sm"
-            onClick={() => navigate("/forgot-password")}
-          >
-            {t("Public.Login.Labels.DidUForgotPassword")}
-          </Button>
-        </div>
+        <BelowInputButton
+          introText=""
+          buttonText={t("Public.Login.Labels.DidUForgotPassword")}
+          action={() => navigate("/forgot-password")}
+        />
       ),
       required: true,
     },
   ];
 
-  const onSubmit = (values = {}) => {
-    console.log({ values });
-
-    dispatch(
-      login({
-        jwt: "thisIsFakeToken",
-        refreshToken: "thisIsFakeRefreshToken",
-        user: {
-          id: "1",
-          name: "Suhaib Ahmad",
-          email: "SuhaibAhmadAi@hotmail.com",
-        },
+  const onSubmit = (values: authApi.loginCredentials) => {
+    authApi
+      .login({ ...values, identifier: "+966" + values.identifier })
+      .then((res: any) => {
+        dispatch(
+          addNotification({
+            msg: t("Public.Login.Labels.Success", {
+              name: res.user.name,
+            }),
+          })
+        );
+        dispatch(login(res));
       })
-    );
-
-    navigate("/");
+      .catch(apiCatchGlobalHandler);
   };
 
   return (

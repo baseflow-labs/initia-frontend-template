@@ -1,6 +1,5 @@
 export interface NotificationProps {
-  id: number;
-  message: string;
+  msg: string;
   type?: string;
   [key: string]: any;
 }

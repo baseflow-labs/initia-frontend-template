@@ -3,13 +3,14 @@ import axios, {
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from "axios";
+
 import { logout } from "../store/actions/auth";
 import { endLoading, startLoading } from "../store/actions/loading";
 import { addNotification } from "../store/actions/notifications";
 import store, { RootState } from "../store/store";
 
 export const baseURL =
-  (process.env.REACT_APP_BACKEND_URL || "http://127.0.0.1:8000") + "/api";
+  process.env.REACT_APP_BACKEND_URL || "http://127.0.0.1:8000";
 
 const service = axios.create({
   baseURL,
@@ -25,7 +26,9 @@ service.interceptors.request.use(
 
     const { token } = (store.getState() as RootState).auth;
 
-    config.headers.Authorization = `Bearer ${token}`;
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
 
     return config;
   },
@@ -36,61 +39,39 @@ service.interceptors.request.use(
 
 const fallbackMessage = "Something Went Wrong";
 
-const errorHandle = (res?: AxiosResponse): Promise<never> => {
-  if (!res) {
-    store.dispatch(
-      addNotification({
-        id: 1,
-        type: "error",
-        message: fallbackMessage,
-      })
-    );
-    return Promise.reject(fallbackMessage);
-  }
-
-  if (res.status === 401 || res.status === 403) {
-    store.dispatch(logout());
-  }
-
-  const msg = (res.data as { message?: string })?.message || fallbackMessage;
-
-  store.dispatch(
-    addNotification({
-      id: 1,
-      type: "error",
-      message: msg,
-    })
-  );
-
-  return Promise.reject(msg);
-};
-
 service.interceptors.response.use(
   (res: AxiosResponse) => {
     store.dispatch(endLoading());
 
     if ([200, 201, 204].includes(res.status)) {
-      return res.data;
+      return res.data.payload;
     }
 
-    return errorHandle(res);
+    const msg = (res.data as { message?: string })?.message || fallbackMessage;
+
+    store.dispatch(
+      addNotification({
+        type: "err",
+        msg,
+      })
+    );
+
+    return Promise.reject(new Error(msg));
   },
   (err: AxiosError) => {
     store.dispatch(endLoading());
 
-    if (err.response) {
-      return errorHandle(err.response);
-    }
+    const errMsg =
+      (err?.response?.data as any)?.message || err.message || fallbackMessage;
 
     store.dispatch(
       addNotification({
-        id: 1,
-        type: "error",
-        message: fallbackMessage,
+        type: "err",
+        msg: errMsg,
       })
     );
 
-    return Promise.reject(fallbackMessage);
+    return Promise.reject(new Error(errMsg));
   }
 );
 

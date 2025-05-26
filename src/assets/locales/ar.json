@@ -29,14 +29,14 @@
         "ClickForHelp": "اضغط هنا للمساعدة في تعبئة النموذج",
         "ComprehensiveRehabilitation": "التأهيل الشامل",
         "ContactData": "بيانات الاتصال والبيانات البنكية",
-        "CreditStatement": "التقرير الائتماني من موقع فلم",
+        "CreditStatement": "التقرير الائتماني من موقع ملم",
         "CreditStatementNote": "في حال وجود ديون رسمية",
         "DependentMobile": "رقم جوال التابع",
         "DependentMobileNote": "إن وجد",
         "Dependents": {
           "AddNew": "إضافة تابع جديد",
           "Dependant": "تابع",
-          "Title": "التابعين"
+          "SaveDependent": "حفظ بيانات التابع"
         },
         "DependentsData": "بيانات التابعين",
         "Diseases": {
@@ -120,7 +120,19 @@
           "Saudi": "سعودي",
           "Title": "الجنسية"
         },
-        "Occupation": "المهنة",
+        "Occupation": {
+          "GovernmentEmployee": "موظف حكومي",
+          "Housewife": "ربة منزل",
+          "LookingForJob": "باحث عن عمل",
+          "NoFixed": "بدون عمل ثابت",
+          "PerDayWorker": "عامل باليوم",
+          "PrivateSectorEmployee": "موظف قطاع خاص",
+          "Retiree": "متقاعد",
+          "Student": "طالب",
+          "Title": "الوظيفة",
+          "UnableToWork": "غير قادر على العمل",
+          "Unemployed": "عاطل عن العمل"
+        },
         "OwnershipDocumentPhoto": "صك الملكية",
         "Payee": {
           "Free": "لا يتم دفع الإيجار (سكن مجاني)",
@@ -177,6 +189,10 @@
         },
         "StudentsDocument": "تعريف طالب منتظم",
         "StudentsDocumentNote": "من موقع نور أو من موقع الجامعة",
+        "Success": {
+          "Text": "سيتم التواصل معك في أقرب وقت على الوتساب وفي قسم الرسائل الخاص بك",
+          "Title": "تم تقديم الطلب بنجاح"
+        },
         "TawakkalnaDocument": "صورة بطاقة الهوية وسجل الأسرة من تطبيق توكلنا"
       }
     }
@@ -199,6 +215,10 @@
         "UploadAttachment": "إضافة مرفق",
         "Yes": "نعم"
       }
+    },
+    "Labels": {
+      "Back": "عودة",
+      "Ok": "حسناً"
     }
   },
   "Public": {
@@ -224,17 +244,23 @@
         "DidUForgotPassword": "هل نسيت كلمة السر؟",
         "Login": "تسجيل الدخول",
         "Password": "كلمة السر",
-        "PhoneNo": "رقم الهاتف"
+        "PhoneNo": "رقم الهاتف",
+        "Success": "أهلاً بك مجدداً {{name}}"
       },
       "Title": "تسجيل الدخول"
     },
     "Register": {
       "Labels": {
+        "ByClickYouAccept": "بالضغط على \"إنشاء حساب\", فإنك توافق على",
+        "DidNotGetOtp": "لم تصلك الرسالة؟",
         "Name": "الاسم",
         "Password": "كلمة السر",
         "PasswordConfirmation": "تأكيد كلمة السر",
         "PhoneNo": "رقم الهاتف",
-        "Register": "إنشاء حساب"
+        "PrivacyPolicyTermsConditions": "سياسة الخصوصية وشروط الاستخدام",
+        "Register": "إنشاء حساب",
+        "ResendOtp": "إعادة الإرسال",
+        "Success": "تم التسجيل بنجاح. يمكنك الآن تسجيل الدخول"
       },
       "Title": "إنشاء حساب"
     }

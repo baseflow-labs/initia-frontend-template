@@ -19,7 +19,10 @@ const notifications = (
   switch (action.type) {
     case "addNotification":
       return {
-        notifications: [...state.notifications, action.notification],
+        notifications: [
+          ...state.notifications,
+          { ...action.notification, id: new Date() },
+        ],
       };
 
     case "removeNotification":

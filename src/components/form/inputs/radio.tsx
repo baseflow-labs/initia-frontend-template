@@ -12,7 +12,7 @@ const RadioInput: React.FC<FinalInput> = ({ type, options, ...input }) => {
           <input
             {...input}
             value={option.value}
-            defaultChecked={input.value === option.value}
+            checked={input.value === option.value}
             type="radio"
             className="form-check-input"
             required={false}

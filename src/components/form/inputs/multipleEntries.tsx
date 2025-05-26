@@ -68,10 +68,14 @@ const MultipleEntriesInput: React.FC<FinalInput> = (input) => {
                           name: `${input.name}[${i}].${childInput.name}`,
                         }))
                       }
-                      submitText={t("Global.Form.Labels.SaveData")}
-                      onFormSubmit={(values) =>
-                        helpers.setValue([...(input.value as []), values])
+                      submitText={
+                        input.recordSubmitButtonText ||
+                        t("Global.Form.Labels.SaveData")
                       }
+                      onFormSubmit={(values) => {
+                        helpers.setValue([...(input.value as []), values]);
+                        input.onRecordSubmit && input.onRecordSubmit(values);
+                      }}
                     />
                   </div>
                 </div>
@@ -83,7 +87,6 @@ const MultipleEntriesInput: React.FC<FinalInput> = (input) => {
             color="success"
             outline
             type="button"
-            rounded={3}
             className="mt-4"
             onClick={() => push({})}
           >

@@ -1,10 +1,16 @@
-import { faInfoCircle, faPerson } from "@fortawesome/free-solid-svg-icons";
+import { faCheckCircle, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FormikProps } from "formik";
 import moment from "moment";
-import { useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Fragment } from "react/jsx-runtime";
+
+import * as BeneficiaryApi from "../../../api/profile/beneficiary";
+import * as ContactApi from "../../../api/profile/contact";
+import * as HousingApi from "../../../api/profile/housing";
+import * as IncomeApi from "../../../api/profile/income";
+import * as NationalRecordApi from "../../../api/profile/nationalRecord";
 import absherLogo from "../../../assets/images/partners/absher.svg";
 import eduMinistryLogo from "../../../assets/images/partners/eduMinistry.svg";
 import ejarLogo from "../../../assets/images/partners/ejar.svg";
@@ -16,14 +22,33 @@ import Button from "../../../components/core/button";
 import Form from "../../../components/form";
 import WizardFormStepper from "../../../components/form/wizard/stepper";
 import { dataDateFormat } from "../../../utils/consts";
+import { apiCatchGlobalHandler } from "../../../utils/fucntions";
+import DependentsFormView from "./Dependents";
 
 const MembershipRegistrationView = () => {
   const { t } = useTranslation();
   const [currentStep, setCurrentStep] = useState(0);
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    beneficiary: { id: "" },
+    contactsBank: {},
+    housing: {},
+    income: {},
+    dependents: [{ fullName: "", idNumber: "" }],
+    nationalRecord: {},
+  });
 
-  const onNextStep = (values = {}) => {
-    setFormData((current) => ({ ...current, ...values }));
+  useLayoutEffect(() => {
+    BeneficiaryApi.getByUserId()
+      .then((res: any) => (res.id ? setFormData(res) : ""))
+      .catch(apiCatchGlobalHandler);
+  }, []);
+
+  const onNextStep = (values = {}, service = "") => {
+    window.scrollTo(0, 0);
+    setFormData((current) => ({
+      ...current,
+      [service]: { ...(current as any)[service], ...values },
+    }));
     setCurrentStep((current = 0) => current + 1);
   };
 
@@ -288,9 +313,55 @@ const MembershipRegistrationView = () => {
 
   const qualificationDataInputs = () => [
     {
-      type: "text",
+      type: "select",
+      options: [
+        {
+          value: "Government Employee",
+          label: t(
+            "Auth.MembershipRegistration.Form.Occupation.GovernmentEmployee"
+          ),
+        },
+        {
+          value: "Private-Sector Employee",
+          label: t(
+            "Auth.MembershipRegistration.Form.Occupation.PrivateSectorEmployee"
+          ),
+        },
+        {
+          value: "Per-Day Worker",
+          label: t("Auth.MembershipRegistration.Form.Occupation.PerDayWorker"),
+        },
+        {
+          value: "No Fixed",
+          label: t("Auth.MembershipRegistration.Form.Occupation.NoFixed"),
+        },
+        {
+          value: "Looking For Job",
+          label: t("Auth.MembershipRegistration.Form.Occupation.LookingForJob"),
+        },
+        {
+          value: "Retiree",
+          label: t("Auth.MembershipRegistration.Form.Occupation.Retiree"),
+        },
+        {
+          value: "Student",
+          label: t("Auth.MembershipRegistration.Form.Occupation.Student"),
+        },
+        {
+          value: "Housewife",
+          label: t("Auth.MembershipRegistration.Form.Occupation.Housewife"),
+        },
+        {
+          value: "Unemployed",
+          label: t("Auth.MembershipRegistration.Form.Occupation.Unemployed"),
+        },
+        {
+          value: "Unable To Work",
+          label: t("Auth.MembershipRegistration.Form.Occupation.UnableToWork"),
+        },
+      ],
       name: "occupation",
-      label: t("Auth.MembershipRegistration.Form.Occupation"),
+      label: t("Auth.MembershipRegistration.Form.Occupation.Title"),
       required: true,
     },
     {
@@ -360,7 +431,9 @@ const MembershipRegistrationView = () => {
       type: "number",
       name: "salary",
       label: t("Auth.MembershipRegistration.Form.Salary"),
-      required: true,
+      min: 0,
+      step: 0.1,
+      required: false,
       halfCol: true,
     },
     {
@@ -373,7 +446,9 @@ const MembershipRegistrationView = () => {
       type: "number",
       name: "insurances",
       label: t("Auth.MembershipRegistration.Form.Insurances"),
-      required: true,
+      min: 0,
+      step: 0.1,
+      required: false,
       halfCol: true,
     },
     {
@@ -386,7 +461,9 @@ const MembershipRegistrationView = () => {
       type: "number",
       name: "comprehensiveRehabilitation",
       label: t("Auth.MembershipRegistration.Form.ComprehensiveRehabilitation"),
-      required: true,
+      min: 0,
+      step: 0.1,
+      required: false,
       halfCol: true,
     },
     {
@@ -399,7 +476,9 @@ const MembershipRegistrationView = () => {
       type: "number",
       name: "retirement",
       label: t("Auth.MembershipRegistration.Form.Retirement"),
-      required: true,
+      min: 0,
+      step: 0.1,
+      required: false,
       halfCol: true,
     },
     {
@@ -412,7 +491,9 @@ const MembershipRegistrationView = () => {
       type: "number",
       name: "socialSecurity",
       label: t("Auth.MembershipRegistration.Form.SocialSecurity"),
-      required: true,
+      min: 0,
+      step: 0.1,
+      required: false,
       halfCol: true,
     },
     {
@@ -587,7 +668,7 @@ const MembershipRegistrationView = () => {
     },
     {
       type: "file",
-      name: "rentalContractPhoto",
+      name: "homeDocumentPhoto",
       label:
         formik.values.homeOwnership === "Rental"
           ? t("Auth.MembershipRegistration.Form.RentalContractPhoto")
@@ -608,6 +689,8 @@ const MembershipRegistrationView = () => {
             type: "number",
             name: "rentalCharge",
             label: t("Auth.MembershipRegistration.Form.RentalCharge"),
+            min: 0,
+            step: 0.1,
             required: true,
           },
           {
@@ -638,282 +721,12 @@ const MembershipRegistrationView = () => {
                 label: t("Auth.MembershipRegistration.Form.Payee.Free"),
               },
             ],
-            name: "paymentFrequency",
+            name: "payee",
             label: t("Auth.MembershipRegistration.Form.Payee.Title"),
             required: true,
           },
         ]
       : []),
-  ];
-
-  const dependentsDataInputs = (formik: FormikProps<Record<string, any>>) => [
-    {
-      type: "multipleEntries",
-      name: "dependentsList",
-      label: t("Auth.MembershipRegistration.Form.Dependents.Title"),
-      singleRecordLabel: t(
-        "Auth.MembershipRegistration.Form.Dependents.Dependant"
-      ),
-      addLabel: (
-        <Fragment>
-          {t("Auth.MembershipRegistration.Form.Dependents.AddNew")}{" "}
-          <FontAwesomeIcon icon={faPerson} />
-        </Fragment>
-      ),
-      recordDynamicLabelKey: "fullName",
-      required: false,
-      inputs: [
-        {
-          type: "text",
-          name: "fullName",
-          label: t("Auth.MembershipRegistration.Form.FullName"),
-          required: true,
-        },
-        {
-          type: "date",
-          name: "dob",
-          min: moment().subtract(125, "y").format(dataDateFormat),
-          max: moment().subtract(17, "y").format(dataDateFormat),
-          label: t("Auth.MembershipRegistration.Form.Dob"),
-          required: true,
-        },
-        {
-          type: "date",
-          name: "idExpiryDate",
-          max: moment().add(10, "y").format(dataDateFormat),
-          label: t("Auth.MembershipRegistration.Form.IdExpiryDate"),
-          required: true,
-        },
-        {
-          type: "numberText",
-          name: "idNumber",
-          minLength: 10,
-          maxLength: 10,
-          label: t("Auth.MembershipRegistration.Form.IdNumber"),
-          labelNote: t("Auth.MembershipRegistration.Form.IdNumberNote"),
-          required: true,
-        },
-        {
-          type: "radio",
-          options: [
-            {
-              value: "Male",
-              label: t("Auth.MembershipRegistration.Form.Gender.Male"),
-            },
-            {
-              value: "Female",
-              label: t("Auth.MembershipRegistration.Form.Gender.Female"),
-            },
-          ],
-          name: "gender",
-          label: t("Auth.MembershipRegistration.Form.Gender.Title"),
-          required: true,
-          halfCol: true,
-        },
-        {
-          type: "phoneNumber",
-          name: "mobile",
-          label: t("Auth.MembershipRegistration.Form.DependentMobile"),
-          labelNote: t("Auth.MembershipRegistration.Form.DependentMobileNote"),
-          required: false,
-        },
-        {
-          type: "select",
-          options: [
-            {
-              value: "Spouse",
-              label: t("Auth.MembershipRegistration.Form.Relation.Spouse"),
-            },
-            {
-              value: "Parent",
-              label: t("Auth.MembershipRegistration.Form.Relation.Parent"),
-            },
-            {
-              value: "Child",
-              label: t("Auth.MembershipRegistration.Form.Relation.Child"),
-            },
-            {
-              value: "Sibling",
-              label: t("Auth.MembershipRegistration.Form.Relation.Sibling"),
-            },
-            {
-              value: "Grandparent",
-              label: t("Auth.MembershipRegistration.Form.Relation.Grandparent"),
-            },
-            {
-              value: "Grandchild",
-              label: t("Auth.MembershipRegistration.Form.Relation.Grandchild"),
-            },
-            {
-              value: "Paternal Uncle / Aunt",
-              label: t(
-                "Auth.MembershipRegistration.Form.Relation.PaternalUncleAunt"
-              ),
-            },
-            {
-              value: "Maternal Uncle / Aunt",
-              label: t(
-                "Auth.MembershipRegistration.Form.Relation.MaternalUncleAunt"
-              ),
-            },
-            {
-              value: "InLow",
-              label: t("Auth.MembershipRegistration.Form.Relation.InLow"),
-            },
-            {
-              value: "None",
-              label: t("Auth.MembershipRegistration.Form.Relation.None"),
-            },
-          ],
-          name: "relation",
-          label: t("Auth.MembershipRegistration.Form.Relation.Title"),
-          required: true,
-        },
-        {
-          type: "select",
-          options: [
-            {
-              value: "Below 5",
-              label: t("Auth.MembershipRegistration.Form.AgeGroup.BelowFive"),
-            },
-            {
-              value: "5 - 12",
-              label: t(
-                "Auth.MembershipRegistration.Form.AgeGroup.FiveToTwelve"
-              ),
-            },
-            {
-              value: "12 - 18",
-              label: t(
-                "Auth.MembershipRegistration.Form.AgeGroup.TwelveToEighteen"
-              ),
-            },
-            {
-              value: "18 - 30",
-              label: t(
-                "Auth.MembershipRegistration.Form.AgeGroup.EighteenToThirty"
-              ),
-            },
-            {
-              value: "30 - 45",
-              label: t(
-                "Auth.MembershipRegistration.Form.AgeGroup.ThirtyToFortyFive"
-              ),
-            },
-            {
-              value: "45 - 60",
-              label: t(
-                "Auth.MembershipRegistration.Form.AgeGroup.FortyFiveToSixty"
-              ),
-            },
-            {
-              value: "Above 60",
-              label: t("Auth.MembershipRegistration.Form.AgeGroup.AboveSixty"),
-            },
-          ],
-          name: "ageGroup",
-          label: t("Auth.MembershipRegistration.Form.AgeGroup.Title"),
-          required: true,
-        },
-        {
-          type: "radio",
-          options: [
-            {
-              value: "Healthy",
-              label: t("Auth.MembershipRegistration.Form.HealthStatus.Healthy"),
-            },
-            {
-              value: "Sick",
-              label: t("Auth.MembershipRegistration.Form.HealthStatus.Sick"),
-            },
-          ],
-          name: "healthStatus",
-          label: t("Auth.MembershipRegistration.Form.HealthStatus.Title"),
-          required: true,
-        },
-        {
-          type: "selectMany",
-          options: [
-            {
-              value: "Disability",
-              label: t("Auth.MembershipRegistration.Form.Diseases.Disability"),
-            },
-            {
-              value: "Hearing Impairment",
-              label: t(
-                "Auth.MembershipRegistration.Form.Diseases.HearingImpairment"
-              ),
-            },
-            {
-              value: "Visual Impairment",
-              label: t(
-                "Auth.MembershipRegistration.Form.Diseases.VisualImpairment"
-              ),
-            },
-            {
-              value: "Mental Disability",
-              label: t(
-                "Auth.MembershipRegistration.Form.Diseases.MentalDisability"
-              ),
-            },
-            {
-              value: "Chronic Diseases",
-              label: t(
-                "Auth.MembershipRegistration.Form.Diseases.ChronicDiseases"
-              ),
-            },
-            {
-              value: "Neurological Diseases",
-              label: t(
-                "Auth.MembershipRegistration.Form.Diseases.NeurologicalDiseases"
-              ),
-            },
-            {
-              value: "Genetic Diseases",
-              label: t(
-                "Auth.MembershipRegistration.Form.Diseases.GeneticDiseases"
-              ),
-            },
-            {
-              value: "Cancerous",
-              label: t("Auth.MembershipRegistration.Form.Diseases.Cancerous"),
-            },
-            {
-              value: "Chest Diseases",
-              label: t(
-                "Auth.MembershipRegistration.Form.Diseases.ChestDiseases"
-              ),
-            },
-            {
-              value: "Liver Diseases",
-              label: t(
-                "Auth.MembershipRegistration.Form.Diseases.LiverDiseases"
-              ),
-            },
-            {
-              value: "Skin Diseases",
-              label: t(
-                "Auth.MembershipRegistration.Form.Diseases.SkinDiseases"
-              ),
-            },
-          ],
-          Placeholder: t("Auth.MembershipRegistration.Form.Diseases.None"),
-          name: "diseases",
-          label: t("Auth.MembershipRegistration.Form.Diseases.Title"),
-          required: false,
-        },
-        {
-          type: "radio",
-          options: [
-            { value: "Yes", label: t("Global.Form.Labels.Yes") },
-            { value: "No", label: t("Global.Form.Labels.No") },
-          ],
-          name: "incurableDisease",
-          label: t("Auth.MembershipRegistration.Form.IncurableDisease"),
-          required: false,
-        },
-      ],
-    },
   ];
 
   const attachmentInputs = () => [
@@ -974,7 +787,6 @@ const MembershipRegistrationView = () => {
   const HelpButton = () => (
     <Button
       className="w-100 p-2 ps-1 mb-3 text-start"
-      rounded={3}
       color="ghost"
       type="button"
     >
@@ -987,12 +799,7 @@ const MembershipRegistrationView = () => {
     <Fragment>
       <HelpButton />
 
-      <Button
-        className="w-50 p-2"
-        rounded={3}
-        onClick={() => onPreviousStep()}
-        outline
-      >
+      <Button className="w-50 p-2" onClick={() => onPreviousStep()} outline>
         {t("Global.Form.Labels.Previous")}
       </Button>
     </Fragment>
@@ -1007,7 +814,14 @@ const MembershipRegistrationView = () => {
           inputs={basicDataInputs}
           submitText={t("Global.Form.Labels.SaveContinue")}
           customButtons={<HelpButton />}
-          onFormSubmit={(e) => onNextStep(e)}
+          initialValues={formData.beneficiary}
+          onFormSubmit={(e) => {
+            BeneficiaryApi.createOrUpdate(e)
+              .then((res) => {
+                onNextStep({ ...e, ...res }, "beneficiary");
+              })
+              .catch(apiCatchGlobalHandler);
+          }}
         />
       ),
     },
@@ -1019,7 +833,17 @@ const MembershipRegistrationView = () => {
           inputs={contactDataInputs}
           submitText={t("Global.Form.Labels.SaveContinue")}
           customButtons={<BackButton />}
-          onFormSubmit={(e) => onNextStep(e)}
+          initialValues={formData.contactsBank}
+          onFormSubmit={(e) => {
+            ContactApi.createOrUpdate({
+              beneficiary: formData.beneficiary.id,
+              ...e,
+            })
+              .then(() => {
+                onNextStep(e, "contactsBank");
+              })
+              .catch(apiCatchGlobalHandler);
+          }}
         />
       ),
     },
@@ -1031,7 +855,17 @@ const MembershipRegistrationView = () => {
           inputs={qualificationDataInputs}
           submitText={t("Global.Form.Labels.SaveContinue")}
           customButtons={<BackButton />}
-          onFormSubmit={(e) => onNextStep(e)}
+          initialValues={formData.income}
+          onFormSubmit={(e) => {
+            IncomeApi.createOrUpdate({
+              beneficiary: formData.beneficiary.id,
+              ...e,
+            })
+              .then(() => {
+                onNextStep(e, "income");
+              })
+              .catch(apiCatchGlobalHandler);
+          }}
         />
       ),
     },
@@ -1043,7 +877,17 @@ const MembershipRegistrationView = () => {
           inputs={hostelDataInputs}
           submitText={t("Global.Form.Labels.SaveContinue")}
           customButtons={<BackButton />}
-          onFormSubmit={(e) => onNextStep(e)}
+          initialValues={formData.housing}
+          onFormSubmit={(e) => {
+            HousingApi.createOrUpdate({
+              beneficiary: formData.beneficiary.id,
+              ...e,
+            })
+              .then(() => {
+                onNextStep(e, "housing");
+              })
+              .catch(apiCatchGlobalHandler);
+          }}
         />
       ),
     },
@@ -1051,11 +895,11 @@ const MembershipRegistrationView = () => {
       label: t("Auth.MembershipRegistration.Form.DependentsData"),
       name: "DependentsData",
       contents: (
-        <Form
-          inputs={dependentsDataInputs}
-          submitText={t("Global.Form.Labels.SaveContinue")}
+        <DependentsFormView
           customButtons={<BackButton />}
+          initialValues={formData.dependents}
           onFormSubmit={(e) => onNextStep(e)}
+          beneficiary={formData.beneficiary.id}
         />
       ),
     },
@@ -1066,8 +910,37 @@ const MembershipRegistrationView = () => {
         <Form
           inputs={attachmentInputs}
           customButtons={<BackButton />}
-          onFormSubmit={(e) => console.log({ e })}
+          initialValues={formData.nationalRecord}
+          onFormSubmit={(e) => {
+            NationalRecordApi.createOrUpdate({
+              beneficiary: formData.beneficiary.id,
+              ...e,
+            })
+              .then(() => {
+                onNextStep(e, "nationalRecord");
+              })
+              .catch(apiCatchGlobalHandler);
+          }}
         />
+      ),
+    },
+    {
+      label: "",
+      name: "Success",
+      contents: (
+        <div className="text-center">
+          <h2>
+            <FontAwesomeIcon icon={faCheckCircle} className="text-success" />
+            <br />
+            {t("Auth.MembershipRegistration.Form.Success.Title")}
+          </h2>
+
+          <h6 className="text-muted my-4">
+            {t("Auth.MembershipRegistration.Form.Success.Text")}
+          </h6>
+
+          <Button color="info">{t("Global.Labels.Ok")}</Button>
+        </div>
       ),
     },
   ];

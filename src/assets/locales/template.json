@@ -36,7 +36,7 @@
         "Dependents": {
           "AddNew": "Add New Dependant",
           "Dependant": "Dependant",
-          "Title": "Dependents"
+          "SaveDependent": "Save Dependent Data"
         },
         "DependentsData": "Dependents Data",
         "Diseases": {
@@ -120,7 +120,19 @@
           "Saudi": "Saudi",
           "Title": "Nationality"
         },
-        "Occupation": "Occupation",
+        "Occupation": {
+          "GovernmentEmployee": "Government Employee",
+          "Housewife": "Housewife",
+          "LookingForJob": "Looking For Job",
+          "NoFixed": "No Fixed Job",
+          "PerDayWorker": "Per-Day Worker",
+          "PrivateSectorEmployee": "Private-Sector Employee",
+          "Retiree": "Retiree",
+          "Student": "Student",
+          "Title": "Occupation",
+          "UnableToWork": "Unable To Work",
+          "Unemployed": "Unemployed"
+        },
         "OwnershipDocumentPhoto": "Home Ownership Document Photo",
         "Payee": {
           "Free": "Free",
@@ -177,6 +189,10 @@
         },
         "StudentsDocument": "Students Document",
         "StudentsDocumentNote": "Noor or university website",
+        "Success": {
+          "Text": "Soon you will be reached out via What'sApp and messages section of this dashboard",
+          "Title": "Application Has Been Submitted Successfully"
+        },
         "TawakkalnaDocument": "Tawakkalna Document"
       }
     }
@@ -199,6 +215,10 @@
         "UploadAttachment": "Upload Attachment",
         "Yes": "Yes"
       }
+    },
+    "Labels": {
+      "Back": "Back",
+      "Ok": "Ok"
     }
   },
   "Public": {
@@ -224,17 +244,23 @@
         "DidUForgotPassword": "Did You Forgot Password?",
         "Login": "Login",
         "Password": "Password",
-        "PhoneNo": "PhoneNo"
+        "PhoneNo": "PhoneNo",
+        "Success": "Welcome Back {{name}}"
       },
       "Title": "Login"
     },
     "Register": {
       "Labels": {
+        "ByClickYouAccept": "By Clicking 'Register', You Are Accepting",
+        "DidNotGetOtp": "Did Not Get OTP?",
         "Name": "Name",
         "Password": "Password",
         "PasswordConfirmation": "Password Confirmation",
         "PhoneNo": "PhoneNo",
-        "Register": "Register"
+        "PrivacyPolicyTermsConditions": "Privacy Policy and Terms & Conditions",
+        "Register": "Register",
+        "ResendOtp": "Resend Otp",
+        "Success": "Registration Has Been Successful. Now You May Login."
       },
       "Title": "Register"
     }
