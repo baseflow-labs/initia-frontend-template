@@ -33,7 +33,7 @@ const MembershipRegistrationView = () => {
     contactsBank: {},
     housing: {},
     income: {},
-    dependents: [{ fullName: "" }],
+    dependents: [{ fullName: "", idNumber: "" }],
     nationalRecord: {},
   });
 

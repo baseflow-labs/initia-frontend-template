@@ -16,7 +16,7 @@ import { apiCatchGlobalHandler } from "../../../utils/fucntions";
 
 interface Props {
   customButtons: React.ReactNode;
-  initialValues: { fullName: string }[];
+  initialValues: { fullName: string; idNumber: string }[];
   beneficiary: string;
   onFormSubmit: (values: any) => void;
 }
@@ -45,6 +45,7 @@ const DependentsFormView = ({
       type: "date",
       name: "dob",
       min: moment().subtract(125, "y").format(dataDateFormat),
+      max: moment().format(dataDateFormat),
       label: t("Auth.MembershipRegistration.Form.Dob"),
       required: true,
     },
@@ -330,7 +331,9 @@ const DependentsFormView = ({
                     ...e,
                   })
                     .then(() => {
-                      setDependents((current) => [...current, e]);
+                      setDependents((current) =>
+                        [...current, e].filter((data) => !data.idNumber)
+                      );
                     })
                     .catch(apiCatchGlobalHandler);
                 }}
@@ -346,7 +349,10 @@ const DependentsFormView = ({
         type="button"
         className="my-4"
         onClick={() =>
-          setDependents((current) => [...current, { fullName: "" }])
+          setDependents((current) => [
+            ...current,
+            { fullName: "", idNumber: "" },
+          ])
         }
       >
         {t("Auth.MembershipRegistration.Form.Dependents.AddNew")}{" "}
