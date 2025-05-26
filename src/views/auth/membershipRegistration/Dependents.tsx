@@ -326,8 +326,8 @@ const DependentsFormView = ({
                 initialValues={dependent}
                 onFormSubmit={(e) => {
                   DependentApi.createOrUpdate({
-                    ...e,
                     beneficiary,
+                    ...e,
                   })
                     .then(() => {
                       setDependents((current) => [...current, e]);

@@ -836,8 +836,8 @@ const MembershipRegistrationView = () => {
           initialValues={formData.contactsBank}
           onFormSubmit={(e) => {
             ContactApi.createOrUpdate({
-              ...e,
               beneficiary: formData.beneficiary.id,
+              ...e,
             })
               .then(() => {
                 onNextStep(e, "contactsBank");
@@ -858,8 +858,8 @@ const MembershipRegistrationView = () => {
           initialValues={formData.income}
           onFormSubmit={(e) => {
             IncomeApi.createOrUpdate({
-              ...e,
               beneficiary: formData.beneficiary.id,
+              ...e,
             })
               .then(() => {
                 onNextStep(e, "income");
@@ -880,8 +880,8 @@ const MembershipRegistrationView = () => {
           initialValues={formData.housing}
           onFormSubmit={(e) => {
             HousingApi.createOrUpdate({
-              ...e,
               beneficiary: formData.beneficiary.id,
+              ...e,
             })
               .then(() => {
                 onNextStep(e, "housing");
@@ -913,8 +913,8 @@ const MembershipRegistrationView = () => {
           initialValues={formData.nationalRecord}
           onFormSubmit={(e) => {
             NationalRecordApi.createOrUpdate({
-              ...e,
               beneficiary: formData.beneficiary.id,
+              ...e,
             })
               .then(() => {
                 onNextStep(e, "nationalRecord");
