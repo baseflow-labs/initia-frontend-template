@@ -34,7 +34,7 @@ const MembershipRegistrationView = () => {
     housing: {},
     income: {},
     dependents: [],
-    nationalData: {},
+    nationalRecord: {},
   });
 
   useLayoutEffect(() => {
@@ -1102,8 +1102,8 @@ const MembershipRegistrationView = () => {
           initialValues={formData.beneficiary}
           onFormSubmit={(e) => {
             BeneficiaryApi.createOrUpdate(e)
-              .then(() => {
-                onNextStep(e, "beneficiary");
+              .then((res) => {
+                onNextStep({ ...e, ...res }, "beneficiary");
               })
               .catch(apiCatchGlobalHandler);
           }}
@@ -1196,14 +1196,17 @@ const MembershipRegistrationView = () => {
         <Form
           inputs={attachmentInputs}
           customButtons={<BackButton />}
-          initialValues={formData.nationalData}
+          initialValues={formData.nationalRecord}
           onFormSubmit={(e) => {
             NationalRecordApi.createOrUpdate({
               ...e,
               beneficiary: formData.beneficiary.id,
             })
               .then(() => {
-                onNextStep(e, "nationalData");
+                setFormData((current) => ({
+                  ...current,
+                  nationalRecord: { ...current.nationalRecord, ...e },
+                }));
               })
               .catch(apiCatchGlobalHandler);
           }}
