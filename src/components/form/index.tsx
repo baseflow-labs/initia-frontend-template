@@ -284,7 +284,6 @@ const Form: React.FC<Props> = ({
           disabled={loading.length > 0}
           color="info"
           className={`w-${customButtons ? "50" : "100"} p-2`}
-          rounded={3}
         >
           {loading.length > 0 ? (
             <small>

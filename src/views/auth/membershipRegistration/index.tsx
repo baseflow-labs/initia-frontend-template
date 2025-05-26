@@ -39,7 +39,7 @@ const MembershipRegistrationView = () => {
 
   useLayoutEffect(() => {
     BeneficiaryApi.getByUserId()
-      .then((res: any) => setFormData(res))
+      .then((res: any) => (res.id ? setFormData(res) : ""))
       .catch(apiCatchGlobalHandler);
   }, []);
 
@@ -787,7 +787,6 @@ const MembershipRegistrationView = () => {
   const HelpButton = () => (
     <Button
       className="w-100 p-2 ps-1 mb-3 text-start"
-      rounded={3}
       color="ghost"
       type="button"
     >
@@ -800,12 +799,7 @@ const MembershipRegistrationView = () => {
     <Fragment>
       <HelpButton />
 
-      <Button
-        className="w-50 p-2"
-        rounded={3}
-        onClick={() => onPreviousStep()}
-        outline
-      >
+      <Button className="w-50 p-2" onClick={() => onPreviousStep()} outline>
         {t("Global.Form.Labels.Previous")}
       </Button>
     </Fragment>

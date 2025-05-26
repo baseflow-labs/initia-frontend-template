@@ -344,7 +344,6 @@ const DependentsFormView = ({
         color="success"
         outline
         type="button"
-        rounded={3}
         className="my-4"
         onClick={() =>
           setDependents((current) => [...current, { fullName: "" }])
@@ -362,7 +361,6 @@ const DependentsFormView = ({
         color="info"
         className={`w-${customButtons ? "50" : "100"} p-2`}
         onClick={() => onFormSubmit(dependents)}
-        rounded={3}
       >
         {loading.length > 0 ? (
           <small>

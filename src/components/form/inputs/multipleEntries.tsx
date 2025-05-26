@@ -87,7 +87,6 @@ const MultipleEntriesInput: React.FC<FinalInput> = (input) => {
             color="success"
             outline
             type="button"
-            rounded={3}
             className="mt-4"
             onClick={() => push({})}
           >

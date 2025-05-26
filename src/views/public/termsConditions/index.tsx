@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+
 import Button from "../../../components/core/button";
 
 const TermsConditions = () => {
@@ -36,7 +37,7 @@ const TermsConditions = () => {
         </div>
       ))}
 
-      <Button rounded={3} route="/register" className="w-fit mx-auto">
+      <Button route="/register" className="w-fit mx-auto">
         {t("Global.Labels.Back")}
       </Button>
     </div>

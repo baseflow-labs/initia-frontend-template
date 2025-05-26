@@ -17,7 +17,7 @@ const Button = ({
   className,
   color = "info",
   text = "info",
-  rounded = 0,
+  rounded = 3,
   p = 2,
   route,
   size = "",
