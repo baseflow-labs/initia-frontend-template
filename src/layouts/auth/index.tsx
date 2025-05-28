@@ -8,6 +8,7 @@ import Navbar from "./navbar";
 import Sidebar from "./sidebar";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import DashboardNavbar from "./dashabordNavbar";
+import FourZeroFourError from "../../views/common/404";
 
 const AuthLayout = () => {
   const { t } = useTranslation();
@@ -51,6 +52,8 @@ const AuthLayout = () => {
               {authRoutes.map(({ name, route, view }, i) => (
                 <Route path={route} element={view} key={i} />
               ))}
+
+              <Route path="*" element={<FourZeroFourError />} />
             </Routes>
           </div>
         </div>

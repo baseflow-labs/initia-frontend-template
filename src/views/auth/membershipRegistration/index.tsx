@@ -30,7 +30,7 @@ const MembershipRegistrationView = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const [currentStep, setCurrentStep] = useState(6);
+  const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({
     beneficiary: { id: "" },
     contactsBank: {},

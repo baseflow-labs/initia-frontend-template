@@ -218,7 +218,8 @@
     },
     "Labels": {
       "Back": "Back",
-      "Ok": "Ok"
+      "Ok": "Ok",
+      "WrongUrl": "Sorry, this is wrong address"
     }
   },
   "Public": {
