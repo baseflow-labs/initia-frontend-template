@@ -4,6 +4,7 @@ import { FormikProps } from "formik";
 import moment from "moment";
 import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router";
 import { Fragment } from "react/jsx-runtime";
 
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
@@ -27,7 +28,9 @@ import DependentsFormView from "./Dependents";
 
 const MembershipRegistrationView = () => {
   const { t } = useTranslation();
-  const [currentStep, setCurrentStep] = useState(0);
+  const navigate = useNavigate();
+
+  const [currentStep, setCurrentStep] = useState(6);
   const [formData, setFormData] = useState({
     beneficiary: { id: "" },
     contactsBank: {},
@@ -939,7 +942,9 @@ const MembershipRegistrationView = () => {
             {t("Auth.MembershipRegistration.Form.Success.Text")}
           </h6>
 
-          <Button color="info">{t("Global.Labels.Ok")}</Button>
+          <Button color="info" onClick={() => navigate("/dashboard")}>
+            {t("Global.Labels.Ok")}
+          </Button>
         </div>
       ),
     },

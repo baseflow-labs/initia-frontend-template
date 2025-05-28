@@ -1,6 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { Route, Routes } from "react-router";
 import { Fragment } from "react/jsx-runtime";
+
+import DashboardView from "../../views/auth/dashboard";
 import MembershipRegistrationView from "../../views/auth/membershipRegistration";
 import Navbar from "./navbar";
 
@@ -12,6 +14,11 @@ const AuthLayout = () => {
       name: t("Auth.Dashboard.Title"),
       route: "/",
       view: <MembershipRegistrationView />,
+    },
+    {
+      name: t("Auth.Dashboard.Title"),
+      route: "/dashboard",
+      view: <DashboardView />,
     },
   ];
 
