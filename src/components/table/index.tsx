@@ -1,14 +1,13 @@
 import moment from "moment";
-import { viewDateFormat } from "../../utils/consts";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import "moment/locale/ar";
 import { useTranslation } from "react-i18next";
+import { viewDateFormat } from "../../utils/consts";
 
 export interface TableProps {
   columns: {
     label: string;
     name: string;
+    render?: (row: {}) => string | React.ReactNode;
     type?: string;
     options?: { value: string; label?: string }[];
   }[];
@@ -16,7 +15,9 @@ export interface TableProps {
 }
 
 interface Props {
+  row: object;
   data: string;
+  render?: (row: {}) => string | React.ReactNode;
   type?: string;
   options?: { value: string; label?: string }[];
 }
@@ -24,20 +25,7 @@ interface Props {
 const DynamicTable = ({ columns, data }: TableProps) => {
   const { i18n } = useTranslation();
 
-  const statusColorRender = (status = "") => {
-    switch (status) {
-      case "Reject":
-      case "Rejected":
-        return "danger";
-      case "Accept":
-      case "Accepted":
-        return "success";
-      default:
-        return "primary";
-    }
-  };
-
-  const dataRender = ({ data, type, options }: Props) => {
+  const dataRender = ({ row, render, data, type, options }: Props) => {
     switch (type) {
       case "date":
         return moment(data).locale(i18n.language).format(viewDateFormat);
@@ -46,17 +34,8 @@ const DynamicTable = ({ columns, data }: TableProps) => {
       case "select":
         const option = options?.find(({ value }) => value === data);
         return option?.label || option?.value;
-      case "status":
-        return (
-          <span>
-            {" "}
-            <FontAwesomeIcon
-              icon={faCircle}
-              className={`text-${statusColorRender(data)}`}
-            />{" "}
-            {data}
-          </span>
-        );
+      case "custom":
+        return render ? render(row) : data;
       default:
         return data;
     }
@@ -84,9 +63,15 @@ const DynamicTable = ({ columns, data }: TableProps) => {
               {i + 1}
             </td>
 
-            {columns.map(({ name, type, options }, y) => (
+            {columns.map(({ name, type, options, render }, y) => (
               <td className="py-3" key={y}>
-                {dataRender({ data: (row as any)[name], type, options })}
+                {dataRender({
+                  row,
+                  data: (row as any)[name],
+                  type,
+                  render,
+                  options,
+                })}
               </td>
             ))}
           </tr>

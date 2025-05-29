@@ -201,6 +201,14 @@
         },
         "TawakkalnaDocument": "صورة بطاقة الهوية وسجل الأسرة من تطبيق توكلنا"
       },
+      "Statuses": {
+        "Accepted": "مقبول",
+        "InPreview": "قيد المراجعة",
+        "Incomplete": "طلب غير مكتمل",
+        "NeedHelp": "طلب غير مكتمل",
+        "NewMember": "مستفيد جديد",
+        "Rejected": "مرفوض"
+      },
       "Title": "طلب الانتساب للجمعية"
     }
   },

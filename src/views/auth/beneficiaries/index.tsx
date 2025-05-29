@@ -1,7 +1,13 @@
-import { useLayoutEffect, useState } from "react";
+import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import TablePage from "../../../components/tablePage";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircle } from "@fortawesome/free-solid-svg-icons";
+import {
+  statusColorRender,
+  renderDataFromOptions,
+} from "../../../utils/fucntions";
 
 const BeneficiariesView = () => {
   const { t } = useTranslation();
@@ -10,11 +16,14 @@ const BeneficiariesView = () => {
   useLayoutEffect(() => {
     BeneficiaryApi.getAll().then((res) => {
       setBeneficiaries(
-        (res as any).map(({ contactsBank = {}, housing = {}, ...rest }) => ({
-          ...contactsBank,
-          ...housing,
-          ...rest,
-        })) as any
+        (res as any).map(
+          ({ contactsBank = {}, housing = {}, status = {}, ...rest }) => ({
+            ...contactsBank,
+            ...housing,
+            ...status,
+            ...rest,
+          })
+        ) as any
       );
     });
   }, []);
@@ -31,6 +40,7 @@ const BeneficiariesView = () => {
       label: t("Auth.MembershipRegistration.Form.Nationality.NonSaudi"),
     },
   ];
+
   const provinces = [
     {
       value: "Riyadh",
@@ -86,6 +96,72 @@ const BeneficiariesView = () => {
     },
   ];
 
+  const homeTypes = [
+    {
+      value: "Apartment",
+      label: t("Auth.MembershipRegistration.Form.HomeType.Apartment"),
+    },
+    {
+      value: "Villa",
+      label: t("Auth.MembershipRegistration.Form.HomeType.Villa"),
+    },
+    {
+      value: "Independent Home",
+      label: t("Auth.MembershipRegistration.Form.HomeType.IndependentHome"),
+    },
+    {
+      value: "Folk House",
+      label: t("Auth.MembershipRegistration.Form.HomeType.FolkHouse"),
+    },
+    {
+      value: "Room(s) in Shared House",
+      label: t("Auth.MembershipRegistration.Form.HomeType.SharedHouse"),
+    },
+    {
+      value: "Roof",
+      label: t("Auth.MembershipRegistration.Form.HomeType.Roof"),
+    },
+    {
+      value: "Caravan",
+      label: t("Auth.MembershipRegistration.Form.HomeType.Caravan"),
+    },
+    {
+      value: "Incomplete Building",
+      label: t("Auth.MembershipRegistration.Form.HomeType.IncompleteBuilding"),
+    },
+    {
+      value: "No Permanent Home",
+      label: t("Auth.MembershipRegistration.Form.HomeType.NoPermanentHome"),
+    },
+  ];
+
+  const statuses = [
+    {
+      value: "New Member",
+      label: t("Auth.MembershipRegistration.Statuses.NewMember"),
+    },
+    {
+      value: "Incomplete",
+      label: t("Auth.MembershipRegistration.Statuses.Incomplete"),
+    },
+    {
+      value: "Need Help",
+      label: t("Auth.MembershipRegistration.Statuses.NeedHelp"),
+    },
+    {
+      value: "Rejected",
+      label: t("Auth.MembershipRegistration.Statuses.Rejected"),
+    },
+    {
+      value: "Accepted",
+      label: t("Auth.MembershipRegistration.Statuses.Accepted"),
+    },
+    {
+      value: "In Preview",
+      label: t("Auth.MembershipRegistration.Statuses.InPreview"),
+    },
+  ];
+
   const filters = [
     {
       label: t("Auth.MembershipRegistration.Form.Nationality.Title"),
@@ -111,15 +187,21 @@ const BeneficiariesView = () => {
       label: t("Auth.MembershipRegistration.Form.IdNumber"),
     },
     {
-      type: "phoneNumber",
-      name: "beneficiaryMobile",
-      label: t("Global.Labels.PhoneNumber"),
-    },
-    {
       type: "select",
       options: nationalities,
       name: "nationality",
       label: t("Auth.MembershipRegistration.Form.Nationality.Title"),
+    },
+    {
+      type: "select",
+      options: homeTypes,
+      name: "homeType",
+      label: t("Auth.MembershipRegistration.Form.HomeType.Title"),
+    },
+    {
+      type: "phoneNumber",
+      name: "beneficiaryMobile",
+      label: t("Global.Labels.PhoneNumber"),
     },
     {
       type: "select",
@@ -130,6 +212,20 @@ const BeneficiariesView = () => {
     {
       type: "text",
       name: "governorate",
+      label: t("Auth.MembershipRegistration.Form.Governorate"),
+    },
+    {
+      type: "custom",
+      render: (row: any) => (
+        <Fragment>
+          <FontAwesomeIcon
+            icon={faCircle}
+            className={`text-${statusColorRender(row.status)}`}
+          />{" "}
+          {renderDataFromOptions(row.status, statuses)}
+        </Fragment>
+      ),
+      name: "status",
       label: t("Auth.MembershipRegistration.Form.Governorate"),
     },
   ];
