@@ -22,17 +22,17 @@ const Sidebar = ({ routes = [{ name: "", route: "", icon: faHome }] }) => {
 
       <ul className="nav nav-pills flex-column mb-3">
         {routes.map(({ name, route, icon }, i) => (
-          <li className="nav-item" key={i}>
-            <span
+          <li className="nav-item my-1" key={i}>
+            <h5
               onClick={() => navigate(route)}
               role="button"
-              className={`nav-link ${
+              className={`p-2 rounded-3 ${
                 location.pathname === route ? "bg-info text-white" : "text-dark"
               }`}
             >
               <FontAwesomeIcon icon={icon} className="me-2" />
               {name}
-            </span>
+            </h5>
           </li>
         ))}
       </ul>

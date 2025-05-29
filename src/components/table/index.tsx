@@ -118,7 +118,7 @@ const DynamicTable = ({ columns, data, onPageChange }: TableProps) => {
         <tr>
           <th colSpan={columns.length + 1}>
             <div className="d-flex">
-              <nav className="my-auto">
+              <nav className="my-auto me-2">
                 <ul className="pagination">
                   <li className="page-item my-auto">
                     <button
