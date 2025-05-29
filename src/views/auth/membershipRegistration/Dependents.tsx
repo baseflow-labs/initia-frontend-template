@@ -2,7 +2,7 @@ import { faPerson, faTrash, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FormikProps } from "formik";
 import moment from "moment";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { Fragment } from "react/jsx-runtime";
@@ -34,8 +34,11 @@ const DependentsFormView = ({
   const [dependents, setDependents] = useState(initialValues);
   const { loading } = useAppSelector((state) => state.loading);
 
-  const remove = (i = 0) =>
+  useEffect(() => setDependents(initialValues), [initialValues]);
+
+  const remove = (i = 0) => {
     setDependents((current) => current.filter((_, y) => y != i));
+  };
 
   const dependentsDataInputs = (formik: FormikProps<Record<string, any>>) => [
     {
