@@ -212,6 +212,12 @@
         "Status": "Status"
       },
       "Title": "Membership Registration"
+    },
+    "Visits": {
+      "AddVisit": "Add Visit",
+      "Title": "Visits",
+      "VisitDate": "Visit Date",
+      "VisitPurpose": "Visit Purpose"
     }
   },
   "Global": {

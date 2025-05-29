@@ -6,10 +6,16 @@ import DashboardView from "../../views/auth/dashboard";
 import MembershipRegistrationView from "../../views/auth/membershipRegistration";
 import Navbar from "./navbar";
 import Sidebar from "./sidebar";
-import { faEdit, faHome, faUsers } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBezierCurve,
+  faEdit,
+  faHome,
+  faUsers,
+} from "@fortawesome/free-solid-svg-icons";
 import DashboardNavbar from "./dashboardNavbar";
 import FourZeroFourError from "../../views/common/404";
 import BeneficiariesView from "../../views/auth/beneficiaries";
+import VisitsView from "../../views/auth/visits";
 
 const AuthLayout = () => {
   const { t } = useTranslation();
@@ -33,6 +39,12 @@ const AuthLayout = () => {
       route: "/beneficiaries",
       view: <BeneficiariesView />,
       icon: faUsers,
+    },
+    {
+      name: t("Auth.Visits.Title"),
+      route: "/visits",
+      view: <VisitsView />,
+      icon: faBezierCurve,
     },
   ];
 
