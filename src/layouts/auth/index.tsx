@@ -7,7 +7,7 @@ import MembershipRegistrationView from "../../views/auth/membershipRegistration"
 import Navbar from "./navbar";
 import Sidebar from "./sidebar";
 import { faEdit, faHome, faUsers } from "@fortawesome/free-solid-svg-icons";
-import DashboardNavbar from "./dashabordNavbar";
+import DashboardNavbar from "./dashboardNavbar";
 import FourZeroFourError from "../../views/common/404";
 import BeneficiariesView from "../../views/auth/beneficiaries";
 
