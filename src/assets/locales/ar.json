@@ -2,6 +2,7 @@
   "Auth": {
     "Beneficiaries": {
       "AddBeneficiary": "إضافة مستفيد",
+      "BeneficiaryName": "اسم المستفيد",
       "Title": "المستفيدون"
     },
     "Dashboard": {
@@ -225,6 +226,7 @@
     "Labels": {
       "Back": "عودة",
       "Ok": "حسناً",
+      "PhoneNumber": "رقم الجوال",
       "WrongUrl": "عذراً, العنوان المطلوب خاطئ"
     }
   },

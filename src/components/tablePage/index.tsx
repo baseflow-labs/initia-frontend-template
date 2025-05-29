@@ -4,9 +4,9 @@ import { Form as FormikForm, FormikProvider, useFormik } from "formik";
 import Button from "../core/button";
 import SelectInput from "../form/inputs/select";
 import SelectManyInput from "../form/inputs/selectMany";
-import DynamicTable from "../table";
+import DynamicTable, { TableProps } from "../table";
 
-interface Props {
+interface Props extends TableProps {
   title: string;
   filters?: {
     label: string;
@@ -14,10 +14,9 @@ interface Props {
     multi?: boolean;
   }[];
   actionButtons: { label: string }[];
-  columns: { label: string; name: string; type?: string }[];
-  data: {}[];
   onSearch: (values: {}) => void;
 }
+
 const TablePage = ({
   title,
   filters,

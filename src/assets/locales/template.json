@@ -2,6 +2,7 @@
   "Auth": {
     "Beneficiaries": {
       "AddBeneficiary": "Add Beneficiary",
+      "BeneficiaryName": "Beneficiary Name",
       "Title": "Beneficiaries"
     },
     "Dashboard": {
@@ -225,6 +226,7 @@
     "Labels": {
       "Back": "Back",
       "Ok": "Ok",
+      "PhoneNumber": "Phone Number",
       "WrongUrl": "Sorry, this is wrong address"
     }
   },

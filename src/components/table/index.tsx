@@ -5,11 +5,23 @@ import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import "moment/locale/ar";
 import { useTranslation } from "react-i18next";
 
-interface Props {
-  columns: { label: string; name: string; type?: string }[];
+export interface TableProps {
+  columns: {
+    label: string;
+    name: string;
+    type?: string;
+    options?: { value: string; label?: string }[];
+  }[];
   data: {}[];
 }
-const DynamicTable = ({ columns, data }: Props) => {
+
+interface Props {
+  data: string;
+  type?: string;
+  options?: { value: string; label?: string }[];
+}
+
+const DynamicTable = ({ columns, data }: TableProps) => {
   const { i18n } = useTranslation();
 
   const statusColorRender = (status = "") => {
@@ -25,12 +37,15 @@ const DynamicTable = ({ columns, data }: Props) => {
     }
   };
 
-  const dataRender = (data = "", type = "") => {
+  const dataRender = ({ data, type, options }: Props) => {
     switch (type) {
       case "date":
         return moment(data).locale(i18n.language).format(viewDateFormat);
-      case "phoneNo":
+      case "phoneNumber":
         return <span dir="ltr"> {"+966" + data}</span>;
+      case "select":
+        const option = options?.find(({ value }) => value === data);
+        return option?.label || option?.value;
       case "status":
         return (
           <span>
@@ -69,9 +84,9 @@ const DynamicTable = ({ columns, data }: Props) => {
               {i + 1}
             </td>
 
-            {columns.map(({ name, type }, y) => (
+            {columns.map(({ name, type, options }, y) => (
               <td className="py-3" key={y}>
-                {dataRender((row as any)[name], type)}
+                {dataRender({ data: (row as any)[name], type, options })}
               </td>
             ))}
           </tr>
