@@ -164,6 +164,10 @@ const BeneficiariesView = () => {
 
   const filters = [
     {
+      label: t("Auth.MembershipRegistration.Statuses.Status"),
+      options: statuses,
+    },
+    {
       label: t("Auth.MembershipRegistration.Form.Nationality.Title"),
       options: nationalities,
     },
@@ -204,15 +208,10 @@ const BeneficiariesView = () => {
       label: t("Global.Labels.PhoneNumber"),
     },
     {
-      type: "select",
-      options: provinces,
-      name: "province",
-      label: t("Auth.MembershipRegistration.Form.Province.Title"),
-    },
-    {
-      type: "text",
-      name: "governorate",
-      label: t("Auth.MembershipRegistration.Form.Governorate"),
+      type: "custom",
+      name: "city",
+      label: t("Auth.MembershipRegistration.Address"),
+      render: (row: any) => row.city + " - " + row.district,
     },
     {
       type: "custom",
@@ -226,7 +225,7 @@ const BeneficiariesView = () => {
         </Fragment>
       ),
       name: "status",
-      label: t("Auth.MembershipRegistration.Form.Governorate"),
+      label: t("Auth.MembershipRegistration.Statuses.Status"),
     },
   ];
 

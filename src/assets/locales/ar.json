@@ -10,6 +10,7 @@
       "Welcome": "Welcome To Dashboard"
     },
     "MembershipRegistration": {
+      "Address": "العنوان",
       "Form": {
         "AbsherDocument": "لوحة المعلومات من موقع ابشر - المركبات - العمالة",
         "Address": "عنوان السكن",
@@ -205,9 +206,10 @@
         "Accepted": "مقبول",
         "InPreview": "قيد المراجعة",
         "Incomplete": "طلب غير مكتمل",
-        "NeedHelp": "طلب غير مكتمل",
+        "NeedHelp": "بحاجة لمساعدة",
         "NewMember": "مستفيد جديد",
-        "Rejected": "مرفوض"
+        "Rejected": "مرفوض",
+        "Status": "حالة الطلب"
       },
       "Title": "طلب الانتساب للجمعية"
     }

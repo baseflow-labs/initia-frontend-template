@@ -10,6 +10,7 @@
       "Welcome": "Welcome To Dashboard"
     },
     "MembershipRegistration": {
+      "Address": "Address",
       "Form": {
         "AbsherDocument": "Absher Document",
         "Address": "Home Address",
@@ -207,7 +208,8 @@
         "Incomplete": "Incomplete",
         "NeedHelp": "Need Help",
         "NewMember": "New Member",
-        "Rejected": "Rejected"
+        "Rejected": "Rejected",
+        "Status": "Status"
       },
       "Title": "Membership Registration"
     }
