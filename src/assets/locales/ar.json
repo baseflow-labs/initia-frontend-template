@@ -1,5 +1,9 @@
 {
   "Auth": {
+    "Beneficiaries": {
+      "AddBeneficiary": "إضافة مستفيد",
+      "Title": "المستفيدون"
+    },
     "Dashboard": {
       "Title": "Dashboard",
       "Welcome": "Welcome To Dashboard"
@@ -195,7 +199,8 @@
           "Title": "تم تقديم الطلب بنجاح"
         },
         "TawakkalnaDocument": "صورة بطاقة الهوية وسجل الأسرة من تطبيق توكلنا"
-      }
+      },
+      "Title": "طلب الانتساب للجمعية"
     }
   },
   "Global": {

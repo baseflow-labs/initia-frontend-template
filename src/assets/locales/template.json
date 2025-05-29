@@ -1,5 +1,9 @@
 {
   "Auth": {
+    "Beneficiaries": {
+      "AddBeneficiary": "Add Beneficiary",
+      "Title": "Beneficiaries"
+    },
     "Dashboard": {
       "Title": "Dashboard",
       "Welcome": "Welcome To Dashboard"
@@ -195,7 +199,8 @@
           "Title": "Application Has Been Submitted Successfully"
         },
         "TawakkalnaDocument": "Tawakkalna Document"
-      }
+      },
+      "Title": "Membership Registration"
     }
   },
   "Global": {

@@ -6,9 +6,10 @@ import DashboardView from "../../views/auth/dashboard";
 import MembershipRegistrationView from "../../views/auth/membershipRegistration";
 import Navbar from "./navbar";
 import Sidebar from "./sidebar";
-import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faHome, faUsers } from "@fortawesome/free-solid-svg-icons";
 import DashboardNavbar from "./dashabordNavbar";
 import FourZeroFourError from "../../views/common/404";
+import BeneficiariesView from "../../views/auth/beneficiaries";
 
 const AuthLayout = () => {
   const { t } = useTranslation();
@@ -16,20 +17,27 @@ const AuthLayout = () => {
 
   const authRoutes = [
     {
-      name: t("Auth.Dashboard.Title"),
-      route: "/",
+      name: t("Auth.MembershipRegistration.Title"),
+      route: "/apply",
       view: <MembershipRegistrationView />,
-      icon: faHome,
+      icon: faEdit,
     },
     {
       name: t("Auth.Dashboard.Title"),
-      route: "/dashboard",
+      route: "/",
       view: <DashboardView />,
       icon: faHome,
     },
+    {
+      name: t("Auth.Beneficiaries.Title"),
+      route: "/beneficiaries",
+      view: <BeneficiariesView />,
+      icon: faUsers,
+    },
   ];
 
-  const showSidebar = location.pathname !== "/" && location.pathname !== "";
+  const showSidebar =
+    location.pathname !== "/apply" && location.pathname !== "apply";
 
   return (
     <Fragment>

@@ -24,21 +24,23 @@ const Navbar = () => {
         <div className="collapse navbar-collapse justify-content-center">
           <ul className="navbar-nav mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="#">
+              <span
+                className="nav-link active"
+                role="button"
+                onClick={() => navigate("/")}
+              >
                 الرئيسية
-              </a>
+              </span>
             </li>
 
             <li className="nav-item">
-              <a className="nav-link" href="#">
-                مساعدة
-              </a>
-            </li>
-
-            <li className="nav-item">
-              <a className="nav-link" href="#">
+              <span
+                className="nav-link"
+                role="button"
+                onClick={() => navigate("/contact")}
+              >
                 تواصل معنا
-              </a>
+              </span>
             </li>
           </ul>
         </div>
