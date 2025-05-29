@@ -1,5 +1,13 @@
 {
   "Auth": {
+    "Aids": {
+      "AddAid": "Send Aid",
+      "AidName": "Aid Name",
+      "AidPurpose": "Aid Purpose",
+      "AidType": "Aid Type",
+      "RecaptionDate": "Recaption Date",
+      "Title": "Aids"
+    },
     "Beneficiaries": {
       "AddBeneficiary": "Add Beneficiary",
       "BeneficiaryName": "Beneficiary Name",
@@ -240,6 +248,7 @@
       }
     },
     "Labels": {
+      "ApplicationDate": "Application Date",
       "Back": "Back",
       "Ok": "Ok",
       "PhoneNumber": "Phone Number",

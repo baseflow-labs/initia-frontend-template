@@ -1,6 +1,6 @@
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import * as VisitApi from "../../../api/profile/beneficiary";
+import * as AidApi from "../../../api/profile/beneficiary";
 import TablePage from "../../../components/tablePage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
@@ -9,13 +9,13 @@ import {
   renderDataFromOptions,
 } from "../../../utils/fucntions";
 
-const VisitsView = () => {
+const AidsView = () => {
   const { t } = useTranslation();
-  const [beneficiaries, setVisits] = useState([{}]);
+  const [beneficiaries, setAids] = useState([{}]);
 
   useLayoutEffect(() => {
-    VisitApi.getAll().then((res) => {
-      setVisits(
+    AidApi.getAll().then((res) => {
+      setAids(
         (res as any).map(
           ({ contactsBank = {}, housing = {}, status = {}, ...rest }) => ({
             ...contactsBank,
@@ -28,9 +28,9 @@ const VisitsView = () => {
     });
   }, []);
 
-  const title = t("Auth.Visits.Title");
+  const title = t("Auth.Aids.Title");
 
-  const visitPurposes = [
+  const aidTypes = [
     {
       value: "A",
       label: "A",
@@ -74,12 +74,12 @@ const VisitsView = () => {
       options: statuses,
     },
     {
-      label: t("Auth.Visits.VisitPurpose"),
-      options: visitPurposes,
+      label: t("Auth.Aids.AidType"),
+      options: aidTypes,
     },
   ];
 
-  const actionButtons = [{ label: t("Auth.Visits.AddVisit") }];
+  const actionButtons = [{ label: t("Auth.Aids.AddAid") }];
 
   const columns = [
     {
@@ -88,26 +88,25 @@ const VisitsView = () => {
       label: t("Auth.Beneficiaries.BeneficiaryName"),
     },
     {
-      type: "date",
-      name: "date",
-      label: t("Auth.Visits.VisitDate"),
-    },
-    {
-      type: "phoneNumber",
-      name: "beneficiaryMobile",
-      label: t("Global.Labels.PhoneNumber"),
-    },
-    {
-      type: "custom",
-      name: "city",
-      label: t("Auth.MembershipRegistration.Address"),
-      render: (row: any) => row.city + " - " + row.district,
+      type: "text",
+      name: "name",
+      label: t("Auth.Aids.AidName"),
     },
     {
       type: "select",
-      options: visitPurposes,
+      options: aidTypes,
       name: "type",
-      label: t("Auth.Visits.VisitPurpose"),
+      label: t("Auth.Aids.AidType"),
+    },
+    {
+      type: "date",
+      name: "applicationDate",
+      label: t("Global.Labels.ApplicationDate"),
+    },
+    {
+      type: "date",
+      name: "recaptionDate",
+      label: t("Auth.Aids.RecaptionDate"),
     },
     {
       type: "custom",
@@ -137,4 +136,4 @@ const VisitsView = () => {
   );
 };
 
-export default VisitsView;
+export default AidsView;

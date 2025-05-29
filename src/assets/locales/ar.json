@@ -1,5 +1,12 @@
 {
   "Auth": {
+    "Aids": {
+      "AddAid": "ارسال معونة",
+      "AidName": "اسم المعونة",
+      "AidType": "نوع المعونة",
+      "RecaptionDate": "تاريخ الاستلام",
+      "Title": "طلبات الإعانة"
+    },
     "Beneficiaries": {
       "AddBeneficiary": "إضافة مستفيد",
       "BeneficiaryName": "اسم المستفيد",
@@ -242,6 +249,7 @@
     "Labels": {
       "Back": "عودة",
       "Ok": "حسناً",
+      "ApplicationDate": "تاريخ التقديم",
       "PhoneNumber": "رقم الجوال",
       "WrongUrl": "عذراً, العنوان المطلوب خاطئ"
     }

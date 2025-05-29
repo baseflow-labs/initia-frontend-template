@@ -2,20 +2,22 @@ import { useTranslation } from "react-i18next";
 import { Route, Routes, useLocation } from "react-router";
 import { Fragment } from "react/jsx-runtime";
 
-import DashboardView from "../../views/auth/dashboard";
-import MembershipRegistrationView from "../../views/auth/membershipRegistration";
-import Navbar from "./navbar";
-import Sidebar from "./sidebar";
 import {
   faBezierCurve,
+  faBoxOpen,
   faEdit,
   faHome,
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
-import DashboardNavbar from "./dashboardNavbar";
-import FourZeroFourError from "../../views/common/404";
+import AidsView from "../../views/auth/aids";
 import BeneficiariesView from "../../views/auth/beneficiaries";
+import DashboardView from "../../views/auth/dashboard";
+import MembershipRegistrationView from "../../views/auth/membershipRegistration";
 import VisitsView from "../../views/auth/visits";
+import FourZeroFourError from "../../views/common/404";
+import DashboardNavbar from "./dashboardNavbar";
+import Navbar from "./navbar";
+import Sidebar from "./sidebar";
 
 const AuthLayout = () => {
   const { t } = useTranslation();
@@ -45,6 +47,12 @@ const AuthLayout = () => {
       route: "/visits",
       view: <VisitsView />,
       icon: faBezierCurve,
+    },
+    {
+      name: t("Auth.Aids.Title"),
+      route: "/aids",
+      view: <AidsView />,
+      icon: faBoxOpen,
     },
   ];
 
