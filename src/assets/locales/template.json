@@ -36,6 +36,7 @@
         "Dependents": {
           "AddNew": "Add New Dependant",
           "Dependant": "Dependant",
+          "DependentSaved": "Dependant {{name}} data has been saved successfully",
           "SaveDependent": "Save Dependent Data"
         },
         "DependentsData": "Dependents Data",

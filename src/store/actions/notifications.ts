@@ -1,6 +1,6 @@
 export interface NotificationProps {
   msg: string;
-  type?: string;
+  type?: "err" | "warning";
   [key: string]: any;
 }
 
