@@ -23,6 +23,7 @@ const TablePage = ({
   actionButtons,
   columns,
   data,
+  onPageChange,
   onSearch,
 }: Props) => {
   const formik = useFormik<Record<string, any>>({
@@ -85,7 +86,7 @@ const TablePage = ({
         </div>
       </div>
 
-      <DynamicTable columns={columns} data={data} />
+      <DynamicTable columns={columns} data={data} onPageChange={onPageChange} />
     </div>
   );
 };

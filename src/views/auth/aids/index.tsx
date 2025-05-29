@@ -131,6 +131,7 @@ const AidsView = () => {
       actionButtons={actionButtons}
       columns={columns}
       data={beneficiaries}
+      onPageChange={(i = 0, x = 0) => console.log(i, x)}
       onSearch={(values) => console.log(values)}
     />
   );
