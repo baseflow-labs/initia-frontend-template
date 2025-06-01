@@ -3,11 +3,10 @@ import { useTranslation } from "react-i18next";
 
 import moment from "moment";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
+import { InputSingleProps } from "../../../components/form";
 import { dataRender } from "../../../components/table";
 import ColumnsPage from "../../../layouts/auth/columnsPage";
 import { dataDateFormat } from "../../../utils/consts";
-import { splitOverNumberPlusLeftover } from "../../../utils/fucntions";
-import { InputProps, InputSingleProps } from "../../../components/form";
 
 const BeneficiaryProfileView = () => {
   const { t } = useTranslation();
@@ -20,8 +19,6 @@ const BeneficiaryProfileView = () => {
       }
     );
   }, []);
-
-  const title = t("Auth.Beneficiaries.Profile.Title");
 
   const basicDataInputs: InputSingleProps[] = [
     {

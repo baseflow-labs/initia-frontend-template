@@ -37,7 +37,7 @@ const DependentsFormView = ({
   useEffect(() => setDependents(initialValues), [initialValues]);
 
   const remove = (i = 0) => {
-    setDependents((current) => current.filter((_, y) => y != i));
+    setDependents((current) => current.filter((_, y) => y !== i));
   };
 
   const dependentsDataInputs = (formik: FormikProps<Record<string, any>>) => [

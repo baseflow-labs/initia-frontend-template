@@ -11,9 +11,7 @@ import moment from "moment";
 import { useEffect, useState } from "react";
 import i18n from "../../i18next";
 import { useTranslation } from "react-i18next";
-
 import { viewDateFormat } from "../../utils/consts";
-
 import "moment/locale/ar";
 import { splitOverNumberPlusLeftover } from "../../utils/fucntions";
 
