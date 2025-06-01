@@ -28,3 +28,6 @@ export const renderDataFromOptions = (
 
   return option?.label || option?.value || "";
 };
+
+export const splitOverNumberPlusLeftover = (i: number, y = 2) =>
+  Math.floor(i / y) + (i % y > 0 ? 1 : 0);

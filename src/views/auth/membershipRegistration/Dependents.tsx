@@ -263,7 +263,7 @@ const DependentsFormView = ({
           label: t("Auth.MembershipRegistration.Form.Diseases.SkinDiseases"),
         },
       ],
-      Placeholder: t("Auth.MembershipRegistration.Form.Diseases.None"),
+      placeholder: t("Auth.MembershipRegistration.Form.Diseases.None"),
       name: "diseases",
       label: t("Auth.MembershipRegistration.Form.Diseases.Title"),
       required: false,
