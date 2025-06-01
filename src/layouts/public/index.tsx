@@ -9,6 +9,7 @@ import OtpView from "../../views/public/otp";
 import RegisterView from "../../views/public/register";
 import ResetPasswordView from "../../views/public/ResetPassword";
 import TermsConditions from "../../views/public/termsConditions";
+import FourZeroFourError from "../../views/common/404";
 
 const AuthLayout = () => {
   const { t } = useTranslation();
@@ -117,6 +118,8 @@ const AuthLayout = () => {
                 {publicRoutes.map(({ name, route, view }, i) => (
                   <Route path={route} element={view} key={i} />
                 ))}
+
+                <Route path="*" element={<FourZeroFourError />} />
               </Routes>
             </div>
           </div>

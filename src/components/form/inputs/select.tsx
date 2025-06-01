@@ -7,19 +7,24 @@ type FinalInput = InputProps &
   React.InputHTMLAttributes<HTMLInputElement> &
   React.SelectHTMLAttributes<HTMLSelectElement>;
 
-const SelectInput: React.FC<FinalInput> = (input) => {
+const SelectInput: React.FC<FinalInput> = ({
+  className,
+  placeholder,
+  options,
+  ...input
+}) => {
   const { t } = useTranslation();
 
   return (
     <select
       {...input}
-      className={`form-select form-select-sm ${commonInputClasses}`}
+      className={`form-select form-select-sm ${commonInputClasses} ${className}`}
     >
       <option value="">
-        {input.placeholder || t("Global.Form.Labels.PleaseSelect")}
+        {placeholder || t("Global.Form.Labels.PleaseSelect")}
       </option>
 
-      {input.options?.map((option) => (
+      {options?.map((option) => (
         <option key={option.value} value={option.value}>
           {option.label ?? option.value}
         </option>

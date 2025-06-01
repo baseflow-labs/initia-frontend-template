@@ -1,10 +1,28 @@
 {
   "Auth": {
+    "Aids": {
+      "AddAid": "Send Aid",
+      "AidName": "Aid Name",
+      "AidPurpose": "Aid Purpose",
+      "AidType": "Aid Type",
+      "RecaptionDate": "Recaption Date",
+      "Title": "Aids"
+    },
+    "Beneficiaries": {
+      "AddBeneficiary": "Add Beneficiary",
+      "BeneficiaryName": "Beneficiary Name",
+      "Profile": {
+        "ProfileDetails": "Profile Details",
+        "Title": "Profile"
+      },
+      "Title": "Beneficiaries"
+    },
     "Dashboard": {
       "Title": "Dashboard",
       "Welcome": "Welcome To Dashboard"
     },
     "MembershipRegistration": {
+      "Address": "Address",
       "Form": {
         "AbsherDocument": "Absher Document",
         "Address": "Home Address",
@@ -31,11 +49,13 @@
         "ContactData": "Contact Data",
         "CreditStatement": "Credit Statement",
         "CreditStatementNote": "In case of having officially documented debts",
+        "DependantData": "Dependant {{name}} Data",
         "DependentMobile": "Dependent Mobile",
         "DependentMobileNote": "If Any",
         "Dependents": {
           "AddNew": "Add New Dependant",
           "Dependant": "Dependant",
+          "DependentSaved": "Dependant {{name}} data has been saved successfully",
           "SaveDependent": "Save Dependent Data"
         },
         "DependentsData": "Dependents Data",
@@ -194,7 +214,23 @@
           "Title": "Application Has Been Submitted Successfully"
         },
         "TawakkalnaDocument": "Tawakkalna Document"
-      }
+      },
+      "Statuses": {
+        "Accepted": "Accepted",
+        "InPreview": "In Preview",
+        "Incomplete": "Incomplete",
+        "NeedHelp": "Need Help",
+        "NewMember": "New Member",
+        "Rejected": "Rejected",
+        "Status": "Status"
+      },
+      "Title": "Membership Registration"
+    },
+    "Visits": {
+      "AddVisit": "Add Visit",
+      "Title": "Visits",
+      "VisitDate": "Visit Date",
+      "VisitPurpose": "Visit Purpose"
     }
   },
   "Global": {
@@ -217,8 +253,12 @@
       }
     },
     "Labels": {
+      "Action": "Action",
+      "ApplicationDate": "Application Date",
       "Back": "Back",
-      "Ok": "Ok"
+      "Ok": "Ok",
+      "PhoneNumber": "Phone Number",
+      "WrongUrl": "Sorry, this is wrong address"
     }
   },
   "Public": {

@@ -1,48 +1,23 @@
 import { faBell, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Logo from "../../assets/images/brand/logo-full.png";
-import profilePhotoPlaceholder from "../../assets/images/profile-image-placeholder.png";
 import { useDispatch } from "react-redux";
+import profilePhotoPlaceholder from "../../assets/images/profile-image-placeholder.png";
 import { logout } from "../../store/actions/auth";
-import { useNavigate } from "react-router";
 
-const Navbar = () => {
+const DashboardNavbar = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-white px-4 py-4">
+    <nav className="navbar navbar-expand-lg navbar-light bg-white py-4 mt-2 me-4 ms-0 ps-0">
       <div className="container-fluid">
-        <span
-          className="navbar-brand"
-          onClick={() => navigate("/")}
-          role="button"
-        >
-          <img src={Logo} style={{ height: "50px" }} />
-        </span>
-
-        <div className="collapse navbar-collapse justify-content-center">
-          <ul className="navbar-nav mb-2 mb-lg-0">
-            <li className="nav-item">
-              <span
-                className="nav-link active"
-                role="button"
-                onClick={() => navigate("/")}
-              >
-                الرئيسية
-              </span>
-            </li>
-
-            <li className="nav-item">
-              <span
-                className="nav-link"
-                role="button"
-                onClick={() => navigate("/contact")}
-              >
-                تواصل معنا
-              </span>
-            </li>
-          </ul>
+        <div className="collapse navbar-collapse">
+          <form className="w-50">
+            <input
+              className="form-control w-100"
+              type="text"
+              placeholder="بحث"
+            />
+          </form>
         </div>
 
         <div className="d-flex align-items-center gap-3">
@@ -127,4 +102,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default DashboardNavbar;

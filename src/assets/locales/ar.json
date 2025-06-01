@@ -1,10 +1,27 @@
 {
   "Auth": {
+    "Aids": {
+      "AddAid": "ارسال معونة",
+      "AidName": "اسم المعونة",
+      "AidType": "نوع المعونة",
+      "RecaptionDate": "تاريخ الاستلام",
+      "Title": "طلبات الإعانة"
+    },
+    "Beneficiaries": {
+      "AddBeneficiary": "إضافة مستفيد",
+      "BeneficiaryName": "اسم المستفيد",
+      "Profile": {
+        "ProfileDetails": "تفاصيل ملف المستفيد",
+        "Title": "ملف المستفيد"
+      },
+      "Title": "المستفيدون"
+    },
     "Dashboard": {
       "Title": "Dashboard",
       "Welcome": "Welcome To Dashboard"
     },
     "MembershipRegistration": {
+      "Address": "العنوان",
       "Form": {
         "AbsherDocument": "لوحة المعلومات من موقع ابشر - المركبات - العمالة",
         "Address": "عنوان السكن",
@@ -36,9 +53,11 @@
         "Dependents": {
           "AddNew": "إضافة تابع جديد",
           "Dependant": "تابع",
+          "DependentSaved": "تم حفظ بيانات التابع {{name}} بنجاح",
           "SaveDependent": "حفظ بيانات التابع"
         },
         "DependentsData": "بيانات التابعين",
+        "DependantData": "بيانات التابع {{name}}",
         "Diseases": {
           "Cancerous": "أمراض سرطانية",
           "ChestDiseases": "أمراض صدرية وتنفسية",
@@ -194,7 +213,23 @@
           "Title": "تم تقديم الطلب بنجاح"
         },
         "TawakkalnaDocument": "صورة بطاقة الهوية وسجل الأسرة من تطبيق توكلنا"
-      }
+      },
+      "Statuses": {
+        "Accepted": "مقبول",
+        "InPreview": "قيد المراجعة",
+        "Incomplete": "طلب غير مكتمل",
+        "NeedHelp": "بحاجة لمساعدة",
+        "NewMember": "مستفيد جديد",
+        "Rejected": "مرفوض",
+        "Status": "حالة الطلب"
+      },
+      "Title": "طلب الانتساب للجمعية"
+    },
+    "Visits": {
+      "AddVisit": "جدولة زيارة",
+      "Title": "الزيارات الميدانية",
+      "VisitDate": "تاريخ الزيارة",
+      "VisitPurpose": "سبب الزيارة"
     }
   },
   "Global": {
@@ -217,8 +252,12 @@
       }
     },
     "Labels": {
+      "Action": "إجراء",
+      "ApplicationDate": "تاريخ التقديم",
       "Back": "عودة",
-      "Ok": "حسناً"
+      "Ok": "حسناً",
+      "PhoneNumber": "رقم الجوال",
+      "WrongUrl": "عذراً, العنوان المطلوب خاطئ"
     }
   },
   "Public": {

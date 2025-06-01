@@ -24,6 +24,16 @@ interface Props {
 const mainPath = "/beneficiary";
 const { user } = (store.getState() as RootState).auth;
 
+const getAll = async () => {
+  const res = await api.get(mainPath);
+  return res;
+};
+
+const getById = async (id: string) => {
+  const res = await api.get(mainPath + "/" + id);
+  return res;
+};
+
 const getByUserId = async () => {
   const res = await api.get(mainPath + "/by-user/" + user.id);
   return res;
@@ -41,4 +51,4 @@ const createOrUpdate = async (data: Props) => {
   );
 };
 
-export { createOrUpdate, getByUserId };
+export { getAll, getById, getByUserId, createOrUpdate };

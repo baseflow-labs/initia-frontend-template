@@ -37,13 +37,19 @@ interface InputBasicProps {
     | string;
   required?: boolean;
   defaultValue?: string | number;
+  placeholder?: string;
+  min?: string | number;
+  max?: string | number;
+  step?: number;
+  minLength?: number;
+  maxLength?: number;
   options?: {
     value: string | number;
     label?: string;
   }[];
 }
 
-interface InputSingleProps extends InputBasicProps {
+export interface InputSingleProps extends InputBasicProps {
   logo?: string;
   halfCol?: boolean;
   prefixText?: string | number;

@@ -2,14 +2,16 @@ import { faPerson, faTrash, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FormikProps } from "formik";
 import moment from "moment";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 import { Fragment } from "react/jsx-runtime";
 
 import * as DependentApi from "../../../api/profile/dependent";
 import Button from "../../../components/core/button";
 import Spinner from "../../../components/core/spinner";
 import Form from "../../../components/form";
+import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
 import { dataDateFormat } from "../../../utils/consts";
 import { apiCatchGlobalHandler } from "../../../utils/fucntions";
@@ -28,11 +30,15 @@ const DependentsFormView = ({
   onFormSubmit,
 }: Props) => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
   const [dependents, setDependents] = useState(initialValues);
   const { loading } = useAppSelector((state) => state.loading);
 
-  const remove = (i = 0) =>
+  useEffect(() => setDependents(initialValues), [initialValues]);
+
+  const remove = (i = 0) => {
     setDependents((current) => current.filter((_, y) => y != i));
+  };
 
   const dependentsDataInputs = (formik: FormikProps<Record<string, any>>) => [
     {
@@ -257,7 +263,7 @@ const DependentsFormView = ({
           label: t("Auth.MembershipRegistration.Form.Diseases.SkinDiseases"),
         },
       ],
-      Placeholder: t("Auth.MembershipRegistration.Form.Diseases.None"),
+      placeholder: t("Auth.MembershipRegistration.Form.Diseases.None"),
       name: "diseases",
       label: t("Auth.MembershipRegistration.Form.Diseases.Title"),
       required: false,
@@ -331,6 +337,14 @@ const DependentsFormView = ({
                     ...e,
                   })
                     .then(() => {
+                      dispatch(
+                        addNotification({
+                          msg: t(
+                            "Auth.MembershipRegistration.Form.Dependents.DependentSaved",
+                            { name: e.fullName }
+                          ),
+                        })
+                      );
                       setDependents((current) =>
                         [...current, e].filter((data) => !data.idNumber)
                       );

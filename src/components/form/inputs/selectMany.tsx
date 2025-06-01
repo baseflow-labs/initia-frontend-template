@@ -14,12 +14,14 @@ interface OptionType {
 
 interface SelectManyInputProps extends InputProps {
   placeholder?: string;
+  className?: string;
 }
 
 const SelectManyInput: React.FC<SelectManyInputProps> = ({
   name,
   options,
   placeholder,
+  className,
 }) => {
   const { t } = useTranslation();
   const [field, , helpers] = useField<string[]>(name);
@@ -122,7 +124,7 @@ const SelectManyInput: React.FC<SelectManyInputProps> = ({
       onChange={handleChange}
       styles={customStyles}
       placeholder={placeholder || t("Global.Form.Labels.PleaseSelect")}
-      className={`w-100 px-0 ${commonInputClasses}`}
+      className={`w-100 rounded-2 px-3 ${className}`}
       options={reactSelectOptions}
       components={{
         DropdownIndicator,

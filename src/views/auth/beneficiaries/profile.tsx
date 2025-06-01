@@ -1,65 +1,29 @@
-import { faCheckCircle, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { FormikProps } from "formik";
-import moment from "moment";
-import { useLayoutEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router";
-import { Fragment } from "react/jsx-runtime";
 
+import moment from "moment";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
-import * as ContactApi from "../../../api/profile/contact";
-import * as HousingApi from "../../../api/profile/housing";
-import * as IncomeApi from "../../../api/profile/income";
-import * as NationalRecordApi from "../../../api/profile/nationalRecord";
-import absherLogo from "../../../assets/images/partners/absher.svg";
-import eduMinistryLogo from "../../../assets/images/partners/eduMinistry.svg";
-import ejarLogo from "../../../assets/images/partners/ejar.svg";
-import masrafLogo from "../../../assets/images/partners/Masraf.svg";
-import ministryLogo from "../../../assets/images/partners/ministry.svg";
-import molimLogo from "../../../assets/images/partners/molim.svg";
-import tawakkalnaLogo from "../../../assets/images/partners/Tawakkalna.svg";
-import Button from "../../../components/core/button";
-import Form from "../../../components/form";
-import WizardFormStepper from "../../../components/form/wizard/stepper";
+import { dataRender } from "../../../components/table";
+import ColumnsPage from "../../../layouts/auth/columnsPage";
 import { dataDateFormat } from "../../../utils/consts";
-import { apiCatchGlobalHandler } from "../../../utils/fucntions";
-import DependentsFormView from "./Dependents";
+import { splitOverNumberPlusLeftover } from "../../../utils/fucntions";
+import { InputProps, InputSingleProps } from "../../../components/form";
 
-const MembershipRegistrationView = () => {
+const BeneficiaryProfileView = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const [beneficiary, setBeneficiary] = useState<any>();
 
-  const [currentStep, setCurrentStep] = useState(0);
-  const [formData, setFormData] = useState({
-    beneficiary: { id: "" },
-    contactsBank: {},
-    housing: {},
-    income: {},
-    dependents: [{ fullName: "", idNumber: "" }],
-    nationalRecord: {},
-  });
-
-  useLayoutEffect(() => {
-    BeneficiaryApi.getByUserId()
-      .then((res: any) => (res.beneficiary.id ? setFormData(res) : ""))
-      .catch(apiCatchGlobalHandler);
+  useEffect(() => {
+    BeneficiaryApi.getById("5fa327aa-de97-413b-a396-04c473f6df0f").then(
+      (res) => {
+        setBeneficiary(res as any);
+      }
+    );
   }, []);
 
-  const onNextStep = (values = {}, service = "") => {
-    window.scrollTo(0, 0);
-    setFormData((current) => ({
-      ...current,
-      [service]: { ...(current as any)[service], ...values },
-    }));
-    setCurrentStep((current = 0) => current + 1);
-  };
+  const title = t("Auth.Beneficiaries.Profile.Title");
 
-  const onPreviousStep = () => {
-    setCurrentStep((current = 0) => current - 1);
-  };
-
-  const basicDataInputs = (formik: FormikProps<Record<string, any>>) => [
+  const basicDataInputs: InputSingleProps[] = [
     {
       type: "select",
       options: [
@@ -178,102 +142,86 @@ const MembershipRegistrationView = () => {
       required: true,
       halfCol: true,
     },
-    ...(formik.values.healthStatus === "Sick"
-      ? [
-          {
-            type: "selectMany",
-            options: [
-              {
-                value: "Disability",
-                label: t(
-                  "Auth.MembershipRegistration.Form.Diseases.Disability"
-                ),
-              },
-              {
-                value: "Hearing Impairment",
-                label: t(
-                  "Auth.MembershipRegistration.Form.Diseases.HearingImpairment"
-                ),
-              },
-              {
-                value: "Visual Impairment",
-                label: t(
-                  "Auth.MembershipRegistration.Form.Diseases.VisualImpairment"
-                ),
-              },
-              {
-                value: "Mental Disability",
-                label: t(
-                  "Auth.MembershipRegistration.Form.Diseases.MentalDisability"
-                ),
-              },
-              {
-                value: "Chronic Diseases",
-                label: t(
-                  "Auth.MembershipRegistration.Form.Diseases.ChronicDiseases"
-                ),
-              },
-              {
-                value: "Neurological Diseases",
-                label: t(
-                  "Auth.MembershipRegistration.Form.Diseases.NeurologicalDiseases"
-                ),
-              },
-              {
-                value: "Genetic Diseases",
-                label: t(
-                  "Auth.MembershipRegistration.Form.Diseases.GeneticDiseases"
-                ),
-              },
-              {
-                value: "Cancerous",
-                label: t("Auth.MembershipRegistration.Form.Diseases.Cancerous"),
-              },
-              {
-                value: "Chest Diseases",
-                label: t(
-                  "Auth.MembershipRegistration.Form.Diseases.ChestDiseases"
-                ),
-              },
-              {
-                value: "Liver Diseases",
-                label: t(
-                  "Auth.MembershipRegistration.Form.Diseases.LiverDiseases"
-                ),
-              },
-              {
-                value: "Skin Diseases",
-                label: t(
-                  "Auth.MembershipRegistration.Form.Diseases.SkinDiseases"
-                ),
-              },
-            ],
-            placeholder: t("Auth.MembershipRegistration.Form.Diseases.None"),
-            name: "diseases",
-            label: t("Auth.MembershipRegistration.Form.Diseases.Title"),
-            required: false,
-          },
-          {
-            type: "radio",
-            options: [
-              { value: "Yes", label: t("Global.Form.Labels.Yes") },
-              { value: "No", label: t("Global.Form.Labels.No") },
-            ],
-            name: "incurableDisease",
-            label: t("Auth.MembershipRegistration.Form.IncurableDisease"),
-            required: true,
-          },
-          {
-            type: "file",
-            name: "healthStatementPhoto",
-            label: t("Auth.MembershipRegistration.Form.HealthStatementPhoto"),
-            required: true,
-          },
-        ]
-      : []),
+    {
+      type: "selectMany",
+      options: [
+        {
+          value: "Disability",
+          label: t("Auth.MembershipRegistration.Form.Diseases.Disability"),
+        },
+        {
+          value: "Hearing Impairment",
+          label: t(
+            "Auth.MembershipRegistration.Form.Diseases.HearingImpairment"
+          ),
+        },
+        {
+          value: "Visual Impairment",
+          label: t(
+            "Auth.MembershipRegistration.Form.Diseases.VisualImpairment"
+          ),
+        },
+        {
+          value: "Mental Disability",
+          label: t(
+            "Auth.MembershipRegistration.Form.Diseases.MentalDisability"
+          ),
+        },
+        {
+          value: "Chronic Diseases",
+          label: t("Auth.MembershipRegistration.Form.Diseases.ChronicDiseases"),
+        },
+        {
+          value: "Neurological Diseases",
+          label: t(
+            "Auth.MembershipRegistration.Form.Diseases.NeurologicalDiseases"
+          ),
+        },
+        {
+          value: "Genetic Diseases",
+          label: t("Auth.MembershipRegistration.Form.Diseases.GeneticDiseases"),
+        },
+        {
+          value: "Cancerous",
+          label: t("Auth.MembershipRegistration.Form.Diseases.Cancerous"),
+        },
+        {
+          value: "Chest Diseases",
+          label: t("Auth.MembershipRegistration.Form.Diseases.ChestDiseases"),
+        },
+        {
+          value: "Liver Diseases",
+          label: t("Auth.MembershipRegistration.Form.Diseases.LiverDiseases"),
+        },
+        {
+          value: "Skin Diseases",
+          label: t("Auth.MembershipRegistration.Form.Diseases.SkinDiseases"),
+        },
+      ],
+      placeholder: t("Auth.MembershipRegistration.Form.Diseases.None"),
+      name: "diseases",
+      label: t("Auth.MembershipRegistration.Form.Diseases.Title"),
+      required: false,
+    },
+    {
+      type: "radio",
+      options: [
+        { value: "Yes", label: t("Global.Form.Labels.Yes") },
+        { value: "No", label: t("Global.Form.Labels.No") },
+      ],
+      name: "incurableDisease",
+      label: t("Auth.MembershipRegistration.Form.IncurableDisease"),
+      required: true,
+    },
+    {
+      type: "file",
+      name: "healthStatementPhoto",
+      label: t("Auth.MembershipRegistration.Form.HealthStatementPhoto"),
+      required: true,
+    },
   ];
 
-  const contactDataInputs = () => [
+  const contactDataInputs: InputSingleProps[] = [
     {
       type: "phoneNumber",
       name: "beneficiaryMobile",
@@ -314,7 +262,7 @@ const MembershipRegistrationView = () => {
     },
   ];
 
-  const qualificationDataInputs = () => [
+  const qualificationDataInputs: InputSingleProps[] = [
     {
       type: "select",
       options: [
@@ -507,7 +455,7 @@ const MembershipRegistrationView = () => {
     },
   ];
 
-  const hostelDataInputs = (formik: FormikProps<Record<string, any>>) => [
+  const hostelDataInputs: InputSingleProps[] = [
     {
       type: "title",
       name: "title2",
@@ -673,9 +621,9 @@ const MembershipRegistrationView = () => {
       type: "file",
       name: "homeDocumentPhoto",
       label:
-        formik.values.homeOwnership === "Rental"
-          ? t("Auth.MembershipRegistration.Form.RentalContractPhoto")
-          : t("Auth.MembershipRegistration.Form.OwnershipDocumentPhoto"),
+        t("Auth.MembershipRegistration.Form.RentalContractPhoto") +
+        " / " +
+        t("Auth.MembershipRegistration.Form.OwnershipDocumentPhoto"),
       required: true,
       halfCol: true,
     },
@@ -686,70 +634,303 @@ const MembershipRegistrationView = () => {
       required: true,
       halfCol: true,
     },
-    ...(formik.values.homeOwnership === "Rental"
-      ? [
-          {
-            type: "number",
-            name: "rentalCharge",
-            label: t("Auth.MembershipRegistration.Form.RentalCharge"),
-            min: 0,
-            step: 0.1,
-            required: true,
-          },
-          {
-            type: "select",
-            options: [
-              {
-                value: "Self",
-                label: t("Auth.MembershipRegistration.Form.Payee.Self"),
-              },
-              {
-                value: "Relative",
-                label: t("Auth.MembershipRegistration.Form.Payee.Relative"),
-              },
-              {
-                value: "Society",
-                label: t("Auth.MembershipRegistration.Form.Payee.Society"),
-              },
-              {
-                value: "Government",
-                label: t("Auth.MembershipRegistration.Form.Payee.Government"),
-              },
-              {
-                value: "Installment",
-                label: t("Auth.MembershipRegistration.Form.Payee.Installment"),
-              },
-              {
-                value: "Free",
-                label: t("Auth.MembershipRegistration.Form.Payee.Free"),
-              },
-            ],
-            name: "payee",
-            label: t("Auth.MembershipRegistration.Form.Payee.Title"),
-            required: true,
-          },
-        ]
-      : []),
+    {
+      type: "number",
+      name: "rentalCharge",
+      label: t("Auth.MembershipRegistration.Form.RentalCharge"),
+      min: 0,
+      step: 0.1,
+      required: true,
+    },
+    {
+      type: "select",
+      options: [
+        {
+          value: "Self",
+          label: t("Auth.MembershipRegistration.Form.Payee.Self"),
+        },
+        {
+          value: "Relative",
+          label: t("Auth.MembershipRegistration.Form.Payee.Relative"),
+        },
+        {
+          value: "Society",
+          label: t("Auth.MembershipRegistration.Form.Payee.Society"),
+        },
+        {
+          value: "Government",
+          label: t("Auth.MembershipRegistration.Form.Payee.Government"),
+        },
+        {
+          value: "Installment",
+          label: t("Auth.MembershipRegistration.Form.Payee.Installment"),
+        },
+        {
+          value: "Free",
+          label: t("Auth.MembershipRegistration.Form.Payee.Free"),
+        },
+      ],
+      name: "payee",
+      label: t("Auth.MembershipRegistration.Form.Payee.Title"),
+      required: true,
+    },
   ];
 
-  const attachmentInputs = () => [
+  const dependentsDataInputs: InputSingleProps[] = [
+    {
+      type: "text",
+      name: "fullName",
+      label: t("Auth.MembershipRegistration.Form.FullName"),
+      required: true,
+    },
+    {
+      type: "date",
+      name: "dob",
+      min: moment().subtract(125, "y").format(dataDateFormat),
+      max: moment().format(dataDateFormat),
+      label: t("Auth.MembershipRegistration.Form.Dob"),
+      required: true,
+    },
+    {
+      type: "date",
+      name: "idExpiryDate",
+      max: moment().add(10, "y").format(dataDateFormat),
+      label: t("Auth.MembershipRegistration.Form.IdExpiryDate"),
+      required: true,
+    },
+    {
+      type: "numberText",
+      name: "idNumber",
+      minLength: 10,
+      maxLength: 10,
+      label: t("Auth.MembershipRegistration.Form.IdNumber"),
+      labelNote: t("Auth.MembershipRegistration.Form.IdNumberNote"),
+      required: true,
+    },
+    {
+      type: "radio",
+      options: [
+        {
+          value: "Male",
+          label: t("Auth.MembershipRegistration.Form.Gender.Male"),
+        },
+        {
+          value: "Female",
+          label: t("Auth.MembershipRegistration.Form.Gender.Female"),
+        },
+      ],
+      name: "gender",
+      label: t("Auth.MembershipRegistration.Form.Gender.Title"),
+      required: true,
+      halfCol: true,
+    },
+    {
+      type: "phoneNumber",
+      name: "mobile",
+      label: t("Auth.MembershipRegistration.Form.DependentMobile"),
+      labelNote: t("Auth.MembershipRegistration.Form.DependentMobileNote"),
+      required: false,
+    },
+    {
+      type: "select",
+      options: [
+        {
+          value: "Spouse",
+          label: t("Auth.MembershipRegistration.Form.Relation.Spouse"),
+        },
+        {
+          value: "Parent",
+          label: t("Auth.MembershipRegistration.Form.Relation.Parent"),
+        },
+        {
+          value: "Child",
+          label: t("Auth.MembershipRegistration.Form.Relation.Child"),
+        },
+        {
+          value: "Sibling",
+          label: t("Auth.MembershipRegistration.Form.Relation.Sibling"),
+        },
+        {
+          value: "Grandparent",
+          label: t("Auth.MembershipRegistration.Form.Relation.Grandparent"),
+        },
+        {
+          value: "Grandchild",
+          label: t("Auth.MembershipRegistration.Form.Relation.Grandchild"),
+        },
+        {
+          value: "Paternal Uncle / Aunt",
+          label: t(
+            "Auth.MembershipRegistration.Form.Relation.PaternalUncleAunt"
+          ),
+        },
+        {
+          value: "Maternal Uncle / Aunt",
+          label: t(
+            "Auth.MembershipRegistration.Form.Relation.MaternalUncleAunt"
+          ),
+        },
+        {
+          value: "InLow",
+          label: t("Auth.MembershipRegistration.Form.Relation.InLow"),
+        },
+        {
+          value: "None",
+          label: t("Auth.MembershipRegistration.Form.Relation.None"),
+        },
+      ],
+      name: "relation",
+      label: t("Auth.MembershipRegistration.Form.Relation.Title"),
+      required: true,
+    },
+    {
+      type: "select",
+      options: [
+        {
+          value: "Below 5",
+          label: t("Auth.MembershipRegistration.Form.AgeGroup.BelowFive"),
+        },
+        {
+          value: "5 - 12",
+          label: t("Auth.MembershipRegistration.Form.AgeGroup.FiveToTwelve"),
+        },
+        {
+          value: "12 - 18",
+          label: t(
+            "Auth.MembershipRegistration.Form.AgeGroup.TwelveToEighteen"
+          ),
+        },
+        {
+          value: "18 - 30",
+          label: t(
+            "Auth.MembershipRegistration.Form.AgeGroup.EighteenToThirty"
+          ),
+        },
+        {
+          value: "30 - 45",
+          label: t(
+            "Auth.MembershipRegistration.Form.AgeGroup.ThirtyToFortyFive"
+          ),
+        },
+        {
+          value: "45 - 60",
+          label: t(
+            "Auth.MembershipRegistration.Form.AgeGroup.FortyFiveToSixty"
+          ),
+        },
+        {
+          value: "Above 60",
+          label: t("Auth.MembershipRegistration.Form.AgeGroup.AboveSixty"),
+        },
+      ],
+      name: "ageGroup",
+      label: t("Auth.MembershipRegistration.Form.AgeGroup.Title"),
+      required: true,
+    },
+    {
+      type: "radio",
+      options: [
+        {
+          value: "Healthy",
+          label: t("Auth.MembershipRegistration.Form.HealthStatus.Healthy"),
+        },
+        {
+          value: "Sick",
+          label: t("Auth.MembershipRegistration.Form.HealthStatus.Sick"),
+        },
+      ],
+      name: "healthStatus",
+      label: t("Auth.MembershipRegistration.Form.HealthStatus.Title"),
+      required: true,
+    },
+    {
+      type: "selectMany",
+      options: [
+        {
+          value: "Disability",
+          label: t("Auth.MembershipRegistration.Form.Diseases.Disability"),
+        },
+        {
+          value: "Hearing Impairment",
+          label: t(
+            "Auth.MembershipRegistration.Form.Diseases.HearingImpairment"
+          ),
+        },
+        {
+          value: "Visual Impairment",
+          label: t(
+            "Auth.MembershipRegistration.Form.Diseases.VisualImpairment"
+          ),
+        },
+        {
+          value: "Mental Disability",
+          label: t(
+            "Auth.MembershipRegistration.Form.Diseases.MentalDisability"
+          ),
+        },
+        {
+          value: "Chronic Diseases",
+          label: t("Auth.MembershipRegistration.Form.Diseases.ChronicDiseases"),
+        },
+        {
+          value: "Neurological Diseases",
+          label: t(
+            "Auth.MembershipRegistration.Form.Diseases.NeurologicalDiseases"
+          ),
+        },
+        {
+          value: "Genetic Diseases",
+          label: t("Auth.MembershipRegistration.Form.Diseases.GeneticDiseases"),
+        },
+        {
+          value: "Cancerous",
+          label: t("Auth.MembershipRegistration.Form.Diseases.Cancerous"),
+        },
+        {
+          value: "Chest Diseases",
+          label: t("Auth.MembershipRegistration.Form.Diseases.ChestDiseases"),
+        },
+        {
+          value: "Liver Diseases",
+          label: t("Auth.MembershipRegistration.Form.Diseases.LiverDiseases"),
+        },
+        {
+          value: "Skin Diseases",
+          label: t("Auth.MembershipRegistration.Form.Diseases.SkinDiseases"),
+        },
+      ],
+      placeholder: t("Auth.MembershipRegistration.Form.Diseases.None"),
+      name: "diseases",
+      label: t("Auth.MembershipRegistration.Form.Diseases.Title"),
+      required: false,
+    },
+    {
+      type: "radio",
+      options: [
+        { value: "Yes", label: t("Global.Form.Labels.Yes") },
+        { value: "No", label: t("Global.Form.Labels.No") },
+      ],
+      name: "incurableDisease",
+      label: t("Auth.MembershipRegistration.Form.IncurableDisease"),
+      required: false,
+    },
+  ];
+
+  const attachmentInputs: InputSingleProps[] = [
     {
       type: "file",
-      logo: absherLogo,
       name: "absherDocument",
       label: t("Auth.MembershipRegistration.Form.AbsherDocument"),
       required: true,
     },
     {
       type: "file",
-      logo: tawakkalnaLogo,
       name: "tawakkalnaDocument",
       label: t("Auth.MembershipRegistration.Form.TawakkalnaDocument"),
       required: true,
     },
     {
       type: "file",
-      logo: ministryLogo,
       name: "incomeDocument",
       label: t("Auth.MembershipRegistration.Form.IncomeDocument"),
       labelNote: t("Auth.MembershipRegistration.Form.IncomeDocumentNote"),
@@ -757,7 +938,6 @@ const MembershipRegistrationView = () => {
     },
     {
       type: "file",
-      logo: eduMinistryLogo,
       name: "studentsDocument",
       label: t("Auth.MembershipRegistration.Form.StudentsDocument"),
       labelNote: t("Auth.MembershipRegistration.Form.StudentsDocumentNote"),
@@ -765,21 +945,18 @@ const MembershipRegistrationView = () => {
     },
     {
       type: "file",
-      logo: ejarLogo,
       name: "rentalDocument",
       label: t("Auth.MembershipRegistration.Form.RentalDocument"),
       required: true,
     },
     {
       type: "file",
-      logo: masrafLogo,
       name: "masrefDocument",
       label: t("Auth.MembershipRegistration.Form.MasrefDocument"),
       required: true,
     },
     {
       type: "file",
-      logo: molimLogo,
       name: "creditStatement",
       label: t("Auth.MembershipRegistration.Form.CreditStatement"),
       labelNote: t("Auth.MembershipRegistration.Form.CreditStatementNote"),
@@ -787,180 +964,98 @@ const MembershipRegistrationView = () => {
     },
   ];
 
-  const HelpButton = () => (
-    <Button
-      className="w-100 p-2 ps-1 mb-3 text-start"
-      color="ghost"
-      type="button"
-    >
-      <FontAwesomeIcon icon={faInfoCircle} />{" "}
-      {t("Auth.MembershipRegistration.Form.ClickForHelp")}
-    </Button>
-  );
-
-  const BackButton = () => (
-    <Fragment>
-      <HelpButton />
-
-      <Button className="w-50 p-2" onClick={() => onPreviousStep()} outline>
-        {t("Global.Form.Labels.Previous")}
-      </Button>
-    </Fragment>
-  );
-
-  const formSteps = [
+  const cards = [
     {
-      label: t("Auth.MembershipRegistration.Form.BasicData"),
-      name: "BasicData",
-      contents: (
-        <Form
-          inputs={basicDataInputs}
-          submitText={t("Global.Form.Labels.SaveContinue")}
-          customButtons={<HelpButton />}
-          initialValues={formData.beneficiary}
-          onFormSubmit={(e) => {
-            BeneficiaryApi.createOrUpdate(e)
-              .then((res) => {
-                onNextStep({ ...e, ...res }, "beneficiary");
-              })
-              .catch(apiCatchGlobalHandler);
-          }}
-        />
-      ),
+      title: t("Auth.MembershipRegistration.Form.BasicData"),
+      data: beneficiary,
+      map: basicDataInputs,
     },
     {
-      label: t("Auth.MembershipRegistration.Form.ContactData"),
-      name: "ContactData",
-      contents: (
-        <Form
-          inputs={contactDataInputs}
-          submitText={t("Global.Form.Labels.SaveContinue")}
-          customButtons={<BackButton />}
-          initialValues={formData.contactsBank}
-          onFormSubmit={(e) => {
-            ContactApi.createOrUpdate({
-              beneficiary: formData.beneficiary.id,
-              ...e,
-            })
-              .then(() => {
-                onNextStep(e, "contactsBank");
-              })
-              .catch(apiCatchGlobalHandler);
-          }}
-        />
-      ),
+      title: t("Auth.MembershipRegistration.Form.ContactData"),
+      data: beneficiary?.contactsBank,
+      map: contactDataInputs,
     },
     {
-      label: t("Auth.MembershipRegistration.Form.QualificationData"),
-      name: "QualificationData",
-      contents: (
-        <Form
-          inputs={qualificationDataInputs}
-          submitText={t("Global.Form.Labels.SaveContinue")}
-          customButtons={<BackButton />}
-          initialValues={formData.income}
-          onFormSubmit={(e) => {
-            IncomeApi.createOrUpdate({
-              beneficiary: formData.beneficiary.id,
-              ...e,
-            })
-              .then(() => {
-                onNextStep(e, "income");
-              })
-              .catch(apiCatchGlobalHandler);
-          }}
-        />
-      ),
+      title: t("Auth.MembershipRegistration.Form.QualificationData"),
+      data: beneficiary?.income,
+      map: qualificationDataInputs,
     },
     {
-      label: t("Auth.MembershipRegistration.Form.HostelData"),
-      name: "HostelData",
-      contents: (
-        <Form
-          inputs={hostelDataInputs}
-          submitText={t("Global.Form.Labels.SaveContinue")}
-          customButtons={<BackButton />}
-          initialValues={formData.housing}
-          onFormSubmit={(e) => {
-            HousingApi.createOrUpdate({
-              beneficiary: formData.beneficiary.id,
-              ...e,
-            })
-              .then(() => {
-                onNextStep(e, "housing");
-              })
-              .catch(apiCatchGlobalHandler);
-          }}
-        />
-      ),
+      title: t("Auth.MembershipRegistration.Form.HostelData"),
+      data: beneficiary?.housing,
+      map: hostelDataInputs,
     },
+    ...(beneficiary?.dependents.map((dependent: any) => ({
+      title: t("Auth.MembershipRegistration.Form.DependantData", {
+        name: dependent.fullName,
+      }),
+      data: dependent,
+      map: dependentsDataInputs,
+    })) || []),
     {
-      label: t("Auth.MembershipRegistration.Form.DependentsData"),
-      name: "DependentsData",
-      contents: (
-        <DependentsFormView
-          customButtons={<BackButton />}
-          initialValues={formData.dependents}
-          onFormSubmit={(e) => onNextStep(e)}
-          beneficiary={formData.beneficiary.id}
-        />
-      ),
-    },
-    {
-      label: t("Auth.MembershipRegistration.Form.Attachments"),
-      name: "Attachments",
-      contents: (
-        <Form
-          inputs={attachmentInputs}
-          customButtons={<BackButton />}
-          initialValues={formData.nationalRecord}
-          onFormSubmit={(e) => {
-            NationalRecordApi.createOrUpdate({
-              beneficiary: formData.beneficiary.id,
-              ...e,
-            })
-              .then(() => {
-                onNextStep(e, "nationalRecord");
-              })
-              .catch(apiCatchGlobalHandler);
-          }}
-        />
-      ),
-    },
-    {
-      label: "",
-      name: "Success",
-      contents: (
-        <div className="text-center">
-          <h2>
-            <FontAwesomeIcon icon={faCheckCircle} className="text-success" />
-            <br />
-            {t("Auth.MembershipRegistration.Form.Success.Title")}
-          </h2>
-
-          <h6 className="text-muted my-4">
-            {t("Auth.MembershipRegistration.Form.Success.Text")}
-          </h6>
-
-          <Button color="info" onClick={() => navigate("/dashboard")}>
-            {t("Global.Labels.Ok")}
-          </Button>
-        </div>
-      ),
+      title: t("Auth.MembershipRegistration.Form.Attachments"),
+      data: beneficiary?.nationalRecord,
+      map: attachmentInputs,
     },
   ];
 
   return (
-    <Fragment>
-      <div className="px-1 mx-1 px-lg-5 mx-lg-5">
-        <WizardFormStepper
-          steps={formSteps}
-          currentStep={currentStep}
-          setCurrentStep={setCurrentStep}
-        />
-      </div>
-    </Fragment>
+    <ColumnsPage>
+      <Fragment>
+        <h2>{beneficiary?.fullName}</h2>
+
+        {cards.map(({ title, data, map }, i) => (
+          <div className="col-md-6 my-5" key={i}>
+            <h4 className="mb-4">{title}</h4>
+
+            <div className="card h-100">
+              <div className="card-body">
+                <table className="table table-borderless">
+                  <tbody>
+                    {data &&
+                      map
+                        // .reduce(
+                        //   (
+                        //     final: {
+                        //       prop1: InputSingleProps;
+                        //       prop2?: InputSingleProps;
+                        //     }[],
+                        //     current,
+                        //     i
+                        //   ) => {
+                        //     if (i % 2 === 0) {
+                        //       final.push({
+                        //         prop1: current,
+                        //         prop2: map[i + 1] || null,
+                        //       });
+                        //     }
+
+                        //     return final;
+                        //   },
+                        //   []
+                        // )
+                        .map((prop: InputSingleProps, y = 0) => (
+                          <tr key={y}>
+                            <td className="pb-3">{prop.label}</td>
+
+                            <td className="pb-3">
+                              {dataRender({
+                                data: (data as any)[prop.name || "id"],
+                                type: prop.type,
+                                options: prop.options || [],
+                              })}
+                            </td>
+                          </tr>
+                        ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        ))}
+      </Fragment>
+    </ColumnsPage>
   );
 };
 
-export default MembershipRegistrationView;
+export default BeneficiaryProfileView;
