@@ -49,6 +49,7 @@
         "ContactData": "Contact Data",
         "CreditStatement": "Credit Statement",
         "CreditStatementNote": "In case of having officially documented debts",
+        "DependantData": "Dependant {{name}} Data",
         "DependentMobile": "Dependent Mobile",
         "DependentMobileNote": "If Any",
         "Dependents": {

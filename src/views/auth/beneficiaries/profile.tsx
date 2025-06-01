@@ -977,7 +977,7 @@ const BeneficiaryProfileView = () => {
     },
     {
       title: t("Auth.MembershipRegistration.Form.QualificationData"),
-      data: beneficiary?.qualification,
+      data: beneficiary?.income,
       map: qualificationDataInputs,
     },
     {
@@ -985,14 +985,16 @@ const BeneficiaryProfileView = () => {
       data: beneficiary?.housing,
       map: hostelDataInputs,
     },
-    // {
-    //   title: t("Auth.MembershipRegistration.Form.DependentsData"),
-    //   data: beneficiary?.dependents,
-    //   map: dependentsDataInputs,
-    // },
+    ...(beneficiary?.dependents.map((dependent: any) => ({
+      title: t("Auth.MembershipRegistration.Form.DependantData", {
+        name: dependent.fullName,
+      }),
+      data: dependent,
+      map: dependentsDataInputs,
+    })) || []),
     {
       title: t("Auth.MembershipRegistration.Form.Attachments"),
-      data: beneficiary?.nationalData,
+      data: beneficiary?.nationalRecord,
       map: attachmentInputs,
     },
   ];
@@ -1000,7 +1002,7 @@ const BeneficiaryProfileView = () => {
   return (
     <ColumnsPage>
       <Fragment>
-        <h2>{beneficiary.fullName}</h2>
+        <h2>{beneficiary?.fullName}</h2>
 
         {cards.map(({ title, data, map }, i) => (
           <div className="col-md-6 my-5" key={i}>
@@ -1011,27 +1013,36 @@ const BeneficiaryProfileView = () => {
                 <table className="table table-borderless">
                   <tbody>
                     {data &&
-                      Array(splitOverNumberPlusLeftover(map.length))
-                        .fill("")
-                        .map((_, y) => (
+                      map
+                        // .reduce(
+                        //   (
+                        //     final: {
+                        //       prop1: InputSingleProps;
+                        //       prop2?: InputSingleProps;
+                        //     }[],
+                        //     current,
+                        //     i
+                        //   ) => {
+                        //     if (i % 2 === 0) {
+                        //       final.push({
+                        //         prop1: current,
+                        //         prop2: map[i + 1] || null,
+                        //       });
+                        //     }
+
+                        //     return final;
+                        //   },
+                        //   []
+                        // )
+                        .map((prop: InputSingleProps, y = 0) => (
                           <tr key={y}>
-                            <td className="py-3">{map[y].label}</td>
+                            <td className="pb-3">{prop.label}</td>
 
-                            <td className="py-3 fw-bold">
+                            <td className="pb-3">
                               {dataRender({
-                                data: (data as any)[map[y].name || "id"],
-                                type: map[y].type,
-                                options: map[y].options || [],
-                              })}
-                            </td>
-
-                            <td className="py-3">{map[y + 2].label}</td>
-
-                            <td className="py-3 fw-bold">
-                              {dataRender({
-                                data: (data as any)[map[y + 2].name || "id"],
-                                type: map[y + 2].type,
-                                options: map[y + 2].options || [],
+                                data: (data as any)[prop.name || "id"],
+                                type: prop.type,
+                                options: prop.options || [],
                               })}
                             </td>
                           </tr>
