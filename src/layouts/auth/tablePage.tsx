@@ -1,10 +1,10 @@
 import { faFilter, faHistory } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Form as FormikForm, FormikProvider, useFormik } from "formik";
-import Button from "../core/button";
-import SelectInput from "../form/inputs/select";
-import SelectManyInput from "../form/inputs/selectMany";
-import DynamicTable, { TableProps } from "../table";
+import Button from "../../components/core/button";
+import SelectInput from "../../components/form/inputs/select";
+import SelectManyInput from "../../components/form/inputs/selectMany";
+import DynamicTable, { TableProps } from "../../components/table";
 
 interface Props extends TableProps {
   title: string;
