@@ -1,10 +1,13 @@
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faFilter, faHistory } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Form as FormikForm, FormikProvider, useFormik } from "formik";
+
 import Button from "../../components/core/button";
 import SelectInput from "../../components/form/inputs/select";
 import SelectManyInput from "../../components/form/inputs/selectMany";
 import DynamicTable, { TableProps } from "../../components/table";
+import ColumnsPage from "./columnsPage";
 
 interface Props extends TableProps {
   title: string;
@@ -15,6 +18,12 @@ interface Props extends TableProps {
   }[];
   actionButtons: { label: string }[];
   onSearch: (values: {}) => void;
+  tableActions?: {
+    label: string;
+    icon: IconProp;
+    spread?: boolean;
+    onClick: (data: string | object) => void;
+  }[];
 }
 
 const TablePage = ({
@@ -25,6 +34,7 @@ const TablePage = ({
   data,
   onPageChange,
   onSearch,
+  tableActions,
 }: Props) => {
   const formik = useFormik<Record<string, any>>({
     initialValues: {},
@@ -36,7 +46,7 @@ const TablePage = ({
 
   return (
     <div>
-      <div className="row">
+      <ColumnsPage>
         <div className="col-md-3">
           <h3>{title}</h3>
         </div>
@@ -84,9 +94,14 @@ const TablePage = ({
             ))}
           </div>
         </div>
-      </div>
+      </ColumnsPage>
 
-      <DynamicTable columns={columns} data={data} onPageChange={onPageChange} />
+      <DynamicTable
+        columns={columns}
+        data={data}
+        onPageChange={onPageChange}
+        actions={tableActions}
+      />
     </div>
   );
 };

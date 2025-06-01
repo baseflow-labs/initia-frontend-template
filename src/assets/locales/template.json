@@ -11,6 +11,10 @@
     "Beneficiaries": {
       "AddBeneficiary": "Add Beneficiary",
       "BeneficiaryName": "Beneficiary Name",
+      "Profile": {
+        "ProfileDetails": "Profile Details",
+        "Title": "Profile"
+      },
       "Title": "Beneficiaries"
     },
     "Dashboard": {
@@ -248,6 +252,7 @@
       }
     },
     "Labels": {
+      "Action": "Action",
       "ApplicationDate": "Application Date",
       "Back": "Back",
       "Ok": "Ok",

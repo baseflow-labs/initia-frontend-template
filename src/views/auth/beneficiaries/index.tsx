@@ -1,12 +1,13 @@
+import { faCircle, faUser } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import TablePage from "../../../layouts/auth/tablePage";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import {
-  statusColorRender,
   renderDataFromOptions,
+  statusColorRender,
 } from "../../../utils/fucntions";
 
 const BeneficiariesView = () => {
@@ -229,6 +230,10 @@ const BeneficiariesView = () => {
     },
   ];
 
+  const viewProfile = (data: string | object) => {
+    console.log({ data });
+  };
+
   return (
     <TablePage
       title={title}
@@ -236,6 +241,13 @@ const BeneficiariesView = () => {
       actionButtons={actionButtons}
       columns={columns}
       data={beneficiaries}
+      tableActions={[
+        {
+          icon: faUser,
+          label: t("Auth.Beneficiaries.Profile.ProfileDetails"),
+          onClick: (data: string | object) => viewProfile(data),
+        },
+      ]}
       onPageChange={(i = 0, x = 0) => console.log(i, x)}
       onSearch={(values) => console.log(values)}
     />

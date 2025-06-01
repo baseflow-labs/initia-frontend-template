@@ -10,6 +10,10 @@
     "Beneficiaries": {
       "AddBeneficiary": "إضافة مستفيد",
       "BeneficiaryName": "اسم المستفيد",
+      "Profile": {
+        "ProfileDetails": "تفاصيل ملف المستفيد",
+        "Title": "ملف المستفيد"
+      },
       "Title": "المستفيدون"
     },
     "Dashboard": {
@@ -247,9 +251,10 @@
       }
     },
     "Labels": {
+      "Action": "إجراء",
+      "ApplicationDate": "تاريخ التقديم",
       "Back": "عودة",
       "Ok": "حسناً",
-      "ApplicationDate": "تاريخ التقديم",
       "PhoneNumber": "رقم الجوال",
       "WrongUrl": "عذراً, العنوان المطلوب خاطئ"
     }
