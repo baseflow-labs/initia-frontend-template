@@ -1,7 +1,3 @@
-import { useTranslation } from "react-i18next";
-import { Route, Routes, useLocation } from "react-router";
-import { Fragment } from "react/jsx-runtime";
-
 import {
   faBezierCurve,
   faBoxOpen,
@@ -9,8 +5,13 @@ import {
   faHome,
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
+import { useTranslation } from "react-i18next";
+import { Route, Routes, useLocation } from "react-router";
+import { Fragment } from "react/jsx-runtime";
+
 import AidsView from "../../views/auth/aids";
 import BeneficiariesView from "../../views/auth/beneficiaries";
+import BeneficiaryProfileView from "../../views/auth/beneficiaries/profile";
 import DashboardView from "../../views/auth/dashboard";
 import MembershipRegistrationView from "../../views/auth/membershipRegistration";
 import VisitsView from "../../views/auth/visits";
@@ -40,6 +41,12 @@ const AuthLayout = () => {
       name: t("Auth.Beneficiaries.Title"),
       route: "/beneficiaries",
       view: <BeneficiariesView />,
+      icon: faUsers,
+    },
+    {
+      name: t("Auth.Beneficiaries.Profile.Title"),
+      route: "/beneficiaries/profile/",
+      view: <BeneficiaryProfileView />,
       icon: faUsers,
     },
     {

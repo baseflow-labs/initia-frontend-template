@@ -29,6 +29,11 @@ const getAll = async () => {
   return res;
 };
 
+const getById = async (id: string) => {
+  const res = await api.get(mainPath + "/" + id);
+  return res;
+};
+
 const getByUserId = async () => {
   const res = await api.get(mainPath + "/by-user/" + user.id);
   return res;
@@ -46,4 +51,4 @@ const createOrUpdate = async (data: Props) => {
   );
 };
 
-export { getAll, getByUserId, createOrUpdate };
+export { getAll, getById, getByUserId, createOrUpdate };
