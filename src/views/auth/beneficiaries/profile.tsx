@@ -1005,7 +1005,7 @@ const BeneficiaryProfileView = () => {
           <div className="col-md-6 my-5" key={i}>
             <h4 className="mb-4">{title}</h4>
 
-            <div className="card h-100">
+            <div className="card h-100 rounded-4">
               <div className="card-body">
                 <table className="table table-borderless">
                   <tbody>
