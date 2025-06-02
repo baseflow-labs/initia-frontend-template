@@ -263,7 +263,8 @@
         "SupportingDocument": "وثائق مدعمة",
         "UploadAttachment": "إضافة مرفق",
         "Yes": "نعم"
-      }
+      },
+      "SuccessMsg": "تم {{action}} لـ {{data}} بنجاح"
     },
     "Labels": {
       "Action": "إجراء",
@@ -272,8 +273,7 @@
       "Ok": "حسناً",
       "PhoneNumber": "رقم الجوال",
       "WrongUrl": "عذراً, العنوان المطلوب خاطئ"
-    },
-    "SuccessMsg": "تم {{action}} لـ {{data}} بنجاح"
+    }
   },
   "Public": {
     "ForgotPassword": {
