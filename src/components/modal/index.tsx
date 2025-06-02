@@ -43,7 +43,7 @@ const Modal = ({
             <div className="modal-body">
               <div className="row">
                 <div className="col-10">
-                  <h3 className="modal-title mb-4">{title}</h3>
+                  <h4 className="modal-title my-5">{title}</h4>
                 </div>
 
                 <div className="col-2">
