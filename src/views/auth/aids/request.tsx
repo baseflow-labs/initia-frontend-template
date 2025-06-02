@@ -3,8 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import * as AidApi from "../../../api/profile/beneficiary";
-import ActionButtons from "../../../components/button/actionButtons";
+import * as AidApi from "../../../api/aids/aids";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/tablePage";

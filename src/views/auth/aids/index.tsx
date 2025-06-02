@@ -1,6 +1,6 @@
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import * as AidApi from "../../../api/profile/beneficiary";
+import * as AidApi from "../../../api/aids/aids";
 import TablePage from "../../../layouts/auth/tablePage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
