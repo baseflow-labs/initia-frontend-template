@@ -1,6 +1,6 @@
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import * as VisitApi from "../../../api/profile/beneficiary";
+import * as VisitApi from "../../../api/visits/visits";
 import TablePage from "../../../layouts/auth/tablePage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
@@ -9,6 +9,7 @@ import {
   renderDataFromOptions,
 } from "../../../utils/fucntions";
 import Modal from "../../../components/modal";
+import Form from "../../../components/form";
 
 const VisitsView = () => {
   const { t } = useTranslation();
@@ -80,7 +81,16 @@ const VisitsView = () => {
     },
   ];
 
-  const actionButtons = [{ label: t("Auth.Visits.AddVisit") }];
+  const aidTypes = [
+    {
+      value: "A",
+      label: "A",
+    },
+    {
+      value: "B",
+      label: "B",
+    },
+  ];
 
   const columns = [
     {
@@ -126,6 +136,39 @@ const VisitsView = () => {
     },
   ];
 
+  const actionButtons = [
+    {
+      label: t("Auth.Visits.AddVisit"),
+      modal: "modal",
+    },
+  ];
+
+  const scheduleVisitInputs = () => [
+    {
+      type: "select",
+      options: aidTypes,
+      name: "beneficiary",
+      label: t("Auth.Beneficiaries.BeneficiaryName"),
+      required: true,
+    },
+    {
+      type: "time",
+      name: "time",
+      required: true,
+    },
+    {
+      type: "date",
+      name: "date",
+      required: true,
+    },
+    {
+      type: "textarea",
+      name: "reason",
+      label: t("Auth.Visits.VisitPurpose"),
+      required: true,
+    },
+  ];
+
   return (
     <Fragment>
       <TablePage
@@ -137,8 +180,17 @@ const VisitsView = () => {
         onPageChange={(i = 0, x = 0) => console.log(i, x)}
         onSearch={(values) => console.log(values)}
       />
-      <Modal actions={<>h</>}>
-        <h1>Hello</h1>
+
+      <Modal title={t("Auth.Visits.AddVisit")}>
+        <Form
+          inputs={scheduleVisitInputs}
+          submitText={t("Global.Form.Labels.Confirm")}
+          onFormSubmit={(e) => {
+            VisitApi.create(e).then((res) => {
+              console.log("Success");
+            });
+          }}
+        />
       </Modal>
     </Fragment>
   );

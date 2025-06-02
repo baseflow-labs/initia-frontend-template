@@ -40,27 +40,21 @@ const Modal = ({
       >
         <div className="modal-dialog">
           <div className="modal-content">
-            {title && (
-              <div className="modal-header">
-                <h1 className="modal-title fs-5">{title}</h1>
-                <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                />
-              </div>
-            )}
-
             <div className="modal-body">
-              {!title && (
-                <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                />
-              )}
+              <div className="row">
+                <div className="col-10">
+                  <h3 className="modal-title mb-4">{title}</h3>
+                </div>
+
+                <div className="col-2">
+                  <button
+                    type="button"
+                    className="btn-close float-end"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  />
+                </div>
+              </div>
               {children}
             </div>
 

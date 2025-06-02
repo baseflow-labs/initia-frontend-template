@@ -168,15 +168,12 @@ const AidsView = () => {
         onSearch={(values) => console.log(values)}
       />
 
-      <Modal title={t("Auth.Aids.Beneficiary.RequestAid")}>
+      <Modal title={t("Auth.Aids.AddAid")}>
         <Form
           inputs={grantAidInputs}
           submitText={t("Global.Form.Labels.SubmitApplication")}
           onFormSubmit={(e) => {
-            AidApi.grant({
-              ...e,
-              beneficiary: "5fa327aa-de97-413b-a396-04c473f6df0f",
-            }).then((res) => {
+            AidApi.grant(e).then((res) => {
               console.log("Success");
             });
           }}

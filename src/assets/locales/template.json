@@ -243,6 +243,7 @@
     "Form": {
       "Labels": {
         "AddNew": "Add New Record",
+        "Confirm": "Confirm",
         "InvalidEmail": "Invalid Email",
         "Location": "Google Map URL",
         "No": "No",

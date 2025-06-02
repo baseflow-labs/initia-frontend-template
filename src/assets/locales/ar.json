@@ -243,6 +243,7 @@
     "Form": {
       "Labels": {
         "AddNew": "إضافة بيانات جديدة",
+        "Confirm": "تأكيد",
         "InvalidEmail": "بريد إلكتروني غير صالح",
         "Location": "Google Map رابط",
         "No": "لا",
