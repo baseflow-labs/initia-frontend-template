@@ -19,14 +19,10 @@ const AidsBeneficiaryView = () => {
   useLayoutEffect(() => {
     AidApi.getAll().then((res) => {
       setAids(
-        (res as any).map(
-          ({ contactsBank = {}, housing = {}, status = {}, ...rest }) => ({
-            ...contactsBank,
-            ...housing,
-            ...status,
-            ...rest,
-          })
-        ) as any
+        (res as any).map(({ beneficiary = {}, ...rest }) => ({
+          ...beneficiary,
+          ...rest,
+        })) as any
       );
     });
   }, []);

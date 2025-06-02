@@ -8,6 +8,8 @@ import {
   statusColorRender,
   renderDataFromOptions,
 } from "../../../utils/fucntions";
+import Modal from "../../../components/modal";
+import Form from "../../../components/form";
 
 const AidsView = () => {
   const { t } = useTranslation();
@@ -16,14 +18,10 @@ const AidsView = () => {
   useLayoutEffect(() => {
     AidApi.getAll().then((res) => {
       setAids(
-        (res as any).map(
-          ({ contactsBank = {}, housing = {}, status = {}, ...rest }) => ({
-            ...contactsBank,
-            ...housing,
-            ...status,
-            ...rest,
-          })
-        ) as any
+        (res as any).map(({ beneficiary = {}, ...rest }) => ({
+          ...beneficiary,
+          ...rest,
+        })) as any
       );
     });
   }, []);
@@ -79,7 +77,12 @@ const AidsView = () => {
     },
   ];
 
-  const actionButtons = [{ label: t("Auth.Aids.AddAid") }];
+  const actionButtons = [
+    {
+      label: t("Auth.Aids.AddAid"),
+      modal: "modal",
+    },
+  ];
 
   const columns = [
     {
@@ -124,16 +127,62 @@ const AidsView = () => {
     },
   ];
 
+  const grantAidInputs = () => [
+    {
+      type: "select",
+      options: aidTypes,
+      name: "beneficiary",
+      label: t("Auth.Beneficiaries.BeneficiaryName"),
+      required: true,
+    },
+    {
+      type: "select",
+      options: aidTypes,
+      name: "type",
+      label: t("Auth.Aids.AidType"),
+      required: true,
+    },
+    {
+      type: "text",
+      name: "name",
+      label: t("Auth.Aids.AidName"),
+      required: true,
+    },
+    {
+      type: "textarea",
+      name: "reason",
+      label: t("Global.Form.Labels.Notes"),
+      required: false,
+    },
+  ];
+
   return (
-    <TablePage
-      title={title}
-      filters={filters}
-      actionButtons={actionButtons}
-      columns={columns}
-      data={beneficiaries}
-      onPageChange={(i = 0, x = 0) => console.log(i, x)}
-      onSearch={(values) => console.log(values)}
-    />
+    <Fragment>
+      <TablePage
+        title={title}
+        filters={filters}
+        actionButtons={actionButtons}
+        columns={columns}
+        data={beneficiaries}
+        onPageChange={(i = 0, x = 0) => console.log(i, x)}
+        onSearch={(values) => console.log(values)}
+      />
+
+      <Modal title={t("Auth.Aids.Beneficiary.RequestAid")}>
+        <Form
+          inputs={grantAidInputs}
+          submitText={t("Global.Form.Labels.SubmitApplication")}
+          onFormSubmit={(e) => {
+            AidApi.grant({
+              ...e,
+              beneficiary: "5fa327aa-de97-413b-a396-04c473f6df0f",
+            }).then((res) => {
+              console.log("Success");
+            });
+          }}
+        />
+      </Modal>
+    </Fragment>
   );
 };
 
