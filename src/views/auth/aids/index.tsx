@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
 import * as AidApi from "../../../api/aids/aids";
+import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/tablePage";
@@ -18,7 +19,10 @@ import {
 const AidsView = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const [beneficiaries, setAids] = useState([{}]);
+  const [aids, setAids] = useState([{}]);
+  const [selectOptions, setSelectOptions] = useState({
+    beneficiaries: [{ id: "", fullName: "" }],
+  });
 
   useLayoutEffect(() => {
     AidApi.getAll()
@@ -30,6 +34,15 @@ const AidsView = () => {
           })) as any
         );
       })
+      .catch(apiCatchGlobalHandler);
+
+    BeneficiaryApi.getAll()
+      .then((res) =>
+        setSelectOptions((current) => ({
+          ...current,
+          beneficiaries: res as any,
+        }))
+      )
       .catch(apiCatchGlobalHandler);
   }, []);
 
@@ -77,6 +90,13 @@ const AidsView = () => {
     {
       label: t("Auth.MembershipRegistration.Statuses.Status"),
       options: statuses,
+    },
+    {
+      label: t("Auth.Beneficiaries.BeneficiaryName"),
+      options: selectOptions.beneficiaries.map(({ id, fullName }) => ({
+        value: id,
+        label: fullName,
+      })),
     },
     {
       label: t("Auth.Aids.AidType"),
@@ -137,7 +157,10 @@ const AidsView = () => {
   const grantAidInputs = () => [
     {
       type: "select",
-      options: aidTypes,
+      options: selectOptions.beneficiaries.map(({ id, fullName }) => ({
+        value: id,
+        label: fullName,
+      })),
       name: "beneficiary",
       label: t("Auth.Beneficiaries.BeneficiaryName"),
       required: true,
@@ -170,7 +193,7 @@ const AidsView = () => {
         filters={filters}
         actionButtons={actionButtons}
         columns={columns}
-        data={beneficiaries}
+        data={aids}
         onPageChange={(i = 0, x = 0) => console.log(i, x)}
         onSearch={(values) => console.log(values)}
       />
@@ -186,9 +209,9 @@ const AidsView = () => {
                   addNotification({
                     msg: t("Global.Form.SuccessMsg", {
                       action: t("Auth.Aids.AddAid"),
-                      data: aidTypes.find(
-                        ({ value }) => value === e.beneficiary
-                      )?.label,
+                      data: selectOptions.beneficiaries.find(
+                        ({ id }) => id === e.beneficiary
+                      )?.fullName,
                     }),
                   })
                 );

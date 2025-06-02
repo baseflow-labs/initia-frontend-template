@@ -4,6 +4,7 @@ import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
+import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import * as VisitApi from "../../../api/visits/visits";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
@@ -18,22 +19,30 @@ import {
 const VisitsView = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const [selectOptions, setSelectOptions] = useState({
+    beneficiaries: [{ id: "", fullName: "" }],
+  });
   const [beneficiaries, setVisits] = useState([{}]);
 
   useLayoutEffect(() => {
     VisitApi.getAll()
       .then((res) => {
         setVisits(
-          (res as any).map(
-            ({ contactsBank = {}, housing = {}, status = {}, ...rest }) => ({
-              ...contactsBank,
-              ...housing,
-              ...status,
-              ...rest,
-            })
-          ) as any
+          (res as any).map(({ beneficiary = {}, ...rest }) => ({
+            ...beneficiary,
+            ...rest,
+          })) as any
         );
       })
+      .catch(apiCatchGlobalHandler);
+
+    BeneficiaryApi.getAll()
+      .then((res) =>
+        setSelectOptions((current) => ({
+          ...current,
+          beneficiaries: res as any,
+        }))
+      )
       .catch(apiCatchGlobalHandler);
   }, []);
 
@@ -158,7 +167,10 @@ const VisitsView = () => {
   const scheduleVisitInputs = () => [
     {
       type: "select",
-      options: aidTypes,
+      options: selectOptions.beneficiaries.map(({ id, fullName }) => ({
+        value: id,
+        label: fullName,
+      })),
       name: "beneficiary",
       label: t("Auth.Beneficiaries.BeneficiaryName"),
       required: true,
@@ -204,9 +216,9 @@ const VisitsView = () => {
                   addNotification({
                     msg: t("Global.Form.SuccessMsg", {
                       action: t("Auth.Visits.AddVisit"),
-                      data: aidTypes.find(
-                        ({ value }) => value === e.beneficiary
-                      )?.label,
+                      data: selectOptions.beneficiaries.find(
+                        ({ id }) => id === e.beneficiary
+                      )?.fullName,
                     }),
                   })
                 );
