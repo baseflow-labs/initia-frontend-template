@@ -5,6 +5,12 @@
       "AidName": "Aid Name",
       "AidPurpose": "Aid Purpose",
       "AidType": "Aid Type",
+      "Beneficiary": {
+        "RequestAid": "Request Aid",
+        "RequestDetails": "Request Details",
+        "Title": "Aids",
+        "Urgent?": "Urgent Case?"
+      },
       "RecaptionDate": "Recaption Date",
       "Title": "Aids"
     },
@@ -248,6 +254,8 @@
         "SaveContinue": "Save & Continue",
         "SaveData": "Save Data",
         "Submit": "Submit",
+        "SubmitApplication": "Submit Application",
+        "SupportingDocument": "Supporting Document",
         "UploadAttachment": "Upload Attachment",
         "Yes": "Yes"
       }

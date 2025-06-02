@@ -10,6 +10,7 @@ import { Route, Routes, useLocation } from "react-router";
 import { Fragment } from "react/jsx-runtime";
 
 import AidsView from "../../views/auth/aids";
+import AidsBeneficiaryView from "../../views/auth/aids/request";
 import BeneficiariesView from "../../views/auth/beneficiaries";
 import BeneficiaryProfileView from "../../views/auth/beneficiaries/profile";
 import DashboardView from "../../views/auth/dashboard";
@@ -59,6 +60,12 @@ const AuthLayout = () => {
       name: t("Auth.Aids.Title"),
       route: "/aids",
       view: <AidsView />,
+      icon: faBoxOpen,
+    },
+    {
+      name: t("Auth.Aids.Beneficiary.Title"),
+      route: "/beneficiary/aids",
+      view: <AidsBeneficiaryView />,
       icon: faBoxOpen,
     },
   ];

@@ -3,12 +3,16 @@ import { Fragment } from "react/jsx-runtime";
 interface Props {
   name?: string;
   title?: string;
+  withTrigger?: boolean;
+  triggerLabel?: string;
   children: React.ReactNode;
-  actions: React.ReactNode;
+  actions?: React.ReactNode;
 }
 
 const Modal = ({
   name = "modal",
+  withTrigger,
+  triggerLabel = "Open",
   title,
   children,
   actions,
@@ -16,14 +20,16 @@ const Modal = ({
 }: Props) => {
   return (
     <Fragment>
-      <button
-        type="button"
-        className="btn btn-primary"
-        data-bs-toggle="modal"
-        data-bs-target={`#${name}`}
-      >
-        Launch demo modal
-      </button>
+      {withTrigger && (
+        <button
+          type="button"
+          className="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target={`#${name}`}
+        >
+          {triggerLabel}
+        </button>
+      )}
 
       <div
         className="modal fade"
@@ -47,16 +53,18 @@ const Modal = ({
             )}
 
             <div className="modal-body">
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              />
+              {!title && (
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                />
+              )}
               {children}
             </div>
 
-            <div className="modal-footer">{actions}</div>
+            {actions && <div className="modal-footer">{actions}</div>}
           </div>
         </div>
       </div>

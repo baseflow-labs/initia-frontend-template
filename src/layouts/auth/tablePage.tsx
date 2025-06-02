@@ -3,6 +3,7 @@ import { faFilter, faHistory } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Form as FormikForm, FormikProvider, useFormik } from "formik";
 
+import ActionButtons from "../../components/button/actionButtons";
 import Button from "../../components/core/button";
 import SelectInput from "../../components/form/inputs/select";
 import SelectManyInput from "../../components/form/inputs/selectMany";
@@ -89,9 +90,7 @@ const TablePage = ({
 
         <div className="col-md-2 my-auto">
           <div className="float-end">
-            {actionButtons.map(({ label }, i) => (
-              <Button key={i}>{label}</Button>
-            ))}
+            <ActionButtons buttons={actionButtons} />
           </div>
         </div>
       </ColumnsPage>

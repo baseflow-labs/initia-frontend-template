@@ -34,6 +34,11 @@ const getById = async (id: string) => {
   return res;
 };
 
+const create = async (data: object) => {
+  const res = await api.post(mainPath, data);
+  return res;
+};
+
 const getByUserId = async () => {
   const res = await api.get(mainPath + "/by-user/" + user.id);
   return res;
@@ -51,4 +56,4 @@ const createOrUpdate = async (data: Props) => {
   );
 };
 
-export { getAll, getById, getByUserId, createOrUpdate };
+export { getAll, create, getById, getByUserId, createOrUpdate };

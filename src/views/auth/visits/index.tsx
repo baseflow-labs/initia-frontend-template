@@ -8,6 +8,7 @@ import {
   statusColorRender,
   renderDataFromOptions,
 } from "../../../utils/fucntions";
+import Modal from "../../../components/modal";
 
 const VisitsView = () => {
   const { t } = useTranslation();
@@ -126,15 +127,20 @@ const VisitsView = () => {
   ];
 
   return (
-    <TablePage
-      title={title}
-      filters={filters}
-      actionButtons={actionButtons}
-      columns={columns}
-      data={beneficiaries}
-      onPageChange={(i = 0, x = 0) => console.log(i, x)}
-      onSearch={(values) => console.log(values)}
-    />
+    <Fragment>
+      <TablePage
+        title={title}
+        filters={filters}
+        actionButtons={actionButtons}
+        columns={columns}
+        data={beneficiaries}
+        onPageChange={(i = 0, x = 0) => console.log(i, x)}
+        onSearch={(values) => console.log(values)}
+      />
+      <Modal actions={<>h</>}>
+        <h1>Hello</h1>
+      </Modal>
+    </Fragment>
   );
 };
 
