@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import TablePage from "../../../layouts/auth/tablePage";
 import {
+  apiCatchGlobalHandler,
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/fucntions";
@@ -15,18 +16,20 @@ const BeneficiariesView = () => {
   const [beneficiaries, setBeneficiaries] = useState([{}]);
 
   useLayoutEffect(() => {
-    BeneficiaryApi.getAll().then((res) => {
-      setBeneficiaries(
-        (res as any).map(
-          ({ contactsBank = {}, housing = {}, status = {}, ...rest }) => ({
-            ...contactsBank,
-            ...housing,
-            ...status,
-            ...rest,
-          })
-        ) as any
-      );
-    });
+    BeneficiaryApi.getAll()
+      .then((res) => {
+        setBeneficiaries(
+          (res as any).map(
+            ({ contactsBank = {}, housing = {}, status = {}, ...rest }) => ({
+              ...contactsBank,
+              ...housing,
+              ...status,
+              ...rest,
+            })
+          ) as any
+        );
+      })
+      .catch(apiCatchGlobalHandler);
   }, []);
 
   const title = t("Auth.Beneficiaries.Title");
@@ -178,7 +181,9 @@ const BeneficiariesView = () => {
     },
   ];
 
-  const actionButtons = [{ label: t("Auth.Beneficiaries.AddBeneficiary") }];
+  const actionButtons = [
+    { label: t("Auth.Beneficiaries.AddBeneficiary"), route: "/apply" },
+  ];
 
   const columns = [
     {

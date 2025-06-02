@@ -234,6 +234,9 @@
     },
     "Visits": {
       "AddVisit": "Add Visit",
+      "Report": {
+        "AddReport": "Add Report"
+      },
       "Title": "Visits",
       "VisitDate": "Visit Date",
       "VisitPurpose": "Visit Purpose"
@@ -260,7 +263,8 @@
         "SupportingDocument": "Supporting Document",
         "UploadAttachment": "Upload Attachment",
         "Yes": "Yes"
-      }
+      },
+      "SuccessMsg": "{{action}} {{data}] was done successfully"
     },
     "Labels": {
       "Action": "Action",

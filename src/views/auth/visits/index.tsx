@@ -1,33 +1,40 @@
+import { faCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+
 import * as VisitApi from "../../../api/visits/visits";
-import TablePage from "../../../layouts/auth/tablePage";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircle } from "@fortawesome/free-solid-svg-icons";
-import {
-  statusColorRender,
-  renderDataFromOptions,
-} from "../../../utils/fucntions";
-import Modal from "../../../components/modal";
 import Form from "../../../components/form";
+import Modal from "../../../components/modal";
+import TablePage from "../../../layouts/auth/tablePage";
+import { addNotification } from "../../../store/actions/notifications";
+import {
+  apiCatchGlobalHandler,
+  renderDataFromOptions,
+  statusColorRender,
+} from "../../../utils/fucntions";
 
 const VisitsView = () => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
   const [beneficiaries, setVisits] = useState([{}]);
 
   useLayoutEffect(() => {
-    VisitApi.getAll().then((res) => {
-      setVisits(
-        (res as any).map(
-          ({ contactsBank = {}, housing = {}, status = {}, ...rest }) => ({
-            ...contactsBank,
-            ...housing,
-            ...status,
-            ...rest,
-          })
-        ) as any
-      );
-    });
+    VisitApi.getAll()
+      .then((res) => {
+        setVisits(
+          (res as any).map(
+            ({ contactsBank = {}, housing = {}, status = {}, ...rest }) => ({
+              ...contactsBank,
+              ...housing,
+              ...status,
+              ...rest,
+            })
+          ) as any
+        );
+      })
+      .catch(apiCatchGlobalHandler);
   }, []);
 
   const title = t("Auth.Visits.Title");
@@ -138,6 +145,11 @@ const VisitsView = () => {
 
   const actionButtons = [
     {
+      label: t("Auth.Visits.Report.AddReport"),
+      route: "/report",
+      outline: true,
+    },
+    {
       label: t("Auth.Visits.AddVisit"),
       modal: "modal",
     },
@@ -186,9 +198,20 @@ const VisitsView = () => {
           inputs={scheduleVisitInputs}
           submitText={t("Global.Form.Labels.Confirm")}
           onFormSubmit={(e) => {
-            VisitApi.create(e).then((res) => {
-              console.log("Success");
-            });
+            VisitApi.create(e)
+              .then((res) => {
+                dispatch(
+                  addNotification({
+                    msg: t("Global.Form.SuccessMsg", {
+                      action: t("Auth.Visits.AddVisit"),
+                      data: aidTypes.find(
+                        ({ value }) => value === e.beneficiary
+                      )?.label,
+                    }),
+                  })
+                );
+              })
+              .catch(apiCatchGlobalHandler);
           }}
         />
       </Modal>

@@ -1,29 +1,36 @@
+import { faCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+
 import * as AidApi from "../../../api/aids/aids";
-import TablePage from "../../../layouts/auth/tablePage";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircle } from "@fortawesome/free-solid-svg-icons";
-import {
-  statusColorRender,
-  renderDataFromOptions,
-} from "../../../utils/fucntions";
-import Modal from "../../../components/modal";
 import Form from "../../../components/form";
+import Modal from "../../../components/modal";
+import TablePage from "../../../layouts/auth/tablePage";
+import { addNotification } from "../../../store/actions/notifications";
+import {
+  apiCatchGlobalHandler,
+  renderDataFromOptions,
+  statusColorRender,
+} from "../../../utils/fucntions";
 
 const AidsView = () => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
   const [beneficiaries, setAids] = useState([{}]);
 
   useLayoutEffect(() => {
-    AidApi.getAll().then((res) => {
-      setAids(
-        (res as any).map(({ beneficiary = {}, ...rest }) => ({
-          ...beneficiary,
-          ...rest,
-        })) as any
-      );
-    });
+    AidApi.getAll()
+      .then((res) => {
+        setAids(
+          (res as any).map(({ beneficiary = {}, ...rest }) => ({
+            ...beneficiary,
+            ...rest,
+          })) as any
+        );
+      })
+      .catch(apiCatchGlobalHandler);
   }, []);
 
   const title = t("Auth.Aids.Title");
@@ -173,9 +180,20 @@ const AidsView = () => {
           inputs={grantAidInputs}
           submitText={t("Global.Form.Labels.SubmitApplication")}
           onFormSubmit={(e) => {
-            AidApi.grant(e).then((res) => {
-              console.log("Success");
-            });
+            AidApi.grant(e)
+              .then((res) => {
+                dispatch(
+                  addNotification({
+                    msg: t("Global.Form.SuccessMsg", {
+                      action: t("Auth.Aids.AddAid"),
+                      data: aidTypes.find(
+                        ({ value }) => value === e.beneficiary
+                      )?.label,
+                    }),
+                  })
+                );
+              })
+              .catch(apiCatchGlobalHandler);
           }}
         />
       </Modal>

@@ -1,23 +1,24 @@
+import moment from "moment";
 import { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import moment from "moment";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import { InputSingleProps } from "../../../components/form";
 import { dataRender } from "../../../components/table";
 import ColumnsPage from "../../../layouts/auth/columnsPage";
 import { dataDateFormat } from "../../../utils/consts";
+import { apiCatchGlobalHandler } from "../../../utils/fucntions";
 
 const BeneficiaryProfileView = () => {
   const { t } = useTranslation();
   const [beneficiary, setBeneficiary] = useState<any>();
 
   useEffect(() => {
-    BeneficiaryApi.getById("5fa327aa-de97-413b-a396-04c473f6df0f").then(
-      (res) => {
+    BeneficiaryApi.getById("5fa327aa-de97-413b-a396-04c473f6df0f")
+      .then((res) => {
         setBeneficiary(res as any);
-      }
-    );
+      })
+      .catch(apiCatchGlobalHandler);
   }, []);
 
   const basicDataInputs: InputSingleProps[] = [
@@ -371,11 +372,6 @@ const BeneficiaryProfileView = () => {
       required: true,
     },
     {
-      type: "title",
-      name: "title1",
-      defaultValue: t("Auth.MembershipRegistration.Form.IncomeResources"),
-    },
-    {
       type: "number",
       name: "salary",
       label: t("Auth.MembershipRegistration.Form.Salary"),
@@ -453,11 +449,6 @@ const BeneficiaryProfileView = () => {
   ];
 
   const hostelDataInputs: InputSingleProps[] = [
-    {
-      type: "title",
-      name: "title2",
-      defaultValue: t("Auth.MembershipRegistration.Form.Address"),
-    },
     {
       type: "select",
       options: [

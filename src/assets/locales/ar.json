@@ -234,6 +234,9 @@
     },
     "Visits": {
       "AddVisit": "جدولة زيارة",
+      "Report": {
+        "AddReport": "إجراء تقييم"
+      },
       "Title": "الزيارات الميدانية",
       "VisitDate": "تاريخ الزيارة",
       "VisitPurpose": "سبب الزيارة"
@@ -269,7 +272,8 @@
       "Ok": "حسناً",
       "PhoneNumber": "رقم الجوال",
       "WrongUrl": "عذراً, العنوان المطلوب خاطئ"
-    }
+    },
+    "SuccessMsg": "تم {{action}} لـ {{data}} بنجاح"
   },
   "Public": {
     "ForgotPassword": {
