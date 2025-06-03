@@ -254,6 +254,7 @@
     "Visits": {
       "AddVisit": "Add Visit",
       "CancelVisit": "Cancel Visit",
+      "EditVisit": "Edit Visit",
       "Report": {
         "AddReport": "Add Report"
       },
@@ -274,6 +275,7 @@
       "Labels": {
         "AddNew": "Add New Record",
         "Confirm": "Confirm",
+        "Edit": "Edit",
         "InvalidEmail": "Invalid Email",
         "Location": "Google Map URL",
         "No": "No",

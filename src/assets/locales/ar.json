@@ -254,6 +254,7 @@
     "Visits": {
       "AddVisit": "جدولة زيارة",
       "CancelVisit": "إلغاء الزيارة",
+      "EditVisit": "تعديل زيارة",
       "Report": {
         "AddReport": "إجراء تقييم"
       },
@@ -274,6 +275,7 @@
       "Labels": {
         "AddNew": "إضافة بيانات جديدة",
         "Confirm": "تأكيد",
+        "Edit": "تعدبل",
         "InvalidEmail": "بريد إلكتروني غير صالح",
         "Location": "Google Map رابط",
         "No": "لا",

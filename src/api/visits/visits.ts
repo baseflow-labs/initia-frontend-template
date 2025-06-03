@@ -39,6 +39,11 @@ const create = async (data: object) => {
   return res;
 };
 
+const update = async (data: { id: "" }) => {
+  const res = await api.patch(mainPath + "/" + data.id, data);
+  return res;
+};
+
 const cancel = async (id: string) => {
   const res = await api.patch(mainPath + "/cancel/" + id);
   return res;
@@ -61,4 +66,4 @@ const createOrUpdate = async (data: Props) => {
   );
 };
 
-export { getAll, create, cancel, getById, getByUserId, createOrUpdate };
+export { getAll, create, update, cancel, getById, getByUserId, createOrUpdate };

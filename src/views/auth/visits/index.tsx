@@ -1,4 +1,4 @@
-import { faCircle, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faCircle, faEdit, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useEffect, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -25,6 +25,7 @@ const VisitsView = () => {
   const [searchParams] = useSearchParams();
 
   const [openModal, setOpenModal] = useState(false);
+  const [crudData, setCrudData] = useState({});
   const [selectOptions, setSelectOptions] = useState({
     beneficiaries: [{ id: "", fullName: "" }],
   });
@@ -186,6 +187,7 @@ const VisitsView = () => {
 
   const onModalClose = () => {
     setOpenModal(false);
+    setCrudData({});
     if (searchParams.get("id")) {
       navigate("/visits");
       window.location.reload();
@@ -209,12 +211,44 @@ const VisitsView = () => {
       .catch(apiCatchGlobalHandler);
   };
 
+  const editData = (data: {}) => {
+    VisitApi.getById(data as string)
+      .then((res) => {
+        setCrudData(res);
+        console.log(res);
+
+        setOpenModal(true);
+      })
+      .catch(apiCatchGlobalHandler);
+  };
+
+  const onCrudSuccess = (e: { beneficiary: "" }, action = "") => {
+    onModalClose();
+    getData();
+    dispatch(
+      addNotification({
+        msg: t("Global.Form.SuccessMsg", {
+          action,
+          data: selectOptions.beneficiaries.find(
+            ({ id }) => id === e.beneficiary
+          )?.fullName,
+        }),
+      })
+    );
+  };
+
   return (
     <Fragment>
       <TablePage
         title={title}
         filters={filters}
         tableActions={[
+          // {
+          //   icon: faEdit,
+          //   spread: true,
+          //   label: t("Global.Form.Labels.Edit"),
+          //   onClick: (data: string | object) => editData(data),
+          // },
           {
             icon: faXmark,
             label: t("Auth.Visits.CancelVisit"),
@@ -236,23 +270,19 @@ const VisitsView = () => {
         <Form
           inputs={scheduleVisitInputs}
           submitText={t("Global.Form.Labels.Confirm")}
+          initialValues={crudData}
           onFormSubmit={(e) => {
-            VisitApi.create(e)
-              .then((res) => {
-                onModalClose();
-                getData();
-                dispatch(
-                  addNotification({
-                    msg: t("Global.Form.SuccessMsg", {
-                      action: t("Auth.Visits.AddVisit"),
-                      data: selectOptions.beneficiaries.find(
-                        ({ id }) => id === e.beneficiary
-                      )?.fullName,
-                    }),
+            e.id
+              ? VisitApi.update(e)
+                  .then((res) => {
+                    onCrudSuccess(e, t("Auth.Visits.EditVisit"));
                   })
-                );
-              })
-              .catch(apiCatchGlobalHandler);
+                  .catch(apiCatchGlobalHandler)
+              : VisitApi.create(e)
+                  .then((res) => {
+                    onCrudSuccess(e, t("Auth.Visits.AddVisit"));
+                  })
+                  .catch(apiCatchGlobalHandler);
           }}
         />
       </Modal>

@@ -171,6 +171,10 @@ const DynamicTable = ({ columns, data, onPageChange, actions }: TableProps) => {
                     .map(({ icon, label, onClick }, y) => (
                       <FontAwesomeIcon
                         icon={icon}
+                        // data-bs-toggle="tooltip"
+                        // data-bs-placement="top"
+                        // data-bs-custom-class="custom-tooltip"
+                        // data-bs-title={label}
                         role="button"
                         onClick={() => onClick(row?.id || row)}
                         key={y}
