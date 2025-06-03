@@ -29,7 +29,7 @@ const LoginView = () => {
         <BelowInputButton
           introText=""
           buttonText={t("Public.Login.Labels.DidUForgotPassword")}
-          action={() => navigate("/forgot-password")}
+          route="/forgot-password"
         />
       ),
       required: true,

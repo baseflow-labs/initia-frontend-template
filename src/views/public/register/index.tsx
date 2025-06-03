@@ -63,7 +63,7 @@ const RegisterView = () => {
         <BelowInputButton
           introText={t("Public.Register.Labels.ByClickYouAccept")}
           buttonText={t("Public.Register.Labels.PrivacyPolicyTermsConditions")}
-          action={() => navigate("/terms-conditions")}
+          route="/terms-conditions"
         />
       ),
     },

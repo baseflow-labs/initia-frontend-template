@@ -17,7 +17,7 @@ const ForgotPasswordView = () => {
         <BelowInputButton
           introText={t("Public.ForgotPassword.SendOtp.RememberPassword")}
           buttonText={t("Public.Login.Labels.Login")}
-          action={() => navigate("/")}
+          route="/"
         />
       ),
       required: true,

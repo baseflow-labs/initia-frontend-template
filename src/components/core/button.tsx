@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router";
+import React from "react";
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
@@ -14,7 +15,7 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const Button = ({
   children,
-  className,
+  className = "",
   color = "info",
   text = "info",
   rounded = 3,
@@ -22,6 +23,7 @@ const Button = ({
   route,
   size = "",
   outline,
+  onClick,
   ...rest
 }: Props) => {
   const navigate = useNavigate();
@@ -34,18 +36,27 @@ const Button = ({
         return "white";
       case "ghost":
         return text;
-
       default:
         return "dark";
     }
   };
 
+  const paddingY = size === "sm" ? "py-0" : `py-${p}`;
+  const paddingX = size === "sm" ? "px-0" : `px-${p + 1}`;
+  const textClass = !outline ? `text-${textColor()}` : "";
+  const sizeClass = size ? `btn-${size}` : "";
+
+  const finalClass = `btn btn-${
+    outline ? "outline-" : ""
+  }${color} ${textClass} ${sizeClass} ${paddingY} ${paddingX} rounded-${rounded} ${className}`;
+
   return (
     <button
-      className={`btn btn-${outline ? "outline-" : ""}${color} text-${
-        outline ? "" : textColor()
-      } btn-${size} ${className} rounded-${rounded} py-${p} px-${p + 1}`}
-      onClick={route ? () => navigate(route) : rest.onClick}
+      className={finalClass.trim()}
+      onClick={(e) => {
+        onClick?.(e);
+        if (route) navigate(route);
+      }}
       {...rest}
     >
       {children}
