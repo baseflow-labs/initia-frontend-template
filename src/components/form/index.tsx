@@ -238,7 +238,7 @@ const Form: React.FC<Props> = ({
                       >
                         <InlineElement content={prefixTexts} flip />
 
-                        <InputComp {...input} />
+                        <InputComp id={input.name} {...input} />
 
                         <InlineElement content={postfixText} />
                       </div>
@@ -269,7 +269,7 @@ const Form: React.FC<Props> = ({
                   >
                     <InlineElement content={prefixTexts} flip />
 
-                    <InputComp {...input} />
+                    <InputComp id={input.name} {...input} />
 
                     <InlineElement content={postfixText} />
                   </div>
