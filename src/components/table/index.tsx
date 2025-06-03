@@ -11,7 +11,7 @@ import moment from "moment";
 import { useEffect, useState } from "react";
 import i18n from "../../i18next";
 import { useTranslation } from "react-i18next";
-import { viewDateFormat } from "../../utils/consts";
+import { viewDateFormat, viewTimeFormat } from "../../utils/consts";
 import "moment/locale/ar";
 import { splitOverNumberPlusLeftover } from "../../utils/fucntions";
 
@@ -21,7 +21,7 @@ export interface TableProps {
     name: string;
     render?: (row: {}) => string | React.ReactNode;
     type?: string;
-    dateFormat?: string;
+    timestampFormat?: string;
     options?: { value: string; label?: string }[];
   }[];
   data: { id?: string }[];
@@ -39,7 +39,7 @@ interface Props {
   data: string;
   render?: (row: {}) => string | React.ReactNode;
   type?: string;
-  dateFormat?: string;
+  timestampFormat?: string;
   options?: { value: string | number; label?: string }[];
 }
 
@@ -49,13 +49,17 @@ export const dataRender = ({
   data,
   type,
   options,
-  dateFormat,
+  timestampFormat,
 }: Props) => {
   switch (type) {
     case "date":
       return moment(data)
         .locale(i18n.language)
-        .format(dateFormat || viewDateFormat);
+        .format(timestampFormat || viewDateFormat);
+    case "time":
+      return moment("2025-06-08T" + data)
+        .locale(i18n.language)
+        .format(timestampFormat || viewTimeFormat);
     case "phoneNumber":
       return <span dir="ltr"> {data && "+966" + data}</span>;
     case "select":
@@ -145,18 +149,20 @@ const DynamicTable = ({ columns, data, onPageChange, actions }: TableProps) => {
                 {i + pageSize * (pageNumber - 1) + 1}
               </td>
 
-              {columns.map(({ name, type, options, render, dateFormat }, y) => (
-                <td className="py-3" key={y}>
-                  {dataRender({
-                    row,
-                    data: (row as any)[name],
-                    type,
-                    render,
-                    options,
-                    dateFormat,
-                  })}
-                </td>
-              ))}
+              {columns.map(
+                ({ name, type, options, render, timestampFormat }, y) => (
+                  <td className="py-3" key={y}>
+                    {dataRender({
+                      row,
+                      data: (row as any)[name],
+                      type,
+                      render,
+                      options,
+                      timestampFormat,
+                    })}
+                  </td>
+                )
+              )}
 
               {actions?.length && (
                 <td className="py-3 d-flex" scope="row">

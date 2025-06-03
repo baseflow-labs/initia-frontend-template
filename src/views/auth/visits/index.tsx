@@ -11,12 +11,12 @@ import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
+import { viewDayDateFormat } from "../../../utils/consts";
 import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/fucntions";
-import { dataDateFormat, viewDayDateFormat } from "../../../utils/consts";
 
 const VisitsView = () => {
   const { t } = useTranslation();
@@ -28,9 +28,9 @@ const VisitsView = () => {
   const [selectOptions, setSelectOptions] = useState({
     beneficiaries: [{ id: "", fullName: "" }],
   });
-  const [beneficiaries, setVisits] = useState([{}]);
+  const [visits, setVisits] = useState([{}]);
 
-  useLayoutEffect(() => {
+  const getData = () => {
     VisitApi.getAll()
       .then((res) => {
         setVisits(
@@ -45,6 +45,10 @@ const VisitsView = () => {
         );
       })
       .catch(apiCatchGlobalHandler);
+  };
+
+  useLayoutEffect(() => {
+    getData();
 
     BeneficiaryApi.getAll()
       .then((res) =>
@@ -129,8 +133,13 @@ const VisitsView = () => {
     {
       type: "date",
       name: "date",
-      dateFormat: viewDayDateFormat,
+      timestampFormat: viewDayDateFormat,
       label: t("Auth.Visits.VisitDate"),
+    },
+    {
+      type: "time",
+      name: "time",
+      label: t("Auth.Visits.VisitTime"),
     },
     {
       type: "phoneNumber",
@@ -216,7 +225,7 @@ const VisitsView = () => {
         filters={filters}
         actionButtons={actionButtons}
         columns={columns}
-        data={beneficiaries}
+        data={visits}
         onPageChange={(i = 0, x = 0) => console.log(i, x)}
         onSearch={(values) => console.log(values)}
       />
@@ -233,6 +242,7 @@ const VisitsView = () => {
             VisitApi.create(e)
               .then((res) => {
                 onModalClose();
+                getData();
                 dispatch(
                   addNotification({
                     msg: t("Global.Form.SuccessMsg", {

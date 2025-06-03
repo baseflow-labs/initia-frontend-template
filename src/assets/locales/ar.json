@@ -30,8 +30,8 @@
       "Title": "تواصل معنا"
     },
     "Dashboard": {
-      "Title": "نظرة عامة",
       "Main": "الرئيسية",
+      "Title": "نظرة عامة",
       "Welcome": "أهلاً بكم في نظام مستحق"
     },
     "MembershipRegistration": {
@@ -249,7 +249,8 @@
       },
       "Title": "الزيارات الميدانية",
       "VisitDate": "تاريخ الزيارة",
-      "VisitPurpose": "سبب الزيارة"
+      "VisitPurpose": "سبب الزيارة",
+      "VisitTime": "وقت الزيارة"
     }
   },
   "Global": {

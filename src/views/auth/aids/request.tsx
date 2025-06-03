@@ -21,7 +21,7 @@ const AidsBeneficiaryView = () => {
   const [beneficiaries, setAids] = useState([{}]);
   const [openModal, setOpenModal] = useState(false);
 
-  useLayoutEffect(() => {
+  const getData = () => {
     AidApi.getAll()
       .then((res) => {
         setAids(
@@ -32,6 +32,10 @@ const AidsBeneficiaryView = () => {
         );
       })
       .catch(apiCatchGlobalHandler);
+  };
+
+  useLayoutEffect(() => {
+    getData();
   }, []);
 
   const title = t("Auth.Aids.Beneficiary.Title");
@@ -199,6 +203,7 @@ const AidsBeneficiaryView = () => {
             AidApi.create(e)
               .then((res) => {
                 setOpenModal(false);
+                getData();
                 dispatch(
                   addNotification({
                     msg: t("Global.Form.SuccessMsg", {

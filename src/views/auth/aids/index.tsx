@@ -25,7 +25,7 @@ const AidsView = () => {
     beneficiaries: [{ id: "", fullName: "" }],
   });
 
-  useLayoutEffect(() => {
+  const getData = () => {
     AidApi.getAll()
       .then((res) => {
         setAids(
@@ -36,6 +36,10 @@ const AidsView = () => {
         );
       })
       .catch(apiCatchGlobalHandler);
+  };
+
+  useLayoutEffect(() => {
+    getData();
 
     BeneficiaryApi.getAll()
       .then((res) =>
@@ -211,6 +215,7 @@ const AidsView = () => {
             AidApi.grant(e)
               .then((res) => {
                 setOpenModal(false);
+                getData();
                 dispatch(
                   addNotification({
                     msg: t("Global.Form.SuccessMsg", {

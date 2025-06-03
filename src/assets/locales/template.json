@@ -92,8 +92,8 @@
         "EducationLevel": {
           "Degree": "Degree",
           "Diploma": "Diploma",
-          "HigherDiploma": "Higher Diploma",
           "HighSchool": "High School",
+          "HigherDiploma": "Higher Diploma",
           "Illiterate": "Illiterate",
           "IntermediateSchool": "Intermediate School",
           "Literate": "Literate",
@@ -230,8 +230,8 @@
       },
       "Statuses": {
         "Accepted": "Accepted",
-        "Incomplete": "Incomplete",
         "InPreview": "In Preview",
+        "Incomplete": "Incomplete",
         "NeedHelp": "Need Help",
         "NewMember": "New Member",
         "Rejected": "Rejected",
@@ -249,7 +249,8 @@
       },
       "Title": "Visits",
       "VisitDate": "Visit Date",
-      "VisitPurpose": "Visit Purpose"
+      "VisitPurpose": "Visit Purpose",
+      "VisitTime": "Visit Time"
     }
   },
   "Global": {
