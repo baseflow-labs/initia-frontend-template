@@ -3,6 +3,7 @@ import {
   faBoxOpen,
   faEdit,
   faHome,
+  faInfoCircle,
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "react-i18next";
@@ -20,6 +21,7 @@ import FourZeroFourError from "../../views/common/404";
 import DashboardNavbar from "./dashboardNavbar";
 import Navbar from "./navbar";
 import Sidebar from "./sidebar";
+import ContactUsPage from "../../views/auth/contact-us";
 
 const AuthLayout = () => {
   const { t } = useTranslation();
@@ -72,6 +74,12 @@ const AuthLayout = () => {
       view: <AidsBeneficiaryView />,
       showInNav: true,
       icon: faBoxOpen,
+    },
+    {
+      name: t("Auth.ContactUs.Title"),
+      route: "/contact-us",
+      view: <ContactUsPage />,
+      icon: faInfoCircle,
     },
   ];
 

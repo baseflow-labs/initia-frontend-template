@@ -23,6 +23,12 @@
       },
       "Title": "المستفيدون"
     },
+    "ContactUs": {
+      "Contact": "إذا كنت بحاجة لمساعدة أو أي استفسار فلا تترد في الاتصال بنا",
+      "ContactNow": "اتصل الآن للمساعدة",
+      "ContactUsNow": "اتصل الآن",
+      "Title": "تواصل معنا"
+    },
     "Dashboard": {
       "Title": "نظرة عامة",
       "Welcome": "Welcome To Dashboard"

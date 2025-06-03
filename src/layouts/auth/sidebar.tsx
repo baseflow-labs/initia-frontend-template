@@ -1,4 +1,8 @@
-import { faGear, faHome } from "@fortawesome/free-solid-svg-icons";
+import {
+  faGear,
+  faHome,
+  faInfoCircle,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
@@ -11,7 +15,12 @@ const Sidebar = ({ routes = [{ name: "", route: "", icon: faHome }] }) => {
   const location = useLocation();
 
   const fixedRoutes = [
-    { name: t("Auth.Settings.Title"), route: "settings", icon: faGear },
+    {
+      name: t("Auth.ContactUs.Title"),
+      route: "/contact-us",
+      icon: faInfoCircle,
+    },
+    { name: t("Auth.Settings.Title"), route: "/settings", icon: faGear },
   ];
 
   return (

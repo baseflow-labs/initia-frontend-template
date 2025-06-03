@@ -23,6 +23,12 @@
       },
       "Title": "Beneficiaries"
     },
+    "ContactUs": {
+      "Contact": "Contact",
+      "ContactNow": "Contact Now",
+      "ContactUsNow": "Contact Us Now",
+      "Title": "Contact Us"
+    },
     "Dashboard": {
       "Title": "Dashboard",
       "Welcome": "Welcome To Dashboard"
