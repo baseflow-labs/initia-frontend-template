@@ -10,9 +10,11 @@ import {
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/fucntions";
+import { useNavigate } from "react-router";
 
 const BeneficiariesView = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [beneficiaries, setBeneficiaries] = useState([{}]);
 
   useLayoutEffect(() => {
@@ -236,7 +238,7 @@ const BeneficiariesView = () => {
   ];
 
   const viewProfile = (data: string | object) => {
-    console.log({ data });
+    navigate(`/beneficiaries/profile/?id=${data}`);
   };
 
   return (

@@ -2,6 +2,7 @@ import moment from "moment";
 import { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import { useSearchParams } from "react-router";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import { InputSingleProps } from "../../../components/form";
 import { dataRender } from "../../../components/table";
@@ -12,9 +13,10 @@ import { apiCatchGlobalHandler } from "../../../utils/fucntions";
 const BeneficiaryProfileView = () => {
   const { t } = useTranslation();
   const [beneficiary, setBeneficiary] = useState<any>();
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    BeneficiaryApi.getById("5fa327aa-de97-413b-a396-04c473f6df0f")
+    BeneficiaryApi.getById(searchParams.get("id") || "")
       .then((res) => {
         setBeneficiary(res as any);
       })
