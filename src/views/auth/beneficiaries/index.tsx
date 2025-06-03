@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import { useNavigate } from "react-router";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import TablePage from "../../../layouts/auth/tablePage";
 import {
@@ -15,7 +16,6 @@ import {
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
-import { useNavigate } from "react-router";
 
 const BeneficiariesView = () => {
   const { t } = useTranslation();

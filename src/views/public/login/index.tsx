@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router";
 
 import * as authApi from "../../../api/auth";
 import BelowInputButton from "../../../components/button/belowInput";
@@ -12,7 +11,6 @@ import { apiCatchGlobalHandler } from "../../../utils/function";
 const LoginView = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const formInputs = () => [
     {
