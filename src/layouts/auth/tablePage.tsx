@@ -17,7 +17,7 @@ interface Props extends TableProps {
     options: { value: string; label?: string }[];
     multi?: boolean;
   }[];
-  actionButtons: { label: string }[];
+  actionButtons?: { label: string }[];
   onSearch: (values: {}) => void;
   tableActions?: {
     label: string;
@@ -89,9 +89,11 @@ const TablePage = ({
         </div>
 
         <div className="col-md-2 my-auto">
-          <div className="float-end">
-            <ActionButtons buttons={actionButtons} />
-          </div>
+          {actionButtons && (
+            <div className="float-end">
+              <ActionButtons buttons={actionButtons} />
+            </div>
+          )}
         </div>
       </ColumnsPage>
 

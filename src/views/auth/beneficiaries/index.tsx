@@ -258,7 +258,7 @@ const BeneficiariesView = () => {
     <TablePage
       title={title}
       filters={filters}
-      actionButtons={actionButtons}
+      // actionButtons={actionButtons}
       columns={columns}
       data={beneficiaries}
       tableActions={[

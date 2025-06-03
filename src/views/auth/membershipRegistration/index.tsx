@@ -848,7 +848,7 @@ const MembershipRegistrationView = () => {
           customButtons={<HelpButton />}
           initialValues={formData.beneficiary}
           onFormSubmit={(e) => {
-            BeneficiaryApi.createOrUpdate(e)
+            BeneficiaryApi.createOrUpdate({ ...e, user: e.user.id })
               .then((res) => {
                 onNextStep({ ...e, ...res }, "beneficiary");
               })
@@ -971,7 +971,7 @@ const MembershipRegistrationView = () => {
             {t("Auth.MembershipRegistration.Form.Success.Text")}
           </h6>
 
-          <Button color="info" onClick={() => navigate("/dashboard")}>
+          <Button color="info" onClick={() => navigate("/")}>
             {t("Global.Labels.Ok")}
           </Button>
         </div>
