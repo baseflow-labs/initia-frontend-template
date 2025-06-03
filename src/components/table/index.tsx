@@ -147,7 +147,7 @@ const DynamicTable = ({ columns, data, onPageChange, actions }: TableProps) => {
               ))}
 
               {actions?.length && (
-                <td className="py-3" scope="row">
+                <td className="py-3 d-flex" scope="row">
                   {actions
                     .filter(({ spread }) => spread)
                     .map(({ icon, label, onClick }, y) => (
@@ -159,7 +159,7 @@ const DynamicTable = ({ columns, data, onPageChange, actions }: TableProps) => {
                       />
                     ))}
 
-                  <div className="dropdown">
+                  <div className="dropdown ms-3">
                     <FontAwesomeIcon
                       icon={faEllipsisVertical}
                       className="dropdown-toggle"
@@ -173,17 +173,16 @@ const DynamicTable = ({ columns, data, onPageChange, actions }: TableProps) => {
                         .filter(({ spread }) => !spread)
                         .map(({ icon, label, onClick }, y) => (
                           <li key={y}>
-                            <div
+                            <button
                               className="dropdown-item"
-                              role="button"
-                              onClick={() => console.log(row.id || row)}
+                              onClick={() => onClick(row.id || row)}
                             >
                               <FontAwesomeIcon
                                 icon={icon}
                                 className="text-info"
                               />{" "}
                               {label}
-                            </div>
+                            </button>
                           </li>
                         ))}
                     </ul>
