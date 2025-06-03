@@ -22,6 +22,7 @@ import DashboardNavbar from "./dashboardNavbar";
 import Navbar from "./navbar";
 import Sidebar from "./sidebar";
 import ContactUsPage from "../../views/auth/contact-us";
+import BeneficiaryDetailView from '../../views/auth/beneficiaries/detail';
 
 const AuthLayout = () => {
   const { t } = useTranslation();
@@ -46,6 +47,12 @@ const AuthLayout = () => {
       route: "/beneficiaries",
       view: <BeneficiariesView />,
       showInNav: true,
+      icon: faUsers,
+    },
+    {
+      name: t("Auth.Beneficiaries.Profile.Title"),
+      route: "/beneficiaries/detail/",
+      view: <BeneficiaryDetailView />,
       icon: faUsers,
     },
     {

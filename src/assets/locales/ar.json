@@ -25,8 +25,14 @@
       "BeneficiaryName": "اسم المستفيد",
       "Profile": {
         "ProfileCompletion": "استكمال طلب المستفيد",
+        "field": "الخانة",
+        "info": "المعلومات",
+        "notes": "ملاحظات",
+        "editStatus": "حالة التعديل",
         "ProfileDetails": "تفاصيل ملف المستفيد",
-        "Title": "ملف المستفيد"
+        "Title": "ملف المستفيد",
+        "editRequest": "طلب تعديل",
+        "archive": "ارشيف"
       },
       "Title": "المستفيدون"
     },

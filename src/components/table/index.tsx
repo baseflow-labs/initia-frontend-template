@@ -16,6 +16,7 @@ import "moment/locale/ar";
 import { splitOverNumberPlusLeftover } from "../../utils/function";
 
 export interface TableProps {
+  size?: number;
   columns: {
     label: string;
     name: string;
@@ -89,10 +90,16 @@ export const dataRender = ({
   }
 };
 
-const DynamicTable = ({ columns, data, onPageChange, actions }: TableProps) => {
+const DynamicTable = ({
+  columns,
+  data,
+  onPageChange,
+  actions,
+  size = 10,
+}: TableProps) => {
   const { t } = useTranslation();
 
-  const [pageSize, setPageSize] = useState(10);
+  const [pageSize, setPageSize] = useState(size);
 
   const calculatePageCount = () =>
     splitOverNumberPlusLeftover(data.length, pageSize);
