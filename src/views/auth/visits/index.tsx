@@ -19,6 +19,7 @@ import {
 const VisitsView = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const [openModal, setOpenModal] = useState(false);
   const [selectOptions, setSelectOptions] = useState({
     beneficiaries: [{ id: "", fullName: "" }],
   });
@@ -160,7 +161,7 @@ const VisitsView = () => {
     },
     {
       label: t("Auth.Visits.AddVisit"),
-      modal: "modal",
+      onClick: () => setOpenModal(true),
     },
   ];
 
@@ -205,13 +206,18 @@ const VisitsView = () => {
         onSearch={(values) => console.log(values)}
       />
 
-      <Modal title={t("Auth.Visits.AddVisit")}>
+      <Modal
+        title={t("Auth.Visits.AddVisit")}
+        onClose={() => setOpenModal(false)}
+        isOpen={openModal}
+      >
         <Form
           inputs={scheduleVisitInputs}
           submitText={t("Global.Form.Labels.Confirm")}
           onFormSubmit={(e) => {
             VisitApi.create(e)
               .then((res) => {
+                setOpenModal(false);
                 dispatch(
                   addNotification({
                     msg: t("Global.Form.SuccessMsg", {

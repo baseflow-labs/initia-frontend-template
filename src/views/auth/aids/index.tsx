@@ -20,6 +20,7 @@ const AidsView = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const [aids, setAids] = useState([{}]);
+  const [openModal, setOpenModal] = useState(false);
   const [selectOptions, setSelectOptions] = useState({
     beneficiaries: [{ id: "", fullName: "" }],
   });
@@ -107,7 +108,7 @@ const AidsView = () => {
   const actionButtons = [
     {
       label: t("Auth.Aids.AddAid"),
-      modal: "modal",
+      onClick: () => setOpenModal(true),
     },
   ];
 
@@ -198,13 +199,18 @@ const AidsView = () => {
         onSearch={(values) => console.log(values)}
       />
 
-      <Modal title={t("Auth.Aids.AddAid")}>
+      <Modal
+        title={t("Auth.Aids.AddAid")}
+        onClose={() => setOpenModal(false)}
+        isOpen={openModal}
+      >
         <Form
           inputs={grantAidInputs}
           submitText={t("Global.Form.Labels.SubmitApplication")}
           onFormSubmit={(e) => {
             AidApi.grant(e)
               .then((res) => {
+                setOpenModal(false);
                 dispatch(
                   addNotification({
                     msg: t("Global.Form.SuccessMsg", {

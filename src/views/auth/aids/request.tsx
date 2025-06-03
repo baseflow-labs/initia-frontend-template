@@ -19,6 +19,7 @@ const AidsBeneficiaryView = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const [beneficiaries, setAids] = useState([{}]);
+  const [openModal, setOpenModal] = useState(false);
 
   useLayoutEffect(() => {
     AidApi.getAll()
@@ -87,7 +88,7 @@ const AidsBeneficiaryView = () => {
   const actionButtons = [
     {
       label: t("Auth.Aids.Beneficiary.RequestAid"),
-      modal: "modal",
+      onClick: () => setOpenModal(true),
     },
   ];
 
@@ -186,13 +187,18 @@ const AidsBeneficiaryView = () => {
         onSearch={(values) => console.log(values)}
       />
 
-      <Modal title={t("Auth.Aids.Beneficiary.RequestAid")}>
+      <Modal
+        title={t("Auth.Aids.Beneficiary.RequestAid")}
+        isOpen={openModal}
+        onClose={() => setOpenModal(false)}
+      >
         <Form
           inputs={requestAidInputs}
           submitText={t("Global.Form.Labels.SubmitApplication")}
           onFormSubmit={(e) => {
             AidApi.create(e)
               .then((res) => {
+                setOpenModal(false);
                 dispatch(
                   addNotification({
                     msg: t("Global.Form.SuccessMsg", {

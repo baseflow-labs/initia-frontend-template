@@ -10,7 +10,6 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   route?: string;
   size?: string;
   outline?: boolean;
-  modal?: string;
 }
 
 const Button = ({
@@ -23,7 +22,6 @@ const Button = ({
   route,
   size = "",
   outline,
-  modal,
   ...rest
 }: Props) => {
   const navigate = useNavigate();
@@ -48,8 +46,6 @@ const Button = ({
         outline ? "" : textColor()
       } btn-${size} ${className} rounded-${rounded} py-${p} px-${p + 1}`}
       onClick={route ? () => navigate(route) : rest.onClick}
-      data-bs-target={"#" + modal}
-      data-bs-toggle={modal && "modal"}
       {...rest}
     >
       {children}
