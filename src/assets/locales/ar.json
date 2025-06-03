@@ -18,6 +18,7 @@
       "AddBeneficiary": "إضافة مستفيد",
       "BeneficiaryName": "اسم المستفيد",
       "Profile": {
+        "ProfileCompletion": "استكمال طلب المستفيد",
         "ProfileDetails": "تفاصيل ملف المستفيد",
         "Title": "ملف المستفيد"
       },
@@ -246,6 +247,12 @@
       "AddVisit": "جدولة زيارة",
       "Report": {
         "AddReport": "إجراء تقييم"
+      },
+      "Statuses": {
+        "Cancelled": "ألغيت الزيارة",
+        "Done": "تمت الزيارة",
+        "Pending": "بانتظار الزيارة",
+        "Status": "حالة الزيارة"
       },
       "Title": "الزيارات الميدانية",
       "VisitDate": "تاريخ الزيارة",

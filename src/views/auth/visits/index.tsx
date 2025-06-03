@@ -68,59 +68,25 @@ const VisitsView = () => {
 
   const title = t("Auth.Visits.Title");
 
-  const visitPurposes = [
-    {
-      value: "A",
-      label: "A",
-    },
-    {
-      value: "B",
-      label: "B",
-    },
-  ];
-
   const statuses = [
     {
-      value: "New Member",
-      label: t("Auth.MembershipRegistration.Statuses.NewMember"),
+      value: "Pending",
+      label: t("Auth.Visits.Statuses.Pending"),
     },
     {
-      value: "Incomplete",
-      label: t("Auth.MembershipRegistration.Statuses.Incomplete"),
+      value: "Done",
+      label: t("Auth.Visits.Statuses.Done"),
     },
     {
-      value: "Need Help",
-      label: t("Auth.MembershipRegistration.Statuses.NeedHelp"),
-    },
-    {
-      value: "Rejected",
-      label: t("Auth.MembershipRegistration.Statuses.Rejected"),
-    },
-    {
-      value: "Accepted",
-      label: t("Auth.MembershipRegistration.Statuses.Accepted"),
-    },
-    {
-      value: "In Preview",
-      label: t("Auth.MembershipRegistration.Statuses.InPreview"),
+      value: "Cancelled",
+      label: t("Auth.Visits.Statuses.Cancelled"),
     },
   ];
 
   const filters = [
     {
-      label: t("Auth.MembershipRegistration.Statuses.Status"),
+      label: t("Auth.Visits.Statuses.Status"),
       options: statuses,
-    },
-  ];
-
-  const aidTypes = [
-    {
-      value: "A",
-      label: "A",
-    },
-    {
-      value: "B",
-      label: "B",
     },
   ];
 
@@ -164,7 +130,7 @@ const VisitsView = () => {
         </Fragment>
       ),
       name: "status",
-      label: t("Auth.MembershipRegistration.Statuses.Status"),
+      label: t("Auth.Visits.Statuses.Status"),
     },
   ];
 

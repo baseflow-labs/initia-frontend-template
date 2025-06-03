@@ -8,10 +8,13 @@ export const statusColorRender = (status = "") => {
     case "Rejected":
       return "danger";
     case "Accept":
+    case "Granted":
     case "Accepted":
       return "success";
     case "In Preview":
-      return "Warning";
+    case "Pending":
+    case "Pending Approval":
+      return "warning";
     case "Incomplete":
     case "Need Help":
       return "black";

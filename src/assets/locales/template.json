@@ -18,6 +18,7 @@
       "AddBeneficiary": "Add Beneficiary",
       "BeneficiaryName": "Beneficiary Name",
       "Profile": {
+        "ProfileCompletion": "Profile Completion",
         "ProfileDetails": "Profile Details",
         "Title": "Profile"
       },
@@ -246,6 +247,12 @@
       "AddVisit": "Add Visit",
       "Report": {
         "AddReport": "Add Report"
+      },
+      "Statuses": {
+        "Cancelled": "Cancelled",
+        "Done": "Done",
+        "Pending": "Pending",
+        "Status": "Visit Status"
       },
       "Title": "Visits",
       "VisitDate": "Visit Date",

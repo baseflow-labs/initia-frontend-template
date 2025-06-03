@@ -4,7 +4,7 @@ import { FormikProps } from "formik";
 import moment from "moment";
 import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 import { Fragment } from "react/jsx-runtime";
 
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
@@ -29,6 +29,7 @@ import DependentsFormView from "./Dependents";
 const MembershipRegistrationView = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({
@@ -36,14 +37,42 @@ const MembershipRegistrationView = () => {
     contactsBank: {},
     housing: {},
     income: {},
+    user: {},
     dependents: [{ fullName: "", idNumber: "" }],
     nationalRecord: {},
   });
 
   useLayoutEffect(() => {
-    BeneficiaryApi.getByUserId()
-      .then((res: any) => (res.beneficiary.id ? setFormData(res) : ""))
-      .catch(apiCatchGlobalHandler);
+    if (searchParams.get("id")) {
+      BeneficiaryApi.getById(searchParams.get("id") || "")
+        .then(
+          ({
+            contactsBank,
+            dependents,
+            housing,
+            income,
+            nationalRecord,
+            user,
+            ...beneficiary
+          }: any) =>
+            beneficiary.id
+              ? setFormData({
+                  contactsBank,
+                  dependents,
+                  housing,
+                  income,
+                  nationalRecord,
+                  user,
+                  beneficiary,
+                })
+              : ""
+        )
+        .catch(apiCatchGlobalHandler);
+    } else {
+      BeneficiaryApi.getByUserId()
+        .then((res: any) => (res.beneficiary.id ? setFormData(res) : ""))
+        .catch(apiCatchGlobalHandler);
+    }
   }, []);
 
   const onNextStep = (values = {}, service = "") => {
