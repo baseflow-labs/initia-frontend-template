@@ -38,7 +38,7 @@ const LoginView = () => {
 
   const onSubmit = (values: authApi.loginCredentials) => {
     authApi
-      .login({ ...values, identifier: "+966" + values.identifier })
+      .login(values)
       .then((res: any) => {
         dispatch(
           addNotification({

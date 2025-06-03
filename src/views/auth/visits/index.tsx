@@ -35,7 +35,15 @@ const VisitsView = () => {
       .then((res) => {
         setVisits(
           (res as any).map(
-            ({ beneficiary = { contactsBank: {}, housing: {} }, ...rest }) => ({
+            ({
+              beneficiary = {
+                contactsBank: {},
+                housing: {},
+                user: { username: "" },
+              },
+              ...rest
+            }) => ({
+              beneficiaryMobile: beneficiary.user.username,
               ...beneficiary.housing,
               ...beneficiary.contactsBank,
               ...beneficiary,

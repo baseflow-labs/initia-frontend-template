@@ -13,11 +13,11 @@ const RegisterView = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [data, setData] = useState({ identifier: "" });
+  const [data, setData] = useState({ username: "" });
 
-  const onRegisterSubmit = (values = { identifier: "" }) => {
+  const onRegisterSubmit = (values = { username: "" }) => {
     authApi
-      .otpSend("+966" + values.identifier)
+      .otpSend(values.username)
       .then(() => {
         setData(values);
       })
@@ -26,7 +26,7 @@ const RegisterView = () => {
 
   const onOtpSubmit = (values: authApi.registerProps) => {
     authApi
-      .register({ ...values, ...data, username: "+966" + data.identifier })
+      .register({ ...values, ...data })
       .then((res: any) => {
         dispatch(addNotification({ msg: t("Public.Register.Labels.Success") }));
         navigate("/");
@@ -43,7 +43,7 @@ const RegisterView = () => {
     },
     {
       type: "phoneNumber",
-      name: "identifier",
+      name: "username",
       label: t("Public.Register.Labels.PhoneNo"),
       required: true,
     },
@@ -86,7 +86,7 @@ const RegisterView = () => {
 
   return (
     <div>
-      {data.identifier ? (
+      {data.username ? (
         <Fragment>
           <h4>رمز التحقق OTP</h4>
 
