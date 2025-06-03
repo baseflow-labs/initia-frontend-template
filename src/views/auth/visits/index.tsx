@@ -16,7 +16,7 @@ import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
   statusColorRender,
-} from "../../../utils/fucntions";
+} from "../../../utils/function";
 
 const VisitsView = () => {
   const { t } = useTranslation();

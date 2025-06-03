@@ -14,7 +14,7 @@ import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
   statusColorRender,
-} from "../../../utils/fucntions";
+} from "../../../utils/function";
 import { useNavigate } from "react-router";
 
 const BeneficiariesView = () => {

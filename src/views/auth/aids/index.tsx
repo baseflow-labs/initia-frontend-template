@@ -14,7 +14,7 @@ import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
   statusColorRender,
-} from "../../../utils/fucntions";
+} from "../../../utils/function";
 
 const AidsView = () => {
   const { t } = useTranslation();

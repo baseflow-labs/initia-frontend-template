@@ -7,7 +7,7 @@ import BelowInputButton from "../../../components/button/belowInput";
 import Form from "../../../components/form";
 import { login } from "../../../store/actions/auth";
 import { addNotification } from "../../../store/actions/notifications";
-import { apiCatchGlobalHandler } from "../../../utils/fucntions";
+import { apiCatchGlobalHandler } from "../../../utils/function";
 
 const LoginView = () => {
   const { t } = useTranslation();

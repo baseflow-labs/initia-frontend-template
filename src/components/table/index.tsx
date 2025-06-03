@@ -13,7 +13,7 @@ import i18n from "../../i18next";
 import { useTranslation } from "react-i18next";
 import { viewDateFormat, viewTimeFormat } from "../../utils/consts";
 import "moment/locale/ar";
-import { splitOverNumberPlusLeftover } from "../../utils/fucntions";
+import { splitOverNumberPlusLeftover } from "../../utils/function";
 
 export interface TableProps {
   columns: {

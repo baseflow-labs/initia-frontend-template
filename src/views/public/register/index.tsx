@@ -7,7 +7,7 @@ import * as authApi from "../../../api/auth";
 import BelowInputButton from "../../../components/button/belowInput";
 import Form from "../../../components/form";
 import { addNotification } from "../../../store/actions/notifications";
-import { apiCatchGlobalHandler } from "../../../utils/fucntions";
+import { apiCatchGlobalHandler } from "../../../utils/function";
 
 const RegisterView = () => {
   const { t } = useTranslation();
