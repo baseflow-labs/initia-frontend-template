@@ -4,6 +4,7 @@ import { Fragment, useEffect, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
+import { useNavigate, useSearchParams } from "react-router";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import * as VisitApi from "../../../api/visits/visits";
 import Form from "../../../components/form";
@@ -15,13 +16,12 @@ import {
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/fucntions";
-import { useLocation, useNavigate, useSearchParams } from "react-router";
+import { dataDateFormat, viewDayDateFormat } from "../../../utils/consts";
 
 const VisitsView = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
   const [searchParams] = useSearchParams();
 
   const [openModal, setOpenModal] = useState(false);
@@ -34,10 +34,14 @@ const VisitsView = () => {
     VisitApi.getAll()
       .then((res) => {
         setVisits(
-          (res as any).map(({ beneficiary = {}, ...rest }) => ({
-            ...beneficiary,
-            ...rest,
-          })) as any
+          (res as any).map(
+            ({ beneficiary = { contactsBank: {}, housing: {} }, ...rest }) => ({
+              ...beneficiary.housing,
+              ...beneficiary.contactsBank,
+              ...beneficiary,
+              ...rest,
+            })
+          ) as any
         );
       })
       .catch(apiCatchGlobalHandler);
@@ -103,10 +107,6 @@ const VisitsView = () => {
       label: t("Auth.MembershipRegistration.Statuses.Status"),
       options: statuses,
     },
-    {
-      label: t("Auth.Visits.VisitPurpose"),
-      options: visitPurposes,
-    },
   ];
 
   const aidTypes = [
@@ -129,6 +129,7 @@ const VisitsView = () => {
     {
       type: "date",
       name: "date",
+      dateFormat: viewDayDateFormat,
       label: t("Auth.Visits.VisitDate"),
     },
     {
@@ -141,12 +142,6 @@ const VisitsView = () => {
       name: "city",
       label: t("Auth.MembershipRegistration.Address"),
       render: (row: any) => row.city + " - " + row.district,
-    },
-    {
-      type: "select",
-      options: visitPurposes,
-      name: "type",
-      label: t("Auth.Visits.VisitPurpose"),
     },
     {
       type: "custom",

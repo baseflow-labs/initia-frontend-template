@@ -21,6 +21,7 @@ export interface TableProps {
     name: string;
     render?: (row: {}) => string | React.ReactNode;
     type?: string;
+    dateFormat?: string;
     options?: { value: string; label?: string }[];
   }[];
   data: { id?: string }[];
@@ -38,13 +39,23 @@ interface Props {
   data: string;
   render?: (row: {}) => string | React.ReactNode;
   type?: string;
+  dateFormat?: string;
   options?: { value: string | number; label?: string }[];
 }
 
-export const dataRender = ({ row, render, data, type, options }: Props) => {
+export const dataRender = ({
+  row,
+  render,
+  data,
+  type,
+  options,
+  dateFormat,
+}: Props) => {
   switch (type) {
     case "date":
-      return moment(data).locale(i18n.language).format(viewDateFormat);
+      return moment(data)
+        .locale(i18n.language)
+        .format(dateFormat || viewDateFormat);
     case "phoneNumber":
       return <span dir="ltr"> {data && "+966" + data}</span>;
     case "select":
@@ -134,7 +145,7 @@ const DynamicTable = ({ columns, data, onPageChange, actions }: TableProps) => {
                 {i + pageSize * (pageNumber - 1) + 1}
               </td>
 
-              {columns.map(({ name, type, options, render }, y) => (
+              {columns.map(({ name, type, options, render, dateFormat }, y) => (
                 <td className="py-3" key={y}>
                   {dataRender({
                     row,
@@ -142,6 +153,7 @@ const DynamicTable = ({ columns, data, onPageChange, actions }: TableProps) => {
                     type,
                     render,
                     options,
+                    dateFormat,
                   })}
                 </td>
               ))}
