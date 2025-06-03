@@ -25,16 +25,20 @@ import WizardFormStepper from "../../../components/form/wizard/stepper";
 import { dataDateFormat } from "../../../utils/consts";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import DependentsFormView from "./Dependents";
+import { useDispatch } from "react-redux";
+import { addNotification } from "../../../store/actions/notifications";
 
 const MembershipRegistrationView = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
 
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({
     beneficiary: { id: "" },
     contactsBank: {},
+    status: { status: "" },
     housing: {},
     income: {},
     user: {},
@@ -53,6 +57,7 @@ const MembershipRegistrationView = () => {
             income,
             nationalRecord,
             user,
+            status,
             ...beneficiary
           }: any) =>
             beneficiary.id
@@ -60,6 +65,7 @@ const MembershipRegistrationView = () => {
                   contactsBank,
                   dependents,
                   housing,
+                  status,
                   income,
                   nationalRecord,
                   user,
@@ -74,6 +80,20 @@ const MembershipRegistrationView = () => {
         .catch(apiCatchGlobalHandler);
     }
   }, []);
+
+  const onRequestHelp = () => {
+    BeneficiaryApi.requestHelp(formData.beneficiary.id)
+      .then(() =>
+        dispatch(
+          addNotification({
+            msg: t("Global.Form.SuccessMsg", {
+              action: t("Auth.MembershipRegistration.Form.HelpRequested"),
+            }),
+          })
+        )
+      )
+      .catch(apiCatchGlobalHandler);
+  };
 
   const onNextStep = (values = {}, service = "") => {
     window.scrollTo(0, 0);
@@ -816,16 +836,24 @@ const MembershipRegistrationView = () => {
     },
   ];
 
-  const HelpButton = () => (
-    <Button
-      className="w-100 p-2 ps-1 mb-3 text-start"
-      color="ghost"
-      type="button"
-    >
-      <FontAwesomeIcon icon={faInfoCircle} />{" "}
-      {t("Auth.MembershipRegistration.Form.ClickForHelp")}
-    </Button>
-  );
+  const HelpButton = () => {
+    const alreadyRequested = formData.status.status === "Need Help";
+
+    return (
+      <Button
+        className="w-100 p-2 ps-1 mb-3 text-start border-0"
+        color="ghost"
+        type="button"
+        disabled={alreadyRequested}
+        onClick={() => onRequestHelp()}
+      >
+        <FontAwesomeIcon icon={faInfoCircle} />{" "}
+        {alreadyRequested
+          ? t("Auth.MembershipRegistration.Form.AlreadyRequested")
+          : t("Auth.MembershipRegistration.Form.ClickForHelp")}
+      </Button>
+    );
+  };
 
   const BackButton = () => (
     <Fragment>

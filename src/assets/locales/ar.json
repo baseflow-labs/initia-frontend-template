@@ -56,6 +56,7 @@
           "Title": "المرحلة العمرية",
           "TwelveToEighteen": "من 12 إلى 17"
         },
+        "AlreadyRequested": "تم طلب المساعدة بالفعل",
         "ApartmentNo": "رقم الشقة",
         "Attachments": "المرفقات",
         "BackupMobile": "رقم الجوال الاحتياطي",
@@ -125,6 +126,7 @@
           "Sick": "مريض",
           "Title": "الحالة الصحية"
         },
+        "HelpRequested": "طلب المساعدة",
         "HomeLocation": "موقع المنزل",
         "HomeOwnership": {
           "Ownership": "ملك",

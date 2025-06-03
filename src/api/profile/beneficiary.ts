@@ -56,4 +56,8 @@ const createOrUpdate = async (data: Props) => {
   );
 };
 
-export { getAll, create, getById, getByUserId, createOrUpdate };
+const requestHelp = async (id: string) => {
+  return await api.get(mainPath + "/request-help/" + id);
+};
+
+export { getAll, create, getById, getByUserId, createOrUpdate, requestHelp };

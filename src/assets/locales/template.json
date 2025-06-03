@@ -56,6 +56,7 @@
           "Title": "Age Group",
           "TwelveToEighteen": "Twelve To Eighteen"
         },
+        "AlreadyRequested": "Help Was Already Requested",
         "ApartmentNo": "Apartment No",
         "Attachments": "Attachments",
         "BackupMobile": "Backup Mobile",
@@ -125,6 +126,7 @@
           "Sick": "Sick",
           "Title": "Health Status"
         },
+        "HelpRequested": "Help Request",
         "HomeLocation": "Home Location",
         "HomeOwnership": {
           "Ownership": "Ownership",
