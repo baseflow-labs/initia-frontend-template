@@ -6,12 +6,17 @@ export const statusColorRender = (status = "") => {
   switch (status) {
     case "Reject":
     case "Rejected":
+    case "Cancelled":
+    case "Cancel":
       return "danger";
     case "Accept":
+    case "Granted":
     case "Accepted":
       return "success";
     case "In Preview":
-      return "Warning";
+    case "Pending":
+    case "Pending Approval":
+      return "warning";
     case "Incomplete":
     case "Need Help":
       return "black";

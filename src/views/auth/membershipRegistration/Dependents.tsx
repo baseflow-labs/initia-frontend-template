@@ -14,7 +14,7 @@ import Form from "../../../components/form";
 import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
 import { dataDateFormat } from "../../../utils/consts";
-import { apiCatchGlobalHandler } from "../../../utils/fucntions";
+import { apiCatchGlobalHandler } from "../../../utils/function";
 
 interface Props {
   customButtons: React.ReactNode;
@@ -37,7 +37,7 @@ const DependentsFormView = ({
   useEffect(() => setDependents(initialValues), [initialValues]);
 
   const remove = (i = 0) => {
-    setDependents((current) => current.filter((_, y) => y != i));
+    setDependents((current) => current.filter((_, y) => y !== i));
   };
 
   const dependentsDataInputs = (formik: FormikProps<Record<string, any>>) => [

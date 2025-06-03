@@ -1,13 +1,16 @@
 import { useAppSelector } from "../../store/hooks";
+import Button from "../core/button";
 
 const BelowInputButton = ({
   introText,
   buttonText,
+  route,
   action,
 }: {
   introText?: string;
   buttonText: string;
-  action: any;
+  route?: string;
+  action?: (data?: any) => void;
 }) => {
   const { loading } = useAppSelector((state) => state.loading);
 
@@ -15,13 +18,17 @@ const BelowInputButton = ({
     <div className="pb-0 mb-0 mt-3">
       <small className="pt-2">
         {introText}{" "}
-        <span
-          role="button"
-          onClick={loading ? undefined : action}
+        <Button
+          color="ghost"
+          size="sm"
+          type="button"
+          route={route}
+          onClick={route ? undefined : action}
+          disabled={loading.length > 0}
           className="text-decoration-underline text-info"
         >
           {buttonText}
-        </span>
+        </Button>
       </small>
     </div>
   );

@@ -21,7 +21,7 @@ interface Props {
   contactsBank: string;
 }
 
-const mainPath = "/beneficiary";
+const mainPath = "/visitSchedule";
 const { user } = (store.getState() as RootState).auth;
 
 const getAll = async () => {
@@ -36,6 +36,16 @@ const getById = async (id: string) => {
 
 const create = async (data: object) => {
   const res = await api.post(mainPath, data);
+  return res;
+};
+
+const update = async (data: { id: "" }) => {
+  const res = await api.patch(mainPath + "/" + data.id, data);
+  return res;
+};
+
+const cancel = async (id: string) => {
+  const res = await api.patch(mainPath + "/cancel/" + id);
   return res;
 };
 
@@ -56,8 +66,4 @@ const createOrUpdate = async (data: Props) => {
   );
 };
 
-const requestHelp = async (id: string) => {
-  return await api.get(mainPath + "/request-help/" + id);
-};
-
-export { getAll, create, getById, getByUserId, createOrUpdate, requestHelp };
+export { getAll, create, update, cancel, getById, getByUserId, createOrUpdate };

@@ -4,7 +4,6 @@ import axios, {
   InternalAxiosRequestConfig,
 } from "axios";
 
-import { logout } from "../store/actions/auth";
 import { endLoading, startLoading } from "../store/actions/loading";
 import { addNotification } from "../store/actions/notifications";
 import store, { RootState } from "../store/store";
@@ -43,7 +42,7 @@ service.interceptors.response.use(
   (res: AxiosResponse) => {
     store.dispatch(endLoading());
 
-    if ([200, 201, 204].includes(res.status)) {
+    if ([200, 201, 202, 204].includes(res.status)) {
       return res.data.payload;
     }
 

@@ -15,6 +15,7 @@ const PasswordInput: React.FC<FinalInput> = ({ placeholder, ...rest }) => {
         {...rest}
         type={show ? "text" : "password"}
         placeholder={rest.label}
+        autoComplete={rest.name}
         className={`form-control form-control-sm ${commonInputClasses}`}
       />
       <span

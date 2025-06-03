@@ -3,22 +3,43 @@
     "Aids": {
       "AddAid": "ارسال معونة",
       "AidName": "اسم المعونة",
+      "AidPurpose": "سبب طلب المعونة",
       "AidType": "نوع المعونة",
+      "Beneficiary": {
+        "RequestAid": "طلب معونة",
+        "RequestDetails": "تفاصيل المعونة",
+        "Title": "المعونات",
+        "Urgent?": "هل الحالة مستعجلة؟"
+      },
+      "Cash": "نقدية",
+      "In-Kind": "عينية",
       "RecaptionDate": "تاريخ الاستلام",
+      "Statuses": {
+        "Granted": "اعتمدت",
+        "Pending": "قيد المراجعة"
+      },
       "Title": "طلبات الإعانة"
     },
     "Beneficiaries": {
       "AddBeneficiary": "إضافة مستفيد",
       "BeneficiaryName": "اسم المستفيد",
       "Profile": {
+        "ProfileCompletion": "استكمال طلب المستفيد",
         "ProfileDetails": "تفاصيل ملف المستفيد",
         "Title": "ملف المستفيد"
       },
       "Title": "المستفيدون"
     },
+    "ContactUs": {
+      "Contact": "إذا كنت بحاجة لمساعدة أو أي استفسار فلا تترد في الاتصال بنا",
+      "ContactNow": "اتصل الآن للمساعدة",
+      "ContactUsNow": "اتصل الآن",
+      "Title": "تواصل معنا"
+    },
     "Dashboard": {
-      "Title": "Dashboard",
-      "Welcome": "Welcome To Dashboard"
+      "Main": "الرئيسية",
+      "Title": "نظرة عامة",
+      "Welcome": "أهلاً بكم في نظام مستحق"
     },
     "MembershipRegistration": {
       "Address": "العنوان",
@@ -35,6 +56,7 @@
           "Title": "المرحلة العمرية",
           "TwelveToEighteen": "من 12 إلى 17"
         },
+        "AlreadyRequested": "تم طلب المساعدة بالفعل",
         "ApartmentNo": "رقم الشقة",
         "Attachments": "المرفقات",
         "BackupMobile": "رقم الجوال الاحتياطي",
@@ -48,6 +70,7 @@
         "ContactData": "بيانات الاتصال والبيانات البنكية",
         "CreditStatement": "التقرير الائتماني من موقع ملم",
         "CreditStatementNote": "في حال وجود ديون رسمية",
+        "DependantData": "بيانات التابع {{name}}",
         "DependentMobile": "رقم جوال التابع",
         "DependentMobileNote": "إن وجد",
         "Dependents": {
@@ -57,7 +80,6 @@
           "SaveDependent": "حفظ بيانات التابع"
         },
         "DependentsData": "بيانات التابعين",
-        "DependantData": "بيانات التابع {{name}}",
         "Diseases": {
           "Cancerous": "أمراض سرطانية",
           "ChestDiseases": "أمراض صدرية وتنفسية",
@@ -104,6 +126,7 @@
           "Sick": "مريض",
           "Title": "الحالة الصحية"
         },
+        "HelpRequested": "طلب المساعدة",
         "HomeLocation": "موقع المنزل",
         "HomeOwnership": {
           "Ownership": "ملك",
@@ -225,20 +248,38 @@
       },
       "Title": "طلب الانتساب للجمعية"
     },
+    "Settings": {
+      "Title": "الإعدادات"
+    },
     "Visits": {
       "AddVisit": "جدولة زيارة",
+      "CancelVisit": "إلغاء الزيارة",
+      "EditVisit": "تعديل زيارة",
+      "Report": {
+        "AddReport": "إجراء تقييم"
+      },
+      "Statuses": {
+        "Cancelled": "ألغيت الزيارة",
+        "Done": "تمت الزيارة",
+        "Pending": "بانتظار الزيارة",
+        "Status": "حالة الزيارة"
+      },
       "Title": "الزيارات الميدانية",
       "VisitDate": "تاريخ الزيارة",
-      "VisitPurpose": "سبب الزيارة"
+      "VisitPurpose": "سبب الزيارة",
+      "VisitTime": "وقت الزيارة"
     }
   },
   "Global": {
     "Form": {
       "Labels": {
         "AddNew": "إضافة بيانات جديدة",
+        "Confirm": "تأكيد",
+        "Edit": "تعدبل",
         "InvalidEmail": "بريد إلكتروني غير صالح",
         "Location": "Google Map رابط",
         "No": "لا",
+        "Notes": "ملاحظات",
         "PickDate": "اختر التاريخ",
         "PleaseSelect": "نرجو الاختيار...",
         "Previous": "السابق",
@@ -247,9 +288,12 @@
         "SaveContinue": "حفظ ومتابعة",
         "SaveData": "حفظ البيانات",
         "Submit": "إرسال",
+        "SubmitApplication": "تقديم الطلب",
+        "SupportingDocument": "وثائق مدعمة",
         "UploadAttachment": "إضافة مرفق",
         "Yes": "نعم"
-      }
+      },
+      "SuccessMsg": "تم {{action}} لـ {{data}} بنجاح"
     },
     "Labels": {
       "Action": "إجراء",
@@ -272,9 +316,7 @@
         "Title": "إعادة تعيين كلمة السر"
       },
       "SendOtp": {
-        "ConfirmOTP": "تأكيد رمز التحقق OTP",
-        "RememberPassword": "هل تتذكر كلمة السر؟",
-        "SendOtp": "ارسل رمز التحقق OTP"
+        "ConfirmOTP": "تأكيد رمز التحقق OTP"
       },
       "Title": "نسيت كلمة السر"
     },

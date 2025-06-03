@@ -4,8 +4,8 @@ const DashboardView = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="text-success">
-      <h1>{t("Auth.Dashboard.Welcome")}</h1>
+    <div className="text-info text-center">
+      <h1 className="display-1">{t("Auth.Dashboard.Welcome")}</h1>
     </div>
   );
 };

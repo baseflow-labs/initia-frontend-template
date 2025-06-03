@@ -3,6 +3,7 @@ import {
   faBoxOpen,
   faEdit,
   faHome,
+  faInfoCircle,
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "react-i18next";
@@ -10,6 +11,7 @@ import { Route, Routes, useLocation } from "react-router";
 import { Fragment } from "react/jsx-runtime";
 
 import AidsView from "../../views/auth/aids";
+import AidsBeneficiaryView from "../../views/auth/aids/request";
 import BeneficiariesView from "../../views/auth/beneficiaries";
 import BeneficiaryProfileView from "../../views/auth/beneficiaries/profile";
 import DashboardView from "../../views/auth/dashboard";
@@ -19,6 +21,7 @@ import FourZeroFourError from "../../views/common/404";
 import DashboardNavbar from "./dashboardNavbar";
 import Navbar from "./navbar";
 import Sidebar from "./sidebar";
+import ContactUsPage from "../../views/auth/contact-us";
 
 const AuthLayout = () => {
   const { t } = useTranslation();
@@ -35,12 +38,14 @@ const AuthLayout = () => {
       name: t("Auth.Dashboard.Title"),
       route: "/",
       view: <DashboardView />,
+      showInNav: true,
       icon: faHome,
     },
     {
       name: t("Auth.Beneficiaries.Title"),
       route: "/beneficiaries",
       view: <BeneficiariesView />,
+      showInNav: true,
       icon: faUsers,
     },
     {
@@ -53,13 +58,28 @@ const AuthLayout = () => {
       name: t("Auth.Visits.Title"),
       route: "/visits",
       view: <VisitsView />,
+      showInNav: true,
       icon: faBezierCurve,
     },
     {
       name: t("Auth.Aids.Title"),
       route: "/aids",
       view: <AidsView />,
+      showInNav: true,
       icon: faBoxOpen,
+    },
+    {
+      name: t("Auth.Aids.Beneficiary.Title"),
+      route: "/beneficiary/aids",
+      view: <AidsBeneficiaryView />,
+      showInNav: true,
+      icon: faBoxOpen,
+    },
+    {
+      name: t("Auth.ContactUs.Title"),
+      route: "/contact-us",
+      view: <ContactUsPage />,
+      icon: faInfoCircle,
     },
   ];
 
@@ -74,7 +94,9 @@ const AuthLayout = () => {
         <div className="col-md-2 p-0">
           {showSidebar && (
             <Sidebar
-              routes={authRoutes.map(({ view, ...rest }) => ({ ...rest }))}
+              routes={authRoutes
+                .filter(({ showInNav }) => showInNav)
+                .map(({ view, ...rest }) => ({ ...rest }))}
             />
           )}
         </div>

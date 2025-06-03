@@ -45,7 +45,7 @@ const auth = (
       localStorage.removeItem("refreshToken");
       localStorage.removeItem("user");
 
-      window.location.reload();
+      window.location.assign("/");
 
       return {
         token: null,

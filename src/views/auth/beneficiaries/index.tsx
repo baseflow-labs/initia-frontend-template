@@ -1,32 +1,42 @@
-import { faCircle, faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCalendarDays,
+  faCircle,
+  faEdit,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import { useNavigate } from "react-router";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import TablePage from "../../../layouts/auth/tablePage";
 import {
+  apiCatchGlobalHandler,
   renderDataFromOptions,
   statusColorRender,
-} from "../../../utils/fucntions";
+} from "../../../utils/function";
 
 const BeneficiariesView = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [beneficiaries, setBeneficiaries] = useState([{}]);
 
   useLayoutEffect(() => {
-    BeneficiaryApi.getAll().then((res) => {
-      setBeneficiaries(
-        (res as any).map(
-          ({ contactsBank = {}, housing = {}, status = {}, ...rest }) => ({
-            ...contactsBank,
-            ...housing,
-            ...status,
-            ...rest,
-          })
-        ) as any
-      );
-    });
+    BeneficiaryApi.getAll()
+      .then((res) => {
+        setBeneficiaries(
+          (res as any).map(
+            ({ contactsBank = {}, housing = {}, status = {}, ...rest }) => ({
+              ...contactsBank,
+              ...housing,
+              ...status,
+              ...rest,
+            })
+          ) as any
+        );
+      })
+      .catch(apiCatchGlobalHandler);
   }, []);
 
   const title = t("Auth.Beneficiaries.Title");
@@ -178,7 +188,9 @@ const BeneficiariesView = () => {
     },
   ];
 
-  const actionButtons = [{ label: t("Auth.Beneficiaries.AddBeneficiary") }];
+  const actionButtons = [
+    { label: t("Auth.Beneficiaries.AddBeneficiary"), route: "/apply" },
+  ];
 
   const columns = [
     {
@@ -230,18 +242,37 @@ const BeneficiariesView = () => {
     },
   ];
 
+  const completeProfile = (data: string | object) => {
+    navigate(`/apply/?id=${data}`);
+  };
+
   const viewProfile = (data: string | object) => {
-    console.log({ data });
+    navigate(`/beneficiaries/profile/?id=${data}`);
+  };
+
+  const scheduleVisit = (data: string | object) => {
+    navigate(`/visits/?id=${data}`);
   };
 
   return (
     <TablePage
       title={title}
       filters={filters}
-      actionButtons={actionButtons}
+      // actionButtons={actionButtons}
       columns={columns}
       data={beneficiaries}
       tableActions={[
+        {
+          icon: faCalendarDays,
+          spread: true,
+          label: t("Auth.Visits.AddVisit"),
+          onClick: (data: string | object) => scheduleVisit(data),
+        },
+        {
+          icon: faEdit,
+          label: t("Auth.Beneficiaries.Profile.ProfileCompletion"),
+          onClick: (data: string | object) => completeProfile(data),
+        },
         {
           icon: faUser,
           label: t("Auth.Beneficiaries.Profile.ProfileDetails"),

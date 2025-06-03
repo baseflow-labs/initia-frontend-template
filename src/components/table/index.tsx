@@ -11,11 +11,9 @@ import moment from "moment";
 import { useEffect, useState } from "react";
 import i18n from "../../i18next";
 import { useTranslation } from "react-i18next";
-
-import { viewDateFormat } from "../../utils/consts";
-
+import { viewDateFormat, viewTimeFormat } from "../../utils/consts";
 import "moment/locale/ar";
-import { splitOverNumberPlusLeftover } from "../../utils/fucntions";
+import { splitOverNumberPlusLeftover } from "../../utils/function";
 
 export interface TableProps {
   columns: {
@@ -23,6 +21,7 @@ export interface TableProps {
     name: string;
     render?: (row: {}) => string | React.ReactNode;
     type?: string;
+    timestampFormat?: string;
     options?: { value: string; label?: string }[];
   }[];
   data: { id?: string }[];
@@ -40,13 +39,27 @@ interface Props {
   data: string;
   render?: (row: {}) => string | React.ReactNode;
   type?: string;
+  timestampFormat?: string;
   options?: { value: string | number; label?: string }[];
 }
 
-export const dataRender = ({ row, render, data, type, options }: Props) => {
+export const dataRender = ({
+  row,
+  render,
+  data,
+  type,
+  options,
+  timestampFormat,
+}: Props) => {
   switch (type) {
     case "date":
-      return moment(data).locale(i18n.language).format(viewDateFormat);
+      return moment(data)
+        .locale(i18n.language)
+        .format(timestampFormat || viewDateFormat);
+    case "time":
+      return moment("2025-06-08T" + data)
+        .locale(i18n.language)
+        .format(timestampFormat || viewTimeFormat);
     case "phoneNumber":
       return <span dir="ltr"> {data && "+966" + data}</span>;
     case "select":
@@ -136,32 +149,39 @@ const DynamicTable = ({ columns, data, onPageChange, actions }: TableProps) => {
                 {i + pageSize * (pageNumber - 1) + 1}
               </td>
 
-              {columns.map(({ name, type, options, render }, y) => (
-                <td className="py-3" key={y}>
-                  {dataRender({
-                    row,
-                    data: (row as any)[name],
-                    type,
-                    render,
-                    options,
-                  })}
-                </td>
-              ))}
+              {columns.map(
+                ({ name, type, options, render, timestampFormat }, y) => (
+                  <td className="py-3" key={y}>
+                    {dataRender({
+                      row,
+                      data: (row as any)[name],
+                      type,
+                      render,
+                      options,
+                      timestampFormat,
+                    })}
+                  </td>
+                )
+              )}
 
               {actions?.length && (
-                <td className="py-3" scope="row">
+                <td className="py-3 d-flex" scope="row">
                   {actions
                     .filter(({ spread }) => spread)
                     .map(({ icon, label, onClick }, y) => (
                       <FontAwesomeIcon
                         icon={icon}
+                        // data-bs-toggle="tooltip"
+                        // data-bs-placement="top"
+                        // data-bs-custom-class="custom-tooltip"
+                        // data-bs-title={label}
                         role="button"
                         onClick={() => onClick(row?.id || row)}
                         key={y}
                       />
                     ))}
 
-                  <div className="dropdown">
+                  <div className="dropdown ms-3">
                     <FontAwesomeIcon
                       icon={faEllipsisVertical}
                       className="dropdown-toggle"
@@ -175,17 +195,16 @@ const DynamicTable = ({ columns, data, onPageChange, actions }: TableProps) => {
                         .filter(({ spread }) => !spread)
                         .map(({ icon, label, onClick }, y) => (
                           <li key={y}>
-                            <div
+                            <button
                               className="dropdown-item"
-                              role="button"
-                              onClick={() => console.log(row.id || row)}
+                              onClick={() => onClick(row.id || row)}
                             >
                               <FontAwesomeIcon
                                 icon={icon}
                                 className="text-info"
                               />{" "}
                               {label}
-                            </div>
+                            </button>
                           </li>
                         ))}
                     </ul>

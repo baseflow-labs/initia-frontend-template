@@ -1,11 +1,27 @@
-import { faGear, faHome } from "@fortawesome/free-solid-svg-icons";
+import {
+  faGear,
+  faHome,
+  faInfoCircle,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
+
 import Logo from "../../assets/images/brand/logo-full.png";
 
 const Sidebar = ({ routes = [{ name: "", route: "", icon: faHome }] }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const location = useLocation();
+
+  const fixedRoutes = [
+    {
+      name: t("Auth.ContactUs.Title"),
+      route: "/contact-us",
+      icon: faInfoCircle,
+    },
+    { name: t("Auth.Settings.Title"), route: "/settings", icon: faGear },
+  ];
 
   return (
     <div
@@ -39,29 +55,22 @@ const Sidebar = ({ routes = [{ name: "", route: "", icon: faHome }] }) => {
 
       <hr />
 
-      <div className="d-flex align-items-center gap-3 ms-3">
-        <div className="dropdown">
-          <a
-            role="button"
-            className="d-flex align-items-center link-dark text-decoration-none"
-            data-bs-toggle="dropdown"
-          >
-            <FontAwesomeIcon icon={faGear} className="me-2" />
-            <strong>Settings</strong>
-          </a>
-
-          <ul
-            className="dropdown-menu text-small shadow"
-            aria-labelledby="dropdownUser2"
-          >
-            <li>
-              <a className="dropdown-item" href="#">
-                Settings
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
+      <ul className="nav nav-pills flex-column mb-3">
+        {fixedRoutes.map(({ name, route, icon }, i) => (
+          <li className="nav-item my-1" key={i}>
+            <h5
+              onClick={() => navigate(route)}
+              role="button"
+              className={`p-2 rounded-3 ${
+                location.pathname === route ? "bg-info text-white" : "text-dark"
+              }`}
+            >
+              <FontAwesomeIcon icon={icon} className="me-2" />
+              {name}
+            </h5>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

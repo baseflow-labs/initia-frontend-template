@@ -5,7 +5,6 @@ import bgImage from "../../assets/images/brand/logo-full.png";
 import Button from "../../components/core/button";
 import ForgotPasswordView from "../../views/public/forgotPassword";
 import LoginView from "../../views/public/login";
-import OtpView from "../../views/public/otp";
 import RegisterView from "../../views/public/register";
 import ResetPasswordView from "../../views/public/ResetPassword";
 import TermsConditions from "../../views/public/termsConditions";
@@ -39,12 +38,6 @@ const AuthLayout = () => {
       name: t("Public.ForgotPassword.GotOtp.Title"),
       route: "/terms-conditions",
       view: <TermsConditions />,
-      show: false,
-    },
-    {
-      name: t("Public.ForgotPassword.GotOtp.Title"),
-      route: "/otp",
-      view: <OtpView />,
       show: false,
     },
     {

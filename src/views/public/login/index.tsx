@@ -1,18 +1,16 @@
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router";
 
 import * as authApi from "../../../api/auth";
 import BelowInputButton from "../../../components/button/belowInput";
 import Form from "../../../components/form";
 import { login } from "../../../store/actions/auth";
 import { addNotification } from "../../../store/actions/notifications";
-import { apiCatchGlobalHandler } from "../../../utils/fucntions";
+import { apiCatchGlobalHandler } from "../../../utils/function";
 
 const LoginView = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const formInputs = () => [
     {
@@ -29,7 +27,7 @@ const LoginView = () => {
         <BelowInputButton
           introText=""
           buttonText={t("Public.Login.Labels.DidUForgotPassword")}
-          action={() => navigate("/forgot-password")}
+          route="/forgot-password"
         />
       ),
       required: true,
@@ -38,7 +36,7 @@ const LoginView = () => {
 
   const onSubmit = (values: authApi.loginCredentials) => {
     authApi
-      .login({ ...values, identifier: "+966" + values.identifier })
+      .login(values)
       .then((res: any) => {
         dispatch(
           addNotification({

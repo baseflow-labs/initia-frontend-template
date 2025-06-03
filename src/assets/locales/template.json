@@ -5,21 +5,41 @@
       "AidName": "Aid Name",
       "AidPurpose": "Aid Purpose",
       "AidType": "Aid Type",
+      "Beneficiary": {
+        "RequestAid": "Request Aid",
+        "RequestDetails": "Request Details",
+        "Title": "Aids",
+        "Urgent?": "Urgent Case?"
+      },
+      "Cash": "Cash",
+      "In-Kind": "In-Kind",
       "RecaptionDate": "Recaption Date",
+      "Statuses": {
+        "Granted": "Granted",
+        "Pending": "Pending"
+      },
       "Title": "Aids"
     },
     "Beneficiaries": {
       "AddBeneficiary": "Add Beneficiary",
       "BeneficiaryName": "Beneficiary Name",
       "Profile": {
+        "ProfileCompletion": "Profile Completion",
         "ProfileDetails": "Profile Details",
         "Title": "Profile"
       },
       "Title": "Beneficiaries"
     },
+    "ContactUs": {
+      "Contact": "Contact",
+      "ContactNow": "Contact Now",
+      "ContactUsNow": "Contact Us Now",
+      "Title": "Contact Us"
+    },
     "Dashboard": {
+      "Main": "Home",
       "Title": "Dashboard",
-      "Welcome": "Welcome To Dashboard"
+      "Welcome": "Welcome To Mustaheq System"
     },
     "MembershipRegistration": {
       "Address": "Address",
@@ -36,6 +56,7 @@
           "Title": "Age Group",
           "TwelveToEighteen": "Twelve To Eighteen"
         },
+        "AlreadyRequested": "Help Was Already Requested",
         "ApartmentNo": "Apartment No",
         "Attachments": "Attachments",
         "BackupMobile": "Backup Mobile",
@@ -105,6 +126,7 @@
           "Sick": "Sick",
           "Title": "Health Status"
         },
+        "HelpRequested": "Help Request",
         "HomeLocation": "Home Location",
         "HomeOwnership": {
           "Ownership": "Ownership",
@@ -226,20 +248,38 @@
       },
       "Title": "Membership Registration"
     },
+    "Settings": {
+      "Title": "Settings"
+    },
     "Visits": {
       "AddVisit": "Add Visit",
+      "CancelVisit": "Cancel Visit",
+      "EditVisit": "Edit Visit",
+      "Report": {
+        "AddReport": "Add Report"
+      },
+      "Statuses": {
+        "Cancelled": "Cancelled",
+        "Done": "Done",
+        "Pending": "Pending",
+        "Status": "Visit Status"
+      },
       "Title": "Visits",
       "VisitDate": "Visit Date",
-      "VisitPurpose": "Visit Purpose"
+      "VisitPurpose": "Visit Purpose",
+      "VisitTime": "Visit Time"
     }
   },
   "Global": {
     "Form": {
       "Labels": {
         "AddNew": "Add New Record",
+        "Confirm": "Confirm",
+        "Edit": "Edit",
         "InvalidEmail": "Invalid Email",
         "Location": "Google Map URL",
         "No": "No",
+        "Notes": "Notes",
         "PickDate": "Pick Date",
         "PleaseSelect": "Please Select...",
         "Previous": "Previous",
@@ -248,9 +288,12 @@
         "SaveContinue": "Save & Continue",
         "SaveData": "Save Data",
         "Submit": "Submit",
+        "SubmitApplication": "Submit Application",
+        "SupportingDocument": "Supporting Document",
         "UploadAttachment": "Upload Attachment",
         "Yes": "Yes"
-      }
+      },
+      "SuccessMsg": "{{action}} {{data}] was done successfully"
     },
     "Labels": {
       "Action": "Action",
@@ -273,9 +316,7 @@
         "Title": "Reset Password"
       },
       "SendOtp": {
-        "ConfirmOTP": "Confirm OTP",
-        "RememberPassword": "Remember Password?",
-        "SendOtp": "Send OTP"
+        "ConfirmOTP": "Confirm OTP"
       },
       "Title": "Forgot Password"
     },

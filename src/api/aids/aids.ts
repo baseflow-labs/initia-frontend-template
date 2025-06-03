@@ -21,7 +21,7 @@ interface Props {
   contactsBank: string;
 }
 
-const mainPath = "/beneficiary";
+const mainPath = "/aid";
 const { user } = (store.getState() as RootState).auth;
 
 const getAll = async () => {
@@ -35,7 +35,12 @@ const getById = async (id: string) => {
 };
 
 const create = async (data: object) => {
-  const res = await api.post(mainPath, data);
+  const res = await api.post(mainPath, { beneficiary: user.id, ...data });
+  return res;
+};
+
+const grant = async (data: object) => {
+  const res = await api.post(mainPath + "/grant", data);
   return res;
 };
 
@@ -56,8 +61,4 @@ const createOrUpdate = async (data: Props) => {
   );
 };
 
-const requestHelp = async (id: string) => {
-  return await api.get(mainPath + "/request-help/" + id);
-};
-
-export { getAll, create, getById, getByUserId, createOrUpdate, requestHelp };
+export { create, createOrUpdate, getAll, getById, getByUserId, grant };

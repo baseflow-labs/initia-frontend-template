@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
 import * as AidApi from "../../../api/aids/aids";
-import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/tablePage";
@@ -16,14 +15,11 @@ import {
   statusColorRender,
 } from "../../../utils/function";
 
-const AidsView = () => {
+const AidsBeneficiaryView = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const [aids, setAids] = useState([{}]);
+  const [beneficiaries, setAids] = useState([{}]);
   const [openModal, setOpenModal] = useState(false);
-  const [selectOptions, setSelectOptions] = useState({
-    beneficiaries: [{ id: "", fullName: "" }],
-  });
 
   const getData = () => {
     AidApi.getAll()
@@ -41,18 +37,9 @@ const AidsView = () => {
 
   useLayoutEffect(() => {
     getData();
-
-    BeneficiaryApi.getAll()
-      .then((res) =>
-        setSelectOptions((current) => ({
-          ...current,
-          beneficiaries: res as any,
-        }))
-      )
-      .catch(apiCatchGlobalHandler);
   }, []);
 
-  const title = t("Auth.Aids.Title");
+  const title = t("Auth.Aids.Beneficiary.Title");
 
   const aidTypes = [
     {
@@ -86,13 +73,6 @@ const AidsView = () => {
       options: statuses,
     },
     {
-      label: t("Auth.Beneficiaries.BeneficiaryName"),
-      options: selectOptions.beneficiaries.map(({ id, fullName }) => ({
-        value: id,
-        label: fullName,
-      })),
-    },
-    {
       label: t("Auth.Aids.AidType"),
       options: aidTypes,
     },
@@ -100,17 +80,12 @@ const AidsView = () => {
 
   const actionButtons = [
     {
-      label: t("Auth.Aids.AddAid"),
+      label: t("Auth.Aids.Beneficiary.RequestAid"),
       onClick: () => setOpenModal(true),
     },
   ];
 
   const columns = [
-    {
-      type: "text",
-      name: "fullName",
-      label: t("Auth.Beneficiaries.BeneficiaryName"),
-    },
     {
       type: "text",
       name: "name",
@@ -133,6 +108,11 @@ const AidsView = () => {
       label: t("Auth.Aids.RecaptionDate"),
     },
     {
+      type: "date",
+      name: "recaptionDate",
+      label: t("Auth.Aids.Beneficiary.RequestDetails"),
+    },
+    {
       type: "custom",
       render: (row: any) => (
         <Fragment>
@@ -148,17 +128,7 @@ const AidsView = () => {
     },
   ];
 
-  const grantAidInputs = () => [
-    {
-      type: "select",
-      options: selectOptions.beneficiaries.map(({ id, fullName }) => ({
-        value: id,
-        label: fullName,
-      })),
-      name: "beneficiary",
-      label: t("Auth.Beneficiaries.BeneficiaryName"),
-      required: true,
-    },
+  const requestAidInputs = () => [
     {
       type: "select",
       options: aidTypes,
@@ -173,10 +143,28 @@ const AidsView = () => {
       required: true,
     },
     {
+      type: "select",
+      options: [
+        { value: "Yes", label: t("Global.Form.Labels.Yes") },
+        { value: "No", label: t("Global.Form.Labels.No") },
+      ],
+      name: "urgent",
+      label: t("Auth.Aids.Beneficiary.Urgent?"),
+      required: true,
+      halfCol: true,
+    },
+    {
+      type: "file",
+      name: "document",
+      label: t("Global.Form.Labels.SupportingDocument"),
+      required: false,
+      halfCol: true,
+    },
+    {
       type: "textarea",
       name: "reason",
-      label: t("Global.Form.Labels.Notes"),
-      required: false,
+      label: t("Auth.Aids.AidPurpose"),
+      required: true,
     },
   ];
 
@@ -187,31 +175,29 @@ const AidsView = () => {
         filters={filters}
         actionButtons={actionButtons}
         columns={columns}
-        data={aids}
+        data={beneficiaries}
         onPageChange={(i = 0, x = 0) => console.log(i, x)}
         onSearch={(values) => console.log(values)}
       />
 
       <Modal
-        title={t("Auth.Aids.AddAid")}
-        onClose={() => setOpenModal(false)}
+        title={t("Auth.Aids.Beneficiary.RequestAid")}
         isOpen={openModal}
+        onClose={() => setOpenModal(false)}
       >
         <Form
-          inputs={grantAidInputs}
+          inputs={requestAidInputs}
           submitText={t("Global.Form.Labels.SubmitApplication")}
           onFormSubmit={(e) => {
-            AidApi.grant(e)
+            AidApi.create(e)
               .then((res) => {
                 setOpenModal(false);
                 getData();
                 dispatch(
                   addNotification({
                     msg: t("Global.Form.SuccessMsg", {
-                      action: t("Auth.Aids.AddAid"),
-                      data: selectOptions.beneficiaries.find(
-                        ({ id }) => id === e.beneficiary
-                      )?.fullName,
+                      action: t("Auth.Aids.Beneficiary.RequestAid"),
+                      data: e.name,
                     }),
                   })
                 );
@@ -224,4 +210,4 @@ const AidsView = () => {
   );
 };
 
-export default AidsView;
+export default AidsBeneficiaryView;
