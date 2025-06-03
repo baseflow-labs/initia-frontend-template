@@ -36,12 +36,14 @@ const AuthLayout = () => {
       name: t("Auth.Dashboard.Title"),
       route: "/",
       view: <DashboardView />,
+      showInNav: true,
       icon: faHome,
     },
     {
       name: t("Auth.Beneficiaries.Title"),
       route: "/beneficiaries",
       view: <BeneficiariesView />,
+      showInNav: true,
       icon: faUsers,
     },
     {
@@ -54,18 +56,21 @@ const AuthLayout = () => {
       name: t("Auth.Visits.Title"),
       route: "/visits",
       view: <VisitsView />,
+      showInNav: true,
       icon: faBezierCurve,
     },
     {
       name: t("Auth.Aids.Title"),
       route: "/aids",
       view: <AidsView />,
+      showInNav: true,
       icon: faBoxOpen,
     },
     {
       name: t("Auth.Aids.Beneficiary.Title"),
       route: "/beneficiary/aids",
       view: <AidsBeneficiaryView />,
+      showInNav: true,
       icon: faBoxOpen,
     },
   ];
@@ -81,7 +86,9 @@ const AuthLayout = () => {
         <div className="col-md-2 p-0">
           {showSidebar && (
             <Sidebar
-              routes={authRoutes.map(({ view, ...rest }) => ({ ...rest }))}
+              routes={authRoutes
+                .filter(({ showInNav }) => showInNav)
+                .map(({ view, ...rest }) => ({ ...rest }))}
             />
           )}
         </div>
