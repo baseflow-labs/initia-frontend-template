@@ -25,8 +25,9 @@ const AidsBeneficiaryView = () => {
     AidApi.getAll()
       .then((res) => {
         setAids(
-          (res as any).map(({ beneficiary = {}, ...rest }) => ({
+          (res as any).map(({ beneficiary = {}, status = {}, ...rest }) => ({
             ...beneficiary,
+            ...status,
             ...rest,
           })) as any
         );
@@ -42,39 +43,27 @@ const AidsBeneficiaryView = () => {
 
   const aidTypes = [
     {
-      value: "A",
-      label: "A",
+      value: "Cash",
+      label: t("Auth.Aids.Cash"),
     },
     {
-      value: "B",
-      label: "B",
+      value: "In-Kind",
+      label: t("Auth.Aids.In-Kind"),
     },
   ];
 
   const statuses = [
     {
-      value: "New Member",
-      label: t("Auth.MembershipRegistration.Statuses.NewMember"),
+      value: "Pending",
+      label: t("Auth.Aids.Statuses.Pending"),
     },
     {
-      value: "Incomplete",
-      label: t("Auth.MembershipRegistration.Statuses.Incomplete"),
-    },
-    {
-      value: "Need Help",
-      label: t("Auth.MembershipRegistration.Statuses.NeedHelp"),
+      value: "Granted",
+      label: t("Auth.Aids.Statuses.Granted"),
     },
     {
       value: "Rejected",
       label: t("Auth.MembershipRegistration.Statuses.Rejected"),
-    },
-    {
-      value: "Accepted",
-      label: t("Auth.MembershipRegistration.Statuses.Accepted"),
-    },
-    {
-      value: "In Preview",
-      label: t("Auth.MembershipRegistration.Statuses.InPreview"),
     },
   ];
 

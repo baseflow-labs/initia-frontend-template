@@ -35,7 +35,7 @@ const getById = async (id: string) => {
 };
 
 const create = async (data: object) => {
-  const res = await api.post(mainPath, data);
+  const res = await api.post(mainPath, { beneficiary: user.id, ...data });
   return res;
 };
 
@@ -61,4 +61,4 @@ const createOrUpdate = async (data: Props) => {
   );
 };
 
-export { getAll, create, grant, getById, getByUserId, createOrUpdate };
+export { create, createOrUpdate, getAll, getById, getByUserId, grant };

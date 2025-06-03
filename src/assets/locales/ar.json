@@ -11,7 +11,13 @@
         "Title": "المعونات",
         "Urgent?": "هل الحالة مستعجلة؟"
       },
+      "Cash": "نقدية",
+      "In-Kind": "عينية",
       "RecaptionDate": "تاريخ الاستلام",
+      "Statuses": {
+        "Granted": "اعتمدت",
+        "Pending": "قيد المراجعة"
+      },
       "Title": "طلبات الإعانة"
     },
     "Beneficiaries": {
@@ -306,9 +312,7 @@
         "Title": "إعادة تعيين كلمة السر"
       },
       "SendOtp": {
-        "ConfirmOTP": "تأكيد رمز التحقق OTP",
-        "RememberPassword": "هل تتذكر كلمة السر؟",
-        "SendOtp": "ارسل رمز التحقق OTP"
+        "ConfirmOTP": "تأكيد رمز التحقق OTP"
       },
       "Title": "نسيت كلمة السر"
     },
