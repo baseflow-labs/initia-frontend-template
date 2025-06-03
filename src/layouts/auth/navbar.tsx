@@ -5,10 +5,12 @@ import profilePhotoPlaceholder from "../../assets/images/profile-image-placehold
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/actions/auth";
 import { useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white px-4 py-4">
@@ -29,7 +31,7 @@ const Navbar = () => {
                 role="button"
                 onClick={() => navigate("/")}
               >
-                الرئيسية
+                {t("Auth.Dashboard.Main")}
               </span>
             </li>
 
@@ -37,9 +39,9 @@ const Navbar = () => {
               <span
                 className="nav-link"
                 role="button"
-                onClick={() => navigate("/contact")}
+                onClick={() => navigate("/contact-us")}
               >
-                تواصل معنا
+                {t("Auth.ContactUs.Title")}
               </span>
             </li>
           </ul>

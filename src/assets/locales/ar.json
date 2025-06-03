@@ -31,7 +31,8 @@
     },
     "Dashboard": {
       "Title": "نظرة عامة",
-      "Welcome": "Welcome To Dashboard"
+      "Main": "الرئيسية",
+      "Welcome": "أهلاً بكم في نظام مستحق"
     },
     "MembershipRegistration": {
       "Address": "العنوان",
