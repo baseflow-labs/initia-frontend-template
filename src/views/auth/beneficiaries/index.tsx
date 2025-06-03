@@ -1,4 +1,8 @@
-import { faCircle, faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCalendarDays,
+  faCircle,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -241,6 +245,10 @@ const BeneficiariesView = () => {
     navigate(`/beneficiaries/profile/?id=${data}`);
   };
 
+  const scheduleVisit = (data: string | object) => {
+    navigate(`/visits/?id=${data}`);
+  };
+
   return (
     <TablePage
       title={title}
@@ -249,6 +257,12 @@ const BeneficiariesView = () => {
       columns={columns}
       data={beneficiaries}
       tableActions={[
+        {
+          icon: faCalendarDays,
+          spread: true,
+          label: t("Auth.Visits.AddVisit"),
+          onClick: (data: string | object) => scheduleVisit(data),
+        },
         {
           icon: faUser,
           label: t("Auth.Beneficiaries.Profile.ProfileDetails"),

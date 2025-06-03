@@ -1,6 +1,6 @@
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Fragment, useLayoutEffect, useState } from "react";
+import { Fragment, useEffect, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
@@ -15,10 +15,15 @@ import {
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/fucntions";
+import { useLocation, useNavigate, useSearchParams } from "react-router";
 
 const VisitsView = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [searchParams] = useSearchParams();
+
   const [openModal, setOpenModal] = useState(false);
   const [selectOptions, setSelectOptions] = useState({
     beneficiaries: [{ id: "", fullName: "" }],
@@ -46,6 +51,12 @@ const VisitsView = () => {
       )
       .catch(apiCatchGlobalHandler);
   }, []);
+
+  useEffect(() => {
+    if (searchParams.get("id")) {
+      setOpenModal(true);
+    }
+  }, [searchParams.get("id")]);
 
   const title = t("Auth.Visits.Title");
 
@@ -172,6 +183,7 @@ const VisitsView = () => {
         value: id,
         label: fullName,
       })),
+      defaultValue: searchParams.get("id") || "",
       name: "beneficiary",
       label: t("Auth.Beneficiaries.BeneficiaryName"),
       required: true,
@@ -194,6 +206,14 @@ const VisitsView = () => {
     },
   ];
 
+  const onModalClose = () => {
+    setOpenModal(false);
+    if (searchParams.get("id")) {
+      navigate("/visits");
+      window.location.reload();
+    }
+  };
+
   return (
     <Fragment>
       <TablePage
@@ -208,7 +228,7 @@ const VisitsView = () => {
 
       <Modal
         title={t("Auth.Visits.AddVisit")}
-        onClose={() => setOpenModal(false)}
+        onClose={onModalClose}
         isOpen={openModal}
       >
         <Form
@@ -217,7 +237,7 @@ const VisitsView = () => {
           onFormSubmit={(e) => {
             VisitApi.create(e)
               .then((res) => {
-                setOpenModal(false);
+                onModalClose();
                 dispatch(
                   addNotification({
                     msg: t("Global.Form.SuccessMsg", {
