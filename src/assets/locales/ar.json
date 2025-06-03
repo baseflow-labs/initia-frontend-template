@@ -245,6 +245,7 @@
     },
     "Visits": {
       "AddVisit": "جدولة زيارة",
+      "CancelVisit": "إلغاء الزيارة",
       "Report": {
         "AddReport": "إجراء تقييم"
       },

@@ -1,4 +1,4 @@
-import { faCircle } from "@fortawesome/free-solid-svg-icons";
+import { faCircle, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useEffect, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -192,11 +192,35 @@ const VisitsView = () => {
     }
   };
 
+  const cancelVisit = (data: string | object) => {
+    VisitApi.cancel(typeof data === "string" ? data : "")
+      .then((res) => {
+        getData();
+        dispatch(
+          addNotification({
+            msg: t("Global.Form.SuccessMsg", {
+              action: t("Auth.Visits.CancelVisit"),
+              data: selectOptions.beneficiaries.find(({ id }) => id === data)
+                ?.fullName,
+            }),
+          })
+        );
+      })
+      .catch(apiCatchGlobalHandler);
+  };
+
   return (
     <Fragment>
       <TablePage
         title={title}
         filters={filters}
+        tableActions={[
+          {
+            icon: faXmark,
+            label: t("Auth.Visits.CancelVisit"),
+            onClick: (data: string | object) => cancelVisit(data),
+          },
+        ]}
         actionButtons={actionButtons}
         columns={columns}
         data={visits}

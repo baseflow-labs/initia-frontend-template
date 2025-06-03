@@ -6,6 +6,8 @@ export const statusColorRender = (status = "") => {
   switch (status) {
     case "Reject":
     case "Rejected":
+    case "Cancelled":
+    case "Cancel":
       return "danger";
     case "Accept":
     case "Granted":
