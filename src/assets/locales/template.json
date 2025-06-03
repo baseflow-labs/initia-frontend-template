@@ -232,6 +232,9 @@
       },
       "Title": "Membership Registration"
     },
+    "Settings": {
+      "Title": "Settings"
+    },
     "Visits": {
       "AddVisit": "Add Visit",
       "Report": {
