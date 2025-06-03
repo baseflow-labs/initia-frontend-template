@@ -1,44 +1,115 @@
+import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
-import Form from "../../../components/form";
+import { useDispatch } from "react-redux";
+import * as authApi from "../../../api/auth";
 import BelowInputButton from "../../../components/button/belowInput";
+import Form from "../../../components/form";
+import { addNotification } from "../../../store/actions/notifications";
+import { apiCatchGlobalHandler } from "../../../utils/function";
 
-const ForgotPasswordView = () => {
+const ForgotPassword = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [data, setData] = useState({ identifier: "", code: "" });
 
-  const formInputs = () => [
+  const onForgotSubmit = (values = { identifier: "" }) => {
+    authApi
+      .requestPasswordReset(values.identifier)
+      .then(() => {
+        setData({ ...values, code: "" });
+      })
+      .catch(apiCatchGlobalHandler);
+  };
+
+  const onOtpSubmit = (values: { code: "" }) => {
+    setData((current) => ({ ...current, ...values }));
+  };
+
+  const forgotInputs = () => [
     {
       type: "phoneNumber",
-      name: "phoneNo",
-      label: t("Public.Login.Labels.PhoneNo"),
-      belowComp: (
-        <BelowInputButton
-          introText={t("Public.ForgotPassword.SendOtp.RememberPassword")}
-          buttonText={t("Public.Login.Labels.Login")}
-          route="/"
-        />
-      ),
+      name: "identifier",
+      label: t("Public.Register.Labels.PhoneNo"),
       required: true,
     },
   ];
 
-  const onSubmit = (values = {}) => {
-    console.log({ values });
+  const otpInputs = () => [
+    {
+      type: "otp",
+      name: "code",
+      required: true,
+    },
+  ];
 
-    navigate("/otp");
+  const resetInputs = () => [
+    {
+      type: "password",
+      name: "password",
+      label: t("Public.ForgotPassword.ResetPassword.NewPassword"),
+      required: true,
+    },
+    {
+      type: "password",
+      name: "passwordConfirmation",
+      label: t("Public.ForgotPassword.ResetPassword.NewPasswordConfirmation"),
+      required: true,
+    },
+  ];
+
+  const onResetSubmit = (
+    values = { password: "", passwordConfirmation: "" }
+  ) => {
+    authApi
+      .resetPassword({ ...values, ...data })
+      .then((res) => {
+        dispatch(
+          addNotification({
+            msg: t("Global.Form.SuccessMsg", {
+              action: t("Public.ForgotPassword.ResetPassword.ResetPassword"),
+              data: "+966" + data.identifier,
+            }),
+          })
+        );
+        navigate("/");
+      })
+      .catch(apiCatchGlobalHandler);
   };
 
   return (
     <div>
-      <Form
-        inputs={formInputs}
-        onFormSubmit={onSubmit}
-        submitText={t("Public.ForgotPassword.SendOtp.SendOtp")}
-      />
+      {data.code ? (
+        <Form
+          inputs={resetInputs}
+          submitText={t("Public.ForgotPassword.ResetPassword.ResetPassword")}
+          onFormSubmit={onResetSubmit}
+        />
+      ) : data.identifier ? (
+        <Fragment>
+          <h4>رمز التحقق OTP</h4>
+
+          <div className="text-center mt-2">
+            <small>تحقق من رسائل هاتفك وادخل رقم التحقق (OTP)</small>
+          </div>
+
+          <Form
+            inputs={otpInputs}
+            submitText={t("Public.ForgotPassword.SendOtp.ConfirmOTP")}
+            onFormSubmit={onOtpSubmit}
+          />
+        </Fragment>
+      ) : (
+        <Form
+          inputs={forgotInputs}
+          submitText={t("Public.Register.Labels.Register")}
+          onFormSubmit={onForgotSubmit}
+        />
+      )}
     </div>
   );
 };
 
-export default ForgotPasswordView;
+export default ForgotPassword;

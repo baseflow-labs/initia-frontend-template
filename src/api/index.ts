@@ -43,7 +43,7 @@ service.interceptors.response.use(
   (res: AxiosResponse) => {
     store.dispatch(endLoading());
 
-    if ([200, 201, 204].includes(res.status)) {
+    if ([200, 201, 202, 204].includes(res.status)) {
       return res.data.payload;
     }
 

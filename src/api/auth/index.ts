@@ -15,9 +15,9 @@ export interface registerProps {
 
 interface resetPasswordProps {
   identifier: string;
-  newPassword: string;
-  newPasswordConfirmation: string;
-  token: string;
+  password: string;
+  passwordConfirmation: string;
+  code: string;
 }
 
 const mainPath = "/auth";
@@ -35,7 +35,9 @@ const otpSend = async (identifier: string) => {
 };
 
 const requestPasswordReset = async (identifier: string) => {
-  return await api.get(mainPath + "/passwordRequest", { params: identifier });
+  return await api.get(mainPath + "/passwordRequest", {
+    params: { identifier },
+  });
 };
 
 const resetPassword = async (resetPasswordData: resetPasswordProps) => {
