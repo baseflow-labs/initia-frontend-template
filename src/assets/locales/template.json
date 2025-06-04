@@ -100,8 +100,8 @@
         "EducationLevel": {
           "Degree": "Degree",
           "Diploma": "Diploma",
-          "HighSchool": "High School",
           "HigherDiploma": "Higher Diploma",
+          "HighSchool": "High School",
           "Illiterate": "Illiterate",
           "IntermediateSchool": "Intermediate School",
           "Literate": "Literate",
@@ -239,8 +239,8 @@
       },
       "Statuses": {
         "Accepted": "Accepted",
-        "InPreview": "In Preview",
         "Incomplete": "Incomplete",
+        "InPreview": "In Preview",
         "NeedHelp": "Need Help",
         "NewMember": "New Member",
         "Rejected": "Rejected",
@@ -254,6 +254,35 @@
     "Visits": {
       "AddVisit": "Add Visit",
       "CancelVisit": "Cancel Visit",
+      "Detail": {
+        "device": "Auth.Visits.Detail.device",
+        "devicePhoto": "Auth.Visits.Detail.devicePhoto",
+        "Devices": {
+          "AC": "Auth.Visits.Detail.Devices.AC",
+          "notWorking": "Auth.Visits.Detail.Devices.notWorking",
+          "TV": "Auth.Visits.Detail.Devices.TV",
+          "working": "Auth.Visits.Detail.Devices.working"
+        },
+        "devicesNumber": "Auth.Visits.Detail.devicesNumber",
+        "deviceStatus": "Auth.Visits.Detail.deviceStatus",
+        "evaluation": "Auth.Visits.Detail.evaluation",
+        "furniture": "Auth.Visits.Detail.furniture",
+        "Furniture": {
+          "bed": "Auth.Visits.Detail.Furniture.bed",
+          "sofas": "Auth.Visits.Detail.Furniture.sofas",
+          "table": "Auth.Visits.Detail.Furniture.table"
+        },
+        "furnitureNumber": "Auth.Visits.Detail.furnitureNumber",
+        "needRepair": "Auth.Visits.Detail.needRepair",
+        "Room": {
+          "bathroom": "Auth.Visits.Detail.Room.bathroom",
+          "bedroom": "Auth.Visits.Detail.Room.bedroom",
+          "kitchen": "Auth.Visits.Detail.Room.kitchen",
+          "LivingRoom": "Auth.Visits.Detail.Room.LivingRoom"
+        },
+        "roomsNumber": "Auth.Visits.Detail.roomsNumber",
+        "title": "Auth.Visits.Detail.title"
+      },
       "EditVisit": "Edit Visit",
       "Report": {
         "AddReport": "Add Report"

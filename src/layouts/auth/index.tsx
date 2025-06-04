@@ -22,6 +22,7 @@ import DashboardNavbar from "./dashboardNavbar";
 import Navbar from "./navbar";
 import Sidebar from "./sidebar";
 import ContactUsPage from "../../views/auth/contact-us";
+import VisitDetailView from '../../views/auth/visits/detail';
 
 const AuthLayout = () => {
   const { t } = useTranslation();
@@ -59,6 +60,13 @@ const AuthLayout = () => {
       route: "/visits",
       view: <VisitsView />,
       showInNav: true,
+      icon: faBezierCurve,
+    },
+    {
+      name: t('Auth.Visits.Detail.title'),
+      route: '/visits/detail',
+      view: <VisitDetailView />,
+      showInNav: false,
       icon: faBezierCurve,
     },
     {

@@ -254,6 +254,38 @@
     "Visits": {
       "AddVisit": "جدولة زيارة",
       "CancelVisit": "إلغاء الزيارة",
+      "Detail": {
+        "device": "الجهاز",
+        "devices": "الاجهزة",
+        "devicePhoto": "صورة الجهاز",
+        "Devices": {
+          "AC": "مكيف",
+          "notWorking": "لا يعمل",
+          "Sofas": "كنب",
+          "table": "طاولة",
+          "TV": "تلفاز",
+          "working": "يعمل"
+        },
+        "Furniture": {
+          "Sofas": "كنب",
+          "table": "طاولة",
+          "bed": "سرير"
+        },
+        "devicesNumber": "عدد الاجهزة الكلي",
+        "deviceStatus": "حالة الجهاز",
+        "evaluation": "التقييم",
+        "furniture": "الاثاث",
+        "furnitureNumber": "عدد الاثاث الكلي",
+        "needRepair": "هل يحتاج للصيانة",
+        "Room": {
+          "bathroom": "دورة المياه",
+          "bedroom": "غرفة نوم",
+          "kitchen": "مطبخ",
+          "LivingRoom": "غرفة المعيشة"
+        },
+        "roomsNumber": "عدد الغرف",
+        "title": "تفاصيل الزيارة"
+      },
       "EditVisit": "تعديل زيارة",
       "Report": {
         "AddReport": "إجراء تقييم"

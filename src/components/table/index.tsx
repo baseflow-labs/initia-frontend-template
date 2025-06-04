@@ -3,8 +3,10 @@ import {
   faChevronLeft,
   faChevronRight,
   faEllipsisVertical,
+  faEye,
   faFile,
   faLocationPin,
+  faStar,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
@@ -82,7 +84,31 @@ export const dataRender = ({
           onClick={() => console.log({ data })}
         />
       );
-    case "custom":
+    case 'image':
+      return (
+        <div className='d-flex '>
+          <p>{}</p>
+          <FontAwesomeIcon
+            icon={faEye}
+            role='button'
+            onClick={() => console.log({ data })}
+          />
+        </div>
+      );
+    case 'stars':
+      const starsToDisplay = [1, 2, 3, 4, 5];
+      return (
+        <div className='d-flex '>
+          {starsToDisplay.map((i) => (
+            <FontAwesomeIcon
+              icon={faStar}
+              className={i <= parseInt(data) ? 'text-warning' : ''}
+            />
+          ))}
+        </div>
+      );
+
+    case 'custom':
       return render && row ? render(row) : data;
     default:
       return data;
