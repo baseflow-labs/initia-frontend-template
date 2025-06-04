@@ -12,6 +12,7 @@ import { useAppSelector } from "../../store/hooks";
 import Button from "../core/button";
 import Spinner from "../core/spinner";
 import InputComp from "./Input";
+import DefaultInput from "./inputs/default";
 
 interface InputBasicProps {
   name: string;
@@ -191,14 +192,14 @@ const Form: React.FC<Props> = ({
               belowComp,
               logo,
               halfCol,
+              type,
               ...input
             }) => {
               const triggerError =
                 formik.errors[input.name] && formik.touched[input.name];
 
               const prefixTexts =
-                prefixText ||
-                (input.type === "phoneNumber" ? "+966" : undefined);
+                prefixText || (type === "phoneNumber" ? "+966" : undefined);
 
               const ErrorView = () => (
                 <small className={triggerError ? "text-danger" : "text-white"}>
@@ -231,14 +232,12 @@ const Form: React.FC<Props> = ({
 
                       <div
                         className={`input-group ${
-                          input.type === "phoneNumber"
-                            ? "phone-number-input"
-                            : ""
+                          type === "phoneNumber" ? "phone-number-input" : ""
                         }`}
                       >
                         <InlineElement content={prefixTexts} flip />
 
-                        <InputComp id={input.name} {...input} />
+                        <InputComp id={input.name} type={type} {...input} />
 
                         <InlineElement content={postfixText} />
                       </div>
@@ -264,17 +263,25 @@ const Form: React.FC<Props> = ({
 
                   <div
                     className={`input-group ${
-                      input.type === "phoneNumber" ? "phone-number-input" : ""
+                      type === "phoneNumber" ? "phone-number-input" : ""
                     }`}
                   >
                     <InlineElement content={prefixTexts} flip />
 
-                    <InputComp id={input.name} {...input} />
+                    <InputComp id={input.name} type={type} {...input} />
 
                     <InlineElement content={postfixText} />
                   </div>
 
                   {belowComp}
+
+                  {type === "range" && (
+                    <DefaultInput
+                      name={input.name}
+                      className="form-control-md"
+                      value={formik.values[input.name] || input.defaultValue}
+                    />
+                  )}
 
                   <ErrorView />
                 </div>
