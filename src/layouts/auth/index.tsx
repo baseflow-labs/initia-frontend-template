@@ -2,6 +2,7 @@ import {
   faBezierCurve,
   faBoxOpen,
   faEdit,
+  faGear,
   faHome,
   faInfoCircle,
   faUsers,
@@ -18,10 +19,12 @@ import ContactUsPage from "../../views/auth/contact-us";
 import DashboardView from "../../views/auth/dashboard";
 import MembershipRegistrationView from "../../views/auth/membershipRegistration";
 import VisitsView from "../../views/auth/visits";
+import VisitReportsView from "../../views/auth/visits/reports";
 import FourZeroFourError from "../../views/common/404";
 import DashboardNavbar from "./dashboardNavbar";
 import Navbar from "./navbar";
 import Sidebar from "./sidebar";
+import SettingsPage from "../../views/auth/settings";
 
 const AuthLayout = () => {
   const { t } = useTranslation();
@@ -62,6 +65,13 @@ const AuthLayout = () => {
       icon: faBezierCurve,
     },
     {
+      name: t("Auth.Visits.Report.Title"),
+      route: "/visits/report",
+      view: <VisitReportsView />,
+      showInNav: false,
+      icon: faBezierCurve,
+    },
+    {
       name: t("Auth.Aids.Title"),
       route: "/aids",
       view: <AidsView />,
@@ -80,6 +90,12 @@ const AuthLayout = () => {
       route: "/contact-us",
       view: <ContactUsPage />,
       icon: faInfoCircle,
+    },
+    {
+      name: t("Auth.Settings.Title"),
+      route: "/settings",
+      view: <SettingsPage />,
+      icon: faGear,
     },
   ];
 
