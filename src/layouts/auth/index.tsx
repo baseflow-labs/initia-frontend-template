@@ -25,6 +25,7 @@ import DashboardNavbar from "./dashboardNavbar";
 import Navbar from "./navbar";
 import Sidebar from "./sidebar";
 import SettingsPage from "../../views/auth/settings";
+import BeneficiariesVisitsView from "../../views/auth/visits/beneficiaryVisits";
 
 const AuthLayout = () => {
   const { t } = useTranslation();
@@ -61,6 +62,13 @@ const AuthLayout = () => {
       name: t("Auth.Visits.Title"),
       route: "/visits",
       view: <VisitsView />,
+      showInNav: true,
+      icon: faBezierCurve,
+    },
+    {
+      name: t("Auth.Visits.Visits"),
+      route: "/beneficiary/visits",
+      view: <BeneficiariesVisitsView />,
       showInNav: true,
       icon: faBezierCurve,
     },

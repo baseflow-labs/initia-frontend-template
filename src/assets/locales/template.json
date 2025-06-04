@@ -277,7 +277,8 @@
       "Title": "Visits",
       "VisitDate": "Visit Date",
       "VisitPurpose": "Visit Purpose",
-      "VisitTime": "Visit Time"
+      "VisitTime": "Visit Time",
+      "Visits": "Visits"
     }
   },
   "Global": {

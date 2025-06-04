@@ -276,7 +276,8 @@
       "Title": "الزيارات الميدانية",
       "VisitDate": "تاريخ الزيارة",
       "VisitPurpose": "سبب الزيارة",
-      "VisitTime": "وقت الزيارة"
+      "VisitTime": "وقت الزيارة",
+      "Visits": "الزيارات"
     }
   },
   "Global": {
