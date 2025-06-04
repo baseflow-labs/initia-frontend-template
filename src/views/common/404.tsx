@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+
 import Button from "../../components/core/button";
 
 const FourZeroFourError = () => {
@@ -11,7 +12,7 @@ const FourZeroFourError = () => {
 
         <h4 className="mt-3 mb-5">{t("Global.Labels.WrongUrl")}</h4>
 
-        <Button color="info" route="/">
+        <Button color="info" route="back">
           {t("Global.Labels.Back")}
         </Button>
       </div>

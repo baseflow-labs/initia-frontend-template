@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useEffect, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-
 import { useNavigate, useSearchParams } from "react-router";
+
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import * as VisitApi from "../../../api/visits/visits";
 import Form from "../../../components/form";
@@ -146,7 +146,7 @@ const VisitsView = () => {
   const actionButtons = [
     {
       label: t("Auth.Visits.Report.AddReport"),
-      route: "/report",
+      route: "/visits/report",
       outline: true,
     },
     {

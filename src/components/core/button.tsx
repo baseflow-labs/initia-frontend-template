@@ -1,5 +1,5 @@
-import { useNavigate } from "react-router";
 import React from "react";
+import { useNavigate } from "react-router";
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
@@ -55,7 +55,13 @@ const Button = ({
       className={finalClass.trim()}
       onClick={(e) => {
         onClick?.(e);
-        if (route) navigate(route);
+        if (route) {
+          if (route === "back") {
+            navigate(-1);
+          } else {
+            navigate(route);
+          }
+        }
       }}
       {...rest}
     >
