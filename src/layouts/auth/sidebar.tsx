@@ -30,7 +30,7 @@ const Sidebar = ({ routes = [{ name: "", route: "", icon: faHome }] }) => {
     >
       <span
         className="navbar-brand p-3 mb-5 px-4"
-        onClick={() => navigate("/")}
+        onClick={() => navigate("/dashboard")}
         role="button"
       >
         <img src={Logo} style={{ height: "75px" }} />

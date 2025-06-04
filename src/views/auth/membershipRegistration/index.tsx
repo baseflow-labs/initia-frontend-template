@@ -999,7 +999,7 @@ const MembershipRegistrationView = () => {
             {t("Auth.MembershipRegistration.Form.Success.Text")}
           </h6>
 
-          <Button color="info" onClick={() => navigate("/")}>
+          <Button color="info" onClick={() => navigate("/dashboard")}>
             {t("Global.Labels.Ok")}
           </Button>
         </div>

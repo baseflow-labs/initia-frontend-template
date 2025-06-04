@@ -18,7 +18,7 @@ const Navbar = () => {
       <div className="container-fluid">
         <span
           className="navbar-brand"
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/dashboard")}
           role="button"
         >
           <img src={Logo} style={{ height: "50px" }} />
@@ -30,7 +30,7 @@ const Navbar = () => {
               <span
                 className="nav-link active"
                 role="button"
-                onClick={() => navigate("/")}
+                onClick={() => navigate("/dashboard")}
               >
                 {t("Auth.Dashboard.Main")}
               </span>
