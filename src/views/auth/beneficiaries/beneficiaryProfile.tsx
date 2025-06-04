@@ -1,5 +1,5 @@
 import moment from "moment";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
@@ -18,9 +18,11 @@ const BeneficiaryOwnProfile = () => {
   const dispatch = useDispatch();
   const [beneficiary, setBeneficiary] = useState<any>();
   const [dataReviews, setDataReviews] =
-    useState<{ table: string; property: string; row?: {}; note?: string }[]>();
+    useState<
+      { id: string; table: string; property: string; row?: {}; note?: string }[]
+    >();
 
-  useEffect(() => {
+  const callData = () => {
     BeneficiaryApi.getByUserId()
       .then((res: any) => {
         setBeneficiary(res);
@@ -31,6 +33,10 @@ const BeneficiaryOwnProfile = () => {
       })
 
       .catch(apiCatchGlobalHandler);
+  };
+
+  useLayoutEffect(() => {
+    callData();
   }, []);
 
   const basicDataInputs: InputSingleProps[] = [
@@ -1034,7 +1040,7 @@ const BeneficiaryOwnProfile = () => {
 
   const onDataUpdate = (data = {}) => {
     DataUpdateApi.create(data)
-      .then((res) =>
+      .then((res) => {
         dispatch(
           addNotification({
             msg: t("Global.Form.SuccessMsg", {
@@ -1042,8 +1048,9 @@ const BeneficiaryOwnProfile = () => {
               data: t("Auth.Beneficiary.Profile.YourProfile"),
             }),
           })
-        )
-      )
+        );
+        callData();
+      })
       .catch(apiCatchGlobalHandler);
   };
 
@@ -1059,7 +1066,7 @@ const BeneficiaryOwnProfile = () => {
             {t("Auth.Beneficiary.Profile.PleaseUpdateFollowingData")}
           </h5>
 
-          {dataReviews?.map(({ table, property, row, note }, i) => {
+          {dataReviews?.map(({ id, table, property, row, note }, i) => {
             const requestTable = mapping.find(
               ({ table: mapTable }) => mapTable === table
             );
@@ -1082,6 +1089,12 @@ const BeneficiaryOwnProfile = () => {
                             defaultValue: currentData,
                             required: true,
                           }))
+                        }
+                        onFormSubmit={(values) =>
+                          onDataUpdate({
+                            data: values[property],
+                            dataReview: id,
+                          })
                         }
                         submitText={t("Global.Form.Labels.SaveData")}
                       />
