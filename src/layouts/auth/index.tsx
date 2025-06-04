@@ -14,6 +14,7 @@ import AidsView from "../../views/auth/aids";
 import AidsBeneficiaryView from "../../views/auth/aids/request";
 import BeneficiariesView from "../../views/auth/beneficiaries";
 import BeneficiaryProfileView from "../../views/auth/beneficiaries/profile";
+import ContactUsPage from "../../views/auth/contact-us";
 import DashboardView from "../../views/auth/dashboard";
 import MembershipRegistrationView from "../../views/auth/membershipRegistration";
 import VisitsView from "../../views/auth/visits";
@@ -21,7 +22,6 @@ import FourZeroFourError from "../../views/common/404";
 import DashboardNavbar from "./dashboardNavbar";
 import Navbar from "./navbar";
 import Sidebar from "./sidebar";
-import ContactUsPage from "../../views/auth/contact-us";
 
 const AuthLayout = () => {
   const { t } = useTranslation();
@@ -36,7 +36,7 @@ const AuthLayout = () => {
     },
     {
       name: t("Auth.Dashboard.Title"),
-      route: "/",
+      route: "/dashboard",
       view: <DashboardView />,
       showInNav: true,
       icon: faHome,

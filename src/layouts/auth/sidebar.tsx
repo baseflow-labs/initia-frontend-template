@@ -43,7 +43,9 @@ const Sidebar = ({ routes = [{ name: "", route: "", icon: faHome }] }) => {
               onClick={() => navigate(route)}
               role="button"
               className={`p-2 rounded-3 ${
-                location.pathname === route ? "bg-info text-white" : "text-dark"
+                location.pathname.includes(route)
+                  ? "bg-info text-white"
+                  : "text-dark"
               }`}
             >
               <FontAwesomeIcon icon={icon} className="me-2" />
@@ -62,7 +64,9 @@ const Sidebar = ({ routes = [{ name: "", route: "", icon: faHome }] }) => {
               onClick={() => navigate(route)}
               role="button"
               className={`p-2 rounded-3 ${
-                location.pathname === route ? "bg-info text-white" : "text-dark"
+                location.pathname.includes(route)
+                  ? "bg-info text-white"
+                  : "text-dark"
               }`}
             >
               <FontAwesomeIcon icon={icon} className="me-2" />
