@@ -312,8 +312,10 @@
       "Action": "Action",
       "ApplicationDate": "Application Date",
       "Back": "Back",
+      "Logout": "Logout",
       "Ok": "Ok",
       "PhoneNumber": "Phone Number",
+      "Search": "Search",
       "WrongUrl": "Sorry, this is wrong address"
     }
   },

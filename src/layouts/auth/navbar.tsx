@@ -100,26 +100,16 @@ const Navbar = () => {
               className="dropdown-menu dropdown-menu-end"
               aria-labelledby="avatarDropdown"
             >
-              <li>
-                <a className="dropdown-item" href="#">
-                  الملف الشخصي
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  الإعدادات
-                </a>
-              </li>
-              <li>
+              {/* <li>
                 <hr className="dropdown-divider" />
-              </li>
+              </li> */}
               <li>
                 <span
                   className="dropdown-item"
                   role="button"
                   onClick={() => dispatch(logout())}
                 >
-                  تسجيل الخروج
+                  {t("Global.Labels.Logout")}
                 </span>
               </li>
             </ul>
