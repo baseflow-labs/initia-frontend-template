@@ -49,9 +49,9 @@ const DashboardNavbar = () => {
             </ul>
           </div>
 
-          <button className="btn btn-link position-relative">
+          {/* <button className="btn btn-link position-relative">
             <FontAwesomeIcon icon={faEnvelope} className="text-secondary" />
-          </button>
+          </button> */}
 
           <div className="dropdown">
             <button

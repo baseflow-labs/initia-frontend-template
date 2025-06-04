@@ -1,11 +1,12 @@
 import { faBell, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
+
 import Logo from "../../assets/images/brand/logo-full.png";
 import profilePhotoPlaceholder from "../../assets/images/profile-image-placeholder.png";
-import { useDispatch } from "react-redux";
 import { logout } from "../../store/actions/auth";
-import { useNavigate } from "react-router";
-import { useTranslation } from "react-i18next";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -76,9 +77,9 @@ const Navbar = () => {
             </ul>
           </div>
 
-          <button className="btn btn-link position-relative">
+          {/* <button className="btn btn-link position-relative">
             <FontAwesomeIcon icon={faEnvelope} className="text-secondary" />
-          </button>
+          </button> */}
 
           <div className="dropdown">
             <button
