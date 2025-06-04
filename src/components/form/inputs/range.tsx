@@ -10,7 +10,7 @@ const RangeInput: React.FC<FinalInput> = (input) => {
       {...input}
       type="range"
       placeholder={input.placeholder || input.label}
-      className={`w-100 ${commonInputClasses}`}
+      className={`w-100 form-range ${commonInputClasses}`}
     />
   );
 };

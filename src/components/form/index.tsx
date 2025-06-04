@@ -13,6 +13,8 @@ import Button from "../core/button";
 import Spinner from "../core/spinner";
 import InputComp from "./Input";
 import DefaultInput from "./inputs/default";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHistory } from "@fortawesome/free-solid-svg-icons";
 
 interface InputBasicProps {
   name: string;
@@ -152,7 +154,7 @@ const Form: React.FC<Props> = ({
     content,
   }: {
     flip?: boolean;
-    content?: string | number;
+    content?: string | number | React.ReactNode;
   }) =>
     content ? (
       <span
@@ -276,11 +278,31 @@ const Form: React.FC<Props> = ({
                   {belowComp}
 
                   {type === "range" && (
-                    <DefaultInput
-                      name={input.name}
-                      className="form-control-md"
-                      value={formik.values[input.name] || input.defaultValue}
-                    />
+                    <Fragment>
+                      <div className={`input-group`}>
+                        <DefaultInput
+                          name={input.name}
+                          className="form-control-md"
+                          value={formik.values[input.name]}
+                        />
+
+                        <InlineElement
+                          flip
+                          content={
+                            <FontAwesomeIcon
+                              icon={faHistory}
+                              role="button"
+                              onClick={() =>
+                                formik.setFieldValue(
+                                  input.name,
+                                  input.defaultValue
+                                )
+                              }
+                            />
+                          }
+                        />
+                      </div>
+                    </Fragment>
                   )}
 
                   <ErrorView />
