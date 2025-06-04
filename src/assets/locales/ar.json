@@ -30,6 +30,14 @@
       },
       "Title": "المستفيدون"
     },
+    "Beneficiary": {
+      "Profile": {
+        "CurrentData": "البيانات الحالية",
+        "PleaseUpdateFollowingData": "يرجى تعبئة الحقول بالبيانات الصحيحة...",
+        "Title": "معلوماتي",
+        "YourProfile": "معلوماتك"
+      }
+    },
     "ContactUs": {
       "Contact": "إذا كنت بحاجة لمساعدة أو أي استفسار فلا تترد في الاتصال بنا",
       "ContactNow": "اتصل الآن للمساعدة",

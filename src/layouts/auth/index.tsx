@@ -5,6 +5,7 @@ import {
   faGear,
   faHome,
   faInfoCircle,
+  faUser,
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "react-i18next";
@@ -14,18 +15,19 @@ import { Fragment } from "react/jsx-runtime";
 import AidsView from "../../views/auth/aids";
 import AidsBeneficiaryView from "../../views/auth/aids/request";
 import BeneficiariesView from "../../views/auth/beneficiaries";
+import BeneficiaryOwnProfile from "../../views/auth/beneficiaries/beneficiaryProfile";
 import BeneficiaryProfileView from "../../views/auth/beneficiaries/profile";
 import ContactUsPage from "../../views/auth/contact-us";
 import DashboardView from "../../views/auth/dashboard";
 import MembershipRegistrationView from "../../views/auth/membershipRegistration";
+import SettingsPage from "../../views/auth/settings";
 import VisitsView from "../../views/auth/visits";
+import BeneficiariesVisitsView from "../../views/auth/visits/beneficiaryVisits";
 import VisitReportsView from "../../views/auth/visits/reports";
 import FourZeroFourError from "../../views/common/404";
 import DashboardNavbar from "./dashboardNavbar";
 import Navbar from "./navbar";
 import Sidebar from "./sidebar";
-import SettingsPage from "../../views/auth/settings";
-import BeneficiariesVisitsView from "../../views/auth/visits/beneficiaryVisits";
 
 const AuthLayout = () => {
   const { t } = useTranslation();
@@ -92,6 +94,13 @@ const AuthLayout = () => {
       view: <AidsBeneficiaryView />,
       showInNav: true,
       icon: faBoxOpen,
+    },
+    {
+      name: t("Auth.Beneficiary.Profile.Title"),
+      route: "/beneficiary/profile",
+      view: <BeneficiaryOwnProfile />,
+      showInNav: true,
+      icon: faUser,
     },
     {
       name: t("Auth.ContactUs.Title"),

@@ -30,6 +30,14 @@
       },
       "Title": "Beneficiaries"
     },
+    "Beneficiary": {
+      "Profile": {
+        "CurrentData": "Current Data",
+        "PleaseUpdateFollowingData": "Please Update Following Data Records...",
+        "Title": "My Profile",
+        "YourProfile": "Your Profile Data"
+      }
+    },
     "ContactUs": {
       "Contact": "Contact",
       "ContactNow": "Contact Now",
