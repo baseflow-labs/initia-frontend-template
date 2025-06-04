@@ -5,7 +5,7 @@ export interface NotificationsState {
 export type NotificationsAction = { type: "setFontSize"; size: number };
 
 const initialState: NotificationsState = {
-  fontSize: 15,
+  fontSize: parseInt(localStorage.getItem("fontSize") || "") || 15,
 };
 
 const notifications = (
@@ -14,6 +14,7 @@ const notifications = (
 ): NotificationsState => {
   switch (action.type) {
     case "setFontSize":
+      localStorage.setItem("fontSize", String(action.size));
       return {
         fontSize: action.size,
       };
