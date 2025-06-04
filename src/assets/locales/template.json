@@ -274,6 +274,11 @@
       "EditVisit": "Edit Visit",
       "Report": {
         "AddReport": "Add Report",
+        "AddRoom": "Add New Room",
+        "Contents": "Contents",
+        "RoomXDetails": "Room {{number}} Details",
+        "RoomXType": "Room {{number}} Type",
+        "RoomsCount": "Rooms Count",
         "Title": "Report"
       },
       "Statuses": {

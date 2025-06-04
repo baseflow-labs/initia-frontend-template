@@ -54,6 +54,7 @@ interface InputBasicProps {
 
 export interface InputSingleProps extends InputBasicProps {
   logo?: string;
+  sizing?: string;
   halfCol?: boolean;
   prefixText?: string | number;
   postfixText?: string | number;
@@ -83,6 +84,22 @@ interface Props extends React.FormHTMLAttributes<HTMLFormElement> {
   initialValues?: object;
   customButtons?: React.ReactNode;
 }
+
+export const LabelView = ({ labelNote, label, required }: InputSingleProps) => (
+  <label className={`form-label ${label ? "" : "text-white"}`}>
+    <small>
+      {label ? label : "."}{" "}
+      {labelNote && (
+        <span className="text-muted">
+          {"("}
+          {labelNote}
+          {")"}{" "}
+        </span>
+      )}
+      {label && required ? <span className="text-danger">*</span> : null}
+    </small>
+  </label>
+);
 
 const Form: React.FC<Props> = ({
   onFormSubmit,
@@ -165,22 +182,6 @@ const Form: React.FC<Props> = ({
         {content}
       </span>
     ) : null;
-
-  const LabelView = ({ labelNote, label, required }: InputProps) => (
-    <label className={`form-label ${label ? "" : "text-white"}`}>
-      <small>
-        {label ? label : "."}{" "}
-        {labelNote && (
-          <span className="text-muted">
-            {"("}
-            {labelNote}
-            {")"}{" "}
-          </span>
-        )}
-        {label && required ? <span className="text-danger">*</span> : null}
-      </small>
-    </label>
-  );
 
   return (
     <FormikProvider value={formik}>

@@ -1,4 +1,10 @@
-import { faCircle, faXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircle,
+  faDesktop,
+  faDoorOpen,
+  faTrash,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useEffect, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -7,7 +13,7 @@ import { useNavigate, useSearchParams } from "react-router";
 
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import * as VisitApi from "../../../api/visits/visits";
-import Form from "../../../components/form";
+import Form, { LabelView } from "../../../components/form";
 import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
@@ -17,9 +23,21 @@ import {
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
+import Button from "../../../components/core/button";
+import DefaultInput from "../../../components/form/inputs/default";
+import TextareaInput from "../../../components/form/inputs/textarea";
+import SelectInput from "../../../components/form/inputs/select";
 
 const VisitReportsView = () => {
   const { t } = useTranslation();
+  const [data, setData] = useState({
+    note: "",
+    rooms: [
+      {
+        type: "",
+      },
+    ],
+  });
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -227,10 +245,113 @@ const VisitReportsView = () => {
   };
 
   return (
-    <div className="border border-3 border-dark rounded-5 mx-auto w-50 py-5">
-      <div className="text-danger text-center">
-        <h1 className="display-1">تقييم زيارة</h1>
+    <div className="border border-3 border-dark rounded-5 mx-auto w-50 p-5">
+      <h3>اسم المستفيد</h3>
+
+      <div className="row">
+        <div className="col-md-10">
+          <Button
+            className="w-100 btn-lg my-3 mt-5"
+            onClick={() =>
+              setData((current) => ({
+                ...current,
+                rooms: [...current.rooms, { type: "" }],
+              }))
+            }
+          >
+            {t("Auth.Visits.Report.AddRoom")}{" "}
+            <FontAwesomeIcon icon={faDoorOpen} />
+          </Button>
+        </div>
+
+        <div className="col-md-2 pt-3 px-0">
+          <LabelView
+            name="roomsCount"
+            label={t("Auth.Visits.Report.RoomsCount")}
+          />
+
+          <DefaultInput
+            sizing="lg"
+            name="roomsCount"
+            value={data.rooms.length}
+            disabled
+            className="mb-4 w-100 mx-0"
+            min={1}
+          />
+        </div>
       </div>
+
+      {data.rooms.map((room, i) => (
+        <div className="my-4 row" key={i}>
+          <div className="col-md-6">
+            <LabelView
+              name="room"
+              label={t("Auth.Visits.Report.RoomXType", { number: i + 1 })}
+            />
+
+            <SelectInput
+              sizing="lg"
+              name="type"
+              value={room.type}
+              options={[{ value: "1" }, { value: "2" }]}
+              onChange={(e) =>
+                setData((current) => ({
+                  ...current,
+                  rooms: current.rooms.map((_, y) =>
+                    y === i ? { type: e.target.value } : _
+                  ),
+                }))
+              }
+            />
+          </div>
+
+          <div className="col-md-5">
+            <LabelView name="room" label={t("Auth.Visits.Report.Contents")} />
+
+            <div>
+              <Button color="success" className="btn-lg w-100 text-white">
+                {t("Auth.Visits.Report.RoomXDetails", { number: i + 1 })}{" "}
+                <FontAwesomeIcon icon={faDesktop} />
+              </Button>
+            </div>
+          </div>
+
+          <div className="col-md-1 pt-4">
+            <div className="mt-2">
+              <Button
+                color="white"
+                className="btn-lg border-dark"
+                onClick={() =>
+                  setData((current) => ({
+                    ...current,
+                    rooms: current.rooms.filter((_, y) => !(y === i)),
+                  }))
+                }
+              >
+                <FontAwesomeIcon icon={faTrash} className="text-danger" />
+              </Button>
+            </div>
+          </div>
+        </div>
+      ))}
+
+      <LabelView name="roomsCount" label={t("Global.Form.Labels.Notes")} />
+
+      <TextareaInput
+        name="note"
+        value={data.note}
+        onChange={(e) =>
+          setData((current) => ({
+            ...current,
+            note: e.target.value,
+          }))
+        }
+        className="mb-4"
+      />
+
+      <Button className="mt-4 w-100 btn-lg">
+        {t("Global.Form.Labels.Submit")}
+      </Button>
     </div>
   );
 };

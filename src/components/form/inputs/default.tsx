@@ -4,12 +4,16 @@ import { commonInputClasses } from "../../../utils/consts";
 
 type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 
-const DefaultInput: React.FC<FinalInput> = (input) => {
+const DefaultInput: React.FC<FinalInput> = ({
+  className,
+  sizing = "sm",
+  ...input
+}) => {
   return (
     <input
       {...input}
       placeholder={input.placeholder || input.label}
-      className={`form-control form-control-sm ${commonInputClasses}`}
+      className={`form-control form-control-${sizing} ${commonInputClasses} ${className}`}
     />
   );
 };

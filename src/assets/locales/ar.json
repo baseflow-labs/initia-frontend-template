@@ -273,7 +273,12 @@
       "CancelVisit": "إلغاء الزيارة",
       "EditVisit": "تعديل زيارة",
       "Report": {
-        "AddReport": "إجراء تقييم"
+        "AddReport": "إجراء تقييم",
+        "AddRoom": "إضافة غرفة جديدة",
+        "Contents": "المحتويات",
+        "RoomXDetails": "تفاصيل الغرفة {{number}}",
+        "RoomXType": "نوع الغرفة رقم {{number}}",
+        "RoomsCount": "عدد الغرف"
       },
       "Statuses": {
         "Cancelled": "ألغيت الزيارة",

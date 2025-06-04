@@ -145,11 +145,6 @@ const VisitsView = () => {
 
   const actionButtons = [
     {
-      label: t("Auth.Visits.Report.AddReport"),
-      route: "/visits/report",
-      outline: true,
-    },
-    {
       label: t("Auth.Visits.AddVisit"),
       onClick: () => setOpenModal(true),
     },
@@ -249,6 +244,13 @@ const VisitsView = () => {
           //   label: t("Global.Form.Labels.Edit"),
           //   onClick: (data: string | object) => editData(data),
           // },
+          {
+            icon: faEdit,
+            spread: true,
+            label: t("Auth.Visits.Report.AddReport"),
+            onClick: (data: string | object) =>
+              navigate("/visits/report?id=" + data),
+          },
           {
             icon: faXmark,
             label: t("Auth.Visits.CancelVisit"),
