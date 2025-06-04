@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import Form from "../../../components/form";
 import { setFontSize } from "../../../store/actions/settings";
 import { useAppSelector } from "../../../store/hooks";
+import { addNotification } from "../../../store/actions/notifications";
 
 const SettingsPage = () => {
   const { t } = useTranslation();
@@ -29,8 +30,18 @@ const SettingsPage = () => {
         initialValues={{
           fontSize: fontSize,
         }}
-        submitText={t("Global.Form.Labels.SaveData")}
-        onFormSubmit={(values) => dispatch(setFontSize(values.fontSize))}
+        submitText={t("Global.Form.Labels.Save")}
+        onFormSubmit={(values) => {
+          dispatch(setFontSize(values.fontSize));
+          dispatch(
+            addNotification({
+              msg: t("Global.Form.SuccessMsg", {
+                action: t("Global.Form.Labels.Update"),
+                data: t("Auth.Settings.Title"),
+              }),
+            })
+          );
+        }}
       />
     </div>
   );

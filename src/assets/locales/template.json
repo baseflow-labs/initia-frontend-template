@@ -250,6 +250,14 @@
     },
     "Settings": {
       "FontSize": "Font Size",
+      "Samples": {
+        "H3Sample": "Main Title Sample",
+        "H4Sample": "Sub-Title Sample",
+        "H5Sample": "Page Links Sample",
+        "LabelSample": "Input Label Sample",
+        "SmallSample": "Notes Sample",
+        "Title": "Samples"
+      },
       "Title": "Settings"
     },
     "Visits": {
@@ -257,7 +265,8 @@
       "CancelVisit": "Cancel Visit",
       "EditVisit": "Edit Visit",
       "Report": {
-        "AddReport": "Add Report"
+        "AddReport": "Add Report",
+        "Title": "Report"
       },
       "Statuses": {
         "Cancelled": "Cancelled",
@@ -286,11 +295,13 @@
         "Previous": "Previous",
         "Record": "Record",
         "Required": "Required",
+        "Save": "Save",
         "SaveContinue": "Save & Continue",
         "SaveData": "Save Data",
         "Submit": "Submit",
         "SubmitApplication": "Submit Application",
         "SupportingDocument": "Supporting Document",
+        "Update": "Update",
         "UploadAttachment": "Upload Attachment",
         "Yes": "Yes"
       },

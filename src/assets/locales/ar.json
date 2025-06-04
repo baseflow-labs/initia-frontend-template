@@ -250,6 +250,14 @@
     },
     "Settings": {
       "FontSize": "حجم الخط للتطبيق",
+      "Samples": {
+        "H3Sample": "عينة عنوان رئيسيي",
+        "H4Sample": "عينة عنوان فرعي",
+        "H5Sample": "عينة روابط الصفحات",
+        "LabelSample": "عينة عنوان لحقل ادخال",
+        "SmallSample": " عينة ملاحظات",
+        "Title": "عينات"
+      },
       "Title": "الإعدادات"
     },
     "Visits": {
@@ -286,11 +294,13 @@
         "Previous": "السابق",
         "Record": "سجل",
         "Required": "هذا الحقل إلزامي",
+        "Save": "حفظ",
         "SaveContinue": "حفظ ومتابعة",
         "SaveData": "حفظ البيانات",
         "Submit": "إرسال",
         "SubmitApplication": "تقديم الطلب",
         "SupportingDocument": "وثائق مدعمة",
+        "Update": "التحديث",
         "UploadAttachment": "إضافة مرفق",
         "Yes": "نعم"
       },
