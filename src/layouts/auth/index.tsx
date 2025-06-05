@@ -9,7 +9,7 @@ import {
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "react-i18next";
-import { Route, Routes, useLocation } from "react-router";
+import { Navigate, Route, Routes, useLocation } from "react-router";
 import { Fragment } from "react/jsx-runtime";
 
 import AidsView from "../../views/auth/aids";
@@ -143,7 +143,9 @@ const AuthLayout = () => {
                 <Route path={route} element={view} key={i} />
               ))}
 
-              <Route path="*" element={<FourZeroFourError />} />
+              <Route path="*" element={<Navigate to="/dashboard" replace />} />
+
+              {/* <Route path="*" element={<FourZeroFourError />} /> */}
             </Routes>
           </div>
         </div>
