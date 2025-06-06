@@ -8,27 +8,38 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import * as VisitReportsApi from "../../../api/visits/reports";
 import Button from "../../../components/core/button";
 import { LabelView } from "../../../components/form";
 import DefaultInput from "../../../components/form/inputs/default";
 import RadioInput from "../../../components/form/inputs/radio";
 import SelectInput from "../../../components/form/inputs/select";
 import TextareaInput from "../../../components/form/inputs/textarea";
-import { renderDataFromOptions } from "../../../utils/function";
+import {
+  apiCatchGlobalHandler,
+  renderDataFromOptions,
+} from "../../../utils/function";
+import { useSearchParams } from "react-router";
+import { useAppSelector } from "../../../store/hooks";
+import { useDispatch } from "react-redux";
+import { addNotification } from "../../../store/actions/notifications";
 
 const VisitReportsView = () => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const [searchParams] = useSearchParams();
+  const { user } = useAppSelector((state) => state.auth);
   const [data, setData] = useState({
     note: "",
     rooms: [
       {
         type: "",
-        recommendations: "",
-        notes: "",
+        recommendation: "",
+        note: "",
         contents: [
           {
+            content: "",
             type: "",
-            category: "",
             photo: "",
             status: "",
             evaluation: 0,
@@ -41,15 +52,15 @@ const VisitReportsView = () => {
     type: "",
     contents: [
       {
+        content: "",
         type: "",
-        category: "",
         photo: "",
         status: "",
         evaluation: 0,
       },
     ],
-    recommendations: "",
-    notes: "",
+    recommendation: "",
+    note: "",
     index: -1,
   });
 
@@ -85,7 +96,22 @@ const VisitReportsView = () => {
   ];
 
   const onFormSubmit = () => {
-    console.log({ data });
+    VisitReportsApi.createOrUpdate({
+      ...data,
+      visitSchedule: searchParams.get("id"),
+      staff: user.id,
+    })
+      .then(() => {
+        dispatch(
+          addNotification({
+            msg: t("Global.Form.SuccessMsg", {
+              action: t("Auth.Visits.AddVisit"),
+              data: t("Auth.Beneficiaries.Profile.Title"),
+            }),
+          })
+        );
+      })
+      .catch(apiCatchGlobalHandler);
   };
 
   return (
@@ -112,13 +138,13 @@ const VisitReportsView = () => {
                     contents: [
                       ...current.contents,
                       {
+                        content: "",
                         type: "",
-                        category: "",
                         photo: "",
                         status: "",
                         evaluation: 0,
-                        recommendations: "",
-                        notes: "",
+                        recommendation: "",
+                        note: "",
                       },
                     ],
                   }))
@@ -150,7 +176,7 @@ const VisitReportsView = () => {
             <div className="my-4 row" key={i}>
               <div className="col-md-10">
                 <LabelView
-                  name="category"
+                  name="type"
                   label={t("Auth.Visits.Report.ContentXType", {
                     number: i + 1,
                   })}
@@ -158,8 +184,8 @@ const VisitReportsView = () => {
 
                 <SelectInput
                   sizing="lg"
-                  name="category"
-                  value={content.category}
+                  name="type"
+                  value={content.type}
                   options={contentTypes}
                   onChange={(e) =>
                     setRoomDetails((current) => ({
@@ -168,7 +194,7 @@ const VisitReportsView = () => {
                         y === i
                           ? {
                               ...content,
-                              category: e.target.value,
+                              type: e.target.value,
                             }
                           : content
                       ),
@@ -196,10 +222,10 @@ const VisitReportsView = () => {
 
               <div className="col-md-12 pt-3">
                 <LabelView
-                  name="type"
+                  name="content"
                   label={t("Auth.Visits.Report.ContentType", {
                     type:
-                      content.category === "Device"
+                      content.type === "Device"
                         ? t("Auth.Visits.Report.TheDevice")
                         : t("Auth.Visits.Report.TheFurniture"),
                   })}
@@ -207,10 +233,10 @@ const VisitReportsView = () => {
 
                 <SelectInput
                   sizing="lg"
-                  name="type"
-                  value={content.type}
+                  name="content"
+                  value={content.content}
                   options={
-                    contentTypes.find(({ value }) => value === content.category)
+                    contentTypes.find(({ value }) => value === content.type)
                       ?.subList
                   }
                   onChange={(e) =>
@@ -220,7 +246,7 @@ const VisitReportsView = () => {
                         y === i
                           ? {
                               ...content,
-                              type: e.target.value,
+                              content: e.target.value,
                             }
                           : content
                       ),
@@ -234,7 +260,7 @@ const VisitReportsView = () => {
                   name="photo"
                   label={t("Auth.Visits.Report.RoomContentPhoto", {
                     type:
-                      content.category === "Device"
+                      content.type === "Device"
                         ? t("Auth.Visits.Report.TheDevice")
                         : t("Auth.Visits.Report.TheFurniture"),
                   })}
@@ -266,7 +292,7 @@ const VisitReportsView = () => {
                   name="status"
                   label={t("Auth.Visits.Report.RoomContentStatus", {
                     type:
-                      content.category === "Device"
+                      content.type === "Device"
                         ? t("Auth.Visits.Report.TheDevice")
                         : t("Auth.Visits.Report.TheFurniture"),
                   })}
@@ -299,7 +325,7 @@ const VisitReportsView = () => {
                   name="evaluation"
                   label={t("Auth.Visits.Report.RoomContentEvaluation", {
                     type:
-                      content.category === "Device"
+                      content.type === "Device"
                         ? t("Auth.Visits.Report.TheDevice")
                         : t("Auth.Visits.Report.TheFurniture"),
                   })}
@@ -338,17 +364,17 @@ const VisitReportsView = () => {
 
           <div className="col-md-12 pt-3">
             <LabelView
-              name="recommendations"
+              name="recommendation"
               label={t("Auth.Visits.Report.RoomRecommendations")}
             />
 
             <TextareaInput
-              name="recommendations"
-              value={roomDetails.recommendations}
+              name="recommendation"
+              value={roomDetails.recommendation}
               onChange={(e) =>
                 setRoomDetails((current) => ({
                   ...current,
-                  recommendations: e.target.value,
+                  recommendation: e.target.value,
                 }))
               }
               className="mb-4"
@@ -356,15 +382,15 @@ const VisitReportsView = () => {
           </div>
 
           <div className="col-md-12 pt-3">
-            <LabelView name="notes" label={t("Global.Form.Labels.Notes")} />
+            <LabelView name="note" label={t("Global.Form.Labels.Notes")} />
 
             <TextareaInput
-              name="notes"
-              value={roomDetails.notes}
+              name="note"
+              value={roomDetails.note}
               onChange={(e) =>
                 setRoomDetails((current) => ({
                   ...current,
-                  notes: e.target.value,
+                  note: e.target.value,
                 }))
               }
               className="mb-4"
@@ -378,8 +404,8 @@ const VisitReportsView = () => {
               setRoomDetails({
                 type: "",
                 contents: [],
-                recommendations: "",
-                notes: "",
+                recommendation: "",
+                note: "",
                 index: -1,
               });
               setData((current) => ({
@@ -407,8 +433,8 @@ const VisitReportsView = () => {
                       {
                         type: "",
                         contents: [],
-                        recommendations: "",
-                        notes: "",
+                        recommendation: "",
+                        note: "",
                       },
                     ],
                   }))
