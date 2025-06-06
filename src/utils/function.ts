@@ -26,8 +26,8 @@ export const statusColorRender = (status = "") => {
 };
 
 export const renderDataFromOptions = (
-  data = "",
-  options = [{ label: "", value: "" }]
+  data: string,
+  options: { label?: string; value: string }[]
 ) => {
   const option = options.find(({ value }) => value === data);
 
