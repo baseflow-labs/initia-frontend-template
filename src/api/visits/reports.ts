@@ -1,13 +1,9 @@
 import api from "..";
 
-const mainPath = "/visitSchedule";
+const mainPath = "/visitReport";
 
 const createOrUpdate = async (data: {}) => {
-  return await api.post(mainPath + "/create-update", data, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  });
+  return await api.post(mainPath + "/create-update", data);
 };
 
 export { createOrUpdate };

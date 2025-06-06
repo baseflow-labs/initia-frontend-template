@@ -19,7 +19,7 @@ import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
 } from "../../../utils/function";
-import { useSearchParams } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 import { useAppSelector } from "../../../store/hooks";
 import { useDispatch } from "react-redux";
 import { addNotification } from "../../../store/actions/notifications";
@@ -27,6 +27,7 @@ import { addNotification } from "../../../store/actions/notifications";
 const VisitReportsView = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const { user } = useAppSelector((state) => state.auth);
   const [data, setData] = useState({
@@ -110,6 +111,8 @@ const VisitReportsView = () => {
             }),
           })
         );
+
+        navigate("/visits/");
       })
       .catch(apiCatchGlobalHandler);
   };
