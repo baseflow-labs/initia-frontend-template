@@ -17,7 +17,7 @@ import AidsBeneficiaryView from "../../views/auth/aids/request";
 import BeneficiariesView from "../../views/auth/beneficiaries";
 import BeneficiaryOwnProfile from "../../views/auth/beneficiaries/beneficiaryProfile";
 import BeneficiaryProfileView from "../../views/auth/beneficiaries/profile";
-import BeneficiaryDetailView from "../../views/auth/beneficiaries/review";
+import BeneficiaryFormReview from "../../views/auth/beneficiaries/review";
 import ContactUsPage from "../../views/auth/contact-us";
 import DashboardView from "../../views/auth/dashboard";
 import MembershipRegistrationView from "../../views/auth/membershipRegistration";
@@ -59,7 +59,7 @@ const AuthLayout = () => {
     {
       name: t("Auth.Beneficiaries.Profile.Title"),
       route: "/beneficiaries/review/",
-      view: <BeneficiaryDetailView />,
+      view: <BeneficiaryFormReview />,
       icon: faUsers,
     },
     {

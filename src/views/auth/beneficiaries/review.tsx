@@ -1,30 +1,27 @@
-import {
-  faBoxOpen,
-  faCircle,
-  faEdit,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBoxOpen, faCircle, faEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import { useSearchParams } from "react-router";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
+import TabsHeader from "../../../components/tab";
+import DynamicTable, { dataRender } from "../../../components/table";
 import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
-import DynamicTable, { dataRender } from "../../../components/table";
-import TabsHeader from "../../../components/tab";
 import {
+  beneficiaryMapping,
   beneficiaryTabs,
   inputsData,
-  beneficiaryMapping,
-  statuses,
 } from "../../../utils/inputsData";
 
-const BeneficiaryDetailView = () => {
+const BeneficiaryFormReview = () => {
   const { t } = useTranslation();
+  const [searchParams] = useSearchParams();
+
   const [beneficiary, setBeneficiary] = useState<any>();
   const [tab, setTab] = useState<string>("basicDataInputs");
   const [dependent, setDependent] = useState<string>("");
@@ -32,7 +29,7 @@ const BeneficiaryDetailView = () => {
   const fieldsToShow = inputsData(t);
 
   useEffect(() => {
-    BeneficiaryApi.getById("d351c61b-6581-4647-9e96-d45b976d0f63")
+    BeneficiaryApi.getById(searchParams.get("id") || "")
       .then((res) => {
         setBeneficiary(res as any);
       })
@@ -40,6 +37,33 @@ const BeneficiaryDetailView = () => {
   }, []);
 
   const title = beneficiary?.fullName;
+
+  const statuses = [
+    {
+      value: "New Member",
+      label: t("Auth.MembershipRegistration.Statuses.NewMember"),
+    },
+    {
+      value: "Incomplete",
+      label: t("Auth.MembershipRegistration.Statuses.Incomplete"),
+    },
+    {
+      value: "Need Help",
+      label: t("Auth.MembershipRegistration.Statuses.NeedHelp"),
+    },
+    {
+      value: "Rejected",
+      label: t("Auth.MembershipRegistration.Statuses.Rejected"),
+    },
+    {
+      value: "Accepted",
+      label: t("Auth.MembershipRegistration.Statuses.Accepted"),
+    },
+    {
+      value: "In Preview",
+      label: t("Auth.MembershipRegistration.Statuses.InPreview"),
+    },
+  ];
 
   const columns = [
     {
@@ -60,9 +84,9 @@ const BeneficiaryDetailView = () => {
         <Fragment>
           <FontAwesomeIcon
             icon={faCircle}
-            className={`text-${statusColorRender(row.status)}`}
+            className={`text-${statusColorRender(row.status || "Pending")}`}
           />{" "}
-          {renderDataFromOptions(row.status, statuses(t))}
+          {renderDataFromOptions(row.status || "Pending", statuses)}
         </Fragment>
       ),
       name: "editStatus",
@@ -126,18 +150,20 @@ const BeneficiaryDetailView = () => {
       )}
 
       <DynamicTable
+        noPagination
         columns={columns}
         data={data}
         onPageChange={() => console.log(1)}
-        size={data.length}
         actions={[
           {
             icon: faEdit,
+            spread: true,
             label: t("Auth.Beneficiaries.Profile.editRequest"),
             onClick: (data: string | object) => console.log(data),
           },
           {
             icon: faBoxOpen,
+            spread: true,
             label: t("Auth.Beneficiaries.Profile.archive"),
             onClick: (data: string | object) => console.log(data),
           },
@@ -147,4 +173,4 @@ const BeneficiaryDetailView = () => {
   );
 };
 
-export default BeneficiaryDetailView;
+export default BeneficiaryFormReview;

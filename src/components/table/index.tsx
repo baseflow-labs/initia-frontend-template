@@ -227,34 +227,38 @@ const DynamicTable = ({
                       />
                     ))}
 
-                  <div className="dropdown">
-                    <FontAwesomeIcon
-                      icon={faEllipsisVertical}
-                      className="dropdown-toggle"
-                      role="button"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    />
+                  {actions.filter(({ spread }) => !spread).length ? (
+                    <div className="dropdown">
+                      <FontAwesomeIcon
+                        icon={faEllipsisVertical}
+                        className="dropdown-toggle ms-1"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      />
 
-                    <ul className="dropdown-menu">
-                      {actions
-                        .filter(({ spread }) => !spread)
-                        .map(({ icon, label, onClick }, y) => (
-                          <li key={y}>
-                            <button
-                              className="dropdown-item"
-                              onClick={() => onClick(row.id || "")}
-                            >
-                              <FontAwesomeIcon
-                                icon={icon}
-                                className="text-info"
-                              />{" "}
-                              {label}
-                            </button>
-                          </li>
-                        ))}
-                    </ul>
-                  </div>
+                      <ul className="dropdown-menu">
+                        {actions
+                          .filter(({ spread }) => !spread)
+                          .map(({ icon, label, onClick }, y) => (
+                            <li key={y}>
+                              <button
+                                className="dropdown-item"
+                                onClick={() => onClick(row.id || "")}
+                              >
+                                <FontAwesomeIcon
+                                  icon={icon}
+                                  className="text-info"
+                                />{" "}
+                                {label}
+                              </button>
+                            </li>
+                          ))}
+                      </ul>
+                    </div>
+                  ) : (
+                    <span className="text-white">-</span>
+                  )}
                 </td>
               )}
             </tr>
