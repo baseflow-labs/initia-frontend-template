@@ -15,8 +15,10 @@
       "In-Kind": "In-Kind",
       "RecaptionDate": "Recaption Date",
       "Statuses": {
+        "Grant": "Grant",
         "Granted": "Granted",
-        "Pending": "Pending"
+        "Pending": "Pending",
+        "Reject": "Reject"
       },
       "Title": "Aids"
     },
