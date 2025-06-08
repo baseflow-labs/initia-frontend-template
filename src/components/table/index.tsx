@@ -88,31 +88,31 @@ export const dataRender = ({
           onClick={() => console.log({ data })}
         />
       );
-    case 'image':
+    case "image":
       return (
-        <div className='d-flex '>
+        <div className="d-flex">
           <p>{}</p>
           <FontAwesomeIcon
             icon={faEye}
-            role='button'
+            role="button"
             onClick={() => console.log({ data })}
           />
         </div>
       );
-    case 'stars':
+    case "stars":
       const starsToDisplay = [1, 2, 3, 4, 5];
       return (
-        <div className='d-flex '>
+        <div className="d-flex">
           {starsToDisplay.map((i) => (
             <FontAwesomeIcon
               icon={faStar}
-              className={i <= parseInt(data) ? 'text-warning' : ''}
+              className={i <= parseInt(data) ? "text-warning" : ""}
             />
           ))}
         </div>
       );
 
-    case 'custom':
+    case "custom":
       return render && row ? render(row) : data;
     default:
       return data;
@@ -206,12 +206,13 @@ const DynamicTable = ({ columns, data, onPageChange, actions }: TableProps) => {
                         // data-bs-custom-class="custom-tooltip"
                         // data-bs-title={label}
                         role="button"
+                        className="me-1"
                         onClick={() => onClick(row?.id || "")}
                         key={y}
                       />
                     ))}
 
-                  <div className="dropdown ms-3">
+                  <div className="dropdown">
                     <FontAwesomeIcon
                       icon={faEllipsisVertical}
                       className="dropdown-toggle"

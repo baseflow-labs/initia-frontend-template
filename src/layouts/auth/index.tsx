@@ -23,8 +23,8 @@ import MembershipRegistrationView from "../../views/auth/membershipRegistration"
 import SettingsPage from "../../views/auth/settings";
 import VisitsView from "../../views/auth/visits";
 import BeneficiariesVisitsView from "../../views/auth/visits/beneficiaryVisits";
-import VisitDetailView from "../../views/auth/visits/detail";
-import VisitReportsView from "../../views/auth/visits/reports";
+import VisitDetailView from "../../views/auth/visits/reportDetails";
+import VisitReportsView from "../../views/auth/visits/addReport";
 import DashboardNavbar from "./dashboardNavbar";
 import Navbar from "./navbar";
 import Sidebar from "./sidebar";
@@ -90,7 +90,7 @@ const AuthLayout = () => {
     },
     {
       name: t("Auth.Visits.Detail.title"),
-      route: "/visits/detail",
+      route: "/visits/report/details",
       view: <VisitDetailView />,
       icon: faEdit,
     },
