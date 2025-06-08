@@ -50,15 +50,15 @@ const DependentsFormView = ({
     {
       type: "date",
       name: "dob",
-      min: moment().subtract(125, "y").format(dataDateFormat),
-      max: moment().format(dataDateFormat),
+      min: moment().locale("en").subtract(125, "y").format(dataDateFormat),
+      max: moment().locale("en").format(dataDateFormat),
       label: t("Auth.MembershipRegistration.Form.Dob"),
       required: true,
     },
     {
       type: "date",
       name: "idExpiryDate",
-      max: moment().add(10, "y").format(dataDateFormat),
+      max: moment().locale("en").add(10, "y").format(dataDateFormat),
       label: t("Auth.MembershipRegistration.Form.IdExpiryDate"),
       required: true,
     },

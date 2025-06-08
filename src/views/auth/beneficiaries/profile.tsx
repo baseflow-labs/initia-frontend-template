@@ -1,8 +1,8 @@
 import moment from "moment";
 import { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-
 import { useSearchParams } from "react-router";
+
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import { InputSingleProps } from "../../../components/form";
 import { dataRender } from "../../../components/table";
@@ -73,15 +73,15 @@ const BeneficiaryProfileView = () => {
     {
       type: "date",
       name: "dob",
-      min: moment().subtract(125, "y").format(dataDateFormat),
-      max: moment().subtract(17, "y").format(dataDateFormat),
+      min: moment().locale("en").subtract(125, "y").format(dataDateFormat),
+      max: moment().locale("en").subtract(17, "y").format(dataDateFormat),
       label: t("Auth.MembershipRegistration.Form.Dob"),
       required: true,
     },
     {
       type: "date",
       name: "idExpiryDate",
-      max: moment().add(10, "y").format(dataDateFormat),
+      max: moment().locale("en").add(10, "y").format(dataDateFormat),
       label: t("Auth.MembershipRegistration.Form.IdExpiryDate"),
       required: true,
     },
@@ -676,15 +676,15 @@ const BeneficiaryProfileView = () => {
     {
       type: "date",
       name: "dob",
-      min: moment().subtract(125, "y").format(dataDateFormat),
-      max: moment().format(dataDateFormat),
+      min: moment().locale("en").subtract(125, "y").format(dataDateFormat),
+      max: moment().locale("en").format(dataDateFormat),
       label: t("Auth.MembershipRegistration.Form.Dob"),
       required: true,
     },
     {
       type: "date",
       name: "idExpiryDate",
-      max: moment().add(10, "y").format(dataDateFormat),
+      max: moment().locale("en").add(10, "y").format(dataDateFormat),
       label: t("Auth.MembershipRegistration.Form.IdExpiryDate"),
       required: true,
     },

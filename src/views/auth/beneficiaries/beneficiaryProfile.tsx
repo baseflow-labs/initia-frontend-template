@@ -1,6 +1,7 @@
 import moment from "moment";
 import { Fragment, useEffect, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import * as DataReviewApi from "../../../api/profile/dataReview";
@@ -8,10 +9,9 @@ import * as DataUpdateApi from "../../../api/profile/dataUpdate";
 import Form, { InputSingleProps } from "../../../components/form";
 import { dataRender } from "../../../components/table";
 import ColumnsPage from "../../../layouts/auth/columnsPage";
+import { addNotification } from "../../../store/actions/notifications";
 import { dataDateFormat } from "../../../utils/consts";
 import { apiCatchGlobalHandler } from "../../../utils/function";
-import { useDispatch } from "react-redux";
-import { addNotification } from "../../../store/actions/notifications";
 
 const BeneficiaryOwnProfile = () => {
   const { t } = useTranslation();
@@ -89,15 +89,15 @@ const BeneficiaryOwnProfile = () => {
     {
       type: "date",
       name: "dob",
-      min: moment().subtract(125, "y").format(dataDateFormat),
-      max: moment().subtract(17, "y").format(dataDateFormat),
+      min: moment().locale("en").subtract(125, "y").format(dataDateFormat),
+      max: moment().locale("en").subtract(17, "y").format(dataDateFormat),
       label: t("Auth.MembershipRegistration.Form.Dob"),
       required: true,
     },
     {
       type: "date",
       name: "idExpiryDate",
-      max: moment().add(10, "y").format(dataDateFormat),
+      max: moment().locale("en").add(10, "y").format(dataDateFormat),
       label: t("Auth.MembershipRegistration.Form.IdExpiryDate"),
       required: true,
     },
@@ -692,15 +692,15 @@ const BeneficiaryOwnProfile = () => {
     {
       type: "date",
       name: "dob",
-      min: moment().subtract(125, "y").format(dataDateFormat),
-      max: moment().format(dataDateFormat),
+      min: moment().locale("en").subtract(125, "y").format(dataDateFormat),
+      max: moment().locale("en").format(dataDateFormat),
       label: t("Auth.MembershipRegistration.Form.Dob"),
       required: true,
     },
     {
       type: "date",
       name: "idExpiryDate",
-      max: moment().add(10, "y").format(dataDateFormat),
+      max: moment().locale("en").add(10, "y").format(dataDateFormat),
       label: t("Auth.MembershipRegistration.Form.IdExpiryDate"),
       required: true,
     },
