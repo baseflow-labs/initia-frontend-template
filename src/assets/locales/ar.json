@@ -22,6 +22,7 @@
     },
     "Beneficiaries": {
       "AddBeneficiary": "إضافة مستفيد",
+      "Beneficiary": "المستفيد",
       "BeneficiaryName": "اسم المستفيد",
       "Profile": {
         "ProfileCompletion": "استكمال طلب المستفيد",

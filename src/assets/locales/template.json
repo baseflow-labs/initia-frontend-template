@@ -22,6 +22,7 @@
     },
     "Beneficiaries": {
       "AddBeneficiary": "Add Beneficiary",
+      "Beneficiary": "Beneficiary",
       "BeneficiaryName": "Beneficiary Name",
       "Profile": {
         "ProfileCompletion": "Profile Completion",

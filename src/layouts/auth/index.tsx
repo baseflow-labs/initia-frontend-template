@@ -1,13 +1,4 @@
-import {
-  faBezierCurve,
-  faBoxOpen,
-  faEdit,
-  faGear,
-  faHome,
-  faInfoCircle,
-  faUser,
-  faUsers,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBezierCurve, faBoxOpen, faEdit, faGear, faHome, faInfoCircle, faUser, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes, useLocation } from "react-router";
 import { Fragment } from "react/jsx-runtime";
@@ -37,6 +28,7 @@ const AuthLayout = () => {
     {
       name: t("Auth.MembershipRegistration.Title"),
       route: "/apply",
+      showInNav: true,
       view: <MembershipRegistrationView />,
       icon: faEdit,
     },
