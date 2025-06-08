@@ -274,6 +274,34 @@
     "Visits": {
       "AddVisit": "Add Visit",
       "CancelVisit": "Cancel Visit",
+      "Detail": {
+        "Devices": {
+          "AC": "Auth.Visits.Detail.Devices.AC",
+          "TV": "Auth.Visits.Detail.Devices.TV",
+          "notWorking": "Auth.Visits.Detail.Devices.notWorking"
+        },
+        "Furniture": {
+          "bed": "Auth.Visits.Detail.Furniture.bed",
+          "sofas": "Auth.Visits.Detail.Furniture.sofas",
+          "table": "Auth.Visits.Detail.Furniture.table"
+        },
+        "Room": {
+          "LivingRoom": "Auth.Visits.Detail.Room.LivingRoom",
+          "bathroom": "Auth.Visits.Detail.Room.bathroom",
+          "bedroom": "Auth.Visits.Detail.Room.bedroom",
+          "kitchen": "Auth.Visits.Detail.Room.kitchen"
+        },
+        "device": "Auth.Visits.Detail.device",
+        "devicePhoto": "Auth.Visits.Detail.devicePhoto",
+        "deviceStatus": "Auth.Visits.Detail.deviceStatus",
+        "devicesNumber": "Auth.Visits.Detail.devicesNumber",
+        "evaluation": "Auth.Visits.Detail.evaluation",
+        "furniture": "Auth.Visits.Detail.furniture",
+        "furnitureNumber": "Auth.Visits.Detail.furnitureNumber",
+        "needRepair": "Auth.Visits.Detail.needRepair",
+        "roomsNumber": "Auth.Visits.Detail.roomsNumber",
+        "title": "Auth.Visits.Detail.title"
+      },
       "EditVisit": "Edit Visit",
       "Report": {
         "AddContent": "Add Content",
@@ -348,6 +376,7 @@
       "ApplicationDate": "Application Date",
       "Back": "Back",
       "Logout": "Logout",
+      "NoData": "Sorry, No Available Data",
       "Ok": "Ok",
       "PhoneNumber": "Phone Number",
       "Search": "Search",

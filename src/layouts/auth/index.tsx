@@ -23,8 +23,8 @@ import MembershipRegistrationView from "../../views/auth/membershipRegistration"
 import SettingsPage from "../../views/auth/settings";
 import VisitsView from "../../views/auth/visits";
 import BeneficiariesVisitsView from "../../views/auth/visits/beneficiaryVisits";
-import VisitReportsView from "../../views/auth/visits/reports";
-import FourZeroFourError from "../../views/common/404";
+import VisitDetailView from "../../views/auth/visits/reportDetails";
+import VisitReportsView from "../../views/auth/visits/addReport";
 import DashboardNavbar from "./dashboardNavbar";
 import Navbar from "./navbar";
 import Sidebar from "./sidebar";
@@ -69,6 +69,12 @@ const AuthLayout = () => {
       icon: faBezierCurve,
     },
     {
+      name: t("Auth.Visits.Detail.title"),
+      route: "/visits/detail",
+      view: <VisitDetailView />,
+      icon: faEdit,
+    },
+    {
       name: t("Auth.Visits.Visits") + " '" + "للمستفيدين" + "'",
       route: "/beneficiary/visits",
       view: <BeneficiariesVisitsView />,
@@ -81,6 +87,12 @@ const AuthLayout = () => {
       view: <VisitReportsView />,
       showInNav: false,
       icon: faBezierCurve,
+    },
+    {
+      name: t("Auth.Visits.Detail.title"),
+      route: "/visits/report/details",
+      view: <VisitDetailView />,
+      icon: faEdit,
     },
     {
       name: t("Auth.Aids.Title") + " '" + "للباحثين" + "'",

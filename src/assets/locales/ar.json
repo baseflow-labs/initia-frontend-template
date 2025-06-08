@@ -274,6 +274,36 @@
     "Visits": {
       "AddVisit": "جدولة زيارة",
       "CancelVisit": "إلغاء الزيارة",
+      "Detail": {
+        "Devices": {
+          "AC": "مكيف",
+          "Sofas": "كنب",
+          "TV": "تلفاز",
+          "table": "طاولة"
+        },
+        "Furniture": {
+          "Sofas": "كنب",
+          "bed": "سرير",
+          "table": "طاولة"
+        },
+        "Room": {
+          "LivingRoom": "غرفة المعيشة",
+          "bathroom": "دورة المياه",
+          "bedroom": "غرفة نوم",
+          "kitchen": "مطبخ"
+        },
+        "device": "الجهاز",
+        "devicePhoto": "صورة الجهاز",
+        "deviceStatus": "حالة الجهاز",
+        "devices": "الاجهزة",
+        "devicesNumber": "عدد الاجهزة الكلي",
+        "evaluation": "التقييم",
+        "furniture": "الاثاث",
+        "furnitureNumber": "عدد الاثاث الكلي",
+        "needRepair": "هل يحتاج للصيانة",
+        "roomsNumber": "عدد الغرف",
+        "title": "تفاصيل الزيارة"
+      },
       "EditVisit": "تعديل زيارة",
       "Report": {
         "AddContent": "إضافة محتوى",
@@ -347,6 +377,7 @@
       "ApplicationDate": "تاريخ التقديم",
       "Back": "عودة",
       "Logout": "تسجيل الخروج",
+      "NoData": "عذراً, لا يوجد بيانات للعرض",
       "Ok": "حسناً",
       "PhoneNumber": "رقم الجوال",
       "Search": "بحث",
