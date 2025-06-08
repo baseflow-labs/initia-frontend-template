@@ -252,7 +252,7 @@ const BeneficiariesView = () => {
   };
 
   const reviewProfile = (data: string) => {
-    navigate(`/beneficiaries/review//?id=${data}`);
+    navigate(`/beneficiaries/review/?id=${data}`);
   };
 
   const scheduleVisit = (data: string) => {

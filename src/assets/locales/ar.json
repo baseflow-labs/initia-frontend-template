@@ -30,12 +30,18 @@
         "ProfileCompletion": "استكمال طلب المستفيد",
         "ProfileDetails": "تفاصيل ملف المستفيد",
         "ProfileReview": "مراجعة طلب الانتساب",
+        "RequestDataUpdate": "طلب تعديل {{property}}",
+        "Statuses": {
+          "Confirmed": "تم التأكيد",
+          "NeedUpdate": "تم طلب التعديل"
+        },
         "Title": "ملف المستفيد",
+        "UpdateNote": "سبب التعديل",
         "archive": "ارشيف",
         "editRequest": "طلب تعديل",
         "editStatus": "حالة التعديل",
         "field": "الخانة",
-        "info": "المعلومات",
+        "info": "المعلومة",
         "notes": "ملاحظات"
       },
       "Title": "المستفيدون"

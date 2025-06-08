@@ -30,6 +30,10 @@
         "ProfileCompletion": "Profile Completion",
         "ProfileDetails": "Profile Details",
         "ProfileReview": "Membership Form Review",
+        "Statuses": {
+          "Confirmed": "Confirmed",
+          "NeedUpdate": "Need Update"
+        },
         "Title": "Profile"
       },
       "Title": "Beneficiaries"

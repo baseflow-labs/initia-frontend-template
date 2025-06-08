@@ -394,7 +394,7 @@ export function inputsData(t: (value: string) => string): {
   [key: string]: InputSingleProps[];
 } {
   return {
-    basicDataInputs: [
+    beneficiary: [
       {
         type: "select",
         options: socialStatusOptions(t),
@@ -492,7 +492,7 @@ export function inputsData(t: (value: string) => string): {
       },
     ],
 
-    contactDataInputs: [
+    contactsBank: [
       {
         type: "phoneNumber",
         name: "beneficiaryMobile",
@@ -533,7 +533,7 @@ export function inputsData(t: (value: string) => string): {
       },
     ],
 
-    qualificationDataInputs: [
+    income: [
       {
         type: "select",
         options: occupationOptions(t),
@@ -632,7 +632,7 @@ export function inputsData(t: (value: string) => string): {
       },
     ],
 
-    hostelDataInputs: [
+    housing: [
       {
         type: "title",
         name: "title2",
@@ -736,7 +736,7 @@ export function inputsData(t: (value: string) => string): {
       },
     ],
 
-    dependentsDataInputs: [
+    dependents: [
       {
         type: "text",
         name: "fullName",
@@ -820,7 +820,7 @@ export function inputsData(t: (value: string) => string): {
       },
     ],
 
-    attachmentInputs: [
+    nationalRecord: [
       {
         type: "file",
         name: "absherDocument",
@@ -872,42 +872,42 @@ export function inputsData(t: (value: string) => string): {
 
 export const beneficiaryTabs = (t: (value: string) => string) => [
   {
-    id: "basicDataInputs",
-    name: "basicDataInputs",
+    id: "beneficiary",
+    name: "beneficiary",
     title: t("Auth.MembershipRegistration.Form.BasicData"),
   },
   {
-    id: "contactDataInputs",
-    name: "contactDataInputs",
+    id: "contactsBank",
+    name: "contactsBank",
     title: t("Auth.MembershipRegistration.Form.ContactData"),
   },
   {
-    id: "qualificationDataInputs",
-    name: "qualificationDataInputs",
+    id: "income",
+    name: "income",
     title: t("Auth.MembershipRegistration.Form.QualificationData"),
   },
   {
-    id: "hostelDataInputs",
-    name: "hostelDataInputs",
+    id: "housing",
+    name: "housing",
     title: t("Auth.MembershipRegistration.Form.HostelData"),
   },
   {
-    id: "dependentsDataInputs",
-    name: "dependentsDataInputs",
+    id: "dependents",
+    name: "dependents",
     title: t("Auth.MembershipRegistration.Form.DependentsData"),
   },
   {
-    id: "attachmentInputs",
-    name: "attachmentInputs",
+    id: "nationalRecord",
+    name: "nationalRecord",
     title: t("Auth.MembershipRegistration.Form.Attachments"),
   },
 ];
 
 export const beneficiaryMapping: { [key: string]: string } = {
-  basicDataInputs: "",
-  contactDataInputs: "contactsBank",
-  qualificationDataInputs: "income",
-  hostelDataInputs: "housing",
-  dependentsDataInputs: "dependents",
-  attachmentInputs: "staff",
+  beneficiary: "",
+  contactsBank: "contactsBank",
+  income: "income",
+  housing: "housing",
+  dependents: "dependents",
+  nationalRecord: "staff",
 };

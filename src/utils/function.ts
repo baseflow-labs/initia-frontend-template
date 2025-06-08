@@ -13,6 +13,7 @@ export const statusColorRender = (status = "") => {
     case "Accept":
     case "Granted":
     case "Accepted":
+    case "Confirmed":
       return "success";
     case "In Preview":
     case "Pending":
