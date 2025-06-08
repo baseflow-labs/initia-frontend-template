@@ -55,8 +55,8 @@ const BeneficiaryFormReview = () => {
 
   useEffect(() => {
     BeneficiaryApi.getById(searchParams.get("id") || "")
-      .then((res) => {
-        setBeneficiary(res as any);
+      .then((res: any) => {
+        setBeneficiary(res);
 
         const emptyReview: ReviewProps[] = [];
 
@@ -69,6 +69,10 @@ const BeneficiaryFormReview = () => {
             });
           });
         });
+
+        DataReviewApi.getBeneficiaryDataReview(res.id)
+          .then((res: any) => setDataReview(res))
+          .catch(apiCatchGlobalHandler);
 
         setDataReview((current) =>
           [...emptyReview, ...current].reduce(
