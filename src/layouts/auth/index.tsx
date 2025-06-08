@@ -1,4 +1,13 @@
-import { faBezierCurve, faBoxOpen, faEdit, faGear, faHome, faInfoCircle, faUser, faUsers } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBezierCurve,
+  faBoxOpen,
+  faEdit,
+  faGear,
+  faHome,
+  faInfoCircle,
+  faUser,
+  faUsers,
+} from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes, useLocation } from "react-router";
 import { Fragment } from "react/jsx-runtime";
@@ -53,14 +62,14 @@ const AuthLayout = () => {
       icon: faUsers,
     },
     {
-      name: t("Auth.Visits.Title"),
+      name: t("Auth.Visits.Title") + " '" + "للباحثين" + "'",
       route: "/visits",
       view: <VisitsView />,
       showInNav: true,
       icon: faBezierCurve,
     },
     {
-      name: t("Auth.Visits.Visits"),
+      name: t("Auth.Visits.Visits") + " '" + "للمستفيدين" + "'",
       route: "/beneficiary/visits",
       view: <BeneficiariesVisitsView />,
       showInNav: true,
@@ -74,21 +83,21 @@ const AuthLayout = () => {
       icon: faBezierCurve,
     },
     {
-      name: t("Auth.Aids.Title"),
+      name: t("Auth.Aids.Title") + " '" + "للباحثين" + "'",
       route: "/aids",
       view: <AidsView />,
       showInNav: true,
       icon: faBoxOpen,
     },
     {
-      name: t("Auth.Aids.Beneficiary.Title"),
+      name: t("Auth.Aids.Beneficiary.Title") + " '" + "للمستفيدين" + "'",
       route: "/beneficiary/aids",
       view: <AidsBeneficiaryView />,
       showInNav: true,
       icon: faBoxOpen,
     },
     {
-      name: t("Auth.Beneficiary.Profile.Title"),
+      name: t("Auth.Beneficiary.Profile.Title") + " '" + "للمستفيدين" + "'",
       route: "/beneficiary/profile",
       view: <BeneficiaryOwnProfile />,
       showInNav: true,
