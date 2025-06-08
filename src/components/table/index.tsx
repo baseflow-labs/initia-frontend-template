@@ -51,6 +51,10 @@ export const dataRender = ({
   options,
   timestampFormat,
 }: Props) => {
+  if (!data) {
+    return "-";
+  }
+
   switch (type) {
     case "date":
       return moment(data)
