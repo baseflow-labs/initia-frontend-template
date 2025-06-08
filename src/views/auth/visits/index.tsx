@@ -1,4 +1,9 @@
-import { faCircle, faEdit, faXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircle,
+  faEdit,
+  faNewspaper,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useEffect, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -206,17 +211,6 @@ const VisitsView = () => {
       .catch(apiCatchGlobalHandler);
   };
 
-  const editData = (data: {}) => {
-    VisitApi.getById(data as string)
-      .then((res) => {
-        setCrudData(res);
-        console.log(res);
-
-        setOpenModal(true);
-      })
-      .catch(apiCatchGlobalHandler);
-  };
-
   const onCrudSuccess = (e: { beneficiary: "" }, action = "") => {
     onModalClose();
     getData();
@@ -249,6 +243,13 @@ const VisitsView = () => {
             spread: true,
             label: t("Auth.Visits.Report.AddReport"),
             onClick: (data: string) => navigate("/visits/report?id=" + data),
+          },
+          {
+            icon: faNewspaper,
+            spread: true,
+            label: t("Auth.Visits.Report.ViewReport"),
+            onClick: (data: string) =>
+              navigate("/visits/report/details/?id=" + data),
           },
           {
             icon: faXmark,

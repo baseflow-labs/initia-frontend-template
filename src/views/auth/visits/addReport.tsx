@@ -69,6 +69,7 @@ const VisitReportsView = () => {
     { value: "Bedroom", label: t("Auth.Visits.Report.Bedroom") },
     { value: "Kitchen", label: t("Auth.Visits.Report.Kitchen") },
   ];
+
   const contentTypes = [
     {
       value: "Device",
@@ -81,6 +82,7 @@ const VisitReportsView = () => {
       subList: [{ value: "Dining Table" }],
     },
   ];
+
   const roomContentStatuses = [
     {
       value: "Working",

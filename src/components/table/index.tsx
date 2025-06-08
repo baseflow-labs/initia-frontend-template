@@ -21,7 +21,7 @@ export interface TableProps {
   columns: {
     label: string;
     name: string;
-    render?: (row: {}) => string | React.ReactNode;
+    render?: (row: any) => string | React.ReactNode;
     type?: string;
     timestampFormat?: string;
     options?: { value: string; label?: string }[];
@@ -90,17 +90,15 @@ export const dataRender = ({
       );
     case "image":
       return (
-        <div className="d-flex">
-          <p>{}</p>
-          <FontAwesomeIcon
-            icon={faEye}
-            role="button"
-            onClick={() => console.log({ data })}
-          />
-        </div>
+        <FontAwesomeIcon
+          icon={faEye}
+          role="button"
+          onClick={() => console.log({ data })}
+        />
       );
     case "stars":
       const starsToDisplay = [1, 2, 3, 4, 5];
+
       return (
         <div className="d-flex">
           {starsToDisplay.map((i) => (

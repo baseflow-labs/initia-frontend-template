@@ -280,11 +280,9 @@
         "devicePhoto": "صورة الجهاز",
         "Devices": {
           "AC": "مكيف",
-          "notWorking": "لا يعمل",
           "Sofas": "كنب",
           "table": "طاولة",
-          "TV": "تلفاز",
-          "working": "يعمل"
+          "TV": "تلفاز"
         },
         "Furniture": {
           "Sofas": "كنب",

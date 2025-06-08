@@ -280,8 +280,7 @@
         "Devices": {
           "AC": "Auth.Visits.Detail.Devices.AC",
           "notWorking": "Auth.Visits.Detail.Devices.notWorking",
-          "TV": "Auth.Visits.Detail.Devices.TV",
-          "working": "Auth.Visits.Detail.Devices.working"
+          "TV": "Auth.Visits.Detail.Devices.TV"
         },
         "devicesNumber": "Auth.Visits.Detail.devicesNumber",
         "deviceStatus": "Auth.Visits.Detail.deviceStatus",
