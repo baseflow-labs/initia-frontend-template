@@ -124,13 +124,26 @@ const AidsView = () => {
     },
     {
       type: "date",
-      name: "applicationDate",
+      name: "createdAt",
       label: t("Global.Labels.ApplicationDate"),
     },
     {
       type: "date",
       name: "recaptionDate",
       label: t("Auth.Aids.RecaptionDate"),
+    },
+    {
+      type: "file",
+      name: "document",
+      label: t("Global.Form.Labels.SupportingDocument"),
+      required: false,
+      halfCol: true,
+    },
+    {
+      type: "textarea",
+      name: "note",
+      label: t("Auth.Aids.AidPurpose"),
+      required: true,
     },
     {
       type: "custom",
@@ -174,7 +187,7 @@ const AidsView = () => {
     },
     {
       type: "textarea",
-      name: "reason",
+      name: "note",
       label: t("Global.Form.Labels.Notes"),
       required: false,
     },
