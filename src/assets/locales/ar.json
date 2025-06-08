@@ -15,13 +15,16 @@
       "In-Kind": "عينية",
       "RecaptionDate": "تاريخ الاستلام",
       "Statuses": {
+        "Grant": "منح المعونة",
         "Granted": "اعتمدت",
-        "Pending": "قيد المراجعة"
+        "Pending": "قيد المراجعة",
+        "Reject": "رفض طلب المعونة"
       },
       "Title": "طلبات الإعانة"
     },
     "Beneficiaries": {
       "AddBeneficiary": "إضافة مستفيد",
+      "Beneficiary": "المستفيد",
       "BeneficiaryName": "اسم المستفيد",
       "Profile": {
         "ProfileCompletion": "استكمال طلب المستفيد",
@@ -29,6 +32,14 @@
         "Title": "ملف المستفيد"
       },
       "Title": "المستفيدون"
+    },
+    "Beneficiary": {
+      "Profile": {
+        "CurrentData": "البيانات الحالية",
+        "PleaseUpdateFollowingData": "يرجى تعبئة الحقول بالبيانات الصحيحة...",
+        "Title": "معلوماتي",
+        "YourProfile": "معلوماتك"
+      }
     },
     "ContactUs": {
       "Contact": "إذا كنت بحاجة لمساعدة أو أي استفسار فلا تترد في الاتصال بنا",
@@ -249,6 +260,15 @@
       "Title": "طلب الانتساب للجمعية"
     },
     "Settings": {
+      "FontSize": "حجم الخط للتطبيق",
+      "Samples": {
+        "H3Sample": "عينة عنوان رئيسيي",
+        "H4Sample": "عينة عنوان فرعي",
+        "H5Sample": "عينة روابط الصفحات",
+        "LabelSample": "عينة عنوان لحقل ادخال",
+        "SmallSample": " عينة ملاحظات",
+        "Title": "عينات"
+      },
       "Title": "الإعدادات"
     },
     "Visits": {
@@ -288,10 +308,34 @@
       },
       "EditVisit": "تعديل زيارة",
       "Report": {
-        "AddReport": "إجراء تقييم"
+        "AddContent": "إضافة محتوى",
+        "AddReport": "إجراء تقييم",
+        "AddRoom": "إضافة غرفة جديدة",
+        "Bedroom": "غرفة نوم",
+        "ContentType": "نوع {{type}}",
+        "ContentXType": "نوع المحتوى {{number}}",
+        "Contents": "المحتويات",
+        "ContentsCount": "عدد المحتويات",
+        "Device": "جهاز",
+        "Furniture": "قطعة أثاث",
+        "Kitchen": "مطبخ",
+        "NeedsMaintenance": "يحتاج لصيانة",
+        "NotWorking": "لا يعمل",
+        "RoomContentEvaluation": "تقييم {{type}}",
+        "RoomContentPhoto": "صورة {{type}}",
+        "RoomContentStatus": "حالة {{type}}",
+        "RoomRecommendations": "توصيات الغرفة",
+        "RoomXDetails": "تفاصيل الغرفة {{number}}",
+        "RoomXType": "نوع الغرفة رقم {{number}}",
+        "RoomsCount": "عدد الغرف",
+        "TheDevice": "الجهاز",
+        "TheFurniture": "قطعة الأثاث",
+        "Working": "يعمل"
       },
       "Statuses": {
+        "Approved": "تمت الموافقة",
         "Cancelled": "ألغيت الزيارة",
+        "Delayed": "تم طلب التأجيل",
         "Done": "تمت الزيارة",
         "Pending": "بانتظار الزيارة",
         "Status": "حالة الزيارة"
@@ -299,7 +343,8 @@
       "Title": "الزيارات الميدانية",
       "VisitDate": "تاريخ الزيارة",
       "VisitPurpose": "سبب الزيارة",
-      "VisitTime": "وقت الزيارة"
+      "VisitTime": "وقت الزيارة",
+      "Visits": "الزيارات"
     }
   },
   "Global": {
@@ -317,11 +362,13 @@
         "Previous": "السابق",
         "Record": "سجل",
         "Required": "هذا الحقل إلزامي",
+        "Save": "حفظ",
         "SaveContinue": "حفظ ومتابعة",
         "SaveData": "حفظ البيانات",
         "Submit": "إرسال",
         "SubmitApplication": "تقديم الطلب",
         "SupportingDocument": "وثائق مدعمة",
+        "Update": "التحديث",
         "UploadAttachment": "إضافة مرفق",
         "Yes": "نعم"
       },
@@ -331,8 +378,10 @@
       "Action": "إجراء",
       "ApplicationDate": "تاريخ التقديم",
       "Back": "عودة",
+      "Logout": "تسجيل الخروج",
       "Ok": "حسناً",
       "PhoneNumber": "رقم الجوال",
+      "Search": "بحث",
       "WrongUrl": "عذراً, العنوان المطلوب خاطئ"
     }
   },

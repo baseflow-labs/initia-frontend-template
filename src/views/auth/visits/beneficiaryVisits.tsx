@@ -1,5 +1,6 @@
 import { faCircle, faEdit, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { render } from "@testing-library/react";
 import { Fragment, useEffect, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
@@ -11,14 +12,18 @@ import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
-import { viewDayDateFormat } from "../../../utils/consts";
+import {
+  viewDateFormat,
+  viewDayDateFormat,
+  viewDayFormat,
+} from "../../../utils/consts";
 import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
 
-const VisitsView = () => {
+const BeneficiariesVisitsView = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -75,12 +80,20 @@ const VisitsView = () => {
     }
   }, [searchParams.get("id")]);
 
-  const title = t("Auth.Visits.Title");
+  const title = t("Auth.Visits.Visits");
 
   const statuses = [
     {
       value: "Pending",
       label: t("Auth.Visits.Statuses.Pending"),
+    },
+    {
+      value: "Approved",
+      label: t("Auth.Visits.Statuses.Approved"),
+    },
+    {
+      value: "Delayed",
+      label: t("Auth.Visits.Statuses.Delayed"),
     },
     {
       value: "Done",
@@ -101,31 +114,26 @@ const VisitsView = () => {
 
   const columns = [
     {
-      type: "text",
-      name: "fullName",
-      label: t("Auth.Beneficiaries.BeneficiaryName"),
+      type: "date",
+      name: "date",
+      timestampFormat: viewDayFormat,
+      label: t("Auth.Visits.VisitDate"),
     },
     {
       type: "date",
       name: "date",
-      timestampFormat: viewDayDateFormat,
+      timestampFormat: viewDateFormat,
       label: t("Auth.Visits.VisitDate"),
     },
+    // {
+    //   type: "time",
+    //   name: "time",
+    //   label: t("Auth.Visits.VisitTime"),
+    // },
     {
-      type: "time",
-      name: "time",
-      label: t("Auth.Visits.VisitTime"),
-    },
-    {
-      type: "phoneNumber",
-      name: "beneficiaryMobile",
-      label: t("Global.Labels.PhoneNumber"),
-    },
-    {
-      type: "custom",
-      name: "city",
-      label: t("Auth.MembershipRegistration.Address"),
-      render: (row: any) => row.city + " - " + row.district,
+      type: "text",
+      name: "reason",
+      label: t("Auth.Visits.VisitPurpose"),
     },
     {
       type: "custom",
@@ -144,6 +152,11 @@ const VisitsView = () => {
   ];
 
   const actionButtons = [
+    {
+      label: t("Auth.Visits.Report.AddReport"),
+      route: "/visits/report",
+      outline: true,
+    },
     {
       label: t("Auth.Visits.AddVisit"),
       onClick: () => setOpenModal(true),
@@ -190,7 +203,7 @@ const VisitsView = () => {
   };
 
   const cancelVisit = (data: string) => {
-    VisitApi.cancel(data)
+    VisitApi.cancel(typeof data === "string" ? data : "")
       .then((res) => {
         getData();
         dispatch(
@@ -237,25 +250,19 @@ const VisitsView = () => {
       <TablePage
         title={title}
         filters={filters}
-        tableActions={[
-          // {
-          //   icon: faEdit,
-          //   spread: true,
-          //   label: t("Global.Form.Labels.Edit"),
-          //   onClick: (data: string) => editData(data),
-          // },
-          {
-            icon: faEdit,
-            spread: true,
-            label: t("Auth.Visits.Report.AddReport"),
-            onClick: (data: string) => navigate("/visits/report?id=" + data),
-          },
-          {
-            icon: faXmark,
-            label: t("Auth.Visits.CancelVisit"),
-            onClick: (data: string) => cancelVisit(data),
-          },
-        ]}
+        // tableActions={[
+        //   // {
+        //   //   icon: faEdit,
+        //   //   spread: true,
+        //   //   label: t("Global.Form.Labels.Edit"),
+        //   //   onClick: (data: string) => editData(data),
+        //   // },
+        //   {
+        //     icon: faXmark,
+        //     label: t("Auth.Visits.CancelVisit"),
+        //     onClick: (data: string) => cancelVisit(data),
+        //   },
+        // ]}
         actionButtons={actionButtons}
         columns={columns}
         data={visits}
@@ -291,4 +298,4 @@ const VisitsView = () => {
   );
 };
 
-export default VisitsView;
+export default BeneficiariesVisitsView;

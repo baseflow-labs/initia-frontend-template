@@ -23,7 +23,7 @@ interface Props extends TableProps {
     label: string;
     icon: IconProp;
     spread?: boolean;
-    onClick: (data: string | object) => void;
+    onClick: (data: string) => void;
   }[];
 }
 

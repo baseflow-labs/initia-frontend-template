@@ -1,22 +1,30 @@
-import { faBell, faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { faBell, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import profilePhotoPlaceholder from "../../assets/images/profile-image-placeholder.png";
 import { logout } from "../../store/actions/auth";
 
 const DashboardNavbar = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white py-4 mt-2 me-4 ms-0 ps-0">
       <div className="container-fluid">
         <div className="collapse navbar-collapse">
           <form className="w-50">
-            <input
-              className="form-control w-100"
-              type="text"
-              placeholder="بحث"
-            />
+            <div className="input-group w-100">
+              <input
+                className="form-control"
+                type="text"
+                placeholder={t("Global.Labels.Search")}
+              />
+
+              <span className="input-group-text bg-transparent border-0">
+                <FontAwesomeIcon icon={faSearch} />
+              </span>
+            </div>
           </form>
         </div>
 
@@ -49,9 +57,9 @@ const DashboardNavbar = () => {
             </ul>
           </div>
 
-          <button className="btn btn-link position-relative">
+          {/* <button className="btn btn-link position-relative">
             <FontAwesomeIcon icon={faEnvelope} className="text-secondary" />
-          </button>
+          </button> */}
 
           <div className="dropdown">
             <button
@@ -72,26 +80,16 @@ const DashboardNavbar = () => {
               className="dropdown-menu dropdown-menu-end"
               aria-labelledby="avatarDropdown"
             >
-              <li>
-                <a className="dropdown-item" href="#">
-                  الملف الشخصي
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  الإعدادات
-                </a>
-              </li>
-              <li>
+              {/* <li>
                 <hr className="dropdown-divider" />
-              </li>
+              </li> */}
               <li>
                 <span
                   className="dropdown-item"
                   role="button"
                   onClick={() => dispatch(logout())}
                 >
-                  تسجيل الخروج
+                  {t("Global.Labels.Logout")}
                 </span>
               </li>
             </ul>

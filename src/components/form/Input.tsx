@@ -13,6 +13,7 @@ import SelectInput from "./inputs/select";
 import SelectManyInput from "./inputs/selectMany";
 import MultipleEntriesInput from "./inputs/multipleEntries";
 import TextareaInput from "./inputs/textarea";
+import RangeInput from "./inputs/range";
 
 type FinalInput = InputProps &
   React.InputHTMLAttributes<HTMLInputElement> &
@@ -32,6 +33,10 @@ const InputComp: React.FC<FinalInput> = ({ name, type, ...input }) => {
 
   if (type === "radio" && input.options) {
     return <RadioInput {...input} {...field} />;
+  }
+
+  if (type === "range") {
+    return <RangeInput {...input} {...field} />;
   }
 
   if (type === "phoneNumber") {

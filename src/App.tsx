@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { BrowserRouter, Route, Routes } from "react-router";
 
@@ -9,10 +9,18 @@ import { useAppSelector } from "./store/hooks";
 
 const App = () => {
   const { token } = useAppSelector((state) => state.auth);
+  const { fontSize } = useAppSelector((state) => state.settings);
   const { i18n } = useTranslation();
 
   document.documentElement.dir = i18n.dir();
   document.documentElement.lang = i18n.language;
+
+  useEffect(() => {
+    document.documentElement.style.setProperty(
+      "--base-font-size",
+      fontSize + "px"
+    );
+  }, [fontSize]);
 
   return (
     <BrowserRouter>

@@ -7,6 +7,30 @@
   --bs-info: #18b4bf !important;
   --bs-light: #f8f9fa !important;
   --bs-dark: #343a40 !important;
+  --base-font-size: 16px;
+}
+
+html {
+  font-size: var(--base-font-size); /* affects rem units */
+}
+
+.fs-1 {
+  font-size: 2.5rem !important;
+}
+.fs-2 {
+  font-size: 2rem !important;
+}
+.fs-3 {
+  font-size: 1.75rem !important;
+}
+.fs-4 {
+  font-size: 1.5rem !important;
+}
+.fs-5 {
+  font-size: 1.25rem !important;
+}
+.fs-6 {
+  font-size: 1rem !important;
 }
 
 body {

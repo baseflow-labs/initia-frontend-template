@@ -32,7 +32,7 @@ export interface TableProps {
     label: string;
     icon: IconProp;
     spread?: boolean;
-    onClick: (data: string | object) => void;
+    onClick: (data: string) => void;
   }[];
 }
 
@@ -53,6 +53,10 @@ export const dataRender = ({
   options,
   timestampFormat,
 }: Props) => {
+  if (!data) {
+    return "-";
+  }
+
   switch (type) {
     case "date":
       return moment(data)
@@ -202,7 +206,7 @@ const DynamicTable = ({ columns, data, onPageChange, actions }: TableProps) => {
                         // data-bs-custom-class="custom-tooltip"
                         // data-bs-title={label}
                         role="button"
-                        onClick={() => onClick(row?.id || row)}
+                        onClick={() => onClick(row?.id || "")}
                         key={y}
                       />
                     ))}
@@ -223,7 +227,7 @@ const DynamicTable = ({ columns, data, onPageChange, actions }: TableProps) => {
                           <li key={y}>
                             <button
                               className="dropdown-item"
-                              onClick={() => onClick(row.id || row)}
+                              onClick={() => onClick(row.id || "")}
                             >
                               <FontAwesomeIcon
                                 icon={icon}

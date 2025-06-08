@@ -29,13 +29,13 @@ const getAll = async () => {
   return res;
 };
 
-const getById = async (id: string) => {
-  const res = await api.get(mainPath + "/" + id);
+const create = async (data: object) => {
+  const res = await api.post(mainPath, { beneficiary: user.id, ...data });
   return res;
 };
 
-const create = async (data: object) => {
-  const res = await api.post(mainPath, { beneficiary: user.id, ...data });
+const updateStatus = async (id: string, status: string) => {
+  const res = await api.patch(mainPath + "/update-status/" + id, { status });
   return res;
 };
 
@@ -44,21 +44,4 @@ const grant = async (data: object) => {
   return res;
 };
 
-const getByUserId = async () => {
-  const res = await api.get(mainPath + "/by-user/" + user.id);
-  return res;
-};
-
-const createOrUpdate = async (data: Props) => {
-  return await api.post(
-    mainPath + "/create-update",
-    { user: user.id, ...data },
-    {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    }
-  );
-};
-
-export { create, createOrUpdate, getAll, getById, getByUserId, grant };
+export { updateStatus, create, getAll, grant };
