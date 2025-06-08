@@ -9,6 +9,7 @@ export const statusColorRender = (status = "") => {
     case "Cancelled":
     case "Cancel":
       return "danger";
+    case "Done":
     case "Accept":
     case "Granted":
     case "Accepted":
