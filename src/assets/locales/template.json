@@ -111,8 +111,8 @@
         "EducationLevel": {
           "Degree": "Degree",
           "Diploma": "Diploma",
-          "HigherDiploma": "Higher Diploma",
           "HighSchool": "High School",
+          "HigherDiploma": "Higher Diploma",
           "Illiterate": "Illiterate",
           "IntermediateSchool": "Intermediate School",
           "Literate": "Literate",
@@ -250,8 +250,8 @@
       },
       "Statuses": {
         "Accepted": "Accepted",
-        "Incomplete": "Incomplete",
         "InPreview": "In Preview",
+        "Incomplete": "Incomplete",
         "NeedHelp": "Need Help",
         "NewMember": "New Member",
         "Rejected": "Rejected",
@@ -275,30 +275,30 @@
       "AddVisit": "Add Visit",
       "CancelVisit": "Cancel Visit",
       "Detail": {
-        "device": "Auth.Visits.Detail.device",
-        "devicePhoto": "Auth.Visits.Detail.devicePhoto",
         "Devices": {
           "AC": "Auth.Visits.Detail.Devices.AC",
-          "notWorking": "Auth.Visits.Detail.Devices.notWorking",
-          "TV": "Auth.Visits.Detail.Devices.TV"
+          "TV": "Auth.Visits.Detail.Devices.TV",
+          "notWorking": "Auth.Visits.Detail.Devices.notWorking"
         },
-        "devicesNumber": "Auth.Visits.Detail.devicesNumber",
-        "deviceStatus": "Auth.Visits.Detail.deviceStatus",
-        "evaluation": "Auth.Visits.Detail.evaluation",
-        "furniture": "Auth.Visits.Detail.furniture",
         "Furniture": {
           "bed": "Auth.Visits.Detail.Furniture.bed",
           "sofas": "Auth.Visits.Detail.Furniture.sofas",
           "table": "Auth.Visits.Detail.Furniture.table"
         },
-        "furnitureNumber": "Auth.Visits.Detail.furnitureNumber",
-        "needRepair": "Auth.Visits.Detail.needRepair",
         "Room": {
+          "LivingRoom": "Auth.Visits.Detail.Room.LivingRoom",
           "bathroom": "Auth.Visits.Detail.Room.bathroom",
           "bedroom": "Auth.Visits.Detail.Room.bedroom",
-          "kitchen": "Auth.Visits.Detail.Room.kitchen",
-          "LivingRoom": "Auth.Visits.Detail.Room.LivingRoom"
+          "kitchen": "Auth.Visits.Detail.Room.kitchen"
         },
+        "device": "Auth.Visits.Detail.device",
+        "devicePhoto": "Auth.Visits.Detail.devicePhoto",
+        "deviceStatus": "Auth.Visits.Detail.deviceStatus",
+        "devicesNumber": "Auth.Visits.Detail.devicesNumber",
+        "evaluation": "Auth.Visits.Detail.evaluation",
+        "furniture": "Auth.Visits.Detail.furniture",
+        "furnitureNumber": "Auth.Visits.Detail.furnitureNumber",
+        "needRepair": "Auth.Visits.Detail.needRepair",
         "roomsNumber": "Auth.Visits.Detail.roomsNumber",
         "title": "Auth.Visits.Detail.title"
       },
@@ -376,6 +376,7 @@
       "ApplicationDate": "Application Date",
       "Back": "Back",
       "Logout": "Logout",
+      "NoData": "Sorry, No Available Data",
       "Ok": "Ok",
       "PhoneNumber": "Phone Number",
       "Search": "Search",

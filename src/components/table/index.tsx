@@ -28,6 +28,7 @@ export interface TableProps {
   }[];
   data: { id?: string }[];
   onPageChange: (page: number, size: number) => void;
+  noPagination?: boolean;
   actions?: {
     label: string;
     icon: IconProp;
@@ -117,7 +118,13 @@ export const dataRender = ({
   }
 };
 
-const DynamicTable = ({ columns, data, onPageChange, actions }: TableProps) => {
+const DynamicTable = ({
+  columns,
+  data,
+  onPageChange,
+  actions,
+  noPagination,
+}: TableProps) => {
   const { t } = useTranslation();
 
   const [pageSize, setPageSize] = useState(10);
@@ -166,6 +173,14 @@ const DynamicTable = ({ columns, data, onPageChange, actions }: TableProps) => {
       </thead>
 
       <tbody>
+        {data.length === 0 && (
+          <tr>
+            <td colSpan={columns.length + 2} className="text-center py-4">
+              {t("Global.Labels.NoData")}
+            </td>
+          </tr>
+        )}
+
         {data
           .filter(
             (_, i) =>
@@ -244,93 +259,95 @@ const DynamicTable = ({ columns, data, onPageChange, actions }: TableProps) => {
           ))}
       </tbody>
 
-      <tfoot>
-        <tr>
-          <th colSpan={columns.length + 1}>
-            <div className="d-flex">
-              <nav className="my-auto me-2">
-                <ul className="pagination">
-                  <li className="page-item my-auto">
-                    <button
-                      className="page-link"
-                      onClick={() => onPageNumberChange(pageNumber - 1)}
-                      disabled={pageNumber === 1}
-                    >
-                      <FontAwesomeIcon icon={faChevronRight} />
-                    </button>
-                  </li>
-
-                  {Array(pagesCount)
-                    .fill("")
-                    .map((_, i) => (
-                      <li className="page-item my-auto" key={i}>
-                        <button
-                          className={`page-link ${
-                            pageNumber === i + 1 ? "active" : ""
-                          }`}
-                          onClick={() => onPageNumberChange(i + 1)}
-                        >
-                          {i + 1}
-                        </button>
-                      </li>
-                    ))}
-
-                  <li className="page-item my-auto">
-                    <button
-                      className="page-link"
-                      onClick={() => onPageNumberChange(pageNumber + 1)}
-                      disabled={pageNumber === pagesCount}
-                    >
-                      <FontAwesomeIcon icon={faChevronLeft} />
-                    </button>
-                  </li>
-                </ul>
-              </nav>
-
-              <nav className="my-auto">
-                <ul className="pagination">
-                  <li className="page-item my-auto">
-                    <span className="page-link border-0 d-flex">
-                      <div className="my-auto">الصفحة رقم</div>
-
-                      <input
-                        value={pageNumber}
-                        className="form-control ms-1"
-                        style={{ width: "50px" }}
-                        type="number"
-                        min={1}
-                        max={pagesCount}
-                        onChange={(e) =>
-                          onPageNumberChange(parseInt(e.target.value))
-                        }
-                      />
-                    </span>
-                  </li>
-
-                  <li className="page-item my-auto">
-                    <span className="page-link border-0 d-flex">
-                      <div className="my-auto">حجم الصفحة</div>
-
-                      <select
-                        value={pageSize}
-                        className="form-control ms-1"
-                        onChange={(e) =>
-                          onPageSizeChange(parseInt(e.target.value))
-                        }
+      {!noPagination && (
+        <tfoot>
+          <tr>
+            <th colSpan={columns.length + 1}>
+              <div className="d-flex">
+                <nav className="my-auto me-2">
+                  <ul className="pagination">
+                    <li className="page-item my-auto">
+                      <button
+                        className="page-link"
+                        onClick={() => onPageNumberChange(pageNumber - 1)}
+                        disabled={pageNumber === 1}
                       >
-                        <option value={10}>10</option>
-                        <option value={20}>20</option>
-                        <option value={50}>50</option>
-                        <option value={100}>100</option>
-                      </select>
-                    </span>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-          </th>
-        </tr>
-      </tfoot>
+                        <FontAwesomeIcon icon={faChevronRight} />
+                      </button>
+                    </li>
+
+                    {Array(pagesCount)
+                      .fill("")
+                      .map((_, i) => (
+                        <li className="page-item my-auto" key={i}>
+                          <button
+                            className={`page-link ${
+                              pageNumber === i + 1 ? "active" : ""
+                            }`}
+                            onClick={() => onPageNumberChange(i + 1)}
+                          >
+                            {i + 1}
+                          </button>
+                        </li>
+                      ))}
+
+                    <li className="page-item my-auto">
+                      <button
+                        className="page-link"
+                        onClick={() => onPageNumberChange(pageNumber + 1)}
+                        disabled={pageNumber === pagesCount}
+                      >
+                        <FontAwesomeIcon icon={faChevronLeft} />
+                      </button>
+                    </li>
+                  </ul>
+                </nav>
+
+                <nav className="my-auto">
+                  <ul className="pagination">
+                    <li className="page-item my-auto">
+                      <span className="page-link border-0 d-flex">
+                        <div className="my-auto">الصفحة رقم</div>
+
+                        <input
+                          value={pageNumber}
+                          className="form-control ms-1"
+                          style={{ width: "50px" }}
+                          type="number"
+                          min={1}
+                          max={pagesCount}
+                          onChange={(e) =>
+                            onPageNumberChange(parseInt(e.target.value))
+                          }
+                        />
+                      </span>
+                    </li>
+
+                    <li className="page-item my-auto">
+                      <span className="page-link border-0 d-flex">
+                        <div className="my-auto">حجم الصفحة</div>
+
+                        <select
+                          value={pageSize}
+                          className="form-control ms-1"
+                          onChange={(e) =>
+                            onPageSizeChange(parseInt(e.target.value))
+                          }
+                        >
+                          <option value={10}>10</option>
+                          <option value={20}>20</option>
+                          <option value={50}>50</option>
+                          <option value={100}>100</option>
+                        </select>
+                      </span>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </th>
+          </tr>
+        </tfoot>
+      )}
     </table>
   );
 };

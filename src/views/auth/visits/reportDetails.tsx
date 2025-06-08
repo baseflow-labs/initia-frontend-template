@@ -90,13 +90,15 @@ const VisitDetailView = () => {
       type: "select",
       name: "content",
       options: contents,
-      label: t("Auth.Visits.Detail.device"),
+      label: t("Auth.Visits.Report.TheDevice"),
     },
     {
       type: "select",
       options: roomContentStatuses,
       name: "status",
-      label: t("Auth.Visits.Detail.deviceStatus"),
+      label: t("Auth.Visits.Report.RoomContentStatus", {
+        type: t("Auth.Visits.Report.TheDevice"),
+      }),
     },
     {
       type: "stars",
@@ -106,7 +108,9 @@ const VisitDetailView = () => {
     {
       type: "image",
       name: "photo",
-      label: t("Auth.Visits.Detail.devicePhoto"),
+      label: t("Auth.Visits.Report.RoomContentPhoto", {
+        type: t("Auth.Visits.Report.TheDevice"),
+      }),
     },
     {
       type: "custom",
@@ -127,13 +131,15 @@ const VisitDetailView = () => {
       type: "select",
       name: "content",
       options: contents,
-      label: t("Auth.Visits.Detail.furniture"),
+      label: t("Auth.Visits.Report.TheFurniture"),
     },
     {
       type: "select",
       options: roomContentStatuses,
       name: "status",
-      label: t("Auth.Visits.Detail.deviceStatus"),
+      label: t("Auth.Visits.Report.RoomContentStatus", {
+        type: t("Auth.Visits.Report.TheFurniture"),
+      }),
     },
     {
       type: "stars",
@@ -143,7 +149,9 @@ const VisitDetailView = () => {
     {
       type: "image",
       name: "photo",
-      label: t("Auth.Visits.Detail.devicePhoto"),
+      label: t("Auth.Visits.Report.RoomContentPhoto", {
+        type: t("Auth.Visits.Report.TheFurniture"),
+      }),
     },
     {
       type: "custom",
@@ -206,6 +214,7 @@ const VisitDetailView = () => {
               ({ type }) => type === "Device"
             )}
             onPageChange={() => {}}
+            noPagination
           />
 
           <DynamicTable
@@ -214,6 +223,7 @@ const VisitDetailView = () => {
               ({ type }) => type === "Furniture"
             )}
             onPageChange={() => {}}
+            noPagination
           />
         </div>
       ))}
