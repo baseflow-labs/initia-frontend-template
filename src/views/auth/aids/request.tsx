@@ -198,7 +198,7 @@ const AidsBeneficiaryView = () => {
           submitText={t("Global.Form.Labels.SubmitApplication")}
           onFormSubmit={(e) => {
             AidApi.create(e)
-              .then((res) => {
+              .then(() => {
                 setOpenModal(false);
                 getData();
                 dispatch(

@@ -202,7 +202,7 @@ const BeneficiariesVisitsView = () => {
     }
   };
 
-  const cancelVisit = (data: string | object) => {
+  const cancelVisit = (data: string) => {
     VisitApi.cancel(typeof data === "string" ? data : "")
       .then((res) => {
         getData();
@@ -255,12 +255,12 @@ const BeneficiariesVisitsView = () => {
         //   //   icon: faEdit,
         //   //   spread: true,
         //   //   label: t("Global.Form.Labels.Edit"),
-        //   //   onClick: (data: string | object) => editData(data),
+        //   //   onClick: (data: string) => editData(data),
         //   // },
         //   {
         //     icon: faXmark,
         //     label: t("Auth.Visits.CancelVisit"),
-        //     onClick: (data: string | object) => cancelVisit(data),
+        //     onClick: (data: string) => cancelVisit(data),
         //   },
         // ]}
         actionButtons={actionButtons}

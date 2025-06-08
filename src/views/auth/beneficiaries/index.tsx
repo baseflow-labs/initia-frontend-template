@@ -242,15 +242,15 @@ const BeneficiariesView = () => {
     },
   ];
 
-  const completeProfile = (data: string | object) => {
+  const completeProfile = (data: string) => {
     navigate(`/apply/?id=${data}`);
   };
 
-  const viewProfile = (data: string | object) => {
+  const viewProfile = (data: string) => {
     navigate(`/beneficiaries/profile/?id=${data}`);
   };
 
-  const scheduleVisit = (data: string | object) => {
+  const scheduleVisit = (data: string) => {
     navigate(`/visits/?id=${data}`);
   };
 
@@ -266,17 +266,17 @@ const BeneficiariesView = () => {
           icon: faCalendarDays,
           spread: true,
           label: t("Auth.Visits.AddVisit"),
-          onClick: (data: string | object) => scheduleVisit(data),
+          onClick: (data: string) => scheduleVisit(data),
         },
         {
           icon: faEdit,
           label: t("Auth.Beneficiaries.Profile.ProfileCompletion"),
-          onClick: (data: string | object) => completeProfile(data),
+          onClick: (data: string) => completeProfile(data),
         },
         {
           icon: faUser,
           label: t("Auth.Beneficiaries.Profile.ProfileDetails"),
-          onClick: (data: string | object) => viewProfile(data),
+          onClick: (data: string) => viewProfile(data),
         },
       ]}
       onPageChange={(i = 0, x = 0) => console.log(i, x)}

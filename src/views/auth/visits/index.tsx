@@ -189,8 +189,8 @@ const VisitsView = () => {
     }
   };
 
-  const cancelVisit = (data: string | object) => {
-    VisitApi.cancel(typeof data === "string" ? data : "")
+  const cancelVisit = (data: string) => {
+    VisitApi.cancel(data)
       .then((res) => {
         getData();
         dispatch(
@@ -242,19 +242,18 @@ const VisitsView = () => {
           //   icon: faEdit,
           //   spread: true,
           //   label: t("Global.Form.Labels.Edit"),
-          //   onClick: (data: string | object) => editData(data),
+          //   onClick: (data: string) => editData(data),
           // },
           {
             icon: faEdit,
             spread: true,
             label: t("Auth.Visits.Report.AddReport"),
-            onClick: (data: string | object) =>
-              navigate("/visits/report?id=" + data),
+            onClick: (data: string) => navigate("/visits/report?id=" + data),
           },
           {
             icon: faXmark,
             label: t("Auth.Visits.CancelVisit"),
-            onClick: (data: string | object) => cancelVisit(data),
+            onClick: (data: string) => cancelVisit(data),
           },
         ]}
         actionButtons={actionButtons}
