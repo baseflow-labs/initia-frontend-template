@@ -99,7 +99,7 @@ const AidsBeneficiaryView = () => {
     },
     {
       type: "date",
-      name: "applicationDate",
+      name: "createdAt",
       label: t("Global.Labels.ApplicationDate"),
     },
     {
@@ -108,9 +108,17 @@ const AidsBeneficiaryView = () => {
       label: t("Auth.Aids.RecaptionDate"),
     },
     {
-      type: "date",
-      name: "recaptionDate",
-      label: t("Auth.Aids.Beneficiary.RequestDetails"),
+      type: "file",
+      name: "document",
+      label: t("Global.Form.Labels.SupportingDocument"),
+      required: false,
+      halfCol: true,
+    },
+    {
+      type: "textarea",
+      name: "note",
+      label: t("Auth.Aids.AidPurpose"),
+      required: true,
     },
     {
       type: "custom",
@@ -162,7 +170,7 @@ const AidsBeneficiaryView = () => {
     },
     {
       type: "textarea",
-      name: "reason",
+      name: "note",
       label: t("Auth.Aids.AidPurpose"),
       required: true,
     },
@@ -190,7 +198,7 @@ const AidsBeneficiaryView = () => {
           submitText={t("Global.Form.Labels.SubmitApplication")}
           onFormSubmit={(e) => {
             AidApi.create(e)
-              .then((res) => {
+              .then(() => {
                 setOpenModal(false);
                 getData();
                 dispatch(

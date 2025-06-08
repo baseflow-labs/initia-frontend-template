@@ -1,10 +1,13 @@
 import { combineReducers, createStore } from "redux";
-import notifications from "./reducers/notifications";
-import loading from "./reducers/loading";
+
 import auth from "./reducers/auth";
+import loading from "./reducers/loading";
+import notifications from "./reducers/notifications";
+import settings from "./reducers/settings";
 
 const rootReducer = combineReducers({
   notifications,
+  settings,
   loading,
   auth,
 });

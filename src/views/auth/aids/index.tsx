@@ -1,4 +1,4 @@
-import { faCircle } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faCircle, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -19,7 +19,7 @@ import {
 const AidsView = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const [aids, setAids] = useState([{}]);
+  const [aids, setAids] = useState([{ id: "", beneficiaryId: "" }]);
   const [openModal, setOpenModal] = useState(false);
   const [selectOptions, setSelectOptions] = useState({
     beneficiaries: [{ id: "", fullName: "" }],
@@ -29,11 +29,14 @@ const AidsView = () => {
     AidApi.getAll()
       .then((res) => {
         setAids(
-          (res as any).map(({ beneficiary = {}, status = {}, ...rest }) => ({
-            ...beneficiary,
-            ...status,
-            ...rest,
-          })) as any
+          (res as any).map(
+            ({ beneficiary = { id: "" }, status = {}, ...rest }) => ({
+              ...beneficiary,
+              beneficiaryId: beneficiary.id,
+              ...status,
+              ...rest,
+            })
+          ) as any
         );
       })
       .catch(apiCatchGlobalHandler);
@@ -124,13 +127,26 @@ const AidsView = () => {
     },
     {
       type: "date",
-      name: "applicationDate",
+      name: "createdAt",
       label: t("Global.Labels.ApplicationDate"),
     },
     {
       type: "date",
       name: "recaptionDate",
       label: t("Auth.Aids.RecaptionDate"),
+    },
+    {
+      type: "file",
+      name: "document",
+      label: t("Global.Form.Labels.SupportingDocument"),
+      required: false,
+      halfCol: true,
+    },
+    {
+      type: "textarea",
+      name: "note",
+      label: t("Auth.Aids.AidPurpose"),
+      required: true,
     },
     {
       type: "custom",
@@ -174,11 +190,33 @@ const AidsView = () => {
     },
     {
       type: "textarea",
-      name: "reason",
+      name: "note",
       label: t("Global.Form.Labels.Notes"),
       required: false,
     },
   ];
+
+  const updateStatus = (id: string, status: string) => {
+    AidApi.updateStatus(id, status)
+      .then(() => {
+        const aid = aids.find((aid) => aid.id === id);
+        getData();
+        dispatch(
+          addNotification({
+            msg: t("Global.Form.SuccessMsg", {
+              action:
+                status === "Granted"
+                  ? t("Auth.Aids.Statuses.Grant")
+                  : t("Auth.Aids.Statuses.Reject"),
+              data: selectOptions.beneficiaries.find(
+                ({ id }) => id === aid?.beneficiaryId
+              )?.fullName,
+            }),
+          })
+        );
+      })
+      .catch(apiCatchGlobalHandler);
+  };
 
   return (
     <Fragment>
@@ -186,6 +224,18 @@ const AidsView = () => {
         title={title}
         filters={filters}
         actionButtons={actionButtons}
+        tableActions={[
+          {
+            label: t("Auth.Aids.Statuses.Grant"),
+            icon: faCheck,
+            onClick: (data: string) => updateStatus(data, "Granted"),
+          },
+          {
+            label: t("Auth.Aids.Statuses.Reject"),
+            icon: faXmark,
+            onClick: (data: string) => updateStatus(data, "Rejected"),
+          },
+        ]}
         columns={columns}
         data={aids}
         onPageChange={(i = 0, x = 0) => console.log(i, x)}

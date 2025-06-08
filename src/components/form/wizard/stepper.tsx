@@ -68,7 +68,7 @@ const WizardFormStepper = ({ steps, currentStep, setCurrentStep }: Props) => {
           </div>
         )}
 
-        <div className="bs-stepper-content border border-gray rounded-5 py-5 px-5 mt-5">
+        <div className="bs-stepper-content border border-gray rounded-5 p-5 mt-5">
           {steps[currentStep]?.contents}
         </div>
       </div>

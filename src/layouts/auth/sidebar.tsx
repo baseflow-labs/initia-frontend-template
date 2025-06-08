@@ -30,7 +30,7 @@ const Sidebar = ({ routes = [{ name: "", route: "", icon: faHome }] }) => {
     >
       <span
         className="navbar-brand p-3 mb-5 px-4"
-        onClick={() => navigate("/")}
+        onClick={() => navigate("/dashboard")}
         role="button"
       >
         <img src={Logo} style={{ height: "75px" }} />
@@ -43,7 +43,9 @@ const Sidebar = ({ routes = [{ name: "", route: "", icon: faHome }] }) => {
               onClick={() => navigate(route)}
               role="button"
               className={`p-2 rounded-3 ${
-                location.pathname === route ? "bg-info text-white" : "text-dark"
+                location.pathname.includes(route)
+                  ? "bg-info text-white"
+                  : "text-dark"
               }`}
             >
               <FontAwesomeIcon icon={icon} className="me-2" />
@@ -62,7 +64,9 @@ const Sidebar = ({ routes = [{ name: "", route: "", icon: faHome }] }) => {
               onClick={() => navigate(route)}
               role="button"
               className={`p-2 rounded-3 ${
-                location.pathname === route ? "bg-info text-white" : "text-dark"
+                location.pathname.includes(route)
+                  ? "bg-info text-white"
+                  : "text-dark"
               }`}
             >
               <FontAwesomeIcon icon={icon} className="me-2" />

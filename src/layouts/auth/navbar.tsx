@@ -1,23 +1,26 @@
 import { faBell, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
+
 import Logo from "../../assets/images/brand/logo-full.png";
 import profilePhotoPlaceholder from "../../assets/images/profile-image-placeholder.png";
-import { useDispatch } from "react-redux";
 import { logout } from "../../store/actions/auth";
-import { useNavigate } from "react-router";
-import { useTranslation } from "react-i18next";
+import { useAppSelector } from "../../store/hooks";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { logo } = useAppSelector((state) => state.settings);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white px-4 py-4">
       <div className="container-fluid">
         <span
           className="navbar-brand"
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/dashboard")}
           role="button"
         >
           <img src={Logo} style={{ height: "50px" }} />
@@ -29,7 +32,7 @@ const Navbar = () => {
               <span
                 className="nav-link active"
                 role="button"
-                onClick={() => navigate("/")}
+                onClick={() => navigate("/dashboard")}
               >
                 {t("Auth.Dashboard.Main")}
               </span>
@@ -76,9 +79,9 @@ const Navbar = () => {
             </ul>
           </div>
 
-          <button className="btn btn-link position-relative">
+          {/* <button className="btn btn-link position-relative">
             <FontAwesomeIcon icon={faEnvelope} className="text-secondary" />
-          </button>
+          </button> */}
 
           <div className="dropdown">
             <button
@@ -88,7 +91,7 @@ const Navbar = () => {
               aria-expanded="false"
             >
               <img
-                src={profilePhotoPlaceholder}
+                src={logo || profilePhotoPlaceholder}
                 alt="avatar"
                 className="rounded-circle"
                 width="30"
@@ -99,26 +102,16 @@ const Navbar = () => {
               className="dropdown-menu dropdown-menu-end"
               aria-labelledby="avatarDropdown"
             >
-              <li>
-                <a className="dropdown-item" href="#">
-                  الملف الشخصي
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  الإعدادات
-                </a>
-              </li>
-              <li>
+              {/* <li>
                 <hr className="dropdown-divider" />
-              </li>
+              </li> */}
               <li>
                 <span
                   className="dropdown-item"
                   role="button"
                   onClick={() => dispatch(logout())}
                 >
-                  تسجيل الخروج
+                  {t("Global.Labels.Logout")}
                 </span>
               </li>
             </ul>

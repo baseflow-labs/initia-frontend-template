@@ -4,18 +4,15 @@ import { commonInputClasses } from "../../../utils/consts";
 
 type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 
-const DefaultInput: React.FC<FinalInput> = ({
-  className,
-  sizing = "sm",
-  ...input
-}) => {
+const RangeInput: React.FC<FinalInput> = (input) => {
   return (
     <input
       {...input}
+      type="range"
       placeholder={input.placeholder || input.label}
-      className={`form-control form-control-${sizing} ${commonInputClasses} ${className}`}
+      className={`w-100 form-range ${commonInputClasses}`}
     />
   );
 };
 
-export default DefaultInput;
+export default RangeInput;
