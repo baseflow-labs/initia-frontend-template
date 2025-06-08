@@ -216,10 +216,10 @@ const DynamicTable = ({
                     .map(({ icon, label, onClick }, y) => (
                       <FontAwesomeIcon
                         icon={icon}
-                        // data-bs-toggle="tooltip"
-                        // data-bs-placement="top"
-                        // data-bs-custom-class="custom-tooltip"
-                        // data-bs-title={label}
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="top"
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title={label}
                         role="button"
                         className="me-1"
                         onClick={() => onClick(row?.id || "")}

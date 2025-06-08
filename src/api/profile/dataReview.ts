@@ -6,4 +6,8 @@ const getNonUpdatedDataReview = async (id: string) => {
   return await api.get(mainPath + "/by-user/" + id);
 };
 
-export { getNonUpdatedDataReview };
+const submitReview = async (id: string, data: object) => {
+  return await api.post(mainPath + "/reviews/" + id, data);
+};
+
+export { getNonUpdatedDataReview, submitReview };

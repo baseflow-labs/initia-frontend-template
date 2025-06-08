@@ -27,6 +27,7 @@
       "Beneficiary": "Beneficiary",
       "BeneficiaryName": "Beneficiary Name",
       "Profile": {
+        "ConfirmData": "Confirm Data",
         "ProfileCompletion": "Profile Completion",
         "ProfileDetails": "Profile Details",
         "ProfileReview": "Membership Form Review",

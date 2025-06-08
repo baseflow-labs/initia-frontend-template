@@ -7,7 +7,8 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useSearchParams } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
+import * as DataReviewApi from "../../../api/profile/dataReview";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
@@ -23,6 +24,9 @@ import {
   beneficiaryTabs,
   inputsData,
 } from "../../../utils/inputsData";
+import Button from "../../../components/core/button";
+import { useDispatch } from "react-redux";
+import { addNotification } from "../../../store/actions/notifications";
 
 interface ReviewProps {
   property?: string;
@@ -37,6 +41,8 @@ interface ReviewProps {
 
 const BeneficiaryFormReview = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
 
   const [beneficiary, setBeneficiary] = useState<any>();
@@ -173,11 +179,41 @@ const BeneficiaryFormReview = () => {
       };
     });
 
+  const onSubmit = () => {
+    DataReviewApi.submitReview(
+      beneficiary.id,
+      dataReview.filter((row) => row.new)
+    )
+      .then(() => {
+        dispatch(
+          addNotification({
+            msg: t("Global.Form.SuccessMsg", {
+              action: t("Auth.Beneficiaries.Profile.ProfileReview"),
+              data: beneficiary.fullName,
+            }),
+          })
+        );
+
+        navigate("/beneficiaries");
+      })
+      .catch(apiCatchGlobalHandler);
+  };
+
   return (
     <Fragment>
-      <h2 className="text-dark fs-5 fw-semibold font-family-Cairo m-0 px-3 py-2">
-        {title}
-      </h2>
+      <div className="row">
+        <div className="col-md-9">
+          <h2 className="text-dark fs-5 fw-semibold font-family-Cairo m-0 px-3 py-2">
+            {title}
+          </h2>
+        </div>
+
+        <div className="col-md-3">
+          <Button className="float-end" onClick={() => onSubmit()}>
+            {t("Global.Form.Labels.SaveData")}
+          </Button>
+        </div>
+      </div>
 
       <TabsHeader
         tabs={beneficiaryTabs(t)}
