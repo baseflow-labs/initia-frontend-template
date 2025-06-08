@@ -1,22 +1,47 @@
-export interface NotificationsState {
+export interface State {
   fontSize: number;
+  name: string;
+  logo: string;
+  phoneNumber: string;
 }
 
-export type NotificationsAction = { type: "setFontSize"; size: number };
+export type Action =
+  | { type: "setFontSize"; size: number }
+  | {
+      type: "setMetadata";
+      data: {
+        name: string;
+        logo: string;
+        phoneNumber: string;
+      };
+    };
 
-const initialState: NotificationsState = {
+const initialState: State = {
   fontSize: parseInt(localStorage.getItem("fontSize") || "") || 15,
+  name: localStorage.getItem("name") || "",
+  logo: localStorage.getItem("logo") || "",
+  phoneNumber: localStorage.getItem("phoneNumber") || "",
 };
 
-const notifications = (
-  state: NotificationsState = initialState,
-  action: NotificationsAction
-): NotificationsState => {
+const settings = (state: State = initialState, action: Action): State => {
   switch (action.type) {
     case "setFontSize":
       localStorage.setItem("fontSize", String(action.size));
       return {
+        ...state,
         fontSize: action.size,
+      };
+
+    case "setMetadata":
+      const { name, logo, phoneNumber } = action.data;
+
+      name && localStorage.setItem("name", String(name));
+      logo && localStorage.setItem("logo", String(logo));
+      phoneNumber && localStorage.setItem("phoneNumber", String(phoneNumber));
+
+      return {
+        ...action.data,
+        ...state,
       };
 
     default:
@@ -24,4 +49,4 @@ const notifications = (
   }
 };
 
-export default notifications;
+export default settings;

@@ -1,4 +1,3 @@
-import * as bootstrap from "bootstrap";
 import { useEffect, useRef } from "react";
 import { Fragment } from "react/jsx-runtime";
 

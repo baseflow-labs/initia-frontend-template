@@ -7,11 +7,13 @@ import { useNavigate } from "react-router";
 import Logo from "../../assets/images/brand/logo-full.png";
 import profilePhotoPlaceholder from "../../assets/images/profile-image-placeholder.png";
 import { logout } from "../../store/actions/auth";
+import { useAppSelector } from "../../store/hooks";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { logo } = useAppSelector((state) => state.settings);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white px-4 py-4">
@@ -89,7 +91,7 @@ const Navbar = () => {
               aria-expanded="false"
             >
               <img
-                src={profilePhotoPlaceholder}
+                src={logo || profilePhotoPlaceholder}
                 alt="avatar"
                 className="rounded-circle"
                 width="30"

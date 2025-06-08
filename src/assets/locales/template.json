@@ -27,8 +27,14 @@
       "Beneficiary": "Beneficiary",
       "BeneficiaryName": "Beneficiary Name",
       "Profile": {
+        "ConfirmData": "Confirm Data",
         "ProfileCompletion": "Profile Completion",
         "ProfileDetails": "Profile Details",
+        "ProfileReview": "Membership Form Review",
+        "Statuses": {
+          "Confirmed": "Confirmed",
+          "NeedUpdate": "Need Update"
+        },
         "Title": "Profile"
       },
       "Title": "Beneficiaries"
@@ -269,6 +275,9 @@
         "SmallSample": "Notes Sample",
         "Title": "Samples"
       },
+      "SocietyLogo": "SocietyLogo",
+      "SocietyName": "SocietyName",
+      "SocietyPhoneNumber": "SocietyPhoneNumber",
       "Title": "Settings"
     },
     "Visits": {

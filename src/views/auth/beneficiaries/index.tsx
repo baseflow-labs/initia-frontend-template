@@ -2,6 +2,7 @@ import {
   faCalendarDays,
   faCircle,
   faEdit,
+  faSearch,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -250,6 +251,10 @@ const BeneficiariesView = () => {
     navigate(`/beneficiaries/profile/?id=${data}`);
   };
 
+  const reviewProfile = (data: string) => {
+    navigate(`/beneficiaries/review/?id=${data}`);
+  };
+
   const scheduleVisit = (data: string) => {
     navigate(`/visits/?id=${data}`);
   };
@@ -267,6 +272,11 @@ const BeneficiariesView = () => {
           spread: true,
           label: t("Auth.Visits.AddVisit"),
           onClick: (data: string) => scheduleVisit(data),
+        },
+        {
+          icon: faSearch,
+          label: t("Auth.Beneficiaries.Profile.ProfileReview"),
+          onClick: (data: string) => reviewProfile(data),
         },
         {
           icon: faEdit,

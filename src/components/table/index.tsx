@@ -18,6 +18,7 @@ import "moment/locale/ar";
 import { splitOverNumberPlusLeftover } from "../../utils/function";
 
 export interface TableProps {
+  size?: number;
   columns: {
     label: string;
     name: string;
@@ -123,11 +124,12 @@ const DynamicTable = ({
   data,
   onPageChange,
   actions,
+  size = 10,
   noPagination,
 }: TableProps) => {
   const { t } = useTranslation();
 
-  const [pageSize, setPageSize] = useState(10);
+  const [pageSize, setPageSize] = useState(size);
 
   const calculatePageCount = () =>
     splitOverNumberPlusLeftover(data.length, pageSize);
@@ -214,10 +216,10 @@ const DynamicTable = ({
                     .map(({ icon, label, onClick }, y) => (
                       <FontAwesomeIcon
                         icon={icon}
-                        // data-bs-toggle="tooltip"
-                        // data-bs-placement="top"
-                        // data-bs-custom-class="custom-tooltip"
-                        // data-bs-title={label}
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="top"
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title={label}
                         role="button"
                         className="me-1"
                         onClick={() => onClick(row?.id || "")}
@@ -225,34 +227,38 @@ const DynamicTable = ({
                       />
                     ))}
 
-                  <div className="dropdown">
-                    <FontAwesomeIcon
-                      icon={faEllipsisVertical}
-                      className="dropdown-toggle"
-                      role="button"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    />
+                  {actions.filter(({ spread }) => !spread).length ? (
+                    <div className="dropdown">
+                      <FontAwesomeIcon
+                        icon={faEllipsisVertical}
+                        className="dropdown-toggle ms-1"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      />
 
-                    <ul className="dropdown-menu">
-                      {actions
-                        .filter(({ spread }) => !spread)
-                        .map(({ icon, label, onClick }, y) => (
-                          <li key={y}>
-                            <button
-                              className="dropdown-item"
-                              onClick={() => onClick(row.id || "")}
-                            >
-                              <FontAwesomeIcon
-                                icon={icon}
-                                className="text-info"
-                              />{" "}
-                              {label}
-                            </button>
-                          </li>
-                        ))}
-                    </ul>
-                  </div>
+                      <ul className="dropdown-menu">
+                        {actions
+                          .filter(({ spread }) => !spread)
+                          .map(({ icon, label, onClick }, y) => (
+                            <li key={y}>
+                              <button
+                                className="dropdown-item"
+                                onClick={() => onClick(row.id || "")}
+                              >
+                                <FontAwesomeIcon
+                                  icon={icon}
+                                  className="text-info"
+                                />{" "}
+                                {label}
+                              </button>
+                            </li>
+                          ))}
+                      </ul>
+                    </div>
+                  ) : (
+                    <span className="text-white">-</span>
+                  )}
                 </td>
               )}
             </tr>

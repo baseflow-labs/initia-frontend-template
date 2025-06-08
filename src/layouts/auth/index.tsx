@@ -17,14 +17,15 @@ import AidsBeneficiaryView from "../../views/auth/aids/request";
 import BeneficiariesView from "../../views/auth/beneficiaries";
 import BeneficiaryOwnProfile from "../../views/auth/beneficiaries/beneficiaryProfile";
 import BeneficiaryProfileView from "../../views/auth/beneficiaries/profile";
+import BeneficiaryFormReview from "../../views/auth/beneficiaries/review";
 import ContactUsPage from "../../views/auth/contact-us";
 import DashboardView from "../../views/auth/dashboard";
 import MembershipRegistrationView from "../../views/auth/membershipRegistration";
 import SettingsPage from "../../views/auth/settings";
 import VisitsView from "../../views/auth/visits";
+import VisitReportsView from "../../views/auth/visits/addReport";
 import BeneficiariesVisitsView from "../../views/auth/visits/beneficiaryVisits";
 import VisitDetailView from "../../views/auth/visits/reportDetails";
-import VisitReportsView from "../../views/auth/visits/addReport";
 import DashboardNavbar from "./dashboardNavbar";
 import Navbar from "./navbar";
 import Sidebar from "./sidebar";
@@ -53,6 +54,12 @@ const AuthLayout = () => {
       route: "/beneficiaries",
       view: <BeneficiariesView />,
       showInNav: true,
+      icon: faUsers,
+    },
+    {
+      name: t("Auth.Beneficiaries.Profile.Title"),
+      route: "/beneficiaries/review/",
+      view: <BeneficiaryFormReview />,
       icon: faUsers,
     },
     {

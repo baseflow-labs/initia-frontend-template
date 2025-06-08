@@ -1,14 +1,38 @@
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
+
+import * as MetadataApi from "../../../api/metadata";
 import Form from "../../../components/form";
-import { setFontSize } from "../../../store/actions/settings";
-import { useAppSelector } from "../../../store/hooks";
 import { addNotification } from "../../../store/actions/notifications";
+import { setFontSize, setMetadata } from "../../../store/actions/settings";
+import { useAppSelector } from "../../../store/hooks";
+import { apiCatchGlobalHandler } from "../../../utils/function";
 
 const SettingsPage = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { fontSize } = useAppSelector((state) => state.settings);
+  const { fontSize, ...metadata } = useAppSelector((state) => state.settings);
+
+  const onMetadataSubmit = (values = {}) => {
+    const data = Object.keys(values)
+      .filter((key) => (values as any)[key])
+      .reduce((final, key) => ({ ...final, [key]: (values as any)[key] }), {});
+
+    MetadataApi.update(data)
+      .then(() => {
+        dispatch(setMetadata(data as any));
+
+        dispatch(
+          addNotification({
+            msg: t("Global.Form.SuccessMsg", {
+              action: t("Global.Form.Labels.Update"),
+              data: t("Auth.Settings.Title"),
+            }),
+          })
+        );
+      })
+      .catch(apiCatchGlobalHandler);
+  };
 
   const inputs = () => [
     {
@@ -18,6 +42,21 @@ const SettingsPage = () => {
       max: 25,
       label: t("Auth.Settings.FontSize"),
       defaultValue: 15,
+    },
+    {
+      type: "text",
+      name: "name",
+      label: t("Auth.Settings.SocietyName"),
+    },
+    {
+      type: "file",
+      name: "logo",
+      label: t("Auth.Settings.SocietyLogo"),
+    },
+    {
+      type: "phoneNumber",
+      name: "phoneNumber",
+      label: t("Auth.Settings.SocietyPhoneNumber"),
     },
   ];
 
@@ -29,9 +68,11 @@ const SettingsPage = () => {
         inputs={inputs}
         initialValues={{
           fontSize: fontSize,
+          ...metadata,
         }}
         submitText={t("Global.Form.Labels.Save")}
         onFormSubmit={(values) => {
+          onMetadataSubmit(values);
           dispatch(setFontSize(values.fontSize));
           dispatch(
             addNotification({
