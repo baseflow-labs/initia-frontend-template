@@ -283,6 +283,9 @@
         "SmallSample": " عينة ملاحظات",
         "Title": "عينات"
       },
+      "SocietyLogo": "شعار الجمعية",
+      "SocietyName": "اسم الجمعية",
+      "SocietyPhoneNumber": "رقم الهاتف للجمعية",
       "Title": "الإعدادات"
     },
     "Visits": {

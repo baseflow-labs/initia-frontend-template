@@ -4,10 +4,12 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import profilePhotoPlaceholder from "../../assets/images/profile-image-placeholder.png";
 import { logout } from "../../store/actions/auth";
+import { useAppSelector } from "../../store/hooks";
 
 const DashboardNavbar = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const { logo } = useAppSelector((state) => state.settings);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white py-4 mt-2 me-4 ms-0 ps-0">
@@ -69,7 +71,7 @@ const DashboardNavbar = () => {
               aria-expanded="false"
             >
               <img
-                src={profilePhotoPlaceholder}
+                src={logo || profilePhotoPlaceholder}
                 alt="avatar"
                 className="rounded-circle"
                 width="30"
