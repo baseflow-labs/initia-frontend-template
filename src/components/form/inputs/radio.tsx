@@ -5,7 +5,12 @@ import { InputProps } from "..";
 type FinalInput = InputProps &
   React.InputHTMLAttributes<HTMLInputElement> & { row?: boolean };
 
-const RadioInput: React.FC<FinalInput> = ({ type, options, row, ...input }) => {
+const RadioInput: React.FC<FinalInput> = ({
+  type,
+  options,
+  row = true,
+  ...input
+}) => {
   return (
     <Fragment>
       <span className={row ? "d-flex" : undefined}>

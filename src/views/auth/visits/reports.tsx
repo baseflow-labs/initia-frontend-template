@@ -7,6 +7,8 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { useNavigate, useSearchParams } from "react-router";
 
 import * as VisitReportsApi from "../../../api/visits/reports";
 import Button from "../../../components/core/button";
@@ -15,14 +17,12 @@ import DefaultInput from "../../../components/form/inputs/default";
 import RadioInput from "../../../components/form/inputs/radio";
 import SelectInput from "../../../components/form/inputs/select";
 import TextareaInput from "../../../components/form/inputs/textarea";
+import { addNotification } from "../../../store/actions/notifications";
+import { useAppSelector } from "../../../store/hooks";
 import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
 } from "../../../utils/function";
-import { useNavigate, useSearchParams } from "react-router";
-import { useAppSelector } from "../../../store/hooks";
-import { useDispatch } from "react-redux";
-import { addNotification } from "../../../store/actions/notifications";
 
 const VisitReportsView = () => {
   const { t } = useTranslation();
@@ -303,7 +303,6 @@ const VisitReportsView = () => {
 
                 <RadioInput
                   name="status"
-                  row
                   options={roomContentStatuses}
                   value={content.status}
                   onChange={(e) =>
@@ -336,7 +335,6 @@ const VisitReportsView = () => {
 
                 <RadioInput
                   name="evaluation"
-                  row
                   options={[
                     { value: 0 },
                     { value: 1 },
