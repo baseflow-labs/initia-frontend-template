@@ -15,13 +15,16 @@
       "In-Kind": "In-Kind",
       "RecaptionDate": "Recaption Date",
       "Statuses": {
+        "Grant": "Grant",
         "Granted": "Granted",
-        "Pending": "Pending"
+        "Pending": "Pending",
+        "Reject": "Reject"
       },
       "Title": "Aids"
     },
     "Beneficiaries": {
       "AddBeneficiary": "Add Beneficiary",
+      "Beneficiary": "Beneficiary",
       "BeneficiaryName": "Beneficiary Name",
       "Profile": {
         "ProfileCompletion": "Profile Completion",
@@ -29,6 +32,14 @@
         "Title": "Profile"
       },
       "Title": "Beneficiaries"
+    },
+    "Beneficiary": {
+      "Profile": {
+        "CurrentData": "Current Data",
+        "PleaseUpdateFollowingData": "Please Update Following Data Records...",
+        "Title": "My Profile",
+        "YourProfile": "Your Profile Data"
+      }
     },
     "ContactUs": {
       "Contact": "Contact",
@@ -249,17 +260,79 @@
       "Title": "Membership Registration"
     },
     "Settings": {
+      "FontSize": "Font Size",
+      "Samples": {
+        "H3Sample": "Main Title Sample",
+        "H4Sample": "Sub-Title Sample",
+        "H5Sample": "Page Links Sample",
+        "LabelSample": "Input Label Sample",
+        "SmallSample": "Notes Sample",
+        "Title": "Samples"
+      },
       "Title": "Settings"
     },
     "Visits": {
       "AddVisit": "Add Visit",
       "CancelVisit": "Cancel Visit",
+      "Detail": {
+        "Devices": {
+          "AC": "Auth.Visits.Detail.Devices.AC",
+          "TV": "Auth.Visits.Detail.Devices.TV",
+          "notWorking": "Auth.Visits.Detail.Devices.notWorking"
+        },
+        "Furniture": {
+          "bed": "Auth.Visits.Detail.Furniture.bed",
+          "sofas": "Auth.Visits.Detail.Furniture.sofas",
+          "table": "Auth.Visits.Detail.Furniture.table"
+        },
+        "Room": {
+          "LivingRoom": "Auth.Visits.Detail.Room.LivingRoom",
+          "bathroom": "Auth.Visits.Detail.Room.bathroom",
+          "bedroom": "Auth.Visits.Detail.Room.bedroom",
+          "kitchen": "Auth.Visits.Detail.Room.kitchen"
+        },
+        "device": "Auth.Visits.Detail.device",
+        "devicePhoto": "Auth.Visits.Detail.devicePhoto",
+        "deviceStatus": "Auth.Visits.Detail.deviceStatus",
+        "devicesNumber": "Auth.Visits.Detail.devicesNumber",
+        "evaluation": "Auth.Visits.Detail.evaluation",
+        "furniture": "Auth.Visits.Detail.furniture",
+        "furnitureNumber": "Auth.Visits.Detail.furnitureNumber",
+        "needRepair": "Auth.Visits.Detail.needRepair",
+        "roomsNumber": "Auth.Visits.Detail.roomsNumber",
+        "title": "Auth.Visits.Detail.title"
+      },
       "EditVisit": "Edit Visit",
       "Report": {
-        "AddReport": "Add Report"
+        "AddContent": "Add Content",
+        "AddReport": "Add Report",
+        "AddRoom": "Add New Room",
+        "Bedroom": "Bedroom",
+        "ContentType": "{{type}} Type",
+        "ContentXType": "Content {{number}} Type",
+        "Contents": "Contents",
+        "ContentsCount": "Contents Count",
+        "Device": "Device",
+        "Furniture": "Furniture",
+        "Kitchen": "Kitchen",
+        "NeedsMaintenance": "Needs Maintenance",
+        "NotWorking": "Not Working",
+        "RoomContentEvaluation": "Room Content Evaluation",
+        "RoomContentPhoto": "Room Content Photo",
+        "RoomContentStatus": "Room Content Status",
+        "RoomRecommendations": "Room Recommendations",
+        "RoomXDetails": "Room {{number}} Details",
+        "RoomXType": "Room {{number}} Type",
+        "RoomsCount": "Rooms Count",
+        "TheDevice": "Device",
+        "TheFurniture": "Furniture",
+        "Title": "Report",
+        "Working": "Working"
       },
       "Statuses": {
+        "Approved": "Approved",
         "Cancelled": "Cancelled",
+        "Delayed": "Delayed",
         "Done": "Done",
         "Pending": "Pending",
         "Status": "Visit Status"
@@ -267,7 +340,8 @@
       "Title": "Visits",
       "VisitDate": "Visit Date",
       "VisitPurpose": "Visit Purpose",
-      "VisitTime": "Visit Time"
+      "VisitTime": "Visit Time",
+      "Visits": "Visits"
     }
   },
   "Global": {
@@ -285,11 +359,13 @@
         "Previous": "Previous",
         "Record": "Record",
         "Required": "Required",
+        "Save": "Save",
         "SaveContinue": "Save & Continue",
         "SaveData": "Save Data",
         "Submit": "Submit",
         "SubmitApplication": "Submit Application",
         "SupportingDocument": "Supporting Document",
+        "Update": "Update",
         "UploadAttachment": "Upload Attachment",
         "Yes": "Yes"
       },
@@ -299,8 +375,11 @@
       "Action": "Action",
       "ApplicationDate": "Application Date",
       "Back": "Back",
+      "Logout": "Logout",
+      "NoData": "Sorry, No Available Data",
       "Ok": "Ok",
       "PhoneNumber": "Phone Number",
+      "Search": "Search",
       "WrongUrl": "Sorry, this is wrong address"
     }
   },

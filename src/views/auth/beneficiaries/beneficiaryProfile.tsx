@@ -1,26 +1,42 @@
 import moment from "moment";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useSearchParams } from "react-router";
+import { useDispatch } from "react-redux";
 
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
-import { InputSingleProps } from "../../../components/form";
+import * as DataReviewApi from "../../../api/profile/dataReview";
+import * as DataUpdateApi from "../../../api/profile/dataUpdate";
+import Form, { InputSingleProps } from "../../../components/form";
 import { dataRender } from "../../../components/table";
 import ColumnsPage from "../../../layouts/auth/columnsPage";
+import { addNotification } from "../../../store/actions/notifications";
 import { dataDateFormat } from "../../../utils/consts";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 
-const BeneficiaryProfileView = () => {
+const BeneficiaryOwnProfile = () => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
   const [beneficiary, setBeneficiary] = useState<any>();
-  const [searchParams] = useSearchParams();
+  const [dataReviews, setDataReviews] =
+    useState<
+      { id: string; table: string; property: string; row?: {}; note?: string }[]
+    >();
 
-  useEffect(() => {
-    BeneficiaryApi.getById(searchParams.get("id") || "")
-      .then((res) => {
-        setBeneficiary(res as any);
+  const callData = () => {
+    BeneficiaryApi.getByUserId()
+      .then((res: any) => {
+        setBeneficiary(res);
+
+        DataReviewApi.getNonUpdatedDataReview(res.beneficiary.id)
+          .then((res) => setDataReviews(res as any))
+          .catch(apiCatchGlobalHandler);
       })
+
       .catch(apiCatchGlobalHandler);
+  };
+
+  useLayoutEffect(() => {
+    callData();
   }, []);
 
   const basicDataInputs: InputSingleProps[] = [
@@ -957,7 +973,7 @@ const BeneficiaryProfileView = () => {
   const cards = [
     {
       title: t("Auth.MembershipRegistration.Form.BasicData"),
-      data: beneficiary,
+      data: beneficiary?.beneficiary,
       map: basicDataInputs,
     },
     {
@@ -975,7 +991,7 @@ const BeneficiaryProfileView = () => {
       data: beneficiary?.housing,
       map: hostelDataInputs,
     },
-    ...(beneficiary?.dependents.map((dependent: any) => ({
+    ...(beneficiary?.dependents?.map((dependent: any) => ({
       title: t("Auth.MembershipRegistration.Form.DependantData", {
         name: dependent.fullName,
       }),
@@ -989,14 +1005,114 @@ const BeneficiaryProfileView = () => {
     },
   ];
 
+  const mapping = [
+    {
+      table: "beneficiary",
+      inputs: basicDataInputs,
+      data: beneficiary?.beneficiary,
+    },
+    {
+      table: "income",
+      inputs: qualificationDataInputs,
+      data: beneficiary?.income,
+    },
+    {
+      table: "contactsBank",
+      inputs: contactDataInputs,
+      data: beneficiary?.contactsBank,
+    },
+    {
+      table: "housing",
+      inputs: hostelDataInputs,
+      data: beneficiary?.housing,
+    },
+    // {
+    //   table: "dependant",
+    //   inputs: dependentsDataInputs,
+    //   data: beneficiary?.dependents
+    // },
+    {
+      table: "nationalRecord",
+      inputs: attachmentInputs,
+      data: beneficiary?.nationalRecord,
+    },
+  ];
+
+  const onDataUpdate = (data = {}) => {
+    DataUpdateApi.create(data)
+      .then((res) => {
+        dispatch(
+          addNotification({
+            msg: t("Global.Form.SuccessMsg", {
+              action: t("Global.Form.Labels.Update"),
+              data: t("Auth.Beneficiary.Profile.YourProfile"),
+            }),
+          })
+        );
+        callData();
+      })
+      .catch(apiCatchGlobalHandler);
+  };
+
   return (
     <ColumnsPage>
       <Fragment>
-        <h2>{beneficiary?.fullName}</h2>
+        <div className="col-md-12 mb-4">
+          <h3>{t("Auth.Beneficiary.Profile.Title")}</h3>
+        </div>
+
+        <div className="col-md-12 mb-4 row">
+          <h5 className="mb-4">
+            {t("Auth.Beneficiary.Profile.PleaseUpdateFollowingData")}
+          </h5>
+
+          {dataReviews?.map(({ id, table, property, row, note }, i) => {
+            const requestTable = mapping.find(
+              ({ table: mapTable }) => mapTable === table
+            );
+
+            const requestProperty = requestTable?.inputs.find(
+              ({ name }) => name === property
+            );
+
+            const currentData = requestTable?.data[property];
+
+            return (
+              <div className="col-md-6" key={i}>
+                <div className="card h-100 rounded-4">
+                  <div className="card-body p-5">
+                    {requestProperty && (
+                      <Form
+                        inputs={() =>
+                          [requestProperty].map(({ halfCol, ...rest }) => ({
+                            ...rest,
+                            defaultValue: currentData,
+                            required: true,
+                          }))
+                        }
+                        onFormSubmit={(values) =>
+                          onDataUpdate({
+                            data: values[property],
+                            dataReview: id,
+                          })
+                        }
+                        submitText={t("Global.Form.Labels.SaveData")}
+                      />
+                    )}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="col-md-12 mt-5">
+          <h5>{t("Auth.Beneficiary.Profile.CurrentData")}</h5>
+        </div>
 
         {cards.map(({ title, data, map }, i) => (
           <div className="col-md-6 my-5" key={i}>
-            <h4 className="mb-4">{title}</h4>
+            <h4 className="my-4">{title}</h4>
 
             <div className="card h-100 rounded-4">
               <div className="card-body">
@@ -1048,4 +1164,4 @@ const BeneficiaryProfileView = () => {
   );
 };
 
-export default BeneficiaryProfileView;
+export default BeneficiaryOwnProfile;

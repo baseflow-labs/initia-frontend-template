@@ -11,6 +11,7 @@ const SelectInput: React.FC<FinalInput> = ({
   className,
   placeholder,
   options,
+  sizing = "sm",
   ...input
 }) => {
   const { t } = useTranslation();
@@ -18,7 +19,7 @@ const SelectInput: React.FC<FinalInput> = ({
   return (
     <select
       {...input}
-      className={`form-select form-select-sm ${commonInputClasses} ${className}`}
+      className={`form-select form-select-${sizing} ${commonInputClasses} ${className}`}
     >
       <option value="">
         {placeholder || t("Global.Form.Labels.PleaseSelect")}

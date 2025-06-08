@@ -9,6 +9,7 @@ export const statusColorRender = (status = "") => {
     case "Cancelled":
     case "Cancel":
       return "danger";
+    case "Done":
     case "Accept":
     case "Granted":
     case "Accepted":
@@ -26,8 +27,8 @@ export const statusColorRender = (status = "") => {
 };
 
 export const renderDataFromOptions = (
-  data = "",
-  options = [{ label: "", value: "" }]
+  data: string,
+  options: { label?: string; value: string }[]
 ) => {
   const option = options.find(({ value }) => value === data);
 

@@ -12,6 +12,9 @@ import { useAppSelector } from "../../store/hooks";
 import Button from "../core/button";
 import Spinner from "../core/spinner";
 import InputComp from "./Input";
+import DefaultInput from "./inputs/default";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHistory } from "@fortawesome/free-solid-svg-icons";
 
 interface InputBasicProps {
   name: string;
@@ -51,6 +54,7 @@ interface InputBasicProps {
 
 export interface InputSingleProps extends InputBasicProps {
   logo?: string;
+  sizing?: string;
   halfCol?: boolean;
   prefixText?: string | number;
   postfixText?: string | number;
@@ -80,6 +84,22 @@ interface Props extends React.FormHTMLAttributes<HTMLFormElement> {
   initialValues?: object;
   customButtons?: React.ReactNode;
 }
+
+export const LabelView = ({ labelNote, label, required }: InputSingleProps) => (
+  <label className={`form-label ${label ? "" : "text-white"}`}>
+    <small>
+      {label ? label : "."}{" "}
+      {labelNote && (
+        <span className="text-muted">
+          {"("}
+          {labelNote}
+          {")"}{" "}
+        </span>
+      )}
+      {label && required ? <span className="text-danger">*</span> : null}
+    </small>
+  </label>
+);
 
 const Form: React.FC<Props> = ({
   onFormSubmit,
@@ -151,7 +171,7 @@ const Form: React.FC<Props> = ({
     content,
   }: {
     flip?: boolean;
-    content?: string | number;
+    content?: string | number | React.ReactNode;
   }) =>
     content ? (
       <span
@@ -162,22 +182,6 @@ const Form: React.FC<Props> = ({
         {content}
       </span>
     ) : null;
-
-  const LabelView = ({ labelNote, label, required }: InputProps) => (
-    <label className={`form-label ${label ? "" : "text-white"}`}>
-      <small>
-        {label ? label : "."}{" "}
-        {labelNote && (
-          <span className="text-muted">
-            {"("}
-            {labelNote}
-            {")"}{" "}
-          </span>
-        )}
-        {label && required ? <span className="text-danger">*</span> : null}
-      </small>
-    </label>
-  );
 
   return (
     <FormikProvider value={formik}>
@@ -191,14 +195,14 @@ const Form: React.FC<Props> = ({
               belowComp,
               logo,
               halfCol,
+              type,
               ...input
             }) => {
               const triggerError =
                 formik.errors[input.name] && formik.touched[input.name];
 
               const prefixTexts =
-                prefixText ||
-                (input.type === "phoneNumber" ? "+966" : undefined);
+                prefixText || (type === "phoneNumber" ? "+966" : undefined);
 
               const ErrorView = () => (
                 <small className={triggerError ? "text-danger" : "text-white"}>
@@ -231,14 +235,12 @@ const Form: React.FC<Props> = ({
 
                       <div
                         className={`input-group ${
-                          input.type === "phoneNumber"
-                            ? "phone-number-input"
-                            : ""
+                          type === "phoneNumber" ? "phone-number-input" : ""
                         }`}
                       >
                         <InlineElement content={prefixTexts} flip />
 
-                        <InputComp id={input.name} {...input} />
+                        <InputComp id={input.name} type={type} {...input} />
 
                         <InlineElement content={postfixText} />
                       </div>
@@ -264,17 +266,90 @@ const Form: React.FC<Props> = ({
 
                   <div
                     className={`input-group ${
-                      input.type === "phoneNumber" ? "phone-number-input" : ""
+                      type === "phoneNumber" ? "phone-number-input" : ""
                     }`}
                   >
                     <InlineElement content={prefixTexts} flip />
 
-                    <InputComp id={input.name} {...input} />
+                    <InputComp id={input.name} type={type} {...input} />
 
                     <InlineElement content={postfixText} />
                   </div>
 
                   {belowComp}
+
+                  {type === "range" && (
+                    <Fragment>
+                      <div className={`input-group`}>
+                        <DefaultInput
+                          name={input.name}
+                          className="form-control-md"
+                          value={formik.values[input.name]}
+                        />
+
+                        <InlineElement
+                          flip
+                          content={
+                            <FontAwesomeIcon
+                              icon={faHistory}
+                              role="button"
+                              onClick={() =>
+                                formik.setFieldValue(
+                                  input.name,
+                                  input.defaultValue
+                                )
+                              }
+                            />
+                          }
+                        />
+                      </div>
+
+                      {input.name === "fontSize" && (
+                        <div className="row mt-3">
+                          <h4 className="col-md-12 mb-3">
+                            {t("Auth.Settings.Samples.Title")}
+                          </h4>
+
+                          <h3
+                            className="col-md-6"
+                            style={{ fontSize: 1.75 * formik.values.fontSize }}
+                          >
+                            {t("Auth.Settings.Samples.H3Sample")}
+                          </h3>
+
+                          <h4
+                            className="col-md-6"
+                            style={{ fontSize: 1.5 * formik.values.fontSize }}
+                          >
+                            {t("Auth.Settings.Samples.H4Sample")}
+                          </h4>
+
+                          <h5
+                            className="col-md-6"
+                            style={{ fontSize: 1.25 * formik.values.fontSize }}
+                          >
+                            {t("Auth.Settings.Samples.H5Sample")}
+                          </h5>
+
+                          <label
+                            className="form-label col-md-6"
+                            style={{ fontSize: 1 * formik.values.fontSize }}
+                          >
+                            {t("Auth.Settings.Samples.LabelSample")}
+                          </label>
+
+                          <div
+                            className="col-md-6"
+                            style={{ fontSize: 0.875 * formik.values.fontSize }}
+                          >
+                            <small>
+                              {t("Auth.Settings.Samples.SmallSample")}
+                            </small>
+                          </div>
+                        </div>
+                      )}
+                    </Fragment>
+                  )}
 
                   <ErrorView />
                 </div>

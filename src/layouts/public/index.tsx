@@ -1,14 +1,20 @@
 import { useTranslation } from "react-i18next";
-import { Route, Routes, useLocation, useNavigate } from "react-router";
+import {
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from "react-router";
 
 import bgImage from "../../assets/images/brand/logo-full.png";
 import Button from "../../components/core/button";
+import FourZeroFourError from "../../views/common/404";
 import ForgotPasswordView from "../../views/public/forgotPassword";
 import LoginView from "../../views/public/login";
 import RegisterView from "../../views/public/register";
 import ResetPasswordView from "../../views/public/ResetPassword";
 import TermsConditions from "../../views/public/termsConditions";
-import FourZeroFourError from "../../views/common/404";
 
 const AuthLayout = () => {
   const { t } = useTranslation();
@@ -112,7 +118,8 @@ const AuthLayout = () => {
                   <Route path={route} element={view} key={i} />
                 ))}
 
-                <Route path="*" element={<FourZeroFourError />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
+                {/* <Route path="*" element={<FourZeroFourError />} /> */}
               </Routes>
             </div>
           </div>

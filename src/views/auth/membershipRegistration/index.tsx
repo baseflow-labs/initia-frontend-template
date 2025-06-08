@@ -4,6 +4,7 @@ import { FormikProps } from "formik";
 import moment from "moment";
 import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router";
 import { Fragment } from "react/jsx-runtime";
 
@@ -22,21 +23,22 @@ import tawakkalnaLogo from "../../../assets/images/partners/Tawakkalna.svg";
 import Button from "../../../components/core/button";
 import Form from "../../../components/form";
 import WizardFormStepper from "../../../components/form/wizard/stepper";
+import { addNotification } from "../../../store/actions/notifications";
+import { useAppSelector } from "../../../store/hooks";
 import { dataDateFormat } from "../../../utils/consts";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import DependentsFormView from "./Dependents";
-import { useDispatch } from "react-redux";
-import { addNotification } from "../../../store/actions/notifications";
 
 const MembershipRegistrationView = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
+  const { user } = useAppSelector((state) => state.auth);
 
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({
-    beneficiary: { id: "" },
+    beneficiary: { id: "", fullName: "" },
     contactsBank: {},
     status: { status: "" },
     housing: {},
@@ -60,7 +62,7 @@ const MembershipRegistrationView = () => {
             status,
             ...beneficiary
           }: any) =>
-            beneficiary.id
+            beneficiary?.id
               ? setFormData({
                   contactsBank,
                   dependents,
@@ -76,18 +78,21 @@ const MembershipRegistrationView = () => {
         .catch(apiCatchGlobalHandler);
     } else {
       BeneficiaryApi.getByUserId()
-        .then((res: any) => (res.beneficiary.id ? setFormData(res) : ""))
+        .then((res: any) => (res.beneficiary?.id ? setFormData(res) : ""))
         .catch(apiCatchGlobalHandler);
     }
   }, []);
 
   const onRequestHelp = () => {
-    BeneficiaryApi.requestHelp(formData.beneficiary.id)
+    BeneficiaryApi.requestHelp(formData.beneficiary?.id)
       .then(() =>
         dispatch(
           addNotification({
             msg: t("Global.Form.SuccessMsg", {
               action: t("Auth.MembershipRegistration.Form.HelpRequested"),
+              data:
+                formData.beneficiary.fullName ||
+                t("Auth.Beneficiaries.Beneficiary"),
             }),
           })
         )
@@ -158,15 +163,15 @@ const MembershipRegistrationView = () => {
     {
       type: "date",
       name: "dob",
-      min: moment().subtract(125, "y").format(dataDateFormat),
-      max: moment().subtract(17, "y").format(dataDateFormat),
+      min: moment().locale("en").subtract(125, "y").format(dataDateFormat),
+      max: moment().locale("en").subtract(17, "y").format(dataDateFormat),
       label: t("Auth.MembershipRegistration.Form.Dob"),
       required: true,
     },
     {
       type: "date",
       name: "idExpiryDate",
-      max: moment().add(10, "y").format(dataDateFormat),
+      max: moment().locale("en").add(10, "y").format(dataDateFormat),
       label: t("Auth.MembershipRegistration.Form.IdExpiryDate"),
       required: true,
     },
@@ -876,7 +881,7 @@ const MembershipRegistrationView = () => {
           customButtons={<HelpButton />}
           initialValues={formData.beneficiary}
           onFormSubmit={(e) => {
-            BeneficiaryApi.createOrUpdate({ ...e, user: e.user.id })
+            BeneficiaryApi.createOrUpdate({ ...e, user: user?.id })
               .then((res) => {
                 onNextStep({ ...e, ...res }, "beneficiary");
               })
@@ -896,7 +901,7 @@ const MembershipRegistrationView = () => {
           initialValues={formData.contactsBank}
           onFormSubmit={(e) => {
             ContactApi.createOrUpdate({
-              beneficiary: formData.beneficiary.id,
+              beneficiary: formData.beneficiary?.id,
               ...e,
             })
               .then(() => {
@@ -918,7 +923,7 @@ const MembershipRegistrationView = () => {
           initialValues={formData.income}
           onFormSubmit={(e) => {
             IncomeApi.createOrUpdate({
-              beneficiary: formData.beneficiary.id,
+              beneficiary: formData.beneficiary?.id,
               ...e,
             })
               .then(() => {
@@ -940,7 +945,7 @@ const MembershipRegistrationView = () => {
           initialValues={formData.housing}
           onFormSubmit={(e) => {
             HousingApi.createOrUpdate({
-              beneficiary: formData.beneficiary.id,
+              beneficiary: formData.beneficiary?.id,
               ...e,
             })
               .then(() => {
@@ -959,7 +964,7 @@ const MembershipRegistrationView = () => {
           customButtons={<BackButton />}
           initialValues={formData.dependents}
           onFormSubmit={(e) => onNextStep(e)}
-          beneficiary={formData.beneficiary.id}
+          beneficiary={formData.beneficiary?.id}
         />
       ),
     },
@@ -973,7 +978,7 @@ const MembershipRegistrationView = () => {
           initialValues={formData.nationalRecord}
           onFormSubmit={(e) => {
             NationalRecordApi.createOrUpdate({
-              beneficiary: formData.beneficiary.id,
+              beneficiary: formData.beneficiary?.id,
               ...e,
             })
               .then(() => {
@@ -999,7 +1004,7 @@ const MembershipRegistrationView = () => {
             {t("Auth.MembershipRegistration.Form.Success.Text")}
           </h6>
 
-          <Button color="info" onClick={() => navigate("/")}>
+          <Button color="info" onClick={() => navigate("/dashboard")}>
             {t("Global.Labels.Ok")}
           </Button>
         </div>
