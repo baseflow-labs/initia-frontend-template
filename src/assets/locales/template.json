@@ -300,7 +300,9 @@
         "Working": "Working"
       },
       "Statuses": {
+        "Approved": "Approved",
         "Cancelled": "Cancelled",
+        "Delayed": "Delayed",
         "Done": "Done",
         "Pending": "Pending",
         "Status": "Visit Status"

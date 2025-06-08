@@ -1,5 +1,6 @@
 import { faCircle, faEdit, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { render } from "@testing-library/react";
 import { Fragment, useEffect, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
@@ -21,7 +22,6 @@ import {
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
-import { render } from "@testing-library/react";
 
 const BeneficiariesVisitsView = () => {
   const { t } = useTranslation();
@@ -86,6 +86,14 @@ const BeneficiariesVisitsView = () => {
     {
       value: "Pending",
       label: t("Auth.Visits.Statuses.Pending"),
+    },
+    {
+      value: "Approved",
+      label: t("Auth.Visits.Statuses.Approved"),
+    },
+    {
+      value: "Delayed",
+      label: t("Auth.Visits.Statuses.Delayed"),
     },
     {
       value: "Done",
