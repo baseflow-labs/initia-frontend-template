@@ -248,15 +248,15 @@ const BeneficiariesView = () => {
   };
 
   const viewProfile = (data: string) => {
-    navigate(`/beneficiaries/profile/?id=${data}`);
+    navigate(`/beneficiary/profile/?id=${data}`);
   };
 
   const reviewProfile = (data: string) => {
-    navigate(`/beneficiaries/review/?id=${data}`);
+    navigate(`/beneficiary/review/?id=${data}`);
   };
 
   const scheduleVisit = (data: string) => {
-    navigate(`/visits/?id=${data}`);
+    navigate(`/visitSchedule/?id=${data}`);
   };
 
   return (

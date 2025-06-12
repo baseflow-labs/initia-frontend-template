@@ -114,7 +114,7 @@ const VisitReportsView = () => {
           })
         );
 
-        navigate("/visits/");
+        navigate("/visitSchedule/");
       })
       .catch(apiCatchGlobalHandler);
   };
