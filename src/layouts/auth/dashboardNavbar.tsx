@@ -1,14 +1,11 @@
-import {
-  faBell,
-  faInfoCircle,
-  faSearch,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBell, faInfoCircle, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
 import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
+
 import * as NotificationApi from "../../api/notifications";
 import profilePhotoPlaceholder from "../../assets/images/profile-image-placeholder.png";
 import { logout } from "../../store/actions/auth";
@@ -90,7 +87,7 @@ const DashboardNavbar = () => {
                           </h3>
                         </div>
 
-                        <div className="col-md-10">
+                        <div className="col-md-10 ps-4">
                           <h6>{message}</h6>
                           <small>{moment(createdAt).fromNow()}</small>
                         </div>

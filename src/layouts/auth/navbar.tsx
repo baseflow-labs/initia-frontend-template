@@ -5,6 +5,7 @@ import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
+
 import * as NotificationApi from "../../api/notifications";
 import Logo from "../../assets/images/brand/logo-full.png";
 import profilePhotoPlaceholder from "../../assets/images/profile-image-placeholder.png";
@@ -98,7 +99,7 @@ const Navbar = () => {
                           </h3>
                         </div>
 
-                        <div className="col-md-10">
+                        <div className="col-md-10 ps-4">
                           <h6>{message}</h6>
                           <small>{moment(createdAt).fromNow()}</small>
                         </div>
