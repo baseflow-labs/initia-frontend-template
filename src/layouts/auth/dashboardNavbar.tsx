@@ -76,29 +76,33 @@ const DashboardNavbar = () => {
               className="dropdown-menu dropdown-menu-end"
               aria-labelledby="notificationsDropdown"
             >
-              {notifications.map(
-                ({ title, message, service, createdAt }, i) => (
-                  <li key={i}>
-                    <span
-                      className="dropdown-item"
-                      role="button"
-                      onClick={() => navigate("/" + service)}
-                    >
-                      <div className="row">
-                        <div className="col-md-2 my-auto text-warning">
-                          <h3>
-                            <FontAwesomeIcon icon={faInfoCircle} />
-                          </h3>
-                        </div>
+              {notifications.length ? (
+                notifications.map(
+                  ({ title, message, service, createdAt }, i) => (
+                    <li key={i}>
+                      <span
+                        className="dropdown-item"
+                        role="button"
+                        onClick={() => navigate("/" + service)}
+                      >
+                        <div className="row">
+                          <div className="col-md-2 my-auto text-warning">
+                            <h3>
+                              <FontAwesomeIcon icon={faInfoCircle} />
+                            </h3>
+                          </div>
 
-                        <div className="col-md-10 ps-4">
-                          <h6>{message}</h6>
-                          <small>{moment(createdAt).fromNow()}</small>
+                          <div className="col-md-10 ps-4">
+                            <h6>{message}</h6>
+                            <small>{moment(createdAt).fromNow()}</small>
+                          </div>
                         </div>
-                      </div>
-                    </span>
-                  </li>
+                      </span>
+                    </li>
+                  )
                 )
+              ) : (
+                <span className="p-1">لا يوجد اشعارات للعرض</span>
               )}
             </ul>
           </div>
