@@ -123,7 +123,11 @@ const Navbar = () => {
               aria-expanded="false"
             >
               <img
-                src={logo || profilePhotoPlaceholder}
+                src={
+                  logo
+                    ? "https://pdt-bucket.s3.us-east-1.amazonaws.com" + logo
+                    : profilePhotoPlaceholder
+                }
                 alt="avatar"
                 className="rounded-circle"
                 width="30"

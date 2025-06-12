@@ -1,4 +1,8 @@
-import { faBell, faInfoCircle, faSearch } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBell,
+  faInfoCircle,
+  faSearch,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
 import { useLayoutEffect, useState } from "react";
@@ -111,13 +115,18 @@ const DashboardNavbar = () => {
               aria-expanded="false"
             >
               <img
-                src={logo || profilePhotoPlaceholder}
+                src={
+                  logo
+                    ? "https://pdt-bucket.s3.us-east-1.amazonaws.com" + logo
+                    : profilePhotoPlaceholder
+                }
                 alt="avatar"
                 className="rounded-circle"
                 width="30"
                 height="30"
               />
             </button>
+
             <ul
               className="dropdown-menu dropdown-menu-end"
               aria-labelledby="avatarDropdown"
