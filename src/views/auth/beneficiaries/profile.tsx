@@ -975,7 +975,7 @@ const BeneficiaryProfileView = () => {
       data: beneficiary?.housing,
       map: hostelDataInputs,
     },
-    ...(beneficiary?.dependents.map((dependent: any) => ({
+    ...(beneficiary?.dependents?.map((dependent: any) => ({
       title: t("Auth.MembershipRegistration.Form.DependantData", {
         name: dependent.fullName,
       }),
@@ -994,7 +994,7 @@ const BeneficiaryProfileView = () => {
       <Fragment>
         <h2>{beneficiary?.fullName}</h2>
 
-        {cards.map(({ title, data, map }, i) => (
+        {cards?.map(({ title, data, map }, i) => (
           <div className="col-md-6 my-5" key={i}>
             <h4 className="mb-4">{title}</h4>
 
@@ -1024,7 +1024,7 @@ const BeneficiaryProfileView = () => {
                         //   },
                         //   []
                         // )
-                        .map((prop: InputSingleProps, y = 0) => (
+                        ?.map((prop: InputSingleProps, y = 0) => (
                           <tr key={y}>
                             <td className="pb-3">{prop.label}</td>
 
