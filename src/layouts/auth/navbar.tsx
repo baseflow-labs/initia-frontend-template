@@ -1,19 +1,37 @@
-import { faBell, faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { faBell, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import moment from "moment";
+import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-
+import * as NotificationApi from "../../api/notifications";
 import Logo from "../../assets/images/brand/logo-full.png";
 import profilePhotoPlaceholder from "../../assets/images/profile-image-placeholder.png";
 import { logout } from "../../store/actions/auth";
 import { useAppSelector } from "../../store/hooks";
+import { apiCatchGlobalHandler } from "../../utils/function";
+import { Notification } from "./dashboardNavbar";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { logo } = useAppSelector((state) => state.settings);
+
+  const [notifications, setNotification] = useState<Notification[]>([]);
+
+  useLayoutEffect(() => {
+    NotificationApi.get()
+      .then((res: any) =>
+        setNotification(
+          res.sort((a: Notification, b: Notification) =>
+            a.createdAt > b.createdAt ? -1 : 1
+          )
+        )
+      )
+      .catch(apiCatchGlobalHandler);
+  }, []);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white px-4 py-4">
@@ -65,17 +83,30 @@ const Navbar = () => {
               className="dropdown-menu dropdown-menu-end"
               aria-labelledby="notificationsDropdown"
             >
-              <li>
-                <a className="dropdown-item" href="#">
-                  إشعار 1
-                </a>
-              </li>
+              {notifications.map(
+                ({ title, message, service, createdAt }, i) => (
+                  <li key={i}>
+                    <span
+                      className="dropdown-item"
+                      role="button"
+                      onClick={() => navigate("/" + service)}
+                    >
+                      <div className="row">
+                        <div className="col-md-2 my-auto text-warning">
+                          <h3>
+                            <FontAwesomeIcon icon={faInfoCircle} />
+                          </h3>
+                        </div>
 
-              <li>
-                <a className="dropdown-item" href="#">
-                  إشعار 2
-                </a>
-              </li>
+                        <div className="col-md-10">
+                          <h6>{message}</h6>
+                          <small>{moment(createdAt).fromNow()}</small>
+                        </div>
+                      </div>
+                    </span>
+                  </li>
+                )
+              )}
             </ul>
           </div>
 
