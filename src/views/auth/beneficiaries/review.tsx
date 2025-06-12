@@ -198,7 +198,7 @@ const BeneficiaryFormReview = () => {
           })
         );
 
-        navigate("/beneficiaries");
+        navigate("/beneficiary");
       })
       .catch(apiCatchGlobalHandler);
   };

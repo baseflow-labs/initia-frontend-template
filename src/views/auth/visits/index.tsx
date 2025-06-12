@@ -189,7 +189,7 @@ const VisitsView = () => {
     setOpenModal(false);
     setCrudData({});
     if (searchParams.get("id")) {
-      navigate("/visits");
+      navigate("/visitSchedule");
       window.location.reload();
     }
   };
@@ -242,14 +242,15 @@ const VisitsView = () => {
             icon: faEdit,
             spread: true,
             label: t("Auth.Visits.Report.AddReport"),
-            onClick: (data: string) => navigate("/visits/report?id=" + data),
+            onClick: (data: string) =>
+              navigate("/visitSchedule/report?id=" + data),
           },
           {
             icon: faNewspaper,
             spread: true,
             label: t("Auth.Visits.Report.ViewReport"),
             onClick: (data: string) =>
-              navigate("/visits/report/details/?id=" + data),
+              navigate("/visitSchedule/report/details/?id=" + data),
           },
           {
             icon: faXmark,

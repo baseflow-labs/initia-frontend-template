@@ -154,7 +154,7 @@ const BeneficiariesVisitsView = () => {
   const actionButtons = [
     {
       label: t("Auth.Visits.Report.AddReport"),
-      route: "/visits/report",
+      route: "/visitSchedule/report",
       outline: true,
     },
     {
@@ -197,7 +197,7 @@ const BeneficiariesVisitsView = () => {
     setOpenModal(false);
     setCrudData({});
     if (searchParams.get("id")) {
-      navigate("/visits");
+      navigate("/visitSchedule");
       window.location.reload();
     }
   };
