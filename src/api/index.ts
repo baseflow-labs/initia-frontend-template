@@ -9,7 +9,7 @@ import { addNotification } from "../store/actions/notifications";
 import store, { RootState } from "../store/store";
 
 export const baseURL =
-  process.env.REACT_APP_BACKEND_URL || "http://127.0.0.1:8000";
+  process.env.REACT_APP_BACKEND_URL || "https://api.mustaheq.org";
 
 const service = axios.create({
   baseURL,
