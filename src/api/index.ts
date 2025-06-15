@@ -8,8 +8,7 @@ import { endLoading, startLoading } from "../store/actions/loading";
 import { addNotification } from "../store/actions/notifications";
 import store, { RootState } from "../store/store";
 
-export const baseURL =
-  process.env.REACT_APP_BACKEND_URL || "https://api.mustaheq.org";
+export const baseURL = "https://api.mustaheq.org";
 
 const service = axios.create({
   baseURL,
