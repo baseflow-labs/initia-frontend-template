@@ -121,7 +121,7 @@ const DashboardNavbar = () => {
               <img
                 src={
                   logo
-                    ? (process.env.REACT_APP_BUCKET_URL ||
+                    ? (process.env.REACT_APP_STORAGE_DIRECTORY_URL ||
                         "https://pdt-bucket.s3.us-east-1.amazonaws.com") +
                       logo
                         .replaceAll("\\", "%5C")
