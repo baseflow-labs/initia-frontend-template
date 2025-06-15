@@ -11,11 +11,13 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
 import { useEffect, useState } from "react";
-import i18n from "../../i18next";
 import { useTranslation } from "react-i18next";
+
+import i18n from "../../i18next";
 import { viewDateFormat, viewTimeFormat } from "../../utils/consts";
-import "moment/locale/ar";
 import { splitOverNumberPlusLeftover } from "../../utils/function";
+
+import "moment/locale/ar";
 
 export interface TableProps {
   size?: number;
@@ -268,13 +270,13 @@ const DynamicTable = ({
       {!noPagination && (
         <tfoot>
           <tr>
-            <th colSpan={columns.length + 1}>
+            <th colSpan={columns.length + 1 + (actions?.length ? 1 : 0)}>
               <div className="d-flex">
                 <nav className="my-auto me-2">
                   <ul className="pagination">
                     <li className="page-item my-auto">
                       <button
-                        className="page-link"
+                        className="page-link text-info border-0 px-3"
                         onClick={() => onPageNumberChange(pageNumber - 1)}
                         disabled={pageNumber === 1}
                       >
@@ -287,8 +289,8 @@ const DynamicTable = ({
                       .map((_, i) => (
                         <li className="page-item my-auto" key={i}>
                           <button
-                            className={`page-link ${
-                              pageNumber === i + 1 ? "active" : ""
+                            className={`page-link border-0 bg-info ${
+                              pageNumber === i + 1 ? "active rounded-2" : ""
                             }`}
                             onClick={() => onPageNumberChange(i + 1)}
                           >
@@ -299,7 +301,7 @@ const DynamicTable = ({
 
                     <li className="page-item my-auto">
                       <button
-                        className="page-link"
+                        className="page-link text-info border-0 px-3"
                         onClick={() => onPageNumberChange(pageNumber + 1)}
                         disabled={pageNumber === pagesCount}
                       >
@@ -313,7 +315,9 @@ const DynamicTable = ({
                   <ul className="pagination">
                     <li className="page-item my-auto">
                       <span className="page-link border-0 d-flex">
-                        <div className="my-auto">الصفحة رقم</div>
+                        <small className="my-auto text-info">
+                          {t("Global.Labels.PageNo")}
+                        </small>
 
                         <input
                           value={pageNumber}
@@ -331,7 +335,9 @@ const DynamicTable = ({
 
                     <li className="page-item my-auto">
                       <span className="page-link border-0 d-flex">
-                        <div className="my-auto">حجم الصفحة</div>
+                        <small className="my-auto text-info">
+                          {t("Global.Labels.PageSize")}
+                        </small>
 
                         <select
                           value={pageSize}
