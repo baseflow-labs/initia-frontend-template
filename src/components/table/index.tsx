@@ -270,13 +270,13 @@ const DynamicTable = ({
       {!noPagination && (
         <tfoot>
           <tr>
-            <th colSpan={columns.length + 1}>
+            <th colSpan={columns.length + 1 + (actions?.length ? 1 : 0)}>
               <div className="d-flex">
                 <nav className="my-auto me-2">
                   <ul className="pagination">
                     <li className="page-item my-auto">
                       <button
-                        className="page-link text-info"
+                        className="page-link text-info border-0 px-3"
                         onClick={() => onPageNumberChange(pageNumber - 1)}
                         disabled={pageNumber === 1}
                       >
@@ -289,8 +289,8 @@ const DynamicTable = ({
                       .map((_, i) => (
                         <li className="page-item my-auto" key={i}>
                           <button
-                            className={`page-link border-info bg-info ${
-                              pageNumber === i + 1 ? "active" : ""
+                            className={`page-link border-0 bg-info ${
+                              pageNumber === i + 1 ? "active rounded-2" : ""
                             }`}
                             onClick={() => onPageNumberChange(i + 1)}
                           >
@@ -301,7 +301,7 @@ const DynamicTable = ({
 
                     <li className="page-item my-auto">
                       <button
-                        className="page-link text-info"
+                        className="page-link text-info border-0 px-3"
                         onClick={() => onPageNumberChange(pageNumber + 1)}
                         disabled={pageNumber === pagesCount}
                       >
@@ -315,7 +315,9 @@ const DynamicTable = ({
                   <ul className="pagination">
                     <li className="page-item my-auto">
                       <span className="page-link border-0 d-flex">
-                        <div className="my-auto text-info">الصفحة رقم</div>
+                        <small className="my-auto text-info">
+                          {t("Global.Labels.PageNo")}
+                        </small>
 
                         <input
                           value={pageNumber}
@@ -333,7 +335,9 @@ const DynamicTable = ({
 
                     <li className="page-item my-auto">
                       <span className="page-link border-0 d-flex">
-                        <div className="my-auto text-info">حجم الصفحة</div>
+                        <small className="my-auto text-info">
+                          {t("Global.Labels.PageSize")}
+                        </small>
 
                         <select
                           value={pageSize}

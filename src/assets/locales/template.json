@@ -387,6 +387,8 @@
       "Logout": "Logout",
       "NoData": "Sorry, No Available Data",
       "Ok": "Ok",
+      "PageNo": "Page No",
+      "PageSize": "Page Size",
       "PhoneNumber": "Phone Number",
       "Search": "Search",
       "WrongUrl": "Sorry, this is wrong address"
