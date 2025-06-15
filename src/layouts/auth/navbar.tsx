@@ -130,7 +130,11 @@ const Navbar = () => {
                 src={
                   logo
                     ? (process.env.REACT_APP_BUCKET_URL ||
-                        "https://pdt-bucket.s3.us-east-1.amazonaws.com") + logo
+                        "https://pdt-bucket.s3.us-east-1.amazonaws.com") +
+                      logo
+                        .replaceAll("\\", "%5C")
+                        .replaceAll("/", "%5C")
+                        .replace("%5C", "/")
                     : profilePhotoPlaceholder
                 }
                 alt="avatar"
