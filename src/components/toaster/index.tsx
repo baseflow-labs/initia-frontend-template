@@ -31,7 +31,7 @@ const NotificationsToaster = () => {
   return (
     <div
       className="toast-container position-fixed top-0 start-50 translate-middle-x p-2"
-      style={{ zIndex: 1055 }}
+      style={{ zIndex: 1155 }}
     >
       {notifications.map(({ msg, type, id }) => (
         <div

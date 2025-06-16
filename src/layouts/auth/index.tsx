@@ -30,6 +30,7 @@ import VisitDetailView from "../../views/auth/visits/reportDetails";
 import DashboardNavbar from "./dashboardNavbar";
 import Navbar from "./navbar";
 import Sidebar from "./sidebar";
+import { FilePreviewModal } from "./globalModal";
 
 const AuthLayout = () => {
   const { t } = useTranslation();
@@ -165,7 +166,7 @@ const AuthLayout = () => {
       {showSidebar ? "" : <Navbar />}
 
       <main className="m-0 row">
-        <div className="col-md-2 p-0">
+        <div className="col-1 col-md-2 p-0">
           {showSidebar && (
             <Sidebar
               routes={filteredRoutes
@@ -175,7 +176,7 @@ const AuthLayout = () => {
           )}
         </div>
 
-        <div className={`col-md-${showSidebar ? 10 : 12} p-0 ps-4`}>
+        <div className={`col-11 col-md-${showSidebar ? 10 : 12} p-0 ps-4`}>
           {showSidebar && <DashboardNavbar />}
 
           <div className="py-5 px-3">
@@ -189,6 +190,8 @@ const AuthLayout = () => {
               {/* <Route path="*" element={<FourZeroFourError />} /> */}
             </Routes>
           </div>
+
+          <FilePreviewModal />
         </div>
       </main>
     </Fragment>

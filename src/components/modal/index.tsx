@@ -8,6 +8,7 @@ interface Props {
   triggerLabel?: string;
   children: React.ReactNode;
   actions?: React.ReactNode;
+  className?: string;
 
   isOpen?: boolean;
   onClose: () => void;
@@ -22,6 +23,7 @@ const Modal = ({
   actions,
   isOpen,
   onClose,
+  className,
   ...rest
 }: Props) => {
   const modalRef = useRef<HTMLDivElement | null>(null);
@@ -57,7 +59,7 @@ const Modal = ({
       )}
 
       <div
-        className="modal fade"
+        className={"modal fade " + className}
         id={name}
         ref={modalRef}
         tabIndex={-1}

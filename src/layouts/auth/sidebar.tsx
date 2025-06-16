@@ -1,18 +1,23 @@
 import {
+  faChevronLeft,
+  faChevronRight,
   faGear,
   faHome,
   faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
 
 import Logo from "../../assets/images/brand/logo-full.png";
+import LogoOnly from "../../assets/images/brand/logo-only.png";
 
 const Sidebar = ({ routes = [{ name: "", route: "", icon: faHome }] }) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const location = useLocation();
+  const [collapsed, setCollapsed] = useState(false);
 
   const fixedRoutes = [
     {
@@ -23,59 +28,85 @@ const Sidebar = ({ routes = [{ name: "", route: "", icon: faHome }] }) => {
     { name: t("Auth.Settings.Title"), route: "/settings", icon: faGear },
   ];
 
+  const toggleSidebar = () => setCollapsed((current) => !current);
+
   return (
-    <div
-      className="d-flex flex-column p-3 bg-light m-0 vh-100 w-100"
-      style={{ overflowY: "hidden" }}
-    >
-      <span
-        className="navbar-brand p-3 mb-5 px-4"
-        onClick={() => navigate("/dashboard")}
-        role="button"
+    <Fragment>
+      <nav
+        className={`sidebar d-flex flex-column flex-shrink-0 position-fixed bg-light min-vh-100 ${
+          collapsed ? "collapsed-sidebar" : ""
+        }`}
+        style={{
+          width: collapsed ? "80px" : "250px",
+          transition: "0.3s",
+          zIndex: 4,
+        }}
       >
-        <img src={Logo} style={{ height: "75px" }} />
-      </span>
+        <div className="p-4">
+          <img src={collapsed ? LogoOnly : Logo} className="w-100" alt="Logo" />
+        </div>
 
-      <ul className="nav nav-pills flex-column mb-3">
-        {routes.map(({ name, route, icon }, i) => (
-          <li className="nav-item my-1" key={i}>
+        <div className="nav flex-column px-2">
+          {routes.map(({ name, route, icon }, i) => (
+            <Fragment key={i}>
+              <h5
+                className={`sidebar-link text-decoration-none p-3 rounded-3 ${
+                  location.pathname.includes(route)
+                    ? "bg-info text-white"
+                    : "text-dark"
+                }`}
+                role="button"
+                onClick={() => {
+                  navigate(route);
+                  setCollapsed(true);
+                }}
+              >
+                <FontAwesomeIcon icon={icon} className="me-2" />
+                {!collapsed && <span>{name}</span>}
+              </h5>
+
+              {i === 0 && (
+                <button
+                  className="btn toggle-btn float-end bg-white rounded-circle border-dark border-1 m-0 position-absolute"
+                  style={{
+                    zIndex: 5,
+                    left: -20,
+                  }}
+                  onClick={toggleSidebar}
+                >
+                  <FontAwesomeIcon
+                    icon={collapsed ? faChevronLeft : faChevronRight}
+                  />
+                </button>
+              )}
+            </Fragment>
+          ))}
+        </div>
+
+        <hr />
+
+        <div className="nav flex-column px-2">
+          {fixedRoutes.map(({ name, route, icon }, i) => (
             <h5
-              onClick={() => navigate(route)}
-              role="button"
-              className={`p-2 rounded-3 ${
+              key={i}
+              className={`sidebar-link text-decoration-none p-3 rounded-3 ${
                 location.pathname.includes(route)
                   ? "bg-info text-white"
                   : "text-dark"
               }`}
-            >
-              <FontAwesomeIcon icon={icon} className="me-2" />
-              {name}
-            </h5>
-          </li>
-        ))}
-      </ul>
-
-      <hr />
-
-      <ul className="nav nav-pills flex-column mb-3">
-        {fixedRoutes.map(({ name, route, icon }, i) => (
-          <li className="nav-item my-1" key={i}>
-            <h5
-              onClick={() => navigate(route)}
               role="button"
-              className={`p-2 rounded-3 ${
-                location.pathname.includes(route)
-                  ? "bg-info text-white"
-                  : "text-dark"
-              }`}
+              onClick={() => {
+                navigate(route);
+                setCollapsed(true);
+              }}
             >
               <FontAwesomeIcon icon={icon} className="me-2" />
-              {name}
+              {!collapsed && <span>{name}</span>}
             </h5>
-          </li>
-        ))}
-      </ul>
-    </div>
+          ))}
+        </div>
+      </nav>
+    </Fragment>
   );
 };
 
