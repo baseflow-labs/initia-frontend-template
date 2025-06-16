@@ -1,5 +1,4 @@
-import { useAppSelector } from "../../store/hooks";
-import Button from "../core/button";
+import { useNavigate } from "react-router";
 
 const BelowInputButton = ({
   introText,
@@ -12,23 +11,19 @@ const BelowInputButton = ({
   route?: string;
   action?: (data?: any) => void;
 }) => {
-  const { loading } = useAppSelector((state) => state.loading);
+  const navigate = useNavigate();
 
   return (
     <div className="pb-0 mb-0 mt-3">
       <small className="pt-2">
         {introText}{" "}
-        <Button
+        <span
           color="ghost"
-          size="sm"
-          type="button"
-          route={route}
-          onClick={route ? undefined : action}
-          disabled={loading.length > 0}
+          onClick={route ? () => navigate(route) : action}
           className="text-decoration-underline text-info"
         >
           {buttonText}
-        </Button>
+        </span>
       </small>
     </div>
   );
