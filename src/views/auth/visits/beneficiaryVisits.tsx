@@ -1,6 +1,5 @@
-import { faCircle, faEdit, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { render } from "@testing-library/react";
 import { Fragment, useEffect, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
@@ -12,11 +11,7 @@ import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
-import {
-  viewDateFormat,
-  viewDayDateFormat,
-  viewDayFormat,
-} from "../../../utils/consts";
+import { viewDateFormat, viewDayFormat } from "../../../utils/consts";
 import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
@@ -151,18 +146,6 @@ const BeneficiariesVisitsView = () => {
     },
   ];
 
-  const actionButtons = [
-    {
-      label: t("Auth.Visits.Report.AddReport"),
-      route: "/visitSchedule/report",
-      outline: true,
-    },
-    {
-      label: t("Auth.Visits.AddVisit"),
-      onClick: () => setOpenModal(true),
-    },
-  ];
-
   const scheduleVisitInputs = () => [
     {
       type: "select",
@@ -263,7 +246,6 @@ const BeneficiariesVisitsView = () => {
         //     onClick: (data: string) => cancelVisit(data),
         //   },
         // ]}
-        actionButtons={actionButtons}
         columns={columns}
         data={visits}
         onPageChange={(i = 0, x = 0) => console.log(i, x)}
