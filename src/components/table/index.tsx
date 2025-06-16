@@ -18,6 +18,7 @@ import { viewDateFormat, viewTimeFormat } from "../../utils/consts";
 import { splitOverNumberPlusLeftover } from "../../utils/function";
 
 import "moment/locale/ar";
+import { triggerFilePreview } from "../../layouts/auth/globalModal";
 
 export interface TableProps {
   size?: number;
@@ -81,23 +82,21 @@ export const dataRender = ({
         <FontAwesomeIcon
           icon={faFile}
           role="button"
-          onClick={() => console.log({ data })}
+          onClick={() => triggerFilePreview(data)}
         />
       );
     case "location":
       return (
-        <FontAwesomeIcon
-          icon={faLocationPin}
-          role="button"
-          onClick={() => console.log({ data })}
-        />
+        <a href={data} target="_blank">
+          <FontAwesomeIcon icon={faLocationPin} />
+        </a>
       );
     case "image":
       return (
         <FontAwesomeIcon
           icon={faEye}
           role="button"
-          onClick={() => console.log({ data })}
+          onClick={() => triggerFilePreview(data)}
         />
       );
     case "stars":

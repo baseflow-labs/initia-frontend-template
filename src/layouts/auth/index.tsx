@@ -30,6 +30,7 @@ import VisitDetailView from "../../views/auth/visits/reportDetails";
 import DashboardNavbar from "./dashboardNavbar";
 import Navbar from "./navbar";
 import Sidebar from "./sidebar";
+import { FilePreviewModal } from "./globalModal";
 
 const AuthLayout = () => {
   const { t } = useTranslation();
@@ -189,6 +190,8 @@ const AuthLayout = () => {
               {/* <Route path="*" element={<FourZeroFourError />} /> */}
             </Routes>
           </div>
+
+          <FilePreviewModal />
         </div>
       </main>
     </Fragment>
