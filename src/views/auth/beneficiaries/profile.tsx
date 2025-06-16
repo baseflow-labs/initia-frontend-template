@@ -7,20 +7,30 @@ import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import { InputSingleProps } from "../../../components/form";
 import { dataRender } from "../../../components/table";
 import ColumnsPage from "../../../layouts/auth/columnsPage";
+import { useAppSelector } from "../../../store/hooks";
 import { dataDateFormat } from "../../../utils/consts";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 
 const BeneficiaryProfileView = () => {
   const { t } = useTranslation();
   const [beneficiary, setBeneficiary] = useState<any>();
+  const { user } = useAppSelector((state) => state.auth);
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    BeneficiaryApi.getById(searchParams.get("id") || "")
-      .then((res) => {
-        setBeneficiary(res as any);
-      })
-      .catch(apiCatchGlobalHandler);
+    if (searchParams.get("id")) {
+      BeneficiaryApi.getById(searchParams.get("id") || "")
+        .then((res) => {
+          setBeneficiary(res as any);
+        })
+        .catch(apiCatchGlobalHandler);
+    } else {
+      BeneficiaryApi.getByUserId()
+        .then((res) => {
+          setBeneficiary(res as any);
+        })
+        .catch(apiCatchGlobalHandler);
+    }
   }, []);
 
   const basicDataInputs: InputSingleProps[] = [
@@ -957,7 +967,7 @@ const BeneficiaryProfileView = () => {
   const cards = [
     {
       title: t("Auth.MembershipRegistration.Form.BasicData"),
-      data: beneficiary,
+      data: beneficiary?.beneficiary || beneficiary,
       map: basicDataInputs,
     },
     {

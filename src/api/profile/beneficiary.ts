@@ -39,8 +39,8 @@ const create = async (data: object) => {
   return res;
 };
 
-const getByUserId = async () => {
-  const res = await api.get(mainPath + "/by-user/" + user.id);
+const getByUserId = async (id?: string) => {
+  const res = await api.get(mainPath + "/by-user/" + (id || user.id));
   return res;
 };
 
