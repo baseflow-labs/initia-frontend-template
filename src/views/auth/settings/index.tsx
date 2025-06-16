@@ -12,6 +12,7 @@ const SettingsPage = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { fontSize, ...metadata } = useAppSelector((state) => state.settings);
+  const { user } = useAppSelector((state) => state.auth);
 
   const onMetadataSubmit = (values = {}) => {
     const data = Object.keys(values)
@@ -34,7 +35,18 @@ const SettingsPage = () => {
       .catch(apiCatchGlobalHandler);
   };
 
-  const inputs = () => [
+  const beneficiaryInputs = () => [
+    {
+      type: "range",
+      name: "fontSize",
+      min: 10,
+      max: 25,
+      label: t("Auth.Settings.FontSize"),
+      defaultValue: 15,
+    },
+  ];
+
+  const staffInputs = () => [
     {
       type: "range",
       name: "fontSize",
@@ -65,7 +77,7 @@ const SettingsPage = () => {
       <h3 className="mb-5">{t("Auth.Settings.Title")}</h3>
 
       <Form
-        inputs={inputs}
+        inputs={user.role === "beneficiary" ? beneficiaryInputs : staffInputs}
         initialValues={{
           fontSize: fontSize,
           ...metadata,
