@@ -12,6 +12,7 @@ import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes, useLocation } from "react-router";
 import { Fragment } from "react/jsx-runtime";
 
+import { useAppSelector } from "../../store/hooks";
 import AidsView from "../../views/auth/aids";
 import AidsBeneficiaryView from "../../views/auth/aids/request";
 import BeneficiariesView from "../../views/auth/beneficiaries";
@@ -33,14 +34,16 @@ import Sidebar from "./sidebar";
 const AuthLayout = () => {
   const { t } = useTranslation();
   const location = useLocation();
+  const { user } = useAppSelector((state) => state.auth);
 
   const authRoutes = [
     {
       name: t("Auth.MembershipRegistration.Title"),
       route: "/apply",
-      showInNav: true,
+      showInNav: user.role === "beneficiary",
       view: <MembershipRegistrationView />,
       icon: faEdit,
+      users: ["beneficiary", "researcher", "admin"],
     },
     {
       name: t("Auth.Dashboard.Title"),
@@ -48,6 +51,7 @@ const AuthLayout = () => {
       view: <DashboardView />,
       showInNav: true,
       icon: faHome,
+      users: ["beneficiary", "researcher", "admin"],
     },
     {
       name: t("Auth.Beneficiaries.Title"),
@@ -55,38 +59,44 @@ const AuthLayout = () => {
       view: <BeneficiariesView />,
       showInNav: true,
       icon: faUsers,
+      users: ["researcher", "admin"],
     },
     {
       name: t("Auth.Beneficiaries.Profile.Title"),
       route: "/beneficiary/review/",
       view: <BeneficiaryFormReview />,
       icon: faUsers,
+      users: ["researcher", "admin"],
     },
     {
       name: t("Auth.Beneficiaries.Profile.Title"),
       route: "/beneficiary/profile/",
       view: <BeneficiaryProfileView />,
       icon: faUsers,
+      users: ["beneficiary", "researcher", "admin"],
     },
     {
-      name: t("Auth.Visits.Title") + " '" + "للباحثين" + "'",
+      name: t("Auth.Visits.Title"),
       route: "/visitSchedule",
       view: <VisitsView />,
       showInNav: true,
       icon: faBezierCurve,
+      users: ["researcher", "admin"],
     },
     {
       name: t("Auth.Visits.Detail.title"),
       route: "/visitSchedule/detail",
       view: <VisitDetailView />,
       icon: faEdit,
+      users: ["researcher", "admin"],
     },
     {
-      name: t("Auth.Visits.Visits") + " '" + "للمستفيدين" + "'",
+      name: t("Auth.Visits.Visits"),
       route: "/beneficiary/visitSchedule",
       view: <BeneficiariesVisitsView />,
       showInNav: true,
       icon: faBezierCurve,
+      users: ["beneficiary"],
     },
     {
       name: t("Auth.Visits.Report.Title"),
@@ -94,50 +104,61 @@ const AuthLayout = () => {
       view: <VisitReportsView />,
       showInNav: false,
       icon: faBezierCurve,
+      users: ["researcher", "admin"],
     },
     {
       name: t("Auth.Visits.Detail.title"),
       route: "/visitSchedule/report/details",
       view: <VisitDetailView />,
       icon: faEdit,
+      users: ["researcher", "admin"],
     },
     {
-      name: t("Auth.Aids.Title") + " '" + "للباحثين" + "'",
+      name: t("Auth.Aids.Title"),
       route: "/aid",
       view: <AidsView />,
       showInNav: true,
       icon: faBoxOpen,
+      users: ["researcher", "admin"],
     },
     {
-      name: t("Auth.Aids.Beneficiary.Title") + " '" + "للمستفيدين" + "'",
+      name: t("Auth.Aids.Beneficiary.Title"),
       route: "/beneficiary/aid",
       view: <AidsBeneficiaryView />,
       showInNav: true,
       icon: faBoxOpen,
+      users: ["beneficiary"],
     },
     {
-      name: t("Auth.Beneficiary.Profile.Title") + " '" + "للمستفيدين" + "'",
+      name: t("Auth.Beneficiary.Profile.Title"),
       route: "/beneficiary/profile",
       view: <BeneficiaryOwnProfile />,
       showInNav: true,
       icon: faUser,
+      users: ["beneficiary"],
     },
     {
       name: t("Auth.ContactUs.Title"),
       route: "/contact-us",
       view: <ContactUsPage />,
       icon: faInfoCircle,
+      users: ["beneficiary", "researcher", "admin"],
     },
     {
       name: t("Auth.Settings.Title"),
       route: "/settings",
       view: <SettingsPage />,
       icon: faGear,
+      users: ["beneficiary", "researcher", "admin"],
     },
   ];
 
   const showSidebar =
     location.pathname !== "/apply" && location.pathname !== "apply";
+
+  const filteredRoutes = authRoutes.filter(({ users }) =>
+    users.includes(user.role)
+  );
 
   return (
     <Fragment>
@@ -147,7 +168,7 @@ const AuthLayout = () => {
         <div className="col-md-2 p-0">
           {showSidebar && (
             <Sidebar
-              routes={authRoutes
+              routes={filteredRoutes
                 .filter(({ showInNav }) => showInNav)
                 .map(({ view, ...rest }) => ({ ...rest }))}
             />
@@ -159,7 +180,7 @@ const AuthLayout = () => {
 
           <div className="py-5 px-3">
             <Routes>
-              {authRoutes.map(({ name, route, view }, i) => (
+              {filteredRoutes.map(({ name, route, view }, i) => (
                 <Route path={route} element={view} key={i} />
               ))}
 
