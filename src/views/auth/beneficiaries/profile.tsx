@@ -7,14 +7,12 @@ import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import { InputSingleProps } from "../../../components/form";
 import { dataRender } from "../../../components/table";
 import ColumnsPage from "../../../layouts/auth/columnsPage";
-import { useAppSelector } from "../../../store/hooks";
 import { dataDateFormat } from "../../../utils/consts";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 
 const BeneficiaryProfileView = () => {
   const { t } = useTranslation();
   const [beneficiary, setBeneficiary] = useState<any>();
-  const { user } = useAppSelector((state) => state.auth);
   const [searchParams] = useSearchParams();
 
   useEffect(() => {

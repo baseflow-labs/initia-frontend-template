@@ -1,26 +1,6 @@
 import api from "..";
 import store, { RootState } from "../../store/store";
 
-interface Props {
-  socialStatus: string;
-  fullName: string;
-  nationality: string;
-  dob: string;
-  idExpiryDate: string;
-  idNumber: string;
-  familyRecordPhoto: string;
-  guardianIdPhoto: string;
-  gender: string;
-  healthStatus: string;
-  diseases: string;
-  incurableDisease?: string[];
-  healthStatementPhoto: string;
-  nationalRecord: string;
-  housing: string;
-  income: string;
-  contactsBank: string;
-}
-
 const mainPath = "/aid";
 const { user } = (store.getState() as RootState).auth;
 

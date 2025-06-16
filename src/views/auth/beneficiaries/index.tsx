@@ -189,10 +189,6 @@ const BeneficiariesView = () => {
     },
   ];
 
-  const actionButtons = [
-    { label: t("Auth.Beneficiaries.AddBeneficiary"), route: "/apply" },
-  ];
-
   const columns = [
     {
       type: "text",

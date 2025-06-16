@@ -1,11 +1,10 @@
 import { faPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useField } from "formik";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import Select, { components, StylesConfig, MultiValue } from "react-select";
-import { useField } from "formik";
+import Select, { components, MultiValue, StylesConfig } from "react-select";
 import { InputProps } from "..";
-import { commonInputClasses } from "../../../utils/consts";
 
 interface OptionType {
   value: string;

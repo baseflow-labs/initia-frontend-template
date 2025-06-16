@@ -3,7 +3,7 @@ import { useAppSelector } from "../../../store/hooks";
 
 const DashboardView = () => {
   const { t } = useTranslation();
-  const { logo, name } = useAppSelector((state) => state.settings);
+  const { name } = useAppSelector((state) => state.settings);
 
   return (
     <div className="text-info text-center">
