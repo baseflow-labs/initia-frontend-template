@@ -25,8 +25,8 @@ const Sidebar = ({ routes = [{ name: "", route: "", icon: faHome }] }) => {
 
   return (
     <div
-      className="d-flex flex-column p-3 bg-light m-0 vh-100 w-100"
-      style={{ overflowY: "hidden" }}
+      className="d-flex flex-column p-3 bg-light m-0 min-vh-100 h-100 w-100"
+      style={{ overflowY: "auto" }}
     >
       <span
         className="navbar-brand p-3 mb-5 px-4"

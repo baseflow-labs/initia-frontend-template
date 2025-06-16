@@ -164,7 +164,7 @@ const AuthLayout = () => {
     <Fragment>
       {showSidebar ? "" : <Navbar />}
 
-      <main className="m-0 row">
+      <main className="m-0 d-flex">
         <div className="col-md-2 p-0">
           {showSidebar && (
             <Sidebar
