@@ -1,9 +1,4 @@
-import {
-  faCircle,
-  faEdit,
-  faNewspaper,
-  faXmark,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCircle, faEdit, faNewspaper, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useEffect, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -17,11 +12,7 @@ import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import { viewDayDateFormat } from "../../../utils/consts";
-import {
-  apiCatchGlobalHandler,
-  renderDataFromOptions,
-  statusColorRender,
-} from "../../../utils/function";
+import { apiCatchGlobalHandler, renderDataFromOptions, statusColorRender } from "../../../utils/function";
 
 const VisitsView = () => {
   const { t } = useTranslation();
@@ -34,7 +25,7 @@ const VisitsView = () => {
   const [selectOptions, setSelectOptions] = useState({
     beneficiaries: [{ id: "", fullName: "" }],
   });
-  const [visits, setVisits] = useState([{}]);
+  const [visits, setVisits] = useState([{ id: "", visitReport: {} }]);
 
   const getData = () => {
     VisitApi.getAll()
@@ -242,20 +233,26 @@ const VisitsView = () => {
             icon: faEdit,
             spread: true,
             label: t("Auth.Visits.Report.AddReport"),
-            onClick: (data: string) =>
-              navigate("/visitSchedule/report?id=" + data),
+            onClick: (id: string) => navigate("/visitSchedule/report?id=" + id),
           },
           {
             icon: faNewspaper,
             spread: true,
             label: t("Auth.Visits.Report.ViewReport"),
-            onClick: (data: string) =>
-              navigate("/visitSchedule/report/details/?id=" + data),
+            onClick: (id: string) =>
+              visits.find((v) => v.id == id)?.visitReport
+                ? navigate("/visitSchedule/report/details/?id=" + id)
+                : dispatch(
+                    addNotification({
+                      msg: t("Auth.Visits.Report.ThereIsNoReport"),
+                      type: "err",
+                    })
+                  ),
           },
           {
             icon: faXmark,
             label: t("Auth.Visits.CancelVisit"),
-            onClick: (data: string) => cancelVisit(data),
+            onClick: (id: string) => cancelVisit(id),
           },
         ]}
         actionButtons={actionButtons}

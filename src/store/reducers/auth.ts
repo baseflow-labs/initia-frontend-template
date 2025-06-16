@@ -50,7 +50,7 @@ const auth = (
       return {
         token: null,
         refreshToken: null,
-        user: {},
+        user: { role: "" },
       };
     }
 

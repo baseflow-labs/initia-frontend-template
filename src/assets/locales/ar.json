@@ -345,6 +345,7 @@
         "RoomsCount": "عدد الغرف",
         "TheDevice": "الجهاز",
         "TheFurniture": "قطعة الأثاث",
+        "ThereIsNoReport": "لم يتم إدخال تقرير للزيارة المختارة",
         "Working": "يعمل"
       },
       "Statuses": {

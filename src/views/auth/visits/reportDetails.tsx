@@ -1,12 +1,10 @@
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router";
+
 import * as VisitApi from "../../../api/visits/visits";
 import DynamicTable from "../../../components/table";
-import {
-  apiCatchGlobalHandler,
-  renderDataFromOptions,
-} from "../../../utils/function";
+import { apiCatchGlobalHandler, renderDataFromOptions } from "../../../utils/function";
 
 type visitReportRoomContentsType = {
   id: string;
@@ -178,7 +176,9 @@ const VisitDetailView = () => {
   const devicesNumber = roomItems?.length - furnitureNumber;
 
   const tabs = [
-    `${t("Auth.Visits.Detail.roomsNumber")}  ${visit?.visitReportRooms.length}`,
+    `${t("Auth.Visits.Detail.roomsNumber")}  ${
+      visit?.visitReportRooms.length || 0
+    }`,
     `${t("Auth.Visits.Detail.devicesNumber")}  ${devicesNumber}`,
     `${t("Auth.Visits.Detail.furnitureNumber")}  ${furnitureNumber}`,
   ];
