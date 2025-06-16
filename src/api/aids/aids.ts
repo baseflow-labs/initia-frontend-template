@@ -30,7 +30,15 @@ const getAll = async () => {
 };
 
 const create = async (data: object) => {
-  const res = await api.post(mainPath, { beneficiary: user.id, ...data });
+  const res = await api.post(
+    mainPath,
+    { beneficiary: user.id, ...data },
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
   return res;
 };
 
