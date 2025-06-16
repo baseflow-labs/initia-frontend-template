@@ -48,18 +48,22 @@ const Sidebar = ({ routes = [{ name: "", route: "", icon: faHome }] }) => {
 
         <div className="nav flex-column px-2">
           {routes.map(({ name, route, icon }, i) => (
-            <h5
-              key={i}
-              className={`sidebar-link text-decoration-none p-3 rounded-3 ${
-                location.pathname.includes(route)
-                  ? "bg-info text-white"
-                  : "text-dark"
-              }`}
-              role="button"
-              onClick={() => navigate(route)}
-            >
-              <FontAwesomeIcon icon={icon} className="me-2" />
-              {!collapsed && <span>{name}</span>}
+            <Fragment key={i}>
+              <h5
+                className={`sidebar-link text-decoration-none p-3 rounded-3 ${
+                  location.pathname.includes(route)
+                    ? "bg-info text-white"
+                    : "text-dark"
+                }`}
+                role="button"
+                onClick={() => {
+                  navigate(route);
+                  setCollapsed(true);
+                }}
+              >
+                <FontAwesomeIcon icon={icon} className="me-2" />
+                {!collapsed && <span>{name}</span>}
+              </h5>
 
               {i === 0 && (
                 <button
@@ -75,7 +79,7 @@ const Sidebar = ({ routes = [{ name: "", route: "", icon: faHome }] }) => {
                   />
                 </button>
               )}
-            </h5>
+            </Fragment>
           ))}
         </div>
 
@@ -91,7 +95,10 @@ const Sidebar = ({ routes = [{ name: "", route: "", icon: faHome }] }) => {
                   : "text-dark"
               }`}
               role="button"
-              onClick={() => navigate(route)}
+              onClick={() => {
+                navigate(route);
+                setCollapsed(true);
+              }}
             >
               <FontAwesomeIcon icon={icon} className="me-2" />
               {!collapsed && <span>{name}</span>}
