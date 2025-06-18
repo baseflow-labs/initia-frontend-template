@@ -262,7 +262,7 @@ const BeneficiariesView = () => {
       // actionButtons={actionButtons}
       columns={columns}
       data={beneficiaries}
-      tableActions={[
+      tableActions={(id?: string) => [
         {
           icon: faCalendarDays,
           spread: true,

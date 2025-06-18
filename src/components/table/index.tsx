@@ -31,7 +31,7 @@ export interface TableProps {
   data: { id?: string }[];
   onPageChange: (page: number, size: number) => void;
   noPagination?: boolean;
-  actions?: {
+  actions?: (id?: string) => {
     label: string;
     icon: IconProp;
     spread?: boolean;
@@ -165,7 +165,7 @@ const DynamicTable = ({
             </th>
           ))}
 
-          {actions?.length && (
+          {actions && actions()?.length && (
             <th className="py-3" scope="col">
               {t("Global.Labels.Action")}
             </th>
@@ -208,9 +208,9 @@ const DynamicTable = ({
                 )
               )}
 
-              {actions?.length && (
+              {actions && actions()?.length && (
                 <td className="py-3 d-flex" scope="row">
-                  {actions
+                  {actions(row.id)
                     .filter(({ spread }) => spread)
                     .map(({ icon, label, onClick }, y) => (
                       <FontAwesomeIcon
@@ -226,7 +226,7 @@ const DynamicTable = ({
                       />
                     ))}
 
-                  {actions.filter(({ spread }) => !spread).length ? (
+                  {actions(row.id).filter(({ spread }) => !spread).length ? (
                     <div className="dropdown">
                       <FontAwesomeIcon
                         icon={faEllipsisVertical}
@@ -237,7 +237,7 @@ const DynamicTable = ({
                       />
 
                       <ul className="dropdown-menu">
-                        {actions
+                        {actions(row.id)
                           .filter(({ spread }) => !spread)
                           .map(({ icon, label, onClick }, y) => (
                             <li key={y}>
@@ -267,7 +267,11 @@ const DynamicTable = ({
       {!noPagination && (
         <tfoot>
           <tr>
-            <th colSpan={columns.length + 1 + (actions?.length ? 1 : 0)}>
+            <th
+              colSpan={
+                columns.length + 1 + (actions && actions()?.length ? 1 : 0)
+              }
+            >
               <div className="d-flex">
                 <nav className="my-auto me-2">
                   <ul className="pagination">

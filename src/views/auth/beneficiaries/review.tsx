@@ -255,54 +255,64 @@ const BeneficiaryFormReview = () => {
         columns={columns}
         data={data}
         onPageChange={() => console.log(1)}
-        actions={[
-          {
-            icon: faCheck,
-            spread: true,
-            label: t("Auth.Beneficiaries.Profile.ConfirmData"),
-            onClick: (property: string) => {
-              setDataReview((current) =>
-                current.map((row) =>
-                  row.property === property && row.table === tab
-                    ? {
-                        ...row,
-                        note: "",
-                        table: tab,
-                        property,
-                        needUpdate: false,
-                        confirm: true,
-                        new: true,
-                      }
-                    : row
-                )
-              );
+        actions={(id?: string) => {
+          const fixed = [
+            {
+              icon: faCheck,
+              spread: true,
+              label: t("Auth.Beneficiaries.Profile.ConfirmData"),
+              onClick: (property: string) => {
+                setDataReview((current) =>
+                  current.map((row) =>
+                    row.property === property && row.table === tab
+                      ? {
+                          ...row,
+                          note: "",
+                          table: tab,
+                          property,
+                          needUpdate: false,
+                          confirm: true,
+                          new: true,
+                        }
+                      : row
+                  )
+                );
+              },
             },
-          },
-          {
-            icon: faEdit,
-            spread: true,
-            label: t("Auth.Beneficiaries.Profile.editRequest"),
-            onClick: (data: string) =>
-              setUpdateModalData(
-                dataReview.find(
-                  (r) => r.property === data && r.table === tab
-                ) || {}
-              ),
-          },
-          {
-            icon: faBoxOpen,
-            spread: true,
-            label: t("Auth.Beneficiaries.Profile.archive"),
-            onClick: (id: string) => {
-              const archive = dataArchive.filter(
-                (r) => r.property === id && r.table === tab
-              );
-              if (archive) {
-                setArchiveModalData(archive);
-              }
+            {
+              icon: faEdit,
+              spread: true,
+              label: t("Auth.Beneficiaries.Profile.editRequest"),
+              onClick: (data: string) =>
+                setUpdateModalData(
+                  dataReview.find(
+                    (r) => r.property === data && r.table === tab
+                  ) || {}
+                ),
             },
-          },
-        ]}
+          ];
+
+          const conditional = [
+            {
+              icon: faBoxOpen,
+              spread: true,
+              label: t("Auth.Beneficiaries.Profile.archive"),
+              onClick: (id: string) => {
+                const archive = dataArchive.filter(
+                  (r) => r.property === id && r.table === tab
+                );
+                if (archive) {
+                  setArchiveModalData(archive);
+                }
+              },
+            },
+          ];
+
+          return dataArchive.filter((r) => r.property === id && r.table === tab)
+            ?.length
+            ? [...fixed, ...conditional]
+            : fixed;
+        }}
       />
 
       <Modal

@@ -224,7 +224,7 @@ const AidsView = () => {
         title={title}
         filters={filters}
         actionButtons={actionButtons}
-        tableActions={[
+        tableActions={(id?: string) => [
           {
             label: t("Auth.Aids.Statuses.Grant"),
             icon: faCheck,
