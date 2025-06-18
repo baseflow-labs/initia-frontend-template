@@ -14,11 +14,9 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import i18n from "../../i18next";
+import { triggerFilePreview } from "../../layouts/auth/globalModal";
 import { viewDateFormat, viewTimeFormat } from "../../utils/consts";
 import { splitOverNumberPlusLeftover } from "../../utils/function";
-
-import "moment/locale/ar";
-import { triggerFilePreview } from "../../layouts/auth/globalModal";
 
 export interface TableProps {
   size?: number;
