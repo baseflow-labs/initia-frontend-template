@@ -7,13 +7,17 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router";
-import * as DataReviewApi from "../../../api/profile/dataReview";
+
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
+import * as DataReviewApi from "../../../api/profile/dataReview";
+import Button from "../../../components/core/button";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import TabsHeader from "../../../components/tab";
 import DynamicTable, { dataRender } from "../../../components/table";
+import { addNotification } from "../../../store/actions/notifications";
 import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
@@ -24,9 +28,6 @@ import {
   beneficiaryTabs,
   inputsData,
 } from "../../../utils/inputsData";
-import Button from "../../../components/core/button";
-import { useDispatch } from "react-redux";
-import { addNotification } from "../../../store/actions/notifications";
 
 interface ReviewProps {
   property?: string;
@@ -71,21 +72,22 @@ const BeneficiaryFormReview = () => {
         });
 
         DataReviewApi.getBeneficiaryDataReview(res.id)
-          .then((res: any) => setDataReview(res))
-          .catch(apiCatchGlobalHandler);
-
-        setDataReview((current) =>
-          [...emptyReview, ...current].reduce(
-            (final: ReviewProps[], current) =>
-              final.findIndex(
-                (f: any) =>
-                  f.property === current.property && f.table === current.table
-              ) >= 0
-                ? final
-                : [...final, current],
-            []
+          .then((res: any) =>
+            setDataReview(() =>
+              [...emptyReview, ...res].reduce(
+                (final: ReviewProps[], current) =>
+                  final.find(
+                    (f) =>
+                      f.property === current.property &&
+                      f.table === current.table
+                  )
+                    ? final
+                    : [...final, current],
+                []
+              )
+            )
           )
-        );
+          .catch(apiCatchGlobalHandler);
       })
       .catch(apiCatchGlobalHandler);
   }, []);
@@ -243,22 +245,23 @@ const BeneficiaryFormReview = () => {
             icon: faCheck,
             spread: true,
             label: t("Auth.Beneficiaries.Profile.ConfirmData"),
-            onClick: (data: string) =>
+            onClick: (property: string) => {
               setDataReview((current) =>
                 current.map((row) =>
-                  row.property === data && row.table === tab
+                  row.property === property && row.table === tab
                     ? {
                         ...row,
                         note: "",
                         table: tab,
-                        property: data,
+                        property,
                         needUpdate: false,
                         confirm: true,
                         new: true,
                       }
                     : row
                 )
-              ),
+              );
+            },
           },
           {
             icon: faEdit,
