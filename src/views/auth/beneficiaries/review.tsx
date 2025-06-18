@@ -5,7 +5,7 @@ import {
   faEdit,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router";
@@ -54,7 +54,7 @@ const BeneficiaryFormReview = () => {
 
   const fieldsToShow = inputsData(t);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     BeneficiaryApi.getById(searchParams.get("id") || "")
       .then((res: any) => {
         setBeneficiary(res);
@@ -72,9 +72,15 @@ const BeneficiaryFormReview = () => {
         });
 
         DataReviewApi.getBeneficiaryDataReview(res.id)
-          .then((res: any) =>
+          .then((res: any) => {
+            const resp = res.map(({ needUpdate = false, ...rest }) => ({
+              ...rest,
+              needUpdate,
+              confirm: !needUpdate,
+            }));
+
             setDataReview(() =>
-              [...emptyReview, ...res].reduce(
+              [...resp, ...emptyReview].reduce(
                 (final: ReviewProps[], current) =>
                   final.find(
                     (f) =>
@@ -85,8 +91,8 @@ const BeneficiaryFormReview = () => {
                     : [...final, current],
                 []
               )
-            )
-          )
+            );
+          })
           .catch(apiCatchGlobalHandler);
       })
       .catch(apiCatchGlobalHandler);

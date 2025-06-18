@@ -11,6 +11,7 @@ import store from "./store/store";
 import "./styles/index.css";
 import "./styles/stepper.css";
 import "@fontsource/cairo";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/css/bootstrap.rtl.min.css";
 import "moment/locale/ar";
 
