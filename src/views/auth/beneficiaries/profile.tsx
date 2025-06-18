@@ -1000,7 +1000,7 @@ const BeneficiaryProfileView = () => {
   return (
     <ColumnsPage>
       <Fragment>
-        <h2>{beneficiary?.fullName}</h2>
+        <h2>{beneficiary?.fullName || beneficiary?.beneficiary?.fullName}</h2>
 
         {cards?.map(({ title, data, map }, i) => (
           <div className="col-md-6 my-5" key={i}>
