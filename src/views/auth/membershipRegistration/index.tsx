@@ -24,7 +24,6 @@ import Button from "../../../components/core/button";
 import Form from "../../../components/form";
 import WizardFormStepper from "../../../components/form/wizard/stepper";
 import { addNotification } from "../../../store/actions/notifications";
-import { useAppSelector } from "../../../store/hooks";
 import { dataDateFormat } from "../../../utils/consts";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import DependentsFormView from "./Dependents";
@@ -34,7 +33,6 @@ const MembershipRegistrationView = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
-  const { user } = useAppSelector((state) => state.auth);
 
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({
@@ -43,7 +41,7 @@ const MembershipRegistrationView = () => {
     status: { status: "" },
     housing: {},
     income: {},
-    user: {},
+    user: { id: "" },
     dependents: [{ fullName: "", idNumber: "" }],
     nationalRecord: {},
   });
@@ -842,7 +840,7 @@ const MembershipRegistrationView = () => {
   ];
 
   const HelpButton = () => {
-    const alreadyRequested = formData.status.status === "Need Help";
+    const alreadyRequested = formData.status?.status === "Need Help";
 
     return (
       <Button
@@ -881,7 +879,10 @@ const MembershipRegistrationView = () => {
           customButtons={<HelpButton />}
           initialValues={formData.beneficiary}
           onFormSubmit={(e) => {
-            BeneficiaryApi.createOrUpdate({ ...e, user: user?.id })
+            BeneficiaryApi.createOrUpdate({
+              ...e,
+              user: formData.user?.id,
+            })
               .then((res) => {
                 onNextStep({ ...e, ...res }, "beneficiary");
               })
