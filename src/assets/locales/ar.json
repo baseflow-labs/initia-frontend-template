@@ -27,6 +27,7 @@
       "Beneficiary": "المستفيد",
       "BeneficiaryName": "اسم المستفيد",
       "Profile": {
+        "Archive": "أرشيف {{property}}",
         "ConfirmData": "تأكيد المعلومة",
         "ProfileCompletion": "استكمال طلب المستفيد",
         "ProfileDetails": "تفاصيل ملف المستفيد",

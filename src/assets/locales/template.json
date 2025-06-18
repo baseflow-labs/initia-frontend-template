@@ -27,6 +27,7 @@
       "Beneficiary": "Beneficiary",
       "BeneficiaryName": "Beneficiary Name",
       "Profile": {
+        "Archive": "{{property}} Archive",
         "ConfirmData": "Confirm Data",
         "ProfileCompletion": "Profile Completion",
         "ProfileDetails": "Profile Details",

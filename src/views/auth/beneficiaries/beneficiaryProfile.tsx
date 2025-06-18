@@ -1098,7 +1098,6 @@ const BeneficiaryOwnProfile = () => {
                             dataReview: id,
                           })
                         }
-                        submitText={t("Global.Form.Labels.SaveData")}
                       />
                     )}
                   </div>
