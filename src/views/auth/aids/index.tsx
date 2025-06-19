@@ -19,8 +19,10 @@ import {
 const AidsView = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const [aids, setAids] = useState([{ id: "", beneficiaryId: "" }]);
+
   const [openModal, setOpenModal] = useState(false);
+
+  const [aids, setAids] = useState<{ id: string; beneficiaryId: string }[]>([]);
   const [selectOptions, setSelectOptions] = useState({
     beneficiaries: [{ id: "", fullName: "" }],
   });

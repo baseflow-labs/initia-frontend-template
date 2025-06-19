@@ -29,7 +29,9 @@ const VisitReportsView = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+
   const { user } = useAppSelector((state) => state.auth);
+
   const [data, setData] = useState({
     note: "",
     rooms: [

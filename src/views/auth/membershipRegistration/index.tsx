@@ -35,6 +35,7 @@ const MembershipRegistrationView = () => {
   const [searchParams] = useSearchParams();
 
   const [currentStep, setCurrentStep] = useState(0);
+
   const [formData, setFormData] = useState({
     beneficiary: { id: "", fullName: "" },
     contactsBank: {},

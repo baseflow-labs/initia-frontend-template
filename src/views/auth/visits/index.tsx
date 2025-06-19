@@ -31,10 +31,13 @@ const VisitsView = () => {
 
   const [openModal, setOpenModal] = useState(false);
   const [crudData, setCrudData] = useState({});
+
   const [selectOptions, setSelectOptions] = useState({
     beneficiaries: [{ id: "", fullName: "" }],
   });
-  const [visits, setVisits] = useState([{ id: "", visitReport: {} }]);
+  const [visits, setVisits] = useState<{ id: string; visitReport: object }[]>(
+    []
+  );
 
   const getData = () => {
     VisitApi.getAll()

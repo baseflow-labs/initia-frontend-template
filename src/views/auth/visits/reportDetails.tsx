@@ -4,7 +4,10 @@ import { useSearchParams } from "react-router";
 
 import * as VisitApi from "../../../api/visits/visits";
 import DynamicTable from "../../../components/table";
-import { apiCatchGlobalHandler, renderDataFromOptions } from "../../../utils/function";
+import {
+  apiCatchGlobalHandler,
+  renderDataFromOptions,
+} from "../../../utils/function";
 
 type visitReportRoomContentsType = {
   id: string;
@@ -30,6 +33,7 @@ type visitType = {
 const VisitDetailView = () => {
   const { t } = useTranslation();
   const [searchParams] = useSearchParams();
+
   const [visit, setVisit] = useState<visitType>();
 
   const getData = () => {

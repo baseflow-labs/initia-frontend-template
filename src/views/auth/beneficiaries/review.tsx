@@ -49,13 +49,14 @@ const BeneficiaryFormReview = () => {
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
 
+  const [archiveModalData, setArchiveModalData] = useState<ReviewProps[]>([]);
+  const [updateModalData, setUpdateModalData] = useState<ReviewProps>({});
+
   const [beneficiary, setBeneficiary] = useState<any>();
   const [tab, setTab] = useState<string>("beneficiary");
   const [dependent, setDependent] = useState<string>("");
   const [dataReview, setDataReview] = useState<ReviewProps[]>([]);
   const [dataArchive, setDataArchive] = useState<ReviewProps[]>([]);
-  const [archiveModalData, setArchiveModalData] = useState<ReviewProps[]>([]);
-  const [updateModalData, setUpdateModalData] = useState<ReviewProps>({});
 
   const fieldsToShow = inputsData(t);
 

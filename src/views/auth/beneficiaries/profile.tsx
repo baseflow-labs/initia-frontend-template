@@ -12,8 +12,9 @@ import { apiCatchGlobalHandler } from "../../../utils/function";
 
 const BeneficiaryProfileView = () => {
   const { t } = useTranslation();
-  const [beneficiary, setBeneficiary] = useState<any>();
   const [searchParams] = useSearchParams();
+
+  const [beneficiary, setBeneficiary] = useState<any>();
 
   useEffect(() => {
     if (searchParams.get("id")) {

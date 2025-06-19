@@ -1,5 +1,5 @@
 import moment from "moment";
-import { Fragment, useEffect, useLayoutEffect, useState } from "react";
+import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
@@ -19,6 +19,7 @@ const BeneficiaryOwnProfile = () => {
   const dispatch = useDispatch();
 
   const { user } = useAppSelector((state) => state.auth);
+
   const [beneficiary, setBeneficiary] = useState<any>();
   const [dataReviews, setDataReviews] =
     useState<
