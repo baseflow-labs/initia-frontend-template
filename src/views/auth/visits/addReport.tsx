@@ -24,6 +24,16 @@ import {
   renderDataFromOptions,
 } from "../../../utils/function";
 
+const getInitialContent = () => ({
+  content: "",
+  type: "",
+  photo: null,
+  status: "",
+  evaluation: 0,
+  recommendation: "",
+  note: "",
+});
+
 const VisitReportsView = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -39,29 +49,14 @@ const VisitReportsView = () => {
         type: "",
         recommendation: "",
         note: "",
-        contents: [
-          {
-            content: "",
-            type: "",
-            photo: "",
-            status: "",
-            evaluation: 0,
-          },
-        ],
+        contents: [getInitialContent()],
       },
     ],
   });
+
   const [roomDetails, setRoomDetails] = useState({
     type: "",
-    contents: [
-      {
-        content: "",
-        type: "",
-        photo: "",
-        status: "",
-        evaluation: 0,
-      },
-    ],
+    contents: [getInitialContent()],
     recommendation: "",
     note: "",
     index: -1,
@@ -128,14 +123,8 @@ const VisitReportsView = () => {
   ];
 
   const roomContentStatuses = [
-    {
-      value: "Working",
-      label: t("Auth.Visits.Report.Working"),
-    },
-    {
-      value: "Not Working",
-      label: t("Auth.Visits.Report.NotWorking"),
-    },
+    { value: "Working", label: t("Auth.Visits.Report.Working") },
+    { value: "Not Working", label: t("Auth.Visits.Report.NotWorking") },
     {
       value: "Needs Maintenance",
       label: t("Auth.Visits.Report.NeedsMaintenance"),
@@ -163,6 +152,15 @@ const VisitReportsView = () => {
       .catch(apiCatchGlobalHandler);
   };
 
+  const updateContentAtIndex = (index = 0, updated = {}) => {
+    setRoomDetails((current) => ({
+      ...current,
+      contents: current.contents.map((content, i) =>
+        i === index ? { ...content, ...updated } : content
+      ),
+    }));
+  };
+
   return (
     <div className="border border-3 border-dark rounded-5 mx-auto w-50 p-5">
       <h3>
@@ -184,18 +182,7 @@ const VisitReportsView = () => {
                 onClick={() =>
                   setRoomDetails((current) => ({
                     ...current,
-                    contents: [
-                      ...current.contents,
-                      {
-                        content: "",
-                        type: "",
-                        photo: "",
-                        status: "",
-                        evaluation: 0,
-                        recommendation: "",
-                        note: "",
-                      },
-                    ],
+                    contents: [...current.contents, getInitialContent()],
                   }))
                 }
               >
@@ -225,53 +212,38 @@ const VisitReportsView = () => {
             <div className="my-4 row" key={i}>
               <div className="col-md-10">
                 <LabelView
-                  name="type"
+                  name={`type-${i}`}
                   label={t("Auth.Visits.Report.ContentXType", {
                     number: i + 1,
                   })}
                 />
-
                 <SelectInput
                   sizing="lg"
-                  name="type"
+                  name={`type-${i}`}
                   value={content.type}
                   options={contentTypes}
                   onChange={(e) =>
-                    setRoomDetails((current) => ({
-                      ...current,
-                      contents: current.contents.map((content, y) =>
-                        y === i
-                          ? {
-                              ...content,
-                              type: e.target.value,
-                            }
-                          : content
-                      ),
-                    }))
+                    updateContentAtIndex(i, { type: e.target.value })
                   }
                 />
               </div>
-
               <div className="col-md-2 pt-4">
-                <div className="mt-2">
-                  <Button
-                    color="white"
-                    className="btn-lg border-dark w-100"
-                    onClick={() =>
-                      setRoomDetails((current) => ({
-                        ...current,
-                        contents: current.contents.filter((_, y) => !(y === i)),
-                      }))
-                    }
-                  >
-                    <FontAwesomeIcon icon={faTrash} className="text-danger" />
-                  </Button>
-                </div>
+                <Button
+                  color="white"
+                  className="btn-lg border-dark w-100"
+                  onClick={() =>
+                    setRoomDetails((current) => ({
+                      ...current,
+                      contents: current.contents.filter((_, y) => y !== i),
+                    }))
+                  }
+                >
+                  <FontAwesomeIcon icon={faTrash} className="text-danger" />
+                </Button>
               </div>
-
               <div className="col-md-12 pt-3">
                 <LabelView
-                  name="content"
+                  name={`content-${i}`}
                   label={t("Auth.Visits.Report.ContentType", {
                     type:
                       content.type === "Device"
@@ -279,34 +251,22 @@ const VisitReportsView = () => {
                         : t("Auth.Visits.Report.TheFurniture"),
                   })}
                 />
-
                 <SelectInput
                   sizing="lg"
-                  name="content"
+                  name={`content-${i}`}
                   value={content.content}
                   options={
                     contentTypes.find(({ value }) => value === content.type)
-                      ?.subList
+                      ?.subList || []
                   }
                   onChange={(e) =>
-                    setRoomDetails((current) => ({
-                      ...current,
-                      contents: current.contents.map((content, y) =>
-                        y === i
-                          ? {
-                              ...content,
-                              content: e.target.value,
-                            }
-                          : content
-                      ),
-                    }))
+                    updateContentAtIndex(i, { content: e.target.value })
                   }
                 />
               </div>
-
               <div className="col-md-12 pt-3">
                 <LabelView
-                  name="photo"
+                  name={`photo-${i}`}
                   label={t("Auth.Visits.Report.RoomContentPhoto", {
                     type:
                       content.type === "Device"
@@ -314,31 +274,18 @@ const VisitReportsView = () => {
                         : t("Auth.Visits.Report.TheFurniture"),
                   })}
                 />
-
                 <DefaultInput
-                  name="photo"
+                  name={`photo-${i}`}
                   type="file"
-                  value={content.photo}
                   onChange={(e) =>
-                    setRoomDetails((current) => ({
-                      ...current,
-                      contents: current.contents.map((content, y) =>
-                        y === i
-                          ? {
-                              ...content,
-                              photo: e.target.value,
-                            }
-                          : content
-                      ),
-                    }))
+                    updateContentAtIndex(i, { photo: e.target.files?.[0] })
                   }
                   className="mb-4"
                 />
               </div>
-
               <div className="col-md-12 pt-3">
                 <LabelView
-                  name="status"
+                  name={`status-${i}`}
                   label={t("Auth.Visits.Report.RoomContentStatus", {
                     type:
                       content.type === "Device"
@@ -352,17 +299,7 @@ const VisitReportsView = () => {
                   options={roomContentStatuses}
                   value={content.status}
                   onChange={(e) =>
-                    setRoomDetails((current) => ({
-                      ...current,
-                      contents: current.contents.map((content, y) =>
-                        y === i
-                          ? {
-                              ...content,
-                              status: e.target.value,
-                            }
-                          : content
-                      ),
-                    }))
+                    updateContentAtIndex(i, { status: e.target.value })
                   }
                   className="mb-4"
                 />
@@ -370,7 +307,7 @@ const VisitReportsView = () => {
 
               <div className="col-md-12 pt-3">
                 <LabelView
-                  name="evaluation"
+                  name={`evaluation-${i}`}
                   label={t("Auth.Visits.Report.RoomContentEvaluation", {
                     type:
                       content.type === "Device"
@@ -381,27 +318,12 @@ const VisitReportsView = () => {
 
                 <RadioInput
                   name={`evaluation-${i}`}
-                  options={[
-                    { value: 0 },
-                    { value: 1 },
-                    { value: 2 },
-                    { value: 3 },
-                    { value: 4 },
-                    { value: 5 },
-                  ]}
+                  options={[0, 1, 2, 3, 4, 5].map((value) => ({ value }))}
                   value={content.evaluation}
                   onChange={(e) =>
-                    setRoomDetails((current) => ({
-                      ...current,
-                      contents: current.contents.map((content, y) =>
-                        y === i
-                          ? {
-                              ...content,
-                              evaluation: parseInt(e.target.value),
-                            }
-                          : content
-                      ),
-                    }))
+                    updateContentAtIndex(i, {
+                      evaluation: parseInt(e.target.value),
+                    })
                   }
                   className="mb-4"
                 />
@@ -450,7 +372,7 @@ const VisitReportsView = () => {
               const record = { ...roomDetails };
               setRoomDetails({
                 type: "",
-                contents: [],
+                contents: [getInitialContent()],
                 recommendation: "",
                 note: "",
                 index: -1,

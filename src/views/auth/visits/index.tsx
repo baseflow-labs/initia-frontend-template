@@ -234,39 +234,40 @@ const VisitsView = () => {
       <TablePage
         title={title}
         filters={filters}
-        tableActions={(id?: string) => [
-          // {
-          //   icon: faEdit,
-          //   spread: true,
-          //   label: t("Global.Form.Labels.Edit"),
-          //   onClick: (data: string) => editData(data),
-          // },
-          {
-            icon: faEdit,
-            spread: true,
-            label: t("Auth.Visits.Report.AddReport"),
-            onClick: (id: string) => navigate("/visitSchedule/report?id=" + id),
-          },
-          {
-            icon: faNewspaper,
-            spread: true,
-            label: t("Auth.Visits.Report.ViewReport"),
-            onClick: (id: string) =>
-              visits.find((v) => v.id === id)?.visitReport
-                ? navigate("/visitSchedule/report/details/?id=" + id)
-                : dispatch(
-                    addNotification({
-                      msg: t("Auth.Visits.Report.ThereIsNoReport"),
-                      type: "err",
-                    })
-                  ),
-          },
-          {
-            icon: faXmark,
-            label: t("Auth.Visits.CancelVisit"),
-            onClick: (id: string) => cancelVisit(id),
-          },
-        ]}
+        tableActions={(id?: string) => {
+          const row = visits.find((v) => v.id === id);
+
+          return row?.visitReport
+            ? [
+                // {
+                //   icon: faEdit,
+                //   spread: true,
+                //   label: t("Global.Form.Labels.Edit"),
+                //   onClick: (data: string) => editData(data),
+                // },
+                {
+                  icon: faNewspaper,
+                  spread: true,
+                  label: t("Auth.Visits.Report.ViewReport"),
+                  onClick: (id: string) =>
+                    navigate("/visitSchedule/report/details/?id=" + id),
+                },
+              ]
+            : [
+                {
+                  icon: faEdit,
+                  spread: true,
+                  label: t("Auth.Visits.Report.AddReport"),
+                  onClick: (id: string) =>
+                    navigate("/visitSchedule/report?id=" + id),
+                },
+                {
+                  icon: faXmark,
+                  label: t("Auth.Visits.CancelVisit"),
+                  onClick: (id: string) => cancelVisit(id),
+                },
+              ];
+        }}
         actionButtons={actionButtons}
         columns={columns}
         data={visits}
