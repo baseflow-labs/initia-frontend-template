@@ -35,9 +35,9 @@ const VisitsView = () => {
   const [selectOptions, setSelectOptions] = useState({
     beneficiaries: [{ id: "", fullName: "" }],
   });
-  const [visits, setVisits] = useState<{ id: string; visitReport: object }[]>(
-    []
-  );
+  const [visits, setVisits] = useState<
+    { id: string; visitReport: object; status: string }[]
+  >([]);
 
   const getData = () => {
     VisitApi.getAll()
@@ -235,38 +235,42 @@ const VisitsView = () => {
         title={title}
         filters={filters}
         tableActions={(id?: string) => {
-          const row = visits.find((v) => v.id === id);
+          const visit = visits.find((v) => v.id === id);
 
-          return row?.visitReport
-            ? [
-                // {
-                //   icon: faEdit,
-                //   spread: true,
-                //   label: t("Global.Form.Labels.Edit"),
-                //   onClick: (data: string) => editData(data),
-                // },
-                {
-                  icon: faNewspaper,
-                  spread: true,
-                  label: t("Auth.Visits.Report.ViewReport"),
-                  onClick: (id: string) =>
-                    navigate("/visitSchedule/report/details/?id=" + id),
-                },
-              ]
-            : [
-                {
-                  icon: faEdit,
-                  spread: true,
-                  label: t("Auth.Visits.Report.AddReport"),
-                  onClick: (id: string) =>
-                    navigate("/visitSchedule/report?id=" + id),
-                },
-                {
-                  icon: faXmark,
-                  label: t("Auth.Visits.CancelVisit"),
-                  onClick: (id: string) => cancelVisit(id),
-                },
-              ];
+          console.log({ visit });
+
+          const final = [];
+
+          const gotReport = !!visit?.visitReport;
+          const cancelled = visit?.status === "Cancelled";
+
+          if (gotReport) {
+            final.push({
+              icon: faNewspaper,
+              spread: true,
+              label: t("Auth.Visits.Report.ViewReport"),
+              onClick: (id: string) =>
+                navigate("/visitSchedule/report/details/?id=" + id),
+            });
+          } else {
+            final.push({
+              icon: faEdit,
+              spread: true,
+              label: t("Auth.Visits.Report.AddReport"),
+              onClick: (id: string) =>
+                navigate("/visitSchedule/report?id=" + id),
+            });
+
+            if (!cancelled) {
+              final.push({
+                icon: faXmark,
+                label: t("Auth.Visits.CancelVisit"),
+                onClick: (id: string) => cancelVisit(id),
+              });
+            }
+          }
+
+          return final;
         }}
         actionButtons={actionButtons}
         columns={columns}
