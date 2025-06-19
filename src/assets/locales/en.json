@@ -273,6 +273,10 @@
       "Title": "Title"
     },
     "Settings": {
+      "AllCities": "All Cities",
+      "AllDistricts": "All Districts",
+      "AllGovernorate": "All Governorate",
+      "AllProvinces": "All Provinces",
       "FontSize": "FontSize",
       "Samples": {
         "H3Sample": "H3Sample",

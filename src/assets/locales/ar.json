@@ -273,6 +273,10 @@
       "Title": "طلب الانتساب للجمعية"
     },
     "Settings": {
+      "AllCities": "جميع مدن المحافظات",
+      "AllDistricts": "جميع أحياء المدينة",
+      "AllGovernorate": "جميع محافظات المنطقة",
+      "AllProvinces": "جميع مناطق المملكة",
       "FontSize": "حجم الخط للتطبيق",
       "Samples": {
         "H3Sample": "عينة عنوان رئيسيي",
