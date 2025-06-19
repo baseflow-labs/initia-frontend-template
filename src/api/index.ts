@@ -44,7 +44,7 @@ service.interceptors.response.use(
 
     const msg = (res.data as { message?: string })?.message || fallbackMessage;
 
-    if ([401, 403].includes(res.status)) {
+    if (store.getState().auth.token && [403].includes(res.status)) {
       store.dispatch(logout());
       return Promise.reject(new Error(msg));
     }
@@ -68,7 +68,7 @@ service.interceptors.response.use(
     const errMsg =
       (err?.response?.data as any)?.message || err.message || fallbackMessage;
 
-    if ([401, 403].includes(err.status || 0)) {
+    if (store.getState().auth.token && [403].includes(err.status || 0)) {
       store.dispatch(logout());
       return Promise.reject(new Error(errMsg));
     }
