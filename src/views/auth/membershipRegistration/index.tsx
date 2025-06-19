@@ -996,18 +996,18 @@ const MembershipRegistrationView = () => {
       name: "Success",
       contents: (
         <div className="text-center">
-          <h2>
+          <h2 className="display-4">
             <FontAwesomeIcon icon={faCheckCircle} className="text-success" />
             <br />
             {t("Auth.MembershipRegistration.Form.Success.Title")}
           </h2>
 
-          <h6 className="text-muted my-4">
+          <h4 className="text-muted my-4">
             {t("Auth.MembershipRegistration.Form.Success.Text")}
-          </h6>
+          </h4>
 
           <Button color="info" onClick={() => navigate("/dashboard")}>
-            {t("Global.Labels.Ok")}
+            {t("Auth.MembershipRegistration.Form.Success.Next")}
           </Button>
         </div>
       ),

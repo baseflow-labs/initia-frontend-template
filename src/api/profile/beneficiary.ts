@@ -2,6 +2,7 @@ import api from "..";
 import store, { RootState } from "../../store/store";
 
 interface Props {
+  user?: string;
   socialStatus: string;
   fullName: string;
   nationality: string;
@@ -45,9 +46,11 @@ const getByUserId = async (id?: string) => {
 };
 
 const createOrUpdate = async (data: Props) => {
+  console.log({ user });
+
   return await api.post(
     mainPath + "/create-update",
-    { user: user.id, ...data },
+    { ...data, user: data.user || user.id },
     {
       headers: {
         "Content-Type": "multipart/form-data",

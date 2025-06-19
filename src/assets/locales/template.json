@@ -250,6 +250,7 @@
         "StudentsDocument": "Students Document",
         "StudentsDocumentNote": "Noor or university website",
         "Success": {
+          "Next": "Access Dashboard",
           "Text": "Soon you will be reached out via What'sApp and messages section of this dashboard",
           "Title": "Application Has Been Submitted Successfully"
         },
