@@ -7,7 +7,6 @@
       "AidType": "نوع المعونة",
       "Beneficiary": {
         "RequestAid": "طلب معونة",
-        "RequestDetails": "تفاصيل المعونة",
         "Title": "المعونات",
         "Urgent?": "هل الحالة مستعجلة؟"
       },
@@ -23,8 +22,6 @@
       "Title": "طلبات الإعانة"
     },
     "Beneficiaries": {
-      "AddBeneficiary": "إضافة مستفيد",
-      "Beneficiary": "المستفيد",
       "BeneficiaryName": "اسم المستفيد",
       "Profile": {
         "Archive": "أرشيف {{property}}",
@@ -294,30 +291,8 @@
       "AddVisit": "جدولة زيارة",
       "CancelVisit": "إلغاء الزيارة",
       "Detail": {
-        "Devices": {
-          "AC": "مكيف",
-          "Sofas": "كنب",
-          "TV": "تلفاز",
-          "table": "طاولة"
-        },
-        "Furniture": {
-          "Sofas": "كنب",
-          "bed": "سرير",
-          "table": "طاولة"
-        },
-        "Room": {
-          "LivingRoom": "غرفة المعيشة",
-          "bathroom": "دورة المياه",
-          "bedroom": "غرفة نوم",
-          "kitchen": "مطبخ"
-        },
-        "device": "الجهاز",
-        "devicePhoto": "صورة الجهاز",
-        "deviceStatus": "حالة الجهاز",
-        "devices": "الاجهزة",
         "devicesNumber": "عدد الاجهزة الكلي",
         "evaluation": "التقييم",
-        "furniture": "الاثاث",
         "furnitureNumber": "عدد الاثاث الكلي",
         "needRepair": "هل يحتاج للصيانة",
         "roomsNumber": "عدد الغرف",
@@ -375,7 +350,7 @@
         "TV": "تلفاز",
         "TheDevice": "الجهاز",
         "TheFurniture": "قطعة الأثاث",
-        "ThereIsNoReport": "لم يتم إدخال تقرير للزيارة المختارة",
+        "Title": "تقرير الزيارة",
         "ViewReport": "عرض التقرير",
         "Wardrobe": "خزانة ملابس",
         "WashingMachine": "غسالة",

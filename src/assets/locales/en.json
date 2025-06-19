@@ -1,0 +1,457 @@
+{
+  "Auth": {
+    "Aids": {
+      "AddAid": "AddAid",
+      "AidName": "AidName",
+      "AidPurpose": "AidPurpose",
+      "AidType": "AidType",
+      "Beneficiary": {
+        "RequestAid": "RequestAid",
+        "Title": "Title",
+        "Urgent?": "Urgent?"
+      },
+      "Cash": "Cash",
+      "In-Kind": "In-Kind",
+      "RecaptionDate": "RecaptionDate",
+      "Statuses": {
+        "Grant": "Grant",
+        "Granted": "Granted",
+        "Pending": "Pending",
+        "Reject": "Reject"
+      },
+      "Title": "Title"
+    },
+    "Beneficiaries": {
+      "BeneficiaryName": "BeneficiaryName",
+      "Profile": {
+        "Archive": "Archive",
+        "ConfirmData": "ConfirmData",
+        "ProfileCompletion": "ProfileCompletion",
+        "ProfileDetails": "ProfileDetails",
+        "ProfileReview": "ProfileReview",
+        "RequestDataUpdate": "RequestDataUpdate",
+        "Statuses": {
+          "Confirmed": "Confirmed",
+          "NeedUpdate": "NeedUpdate"
+        },
+        "Title": "Title",
+        "UpdateNote": "UpdateNote",
+        "archive": "archive",
+        "editRequest": "editRequest",
+        "editStatus": "editStatus",
+        "field": "field",
+        "info": "info",
+        "notes": "notes"
+      },
+      "Title": "Title"
+    },
+    "Beneficiary": {
+      "Profile": {
+        "CurrentData": "CurrentData",
+        "PleaseUpdateFollowingData": "PleaseUpdateFollowingData",
+        "Title": "Title",
+        "YourProfile": "YourProfile"
+      }
+    },
+    "ContactUs": {
+      "Contact": "Contact",
+      "ContactNow": "ContactNow",
+      "ContactUsNow": "ContactUsNow",
+      "Title": "Title"
+    },
+    "Dashboard": {
+      "Main": "Main",
+      "Title": "Title",
+      "Welcome": "Welcome"
+    },
+    "MembershipRegistration": {
+      "Address": "Address",
+      "Form": {
+        "AbsherDocument": "AbsherDocument",
+        "Address": "Address",
+        "AgeGroup": {
+          "AboveSixty": "AboveSixty",
+          "BelowFive": "BelowFive",
+          "EighteenToThirty": "EighteenToThirty",
+          "FiveToTwelve": "FiveToTwelve",
+          "FortyFiveToSixty": "FortyFiveToSixty",
+          "ThirtyToFortyFive": "ThirtyToFortyFive",
+          "Title": "Title",
+          "TwelveToEighteen": "TwelveToEighteen"
+        },
+        "AlreadyRequested": "AlreadyRequested",
+        "ApartmentNo": "ApartmentNo",
+        "Attachments": "Attachments",
+        "BackupMobile": "BackupMobile",
+        "BankAccountNumber": "BankAccountNumber",
+        "BankAccountNumberNote": "BankAccountNumberNote",
+        "BasicData": "BasicData",
+        "BeneficiaryMobile": "BeneficiaryMobile",
+        "City": "City",
+        "ClickForHelp": "ClickForHelp",
+        "ComprehensiveRehabilitation": "ComprehensiveRehabilitation",
+        "ContactData": "ContactData",
+        "CreditStatement": "CreditStatement",
+        "CreditStatementNote": "CreditStatementNote",
+        "DependantData": "DependantData",
+        "DependentMobile": "DependentMobile",
+        "DependentMobileNote": "DependentMobileNote",
+        "Dependents": {
+          "AddNew": "AddNew",
+          "Dependant": "Dependant",
+          "DependentSaved": "DependentSaved",
+          "SaveDependent": "SaveDependent"
+        },
+        "DependentsData": "DependentsData",
+        "Diseases": {
+          "Cancerous": "Cancerous",
+          "ChestDiseases": "ChestDiseases",
+          "ChronicDiseases": "ChronicDiseases",
+          "Disability": "Disability",
+          "GeneticDiseases": "GeneticDiseases",
+          "HearingImpairment": "HearingImpairment",
+          "LiverDiseases": "LiverDiseases",
+          "MentalDisability": "MentalDisability",
+          "NeurologicalDiseases": "NeurologicalDiseases",
+          "None": "None",
+          "SkinDiseases": "SkinDiseases",
+          "Title": "Title",
+          "VisualImpairment": "VisualImpairment"
+        },
+        "District": "District",
+        "Dob": "Dob",
+        "EducationLevel": {
+          "Degree": "Degree",
+          "Diploma": "Diploma",
+          "HighSchool": "HighSchool",
+          "HigherDiploma": "HigherDiploma",
+          "Illiterate": "Illiterate",
+          "IntermediateSchool": "IntermediateSchool",
+          "Literate": "Literate",
+          "Master": "Master",
+          "Phd": "Phd",
+          "PrimarySchool": "PrimarySchool",
+          "Title": "Title"
+        },
+        "Email": "Email",
+        "FamilyRecordPhoto": "FamilyRecordPhoto",
+        "FullName": "FullName",
+        "Gender": {
+          "Female": "Female",
+          "Male": "Male",
+          "Title": "Title"
+        },
+        "Governorate": "Governorate",
+        "GuardianIdPhoto": "GuardianIdPhoto",
+        "HealthStatementPhoto": "HealthStatementPhoto",
+        "HealthStatus": {
+          "Healthy": "Healthy",
+          "Sick": "Sick",
+          "Title": "Title"
+        },
+        "HelpRequested": "HelpRequested",
+        "HomeLocation": "HomeLocation",
+        "HomeOwnership": {
+          "Ownership": "Ownership",
+          "Rental": "Rental",
+          "Title": "Title"
+        },
+        "HomeType": {
+          "Apartment": "Apartment",
+          "Caravan": "Caravan",
+          "FolkHouse": "FolkHouse",
+          "IncompleteBuilding": "IncompleteBuilding",
+          "IndependentHome": "IndependentHome",
+          "NoPermanentHome": "NoPermanentHome",
+          "Roof": "Roof",
+          "SharedHouse": "SharedHouse",
+          "Title": "Title",
+          "Villa": "Villa"
+        },
+        "HostelData": "HostelData",
+        "IbanPhoto": "IbanPhoto",
+        "IdExpiryDate": "IdExpiryDate",
+        "IdNumber": "IdNumber",
+        "IdNumberNote": "IdNumberNote",
+        "IncomeDocument": "IncomeDocument",
+        "IncomeDocumentNote": "IncomeDocumentNote",
+        "IncomeResources": "IncomeResources",
+        "IncurableDisease": "IncurableDisease",
+        "Insurances": "Insurances",
+        "MasrefDocument": "MasrefDocument",
+        "NationalAddressDocument": "NationalAddressDocument",
+        "Nationality": {
+          "NonSaudi": "NonSaudi",
+          "Saudi": "Saudi",
+          "Title": "Title"
+        },
+        "Occupation": {
+          "GovernmentEmployee": "GovernmentEmployee",
+          "Housewife": "Housewife",
+          "LookingForJob": "LookingForJob",
+          "NoFixed": "NoFixed",
+          "PerDayWorker": "PerDayWorker",
+          "PrivateSectorEmployee": "PrivateSectorEmployee",
+          "Retiree": "Retiree",
+          "Student": "Student",
+          "Title": "Title",
+          "UnableToWork": "UnableToWork",
+          "Unemployed": "Unemployed"
+        },
+        "OwnershipDocumentPhoto": "OwnershipDocumentPhoto",
+        "Payee": {
+          "Free": "Free",
+          "Government": "Government",
+          "Installment": "Installment",
+          "Relative": "Relative",
+          "Self": "Self",
+          "Society": "Society",
+          "Title": "Title"
+        },
+        "Province": {
+          "AlBahah": "AlBahah",
+          "AlJawf": "AlJawf",
+          "AlQassim": "AlQassim",
+          "Asir": "Asir",
+          "Eastern Province": "Eastern Province",
+          "Hail": "Hail",
+          "Jazan": "Jazan",
+          "Madinah": "Madinah",
+          "Makkah": "Makkah",
+          "Najran": "Najran",
+          "NorthernBorders": "NorthernBorders",
+          "Riyadh": "Riyadh",
+          "Tabuk": "Tabuk",
+          "Title": "Title"
+        },
+        "QualificationData": "QualificationData",
+        "Relation": {
+          "Child": "Child",
+          "Grandchild": "Grandchild",
+          "Grandparent": "Grandparent",
+          "InLow": "InLow",
+          "MaternalUncleAunt": "MaternalUncleAunt",
+          "None": "None",
+          "Parent": "Parent",
+          "PaternalUncleAunt": "PaternalUncleAunt",
+          "Sibling": "Sibling",
+          "Spouse": "Spouse",
+          "Title": "Title"
+        },
+        "RentalCharge": "RentalCharge",
+        "RentalContractPhoto": "RentalContractPhoto",
+        "RentalDocument": "RentalDocument",
+        "Retirement": "Retirement",
+        "Salary": "Salary",
+        "SecondaryMobile": "SecondaryMobile",
+        "SocialSecurity": "SocialSecurity",
+        "SocialStatus": {
+          "Divorced": "Divorced",
+          "Married": "Married",
+          "Single": "Single",
+          "Title": "Title",
+          "Widower": "Widower"
+        },
+        "StudentsDocument": "StudentsDocument",
+        "StudentsDocumentNote": "StudentsDocumentNote",
+        "Success": {
+          "Next": "Next",
+          "Text": "Text",
+          "Title": "Title"
+        },
+        "TawakkalnaDocument": "TawakkalnaDocument"
+      },
+      "Statuses": {
+        "Accepted": "Accepted",
+        "InPreview": "InPreview",
+        "Incomplete": "Incomplete",
+        "NeedHelp": "NeedHelp",
+        "NewMember": "NewMember",
+        "Rejected": "Rejected",
+        "Status": "Status"
+      },
+      "Title": "Title"
+    },
+    "Settings": {
+      "FontSize": "FontSize",
+      "Samples": {
+        "H3Sample": "H3Sample",
+        "H4Sample": "H4Sample",
+        "H5Sample": "H5Sample",
+        "LabelSample": "LabelSample",
+        "SmallSample": "SmallSample",
+        "Title": "Title"
+      },
+      "SocietyLogo": "SocietyLogo",
+      "SocietyName": "SocietyName",
+      "SocietyPhoneNumber": "SocietyPhoneNumber",
+      "Title": "Title"
+    },
+    "Visits": {
+      "AddVisit": "AddVisit",
+      "CancelVisit": "CancelVisit",
+      "Detail": {
+        "devicesNumber": "devicesNumber",
+        "evaluation": "evaluation",
+        "furnitureNumber": "furnitureNumber",
+        "needRepair": "needRepair",
+        "roomsNumber": "roomsNumber",
+        "title": "title"
+      },
+      "EditVisit": "EditVisit",
+      "Report": {
+        "AddContent": "AddContent",
+        "AddReport": "AddReport",
+        "AddRoom": "AddRoom",
+        "AirConditioner": "AirConditioner",
+        "Balcony": "Balcony",
+        "Bathroom": "Bathroom",
+        "Bed": "Bed",
+        "Bedroom": "Bedroom",
+        "ContentType": "ContentType",
+        "ContentXType": "ContentXType",
+        "Contents": "Contents",
+        "ContentsCount": "ContentsCount",
+        "Desk": "Desk",
+        "Device": "Device",
+        "DiningRoom": "DiningRoom",
+        "DiningTable": "DiningTable",
+        "Dishwasher": "Dishwasher",
+        "DressingTable": "DressingTable",
+        "Entry": "Entry",
+        "Freezer": "Freezer",
+        "Fridge": "Fridge",
+        "Furniture": "Furniture",
+        "GuestRoom": "GuestRoom",
+        "Hallway": "Hallway",
+        "Kitchen": "Kitchen",
+        "Laundry": "Laundry",
+        "LivingRoom": "LivingRoom",
+        "MaidRoom": "MaidRoom",
+        "Microwave": "Microwave",
+        "NeedsMaintenance": "NeedsMaintenance",
+        "Nightstand": "Nightstand",
+        "NotWorking": "NotWorking",
+        "Oven": "Oven",
+        "PrayerMat": "PrayerMat",
+        "PrayerRoom": "PrayerRoom",
+        "RoomContentEvaluation": "RoomContentEvaluation",
+        "RoomContentPhoto": "RoomContentPhoto",
+        "RoomContentStatus": "RoomContentStatus",
+        "RoomRecommendations": "RoomRecommendations",
+        "RoomXDetails": "RoomXDetails",
+        "RoomXType": "RoomXType",
+        "RoomsCount": "RoomsCount",
+        "Router": "Router",
+        "Shelf": "Shelf",
+        "ShoeRack": "ShoeRack",
+        "Sofa": "Sofa",
+        "Storage": "Storage",
+        "TV": "TV",
+        "TheDevice": "TheDevice",
+        "TheFurniture": "TheFurniture",
+        "Title": "Title",
+        "ViewReport": "ViewReport",
+        "Wardrobe": "Wardrobe",
+        "WashingMachine": "WashingMachine",
+        "WaterHeater": "WaterHeater",
+        "Working": "Working"
+      },
+      "Statuses": {
+        "Approved": "Approved",
+        "Cancelled": "Cancelled",
+        "Delayed": "Delayed",
+        "Done": "Done",
+        "Pending": "Pending",
+        "Status": "Status"
+      },
+      "Title": "Title",
+      "VisitDate": "VisitDate",
+      "VisitPurpose": "VisitPurpose",
+      "VisitTime": "VisitTime",
+      "Visits": "Visits"
+    }
+  },
+  "Global": {
+    "Form": {
+      "Labels": {
+        "AddNew": "AddNew",
+        "Confirm": "Confirm",
+        "Edit": "Edit",
+        "InvalidEmail": "InvalidEmail",
+        "Location": "Location",
+        "No": "No",
+        "Notes": "Notes",
+        "PickDate": "PickDate",
+        "PleaseSelect": "PleaseSelect",
+        "Previous": "Previous",
+        "Record": "Record",
+        "Required": "Required",
+        "Save": "Save",
+        "SaveContinue": "SaveContinue",
+        "SaveData": "SaveData",
+        "Submit": "Submit",
+        "SubmitApplication": "SubmitApplication",
+        "SupportingDocument": "SupportingDocument",
+        "Update": "Update",
+        "UploadAttachment": "UploadAttachment",
+        "Yes": "Yes"
+      },
+      "SuccessMsg": "SuccessMsg"
+    },
+    "Labels": {
+      "Action": "Action",
+      "ApplicationDate": "ApplicationDate",
+      "Back": "Back",
+      "Logout": "Logout",
+      "NoData": "NoData",
+      "PageNo": "PageNo",
+      "PageSize": "PageSize",
+      "PhoneNumber": "PhoneNumber",
+      "Search": "Search",
+      "WrongUrl": "WrongUrl"
+    }
+  },
+  "Public": {
+    "ForgotPassword": {
+      "GotOtp": {
+        "Title": "Title"
+      },
+      "ResetPassword": {
+        "NewPassword": "NewPassword",
+        "NewPasswordConfirmation": "NewPasswordConfirmation",
+        "ResetPassword": "ResetPassword",
+        "Title": "Title"
+      },
+      "SendOtp": {
+        "ConfirmOTP": "ConfirmOTP"
+      },
+      "Title": "Title"
+    },
+    "Login": {
+      "Labels": {
+        "DidUForgotPassword": "DidUForgotPassword",
+        "Login": "Login",
+        "Password": "Password",
+        "PhoneNo": "PhoneNo",
+        "Success": "Success"
+      },
+      "Title": "Title"
+    },
+    "Register": {
+      "Labels": {
+        "ByClickYouAccept": "ByClickYouAccept",
+        "DidNotGetOtp": "DidNotGetOtp",
+        "Name": "Name",
+        "Password": "Password",
+        "PasswordConfirmation": "PasswordConfirmation",
+        "PhoneNo": "PhoneNo",
+        "PrivacyPolicyTermsConditions": "PrivacyPolicyTermsConditions",
+        "Register": "Register",
+        "ResendOtp": "ResendOtp",
+        "Success": "Success"
+      },
+      "Title": "Title"
+    }
+  }
+}
