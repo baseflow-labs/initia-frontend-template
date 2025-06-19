@@ -282,9 +282,16 @@
         "SmallSample": " عينة ملاحظات",
         "Title": "عينات"
       },
+      "SocietyAddress": "عنوان الجمعية",
+      "SocietyCities": "المدن التي تخدمها الجمعية ضمن المحافظة",
+      "SocietyDistricts": "الأحياء التي تخدمها الجمعية ضمن المدينة",
+      "SocietyGovernorate": "المحافظات التي تخدمها الجمعية ضمن المنطقة",
+      "SocietyLocation": "موقع الجمعية",
       "SocietyLogo": "شعار الجمعية",
       "SocietyName": "اسم الجمعية",
       "SocietyPhoneNumber": "رقم الهاتف للجمعية",
+      "SocietyProvinces": "المناطق التي تخدمها الجمعية ضمن المملكة",
+      "SocietyWebsite": "الموقع الإلكتروني للجمعية",
       "Title": "الإعدادات"
     },
     "Visits": {

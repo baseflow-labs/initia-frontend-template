@@ -66,9 +66,48 @@ const SettingsPage = () => {
       label: t("Auth.Settings.SocietyLogo"),
     },
     {
+      type: "selectMany",
+      name: "provinces",
+      options: [{ value: "" }],
+      label: t("Auth.Settings.SocietyProvinces"),
+    },
+    {
+      type: "selectMany",
+      name: "governorate",
+      options: [{ value: "" }],
+      label: t("Auth.Settings.SocietyGovernorate"),
+    },
+    {
+      type: "selectMany",
+      name: "cities",
+      options: [{ value: "" }],
+      label: t("Auth.Settings.SocietyCities"),
+    },
+    {
+      type: "selectMany",
+      name: "districts",
+      options: [{ value: "" }],
+      label: t("Auth.Settings.SocietyDistricts"),
+    },
+    {
       type: "phoneNumber",
       name: "phoneNumber",
       label: t("Auth.Settings.SocietyPhoneNumber"),
+    },
+    {
+      type: "location",
+      name: "location",
+      label: t("Auth.Settings.SocietyLocation"),
+    },
+    {
+      type: "text",
+      name: "address",
+      label: t("Auth.Settings.SocietyAddress"),
+    },
+    {
+      type: "url",
+      name: "website",
+      label: t("Auth.Settings.SocietyWebsite"),
     },
   ];
 

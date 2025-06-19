@@ -282,9 +282,16 @@
         "SmallSample": "SmallSample",
         "Title": "Title"
       },
+      "SocietyAddress": "Society Address",
+      "SocietyCities": "Society Cities",
+      "SocietyDistricts": "Society Districts",
+      "SocietyGovernorate": "Society Governorate",
+      "SocietyLocation": "Society Location",
       "SocietyLogo": "SocietyLogo",
       "SocietyName": "SocietyName",
       "SocietyPhoneNumber": "SocietyPhoneNumber",
+      "SocietyProvinces": "Society Provinces",
+      "SocietyWebsite": "Society Website",
       "Title": "Title"
     },
     "Visits": {
