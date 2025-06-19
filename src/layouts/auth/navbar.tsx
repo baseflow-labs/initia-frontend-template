@@ -13,6 +13,7 @@ import { logout } from "../../store/actions/auth";
 import { useAppSelector } from "../../store/hooks";
 import { apiCatchGlobalHandler } from "../../utils/function";
 import { Notification } from "./dashboardNavbar";
+import DropdownComp from "../../components/dropdown";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -70,29 +71,16 @@ const Navbar = () => {
         </div>
 
         <div className="d-flex align-items-center gap-3">
-          <div className="dropdown">
-            <button
-              className="btn btn-link text-secondary"
-              id="notificationsDropdown"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
+          <DropdownComp
+            button={
               <FontAwesomeIcon icon={faBell} className="text-secondary" />
-            </button>
-
-            <ul
-              className="dropdown-menu dropdown-menu-end"
-              aria-labelledby="notificationsDropdown"
-            >
-              {notifications.length ? (
-                notifications.map(
-                  ({ title, message, service, createdAt }, i) => (
-                    <li key={i}>
-                      <span
-                        className="dropdown-item"
-                        role="button"
-                        onClick={() => navigate("/" + service)}
-                      >
+            }
+            list={
+              notifications.length
+                ? notifications.map(
+                    ({ title, message, service, createdAt }, i) => ({
+                      route: "/" + service,
+                      label: (
                         <div className="row">
                           <div className="col-md-2 my-auto text-warning">
                             <h3>
@@ -105,27 +93,19 @@ const Navbar = () => {
                             <small>{moment(createdAt).fromNow()}</small>
                           </div>
                         </div>
-                      </span>
-                    </li>
+                      ),
+                    })
                   )
-                )
-              ) : (
-                <span className="p-1">لا يوجد اشعارات للعرض</span>
-              )}
-            </ul>
-          </div>
+                : [{ label: "لا يوجد إشعارات" }]
+            }
+          />
 
           {/* <button className="btn btn-link position-relative">
             <FontAwesomeIcon icon={faEnvelope} className="text-secondary" />
           </button> */}
 
-          <div className="dropdown">
-            <button
-              className="btn btn-link text-secondary"
-              id="avatarDropdown"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
+          <DropdownComp
+            button={
               <img
                 src={
                   logo
@@ -139,25 +119,14 @@ const Navbar = () => {
                 width="30"
                 height="30"
               />
-            </button>
-            <ul
-              className="dropdown-menu dropdown-menu-end"
-              aria-labelledby="avatarDropdown"
-            >
-              {/* <li>
-                <hr className="dropdown-divider" />
-              </li> */}
-              <li>
-                <span
-                  className="dropdown-item"
-                  role="button"
-                  onClick={() => dispatch(logout())}
-                >
-                  {t("Global.Labels.Logout")}
-                </span>
-              </li>
-            </ul>
-          </div>
+            }
+            list={[
+              {
+                onClick: () => dispatch(logout()),
+                label: t("Global.Labels.Logout"),
+              },
+            ]}
+          />
         </div>
       </div>
     </nav>

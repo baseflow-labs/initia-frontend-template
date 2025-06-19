@@ -10,13 +10,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import i18n from "../../i18next";
 import { triggerFilePreview } from "../../layouts/auth/globalModal";
 import { viewDateFormat, viewTimeFormat } from "../../utils/consts";
 import { splitOverNumberPlusLeftover } from "../../utils/function";
+import DropdownComp from "../dropdown";
 
 export interface TableProps {
   size?: number;
@@ -227,34 +228,29 @@ const DynamicTable = ({
                     ))}
 
                   {actions(row.id).filter(({ spread }) => !spread).length ? (
-                    <div className="dropdown">
-                      <FontAwesomeIcon
-                        icon={faEllipsisVertical}
-                        className="dropdown-toggle ms-1"
-                        role="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      />
-
-                      <ul className="dropdown-menu">
-                        {actions(row.id)
-                          .filter(({ spread }) => !spread)
-                          .map(({ icon, label, onClick }, y) => (
-                            <li key={y}>
-                              <button
-                                className="dropdown-item"
-                                onClick={() => onClick(row.id || "")}
-                              >
-                                <FontAwesomeIcon
-                                  icon={icon}
-                                  className="text-info"
-                                />{" "}
-                                {label}
-                              </button>
-                            </li>
-                          ))}
-                      </ul>
-                    </div>
+                    <DropdownComp
+                      button={
+                        <FontAwesomeIcon
+                          icon={faEllipsisVertical}
+                          className="ms-1"
+                        />
+                      }
+                      list={actions(row.id)
+                        .filter(({ spread }) => !spread)
+                        .map(({ icon, label, onClick }) => ({
+                          onClick: () => onClick(row.id || ""),
+                          label: (
+                            <Fragment>
+                              {" "}
+                              <FontAwesomeIcon
+                                icon={icon}
+                                className="text-info"
+                              />{" "}
+                              {label}
+                            </Fragment>
+                          ),
+                        }))}
+                    />
                   ) : (
                     <span className="text-white">-</span>
                   )}
