@@ -252,7 +252,7 @@ const VisitsView = () => {
             spread: true,
             label: t("Auth.Visits.Report.ViewReport"),
             onClick: (id: string) =>
-              visits.find((v) => v.id == id)?.visitReport
+              visits.find((v) => v.id === id)?.visitReport
                 ? navigate("/visitSchedule/report/details/?id=" + id)
                 : dispatch(
                     addNotification({
