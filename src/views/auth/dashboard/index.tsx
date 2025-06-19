@@ -23,7 +23,7 @@ const DashboardView = () => {
         className="my-5"
       />
 
-      <h4 className="display-4 mt-5">{name}</h4>
+      <h4 className="display-4 mt-5 text-success">{name}</h4>
     </div>
   );
 };
