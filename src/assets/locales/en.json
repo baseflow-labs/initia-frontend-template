@@ -309,6 +309,7 @@
         "Bed": "Bed",
         "Bedroom": "Bedroom",
         "ContentType": "ContentType",
+        "ContentX": "Content {{number}}",
         "ContentXType": "ContentXType",
         "Contents": "Contents",
         "ContentsCount": "ContentsCount",

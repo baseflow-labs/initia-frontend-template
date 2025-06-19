@@ -23,6 +23,7 @@ import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
 } from "../../../utils/function";
+import CollapseGroup from "../../../components/collapse";
 
 const getInitialContent = () => ({
   content: "",
@@ -176,7 +177,7 @@ const VisitReportsView = () => {
       {roomDetails.index >= 0 ? (
         <Fragment>
           <div className="row">
-            <div className="col-md-10">
+            <div className="col-md-11">
               <Button
                 className="w-100 btn-lg my-3 mt-5"
                 onClick={() =>
@@ -186,13 +187,12 @@ const VisitReportsView = () => {
                   }))
                 }
               >
-                {t("Auth.Visits.Report.AddContent")}{" "}
-                <FontAwesomeIcon icon={faDesktop} />{" "}
-                <FontAwesomeIcon icon={faCouch} />
+                <FontAwesomeIcon icon={faCouch} />{" "}
+                {t("Auth.Visits.Report.AddContent")}
               </Button>
             </div>
 
-            <div className="col-md-2 pt-3 px-0">
+            <div className="col-md-1 pt-3 px-0">
               <LabelView
                 name="roomsCount"
                 label={t("Auth.Visits.Report.ContentsCount")}
@@ -208,128 +208,138 @@ const VisitReportsView = () => {
             </div>
           </div>
 
-          {roomDetails.contents.map((content, i) => (
-            <div className="my-4 row" key={i}>
-              <div className="col-md-10">
-                <LabelView
-                  name={`type-${i}`}
-                  label={t("Auth.Visits.Report.ContentXType", {
-                    number: i + 1,
-                  })}
-                />
-                <SelectInput
-                  sizing="lg"
-                  name={`type-${i}`}
-                  value={content.type}
-                  options={contentTypes}
-                  onChange={(e) =>
-                    updateContentAtIndex(i, { type: e.target.value })
-                  }
-                />
-              </div>
-              <div className="col-md-2 pt-4">
-                <Button
-                  color="white"
-                  className="btn-lg border-dark w-100"
-                  onClick={() =>
-                    setRoomDetails((current) => ({
-                      ...current,
-                      contents: current.contents.filter((_, y) => y !== i),
-                    }))
-                  }
-                >
-                  <FontAwesomeIcon icon={faTrash} className="text-danger" />
-                </Button>
-              </div>
-              <div className="col-md-12 pt-3">
-                <LabelView
-                  name={`content-${i}`}
-                  label={t("Auth.Visits.Report.ContentType", {
-                    type:
-                      content.type === "Device"
-                        ? t("Auth.Visits.Report.TheDevice")
-                        : t("Auth.Visits.Report.TheFurniture"),
-                  })}
-                />
-                <SelectInput
-                  sizing="lg"
-                  name={`content-${i}`}
-                  value={content.content}
-                  options={
-                    contentTypes.find(({ value }) => value === content.type)
-                      ?.subList || []
-                  }
-                  onChange={(e) =>
-                    updateContentAtIndex(i, { content: e.target.value })
-                  }
-                />
-              </div>
-              <div className="col-md-12 pt-3">
-                <LabelView
-                  name={`photo-${i}`}
-                  label={t("Auth.Visits.Report.RoomContentPhoto", {
-                    type:
-                      content.type === "Device"
-                        ? t("Auth.Visits.Report.TheDevice")
-                        : t("Auth.Visits.Report.TheFurniture"),
-                  })}
-                />
-                <DefaultInput
-                  name={`photo-${i}`}
-                  type="file"
-                  onChange={(e) =>
-                    updateContentAtIndex(i, { photo: e.target.files?.[0] })
-                  }
-                  className="mb-4"
-                />
-              </div>
-              <div className="col-md-12 pt-3">
-                <LabelView
-                  name={`status-${i}`}
-                  label={t("Auth.Visits.Report.RoomContentStatus", {
-                    type:
-                      content.type === "Device"
-                        ? t("Auth.Visits.Report.TheDevice")
-                        : t("Auth.Visits.Report.TheFurniture"),
-                  })}
-                />
+          <CollapseGroup
+            items={roomDetails.contents.map((content, i) => ({
+              title: t("Auth.Visits.Report.ContentX", {
+                number: i + 1,
+              }),
+              content: (
+                <div className="my-4 row" key={i}>
+                  <div className="col-md-10">
+                    <LabelView
+                      name={`type-${i}`}
+                      label={t("Auth.Visits.Report.ContentXType", {
+                        number: i + 1,
+                      })}
+                    />
+                    <SelectInput
+                      sizing="lg"
+                      name={`type-${i}`}
+                      value={content.type}
+                      options={contentTypes}
+                      onChange={(e) =>
+                        updateContentAtIndex(i, { type: e.target.value })
+                      }
+                    />
+                  </div>
+                  <div className="col-md-2 pt-4">
+                    <Button
+                      color="white"
+                      className="btn-lg border-dark w-100 mt-1"
+                      onClick={() =>
+                        setRoomDetails((current) => ({
+                          ...current,
+                          contents: current.contents.filter((_, y) => y !== i),
+                        }))
+                      }
+                    >
+                      <FontAwesomeIcon
+                        icon={faTrash}
+                        className="text-danger pt-2"
+                      />
+                    </Button>
+                  </div>
+                  <div className="col-md-12 pt-3">
+                    <LabelView
+                      name={`content-${i}`}
+                      label={t("Auth.Visits.Report.ContentType", {
+                        type:
+                          content.type === "Device"
+                            ? t("Auth.Visits.Report.TheDevice")
+                            : t("Auth.Visits.Report.TheFurniture"),
+                      })}
+                    />
+                    <SelectInput
+                      sizing="lg"
+                      name={`content-${i}`}
+                      value={content.content}
+                      options={
+                        contentTypes.find(({ value }) => value === content.type)
+                          ?.subList || []
+                      }
+                      onChange={(e) =>
+                        updateContentAtIndex(i, { content: e.target.value })
+                      }
+                    />
+                  </div>
+                  <div className="col-md-12 pt-3">
+                    <LabelView
+                      name={`photo-${i}`}
+                      label={t("Auth.Visits.Report.RoomContentPhoto", {
+                        type:
+                          content.type === "Device"
+                            ? t("Auth.Visits.Report.TheDevice")
+                            : t("Auth.Visits.Report.TheFurniture"),
+                      })}
+                    />
+                    <DefaultInput
+                      name={`photo-${i}`}
+                      type="file"
+                      onChange={(e) =>
+                        updateContentAtIndex(i, { photo: e.target.files?.[0] })
+                      }
+                      className="mb-4"
+                    />
+                  </div>
+                  <div className="col-md-12 pt-3">
+                    <LabelView
+                      name={`status-${i}`}
+                      label={t("Auth.Visits.Report.RoomContentStatus", {
+                        type:
+                          content.type === "Device"
+                            ? t("Auth.Visits.Report.TheDevice")
+                            : t("Auth.Visits.Report.TheFurniture"),
+                      })}
+                    />
 
-                <RadioInput
-                  name={`status-${i}`}
-                  options={roomContentStatuses}
-                  value={content.status}
-                  onChange={(e) =>
-                    updateContentAtIndex(i, { status: e.target.value })
-                  }
-                  className="mb-4"
-                />
-              </div>
+                    <RadioInput
+                      name={`status-${i}`}
+                      options={roomContentStatuses}
+                      value={content.status}
+                      onChange={(e) =>
+                        updateContentAtIndex(i, { status: e.target.value })
+                      }
+                      className="mb-4"
+                    />
+                  </div>
 
-              <div className="col-md-12 pt-3">
-                <LabelView
-                  name={`evaluation-${i}`}
-                  label={t("Auth.Visits.Report.RoomContentEvaluation", {
-                    type:
-                      content.type === "Device"
-                        ? t("Auth.Visits.Report.TheDevice")
-                        : t("Auth.Visits.Report.TheFurniture"),
-                  })}
-                />
+                  <div className="col-md-12 pt-3">
+                    <LabelView
+                      name={`evaluation-${i}`}
+                      label={t("Auth.Visits.Report.RoomContentEvaluation", {
+                        type:
+                          content.type === "Device"
+                            ? t("Auth.Visits.Report.TheDevice")
+                            : t("Auth.Visits.Report.TheFurniture"),
+                      })}
+                    />
 
-                <RadioInput
-                  name={`evaluation-${i}`}
-                  options={[0, 1, 2, 3, 4, 5].map((value) => ({ value }))}
-                  value={content.evaluation}
-                  onChange={(e) =>
-                    updateContentAtIndex(i, {
-                      evaluation: parseInt(e.target.value),
-                    })
-                  }
-                  className="mb-4"
-                />
-              </div>
-            </div>
-          ))}
+                    <RadioInput
+                      name={`evaluation-${i}`}
+                      options={[0, 1, 2, 3, 4, 5].map((value) => ({ value }))}
+                      value={content.evaluation}
+                      onChange={(e) =>
+                        updateContentAtIndex(i, {
+                          evaluation: parseInt(e.target.value),
+                        })
+                      }
+                      className="mb-4"
+                    />
+                  </div>
+                </div>
+              ),
+            }))}
+          />
 
           <div className="col-md-12 pt-3">
             <LabelView
@@ -391,7 +401,7 @@ const VisitReportsView = () => {
       ) : (
         <Fragment>
           <div className="row">
-            <div className="col-md-10">
+            <div className="col-md-11">
               <Button
                 className="w-100 btn-lg my-3 mt-5"
                 onClick={() =>
@@ -414,7 +424,7 @@ const VisitReportsView = () => {
               </Button>
             </div>
 
-            <div className="col-md-2 pt-3 px-0">
+            <div className="col-md-1 pt-3 px-0">
               <LabelView
                 name="roomsCount"
                 label={t("Auth.Visits.Report.RoomsCount")}
