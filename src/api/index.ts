@@ -9,7 +9,7 @@ import { endLoading, startLoading } from "../store/actions/loading";
 import { addNotification } from "../store/actions/notifications";
 import store, { RootState } from "../store/store";
 
-export const baseURL = "http://localhost:8000";
+export const baseURL = "https://api.mustaheq.org";
 
 const service = axios.create({
   baseURL,
