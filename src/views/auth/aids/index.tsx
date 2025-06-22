@@ -19,8 +19,12 @@ import {
 const AidsView = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const [aids, setAids] = useState([{ id: "", beneficiaryId: "" }]);
+
   const [openModal, setOpenModal] = useState(false);
+
+  const [aids, setAids] = useState<
+    { id: string; beneficiaryId: string; status: string }[]
+  >([]);
   const [selectOptions, setSelectOptions] = useState({
     beneficiaries: [{ id: "", fullName: "" }],
   });
@@ -224,18 +228,30 @@ const AidsView = () => {
         title={title}
         filters={filters}
         actionButtons={actionButtons}
-        tableActions={[
-          {
-            label: t("Auth.Aids.Statuses.Grant"),
-            icon: faCheck,
-            onClick: (data: string) => updateStatus(data, "Granted"),
-          },
-          {
-            label: t("Auth.Aids.Statuses.Reject"),
-            icon: faXmark,
-            onClick: (data: string) => updateStatus(data, "Rejected"),
-          },
-        ]}
+        tableActions={(id?: string) => {
+          const aid = aids.find((a) => a.id === id);
+
+          const granted = aid?.status === "Granted";
+          const rejected = aid?.status === "Rejected";
+
+          const final = [];
+
+          if (!granted && !rejected) {
+            final.push({
+              label: t("Auth.Aids.Statuses.Grant"),
+              icon: faCheck,
+              onClick: (data: string) => updateStatus(data, "Granted"),
+            });
+
+            final.push({
+              label: t("Auth.Aids.Statuses.Reject"),
+              icon: faXmark,
+              onClick: (data: string) => updateStatus(data, "Rejected"),
+            });
+          }
+
+          return final;
+        }}
         columns={columns}
         data={aids}
         onPageChange={(i = 0, x = 0) => console.log(i, x)}

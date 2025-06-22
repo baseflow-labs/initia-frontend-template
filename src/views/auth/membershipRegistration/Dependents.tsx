@@ -31,8 +31,10 @@ const DependentsFormView = ({
 }: Props) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const [dependents, setDependents] = useState(initialValues);
+
   const { loading } = useAppSelector((state) => state.loading);
+
+  const [dependents, setDependents] = useState(initialValues);
 
   useEffect(() => setDependents(initialValues), [initialValues]);
 

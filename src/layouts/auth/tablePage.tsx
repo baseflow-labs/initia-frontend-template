@@ -19,7 +19,7 @@ interface Props extends TableProps {
   }[];
   actionButtons?: { label: string }[];
   onSearch: (values: {}) => void;
-  tableActions?: {
+  tableActions?: (id?: string) => {
     label: string;
     icon: IconProp;
     spread?: boolean;

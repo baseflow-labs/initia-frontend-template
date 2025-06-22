@@ -5,15 +5,21 @@ import {
   faEdit,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Fragment, useEffect, useState } from "react";
+import moment from "moment";
+import { Fragment, useEffect, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router";
-import * as DataReviewApi from "../../../api/profile/dataReview";
+
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
+import * as DataReviewApi from "../../../api/profile/dataReview";
+import Button from "../../../components/core/button";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import TabsHeader from "../../../components/tab";
 import DynamicTable, { dataRender } from "../../../components/table";
+import { addNotification } from "../../../store/actions/notifications";
+import { viewDayDateFormat } from "../../../utils/consts";
 import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
@@ -24,9 +30,6 @@ import {
   beneficiaryTabs,
   inputsData,
 } from "../../../utils/inputsData";
-import Button from "../../../components/core/button";
-import { useDispatch } from "react-redux";
-import { addNotification } from "../../../store/actions/notifications";
 
 interface ReviewProps {
   property?: string;
@@ -36,6 +39,7 @@ interface ReviewProps {
   label?: string;
   needUpdate?: boolean;
   confirm?: boolean;
+  dataUpdate?: { createdAt: string; data: string };
   new?: boolean;
 }
 
@@ -45,15 +49,18 @@ const BeneficiaryFormReview = () => {
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
 
+  const [archiveModalData, setArchiveModalData] = useState<ReviewProps[]>([]);
+  const [updateModalData, setUpdateModalData] = useState<ReviewProps>({});
+
   const [beneficiary, setBeneficiary] = useState<any>();
   const [tab, setTab] = useState<string>("beneficiary");
   const [dependent, setDependent] = useState<string>("");
   const [dataReview, setDataReview] = useState<ReviewProps[]>([]);
-  const [modalData, setModalData] = useState<ReviewProps>({});
+  const [dataArchive, setDataArchive] = useState<ReviewProps[]>([]);
 
   const fieldsToShow = inputsData(t);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     BeneficiaryApi.getById(searchParams.get("id") || "")
       .then((res: any) => {
         setBeneficiary(res);
@@ -71,21 +78,32 @@ const BeneficiaryFormReview = () => {
         });
 
         DataReviewApi.getBeneficiaryDataReview(res.id)
-          .then((res: any) => setDataReview(res))
-          .catch(apiCatchGlobalHandler);
+          .then((res: any) => {
+            setDataArchive(res.filter(({ dataUpdate = null }) => dataUpdate));
 
-        setDataReview((current) =>
-          [...emptyReview, ...current].reduce(
-            (final: ReviewProps[], current) =>
-              final.findIndex(
-                (f: any) =>
-                  f.property === current.property && f.table === current.table
-              ) >= 0
-                ? final
-                : [...final, current],
-            []
-          )
-        );
+            const resp = res
+              .filter(({ dataUpdate = null }) => !dataUpdate)
+              .map(({ needUpdate = false, ...rest }) => ({
+                ...rest,
+                needUpdate,
+                confirm: !needUpdate,
+              }));
+
+            setDataReview(() =>
+              [...resp, ...emptyReview].reduce(
+                (final: ReviewProps[], current) =>
+                  final.find(
+                    (f) =>
+                      f.property === current.property &&
+                      f.table === current.table
+                  )
+                    ? final
+                    : [...final, current],
+                []
+              )
+            );
+          })
+          .catch(apiCatchGlobalHandler);
       })
       .catch(apiCatchGlobalHandler);
   }, []);
@@ -238,54 +256,72 @@ const BeneficiaryFormReview = () => {
         columns={columns}
         data={data}
         onPageChange={() => console.log(1)}
-        actions={[
-          {
-            icon: faCheck,
-            spread: true,
-            label: t("Auth.Beneficiaries.Profile.ConfirmData"),
-            onClick: (data: string) =>
-              setDataReview((current) =>
-                current.map((row) =>
-                  row.property === data && row.table === tab
-                    ? {
-                        ...row,
-                        note: "",
-                        table: tab,
-                        property: data,
-                        needUpdate: false,
-                        confirm: true,
-                        new: true,
-                      }
-                    : row
-                )
-              ),
-          },
-          {
-            icon: faEdit,
-            spread: true,
-            label: t("Auth.Beneficiaries.Profile.editRequest"),
-            onClick: (data: string) =>
-              setModalData(
-                dataReview.find(
-                  (r) => r.property === data && r.table === tab
-                ) || {}
-              ),
-          },
-          {
-            icon: faBoxOpen,
-            spread: true,
-            label: t("Auth.Beneficiaries.Profile.archive"),
-            onClick: (data: string) => console.log(data),
-          },
-        ]}
+        actions={(id?: string) => {
+          const fixed = [
+            {
+              icon: faCheck,
+              spread: true,
+              label: t("Auth.Beneficiaries.Profile.ConfirmData"),
+              onClick: (property: string) => {
+                setDataReview((current) =>
+                  current.map((row) =>
+                    row.property === property && row.table === tab
+                      ? {
+                          ...row,
+                          note: "",
+                          table: tab,
+                          property,
+                          needUpdate: false,
+                          confirm: true,
+                          new: true,
+                        }
+                      : row
+                  )
+                );
+              },
+            },
+            {
+              icon: faEdit,
+              spread: true,
+              label: t("Auth.Beneficiaries.Profile.editRequest"),
+              onClick: (data: string) =>
+                setUpdateModalData(
+                  dataReview.find(
+                    (r) => r.property === data && r.table === tab
+                  ) || {}
+                ),
+            },
+          ];
+
+          const conditional = [
+            {
+              icon: faBoxOpen,
+              spread: true,
+              label: t("Auth.Beneficiaries.Profile.archive"),
+              onClick: (id: string) => {
+                const archive = dataArchive.filter(
+                  (r) => r.property === id && r.table === tab
+                );
+                if (archive) {
+                  setArchiveModalData(archive);
+                }
+              },
+            },
+          ];
+
+          return dataArchive.filter((r) => r.property === id && r.table === tab)
+            ?.length
+            ? [...fixed, ...conditional]
+            : fixed;
+        }}
       />
 
       <Modal
         title={t("Auth.Beneficiaries.Profile.RequestDataUpdate", {
-          property: modalData.label,
+          property: updateModalData.label,
         })}
-        onClose={() => setModalData({})}
-        isOpen={!!modalData.property}
+        onClose={() => setUpdateModalData({})}
+        isOpen={!!updateModalData.property}
       >
         <Form
           initialValues={dataReview}
@@ -300,8 +336,8 @@ const BeneficiaryFormReview = () => {
           onFormSubmit={(e) => {
             setDataReview((current) =>
               current.map((row) =>
-                row.property === modalData.property &&
-                row.table === modalData.table
+                row.property === updateModalData.property &&
+                row.table === updateModalData.table
                   ? {
                       ...row,
                       note: e.note,
@@ -312,9 +348,50 @@ const BeneficiaryFormReview = () => {
                   : row
               )
             );
-            setModalData({});
+            setUpdateModalData({});
           }}
         />
+      </Modal>
+
+      <Modal
+        title={t("Auth.Beneficiaries.Profile.Archive", {
+          property: fieldsToShow[archiveModalData[0]?.table || ""]?.find(
+            (field) => field.name === archiveModalData[0]?.property
+          )?.label,
+        })}
+        onClose={() => setArchiveModalData([])}
+        isOpen={!!archiveModalData[0]?.property}
+      >
+        <ul>
+          {archiveModalData
+            .sort((a, b) =>
+              moment(a.dataUpdate?.createdAt).isBefore(
+                moment(b.dataUpdate?.createdAt)
+              )
+                ? -1
+                : 1
+            )
+            .map((row, i) => {
+              const propertySpecs = fieldsToShow[row.table || ""].find(
+                (field) => field.name === row.property
+              );
+
+              return (
+                <li key={i}>
+                  {dataRender({
+                    data: row.dataUpdate?.data || "",
+                    type: propertySpecs?.type,
+                    options: propertySpecs?.options,
+                  })}
+                  <small className="float-end">
+                    {moment(row.dataUpdate?.createdAt).format(
+                      viewDayDateFormat
+                    )}
+                  </small>
+                </li>
+              );
+            })}
+        </ul>
       </Modal>
     </Fragment>
   );

@@ -58,7 +58,6 @@ const Sidebar = ({ routes = [{ name: "", route: "", icon: faHome }] }) => {
                 role="button"
                 onClick={() => {
                   navigate(route);
-                  setCollapsed(true);
                 }}
               >
                 <FontAwesomeIcon icon={icon} className="me-2" />
@@ -97,7 +96,6 @@ const Sidebar = ({ routes = [{ name: "", route: "", icon: faHome }] }) => {
               role="button"
               onClick={() => {
                 navigate(route);
-                setCollapsed(true);
               }}
             >
               <FontAwesomeIcon icon={icon} className="me-2" />

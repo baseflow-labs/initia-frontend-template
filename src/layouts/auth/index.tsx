@@ -28,9 +28,9 @@ import VisitReportsView from "../../views/auth/visits/addReport";
 import BeneficiariesVisitsView from "../../views/auth/visits/beneficiaryVisits";
 import VisitDetailView from "../../views/auth/visits/reportDetails";
 import DashboardNavbar from "./dashboardNavbar";
+import { FilePreviewModal } from "./globalModal";
 import Navbar from "./navbar";
 import Sidebar from "./sidebar";
-import { FilePreviewModal } from "./globalModal";
 
 const AuthLayout = () => {
   const { t } = useTranslation();
@@ -74,7 +74,7 @@ const AuthLayout = () => {
       route: "/beneficiary/profile/",
       view: <BeneficiaryProfileView />,
       icon: faUsers,
-      users: ["beneficiary", "researcher", "admin"],
+      users: ["researcher", "admin"],
     },
     {
       name: t("Auth.Visits.Title"),

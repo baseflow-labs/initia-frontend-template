@@ -7,6 +7,7 @@ import { addNotification } from "../../../store/actions/notifications";
 import { setFontSize, setMetadata } from "../../../store/actions/settings";
 import { useAppSelector } from "../../../store/hooks";
 import { apiCatchGlobalHandler } from "../../../utils/function";
+import { FormikProps } from "formik";
 
 const SettingsPage = () => {
   const { t } = useTranslation();
@@ -46,31 +47,91 @@ const SettingsPage = () => {
     },
   ];
 
-  const staffInputs = () => [
-    {
-      type: "range",
-      name: "fontSize",
-      min: 10,
-      max: 25,
-      label: t("Auth.Settings.FontSize"),
-      defaultValue: 15,
-    },
-    {
-      type: "text",
-      name: "name",
-      label: t("Auth.Settings.SocietyName"),
-    },
-    {
-      type: "file",
-      name: "logo",
-      label: t("Auth.Settings.SocietyLogo"),
-    },
-    {
+  const staffInputs = (formik: FormikProps<Record<string, any>>) => {
+    const final = [
+      {
+        type: "range",
+        name: "fontSize",
+        min: 10,
+        max: 25,
+        label: t("Auth.Settings.FontSize"),
+        defaultValue: 15,
+      },
+      {
+        type: "text",
+        name: "name",
+        label: t("Auth.Settings.SocietyName"),
+      },
+      {
+        type: "file",
+        name: "logo",
+        label: t("Auth.Settings.SocietyLogo"),
+      },
+      {
+        type: "selectMany",
+        name: "provinces",
+        options: [{ value: "All", label: t("Auth.Settings.AllProvinces") }],
+        label: t("Auth.Settings.SocietyProvinces"),
+      },
+    ];
+
+    const allProvinces = formik?.values.provinces?.includes("All");
+    const allGovernorate = formik?.values.governorate?.includes("All");
+    const allCities = formik?.values.cities?.includes("All");
+
+    if (!allProvinces) {
+      final.push({
+        type: "selectMany",
+        name: "governorate",
+        options: [{ value: "All", label: t("Auth.Settings.AllGovernorate") }],
+        label: t("Auth.Settings.SocietyGovernorate"),
+      });
+    }
+
+    if (!allProvinces && !allGovernorate) {
+      final.push({
+        type: "selectMany",
+        name: "cities",
+        options: [{ value: "All", label: t("Auth.Settings.AllCities") }],
+        label: t("Auth.Settings.SocietyCities"),
+      });
+    }
+
+    if (!allProvinces && !allGovernorate && !allCities) {
+      final.push({
+        type: "selectMany",
+        name: "districts",
+        options: [{ value: "All", label: t("Auth.Settings.AllDistricts") }],
+        label: t("Auth.Settings.SocietyDistricts"),
+      });
+    }
+
+    final.push({
       type: "phoneNumber",
       name: "phoneNumber",
       label: t("Auth.Settings.SocietyPhoneNumber"),
-    },
-  ];
+    });
+
+    final.push({
+      type: "location",
+      name: "location",
+      label: t("Auth.Settings.SocietyLocation"),
+    });
+
+    final.push({
+      type: "text",
+      name: "address",
+      label: t("Auth.Settings.SocietyAddress"),
+    });
+
+    final.push({
+      type: "url",
+      name: "website",
+      label: t("Auth.Settings.SocietyWebsite"),
+    });
+
+    return final;
+  };
 
   return (
     <div className="border border-3 border-dark rounded-5 mx-auto w-50 p-5">

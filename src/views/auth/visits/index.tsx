@@ -1,4 +1,9 @@
-import { faCircle, faEdit, faNewspaper, faXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircle,
+  faEdit,
+  faNewspaper,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useEffect, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -12,7 +17,11 @@ import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import { viewDayDateFormat } from "../../../utils/consts";
-import { apiCatchGlobalHandler, renderDataFromOptions, statusColorRender } from "../../../utils/function";
+import {
+  apiCatchGlobalHandler,
+  renderDataFromOptions,
+  statusColorRender,
+} from "../../../utils/function";
 
 const VisitsView = () => {
   const { t } = useTranslation();
@@ -22,10 +31,13 @@ const VisitsView = () => {
 
   const [openModal, setOpenModal] = useState(false);
   const [crudData, setCrudData] = useState({});
+
   const [selectOptions, setSelectOptions] = useState({
     beneficiaries: [{ id: "", fullName: "" }],
   });
-  const [visits, setVisits] = useState([{ id: "", visitReport: {} }]);
+  const [visits, setVisits] = useState<
+    { id: string; visitReport: object; status: string }[]
+  >([]);
 
   const getData = () => {
     VisitApi.getAll()
@@ -222,39 +234,44 @@ const VisitsView = () => {
       <TablePage
         title={title}
         filters={filters}
-        tableActions={[
-          // {
-          //   icon: faEdit,
-          //   spread: true,
-          //   label: t("Global.Form.Labels.Edit"),
-          //   onClick: (data: string) => editData(data),
-          // },
-          {
-            icon: faEdit,
-            spread: true,
-            label: t("Auth.Visits.Report.AddReport"),
-            onClick: (id: string) => navigate("/visitSchedule/report?id=" + id),
-          },
-          {
-            icon: faNewspaper,
-            spread: true,
-            label: t("Auth.Visits.Report.ViewReport"),
-            onClick: (id: string) =>
-              visits.find((v) => v.id == id)?.visitReport
-                ? navigate("/visitSchedule/report/details/?id=" + id)
-                : dispatch(
-                    addNotification({
-                      msg: t("Auth.Visits.Report.ThereIsNoReport"),
-                      type: "err",
-                    })
-                  ),
-          },
-          {
-            icon: faXmark,
-            label: t("Auth.Visits.CancelVisit"),
-            onClick: (id: string) => cancelVisit(id),
-          },
-        ]}
+        tableActions={(id?: string) => {
+          const visit = visits.find((v) => v.id === id);
+
+          console.log({ visit });
+
+          const final = [];
+
+          const gotReport = !!visit?.visitReport;
+          const cancelled = visit?.status === "Cancelled";
+
+          if (gotReport) {
+            final.push({
+              icon: faNewspaper,
+              spread: true,
+              label: t("Auth.Visits.Report.ViewReport"),
+              onClick: (id: string) =>
+                navigate("/visitSchedule/report/details/?id=" + id),
+            });
+          } else {
+            final.push({
+              icon: faEdit,
+              spread: true,
+              label: t("Auth.Visits.Report.AddReport"),
+              onClick: (id: string) =>
+                navigate("/visitSchedule/report?id=" + id),
+            });
+
+            if (!cancelled) {
+              final.push({
+                icon: faXmark,
+                label: t("Auth.Visits.CancelVisit"),
+                onClick: (id: string) => cancelVisit(id),
+              });
+            }
+          }
+
+          return final;
+        }}
         actionButtons={actionButtons}
         columns={columns}
         data={visits}

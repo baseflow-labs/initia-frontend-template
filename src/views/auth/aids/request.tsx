@@ -18,8 +18,10 @@ import {
 const AidsBeneficiaryView = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const [beneficiaries, setAids] = useState([{}]);
+
   const [openModal, setOpenModal] = useState(false);
+
+  const [aids, setAids] = useState([]);
 
   const getData = () => {
     AidApi.getAll()
@@ -183,7 +185,7 @@ const AidsBeneficiaryView = () => {
         filters={filters}
         actionButtons={actionButtons}
         columns={columns}
-        data={beneficiaries}
+        data={aids}
         onPageChange={(i = 0, x = 0) => console.log(i, x)}
         onSearch={(values) => console.log(values)}
       />

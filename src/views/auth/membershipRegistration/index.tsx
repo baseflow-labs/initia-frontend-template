@@ -24,7 +24,6 @@ import Button from "../../../components/core/button";
 import Form from "../../../components/form";
 import WizardFormStepper from "../../../components/form/wizard/stepper";
 import { addNotification } from "../../../store/actions/notifications";
-import { useAppSelector } from "../../../store/hooks";
 import { dataDateFormat } from "../../../utils/consts";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import DependentsFormView from "./Dependents";
@@ -34,16 +33,16 @@ const MembershipRegistrationView = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
-  const { user } = useAppSelector((state) => state.auth);
 
   const [currentStep, setCurrentStep] = useState(0);
+
   const [formData, setFormData] = useState({
     beneficiary: { id: "", fullName: "" },
     contactsBank: {},
     status: { status: "" },
     housing: {},
     income: {},
-    user: {},
+    user: { id: "" },
     dependents: [{ fullName: "", idNumber: "" }],
     nationalRecord: {},
   });
@@ -842,7 +841,7 @@ const MembershipRegistrationView = () => {
   ];
 
   const HelpButton = () => {
-    const alreadyRequested = formData.status.status === "Need Help";
+    const alreadyRequested = formData.status?.status === "Need Help";
 
     return (
       <Button
@@ -881,7 +880,10 @@ const MembershipRegistrationView = () => {
           customButtons={<HelpButton />}
           initialValues={formData.beneficiary}
           onFormSubmit={(e) => {
-            BeneficiaryApi.createOrUpdate({ ...e, user: user?.id })
+            BeneficiaryApi.createOrUpdate({
+              ...e,
+              user: formData.user?.id,
+            })
               .then((res) => {
                 onNextStep({ ...e, ...res }, "beneficiary");
               })
@@ -994,18 +996,18 @@ const MembershipRegistrationView = () => {
       name: "Success",
       contents: (
         <div className="text-center">
-          <h2>
+          <h2 className="display-4">
             <FontAwesomeIcon icon={faCheckCircle} className="text-success" />
             <br />
             {t("Auth.MembershipRegistration.Form.Success.Title")}
           </h2>
 
-          <h6 className="text-muted my-4">
+          <h4 className="text-muted my-4">
             {t("Auth.MembershipRegistration.Form.Success.Text")}
-          </h6>
+          </h4>
 
           <Button color="info" onClick={() => navigate("/dashboard")}>
-            {t("Global.Labels.Ok")}
+            {t("Auth.MembershipRegistration.Form.Success.Next")}
           </Button>
         </div>
       ),

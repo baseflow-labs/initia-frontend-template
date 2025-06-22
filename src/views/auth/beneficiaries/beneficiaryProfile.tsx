@@ -1,5 +1,5 @@
 import moment from "moment";
-import { Fragment, useEffect, useLayoutEffect, useState } from "react";
+import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
@@ -10,12 +10,16 @@ import Form, { InputSingleProps } from "../../../components/form";
 import { dataRender } from "../../../components/table";
 import ColumnsPage from "../../../layouts/auth/columnsPage";
 import { addNotification } from "../../../store/actions/notifications";
+import { useAppSelector } from "../../../store/hooks";
 import { dataDateFormat } from "../../../utils/consts";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 
 const BeneficiaryOwnProfile = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+
+  const { user } = useAppSelector((state) => state.auth);
+
   const [beneficiary, setBeneficiary] = useState<any>();
   const [dataReviews, setDataReviews] =
     useState<
@@ -26,12 +30,11 @@ const BeneficiaryOwnProfile = () => {
     BeneficiaryApi.getByUserId()
       .then((res: any) => {
         setBeneficiary(res);
-
-        DataReviewApi.getNonUpdatedDataReview(res.beneficiary.id)
-          .then((res) => setDataReviews(res as any))
-          .catch(apiCatchGlobalHandler);
       })
+      .catch(apiCatchGlobalHandler);
 
+    DataReviewApi.getNonUpdatedDataReview(user.id || "")
+      .then((res) => setDataReviews(res as any))
       .catch(apiCatchGlobalHandler);
   };
 
@@ -1096,7 +1099,6 @@ const BeneficiaryOwnProfile = () => {
                             dataReview: id,
                           })
                         }
-                        submitText={t("Global.Form.Labels.SaveData")}
                       />
                     )}
                   </div>
@@ -1105,11 +1107,9 @@ const BeneficiaryOwnProfile = () => {
             );
           })}
         </div>
-
         <div className="col-md-12 mt-5">
           <h5>{t("Auth.Beneficiary.Profile.CurrentData")}</h5>
         </div>
-
         {cards.map(({ title, data, map }, i) => (
           <div className="col-md-6 my-5" key={i}>
             <h4 className="my-4">{title}</h4>

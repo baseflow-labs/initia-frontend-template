@@ -8,8 +8,8 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-
 import { useNavigate } from "react-router";
+
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import TablePage from "../../../layouts/auth/tablePage";
 import {
@@ -17,11 +17,15 @@ import {
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 const BeneficiariesView = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [beneficiaries, setBeneficiaries] = useState([{}]);
+
+  const [beneficiaries, setBeneficiaries] = useState<
+    { id: string; status: string }[]
+  >([]);
 
   useLayoutEffect(() => {
     BeneficiaryApi.getAll()
@@ -262,29 +266,55 @@ const BeneficiariesView = () => {
       // actionButtons={actionButtons}
       columns={columns}
       data={beneficiaries}
-      tableActions={[
-        {
-          icon: faCalendarDays,
-          spread: true,
-          label: t("Auth.Visits.AddVisit"),
-          onClick: (data: string) => scheduleVisit(data),
-        },
-        {
-          icon: faSearch,
-          label: t("Auth.Beneficiaries.Profile.ProfileReview"),
-          onClick: (data: string) => reviewProfile(data),
-        },
-        {
-          icon: faEdit,
-          label: t("Auth.Beneficiaries.Profile.ProfileCompletion"),
-          onClick: (data: string) => completeProfile(data),
-        },
-        {
-          icon: faUser,
-          label: t("Auth.Beneficiaries.Profile.ProfileDetails"),
-          onClick: (data: string) => viewProfile(data),
-        },
-      ]}
+      tableActions={(id?: string) => {
+        const row = beneficiaries.find((b) => b.id === id);
+
+        const final: {
+          label: string;
+          icon: IconProp;
+          spread?: boolean;
+          onClick: (data: string) => void;
+        }[] = [
+          {
+            icon: faUser,
+            label: t("Auth.Beneficiaries.Profile.ProfileDetails"),
+            onClick: (data: string) => viewProfile(data),
+          },
+        ];
+
+        const allowDataCompletion = ["Incomplete", "Need Help"].includes(
+          row?.status || ""
+        );
+        const allowDataReview = ["New Member"].includes(row?.status || "");
+        const allowVisit = ["Accepted"].includes(row?.status || "");
+
+        if (allowDataCompletion) {
+          final.push({
+            icon: faEdit,
+            label: t("Auth.Beneficiaries.Profile.ProfileCompletion"),
+            onClick: (data: string) => completeProfile(data),
+          });
+        }
+
+        if (allowDataReview) {
+          final.push({
+            icon: faSearch,
+            label: t("Auth.Beneficiaries.Profile.ProfileReview"),
+            onClick: (data: string) => reviewProfile(data),
+          });
+        }
+
+        if (allowVisit) {
+          final.push({
+            icon: faCalendarDays,
+            spread: true,
+            label: t("Auth.Visits.AddVisit"),
+            onClick: (data: string) => scheduleVisit(data),
+          });
+        }
+
+        return final;
+      }}
       onPageChange={(i = 0, x = 0) => console.log(i, x)}
       onSearch={(values) => console.log(values)}
     />

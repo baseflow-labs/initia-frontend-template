@@ -12,8 +12,9 @@ import { apiCatchGlobalHandler } from "../../../utils/function";
 
 const BeneficiaryProfileView = () => {
   const { t } = useTranslation();
-  const [beneficiary, setBeneficiary] = useState<any>();
   const [searchParams] = useSearchParams();
+
+  const [beneficiary, setBeneficiary] = useState<any>();
 
   useEffect(() => {
     if (searchParams.get("id")) {
@@ -1000,7 +1001,7 @@ const BeneficiaryProfileView = () => {
   return (
     <ColumnsPage>
       <Fragment>
-        <h2>{beneficiary?.fullName}</h2>
+        <h2>{beneficiary?.fullName || beneficiary?.beneficiary?.fullName}</h2>
 
         {cards?.map(({ title, data, map }, i) => (
           <div className="col-md-6 my-5" key={i}>
