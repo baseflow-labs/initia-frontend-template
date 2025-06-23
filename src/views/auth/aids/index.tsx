@@ -91,6 +91,7 @@ const AidsView = () => {
     {
       label: t("Auth.MembershipRegistration.Statuses.Status"),
       options: statuses,
+      name: "status",
     },
     {
       label: t("Auth.Beneficiaries.BeneficiaryName"),
@@ -98,10 +99,12 @@ const AidsView = () => {
         value: id,
         label: fullName,
       })),
+      name: "beneficiary",
     },
     {
       label: t("Auth.Aids.AidType"),
       options: aidTypes,
+      name: "type",
     },
   ];
 

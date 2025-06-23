@@ -46,8 +46,6 @@ const getByUserId = async (id?: string) => {
 };
 
 const createOrUpdate = async (data: Props) => {
-  console.log({ user });
-
   return await api.post(
     mainPath + "/create-update",
     { ...data, user: data.user || user.id },

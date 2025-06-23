@@ -13,6 +13,7 @@ import ColumnsPage from "./columnsPage";
 interface Props extends TableProps {
   title: string;
   filters?: {
+    name: string;
     label: string;
     options: { value: string; label?: string }[];
     multi?: boolean;
@@ -37,11 +38,20 @@ const TablePage = ({
   onSearch,
   tableActions,
 }: Props) => {
+  const initialValues =
+    filters?.reduce(
+      (final, current) => ({ ...final, [current.name]: "" }),
+      {}
+    ) || {};
+
   const formik = useFormik<Record<string, any>>({
-    initialValues: {},
+    initialValues,
     enableReinitialize: true,
     onSubmit: (values) => {
       onSearch?.(values);
+    },
+    onReset: () => {
+      onSearch?.(initialValues);
     },
   });
 
@@ -56,10 +66,10 @@ const TablePage = ({
           <FormikProvider value={formik}>
             <FormikForm className="text-start">
               <div className="d-flex">
-                {filters?.map(({ label, options, multi }, i) =>
+                {filters?.map(({ name, label, options, multi }, i) =>
                   multi ? (
                     <SelectManyInput
-                      name={label}
+                      name={name}
                       placeholder={label}
                       options={options}
                       className="me-2"
@@ -67,8 +77,11 @@ const TablePage = ({
                     />
                   ) : (
                     <SelectInput
-                      name={label}
+                      id={name}
+                      name={name}
                       placeholder={label}
+                      value={formik.values[name]}
+                      onChange={formik.handleChange}
                       options={options}
                       className="me-2"
                       key={i}
@@ -80,7 +93,11 @@ const TablePage = ({
                   <FontAwesomeIcon icon={faFilter} className="me-1 my-auto" />
                 </Button>
 
-                <Button color="ghost" type="button">
+                <Button
+                  color="ghost"
+                  type="button"
+                  onClick={() => formik.resetForm()}
+                >
                   <FontAwesomeIcon icon={faHistory} className="me-1 my-auto" />
                 </Button>
               </div>

@@ -104,6 +104,7 @@ const VisitsView = () => {
     {
       label: t("Auth.Visits.Statuses.Status"),
       options: statuses,
+      name: "status",
     },
   ];
 
@@ -236,8 +237,6 @@ const VisitsView = () => {
         filters={filters}
         tableActions={(id?: string) => {
           const visit = visits.find((v) => v.id === id);
-
-          console.log({ visit });
 
           const final = [];
 

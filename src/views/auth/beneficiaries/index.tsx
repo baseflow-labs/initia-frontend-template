@@ -1,3 +1,4 @@
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import {
   faCalendarDays,
   faCircle,
@@ -17,7 +18,6 @@ import {
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 const BeneficiariesView = () => {
   const { t } = useTranslation();
@@ -182,14 +182,17 @@ const BeneficiariesView = () => {
     {
       label: t("Auth.MembershipRegistration.Statuses.Status"),
       options: statuses,
+      name: "status",
     },
     {
       label: t("Auth.MembershipRegistration.Form.Nationality.Title"),
       options: nationalities,
+      name: "nationality",
     },
     {
       label: t("Auth.MembershipRegistration.Form.Province.Title"),
       options: provinces,
+      name: "province",
     },
   ];
 

@@ -73,10 +73,12 @@ const AidsBeneficiaryView = () => {
     {
       label: t("Auth.MembershipRegistration.Statuses.Status"),
       options: statuses,
+      name: "status",
     },
     {
       label: t("Auth.Aids.AidType"),
       options: aidTypes,
+      name: "type",
     },
   ];
 

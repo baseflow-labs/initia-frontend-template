@@ -105,6 +105,7 @@ const BeneficiariesVisitsView = () => {
     {
       label: t("Auth.Visits.Statuses.Status"),
       options: statuses,
+      name: "status",
     },
   ];
 
@@ -207,7 +208,6 @@ const BeneficiariesVisitsView = () => {
     VisitApi.getById(data as string)
       .then((res) => {
         setCrudData(res);
-        console.log(res);
 
         setOpenModal(true);
       })
