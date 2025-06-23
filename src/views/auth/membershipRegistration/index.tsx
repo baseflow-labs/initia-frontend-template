@@ -112,7 +112,7 @@ const MembershipRegistrationView = () => {
     setCurrentStep((current = 0) => current - 1);
   };
 
-  const basicDataInputs = (formik: FormikProps<Record<string, any>>) => [
+  const basicDataInputs = (formik?: FormikProps<Record<string, any>>) => [
     {
       type: "select",
       options: [
@@ -187,7 +187,7 @@ const MembershipRegistrationView = () => {
       type: "file",
       name: "familyRecordPhoto",
       label: t("Auth.MembershipRegistration.Form.FamilyRecordPhoto"),
-      required: true,
+      required: false,
       halfCol: true,
     },
     {
@@ -231,7 +231,7 @@ const MembershipRegistrationView = () => {
       required: true,
       halfCol: true,
     },
-    ...(formik.values.healthStatus === "Sick"
+    ...(formik?.values.healthStatus === "Sick"
       ? [
           {
             type: "selectMany",
@@ -560,7 +560,7 @@ const MembershipRegistrationView = () => {
     },
   ];
 
-  const hostelDataInputs = (formik: FormikProps<Record<string, any>>) => [
+  const hostelDataInputs = (formik?: FormikProps<Record<string, any>>) => [
     {
       type: "title",
       name: "title2",
@@ -726,7 +726,7 @@ const MembershipRegistrationView = () => {
       type: "file",
       name: "homeDocumentPhoto",
       label:
-        formik.values.homeOwnership === "Rental"
+        formik?.values.homeOwnership === "Rental"
           ? t("Auth.MembershipRegistration.Form.RentalContractPhoto")
           : t("Auth.MembershipRegistration.Form.OwnershipDocumentPhoto"),
       required: true,
@@ -739,7 +739,7 @@ const MembershipRegistrationView = () => {
       required: true,
       halfCol: true,
     },
-    ...(formik.values.homeOwnership === "Rental"
+    ...(formik?.values.homeOwnership === "Rental"
       ? [
           {
             type: "number",
@@ -869,6 +869,17 @@ const MembershipRegistrationView = () => {
     </Fragment>
   );
 
+  const cleanData = (inputs: { name: string }[], values: object) => {
+    const data = Object.keys(values)
+      .filter((key) => inputs.find(({ name }) => name === key))
+      .reduce(
+        (final, key) => ({ ...final, [key]: (values as any)[key] }),
+        {}
+      ) as any;
+
+    return data;
+  };
+
   const formSteps = [
     {
       label: t("Auth.MembershipRegistration.Form.BasicData"),
@@ -880,8 +891,10 @@ const MembershipRegistrationView = () => {
           customButtons={<HelpButton />}
           initialValues={formData.beneficiary}
           onFormSubmit={(e) => {
+            const final = cleanData(basicDataInputs(), e);
+
             BeneficiaryApi.createOrUpdate({
-              ...e,
+              ...final,
               user: formData.user?.id,
             })
               .then((res) => {
@@ -902,9 +915,11 @@ const MembershipRegistrationView = () => {
           customButtons={<BackButton />}
           initialValues={formData.contactsBank}
           onFormSubmit={(e) => {
+            const final = cleanData(contactDataInputs(), e);
+
             ContactApi.createOrUpdate({
+              ...final,
               beneficiary: formData.beneficiary?.id,
-              ...e,
             })
               .then(() => {
                 onNextStep(e, "contactsBank");
@@ -924,9 +939,11 @@ const MembershipRegistrationView = () => {
           customButtons={<BackButton />}
           initialValues={formData.income}
           onFormSubmit={(e) => {
+            const final = cleanData(qualificationDataInputs(), e);
+
             IncomeApi.createOrUpdate({
+              ...final,
               beneficiary: formData.beneficiary?.id,
-              ...e,
             })
               .then(() => {
                 onNextStep(e, "income");
@@ -946,9 +963,11 @@ const MembershipRegistrationView = () => {
           customButtons={<BackButton />}
           initialValues={formData.housing}
           onFormSubmit={(e) => {
+            const final = cleanData(hostelDataInputs(), e);
+
             HousingApi.createOrUpdate({
+              ...final,
               beneficiary: formData.beneficiary?.id,
-              ...e,
             })
               .then(() => {
                 onNextStep(e, "housing");
@@ -979,9 +998,11 @@ const MembershipRegistrationView = () => {
           customButtons={<BackButton />}
           initialValues={formData.nationalRecord}
           onFormSubmit={(e) => {
+            const final = cleanData(attachmentInputs(), e);
+
             NationalRecordApi.createOrUpdate({
+              ...final,
               beneficiary: formData.beneficiary?.id,
-              ...e,
             })
               .then(() => {
                 onNextStep(e, "nationalRecord");
