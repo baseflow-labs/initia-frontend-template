@@ -11,6 +11,7 @@ import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
+import { GetDataProps } from "../../../api";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import TablePage from "../../../layouts/auth/tablePage";
 import {
@@ -27,8 +28,8 @@ const BeneficiariesView = () => {
     { id: string; status: string }[]
   >([]);
 
-  useLayoutEffect(() => {
-    BeneficiaryApi.getAll()
+  const getData = (filters: GetDataProps) => {
+    BeneficiaryApi.getAll(filters)
       .then((res) => {
         setBeneficiaries(
           (res as any).map(
@@ -42,6 +43,10 @@ const BeneficiariesView = () => {
         );
       })
       .catch(apiCatchGlobalHandler);
+  };
+
+  useLayoutEffect(() => {
+    getData({});
   }, []);
 
   const title = t("Auth.Beneficiaries.Title");
@@ -182,7 +187,7 @@ const BeneficiariesView = () => {
     {
       label: t("Auth.MembershipRegistration.Statuses.Status"),
       options: statuses,
-      name: "status",
+      name: "status=>status",
     },
     {
       label: t("Auth.MembershipRegistration.Form.Nationality.Title"),
@@ -192,7 +197,7 @@ const BeneficiariesView = () => {
     {
       label: t("Auth.MembershipRegistration.Form.Province.Title"),
       options: provinces,
-      name: "province",
+      name: "housing=>province",
     },
   ];
 
@@ -319,7 +324,7 @@ const BeneficiariesView = () => {
         return final;
       }}
       onPageChange={(i = 0, x = 0) => console.log(i, x)}
-      onSearch={(values) => console.log(values)}
+      onSearch={(values) => getData(values)}
     />
   );
 };

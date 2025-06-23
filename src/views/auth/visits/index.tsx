@@ -22,6 +22,7 @@ import {
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
+import { GetDataProps } from "../../../api";
 
 const VisitsView = () => {
   const { t } = useTranslation();
@@ -39,8 +40,8 @@ const VisitsView = () => {
     { id: string; visitReport: object; status: string }[]
   >([]);
 
-  const getData = () => {
-    VisitApi.getAll()
+  const getData = (filters: GetDataProps) => {
+    VisitApi.getAll(filters)
       .then((res) => {
         setVisits(
           (res as any).map(
@@ -65,9 +66,9 @@ const VisitsView = () => {
   };
 
   useLayoutEffect(() => {
-    getData();
+    getData({});
 
-    BeneficiaryApi.getAll()
+    BeneficiaryApi.getAll({})
       .then((res) =>
         setSelectOptions((current) => ({
           ...current,
@@ -201,7 +202,7 @@ const VisitsView = () => {
   const cancelVisit = (data: string) => {
     VisitApi.cancel(data)
       .then((res) => {
-        getData();
+        getData({});
         dispatch(
           addNotification({
             msg: t("Global.Form.SuccessMsg", {
@@ -217,7 +218,7 @@ const VisitsView = () => {
 
   const onCrudSuccess = (e: { beneficiary: "" }, action = "") => {
     onModalClose();
-    getData();
+    getData({});
     dispatch(
       addNotification({
         msg: t("Global.Form.SuccessMsg", {
@@ -275,7 +276,7 @@ const VisitsView = () => {
         columns={columns}
         data={visits}
         onPageChange={(i = 0, x = 0) => console.log(i, x)}
-        onSearch={(values) => console.log(values)}
+        onSearch={(values) => getData(values)}
       />
 
       <Modal

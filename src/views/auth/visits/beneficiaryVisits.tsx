@@ -33,7 +33,7 @@ const BeneficiariesVisitsView = () => {
   const [visits, setVisits] = useState([]);
 
   const getData = () => {
-    VisitApi.getAll()
+    VisitApi.getAll({})
       .then((res) => {
         setVisits(
           (res as any).map(
@@ -60,7 +60,7 @@ const BeneficiariesVisitsView = () => {
   useLayoutEffect(() => {
     getData();
 
-    BeneficiaryApi.getAll()
+    BeneficiaryApi.getAll({})
       .then((res) =>
         setSelectOptions((current) => ({
           ...current,

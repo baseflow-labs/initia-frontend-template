@@ -11,6 +11,33 @@ import store, { RootState } from "../store/store";
 
 export const baseURL = "https://api.mustaheq.org";
 
+export interface GetDataProps {
+  filters?: object;
+}
+
+export const formatGetFilters = (filters = {}) => {
+  console.log({ filters });
+
+  const conditions = Object.keys(filters)
+    .filter((key) => (filters as any)[key])
+    .map((key) => {
+      return {
+        field: key.replaceAll("=>", "."),
+        filteredTerm: {
+          dataType: "string",
+          value: (filters as any)[key],
+        },
+        filterOperator: "stringEquals",
+      };
+    });
+
+  return {
+    params: {
+      conditions: JSON.stringify(conditions),
+    },
+  };
+};
+
 const service = axios.create({
   baseURL,
   headers: {

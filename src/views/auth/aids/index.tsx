@@ -4,6 +4,7 @@ import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
+import { GetDataProps } from "../../../api";
 import * as AidApi from "../../../api/aids/aids";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import Form from "../../../components/form";
@@ -29,8 +30,8 @@ const AidsView = () => {
     beneficiaries: [{ id: "", fullName: "" }],
   });
 
-  const getData = () => {
-    AidApi.getAll()
+  const getData = (filters: GetDataProps) => {
+    AidApi.getAll(filters)
       .then((res) => {
         setAids(
           (res as any).map(
@@ -47,9 +48,9 @@ const AidsView = () => {
   };
 
   useLayoutEffect(() => {
-    getData();
+    getData({});
 
-    BeneficiaryApi.getAll()
+    BeneficiaryApi.getAll({})
       .then((res) =>
         setSelectOptions((current) => ({
           ...current,
@@ -91,7 +92,7 @@ const AidsView = () => {
     {
       label: t("Auth.MembershipRegistration.Statuses.Status"),
       options: statuses,
-      name: "status",
+      name: "status=>status",
     },
     {
       label: t("Auth.Beneficiaries.BeneficiaryName"),
@@ -207,7 +208,7 @@ const AidsView = () => {
     AidApi.updateStatus(id, status)
       .then(() => {
         const aid = aids.find((aid) => aid.id === id);
-        getData();
+        getData({});
         dispatch(
           addNotification({
             msg: t("Global.Form.SuccessMsg", {
@@ -258,7 +259,7 @@ const AidsView = () => {
         columns={columns}
         data={aids}
         onPageChange={(i = 0, x = 0) => console.log(i, x)}
-        onSearch={(values) => console.log(values)}
+        onSearch={(values) => getData(values)}
       />
 
       <Modal
@@ -273,7 +274,7 @@ const AidsView = () => {
             AidApi.grant(e)
               .then((res) => {
                 setOpenModal(false);
-                getData();
+                getData({});
                 dispatch(
                   addNotification({
                     msg: t("Global.Form.SuccessMsg", {

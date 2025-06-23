@@ -24,7 +24,7 @@ const AidsBeneficiaryView = () => {
   const [aids, setAids] = useState([]);
 
   const getData = () => {
-    AidApi.getAll()
+    AidApi.getAll({})
       .then((res) => {
         setAids(
           (res as any).map(({ beneficiary = {}, status = {}, ...rest }) => ({
