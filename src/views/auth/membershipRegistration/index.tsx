@@ -844,18 +844,20 @@ const MembershipRegistrationView = () => {
     const alreadyRequested = formData.status?.status === "Need Help";
 
     return (
-      <Button
-        className="w-100 p-2 ps-1 mb-3 text-start border-0"
-        color="ghost"
-        type="button"
-        disabled={alreadyRequested}
-        onClick={() => onRequestHelp()}
-      >
-        <FontAwesomeIcon icon={faInfoCircle} />{" "}
-        {alreadyRequested
-          ? t("Auth.MembershipRegistration.Form.AlreadyRequested")
-          : t("Auth.MembershipRegistration.Form.ClickForHelp")}
-      </Button>
+      <div className="w-100">
+        <Button
+          className="w-fit p-2 ps-1 mb-3 text-start border-0"
+          color="ghost"
+          type="button"
+          disabled={alreadyRequested}
+          onClick={() => onRequestHelp()}
+        >
+          <FontAwesomeIcon icon={faInfoCircle} />{" "}
+          {alreadyRequested
+            ? t("Auth.MembershipRegistration.Form.AlreadyRequested")
+            : t("Auth.MembershipRegistration.Form.ClickForHelp")}
+        </Button>
+      </div>
     );
   };
 
@@ -984,7 +986,20 @@ const MembershipRegistrationView = () => {
         <DependentsFormView
           customButtons={<BackButton />}
           initialValues={formData.dependents}
-          onFormSubmit={(e) => onNextStep(e)}
+          saveData={(dependents) => {
+            setFormData((current) => ({
+              ...current,
+              dependents,
+            }));
+          }}
+          onFormSubmit={(dependents) => {
+            window.scrollTo(0, 0);
+            setFormData((current) => ({
+              ...current,
+              dependents,
+            }));
+            setCurrentStep((current = 0) => current + 1);
+          }}
           beneficiary={formData.beneficiary?.id}
         />
       ),

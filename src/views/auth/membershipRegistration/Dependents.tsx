@@ -21,6 +21,7 @@ interface Props {
   initialValues: { fullName: string; idNumber: string }[];
   beneficiary: string;
   onFormSubmit: (values: any) => void;
+  saveData: (values: any) => void;
 }
 
 const DependentsFormView = ({
@@ -28,6 +29,7 @@ const DependentsFormView = ({
   initialValues = [],
   beneficiary,
   onFormSubmit,
+  saveData,
 }: Props) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -35,6 +37,9 @@ const DependentsFormView = ({
   const { loading } = useAppSelector((state) => state.loading);
 
   const [dependents, setDependents] = useState(initialValues);
+  const [activeCollapse, setActiveCollapse] = useState<number>(
+    initialValues.length
+  );
 
   useEffect(() => setDependents(initialValues), [initialValues]);
 
@@ -285,7 +290,7 @@ const DependentsFormView = ({
   return (
     <Fragment>
       {dependents.map((dependent: any, i: number) => (
-        <div className="accordion-item mb-3" key={i}>
+        <div className="accordion-item my-4" key={i}>
           <h2 className="accordion-header mb-3" id={"heading" + String(i)}>
             <div className="d-flex align-items-center justify-content-between ">
               <button
@@ -295,7 +300,13 @@ const DependentsFormView = ({
                 aria-expanded="false"
                 type="button"
                 aria-controls={"collapse" + String(i)}
-                onClick={() => {}}
+                onClick={() => {
+                  console.log("click");
+
+                  setActiveCollapse(
+                    activeCollapse === i ? dependent.length : i
+                  );
+                }}
               >
                 <FontAwesomeIcon icon={faUser} className="me-2" />{" "}
                 {dependent.fullName ||
@@ -309,7 +320,7 @@ const DependentsFormView = ({
                 text="danger"
                 size="sm"
                 type="button"
-                className="border border-1 rounded-4 py-3 ms-2"
+                className="border border-1 rounded-4 py-3 ms-2 px-3"
                 onClick={() => remove(i)}
               >
                 <FontAwesomeIcon icon={faTrash} />
@@ -319,7 +330,9 @@ const DependentsFormView = ({
 
           <div
             id={`collapse${i}`}
-            className="accordion-collapse show"
+            className={`accordion-collapse collapse ${
+              activeCollapse === i ? "show" : ""
+            }`}
             aria-labelledby={`heading${i}`}
           >
             <div className="accordion-body">
@@ -339,6 +352,8 @@ const DependentsFormView = ({
                     ...e,
                   })
                     .then(() => {
+                      setActiveCollapse(dependents.length);
+
                       dispatch(
                         addNotification({
                           msg: t(
@@ -347,9 +362,21 @@ const DependentsFormView = ({
                           ),
                         })
                       );
-                      setDependents((current) =>
-                        [...current, e].filter((data) => !data.idNumber)
-                      );
+
+                      const data = [...dependents, e]
+                        .filter((d) => d.idNumber)
+                        .reverse()
+                        .reduce(
+                          (final, data) =>
+                            final.find((f: any) => f.idNumber === data.idNumber)
+                              ? final
+                              : [...final, data],
+                          []
+                        )
+                        .reverse();
+
+                      setDependents(data);
+                      saveData(data);
                     })
                     .catch(apiCatchGlobalHandler);
                 }}
@@ -364,12 +391,13 @@ const DependentsFormView = ({
         outline
         type="button"
         className="my-4"
-        onClick={() =>
+        onClick={() => {
+          setActiveCollapse(dependents.length);
           setDependents((current) => [
             ...current,
             { fullName: "", idNumber: "" },
-          ])
-        }
+          ]);
+        }}
       >
         {t("Auth.MembershipRegistration.Form.Dependents.AddNew")}{" "}
         <FontAwesomeIcon icon={faPerson} />
