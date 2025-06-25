@@ -1107,9 +1107,11 @@ const BeneficiaryOwnProfile = () => {
             );
           })}
         </div>
-        <div className="col-md-12 mt-5">
+
+        {/* <div className="col-md-12 mt-5">
           <h5>{t("Auth.Beneficiary.Profile.CurrentData")}</h5>
         </div>
+
         {cards.map(({ title, data, map }, i) => (
           <div className="col-md-6 my-5" key={i}>
             <h4 className="my-4">{title}</h4>
@@ -1158,7 +1160,7 @@ const BeneficiaryOwnProfile = () => {
               </div>
             </div>
           </div>
-        ))}
+        ))} */}
       </Fragment>
     </ColumnsPage>
   );
