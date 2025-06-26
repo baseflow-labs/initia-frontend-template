@@ -193,13 +193,15 @@ const SettingsPage = () => {
             onClose={() => setOpenModal(false)}
             isOpen={openModal}
           >
-            <h3> {t("Auth.Beneficiaries.Profile.SureToDeleteData")}</h3>
+            <h3 className="text-center mb-3">
+              {t("Auth.Beneficiaries.Profile.SureToDeleteData")}
+            </h3>
 
             <div className="btn-group w-100" role="group">
               <Button
                 onClick={() => deleteBeneficiary()}
                 color="danger"
-                className="my-3"
+                className="my-3 me-1"
               >
                 {t("Global.Form.Labels.Yes")}
               </Button>
@@ -208,7 +210,7 @@ const SettingsPage = () => {
                 outline
                 onClick={() => setOpenModal(false)}
                 color="info"
-                className="my-3"
+                className="my-3 ms-1"
               >
                 {t("Global.Form.Labels.No")}
               </Button>

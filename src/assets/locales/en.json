@@ -36,6 +36,7 @@
           "Confirmed": "Confirmed",
           "NeedUpdate": "NeedUpdate"
         },
+        "SureToDeleteData": "Are You Sure?",
         "Title": "Title",
         "UpdateNote": "UpdateNote",
         "archive": "archive",
