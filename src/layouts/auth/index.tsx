@@ -146,7 +146,7 @@ const AuthLayout = () => {
       route: "/contact-us",
       view: <ContactUsPage />,
       icon: faInfoCircle,
-      users: ["beneficiary", "researcher", "admin"],
+      users: ["beneficiary", "admin"],
     },
     {
       name: t("Auth.Settings.Title"),
