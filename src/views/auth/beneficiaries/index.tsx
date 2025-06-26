@@ -4,16 +4,19 @@ import {
   faCircle,
   faEdit,
   faSearch,
+  faTrash,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
 import { GetDataProps } from "../../../api";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import TablePage from "../../../layouts/auth/tablePage";
+import { addNotification } from "../../../store/actions/notifications";
 import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
@@ -23,9 +26,10 @@ import {
 const BeneficiariesView = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [beneficiaries, setBeneficiaries] = useState<
-    { id: string; status: string }[]
+    { id: string; status: string; fullName: string }[]
   >([]);
 
   const getData = (filters: GetDataProps) => {
@@ -267,6 +271,21 @@ const BeneficiariesView = () => {
     navigate(`/visitSchedule/?id=${data}`);
   };
 
+  const deleteBeneficiary = (id: string) => {
+    BeneficiaryApi.remove(id).then(() => {
+      dispatch(
+        addNotification({
+          msg: t("Global.Form.SuccessMsg", {
+            action: t("Auth.Beneficiaries.Profile.DeleteBeneficiary"),
+            data: beneficiaries.find((b) => b.id === id)?.fullName,
+          }),
+        })
+      );
+
+      getData({});
+    });
+  };
+
   return (
     <TablePage
       title={title}
@@ -320,6 +339,12 @@ const BeneficiariesView = () => {
             onClick: (data: string) => scheduleVisit(data),
           });
         }
+
+        final.push({
+          icon: faTrash,
+          label: t("Auth.Beneficiaries.Profile.DeleteBeneficiary"),
+          onClick: (data: string) => deleteBeneficiary(data),
+        });
 
         return final;
       }}

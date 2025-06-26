@@ -26,6 +26,8 @@
       "Profile": {
         "Archive": "أرشيف {{property}}",
         "ConfirmData": "تأكيد المعلومة",
+        "DeleteBeneficiary": "حذف المستفيد",
+        "DeleteData": "حذف بيانات الحساب",
         "ProfileCompletion": "استكمال طلب المستفيد",
         "ProfileDetails": "تفاصيل ملف المستفيد",
         "ProfileReview": "مراجعة طلب الانتساب",
@@ -47,7 +49,6 @@
     },
     "Beneficiary": {
       "Profile": {
-        "CurrentData": "البيانات الحالية",
         "PleaseUpdateFollowingData": "يرجى تعبئة الحقول بالبيانات الصحيحة...",
         "Title": "معلوماتي",
         "YourProfile": "معلوماتك"

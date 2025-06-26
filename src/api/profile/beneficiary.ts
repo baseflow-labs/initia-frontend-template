@@ -61,4 +61,21 @@ const requestHelp = async (id: string) => {
   return await api.get(mainPath + "/request-help/" + id);
 };
 
-export { getAll, create, getById, getByUserId, createOrUpdate, requestHelp };
+const remove = async (id: string) => {
+  return await api.delete(mainPath + "?id=" + id);
+};
+
+const removeByUser = async (id: string) => {
+  return await api.delete(mainPath + "/" + id);
+};
+
+export {
+  getAll,
+  create,
+  getById,
+  getByUserId,
+  createOrUpdate,
+  requestHelp,
+  remove,
+  removeByUser,
+};

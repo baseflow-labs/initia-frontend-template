@@ -26,6 +26,8 @@
       "Profile": {
         "Archive": "Archive",
         "ConfirmData": "ConfirmData",
+        "DeleteBeneficiary": "Delete Beneficiary",
+        "DeleteData": "Delete Your Data",
         "ProfileCompletion": "ProfileCompletion",
         "ProfileDetails": "ProfileDetails",
         "ProfileReview": "ProfileReview",
@@ -47,7 +49,6 @@
     },
     "Beneficiary": {
       "Profile": {
-        "CurrentData": "CurrentData",
         "PleaseUpdateFollowingData": "PleaseUpdateFollowingData",
         "Title": "Title",
         "YourProfile": "YourProfile"
