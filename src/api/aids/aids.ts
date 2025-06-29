@@ -23,7 +23,10 @@ const create = async (data: object) => {
 };
 
 const updateStatus = async (id: string, status: string) => {
-  const res = await api.patch(mainPath + "/update-status/" + id, { status });
+  const res = await api.patch(mainPath + "/update-status/" + id, {
+    status,
+    aid: id,
+  });
   return res;
 };
 
