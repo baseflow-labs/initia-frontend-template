@@ -1,9 +1,4 @@
-import {
-  faCouch,
-  faDesktop,
-  faDoorOpen,
-  faTrash,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCouch, faDesktop, faDoorOpen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -11,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router";
 
 import * as VisitReportsApi from "../../../api/visits/reports";
+import CollapseGroup from "../../../components/collapse";
 import Button from "../../../components/core/button";
 import { LabelView } from "../../../components/form";
 import DefaultInput from "../../../components/form/inputs/default";
@@ -19,11 +15,7 @@ import SelectInput from "../../../components/form/inputs/select";
 import TextareaInput from "../../../components/form/inputs/textarea";
 import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
-import {
-  apiCatchGlobalHandler,
-  renderDataFromOptions,
-} from "../../../utils/function";
-import CollapseGroup from "../../../components/collapse";
+import { apiCatchGlobalHandler, renderDataFromOptions } from "../../../utils/function";
 
 const getInitialContent = () => ({
   content: "",
@@ -221,9 +213,11 @@ const VisitReportsView = () => {
                       label={t("Auth.Visits.Report.ContentXType", {
                         number: i + 1,
                       })}
+                      required
                     />
                     <SelectInput
                       sizing="lg"
+                      required
                       name={`type-${i}`}
                       value={content.type}
                       options={contentTypes}
@@ -258,9 +252,11 @@ const VisitReportsView = () => {
                             ? t("Auth.Visits.Report.TheDevice")
                             : t("Auth.Visits.Report.TheFurniture"),
                       })}
+                      required
                     />
                     <SelectInput
                       sizing="lg"
+                      required
                       name={`content-${i}`}
                       value={content.content}
                       options={
@@ -281,10 +277,12 @@ const VisitReportsView = () => {
                             ? t("Auth.Visits.Report.TheDevice")
                             : t("Auth.Visits.Report.TheFurniture"),
                       })}
+                      required
                     />
                     <DefaultInput
                       name={`photo-${i}`}
                       type="file"
+                      required
                       onChange={(e) =>
                         updateContentAtIndex(i, { photo: e.target.files?.[0] })
                       }
@@ -300,12 +298,14 @@ const VisitReportsView = () => {
                             ? t("Auth.Visits.Report.TheDevice")
                             : t("Auth.Visits.Report.TheFurniture"),
                       })}
+                      required
                     />
 
                     <RadioInput
                       name={`status-${i}`}
                       options={roomContentStatuses}
                       value={content.status}
+                      required
                       onChange={(e) =>
                         updateContentAtIndex(i, { status: e.target.value })
                       }
@@ -322,12 +322,14 @@ const VisitReportsView = () => {
                             ? t("Auth.Visits.Report.TheDevice")
                             : t("Auth.Visits.Report.TheFurniture"),
                       })}
+                      required
                     />
 
                     <RadioInput
                       name={`evaluation-${i}`}
                       options={[0, 1, 2, 3, 4, 5].map((value) => ({ value }))}
                       value={content.evaluation}
+                      required
                       onChange={(e) =>
                         updateContentAtIndex(i, {
                           evaluation: parseInt(e.target.value),
