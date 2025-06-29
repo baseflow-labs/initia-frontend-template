@@ -1,4 +1,4 @@
-import { faCheck, faCircle, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faCircle, faFilter } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -248,13 +248,15 @@ const AidsView = () => {
               icon: faCheck,
               onClick: (data: string) => updateStatus(data, "Granted"),
             });
-
-            final.push({
-              label: t("Auth.Aids.Statuses.Reject"),
-              icon: faXmark,
-              onClick: (data: string) => updateStatus(data, "Rejected"),
-            });
           }
+
+          final.push({
+            label: t("Auth.Aids.FilterByThisBeneficiary"),
+            icon: faFilter,
+            spread: true,
+            onClick: (data: string) =>
+              getData({ filters: { beneficiary: data } }),
+          });
 
           return final;
         }}
