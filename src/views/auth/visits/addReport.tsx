@@ -204,6 +204,10 @@ const VisitReportsView = () => {
             items={roomDetails.contents.map((content, i) => ({
               title: t("Auth.Visits.Report.ContentX", {
                 number: i + 1,
+                name: contentTypes
+                  .find(({ value }) => value === content.type)
+                  ?.subList.find(({ value }) => value == content.content)
+                  ?.label,
               }),
               content: (
                 <div className="my-4 row" key={i}>

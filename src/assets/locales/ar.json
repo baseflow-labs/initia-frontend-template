@@ -324,7 +324,7 @@
         "Contents": "المحتويات",
         "ContentsCount": "العدد",
         "ContentType": "نوع {{type}}",
-        "ContentX": "المحتوى رقم {{number}}",
+        "ContentX": "المحتوى رقم {{number}}: {{name}}",
         "ContentXType": "نوع المحتوى {{number}}",
         "Desk": "مكتب",
         "Device": "جهاز",

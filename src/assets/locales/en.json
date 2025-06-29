@@ -324,7 +324,7 @@
         "Contents": "Contents",
         "ContentsCount": "ContentsCount",
         "ContentType": "ContentType",
-        "ContentX": "Content {{number}}",
+        "ContentX": "Content {{number}}: {{name}}",
         "ContentXType": "ContentXType",
         "Desk": "Desk",
         "Device": "Device",
