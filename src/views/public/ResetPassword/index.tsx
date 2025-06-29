@@ -23,8 +23,6 @@ const ResetPasswordView = () => {
   ];
 
   const onSubmit = (values = {}) => {
-    console.log({ values });
-
     navigate("/");
   };
 

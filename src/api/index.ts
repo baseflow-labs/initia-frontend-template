@@ -9,15 +9,13 @@ import { endLoading, startLoading } from "../store/actions/loading";
 import { addNotification } from "../store/actions/notifications";
 import store, { RootState } from "../store/store";
 
-export const baseURL = "https://api.mustaheq.org";
+export const baseURL = "https://sawaed-api.mustaheq.org";
 
 export interface GetDataProps {
   filters?: object;
 }
 
 export const formatGetFilters = (filters = {}) => {
-  console.log({ filters });
-
   const conditions = Object.keys(filters)
     .filter((key) => (filters as any)[key])
     .map((key) => {
