@@ -1,9 +1,10 @@
-import { faCheck, faCircle, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faCircle, faFilter } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
+import { GetDataProps } from "../../../api";
 import * as AidApi from "../../../api/aids/aids";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import Form from "../../../components/form";
@@ -29,8 +30,8 @@ const AidsView = () => {
     beneficiaries: [{ id: "", fullName: "" }],
   });
 
-  const getData = () => {
-    AidApi.getAll()
+  const getData = (filters: GetDataProps) => {
+    AidApi.getAll(filters)
       .then((res) => {
         setAids(
           (res as any).map(
@@ -47,13 +48,15 @@ const AidsView = () => {
   };
 
   useLayoutEffect(() => {
-    getData();
+    getData({});
 
-    BeneficiaryApi.getAll()
+    BeneficiaryApi.getAll({})
       .then((res) =>
         setSelectOptions((current) => ({
           ...current,
-          beneficiaries: res as any,
+          beneficiaries: (res as any).filter(
+            ({ status = { status: "" } }) => status.status === "Accepted"
+          ),
         }))
       )
       .catch(apiCatchGlobalHandler);
@@ -91,6 +94,7 @@ const AidsView = () => {
     {
       label: t("Auth.MembershipRegistration.Statuses.Status"),
       options: statuses,
+      name: "status=>status",
     },
     {
       label: t("Auth.Beneficiaries.BeneficiaryName"),
@@ -98,10 +102,12 @@ const AidsView = () => {
         value: id,
         label: fullName,
       })),
+      name: "beneficiary",
     },
     {
       label: t("Auth.Aids.AidType"),
       options: aidTypes,
+      name: "type",
     },
   ];
 
@@ -204,7 +210,7 @@ const AidsView = () => {
     AidApi.updateStatus(id, status)
       .then(() => {
         const aid = aids.find((aid) => aid.id === id);
-        getData();
+        getData({});
         dispatch(
           addNotification({
             msg: t("Global.Form.SuccessMsg", {
@@ -242,20 +248,22 @@ const AidsView = () => {
               icon: faCheck,
               onClick: (data: string) => updateStatus(data, "Granted"),
             });
-
-            final.push({
-              label: t("Auth.Aids.Statuses.Reject"),
-              icon: faXmark,
-              onClick: (data: string) => updateStatus(data, "Rejected"),
-            });
           }
+
+          final.push({
+            label: t("Auth.Aids.FilterByThisBeneficiary"),
+            icon: faFilter,
+            spread: true,
+            onClick: (data: string) =>
+              getData({ filters: { beneficiary: data } }),
+          });
 
           return final;
         }}
         columns={columns}
         data={aids}
         onPageChange={(i = 0, x = 0) => console.log(i, x)}
-        onSearch={(values) => console.log(values)}
+        onSearch={(values) => getData(values)}
       />
 
       <Modal
@@ -270,7 +278,7 @@ const AidsView = () => {
             AidApi.grant(e)
               .then((res) => {
                 setOpenModal(false);
-                getData();
+                getData({});
                 dispatch(
                   addNotification({
                     msg: t("Global.Form.SuccessMsg", {

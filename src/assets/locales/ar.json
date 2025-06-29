@@ -11,6 +11,7 @@
         "Urgent?": "هل الحالة مستعجلة؟"
       },
       "Cash": "نقدية",
+      "FilterByThisBeneficiary": "عرض معونات هذا المستفيد",
       "In-Kind": "عينية",
       "RecaptionDate": "تاريخ الاستلام",
       "Statuses": {
@@ -22,10 +23,19 @@
       "Title": "طلبات الإعانة"
     },
     "Beneficiaries": {
+      "Applications": "طلبات الانتساب",
       "BeneficiaryName": "اسم المستفيد",
       "Profile": {
+        "archive": "ارشيف",
         "Archive": "أرشيف {{property}}",
         "ConfirmData": "تأكيد المعلومة",
+        "DeleteBeneficiary": "حذف المستفيد",
+        "DeleteData": "حذف بيانات الحساب",
+        "editRequest": "طلب تعديل",
+        "editStatus": "حالة التعديل",
+        "field": "الخانة",
+        "info": "المعلومة",
+        "notes": "ملاحظات",
         "ProfileCompletion": "استكمال طلب المستفيد",
         "ProfileDetails": "تفاصيل ملف المستفيد",
         "ProfileReview": "مراجعة طلب الانتساب",
@@ -34,20 +44,15 @@
           "Confirmed": "تم التأكيد",
           "NeedUpdate": "تم طلب التعديل"
         },
+        "SureToDeleteData": "هل أنت متأكد؟",
         "Title": "ملف المستفيد",
-        "UpdateNote": "سبب التعديل",
-        "archive": "ارشيف",
-        "editRequest": "طلب تعديل",
-        "editStatus": "حالة التعديل",
-        "field": "الخانة",
-        "info": "المعلومة",
-        "notes": "ملاحظات"
+        "UpdateNote": "سبب التعديل"
       },
       "Title": "المستفيدون"
     },
     "Beneficiary": {
       "Profile": {
-        "CurrentData": "البيانات الحالية",
+        "NoDataUpdate": "لا يوجد طلبات لتعديل بياناتكم الشخصية",
         "PleaseUpdateFollowingData": "يرجى تعبئة الحقول بالبيانات الصحيحة...",
         "Title": "معلوماتي",
         "YourProfile": "معلوماتك"
@@ -87,6 +92,15 @@
         "BankAccountNumberNote": "مكون من 12 رقم",
         "BasicData": "البيانات الأساسية",
         "BeneficiaryMobile": "رقم جوال المستفيد",
+        "Category": {
+          "A": "فئة أ",
+          "B": "فئة ب",
+          "C": "فئة ج",
+          "D": "فئة د",
+          "AboveGrading": "مستوى دخل الفرد في الأسرة فوق مستويات التصنيف",
+          "Title": "تصنيف المستفيد",
+          "Uncategorized": "غير مصنف"
+        },
         "City": "المدينة",
         "ClickForHelp": "اضغط هنا للمساعدة في تعبئة النموذج",
         "ComprehensiveRehabilitation": "التأهيل الشامل",
@@ -123,8 +137,8 @@
         "EducationLevel": {
           "Degree": "بكالوريوس",
           "Diploma": "دبلوم",
-          "HighSchool": "مدرسة ثانوية",
           "HigherDiploma": "دبلوم عالي",
+          "HighSchool": "مدرسة ثانوية",
           "Illiterate": "لا يقرأ ولا يتكب",
           "IntermediateSchool": "مدرسة متوسطة",
           "Literate": "يقرأ ويكتب دون مؤهل",
@@ -263,8 +277,8 @@
       },
       "Statuses": {
         "Accepted": "مقبول",
-        "InPreview": "قيد المراجعة",
         "Incomplete": "طلب غير مكتمل",
+        "InPreview": "قيد المراجعة",
         "NeedHelp": "بحاجة لمساعدة",
         "NewMember": "مستفيد جديد",
         "Rejected": "مرفوض",
@@ -319,11 +333,11 @@
         "Bathroom": "حمام",
         "Bed": "سرير",
         "Bedroom": "غرفة نوم",
-        "ContentType": "نوع {{type}}",
-        "ContentX": "المحتوى رقم {{number}}",
-        "ContentXType": "نوع المحتوى {{number}}",
         "Contents": "المحتويات",
         "ContentsCount": "العدد",
+        "ContentType": "نوع {{type}}",
+        "ContentX": "المحتوى رقم {{number}}: {{name}}",
+        "ContentXType": "نوع المحتوى {{number}}",
         "Desk": "مكتب",
         "Device": "جهاز",
         "DiningRoom": "غرفة طعام",
@@ -351,18 +365,18 @@
         "RoomContentPhoto": "صورة {{type}}",
         "RoomContentStatus": "حالة {{type}}",
         "RoomRecommendations": "توصيات الغرفة",
+        "RoomsCount": "العدد",
         "RoomXDetails": "تفاصيل الغرفة {{number}}",
         "RoomXType": "نوع الغرفة رقم {{number}}",
-        "RoomsCount": "العدد",
         "Router": "جهاز توجيه",
         "Shelf": "رف",
         "ShoeRack": "رف أحذية",
         "Sofa": "كنبة",
         "Storage": "مخزن",
-        "TV": "تلفاز",
         "TheDevice": "الجهاز",
         "TheFurniture": "قطعة الأثاث",
         "Title": "تقرير الزيارة",
+        "TV": "تلفاز",
         "ViewReport": "عرض التقرير",
         "Wardrobe": "خزانة ملابس",
         "WashingMachine": "غسالة",
@@ -380,19 +394,21 @@
       "Title": "الزيارات الميدانية",
       "VisitDate": "تاريخ الزيارة",
       "VisitPurpose": "سبب الزيارة",
-      "VisitTime": "وقت الزيارة",
-      "Visits": "الزيارات"
+      "Visits": "الزيارات",
+      "VisitTime": "وقت الزيارة"
     }
   },
   "Global": {
     "Form": {
       "Labels": {
+        "Add": "إضافة",
         "AddNew": "إضافة بيانات جديدة",
         "Confirm": "تأكيد",
         "Edit": "تعدبل",
         "InvalidEmail": "بريد إلكتروني غير صالح",
         "Location": "Google Map رابط",
         "No": "لا",
+        "NoOptions": "لا يوجد خيارات",
         "Notes": "ملاحظات",
         "PickDate": "اختر التاريخ",
         "PleaseSelect": "نرجو الاختيار...",

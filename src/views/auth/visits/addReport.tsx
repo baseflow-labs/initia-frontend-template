@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router";
 
 import * as VisitReportsApi from "../../../api/visits/reports";
+import CollapseGroup from "../../../components/collapse";
 import Button from "../../../components/core/button";
 import { LabelView } from "../../../components/form";
 import DefaultInput from "../../../components/form/inputs/default";
@@ -23,7 +24,8 @@ import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
 } from "../../../utils/function";
-import CollapseGroup from "../../../components/collapse";
+import StarsInput from "../../../components/form/inputs/stars";
+import SelectAddInput from "../../../components/form/inputs/selectAdd";
 
 const getInitialContent = () => ({
   content: "",
@@ -212,6 +214,10 @@ const VisitReportsView = () => {
             items={roomDetails.contents.map((content, i) => ({
               title: t("Auth.Visits.Report.ContentX", {
                 number: i + 1,
+                name: contentTypes
+                  .find(({ value }) => value === content.type)
+                  ?.subList.find(({ value }) => value == content.content)
+                  ?.label,
               }),
               content: (
                 <div className="my-4 row" key={i}>
@@ -221,9 +227,11 @@ const VisitReportsView = () => {
                       label={t("Auth.Visits.Report.ContentXType", {
                         number: i + 1,
                       })}
+                      required
                     />
                     <SelectInput
                       sizing="lg"
+                      required
                       name={`type-${i}`}
                       value={content.type}
                       options={contentTypes}
@@ -258,18 +266,18 @@ const VisitReportsView = () => {
                             ? t("Auth.Visits.Report.TheDevice")
                             : t("Auth.Visits.Report.TheFurniture"),
                       })}
+                      required
                     />
-                    <SelectInput
+                    <SelectAddInput
                       sizing="lg"
+                      required
                       name={`content-${i}`}
                       value={content.content}
                       options={
                         contentTypes.find(({ value }) => value === content.type)
                           ?.subList || []
                       }
-                      onChange={(e) =>
-                        updateContentAtIndex(i, { content: e.target.value })
-                      }
+                      onChange={(e) => updateContentAtIndex(i, { content: e })}
                     />
                   </div>
                   <div className="col-md-12 pt-3">
@@ -281,10 +289,12 @@ const VisitReportsView = () => {
                             ? t("Auth.Visits.Report.TheDevice")
                             : t("Auth.Visits.Report.TheFurniture"),
                       })}
+                      required
                     />
                     <DefaultInput
                       name={`photo-${i}`}
                       type="file"
+                      required
                       onChange={(e) =>
                         updateContentAtIndex(i, { photo: e.target.files?.[0] })
                       }
@@ -300,12 +310,14 @@ const VisitReportsView = () => {
                             ? t("Auth.Visits.Report.TheDevice")
                             : t("Auth.Visits.Report.TheFurniture"),
                       })}
+                      required
                     />
 
                     <RadioInput
                       name={`status-${i}`}
                       options={roomContentStatuses}
                       value={content.status}
+                      required
                       onChange={(e) =>
                         updateContentAtIndex(i, { status: e.target.value })
                       }
@@ -322,15 +334,17 @@ const VisitReportsView = () => {
                             ? t("Auth.Visits.Report.TheDevice")
                             : t("Auth.Visits.Report.TheFurniture"),
                       })}
+                      required
                     />
 
-                    <RadioInput
+                    <StarsInput
                       name={`evaluation-${i}`}
                       options={[0, 1, 2, 3, 4, 5].map((value) => ({ value }))}
                       value={content.evaluation}
+                      required
                       onChange={(e) =>
                         updateContentAtIndex(i, {
-                          evaluation: parseInt(e.target.value),
+                          evaluation: e,
                         })
                       }
                       className="mb-4"
@@ -448,7 +462,7 @@ const VisitReportsView = () => {
                   label={t("Auth.Visits.Report.RoomXType", { number: i + 1 })}
                 />
 
-                <SelectInput
+                <SelectAddInput
                   sizing="lg"
                   name="type"
                   value={room.type}
@@ -460,7 +474,7 @@ const VisitReportsView = () => {
                         y === i
                           ? {
                               ...room,
-                              type: e.target.value,
+                              type: e,
                             }
                           : room
                       ),

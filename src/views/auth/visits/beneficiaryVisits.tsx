@@ -33,7 +33,7 @@ const BeneficiariesVisitsView = () => {
   const [visits, setVisits] = useState([]);
 
   const getData = () => {
-    VisitApi.getAll()
+    VisitApi.getAll({})
       .then((res) => {
         setVisits(
           (res as any).map(
@@ -60,11 +60,13 @@ const BeneficiariesVisitsView = () => {
   useLayoutEffect(() => {
     getData();
 
-    BeneficiaryApi.getAll()
+    BeneficiaryApi.getAll({})
       .then((res) =>
         setSelectOptions((current) => ({
           ...current,
-          beneficiaries: res as any,
+          beneficiaries: (res as any).filter(
+            ({ status = { status: "" } }) => status.status === "Accepted"
+          ),
         }))
       )
       .catch(apiCatchGlobalHandler);
@@ -105,6 +107,7 @@ const BeneficiariesVisitsView = () => {
     {
       label: t("Auth.Visits.Statuses.Status"),
       options: statuses,
+      name: "status",
     },
   ];
 
@@ -207,7 +210,6 @@ const BeneficiariesVisitsView = () => {
     VisitApi.getById(data as string)
       .then((res) => {
         setCrudData(res);
-        console.log(res);
 
         setOpenModal(true);
       })

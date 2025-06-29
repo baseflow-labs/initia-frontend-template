@@ -11,6 +11,7 @@
         "Urgent?": "Urgent?"
       },
       "Cash": "Cash",
+      "FilterByThisBeneficiary": "Filter By This Beneficiary",
       "In-Kind": "In-Kind",
       "RecaptionDate": "RecaptionDate",
       "Statuses": {
@@ -22,10 +23,19 @@
       "Title": "Title"
     },
     "Beneficiaries": {
+      "Applications": "Membership Applications",
       "BeneficiaryName": "BeneficiaryName",
       "Profile": {
+        "archive": "archive",
         "Archive": "Archive",
         "ConfirmData": "ConfirmData",
+        "DeleteBeneficiary": "Delete Beneficiary",
+        "DeleteData": "Delete Your Data",
+        "editRequest": "editRequest",
+        "editStatus": "editStatus",
+        "field": "field",
+        "info": "info",
+        "notes": "notes",
         "ProfileCompletion": "ProfileCompletion",
         "ProfileDetails": "ProfileDetails",
         "ProfileReview": "ProfileReview",
@@ -34,20 +44,15 @@
           "Confirmed": "Confirmed",
           "NeedUpdate": "NeedUpdate"
         },
+        "SureToDeleteData": "Are You Sure?",
         "Title": "Title",
-        "UpdateNote": "UpdateNote",
-        "archive": "archive",
-        "editRequest": "editRequest",
-        "editStatus": "editStatus",
-        "field": "field",
-        "info": "info",
-        "notes": "notes"
+        "UpdateNote": "UpdateNote"
       },
       "Title": "Title"
     },
     "Beneficiary": {
       "Profile": {
-        "CurrentData": "CurrentData",
+        "NoDataUpdate": "No Data Update Requests",
         "PleaseUpdateFollowingData": "PleaseUpdateFollowingData",
         "Title": "Title",
         "YourProfile": "YourProfile"
@@ -87,6 +92,15 @@
         "BankAccountNumberNote": "BankAccountNumberNote",
         "BasicData": "BasicData",
         "BeneficiaryMobile": "BeneficiaryMobile",
+        "Category": {
+          "A": "A",
+          "B": "B",
+          "C": "C",
+          "D": "D",
+          "AboveGrading": "Above Grading",
+          "Title": "Category",
+          "Uncategorized": "Uncategorized"
+        },
         "City": "City",
         "ClickForHelp": "ClickForHelp",
         "ComprehensiveRehabilitation": "ComprehensiveRehabilitation",
@@ -123,8 +137,8 @@
         "EducationLevel": {
           "Degree": "Degree",
           "Diploma": "Diploma",
-          "HighSchool": "HighSchool",
           "HigherDiploma": "HigherDiploma",
+          "HighSchool": "HighSchool",
           "Illiterate": "Illiterate",
           "IntermediateSchool": "IntermediateSchool",
           "Literate": "Literate",
@@ -263,8 +277,8 @@
       },
       "Statuses": {
         "Accepted": "Accepted",
-        "InPreview": "InPreview",
         "Incomplete": "Incomplete",
+        "InPreview": "InPreview",
         "NeedHelp": "NeedHelp",
         "NewMember": "NewMember",
         "Rejected": "Rejected",
@@ -319,11 +333,11 @@
         "Bathroom": "Bathroom",
         "Bed": "Bed",
         "Bedroom": "Bedroom",
-        "ContentType": "ContentType",
-        "ContentX": "Content {{number}}",
-        "ContentXType": "ContentXType",
         "Contents": "Contents",
         "ContentsCount": "ContentsCount",
+        "ContentType": "ContentType",
+        "ContentX": "Content {{number}}: {{name}}",
+        "ContentXType": "ContentXType",
         "Desk": "Desk",
         "Device": "Device",
         "DiningRoom": "DiningRoom",
@@ -351,18 +365,18 @@
         "RoomContentPhoto": "RoomContentPhoto",
         "RoomContentStatus": "RoomContentStatus",
         "RoomRecommendations": "RoomRecommendations",
+        "RoomsCount": "RoomsCount",
         "RoomXDetails": "RoomXDetails",
         "RoomXType": "RoomXType",
-        "RoomsCount": "RoomsCount",
         "Router": "Router",
         "Shelf": "Shelf",
         "ShoeRack": "ShoeRack",
         "Sofa": "Sofa",
         "Storage": "Storage",
-        "TV": "TV",
         "TheDevice": "TheDevice",
         "TheFurniture": "TheFurniture",
         "Title": "Title",
+        "TV": "TV",
         "ViewReport": "ViewReport",
         "Wardrobe": "Wardrobe",
         "WashingMachine": "WashingMachine",
@@ -380,19 +394,21 @@
       "Title": "Title",
       "VisitDate": "VisitDate",
       "VisitPurpose": "VisitPurpose",
-      "VisitTime": "VisitTime",
-      "Visits": "Visits"
+      "Visits": "Visits",
+      "VisitTime": "VisitTime"
     }
   },
   "Global": {
     "Form": {
       "Labels": {
+        "Add": "Add",
         "AddNew": "AddNew",
         "Confirm": "Confirm",
         "Edit": "Edit",
         "InvalidEmail": "InvalidEmail",
         "Location": "Location",
         "No": "No",
+        "NoOptions": "No Options",
         "Notes": "Notes",
         "PickDate": "PickDate",
         "PleaseSelect": "PleaseSelect",

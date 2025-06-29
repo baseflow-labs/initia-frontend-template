@@ -1,15 +1,11 @@
-import {
-  faCircle,
-  faEdit,
-  faNewspaper,
-  faXmark,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCircle, faEdit, faNewspaper, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useEffect, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router";
 
+import { GetDataProps } from "../../../api";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import * as VisitApi from "../../../api/visits/visits";
 import Form from "../../../components/form";
@@ -17,11 +13,7 @@ import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import { viewDayDateFormat } from "../../../utils/consts";
-import {
-  apiCatchGlobalHandler,
-  renderDataFromOptions,
-  statusColorRender,
-} from "../../../utils/function";
+import { apiCatchGlobalHandler, renderDataFromOptions, statusColorRender } from "../../../utils/function";
 
 const VisitsView = () => {
   const { t } = useTranslation();
@@ -39,8 +31,8 @@ const VisitsView = () => {
     { id: string; visitReport: object; status: string }[]
   >([]);
 
-  const getData = () => {
-    VisitApi.getAll()
+  const getData = (filters: GetDataProps) => {
+    VisitApi.getAll(filters)
       .then((res) => {
         setVisits(
           (res as any).map(
@@ -65,13 +57,15 @@ const VisitsView = () => {
   };
 
   useLayoutEffect(() => {
-    getData();
+    getData({});
 
-    BeneficiaryApi.getAll()
+    BeneficiaryApi.getAll({})
       .then((res) =>
         setSelectOptions((current) => ({
           ...current,
-          beneficiaries: res as any,
+          beneficiaries: (res as any).filter(
+            ({ status = { status: "" } }) => status.status === "Accepted"
+          ),
         }))
       )
       .catch(apiCatchGlobalHandler);
@@ -104,6 +98,7 @@ const VisitsView = () => {
     {
       label: t("Auth.Visits.Statuses.Status"),
       options: statuses,
+      name: "status",
     },
   ];
 
@@ -200,7 +195,7 @@ const VisitsView = () => {
   const cancelVisit = (data: string) => {
     VisitApi.cancel(data)
       .then((res) => {
-        getData();
+        getData({});
         dispatch(
           addNotification({
             msg: t("Global.Form.SuccessMsg", {
@@ -216,7 +211,7 @@ const VisitsView = () => {
 
   const onCrudSuccess = (e: { beneficiary: "" }, action = "") => {
     onModalClose();
-    getData();
+    getData({});
     dispatch(
       addNotification({
         msg: t("Global.Form.SuccessMsg", {
@@ -236,8 +231,6 @@ const VisitsView = () => {
         filters={filters}
         tableActions={(id?: string) => {
           const visit = visits.find((v) => v.id === id);
-
-          console.log({ visit });
 
           const final = [];
 
@@ -276,7 +269,7 @@ const VisitsView = () => {
         columns={columns}
         data={visits}
         onPageChange={(i = 0, x = 0) => console.log(i, x)}
-        onSearch={(values) => console.log(values)}
+        onSearch={(values) => getData(values)}
       />
 
       <Modal

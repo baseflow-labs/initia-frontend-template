@@ -24,7 +24,7 @@ const AidsBeneficiaryView = () => {
   const [aids, setAids] = useState([]);
 
   const getData = () => {
-    AidApi.getAll()
+    AidApi.getAll({})
       .then((res) => {
         setAids(
           (res as any).map(({ beneficiary = {}, status = {}, ...rest }) => ({
@@ -73,10 +73,12 @@ const AidsBeneficiaryView = () => {
     {
       label: t("Auth.MembershipRegistration.Statuses.Status"),
       options: statuses,
+      name: "status",
     },
     {
       label: t("Auth.Aids.AidType"),
       options: aidTypes,
+      name: "type",
     },
   ];
 

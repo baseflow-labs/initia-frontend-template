@@ -1,13 +1,5 @@
-import {
-  faBezierCurve,
-  faBoxOpen,
-  faEdit,
-  faGear,
-  faHome,
-  faInfoCircle,
-  faUser,
-  faUsers,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBezierCurve, faBoxOpen, faEdit, faGear, faHome, faInfoCircle, faUser, faUsers } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes, useLocation } from "react-router";
 import { Fragment } from "react/jsx-runtime";
@@ -15,6 +7,7 @@ import { Fragment } from "react/jsx-runtime";
 import { useAppSelector } from "../../store/hooks";
 import AidsView from "../../views/auth/aids";
 import AidsBeneficiaryView from "../../views/auth/aids/request";
+import ApplicantsView from "../../views/auth/applicants";
 import BeneficiariesView from "../../views/auth/beneficiaries";
 import BeneficiaryOwnProfile from "../../views/auth/beneficiaries/beneficiaryProfile";
 import BeneficiaryProfileView from "../../views/auth/beneficiaries/profile";
@@ -37,6 +30,8 @@ const AuthLayout = () => {
   const location = useLocation();
   const { user } = useAppSelector((state) => state.auth);
 
+  const [collapsed, setCollapsed] = useState(false);
+
   const authRoutes = [
     {
       name: t("Auth.MembershipRegistration.Title"),
@@ -53,6 +48,14 @@ const AuthLayout = () => {
       showInNav: true,
       icon: faHome,
       users: ["beneficiary", "researcher", "admin"],
+    },
+    {
+      name: t("Auth.Beneficiaries.Applications"),
+      route: "/applicants",
+      view: <ApplicantsView />,
+      showInNav: true,
+      icon: faUsers,
+      users: ["researcher", "admin"],
     },
     {
       name: t("Auth.Beneficiaries.Title"),
@@ -143,7 +146,7 @@ const AuthLayout = () => {
       route: "/contact-us",
       view: <ContactUsPage />,
       icon: faInfoCircle,
-      users: ["beneficiary", "researcher", "admin"],
+      users: ["beneficiary", "admin"],
     },
     {
       name: t("Auth.Settings.Title"),
@@ -154,29 +157,45 @@ const AuthLayout = () => {
     },
   ];
 
-  const showSidebar =
-    location.pathname !== "/apply" && location.pathname !== "apply";
+  const showSidebar = !location.pathname.includes("apply");
 
   const filteredRoutes = authRoutes.filter(({ users }) =>
     users.includes(user.role)
   );
 
+  const toggleSidebar = () => setCollapsed((current) => !current);
+
   return (
     <Fragment>
       {showSidebar ? "" : <Navbar />}
 
-      <main className="m-0 row">
-        <div className="col-1 col-md-2 p-0">
-          {showSidebar && (
+      <main className="d-flex">
+        {showSidebar && (
+          <div
+            className="position-fixed top-0 start-0 min-vh-100"
+            style={{
+              width: collapsed ? "80px" : "250px",
+              transition: "width 0.3s",
+              zIndex: 4,
+            }}
+          >
             <Sidebar
+              collapsed={collapsed}
+              toggleSidebar={toggleSidebar}
               routes={filteredRoutes
                 .filter(({ showInNav }) => showInNav)
                 .map(({ view, ...rest }) => ({ ...rest }))}
             />
-          )}
-        </div>
+          </div>
+        )}
 
-        <div className={`col-11 col-md-${showSidebar ? 10 : 12} p-0 ps-4`}>
+        <div
+          className="flex-grow-1"
+          style={{
+            marginRight: showSidebar ? (collapsed ? "80px" : "250px") : "0px",
+            transition: "margin-left 0.3s",
+          }}
+        >
           {showSidebar && <DashboardNavbar />}
 
           <div className="py-5 px-3">

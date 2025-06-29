@@ -1,11 +1,11 @@
-import api from "..";
+import api, { formatGetFilters, GetDataProps } from "..";
 import store, { RootState } from "../../store/store";
 
 const mainPath = "/aid";
 const { user } = (store.getState() as RootState).auth;
 
-const getAll = async () => {
-  const res = await api.get(mainPath);
+const getAll = async (filters: GetDataProps) => {
+  const res = await api.get(mainPath, formatGetFilters(filters));
   return res;
 };
 
@@ -23,7 +23,10 @@ const create = async (data: object) => {
 };
 
 const updateStatus = async (id: string, status: string) => {
-  const res = await api.patch(mainPath + "/update-status/" + id, { status });
+  const res = await api.patch(mainPath + "/update-status/" + id, {
+    status,
+    aid: id,
+  });
   return res;
 };
 

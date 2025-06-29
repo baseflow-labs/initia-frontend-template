@@ -1,9 +1,10 @@
-import api from "..";
+import api, { formatGetFilters, GetDataProps } from "..";
 import store, { RootState } from "../../store/store";
 
 interface Props {
   user?: string;
   socialStatus: string;
+  category: string;
   fullName: string;
   nationality: string;
   dob: string;
@@ -25,8 +26,8 @@ interface Props {
 const mainPath = "/beneficiary";
 const { user } = (store.getState() as RootState).auth;
 
-const getAll = async () => {
-  const res = await api.get(mainPath);
+const getAll = async (filters: GetDataProps) => {
+  const res = await api.get(mainPath, formatGetFilters(filters));
   return res;
 };
 
@@ -46,8 +47,6 @@ const getByUserId = async (id?: string) => {
 };
 
 const createOrUpdate = async (data: Props) => {
-  console.log({ user });
-
   return await api.post(
     mainPath + "/create-update",
     { ...data, user: data.user || user.id },
@@ -63,4 +62,21 @@ const requestHelp = async (id: string) => {
   return await api.get(mainPath + "/request-help/" + id);
 };
 
-export { getAll, create, getById, getByUserId, createOrUpdate, requestHelp };
+const remove = async (id: string) => {
+  return await api.delete(mainPath + "?id=" + id);
+};
+
+const removeByUser = async (id: string) => {
+  return await api.delete(mainPath + "/" + id);
+};
+
+export {
+  getAll,
+  create,
+  getById,
+  getByUserId,
+  createOrUpdate,
+  requestHelp,
+  remove,
+  removeByUser,
+};

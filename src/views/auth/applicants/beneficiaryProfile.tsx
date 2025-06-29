@@ -7,7 +7,6 @@ import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import * as DataReviewApi from "../../../api/profile/dataReview";
 import * as DataUpdateApi from "../../../api/profile/dataUpdate";
 import Form, { InputSingleProps } from "../../../components/form";
-import { dataRender } from "../../../components/table";
 import ColumnsPage from "../../../layouts/auth/columnsPage";
 import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
@@ -1098,9 +1097,7 @@ const BeneficiaryOwnProfile = () => {
 
         <div className="col-md-12 mb-4 row">
           <h5 className="mb-4">
-            {dataReviews?.length
-              ? t("Auth.Beneficiary.Profile.PleaseUpdateFollowingData")
-              : t("Auth.Beneficiary.Profile.NoDataUpdate")}
+            {t("Auth.Beneficiary.Profile.PleaseUpdateFollowingData")}
           </h5>
 
           {dataReviews?.map(({ id, table, property, row, note }, i) => {

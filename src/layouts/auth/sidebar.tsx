@@ -12,12 +12,22 @@ import { useLocation, useNavigate } from "react-router";
 
 import Logo from "../../assets/images/brand/logo-full.png";
 import LogoOnly from "../../assets/images/brand/logo-only.png";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
-const Sidebar = ({ routes = [{ name: "", route: "", icon: faHome }] }) => {
+interface Props {
+  routes: {
+    name: string;
+    route: string;
+    icon: IconProp;
+  }[];
+  collapsed: boolean;
+  toggleSidebar: () => void;
+}
+
+const Sidebar = ({ routes, collapsed, toggleSidebar }: Props) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const location = useLocation();
-  const [collapsed, setCollapsed] = useState(false);
 
   const fixedRoutes = [
     {
@@ -27,8 +37,6 @@ const Sidebar = ({ routes = [{ name: "", route: "", icon: faHome }] }) => {
     },
     { name: t("Auth.Settings.Title"), route: "/settings", icon: faGear },
   ];
-
-  const toggleSidebar = () => setCollapsed((current) => !current);
 
   return (
     <Fragment>
