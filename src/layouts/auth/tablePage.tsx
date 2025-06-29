@@ -59,7 +59,7 @@ const TablePage = ({
   return (
     <Fragment>
       <div className="row w-100">
-        <div className="col-xs-6 col-lg-3 order-2 order-lg-1">
+        <div className="col-6 col-lg-3 order-2 order-lg-1">
           <h3 className="mt-4 mt-lg-0">{title}</h3>
         </div>
 
@@ -113,9 +113,9 @@ const TablePage = ({
           </FormikProvider>
         </div>
 
-        <div className="col-xs-6 col-lg-2 order-3 order-lg-3">
+        <div className="col-6 col-lg-2 order-3 order-lg-3">
           {actionButtons && (
-            <div className="float-end">
+            <div className="float-end mt-3 mt-lg-0">
               <ActionButtons buttons={actionButtons} />
             </div>
           )}
