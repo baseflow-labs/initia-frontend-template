@@ -73,7 +73,10 @@ const WizardFormStepper = ({ steps, currentStep, setCurrentStep }: Props) => {
         {steps[currentStep]?.label}
       </span>
 
-      <div className="bs-stepper-content border border-gray rounded-5 p-5 mt-3">
+      <div
+        className="bs-stepper-content border border-2 border-gray rounded-5 p-5 mt-3 mx-auto"
+        style={{ maxWidth: "750px" }}
+      >
         {steps[currentStep]?.contents}
       </div>
     </div>
