@@ -9,6 +9,7 @@ import SelectInput from "../../components/form/inputs/select";
 import SelectManyInput from "../../components/form/inputs/selectMany";
 import DynamicTable, { TableProps } from "../../components/table";
 import ColumnsPage from "./columnsPage";
+import { Fragment } from "react/jsx-runtime";
 
 interface Props extends TableProps {
   title: string;
@@ -56,13 +57,13 @@ const TablePage = ({
   });
 
   return (
-    <div>
-      <ColumnsPage>
-        <div className="col-md-3">
-          <h3>{title}</h3>
+    <Fragment>
+      <div className="row w-100">
+        <div className="col-xs-6 col-lg-3 order-2 order-lg-1">
+          <h3 className="mt-4 mt-lg-0">{title}</h3>
         </div>
 
-        <div className="col-md-7">
+        <div className="col-xs-12 col-lg-7 order-1 order-lg-2">
           <FormikProvider value={formik}>
             <FormikForm className="text-start">
               <div className="d-flex">
@@ -90,37 +91,46 @@ const TablePage = ({
                 )}
 
                 <Button color="ghost" type="submit">
-                  <FontAwesomeIcon icon={faFilter} className="me-1 my-auto" />
+                  <FontAwesomeIcon
+                    icon={faFilter}
+                    className="me-1 my-auto px-0 px-md-1"
+                  />
                 </Button>
 
                 <Button
+                  className="d-none d-md-block"
                   color="ghost"
                   type="button"
                   onClick={() => formik.resetForm()}
                 >
-                  <FontAwesomeIcon icon={faHistory} className="me-1 my-auto" />
+                  <FontAwesomeIcon
+                    icon={faHistory}
+                    className="me-1 my-auto px-0 px-md-1"
+                  />
                 </Button>
               </div>
             </FormikForm>
           </FormikProvider>
         </div>
 
-        <div className="col-md-2 my-auto">
+        <div className="col-xs-6 col-lg-2 order-3 order-lg-3">
           {actionButtons && (
             <div className="float-end">
               <ActionButtons buttons={actionButtons} />
             </div>
           )}
         </div>
-      </ColumnsPage>
+      </div>
 
-      <DynamicTable
-        columns={columns}
-        data={data}
-        onPageChange={onPageChange}
-        actions={tableActions}
-      />
-    </div>
+      <div className="w-100 max-vw-100 overflow-x-auto">
+        <DynamicTable
+          columns={columns}
+          data={data}
+          onPageChange={onPageChange}
+          actions={tableActions}
+        />
+      </div>
+    </Fragment>
   );
 };
 

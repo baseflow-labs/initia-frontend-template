@@ -202,20 +202,18 @@ const AuthLayout = () => {
           className="flex-grow-1"
           style={{
             marginRight: showSidebar ? (collapsed ? "80px" : "250px") : "0px",
-            transition: "margin-left 0.3s",
+            transition: "margin-right 0.3s",
           }}
         >
           {showSidebar && <DashboardNavbar />}
 
-          <div className="py-5 px-1 px-3-md">
+          <div className="p-0 px-2 px-md-5 w-100">
             <Routes>
               {filteredRoutes.map(({ name, route, view }, i) => (
                 <Route path={route} element={view} key={i} />
               ))}
 
               <Route path="*" element={<Navigate to="/dashboard" replace />} />
-
-              {/* <Route path="*" element={<FourZeroFourError />} /> */}
             </Routes>
           </div>
 
