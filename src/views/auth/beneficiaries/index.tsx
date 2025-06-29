@@ -231,6 +231,17 @@ const BeneficiariesView = () => {
       label: t("Auth.MembershipRegistration.Form.HomeType.Title"),
     },
     {
+      type: "phoneNumber",
+      name: "beneficiaryMobile",
+      label: t("Global.Labels.PhoneNumber"),
+    },
+    {
+      type: "custom",
+      name: "city",
+      label: t("Auth.MembershipRegistration.Address"),
+      render: (row: any) => row.city + " - " + row.district,
+    },
+    {
       type: "select",
       options: [
         {
@@ -260,17 +271,6 @@ const BeneficiariesView = () => {
       ],
       name: "category",
       label: t("Auth.MembershipRegistration.Form.Category.Title"),
-    },
-    {
-      type: "phoneNumber",
-      name: "beneficiaryMobile",
-      label: t("Global.Labels.PhoneNumber"),
-    },
-    {
-      type: "custom",
-      name: "city",
-      label: t("Auth.MembershipRegistration.Address"),
-      render: (row: any) => row.city + " - " + row.district,
     },
     {
       type: "custom",
