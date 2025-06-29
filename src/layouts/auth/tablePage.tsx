@@ -3,13 +3,12 @@ import { faFilter, faHistory } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Form as FormikForm, FormikProvider, useFormik } from "formik";
 
+import { Fragment } from "react/jsx-runtime";
 import ActionButtons from "../../components/button/actionButtons";
 import Button from "../../components/core/button";
 import SelectInput from "../../components/form/inputs/select";
 import SelectManyInput from "../../components/form/inputs/selectMany";
 import DynamicTable, { TableProps } from "../../components/table";
-import ColumnsPage from "./columnsPage";
-import { Fragment } from "react/jsx-runtime";
 
 interface Props extends TableProps {
   title: string;
@@ -56,6 +55,17 @@ const TablePage = ({
     },
   });
 
+  const columnsWidth = (count: number) => {
+    switch (count) {
+      case 1:
+        return 6;
+      case 2:
+        return 4;
+      default:
+        return 3;
+    }
+  };
+
   return (
     <Fragment>
       <div className="row w-100">
@@ -65,10 +75,12 @@ const TablePage = ({
 
         <div className="col-xs-12 col-lg-7 order-1 order-lg-2">
           <FormikProvider value={formik}>
-            <FormikForm className="text-start">
-              <div className="d-flex">
-                {filters?.map(({ name, label, options, multi }, i) =>
-                  multi ? (
+            <FormikForm className="text-start row g-3">
+              {filters?.map(({ name, label, options, multi }, i) =>
+                multi ? (
+                  <div
+                    className={`col-6 col-md-${columnsWidth(filters.length)}`}
+                  >
                     <SelectManyInput
                       name={name}
                       placeholder={label}
@@ -76,7 +88,11 @@ const TablePage = ({
                       className="me-2"
                       key={i}
                     />
-                  ) : (
+                  </div>
+                ) : (
+                  <div
+                    className={`col-6 col-md-${columnsWidth(filters.length)}`}
+                  >
                     <SelectInput
                       id={name}
                       name={name}
@@ -87,9 +103,15 @@ const TablePage = ({
                       className="me-2"
                       key={i}
                     />
-                  )
-                )}
+                  </div>
+                )
+              )}
 
+              <div
+                className={`col-6 d-flex col-md-${columnsWidth(
+                  filters?.length || 1
+                )}`}
+              >
                 <Button color="ghost" type="submit">
                   <FontAwesomeIcon
                     icon={faFilter}
@@ -98,7 +120,6 @@ const TablePage = ({
                 </Button>
 
                 <Button
-                  className="d-none d-md-block"
                   color="ghost"
                   type="button"
                   onClick={() => formik.resetForm()}
@@ -122,14 +143,14 @@ const TablePage = ({
         </div>
       </div>
 
-      <div className="w-100 max-vw-100 overflow-x-auto">
+      {/* <div className="w-100 max-vw-100 overflow-x-auto">
         <DynamicTable
           columns={columns}
           data={data}
           onPageChange={onPageChange}
           actions={tableActions}
         />
-      </div>
+      </div> */}
     </Fragment>
   );
 };
