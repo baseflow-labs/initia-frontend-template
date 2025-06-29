@@ -184,6 +184,38 @@ const MembershipRegistrationView = () => {
       required: true,
     },
     {
+      type: "select",
+      name: "category",
+      options: [
+        {
+          value: "A",
+          label: t("Auth.MembershipRegistration.Form.Category.A"),
+        },
+        {
+          value: "B",
+          label: t("Auth.MembershipRegistration.Form.Category.B"),
+        },
+        {
+          value: "C",
+          label: t("Auth.MembershipRegistration.Form.Category.C"),
+        },
+        {
+          value: "D",
+          label: t("Auth.MembershipRegistration.Form.Category.D"),
+        },
+        {
+          value: "Uncategorized",
+          label: t("Auth.MembershipRegistration.Form.Category.Uncategorized"),
+        },
+        {
+          value: "Above Grading",
+          label: t("Auth.MembershipRegistration.Form.Category.AboveGrading"),
+        },
+      ],
+      label: t("Auth.MembershipRegistration.Form.Category.Title"),
+      required: true,
+    },
+    {
       type: "file",
       name: "familyRecordPhoto",
       label: t("Auth.MembershipRegistration.Form.FamilyRecordPhoto"),

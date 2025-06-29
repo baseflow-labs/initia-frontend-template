@@ -4,6 +4,7 @@ import store, { RootState } from "../../store/store";
 interface Props {
   user?: string;
   socialStatus: string;
+  category: string;
   fullName: string;
   nationality: string;
   dob: string;

@@ -92,6 +92,15 @@
         "BankAccountNumberNote": "مكون من 12 رقم",
         "BasicData": "البيانات الأساسية",
         "BeneficiaryMobile": "رقم جوال المستفيد",
+        "Category": {
+          "A": "فئة أ",
+          "B": "فئة ب",
+          "C": "فئة ج",
+          "D": "فئة د",
+          "AboveGrading": "مستوى دخل الفرد في الأسرة فوق مستويات التصنيف",
+          "Title": "تصنيف المستفيد",
+          "Uncategorized": "غير مصنف"
+        },
         "City": "المدينة",
         "ClickForHelp": "اضغط هنا للمساعدة في تعبئة النموذج",
         "ComprehensiveRehabilitation": "التأهيل الشامل",

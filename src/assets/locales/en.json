@@ -92,6 +92,15 @@
         "BankAccountNumberNote": "BankAccountNumberNote",
         "BasicData": "BasicData",
         "BeneficiaryMobile": "BeneficiaryMobile",
+        "Category": {
+          "A": "A",
+          "B": "B",
+          "C": "C",
+          "D": "D",
+          "AboveGrading": "Above Grading",
+          "Title": "Category",
+          "Uncategorized": "Uncategorized"
+        },
         "City": "City",
         "ClickForHelp": "ClickForHelp",
         "ComprehensiveRehabilitation": "ComprehensiveRehabilitation",

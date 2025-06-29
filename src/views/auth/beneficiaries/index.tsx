@@ -1,5 +1,12 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { faCalendarDays, faCircle, faEdit, faSearch, faTrash, faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCalendarDays,
+  faCircle,
+  faEdit,
+  faSearch,
+  faTrash,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -10,7 +17,11 @@ import { GetDataProps } from "../../../api";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import TablePage from "../../../layouts/auth/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
-import { apiCatchGlobalHandler, renderDataFromOptions, statusColorRender } from "../../../utils/function";
+import {
+  apiCatchGlobalHandler,
+  renderDataFromOptions,
+  statusColorRender,
+} from "../../../utils/function";
 
 const BeneficiariesView = () => {
   const { t } = useTranslation();
@@ -218,6 +229,37 @@ const BeneficiariesView = () => {
       options: homeTypes,
       name: "homeType",
       label: t("Auth.MembershipRegistration.Form.HomeType.Title"),
+    },
+    {
+      type: "select",
+      options: [
+        {
+          value: "A",
+          label: t("Auth.MembershipRegistration.Form.Category.A"),
+        },
+        {
+          value: "B",
+          label: t("Auth.MembershipRegistration.Form.Category.B"),
+        },
+        {
+          value: "C",
+          label: t("Auth.MembershipRegistration.Form.Category.C"),
+        },
+        {
+          value: "D",
+          label: t("Auth.MembershipRegistration.Form.Category.D"),
+        },
+        {
+          value: "Uncategorized",
+          label: t("Auth.MembershipRegistration.Form.Category.Uncategorized"),
+        },
+        {
+          value: "Above Grading",
+          label: t("Auth.MembershipRegistration.Form.Category.AboveGrading"),
+        },
+      ],
+      name: "category",
+      label: t("Auth.MembershipRegistration.Form.Category.Title"),
     },
     {
       type: "phoneNumber",
