@@ -1,4 +1,9 @@
-import { faCouch, faDesktop, faDoorOpen, faTrash } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCouch,
+  faDesktop,
+  faDoorOpen,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -15,7 +20,11 @@ import SelectInput from "../../../components/form/inputs/select";
 import TextareaInput from "../../../components/form/inputs/textarea";
 import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
-import { apiCatchGlobalHandler, renderDataFromOptions } from "../../../utils/function";
+import {
+  apiCatchGlobalHandler,
+  renderDataFromOptions,
+} from "../../../utils/function";
+import StarsInput from "../../../components/form/inputs/stars";
 
 const getInitialContent = () => ({
   content: "",
@@ -329,14 +338,14 @@ const VisitReportsView = () => {
                       required
                     />
 
-                    <RadioInput
+                    <StarsInput
                       name={`evaluation-${i}`}
                       options={[0, 1, 2, 3, 4, 5].map((value) => ({ value }))}
                       value={content.evaluation}
                       required
                       onChange={(e) =>
                         updateContentAtIndex(i, {
-                          evaluation: parseInt(e.target.value),
+                          evaluation: e,
                         })
                       }
                       className="mb-4"
