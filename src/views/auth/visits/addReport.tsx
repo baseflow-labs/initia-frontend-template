@@ -25,6 +25,7 @@ import {
   renderDataFromOptions,
 } from "../../../utils/function";
 import StarsInput from "../../../components/form/inputs/stars";
+import SelectAddInput from "../../../components/form/inputs/selectAdd";
 
 const getInitialContent = () => ({
   content: "",
@@ -267,7 +268,7 @@ const VisitReportsView = () => {
                       })}
                       required
                     />
-                    <SelectInput
+                    <SelectAddInput
                       sizing="lg"
                       required
                       name={`content-${i}`}
@@ -276,9 +277,7 @@ const VisitReportsView = () => {
                         contentTypes.find(({ value }) => value === content.type)
                           ?.subList || []
                       }
-                      onChange={(e) =>
-                        updateContentAtIndex(i, { content: e.target.value })
-                      }
+                      onChange={(e) => updateContentAtIndex(i, { content: e })}
                     />
                   </div>
                   <div className="col-md-12 pt-3">
@@ -463,7 +462,7 @@ const VisitReportsView = () => {
                   label={t("Auth.Visits.Report.RoomXType", { number: i + 1 })}
                 />
 
-                <SelectInput
+                <SelectAddInput
                   sizing="lg"
                   name="type"
                   value={room.type}
@@ -475,7 +474,7 @@ const VisitReportsView = () => {
                         y === i
                           ? {
                               ...room,
-                              type: e.target.value,
+                              type: e,
                             }
                           : room
                       ),

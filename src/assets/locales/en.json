@@ -11,6 +11,7 @@
         "Urgent?": "Urgent?"
       },
       "Cash": "Cash",
+      "FilterByThisBeneficiary": "Filter By This Beneficiary",
       "In-Kind": "In-Kind",
       "RecaptionDate": "RecaptionDate",
       "Statuses": {
@@ -391,12 +392,14 @@
   "Global": {
     "Form": {
       "Labels": {
+        "Add": "Add",
         "AddNew": "AddNew",
         "Confirm": "Confirm",
         "Edit": "Edit",
         "InvalidEmail": "InvalidEmail",
         "Location": "Location",
         "No": "No",
+        "NoOptions": "No Options",
         "Notes": "Notes",
         "PickDate": "PickDate",
         "PleaseSelect": "PleaseSelect",

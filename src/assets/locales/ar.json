@@ -11,6 +11,7 @@
         "Urgent?": "هل الحالة مستعجلة؟"
       },
       "Cash": "نقدية",
+      "FilterByThisBeneficiary": "عرض معونات هذا المستفيد",
       "In-Kind": "عينية",
       "RecaptionDate": "تاريخ الاستلام",
       "Statuses": {
@@ -391,12 +392,14 @@
   "Global": {
     "Form": {
       "Labels": {
+        "Add": "إضافة",
         "AddNew": "إضافة بيانات جديدة",
         "Confirm": "تأكيد",
         "Edit": "تعدبل",
         "InvalidEmail": "بريد إلكتروني غير صالح",
         "Location": "Google Map رابط",
         "No": "لا",
+        "NoOptions": "لا يوجد خيارات",
         "Notes": "ملاحظات",
         "PickDate": "اختر التاريخ",
         "PleaseSelect": "نرجو الاختيار...",
