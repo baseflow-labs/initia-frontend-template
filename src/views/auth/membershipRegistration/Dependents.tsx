@@ -301,8 +301,6 @@ const DependentsFormView = ({
                 type="button"
                 aria-controls={"collapse" + String(i)}
                 onClick={() => {
-                  console.log("click");
-
                   setActiveCollapse(
                     activeCollapse === i ? dependent.length : i
                   );
