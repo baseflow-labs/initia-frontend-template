@@ -21,6 +21,7 @@ import {
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
+import { logout } from "../../../store/actions/auth";
 
 const ApplicantsView = () => {
   const { t } = useTranslation();
@@ -303,6 +304,13 @@ const ApplicantsView = () => {
     navigate(`/visitSchedule/?id=${data}`);
   };
 
+  const actionButtons = [
+    {
+      label: t("Auth.Beneficiaries.AddBeneficiary"),
+      onClick: () => dispatch(logout("/register")),
+    },
+  ];
+
   const deleteBeneficiary = (id: string) => {
     BeneficiaryApi.remove(id).then(() => {
       dispatch(
@@ -322,7 +330,7 @@ const ApplicantsView = () => {
     <TablePage
       title={title}
       filters={filters}
-      // actionButtons={actionButtons}
+      actionButtons={actionButtons}
       columns={columns}
       data={beneficiaries}
       tableActions={(id?: string) => {
