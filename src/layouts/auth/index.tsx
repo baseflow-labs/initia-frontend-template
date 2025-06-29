@@ -1,13 +1,5 @@
-import {
-  faBezierCurve,
-  faBoxOpen,
-  faEdit,
-  faGear,
-  faHome,
-  faInfoCircle,
-  faUser,
-  faUsers,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBezierCurve, faBoxOpen, faEdit, faGear, faHome, faInfoCircle, faUser, faUsers } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes, useLocation } from "react-router";
 import { Fragment } from "react/jsx-runtime";
@@ -15,6 +7,7 @@ import { Fragment } from "react/jsx-runtime";
 import { useAppSelector } from "../../store/hooks";
 import AidsView from "../../views/auth/aids";
 import AidsBeneficiaryView from "../../views/auth/aids/request";
+import ApplicantsView from "../../views/auth/applicants";
 import BeneficiariesView from "../../views/auth/beneficiaries";
 import BeneficiaryOwnProfile from "../../views/auth/beneficiaries/beneficiaryProfile";
 import BeneficiaryProfileView from "../../views/auth/beneficiaries/profile";
@@ -31,7 +24,6 @@ import DashboardNavbar from "./dashboardNavbar";
 import { FilePreviewModal } from "./globalModal";
 import Navbar from "./navbar";
 import Sidebar from "./sidebar";
-import { useState } from "react";
 
 const AuthLayout = () => {
   const { t } = useTranslation();
@@ -56,6 +48,14 @@ const AuthLayout = () => {
       showInNav: true,
       icon: faHome,
       users: ["beneficiary", "researcher", "admin"],
+    },
+    {
+      name: t("Auth.Beneficiaries.Applications"),
+      route: "/applicants",
+      view: <ApplicantsView />,
+      showInNav: true,
+      icon: faUsers,
+      users: ["researcher", "admin"],
     },
     {
       name: t("Auth.Beneficiaries.Title"),

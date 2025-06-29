@@ -22,6 +22,7 @@
       "Title": "Title"
     },
     "Beneficiaries": {
+      "Applications": "Membership Applications",
       "BeneficiaryName": "BeneficiaryName",
       "Profile": {
         "archive": "archive",

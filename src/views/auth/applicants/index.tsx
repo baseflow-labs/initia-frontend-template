@@ -1,5 +1,5 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { faCalendarDays, faCircle, faEdit, faSearch, faTrash, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faCircle, faEdit, faSearch, faTrash, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -12,7 +12,7 @@ import TablePage from "../../../layouts/auth/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import { apiCatchGlobalHandler, renderDataFromOptions, statusColorRender } from "../../../utils/function";
 
-const BeneficiariesView = () => {
+const ApplicantsView = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -34,7 +34,7 @@ const BeneficiariesView = () => {
                 ...rest,
               })
             )
-            .filter(({ status = "" }) => status === "Accepted") as any
+            .filter(({ status = "" }) => status !== "Accepted") as any
         );
       })
       .catch(apiCatchGlobalHandler);
@@ -285,6 +285,8 @@ const BeneficiariesView = () => {
       columns={columns}
       data={beneficiaries}
       tableActions={(id?: string) => {
+        const row = beneficiaries.find((b) => b.id === id);
+
         const final: {
           label: string;
           icon: IconProp;
@@ -296,18 +298,34 @@ const BeneficiariesView = () => {
             label: t("Auth.Beneficiaries.Profile.ProfileDetails"),
             onClick: (data: string) => viewProfile(data),
           },
-          {
-            icon: faCalendarDays,
-            spread: true,
-            label: t("Auth.Visits.AddVisit"),
-            onClick: (data: string) => scheduleVisit(data),
-          },
-          {
-            icon: faTrash,
-            label: t("Auth.Beneficiaries.Profile.DeleteBeneficiary"),
-            onClick: (data: string) => deleteBeneficiary(data),
-          },
         ];
+
+        const allowDataCompletion = ["Incomplete", "Need Help"].includes(
+          row?.status || ""
+        );
+        const allowDataReview = ["New Member"].includes(row?.status || "");
+
+        if (allowDataCompletion) {
+          final.push({
+            icon: faEdit,
+            label: t("Auth.Beneficiaries.Profile.ProfileCompletion"),
+            onClick: (data: string) => completeProfile(data),
+          });
+        }
+
+        if (allowDataReview) {
+          final.push({
+            icon: faSearch,
+            label: t("Auth.Beneficiaries.Profile.ProfileReview"),
+            onClick: (data: string) => reviewProfile(data),
+          });
+        }
+
+        final.push({
+          icon: faTrash,
+          label: t("Auth.Beneficiaries.Profile.DeleteBeneficiary"),
+          onClick: (data: string) => deleteBeneficiary(data),
+        });
 
         return final;
       }}
@@ -317,4 +335,4 @@ const BeneficiariesView = () => {
   );
 };
 
-export default BeneficiariesView;
+export default ApplicantsView;
