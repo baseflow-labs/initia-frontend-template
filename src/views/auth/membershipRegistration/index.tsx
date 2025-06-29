@@ -1083,15 +1083,13 @@ const MembershipRegistrationView = () => {
   ];
 
   return (
-    <Fragment>
-      <div className="px-1 mx-1 px-lg-5 mx-lg-5">
-        <WizardFormStepper
-          steps={formSteps}
-          currentStep={currentStep}
-          setCurrentStep={setCurrentStep}
-        />
-      </div>
-    </Fragment>
+    <div className="container-fluid px-0 mx-0 px-md-5">
+      <WizardFormStepper
+        steps={formSteps}
+        currentStep={currentStep}
+        setCurrentStep={setCurrentStep}
+      />
+    </div>
   );
 };
 

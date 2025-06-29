@@ -1,4 +1,13 @@
-import { faBezierCurve, faBoxOpen, faEdit, faGear, faHome, faInfoCircle, faUser, faUsers } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBezierCurve,
+  faBoxOpen,
+  faEdit,
+  faGear,
+  faHome,
+  faInfoCircle,
+  faUser,
+  faUsers,
+} from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes, useLocation } from "react-router";
@@ -198,7 +207,7 @@ const AuthLayout = () => {
         >
           {showSidebar && <DashboardNavbar />}
 
-          <div className="py-5 px-3">
+          <div className="py-5 px-1 px-3-md">
             <Routes>
               {filteredRoutes.map(({ name, route, view }, i) => (
                 <Route path={route} element={view} key={i} />
