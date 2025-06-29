@@ -51,6 +51,7 @@
     },
     "Beneficiary": {
       "Profile": {
+        "NoDataUpdate": "No Data Update Requests",
         "PleaseUpdateFollowingData": "PleaseUpdateFollowingData",
         "Title": "Title",
         "YourProfile": "YourProfile"

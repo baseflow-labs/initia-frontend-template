@@ -51,6 +51,7 @@
     },
     "Beneficiary": {
       "Profile": {
+        "NoDataUpdate": "لا يوجد طلبات لتعديل بياناتكم الشخصية",
         "PleaseUpdateFollowingData": "يرجى تعبئة الحقول بالبيانات الصحيحة...",
         "Title": "معلوماتي",
         "YourProfile": "معلوماتك"

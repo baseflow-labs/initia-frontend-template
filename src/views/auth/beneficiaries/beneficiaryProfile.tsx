@@ -1066,7 +1066,9 @@ const BeneficiaryOwnProfile = () => {
 
         <div className="col-md-12 mb-4 row">
           <h5 className="mb-4">
-            {t("Auth.Beneficiary.Profile.PleaseUpdateFollowingData")}
+            {dataReviews?.length
+              ? t("Auth.Beneficiary.Profile.PleaseUpdateFollowingData")
+              : t("Auth.Beneficiary.Profile.NoDataUpdate")}
           </h5>
 
           {dataReviews?.map(({ id, table, property, row, note }, i) => {
