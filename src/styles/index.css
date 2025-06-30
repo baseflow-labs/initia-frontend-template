@@ -10,6 +10,44 @@
   --base-font-size: 16px;
 }
 
+.bg-info {
+  background-color: var(--bs-info) !important;
+}
+.btn-info {
+  background-color: var(--bs-info) !important;
+}
+.alert-info {
+  background-color: var(--bs-info) !important;
+}
+.badge-info {
+  background-color: var(--bs-info) !important;
+}
+.text-info {
+  color: var(--bs-info) !important;
+}
+.border-info {
+  border-color: var(--bs-info) !important;
+}
+
+.bg-success {
+  background-color: var(--bs-success) !important;
+}
+.btn-success {
+  background-color: var(--bs-success) !important;
+}
+.alert-success {
+  background-color: var(--bs-success) !important;
+}
+.badge-success {
+  background-color: var(--bs-success) !important;
+}
+.text-success {
+  color: var(--bs-success) !important;
+}
+.border-success {
+  border-color: var(--bs-success) !important;
+}
+
 html {
   font-size: var(--base-font-size); /* affects rem units */
 }
