@@ -143,13 +143,15 @@ const TablePage = ({
         </div>
       </div>
 
-      <div className="w-100 max-vw-100 overflow-x-auto">
-        <DynamicTable
-          columns={columns}
-          data={data}
-          onPageChange={onPageChange}
-          actions={tableActions}
-        />
+      <div className="col-12 order-4 order-lg-4">
+        <div className="overflow-x-auto" style={{ maxWidth: "100vw" }}>
+          <DynamicTable
+            columns={columns}
+            data={data}
+            onPageChange={onPageChange}
+            actions={tableActions}
+          />
+        </div>
       </div>
     </Fragment>
   );
