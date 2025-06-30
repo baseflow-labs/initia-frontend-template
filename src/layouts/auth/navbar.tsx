@@ -42,7 +42,7 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white px-4 py-4">
       <div className="container-fluid">
-        <div className="my-auto">
+        <div className="my-auto d-block d-md-none">
           <button
             className="btn btn-ghost"
             type="button"
