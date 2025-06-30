@@ -293,11 +293,11 @@ const ApplicantsView = () => {
   };
 
   const viewProfile = (data: string) => {
-    navigate(`/beneficiary/profile/?id=${data}`);
+    navigate(`/profile/?id=${data}`);
   };
 
   const reviewProfile = (data: string) => {
-    navigate(`/beneficiary/review/?id=${data}`);
+    navigate(`/review/?id=${data}`);
   };
 
   const scheduleVisit = (data: string) => {

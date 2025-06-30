@@ -80,14 +80,14 @@ const AuthLayout = () => {
     },
     {
       name: t("Auth.Beneficiaries.Profile.Title"),
-      route: "/beneficiary/review/",
+      route: "/review/",
       view: <BeneficiaryFormReview />,
       icon: faUsers,
       users: ["researcher", "admin"],
     },
     {
       name: t("Auth.Beneficiaries.Profile.Title"),
-      route: "/beneficiary/profile/",
+      route: "/profile/",
       view: <BeneficiaryProfileView />,
       icon: faUsers,
       users: ["researcher", "admin"],
@@ -148,7 +148,7 @@ const AuthLayout = () => {
     },
     {
       name: t("Auth.Beneficiary.Profile.Title"),
-      route: "/beneficiary/profile",
+      route: "/profile",
       view: <BeneficiaryOwnProfile />,
       showInNav: true,
       icon: faUser,
