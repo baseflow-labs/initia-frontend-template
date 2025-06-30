@@ -1,9 +1,4 @@
-import {
-  faCouch,
-  faDesktop,
-  faDoorOpen,
-  faTrash,
-} from "@fortawesome/free-solid-svg-icons";
+import { faDesktop, faDoorOpen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -11,12 +6,16 @@ import { useDispatch } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router";
 
 import * as VisitReportsApi from "../../../api/visits/reports";
+import { deleteIcon, furnitureIcon } from "../../../assets/icons/icons";
+import IconWrapperComp from "../../../assets/icons/wrapper";
 import CollapseGroup from "../../../components/collapse";
 import Button from "../../../components/core/button";
 import { LabelView } from "../../../components/form";
 import DefaultInput from "../../../components/form/inputs/default";
 import RadioInput from "../../../components/form/inputs/radio";
 import SelectInput from "../../../components/form/inputs/select";
+import SelectAddInput from "../../../components/form/inputs/selectAdd";
+import StarsInput from "../../../components/form/inputs/stars";
 import TextareaInput from "../../../components/form/inputs/textarea";
 import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
@@ -24,8 +23,6 @@ import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
 } from "../../../utils/function";
-import StarsInput from "../../../components/form/inputs/stars";
-import SelectAddInput from "../../../components/form/inputs/selectAdd";
 
 const getInitialContent = () => ({
   content: "",
@@ -179,7 +176,7 @@ const VisitReportsView = () => {
       {roomDetails.index >= 0 ? (
         <Fragment>
           <div className="row">
-            <div className="col-md-11">
+            <div className="col-lg-11">
               <Button
                 className="w-100 btn-lg my-3 mt-5"
                 onClick={() =>
@@ -189,12 +186,12 @@ const VisitReportsView = () => {
                   }))
                 }
               >
-                <FontAwesomeIcon icon={faCouch} />{" "}
+                <IconWrapperComp icon={furnitureIcon} />{" "}
                 {t("Auth.Visits.Report.AddContent")}
               </Button>
             </div>
 
-            <div className="col-md-1 pt-3 px-0">
+            <div className="col-lg-1 pt-3 px-0">
               <LabelView
                 name="roomsCount"
                 label={t("Auth.Visits.Report.ContentsCount")}
@@ -216,12 +213,12 @@ const VisitReportsView = () => {
                 number: i + 1,
                 name: contentTypes
                   .find(({ value }) => value === content.type)
-                  ?.subList.find(({ value }) => value == content.content)
+                  ?.subList.find(({ value }) => value === content.content)
                   ?.label,
               }),
               content: (
                 <div className="my-4 row" key={i}>
-                  <div className="col-md-10">
+                  <div className="col-lg-10">
                     <LabelView
                       name={`type-${i}`}
                       label={t("Auth.Visits.Report.ContentXType", {
@@ -240,7 +237,7 @@ const VisitReportsView = () => {
                       }
                     />
                   </div>
-                  <div className="col-md-2 pt-4">
+                  <div className="col-lg-2 pt-4">
                     <Button
                       color="white"
                       className="btn-lg border-dark w-100 mt-1"
@@ -251,13 +248,13 @@ const VisitReportsView = () => {
                         }))
                       }
                     >
-                      <FontAwesomeIcon
-                        icon={faTrash}
+                      <IconWrapperComp
+                        icon={deleteIcon}
                         className="text-danger pt-2"
                       />
                     </Button>
                   </div>
-                  <div className="col-md-12 pt-3">
+                  <div className="col-lg-12 pt-3">
                     <LabelView
                       name={`content-${i}`}
                       label={t("Auth.Visits.Report.ContentType", {
@@ -280,7 +277,7 @@ const VisitReportsView = () => {
                       onChange={(e) => updateContentAtIndex(i, { content: e })}
                     />
                   </div>
-                  <div className="col-md-12 pt-3">
+                  <div className="col-lg-12 pt-3">
                     <LabelView
                       name={`photo-${i}`}
                       label={t("Auth.Visits.Report.RoomContentPhoto", {
@@ -301,7 +298,7 @@ const VisitReportsView = () => {
                       className="mb-4"
                     />
                   </div>
-                  <div className="col-md-12 pt-3">
+                  <div className="col-lg-12 pt-3">
                     <LabelView
                       name={`status-${i}`}
                       label={t("Auth.Visits.Report.RoomContentStatus", {
@@ -325,7 +322,7 @@ const VisitReportsView = () => {
                     />
                   </div>
 
-                  <div className="col-md-12 pt-3">
+                  <div className="col-lg-12 pt-3">
                     <LabelView
                       name={`evaluation-${i}`}
                       label={t("Auth.Visits.Report.RoomContentEvaluation", {
@@ -355,7 +352,7 @@ const VisitReportsView = () => {
             }))}
           />
 
-          <div className="col-md-12 pt-3">
+          <div className="col-lg-12 pt-3">
             <LabelView
               name="recommendation"
               label={t("Auth.Visits.Report.RoomRecommendations")}
@@ -374,7 +371,7 @@ const VisitReportsView = () => {
             />
           </div>
 
-          <div className="col-md-12 pt-3">
+          <div className="col-lg-12 pt-3">
             <LabelView name="note" label={t("Global.Form.Labels.Notes")} />
 
             <TextareaInput
@@ -415,7 +412,7 @@ const VisitReportsView = () => {
       ) : (
         <Fragment>
           <div className="row">
-            <div className="col-md-11">
+            <div className="col-lg-11">
               <Button
                 className="w-100 btn-lg my-3 mt-5"
                 onClick={() =>
@@ -438,7 +435,7 @@ const VisitReportsView = () => {
               </Button>
             </div>
 
-            <div className="col-md-1 pt-3 px-0">
+            <div className="col-lg-1 pt-3 px-0">
               <LabelView
                 name="roomsCount"
                 label={t("Auth.Visits.Report.RoomsCount")}
@@ -456,7 +453,7 @@ const VisitReportsView = () => {
 
           {data.rooms.map((room, i) => (
             <div className="my-4 row" key={i}>
-              <div className="col-md-6">
+              <div className="col-lg-6">
                 <LabelView
                   name="room"
                   label={t("Auth.Visits.Report.RoomXType", { number: i + 1 })}
@@ -483,7 +480,7 @@ const VisitReportsView = () => {
                 />
               </div>
 
-              <div className="col-md-5">
+              <div className="col-lg-5">
                 <LabelView
                   name="room"
                   label={t("Auth.Visits.Report.Contents")}
@@ -501,7 +498,7 @@ const VisitReportsView = () => {
                 </div>
               </div>
 
-              <div className="col-md-1 pt-4">
+              <div className="col-lg-1 pt-4">
                 <div className="mt-2">
                   <Button
                     color="white"
@@ -513,7 +510,10 @@ const VisitReportsView = () => {
                       }))
                     }
                   >
-                    <FontAwesomeIcon icon={faTrash} className="text-danger" />
+                    <IconWrapperComp
+                      icon={deleteIcon}
+                      className="text-danger"
+                    />
                   </Button>
                 </div>
               </div>

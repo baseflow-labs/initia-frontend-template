@@ -1,9 +1,9 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { faFilter, faHistory } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Form as FormikForm, FormikProvider, useFormik } from "formik";
 import { Fragment } from "react/jsx-runtime";
 
+import { filterIcon, resetFilterIcon } from "../../assets/icons/icons";
+import IconWrapperComp from "../../assets/icons/wrapper";
 import ActionButtons from "../../components/button/actionButtons";
 import Button from "../../components/core/button";
 import SelectInput from "../../components/form/inputs/select";
@@ -79,7 +79,7 @@ const TablePage = ({
               {filters?.map(({ name, label, options, multi }, i) =>
                 multi ? (
                   <div
-                    className={`col-6 col-md-${columnsWidth(filters.length)}`}
+                    className={`col-6 col-lg-${columnsWidth(filters.length)}`}
                   >
                     <SelectManyInput
                       name={name}
@@ -91,7 +91,7 @@ const TablePage = ({
                   </div>
                 ) : (
                   <div
-                    className={`col-6 col-md-${columnsWidth(filters.length)}`}
+                    className={`col-6 col-lg-${columnsWidth(filters.length)}`}
                   >
                     <SelectInput
                       id={name}
@@ -108,14 +108,14 @@ const TablePage = ({
               )}
 
               <div
-                className={`col-6 d-flex col-md-${columnsWidth(
+                className={`col-6 d-flex col-lg-${columnsWidth(
                   filters?.length || 1
                 )}`}
               >
                 <Button color="ghost" type="submit">
-                  <FontAwesomeIcon
-                    icon={faFilter}
-                    className="me-1 my-auto px-0 px-md-1"
+                  <IconWrapperComp
+                    icon={filterIcon}
+                    className="me-1 my-auto px-0 px-lg-1"
                   />
                 </Button>
 
@@ -124,9 +124,9 @@ const TablePage = ({
                   type="button"
                   onClick={() => formik.resetForm()}
                 >
-                  <FontAwesomeIcon
-                    icon={faHistory}
-                    className="me-1 my-auto px-0 px-md-1"
+                  <IconWrapperComp
+                    icon={resetFilterIcon}
+                    className="me-1 my-auto px-0 px-lg-1"
                   />
                 </Button>
               </div>

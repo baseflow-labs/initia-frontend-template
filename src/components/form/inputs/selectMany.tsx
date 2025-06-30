@@ -1,10 +1,13 @@
-import { faPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useField } from "formik";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import Select, { components, MultiValue, StylesConfig } from "react-select";
+
 import { InputProps } from "..";
+import { deleteIcon } from "../../../assets/icons/icons";
+import IconWrapperComp from "../../../assets/icons/wrapper";
 
 interface OptionType {
   value: string;
@@ -74,7 +77,7 @@ const SelectManyInput: React.FC<SelectManyInputProps> = ({
           fontSize: 8,
         }}
       >
-        <FontAwesomeIcon icon={faXmark} />
+        <IconWrapperComp icon={deleteIcon} />
       </div>
     </components.MultiValueRemove>
   );

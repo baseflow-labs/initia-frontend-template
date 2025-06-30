@@ -2,28 +2,26 @@ import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import {
   faChevronLeft,
   faChevronRight,
-  faGear,
-  faHome,
-  faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
 
 import Logo from "../../assets/images/brand/logo-full.png";
 import LogoOnly from "../../assets/images/brand/logo-only.png";
+import IconWrapperComp from "../../assets/icons/wrapper";
 
 interface Props {
   routes: {
     name: string;
     route: string;
-    icon: IconProp;
+    icon: any;
   }[];
   fixedRoutes: {
     name: string;
     route: string;
-    icon: IconProp;
+    icon: any;
   }[];
   collapsed: boolean;
   toggleSidebar: () => void;
@@ -64,7 +62,7 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
                   navigate(route);
                 }}
               >
-                <FontAwesomeIcon icon={icon} className="me-2" />
+                <IconWrapperComp icon={icon} className="me-2" />
                 {!collapsed && <span>{name}</span>}
               </h5>
 
@@ -86,7 +84,7 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
           ))}
         </div>
 
-        <hr />
+        <hr className="mx-3" />
 
         <div className="nav flex-column px-2">
           {fixedRoutes.map(({ name, route, icon }, i) => (
@@ -102,7 +100,7 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
                 navigate(route);
               }}
             >
-              <FontAwesomeIcon icon={icon} className="me-2" />
+              <IconWrapperComp icon={icon} className="me-2" />
               {!collapsed && <span>{name}</span>}
             </h5>
           ))}

@@ -244,7 +244,6 @@ const DynamicTable = ({
                               onClick: () => onClick(row.id || ""),
                               label: (
                                 <Fragment>
-                                  {" "}
                                   <FontAwesomeIcon
                                     icon={icon}
                                     className="text-info"
@@ -255,8 +254,9 @@ const DynamicTable = ({
                             }))}
                         />
                       ) : (
-                        <span className="text-white">-</span>
+                        ""
                       )}
+                      <span className="text-white">.</span>
                     </td>
                   )}
                 </tr>

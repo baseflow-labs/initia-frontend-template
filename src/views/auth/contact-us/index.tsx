@@ -1,7 +1,8 @@
 import { useTranslation } from "react-i18next";
+
+import { contactUsIcon } from "../../../assets/icons/icons";
+import IconWrapperComp from "../../../assets/icons/wrapper";
 import Button from "../../../components/core/button";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLifeRing } from "@fortawesome/free-solid-svg-icons";
 import { useAppSelector } from "../../../store/hooks";
 
 const ContactUsPage = () => {
@@ -15,7 +16,7 @@ const ContactUsPage = () => {
     >
       <div className="text-center">
         <h1 className="display-1">
-          <FontAwesomeIcon icon={faLifeRing} />
+          <IconWrapperComp height={120} icon={contactUsIcon} />
         </h1>
 
         <h1 className="">{t("Auth.ContactUs.ContactNow")}</h1>

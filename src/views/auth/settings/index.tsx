@@ -73,44 +73,44 @@ const SettingsPage = () => {
         name: "logo",
         label: t("Auth.Settings.SocietyLogo"),
       },
-      {
-        type: "selectMany",
-        name: "provinces",
-        options: [{ value: "All", label: t("Auth.Settings.AllProvinces") }],
-        label: t("Auth.Settings.SocietyProvinces"),
-      },
+      // {
+      //   type: "selectMany",
+      //   name: "provinces",
+      //   options: [{ value: "All", label: t("Auth.Settings.AllProvinces") }],
+      //   label: t("Auth.Settings.SocietyProvinces"),
+      // },
     ];
 
     const allProvinces = formik?.values.provinces?.includes("All");
     const allGovernorate = formik?.values.governorate?.includes("All");
     const allCities = formik?.values.cities?.includes("All");
 
-    if (!allProvinces) {
-      final.push({
-        type: "selectMany",
-        name: "governorate",
-        options: [{ value: "All", label: t("Auth.Settings.AllGovernorate") }],
-        label: t("Auth.Settings.SocietyGovernorate"),
-      });
-    }
+    // if (!allProvinces) {
+    //   final.push({
+    //     type: "selectMany",
+    //     name: "governorate",
+    //     options: [{ value: "All", label: t("Auth.Settings.AllGovernorate") }],
+    //     label: t("Auth.Settings.SocietyGovernorate"),
+    //   });
+    // }
 
-    if (!allProvinces && !allGovernorate) {
-      final.push({
-        type: "selectMany",
-        name: "cities",
-        options: [{ value: "All", label: t("Auth.Settings.AllCities") }],
-        label: t("Auth.Settings.SocietyCities"),
-      });
-    }
+    // if (!allProvinces && !allGovernorate) {
+    //   final.push({
+    //     type: "selectMany",
+    //     name: "cities",
+    //     options: [{ value: "All", label: t("Auth.Settings.AllCities") }],
+    //     label: t("Auth.Settings.SocietyCities"),
+    //   });
+    // }
 
-    if (!allProvinces && !allGovernorate && !allCities) {
-      final.push({
-        type: "selectMany",
-        name: "districts",
-        options: [{ value: "All", label: t("Auth.Settings.AllDistricts") }],
-        label: t("Auth.Settings.SocietyDistricts"),
-      });
-    }
+    // if (!allProvinces && !allGovernorate && !allCities) {
+    //   final.push({
+    //     type: "selectMany",
+    //     name: "districts",
+    //     options: [{ value: "All", label: t("Auth.Settings.AllDistricts") }],
+    //     label: t("Auth.Settings.SocietyDistricts"),
+    //   });
+    // }
 
     final.push({
       type: "phoneNumber",
@@ -118,23 +118,23 @@ const SettingsPage = () => {
       label: t("Auth.Settings.SocietyPhoneNumber"),
     });
 
-    final.push({
-      type: "location",
-      name: "location",
-      label: t("Auth.Settings.SocietyLocation"),
-    });
+    // final.push({
+    //   type: "location",
+    //   name: "location",
+    //   label: t("Auth.Settings.SocietyLocation"),
+    // });
 
-    final.push({
-      type: "text",
-      name: "address",
-      label: t("Auth.Settings.SocietyAddress"),
-    });
+    // final.push({
+    //   type: "text",
+    //   name: "address",
+    //   label: t("Auth.Settings.SocietyAddress"),
+    // });
 
-    final.push({
-      type: "url",
-      name: "website",
-      label: t("Auth.Settings.SocietyWebsite"),
-    });
+    // final.push({
+    //   type: "url",
+    //   name: "website",
+    //   label: t("Auth.Settings.SocietyWebsite"),
+    // });
 
     return final;
   };
