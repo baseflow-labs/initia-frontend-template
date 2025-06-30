@@ -57,6 +57,17 @@ const ApplicantsView = () => {
 
   const title = t("Auth.Beneficiaries.Applications");
 
+  const nationalities = [
+    {
+      value: "Saudi",
+      label: t("Auth.MembershipRegistration.Form.Nationality.Saudi"),
+    },
+    {
+      value: "Non Saudi",
+      label: t("Auth.MembershipRegistration.Form.Nationality.NonSaudi"),
+    },
+  ];
+
   const provinces = [
     {
       value: "Riyadh",
@@ -186,7 +197,7 @@ const ApplicantsView = () => {
     },
     {
       label: t("Auth.MembershipRegistration.Form.Nationality.Title"),
-      options: nationalities(t),
+      options: nationalities,
       name: "nationality",
     },
     {
@@ -209,7 +220,7 @@ const ApplicantsView = () => {
     },
     {
       type: "select",
-      options: nationalities(t),
+      options: nationalities,
       name: "nationality",
       label: t("Auth.MembershipRegistration.Form.Nationality.Title"),
     },
