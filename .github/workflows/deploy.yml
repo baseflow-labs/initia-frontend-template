@@ -18,18 +18,16 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 20
+          cache: "yarn"
 
-      - name: 📦 Install dependencies
-        run: npm install --legacy-peer-deps
-
-      - name: 🛠 Fix vulnerabilities (force)
-        run: npm audit fix --force
+      - name: 📦 Install dependencies with Yarn
+        run: yarn install --ignore-engines
 
       - name: 🧹 Remove old build
         run: rm -rf build # or `dist`, depending on your app
 
       - name: ⚙️ Build the app
-        run: npm run build
+        run: yarn build
 
       - name: 📂 Sync files via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
