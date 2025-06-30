@@ -36,4 +36,4 @@ jobs:
           username: ${{ secrets.ftp_username }}
           password: ${{ secrets.ftp_password }}
           server-dir: /sawaed/
-          local-dir: build # or dist, whichever contains your output
+          local-dir: build/ # or dist, whichever contains your output
