@@ -1,4 +1,8 @@
-import { faBell, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBars,
+  faBell,
+  faInfoCircle,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
 import { useLayoutEffect, useState } from "react";
@@ -9,11 +13,11 @@ import { useNavigate } from "react-router";
 import * as NotificationApi from "../../api/notifications";
 import Logo from "../../assets/images/brand/logo-full.png";
 import profilePhotoPlaceholder from "../../assets/images/profile-image-placeholder.png";
+import DropdownComp from "../../components/dropdown";
 import { logout } from "../../store/actions/auth";
 import { useAppSelector } from "../../store/hooks";
 import { apiCatchGlobalHandler } from "../../utils/function";
 import { Notification } from "./dashboardNavbar";
-import DropdownComp from "../../components/dropdown";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -38,13 +42,17 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white px-4 py-4">
       <div className="container-fluid">
-        <span
-          className="navbar-brand"
-          onClick={() => navigate("/dashboard")}
-          role="button"
-        >
-          <img src={Logo} style={{ height: "50px" }} />
-        </span>
+        <div className="my-auto">
+          <button
+            className="btn btn-ghost"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasNav"
+            aria-controls="offcanvasNav"
+          >
+            <FontAwesomeIcon icon={faBars} />
+          </button>
+        </div>
 
         <div className="collapse navbar-collapse justify-content-center">
           <ul className="navbar-nav mb-2 mb-lg-0">
