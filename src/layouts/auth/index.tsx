@@ -191,7 +191,7 @@ const AuthLayout = () => {
 
   return (
     <Fragment>
-      {showSidebar && isPc ? "" : <Navbar />}
+      {!showSidebar ? <Navbar /> : ""}
 
       <OffCanvasNav
         fixedRoutes={fixedRoutes}
@@ -229,7 +229,7 @@ const AuthLayout = () => {
             transition: "margin-right 0.3s",
           }}
         >
-          {showSidebar && isPc && <DashboardNavbar />}
+          {showSidebar && <DashboardNavbar />}
 
           <div className="p-0 px-2 px-md-5 w-100">
             <Routes>

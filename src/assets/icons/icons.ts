@@ -8,6 +8,7 @@ import dashboardIcon from "./dashboard.svg";
 import dateIcon from "./date.svg";
 import deleteIcon from "./delete.svg";
 import dependantIcon from "./dependant.svg";
+import dependantWhiteIcon from "./dependantWhite.svg";
 import deviceIcon from "./device.svg";
 import dropdownDotsIcon from "./dropdownDots.svg";
 import editIcon from "./edit.svg";
@@ -52,6 +53,7 @@ export {
   dateIcon,
   deleteIcon,
   dependantIcon,
+  dependantWhiteIcon,
   deviceIcon,
   dropdownDotsIcon,
   editIcon,

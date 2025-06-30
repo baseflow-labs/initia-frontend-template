@@ -2,11 +2,11 @@ import moment from "moment";
 import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router";
 
 import * as NotificationApi from "../../api/notifications";
 import {
   helpIcon,
+  menuBarsIcon,
   notificationsIcon,
   searchIcon,
 } from "../../assets/icons/icons";
@@ -26,7 +26,6 @@ export interface Notification {
 
 const DashboardNavbar = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { t } = useTranslation();
   const { logo } = useAppSelector((state) => state.settings);
   const [notifications, setNotification] = useState<Notification[]>([]);
@@ -46,7 +45,19 @@ const DashboardNavbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white py-4 mt-2 me-4 ms-0 ps-0">
       <div className="row w-100 justify-content-between">
-        <form className="col-md-6 order-2 order-md-1">
+        <div className="col-6 col-md-1 d-block d-md-none order-1 order-md-3">
+          <button
+            className="btn btn-ghost"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasNav"
+            aria-controls="offcanvasNav"
+          >
+            <IconWrapperComp icon={menuBarsIcon} />
+          </button>
+        </div>
+
+        <form className="col-12 col-md-6 order-3 order-md-1">
           <div className="input-group w-100 ms-3">
             <input
               className="form-control"
@@ -54,13 +65,13 @@ const DashboardNavbar = () => {
               placeholder={t("Global.Labels.Search")}
             />
 
-            <span className="input-group-text bg-transparent">
+            <span className="input-group-text bg-info">
               <IconWrapperComp icon={searchIcon} />
             </span>
           </div>
         </form>
 
-        <div className="col-md-1 pb-3 order-1 order-md-2">
+        <div className="col-6 col-md-1 pb-3 order-2 order-md-2">
           <div className="d-flex align-items-end gap-3 pe-5 float-end">
             <DropdownComp
               button={

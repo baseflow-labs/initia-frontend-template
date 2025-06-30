@@ -6,7 +6,11 @@ import { useDispatch } from "react-redux";
 import { Fragment } from "react/jsx-runtime";
 
 import * as DependentApi from "../../../api/profile/dependent";
-import { deleteIcon, dependantIcon } from "../../../assets/icons/icons";
+import {
+  deleteIcon,
+  dependantIcon,
+  dependantWhiteIcon,
+} from "../../../assets/icons/icons";
 import IconWrapperComp from "../../../assets/icons/wrapper";
 import Button from "../../../components/core/button";
 import Spinner from "../../../components/core/spinner";
@@ -306,7 +310,7 @@ const DependentsFormView = ({
                   );
                 }}
               >
-                <IconWrapperComp icon={dependantIcon} className="me-2" />{" "}
+                <IconWrapperComp icon={dependantWhiteIcon} className="me-2" />{" "}
                 {dependent.fullName ||
                   t("Auth.MembershipRegistration.Form.Dependents.Dependant") +
                     " " +

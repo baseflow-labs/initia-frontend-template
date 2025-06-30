@@ -9,6 +9,7 @@ import {
   dateIcon,
   deleteIcon,
   dependantIcon,
+  dependantWhiteIcon,
   deviceIcon,
   dropdownDotsIcon,
   editIcon,
@@ -53,6 +54,7 @@ interface Props {
     | "date"
     | "delete"
     | "dependant"
+    | "dependantWhite"
     | "device"
     | "dropdownDots"
     | "edit"
@@ -108,6 +110,8 @@ const IconComp = ({ icon }: Props) => {
         return deleteIcon;
       case "dependant":
         return dependantIcon;
+      case "dependantWhite":
+        return dependantWhiteIcon;
       case "device":
         return deviceIcon;
       case "dropdownDots":

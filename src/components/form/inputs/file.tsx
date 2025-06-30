@@ -1,3 +1,5 @@
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useField } from "formik";
 import React, { Fragment, useRef } from "react";
 import { useTranslation } from "react-i18next";
@@ -49,7 +51,7 @@ const FileInput: React.FC<FinalInput> = ({ name, accept, ...rest }) => {
       }}
       onClick={handleRemoveFile}
     >
-      <IconWrapperComp icon={deleteIcon} />
+      <FontAwesomeIcon icon={faXmark} className="p-0" />
     </div>
   );
 

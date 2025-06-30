@@ -1,7 +1,6 @@
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment } from "react/jsx-runtime";
-
-import { successIcon } from "../../../assets/icons/icons";
-import IconWrapperComp from "../../../assets/icons/wrapper";
 
 interface Props {
   currentStep: number;
@@ -46,7 +45,7 @@ const WizardFormStepper = ({ steps, currentStep, setCurrentStep }: Props) => {
                   >
                     <span className={`bs-stepper-circle`}>
                       {currentStep > i ? (
-                        <IconWrapperComp icon={successIcon} />
+                        <FontAwesomeIcon icon={faCheck} />
                       ) : (
                         i + 1
                       )}
