@@ -88,7 +88,7 @@ const AuthLayout = () => {
                           style: {
                             backgroundColor: "rgba(24,180,191,0.15)",
                           },
-                          className: "text-info",
+                          className: "text-white",
                         }
                       : {
                           color: "ghost",
