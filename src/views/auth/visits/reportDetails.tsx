@@ -241,9 +241,7 @@ const VisitDetailView = () => {
       <div className="row gap-4 mt-4 w-75">
         {tabs?.map((t) => (
           <div className="px-3 py-3 bg-white rounded-3 border border-1 border-info col-3 align-items-end text-center">
-            <span className="text-dark fs-6 fw-normal font-family-Cairo">
-              {t}
-            </span>
+            <span className="text-dark fs-6 fw-normal ">{t}</span>
           </div>
         ))}
       </div>

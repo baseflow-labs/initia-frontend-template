@@ -14,13 +14,14 @@ import { Navigate, Route, Routes, useLocation } from "react-router";
 import { Fragment } from "react/jsx-runtime";
 
 import { useAppSelector } from "../../store/hooks";
+import { useWindowWidth } from "../../utils/hooks";
 import AidsView from "../../views/auth/aids";
 import AidsBeneficiaryView from "../../views/auth/aids/request";
 import ApplicantsView from "../../views/auth/applicants";
 import BeneficiariesView from "../../views/auth/beneficiaries";
 import BeneficiaryOwnProfile from "../../views/auth/beneficiaries/beneficiaryProfile";
 import BeneficiaryProfileView from "../../views/auth/beneficiaries/profile";
-import BeneficiaryFormReview from "../../views/auth/beneficiaries/review";
+import BeneficiaryFormReview from "../../views/auth/applicants/review";
 import ContactUsPage from "../../views/auth/contact-us";
 import DashboardView from "../../views/auth/dashboard";
 import MembershipRegistrationView from "../../views/auth/membershipRegistration";
@@ -32,12 +33,15 @@ import VisitDetailView from "../../views/auth/visits/reportDetails";
 import DashboardNavbar from "./dashboardNavbar";
 import { FilePreviewModal } from "./globalModal";
 import Navbar from "./navbar";
-import Sidebar from "./sidebar";
+import OffCanvasNav from "./offcanvasNav";
+import Sidebar from "./sidebarNav";
 
 const AuthLayout = () => {
   const { t } = useTranslation();
   const location = useLocation();
   const { user } = useAppSelector((state) => state.auth);
+  const width = useWindowWidth();
+  const isPc = width > 768;
 
   const [collapsed, setCollapsed] = useState(false);
 
@@ -76,14 +80,14 @@ const AuthLayout = () => {
     },
     {
       name: t("Auth.Beneficiaries.Profile.Title"),
-      route: "/beneficiary/review/",
+      route: "/review/",
       view: <BeneficiaryFormReview />,
       icon: faUsers,
       users: ["researcher", "admin"],
     },
     {
       name: t("Auth.Beneficiaries.Profile.Title"),
-      route: "/beneficiary/profile/",
+      route: "/profile/",
       view: <BeneficiaryProfileView />,
       icon: faUsers,
       users: ["researcher", "admin"],
@@ -144,7 +148,7 @@ const AuthLayout = () => {
     },
     {
       name: t("Auth.Beneficiary.Profile.Title"),
-      route: "/beneficiary/profile",
+      route: "/profile",
       view: <BeneficiaryOwnProfile />,
       showInNav: true,
       icon: faUser,
@@ -166,6 +170,15 @@ const AuthLayout = () => {
     },
   ];
 
+  const fixedRoutes = [
+    {
+      name: t("Auth.ContactUs.Title"),
+      route: "/contact-us",
+      icon: faInfoCircle,
+    },
+    { name: t("Auth.Settings.Title"), route: "/settings", icon: faGear },
+  ];
+
   const showSidebar = !location.pathname.includes("apply");
 
   const filteredRoutes = authRoutes.filter(({ users }) =>
@@ -176,10 +189,17 @@ const AuthLayout = () => {
 
   return (
     <Fragment>
-      {showSidebar ? "" : <Navbar />}
+      {showSidebar && isPc ? "" : <Navbar />}
+
+      <OffCanvasNav
+        fixedRoutes={fixedRoutes}
+        routes={filteredRoutes
+          .filter(({ showInNav }) => showInNav)
+          .map(({ view, ...rest }) => ({ ...rest }))}
+      />
 
       <main className="d-flex">
-        {showSidebar && (
+        {showSidebar && isPc && (
           <div
             className="position-fixed top-0 start-0 min-vh-100"
             style={{
@@ -191,6 +211,7 @@ const AuthLayout = () => {
             <Sidebar
               collapsed={collapsed}
               toggleSidebar={toggleSidebar}
+              fixedRoutes={fixedRoutes}
               routes={filteredRoutes
                 .filter(({ showInNav }) => showInNav)
                 .map(({ view, ...rest }) => ({ ...rest }))}
@@ -201,11 +222,12 @@ const AuthLayout = () => {
         <div
           className="flex-grow-1"
           style={{
-            marginRight: showSidebar ? (collapsed ? "80px" : "250px") : "0px",
+            marginRight:
+              showSidebar && isPc ? (collapsed ? "80px" : "250px") : "0px",
             transition: "margin-right 0.3s",
           }}
         >
-          {showSidebar && <DashboardNavbar />}
+          {showSidebar && isPc && <DashboardNavbar />}
 
           <div className="p-0 px-2 px-md-5 w-100">
             <Routes>

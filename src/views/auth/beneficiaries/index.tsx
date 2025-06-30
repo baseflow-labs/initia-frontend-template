@@ -2,8 +2,6 @@ import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import {
   faCalendarDays,
   faCircle,
-  faEdit,
-  faSearch,
   faTrash,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
@@ -288,16 +286,8 @@ const BeneficiariesView = () => {
     },
   ];
 
-  const completeProfile = (data: string) => {
-    navigate(`/apply/?id=${data}`);
-  };
-
   const viewProfile = (data: string) => {
-    navigate(`/beneficiary/profile/?id=${data}`);
-  };
-
-  const reviewProfile = (data: string) => {
-    navigate(`/beneficiary/review/?id=${data}`);
+    navigate(`/profile/?id=${data}`);
   };
 
   const scheduleVisit = (data: string) => {

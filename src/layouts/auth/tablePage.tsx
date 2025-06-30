@@ -143,7 +143,7 @@ const TablePage = ({
         </div>
       </div>
 
-      <div className="w-100 max-vw-100 overflow-x-auto">
+      <div className="col-12 order-4 order-lg-4">
         <DynamicTable
           columns={columns}
           data={data}
