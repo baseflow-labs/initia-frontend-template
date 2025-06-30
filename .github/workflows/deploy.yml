@@ -27,7 +27,7 @@ jobs:
         run: rm -rf build # or `dist`, depending on your app
 
       - name: ⚙️ Build the app
-        run: yarn build
+        run: DISABLE_ESLINT_PLUGIN=true yarn build
 
       - name: 📂 Sync files via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
