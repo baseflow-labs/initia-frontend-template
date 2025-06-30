@@ -12,38 +12,76 @@
 
 .bg-info {
   background-color: var(--bs-info) !important;
+  color: white !important;
 }
+
 .btn-info {
   background-color: var(--bs-info) !important;
+  color: white !important;
 }
+
+.btn-outline-info {
+  border-color: var(--bs-info) !important;
+  color: var(--bs-info) !important;
+}
+
+.btn-outline-info:hover {
+  background-color: var(--bs-info) !important;
+  color: white !important;
+}
+
 .alert-info {
   background-color: var(--bs-info) !important;
+  color: white !important;
 }
+
 .badge-info {
   background-color: var(--bs-info) !important;
+  color: white !important;
 }
+
 .text-info {
   color: var(--bs-info) !important;
 }
+
 .border-info {
   border-color: var(--bs-info) !important;
 }
 
 .bg-success {
   background-color: var(--bs-success) !important;
+  color: white !important;
 }
+
 .btn-success {
   background-color: var(--bs-success) !important;
+  color: white !important;
 }
+
+.btn-outline-success {
+  border-color: var(--bs-success) !important;
+  color: var(--bs-success) !important;
+}
+
+.btn-outline-success:hover {
+  background-color: var(--bs-success) !important;
+  color: white !important;
+}
+
 .alert-success {
   background-color: var(--bs-success) !important;
+  color: white !important;
 }
+
 .badge-success {
   background-color: var(--bs-success) !important;
+  color: white !important;
 }
+
 .text-success {
   color: var(--bs-success) !important;
 }
+
 .border-success {
   border-color: var(--bs-success) !important;
 }
