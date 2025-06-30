@@ -15,13 +15,13 @@ import { useNavigate } from "react-router";
 import { GetDataProps } from "../../../api";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import TablePage from "../../../layouts/auth/tablePage";
+import { logout } from "../../../store/actions/auth";
 import { addNotification } from "../../../store/actions/notifications";
 import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
-import { logout } from "../../../store/actions/auth";
 
 const ApplicantsView = () => {
   const { t } = useTranslation();
@@ -298,10 +298,6 @@ const ApplicantsView = () => {
 
   const reviewProfile = (data: string) => {
     navigate(`/review/?id=${data}`);
-  };
-
-  const scheduleVisit = (data: string) => {
-    navigate(`/visitSchedule/?id=${data}`);
   };
 
   const actionButtons = [

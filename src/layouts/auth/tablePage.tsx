@@ -144,14 +144,12 @@ const TablePage = ({
       </div>
 
       <div className="col-12 order-4 order-lg-4">
-        <div className="overflow-x-auto" style={{ maxWidth: "100vw" }}>
-          <DynamicTable
-            columns={columns}
-            data={data}
-            onPageChange={onPageChange}
-            actions={tableActions}
-          />
-        </div>
+        <DynamicTable
+          columns={columns}
+          data={data}
+          onPageChange={onPageChange}
+          actions={tableActions}
+        />
       </div>
     </Fragment>
   );
