@@ -184,38 +184,6 @@ const MembershipRegistrationView = () => {
       required: true,
     },
     {
-      type: "select",
-      name: "category",
-      options: [
-        {
-          value: "A",
-          label: t("Auth.MembershipRegistration.Form.Category.A"),
-        },
-        {
-          value: "B",
-          label: t("Auth.MembershipRegistration.Form.Category.B"),
-        },
-        {
-          value: "C",
-          label: t("Auth.MembershipRegistration.Form.Category.C"),
-        },
-        {
-          value: "D",
-          label: t("Auth.MembershipRegistration.Form.Category.D"),
-        },
-        {
-          value: "Uncategorized",
-          label: t("Auth.MembershipRegistration.Form.Category.Uncategorized"),
-        },
-        {
-          value: "Above Grading",
-          label: t("Auth.MembershipRegistration.Form.Category.AboveGrading"),
-        },
-      ],
-      label: t("Auth.MembershipRegistration.Form.Category.Title"),
-      required: true,
-    },
-    {
       type: "file",
       name: "familyRecordPhoto",
       label: t("Auth.MembershipRegistration.Form.FamilyRecordPhoto"),
@@ -1083,15 +1051,13 @@ const MembershipRegistrationView = () => {
   ];
 
   return (
-    <Fragment>
-      <div className="px-1 mx-1 px-lg-5 mx-lg-5">
-        <WizardFormStepper
-          steps={formSteps}
-          currentStep={currentStep}
-          setCurrentStep={setCurrentStep}
-        />
-      </div>
-    </Fragment>
+    <div className="container-fluid px-0 mx-0 px-md-5">
+      <WizardFormStepper
+        steps={formSteps}
+        currentStep={currentStep}
+        setCurrentStep={setCurrentStep}
+      />
+    </div>
   );
 };
 

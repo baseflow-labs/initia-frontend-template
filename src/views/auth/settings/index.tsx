@@ -154,7 +154,10 @@ const SettingsPage = () => {
   };
 
   return (
-    <div className="border border-3 border-dark rounded-5 mx-auto w-50 p-5">
+    <div
+      className="border border-2 border-dark rounded-5 mx-auto p-5"
+      style={{ maxWidth: "750px" }}
+    >
       <h3 className="mb-5">{t("Auth.Settings.Title")}</h3>
 
       <Form
