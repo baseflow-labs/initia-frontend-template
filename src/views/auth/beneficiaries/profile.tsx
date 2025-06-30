@@ -1031,61 +1031,69 @@ const BeneficiaryProfileView = () => {
   ];
 
   return (
-    <ColumnsPage>
-      <Fragment>
+    <div className="row w-100 mx-auto">
+      <div className="col-12">
         <h2>{beneficiary?.fullName || beneficiary?.beneficiary?.fullName}</h2>
+      </div>
+      {cards?.map(({ title, data, map }, i) => (
+        <div className="col-md-6 my-5" key={i}>
+          <h4 className="mb-4">{title}</h4>
 
-        {cards?.map(({ title, data, map }, i) => (
-          <div className="col-md-6 my-5" key={i}>
-            <h4 className="mb-4">{title}</h4>
+          <div className="card h-100 rounded-4">
+            <div className="card-body">
+              <table className="table table-borderless">
+                <tbody>
+                  {data &&
+                    map
+                      // .reduce(
+                      //   (
+                      //     final: {
+                      //       prop1: InputSingleProps;
+                      //       prop2?: InputSingleProps;
+                      //     }[],
+                      //     current,
+                      //     i
+                      //   ) => {
+                      //     if (i % 2 === 0) {
+                      //       final.push({
+                      //         prop1: current,
+                      //         prop2: map[i + 1] || null,
+                      //       });
+                      //     }
 
-            <div className="card h-100 rounded-4">
-              <div className="card-body">
-                <table className="table table-borderless">
-                  <tbody>
-                    {data &&
-                      map
-                        // .reduce(
-                        //   (
-                        //     final: {
-                        //       prop1: InputSingleProps;
-                        //       prop2?: InputSingleProps;
-                        //     }[],
-                        //     current,
-                        //     i
-                        //   ) => {
-                        //     if (i % 2 === 0) {
-                        //       final.push({
-                        //         prop1: current,
-                        //         prop2: map[i + 1] || null,
-                        //       });
-                        //     }
+                      //     return final;
+                      //   },
+                      //   []
+                      // )
+                      ?.map((prop: InputSingleProps, y = 0) => (
+                        <tr key={y}>
+                          <td
+                            className="pb-3 text-break"
+                            style={{
+                              whiteSpace: "normal",
+                              wordBreak: "break-word",
+                              maxWidth: "200px",
+                            }}
+                          >
+                            {prop.label}
+                          </td>
 
-                        //     return final;
-                        //   },
-                        //   []
-                        // )
-                        ?.map((prop: InputSingleProps, y = 0) => (
-                          <tr key={y}>
-                            <td className="pb-3">{prop.label}</td>
-
-                            <td className="pb-3">
-                              {dataRender({
-                                data: (data as any)[prop.name || "id"],
-                                type: prop.type,
-                                options: prop.options || [],
-                              })}
-                            </td>
-                          </tr>
-                        ))}
-                  </tbody>
-                </table>
-              </div>
+                          <td className="pb-3">
+                            {dataRender({
+                              data: (data as any)[prop.name || "id"],
+                              type: prop.type,
+                              options: prop.options || [],
+                            })}
+                          </td>
+                        </tr>
+                      ))}
+                </tbody>
+              </table>
             </div>
           </div>
-        ))}
-      </Fragment>
-    </ColumnsPage>
+        </div>
+      ))}
+    </div>
   );
 };
 

@@ -169,7 +169,7 @@ const BeneficiaryFormReview = () => {
         ? beneficiary?.[beneficiaryMapping[tab]]
         : beneficiary;
 
-      if (tab === "dependentsDataInputs") {
+      if (tab === "dependents") {
         if (!dependent) {
           setDependent(beneficiaryData[0].id);
         }
@@ -241,7 +241,7 @@ const BeneficiaryFormReview = () => {
         setActiveTab={setTab}
       />
 
-      {tab === "dependentsDataInputs" && (
+      {tab === "dependents" && (
         <TabsHeader
           tabs={dependentTabs}
           activeTab={dependent}
