@@ -1,27 +1,29 @@
-import {
-  faBezierCurve,
-  faBoxOpen,
-  faEdit,
-  faGear,
-  faHome,
-  faInfoCircle,
-  faUser,
-  faUsers,
-} from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes, useLocation } from "react-router";
 import { Fragment } from "react/jsx-runtime";
 
+import {
+  aidsIcon,
+  beneficiariesIcon,
+  contactIcon,
+  dashboardIcon,
+  infoIcon,
+  membershipFormIcon,
+  profileIcon,
+  settingsIcon,
+  visitReportIcon,
+  visitsIcon,
+} from "../../assets/icons/icons";
 import { useAppSelector } from "../../store/hooks";
 import { useWindowWidth } from "../../utils/hooks";
 import AidsView from "../../views/auth/aids";
 import AidsBeneficiaryView from "../../views/auth/aids/request";
 import ApplicantsView from "../../views/auth/applicants";
+import BeneficiaryFormReview from "../../views/auth/applicants/review";
 import BeneficiariesView from "../../views/auth/beneficiaries";
 import BeneficiaryOwnProfile from "../../views/auth/beneficiaries/beneficiaryProfile";
 import BeneficiaryProfileView from "../../views/auth/beneficiaries/profile";
-import BeneficiaryFormReview from "../../views/auth/applicants/review";
 import ContactUsPage from "../../views/auth/contact-us";
 import DashboardView from "../../views/auth/dashboard";
 import MembershipRegistrationView from "../../views/auth/membershipRegistration";
@@ -51,7 +53,7 @@ const AuthLayout = () => {
       route: "/apply",
       showInNav: user.role === "beneficiary",
       view: <MembershipRegistrationView />,
-      icon: faEdit,
+      icon: membershipFormIcon,
       users: ["beneficiary", "researcher", "admin"],
     },
     {
@@ -59,7 +61,7 @@ const AuthLayout = () => {
       route: "/dashboard",
       view: <DashboardView />,
       showInNav: true,
-      icon: faHome,
+      icon: dashboardIcon,
       users: ["beneficiary", "researcher", "admin"],
     },
     {
@@ -67,7 +69,7 @@ const AuthLayout = () => {
       route: "/applicants",
       view: <ApplicantsView />,
       showInNav: true,
-      icon: faUsers,
+      icon: beneficiariesIcon,
       users: ["researcher", "admin"],
     },
     {
@@ -75,21 +77,21 @@ const AuthLayout = () => {
       route: "/beneficiary",
       view: <BeneficiariesView />,
       showInNav: true,
-      icon: faUsers,
+      icon: beneficiariesIcon,
       users: ["researcher", "admin"],
     },
     {
       name: t("Auth.Beneficiaries.Profile.Title"),
       route: "/review/",
       view: <BeneficiaryFormReview />,
-      icon: faUsers,
+      icon: beneficiariesIcon,
       users: ["researcher", "admin"],
     },
     {
       name: t("Auth.Beneficiaries.Profile.Title"),
       route: "/profile/",
       view: <BeneficiaryProfileView />,
-      icon: faUsers,
+      icon: beneficiariesIcon,
       users: ["researcher", "admin"],
     },
     {
@@ -97,14 +99,14 @@ const AuthLayout = () => {
       route: "/visitSchedule",
       view: <VisitsView />,
       showInNav: true,
-      icon: faBezierCurve,
+      icon: visitsIcon,
       users: ["researcher", "admin"],
     },
     {
       name: t("Auth.Visits.Detail.title"),
       route: "/visitSchedule/detail",
       view: <VisitDetailView />,
-      icon: faEdit,
+      icon: visitsIcon,
       users: ["researcher", "admin"],
     },
     {
@@ -112,7 +114,7 @@ const AuthLayout = () => {
       route: "/beneficiary/visitSchedule",
       view: <BeneficiariesVisitsView />,
       showInNav: true,
-      icon: faBezierCurve,
+      icon: visitsIcon,
       users: ["beneficiary"],
     },
     {
@@ -120,14 +122,14 @@ const AuthLayout = () => {
       route: "/visitSchedule/report",
       view: <VisitReportsView />,
       showInNav: false,
-      icon: faBezierCurve,
+      icon: visitsIcon,
       users: ["researcher", "admin"],
     },
     {
       name: t("Auth.Visits.Detail.title"),
       route: "/visitSchedule/report/details",
       view: <VisitDetailView />,
-      icon: faEdit,
+      icon: visitReportIcon,
       users: ["researcher", "admin"],
     },
     {
@@ -135,7 +137,7 @@ const AuthLayout = () => {
       route: "/aid",
       view: <AidsView />,
       showInNav: true,
-      icon: faBoxOpen,
+      icon: aidsIcon,
       users: ["researcher", "admin"],
     },
     {
@@ -143,7 +145,7 @@ const AuthLayout = () => {
       route: "/beneficiary/aid",
       view: <AidsBeneficiaryView />,
       showInNav: true,
-      icon: faBoxOpen,
+      icon: aidsIcon,
       users: ["beneficiary"],
     },
     {
@@ -151,21 +153,21 @@ const AuthLayout = () => {
       route: "/profile",
       view: <BeneficiaryOwnProfile />,
       showInNav: true,
-      icon: faUser,
+      icon: profileIcon,
       users: ["beneficiary"],
     },
     {
       name: t("Auth.ContactUs.Title"),
       route: "/contact-us",
       view: <ContactUsPage />,
-      icon: faInfoCircle,
+      icon: infoIcon,
       users: ["beneficiary", "admin"],
     },
     {
       name: t("Auth.Settings.Title"),
       route: "/settings",
       view: <SettingsPage />,
-      icon: faGear,
+      icon: settingsIcon,
       users: ["beneficiary", "researcher", "admin"],
     },
   ];
@@ -174,9 +176,9 @@ const AuthLayout = () => {
     {
       name: t("Auth.ContactUs.Title"),
       route: "/contact-us",
-      icon: faInfoCircle,
+      icon: contactIcon,
     },
-    { name: t("Auth.Settings.Title"), route: "/settings", icon: faGear },
+    { name: t("Auth.Settings.Title"), route: "/settings", icon: settingsIcon },
   ];
 
   const showSidebar = !location.pathname.includes("apply");

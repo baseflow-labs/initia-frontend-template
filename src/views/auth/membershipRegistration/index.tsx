@@ -13,6 +13,8 @@ import * as ContactApi from "../../../api/profile/contact";
 import * as HousingApi from "../../../api/profile/housing";
 import * as IncomeApi from "../../../api/profile/income";
 import * as NationalRecordApi from "../../../api/profile/nationalRecord";
+import { helpIcon, successIcon } from "../../../assets/icons/icons";
+import IconWrapperComp from "../../../assets/icons/wrapper";
 import absherLogo from "../../../assets/images/partners/absher.svg";
 import eduMinistryLogo from "../../../assets/images/partners/eduMinistry.svg";
 import ejarLogo from "../../../assets/images/partners/ejar.svg";
@@ -852,7 +854,7 @@ const MembershipRegistrationView = () => {
           disabled={alreadyRequested}
           onClick={() => onRequestHelp()}
         >
-          <FontAwesomeIcon icon={faInfoCircle} />{" "}
+          <IconWrapperComp icon={helpIcon} />{" "}
           {alreadyRequested
             ? t("Auth.MembershipRegistration.Form.AlreadyRequested")
             : t("Auth.MembershipRegistration.Form.ClickForHelp")}
@@ -1033,7 +1035,7 @@ const MembershipRegistrationView = () => {
       contents: (
         <div className="text-center">
           <h2 className="display-4">
-            <FontAwesomeIcon icon={faCheckCircle} className="text-success" />
+            <IconWrapperComp icon={successIcon} className="text-success" />
             <br />
             {t("Auth.MembershipRegistration.Form.Success.Title")}
           </h2>

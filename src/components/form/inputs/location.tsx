@@ -1,10 +1,11 @@
-import { faLocationPin } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useField } from "formik";
 import React, { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
+
 import { InputProps } from "..";
+import { locationIcon } from "../../../assets/icons/icons";
+import IconWrapperComp from "../../../assets/icons/wrapper";
 import { commonInputClasses } from "../../../utils/consts";
-import { useField } from "formik";
 
 type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 
@@ -64,7 +65,7 @@ const LocationInput: React.FC<FinalInput> = ({ name, ...input }) => {
         role="button"
         onClick={handleGetLocation}
       >
-        <FontAwesomeIcon icon={faLocationPin} />
+        <IconWrapperComp icon={locationIcon} />
       </span>
 
       {location?.lng && (

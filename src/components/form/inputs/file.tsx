@@ -1,9 +1,10 @@
-import { faUpload, faXmark } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useField } from "formik";
 import React, { Fragment, useRef } from "react";
 import { useTranslation } from "react-i18next";
+
 import { InputProps } from "..";
+import { attachmentIcon, deleteIcon } from "../../../assets/icons/icons";
+import IconWrapperComp from "../../../assets/icons/wrapper";
 
 interface FileUploadProps {
   accept?: string;
@@ -48,7 +49,7 @@ const FileInput: React.FC<FinalInput> = ({ name, accept, ...rest }) => {
       }}
       onClick={handleRemoveFile}
     >
-      <FontAwesomeIcon icon={faXmark} />
+      <IconWrapperComp icon={deleteIcon} />
     </div>
   );
 
@@ -70,7 +71,7 @@ const FileInput: React.FC<FinalInput> = ({ name, accept, ...rest }) => {
         onClick={handleClick}
       >
         {t("Global.Form.Labels.UploadAttachment")}{" "}
-        <FontAwesomeIcon icon={faUpload} />
+        <IconWrapperComp icon={attachmentIcon} />
       </button>
 
       <div

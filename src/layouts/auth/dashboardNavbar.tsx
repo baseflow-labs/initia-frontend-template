@@ -1,9 +1,3 @@
-import {
-  faBell,
-  faInfoCircle,
-  faSearch,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
 import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -11,11 +5,17 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
 import * as NotificationApi from "../../api/notifications";
+import {
+  helpIcon,
+  notificationsIcon,
+  searchIcon,
+} from "../../assets/icons/icons";
+import IconWrapperComp from "../../assets/icons/wrapper";
 import profilePhotoPlaceholder from "../../assets/images/profile-image-placeholder.png";
+import DropdownComp from "../../components/dropdown";
 import { logout } from "../../store/actions/auth";
 import { useAppSelector } from "../../store/hooks";
 import { apiCatchGlobalHandler } from "../../utils/function";
-import DropdownComp from "../../components/dropdown";
 
 export interface Notification {
   title: string;
@@ -55,7 +55,7 @@ const DashboardNavbar = () => {
             />
 
             <span className="input-group-text bg-transparent">
-              <FontAwesomeIcon icon={faSearch} />
+              <IconWrapperComp icon={searchIcon} />
             </span>
           </div>
         </form>
@@ -64,7 +64,10 @@ const DashboardNavbar = () => {
           <div className="d-flex align-items-end gap-3 pe-5 float-end">
             <DropdownComp
               button={
-                <FontAwesomeIcon icon={faBell} className="text-secondary" />
+                <IconWrapperComp
+                  icon={notificationsIcon}
+                  className="text-secondary"
+                />
               }
               list={
                 notifications.length
@@ -75,7 +78,7 @@ const DashboardNavbar = () => {
                           <div className="row">
                             <div className="col-md-2 my-auto text-warning">
                               <h3>
-                                <FontAwesomeIcon icon={faInfoCircle} />
+                                <IconWrapperComp icon={helpIcon} />
                               </h3>
                             </div>
 

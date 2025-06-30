@@ -1,9 +1,3 @@
-import {
-  faBars,
-  faBell,
-  faInfoCircle,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
 import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -11,7 +5,12 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
 import * as NotificationApi from "../../api/notifications";
-import Logo from "../../assets/images/brand/logo-full.png";
+import {
+  helpIcon,
+  menuBarsIcon,
+  notificationsIcon,
+} from "../../assets/icons/icons";
+import IconWrapperComp from "../../assets/icons/wrapper";
 import profilePhotoPlaceholder from "../../assets/images/profile-image-placeholder.png";
 import DropdownComp from "../../components/dropdown";
 import { logout } from "../../store/actions/auth";
@@ -50,7 +49,7 @@ const Navbar = () => {
             data-bs-target="#offcanvasNav"
             aria-controls="offcanvasNav"
           >
-            <FontAwesomeIcon icon={faBars} />
+            <IconWrapperComp icon={menuBarsIcon} />
           </button>
         </div>
 
@@ -81,7 +80,10 @@ const Navbar = () => {
         <div className="d-flex align-items-center gap-3">
           <DropdownComp
             button={
-              <FontAwesomeIcon icon={faBell} className="text-secondary" />
+              <IconWrapperComp
+                icon={notificationsIcon}
+                className="text-secondary"
+              />
             }
             list={
               notifications.length
@@ -92,7 +94,7 @@ const Navbar = () => {
                         <div className="row">
                           <div className="col-md-2 my-auto text-warning">
                             <h3>
-                              <FontAwesomeIcon icon={faInfoCircle} />
+                              <IconWrapperComp icon={helpIcon} />
                             </h3>
                           </div>
 

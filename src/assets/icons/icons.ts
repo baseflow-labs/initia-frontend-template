@@ -2,6 +2,8 @@ import aidsIcon from "./aids.svg";
 import archiveIcon from "./archive.svg";
 import attachmentIcon from "./attachment.svg";
 import beneficiariesIcon from "./beneficiaries.svg";
+import contactIcon from "./contact.svg";
+import contactUsIcon from "./contactUs.svg";
 import dashboardIcon from "./dashboard.svg";
 import dateIcon from "./date.svg";
 import deleteIcon from "./delete.svg";
@@ -35,12 +37,14 @@ import visitReportIcon from "./visitReport.svg";
 import visitsIcon from "./visits.svg";
 
 export {
+  contactIcon,
   searchIcon,
   visitsIcon,
   viewIcon,
   visitReportIcon,
   aidsIcon,
   archiveIcon,
+  contactUsIcon,
   attachmentIcon,
   beneficiariesIcon,
   menuBarsIcon,

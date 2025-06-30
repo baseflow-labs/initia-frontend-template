@@ -11,12 +11,16 @@ import { useDispatch } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router";
 
 import * as VisitReportsApi from "../../../api/visits/reports";
+import { deleteIcon, furnitureIcon } from "../../../assets/icons/icons";
+import IconWrapperComp from "../../../assets/icons/wrapper";
 import CollapseGroup from "../../../components/collapse";
 import Button from "../../../components/core/button";
 import { LabelView } from "../../../components/form";
 import DefaultInput from "../../../components/form/inputs/default";
 import RadioInput from "../../../components/form/inputs/radio";
 import SelectInput from "../../../components/form/inputs/select";
+import SelectAddInput from "../../../components/form/inputs/selectAdd";
+import StarsInput from "../../../components/form/inputs/stars";
 import TextareaInput from "../../../components/form/inputs/textarea";
 import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
@@ -24,8 +28,6 @@ import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
 } from "../../../utils/function";
-import StarsInput from "../../../components/form/inputs/stars";
-import SelectAddInput from "../../../components/form/inputs/selectAdd";
 
 const getInitialContent = () => ({
   content: "",
@@ -189,7 +191,7 @@ const VisitReportsView = () => {
                   }))
                 }
               >
-                <FontAwesomeIcon icon={faCouch} />{" "}
+                <IconWrapperComp icon={furnitureIcon} />{" "}
                 {t("Auth.Visits.Report.AddContent")}
               </Button>
             </div>
@@ -251,8 +253,8 @@ const VisitReportsView = () => {
                         }))
                       }
                     >
-                      <FontAwesomeIcon
-                        icon={faTrash}
+                      <IconWrapperComp
+                        icon={deleteIcon}
                         className="text-danger pt-2"
                       />
                     </Button>
@@ -513,7 +515,10 @@ const VisitReportsView = () => {
                       }))
                     }
                   >
-                    <FontAwesomeIcon icon={faTrash} className="text-danger" />
+                    <IconWrapperComp
+                      icon={deleteIcon}
+                      className="text-danger"
+                    />
                   </Button>
                 </div>
               </div>
