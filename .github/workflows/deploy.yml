@@ -2,19 +2,37 @@ on:
   push:
     branches:
       - prod
-name: 🚀 Deploy systen on push
+
+name: 🚀 Deploy system on push
+
 jobs:
   web-deploy:
     name: 🎉 Deploy
     runs-on: ubuntu-latest
+
     steps:
       - name: 🚚 Get latest code
         uses: actions/checkout@v3
 
-      - name: 📂 Sync files
+      - name: 🧰 Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: 📦 Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: 🧹 Remove old build
+        run: rm -rf build # or `dist`, depending on your app
+
+      - name: ⚙️ Build the app
+        run: npm run build
+
+      - name: 📂 Sync files via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: mustaheq.org
           username: ${{ secrets.ftp_username }}
           password: ${{ secrets.ftp_password }}
           server-dir: /sawaed/
+          local-dir: build # or dist, whichever contains your output
