@@ -2,8 +2,8 @@ import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faFilter, faHistory } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Form as FormikForm, FormikProvider, useFormik } from "formik";
-
 import { Fragment } from "react/jsx-runtime";
+
 import ActionButtons from "../../components/button/actionButtons";
 import Button from "../../components/core/button";
 import SelectInput from "../../components/form/inputs/select";
@@ -143,14 +143,14 @@ const TablePage = ({
         </div>
       </div>
 
-      {/* <div className="w-100 max-vw-100 overflow-x-auto">
+      <div className="w-100 max-vw-100 overflow-x-auto">
         <DynamicTable
           columns={columns}
           data={data}
           onPageChange={onPageChange}
           actions={tableActions}
         />
-      </div> */}
+      </div>
     </Fragment>
   );
 };
