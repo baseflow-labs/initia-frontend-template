@@ -23,6 +23,7 @@
       "Title": "طلبات الإعانة"
     },
     "Beneficiaries": {
+      "AddBeneficiary": "إضافة مستفيد",
       "Applications": "طلبات الانتساب",
       "BeneficiaryName": "اسم المستفيد",
       "Profile": {
@@ -94,10 +95,10 @@
         "BeneficiaryMobile": "رقم جوال المستفيد",
         "Category": {
           "A": "فئة أ",
+          "AboveGrading": "مستوى دخل الفرد في الأسرة فوق مستويات التصنيف",
           "B": "فئة ب",
           "C": "فئة ج",
           "D": "فئة د",
-          "AboveGrading": "مستوى دخل الفرد في الأسرة فوق مستويات التصنيف",
           "Title": "تصنيف المستفيد",
           "Uncategorized": "غير مصنف"
         },

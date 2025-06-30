@@ -11,7 +11,7 @@ export type AuthAction =
       type: "login";
       resp: { jwt: string; refreshToken: string; user: UserProps };
     }
-  | { type: "logout" };
+  | { type: "logout"; resp?: string };
 
 const initialState: AuthState = {
   token: localStorage.getItem("token") || "null",
@@ -45,7 +45,7 @@ const auth = (
       localStorage.removeItem("refreshToken");
       localStorage.removeItem("user");
 
-      window.location.assign("/");
+      window.location.assign(action.resp || "/");
 
       return {
         token: null,

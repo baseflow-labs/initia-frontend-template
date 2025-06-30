@@ -1,4 +1,13 @@
-import { faBezierCurve, faBoxOpen, faEdit, faGear, faHome, faInfoCircle, faUser, faUsers } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBezierCurve,
+  faBoxOpen,
+  faEdit,
+  faGear,
+  faHome,
+  faInfoCircle,
+  faUser,
+  faUsers,
+} from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes, useLocation } from "react-router";
@@ -193,20 +202,18 @@ const AuthLayout = () => {
           className="flex-grow-1"
           style={{
             marginRight: showSidebar ? (collapsed ? "80px" : "250px") : "0px",
-            transition: "margin-left 0.3s",
+            transition: "margin-right 0.3s",
           }}
         >
           {showSidebar && <DashboardNavbar />}
 
-          <div className="py-5 px-3">
+          <div className="p-0 px-2 px-md-5 w-100">
             <Routes>
               {filteredRoutes.map(({ name, route, view }, i) => (
                 <Route path={route} element={view} key={i} />
               ))}
 
               <Route path="*" element={<Navigate to="/dashboard" replace />} />
-
-              {/* <Route path="*" element={<FourZeroFourError />} /> */}
             </Routes>
           </div>
 

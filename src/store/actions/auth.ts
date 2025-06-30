@@ -25,6 +25,7 @@ export const login = (resp: AuthResponse) => ({
   },
 });
 
-export const logout = () => ({
+export const logout = (resp?: string) => ({
   type: "logout" as const,
+  resp,
 });

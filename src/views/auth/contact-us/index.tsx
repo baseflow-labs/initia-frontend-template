@@ -9,7 +9,10 @@ const ContactUsPage = () => {
   const { phoneNumber } = useAppSelector((state) => state.settings);
 
   return (
-    <div className="border border-3 border-dark rounded-5 mx-auto w-50 py-5">
+    <div
+      className="border border-2 border-dark rounded-5 mx-auto p-5"
+      style={{ maxWidth: "750px" }}
+    >
       <div className="text-center">
         <h1 className="display-1">
           <FontAwesomeIcon icon={faLifeRing} />

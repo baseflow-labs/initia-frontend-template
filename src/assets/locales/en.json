@@ -23,6 +23,7 @@
       "Title": "Title"
     },
     "Beneficiaries": {
+      "AddBeneficiary": "Add Beneficiary",
       "Applications": "Membership Applications",
       "BeneficiaryName": "BeneficiaryName",
       "Profile": {
@@ -94,10 +95,10 @@
         "BeneficiaryMobile": "BeneficiaryMobile",
         "Category": {
           "A": "A",
+          "AboveGrading": "Above Grading",
           "B": "B",
           "C": "C",
           "D": "D",
-          "AboveGrading": "Above Grading",
           "Title": "Category",
           "Uncategorized": "Uncategorized"
         },
