@@ -1,5 +1,3 @@
-import { faCheckCircle, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FormikProps } from "formik";
 import moment from "moment";
 import { useLayoutEffect, useState } from "react";

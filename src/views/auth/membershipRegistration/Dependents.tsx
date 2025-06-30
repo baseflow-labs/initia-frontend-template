@@ -1,5 +1,3 @@
-import { faPerson, faTrash, faUser } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FormikProps } from "formik";
 import moment from "moment";
 import { useEffect, useState } from "react";

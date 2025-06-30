@@ -1,6 +1,4 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { faFilter, faHistory } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Form as FormikForm, FormikProvider, useFormik } from "formik";
 import { Fragment } from "react/jsx-runtime";
 

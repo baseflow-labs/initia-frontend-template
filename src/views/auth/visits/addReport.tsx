@@ -1,9 +1,4 @@
-import {
-  faCouch,
-  faDesktop,
-  faDoorOpen,
-  faTrash,
-} from "@fortawesome/free-solid-svg-icons";
+import { faDesktop, faDoorOpen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -218,7 +213,7 @@ const VisitReportsView = () => {
                 number: i + 1,
                 name: contentTypes
                   .find(({ value }) => value === content.type)
-                  ?.subList.find(({ value }) => value == content.content)
+                  ?.subList.find(({ value }) => value === content.content)
                   ?.label,
               }),
               content: (
