@@ -8,13 +8,13 @@ import {
 import React, { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 
+import { resetFilterIcon } from "../../assets/icons/icons";
+import IconWrapperComp from "../../assets/icons/wrapper";
 import { useAppSelector } from "../../store/hooks";
 import Button from "../core/button";
 import Spinner from "../core/spinner";
 import InputComp from "./Input";
 import DefaultInput from "./inputs/default";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHistory } from "@fortawesome/free-solid-svg-icons";
 
 interface InputBasicProps {
   name: string;
@@ -290,8 +290,8 @@ const Form: React.FC<Props> = ({
                         <InlineElement
                           flip
                           content={
-                            <FontAwesomeIcon
-                              icon={faHistory}
+                            <IconWrapperComp
+                              icon={resetFilterIcon}
                               role="button"
                               onClick={() =>
                                 formik.setFieldValue(

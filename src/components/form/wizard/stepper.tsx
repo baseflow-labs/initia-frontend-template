@@ -51,7 +51,7 @@ const WizardFormStepper = ({ steps, currentStep, setCurrentStep }: Props) => {
                       )}
                     </span>
 
-                    <span className={`bs-stepper-label d-none d-md-block`}>
+                    <span className={`bs-stepper-label d-none d-lg-block`}>
                       {label}
                     </span>
                   </button>
@@ -69,7 +69,7 @@ const WizardFormStepper = ({ steps, currentStep, setCurrentStep }: Props) => {
         </div>
       )}
 
-      <span className="d-block d-md-none text-info text-center mt-4">
+      <span className="d-block d-lg-none text-info text-center mt-4">
         {steps[currentStep]?.label}
       </span>
 

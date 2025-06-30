@@ -1,21 +1,21 @@
-import {
-  faBell,
-  faInfoCircle,
-  faSearch,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
 import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router";
 
 import * as NotificationApi from "../../api/notifications";
+import {
+  helpIcon,
+  menuBarsIcon,
+  notificationsIcon,
+  searchIcon,
+} from "../../assets/icons/icons";
+import IconWrapperComp from "../../assets/icons/wrapper";
 import profilePhotoPlaceholder from "../../assets/images/profile-image-placeholder.png";
+import DropdownComp from "../../components/dropdown";
 import { logout } from "../../store/actions/auth";
 import { useAppSelector } from "../../store/hooks";
 import { apiCatchGlobalHandler } from "../../utils/function";
-import DropdownComp from "../../components/dropdown";
 
 export interface Notification {
   title: string;
@@ -26,7 +26,6 @@ export interface Notification {
 
 const DashboardNavbar = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { t } = useTranslation();
   const { logo } = useAppSelector((state) => state.settings);
   const [notifications, setNotification] = useState<Notification[]>([]);
@@ -46,7 +45,19 @@ const DashboardNavbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white py-4 mt-2 me-4 ms-0 ps-0">
       <div className="row w-100 justify-content-between">
-        <form className="col-md-6 order-2 order-md-1">
+        <div className="col-6 col-lg-1 d-block d-lg-none order-1 order-lg-3">
+          <button
+            className="btn btn-ghost"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasNav"
+            aria-controls="offcanvasNav"
+          >
+            <IconWrapperComp icon={menuBarsIcon} />
+          </button>
+        </div>
+
+        <form className="col-12 col-lg-6 order-3 order-lg-1">
           <div className="input-group w-100 ms-3">
             <input
               className="form-control"
@@ -54,17 +65,20 @@ const DashboardNavbar = () => {
               placeholder={t("Global.Labels.Search")}
             />
 
-            <span className="input-group-text bg-transparent">
-              <FontAwesomeIcon icon={faSearch} />
+            <span className="input-group-text bg-info">
+              <IconWrapperComp icon={searchIcon} />
             </span>
           </div>
         </form>
 
-        <div className="col-md-1 pb-3 order-1 order-md-2">
+        <div className="col-6 col-lg-1 pb-3 order-2 order-lg-2">
           <div className="d-flex align-items-end gap-3 pe-5 float-end">
             <DropdownComp
               button={
-                <FontAwesomeIcon icon={faBell} className="text-secondary" />
+                <IconWrapperComp
+                  icon={notificationsIcon}
+                  className="text-secondary"
+                />
               }
               list={
                 notifications.length
@@ -73,13 +87,13 @@ const DashboardNavbar = () => {
                         route: "/" + service,
                         label: (
                           <div className="row">
-                            <div className="col-md-2 my-auto text-warning">
+                            <div className="col-lg-2 my-auto text-warning">
                               <h3>
-                                <FontAwesomeIcon icon={faInfoCircle} />
+                                <IconWrapperComp icon={helpIcon} />
                               </h3>
                             </div>
 
-                            <div className="col-md-10 ps-4">
+                            <div className="col-lg-10 ps-4">
                               <h6>{message}</h6>
                               <small>{moment(createdAt).fromNow()}</small>
                             </div>

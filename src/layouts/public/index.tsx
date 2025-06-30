@@ -56,9 +56,9 @@ const AuthLayout = () => {
 
   return (
     <main className="overflow-x-hidden">
-      <div className="min-vh-100 vw-100 d-flex justify-content-center align-items-center public-bg-image px-3 px-md-4 py-3">
+      <div className="min-vh-100 vw-100 d-flex justify-content-center align-items-center public-bg-image px-3 px-lg-4 py-3">
         <div
-          className="card py-4 px-2 px-md-4 rounded-5"
+          className="card py-4 px-2 px-lg-4 rounded-5"
           style={
             location.pathname === "/terms-conditions"
               ? { height: "100vh", width: "100%" }
@@ -88,7 +88,7 @@ const AuthLayout = () => {
                           style: {
                             backgroundColor: "rgba(24,180,191,0.15)",
                           },
-                          className: "text-info",
+                          className: "text-white",
                         }
                       : {
                           color: "ghost",

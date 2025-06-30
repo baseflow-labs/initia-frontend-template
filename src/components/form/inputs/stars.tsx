@@ -1,7 +1,8 @@
-import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Fragment } from "react";
+
 import { InputProps } from "..";
+import { mutedStarIcon, pickedStarIcon } from "../../../assets/icons/icons";
+import IconWrapperComp from "../../../assets/icons/wrapper";
 
 type FinalInput = InputProps &
   React.InputHTMLAttributes<HTMLInputElement> & {
@@ -17,14 +18,13 @@ const StarsInput: React.FC<FinalInput> = ({ type, options, ...input }) => {
           .fill("")
           .map((_, i) => (
             <h2 key={i}>
-              <FontAwesomeIcon
-                icon={faStar}
-                onClick={() => input.onChange && input.onChange(i + 1)}
-                className={
+              <IconWrapperComp
+                icon={
                   input.value && input.value > i
-                    ? "text-warning"
-                    : "text-secondary"
+                    ? pickedStarIcon
+                    : mutedStarIcon
                 }
+                onClick={() => input.onChange && input.onChange(i + 1)}
               />
             </h2>
           ))}

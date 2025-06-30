@@ -1,9 +1,10 @@
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FieldArray, useField, useFormikContext } from "formik";
 import React, { Fragment } from "react";
 import { useTranslation } from "react-i18next";
+
 import Form, { InputProps } from "..";
+import { deleteIcon } from "../../../assets/icons/icons";
+import IconWrapperComp from "../../../assets/icons/wrapper";
 import Button from "../../core/button";
 
 type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
@@ -50,7 +51,7 @@ const MultipleEntriesInput: React.FC<FinalInput> = (input) => {
                       type="button"
                       onClick={() => remove(i)}
                     >
-                      <FontAwesomeIcon icon={faTrash} />
+                      <IconWrapperComp icon={deleteIcon} />
                     </Button>
                   </div>
                 </h2>

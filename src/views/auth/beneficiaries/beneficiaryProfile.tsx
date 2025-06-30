@@ -1092,11 +1092,11 @@ const BeneficiaryOwnProfile = () => {
   return (
     <ColumnsPage>
       <Fragment>
-        <div className="col-md-12 mb-4">
+        <div className="col-lg-12 mb-4">
           <h3>{t("Auth.Beneficiary.Profile.Title")}</h3>
         </div>
 
-        <div className="col-md-12 mb-4 row">
+        <div className="col-lg-12 mb-4 row">
           <h5 className="mb-4">
             {dataReviews?.length
               ? t("Auth.Beneficiary.Profile.PleaseUpdateFollowingData")
@@ -1115,7 +1115,7 @@ const BeneficiaryOwnProfile = () => {
             const currentData = requestTable?.data[property];
 
             return (
-              <div className="col-md-6" key={i}>
+              <div className="col-lg-6" key={i}>
                 <div className="card h-100 rounded-4">
                   <div className="card-body p-5">
                     {requestProperty && (
@@ -1142,12 +1142,12 @@ const BeneficiaryOwnProfile = () => {
           })}
         </div>
 
-        {/* <div className="col-md-12 mt-5">
+        {/* <div className="col-lg-12 mt-5">
           <h5>{t("Auth.Beneficiary.Profile.CurrentData")}</h5>
         </div>
 
         {cards.map(({ title, data, map }, i) => (
-          <div className="col-md-6 my-5" key={i}>
+          <div className="col-lg-6 my-5" key={i}>
             <h4 className="my-4">{title}</h4>
 
             <div className="card h-100 rounded-4">

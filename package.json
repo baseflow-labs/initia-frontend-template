@@ -17,6 +17,8 @@
     "@types/node": "^16.7.13",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "ajv": "8",
+    "ajv-keywords": "5",
     "axios": "^1.9.0",
     "bootstrap": "^5.3.6",
     "dotenv-cli": "^8.0.0",

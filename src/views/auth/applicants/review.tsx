@@ -224,11 +224,11 @@ const BeneficiaryFormReview = () => {
   return (
     <Fragment>
       <div className="row justify-content-between">
-        <div className="col-6 col-md-9">
+        <div className="col-6 col-lg-9">
           <h2 className="text-dark fs-5 fw-semibold m-0 px-3 py-2">{title}</h2>
         </div>
 
-        <div className="col-6 col-md-3">
+        <div className="col-6 col-lg-3">
           <Button className="float-end" onClick={() => onSubmit()}>
             {t("Global.Form.Labels.SaveData")}
           </Button>

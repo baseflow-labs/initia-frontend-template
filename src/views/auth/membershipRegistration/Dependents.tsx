@@ -1,5 +1,3 @@
-import { faPerson, faTrash, faUser } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FormikProps } from "formik";
 import moment from "moment";
 import { useEffect, useState } from "react";
@@ -8,6 +6,12 @@ import { useDispatch } from "react-redux";
 import { Fragment } from "react/jsx-runtime";
 
 import * as DependentApi from "../../../api/profile/dependent";
+import {
+  deleteIcon,
+  dependantIcon,
+  dependantWhiteIcon,
+} from "../../../assets/icons/icons";
+import IconWrapperComp from "../../../assets/icons/wrapper";
 import Button from "../../../components/core/button";
 import Spinner from "../../../components/core/spinner";
 import Form from "../../../components/form";
@@ -306,7 +310,7 @@ const DependentsFormView = ({
                   );
                 }}
               >
-                <FontAwesomeIcon icon={faUser} className="me-2" />{" "}
+                <IconWrapperComp icon={dependantWhiteIcon} className="me-2" />{" "}
                 {dependent.fullName ||
                   t("Auth.MembershipRegistration.Form.Dependents.Dependant") +
                     " " +
@@ -321,7 +325,7 @@ const DependentsFormView = ({
                 className="border border-1 rounded-4 py-3 ms-2 px-3"
                 onClick={() => remove(i)}
               >
-                <FontAwesomeIcon icon={faTrash} />
+                <IconWrapperComp icon={deleteIcon} />
               </Button>
             </div>
           </h2>
@@ -398,7 +402,7 @@ const DependentsFormView = ({
         }}
       >
         {t("Auth.MembershipRegistration.Form.Dependents.AddNew")}{" "}
-        <FontAwesomeIcon icon={faPerson} />
+        <IconWrapperComp icon={dependantIcon} />
       </Button>
 
       {customButtons}

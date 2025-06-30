@@ -55,7 +55,7 @@ const ApplicantsView = () => {
     getData({});
   }, []);
 
-  const title = t("Auth.Beneficiaries.Title");
+  const title = t("Auth.Beneficiaries.Applications");
 
   const nationalities = [
     {
