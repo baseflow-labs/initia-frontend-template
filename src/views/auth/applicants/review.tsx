@@ -169,7 +169,7 @@ const BeneficiaryFormReview = () => {
         ? beneficiary?.[beneficiaryMapping[tab]]
         : beneficiary;
 
-      if (tab === "dependentsDataInputs") {
+      if (tab === "dependents") {
         if (!dependent) {
           setDependent(beneficiaryData[0].id);
         }
@@ -223,14 +223,12 @@ const BeneficiaryFormReview = () => {
 
   return (
     <Fragment>
-      <div className="row">
-        <div className="col-md-9">
-          <h2 className="text-dark fs-5 fw-semibold font-family-Cairo m-0 px-3 py-2">
-            {title}
-          </h2>
+      <div className="row justify-content-between">
+        <div className="col-6 col-md-9">
+          <h2 className="text-dark fs-5 fw-semibold m-0 px-3 py-2">{title}</h2>
         </div>
 
-        <div className="col-md-3">
+        <div className="col-6 col-md-3">
           <Button className="float-end" onClick={() => onSubmit()}>
             {t("Global.Form.Labels.SaveData")}
           </Button>
@@ -243,7 +241,7 @@ const BeneficiaryFormReview = () => {
         setActiveTab={setTab}
       />
 
-      {tab === "dependentsDataInputs" && (
+      {tab === "dependents" && (
         <TabsHeader
           tabs={dependentTabs}
           activeTab={dependent}

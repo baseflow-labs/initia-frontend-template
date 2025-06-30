@@ -1,3 +1,4 @@
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import {
   faChevronLeft,
   faChevronRight,
@@ -12,10 +13,14 @@ import { useLocation, useNavigate } from "react-router";
 
 import Logo from "../../assets/images/brand/logo-full.png";
 import LogoOnly from "../../assets/images/brand/logo-only.png";
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 interface Props {
   routes: {
+    name: string;
+    route: string;
+    icon: IconProp;
+  }[];
+  fixedRoutes: {
     name: string;
     route: string;
     icon: IconProp;
@@ -24,19 +29,10 @@ interface Props {
   toggleSidebar: () => void;
 }
 
-const Sidebar = ({ routes, collapsed, toggleSidebar }: Props) => {
+const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const location = useLocation();
-
-  const fixedRoutes = [
-    {
-      name: t("Auth.ContactUs.Title"),
-      route: "/contact-us",
-      icon: faInfoCircle,
-    },
-    { name: t("Auth.Settings.Title"), route: "/settings", icon: faGear },
-  ];
 
   return (
     <Fragment>
