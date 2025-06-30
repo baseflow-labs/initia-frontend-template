@@ -43,7 +43,7 @@ const AuthLayout = () => {
   const location = useLocation();
   const { user } = useAppSelector((state) => state.auth);
   const width = useWindowWidth();
-  const isPc = width > 768;
+  const isPc = width > 992;
 
   const [collapsed, setCollapsed] = useState(false);
 
@@ -231,7 +231,7 @@ const AuthLayout = () => {
         >
           {showSidebar && <DashboardNavbar />}
 
-          <div className="p-0 px-2 px-md-5 w-100">
+          <div className="p-0 px-2 px-lg-5 w-100">
             <Routes>
               {filteredRoutes.map(({ name, route, view }, i) => (
                 <Route path={route} element={view} key={i} />

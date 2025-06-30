@@ -176,7 +176,7 @@ const VisitReportsView = () => {
       {roomDetails.index >= 0 ? (
         <Fragment>
           <div className="row">
-            <div className="col-md-11">
+            <div className="col-lg-11">
               <Button
                 className="w-100 btn-lg my-3 mt-5"
                 onClick={() =>
@@ -191,7 +191,7 @@ const VisitReportsView = () => {
               </Button>
             </div>
 
-            <div className="col-md-1 pt-3 px-0">
+            <div className="col-lg-1 pt-3 px-0">
               <LabelView
                 name="roomsCount"
                 label={t("Auth.Visits.Report.ContentsCount")}
@@ -218,7 +218,7 @@ const VisitReportsView = () => {
               }),
               content: (
                 <div className="my-4 row" key={i}>
-                  <div className="col-md-10">
+                  <div className="col-lg-10">
                     <LabelView
                       name={`type-${i}`}
                       label={t("Auth.Visits.Report.ContentXType", {
@@ -237,7 +237,7 @@ const VisitReportsView = () => {
                       }
                     />
                   </div>
-                  <div className="col-md-2 pt-4">
+                  <div className="col-lg-2 pt-4">
                     <Button
                       color="white"
                       className="btn-lg border-dark w-100 mt-1"
@@ -254,7 +254,7 @@ const VisitReportsView = () => {
                       />
                     </Button>
                   </div>
-                  <div className="col-md-12 pt-3">
+                  <div className="col-lg-12 pt-3">
                     <LabelView
                       name={`content-${i}`}
                       label={t("Auth.Visits.Report.ContentType", {
@@ -277,7 +277,7 @@ const VisitReportsView = () => {
                       onChange={(e) => updateContentAtIndex(i, { content: e })}
                     />
                   </div>
-                  <div className="col-md-12 pt-3">
+                  <div className="col-lg-12 pt-3">
                     <LabelView
                       name={`photo-${i}`}
                       label={t("Auth.Visits.Report.RoomContentPhoto", {
@@ -298,7 +298,7 @@ const VisitReportsView = () => {
                       className="mb-4"
                     />
                   </div>
-                  <div className="col-md-12 pt-3">
+                  <div className="col-lg-12 pt-3">
                     <LabelView
                       name={`status-${i}`}
                       label={t("Auth.Visits.Report.RoomContentStatus", {
@@ -322,7 +322,7 @@ const VisitReportsView = () => {
                     />
                   </div>
 
-                  <div className="col-md-12 pt-3">
+                  <div className="col-lg-12 pt-3">
                     <LabelView
                       name={`evaluation-${i}`}
                       label={t("Auth.Visits.Report.RoomContentEvaluation", {
@@ -352,7 +352,7 @@ const VisitReportsView = () => {
             }))}
           />
 
-          <div className="col-md-12 pt-3">
+          <div className="col-lg-12 pt-3">
             <LabelView
               name="recommendation"
               label={t("Auth.Visits.Report.RoomRecommendations")}
@@ -371,7 +371,7 @@ const VisitReportsView = () => {
             />
           </div>
 
-          <div className="col-md-12 pt-3">
+          <div className="col-lg-12 pt-3">
             <LabelView name="note" label={t("Global.Form.Labels.Notes")} />
 
             <TextareaInput
@@ -412,7 +412,7 @@ const VisitReportsView = () => {
       ) : (
         <Fragment>
           <div className="row">
-            <div className="col-md-11">
+            <div className="col-lg-11">
               <Button
                 className="w-100 btn-lg my-3 mt-5"
                 onClick={() =>
@@ -435,7 +435,7 @@ const VisitReportsView = () => {
               </Button>
             </div>
 
-            <div className="col-md-1 pt-3 px-0">
+            <div className="col-lg-1 pt-3 px-0">
               <LabelView
                 name="roomsCount"
                 label={t("Auth.Visits.Report.RoomsCount")}
@@ -453,7 +453,7 @@ const VisitReportsView = () => {
 
           {data.rooms.map((room, i) => (
             <div className="my-4 row" key={i}>
-              <div className="col-md-6">
+              <div className="col-lg-6">
                 <LabelView
                   name="room"
                   label={t("Auth.Visits.Report.RoomXType", { number: i + 1 })}
@@ -480,7 +480,7 @@ const VisitReportsView = () => {
                 />
               </div>
 
-              <div className="col-md-5">
+              <div className="col-lg-5">
                 <LabelView
                   name="room"
                   label={t("Auth.Visits.Report.Contents")}
@@ -498,7 +498,7 @@ const VisitReportsView = () => {
                 </div>
               </div>
 
-              <div className="col-md-1 pt-4">
+              <div className="col-lg-1 pt-4">
                 <div className="mt-2">
                   <Button
                     color="white"

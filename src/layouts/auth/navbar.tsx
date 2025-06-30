@@ -41,7 +41,7 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white px-4 py-4">
       <div className="container-fluid">
-        <div className="my-auto d-block d-md-none">
+        <div className="my-auto d-block d-lg-none">
           <button
             className="btn btn-ghost"
             type="button"
@@ -92,13 +92,13 @@ const Navbar = () => {
                       route: "/" + service,
                       label: (
                         <div className="row">
-                          <div className="col-md-2 my-auto text-warning">
+                          <div className="col-lg-2 my-auto text-warning">
                             <h3>
                               <IconWrapperComp icon={helpIcon} />
                             </h3>
                           </div>
 
-                          <div className="col-md-10 ps-4">
+                          <div className="col-lg-10 ps-4">
                             <h6>{message}</h6>
                             <small>{moment(createdAt).fromNow()}</small>
                           </div>

@@ -45,7 +45,7 @@ const DashboardNavbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white py-4 mt-2 me-4 ms-0 ps-0">
       <div className="row w-100 justify-content-between">
-        <div className="col-6 col-md-1 d-block d-md-none order-1 order-md-3">
+        <div className="col-6 col-lg-1 d-block d-lg-none order-1 order-lg-3">
           <button
             className="btn btn-ghost"
             type="button"
@@ -57,7 +57,7 @@ const DashboardNavbar = () => {
           </button>
         </div>
 
-        <form className="col-12 col-md-6 order-3 order-md-1">
+        <form className="col-12 col-lg-6 order-3 order-lg-1">
           <div className="input-group w-100 ms-3">
             <input
               className="form-control"
@@ -71,7 +71,7 @@ const DashboardNavbar = () => {
           </div>
         </form>
 
-        <div className="col-6 col-md-1 pb-3 order-2 order-md-2">
+        <div className="col-6 col-lg-1 pb-3 order-2 order-lg-2">
           <div className="d-flex align-items-end gap-3 pe-5 float-end">
             <DropdownComp
               button={
@@ -87,13 +87,13 @@ const DashboardNavbar = () => {
                         route: "/" + service,
                         label: (
                           <div className="row">
-                            <div className="col-md-2 my-auto text-warning">
+                            <div className="col-lg-2 my-auto text-warning">
                               <h3>
                                 <IconWrapperComp icon={helpIcon} />
                               </h3>
                             </div>
 
-                            <div className="col-md-10 ps-4">
+                            <div className="col-lg-10 ps-4">
                               <h6>{message}</h6>
                               <small>{moment(createdAt).fromNow()}</small>
                             </div>

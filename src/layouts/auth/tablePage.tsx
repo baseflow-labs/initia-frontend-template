@@ -79,7 +79,7 @@ const TablePage = ({
               {filters?.map(({ name, label, options, multi }, i) =>
                 multi ? (
                   <div
-                    className={`col-6 col-md-${columnsWidth(filters.length)}`}
+                    className={`col-6 col-lg-${columnsWidth(filters.length)}`}
                   >
                     <SelectManyInput
                       name={name}
@@ -91,7 +91,7 @@ const TablePage = ({
                   </div>
                 ) : (
                   <div
-                    className={`col-6 col-md-${columnsWidth(filters.length)}`}
+                    className={`col-6 col-lg-${columnsWidth(filters.length)}`}
                   >
                     <SelectInput
                       id={name}
@@ -108,14 +108,14 @@ const TablePage = ({
               )}
 
               <div
-                className={`col-6 d-flex col-md-${columnsWidth(
+                className={`col-6 d-flex col-lg-${columnsWidth(
                   filters?.length || 1
                 )}`}
               >
                 <Button color="ghost" type="submit">
                   <IconWrapperComp
                     icon={filterIcon}
-                    className="me-1 my-auto px-0 px-md-1"
+                    className="me-1 my-auto px-0 px-lg-1"
                   />
                 </Button>
 
@@ -126,7 +126,7 @@ const TablePage = ({
                 >
                   <IconWrapperComp
                     icon={resetFilterIcon}
-                    className="me-1 my-auto px-0 px-md-1"
+                    className="me-1 my-auto px-0 px-lg-1"
                   />
                 </Button>
               </div>

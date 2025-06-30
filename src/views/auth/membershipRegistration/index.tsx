@@ -1051,7 +1051,7 @@ const MembershipRegistrationView = () => {
   ];
 
   return (
-    <div className="container-fluid px-0 mx-0 px-md-5">
+    <div className="container-fluid px-0 mx-0 px-lg-5">
       <WizardFormStepper
         steps={formSteps}
         currentStep={currentStep}
