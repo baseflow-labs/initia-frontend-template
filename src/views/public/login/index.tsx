@@ -60,6 +60,13 @@ const LoginView = () => {
       },
     },
     {
+      label: t("Public.Login.Labels.LoginAsCeo"),
+      credentials: {
+        identifier: "540000000",
+        password: "12345678",
+      },
+    },
+    {
       label: t("Public.Login.Labels.LoginAsHod"),
       credentials: {
         identifier: "580000000",
@@ -101,7 +108,10 @@ const LoginView = () => {
         <div className="row g-2 mt-3">
           {demoLogin.map(({ label, credentials }, i) => (
             <div className="col-6" key={i}>
-              <Button className="w-100" onClick={() => onSubmit(credentials)}>
+              <Button
+                className="w-100 h-100"
+                onClick={() => onSubmit(credentials)}
+              >
                 {label}
               </Button>
             </div>

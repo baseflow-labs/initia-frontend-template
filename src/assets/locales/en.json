@@ -470,6 +470,7 @@
         "LoginAsAdmin": "Login As System Admin",
         "LoginAsApplicant": "Login As Applicant",
         "LoginAsBeneficiary": "Login As Beneficiary",
+        "LoginAsCeo": "Login As CEO",
         "LoginAsHod": "Login As Researchers Supervisor",
         "LoginAsResearcher": "Login As Researcher",
         "Password": "Password",
