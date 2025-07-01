@@ -17,6 +17,7 @@ import { logout } from "../../store/actions/auth";
 import { useAppSelector } from "../../store/hooks";
 import { apiCatchGlobalHandler } from "../../utils/function";
 import { Notification } from "./dashboardNavbar";
+import appLogo from "../../assets/images/brand/logo-only.png";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -51,6 +52,10 @@ const Navbar = () => {
           >
             <IconWrapperComp icon={menuBarsIcon} />
           </button>
+        </div>
+
+        <div className="my-auto d-none d-lg-block">
+          <img alt="logo" src={appLogo} height="40px" />
         </div>
 
         <div className="collapse navbar-collapse justify-content-center">

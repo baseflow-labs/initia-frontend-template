@@ -192,9 +192,9 @@ const AuthLayout = () => {
 
   return (
     <Fragment>
-      {!showSidebar ? <Navbar /> : ""}
-
       <DemoWarning />
+
+      {!showSidebar ? <Navbar /> : ""}
 
       <OffCanvasNav
         fixedRoutes={fixedRoutes}
