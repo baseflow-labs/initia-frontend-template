@@ -400,8 +400,10 @@
     }
   },
   "CopyRight": {
+    "AllRightsReserved": "جميع الحقوق محفوظة",
     "DoneBy": "تصميم وتنفيذ",
-    "Shai": "شاي للذكاء الاصطناعي"
+    "ShaiFull": "شاي للذكاء الاصطناعي",
+    "ShaiShort": "شاي"
   },
   "Global": {
     "Form": {

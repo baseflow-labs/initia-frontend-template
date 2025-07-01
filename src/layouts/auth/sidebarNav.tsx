@@ -108,7 +108,7 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
         </div>
 
         <div className="mt-auto mb-3 text-center">
-          <CopyRightView />
+          <CopyRightView short={collapsed} />
         </div>
       </nav>
     </Fragment>
