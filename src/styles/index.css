@@ -91,7 +91,7 @@ html {
 }
 
 .blink {
-  animation: blinker 1s linear infinite;
+  animation: blinker 2.5s linear infinite;
 }
 
 @keyframes blinker {
