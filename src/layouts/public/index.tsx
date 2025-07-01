@@ -124,7 +124,7 @@ const AuthLayout = () => {
               </Routes>
 
               <div className="mt-4">
-                <CopyRightView />
+                <CopyRightView onLine />
               </div>
             </div>
           </div>

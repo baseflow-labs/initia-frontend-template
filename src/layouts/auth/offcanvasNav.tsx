@@ -90,7 +90,7 @@ const OffCanvasNav = ({ routes, fixedRoutes }: Props) => {
       </div>
 
       <div className="mt-auto mb-3 text-center">
-        <CopyRightView />
+        <CopyRightView onLine />
       </div>
     </div>
   );
