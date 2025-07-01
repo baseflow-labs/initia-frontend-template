@@ -11,6 +11,7 @@ import { InputSingleProps } from "../../../components/form";
 import { dataRender } from "../../../components/table";
 import { dataDateFormat } from "../../../utils/consts";
 import { apiCatchGlobalHandler } from "../../../utils/function";
+import { downloadFile } from "../../../utils/downloadFiles";
 
 const BeneficiaryProfileView = () => {
   const { t } = useTranslation();
@@ -1033,7 +1034,9 @@ const BeneficiaryProfileView = () => {
   ];
 
   const downloadProfileAsFile = (type: string) => {
-    console.log("download");
+    BeneficiaryApi.downloadProfile(searchParams.get("id") || "", type)
+      .then((res) => downloadFile({ response: res as any, type }))
+      .catch(apiCatchGlobalHandler);
   };
 
   return (
@@ -1043,13 +1046,13 @@ const BeneficiaryProfileView = () => {
       </div>
 
       <div className="col-6 col-md-3">
-        <Button
+        {/* <Button
           className="float-end me-1"
           outline
           onClick={() => downloadProfileAsFile("pdf")}
         >
           <FontAwesomeIcon icon={faFilePdf} />
-        </Button>
+        </Button> */}
 
         <Button
           outline

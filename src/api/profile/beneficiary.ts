@@ -70,6 +70,10 @@ const removeByUser = async (id: string) => {
   return await api.delete(mainPath + "/" + id);
 };
 
+const downloadProfile = async (id: string, type: string) => {
+  return await api.get(mainPath + "/" + id + "/" + type);
+};
+
 export {
   getAll,
   create,
@@ -79,4 +83,5 @@ export {
   requestHelp,
   remove,
   removeByUser,
+  downloadProfile,
 };
