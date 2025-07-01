@@ -426,6 +426,7 @@
         "Submit": "إرسال",
         "SubmitApplication": "تقديم الطلب",
         "SupportingDocument": "وثائق مدعمة",
+        "UnAvailableForDemoMode": "غير متاح في نسخة العرض",
         "Update": "التحديث",
         "UploadAttachment": "إضافة مرفق",
         "Yes": "نعم"
@@ -436,6 +437,7 @@
       "Action": "إجراء",
       "ApplicationDate": "تاريخ التقديم",
       "Back": "عودة",
+      "DemoWarning": "نرجو الانتباه أن هذه النسخة الخاصة بالعرض متاحة للجميع, لذا ننصح بعدم مشاركة أي بيانات حقيقية مثل الاسم أو رقم البطاقة أو ما سواها",
       "Logout": "خروج",
       "NoData": "عذراً, لا يوجد بيانات للعرض",
       "PageNo": "رقم الصفحة",
@@ -465,6 +467,11 @@
       "Labels": {
         "DidUForgotPassword": "هل نسيت كلمة السر؟",
         "Login": "تسجيل الدخول",
+        "LoginAsAdmin": "تسجيل الدخول كمدير النظام",
+        "LoginAsApplicant": "تسجيل الدخول كمتقدم بطلب انتساب",
+        "LoginAsBeneficiary": "تسجيل الدخول كمستفيد / منتسب للجمعية",
+        "LoginAsHod": "تسجيل الدخول كمدير للباحثين",
+        "LoginAsResearcher": "تسجيل الدخول كباحث اجتماعي",
         "Password": "كلمة السر",
         "PhoneNo": "رقم الهاتف",
         "Success": "أهلاً بك مجدداً {{name}}"

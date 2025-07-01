@@ -37,6 +37,7 @@ import { FilePreviewModal } from "./globalModal";
 import Navbar from "./navbar";
 import OffCanvasNav from "./offcanvasNav";
 import Sidebar from "./sidebarNav";
+import DemoWarning from "./demoWarning";
 
 const AuthLayout = () => {
   const { t } = useTranslation();
@@ -192,6 +193,8 @@ const AuthLayout = () => {
   return (
     <Fragment>
       {!showSidebar ? <Navbar /> : ""}
+
+      <DemoWarning />
 
       <OffCanvasNav
         fixedRoutes={fixedRoutes}

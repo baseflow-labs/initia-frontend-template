@@ -203,10 +203,13 @@ const SettingsPage = () => {
             <div className="btn-group w-100" role="group">
               <Button
                 onClick={() => deleteBeneficiary()}
+                disabled={process.env.REACT_APP_DEMO_STATUS === "true"}
                 color="danger"
                 className="my-3 me-1"
               >
-                {t("Global.Form.Labels.Yes")}
+                {process.env.REACT_APP_DEMO_STATUS === "true"
+                  ? t("Global.Form.Labels.UnAvailableForDemoMode")
+                  : t("Global.Form.Labels.Yes")}
               </Button>
 
               <Button

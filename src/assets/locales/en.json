@@ -426,6 +426,7 @@
         "Submit": "Submit",
         "SubmitApplication": "SubmitApplication",
         "SupportingDocument": "SupportingDocument",
+        "UnAvailableForDemoMode": "Unavailable For Demo Mode",
         "Update": "Update",
         "UploadAttachment": "UploadAttachment",
         "Yes": "Yes"
@@ -436,6 +437,7 @@
       "Action": "Action",
       "ApplicationDate": "ApplicationDate",
       "Back": "Back",
+      "DemoWarning": "Demo Warning",
       "Logout": "Logout",
       "NoData": "NoData",
       "PageNo": "PageNo",
@@ -465,6 +467,11 @@
       "Labels": {
         "DidUForgotPassword": "DidUForgotPassword",
         "Login": "Login",
+        "LoginAsAdmin": "Login As System Admin",
+        "LoginAsApplicant": "Login As Applicant",
+        "LoginAsBeneficiary": "Login As Beneficiary",
+        "LoginAsHod": "Login As Researchers Supervisor",
+        "LoginAsResearcher": "Login As Researcher",
         "Password": "Password",
         "PhoneNo": "PhoneNo",
         "Success": "Success"
