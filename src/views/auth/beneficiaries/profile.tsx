@@ -12,6 +12,8 @@ import { dataRender } from "../../../components/table";
 import { dataDateFormat } from "../../../utils/consts";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import { downloadFile } from "../../../utils/downloadFiles";
+import * as XLSX from "xlsx";
+import { l } from "react-router/dist/development/fog-of-war-BLArG-qZ";
 
 const BeneficiaryProfileView = () => {
   const { t } = useTranslation();
@@ -998,7 +1000,7 @@ const BeneficiaryProfileView = () => {
     },
   ];
 
-  const cards = [
+  const commonCards1 = [
     {
       title: t("Auth.MembershipRegistration.Form.BasicData"),
       data: beneficiary?.beneficiary || beneficiary,
@@ -1019,13 +1021,18 @@ const BeneficiaryProfileView = () => {
       data: beneficiary?.housing,
       map: hostelDataInputs,
     },
-    ...(beneficiary?.dependents?.map((dependent: any) => ({
+  ];
+
+  const dependentCards =
+    beneficiary?.dependents?.map((dependent: any) => ({
       title: t("Auth.MembershipRegistration.Form.DependantData", {
         name: dependent.fullName,
       }),
       data: dependent,
       map: dependentsDataInputs,
-    })) || []),
+    })) || [];
+
+  const commonCards2 = [
     {
       title: t("Auth.MembershipRegistration.Form.Attachments"),
       data: beneficiary?.nationalRecord,
@@ -1037,6 +1044,79 @@ const BeneficiaryProfileView = () => {
     BeneficiaryApi.downloadProfile(searchParams.get("id") || "", type)
       .then((res) => downloadFile({ response: res as any, type }))
       .catch(apiCatchGlobalHandler);
+  };
+
+  const processTypesForExport = (type: string) => {
+    switch (type) {
+      case "phoneNumber":
+      case "file":
+      case "location":
+      case "image":
+      case "stars":
+        return "text";
+      default:
+        return type;
+    }
+  };
+
+  const exportToExcel = () => {
+    const workbook = XLSX.utils.book_new();
+
+    [...commonCards1, ...commonCards2]
+      .filter(({ data }) => data)
+      .forEach(({ title, data, map }) => {
+        const worksheet = XLSX.utils.json_to_sheet([
+          map
+            .filter(({ name = "" }) => (data as any)[name || "id"])
+            .reduce(
+              (
+                final = [{}],
+                prop = { label: "", name: "", type: "", options: [] }
+              ) => ({
+                ...final,
+                [prop.label || ""]: dataRender({
+                  data: (data as any)[prop.name || "id"],
+                  type: processTypesForExport(prop.type || ""),
+                  options: prop.options || [],
+                }),
+              }),
+              {}
+            ),
+        ]);
+
+        XLSX.utils.book_append_sheet(workbook, worksheet, title.slice(0, 29));
+      });
+
+    const worksheet = XLSX.utils.json_to_sheet(
+      beneficiary?.dependents.map((dependent: any) =>
+        dependentsDataInputs
+          .filter(({ name = "" }) => (dependent as any)[name || "id"])
+          .reduce(
+            (
+              final = [{}],
+              prop = { label: "", name: "", type: "", options: [] }
+            ) => ({
+              ...final,
+              [prop.label || ""]: dataRender({
+                data: (dependent as any)[prop.name || "id"],
+                type: processTypesForExport(prop.type || ""),
+                options: prop.options || [],
+              }),
+            }),
+            {}
+          )
+      )
+    );
+
+    XLSX.utils.book_append_sheet(
+      workbook,
+      worksheet,
+      t("Auth.MembershipRegistration.Form.DependentsData").slice(0, 29)
+    );
+    XLSX.writeFile(
+      workbook,
+      (beneficiary?.fullName || beneficiary?.beneficiary?.fullName) + ".xlsx"
+    );
   };
 
   return (
@@ -1058,70 +1138,72 @@ const BeneficiaryProfileView = () => {
           outline
           color="success"
           className="float-end"
-          onClick={() => downloadProfileAsFile("excel")}
+          onClick={() => exportToExcel()}
         >
           <FontAwesomeIcon icon={faFileExcel} />
         </Button>
       </div>
 
-      {cards?.map(({ title, data, map }, i) => (
-        <div className="col-md-6 my-5" key={i}>
-          <h4 className="mb-4">{title}</h4>
+      {[...commonCards1, ...dependentCards, ...commonCards2]?.map(
+        ({ title, data, map }, i) => (
+          <div className="col-md-6 my-5" key={i}>
+            <h4 className="mb-4">{title}</h4>
 
-          <div className="card h-100 rounded-4">
-            <div className="card-body">
-              <table className="table table-borderless">
-                <tbody>
-                  {data &&
-                    map
-                      // .reduce(
-                      //   (
-                      //     final: {
-                      //       prop1: InputSingleProps;
-                      //       prop2?: InputSingleProps;
-                      //     }[],
-                      //     current,
-                      //     i
-                      //   ) => {
-                      //     if (i % 2 === 0) {
-                      //       final.push({
-                      //         prop1: current,
-                      //         prop2: map[i + 1] || null,
-                      //       });
-                      //     }
+            <div className="card h-100 rounded-4">
+              <div className="card-body">
+                <table className="table table-borderless">
+                  <tbody>
+                    {data &&
+                      map
+                        // .reduce(
+                        //   (
+                        //     final: {
+                        //       prop1: InputSingleProps;
+                        //       prop2?: InputSingleProps;
+                        //     }[],
+                        //     current,
+                        //     i
+                        //   ) => {
+                        //     if (i % 2 === 0) {
+                        //       final.push({
+                        //         prop1: current,
+                        //         prop2: map[i + 1] || null,
+                        //       });
+                        //     }
 
-                      //     return final;
-                      //   },
-                      //   []
-                      // )
-                      ?.map((prop: InputSingleProps, y = 0) => (
-                        <tr key={y}>
-                          <td
-                            className="pb-3 text-break"
-                            style={{
-                              whiteSpace: "normal",
-                              wordBreak: "break-word",
-                              maxWidth: "200px",
-                            }}
-                          >
-                            {prop.label}
-                          </td>
+                        //     return final;
+                        //   },
+                        //   []
+                        // )
+                        ?.map((prop: InputSingleProps, y = 0) => (
+                          <tr key={y}>
+                            <td
+                              className="pb-3 text-break"
+                              style={{
+                                whiteSpace: "normal",
+                                wordBreak: "break-word",
+                                maxWidth: "200px",
+                              }}
+                            >
+                              {prop.label}
+                            </td>
 
-                          <td className="pb-3">
-                            {dataRender({
-                              data: (data as any)[prop.name || "id"],
-                              type: prop.type,
-                              options: prop.options || [],
-                            })}
-                          </td>
-                        </tr>
-                      ))}
-                </tbody>
-              </table>
+                            <td className="pb-3">
+                              {dataRender({
+                                data: (data as any)[prop.name || "id"],
+                                type: prop.type,
+                                options: prop.options || [],
+                              })}
+                            </td>
+                          </tr>
+                        ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        )
+      )}
     </div>
   );
 };
