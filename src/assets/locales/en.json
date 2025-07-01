@@ -399,6 +399,10 @@
       "VisitTime": "VisitTime"
     }
   },
+  "CopyRight": {
+    "DoneBy": "Designed & Executed By",
+    "Shai": "SHAI For AI"
+  },
   "Global": {
     "Form": {
       "Labels": {
@@ -422,6 +426,7 @@
         "Submit": "Submit",
         "SubmitApplication": "SubmitApplication",
         "SupportingDocument": "SupportingDocument",
+        "UnAvailableForDemoMode": "Unavailable For Demo Mode",
         "Update": "Update",
         "UploadAttachment": "UploadAttachment",
         "Yes": "Yes"
@@ -432,6 +437,7 @@
       "Action": "Action",
       "ApplicationDate": "ApplicationDate",
       "Back": "Back",
+      "DemoWarning": "Demo Warning",
       "Logout": "Logout",
       "NoData": "NoData",
       "PageNo": "PageNo",
@@ -461,6 +467,12 @@
       "Labels": {
         "DidUForgotPassword": "DidUForgotPassword",
         "Login": "Login",
+        "LoginAsAdmin": "Login As System Admin",
+        "LoginAsApplicant": "Login As Applicant",
+        "LoginAsBeneficiary": "Login As Beneficiary",
+        "LoginAsCeo": "Login As CEO",
+        "LoginAsHod": "Login As Researchers Supervisor",
+        "LoginAsResearcher": "Login As Researcher",
         "Password": "Password",
         "PhoneNo": "PhoneNo",
         "Success": "Success"

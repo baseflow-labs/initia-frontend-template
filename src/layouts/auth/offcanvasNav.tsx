@@ -2,7 +2,9 @@ import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useLocation, useNavigate } from "react-router";
 import { Fragment } from "react/jsx-runtime";
+
 import IconWrapperComp from "../../assets/icons/wrapper";
+import CopyRightView from "../common/copyright";
 
 interface Props {
   routes: {
@@ -85,6 +87,10 @@ const OffCanvasNav = ({ routes, fixedRoutes }: Props) => {
             </Fragment>
           ))}
         </div>
+      </div>
+
+      <div className="mt-auto mb-3 text-center">
+        <CopyRightView onLine />
       </div>
     </div>
   );

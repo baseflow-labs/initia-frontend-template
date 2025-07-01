@@ -308,18 +308,25 @@ const ApplicantsView = () => {
   ];
 
   const deleteBeneficiary = (id: string) => {
-    BeneficiaryApi.remove(id).then(() => {
-      dispatch(
-        addNotification({
-          msg: t("Global.Form.SuccessMsg", {
-            action: t("Auth.Beneficiaries.Profile.DeleteBeneficiary"),
-            data: beneficiaries.find((b) => b.id === id)?.fullName,
-          }),
-        })
-      );
+    process.env.REACT_APP_DEMO_STATUS === "true"
+      ? dispatch(
+          addNotification({
+            type: "err",
+            msg: t("Global.Form.Labels.UnAvailableForDemoMode"),
+          })
+        )
+      : BeneficiaryApi.remove(id).then(() => {
+          dispatch(
+            addNotification({
+              msg: t("Global.Form.SuccessMsg", {
+                action: t("Auth.Beneficiaries.Profile.DeleteBeneficiary"),
+                data: beneficiaries.find((b) => b.id === id)?.fullName,
+              }),
+            })
+          );
 
-      getData({});
-    });
+          getData({});
+        });
   };
 
   return (
