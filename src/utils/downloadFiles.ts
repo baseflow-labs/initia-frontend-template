@@ -4,7 +4,7 @@ export const downloadFile = ({
   fileName,
 }: {
   response: any;
-  type?: string;
+  type: string;
   fileName?: string;
 }) => {
   const byteCharacters = atob(response.payload);

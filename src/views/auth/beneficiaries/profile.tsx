@@ -1,12 +1,14 @@
 import moment from "moment";
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router";
 
+import { faFileExcel, faFilePdf } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
+import Button from "../../../components/core/button";
 import { InputSingleProps } from "../../../components/form";
 import { dataRender } from "../../../components/table";
-import ColumnsPage from "../../../layouts/auth/columnsPage";
 import { dataDateFormat } from "../../../utils/consts";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 
@@ -1030,11 +1032,35 @@ const BeneficiaryProfileView = () => {
     },
   ];
 
+  const downloadProfileAsFile = (type: string) => {
+    console.log("download");
+  };
+
   return (
     <div className="row w-100 mx-auto">
-      <div className="col-12">
+      <div className="col-6 col-md-9">
         <h2>{beneficiary?.fullName || beneficiary?.beneficiary?.fullName}</h2>
       </div>
+
+      <div className="col-6 col-md-3">
+        <Button
+          className="float-end me-1"
+          outline
+          onClick={() => downloadProfileAsFile("pdf")}
+        >
+          <FontAwesomeIcon icon={faFilePdf} />
+        </Button>
+
+        <Button
+          outline
+          color="success"
+          className="float-end"
+          onClick={() => downloadProfileAsFile("excel")}
+        >
+          <FontAwesomeIcon icon={faFileExcel} />
+        </Button>
+      </div>
+
       {cards?.map(({ title, data, map }, i) => (
         <div className="col-md-6 my-5" key={i}>
           <h4 className="mb-4">{title}</h4>
