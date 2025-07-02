@@ -64,9 +64,7 @@ const BeneficiariesVisitsView = () => {
       .then((res) =>
         setSelectOptions((current) => ({
           ...current,
-          beneficiaries: (res as any).filter(
-            ({ status = { status: "" } }) => status.status === "Accepted"
-          ),
+          beneficiaries: res as any,
         }))
       )
       .catch(apiCatchGlobalHandler);
