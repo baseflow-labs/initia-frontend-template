@@ -86,15 +86,15 @@ const DashboardNavbar = () => {
                       ({ title, message, service, createdAt }, i) => ({
                         route: "/" + service,
                         label: (
-                          <div className="row">
-                            <div className="col-lg-2 my-auto text-warning">
+                          <div className="row" style={{ minWidth: "25vw" }}>
+                            <div className="d-none d-md-block col-md-2 col-lg-1 my-auto text-warning">
                               <h3>
                                 <IconWrapperComp icon={helpIcon} />
                               </h3>
                             </div>
 
-                            <div className="col-lg-10 ps-4">
-                              <h6>{message}</h6>
+                            <div className="col-md-10 col-lg-11 ps-4 text-break text-wrap">
+                              <h6 className="w-100">{message}</h6>
                               <small>{moment(createdAt).fromNow()}</small>
                             </div>
                           </div>
