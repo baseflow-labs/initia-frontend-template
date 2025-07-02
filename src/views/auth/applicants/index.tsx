@@ -28,6 +28,7 @@ import {
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
+import { actionProps } from "../../../components/table";
 
 const ApplicantsView = () => {
   const { t } = useTranslation();
@@ -355,85 +356,84 @@ const ApplicantsView = () => {
         tableActions={(id?: string) => {
           const row = beneficiaries.find((b) => b.id === id);
 
-          const final: {
-            label: string;
-            icon: IconProp;
-            spread?: boolean;
-            onClick: (data: string) => void;
-          }[] = [
+          return [
             {
               icon: faUser,
               label: t("Auth.Beneficiaries.Profile.ProfileDetails"),
               onClick: (data: string) => viewProfile(data),
             },
-          ];
-
-          const allowDataCompletion = ["Incomplete", "Need Help"].includes(
-            row?.status || ""
-          );
-          const allowDataReview = [
-            "New Member",
-            "In Preview",
-            "Cancelled",
-          ].includes(row?.status || "");
-          const allowApplicationReject = !["Cancelled"].includes(
-            row?.status || ""
-          );
-          const allowApplicationAccept = [
-            "New Member",
-            "In Preview",
-            "Rejected",
-            "Reviewed",
-            "Cancelled",
-          ].includes(row?.status || "");
-
-          if (allowDataCompletion) {
-            final.push({
+            {
               icon: faEdit,
+              disabled: !["Incomplete", "Need Help"].includes(
+                row?.status || ""
+              ),
+              disabledMsg: t(
+                "Auth.Beneficiaries.Profile.ProfileCompletionDisabledMsg"
+              ),
               label: t("Auth.Beneficiaries.Profile.ProfileCompletion"),
               onClick: (data: string) => completeProfile(data),
-            });
-          }
-
-          if (allowDataReview) {
-            final.push({
+            },
+            {
               icon: faSearch,
+              disabled: ![
+                "New Member",
+                "In Preview",
+                "Cancelled",
+                "Reviewed",
+              ].includes(row?.status || ""),
+              disabledMsg: t(
+                "Auth.Beneficiaries.Profile.ProfileReviewDisabledMsg"
+              ),
               label: t("Auth.Beneficiaries.Profile.ProfileReview"),
               onClick: (data: string) => reviewProfile(data),
-            });
-          }
-
-          if (allowApplicationAccept) {
-            final.push({
-              icon: faCheckSquare,
+            },
+            {
+              icon: faXmarkSquare,
+              color: "danger",
               spread: true,
+              disabled: ["Cancelled", "Rejected"].includes(row?.status || ""),
+              disabledMsg: t(
+                "Auth.Beneficiaries.Profile.RejectApplicationDisabledMsg"
+              ),
+              label: t("Auth.Beneficiaries.Profile.RejectApplication"),
+              onClick: (data: string) => setRejectModalOpen(data),
+            },
+            {
+              icon: faCheckSquare,
+              color: "success",
+              spread: true,
+              disabled: !["Reviewed", "Cancelled", "Rejected"].includes(
+                row?.status || ""
+              ),
+              disabledMsg: t(
+                "Auth.Beneficiaries.Profile.AcceptApplicationDisabledMsg"
+              ),
               label: t("Auth.Beneficiaries.Profile.AcceptApplication"),
               onClick: (data: string) =>
                 BeneficiaryApi.accept(data)
                   .then((res) => {
+                    dispatch(
+                      addNotification({
+                        msg: t("Global.Form.SuccessMsg", {
+                          action: t(
+                            "Auth.Beneficiaries.Profile.AcceptApplication"
+                          ),
+                          data: beneficiaries.find((b) => b.id === data)
+                            ?.fullName,
+                        }),
+                      })
+                    );
                     getData({});
                     setRejectModalOpen(null);
                   })
                   .catch(apiCatchGlobalHandler),
-            });
-          }
-
-          if (allowApplicationReject) {
-            final.push({
-              icon: faXmarkSquare,
-              spread: true,
-              label: t("Auth.Beneficiaries.Profile.RejectApplication"),
-              onClick: (data: string) => setRejectModalOpen(data),
-            });
-          }
-
-          final.push({
-            icon: faTrash,
-            label: t("Auth.Beneficiaries.Profile.DeleteApplication"),
-            onClick: (data: string) => deleteBeneficiary(data),
-          });
-
-          return final;
+            },
+            {
+              icon: faTrash,
+              label: t("Auth.Beneficiaries.Profile.DeleteApplication"),
+              onClick: (data: string) => deleteBeneficiary(data),
+            },
+          ];
         }}
         onPageChange={(i = 0, x = 0) => console.log(i, x)}
         onSearch={(values) => getData(values)}
@@ -467,6 +467,15 @@ const ApplicantsView = () => {
           onFormSubmit={(e) => {
             BeneficiaryApi.reject(rejectModalOpen || "", e)
               .then((res) => {
+                dispatch(
+                  addNotification({
+                    msg: t("Global.Form.SuccessMsg", {
+                      action: t("Auth.Beneficiaries.Profile.RejectApplication"),
+                      data: beneficiaries.find((b) => b.id === rejectModalOpen)
+                        ?.fullName,
+                    }),
+                  })
+                );
                 getData({});
                 setRejectModalOpen(null);
               })

@@ -28,6 +28,7 @@
       "BeneficiaryName": "BeneficiaryName",
       "Profile": {
         "AcceptApplication": "Accept Application",
+        "AcceptApplicationDisabledMsg": "Accept Application Disabled Msg",
         "ApplicationRejectReason": "Application Reject Reason",
         "archive": "archive",
         "Archive": "Archive",
@@ -44,9 +45,12 @@
         "info": "info",
         "notes": "notes",
         "ProfileCompletion": "ProfileCompletion",
+        "ProfileCompletionDisabledMsg": "Profile Completion Disabled Msg",
         "ProfileDetails": "ProfileDetails",
         "ProfileReview": "ProfileReview",
+        "ProfileReviewDisabledMsg": "Profile Review Disabled Msg",
         "RejectApplication": "RejectApplication",
+        "RejectApplicationDisabledMsg": "Reject Application Disabled Msg",
         "RequestDataUpdate": "RequestDataUpdate",
         "Statuses": {
           "Confirmed": "Confirmed",
@@ -416,6 +420,7 @@
   },
   "Global": {
     "Form": {
+      "CantDoIt": "Can't Do It",
       "Labels": {
         "Add": "Add",
         "AddNew": "AddNew",

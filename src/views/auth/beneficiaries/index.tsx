@@ -1,12 +1,9 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import {
   faCalendarDays,
-  faCircle,
-  faTrash,
   faUser,
   faUserMinus,
 } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
@@ -19,11 +16,8 @@ import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
-import {
-  apiCatchGlobalHandler,
-  renderDataFromOptions,
-  statusColorRender,
-} from "../../../utils/function";
+import { apiCatchGlobalHandler } from "../../../utils/function";
+import { actionProps } from "../../../components/table";
 
 const BeneficiariesView = () => {
   const { t } = useTranslation();
@@ -299,28 +293,6 @@ const BeneficiariesView = () => {
     navigate(`/visitSchedule/?id=${data}`);
   };
 
-  const deleteBeneficiary = (id: string) => {
-    process.env.REACT_APP_DEMO_STATUS === "true"
-      ? dispatch(
-          addNotification({
-            type: "err",
-            msg: t("Global.Form.Labels.UnAvailableForDemoMode"),
-          })
-        )
-      : BeneficiaryApi.remove(id).then(() => {
-          dispatch(
-            addNotification({
-              msg: t("Global.Form.SuccessMsg", {
-                action: t("Auth.Beneficiaries.Profile.DeleteBeneficiary"),
-                data: beneficiaries.find((b) => b.id === id)?.fullName,
-              }),
-            })
-          );
-
-          getData({});
-        });
-  };
-
   return (
     <Fragment>
       <TablePage
@@ -329,33 +301,24 @@ const BeneficiariesView = () => {
         // actionButtons={actionButtons}
         columns={columns}
         data={beneficiaries}
-        tableActions={(id?: string) => {
-          const final: {
-            label: string;
-            icon: IconProp;
-            spread?: boolean;
-            onClick: (data: string) => void;
-          }[] = [
-            {
-              icon: faUser,
-              label: t("Auth.Beneficiaries.Profile.ProfileDetails"),
-              onClick: (data: string) => viewProfile(data),
-            },
-            {
-              icon: faCalendarDays,
-              spread: true,
-              label: t("Auth.Visits.AddVisit"),
-              onClick: (data: string) => scheduleVisit(data),
-            },
-            {
-              icon: faUserMinus,
-              label: t("Auth.Beneficiaries.Profile.CancelMembership"),
-              onClick: (data: string) => setCancelModalOpen(data),
-            },
-          ];
-
-          return final;
-        }}
+        tableActions={(id?: string) => [
+          {
+            icon: faUser,
+            label: t("Auth.Beneficiaries.Profile.ProfileDetails"),
+            onClick: (data: string) => viewProfile(data),
+          },
+          {
+            icon: faCalendarDays,
+            spread: true,
+            label: t("Auth.Visits.AddVisit"),
+            onClick: (data: string) => scheduleVisit(data),
+          },
+          {
+            icon: faUserMinus,
+            label: t("Auth.Beneficiaries.Profile.CancelMembership"),
+            onClick: (data: string) => setCancelModalOpen(data),
+          },
+        ]}
         onPageChange={(i = 0, x = 0) => console.log(i, x)}
         onSearch={(values) => getData(values)}
       />
@@ -391,10 +354,19 @@ const BeneficiariesView = () => {
               Back
             </Button>
           }
-          submitText={t("Auth.Beneficiaries.Profile.RejectApplication")}
+          submitText={t("Auth.Beneficiaries.Profile.CancelMembership")}
           onFormSubmit={(e) => {
             BeneficiaryApi.cancel(cancelModalOpen || "", e)
               .then((res) => {
+                dispatch(
+                  addNotification({
+                    msg: t("Global.Form.SuccessMsg", {
+                      action: t("Auth.Beneficiaries.Profile.CancelMembership"),
+                      data: beneficiaries.find((b) => b.id === cancelModalOpen)
+                        ?.fullName,
+                    }),
+                  })
+                );
                 getData({});
                 setCancelModalOpen(null);
               })

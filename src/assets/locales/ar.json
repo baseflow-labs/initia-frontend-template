@@ -28,6 +28,7 @@
       "BeneficiaryName": "اسم المستفيد",
       "Profile": {
         "AcceptApplication": "قبول الطلب",
+        "AcceptApplicationDisabledMsg": "لا يمكن قبول الطلبات غير التي 'تم تدقيقها'",
         "ApplicationRejectReason": "سبب رفض الطلب",
         "archive": "ارشيف",
         "Archive": "أرشيف {{property}}",
@@ -44,9 +45,12 @@
         "info": "المعلومة",
         "notes": "ملاحظات",
         "ProfileCompletion": "استكمال طلب المستفيد",
+        "ProfileCompletionDisabledMsg": "لا يمكن استكمال إلا الطلبات غير كاملة",
         "ProfileDetails": "تفاصيل ملف المستفيد",
         "ProfileReview": "مراجعة طلب الانتساب",
+        "ProfileReviewDisabledMsg": "لا يمكن مراجعة إلا الطلبات الكاملة",
         "RejectApplication": "رفض الطلب",
+        "RejectApplicationDisabledMsg": "لا يمكن رفض الطلبات المرفوضة أو في حالات إلغاء العضوية",
         "RequestDataUpdate": "طلب تعديل {{property}}",
         "Statuses": {
           "Confirmed": "تم التأكيد",
@@ -416,6 +420,7 @@
   },
   "Global": {
     "Form": {
+      "CantDoIt": "لا يمكن القيام بهذا الإجراء",
       "Labels": {
         "Add": "إضافة",
         "AddNew": "إضافة بيانات جديدة",

@@ -18,6 +18,18 @@ import { triggerFilePreview } from "../../layouts/auth/globalModal";
 import { viewDateFormat, viewTimeFormat } from "../../utils/consts";
 import { splitOverNumberPlusLeftover } from "../../utils/function";
 import DropdownComp from "../dropdown";
+import { useDispatch } from "react-redux";
+import { addNotification } from "../../store/actions/notifications";
+
+export interface actionProps {
+  label: string;
+  icon: IconProp;
+  spread?: boolean;
+  disabled?: boolean;
+  disabledMsg?: string;
+  color?: string;
+  onClick: (data: string) => void;
+}
 
 export interface TableProps {
   size?: number;
@@ -32,12 +44,7 @@ export interface TableProps {
   data: { id?: string }[];
   onPageChange: (page: number, size: number) => void;
   noPagination?: boolean;
-  actions?: (id?: string) => {
-    label: string;
-    icon: IconProp;
-    spread?: boolean;
-    onClick: (data: string) => void;
-  }[];
+  actions?: (id?: string) => actionProps[];
 }
 
 interface Props {
@@ -128,6 +135,7 @@ const DynamicTable = ({
   noPagination,
 }: TableProps) => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
 
   const [pageSize, setPageSize] = useState(size);
 
@@ -215,19 +223,51 @@ const DynamicTable = ({
                     <td className="py-3 d-flex" scope="row">
                       {actions(row.id)
                         .filter(({ spread }) => spread)
-                        .map(({ icon, label, onClick }, y) => (
-                          <FontAwesomeIcon
-                            icon={icon}
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="top"
-                            data-bs-custom-class="custom-tooltip"
-                            data-bs-title={label}
-                            role="button"
-                            className="me-1"
-                            onClick={() => onClick(row?.id || "")}
-                            key={y}
-                          />
-                        ))}
+                        .map(
+                          (
+                            {
+                              icon,
+                              label,
+                              onClick,
+                              color,
+                              disabled,
+                              disabledMsg,
+                            },
+                            y
+                          ) => (
+                            <h4 key={y}>
+                              <FontAwesomeIcon
+                                icon={icon}
+                                data-bs-toggle="tooltip"
+                                data-bs-placement="top"
+                                data-bs-custom-class="custom-tooltip"
+                                data-bs-title={label}
+                                role="button"
+                                className={
+                                  "me-1" +
+                                  (" text-" +
+                                    (disabled
+                                      ? "secondary"
+                                      : color || "secondary"))
+                                }
+                                onClick={
+                                  disabled
+                                    ? () => {
+                                        dispatch(
+                                          addNotification({
+                                            type: "err",
+                                            msg:
+                                              disabledMsg ||
+                                              t("Global.Form.CantDoIt"),
+                                          })
+                                        );
+                                      }
+                                    : () => onClick(row?.id || "")
+                                }
+                              />
+                            </h4>
+                          )
+                        )}
 
                       {actions(row.id).filter(({ spread }) => !spread)
                         .length ? (

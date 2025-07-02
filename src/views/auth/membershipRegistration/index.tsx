@@ -1032,10 +1032,16 @@ const MembershipRegistrationView = () => {
       name: "Success",
       contents: (
         <div className="text-center">
-          <h2 className="display-4">
-            <IconWrapperComp icon={successIcon} className="text-success" />
-            <br />
-            {t("Auth.MembershipRegistration.Form.Success.Title")}
+          <h2 className="display-5 mb-3">
+            <IconWrapperComp
+              icon={successIcon}
+              className="text-success"
+              height={100}
+            />
+
+            <div className="mt-4">
+              {t("Auth.MembershipRegistration.Form.Success.Title")}
+            </div>
           </h2>
 
           <h4 className="text-muted my-4">
