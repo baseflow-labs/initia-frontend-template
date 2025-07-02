@@ -257,7 +257,13 @@ const VisitDetailView = () => {
 
       const worksheet2 = XLSX.utils.json_to_sheet(
         visitReportRoomContents.map(
-          ({ id, updatedAt, createdAt, photo, ...rest }) => rest
+          ({
+            id,
+            updatedAt,
+            createdAt,
+            // photo,
+            ...rest
+          }) => rest
         )
       );
 
