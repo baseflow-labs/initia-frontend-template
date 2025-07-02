@@ -187,6 +187,14 @@ const ApplicantsView = () => {
       label: t("Auth.MembershipRegistration.Statuses.Rejected"),
     },
     {
+      value: "Reviewed",
+      label: t("Auth.MembershipRegistration.Statuses.Reviewed"),
+    },
+    {
+      value: "Cancelled",
+      label: t("Auth.MembershipRegistration.Statuses.Cancelled"),
+    },
+    {
       value: "Accepted",
       label: t("Auth.MembershipRegistration.Statuses.Accepted"),
     },
@@ -363,7 +371,12 @@ const ApplicantsView = () => {
           const allowDataCompletion = ["Incomplete", "Need Help"].includes(
             row?.status || ""
           );
-          const allowDataReview = ["New Member", "In Preview"].includes(
+          const allowDataReview = [
+            "New Member",
+            "In Preview",
+            "Cancelled",
+          ].includes(row?.status || "");
+          const allowApplicationReject = !["Cancelled"].includes(
             row?.status || ""
           );
           const allowApplicationAccept = [
@@ -371,6 +384,7 @@ const ApplicantsView = () => {
             "In Preview",
             "Rejected",
             "Reviewed",
+            "Cancelled",
           ].includes(row?.status || "");
 
           if (allowDataCompletion) {
@@ -404,12 +418,14 @@ const ApplicantsView = () => {
             });
           }
 
-          final.push({
-            icon: faXmarkSquare,
-            spread: true,
-            label: t("Auth.Beneficiaries.Profile.RejectApplication"),
-            onClick: (data: string) => setRejectModalOpen(data),
-          });
+          if (allowApplicationReject) {
+            final.push({
+              icon: faXmarkSquare,
+              spread: true,
+              label: t("Auth.Beneficiaries.Profile.RejectApplication"),
+              onClick: (data: string) => setRejectModalOpen(data),
+            });
+          }
 
           final.push({
             icon: faTrash,

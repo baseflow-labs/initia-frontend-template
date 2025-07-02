@@ -31,6 +31,9 @@
         "ApplicationRejectReason": "Application Reject Reason",
         "archive": "archive",
         "Archive": "Archive",
+        "CancelMembership": "Cancel Membership",
+        "CancelMembershipNote": "Cancel Membership Note",
+        "CancelMembershipReason": "Cancel Membership Reason",
         "ConfirmData": "ConfirmData",
         "DeleteApplication": "Delete Application",
         "DeleteBeneficiary": "Delete Beneficiary",
@@ -282,11 +285,13 @@
       },
       "Statuses": {
         "Accepted": "Accepted",
+        "Cancelled": "Cancelled",
         "Incomplete": "Incomplete",
         "InPreview": "InPreview",
         "NeedHelp": "NeedHelp",
         "NewMember": "NewMember",
         "Rejected": "Rejected",
+        "Reviewed": "Reviewed",
         "Status": "Status"
       },
       "Title": "Title"

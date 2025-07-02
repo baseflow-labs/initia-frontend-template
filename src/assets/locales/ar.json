@@ -31,6 +31,9 @@
         "ApplicationRejectReason": "سبب رفض الطلب",
         "archive": "ارشيف",
         "Archive": "أرشيف {{property}}",
+        "CancelMembership": "إلغاء العضوية",
+        "CancelMembershipNote": "سيتم نقل بيانات المستفيد إلى تبويب طلبات الانتساب لمراجعة ملفه مرة أخرى أو حذفه نهائياً",
+        "CancelMembershipReason": "سبب إلغاء العضوية",
         "ConfirmData": "تأكيد المعلومة",
         "DeleteApplication": "حذف الطلب",
         "DeleteBeneficiary": "حذف المستفيد",
@@ -282,11 +285,13 @@
       },
       "Statuses": {
         "Accepted": "مقبول",
+        "Cancelled": "تم إلغاء العضوية",
         "Incomplete": "طلب غير مكتمل",
         "InPreview": "قيد المراجعة",
         "NeedHelp": "بحاجة لمساعدة",
         "NewMember": "مستفيد جديد",
         "Rejected": "مرفوض",
+        "Reviewed": "تم التدقيق",
         "Status": "حالة الطلب"
       },
       "Title": "طلب الانتساب للجمعية"
