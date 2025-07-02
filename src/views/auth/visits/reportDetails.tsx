@@ -8,9 +8,15 @@ import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
 } from "../../../utils/function";
+import Button from "../../../components/core/button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFileExcel } from "@fortawesome/free-solid-svg-icons";
+import * as XLSX from "xlsx";
 
 type visitReportRoomContentsType = {
   id: string;
+  updatedAt: string;
+  createdAt: string;
   type: string;
   content: string;
   photo: string;
@@ -234,9 +240,51 @@ const VisitDetailView = () => {
     { value: "Balcony", label: t("Auth.Visits.Report.Balcony") },
   ];
 
+  const exportToExcel = () => {
+    const workbook = XLSX.utils.book_new();
+
+    visit?.visitReportRooms.forEach((room, i) => {
+      const {
+        id,
+        updatedAt,
+        createdAt,
+        visitReportRoomContents,
+        ...finalRoom
+      } = room;
+      const worksheet1 = XLSX.utils.json_to_sheet([finalRoom]);
+
+      XLSX.utils.book_append_sheet(workbook, worksheet1, "Room " + (i + 1));
+
+      const worksheet2 = XLSX.utils.json_to_sheet(
+        visitReportRoomContents.map(
+          ({ id, updatedAt, createdAt, photo, ...rest }) => rest
+        )
+      );
+
+      XLSX.utils.book_append_sheet(workbook, worksheet2, "Contents " + (i + 1));
+    });
+
+    XLSX.writeFile(workbook, "Visit Report" + ".xlsx");
+  };
+
   return (
     <Fragment>
-      <h2>{"تقرير الزيارة"}</h2>
+      <div className="row">
+        <div className="col-md-9">
+          <h2>{"تقرير الزيارة"}</h2>
+        </div>
+
+        <div className="col-md-3">
+          <Button
+            outline
+            color="success"
+            className="float-end"
+            onClick={() => exportToExcel()}
+          >
+            <FontAwesomeIcon icon={faFileExcel} />
+          </Button>
+        </div>
+      </div>
 
       <div className="row gap-4 mt-4 w-75">
         {tabs?.map((t) => (
@@ -259,6 +307,7 @@ const VisitDetailView = () => {
             )}
             onPageChange={() => {}}
             noPagination
+            fitHeight
           />
 
           <DynamicTable
@@ -268,6 +317,7 @@ const VisitDetailView = () => {
             )}
             onPageChange={() => {}}
             noPagination
+            fitHeight
           />
         </div>
       ))}

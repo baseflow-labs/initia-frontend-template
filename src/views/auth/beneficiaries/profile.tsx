@@ -3,17 +3,16 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router";
 
-import { faFileExcel, faFilePdf } from "@fortawesome/free-solid-svg-icons";
+import { faFileExcel } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import * as XLSX from "xlsx";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import Button from "../../../components/core/button";
 import { InputSingleProps } from "../../../components/form";
 import { dataRender } from "../../../components/table";
 import { dataDateFormat } from "../../../utils/consts";
-import { apiCatchGlobalHandler } from "../../../utils/function";
 import { downloadFile } from "../../../utils/downloadFiles";
-import * as XLSX from "xlsx";
-import { l } from "react-router/dist/development/fog-of-war-BLArG-qZ";
+import { apiCatchGlobalHandler } from "../../../utils/function";
 
 const BeneficiaryProfileView = () => {
   const { t } = useTranslation();

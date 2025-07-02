@@ -44,6 +44,7 @@ export interface TableProps {
   data: { id?: string }[];
   onPageChange: (page: number, size: number) => void;
   noPagination?: boolean;
+  fitHeight?: boolean;
   actions?: (id?: string) => actionProps[];
 }
 
@@ -133,6 +134,7 @@ const DynamicTable = ({
   actions,
   size = 10,
   noPagination,
+  fitHeight,
 }: TableProps) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -163,7 +165,7 @@ const DynamicTable = ({
   return (
     <div
       className="overflow-x-auto mx-auto"
-      style={{ maxWidth: "90vw", minHeight: "60vh" }}
+      style={{ maxWidth: "90vw", minHeight: fitHeight ? undefined : "60vh" }}
     >
       <div className="table-responsive">
         <table className="table mt-4 w-100">
