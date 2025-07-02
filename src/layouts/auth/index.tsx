@@ -37,6 +37,7 @@ import { FilePreviewModal } from "./globalModal";
 import Navbar from "./navbar";
 import OffCanvasNav from "./offcanvasNav";
 import Sidebar from "./sidebarNav";
+import DemoWarning from "./demoWarning";
 
 const AuthLayout = () => {
   const { t } = useTranslation();
@@ -191,6 +192,8 @@ const AuthLayout = () => {
 
   return (
     <Fragment>
+      <DemoWarning />
+
       {!showSidebar ? <Navbar /> : ""}
 
       <OffCanvasNav
@@ -200,7 +203,7 @@ const AuthLayout = () => {
           .map(({ view, ...rest }) => ({ ...rest }))}
       />
 
-      <main className="d-flex">
+      <main className="d-flex pb-5">
         {showSidebar && isPc && (
           <div
             className="position-fixed top-0 start-0 min-vh-100"

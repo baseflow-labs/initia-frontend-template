@@ -27,7 +27,7 @@ const AidsView = () => {
     { id: string; beneficiaryId: string; status: string }[]
   >([]);
   const [selectOptions, setSelectOptions] = useState({
-    beneficiaries: [{ id: "", fullName: "" }],
+    beneficiaries: [{ id: "", fullName: "", status: { status: "" } }],
   });
 
   const getData = (filters: GetDataProps) => {
@@ -54,9 +54,7 @@ const AidsView = () => {
       .then((res) =>
         setSelectOptions((current) => ({
           ...current,
-          beneficiaries: (res as any).filter(
-            ({ status = { status: "" } }) => status.status === "Accepted"
-          ),
+          beneficiaries: res as any,
         }))
       )
       .catch(apiCatchGlobalHandler);
@@ -177,10 +175,12 @@ const AidsView = () => {
   const grantAidInputs = () => [
     {
       type: "select",
-      options: selectOptions.beneficiaries.map(({ id, fullName }) => ({
-        value: id,
-        label: fullName,
-      })),
+      options: selectOptions.beneficiaries
+        .filter(({ status }) => status.status === "Accepted")
+        .map(({ id, fullName }) => ({
+          value: id,
+          label: fullName,
+        })),
       name: "beneficiary",
       label: t("Auth.Beneficiaries.BeneficiaryName"),
       required: true,

@@ -27,9 +27,16 @@
       "Applications": "طلبات الانتساب",
       "BeneficiaryName": "اسم المستفيد",
       "Profile": {
+        "AcceptApplication": "قبول الطلب",
+        "AcceptApplicationDisabledMsg": "لا يمكن قبول الطلبات غير التي 'تم تدقيقها'",
+        "ApplicationRejectReason": "سبب رفض الطلب",
         "archive": "ارشيف",
         "Archive": "أرشيف {{property}}",
+        "CancelMembership": "إلغاء العضوية",
+        "CancelMembershipNote": "سيتم نقل بيانات المستفيد إلى تبويب طلبات الانتساب لمراجعة ملفه مرة أخرى أو حذفه نهائياً",
+        "CancelMembershipReason": "سبب إلغاء العضوية",
         "ConfirmData": "تأكيد المعلومة",
+        "DeleteApplication": "حذف الطلب",
         "DeleteBeneficiary": "حذف المستفيد",
         "DeleteData": "حذف بيانات الحساب",
         "editRequest": "طلب تعديل",
@@ -38,8 +45,12 @@
         "info": "المعلومة",
         "notes": "ملاحظات",
         "ProfileCompletion": "استكمال طلب المستفيد",
+        "ProfileCompletionDisabledMsg": "لا يمكن استكمال إلا الطلبات غير كاملة",
         "ProfileDetails": "تفاصيل ملف المستفيد",
         "ProfileReview": "مراجعة طلب الانتساب",
+        "ProfileReviewDisabledMsg": "لا يمكن مراجعة إلا الطلبات الكاملة",
+        "RejectApplication": "رفض الطلب",
+        "RejectApplicationDisabledMsg": "لا يمكن رفض الطلبات المرفوضة أو في حالات إلغاء العضوية",
         "RequestDataUpdate": "طلب تعديل {{property}}",
         "Statuses": {
           "Confirmed": "تم التأكيد",
@@ -278,11 +289,13 @@
       },
       "Statuses": {
         "Accepted": "مقبول",
+        "Cancelled": "تم إلغاء العضوية",
         "Incomplete": "طلب غير مكتمل",
         "InPreview": "قيد المراجعة",
         "NeedHelp": "بحاجة لمساعدة",
         "NewMember": "مستفيد جديد",
         "Rejected": "مرفوض",
+        "Reviewed": "تم التدقيق",
         "Status": "حالة الطلب"
       },
       "Title": "طلب الانتساب للجمعية"
@@ -399,8 +412,15 @@
       "VisitTime": "وقت الزيارة"
     }
   },
+  "CopyRight": {
+    "AllRightsReserved": "جميع الحقوق محفوظة",
+    "DoneBy": "تصميم وتنفيذ",
+    "ShaiFull": "شاي للذكاء الاصطناعي",
+    "ShaiShort": "شاي"
+  },
   "Global": {
     "Form": {
+      "CantDoIt": "لا يمكن القيام بهذا الإجراء",
       "Labels": {
         "Add": "إضافة",
         "AddNew": "إضافة بيانات جديدة",
@@ -422,6 +442,7 @@
         "Submit": "إرسال",
         "SubmitApplication": "تقديم الطلب",
         "SupportingDocument": "وثائق مدعمة",
+        "UnAvailableForDemoMode": "غير متاح في نسخة العرض",
         "Update": "التحديث",
         "UploadAttachment": "إضافة مرفق",
         "Yes": "نعم"
@@ -432,6 +453,7 @@
       "Action": "إجراء",
       "ApplicationDate": "تاريخ التقديم",
       "Back": "عودة",
+      "DemoWarning": "نرجو الانتباه أن هذه النسخة الخاصة بالعرض متاحة للجميع, لذا ننصح بعدم مشاركة أي بيانات حقيقية مثل الاسم أو رقم البطاقة أو ما سواها",
       "Logout": "خروج",
       "NoData": "عذراً, لا يوجد بيانات للعرض",
       "PageNo": "رقم الصفحة",
@@ -461,6 +483,12 @@
       "Labels": {
         "DidUForgotPassword": "هل نسيت كلمة السر؟",
         "Login": "تسجيل الدخول",
+        "LoginAsAdmin": "تسجيل الدخول كمدير النظام",
+        "LoginAsApplicant": "تسجيل الدخول كمتقدم بطلب انتساب",
+        "LoginAsBeneficiary": "تسجيل الدخول كمستفيد منتسب للجمعية",
+        "LoginAsCeo": "تسجيل الدخول كمدير الجمعية",
+        "LoginAsHod": "تسجيل الدخول كمدير للباحثين",
+        "LoginAsResearcher": "تسجيل الدخول كباحث اجتماعي",
         "Password": "كلمة السر",
         "PhoneNo": "رقم الهاتف",
         "Success": "أهلاً بك مجدداً {{name}}"

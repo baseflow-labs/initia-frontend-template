@@ -15,6 +15,7 @@ import LoginView from "../../views/public/login";
 import RegisterView from "../../views/public/register";
 import ResetPasswordView from "../../views/public/ResetPassword";
 import TermsConditions from "../../views/public/termsConditions";
+import CopyRightView from "../common/copyright";
 
 const AuthLayout = () => {
   const { t } = useTranslation();
@@ -58,7 +59,7 @@ const AuthLayout = () => {
     <main className="overflow-x-hidden">
       <div className="min-vh-100 vw-100 d-flex justify-content-center align-items-center public-bg-image px-3 px-lg-4 py-3">
         <div
-          className="card py-4 px-2 px-lg-4 rounded-5"
+          className="card pt-4 px-2 px-lg-4 rounded-5"
           style={
             location.pathname === "/terms-conditions"
               ? { height: "100vh", width: "100%" }
@@ -121,6 +122,10 @@ const AuthLayout = () => {
                 <Route path="*" element={<Navigate to="/" replace />} />
                 {/* <Route path="*" element={<FourZeroFourError />} /> */}
               </Routes>
+
+              <div className="mt-4">
+                <CopyRightView onLine />
+              </div>
             </div>
           </div>
         </div>

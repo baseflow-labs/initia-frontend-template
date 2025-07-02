@@ -1,4 +1,9 @@
-import { faCircle, faEdit, faNewspaper, faXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircle,
+  faEdit,
+  faNewspaper,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useEffect, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -13,7 +18,11 @@ import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import { viewDayDateFormat } from "../../../utils/consts";
-import { apiCatchGlobalHandler, renderDataFromOptions, statusColorRender } from "../../../utils/function";
+import {
+  apiCatchGlobalHandler,
+  renderDataFromOptions,
+  statusColorRender,
+} from "../../../utils/function";
 
 const VisitsView = () => {
   const { t } = useTranslation();
@@ -63,9 +72,7 @@ const VisitsView = () => {
       .then((res) =>
         setSelectOptions((current) => ({
           ...current,
-          beneficiaries: (res as any).filter(
-            ({ status = { status: "" } }) => status.status === "Accepted"
-          ),
+          beneficiaries: res as any,
         }))
       )
       .catch(apiCatchGlobalHandler);

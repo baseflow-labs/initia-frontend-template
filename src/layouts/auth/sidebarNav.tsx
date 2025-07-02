@@ -8,9 +8,10 @@ import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
 
+import IconWrapperComp from "../../assets/icons/wrapper";
 import Logo from "../../assets/images/brand/logo-full.png";
 import LogoOnly from "../../assets/images/brand/logo-only.png";
-import IconWrapperComp from "../../assets/icons/wrapper";
+import CopyRightView from "../common/copyright";
 
 interface Props {
   routes: {
@@ -104,6 +105,10 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
               {!collapsed && <span>{name}</span>}
             </h5>
           ))}
+        </div>
+
+        <div className="mt-auto mb-3 text-center">
+          <CopyRightView short={collapsed} />
         </div>
       </nav>
     </Fragment>

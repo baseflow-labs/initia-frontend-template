@@ -27,9 +27,16 @@
       "Applications": "Membership Applications",
       "BeneficiaryName": "BeneficiaryName",
       "Profile": {
+        "AcceptApplication": "Accept Application",
+        "AcceptApplicationDisabledMsg": "Accept Application Disabled Msg",
+        "ApplicationRejectReason": "Application Reject Reason",
         "archive": "archive",
         "Archive": "Archive",
+        "CancelMembership": "Cancel Membership",
+        "CancelMembershipNote": "Cancel Membership Note",
+        "CancelMembershipReason": "Cancel Membership Reason",
         "ConfirmData": "ConfirmData",
+        "DeleteApplication": "Delete Application",
         "DeleteBeneficiary": "Delete Beneficiary",
         "DeleteData": "Delete Your Data",
         "editRequest": "editRequest",
@@ -38,8 +45,12 @@
         "info": "info",
         "notes": "notes",
         "ProfileCompletion": "ProfileCompletion",
+        "ProfileCompletionDisabledMsg": "Profile Completion Disabled Msg",
         "ProfileDetails": "ProfileDetails",
         "ProfileReview": "ProfileReview",
+        "ProfileReviewDisabledMsg": "Profile Review Disabled Msg",
+        "RejectApplication": "RejectApplication",
+        "RejectApplicationDisabledMsg": "Reject Application Disabled Msg",
         "RequestDataUpdate": "RequestDataUpdate",
         "Statuses": {
           "Confirmed": "Confirmed",
@@ -278,11 +289,13 @@
       },
       "Statuses": {
         "Accepted": "Accepted",
+        "Cancelled": "Cancelled",
         "Incomplete": "Incomplete",
         "InPreview": "InPreview",
         "NeedHelp": "NeedHelp",
         "NewMember": "NewMember",
         "Rejected": "Rejected",
+        "Reviewed": "Reviewed",
         "Status": "Status"
       },
       "Title": "Title"
@@ -399,8 +412,15 @@
       "VisitTime": "VisitTime"
     }
   },
+  "CopyRight": {
+    "AllRightsReserved": "All Rights Reserved",
+    "DoneBy": "Designed & Executed By",
+    "ShaiFull": "SHAI For AI",
+    "ShaiShort": "SHAI"
+  },
   "Global": {
     "Form": {
+      "CantDoIt": "Can't Do It",
       "Labels": {
         "Add": "Add",
         "AddNew": "AddNew",
@@ -422,6 +442,7 @@
         "Submit": "Submit",
         "SubmitApplication": "SubmitApplication",
         "SupportingDocument": "SupportingDocument",
+        "UnAvailableForDemoMode": "Unavailable For Demo Mode",
         "Update": "Update",
         "UploadAttachment": "UploadAttachment",
         "Yes": "Yes"
@@ -432,6 +453,7 @@
       "Action": "Action",
       "ApplicationDate": "ApplicationDate",
       "Back": "Back",
+      "DemoWarning": "Demo Warning",
       "Logout": "Logout",
       "NoData": "NoData",
       "PageNo": "PageNo",
@@ -461,6 +483,12 @@
       "Labels": {
         "DidUForgotPassword": "DidUForgotPassword",
         "Login": "Login",
+        "LoginAsAdmin": "Login As System Admin",
+        "LoginAsApplicant": "Login As Applicant",
+        "LoginAsBeneficiary": "Login As Beneficiary",
+        "LoginAsCeo": "Login As CEO",
+        "LoginAsHod": "Login As Researchers Supervisor",
+        "LoginAsResearcher": "Login As Researcher",
         "Password": "Password",
         "PhoneNo": "PhoneNo",
         "Success": "Success"
