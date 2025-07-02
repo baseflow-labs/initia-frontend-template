@@ -8,7 +8,7 @@ import ActionButtons from "../../components/button/actionButtons";
 import Button from "../../components/core/button";
 import SelectInput from "../../components/form/inputs/select";
 import SelectManyInput from "../../components/form/inputs/selectMany";
-import DynamicTable, { TableProps } from "../../components/table";
+import DynamicTable, { actionProps, TableProps } from "../../components/table";
 
 interface Props extends TableProps {
   title: string;
@@ -20,12 +20,7 @@ interface Props extends TableProps {
   }[];
   actionButtons?: { label: string }[];
   onSearch: (values: {}) => void;
-  tableActions?: (id?: string) => {
-    label: string;
-    icon: IconProp;
-    spread?: boolean;
-    onClick: (data: string) => void;
-  }[];
+  tableActions?: (id?: string) => actionProps[];
 }
 
 const TablePage = ({

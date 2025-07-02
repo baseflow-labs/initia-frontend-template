@@ -1,10 +1,13 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import {
+  faCheck,
+  faCheckSquare,
   faCircle,
   faEdit,
   faSearch,
   faTrash,
   faUser,
+  faXmarkSquare,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
@@ -14,6 +17,9 @@ import { useNavigate } from "react-router";
 
 import { GetDataProps } from "../../../api";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
+import Button from "../../../components/core/button";
+import Form from "../../../components/form";
+import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/tablePage";
 import { logout } from "../../../store/actions/auth";
 import { addNotification } from "../../../store/actions/notifications";
@@ -22,6 +28,7 @@ import {
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
+import { actionProps } from "../../../components/table";
 
 const ApplicantsView = () => {
   const { t } = useTranslation();
@@ -31,6 +38,7 @@ const ApplicantsView = () => {
   const [beneficiaries, setBeneficiaries] = useState<
     { id: string; status: string; fullName: string }[]
   >([]);
+  const [rejectModalOpen, setRejectModalOpen] = useState<string | null>(null);
 
   const getData = (filters: GetDataProps) => {
     BeneficiaryApi.getAll(filters)
@@ -178,6 +186,14 @@ const ApplicantsView = () => {
     {
       value: "Rejected",
       label: t("Auth.MembershipRegistration.Statuses.Rejected"),
+    },
+    {
+      value: "Reviewed",
+      label: t("Auth.MembershipRegistration.Statuses.Reviewed"),
+    },
+    {
+      value: "Cancelled",
+      label: t("Auth.MembershipRegistration.Statuses.Cancelled"),
     },
     {
       value: "Accepted",
@@ -330,60 +346,144 @@ const ApplicantsView = () => {
   };
 
   return (
-    <TablePage
-      title={title}
-      filters={filters}
-      actionButtons={actionButtons}
-      columns={columns}
-      data={beneficiaries}
-      tableActions={(id?: string) => {
-        const row = beneficiaries.find((b) => b.id === id);
+    <Fragment>
+      <TablePage
+        title={title}
+        filters={filters}
+        actionButtons={actionButtons}
+        columns={columns}
+        data={beneficiaries}
+        tableActions={(id?: string) => {
+          const row = beneficiaries.find((b) => b.id === id);
 
-        const final: {
-          label: string;
-          icon: IconProp;
-          spread?: boolean;
-          onClick: (data: string) => void;
-        }[] = [
-          {
-            icon: faUser,
-            label: t("Auth.Beneficiaries.Profile.ProfileDetails"),
-            onClick: (data: string) => viewProfile(data),
-          },
-        ];
+          return [
+            {
+              icon: faUser,
+              label: t("Auth.Beneficiaries.Profile.ProfileDetails"),
+              onClick: (data: string) => viewProfile(data),
+            },
+            {
+              icon: faEdit,
+              disabled: !["Incomplete", "Need Help"].includes(
+                row?.status || ""
+              ),
+              disabledMsg: t(
+                "Auth.Beneficiaries.Profile.ProfileCompletionDisabledMsg"
+              ),
+              label: t("Auth.Beneficiaries.Profile.ProfileCompletion"),
+              onClick: (data: string) => completeProfile(data),
+            },
+            {
+              icon: faSearch,
+              disabled: ![
+                "New Member",
+                "In Preview",
+                "Cancelled",
+                "Reviewed",
+              ].includes(row?.status || ""),
+              disabledMsg: t(
+                "Auth.Beneficiaries.Profile.ProfileReviewDisabledMsg"
+              ),
+              label: t("Auth.Beneficiaries.Profile.ProfileReview"),
+              onClick: (data: string) => reviewProfile(data),
+            },
+            {
+              icon: faXmarkSquare,
+              color: "danger",
+              spread: true,
+              disabled: ["Cancelled", "Rejected"].includes(row?.status || ""),
+              disabledMsg: t(
+                "Auth.Beneficiaries.Profile.RejectApplicationDisabledMsg"
+              ),
+              label: t("Auth.Beneficiaries.Profile.RejectApplication"),
+              onClick: (data: string) => setRejectModalOpen(data),
+            },
+            {
+              icon: faCheckSquare,
+              color: "success",
+              spread: true,
+              disabled: !["Reviewed", "Cancelled", "Rejected"].includes(
+                row?.status || ""
+              ),
+              disabledMsg: t(
+                "Auth.Beneficiaries.Profile.AcceptApplicationDisabledMsg"
+              ),
+              label: t("Auth.Beneficiaries.Profile.AcceptApplication"),
+              onClick: (data: string) =>
+                BeneficiaryApi.accept(data)
+                  .then((res) => {
+                    dispatch(
+                      addNotification({
+                        msg: t("Global.Form.SuccessMsg", {
+                          action: t(
+                            "Auth.Beneficiaries.Profile.AcceptApplication"
+                          ),
+                          data: beneficiaries.find((b) => b.id === data)
+                            ?.fullName,
+                        }),
+                      })
+                    );
+                    getData({});
+                    setRejectModalOpen(null);
+                  })
+                  .catch(apiCatchGlobalHandler),
+            },
+            {
+              icon: faTrash,
+              label: t("Auth.Beneficiaries.Profile.DeleteApplication"),
+              onClick: (data: string) => deleteBeneficiary(data),
+            },
+          ];
+        }}
+        onPageChange={(i = 0, x = 0) => console.log(i, x)}
+        onSearch={(values) => getData(values)}
+      />
 
-        const allowDataCompletion = ["Incomplete", "Need Help"].includes(
-          row?.status || ""
-        );
-        const allowDataReview = ["New Member"].includes(row?.status || "");
-
-        if (allowDataCompletion) {
-          final.push({
-            icon: faEdit,
-            label: t("Auth.Beneficiaries.Profile.ProfileCompletion"),
-            onClick: (data: string) => completeProfile(data),
-          });
-        }
-
-        if (allowDataReview) {
-          final.push({
-            icon: faSearch,
-            label: t("Auth.Beneficiaries.Profile.ProfileReview"),
-            onClick: (data: string) => reviewProfile(data),
-          });
-        }
-
-        final.push({
-          icon: faTrash,
-          label: t("Auth.Beneficiaries.Profile.DeleteBeneficiary"),
-          onClick: (data: string) => deleteBeneficiary(data),
-        });
-
-        return final;
-      }}
-      onPageChange={(i = 0, x = 0) => console.log(i, x)}
-      onSearch={(values) => getData(values)}
-    />
+      <Modal
+        title={t("Auth.Beneficiaries.Profile.RejectApplication")}
+        onClose={() => setRejectModalOpen(null)}
+        isOpen={!!rejectModalOpen}
+      >
+        <Form
+          inputs={() => [
+            {
+              label: t("Auth.Beneficiaries.Profile.ApplicationRejectReason"),
+              name: "reason",
+              type: "textarea",
+              required: true,
+              rows: 3,
+            },
+          ]}
+          customButtons={
+            <Button
+              outline
+              onClick={() => setRejectModalOpen(null)}
+              className="w-50"
+            >
+              Back
+            </Button>
+          }
+          submitText={t("Auth.Beneficiaries.Profile.RejectApplication")}
+          onFormSubmit={(e) => {
+            BeneficiaryApi.reject(rejectModalOpen || "", e)
+              .then((res) => {
+                dispatch(
+                  addNotification({
+                    msg: t("Global.Form.SuccessMsg", {
+                      action: t("Auth.Beneficiaries.Profile.RejectApplication"),
+                      data: beneficiaries.find((b) => b.id === rejectModalOpen)
+                        ?.fullName,
+                    }),
+                  })
+                );
+                getData({});
+                setRejectModalOpen(null);
+              })
+              .catch(apiCatchGlobalHandler);
+          }}
+        />
+      </Modal>
+    </Fragment>
   );
 };
 

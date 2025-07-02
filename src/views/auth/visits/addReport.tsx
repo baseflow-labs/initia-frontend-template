@@ -14,7 +14,6 @@ import { LabelView } from "../../../components/form";
 import DefaultInput from "../../../components/form/inputs/default";
 import RadioInput from "../../../components/form/inputs/radio";
 import SelectInput from "../../../components/form/inputs/select";
-import SelectAddInput from "../../../components/form/inputs/selectAdd";
 import StarsInput from "../../../components/form/inputs/stars";
 import TextareaInput from "../../../components/form/inputs/textarea";
 import { addNotification } from "../../../store/actions/notifications";
@@ -251,6 +250,7 @@ const VisitReportsView = () => {
                       <IconWrapperComp
                         icon={deleteIcon}
                         className="text-danger pt-2"
+                        height={30}
                       />
                     </Button>
                   </div>
@@ -265,7 +265,7 @@ const VisitReportsView = () => {
                       })}
                       required
                     />
-                    <SelectAddInput
+                    <SelectInput
                       sizing="lg"
                       required
                       name={`content-${i}`}
@@ -274,7 +274,9 @@ const VisitReportsView = () => {
                         contentTypes.find(({ value }) => value === content.type)
                           ?.subList || []
                       }
-                      onChange={(e) => updateContentAtIndex(i, { content: e })}
+                      onChange={(e) =>
+                        updateContentAtIndex(i, { content: e.target.value })
+                      }
                     />
                   </div>
                   <div className="col-lg-12 pt-3">
@@ -459,7 +461,7 @@ const VisitReportsView = () => {
                   label={t("Auth.Visits.Report.RoomXType", { number: i + 1 })}
                 />
 
-                <SelectAddInput
+                <SelectInput
                   sizing="lg"
                   name="type"
                   value={room.type}
@@ -471,7 +473,7 @@ const VisitReportsView = () => {
                         y === i
                           ? {
                               ...room,
-                              type: e,
+                              type: e.target.value,
                             }
                           : room
                       ),

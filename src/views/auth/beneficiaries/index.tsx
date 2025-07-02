@@ -1,11 +1,9 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import {
   faCalendarDays,
-  faCircle,
-  faTrash,
   faUser,
+  faUserMinus,
 } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
@@ -13,19 +11,20 @@ import { useNavigate } from "react-router";
 
 import { GetDataProps } from "../../../api";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
+import Button from "../../../components/core/button";
+import Form from "../../../components/form";
+import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
-import {
-  apiCatchGlobalHandler,
-  renderDataFromOptions,
-  statusColorRender,
-} from "../../../utils/function";
+import { apiCatchGlobalHandler } from "../../../utils/function";
+import { actionProps } from "../../../components/table";
 
 const BeneficiariesView = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const [cancelModalOpen, setCancelModalOpen] = useState<string | null>(null);
   const [beneficiaries, setBeneficiaries] = useState<
     { id: string; status: string; fullName: string }[]
   >([]);
@@ -270,20 +269,20 @@ const BeneficiariesView = () => {
       name: "category",
       label: t("Auth.MembershipRegistration.Form.Category.Title"),
     },
-    {
-      type: "custom",
-      render: (row: any) => (
-        <Fragment>
-          <FontAwesomeIcon
-            icon={faCircle}
-            className={`text-${statusColorRender(row.status)}`}
-          />{" "}
-          {renderDataFromOptions(row.status, statuses)}
-        </Fragment>
-      ),
-      name: "status",
-      label: t("Auth.MembershipRegistration.Statuses.Status"),
-    },
+    // {
+    //   type: "custom",
+    //   render: (row: any) => (
+    //     <Fragment>
+    //       <FontAwesomeIcon
+    //         icon={faCircle}
+    //         className={`text-${statusColorRender(row.status)}`}
+    //       />{" "}
+    //       {renderDataFromOptions(row.status, statuses)}
+    //     </Fragment>
+    //   ),
+    //   name: "status",
+    //   label: t("Auth.MembershipRegistration.Statuses.Status"),
+    // },
   ];
 
   const viewProfile = (data: string) => {
@@ -294,42 +293,15 @@ const BeneficiariesView = () => {
     navigate(`/visitSchedule/?id=${data}`);
   };
 
-  const deleteBeneficiary = (id: string) => {
-    process.env.REACT_APP_DEMO_STATUS === "true"
-      ? dispatch(
-          addNotification({
-            type: "err",
-            msg: t("Global.Form.Labels.UnAvailableForDemoMode"),
-          })
-        )
-      : BeneficiaryApi.remove(id).then(() => {
-          dispatch(
-            addNotification({
-              msg: t("Global.Form.SuccessMsg", {
-                action: t("Auth.Beneficiaries.Profile.DeleteBeneficiary"),
-                data: beneficiaries.find((b) => b.id === id)?.fullName,
-              }),
-            })
-          );
-
-          getData({});
-        });
-  };
-
   return (
-    <TablePage
-      title={title}
-      filters={filters}
-      // actionButtons={actionButtons}
-      columns={columns}
-      data={beneficiaries}
-      tableActions={(id?: string) => {
-        const final: {
-          label: string;
-          icon: IconProp;
-          spread?: boolean;
-          onClick: (data: string) => void;
-        }[] = [
+    <Fragment>
+      <TablePage
+        title={title}
+        filters={filters}
+        // actionButtons={actionButtons}
+        columns={columns}
+        data={beneficiaries}
+        tableActions={(id?: string) => [
           {
             icon: faUser,
             label: t("Auth.Beneficiaries.Profile.ProfileDetails"),
@@ -342,17 +314,67 @@ const BeneficiariesView = () => {
             onClick: (data: string) => scheduleVisit(data),
           },
           {
-            icon: faTrash,
-            label: t("Auth.Beneficiaries.Profile.DeleteBeneficiary"),
-            onClick: (data: string) => deleteBeneficiary(data),
+            icon: faUserMinus,
+            label: t("Auth.Beneficiaries.Profile.CancelMembership"),
+            onClick: (data: string) => setCancelModalOpen(data),
           },
-        ];
+        ]}
+        onPageChange={(i = 0, x = 0) => console.log(i, x)}
+        onSearch={(values) => getData(values)}
+      />
 
-        return final;
-      }}
-      onPageChange={(i = 0, x = 0) => console.log(i, x)}
-      onSearch={(values) => getData(values)}
-    />
+      <Modal
+        title={t("Auth.Beneficiaries.Profile.CancelMembership")}
+        onClose={() => setCancelModalOpen(null)}
+        isOpen={!!cancelModalOpen}
+      >
+        <Form
+          inputs={() => [
+            {
+              label: t("Auth.Beneficiaries.Profile.CancelMembershipReason"),
+              name: "reason",
+              type: "textarea",
+              required: true,
+              belowComp: (
+                <div>
+                  <small className="text-info">
+                    {t("Auth.Beneficiaries.Profile.CancelMembershipNote")}
+                  </small>
+                </div>
+              ),
+              rows: 3,
+            },
+          ]}
+          customButtons={
+            <Button
+              outline
+              onClick={() => setCancelModalOpen(null)}
+              className="w-50"
+            >
+              Back
+            </Button>
+          }
+          submitText={t("Auth.Beneficiaries.Profile.CancelMembership")}
+          onFormSubmit={(e) => {
+            BeneficiaryApi.cancel(cancelModalOpen || "", e)
+              .then((res) => {
+                dispatch(
+                  addNotification({
+                    msg: t("Global.Form.SuccessMsg", {
+                      action: t("Auth.Beneficiaries.Profile.CancelMembership"),
+                      data: beneficiaries.find((b) => b.id === cancelModalOpen)
+                        ?.fullName,
+                    }),
+                  })
+                );
+                getData({});
+                setCancelModalOpen(null);
+              })
+              .catch(apiCatchGlobalHandler);
+          }}
+        />
+      </Modal>
+    </Fragment>
   );
 };
 

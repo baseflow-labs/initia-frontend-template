@@ -18,6 +18,18 @@ import { triggerFilePreview } from "../../layouts/auth/globalModal";
 import { viewDateFormat, viewTimeFormat } from "../../utils/consts";
 import { splitOverNumberPlusLeftover } from "../../utils/function";
 import DropdownComp from "../dropdown";
+import { useDispatch } from "react-redux";
+import { addNotification } from "../../store/actions/notifications";
+
+export interface actionProps {
+  label: string;
+  icon: IconProp;
+  spread?: boolean;
+  disabled?: boolean;
+  disabledMsg?: string;
+  color?: string;
+  onClick: (data: string) => void;
+}
 
 export interface TableProps {
   size?: number;
@@ -32,12 +44,8 @@ export interface TableProps {
   data: { id?: string }[];
   onPageChange: (page: number, size: number) => void;
   noPagination?: boolean;
-  actions?: (id?: string) => {
-    label: string;
-    icon: IconProp;
-    spread?: boolean;
-    onClick: (data: string) => void;
-  }[];
+  fitHeight?: boolean;
+  actions?: (id?: string) => actionProps[];
 }
 
 interface Props {
@@ -126,8 +134,10 @@ const DynamicTable = ({
   actions,
   size = 10,
   noPagination,
+  fitHeight,
 }: TableProps) => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
 
   const [pageSize, setPageSize] = useState(size);
 
@@ -153,7 +163,10 @@ const DynamicTable = ({
   };
 
   return (
-    <div className="overflow-x-auto mx-auto" style={{ maxWidth: "90vw" }}>
+    <div
+      className="overflow-x-auto mx-auto"
+      style={{ maxWidth: "90vw", minHeight: fitHeight ? undefined : "60vh" }}
+    >
       <div className="table-responsive">
         <table className="table mt-4 w-100">
           <thead className="table-light">
@@ -191,7 +204,7 @@ const DynamicTable = ({
                   i >= pageSize * (pageNumber - 1) && i < pageSize * pageNumber
               )
               .map((row, i) => (
-                <tr key={i}>
+                <tr className="align-middle" key={i}>
                   <td className="py-3" scope="row">
                     {i + pageSize * (pageNumber - 1) + 1}
                   </td>
@@ -212,58 +225,92 @@ const DynamicTable = ({
                   )}
 
                   {actions && actions()?.length && (
-                    <td className="py-3 d-flex" scope="row">
-                      {actions(row.id)
-                        .filter(({ spread }) => spread)
-                        .map(({ icon, label, onClick }, y) => (
-                          <FontAwesomeIcon
-                            icon={icon}
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="top"
-                            data-bs-custom-class="custom-tooltip"
-                            data-bs-title={label}
-                            role="button"
-                            className="me-1"
-                            onClick={() => onClick(row?.id || "")}
-                            key={y}
-                          />
-                        ))}
+                    <td className="py-3" scope="row">
+                      <div className="d-flex">
+                        {actions(row.id)
+                          .filter(({ spread }) => spread)
+                          .map(
+                            (
+                              {
+                                icon,
+                                label,
+                                onClick,
+                                color,
+                                disabled,
+                                disabledMsg,
+                              },
+                              y
+                            ) => (
+                              <h4 key={y}>
+                                <FontAwesomeIcon
+                                  icon={icon}
+                                  data-bs-toggle="tooltip"
+                                  data-bs-placement="top"
+                                  data-bs-custom-class="custom-tooltip"
+                                  data-bs-title={label}
+                                  role="button"
+                                  className={
+                                    "me-1" +
+                                    (" text-" +
+                                      (disabled
+                                        ? "secondary"
+                                        : color || "secondary"))
+                                  }
+                                  onClick={
+                                    disabled
+                                      ? () => {
+                                          dispatch(
+                                            addNotification({
+                                              type: "err",
+                                              msg:
+                                                disabledMsg ||
+                                                t("Global.Form.CantDoIt"),
+                                            })
+                                          );
+                                        }
+                                      : () => onClick(row?.id || "")
+                                  }
+                                />
+                              </h4>
+                            )
+                          )}
 
-                      {actions(row.id).filter(({ spread }) => !spread)
-                        .length ? (
-                        <DropdownComp
-                          button={
-                            <FontAwesomeIcon
-                              icon={faEllipsisVertical}
-                              className="ms-1"
-                            />
-                          }
-                          list={actions(row.id)
-                            .filter(({ spread }) => !spread)
-                            .map(({ icon, label, onClick }) => ({
-                              onClick: () => onClick(row.id || ""),
-                              label: (
-                                <Fragment>
-                                  <FontAwesomeIcon
-                                    icon={icon}
-                                    className="text-info"
-                                  />{" "}
-                                  {label}
-                                </Fragment>
-                              ),
-                            }))}
-                        />
-                      ) : (
-                        ""
-                      )}
-                      <span className="text-white">.</span>
+                        {actions(row.id).filter(({ spread }) => !spread)
+                          .length ? (
+                          <DropdownComp
+                            start
+                            button={
+                              <FontAwesomeIcon
+                                icon={faEllipsisVertical}
+                                className="ms-1"
+                              />
+                            }
+                            list={actions(row.id)
+                              .filter(({ spread }) => !spread)
+                              .map(({ icon, label, onClick }) => ({
+                                onClick: () => onClick(row.id || ""),
+                                label: (
+                                  <Fragment>
+                                    <FontAwesomeIcon
+                                      icon={icon}
+                                      className="text-info"
+                                    />{" "}
+                                    {label}
+                                  </Fragment>
+                                ),
+                              }))}
+                          />
+                        ) : (
+                          ""
+                        )}
+                      </div>
                     </td>
                   )}
                 </tr>
               ))}
           </tbody>
 
-          {!noPagination && (
+          {!noPagination && data.length !== 0 && (
             <tfoot>
               <tr>
                 <th
@@ -271,7 +318,7 @@ const DynamicTable = ({
                     columns.length + 1 + (actions && actions()?.length ? 1 : 0)
                   }
                 >
-                  <div className="d-flex">
+                  <div className="d-flex float-end">
                     <nav className="my-auto me-2">
                       <ul className="pagination">
                         <li className="page-item my-auto">
@@ -286,15 +333,17 @@ const DynamicTable = ({
 
                         {Array(pagesCount)
                           .fill("")
-                          .map((_, i) => (
-                            <li className="page-item my-auto" key={i}>
+                          .map((_, y) => (
+                            <li className="page-item my-auto" key={y}>
                               <button
-                                className={`page-link border-0 bg-info ${
-                                  pageNumber === i + 1 ? "active rounded-2" : ""
+                                className={`page-link border-0 rounded-2 me-1 ${
+                                  pageNumber === y + 1
+                                    ? "bg-info"
+                                    : "border-info text-info"
                                 }`}
-                                onClick={() => onPageNumberChange(i + 1)}
+                                onClick={() => onPageNumberChange(y + 1)}
                               >
-                                {i + 1}
+                                {y + 1}
                               </button>
                             </li>
                           ))}

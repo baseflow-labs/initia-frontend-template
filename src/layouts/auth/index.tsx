@@ -203,7 +203,7 @@ const AuthLayout = () => {
           .map(({ view, ...rest }) => ({ ...rest }))}
       />
 
-      <main className="d-flex">
+      <main className="d-flex pb-5">
         {showSidebar && isPc && (
           <div
             className="position-fixed top-0 start-0 min-vh-100"

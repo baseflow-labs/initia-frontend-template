@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 
 interface Props {
   button: React.ReactNode;
+  start?: boolean;
   list: {
     route?: string;
     onClick?: () => void;
@@ -10,7 +11,7 @@ interface Props {
   }[];
 }
 
-const DropdownComp = ({ button, list }: Props) => {
+const DropdownComp = ({ button, list, start }: Props) => {
   const navigate = useNavigate();
 
   const [open, setOpen] = useState(false);
@@ -42,7 +43,9 @@ const DropdownComp = ({ button, list }: Props) => {
       </button>
 
       <ul
-        className={`dropdown-menu dropdown-menu-end ${open ? "show" : ""}`}
+        className={`dropdown-menu dropdown-menu-${start ? "start" : "end"} ${
+          open ? "show" : ""
+        }`}
         aria-labelledby="dropdown"
       >
         {list.map(({ onClick, route, label }, i) => (

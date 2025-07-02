@@ -7,39 +7,53 @@ const TermsConditions = () => {
 
   const contents = [
     {
-      title: "Title 1",
-      intro: "This is about introduction...",
-      points: ["this is it", "that is all"],
+      title: "سياسية الخصوصية",
+      intro: "الأقرار بما يلي:",
+      points: [
+        "أقر وأوافق على قيام الجهة القائمة على نظام 'مستحق' بجمع ومعالجة بياناتي الشخصية، بما يشمل – على سبيل المثال لا الحصر – البيانات العامة، الاقتصادية، الصحية، السكنية، وأي بيانات ضرورية لتقييم الاستحقاق.",
+        "تم إبلاغي بأغراض جمع البيانات وكيفية استخدامها، وهي محصورة في تقييم الأهلية للحصول على الدعم.",
+        "أفهم أن بياناتي ستُستخدم فقط للأغراض المذكورة ولن يتم مشاركتها مع أي جهة دون إذن مسبق أو وفقًا لما ينص عليه النظام.",
+        "أقر بأن لي الحق في طلب الوصول إلى بياناتي، وتصحيحها أو حذفها عند الحاجة، حسب ما ورد في النظام.",
+        "أوافق طوعًا دون ضغط على جمع ومعالجة بياناتي لأغراض تقديم الخدمة أو المساعدة الاجتماعية.",
+        "أدرك أن سحب الموافقة لاحقًا لا يؤثر على مشروعية المعالجة التي تمت قبل السحب.",
+      ],
     },
     {
-      title: "Title 2",
-      intro: "This is about introduction...",
-      points: ["this is it", "that is all"],
+      title: "شروط الاستخدام",
+      intro: "",
+      points: [
+        "يقر المستخدم بأن البيانات المقدمة صحيحة وكاملة وحديثة.",
+        "يلتزم المستخدم باستخدام المنصة فقط للأغراض المخصصة لها، وعدم إساءة استخدامها.",
+        "تحتفظ الجهة القائمة على النظام بالحق في تعديل شروط الاستخدام وسياسة الخصوصية في أي وقت.",
+        "يعتبر إنشاء الحساب أو استخدام المنصة موافقة صريحة على هذه الشروط والسياسات.",
+      ],
     },
   ];
 
   return (
     <div className="row">
       {contents.map(({ title, intro, points }, i) => (
-        <div className="col-lg-6 px-3" key={i}>
-          <div className="card p-2 mb-3 text-start w-100">
-            <h4 className="mb-2">{title}</h4>
-            <h5 className="mb-2">{intro}</h5>
+        <div className="col-lg-6 px-3 d-flex" key={i}>
+          <div className="card p-2 mb-3 text-start w-100 h-100">
+            <h4 className="mb-5">{title}</h4>
+            {intro && <h5 className="mb-3">{intro}</h5>}
 
-            <ul>
+            <ol>
               {points.map((point, y) => (
                 <li key={y}>
-                  <h6>{point}</h6>
+                  <h5 className="lh-lg">{point}</h5>
                 </li>
               ))}
-            </ul>
+            </ol>
           </div>
         </div>
       ))}
 
-      <Button route="/register" className="w-fit mx-auto">
-        {t("Global.Labels.Back")}
-      </Button>
+      <div className="col-12 mt-3">
+        <Button route="/register" className="w-fit mx-auto">
+          {t("Global.Labels.Back")}
+        </Button>
+      </div>
     </div>
   );
 };
