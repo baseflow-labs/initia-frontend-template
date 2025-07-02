@@ -74,6 +74,18 @@ const downloadProfile = async (id: string, type: string) => {
   return await api.get(mainPath + "/" + id + "/" + type);
 };
 
+const reject = async (id: string, data: object) => {
+  return await api.post(mainPath + "/reject/" + id, data);
+};
+
+const accept = async (id: string) => {
+  return await api.get(mainPath + "/accept/" + id);
+};
+
+const cancel = async (id: string, data: object) => {
+  return await api.post(mainPath + "/cancel/" + id, data);
+};
+
 export {
   getAll,
   create,
@@ -84,4 +96,7 @@ export {
   remove,
   removeByUser,
   downloadProfile,
+  reject,
+  accept,
+  cancel,
 };

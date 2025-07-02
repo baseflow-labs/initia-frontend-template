@@ -27,9 +27,12 @@
       "Applications": "Membership Applications",
       "BeneficiaryName": "BeneficiaryName",
       "Profile": {
+        "AcceptApplication": "Accept Application",
+        "ApplicationRejectReason": "Application Reject Reason",
         "archive": "archive",
         "Archive": "Archive",
         "ConfirmData": "ConfirmData",
+        "DeleteApplication": "Delete Application",
         "DeleteBeneficiary": "Delete Beneficiary",
         "DeleteData": "Delete Your Data",
         "editRequest": "editRequest",
@@ -40,6 +43,7 @@
         "ProfileCompletion": "ProfileCompletion",
         "ProfileDetails": "ProfileDetails",
         "ProfileReview": "ProfileReview",
+        "RejectApplication": "RejectApplication",
         "RequestDataUpdate": "RequestDataUpdate",
         "Statuses": {
           "Confirmed": "Confirmed",

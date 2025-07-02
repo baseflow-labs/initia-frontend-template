@@ -27,9 +27,12 @@
       "Applications": "طلبات الانتساب",
       "BeneficiaryName": "اسم المستفيد",
       "Profile": {
+        "AcceptApplication": "قبول الطلب",
+        "ApplicationRejectReason": "سبب رفض الطلب",
         "archive": "ارشيف",
         "Archive": "أرشيف {{property}}",
         "ConfirmData": "تأكيد المعلومة",
+        "DeleteApplication": "حذف الطلب",
         "DeleteBeneficiary": "حذف المستفيد",
         "DeleteData": "حذف بيانات الحساب",
         "editRequest": "طلب تعديل",
@@ -40,6 +43,7 @@
         "ProfileCompletion": "استكمال طلب المستفيد",
         "ProfileDetails": "تفاصيل ملف المستفيد",
         "ProfileReview": "مراجعة طلب الانتساب",
+        "RejectApplication": "رفض الطلب",
         "RequestDataUpdate": "طلب تعديل {{property}}",
         "Statuses": {
           "Confirmed": "تم التأكيد",
