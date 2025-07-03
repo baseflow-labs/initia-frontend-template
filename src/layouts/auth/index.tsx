@@ -10,9 +10,11 @@ import AidsView from "../../views/auth/aids";
 import AidsBeneficiaryView from "../../views/auth/aids/request";
 import ApplicantsView from "../../views/auth/applicants";
 import BeneficiaryFormReview from "../../views/auth/applicants/review";
+import ApplicantsViewForSupervisor from "../../views/auth/applicants/supervisor";
 import BeneficiariesView from "../../views/auth/beneficiaries";
 import BeneficiaryOwnProfile from "../../views/auth/beneficiaries/beneficiaryProfile";
 import BeneficiaryProfileView from "../../views/auth/beneficiaries/profile";
+import BeneficiariesViewForSupervisor from "../../views/auth/beneficiaries/supervisor";
 import ContactUsPage from "../../views/auth/contact-us";
 import DashboardView from "../../views/auth/dashboard";
 import MembershipRegistrationView from "../../views/auth/membershipRegistration";
@@ -57,18 +59,38 @@ const AuthLayout = () => {
     {
       name: t("Auth.Beneficiaries.Applications"),
       route: "/applicants",
+      labelNote: "For Rsch",
       view: <ApplicantsView />,
       showInNav: true,
       icon: beneficiariesIcon,
       users: ["researcher", "admin"],
     },
     {
+      name: t("Auth.Beneficiaries.Applications"),
+      route: "/applicantRS",
+      labelNote: "For RS",
+      view: <ApplicantsViewForSupervisor />,
+      showInNav: true,
+      icon: beneficiariesIcon,
+      users: ["supervisor", "admin"],
+    },
+    {
       name: t("Auth.Beneficiaries.Title"),
       route: "/beneficiary",
+      labelNote: "For Rsch",
       view: <BeneficiariesView />,
       showInNav: true,
       icon: beneficiariesIcon,
       users: ["researcher", "admin"],
+    },
+    {
+      name: t("Auth.Beneficiaries.Title"),
+      route: "/beneRS",
+      labelNote: "For RS",
+      view: <BeneficiariesViewForSupervisor />,
+      showInNav: true,
+      icon: beneficiariesIcon,
+      users: ["supervisor", "admin"],
     },
     {
       name: t("Auth.Beneficiaries.Profile.Title"),

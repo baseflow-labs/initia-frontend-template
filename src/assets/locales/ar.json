@@ -32,6 +32,7 @@
         "ApplicationRejectReason": "سبب رفض الطلب",
         "archive": "ارشيف",
         "Archive": "أرشيف {{property}}",
+        "AssignResearcher": "إحالة المستفيد",
         "CancelMembership": "إلغاء العضوية",
         "CancelMembershipNote": "سيتم نقل بيانات المستفيد إلى تبويب طلبات الانتساب لمراجعة ملفه مرة أخرى أو حذفه نهائياً",
         "CancelMembershipReason": "سبب إلغاء العضوية",
@@ -299,6 +300,10 @@
         "Status": "حالة الطلب"
       },
       "Title": "طلب الانتساب للجمعية"
+    },
+    "Researchers": {
+      "Assign": "إحالة",
+      "ResearcherName": "اسم الباحث"
     },
     "Settings": {
       "AllCities": "جميع مدن المحافظات",

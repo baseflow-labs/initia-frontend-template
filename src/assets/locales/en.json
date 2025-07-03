@@ -32,6 +32,7 @@
         "ApplicationRejectReason": "Application Reject Reason",
         "archive": "archive",
         "Archive": "Archive",
+        "AssignResearcher": "Assign Researcher",
         "CancelMembership": "Cancel Membership",
         "CancelMembershipNote": "Cancel Membership Note",
         "CancelMembershipReason": "Cancel Membership Reason",
@@ -299,6 +300,10 @@
         "Status": "Status"
       },
       "Title": "Title"
+    },
+    "Researchers": {
+      "Assign": "Assign",
+      "ResearcherName": "Researcher Name"
     },
     "Settings": {
       "AllCities": "All Cities",
