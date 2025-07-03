@@ -3,18 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes, useLocation } from "react-router";
 import { Fragment } from "react/jsx-runtime";
 
-import {
-  aidsIcon,
-  beneficiariesIcon,
-  contactIcon,
-  dashboardIcon,
-  infoIcon,
-  membershipFormIcon,
-  profileIcon,
-  settingsIcon,
-  visitReportIcon,
-  visitsIcon,
-} from "../../assets/icons/icons";
+import { aidsIcon, beneficiariesIcon, contactIcon, dashboardIcon, infoIcon, membershipFormIcon, profileIcon, settingsIcon, visitReportIcon, visitsIcon } from "../../assets/icons/icons";
 import { useAppSelector } from "../../store/hooks";
 import { useWindowWidth } from "../../utils/hooks";
 import AidsView from "../../views/auth/aids";
@@ -33,11 +22,11 @@ import VisitReportsView from "../../views/auth/visits/addReport";
 import BeneficiariesVisitsView from "../../views/auth/visits/beneficiaryVisits";
 import VisitDetailView from "../../views/auth/visits/reportDetails";
 import DashboardNavbar from "./dashboardNavbar";
+import DemoWarning from "./demoWarning";
 import { FilePreviewModal } from "./globalModal";
 import Navbar from "./navbar";
 import OffCanvasNav from "./offcanvasNav";
 import Sidebar from "./sidebarNav";
-import DemoWarning from "./demoWarning";
 
 const AuthLayout = () => {
   const { t } = useTranslation();
@@ -162,6 +151,7 @@ const AuthLayout = () => {
       route: "/contact-us",
       view: <ContactUsPage />,
       icon: infoIcon,
+      fixed: true,
       users: ["beneficiary", "admin"],
     },
     {
@@ -169,17 +159,9 @@ const AuthLayout = () => {
       route: "/settings",
       view: <SettingsPage />,
       icon: settingsIcon,
+      fixed: true,
       users: ["beneficiary", "researcher", "admin"],
     },
-  ];
-
-  const fixedRoutes = [
-    {
-      name: t("Auth.ContactUs.Title"),
-      route: "/contact-us",
-      icon: contactIcon,
-    },
-    { name: t("Auth.Settings.Title"), route: "/settings", icon: settingsIcon },
   ];
 
   const showSidebar = !location.pathname.includes("apply");
@@ -187,6 +169,8 @@ const AuthLayout = () => {
   const filteredRoutes = authRoutes.filter(({ users }) =>
     users.includes(user.role)
   );
+
+  const filteredFixedRoutes = filteredRoutes.filter(({ fixed }) => fixed);
 
   const toggleSidebar = () => setCollapsed((current) => !current);
 
@@ -197,7 +181,7 @@ const AuthLayout = () => {
       {!showSidebar ? <Navbar /> : ""}
 
       <OffCanvasNav
-        fixedRoutes={fixedRoutes}
+        fixedRoutes={filteredFixedRoutes}
         routes={filteredRoutes
           .filter(({ showInNav }) => showInNav)
           .map(({ view, ...rest }) => ({ ...rest }))}
@@ -216,7 +200,7 @@ const AuthLayout = () => {
             <Sidebar
               collapsed={collapsed}
               toggleSidebar={toggleSidebar}
-              fixedRoutes={fixedRoutes}
+              fixedRoutes={filteredFixedRoutes}
               routes={filteredRoutes
                 .filter(({ showInNav }) => showInNav)
                 .map(({ view, ...rest }) => ({ ...rest }))}
