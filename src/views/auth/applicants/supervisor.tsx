@@ -1,4 +1,12 @@
-import { faCheckSquare, faCircle, faEdit, faSearch, faTrash, faUser, faXmarkSquare } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCheckSquare,
+  faCircle,
+  faEdit,
+  faSearch,
+  faTrash,
+  faUser,
+  faXmarkSquare,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -14,7 +22,11 @@ import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/tablePage";
 import { logout } from "../../../store/actions/auth";
 import { addNotification } from "../../../store/actions/notifications";
-import { apiCatchGlobalHandler, renderDataFromOptions, statusColorRender } from "../../../utils/function";
+import {
+  apiCatchGlobalHandler,
+  renderDataFromOptions,
+  statusColorRender,
+} from "../../../utils/function";
 
 const ApplicantsViewForSupervisor = () => {
   const { t } = useTranslation();
@@ -22,7 +34,7 @@ const ApplicantsViewForSupervisor = () => {
   const dispatch = useDispatch();
 
   const [beneficiaries, setBeneficiaries] = useState<
-    { id: string; status: string; fullName: string }[]
+    { id: string; status: string; fullName: string; staff?: object }[]
   >([]);
   const [researchers, setResearchers] = useState<
     { id: string; status: string; fullName: string }[]
@@ -40,8 +52,8 @@ const ApplicantsViewForSupervisor = () => {
               ({ contactsBank = {}, housing = {}, status = {}, ...rest }) => ({
                 ...contactsBank,
                 ...housing,
-                ...status,
                 ...rest,
+                status: rest.staff ? "Researcher Assigned" : "In Preview",
               })
             )
             .filter(({ status = "" }) => status !== "Accepted") as any
@@ -362,27 +374,39 @@ const ApplicantsViewForSupervisor = () => {
       <TablePage
         title={title}
         filters={filters}
-        actionButtons={actionButtons}
+        // actionButtons={actionButtons}
         columns={columns}
         data={beneficiaries}
-        tableActions={(id?: string) => [
-          {
-            icon: faUser,
-            spread: true,
-            label: t("Auth.Beneficiaries.Profile.AssignResearcher"),
-            onClick: (data: string) => setAssignResearcherModalOpen(data),
-          },
-          {
-            icon: faUser,
-            label: t("Auth.Beneficiaries.Profile.ProfileDetails"),
-            onClick: (data: string) => viewProfile(data),
-          },
-          {
-            icon: faTrash,
-            label: t("Auth.Beneficiaries.Profile.DeleteApplication"),
-            onClick: (data: string) => deleteBeneficiary(data),
-          },
-        ]}
+        tableActions={(id?: string) => {
+          const row = beneficiaries.find((b) => b.id === id);
+
+          const final = [];
+
+          const allowAssign = !row?.staff;
+
+          if (allowAssign) {
+            final.push({
+              icon: faUser,
+              spread: true,
+              label: t("Auth.Beneficiaries.Profile.AssignResearcher"),
+              onClick: (data: string) => setAssignResearcherModalOpen(data),
+            });
+          }
+
+          return [
+            ...final,
+            {
+              icon: faUser,
+              label: t("Auth.Beneficiaries.Profile.ProfileDetails"),
+              onClick: (data: string) => viewProfile(data),
+            },
+            {
+              icon: faTrash,
+              label: t("Auth.Beneficiaries.Profile.DeleteApplication"),
+              onClick: (data: string) => deleteBeneficiary(data),
+            },
+          ];
+        }}
         onPageChange={(i = 0, x = 0) => console.log(i, x)}
         onSearch={(values) => getData(values)}
       />
@@ -408,7 +432,7 @@ const ApplicantsViewForSupervisor = () => {
               },
               {
                 label: t("Auth.Researchers.ResearcherName"),
-                name: "researcher",
+                name: "staff",
                 type: "select",
                 required: true,
                 options: researchers.map(({ id, fullName }) => ({
@@ -426,6 +450,7 @@ const ApplicantsViewForSupervisor = () => {
             //     Back
             //   </Button>
             // }
+            initialValues={{ staff: assignResearcherModalOpen }}
             submitText={t("Auth.Researchers.Assign")}
             onFormSubmit={(e) => {
               BeneficiaryApi.assignResearcher(
