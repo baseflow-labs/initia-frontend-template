@@ -303,6 +303,7 @@
       "Title": "Title"
     },
     "Researchers": {
+      "AddProfilePhoto": "Add Profile Photo",
       "AddResearcher": "Add Researcher",
       "Assign": "Assign",
       "BeneficiariesCount": "Beneficiaries sCount",
@@ -431,6 +432,10 @@
   "Global": {
     "Form": {
       "CantDoIt": "Can't Do It",
+      "Label": {
+        "Email": "Email",
+        "PhoneNumber": "Phone Number"
+      },
       "Labels": {
         "Add": "Add",
         "AddNew": "AddNew",

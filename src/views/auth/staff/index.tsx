@@ -1,21 +1,13 @@
-import { FormikProps } from "formik";
 import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
-import * as MetadataApi from "../../../api/metadata";
-import * as BeneficiaryApi from "../../../api/profile/beneficiary";
+import { faEdit, faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "../../../components/core/button";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
-import { addNotification } from "../../../store/actions/notifications";
-import { setFontSize, setMetadata } from "../../../store/actions/settings";
-import { useAppSelector } from "../../../store/hooks";
-import { apiCatchGlobalHandler } from "../../../utils/function";
 import PageTemplate from "../../../layouts/auth/pageTemplate";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
-import { beneficiariesIcon } from "../../../assets/icons/icons";
 
 const ResearcherMgmtPage = () => {
   const { t } = useTranslation();
@@ -29,7 +21,7 @@ const ResearcherMgmtPage = () => {
       email: "naser@gmail.com",
       phoneNumber: "966505546515",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541",
+        "https://executivesupportmagazine.com/wp-content/uploads/2022/09/Mohammed-Humaid-Almutairy.jpg",
       beneficiariesCount: 20,
       visitsCount: 15,
     },
@@ -38,7 +30,7 @@ const ResearcherMgmtPage = () => {
       email: "naser@gmail.com",
       phoneNumber: "966505546515",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541",
+        "https://executivesupportmagazine.com/wp-content/uploads/2022/09/Mohammed-Humaid-Almutairy.jpg",
       beneficiariesCount: 20,
       visitsCount: 15,
     },
@@ -47,7 +39,7 @@ const ResearcherMgmtPage = () => {
       email: "naser@gmail.com",
       phoneNumber: "966505546515",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541",
+        "https://executivesupportmagazine.com/wp-content/uploads/2022/09/Mohammed-Humaid-Almutairy.jpg",
       beneficiariesCount: 20,
       visitsCount: 15,
     },
@@ -56,7 +48,7 @@ const ResearcherMgmtPage = () => {
       email: "naser@gmail.com",
       phoneNumber: "966505546515",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541",
+        "https://executivesupportmagazine.com/wp-content/uploads/2022/09/Mohammed-Humaid-Almutairy.jpg",
       beneficiariesCount: 20,
       visitsCount: 15,
     },
@@ -89,11 +81,16 @@ const ResearcherMgmtPage = () => {
             ) => (
               <div className="col-12 col-md-4 col-lg-3" key={i}>
                 <div className="card py-4">
-                  <img
-                    src={image}
-                    className="card-img-top w-50 rounded-circle mx-auto"
-                    alt="..."
-                  />
+                  <div
+                    className="mx-auto rounded-circle overflow-hidden"
+                    style={{ width: "150px", height: "150px" }}
+                  >
+                    <img
+                      src={image}
+                      alt="..."
+                      className="w-100 h-100 object-fit-cover"
+                    />
+                  </div>
 
                   <div className="card-body text-center">
                     <h5 className="card-title">{fullName}</h5>
@@ -149,6 +146,63 @@ const ResearcherMgmtPage = () => {
             )
           )}
         </div>
+
+        <Modal
+          title={t("Auth.Researchers.AddResearcher")}
+          onClose={() => setOpenModal(false)}
+          isOpen={!!openModal}
+        >
+          <Form
+            inputs={() => [
+              {
+                label: t("Auth.Researchers.ResearcherName"),
+                name: "fullName",
+                type: "text",
+                required: true,
+              },
+              {
+                label: t("Global.Form.Label.PhoneNumber"),
+                name: "phoneNumber",
+                type: "phoneNumber",
+                required: true,
+              },
+              {
+                label: t("Global.Form.Label.Email"),
+                name: "email",
+                type: "email",
+                required: true,
+              },
+              {
+                label: t("Auth.Researchers.AddProfilePhoto"),
+                name: "photo",
+                type: "file",
+                required: true,
+              },
+            ]}
+            submitText={t("Auth.Researchers.AddResearcher")}
+            onFormSubmit={(e) => {
+              // BeneficiaryApi.cancel(openModal || "", e)
+              //   .then((res) => {
+              //     dispatch(
+              //       addNotification({
+              //         msg: t("Global.Form.SuccessMsg", {
+              //           action: t(
+              //             "Auth.Beneficiaries.Profile.CancelMembership"
+              //           ),
+              //           data: beneficiaries.find(
+              //             (b) => b.id === openModal
+              //           )?.fullName,
+              //         }),
+              //       })
+              //     );
+              //     getData({});
+              //     setOpenModal(null);
+              //   })
+              //   .catch(apiCatchGlobalHandler);
+              console.log({ e });
+            }}
+          />
+        </Modal>
       </Fragment>
     </PageTemplate>
   );

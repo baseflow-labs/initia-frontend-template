@@ -303,6 +303,7 @@
       "Title": "طلب الانتساب للجمعية"
     },
     "Researchers": {
+      "AddProfilePhoto": "إضافة صورة شخصية",
       "AddResearcher": "إضافة باحث جديد",
       "Assign": "إحالة",
       "BeneficiariesCount": "عدد المستفيدين",
@@ -431,6 +432,10 @@
   "Global": {
     "Form": {
       "CantDoIt": "لا يمكن القيام بهذا الإجراء",
+      "Label": {
+        "Email": "البريد الإلكتروني",
+        "PhoneNumber": "رقم الجوال"
+      },
       "Labels": {
         "Add": "إضافة",
         "AddNew": "إضافة بيانات جديدة",
