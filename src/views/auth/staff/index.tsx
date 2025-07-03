@@ -115,12 +115,7 @@ const ResearcherMgmtPage = () => {
                       </a>
                     </p>
 
-                    <Button
-                      color="info"
-                      outline
-                      size="lg"
-                      className="w-50 py-3"
-                    >
+                    <Button color="info" outline size="xs">
                       <FontAwesomeIcon icon={faEdit} />{" "}
                       {t("Global.Form.Labels.Edit")}
                     </Button>
