@@ -1,8 +1,5 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import {
-  faChevronLeft,
-  faChevronRight,
-} from "@fortawesome/free-solid-svg-icons";
+import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
@@ -11,11 +8,13 @@ import { useLocation, useNavigate } from "react-router";
 import IconWrapperComp from "../../assets/icons/wrapper";
 import Logo from "../../assets/images/brand/logo-full.png";
 import LogoOnly from "../../assets/images/brand/logo-only.png";
+import { useAppSelector } from "../../store/hooks";
 import CopyRightView from "../common/copyright";
 
 interface Props {
   routes: {
     name: string;
+    labelNote?: string;
     route: string;
     icon: any;
   }[];
@@ -32,6 +31,7 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const location = useLocation();
+  const { user } = useAppSelector((state) => state.auth);
 
   return (
     <Fragment>
@@ -50,7 +50,7 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
         </div>
 
         <div className="nav flex-column px-2">
-          {routes.map(({ name, route, icon }, i) => (
+          {routes.map(({ name, route, icon, labelNote }, i) => (
             <Fragment key={i}>
               <h5
                 className={`sidebar-link text-decoration-none p-3 rounded-3 ${
@@ -65,6 +65,10 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
               >
                 <IconWrapperComp icon={icon} className="me-2" />
                 {!collapsed && <span>{name}</span>}
+
+                {user.role === "admin" && (
+                  <div className="text-end w-100">{labelNote}</div>
+                )}
               </h5>
 
               {i === 0 && (
