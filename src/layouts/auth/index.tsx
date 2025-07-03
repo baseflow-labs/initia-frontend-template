@@ -3,7 +3,18 @@ import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes, useLocation } from "react-router";
 import { Fragment } from "react/jsx-runtime";
 
-import { aidsIcon, beneficiariesIcon, contactIcon, dashboardIcon, infoIcon, membershipFormIcon, profileIcon, settingsIcon, visitReportIcon, visitsIcon } from "../../assets/icons/icons";
+import {
+  aidsIcon,
+  beneficiariesIcon,
+  contactIcon,
+  dashboardIcon,
+  infoIcon,
+  membershipFormIcon,
+  profileIcon,
+  settingsIcon,
+  visitReportIcon,
+  visitsIcon,
+} from "../../assets/icons/icons";
 import { useAppSelector } from "../../store/hooks";
 import { useWindowWidth } from "../../utils/hooks";
 import AidsView from "../../views/auth/aids";
@@ -29,6 +40,7 @@ import { FilePreviewModal } from "./globalModal";
 import Navbar from "./navbar";
 import OffCanvasNav from "./offcanvasNav";
 import Sidebar from "./sidebarNav";
+import ResearcherMgmtPage from "../../views/auth/staff";
 
 const AuthLayout = () => {
   const { t } = useTranslation();
@@ -88,6 +100,14 @@ const AuthLayout = () => {
       route: "/beneRS",
       labelNote: "For RS",
       view: <BeneficiariesViewForSupervisor />,
+      showInNav: true,
+      icon: beneficiariesIcon,
+      users: ["supervisor", "admin"],
+    },
+    {
+      name: t("Auth.Researchers.Title"),
+      route: "/staff",
+      view: <ResearcherMgmtPage />,
       showInNav: true,
       icon: beneficiariesIcon,
       users: ["supervisor", "admin"],

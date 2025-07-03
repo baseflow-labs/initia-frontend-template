@@ -303,8 +303,12 @@
       "Title": "طلب الانتساب للجمعية"
     },
     "Researchers": {
+      "AddResearcher": "إضافة باحث جديد",
       "Assign": "إحالة",
-      "ResearcherName": "اسم الباحث"
+      "BeneficiariesCount": "عدد المستفيدين",
+      "ResearcherName": "اسم الباحث",
+      "Title": "إدارة الباحثين",
+      "VisitsCount": "عدد الزيارات"
     },
     "Settings": {
       "AllCities": "جميع مدن المحافظات",
@@ -431,7 +435,7 @@
         "Add": "إضافة",
         "AddNew": "إضافة بيانات جديدة",
         "Confirm": "تأكيد",
-        "Edit": "تعدبل",
+        "Edit": "تعديل",
         "InvalidEmail": "بريد إلكتروني غير صالح",
         "Location": "Google Map رابط",
         "No": "لا",

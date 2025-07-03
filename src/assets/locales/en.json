@@ -303,8 +303,12 @@
       "Title": "Title"
     },
     "Researchers": {
+      "AddResearcher": "Add Researcher",
       "Assign": "Assign",
-      "ResearcherName": "Researcher Name"
+      "BeneficiariesCount": "Beneficiaries sCount",
+      "ResearcherName": "Researcher Name",
+      "Title": "Researchers Mgmt",
+      "VisitsCount": "Visits Count"
     },
     "Settings": {
       "AllCities": "All Cities",
