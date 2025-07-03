@@ -49,11 +49,19 @@ const ApplicantsViewForSupervisor = () => {
         setBeneficiaries(
           (res as any)
             .map(
-              ({ contactsBank = {}, housing = {}, status = {}, ...rest }) => ({
+              ({
+                contactsBank = {},
+                housing = {},
+                status: originalStatus = { status: "" },
+                ...rest
+              }) => ({
                 ...contactsBank,
                 ...housing,
                 ...rest,
-                status: rest.staff ? "Researcher Assigned" : "In Preview",
+                researcher: rest.staff?.fullName,
+                status: rest.staff
+                  ? "Researcher Assigned"
+                  : originalStatus.status,
               })
             )
             .filter(({ status = "" }) => status !== "Accepted") as any
@@ -68,16 +76,7 @@ const ApplicantsViewForSupervisor = () => {
     StaffApi.getAll({})
       .then((res) => {
         setResearchers(
-          (res as any)
-            .map(
-              ({ contactsBank = {}, housing = {}, status = {}, ...rest }) => ({
-                ...contactsBank,
-                ...housing,
-                ...status,
-                ...rest,
-              })
-            )
-            .filter(({ status = "" }) => status !== "Accepted") as any
+          (res as any).filter(({ status = "" }) => status !== "Accepted") as any
         );
       })
       .catch(apiCatchGlobalHandler);
@@ -264,23 +263,23 @@ const ApplicantsViewForSupervisor = () => {
       name: "nationality",
       label: t("Auth.MembershipRegistration.Form.Nationality.Title"),
     },
-    {
-      type: "select",
-      options: homeTypes,
-      name: "homeType",
-      label: t("Auth.MembershipRegistration.Form.HomeType.Title"),
-    },
+    // {
+    //   type: "select",
+    //   options: homeTypes,
+    //   name: "homeType",
+    //   label: t("Auth.MembershipRegistration.Form.HomeType.Title"),
+    // },
     {
       type: "phoneNumber",
       name: "beneficiaryMobile",
       label: t("Global.Labels.PhoneNumber"),
     },
-    {
-      type: "custom",
-      name: "city",
-      label: t("Auth.MembershipRegistration.Address"),
-      render: (row: any) => row.city + " - " + row.district,
-    },
+    // {
+    //   type: "custom",
+    //   name: "city",
+    //   label: t("Auth.MembershipRegistration.Address"),
+    //   render: (row: any) => row.city + " - " + row.district,
+    // },
     {
       type: "select",
       options: [
@@ -313,6 +312,11 @@ const ApplicantsViewForSupervisor = () => {
       label: t("Auth.MembershipRegistration.Form.Category.Title"),
     },
     {
+      type: "text",
+      name: "researcher",
+      label: t("Auth.Researchers.ResearcherName"),
+    },
+    {
       type: "custom",
       render: (row: any) => (
         <Fragment>
@@ -342,9 +346,13 @@ const ApplicantsViewForSupervisor = () => {
 
   const actionButtons = [
     {
-      label: t("Auth.Beneficiaries.AddBeneficiary"),
-      onClick: () => dispatch(logout("/register")),
+      label: t("Auth.Beneficiaries.Profile.AssignResearcher"),
+      onClick: () => setAssignResearcherModalOpen("x"),
     },
+    // {
+    //   label: t("Auth.Beneficiaries.AddBeneficiary"),
+    //   onClick: () => dispatch(logout("/register")),
+    // },
   ];
 
   const deleteBeneficiary = (id: string) => {
@@ -374,7 +382,7 @@ const ApplicantsViewForSupervisor = () => {
       <TablePage
         title={title}
         filters={filters}
-        // actionButtons={actionButtons}
+        actionButtons={actionButtons}
         columns={columns}
         data={beneficiaries}
         tableActions={(id?: string) => {
@@ -425,10 +433,12 @@ const ApplicantsViewForSupervisor = () => {
                 type: "select",
                 required: true,
                 defaultValue: assignResearcherModalOpen || "",
-                options: beneficiaries.map(({ id, fullName }) => ({
-                  value: id,
-                  label: fullName,
-                })),
+                options: beneficiaries
+                  ?.filter(({ staff }) => !staff)
+                  ?.map(({ id, fullName }) => ({
+                    value: id,
+                    label: fullName,
+                  })),
               },
               {
                 label: t("Auth.Researchers.ResearcherName"),
