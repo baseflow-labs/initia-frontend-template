@@ -37,7 +37,7 @@ const getById = async (id: string) => {
 };
 
 const create = async (data: object) => {
-  const res = await api.post(mainPath, data);
+  const res = await api.post("/user", data);
   return res;
 };
 

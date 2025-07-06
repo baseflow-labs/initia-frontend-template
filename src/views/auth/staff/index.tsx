@@ -10,9 +10,12 @@ import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import PageTemplate from "../../../layouts/auth/pageTemplate";
 import { apiCatchGlobalHandler } from "../../../utils/function";
+import { useDispatch } from "react-redux";
+import { addNotification } from "../../../store/actions/notifications";
 
 const ResearcherMgmtPage = () => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
 
   const [openModal, setOpenModal] = useState(false);
   const [researchers, setResearchers] = useState<
@@ -144,7 +147,7 @@ const ResearcherMgmtPage = () => {
             inputs={() => [
               {
                 label: t("Auth.Researchers.ResearcherName"),
-                name: "fullName",
+                name: "name",
                 type: "text",
                 required: true,
               },
@@ -155,38 +158,48 @@ const ResearcherMgmtPage = () => {
                 required: true,
               },
               {
+                label: t("Auth.MembershipRegistration.Form.IdNumber"),
+                name: "idNumber",
+                type: "numberText",
+                minLength: 10,
+                maxLength: 10,
+                required: true,
+              },
+              {
                 label: t("Global.Form.Label.Email"),
                 name: "email",
                 type: "email",
                 required: true,
               },
-              {
-                label: t("Auth.Researchers.AddProfilePhoto"),
-                name: "photo",
-                type: "file",
-                required: true,
-              },
+              // {
+              //   label: t("Auth.Researchers.AddProfilePhoto"),
+              //   name: "photo",
+              //   type: "file",
+              //   required: false,
+              // },
             ]}
             submitText={t("Auth.Researchers.AddResearcher")}
             onFormSubmit={(e) => {
-              // BeneficiaryApi.cancel(openModal || "", e)
-              //   .then((res) => {
-              //     dispatch(
-              //       addNotification({
-              //         msg: t("Global.Form.SuccessMsg", {
-              //           action: t(
-              //             "Auth.Beneficiaries.Profile.CancelMembership"
-              //           ),
-              //           data: beneficiaries.find(
-              //             (b) => b.id === openModal
-              //           )?.fullName,
-              //         }),
-              //       })
-              //     );
-              //     getData({});
-              //     setOpenModal(null);
-              //   })
-              //   .catch(apiCatchGlobalHandler);
+              ResearcherApi.create({
+                ...e,
+                role: "researcher",
+                password: e.username,
+                passwordConfirmation: e.username,
+                code: "654321",
+              })
+                .then((res) => {
+                  dispatch(
+                    addNotification({
+                      msg: t("Global.Form.SuccessMsg", {
+                        action: t("Auth.Researchers.AddResearcher"),
+                        data: e.name,
+                      }),
+                    })
+                  );
+                  getData({});
+                  setOpenModal(false);
+                })
+                .catch(apiCatchGlobalHandler);
               console.log({ e });
             }}
           />
