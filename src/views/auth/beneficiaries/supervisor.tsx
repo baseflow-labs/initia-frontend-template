@@ -11,6 +11,7 @@ import { useNavigate } from "react-router";
 import { GetDataProps } from "../../../api";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import Button from "../../../components/core/button";
+import * as StaffApi from "../../../api/staff/researcher";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/tablePage";
@@ -24,6 +25,12 @@ const BeneficiariesViewForSupervisor = () => {
 
   const [cancelModalOpen, setCancelModalOpen] = useState<string | null>(null);
   const [beneficiaries, setBeneficiaries] = useState<
+    { id: string; status: string; fullName: string; staff: { id: string } }[]
+  >([]);
+  const [assignResearcherModalOpen, setAssignResearcherModalOpen] = useState<
+    { beneficiary: string; staff: string } | undefined
+  >(undefined);
+  const [researchers, setResearchers] = useState<
     { id: string; status: string; fullName: string }[]
   >([]);
 
@@ -48,6 +55,14 @@ const BeneficiariesViewForSupervisor = () => {
 
   useLayoutEffect(() => {
     getData({});
+
+    StaffApi.getAll({})
+      .then((res) => {
+        setResearchers(
+          (res as any).filter(({ status = "" }) => status !== "Accepted") as any
+        );
+      })
+      .catch(apiCatchGlobalHandler);
   }, []);
 
   const title = t("Auth.Beneficiaries.Title");
@@ -312,6 +327,16 @@ const BeneficiariesViewForSupervisor = () => {
             onClick: (data: string) => scheduleVisit(data),
           },
           {
+            icon: faUser,
+            label: t("Auth.Beneficiaries.Profile.AssignResearcher"),
+            onClick: (data: string) =>
+              setAssignResearcherModalOpen({
+                beneficiary: data,
+                staff:
+                  beneficiaries.find((b) => b.id === data)?.staff?.id || "",
+              }),
+          },
+          {
             icon: faUserMinus,
             label: t("Auth.Beneficiaries.Profile.CancelMembership"),
             onClick: (data: string) => setCancelModalOpen(data),
@@ -371,6 +396,74 @@ const BeneficiariesViewForSupervisor = () => {
               .catch(apiCatchGlobalHandler);
           }}
         />
+      </Modal>
+
+      <Modal
+        title={t("Auth.Beneficiaries.Profile.AssignResearcher")}
+        onClose={() => setAssignResearcherModalOpen(undefined)}
+        isOpen={!!assignResearcherModalOpen}
+      >
+        {assignResearcherModalOpen && (
+          <Form
+            inputs={() => [
+              {
+                label: t("Auth.Beneficiaries.BeneficiaryName"),
+                name: "beneficiary",
+                type: "select",
+                required: true,
+                options: beneficiaries?.map(({ id, fullName }) => ({
+                  value: id,
+                  label: fullName,
+                })),
+              },
+              {
+                label: t("Auth.Researchers.ResearcherName"),
+                name: "staff",
+                type: "select",
+                required: true,
+                options: researchers.map(({ id, fullName }) => ({
+                  value: id,
+                  label: fullName,
+                })),
+              },
+            ]}
+            // customButtons={
+            //   <Button
+            //     outline
+            //     onClick={() => setAssignResearcherModalOpen(null)}
+            //     className="w-50"
+            //   >
+            //     Back
+            //   </Button>
+            // }
+            initialValues={assignResearcherModalOpen}
+            submitText={t("Auth.Researchers.Assign")}
+            onFormSubmit={(e) => {
+              BeneficiaryApi.assignResearcher(e.beneficiary || "", e)
+                .then((res) => {
+                  dispatch(
+                    addNotification({
+                      msg: t("Global.Form.SuccessMsg", {
+                        action: t(
+                          "Auth.Beneficiaries.Profile.AssignResearcher",
+                          {
+                            researcher: researchers.find(
+                              ({ id }) => e.researcher === id
+                            )?.fullName,
+                          }
+                        ),
+                        data: beneficiaries.find((b) => b.id === e.beneficiary)
+                          ?.fullName,
+                      }),
+                    })
+                  );
+                  getData({});
+                  setAssignResearcherModalOpen(undefined);
+                })
+                .catch(apiCatchGlobalHandler);
+            }}
+          />
+        )}
       </Modal>
     </Fragment>
   );
