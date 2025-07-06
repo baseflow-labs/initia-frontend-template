@@ -66,7 +66,7 @@ const AuthLayout = () => {
       view: <DashboardView />,
       showInNav: true,
       icon: dashboardIcon,
-      users: ["beneficiary", "researcher", "admin"],
+      users: ["beneficiary", "researcher", "hod", "admin"],
     },
     {
       name: t("Auth.Beneficiaries.Applications"),
@@ -84,7 +84,7 @@ const AuthLayout = () => {
       view: <ApplicantsViewForSupervisor />,
       showInNav: true,
       icon: beneficiariesIcon,
-      users: ["supervisor", "admin"],
+      users: ["hod", "admin"],
     },
     {
       name: t("Auth.Beneficiaries.Title"),
@@ -102,7 +102,7 @@ const AuthLayout = () => {
       view: <BeneficiariesViewForSupervisor />,
       showInNav: true,
       icon: beneficiariesIcon,
-      users: ["supervisor", "admin"],
+      users: ["hod", "admin"],
     },
     {
       name: t("Auth.Researchers.Title"),
@@ -110,7 +110,7 @@ const AuthLayout = () => {
       view: <ResearcherMgmtPage />,
       showInNav: true,
       icon: beneficiariesIcon,
-      users: ["supervisor", "admin"],
+      users: ["hod", "admin"],
     },
     {
       name: t("Auth.Beneficiaries.Profile.Title"),
@@ -124,7 +124,7 @@ const AuthLayout = () => {
       route: "/profile/",
       view: <BeneficiaryProfileView />,
       icon: beneficiariesIcon,
-      users: ["researcher", "admin"],
+      users: ["researcher", "hod", "admin"],
     },
     {
       name: t("Auth.Visits.Title"),
@@ -132,14 +132,7 @@ const AuthLayout = () => {
       view: <VisitsView />,
       showInNav: true,
       icon: visitsIcon,
-      users: ["researcher", "admin"],
-    },
-    {
-      name: t("Auth.Visits.Detail.title"),
-      route: "/visitSchedule/detail",
-      view: <VisitDetailView />,
-      icon: visitsIcon,
-      users: ["researcher", "admin"],
+      users: ["researcher", "hod", "admin"],
     },
     {
       name: t("Auth.Visits.Visits"),
@@ -162,7 +155,7 @@ const AuthLayout = () => {
       route: "/visitSchedule/report/details",
       view: <VisitDetailView />,
       icon: visitReportIcon,
-      users: ["researcher", "admin"],
+      users: ["researcher", "hod", "admin"],
     },
     {
       name: t("Auth.Aids.Title"),
@@ -170,7 +163,7 @@ const AuthLayout = () => {
       view: <AidsView />,
       showInNav: true,
       icon: aidsIcon,
-      users: ["researcher", "admin"],
+      users: ["researcher", "hod", "admin"],
     },
     {
       name: t("Auth.Aids.Beneficiary.Title"),
@@ -202,7 +195,7 @@ const AuthLayout = () => {
       view: <SettingsPage />,
       icon: settingsIcon,
       fixed: true,
-      users: ["beneficiary", "researcher", "admin"],
+      users: ["beneficiary", "researcher", "hod", "admin"],
     },
   ];
 

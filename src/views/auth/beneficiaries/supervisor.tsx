@@ -1,8 +1,4 @@
-import {
-  faCalendarDays,
-  faUser,
-  faUserMinus,
-} from "@fortawesome/free-solid-svg-icons";
+import { faUser, faUserMinus } from "@fortawesome/free-solid-svg-icons";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
@@ -10,8 +6,8 @@ import { useNavigate } from "react-router";
 
 import { GetDataProps } from "../../../api";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
-import Button from "../../../components/core/button";
 import * as StaffApi from "../../../api/staff/researcher";
+import Button from "../../../components/core/button";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/tablePage";
@@ -319,12 +315,6 @@ const BeneficiariesViewForSupervisor = () => {
             icon: faUser,
             label: t("Auth.Beneficiaries.Profile.ProfileDetails"),
             onClick: (data: string) => viewProfile(data),
-          },
-          {
-            icon: faCalendarDays,
-            spread: true,
-            label: t("Auth.Visits.AddVisit"),
-            onClick: (data: string) => scheduleVisit(data),
           },
           {
             icon: faUser,

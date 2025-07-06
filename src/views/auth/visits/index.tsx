@@ -23,12 +23,14 @@ import {
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
+import { useAppSelector } from "../../../store/hooks";
 
 const VisitsView = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const { user } = useAppSelector((state) => state.auth);
 
   const [openModal, setOpenModal] = useState(false);
   const [crudData, setCrudData] = useState({});
@@ -272,7 +274,7 @@ const VisitsView = () => {
 
           return final;
         }}
-        actionButtons={actionButtons}
+        actionButtons={user.role !== "hod" ? actionButtons : undefined}
         columns={columns}
         data={visits}
         onPageChange={(i = 0, x = 0) => console.log(i, x)}
