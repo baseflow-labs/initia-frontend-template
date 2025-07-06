@@ -101,6 +101,14 @@ const VisitsView = () => {
       value: "Cancelled",
       label: t("Auth.Visits.Statuses.Cancelled"),
     },
+    {
+      value: "Approved",
+      label: t("Auth.Visits.Statuses.Approved"),
+    },
+    {
+      value: "Delayed",
+      label: t("Auth.Visits.Statuses.Delayed"),
+    },
   ];
 
   const filters = [

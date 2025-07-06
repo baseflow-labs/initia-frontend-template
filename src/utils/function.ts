@@ -8,11 +8,13 @@ export const statusColorRender = (status = "") => {
     case "Rejected":
     case "Cancelled":
     case "Cancel":
+    case "Delayed":
       return "danger";
     case "Done":
     case "Accept":
     case "Granted":
     case "Accepted":
+    case "Approved":
     case "Confirmed":
     case "Researcher Assigned":
       return "success";
