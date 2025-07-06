@@ -161,7 +161,11 @@ const SettingsPage = () => {
       <h3 className="mb-5">{t("Auth.Settings.Title")}</h3>
 
       <Form
-        inputs={user.role === "beneficiary" ? beneficiaryInputs : staffInputs}
+        inputs={
+          user.role !== "beneficiary" && user.role !== "researcher"
+            ? staffInputs
+            : beneficiaryInputs
+        }
         initialValues={{
           fontSize: fontSize,
           ...metadata,

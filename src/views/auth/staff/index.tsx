@@ -55,7 +55,7 @@ const ResearcherMgmtPage = () => {
       onSearch={(values) => console.log(values)}
     >
       <Fragment>
-        <div className="row g-5">
+        <div className="row g-5 justify-content-center">
           {researchers.map(
             (
               {
