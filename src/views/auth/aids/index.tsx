@@ -140,7 +140,7 @@ const AidsView = () => {
     },
     {
       type: "date",
-      name: "recaptionDate",
+      name: "collectionDate",
       label: t("Auth.Aids.RecaptionDate"),
     },
     {
