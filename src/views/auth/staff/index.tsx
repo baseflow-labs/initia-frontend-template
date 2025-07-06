@@ -17,9 +17,10 @@ const ResearcherMgmtPage = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
-  const [openModal, setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState<Object | undefined>(undefined);
   const [researchers, setResearchers] = useState<
     {
+      id?: string;
       fullName: string;
       email: string;
       username: string;
@@ -33,12 +34,7 @@ const ResearcherMgmtPage = () => {
   const getData = (filters: GetDataProps) => {
     ResearcherApi.getAll(filters)
       .then((res) => {
-        setResearchers(
-          (res as any).map(({ user = {}, ...rest }) => ({
-            ...user,
-            ...rest,
-          }))
-        );
+        setResearchers(res as any);
       })
       .catch(apiCatchGlobalHandler);
   };
@@ -53,7 +49,7 @@ const ResearcherMgmtPage = () => {
       actionButtons={[
         {
           label: t("Auth.Researchers.AddResearcher"),
-          onClick: () => setOpenModal(true),
+          onClick: () => setOpenModal({}),
         },
       ]}
       onSearch={(values) => console.log(values)}
@@ -63,6 +59,7 @@ const ResearcherMgmtPage = () => {
           {researchers.map(
             (
               {
+                id,
                 fullName,
                 email,
                 username,
@@ -73,7 +70,7 @@ const ResearcherMgmtPage = () => {
               i
             ) => (
               <div className="col-12 col-md-4 col-lg-3" key={i}>
-                <div className="card py-4">
+                <div className="card rounded-4 py-4">
                   <div
                     className="mx-auto rounded-circle overflow-hidden"
                     style={{ width: "150px", height: "150px" }}
@@ -111,10 +108,23 @@ const ResearcherMgmtPage = () => {
                       </a>
                     </p>
 
-                    <Button color="info" outline size="xs">
+                    {/* <Button
+                      color="info"
+                      outline
+                      size="xs"
+                      onClick={() =>
+                        setOpenModal({
+                          id,
+                          name: fullName,
+                          email,
+                          username,
+                          image,
+                        })
+                      }
+                    >
                       <FontAwesomeIcon icon={faEdit} />{" "}
                       {t("Global.Form.Labels.Edit")}
-                    </Button>
+                    </Button> */}
                   </div>
                 </div>
 
@@ -140,7 +150,7 @@ const ResearcherMgmtPage = () => {
 
         <Modal
           title={t("Auth.Researchers.AddResearcher")}
-          onClose={() => setOpenModal(false)}
+          onClose={() => setOpenModal(undefined)}
           isOpen={!!openModal}
         >
           <Form
@@ -197,11 +207,11 @@ const ResearcherMgmtPage = () => {
                     })
                   );
                   getData({});
-                  setOpenModal(false);
+                  setOpenModal(undefined);
                 })
                 .catch(apiCatchGlobalHandler);
-              console.log({ e });
             }}
+            initialValues={openModal}
           />
         </Modal>
       </Fragment>
