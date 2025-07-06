@@ -1,12 +1,4 @@
-import {
-  faCheckSquare,
-  faCircle,
-  faEdit,
-  faSearch,
-  faTrash,
-  faUser,
-  faXmarkSquare,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCircle, faTrash, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -16,11 +8,9 @@ import { useNavigate } from "react-router";
 import { GetDataProps } from "../../../api";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import * as StaffApi from "../../../api/staff/researcher";
-import Button from "../../../components/core/button";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/tablePage";
-import { logout } from "../../../store/actions/auth";
 import { addNotification } from "../../../store/actions/notifications";
 import {
   apiCatchGlobalHandler,
@@ -34,14 +24,19 @@ const ApplicantsViewForSupervisor = () => {
   const dispatch = useDispatch();
 
   const [beneficiaries, setBeneficiaries] = useState<
-    { id: string; status: string; fullName: string; staff?: object }[]
+    {
+      id: string;
+      status: string;
+      fullName: string;
+      staff?: { id: string };
+    }[]
   >([]);
   const [researchers, setResearchers] = useState<
     { id: string; status: string; fullName: string }[]
   >([]);
   const [assignResearcherModalOpen, setAssignResearcherModalOpen] = useState<
-    string | null
-  >(null);
+    { beneficiary: string; staff: string } | undefined
+  >(undefined);
 
   const getData = (filters: GetDataProps) => {
     BeneficiaryApi.getAll(filters)
@@ -95,100 +90,6 @@ const ApplicantsViewForSupervisor = () => {
     },
   ];
 
-  const provinces = [
-    {
-      value: "Riyadh",
-      label: t("Auth.MembershipRegistration.Form.Province.Riyadh"),
-    },
-    {
-      value: "Makkah",
-      label: t("Auth.MembershipRegistration.Form.Province.Makkah"),
-    },
-    {
-      value: "Madinah",
-      label: t("Auth.MembershipRegistration.Form.Province.Madinah"),
-    },
-    {
-      value: "Eastern Province",
-      label: t("Auth.MembershipRegistration.Form.Province.Eastern Province"),
-    },
-    {
-      value: "Asir",
-      label: t("Auth.MembershipRegistration.Form.Province.Asir"),
-    },
-    {
-      value: "Tabuk",
-      label: t("Auth.MembershipRegistration.Form.Province.Tabuk"),
-    },
-    {
-      value: "Hail",
-      label: t("Auth.MembershipRegistration.Form.Province.Hail"),
-    },
-    {
-      value: "Northern Borders",
-      label: t("Auth.MembershipRegistration.Form.Province.NorthernBorders"),
-    },
-    {
-      value: "Jazan",
-      label: t("Auth.MembershipRegistration.Form.Province.Jazan"),
-    },
-    {
-      value: "Najran",
-      label: t("Auth.MembershipRegistration.Form.Province.Najran"),
-    },
-    {
-      value: "Al-Bahah",
-      label: t("Auth.MembershipRegistration.Form.Province.AlBahah"),
-    },
-    {
-      value: "Al-Jawf",
-      label: t("Auth.MembershipRegistration.Form.Province.AlJawf"),
-    },
-    {
-      value: "Al-Qassim",
-      label: t("Auth.MembershipRegistration.Form.Province.AlQassim"),
-    },
-  ];
-
-  const homeTypes = [
-    {
-      value: "Apartment",
-      label: t("Auth.MembershipRegistration.Form.HomeType.Apartment"),
-    },
-    {
-      value: "Villa",
-      label: t("Auth.MembershipRegistration.Form.HomeType.Villa"),
-    },
-    {
-      value: "Independent Home",
-      label: t("Auth.MembershipRegistration.Form.HomeType.IndependentHome"),
-    },
-    {
-      value: "Folk House",
-      label: t("Auth.MembershipRegistration.Form.HomeType.FolkHouse"),
-    },
-    {
-      value: "Room(s) in Shared House",
-      label: t("Auth.MembershipRegistration.Form.HomeType.SharedHouse"),
-    },
-    {
-      value: "Roof",
-      label: t("Auth.MembershipRegistration.Form.HomeType.Roof"),
-    },
-    {
-      value: "Caravan",
-      label: t("Auth.MembershipRegistration.Form.HomeType.Caravan"),
-    },
-    {
-      value: "Incomplete Building",
-      label: t("Auth.MembershipRegistration.Form.HomeType.IncompleteBuilding"),
-    },
-    {
-      value: "No Permanent Home",
-      label: t("Auth.MembershipRegistration.Form.HomeType.NoPermanentHome"),
-    },
-  ];
-
   const statuses = [
     {
       value: "New Member",
@@ -238,11 +139,6 @@ const ApplicantsViewForSupervisor = () => {
       label: t("Auth.MembershipRegistration.Form.Nationality.Title"),
       options: nationalities,
       name: "nationality",
-    },
-    {
-      label: t("Auth.MembershipRegistration.Form.Province.Title"),
-      options: provinces,
-      name: "housing=>province",
     },
   ];
 
@@ -332,27 +228,16 @@ const ApplicantsViewForSupervisor = () => {
     },
   ];
 
-  const completeProfile = (data: string) => {
-    navigate(`/apply/?id=${data}`);
-  };
-
   const viewProfile = (data: string) => {
     navigate(`/profile/?id=${data}`);
-  };
-
-  const reviewProfile = (data: string) => {
-    navigate(`/review/?id=${data}`);
   };
 
   const actionButtons = [
     {
       label: t("Auth.Beneficiaries.Profile.AssignResearcher"),
-      onClick: () => setAssignResearcherModalOpen("x"),
+      onClick: () =>
+        setAssignResearcherModalOpen({ beneficiary: "", staff: "" }),
     },
-    // {
-    //   label: t("Auth.Beneficiaries.AddBeneficiary"),
-    //   onClick: () => dispatch(logout("/register")),
-    // },
   ];
 
   const deleteBeneficiary = (id: string) => {
@@ -385,43 +270,36 @@ const ApplicantsViewForSupervisor = () => {
         actionButtons={actionButtons}
         columns={columns}
         data={beneficiaries}
-        tableActions={(id?: string) => {
-          const row = beneficiaries.find((b) => b.id === id);
-
-          const final = [];
-
-          const allowAssign = !row?.staff;
-
-          if (allowAssign) {
-            final.push({
-              icon: faUser,
-              spread: true,
-              label: t("Auth.Beneficiaries.Profile.AssignResearcher"),
-              onClick: (data: string) => setAssignResearcherModalOpen(data),
-            });
-          }
-
-          return [
-            ...final,
-            {
-              icon: faUser,
-              label: t("Auth.Beneficiaries.Profile.ProfileDetails"),
-              onClick: (data: string) => viewProfile(data),
-            },
-            {
-              icon: faTrash,
-              label: t("Auth.Beneficiaries.Profile.DeleteApplication"),
-              onClick: (data: string) => deleteBeneficiary(data),
-            },
-          ];
-        }}
+        tableActions={() => [
+          {
+            icon: faUser,
+            spread: true,
+            label: t("Auth.Beneficiaries.Profile.AssignResearcher"),
+            onClick: (data: string) =>
+              setAssignResearcherModalOpen({
+                beneficiary: data,
+                staff:
+                  beneficiaries.find((b) => b.id === data)?.staff?.id || "",
+              }),
+          },
+          {
+            icon: faUser,
+            label: t("Auth.Beneficiaries.Profile.ProfileDetails"),
+            onClick: (data: string) => viewProfile(data),
+          },
+          {
+            icon: faTrash,
+            label: t("Auth.Beneficiaries.Profile.DeleteApplication"),
+            onClick: (data: string) => deleteBeneficiary(data),
+          },
+        ]}
         onPageChange={(i = 0, x = 0) => console.log(i, x)}
         onSearch={(values) => getData(values)}
       />
 
       <Modal
         title={t("Auth.Beneficiaries.Profile.AssignResearcher")}
-        onClose={() => setAssignResearcherModalOpen(null)}
+        onClose={() => setAssignResearcherModalOpen(undefined)}
         isOpen={!!assignResearcherModalOpen}
       >
         {assignResearcherModalOpen && (
@@ -432,13 +310,10 @@ const ApplicantsViewForSupervisor = () => {
                 name: "beneficiary",
                 type: "select",
                 required: true,
-                defaultValue: assignResearcherModalOpen || "",
-                options: beneficiaries
-                  ?.filter(({ staff }) => !staff)
-                  ?.map(({ id, fullName }) => ({
-                    value: id,
-                    label: fullName,
-                  })),
+                options: beneficiaries?.map(({ id, fullName }) => ({
+                  value: id,
+                  label: fullName,
+                })),
               },
               {
                 label: t("Auth.Researchers.ResearcherName"),
@@ -460,13 +335,10 @@ const ApplicantsViewForSupervisor = () => {
             //     Back
             //   </Button>
             // }
-            initialValues={{ staff: assignResearcherModalOpen }}
+            initialValues={assignResearcherModalOpen}
             submitText={t("Auth.Researchers.Assign")}
             onFormSubmit={(e) => {
-              BeneficiaryApi.assignResearcher(
-                assignResearcherModalOpen || "",
-                e
-              )
+              BeneficiaryApi.assignResearcher(e.beneficiary || "", e)
                 .then((res) => {
                   dispatch(
                     addNotification({
@@ -479,14 +351,13 @@ const ApplicantsViewForSupervisor = () => {
                             )?.fullName,
                           }
                         ),
-                        data: beneficiaries.find(
-                          (b) => b.id === assignResearcherModalOpen
-                        )?.fullName,
+                        data: beneficiaries.find((b) => b.id === e.beneficiary)
+                          ?.fullName,
                       }),
                     })
                   );
                   getData({});
-                  setAssignResearcherModalOpen(null);
+                  setAssignResearcherModalOpen(undefined);
                 })
                 .catch(apiCatchGlobalHandler);
             }}
