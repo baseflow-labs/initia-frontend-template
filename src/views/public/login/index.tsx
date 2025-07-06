@@ -104,7 +104,7 @@ const LoginView = () => {
         onFormSubmit={onSubmit}
       />
 
-      {process.env.REACT_APP_DEMO_STATUS === "true" ? (
+      {process.env.REACT_APP_ENVIRONMENT === "staging" ? (
         <div className="row g-2 mt-3">
           {demoLogin.map(({ label, credentials }, i) => (
             <div className="col-6" key={i}>

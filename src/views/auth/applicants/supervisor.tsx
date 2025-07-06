@@ -356,7 +356,7 @@ const ApplicantsViewForSupervisor = () => {
   ];
 
   const deleteBeneficiary = (id: string) => {
-    process.env.REACT_APP_DEMO_STATUS === "true"
+    process.env.REACT_APP_ENVIRONMENT === "staging"
       ? dispatch(
           addNotification({
             type: "err",
