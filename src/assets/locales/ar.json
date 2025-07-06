@@ -208,8 +208,8 @@
         "MasrefDocument": "شهادة الآيبان من تطبيق المصرف",
         "NationalAddressDocument": "إثبات العنوان الوطني",
         "Nationality": {
-          "NonSaudi": "غير سعودي",
-          "Saudi": "سعودي",
+          "NonSaudi": "غير سعودي(ة)",
+          "Saudi": "سعودي(ة)",
           "Title": "الجنسية"
         },
         "Occupation": {
