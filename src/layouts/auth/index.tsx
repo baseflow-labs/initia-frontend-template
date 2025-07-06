@@ -211,8 +211,6 @@ const AuthLayout = () => {
 
   return (
     <Fragment>
-      <DemoWarning />
-
       {!showSidebar ? <Navbar /> : ""}
 
       <OffCanvasNav
@@ -251,6 +249,8 @@ const AuthLayout = () => {
             transition: "margin-right 0.3s",
           }}
         >
+          <DemoWarning />
+
           {showSidebar && <DashboardNavbar />}
 
           <div className="p-0 px-2 px-lg-5 w-100">
