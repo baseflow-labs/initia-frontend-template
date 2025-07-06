@@ -409,7 +409,7 @@
         "Working": "Working"
       },
       "Statuses": {
-        "Approved": "Approved",
+        "Approved": "Beneficiary Approved",
         "Cancelled": "Cancelled",
         "Delayed": "Delayed",
         "Done": "Done",

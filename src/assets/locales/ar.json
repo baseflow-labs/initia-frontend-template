@@ -16,7 +16,7 @@
       "RecaptionDate": "تاريخ الاستلام",
       "Statuses": {
         "Grant": "منح المعونة",
-        "Granted": "اعتمدت",
+        "Granted": "اعتمد",
         "Pending": "قيد المراجعة",
         "Reject": "رفض طلب المعونة"
       },
@@ -409,7 +409,7 @@
         "Working": "يعمل"
       },
       "Statuses": {
-        "Approved": "تمت الموافقة",
+        "Approved": "وافق المستفيد",
         "Cancelled": "ألغيت الزيارة",
         "Delayed": "تم طلب التأجيل",
         "Done": "تمت الزيارة",
