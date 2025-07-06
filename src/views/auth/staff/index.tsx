@@ -1,58 +1,48 @@
-import { Fragment, useState } from "react";
+import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
 
 import { faEdit, faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { GetDataProps } from "../../../api";
+import * as ResearcherApi from "../../../api/staff/researcher";
 import Button from "../../../components/core/button";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import PageTemplate from "../../../layouts/auth/pageTemplate";
+import { apiCatchGlobalHandler } from "../../../utils/function";
 
 const ResearcherMgmtPage = () => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
 
   const [openModal, setOpenModal] = useState(false);
+  const [researchers, setResearchers] = useState<
+    {
+      fullName: string;
+      email: string;
+      username: string;
+      idNumber: string;
+      image: string;
+      beneficiariesCount: number;
+      visitsCount: number;
+    }[]
+  >([]);
 
-  const staff = [
-    {
-      fullName: "ناصر الدوسري",
-      email: "naser@gmail.com",
-      phoneNumber: "966505546515",
-      image:
-        "https://executivesupportmagazine.com/wp-content/uploads/2022/09/Mohammed-Humaid-Almutairy.jpg",
-      beneficiariesCount: 20,
-      visitsCount: 15,
-    },
-    {
-      fullName: "ناصر الدوسري",
-      email: "naser@gmail.com",
-      phoneNumber: "966505546515",
-      image:
-        "https://executivesupportmagazine.com/wp-content/uploads/2022/09/Mohammed-Humaid-Almutairy.jpg",
-      beneficiariesCount: 20,
-      visitsCount: 15,
-    },
-    {
-      fullName: "ناصر الدوسري",
-      email: "naser@gmail.com",
-      phoneNumber: "966505546515",
-      image:
-        "https://executivesupportmagazine.com/wp-content/uploads/2022/09/Mohammed-Humaid-Almutairy.jpg",
-      beneficiariesCount: 20,
-      visitsCount: 15,
-    },
-    {
-      fullName: "ناصر الدوسري",
-      email: "naser@gmail.com",
-      phoneNumber: "966505546515",
-      image:
-        "https://executivesupportmagazine.com/wp-content/uploads/2022/09/Mohammed-Humaid-Almutairy.jpg",
-      beneficiariesCount: 20,
-      visitsCount: 15,
-    },
-  ];
+  const getData = (filters: GetDataProps) => {
+    ResearcherApi.getAll(filters)
+      .then((res) => {
+        setResearchers(
+          (res as any).map(({ user = {}, ...rest }) => ({
+            ...user,
+            ...rest,
+          }))
+        );
+      })
+      .catch(apiCatchGlobalHandler);
+  };
+
+  useLayoutEffect(() => {
+    getData({});
+  }, []);
 
   return (
     <PageTemplate
@@ -67,12 +57,12 @@ const ResearcherMgmtPage = () => {
     >
       <Fragment>
         <div className="row g-5">
-          {staff.map(
+          {researchers.map(
             (
               {
                 fullName,
                 email,
-                phoneNumber,
+                username,
                 image,
                 beneficiariesCount,
                 visitsCount,
@@ -86,7 +76,10 @@ const ResearcherMgmtPage = () => {
                     style={{ width: "150px", height: "150px" }}
                   >
                     <img
-                      src={image}
+                      src={
+                        image ||
+                        "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"
+                      }
                       alt="..."
                       className="w-100 h-100 object-fit-cover"
                     />
@@ -107,11 +100,11 @@ const ResearcherMgmtPage = () => {
                       <br />
 
                       <a
-                        href={"tel:" + phoneNumber}
+                        href={"tel:966" + username}
                         target="_blank"
                         className="text-decoration-none text-muted"
                       >
-                        <FontAwesomeIcon icon={faPhone} /> {phoneNumber}
+                        <FontAwesomeIcon icon={faPhone} /> +966{username}
                       </a>
                     </p>
 
@@ -126,14 +119,14 @@ const ResearcherMgmtPage = () => {
                   <div className="col-6 text-center">
                     <div className="rounded-4 bg-info p-2">
                       <h6>{t("Auth.Researchers.BeneficiariesCount")}</h6>
-                      <h2>{Math.floor(beneficiariesCount / (i + 4))}</h2>
+                      <h2>{Math.floor(beneficiariesCount)}</h2>
                     </div>
                   </div>
 
                   <div className="col-6 text-center">
                     <div className="rounded-4 bg-success p-2">
                       <h6>{t("Auth.Researchers.VisitsCount")}</h6>
-                      <h2>{visitsCount + i}</h2>
+                      <h2>{visitsCount}</h2>
                     </div>
                   </div>
                 </div>
@@ -157,7 +150,7 @@ const ResearcherMgmtPage = () => {
               },
               {
                 label: t("Global.Form.Label.PhoneNumber"),
-                name: "phoneNumber",
+                name: "username",
                 type: "phoneNumber",
                 required: true,
               },
