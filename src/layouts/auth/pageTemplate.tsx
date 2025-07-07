@@ -7,6 +7,7 @@ import ActionButtons from "../../components/button/actionButtons";
 import Button from "../../components/core/button";
 import SelectInput from "../../components/form/inputs/select";
 import SelectManyInput from "../../components/form/inputs/selectMany";
+import { columnsWidth } from "../../utils/function";
 
 interface Props {
   title: string;
@@ -17,7 +18,7 @@ interface Props {
     multi?: boolean;
   }[];
   actionButtons?: { label: string; className?: string; onClick?: () => void }[];
-  onSearch: (values: {}) => void;
+  onSearch?: (values: {}) => void;
   children: React.ReactNode;
 }
 
@@ -44,17 +45,6 @@ const PageTemplate = ({
       onSearch?.(initialValues);
     },
   });
-
-  const columnsWidth = (count: number) => {
-    switch (count) {
-      case 1:
-        return 6;
-      case 2:
-        return 4;
-      default:
-        return 3;
-    }
-  };
 
   return (
     <Fragment>

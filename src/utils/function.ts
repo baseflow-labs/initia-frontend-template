@@ -42,3 +42,14 @@ export const renderDataFromOptions = (
 
 export const splitOverNumberPlusLeftover = (i: number, y = 2) =>
   Math.floor(i / y) + (i % y > 0 ? 1 : 0);
+
+export const columnsWidth = (count: number) => {
+  switch (count) {
+    case 1:
+      return 6;
+    case 2:
+      return 4;
+    default:
+      return 3;
+  }
+};
