@@ -499,7 +499,8 @@
         "Title": "Title"
       },
       "SendOtp": {
-        "ConfirmOTP": "ConfirmOTP"
+        "ConfirmOTP": "Confirm OTP",
+        "SendOtp": "Send OTP"
       },
       "Title": "Title"
     },
