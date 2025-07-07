@@ -5,6 +5,7 @@ import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import * as NotificationApi from "../../../api/notifications";
+import * as OverviewApi from "../../../api/overview";
 import { helpIcon } from "../../../assets/icons/icons";
 import IconWrapperComp from "../../../assets/icons/wrapper";
 import profilePhotoPlaceholder from "../../../assets/images/profile-image-placeholder.png";
@@ -21,18 +22,21 @@ const DashboardView = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { name, logo } = useAppSelector((state) => state.settings);
-  const [notifications, setNotification] = useState<Notification[]>([]);
+  const [data, setData] = useState<{
+    notifications?: Notification[];
+    status?: string;
+  }>({});
 
   useLayoutEffect(() => {
-    NotificationApi.get()
+    OverviewApi.forBeneficiary()
       .then((res: any) =>
-        setNotification(
-          res
-            .filter((a: Notification) => a.important)
-            .sort((a: Notification, b: Notification) =>
+        setData({
+          ...res,
+          notifications: res.notifications?.sort(
+            (a: Notification, b: Notification) =>
               a.createdAt > b.createdAt ? -1 : 1
-            )
-        )
+          ),
+        })
       )
       .catch(apiCatchGlobalHandler);
   }, []);
@@ -109,9 +113,9 @@ const DashboardView = () => {
               <h3 className="my-auto">
                 <FontAwesomeIcon
                   icon={faCircle}
-                  className={`text-${statusColorRender("Accepted")}`}
+                  className={`text-${statusColorRender(data.status)}`}
                 />{" "}
-                {renderDataFromOptions("Accepted", statuses)}
+                {renderDataFromOptions(data.status || "", statuses)}
               </h3>
             </div>
 
@@ -120,8 +124,8 @@ const DashboardView = () => {
             </div>
 
             <div className="col-12">
-              {notifications.length
-                ? notifications.map(
+              {data.notifications?.length
+                ? data.notifications.map(
                     ({ title, message, service, createdAt }, i) => (
                       <div
                         className="card mb-3 p-3 w-100"
