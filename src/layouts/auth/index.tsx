@@ -6,7 +6,6 @@ import { Fragment } from "react/jsx-runtime";
 import {
   aidsIcon,
   beneficiariesIcon,
-  contactIcon,
   dashboardIcon,
   infoIcon,
   membershipFormIcon,
@@ -28,8 +27,10 @@ import BeneficiaryProfileView from "../../views/auth/beneficiaries/profile";
 import BeneficiariesViewForSupervisor from "../../views/auth/beneficiaries/supervisor";
 import ContactUsPage from "../../views/auth/contact-us";
 import DashboardView from "../../views/auth/dashboard";
+import DashboardSupervisorView from "../../views/auth/dashboard/supervisor";
 import MembershipRegistrationView from "../../views/auth/membershipRegistration";
 import SettingsPage from "../../views/auth/settings";
+import ResearcherMgmtPage from "../../views/auth/staff";
 import VisitsView from "../../views/auth/visits";
 import VisitReportsView from "../../views/auth/visits/addReport";
 import BeneficiariesVisitsView from "../../views/auth/visits/beneficiaryVisits";
@@ -40,7 +41,6 @@ import { FilePreviewModal } from "./globalModal";
 import Navbar from "./navbar";
 import OffCanvasNav from "./offcanvasNav";
 import Sidebar from "./sidebarNav";
-import ResearcherMgmtPage from "../../views/auth/staff";
 
 const AuthLayout = () => {
   const { t } = useTranslation();
@@ -61,12 +61,21 @@ const AuthLayout = () => {
       users: ["beneficiary", "researcher", "admin"],
     },
     {
-      name: t("Auth.Dashboard.Title"),
-      route: "/dashboard",
+      name: t("Auth.Dashboard.Welcome"),
+      route: "/welcome",
       view: <DashboardView />,
       showInNav: true,
       icon: dashboardIcon,
-      users: ["beneficiary", "researcher", "hod", "admin"],
+      users: ["beneficiary", "researcher", "hod"],
+    },
+    {
+      name: t("Auth.Dashboard.Title"),
+      route: "/dashboard",
+      labelNote: "For RS",
+      view: <DashboardSupervisorView />,
+      showInNav: true,
+      icon: dashboardIcon,
+      users: ["hod", "admin"],
     },
     {
       name: t("Auth.Beneficiaries.Applications"),
