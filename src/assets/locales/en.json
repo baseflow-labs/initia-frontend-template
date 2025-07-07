@@ -317,6 +317,12 @@
       "AllGovernorate": "All Governorate",
       "AllProvinces": "All Provinces",
       "FontSize": "FontSize",
+      "Metadata": {
+        "Title": "Metadata Settings"
+      },
+      "PasswordReset": {
+        "Title": "Password Reset"
+      },
       "Samples": {
         "H3Sample": "H3Sample",
         "H4Sample": "H4Sample",
@@ -335,6 +341,9 @@
       "SocietyPhoneNumber": "SocietyPhoneNumber",
       "SocietyProvinces": "Society Provinces",
       "SocietyWebsite": "Society Website",
+      "System": {
+        "Title": "System Settings"
+      },
       "Title": "Title"
     },
     "Visits": {

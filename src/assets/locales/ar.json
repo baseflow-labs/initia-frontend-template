@@ -317,6 +317,12 @@
       "AllGovernorate": "جميع محافظات المنطقة",
       "AllProvinces": "جميع مناطق المملكة",
       "FontSize": "حجم الخط للتطبيق",
+      "Metadata": {
+        "Title": "إعدادات الجمعية"
+      },
+      "PasswordReset": {
+        "Title": "إعادة ضبط كلمة السر"
+      },
       "Samples": {
         "H3Sample": "عينة عنوان رئيسيي",
         "H4Sample": "عينة عنوان فرعي",
@@ -333,8 +339,10 @@
       "SocietyLogo": "شعار الجمعية",
       "SocietyName": "اسم الجمعية",
       "SocietyPhoneNumber": "رقم الهاتف للجمعية",
-      "SocietyProvinces": "المناطق التي تخدمها الجمعية ضمن المملكة",
       "SocietyWebsite": "الموقع الإلكتروني للجمعية",
+      "System": {
+        "Title": "إعدادات النظام"
+      },
       "Title": "الإعدادات"
     },
     "Visits": {

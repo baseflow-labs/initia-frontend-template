@@ -3,6 +3,7 @@ import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
+import * as AuthApi from "../../../api/auth/index";
 import * as MetadataApi from "../../../api/metadata";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import Button from "../../../components/core/button";
@@ -42,6 +43,21 @@ const SettingsPage = () => {
       .catch(apiCatchGlobalHandler);
   };
 
+  const onPasswordResetSubmit = (values = {}) => {
+    AuthApi.resetMyPassword(values)
+      .then(() => {
+        dispatch(
+          addNotification({
+            msg: t("Global.Form.SuccessMsg", {
+              action: t("Global.Form.Labels.Update"),
+              data: t("Auth.Settings.Title"),
+            }),
+          })
+        );
+      })
+      .catch(apiCatchGlobalHandler);
+  };
+
   const beneficiaryInputs = () => [
     {
       type: "range",
@@ -55,14 +71,6 @@ const SettingsPage = () => {
 
   const staffInputs = (formik: FormikProps<Record<string, any>>) => {
     const final = [
-      {
-        type: "range",
-        name: "fontSize",
-        min: 10,
-        max: 25,
-        label: t("Auth.Settings.FontSize"),
-        defaultValue: 15,
-      },
       {
         type: "text",
         name: "name",
@@ -158,21 +166,18 @@ const SettingsPage = () => {
       className="border border-2 border-dark rounded-5 mx-auto p-5"
       style={{ maxWidth: "750px" }}
     >
-      <h3 className="mb-5">{t("Auth.Settings.Title")}</h3>
+      <h3>{t("Auth.Settings.Title")}</h3>
+
+      <h5 className="text-info my-5">{t("Auth.Settings.System.Title")}</h5>
 
       <Form
-        inputs={
-          user.role !== "beneficiary" && user.role !== "researcher"
-            ? staffInputs
-            : beneficiaryInputs
-        }
+        inputs={beneficiaryInputs}
         initialValues={{
           fontSize: fontSize,
           ...metadata,
         }}
         submitText={t("Global.Form.Labels.Save")}
         onFormSubmit={(values) => {
-          onMetadataSubmit(values);
           dispatch(setFontSize(values.fontSize));
           dispatch(
             addNotification({
@@ -184,6 +189,53 @@ const SettingsPage = () => {
           );
         }}
       />
+
+      <h5 className="text-info my-5">
+        {t("Auth.Settings.PasswordReset.Title")}
+      </h5>
+
+      <Form
+        inputs={() => [
+          {
+            type: "password",
+            name: "password",
+            label: t("Public.ForgotPassword.ResetPassword.NewPassword"),
+            required: true,
+          },
+          {
+            type: "password",
+            name: "passwordConfirmation",
+            label: t(
+              "Public.ForgotPassword.ResetPassword.NewPasswordConfirmation"
+            ),
+            required: true,
+          },
+        ]}
+        submitText={t("Global.Form.Labels.Save")}
+        onFormSubmit={(values) => {
+          onPasswordResetSubmit(values);
+        }}
+      />
+
+      {user.role !== "beneficiary" && user.role !== "researcher" && (
+        <Fragment>
+          <h5 className="text-info my-5">
+            {t("Auth.Settings.Metadata.Title")}
+          </h5>
+
+          <Form
+            inputs={staffInputs}
+            initialValues={{
+              fontSize: fontSize,
+              ...metadata,
+            }}
+            submitText={t("Global.Form.Labels.Save")}
+            onFormSubmit={(values) => {
+              onMetadataSubmit(values);
+            }}
+          />
+        </Fragment>
+      )}
 
       {user.role === "beneficiary" ? (
         <Fragment>

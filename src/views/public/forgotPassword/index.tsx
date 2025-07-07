@@ -1,8 +1,8 @@
 import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
-import { useDispatch } from "react-redux";
 import * as authApi from "../../../api/auth";
 import Form from "../../../components/form";
 import { addNotification } from "../../../store/actions/notifications";
@@ -101,11 +101,7 @@ const ForgotPassword = () => {
           />
         </Fragment>
       ) : (
-        <Form
-          inputs={forgotInputs}
-          submitText={t("Public.Register.Labels.Register")}
-          onFormSubmit={onForgotSubmit}
-        />
+        <Form inputs={forgotInputs} onFormSubmit={onForgotSubmit} />
       )}
     </div>
   );
