@@ -1,0 +1,62 @@
+name: 🚀 Deploy and Debug Production Server
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  push:
+    branches:
+      - prod
+
+jobs:
+  deployment:
+    name: Production Deployment
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_KEY" > ~/.ssh/production.key
+          chmod 600 ~/.ssh/production.key
+
+          cat >>~/.ssh/config <<END
+          Host production
+            HostName $SSH_SERVER
+            User $SSH_USER
+            IdentityFile ~/.ssh/production.key
+            StrictHostKeyChecking no
+          END
+        env:
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+          SSH_SERVER: ${{ secrets.SSH_SERVER }}
+
+      - name: Deploy to production
+        run: |
+          ssh -tt production << 'EOF'
+          set -e
+          echo "🔐 Connected to production machine"
+
+          cd ${{ secrets.APP_DIR }}
+
+          echo "📥 Pulling latest code..."
+          GIT_SSH_COMMAND="ssh -i ${{ secrets.PULL_KEY_PATH }}" git pull
+
+          echo "🐳 Building and restarting fe"
+
+          cd ${{ secrets.DOCKER_COMPOSE_DIR }}
+          for dir in */; do
+            cd ${{ secrets.DOCKER_COMPOSE_DIR }}/$dir
+            set +x
+            docker compose build "fe"
+            docker compose up -d "fe"
+            set -x
+            echo "✅ Deployment complete for $dir"
+          done
+
+          set +e
+          exit 0
+          EOF
