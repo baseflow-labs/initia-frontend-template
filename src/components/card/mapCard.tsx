@@ -1,5 +1,7 @@
+import { Fragment } from "react/jsx-runtime";
 import Button from "../core/button";
 import MapWithMarkers from "../googleMap";
+import DashboardCard from "./dashboardCard";
 
 const locations = [
   { lat: 29.3759, lng: 47.9774 },
@@ -8,7 +10,7 @@ const locations = [
 
 const MapCard = () => {
   return (
-    <div className="card p-4 my-4 rounded-4">
+    <DashboardCard>
       <div className="row mb-4">
         <div className="col-6">
           <h3>خريطة الزيارات</h3>
@@ -23,7 +25,7 @@ const MapCard = () => {
       </div>
 
       <MapWithMarkers locations={locations} />
-    </div>
+    </DashboardCard>
   );
 };
 

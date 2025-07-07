@@ -1,3 +1,5 @@
+import DashboardCard from "./dashboardCard";
+
 interface Props {
   label: string;
   researchers: {
@@ -12,7 +14,7 @@ interface Props {
 
 const UsersCard = ({ label, researchers }: Props) => {
   return (
-    <div className="card p-4 my-4 rounded-4">
+    <DashboardCard>
       <h3 className="mb-4">
         {label} {researchers.length}
       </h3>
@@ -73,7 +75,7 @@ const UsersCard = ({ label, researchers }: Props) => {
           )}
         </tbody>
       </table>
-    </div>
+    </DashboardCard>
   );
 };
 

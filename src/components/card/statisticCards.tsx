@@ -1,6 +1,7 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { columnsWidth } from "../../utils/function";
+import DashboardCard from "./dashboardCard";
 
 interface Props {
   statistics: {
@@ -20,7 +21,7 @@ const StatisticCards = ({ statistics }: Props) => {
     <div className="row">
       {statistics.map(({ label, count, icon, color, details }, i) => (
         <div className={`col-md-${columnsWidth(statistics.length)}`} key={i}>
-          <div className="card rounded-4 p-3">
+          <DashboardCard>
             <div className="card-body">
               <div className="row">
                 <div className="col-6">
@@ -44,7 +45,7 @@ const StatisticCards = ({ statistics }: Props) => {
                 ))}
               </p>
             </div>
-          </div>
+          </DashboardCard>
         </div>
       ))}
     </div>

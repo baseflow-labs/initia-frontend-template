@@ -1,6 +1,7 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import Button from "../core/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import DashboardCard from "./dashboardCard";
 
 interface Props {
   label: string;
@@ -15,7 +16,7 @@ interface Props {
 
 const TasksCard = ({ label, tasks }: Props) => {
   return (
-    <div className="card p-4 my-4 rounded-4">
+    <DashboardCard>
       <h3 className="mb-4">{label}</h3>
 
       <table className="table table-responsive align-middle">
@@ -50,7 +51,7 @@ const TasksCard = ({ label, tasks }: Props) => {
           ))}
         </tbody>
       </table>
-    </div>
+    </DashboardCard>
   );
 };
 
