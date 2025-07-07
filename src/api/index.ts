@@ -71,7 +71,11 @@ service.interceptors.response.use(
 
     const status = parseInt(`${res.status}`);
 
-    if (store.getState().auth.token && [403, 401].includes(status)) {
+    if (
+      store.getState().auth.token &&
+      store.getState().auth.token !== "null" &&
+      [403, 401].includes(status)
+    ) {
       store.dispatch(logout());
       return Promise.reject(new Error(msg));
     }
@@ -97,7 +101,11 @@ service.interceptors.response.use(
 
     const status = parseInt(`${err.status}`);
 
-    if (store.getState().auth.token && [403, 401].includes(status || 0)) {
+    if (
+      store.getState().auth.token &&
+      store.getState().auth.token !== "null" &&
+      [403, 401].includes(status)
+    ) {
       store.dispatch(logout());
       return Promise.reject(new Error(errMsg));
     }
