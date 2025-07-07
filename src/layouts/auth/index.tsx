@@ -41,6 +41,7 @@ import { FilePreviewModal } from "./globalModal";
 import Navbar from "./navbar";
 import OffCanvasNav from "./offcanvasNav";
 import Sidebar from "./sidebarNav";
+import DashboardResearcherView from "../../views/auth/dashboard/researcher";
 
 const AuthLayout = () => {
   const { t } = useTranslation();
@@ -62,20 +63,29 @@ const AuthLayout = () => {
     },
     {
       name: t("Auth.Dashboard.Welcome"),
-      route: "/welcome",
+      route: "/dashboard",
       view: <DashboardView />,
       showInNav: true,
       icon: dashboardIcon,
-      users: ["beneficiary", "researcher", "hod"],
+      users: ["beneficiary"],
     },
     {
       name: t("Auth.Dashboard.Title"),
-      route: "/dashboard",
+      route: "/dashboardRs",
       labelNote: "For RS",
       view: <DashboardSupervisorView />,
       showInNav: true,
       icon: dashboardIcon,
       users: ["hod", "admin"],
+    },
+    {
+      name: t("Auth.Dashboard.Title"),
+      route: "/dashboardSch",
+      labelNote: "For Rsch",
+      view: <DashboardResearcherView />,
+      showInNav: true,
+      icon: dashboardIcon,
+      users: ["researcher", "admin"],
     },
     {
       name: t("Auth.Beneficiaries.Applications"),
