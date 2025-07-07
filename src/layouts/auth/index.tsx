@@ -62,12 +62,13 @@ const AuthLayout = () => {
       users: ["beneficiary", "researcher", "admin"],
     },
     {
-      name: t("Auth.Dashboard.Welcome"),
+      name: t("Auth.Dashboard.Title"),
       route: "/dashboard",
+      labelNote: "For Ben",
       view: <DashboardView />,
       showInNav: true,
       icon: dashboardIcon,
-      users: ["beneficiary"],
+      users: ["beneficiary", "admin"],
     },
     {
       name: t("Auth.Dashboard.Title"),

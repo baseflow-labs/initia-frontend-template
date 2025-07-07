@@ -21,6 +21,7 @@ export interface Notification {
   title: string;
   message: string;
   service: string;
+  important?: boolean;
   createdAt: string;
 }
 
