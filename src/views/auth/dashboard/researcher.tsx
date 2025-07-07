@@ -10,6 +10,7 @@ import PageTemplate from "../../../layouts/auth/pageTemplate";
 import UsersCard from "../../../components/card/usersCard";
 import profilePhotoPlaceholder from "../../../assets/images/profile-image-placeholder.png";
 import TasksCard from "../../../components/card/tasksCard";
+import MapCard from "../../../components/card/mapCard";
 
 const DashboardResearcherView = () => {
   const { t } = useTranslation();
@@ -78,7 +79,15 @@ const DashboardResearcherView = () => {
     <PageTemplate title="نظرة عامة">
       <DashboardCards statistics={statistics} />
 
-      <TasksCard label="المهام" tasks={researchers} />
+      <div className="row">
+        <div className="col-md-6">
+          <TasksCard label="المهام" tasks={researchers} />
+        </div>
+
+        <div className="col-md-6">
+          <MapCard />
+        </div>
+      </div>
     </PageTemplate>
   );
 };
