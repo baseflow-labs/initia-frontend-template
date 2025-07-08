@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Button from "../core/button";
 import DashboardCard from "./dashboardCard";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   label: string;
@@ -16,6 +17,8 @@ interface Props {
 }
 
 const TasksCard = ({ label, tasks }: Props) => {
+  const { t } = useTranslation();
+
   return (
     <DashboardCard>
       <h3 className="mb-4">{label}</h3>
@@ -45,8 +48,8 @@ const TasksCard = ({ label, tasks }: Props) => {
 
               <td className="text-end">
                 <Button route={route} color="info">
-                  التفاصيل
-                </Button>{" "}
+                  {t("Global.Labels.Details")}
+                </Button>
               </td>
             </tr>
           ))}

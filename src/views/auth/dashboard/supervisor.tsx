@@ -2,17 +2,16 @@ import { useTranslation } from "react-i18next";
 
 import {
   faBox,
-  faLocationCrosshairs,
   faMapLocationDot,
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
-import DashboardCards from "../../../components/card/statisticCards";
-import PageTemplate from "../../../layouts/auth/pageTemplate";
-import UsersCard from "../../../components/card/usersCard";
-import profilePhotoPlaceholder from "../../../assets/images/profile-image-placeholder.png";
-import { apiCatchGlobalHandler } from "../../../utils/function";
-import * as OverviewApi from "../../../api/overview";
 import { useLayoutEffect, useState } from "react";
+import * as OverviewApi from "../../../api/overview";
+import profilePhotoPlaceholder from "../../../assets/images/profile-image-placeholder.png";
+import DashboardCards from "../../../components/card/statisticCards";
+import UsersCard from "../../../components/card/usersCard";
+import PageTemplate from "../../../layouts/auth/pageTemplate";
+import { apiCatchGlobalHandler } from "../../../utils/function";
 
 const DashboardSupervisorView = () => {
   const { t } = useTranslation();
@@ -68,7 +67,7 @@ const DashboardSupervisorView = () => {
       tasks: {
         label: t("Auth.Dashboard.ApplicantsToReview"),
         count: data?.beneficiaries.applicants,
-        route: "/beneficiaries",
+        route: "/beneficiary",
       },
       icon: faUsers,
     },
@@ -89,7 +88,7 @@ const DashboardSupervisorView = () => {
       tasks: {
         label: t("Auth.Dashboard.ScheduledVisitsCount"),
         count: data?.visits.toDo,
-        route: "/visitSchedules",
+        route: "/visitSchedule",
       },
       icon: faMapLocationDot,
     },
@@ -109,7 +108,7 @@ const DashboardSupervisorView = () => {
       tasks: {
         label: t("Auth.Dashboard.ToReviewAidsCount"),
         count: data?.aids.pending,
-        route: "/aids",
+        route: "/aid",
       },
       color: "warning",
       icon: faBox,
@@ -117,11 +116,11 @@ const DashboardSupervisorView = () => {
   ];
 
   return (
-    <PageTemplate title="نظرة عامة">
+    <PageTemplate title={t("Auth.Dashboard.Title")}>
       <DashboardCards statistics={statistics} />
 
       <UsersCard
-        label="الباحثين"
+        label={t("Auth.Dashboard.Researchers")}
         researchers={data.researchers.map((r) => ({
           ...r,
           photo: profilePhotoPlaceholder,

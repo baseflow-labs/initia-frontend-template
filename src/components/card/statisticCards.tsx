@@ -16,7 +16,7 @@ interface Props {
   }[];
 }
 
-const columnsWidth = (count: number) => {
+const columnsLgWidth = (count: number) => {
   switch (count) {
     case 1:
       return 12;
@@ -31,11 +31,25 @@ const columnsWidth = (count: number) => {
   }
 };
 
+const columnsMdWidth = (count: number) => {
+  switch (count) {
+    case 1:
+      return 12;
+    default:
+      return 6;
+  }
+};
+
 const StatisticCards = ({ statistics }: Props) => {
   return (
     <div className="row">
       {statistics.map(({ label, count, icon, color, details }, i) => (
-        <div className={`col-md-${columnsWidth(statistics.length)}`} key={i}>
+        <div
+          className={`col-sm-${columnsMdWidth(
+            statistics.length
+          )} col-xl-${columnsLgWidth(statistics.length)}`}
+          key={i}
+        >
           <DashboardCard>
             <div className="card-body">
               <div className="row">
