@@ -28,7 +28,7 @@ const UsersCard = ({ label, researchers }: Props) => {
 
             <th className="fw-bold">عدد المعونات</th>
 
-            <th className="fw-bold">عدد التقارير</th>
+            {/* <th className="fw-bold">عدد التقارير</th> */}
           </tr>
         </thead>
 
@@ -69,7 +69,7 @@ const UsersCard = ({ label, researchers }: Props) => {
 
                 <td>{aidsCount}</td>
 
-                <td>{reportsCount}</td>
+                {/* <td>{reportsCount}</td> */}
               </tr>
             )
           )}

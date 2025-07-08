@@ -12,4 +12,9 @@ const forResearcher = async () => {
   return res;
 };
 
-export { forBeneficiary, forResearcher };
+const forSupervisor = async () => {
+  const res = await api.get(mainPath + "/supervisor");
+  return res;
+};
+
+export { forBeneficiary, forResearcher, forSupervisor };
