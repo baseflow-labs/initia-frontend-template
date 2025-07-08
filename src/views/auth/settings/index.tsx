@@ -154,7 +154,7 @@ const SettingsPage = () => {
         addNotification({
           msg: t("Global.Form.SuccessMsg", {
             action: t("Auth.Beneficiaries.Profile.DeleteData"),
-            data: "كم",
+            data: t("Global.Labels.YourOwn"),
           }),
         })
       );

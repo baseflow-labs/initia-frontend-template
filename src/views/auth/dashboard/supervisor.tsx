@@ -116,11 +116,11 @@ const DashboardSupervisorView = () => {
   ];
 
   return (
-    <PageTemplate title="نظرة عامة">
+    <PageTemplate title={t("Auth.Dashboard.Title")}>
       <DashboardCards statistics={statistics} />
 
       <UsersCard
-        label="الباحثين"
+        label={t("Auth.Dashboard.Researchers")}
         researchers={data.researchers.map((r) => ({
           ...r,
           photo: profilePhotoPlaceholder,

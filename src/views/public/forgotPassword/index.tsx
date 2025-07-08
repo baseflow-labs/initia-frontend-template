@@ -104,10 +104,10 @@ const ForgotPassword = () => {
         />
       ) : data.identifier ? (
         <Fragment>
-          <h4>رمز التحقق OTP</h4>
+          <h4>{t("Public.Otp.Title")}</h4>
 
           <div className="text-center mt-2">
-            <small>تحقق من رسائل هاتفك وادخل رقم التحقق (OTP)</small>
+            <small>{t("Public.Otp.CheckSms")}</small>
           </div>
 
           <Form

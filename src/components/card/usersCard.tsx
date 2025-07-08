@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import DashboardCard from "./dashboardCard";
 
 interface Props {
@@ -13,6 +14,8 @@ interface Props {
 }
 
 const UsersCard = ({ label, researchers }: Props) => {
+  const { t } = useTranslation();
+
   return (
     <DashboardCard max="40vh">
       <h3 className="mb-4">
@@ -22,13 +25,13 @@ const UsersCard = ({ label, researchers }: Props) => {
       <table className="table table-responsive align-middle">
         <thead>
           <tr>
-            <th className="fw-bold">معلومات الباحث</th>
+            <th className="fw-bold">{t("Auth.Dashboard.ResearcherInfo")}</th>
 
-            <th className="fw-bold">عدد الزيارات</th>
+            <th className="fw-bold">{t("Auth.Dashboard.VisitsCount")}</th>
 
-            <th className="fw-bold">عدد المعونات</th>
+            <th className="fw-bold">{t("Auth.Dashboard.AidsCount")}</th>
 
-            {/* <th className="fw-bold">عدد التقارير</th> */}
+            {/* <th className="fw-bold">{t("Auth.Dashboard.ReportsCount")}</th> */}
           </tr>
         </thead>
 
@@ -59,7 +62,8 @@ const UsersCard = ({ label, researchers }: Props) => {
                       <h5>{name}</h5>
 
                       <div className="text-secondary">
-                        {beneficiariesCount} {"مستفيد"}
+                        {beneficiariesCount}{" "}
+                        {t("Auth.Beneficiaries.BeneficiaryName")}
                       </div>
                     </div>
                   </div>
