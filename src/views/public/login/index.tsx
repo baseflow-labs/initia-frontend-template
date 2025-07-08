@@ -52,20 +52,20 @@ const LoginView = () => {
   };
 
   const demoLogin = [
-    {
-      label: t("Public.Login.Labels.LoginAsAdmin"),
-      credentials: {
-        identifier: "590000000",
-        password: "12345678",
-      },
-    },
-    {
-      label: t("Public.Login.Labels.LoginAsCeo"),
-      credentials: {
-        identifier: "540000000",
-        password: "12345678",
-      },
-    },
+    // {
+    //   label: t("Public.Login.Labels.LoginAsAdmin"),
+    //   credentials: {
+    //     identifier: "590000000",
+    //     password: "12345678",
+    //   },
+    // },
+    // {
+    //   label: t("Public.Login.Labels.LoginAsCeo"),
+    //   credentials: {
+    //     identifier: "540000000",
+    //     password: "12345678",
+    //   },
+    // },
     {
       label: t("Public.Login.Labels.LoginAsHod"),
       credentials: {
@@ -104,7 +104,7 @@ const LoginView = () => {
         onFormSubmit={onSubmit}
       />
 
-      {process.env.REACT_APP_DEMO_STATUS === "true" ? (
+      {process.env.REACT_APP_ENVIRONMENT === "staging" ? (
         <div className="row g-2 mt-3">
           {demoLogin.map(({ label, credentials }, i) => (
             <div className="col-6" key={i}>

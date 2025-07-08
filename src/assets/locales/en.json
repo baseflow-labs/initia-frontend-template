@@ -32,6 +32,7 @@
         "ApplicationRejectReason": "Application Reject Reason",
         "archive": "archive",
         "Archive": "Archive",
+        "AssignResearcher": "Assign Researcher",
         "CancelMembership": "Cancel Membership",
         "CancelMembershipNote": "Cancel Membership Note",
         "CancelMembershipReason": "Cancel Membership Reason",
@@ -77,8 +78,24 @@
       "Title": "Title"
     },
     "Dashboard": {
+      "AcceptedBeneficiariesCount": "Accepted Beneficiaries Count",
+      "AidsCount": "Aids Count",
+      "ApplicantsCount": "Applicants Count",
+      "ApplicantsToReview": "Applicants To Review",
+      "BeneficiariesCount": "Beneficiaries Count",
+      "BeneficiaryInfo": "Your Info",
+      "BeneficiaryMembershipStatus": "Your Membership Status",
+      "DoneVisitsCount": "Done Visits Count",
+      "GrantedAidsCount": "Granted Aids Count",
+      "ImportantNotifications": "Important Notifications",
       "Main": "Main",
+      "PendingAidsCount": "Pending Aids Count",
+      "ScheduledVisitsCount": "Scheduled Visits Count",
+      "Tasks": "Tasks",
       "Title": "Title",
+      "ToDoVisitsCount": "To Do Visits Count",
+      "ToReviewAidsCount": "To Review Aid sCount",
+      "VisitsCount": "Visits Count",
       "Welcome": "Welcome"
     },
     "MembershipRegistration": {
@@ -295,17 +312,31 @@
         "NeedHelp": "NeedHelp",
         "NewMember": "NewMember",
         "Rejected": "Rejected",
+        "ResearcherAssigned": "Researcher Assigned",
         "Reviewed": "Reviewed",
         "Status": "Status"
       },
       "Title": "Title"
     },
+    "Researchers": {
+      "AddResearcher": "Add Researcher",
+      "Assign": "Assign",
+      "BeneficiariesCount": "Beneficiaries sCount",
+      "ResearcherName": "Researcher Name",
+      "Title": "Researchers Mgmt",
+      "VisitsCount": "Visits Count"
+    },
     "Settings": {
       "AllCities": "All Cities",
       "AllDistricts": "All Districts",
       "AllGovernorate": "All Governorate",
-      "AllProvinces": "All Provinces",
       "FontSize": "FontSize",
+      "Metadata": {
+        "Title": "Metadata Settings"
+      },
+      "PasswordReset": {
+        "Title": "Password Reset"
+      },
       "Samples": {
         "H3Sample": "H3Sample",
         "H4Sample": "H4Sample",
@@ -322,8 +353,10 @@
       "SocietyLogo": "SocietyLogo",
       "SocietyName": "SocietyName",
       "SocietyPhoneNumber": "SocietyPhoneNumber",
-      "SocietyProvinces": "Society Provinces",
       "SocietyWebsite": "Society Website",
+      "System": {
+        "Title": "System Settings"
+      },
       "Title": "Title"
     },
     "Visits": {
@@ -398,7 +431,7 @@
         "Working": "Working"
       },
       "Statuses": {
-        "Approved": "Approved",
+        "Approved": "Beneficiary Approved",
         "Cancelled": "Cancelled",
         "Delayed": "Delayed",
         "Done": "Done",
@@ -421,6 +454,10 @@
   "Global": {
     "Form": {
       "CantDoIt": "Can't Do It",
+      "Label": {
+        "Email": "Email",
+        "PhoneNumber": "Phone Number"
+      },
       "Labels": {
         "Add": "Add",
         "AddNew": "AddNew",
@@ -456,6 +493,7 @@
       "DemoWarning": "Demo Warning",
       "Logout": "Logout",
       "NoData": "NoData",
+      "NoNotifications": "No Notifications",
       "PageNo": "PageNo",
       "PageSize": "PageSize",
       "PhoneNumber": "PhoneNumber",
@@ -475,7 +513,8 @@
         "Title": "Title"
       },
       "SendOtp": {
-        "ConfirmOTP": "ConfirmOTP"
+        "ConfirmOTP": "Confirm OTP",
+        "SendOtp": "Send OTP"
       },
       "Title": "Title"
     },

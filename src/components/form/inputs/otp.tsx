@@ -1,10 +1,11 @@
-import React, { useRef, useState } from "react";
-import { InputProps } from "..";
 import { useField } from "formik";
+import React, { useRef, useState } from "react";
+
+import { InputProps } from "..";
 
 type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 
-const OTP_LENGTH = 6;
+const OTP_LENGTH = 4;
 
 const OtpInput: React.FC<FinalInput> = ({ name, value, type, ...input }) => {
   const [otp, setOtp] = useState<string[]>(Array(OTP_LENGTH).fill(""));

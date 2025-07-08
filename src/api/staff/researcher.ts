@@ -23,7 +23,7 @@ interface Props {
   contactsBank: string;
 }
 
-const mainPath = "/beneficiary";
+const mainPath = "/staff";
 const { user } = (store.getState() as RootState).auth;
 
 const getAll = async (filters: GetDataProps) => {
@@ -37,7 +37,7 @@ const getById = async (id: string) => {
 };
 
 const create = async (data: object) => {
-  const res = await api.post(mainPath, data);
+  const res = await api.post("/user", data);
   return res;
 };
 
@@ -46,8 +46,8 @@ const getByUserId = async (id?: string) => {
   return res;
 };
 
-const createOrUpdate = async (data: Props) => {
-  return await api.post(
+const update = async (data: Props) => {
+  return await api.patch(
     mainPath + "/create-update",
     { ...data, user: data.user || user.id },
     {
@@ -58,14 +58,6 @@ const createOrUpdate = async (data: Props) => {
   );
 };
 
-const assignResearcher = async (id: string, data: string) => {
-  return await api.patch(mainPath + "/" + id + "/assign-researcher/", data);
-};
-
-const requestHelp = async (id: string) => {
-  return await api.get(mainPath + "/request-help/" + id);
-};
-
 const remove = async (id: string) => {
   return await api.delete(mainPath + "?id=" + id);
 };
@@ -74,34 +66,4 @@ const removeByUser = async (id: string) => {
   return await api.delete(mainPath + "/" + id);
 };
 
-const downloadProfile = async (id: string, type: string) => {
-  return await api.get(mainPath + "/" + id + "/" + type);
-};
-
-const reject = async (id: string, data: object) => {
-  return await api.post(mainPath + "/reject/" + id, data);
-};
-
-const accept = async (id: string) => {
-  return await api.get(mainPath + "/accept/" + id);
-};
-
-const cancel = async (id: string, data: object) => {
-  return await api.post(mainPath + "/cancel/" + id, data);
-};
-
-export {
-  getAll,
-  create,
-  getById,
-  getByUserId,
-  createOrUpdate,
-  assignResearcher,
-  requestHelp,
-  remove,
-  removeByUser,
-  downloadProfile,
-  reject,
-  accept,
-  cancel,
-};
+export { getAll, create, getById, getByUserId, update, remove, removeByUser };

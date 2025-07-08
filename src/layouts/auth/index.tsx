@@ -6,7 +6,6 @@ import { Fragment } from "react/jsx-runtime";
 import {
   aidsIcon,
   beneficiariesIcon,
-  contactIcon,
   dashboardIcon,
   infoIcon,
   membershipFormIcon,
@@ -21,23 +20,28 @@ import AidsView from "../../views/auth/aids";
 import AidsBeneficiaryView from "../../views/auth/aids/request";
 import ApplicantsView from "../../views/auth/applicants";
 import BeneficiaryFormReview from "../../views/auth/applicants/review";
+import ApplicantsViewForSupervisor from "../../views/auth/applicants/supervisor";
 import BeneficiariesView from "../../views/auth/beneficiaries";
 import BeneficiaryOwnProfile from "../../views/auth/beneficiaries/beneficiaryProfile";
 import BeneficiaryProfileView from "../../views/auth/beneficiaries/profile";
+import BeneficiariesViewForSupervisor from "../../views/auth/beneficiaries/supervisor";
 import ContactUsPage from "../../views/auth/contact-us";
 import DashboardView from "../../views/auth/dashboard";
+import DashboardSupervisorView from "../../views/auth/dashboard/supervisor";
 import MembershipRegistrationView from "../../views/auth/membershipRegistration";
 import SettingsPage from "../../views/auth/settings";
+import ResearcherMgmtPage from "../../views/auth/staff";
 import VisitsView from "../../views/auth/visits";
 import VisitReportsView from "../../views/auth/visits/addReport";
 import BeneficiariesVisitsView from "../../views/auth/visits/beneficiaryVisits";
 import VisitDetailView from "../../views/auth/visits/reportDetails";
 import DashboardNavbar from "./dashboardNavbar";
+import DemoWarning from "./demoWarning";
 import { FilePreviewModal } from "./globalModal";
 import Navbar from "./navbar";
 import OffCanvasNav from "./offcanvasNav";
 import Sidebar from "./sidebarNav";
-import DemoWarning from "./demoWarning";
+import DashboardResearcherView from "../../views/auth/dashboard/researcher";
 
 const AuthLayout = () => {
   const { t } = useTranslation();
@@ -60,26 +64,73 @@ const AuthLayout = () => {
     {
       name: t("Auth.Dashboard.Title"),
       route: "/dashboard",
+      labelNote: "For Ben",
       view: <DashboardView />,
       showInNav: true,
       icon: dashboardIcon,
-      users: ["beneficiary", "researcher", "admin"],
+      users: ["beneficiary", "admin"],
+    },
+    {
+      name: t("Auth.Dashboard.Title"),
+      route: "/dashboardRs",
+      labelNote: "For RS",
+      view: <DashboardSupervisorView />,
+      showInNav: true,
+      icon: dashboardIcon,
+      users: ["hod", "admin"],
+    },
+    {
+      name: t("Auth.Dashboard.Title"),
+      route: "/dashboardSch",
+      labelNote: "For Rsch",
+      view: <DashboardResearcherView />,
+      showInNav: true,
+      icon: dashboardIcon,
+      users: ["researcher", "admin"],
     },
     {
       name: t("Auth.Beneficiaries.Applications"),
       route: "/applicants",
+      labelNote: "For Rsch",
       view: <ApplicantsView />,
       showInNav: true,
       icon: beneficiariesIcon,
       users: ["researcher", "admin"],
     },
     {
+      name: t("Auth.Beneficiaries.Applications"),
+      route: "/applicantRS",
+      labelNote: "For RS",
+      view: <ApplicantsViewForSupervisor />,
+      showInNav: true,
+      icon: beneficiariesIcon,
+      users: ["hod", "admin"],
+    },
+    {
       name: t("Auth.Beneficiaries.Title"),
       route: "/beneficiary",
+      labelNote: "For Rsch",
       view: <BeneficiariesView />,
       showInNav: true,
       icon: beneficiariesIcon,
       users: ["researcher", "admin"],
+    },
+    {
+      name: t("Auth.Beneficiaries.Title"),
+      route: "/beneRS",
+      labelNote: "For RS",
+      view: <BeneficiariesViewForSupervisor />,
+      showInNav: true,
+      icon: beneficiariesIcon,
+      users: ["hod", "admin"],
+    },
+    {
+      name: t("Auth.Researchers.Title"),
+      route: "/staff",
+      view: <ResearcherMgmtPage />,
+      showInNav: true,
+      icon: beneficiariesIcon,
+      users: ["hod", "admin"],
     },
     {
       name: t("Auth.Beneficiaries.Profile.Title"),
@@ -93,7 +144,7 @@ const AuthLayout = () => {
       route: "/profile/",
       view: <BeneficiaryProfileView />,
       icon: beneficiariesIcon,
-      users: ["researcher", "admin"],
+      users: ["researcher", "hod", "admin"],
     },
     {
       name: t("Auth.Visits.Title"),
@@ -101,14 +152,7 @@ const AuthLayout = () => {
       view: <VisitsView />,
       showInNav: true,
       icon: visitsIcon,
-      users: ["researcher", "admin"],
-    },
-    {
-      name: t("Auth.Visits.Detail.title"),
-      route: "/visitSchedule/detail",
-      view: <VisitDetailView />,
-      icon: visitsIcon,
-      users: ["researcher", "admin"],
+      users: ["researcher", "hod", "admin"],
     },
     {
       name: t("Auth.Visits.Visits"),
@@ -131,7 +175,7 @@ const AuthLayout = () => {
       route: "/visitSchedule/report/details",
       view: <VisitDetailView />,
       icon: visitReportIcon,
-      users: ["researcher", "admin"],
+      users: ["researcher", "hod", "admin"],
     },
     {
       name: t("Auth.Aids.Title"),
@@ -139,7 +183,7 @@ const AuthLayout = () => {
       view: <AidsView />,
       showInNav: true,
       icon: aidsIcon,
-      users: ["researcher", "admin"],
+      users: ["researcher", "hod", "admin"],
     },
     {
       name: t("Auth.Aids.Beneficiary.Title"),
@@ -162,6 +206,7 @@ const AuthLayout = () => {
       route: "/contact-us",
       view: <ContactUsPage />,
       icon: infoIcon,
+      fixed: true,
       users: ["beneficiary", "admin"],
     },
     {
@@ -169,17 +214,9 @@ const AuthLayout = () => {
       route: "/settings",
       view: <SettingsPage />,
       icon: settingsIcon,
-      users: ["beneficiary", "researcher", "admin"],
+      fixed: true,
+      users: ["beneficiary", "researcher", "hod", "admin"],
     },
-  ];
-
-  const fixedRoutes = [
-    {
-      name: t("Auth.ContactUs.Title"),
-      route: "/contact-us",
-      icon: contactIcon,
-    },
-    { name: t("Auth.Settings.Title"), route: "/settings", icon: settingsIcon },
   ];
 
   const showSidebar = !location.pathname.includes("apply");
@@ -188,16 +225,16 @@ const AuthLayout = () => {
     users.includes(user.role)
   );
 
+  const filteredFixedRoutes = filteredRoutes.filter(({ fixed }) => fixed);
+
   const toggleSidebar = () => setCollapsed((current) => !current);
 
   return (
     <Fragment>
-      <DemoWarning />
-
       {!showSidebar ? <Navbar /> : ""}
 
       <OffCanvasNav
-        fixedRoutes={fixedRoutes}
+        fixedRoutes={filteredFixedRoutes}
         routes={filteredRoutes
           .filter(({ showInNav }) => showInNav)
           .map(({ view, ...rest }) => ({ ...rest }))}
@@ -216,7 +253,7 @@ const AuthLayout = () => {
             <Sidebar
               collapsed={collapsed}
               toggleSidebar={toggleSidebar}
-              fixedRoutes={fixedRoutes}
+              fixedRoutes={filteredFixedRoutes}
               routes={filteredRoutes
                 .filter(({ showInNav }) => showInNav)
                 .map(({ view, ...rest }) => ({ ...rest }))}
@@ -232,6 +269,8 @@ const AuthLayout = () => {
             transition: "margin-right 0.3s",
           }}
         >
+          <DemoWarning />
+
           {showSidebar && <DashboardNavbar />}
 
           <div className="p-0 px-2 px-lg-5 w-100">

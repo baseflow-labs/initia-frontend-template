@@ -4,12 +4,14 @@ import { useLocation, useNavigate } from "react-router";
 import { Fragment } from "react/jsx-runtime";
 
 import IconWrapperComp from "../../assets/icons/wrapper";
+import { useAppSelector } from "../../store/hooks";
 import CopyRightView from "../common/copyright";
 
 interface Props {
   routes: {
     name: string;
     route: string;
+    labelNote?: string;
     icon: any;
   }[];
   fixedRoutes: {
@@ -22,6 +24,7 @@ interface Props {
 const OffCanvasNav = ({ routes, fixedRoutes }: Props) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { user } = useAppSelector((state) => state.auth);
 
   return (
     <div
@@ -41,7 +44,7 @@ const OffCanvasNav = ({ routes, fixedRoutes }: Props) => {
 
       <div className="offcanvas-body">
         <div className="nav flex-column px-2">
-          {routes.map(({ name, route, icon }, i) => (
+          {routes.map(({ name, route, icon, labelNote }, i) => (
             <Fragment key={i}>
               <h5
                 className={`sidebar-link text-decoration-none p-3 rounded-3 ${
@@ -58,6 +61,10 @@ const OffCanvasNav = ({ routes, fixedRoutes }: Props) => {
               >
                 <IconWrapperComp icon={icon} className="me-2" />
                 {<span>{name}</span>}
+
+                {user.role === "admin" && (
+                  <div className="text-end w-100">{labelNote}</div>
+                )}
               </h5>
             </Fragment>
           ))}

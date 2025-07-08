@@ -44,6 +44,10 @@ const resetPassword = async (resetPasswordData: resetPasswordProps) => {
   return await api.post(mainPath + "/passwordReset", resetPasswordData);
 };
 
+const resetMyPassword = async (resetPasswordData: Object) => {
+  return await api.post(mainPath + "/myPasswordReset", resetPasswordData);
+};
+
 const isAuthorized = async () => {
   return await api.get(mainPath + "/isAuth");
 };
@@ -58,6 +62,7 @@ export {
   requestPasswordReset,
   resetPassword,
   //  logout,
+  resetMyPassword,
   isAuthorized,
   register,
 };

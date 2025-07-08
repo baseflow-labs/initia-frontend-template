@@ -8,15 +8,19 @@ export const statusColorRender = (status = "") => {
     case "Rejected":
     case "Cancelled":
     case "Cancel":
+    case "Delayed":
       return "danger";
     case "Done":
     case "Accept":
     case "Granted":
     case "Accepted":
+    case "Approved":
     case "Confirmed":
+    case "Researcher Assigned":
       return "success";
     case "In Preview":
     case "Pending":
+    case "Reviewed":
     case "Pending Approval":
       return "warning";
     case "Incomplete":
@@ -38,3 +42,14 @@ export const renderDataFromOptions = (
 
 export const splitOverNumberPlusLeftover = (i: number, y = 2) =>
   Math.floor(i / y) + (i % y > 0 ? 1 : 0);
+
+export const columnsWidth = (count: number) => {
+  switch (count) {
+    case 1:
+      return 6;
+    case 2:
+      return 4;
+    default:
+      return 3;
+  }
+};
