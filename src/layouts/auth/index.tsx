@@ -64,7 +64,7 @@ const AuthLayout = () => {
     {
       name: t("Auth.Dashboard.Title"),
       route: "/dashboard",
-      labelNote: "For Ben",
+      labelNote: "For Beneficiary",
       view: <DashboardView />,
       showInNav: true,
       icon: dashboardIcon,
@@ -72,8 +72,8 @@ const AuthLayout = () => {
     },
     {
       name: t("Auth.Dashboard.Title"),
-      route: "/dashboardRs",
-      labelNote: "For RS",
+      route: "/dashboard",
+      labelNote: "For Supervisor",
       view: <DashboardSupervisorView />,
       showInNav: true,
       icon: dashboardIcon,
@@ -81,8 +81,8 @@ const AuthLayout = () => {
     },
     {
       name: t("Auth.Dashboard.Title"),
-      route: "/dashboardSch",
-      labelNote: "For Rsch",
+      route: "/dashboard",
+      labelNote: "For Researchers",
       view: <DashboardResearcherView />,
       showInNav: true,
       icon: dashboardIcon,
@@ -90,8 +90,8 @@ const AuthLayout = () => {
     },
     {
       name: t("Auth.Beneficiaries.Applications"),
-      route: "/applicants",
-      labelNote: "For Rsch",
+      route: "/applicant",
+      labelNote: "For Researchers",
       view: <ApplicantsView />,
       showInNav: true,
       icon: beneficiariesIcon,
@@ -99,8 +99,8 @@ const AuthLayout = () => {
     },
     {
       name: t("Auth.Beneficiaries.Applications"),
-      route: "/applicantRS",
-      labelNote: "For RS",
+      route: "/applicant",
+      labelNote: "For Supervisor",
       view: <ApplicantsViewForSupervisor />,
       showInNav: true,
       icon: beneficiariesIcon,
@@ -109,7 +109,7 @@ const AuthLayout = () => {
     {
       name: t("Auth.Beneficiaries.Title"),
       route: "/beneficiary",
-      labelNote: "For Rsch",
+      labelNote: "For Researchers",
       view: <BeneficiariesView />,
       showInNav: true,
       icon: beneficiariesIcon,
@@ -117,8 +117,8 @@ const AuthLayout = () => {
     },
     {
       name: t("Auth.Beneficiaries.Title"),
-      route: "/beneRS",
-      labelNote: "For RS",
+      route: "/beneficiary",
+      labelNote: "For Supervisor",
       view: <BeneficiariesViewForSupervisor />,
       showInNav: true,
       icon: beneficiariesIcon,
@@ -156,7 +156,7 @@ const AuthLayout = () => {
     },
     {
       name: t("Auth.Visits.Visits"),
-      route: "/beneficiary/visitSchedule",
+      route: "/visitSchedule",
       view: <BeneficiariesVisitsView />,
       showInNav: true,
       icon: visitsIcon,
@@ -187,7 +187,7 @@ const AuthLayout = () => {
     },
     {
       name: t("Auth.Aids.Beneficiary.Title"),
-      route: "/beneficiary/aid",
+      route: "/aid",
       view: <AidsBeneficiaryView />,
       showInNav: true,
       icon: aidsIcon,
@@ -221,9 +221,17 @@ const AuthLayout = () => {
 
   const showSidebar = !location.pathname.includes("apply");
 
-  const filteredRoutes = authRoutes.filter(({ users }) =>
-    users.includes(user.role)
-  );
+  const filteredRoutes = authRoutes
+    .filter(({ users }) => users.includes(user.role))
+    .map((r) =>
+      user.role === "admin"
+        ? {
+            ...r,
+            route:
+              r.route + (r.labelNote ? r.labelNote?.replaceAll(" ", "") : ""),
+          }
+        : r
+    );
 
   const filteredFixedRoutes = filteredRoutes.filter(({ fixed }) => fixed);
 

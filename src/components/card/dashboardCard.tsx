@@ -8,7 +8,7 @@ const DashboardCard = ({
   return (
     <div
       className="card p-4 my-4 rounded-4"
-      style={max ? { maxHeight: "40vh", overflowY: "auto" } : {}}
+      style={max ? { maxHeight: max, overflowY: "auto" } : {}}
     >
       {children}
     </div>

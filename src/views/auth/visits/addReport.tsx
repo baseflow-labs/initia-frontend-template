@@ -169,7 +169,7 @@ const VisitReportsView = () => {
             }) +
             ": " +
             renderDataFromOptions(roomDetails.type, roomTypes)
-          : "اسم المستفيد"}
+          : t("Auth.Beneficiaries.BeneficiaryName")}
       </h3>
 
       {roomDetails.index >= 0 ? (

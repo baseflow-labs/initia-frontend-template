@@ -1,8 +1,9 @@
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChevronLeft,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment } from "react";
-import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
 
 import IconWrapperComp from "../../assets/icons/wrapper";
@@ -29,7 +30,6 @@ interface Props {
 
 const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
   const navigate = useNavigate();
-  const { t } = useTranslation();
   const location = useLocation();
   const { user } = useAppSelector((state) => state.auth);
 
@@ -67,7 +67,9 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
                 {!collapsed && <span>{name}</span>}
 
                 {user.role === "admin" && (
-                  <div className="text-end w-100">{labelNote}</div>
+                  <div className="text-end w-100">
+                    <small>{labelNote}</small>
+                  </div>
                 )}
               </h5>
 

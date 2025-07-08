@@ -22,7 +22,7 @@ const LocationInput: React.FC<FinalInput> = ({ name, ...input }) => {
 
   const handleGetLocation = () => {
     if (!navigator.geolocation) {
-      setError("المتصفح لا يدعم تحديد الموقع.");
+      setError(t("Global.Form.Labels.BrowserDontSupportLocation"));
       return;
     }
 
@@ -46,7 +46,7 @@ const LocationInput: React.FC<FinalInput> = ({ name, ...input }) => {
         setError(null);
       },
       () => {
-        setError("لم نتمكن من تحديد موقعك. الرجاء السماح بالوصول.");
+        setError(t("Global.Form.Labels.PleaseAllowLocation"));
       }
     );
   };
@@ -80,7 +80,7 @@ const LocationInput: React.FC<FinalInput> = ({ name, ...input }) => {
             rel="noreferrer"
             className="d-block mt-2 text-success small"
           >
-            استعرض الموقع
+            {t("Global.Form.Labels.ViewLocation")}
           </a>
         </div>
       )}

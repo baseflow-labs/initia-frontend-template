@@ -277,7 +277,7 @@ const VisitDetailView = () => {
     <Fragment>
       <div className="row">
         <div className="col-md-9">
-          <h2>{"تقرير الزيارة"}</h2>
+          <h2>{t("Auth.Visits.Report.Title")}</h2>
         </div>
 
         <div className="col-md-3">

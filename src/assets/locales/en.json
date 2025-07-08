@@ -30,7 +30,6 @@
         "AcceptApplication": "Accept Application",
         "AcceptApplicationDisabledMsg": "Accept Application Disabled Msg",
         "ApplicationRejectReason": "Application Reject Reason",
-        "archive": "archive",
         "Archive": "Archive",
         "AssignResearcher": "Assign Researcher",
         "CancelMembership": "Cancel Membership",
@@ -40,11 +39,6 @@
         "DeleteApplication": "Delete Application",
         "DeleteBeneficiary": "Delete Beneficiary",
         "DeleteData": "Delete Your Data",
-        "editRequest": "editRequest",
-        "editStatus": "editStatus",
-        "field": "field",
-        "info": "info",
-        "notes": "notes",
         "ProfileCompletion": "ProfileCompletion",
         "ProfileCompletionDisabledMsg": "Profile Completion Disabled Msg",
         "ProfileDetails": "ProfileDetails",
@@ -59,7 +53,13 @@
         },
         "SureToDeleteData": "Are You Sure?",
         "Title": "Title",
-        "UpdateNote": "UpdateNote"
+        "UpdateNote": "UpdateNote",
+        "archive": "archive",
+        "editRequest": "editRequest",
+        "editStatus": "editStatus",
+        "field": "field",
+        "info": "info",
+        "notes": "notes"
       },
       "Title": "Title"
     },
@@ -90,12 +90,15 @@
       "ImportantNotifications": "Important Notifications",
       "Main": "Main",
       "PendingAidsCount": "Pending Aids Count",
+      "ResearcherInfo": "ResearcherInfo",
+      "Researchers": "Researchers",
       "ScheduledVisitsCount": "Scheduled Visits Count",
       "Tasks": "Tasks",
       "Title": "Title",
       "ToDoVisitsCount": "To Do Visits Count",
       "ToReviewAidsCount": "To Review Aid sCount",
       "VisitsCount": "Visits Count",
+      "VisitsMap": "VisitsMap",
       "Welcome": "Welcome"
     },
     "MembershipRegistration": {
@@ -166,8 +169,8 @@
         "EducationLevel": {
           "Degree": "Degree",
           "Diploma": "Diploma",
-          "HigherDiploma": "HigherDiploma",
           "HighSchool": "HighSchool",
+          "HigherDiploma": "HigherDiploma",
           "Illiterate": "Illiterate",
           "IntermediateSchool": "IntermediateSchool",
           "Literate": "Literate",
@@ -307,8 +310,8 @@
       "Statuses": {
         "Accepted": "Accepted",
         "Cancelled": "Cancelled",
-        "Incomplete": "Incomplete",
         "InPreview": "InPreview",
+        "Incomplete": "Incomplete",
         "NeedHelp": "NeedHelp",
         "NewMember": "NewMember",
         "Rejected": "Rejected",
@@ -380,11 +383,11 @@
         "Bathroom": "Bathroom",
         "Bed": "Bed",
         "Bedroom": "Bedroom",
-        "Contents": "Contents",
-        "ContentsCount": "ContentsCount",
         "ContentType": "ContentType",
         "ContentX": "Content {{number}}: {{name}}",
         "ContentXType": "ContentXType",
+        "Contents": "Contents",
+        "ContentsCount": "ContentsCount",
         "Desk": "Desk",
         "Device": "Device",
         "DiningRoom": "DiningRoom",
@@ -412,18 +415,18 @@
         "RoomContentPhoto": "RoomContentPhoto",
         "RoomContentStatus": "RoomContentStatus",
         "RoomRecommendations": "RoomRecommendations",
-        "RoomsCount": "RoomsCount",
         "RoomXDetails": "RoomXDetails",
         "RoomXType": "RoomXType",
+        "RoomsCount": "RoomsCount",
         "Router": "Router",
         "Shelf": "Shelf",
         "ShoeRack": "ShoeRack",
         "Sofa": "Sofa",
         "Storage": "Storage",
+        "TV": "TV",
         "TheDevice": "TheDevice",
         "TheFurniture": "TheFurniture",
         "Title": "Title",
-        "TV": "TV",
         "ViewReport": "ViewReport",
         "Wardrobe": "Wardrobe",
         "WashingMachine": "WashingMachine",
@@ -441,8 +444,8 @@
       "Title": "Title",
       "VisitDate": "VisitDate",
       "VisitPurpose": "VisitPurpose",
-      "Visits": "Visits",
-      "VisitTime": "VisitTime"
+      "VisitTime": "VisitTime",
+      "Visits": "Visits"
     }
   },
   "CopyRight": {
@@ -461,6 +464,7 @@
       "Labels": {
         "Add": "Add",
         "AddNew": "AddNew",
+        "BrowserDontSupportLocation": "Browser Don't Support Location",
         "Confirm": "Confirm",
         "Edit": "Edit",
         "InvalidEmail": "InvalidEmail",
@@ -469,6 +473,7 @@
         "NoOptions": "No Options",
         "Notes": "Notes",
         "PickDate": "PickDate",
+        "PleaseAllowLocation": "Please Allow Location",
         "PleaseSelect": "PleaseSelect",
         "Previous": "Previous",
         "Record": "Record",
@@ -482,6 +487,7 @@
         "UnAvailableForDemoMode": "Unavailable For Demo Mode",
         "Update": "Update",
         "UploadAttachment": "UploadAttachment",
+        "ViewLocation": "View Location",
         "Yes": "Yes"
       },
       "SuccessMsg": "SuccessMsg"
@@ -491,6 +497,7 @@
       "ApplicationDate": "ApplicationDate",
       "Back": "Back",
       "DemoWarning": "Demo Warning",
+      "Details": "Details",
       "Logout": "Logout",
       "NoData": "NoData",
       "NoNotifications": "No Notifications",
@@ -498,7 +505,10 @@
       "PageSize": "PageSize",
       "PhoneNumber": "PhoneNumber",
       "Search": "Search",
-      "WrongUrl": "WrongUrl"
+      "ThisWeek": "This Week",
+      "Today": "Today",
+      "WrongUrl": "WrongUrl",
+      "YourOwn": "YourOwn"
     }
   },
   "Public": {
@@ -534,6 +544,20 @@
       },
       "Title": "Title"
     },
+    "Otp": {
+      "CheckSms": "Check SMS",
+      "Title": "Title"
+    },
+    "PrivacyPolicy": {
+      "Acknowledgment": "Acknowledgment",
+      "Point1": "Point1",
+      "Point2": "Point2",
+      "Point3": "Point3",
+      "Point4": "Point4",
+      "Point5": "Point5",
+      "Point6": "Point6",
+      "Title": "Title"
+    },
     "Register": {
       "Labels": {
         "ByClickYouAccept": "ByClickYouAccept",
@@ -547,6 +571,13 @@
         "ResendOtp": "ResendOtp",
         "Success": "Success"
       },
+      "Title": "Title"
+    },
+    "TermsConditions": {
+      "Point1": "Point1",
+      "Point2": "Point2",
+      "Point3": "Point3",
+      "Point4": "Point4",
       "Title": "Title"
     }
   }
