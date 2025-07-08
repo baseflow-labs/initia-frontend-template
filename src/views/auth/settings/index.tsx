@@ -89,9 +89,9 @@ const SettingsPage = () => {
       // },
     ];
 
-    const allProvinces = formik?.values.provinces?.includes("All");
-    const allGovernorate = formik?.values.governorate?.includes("All");
-    const allCities = formik?.values.cities?.includes("All");
+    // const allProvinces = formik?.values.provinces?.includes("All");
+    // const allGovernorate = formik?.values.governorate?.includes("All");
+    // const allCities = formik?.values.cities?.includes("All");
 
     // if (!allProvinces) {
     //   final.push({
