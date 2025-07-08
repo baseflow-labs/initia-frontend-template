@@ -14,7 +14,7 @@ interface Props {
 
 const UsersCard = ({ label, researchers }: Props) => {
   return (
-    <DashboardCard max="50vh">
+    <DashboardCard max="40vh">
       <h3 className="mb-4">
         {label} {researchers.length}
       </h3>

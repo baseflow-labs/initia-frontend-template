@@ -127,7 +127,10 @@ const DashboardView = () => {
               </h3>
             </div>
 
-            <div className="col-12">
+            <div
+              className="col-12"
+              style={{ maxHeight: "40vh", overflowY: "auto" }}
+            >
               {data.notifications?.length
                 ? data.notifications.map(
                     ({ title, message, service, createdAt }, i) => (
