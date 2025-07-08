@@ -104,7 +104,7 @@ const DashboardResearcherView = () => {
       <DashboardCards statistics={statistics} />
 
       <div className="row">
-        <div className="col-md-6">
+        <div className="col-xl-6">
           <TasksCard
             label={t("Auth.Dashboard.Tasks")}
             tasks={statistics.map(({ icon, color, tasks, ...rest }) => ({
@@ -117,7 +117,7 @@ const DashboardResearcherView = () => {
           />
         </div>
 
-        <div className="col-md-6">
+        <div className="col-xl-6">
           <MapCard />
         </div>
       </div>

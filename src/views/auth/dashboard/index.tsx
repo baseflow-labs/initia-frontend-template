@@ -78,7 +78,7 @@ const DashboardView = () => {
 
   return (
     <div className="row">
-      <div className="col-md-6">
+      <div className="col-lg-6">
         <DashboardCard>
           <div className="text-info text-center py-5">
             <h1 className="mb-4">{t("Auth.Dashboard.Welcome")}</h1>
@@ -100,18 +100,18 @@ const DashboardView = () => {
         </DashboardCard>
       </div>
 
-      <div className="col-md-6">
+      <div className="col-lg-6">
         <DashboardCard>
           <h3 className="mb-5">{t("Auth.Dashboard.BeneficiaryInfo")}</h3>
 
           <div className="row">
-            <div className="col-md-6">
+            <div className="col-6">
               <h6 className="my-auto">
                 {t("Auth.Dashboard.BeneficiaryMembershipStatus")}
               </h6>
             </div>
 
-            <div className="col-md-6">
+            <div className="col-6">
               <h3 className="my-auto">
                 <FontAwesomeIcon
                   icon={faCircle}
@@ -141,13 +141,13 @@ const DashboardView = () => {
                         key={i}
                       >
                         <div className="row">
-                          <div className="col-md-2 col-lg-1 my-auto text-warning">
+                          <div className="col-1 col-lg-2 col-lg-1 my-auto text-warning">
                             <h3>
                               <IconWrapperComp icon={helpIcon} />
                             </h3>
                           </div>
 
-                          <div className="col-md-10 col-lg-11 ps-4 text-break text-wrap">
+                          <div className="col-11 col-lg-10 col-lg-11 ps-4 text-break text-wrap">
                             <h6 className="w-100">{message}</h6>
                             <small>{moment(createdAt).fromNow()}</small>
                           </div>
