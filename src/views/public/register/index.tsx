@@ -20,6 +20,14 @@ const RegisterView = () => {
       .otpSend(values.username)
       .then(() => {
         setData(values);
+        dispatch(
+          addNotification({
+            msg: t("Global.Form.SuccessMsg", {
+              action: t("Public.ForgotPassword.SendOtp.SendOtp"),
+              data: "966" + values.username,
+            }),
+          })
+        );
       })
       .catch(apiCatchGlobalHandler);
   };

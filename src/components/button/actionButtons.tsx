@@ -1,7 +1,7 @@
 import Button from "../core/button";
 
 interface Props {
-  buttons: { label: string; className?: string }[];
+  buttons: { label: string; className?: string; onClick?: () => void }[];
 }
 
 const ActionButtons = ({ buttons }: Props) => {

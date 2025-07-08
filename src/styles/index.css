@@ -15,6 +15,10 @@
   color: white !important;
 }
 
+.bg-opacity-info {
+  background-color: rgba(24, 180, 191, 0.2) !important;
+}
+
 .btn-info {
   background-color: var(--bs-info) !important;
   color: white !important;
@@ -53,6 +57,10 @@
   color: white !important;
 }
 
+.bg-opacity-success {
+  background-color: rgba(142, 193, 86, 0.2) !important;
+}
+
 .btn-success {
   background-color: var(--bs-success) !important;
   color: white !important;
@@ -84,6 +92,18 @@
 
 .border-success {
   border-color: var(--bs-success) !important;
+}
+
+.bg-opacity-primary {
+  background-color: rgba(0, 123, 255, 0.2) !important;
+}
+
+.bg-opacity-warning {
+  background-color: rgba(255, 193, 7, 0.2) !important;
+}
+
+.bg-opacity-danger {
+  background-color: rgba(220, 53, 69, 0.2) !important;
 }
 
 html {

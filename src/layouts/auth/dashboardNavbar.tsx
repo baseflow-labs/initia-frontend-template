@@ -21,6 +21,7 @@ export interface Notification {
   title: string;
   message: string;
   service: string;
+  important?: boolean;
   createdAt: string;
 }
 
@@ -101,7 +102,7 @@ const DashboardNavbar = () => {
                         ),
                       })
                     )
-                  : [{ label: "لا يوجد إشعارات" }]
+                  : [{ label: t("Global.Labels.NoNotifications") }]
               }
             />
 

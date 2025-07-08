@@ -1,9 +1,10 @@
 import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
-import { useDispatch } from "react-redux";
 import * as authApi from "../../../api/auth";
+import BelowInputButton from "../../../components/button/belowInput";
 import Form from "../../../components/form";
 import { addNotification } from "../../../store/actions/notifications";
 import { apiCatchGlobalHandler } from "../../../utils/function";
@@ -18,6 +19,14 @@ const ForgotPassword = () => {
     authApi
       .requestPasswordReset(values.identifier)
       .then(() => {
+        dispatch(
+          addNotification({
+            msg: t("Global.Form.SuccessMsg", {
+              action: t("Public.ForgotPassword.SendOtp.SendOtp"),
+              data: "966" + values.identifier,
+            }),
+          })
+        );
         setData({ ...values, code: "" });
       })
       .catch(apiCatchGlobalHandler);
@@ -41,6 +50,13 @@ const ForgotPassword = () => {
       type: "otp",
       name: "code",
       required: true,
+      belowComp: (
+        <BelowInputButton
+          introText={t("Public.Register.Labels.DidNotGetOtp")}
+          buttonText={t("Public.Register.Labels.ResendOtp")}
+          action={() => onForgotSubmit(data)}
+        />
+      ),
     },
   ];
 
@@ -101,11 +117,7 @@ const ForgotPassword = () => {
           />
         </Fragment>
       ) : (
-        <Form
-          inputs={forgotInputs}
-          submitText={t("Public.Register.Labels.Register")}
-          onFormSubmit={onForgotSubmit}
-        />
+        <Form inputs={forgotInputs} onFormSubmit={onForgotSubmit} />
       )}
     </div>
   );

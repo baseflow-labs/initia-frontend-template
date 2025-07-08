@@ -11,13 +11,13 @@ import {
   notificationsIcon,
 } from "../../assets/icons/icons";
 import IconWrapperComp from "../../assets/icons/wrapper";
+import appLogo from "../../assets/images/brand/logo-only.png";
 import profilePhotoPlaceholder from "../../assets/images/profile-image-placeholder.png";
 import DropdownComp from "../../components/dropdown";
 import { logout } from "../../store/actions/auth";
 import { useAppSelector } from "../../store/hooks";
 import { apiCatchGlobalHandler } from "../../utils/function";
 import { Notification } from "./dashboardNavbar";
-import appLogo from "../../assets/images/brand/logo-only.png";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -111,7 +111,7 @@ const Navbar = () => {
                       ),
                     })
                   )
-                : [{ label: "لا يوجد إشعارات" }]
+                : [{ label: t("Global.Labels.NoNotifications") }]
             }
           />
 

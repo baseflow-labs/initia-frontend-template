@@ -16,7 +16,7 @@
       "RecaptionDate": "تاريخ الاستلام",
       "Statuses": {
         "Grant": "منح المعونة",
-        "Granted": "اعتمدت",
+        "Granted": "اعتمد",
         "Pending": "قيد المراجعة",
         "Reject": "رفض طلب المعونة"
       },
@@ -32,6 +32,7 @@
         "ApplicationRejectReason": "سبب رفض الطلب",
         "archive": "ارشيف",
         "Archive": "أرشيف {{property}}",
+        "AssignResearcher": "إحالة المستفيد",
         "CancelMembership": "إلغاء العضوية",
         "CancelMembershipNote": "سيتم نقل بيانات المستفيد إلى تبويب طلبات الانتساب لمراجعة ملفه مرة أخرى أو حذفه نهائياً",
         "CancelMembershipReason": "سبب إلغاء العضوية",
@@ -77,8 +78,24 @@
       "Title": "تواصل معنا"
     },
     "Dashboard": {
+      "AcceptedBeneficiariesCount": "تم قبولهم",
+      "AidsCount": "عدد المعونات",
+      "ApplicantsCount": "المتقدمين الجدد",
+      "ApplicantsToReview": "طلبات انتساب للمراجعة",
+      "BeneficiariesCount": "عدد المستفيدين",
+      "BeneficiaryInfo": "معلوماتكم",
+      "BeneficiaryMembershipStatus": "حالة عضويتكم الآن في الجمعية",
+      "DoneVisitsCount": "زيارة تمت",
+      "GrantedAidsCount": "معونة مقدمة",
+      "ImportantNotifications": "الإشعارات الهامة",
       "Main": "الرئيسية",
+      "PendingAidsCount": "معونة قيد الانتظار",
+      "ScheduledVisitsCount": "زيارات مجدولة",
+      "Tasks": "Tasks",
       "Title": "نظرة عامة",
+      "ToDoVisitsCount": "زيارة قادمة",
+      "ToReviewAidsCount": "طلبات معونة للتدقيق",
+      "VisitsCount": "عدد الزيارات",
       "Welcome": "أهلاً بكم في نظام مستحق"
     },
     "MembershipRegistration": {
@@ -207,8 +224,8 @@
         "MasrefDocument": "شهادة الآيبان من تطبيق المصرف",
         "NationalAddressDocument": "إثبات العنوان الوطني",
         "Nationality": {
-          "NonSaudi": "غير سعودي",
-          "Saudi": "سعودي",
+          "NonSaudi": "غير سعودي(ة)",
+          "Saudi": "سعودي(ة)",
           "Title": "الجنسية"
         },
         "Occupation": {
@@ -295,17 +312,31 @@
         "NeedHelp": "بحاجة لمساعدة",
         "NewMember": "مستفيد جديد",
         "Rejected": "مرفوض",
+        "ResearcherAssigned": "تمت الإحالة",
         "Reviewed": "تم التدقيق",
         "Status": "حالة الطلب"
       },
       "Title": "طلب الانتساب للجمعية"
     },
+    "Researchers": {
+      "AddResearcher": "إضافة باحث جديد",
+      "Assign": "إحالة",
+      "BeneficiariesCount": "عدد المستفيدين",
+      "ResearcherName": "اسم الباحث",
+      "Title": "إدارة الباحثين",
+      "VisitsCount": "عدد الزيارات"
+    },
     "Settings": {
       "AllCities": "جميع مدن المحافظات",
       "AllDistricts": "جميع أحياء المدينة",
       "AllGovernorate": "جميع محافظات المنطقة",
-      "AllProvinces": "جميع مناطق المملكة",
       "FontSize": "حجم الخط للتطبيق",
+      "Metadata": {
+        "Title": "إعدادات الجمعية"
+      },
+      "PasswordReset": {
+        "Title": "إعادة ضبط كلمة السر"
+      },
       "Samples": {
         "H3Sample": "عينة عنوان رئيسيي",
         "H4Sample": "عينة عنوان فرعي",
@@ -322,8 +353,10 @@
       "SocietyLogo": "شعار الجمعية",
       "SocietyName": "اسم الجمعية",
       "SocietyPhoneNumber": "رقم الهاتف للجمعية",
-      "SocietyProvinces": "المناطق التي تخدمها الجمعية ضمن المملكة",
       "SocietyWebsite": "الموقع الإلكتروني للجمعية",
+      "System": {
+        "Title": "إعدادات النظام"
+      },
       "Title": "الإعدادات"
     },
     "Visits": {
@@ -398,7 +431,7 @@
         "Working": "يعمل"
       },
       "Statuses": {
-        "Approved": "تمت الموافقة",
+        "Approved": "وافق المستفيد",
         "Cancelled": "ألغيت الزيارة",
         "Delayed": "تم طلب التأجيل",
         "Done": "تمت الزيارة",
@@ -421,11 +454,15 @@
   "Global": {
     "Form": {
       "CantDoIt": "لا يمكن القيام بهذا الإجراء",
+      "Label": {
+        "Email": "البريد الإلكتروني",
+        "PhoneNumber": "رقم الجوال"
+      },
       "Labels": {
         "Add": "إضافة",
         "AddNew": "إضافة بيانات جديدة",
         "Confirm": "تأكيد",
-        "Edit": "تعدبل",
+        "Edit": "تعديل",
         "InvalidEmail": "بريد إلكتروني غير صالح",
         "Location": "Google Map رابط",
         "No": "لا",
@@ -453,9 +490,10 @@
       "Action": "إجراء",
       "ApplicationDate": "تاريخ التقديم",
       "Back": "عودة",
-      "DemoWarning": "نرجو الانتباه أن هذه النسخة الخاصة بالعرض متاحة للجميع, لذا ننصح بعدم مشاركة أي بيانات حقيقية مثل الاسم أو رقم البطاقة أو ما سواها",
+      "DemoWarning": "نرجو الانتباه أن هذه النسخة الخاصة بالعرض متاح الوصول إليها للجميع, لذا ننصح بعدم مشاركة أي بيانات حقيقية مثل الاسم أو رقم البطاقة أو ما سواها. كما نرجو أخذ العلم بأن البيانات سيتم إعادة ضبطها آلياً كل يوم",
       "Logout": "خروج",
       "NoData": "عذراً, لا يوجد بيانات للعرض",
+      "NoNotifications": "لا يوجد إشعارات",
       "PageNo": "رقم الصفحة",
       "PageSize": "حجم الصفحة",
       "PhoneNumber": "رقم الجوال",
@@ -475,7 +513,8 @@
         "Title": "إعادة تعيين كلمة السر"
       },
       "SendOtp": {
-        "ConfirmOTP": "تأكيد رمز التحقق OTP"
+        "ConfirmOTP": "تأكيد رمز التحقق OTP",
+        "SendOtp": "إرسال رمز التحقق"
       },
       "Title": "نسيت كلمة السر"
     },

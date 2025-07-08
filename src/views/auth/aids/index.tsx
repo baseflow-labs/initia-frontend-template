@@ -140,7 +140,7 @@ const AidsView = () => {
     },
     {
       type: "date",
-      name: "recaptionDate",
+      name: "collectionDate",
       label: t("Auth.Aids.RecaptionDate"),
     },
     {
@@ -206,6 +206,9 @@ const AidsView = () => {
     },
   ];
 
+  const grantLabel = t("Auth.Aids.Statuses.Grant");
+  const rejectLabel = t("Auth.Aids.Statuses.Reject");
+
   const updateStatus = (id: string, status: string) => {
     AidApi.updateStatus(id, status)
       .then(() => {
@@ -214,10 +217,7 @@ const AidsView = () => {
         dispatch(
           addNotification({
             msg: t("Global.Form.SuccessMsg", {
-              action:
-                status === "Granted"
-                  ? t("Auth.Aids.Statuses.Grant")
-                  : t("Auth.Aids.Statuses.Reject"),
+              action: status === "Granted" ? grantLabel : rejectLabel,
               data: selectOptions.beneficiaries.find(
                 ({ id }) => id === aid?.beneficiaryId
               )?.fullName,

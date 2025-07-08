@@ -18,7 +18,7 @@ const BelowInputButton = ({
       <small className="pt-2">
         {introText}{" "}
         <span
-          color="ghost"
+          role="button"
           onClick={route ? () => navigate(route) : action}
           className="text-decoration-underline text-info"
         >
