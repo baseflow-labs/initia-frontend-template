@@ -1,87 +1,120 @@
-import { useTranslation } from "react-i18next";
-
 import {
-  faLocationCrosshairs,
-  faTable,
+  faBox,
+  faMapLocationDot,
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
-import DashboardCards from "../../../components/card/statisticCards";
-import PageTemplate from "../../../layouts/auth/pageTemplate";
-import UsersCard from "../../../components/card/usersCard";
-import profilePhotoPlaceholder from "../../../assets/images/profile-image-placeholder.png";
-import TasksCard from "../../../components/card/tasksCard";
+import { useLayoutEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+
+import * as OverviewApi from "../../../api/overview";
 import MapCard from "../../../components/card/mapCard";
+import DashboardCards from "../../../components/card/statisticCards";
+import TasksCard from "../../../components/card/tasksCard";
+import PageTemplate from "../../../layouts/auth/pageTemplate";
+import { apiCatchGlobalHandler } from "../../../utils/function";
 
 const DashboardResearcherView = () => {
   const { t } = useTranslation();
+  const [data, setData] = useState<{
+    beneficiaries: { all: number; applicants: number; accepted: number };
+    visits: { all: number; toDo: number; done: number };
+    aids: { all: number; granted: number; pending: number };
+  }>({
+    beneficiaries: { all: 0, applicants: 0, accepted: 0 },
+    visits: { all: 0, toDo: 0, done: 0 },
+    aids: { all: 0, granted: 0, pending: 0 },
+  });
+
+  useLayoutEffect(() => {
+    OverviewApi.forResearcher()
+      .then((res: any) => {
+        setData(res);
+      })
+      .catch(apiCatchGlobalHandler);
+  }, []);
 
   const statistics = [
     {
-      label: "عدد المستفيدين",
-      count: 50,
+      label: t("Auth.Dashboard.BeneficiariesCount"),
+      count: data?.beneficiaries.all,
       details: [
-        { label: "المنتسبين الجدد", count: 20 },
-        { label: "تم قبولهم", count: 200 },
+        {
+          label: t("Auth.Dashboard.ApplicantsCount"),
+          count: data?.beneficiaries.applicants,
+        },
+        {
+          label: t("Auth.Dashboard.AcceptedBeneficiariesCount"),
+          count: data?.beneficiaries.accepted,
+        },
       ],
       color: "success",
+      tasks: {
+        label: t("Auth.Dashboard.ApplicantsToReview"),
+        count: data?.beneficiaries.applicants,
+        route: "/beneficiaries",
+      },
       icon: faUsers,
     },
     {
-      label: "عدد المستفيدين",
-      count: 50,
+      label: t("Auth.Dashboard.VisitsCount"),
+      count: data?.visits.all,
       details: [
-        { label: "المنتسبين الجدد", count: 20 },
-        { label: "تم قبولهم", count: 200 },
-      ],
-      color: "primary",
-      icon: faLocationCrosshairs,
-    },
-    {
-      label: "عدد المستفيدين",
-      count: 50,
-      details: [
-        { label: "المنتسبين الجدد", count: 20 },
-        { label: "تم قبولهم", count: 200 },
+        {
+          label: t("Auth.Dashboard.DoneVisitsCount"),
+          count: data?.visits.done,
+        },
+        {
+          label: t("Auth.Dashboard.ToDoVisitsCount"),
+          count: data?.visits.toDo,
+        },
       ],
       color: "info",
-      icon: faLocationCrosshairs,
+      tasks: {
+        label: t("Auth.Dashboard.ScheduledVisitsCount"),
+        count: data?.visits.toDo,
+        route: "/visitSchedules",
+      },
+      icon: faMapLocationDot,
     },
     {
-      label: "عدد المستفيدين",
-      count: 50,
+      label: t("Auth.Dashboard.AidsCount"),
+      count: data?.aids.all,
       details: [
-        { label: "المنتسبين الجدد", count: 20 },
-        { label: "تم قبولهم", count: 200 },
+        {
+          label: t("Auth.Dashboard.GrantedAidsCount"),
+          count: data?.aids.granted,
+        },
+        {
+          label: t("Auth.Dashboard.PendingAidsCount"),
+          count: data?.aids.pending,
+        },
       ],
+      tasks: {
+        label: t("Auth.Dashboard.ToReviewAidsCount"),
+        count: data?.aids.pending,
+        route: "/aids",
+      },
       color: "warning",
-      icon: faLocationCrosshairs,
-    },
-  ];
-
-  const researchers = [
-    {
-      icon: faTable,
-      color: "success",
-      label: "طلبات انتساب للمراجعة",
-      count: 4,
-      route: "/beneficiaries",
-    },
-    {
-      icon: faTable,
-      color: "success",
-      label: "طلبات انتساب للمراجعة",
-      count: 4,
-      route: "/contact-us",
+      icon: faBox,
     },
   ];
 
   return (
-    <PageTemplate title="نظرة عامة">
+    <PageTemplate title={t("Auth.Dashboard.Title")}>
       <DashboardCards statistics={statistics} />
 
       <div className="row">
         <div className="col-md-6">
-          <TasksCard label="المهام" tasks={researchers} />
+          <TasksCard
+            label={t("Auth.Dashboard.Tasks")}
+            tasks={statistics.map(({ icon, color, tasks, ...rest }) => ({
+              icon,
+              color,
+              label: tasks.label,
+              count: tasks.count,
+              route: tasks.route,
+            }))}
+          />
         </div>
 
         <div className="col-md-6">

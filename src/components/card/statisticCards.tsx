@@ -1,6 +1,6 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { columnsWidth } from "../../utils/function";
+
 import DashboardCard from "./dashboardCard";
 
 interface Props {
@@ -15,6 +15,21 @@ interface Props {
     }[];
   }[];
 }
+
+const columnsWidth = (count: number) => {
+  switch (count) {
+    case 1:
+      return 12;
+    case 2:
+      return 6;
+    case 3:
+      return 4;
+    case 4:
+      return 3;
+    default:
+      return 2;
+  }
+};
 
 const StatisticCards = ({ statistics }: Props) => {
   return (

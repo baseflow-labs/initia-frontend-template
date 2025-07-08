@@ -4,7 +4,7 @@ import moment from "moment";
 import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
-import * as NotificationApi from "../../../api/notifications";
+
 import * as OverviewApi from "../../../api/overview";
 import { helpIcon } from "../../../assets/icons/icons";
 import IconWrapperComp from "../../../assets/icons/wrapper";

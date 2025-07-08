@@ -7,4 +7,9 @@ const forBeneficiary = async () => {
   return res;
 };
 
-export { forBeneficiary };
+const forResearcher = async () => {
+  const res = await api.get(mainPath + "/researcher");
+  return res;
+};
+
+export { forBeneficiary, forResearcher };

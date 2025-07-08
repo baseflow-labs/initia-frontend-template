@@ -78,8 +78,21 @@
       "Title": "Title"
     },
     "Dashboard": {
+      "AcceptedBeneficiariesCount": "Accepted Beneficiaries Count",
+      "AidsCount": "Aids Count",
+      "ApplicantsCount": "Applicants Count",
+      "ApplicantsToReview": "Applicants To Review",
+      "BeneficiariesCount": "Beneficiaries Count",
+      "DoneVisitsCount": "Done Visits Count",
+      "GrantedAidsCount": "Granted Aids Count",
       "Main": "Main",
+      "PendingAidsCount": "Pending Aids Count",
+      "ScheduledVisitsCount": "Scheduled Visits Count",
+      "Tasks": "Tasks",
       "Title": "Title",
+      "ToDoVisitsCount": "To Do Visits Count",
+      "ToReviewAidsCount": "To Review Aid sCount",
+      "VisitsCount": "Visits Count",
       "Welcome": "Welcome"
     },
     "MembershipRegistration": {

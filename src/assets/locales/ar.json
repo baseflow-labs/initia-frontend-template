@@ -78,8 +78,21 @@
       "Title": "تواصل معنا"
     },
     "Dashboard": {
+      "AcceptedBeneficiariesCount": "تم قبولهم",
+      "AidsCount": "عدد المعونات",
+      "ApplicantsCount": "المتقدمين الجدد",
+      "ApplicantsToReview": "طلبات انتساب للمراجعة",
+      "BeneficiariesCount": "عدد المستفيدين",
+      "DoneVisitsCount": "زيارة تمت",
+      "GrantedAidsCount": "معونة مقدمة",
       "Main": "الرئيسية",
+      "PendingAidsCount": "معونة قيد الانتظار",
+      "ScheduledVisitsCount": "زيارات مجدولة",
+      "Tasks": "Tasks",
       "Title": "نظرة عامة",
+      "ToDoVisitsCount": "زيارة قادمة",
+      "ToReviewAidsCount": "طلبات معونة للتدقيق",
+      "VisitsCount": "عدد الزيارات",
       "Welcome": "أهلاً بكم في نظام مستحق"
     },
     "MembershipRegistration": {

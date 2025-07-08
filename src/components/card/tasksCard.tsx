@@ -1,6 +1,7 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import Button from "../core/button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import Button from "../core/button";
 import DashboardCard from "./dashboardCard";
 
 interface Props {
@@ -28,16 +29,16 @@ const TasksCard = ({ label, tasks }: Props) => {
             >
               <td>
                 <div className="d-flex py-2">
-                  <div className={`bg-${color} p-3 me-4 rounded-4 h4`}>
+                  <div
+                    className={`bg-${color} text-white p-3 me-4 rounded-4 h4`}
+                  >
                     <FontAwesomeIcon icon={icon} className="m-0 p-0" />
                   </div>
 
-                  <div>
+                  <div className="my-auto">
                     <h5>
                       {count} {label}
                     </h5>
-
-                    <div className="text-secondary">{"مستفيد"}</div>
                   </div>
                 </div>
               </td>
