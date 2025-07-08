@@ -137,7 +137,7 @@ const DashboardView = () => {
                       <div
                         className="card mb-3 p-3 w-100"
                         role="button"
-                        onClick={() => navigate("/beneficiary/" + service)}
+                        onClick={() => navigate("/" + service)}
                         key={i}
                       >
                         <div className="row">

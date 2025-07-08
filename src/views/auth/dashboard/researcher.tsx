@@ -51,7 +51,7 @@ const DashboardResearcherView = () => {
       tasks: {
         label: t("Auth.Dashboard.ApplicantsToReview"),
         count: data?.beneficiaries.applicants,
-        route: "/beneficiaries",
+        route: "/beneficiary",
       },
       icon: faUsers,
     },
@@ -72,7 +72,7 @@ const DashboardResearcherView = () => {
       tasks: {
         label: t("Auth.Dashboard.ScheduledVisitsCount"),
         count: data?.visits.toDo,
-        route: "/visitSchedules",
+        route: "/visitSchedule",
       },
       icon: faMapLocationDot,
     },
@@ -92,7 +92,7 @@ const DashboardResearcherView = () => {
       tasks: {
         label: t("Auth.Dashboard.ToReviewAidsCount"),
         count: data?.aids.pending,
-        route: "/aids",
+        route: "/aid",
       },
       color: "warning",
       icon: faBox,

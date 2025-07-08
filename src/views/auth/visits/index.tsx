@@ -33,7 +33,6 @@ const VisitsView = () => {
   const { user } = useAppSelector((state) => state.auth);
 
   const [openModal, setOpenModal] = useState(false);
-  const [crudData, setCrudData] = useState({});
 
   const [selectOptions, setSelectOptions] = useState({
     beneficiaries: [{ id: "", fullName: "" }],
@@ -170,39 +169,8 @@ const VisitsView = () => {
     },
   ];
 
-  const scheduleVisitInputs = () => [
-    {
-      type: "select",
-      options: selectOptions.beneficiaries.map(({ id, fullName }) => ({
-        value: id,
-        label: fullName,
-      })),
-      defaultValue: searchParams.get("id") || "",
-      name: "beneficiary",
-      label: t("Auth.Beneficiaries.BeneficiaryName"),
-      required: true,
-    },
-    {
-      type: "time",
-      name: "time",
-      required: true,
-    },
-    {
-      type: "date",
-      name: "date",
-      required: true,
-    },
-    {
-      type: "textarea",
-      name: "reason",
-      label: t("Auth.Visits.VisitPurpose"),
-      required: true,
-    },
-  ];
-
   const onModalClose = () => {
     setOpenModal(false);
-    setCrudData({});
     if (searchParams.get("id")) {
       navigate("/visitSchedule");
       window.location.reload();
@@ -241,6 +209,36 @@ const VisitsView = () => {
     );
   };
 
+  const inputs = () => [
+    {
+      type: "select",
+      options: selectOptions.beneficiaries.map(({ id, fullName }) => ({
+        value: id,
+        label: fullName,
+      })),
+      defaultValue: searchParams.get("id") || "",
+      name: "beneficiary",
+      label: t("Auth.Beneficiaries.BeneficiaryName"),
+      required: true,
+    },
+    {
+      type: "time",
+      name: "time",
+      required: true,
+    },
+    {
+      type: "date",
+      name: "date",
+      required: true,
+    },
+    {
+      type: "textarea",
+      name: "reason",
+      label: t("Auth.Visits.VisitPurpose"),
+      required: true,
+    },
+  ];
+
   return (
     <Fragment>
       <TablePage
@@ -263,13 +261,15 @@ const VisitsView = () => {
                 navigate("/visitSchedule/report/details/?id=" + id),
             });
           } else {
-            final.push({
-              icon: faEdit,
-              spread: true,
-              label: t("Auth.Visits.Report.AddReport"),
-              onClick: (id: string) =>
-                navigate("/visitSchedule/report?id=" + id),
-            });
+            if (user.role !== "hod") {
+              final.push({
+                icon: faEdit,
+                spread: true,
+                label: t("Auth.Visits.Report.AddReport"),
+                onClick: (id: string) =>
+                  navigate("/visitSchedule/report?id=" + id),
+              });
+            }
 
             if (!cancelled) {
               final.push({
@@ -294,24 +294,26 @@ const VisitsView = () => {
         onClose={onModalClose}
         isOpen={openModal}
       >
-        <Form
-          inputs={scheduleVisitInputs}
-          submitText={t("Global.Form.Labels.Confirm")}
-          initialValues={crudData}
-          onFormSubmit={(e) => {
-            e.id
-              ? VisitApi.update(e)
-                  .then((res) => {
-                    onCrudSuccess(e, t("Auth.Visits.EditVisit"));
-                  })
-                  .catch(apiCatchGlobalHandler)
-              : VisitApi.create(e)
-                  .then((res) => {
-                    onCrudSuccess(e, t("Auth.Visits.AddVisit"));
-                  })
-                  .catch(apiCatchGlobalHandler);
-          }}
-        />
+        {openModal && (
+          <Form
+            inputs={inputs}
+            submitText={t("Global.Form.Labels.Confirm")}
+            initialValues={{ beneficiary: searchParams.get("id") }}
+            onFormSubmit={(e) => {
+              e.id
+                ? VisitApi.update(e)
+                    .then((res) => {
+                      onCrudSuccess(e, t("Auth.Visits.EditVisit"));
+                    })
+                    .catch(apiCatchGlobalHandler)
+                : VisitApi.create(e)
+                    .then((res) => {
+                      onCrudSuccess(e, t("Auth.Visits.AddVisit"));
+                    })
+                    .catch(apiCatchGlobalHandler);
+            }}
+          />
+        )}
       </Modal>
     </Fragment>
   );

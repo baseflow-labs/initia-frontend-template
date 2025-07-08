@@ -1,5 +1,3 @@
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useLocation, useNavigate } from "react-router";
 import { Fragment } from "react/jsx-runtime";
 
@@ -63,7 +61,9 @@ const OffCanvasNav = ({ routes, fixedRoutes }: Props) => {
                 {<span>{name}</span>}
 
                 {user.role === "admin" && (
-                  <div className="text-end w-100">{labelNote}</div>
+                  <div className="text-end w-100">
+                    <small>{labelNote}</small>
+                  </div>
                 )}
               </h5>
             </Fragment>

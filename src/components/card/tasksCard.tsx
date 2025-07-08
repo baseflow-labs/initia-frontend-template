@@ -46,7 +46,7 @@ const TasksCard = ({ label, tasks }: Props) => {
               <td className="text-end">
                 <Button route={route} color="info">
                   التفاصيل
-                </Button>{" "}
+                </Button>
               </td>
             </tr>
           ))}
