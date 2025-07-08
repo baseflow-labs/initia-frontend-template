@@ -102,11 +102,13 @@ const DashboardView = () => {
 
       <div className="col-md-6">
         <DashboardCard>
-          <h3 className="mb-5">معلوماتكم</h3>
+          <h3 className="mb-5">{t("Auth.Dashboard.BeneficiaryInfo")}</h3>
 
           <div className="row">
             <div className="col-md-6">
-              <h6 className="my-auto">حالة عضويتكم الآن في الجمعية</h6>
+              <h6 className="my-auto">
+                {t("Auth.Dashboard.BeneficiaryMembershipStatus")}
+              </h6>
             </div>
 
             <div className="col-md-6">
@@ -120,7 +122,9 @@ const DashboardView = () => {
             </div>
 
             <div className="col-12">
-              <h3 className="my-5">الإشعارات الهامة</h3>
+              <h3 className="my-5">
+                {t("Auth.Dashboard.ImportantNotifications")}
+              </h3>
             </div>
 
             <div className="col-12">
@@ -148,7 +152,7 @@ const DashboardView = () => {
                       </div>
                     )
                   )
-                : "لا يوجد إشعارات"}
+                : t("Global.Labels.NoNotifications")}
             </div>
           </div>
         </DashboardCard>

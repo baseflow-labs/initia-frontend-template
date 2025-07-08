@@ -102,7 +102,7 @@ const DashboardNavbar = () => {
                         ),
                       })
                     )
-                  : [{ label: "لا يوجد إشعارات" }]
+                  : [{ label: t("Global.Labels.NoNotifications") }]
               }
             />
 

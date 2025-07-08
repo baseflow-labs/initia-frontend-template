@@ -83,8 +83,11 @@
       "ApplicantsCount": "Applicants Count",
       "ApplicantsToReview": "Applicants To Review",
       "BeneficiariesCount": "Beneficiaries Count",
+      "BeneficiaryInfo": "Your Info",
+      "BeneficiaryMembershipStatus": "Your Membership Status",
       "DoneVisitsCount": "Done Visits Count",
       "GrantedAidsCount": "Granted Aids Count",
+      "ImportantNotifications": "Important Notifications",
       "Main": "Main",
       "PendingAidsCount": "Pending Aids Count",
       "ScheduledVisitsCount": "Scheduled Visits Count",
@@ -316,7 +319,6 @@
       "Title": "Title"
     },
     "Researchers": {
-      "AddProfilePhoto": "Add Profile Photo",
       "AddResearcher": "Add Researcher",
       "Assign": "Assign",
       "BeneficiariesCount": "Beneficiaries sCount",
@@ -328,7 +330,6 @@
       "AllCities": "All Cities",
       "AllDistricts": "All Districts",
       "AllGovernorate": "All Governorate",
-      "AllProvinces": "All Provinces",
       "FontSize": "FontSize",
       "Metadata": {
         "Title": "Metadata Settings"
@@ -352,7 +353,6 @@
       "SocietyLogo": "SocietyLogo",
       "SocietyName": "SocietyName",
       "SocietyPhoneNumber": "SocietyPhoneNumber",
-      "SocietyProvinces": "Society Provinces",
       "SocietyWebsite": "Society Website",
       "System": {
         "Title": "System Settings"
@@ -493,6 +493,7 @@
       "DemoWarning": "Demo Warning",
       "Logout": "Logout",
       "NoData": "NoData",
+      "NoNotifications": "No Notifications",
       "PageNo": "PageNo",
       "PageSize": "PageSize",
       "PhoneNumber": "PhoneNumber",
