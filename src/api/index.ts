@@ -1,15 +1,12 @@
-import axios, {
-  AxiosError,
-  AxiosResponse,
-  InternalAxiosRequestConfig,
-} from "axios";
+import axios, { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from "axios";
 
 import { logout } from "../store/actions/auth";
 import { endLoading, startLoading } from "../store/actions/loading";
 import { addNotification } from "../store/actions/notifications";
 import store, { RootState } from "../store/store";
 
-export const baseURL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
+export const baseURL =
+  process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
 
 export interface GetDataProps {
   filters?: object;
@@ -52,6 +49,18 @@ service.interceptors.request.use(
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
+    }
+
+    if (config.method?.toLowerCase() === "get") {
+      const defaultParams = {
+        page: 1,
+        capacity: 500,
+      };
+
+      config.params = {
+        ...defaultParams,
+        ...(config.params || {}),
+      };
     }
 
     return config;
