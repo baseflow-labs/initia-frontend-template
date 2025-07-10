@@ -5,18 +5,13 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
-import { GetDataProps } from "../../../api";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import * as StaffApi from "../../../api/staff/researcher";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
-import {
-  apiCatchGlobalHandler,
-  renderDataFromOptions,
-  statusColorRender,
-} from "../../../utils/function";
+import { apiCatchGlobalHandler, renderDataFromOptions, statusColorRender } from "../../../utils/function";
 
 const ApplicantsViewForSupervisor = () => {
   const { t } = useTranslation();
@@ -37,9 +32,12 @@ const ApplicantsViewForSupervisor = () => {
   const [assignResearcherModalOpen, setAssignResearcherModalOpen] = useState<
     { beneficiary: string; staff: string } | undefined
   >(undefined);
+  const [currentFilters, setCurrentFilters] = useState({});
 
-  const getData = (filters: GetDataProps) => {
-    BeneficiaryApi.getAll(filters)
+  const onSearch = ({ filters = {}, page = 1, capacity = 10 }) => {
+    setCurrentFilters(filters);
+
+    return BeneficiaryApi.getAll(filters, page, capacity)
       .then((res: any) => {
         setBeneficiaries(
           (res.payload as any)
@@ -66,7 +64,7 @@ const ApplicantsViewForSupervisor = () => {
   };
 
   useLayoutEffect(() => {
-    getData({});
+    onSearch({ filters: {}, page: 1, capacity: 10 });
 
     StaffApi.getAll({})
       .then((res: any) => {
@@ -260,7 +258,7 @@ const ApplicantsViewForSupervisor = () => {
             })
           );
 
-          getData({});
+          onSearch({ filters: {}, page: 1, capacity: 10 });
         });
   };
 
@@ -295,8 +293,10 @@ const ApplicantsViewForSupervisor = () => {
             onClick: (data: string) => deleteBeneficiary(data),
           },
         ]}
-        onPageChange={(i = 0, x = 0) => console.log(i, x)}
-        onSearch={(values) => getData(values)}
+        onSearch={onSearch}
+        onPageChange={(page, capacity) => {
+          onSearch({ filters: currentFilters, page, capacity });
+        }}
       />
 
       <Modal
@@ -358,7 +358,7 @@ const ApplicantsViewForSupervisor = () => {
                       }),
                     })
                   );
-                  getData({});
+                  onSearch({ filters: {}, page: 1, capacity: 10 });
                   setAssignResearcherModalOpen(undefined);
                 })
                 .catch(apiCatchGlobalHandler);

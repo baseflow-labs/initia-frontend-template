@@ -3,21 +3,11 @@ import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes, useLocation } from "react-router";
 import { Fragment } from "react/jsx-runtime";
 
-import {
-  aidsIcon,
-  beneficiariesIcon,
-  dashboardIcon,
-  infoIcon,
-  membershipFormIcon,
-  profileIcon,
-  settingsIcon,
-  visitReportIcon,
-  visitsIcon,
-} from "../../assets/icons/icons";
+import { aidsIcon, beneficiariesIcon, dashboardIcon, infoIcon, membershipFormIcon, profileIcon, settingsIcon, visitReportIcon, visitsIcon } from "../../assets/icons/icons";
 import { useAppSelector } from "../../store/hooks";
 import { useWindowWidth } from "../../utils/hooks";
 import AidsView from "../../views/auth/aids";
-import AidsBeneficiaryView from "../../views/auth/aids/request";
+import AidsBeneficiaryView from "../../views/auth/aids/beneficiary";
 import ApplicantsView from "../../views/auth/applicants";
 import BeneficiaryFormReview from "../../views/auth/applicants/review";
 import ApplicantsViewForSupervisor from "../../views/auth/applicants/supervisor";
@@ -27,6 +17,7 @@ import BeneficiaryProfileView from "../../views/auth/beneficiaries/profile";
 import BeneficiariesViewForSupervisor from "../../views/auth/beneficiaries/supervisor";
 import ContactUsPage from "../../views/auth/contact-us";
 import DashboardView from "../../views/auth/dashboard";
+import DashboardResearcherView from "../../views/auth/dashboard/researcher";
 import DashboardSupervisorView from "../../views/auth/dashboard/supervisor";
 import MembershipRegistrationView from "../../views/auth/membershipRegistration";
 import SettingsPage from "../../views/auth/settings";
@@ -41,7 +32,6 @@ import { FilePreviewModal } from "./globalModal";
 import Navbar from "./navbar";
 import OffCanvasNav from "./offcanvasNav";
 import Sidebar from "./sidebarNav";
-import DashboardResearcherView from "../../views/auth/dashboard/researcher";
 
 const AuthLayout = () => {
   const { t } = useTranslation();

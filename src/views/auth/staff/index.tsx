@@ -1,4 +1,4 @@
-import { faEdit, faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -6,7 +6,6 @@ import { useDispatch } from "react-redux";
 
 import { GetDataProps } from "../../../api";
 import * as ResearcherApi from "../../../api/staff/researcher";
-import Button from "../../../components/core/button";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import PageTemplate from "../../../layouts/auth/pageTemplate";
@@ -92,6 +91,7 @@ const ResearcherMgmtPage = () => {
                       <a
                         href={"mailto:" + email}
                         target="_blank"
+                        rel="noreferrer"
                         className="text-decoration-none text-muted"
                       >
                         <FontAwesomeIcon icon={faEnvelope} /> {email}
@@ -102,6 +102,7 @@ const ResearcherMgmtPage = () => {
                       <a
                         href={"tel:966" + username}
                         target="_blank"
+                        rel="noreferrer"
                         className="text-decoration-none text-muted"
                       >
                         <FontAwesomeIcon icon={faPhone} /> +966{username}

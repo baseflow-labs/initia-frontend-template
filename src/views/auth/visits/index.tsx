@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router";
 
-import { GetDataProps } from "../../../api";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import * as VisitApi from "../../../api/visits/visits";
 import Form from "../../../components/form";
@@ -31,9 +30,12 @@ const VisitsView = () => {
   const [visits, setVisits] = useState<
     { id: string; visitReport: object; status: string }[]
   >([]);
+  const [currentFilters, setCurrentFilters] = useState({});
 
-  const getData = (filters: GetDataProps) => {
-    VisitApi.getAll(filters)
+  const onSearch = ({ filters = {}, page = 1, capacity = 10 }) => {
+    setCurrentFilters(filters);
+
+    return VisitApi.getAll(filters, page, capacity)
       .then((res: any) => {
         setVisits(
           (res.payload as any).map(
@@ -58,7 +60,7 @@ const VisitsView = () => {
   };
 
   useLayoutEffect(() => {
-    getData({});
+    onSearch({ filters: {}, page: 1, capacity: 10 });
 
     BeneficiaryApi.getAll({})
       .then((res: any) =>
@@ -171,7 +173,7 @@ const VisitsView = () => {
   const cancelVisit = (data: string) => {
     VisitApi.cancel(data)
       .then(() => {
-        getData({});
+        onSearch({ filters: {}, page: 1, capacity: 10 });
         dispatch(
           addNotification({
             msg: t("Global.Form.SuccessMsg", {
@@ -187,7 +189,8 @@ const VisitsView = () => {
 
   const onCrudSuccess = (e: { beneficiary: "" }, action = "") => {
     onModalClose();
-    getData({});
+
+    onSearch({ filters: {}, page: 1, capacity: 10 });
     dispatch(
       addNotification({
         msg: t("Global.Form.SuccessMsg", {
@@ -276,8 +279,10 @@ const VisitsView = () => {
         actionButtons={user.role !== "hod" ? actionButtons : undefined}
         columns={columns}
         data={visits}
-        onPageChange={(i = 0, x = 0) => console.log(i, x)}
-        onSearch={(values) => getData(values)}
+        onSearch={onSearch}
+        onPageChange={(page, capacity) => {
+          onSearch({ filters: currentFilters, page, capacity });
+        }}
       />
 
       <Modal

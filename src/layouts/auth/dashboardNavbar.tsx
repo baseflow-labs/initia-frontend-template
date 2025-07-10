@@ -4,14 +4,10 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
 import * as NotificationApi from "../../api/notifications";
-import {
-  helpIcon,
-  menuBarsIcon,
-  notificationsIcon,
-  searchIcon,
-} from "../../assets/icons/icons";
+import { helpIcon, menuBarsIcon, notificationsIcon, searchIcon } from "../../assets/icons/icons";
 import IconWrapperComp from "../../assets/icons/wrapper";
 import profilePhotoPlaceholder from "../../assets/images/profile-image-placeholder.png";
+import Spinner from "../../components/core/spinner";
 import DropdownComp from "../../components/dropdown";
 import { logout } from "../../store/actions/auth";
 import { useAppSelector } from "../../store/hooks";
@@ -30,6 +26,7 @@ const DashboardNavbar = () => {
   const { t } = useTranslation();
   const { logo } = useAppSelector((state) => state.settings);
   const [notifications, setNotification] = useState<Notification[]>([]);
+  const { loading } = useAppSelector((state) => state.loading);
 
   useLayoutEffect(() => {
     NotificationApi.get()
@@ -74,6 +71,14 @@ const DashboardNavbar = () => {
 
         <div className="col-6 col-lg-1 pb-3 order-2 order-lg-2">
           <div className="d-flex align-items-end gap-3 pe-5 float-end">
+            {loading.length > 0 ? (
+              <small className="text-info">
+                <Spinner />
+              </small>
+            ) : (
+              ""
+            )}
+
             <DropdownComp
               button={
                 <IconWrapperComp

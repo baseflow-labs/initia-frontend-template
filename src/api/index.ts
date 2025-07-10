@@ -27,9 +27,7 @@ export const formatGetFilters = (filters = {}) => {
     });
 
   return {
-    params: {
-      conditions: JSON.stringify(conditions),
-    },
+    conditions: JSON.stringify(conditions),
   };
 };
 

@@ -9,22 +9,20 @@ import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
-import {
-  apiCatchGlobalHandler,
-  renderDataFromOptions,
-  statusColorRender,
-} from "../../../utils/function";
+import { apiCatchGlobalHandler, renderDataFromOptions, statusColorRender } from "../../../utils/function";
 
 const AidsBeneficiaryView = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const [openModal, setOpenModal] = useState(false);
-
+  const [currentFilters, setCurrentFilters] = useState({});
   const [aids, setAids] = useState([]);
 
-  const getData = () => {
-    AidApi.getAll({})
+  const onSearch = ({ filters = {}, page = 1, capacity = 10 }) => {
+    setCurrentFilters(filters);
+
+    return AidApi.getAll(filters, page, capacity)
       .then((res: any) => {
         setAids(
           (res.payload as any).map(
@@ -40,7 +38,7 @@ const AidsBeneficiaryView = () => {
   };
 
   useLayoutEffect(() => {
-    getData();
+    onSearch({ filters: currentFilters, page: 1, capacity: 10 });
   }, []);
 
   const title = t("Auth.Aids.Beneficiary.Title");
@@ -190,8 +188,10 @@ const AidsBeneficiaryView = () => {
         actionButtons={actionButtons}
         columns={columns}
         data={aids}
-        onPageChange={(i = 0, x = 0) => console.log(i, x)}
-        onSearch={(values) => console.log(values)}
+        onSearch={onSearch}
+        onPageChange={(page, capacity) => {
+          onSearch({ filters: currentFilters, page, capacity });
+        }}
       />
 
       <Modal
@@ -206,7 +206,7 @@ const AidsBeneficiaryView = () => {
             AidApi.create(e)
               .then(() => {
                 setOpenModal(false);
-                getData();
+                onSearch({ filters: currentFilters, page: 1, capacity: 10 });
                 dispatch(
                   addNotification({
                     msg: t("Global.Form.SuccessMsg", {

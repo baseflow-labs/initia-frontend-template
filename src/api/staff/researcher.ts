@@ -27,7 +27,9 @@ const mainPath = "/staff";
 const { user } = (store.getState() as RootState).auth;
 
 const getAll = async (filters: GetDataProps) => {
-  const res = await api.get(mainPath, formatGetFilters(filters));
+  const res = await api.get(mainPath, {
+    params: { ...formatGetFilters(filters) },
+  });
   return res;
 };
 

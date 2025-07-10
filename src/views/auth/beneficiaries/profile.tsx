@@ -1,17 +1,16 @@
+import { faFileExcel } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router";
-
-import { faFileExcel } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as XLSX from "xlsx";
+
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import Button from "../../../components/core/button";
 import { InputSingleProps } from "../../../components/form";
 import { dataRender } from "../../../components/table";
 import { dataDateFormat } from "../../../utils/consts";
-import { downloadFile } from "../../../utils/downloadFiles";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 
 const BeneficiaryProfileView = () => {
@@ -1039,11 +1038,11 @@ const BeneficiaryProfileView = () => {
     },
   ];
 
-  const downloadProfileAsFile = (type: string) => {
-    BeneficiaryApi.downloadProfile(searchParams.get("id") || "", type)
-      .then((res: any) => downloadFile({ response: res.payload as any, type }))
-      .catch(apiCatchGlobalHandler);
-  };
+  // const downloadProfileAsFile = (type: string) => {
+  //   BeneficiaryApi.downloadProfile(searchParams.get("id") || "", type)
+  //     .then((res: any) => downloadFile({ response: res.payload as any, type }))
+  //     .catch(apiCatchGlobalHandler);
+  // };
 
   const processTypesForExport = (type: string) => {
     switch (type) {

@@ -1,21 +1,10 @@
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import {
-  faCheck,
-  faCheckSquare,
-  faCircle,
-  faEdit,
-  faSearch,
-  faTrash,
-  faUser,
-  faXmarkSquare,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCheckSquare, faCircle, faEdit, faSearch, faTrash, faUser, faXmarkSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
-import { GetDataProps } from "../../../api";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import Button from "../../../components/core/button";
 import Form from "../../../components/form";
@@ -23,12 +12,7 @@ import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/tablePage";
 import { logout } from "../../../store/actions/auth";
 import { addNotification } from "../../../store/actions/notifications";
-import {
-  apiCatchGlobalHandler,
-  renderDataFromOptions,
-  statusColorRender,
-} from "../../../utils/function";
-import { actionProps } from "../../../components/table";
+import { apiCatchGlobalHandler, renderDataFromOptions, statusColorRender } from "../../../utils/function";
 
 const ApplicantsView = () => {
   const { t } = useTranslation();
@@ -39,9 +23,12 @@ const ApplicantsView = () => {
     { id: string; status: string; fullName: string }[]
   >([]);
   const [rejectModalOpen, setRejectModalOpen] = useState<string | null>(null);
+  const [currentFilters, setCurrentFilters] = useState({});
 
-  const getData = (filters: GetDataProps) => {
-    BeneficiaryApi.getAll(filters)
+  const onSearch = ({ filters = {}, page = 1, capacity = 10 }) => {
+    setCurrentFilters(filters);
+
+    return BeneficiaryApi.getAll(filters, page, capacity)
       .then((res: any) => {
         setBeneficiaries(
           (res.payload as any)
@@ -60,7 +47,7 @@ const ApplicantsView = () => {
   };
 
   useLayoutEffect(() => {
-    getData({});
+    onSearch({ filters: {}, page: 1, capacity: 10 });
   }, []);
 
   const title = t("Auth.Beneficiaries.Applications");
@@ -341,7 +328,7 @@ const ApplicantsView = () => {
             })
           );
 
-          getData({});
+          onSearch({ filters: {}, page: 1, capacity: 10 });
         });
   };
 
@@ -423,7 +410,7 @@ const ApplicantsView = () => {
                         }),
                       })
                     );
-                    getData({});
+                    onSearch({ filters: {}, page: 1, capacity: 10 });
                     setRejectModalOpen(null);
                   })
                   .catch(apiCatchGlobalHandler),
@@ -435,8 +422,10 @@ const ApplicantsView = () => {
             },
           ];
         }}
-        onPageChange={(i = 0, x = 0) => console.log(i, x)}
-        onSearch={(values) => getData(values)}
+        onSearch={onSearch}
+        onPageChange={(page, capacity) => {
+          onSearch({ filters: currentFilters, page, capacity });
+        }}
       />
 
       <Modal
@@ -476,7 +465,7 @@ const ApplicantsView = () => {
                     }),
                   })
                 );
-                getData({});
+                onSearch({ filters: {}, page: 1, capacity: 10 });
                 setRejectModalOpen(null);
               })
               .catch(apiCatchGlobalHandler);

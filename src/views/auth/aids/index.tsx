@@ -4,34 +4,31 @@ import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
-import { GetDataProps } from "../../../api";
 import * as AidApi from "../../../api/aids/aids";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
-import {
-  apiCatchGlobalHandler,
-  renderDataFromOptions,
-  statusColorRender,
-} from "../../../utils/function";
+import { apiCatchGlobalHandler, renderDataFromOptions, statusColorRender } from "../../../utils/function";
 
 const AidsView = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const [openModal, setOpenModal] = useState(false);
-
   const [aids, setAids] = useState<
     { id: string; beneficiaryId: string; status: string }[]
   >([]);
   const [selectOptions, setSelectOptions] = useState({
     beneficiaries: [{ id: "", fullName: "", status: { status: "" } }],
   });
+  const [currentFilters, setCurrentFilters] = useState({});
 
-  const getData = (filters: GetDataProps) => {
-    AidApi.getAll(filters)
+  const onSearch = ({ filters = {}, page = 1, capacity = 10 }) => {
+    setCurrentFilters(filters);
+
+    return AidApi.getAll(filters, page, capacity)
       .then((res: any) => {
         setAids(
           (res.payload as any).map(
@@ -41,20 +38,21 @@ const AidsView = () => {
               ...status,
               ...rest,
             })
-          ) as any
+          )
         );
+        return res;
       })
       .catch(apiCatchGlobalHandler);
   };
 
   useLayoutEffect(() => {
-    getData({});
+    onSearch({ filters: {}, page: 1, capacity: 10 });
 
     BeneficiaryApi.getAll({})
       .then((res: any) =>
         setSelectOptions((current) => ({
           ...current,
-          beneficiaries: res.payload as any,
+          beneficiaries: res.payload,
         }))
       )
       .catch(apiCatchGlobalHandler);
@@ -213,7 +211,7 @@ const AidsView = () => {
     AidApi.updateStatus(id, status)
       .then(() => {
         const aid = aids.find((aid) => aid.id === id);
-        getData({});
+        onSearch({ filters: currentFilters, page: 1, capacity: 10 });
         dispatch(
           addNotification({
             msg: t("Global.Form.SuccessMsg", {
@@ -254,16 +252,20 @@ const AidsView = () => {
             label: t("Auth.Aids.FilterByThisBeneficiary"),
             icon: faFilter,
             spread: true,
-            onClick: (data: string) =>
-              getData({ filters: { beneficiary: data } }),
+            onClick: (data: string) => {
+              setCurrentFilters({ beneficiary: data });
+              onSearch({ filters: { beneficiary: data } });
+            },
           });
 
           return final;
         }}
         columns={columns}
         data={aids}
-        onPageChange={(i = 0, x = 0) => console.log(i, x)}
-        onSearch={(values) => getData(values)}
+        onSearch={onSearch}
+        onPageChange={(page, capacity) => {
+          onSearch({ filters: currentFilters, page, capacity });
+        }}
       />
 
       <Modal
@@ -278,7 +280,7 @@ const AidsView = () => {
             AidApi.grant(e)
               .then(() => {
                 setOpenModal(false);
-                getData({});
+                onSearch({ filters: currentFilters, page: 1, capacity: 10 });
                 dispatch(
                   addNotification({
                     msg: t("Global.Form.SuccessMsg", {

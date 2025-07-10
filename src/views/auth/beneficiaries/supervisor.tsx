@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
-import { GetDataProps } from "../../../api";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import * as StaffApi from "../../../api/staff/researcher";
 import Button from "../../../components/core/button";
@@ -29,9 +28,12 @@ const BeneficiariesViewForSupervisor = () => {
   const [researchers, setResearchers] = useState<
     { id: string; status: string; fullName: string }[]
   >([]);
+  const [currentFilters, setCurrentFilters] = useState({});
 
-  const getData = (filters: GetDataProps) => {
-    BeneficiaryApi.getAll(filters)
+  const onSearch = ({ filters = {}, page = 1, capacity = 10 }) => {
+    setCurrentFilters(filters);
+
+    return BeneficiaryApi.getAll(filters, page, capacity)
       .then((res: any) => {
         setBeneficiaries(
           (res.payload as any)
@@ -50,7 +52,7 @@ const BeneficiariesViewForSupervisor = () => {
   };
 
   useLayoutEffect(() => {
-    getData({});
+    onSearch({ filters: {}, page: 1, capacity: 10 });
 
     StaffApi.getAll({})
       .then((res: any) => {
@@ -300,10 +302,6 @@ const BeneficiariesViewForSupervisor = () => {
     navigate(`/profile/?id=${data}`);
   };
 
-  const scheduleVisit = (data: string) => {
-    navigate(`/visitSchedule/?id=${data}`);
-  };
-
   return (
     <Fragment>
       <TablePage
@@ -334,8 +332,10 @@ const BeneficiariesViewForSupervisor = () => {
             onClick: (data: string) => setCancelModalOpen(data),
           },
         ]}
-        onPageChange={(i = 0, x = 0) => console.log(i, x)}
-        onSearch={(values) => getData(values)}
+        onSearch={onSearch}
+        onPageChange={(page, capacity) => {
+          onSearch({ filters: currentFilters, page, capacity });
+        }}
       />
 
       <Modal
@@ -382,7 +382,7 @@ const BeneficiariesViewForSupervisor = () => {
                     }),
                   })
                 );
-                getData({});
+                onSearch({ filters: {}, page: 1, capacity: 10 });
                 setCancelModalOpen(null);
               })
               .catch(apiCatchGlobalHandler);
@@ -449,7 +449,7 @@ const BeneficiariesViewForSupervisor = () => {
                       }),
                     })
                   );
-                  getData({});
+                  onSearch({ filters: {}, page: 1, capacity: 10 });
                   setAssignResearcherModalOpen(undefined);
                 })
                 .catch(apiCatchGlobalHandler);
