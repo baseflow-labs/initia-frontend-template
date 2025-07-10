@@ -1,4 +1,9 @@
-import { faCircle, faEdit, faNewspaper, faXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircle,
+  faEdit,
+  faNewspaper,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useEffect, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -13,7 +18,12 @@ import TablePage from "../../../layouts/auth/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
 import { viewDayDateFormat } from "../../../utils/consts";
-import { apiCatchGlobalHandler, renderDataFromOptions, statusColorRender } from "../../../utils/function";
+import {
+  apiCatchGlobalHandler,
+  booleanColorRender,
+  renderDataFromOptions,
+  statusColorRender,
+} from "../../../utils/function";
 
 const VisitsView = () => {
   const { t } = useTranslation();
@@ -105,6 +115,17 @@ const VisitsView = () => {
     },
   ];
 
+  const surprise = [
+    {
+      value: "No",
+      label: t("Auth.Visits.Surprise.No"),
+    },
+    {
+      value: "Yes",
+      label: t("Auth.Visits.Surprise.Yes"),
+    },
+  ];
+
   const filters = [
     {
       label: t("Auth.Visits.Statuses.Status"),
@@ -140,6 +161,27 @@ const VisitsView = () => {
       name: "city",
       label: t("Auth.MembershipRegistration.Address"),
       render: (row: any) => row.city + " - " + row.district,
+    },
+    {
+      type: "custom",
+      render: (row: any) => (
+        <Fragment>
+          <FontAwesomeIcon
+            icon={faCircle}
+            className={`text-${booleanColorRender(row.surprise)}`}
+          />{" "}
+          {renderDataFromOptions(
+            row.surprise ? "Yes" : "No",
+            surprise.map(({ value, label }) => ({
+              label,
+              value: value,
+            }))
+          )}
+          {}
+        </Fragment>
+      ),
+      name: "surprise",
+      label: t("Auth.Visits.Surprise.Title"),
     },
     {
       type: "custom",
@@ -225,6 +267,14 @@ const VisitsView = () => {
     {
       type: "date",
       name: "date",
+      required: true,
+    },
+    {
+      type: "radio",
+      options: surprise,
+      name: "surprise",
+      defaultValue: "No",
+      label: t("Auth.Visits.Surprise.Title"),
       required: true,
     },
     {
