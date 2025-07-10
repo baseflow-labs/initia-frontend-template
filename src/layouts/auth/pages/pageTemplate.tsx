@@ -1,13 +1,13 @@
 import { Form as FormikForm, FormikProvider, useFormik } from "formik";
 import { Fragment } from "react/jsx-runtime";
 
-import { filterIcon, resetFilterIcon } from "../../assets/icons/icons";
-import IconWrapperComp from "../../assets/icons/wrapper";
-import ActionButtons from "../../components/button/actionButtons";
-import Button from "../../components/core/button";
-import SelectInput from "../../components/form/inputs/select";
-import SelectManyInput from "../../components/form/inputs/selectMany";
-import { columnsWidth } from "../../utils/function";
+import { filterIcon, resetFilterIcon } from "../../../assets/icons/icons";
+import IconWrapperComp from "../../../assets/icons/wrapper";
+import ActionButtons from "../../../components/button/actionButtons";
+import Button from "../../../components/core/button";
+import SelectInput from "../../../components/form/inputs/select";
+import SelectManyInput from "../../../components/form/inputs/selectMany";
+import { columnsWidth } from "../../../utils/function";
 
 interface Props {
   title: string;

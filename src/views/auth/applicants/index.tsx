@@ -17,7 +17,7 @@ import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import Button from "../../../components/core/button";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
-import TablePage from "../../../layouts/auth/tablePage";
+import TablePage from "../../../layouts/auth/pages/tablePage";
 import { logout } from "../../../store/actions/auth";
 import { addNotification } from "../../../store/actions/notifications";
 import {

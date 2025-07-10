@@ -1,5 +1,5 @@
 import moment from "moment";
-import { Fragment, useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
@@ -7,7 +7,6 @@ import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import * as DataReviewApi from "../../../api/profile/dataReview";
 import * as DataUpdateApi from "../../../api/profile/dataUpdate";
 import Form, { InputSingleProps } from "../../../components/form";
-import ColumnsPage from "../../../layouts/auth/columnsPage";
 import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
 import { dataDateFormat } from "../../../utils/consts";
@@ -1089,59 +1088,58 @@ const BeneficiaryOwnProfile = () => {
   };
 
   return (
-    <ColumnsPage>
-      <Fragment>
-        <div className="col-lg-12 mb-4">
-          <h3>{t("Auth.Beneficiary.Profile.Title")}</h3>
-        </div>
+    <div className="row">
+      <div className="col-lg-12 mb-4">
+        <h3>{t("Auth.Beneficiary.Profile.Title")}</h3>
+      </div>
 
-        <div className="col-lg-12 mb-4 row">
-          <h5 className="mb-4">
-            {dataReviews?.length
-              ? t("Auth.Beneficiary.Profile.PleaseUpdateFollowingData")
-              : t("Auth.Beneficiary.Profile.NoDataUpdate")}
-          </h5>
+      <div className="col-lg-12 mb-4 row">
+        <h5 className="mb-4">
+          {dataReviews?.length
+            ? t("Auth.Beneficiary.Profile.PleaseUpdateFollowingData")
+            : t("Auth.Beneficiary.Profile.NoDataUpdate")}
+        </h5>
 
-          {dataReviews?.map(({ id, table, property, row, note }, i) => {
-            const requestTable = mapping.find(
-              ({ table: mapTable }) => mapTable === table
-            );
+        {dataReviews?.map(({ id, table, property, row, note }, i) => {
+          const requestTable = mapping.find(
+            ({ table: mapTable }) => mapTable === table
+          );
 
-            const requestProperty = requestTable?.inputs.find(
-              ({ name }) => name === property
-            );
+          const requestProperty = requestTable?.inputs.find(
+            ({ name }) => name === property
+          );
 
-            const currentData = requestTable?.data[property];
+          const currentData = requestTable?.data[property];
 
-            return (
-              <div className="col-lg-6" key={i}>
-                <div className="card h-100 rounded-4">
-                  <div className="card-body p-5">
-                    {requestProperty && (
-                      <Form
-                        inputs={() =>
-                          [requestProperty].map(({ halfCol, ...rest }) => ({
-                            ...rest,
-                            defaultValue: currentData,
-                            required: true,
-                          }))
-                        }
-                        onFormSubmit={(values) =>
-                          onDataUpdate({
-                            data: values[property],
-                            dataReview: id,
-                          })
-                        }
-                      />
-                    )}
-                  </div>
+          return (
+            <div className="col-lg-6" key={i}>
+              <div className="card h-100 rounded-4">
+                <div className="card-body p-5">
+                  {requestProperty && (
+                    <Form
+                      inputs={() =>
+                        [requestProperty].map(({ halfCol, ...rest }) => ({
+                          ...rest,
+                          defaultValue: currentData,
+                          required: true,
+                        }))
+                      }
+                      onFormSubmit={(values) =>
+                        onDataUpdate({
+                          data: values[property],
+                          dataReview: id,
+                        })
+                      }
+                    />
+                  )}
                 </div>
               </div>
-            );
-          })}
-        </div>
+            </div>
+          );
+        })}
+      </div>
 
-        {/* <div className="col-lg-12 mt-5">
+      {/* <div className="col-lg-12 mt-5">
           <h5>{t("Auth.Beneficiary.Profile.CurrentData")}</h5>
         </div>
 
@@ -1194,8 +1192,7 @@ const BeneficiaryOwnProfile = () => {
             </div>
           </div>
         ))} */}
-      </Fragment>
-    </ColumnsPage>
+    </div>
   );
 };
 

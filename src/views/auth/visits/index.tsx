@@ -14,7 +14,7 @@ import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import * as VisitApi from "../../../api/visits/visits";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
-import TablePage from "../../../layouts/auth/tablePage";
+import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
 import { viewDayDateFormat } from "../../../utils/consts";

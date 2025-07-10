@@ -10,7 +10,7 @@ import { helpIcon } from "../../../assets/icons/icons";
 import IconWrapperComp from "../../../assets/icons/wrapper";
 import profilePhotoPlaceholder from "../../../assets/images/profile-image-placeholder.png";
 import DashboardCard from "../../../components/card/dashboardCard";
-import { Notification } from "../../../layouts/auth/dashboardNavbar";
+import { Notification } from "../../../layouts/auth/navs/dashboardNavbar";
 import { useAppSelector } from "../../../store/hooks";
 import {
   apiCatchGlobalHandler,

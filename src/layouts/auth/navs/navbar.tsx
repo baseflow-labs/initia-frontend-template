@@ -4,21 +4,21 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
-import * as NotificationApi from "../../api/notifications";
+import * as NotificationApi from "../../../api/notifications";
 import {
   helpIcon,
   menuBarsIcon,
   notificationsIcon,
-} from "../../assets/icons/icons";
-import IconWrapperComp from "../../assets/icons/wrapper";
-import appLogo from "../../assets/images/brand/logo-only.png";
-import profilePhotoPlaceholder from "../../assets/images/profile-image-placeholder.png";
-import LangButton from "../../components/button/lang";
-import Spinner from "../../components/core/spinner";
-import DropdownComp from "../../components/dropdown";
-import { logout } from "../../store/actions/auth";
-import { useAppSelector } from "../../store/hooks";
-import { apiCatchGlobalHandler } from "../../utils/function";
+} from "../../../assets/icons/icons";
+import IconWrapperComp from "../../../assets/icons/wrapper";
+import appLogo from "../../../assets/images/brand/logo-only.png";
+import profilePhotoPlaceholder from "../../../assets/images/profile-image-placeholder.png";
+import LangButton from "../../../components/button/lang";
+import Spinner from "../../../components/core/spinner";
+import DropdownComp from "../../../components/dropdown";
+import { logout } from "../../../store/actions/auth";
+import { useAppSelector } from "../../../store/hooks";
+import { apiCatchGlobalHandler } from "../../../utils/function";
 import { Notification } from "./dashboardNavbar";
 
 const Navbar = () => {

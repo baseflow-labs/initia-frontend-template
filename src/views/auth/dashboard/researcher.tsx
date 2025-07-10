@@ -10,7 +10,7 @@ import * as OverviewApi from "../../../api/overview";
 import MapCard, { LocationProps } from "../../../components/card/mapCard";
 import DashboardCards from "../../../components/card/statisticCards";
 import TasksCard from "../../../components/card/tasksCard";
-import PageTemplate from "../../../layouts/auth/pageTemplate";
+import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 
 const DashboardResearcherView = () => {

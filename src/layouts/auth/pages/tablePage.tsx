@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 
-import DynamicTable, { actionProps, TableProps } from "../../components/table";
-import { apiCatchGlobalHandler } from "../../utils/function";
+import DynamicTable, {
+  actionProps,
+  TableProps,
+} from "../../../components/table";
+import { apiCatchGlobalHandler } from "../../../utils/function";
 import PageTemplate from "./pageTemplate";
 
 interface Props extends TableProps {

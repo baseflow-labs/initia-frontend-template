@@ -36,12 +36,12 @@ import VisitsView from "../../views/auth/visits";
 import VisitReportsView from "../../views/auth/visits/addReport";
 import BeneficiariesVisitsView from "../../views/auth/visits/beneficiaryVisits";
 import VisitDetailView from "../../views/auth/visits/reportDetails";
-import DashboardNavbar from "./dashboardNavbar";
+import DashboardNavbar from "./navs/dashboardNavbar";
 import DemoWarning from "./demoWarning";
 import { FilePreviewModal } from "./globalModal";
-import Navbar from "./navbar";
-import OffCanvasNav from "./offcanvasNav";
-import Sidebar from "./sidebarNav";
+import Navbar from "./navs/navbar";
+import OffCanvasNav from "./navs/offcanvasNav";
+import Sidebar from "./navs/sidebarNav";
 
 const AuthLayout = () => {
   const { t, i18n } = useTranslation();

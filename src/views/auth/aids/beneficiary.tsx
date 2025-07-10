@@ -7,9 +7,13 @@ import { useDispatch } from "react-redux";
 import * as AidApi from "../../../api/aids/aids";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
-import TablePage from "../../../layouts/auth/tablePage";
+import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
-import { apiCatchGlobalHandler, renderDataFromOptions, statusColorRender } from "../../../utils/function";
+import {
+  apiCatchGlobalHandler,
+  renderDataFromOptions,
+  statusColorRender,
+} from "../../../utils/function";
 
 const AidsBeneficiaryView = () => {
   const { t } = useTranslation();

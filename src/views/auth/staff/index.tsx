@@ -8,7 +8,7 @@ import { GetDataProps } from "../../../api";
 import * as ResearcherApi from "../../../api/staff/researcher";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
-import PageTemplate from "../../../layouts/auth/pageTemplate";
+import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
 import { addNotification } from "../../../store/actions/notifications";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 

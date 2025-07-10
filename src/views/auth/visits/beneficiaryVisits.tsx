@@ -9,10 +9,14 @@ import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import * as VisitApi from "../../../api/visits/visits";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
-import TablePage from "../../../layouts/auth/tablePage";
+import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import { viewDateFormat, viewDayFormat } from "../../../utils/consts";
-import { apiCatchGlobalHandler, renderDataFromOptions, statusColorRender } from "../../../utils/function";
+import {
+  apiCatchGlobalHandler,
+  renderDataFromOptions,
+  statusColorRender,
+} from "../../../utils/function";
 
 const BeneficiariesVisitsView = () => {
   const { t } = useTranslation();

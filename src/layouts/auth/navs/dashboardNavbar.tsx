@@ -3,21 +3,21 @@ import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
-import * as NotificationApi from "../../api/notifications";
+import * as NotificationApi from "../../../api/notifications";
 import {
   helpIcon,
   menuBarsIcon,
   notificationsIcon,
   searchIcon,
-} from "../../assets/icons/icons";
-import IconWrapperComp from "../../assets/icons/wrapper";
-import profilePhotoPlaceholder from "../../assets/images/profile-image-placeholder.png";
-import LangButton from "../../components/button/lang";
-import Spinner from "../../components/core/spinner";
-import DropdownComp from "../../components/dropdown";
-import { logout } from "../../store/actions/auth";
-import { useAppSelector } from "../../store/hooks";
-import { apiCatchGlobalHandler } from "../../utils/function";
+} from "../../../assets/icons/icons";
+import IconWrapperComp from "../../../assets/icons/wrapper";
+import profilePhotoPlaceholder from "../../../assets/images/profile-image-placeholder.png";
+import LangButton from "../../../components/button/lang";
+import Spinner from "../../../components/core/spinner";
+import DropdownComp from "../../../components/dropdown";
+import { logout } from "../../../store/actions/auth";
+import { useAppSelector } from "../../../store/hooks";
+import { apiCatchGlobalHandler } from "../../../utils/function";
 
 export interface Notification {
   title: string;
