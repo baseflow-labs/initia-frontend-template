@@ -3,7 +3,17 @@ import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes, useLocation } from "react-router";
 import { Fragment } from "react/jsx-runtime";
 
-import { aidsIcon, beneficiariesIcon, dashboardIcon, infoIcon, membershipFormIcon, profileIcon, settingsIcon, visitReportIcon, visitsIcon } from "../../assets/icons/icons";
+import {
+  aidsIcon,
+  beneficiariesIcon,
+  dashboardIcon,
+  infoIcon,
+  membershipFormIcon,
+  profileIcon,
+  settingsIcon,
+  visitReportIcon,
+  visitsIcon,
+} from "../../assets/icons/icons";
 import { useAppSelector } from "../../store/hooks";
 import { useWindowWidth } from "../../utils/hooks";
 import AidsView from "../../views/auth/aids";
@@ -34,7 +44,7 @@ import OffCanvasNav from "./offcanvasNav";
 import Sidebar from "./sidebarNav";
 
 const AuthLayout = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const location = useLocation();
   const { user } = useAppSelector((state) => state.auth);
   const width = useWindowWidth();
@@ -263,7 +273,21 @@ const AuthLayout = () => {
           className="flex-grow-1"
           style={{
             marginRight:
-              showSidebar && isPc ? (collapsed ? "80px" : "250px") : "0px",
+              i18n.language === "ar"
+                ? showSidebar && isPc
+                  ? collapsed
+                    ? "80px"
+                    : "250px"
+                  : "0px"
+                : undefined,
+            marginLeft:
+              i18n.language === "en"
+                ? showSidebar && isPc
+                  ? collapsed
+                    ? "80px"
+                    : "250px"
+                  : "0px"
+                : undefined,
             transition: "margin-right 0.3s",
           }}
         >

@@ -8,8 +8,8 @@ import {
 } from "react-router";
 
 import bgImage from "../../assets/images/brand/logo-full.png";
+import LangButton from "../../components/button/lang";
 import Button from "../../components/core/button";
-import FourZeroFourError from "../../views/common/404";
 import ForgotPasswordView from "../../views/public/forgotPassword";
 import LoginView from "../../views/public/login";
 import RegisterView from "../../views/public/register";
@@ -75,43 +75,48 @@ const AuthLayout = () => {
               role="button"
               onClick={() => navigate("/")}
             />
-            {(location.pathname === "/" ||
-              location.pathname === "/register") && (
-              <div className="my-4 p-2 bg-light w-fit mx-auto rounded-5">
-                {publicRoutes
-                  .filter(({ show }) => show)
-                  .map(({ name, route, view }, i) => {
-                    const isSelected = location.pathname === route;
 
-                    const settings = isSelected
-                      ? {
-                          color: "info",
-                          style: {
-                            backgroundColor: "rgba(24,180,191,0.15)",
-                          },
-                          className: "text-white",
-                        }
-                      : {
-                          color: "ghost",
-                          style: {},
-                          className: "text-black",
-                        };
+            <div className="d-flex">
+              {(location.pathname === "/" ||
+                location.pathname === "/register") && (
+                <div className="my-4 p-2 bg-light w-fit mx-auto rounded-5">
+                  {publicRoutes
+                    .filter(({ show }) => show)
+                    .map(({ name, route, view }, i) => {
+                      const isSelected = location.pathname === route;
 
-                    return (
-                      <Button
-                        color={settings.color}
-                        style={settings.style}
-                        className={`mx-1 border-0 ${settings.className}`}
-                        rounded={5}
-                        route={route}
-                        key={i}
-                      >
-                        <span className={settings.className}>{name}</span>
-                      </Button>
-                    );
-                  })}
-              </div>
-            )}
+                      const settings = isSelected
+                        ? {
+                            color: "info",
+                            style: {
+                              backgroundColor: "rgba(24,180,191,0.15)",
+                            },
+                            className: "text-white",
+                          }
+                        : {
+                            color: "ghost",
+                            style: {},
+                            className: "text-black",
+                          };
+
+                      return (
+                        <Button
+                          color={settings.color}
+                          style={settings.style}
+                          className={`mx-1 border-0 ${settings.className}`}
+                          rounded={5}
+                          route={route}
+                          key={i}
+                        >
+                          <span className={settings.className}>{name}</span>
+                        </Button>
+                      );
+                    })}
+                </div>
+              )}
+
+              {/* <LangButton /> */}
+            </div>
 
             <div className="card-text">
               <Routes>
