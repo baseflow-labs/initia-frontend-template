@@ -25,6 +25,7 @@
     "Beneficiaries": {
       "AddBeneficiary": "Add Beneficiary",
       "Applications": "Membership Applications",
+      "Beneficiaries": "Beneficiaries",
       "BeneficiaryName": "Beneficiary Name",
       "Profile": {
         "AcceptApplication": "Accept Application",
