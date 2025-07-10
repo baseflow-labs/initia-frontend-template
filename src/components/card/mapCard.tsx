@@ -3,11 +3,14 @@ import Button from "../core/button";
 import MapWithMarkers from "../googleMap";
 import DashboardCard from "./dashboardCard";
 
-const MapCard = ({
-  locations,
-}: {
-  locations: { latitude: number; longitude: number }[];
-}) => {
+export interface LocationProps {
+  latitude: number;
+  longitude: number;
+  name: string;
+  phoneNumber: string;
+}
+
+const MapCard = ({ locations }: { locations: LocationProps[] }) => {
   const { t } = useTranslation();
 
   return (
@@ -25,12 +28,11 @@ const MapCard = ({
         </div>
       </div>
 
-      <MapWithMarkers
-        locations={locations.map(({ latitude, longitude }) => ({
-          lat: latitude,
-          lng: longitude,
-        }))}
-      />
+      {locations.length > 0 ? (
+        <MapWithMarkers locations={locations} />
+      ) : (
+        <h2 className="text-center mt-5">{t("Auth.Dashboard.NoVisits")}</h2>
+      )}
     </DashboardCard>
   );
 };

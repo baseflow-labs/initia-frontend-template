@@ -1,15 +1,16 @@
-import { Suspense, useEffect, useLayoutEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { BrowserRouter, Route, Routes } from "react-router";
 
+import { useDispatch } from "react-redux";
 import * as MetadataApi from "./api/metadata";
+import Spinner from "./components/core/spinner";
 import NotificationsToaster from "./components/toaster";
 import AuthLayout from "./layouts/auth";
 import PublicLayout from "./layouts/public";
+import { setMetadata } from "./store/actions/settings";
 import { useAppSelector } from "./store/hooks";
 import { apiCatchGlobalHandler } from "./utils/function";
-import { useDispatch } from "react-redux";
-import { setMetadata } from "./store/actions/settings";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <Suspense fallback={<>Loading...</>}>
+      <Suspense fallback={<Spinner />}>
         <NotificationsToaster />
 
         <Routes>
