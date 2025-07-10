@@ -1,18 +1,17 @@
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import { useRef } from "react";
 
-type Location = {
-  lat: number;
-  lng: number;
-};
-
 const containerStyle = {
   width: "100%",
   height: "500px",
   borderRadius: "1.5rem",
 };
 
-const MapWithMarkers = ({ locations }: { locations: Location[] }) => {
+const MapWithMarkers = ({
+  locations,
+}: {
+  locations: { lat: number; lng: number }[];
+}) => {
   const mapRef = useRef<google.maps.Map | null>(null);
 
   const center = locations[0] || { lat: 0, lng: 0 };
@@ -26,7 +25,7 @@ const MapWithMarkers = ({ locations }: { locations: Location[] }) => {
   };
 
   return (
-    <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY!}>
+    <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAP_API_KEY!}>
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}

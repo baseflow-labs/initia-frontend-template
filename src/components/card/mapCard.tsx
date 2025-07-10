@@ -3,12 +3,11 @@ import Button from "../core/button";
 import MapWithMarkers from "../googleMap";
 import DashboardCard from "./dashboardCard";
 
-const locations = [
-  { lat: 29.3759, lng: 47.9774 },
-  { lat: 24.7136, lng: 46.6753 },
-];
-
-const MapCard = () => {
+const MapCard = ({
+  locations,
+}: {
+  locations: { latitude: number; longitude: number }[];
+}) => {
   const { t } = useTranslation();
 
   return (
@@ -26,7 +25,12 @@ const MapCard = () => {
         </div>
       </div>
 
-      <MapWithMarkers locations={locations} />
+      <MapWithMarkers
+        locations={locations.map(({ latitude, longitude }) => ({
+          lat: latitude,
+          lng: longitude,
+        }))}
+      />
     </DashboardCard>
   );
 };

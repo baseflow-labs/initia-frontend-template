@@ -19,10 +19,12 @@ const DashboardResearcherView = () => {
     beneficiaries: { all: number; applicants: number; accepted: number };
     visits: { all: number; toDo: number; done: number };
     aids: { all: number; granted: number; pending: number };
+    visitLocations: { latitude: number; longitude: number }[];
   }>({
     beneficiaries: { all: 0, applicants: 0, accepted: 0 },
     visits: { all: 0, toDo: 0, done: 0 },
     aids: { all: 0, granted: 0, pending: 0 },
+    visitLocations: [{ latitude: 0, longitude: 0 }],
   });
 
   useLayoutEffect(() => {
@@ -118,7 +120,9 @@ const DashboardResearcherView = () => {
         </div>
 
         <div className="col-xl-6">
-          <MapCard />
+          {data.visitLocations.length > 1 && (
+            <MapCard locations={data.visitLocations} />
+          )}
         </div>
       </div>
     </PageTemplate>
