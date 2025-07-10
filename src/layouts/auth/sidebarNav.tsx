@@ -64,12 +64,16 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
                 }}
               >
                 <IconWrapperComp icon={icon} className="me-2" />
-                {!collapsed && <span>{name}</span>}
+                {!collapsed && (
+                  <span>
+                    {name}
 
-                {user.role === "admin" && (
-                  <div className="text-end w-100">
-                    <small>{labelNote}</small>
-                  </div>
+                    {user.role === "admin" && (
+                      <div className="text-end w-100">
+                        <small>{labelNote}</small>
+                      </div>
+                    )}
+                  </span>
                 )}
               </h5>
 
