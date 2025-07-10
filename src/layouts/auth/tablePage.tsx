@@ -23,7 +23,6 @@ const TablePage = ({
   actionButtons,
   columns,
   data,
-  onPageChange,
   onSearch,
   tableActions,
 }: Props) => {
@@ -95,6 +94,7 @@ const TablePage = ({
             })
             .catch(apiCatchGlobalHandler);
         }}
+        actions={tableActions}
         size={paginationMeta.capacity}
         paginationMeta={paginationMeta}
       />

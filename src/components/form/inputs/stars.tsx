@@ -20,14 +20,13 @@ const StarsInput: React.FC<FinalInput> = ({ type, options, ...input }) => {
         {Array(5)
           .fill("")
           .map((_, i) => (
-            <h2 key={i}>
+            <h2 onClick={() => input.onChange && input.onChange(i + 1)} key={i}>
               <IconWrapperComp
                 icon={
                   input.value && input.value > i
                     ? pickedStarIcon
                     : mutedStarIcon
                 }
-                onClick={() => input.onChange && input.onChange(i + 1)}
               />
             </h2>
           ))}

@@ -257,8 +257,12 @@ const AidsView = () => {
             icon: faFilter,
             spread: true,
             onClick: (data: string) => {
-              setCurrentFilters({ beneficiary: data });
-              onSearch({ filters: { beneficiary: data } });
+              const beneficiary = aids.find(
+                (a) => a.id === data
+              )?.beneficiaryId;
+
+              setCurrentFilters({ beneficiary });
+              onSearch({ filters: { beneficiary } });
             },
           });
 
