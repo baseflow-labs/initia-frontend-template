@@ -13,6 +13,7 @@ import { addNotification } from "../../../store/actions/notifications";
 import { setFontSize, setMetadata } from "../../../store/actions/settings";
 import { useAppSelector } from "../../../store/hooks";
 import { apiCatchGlobalHandler } from "../../../utils/function";
+import BoxedPage from "../../../layouts/auth/pages/boxedPage";
 
 const SettingsPage = () => {
   const { t } = useTranslation();
@@ -162,127 +163,124 @@ const SettingsPage = () => {
   };
 
   return (
-    <div
-      className="border border-2 border-dark rounded-5 mx-auto p-5"
-      style={{ maxWidth: "750px" }}
-    >
-      <h3>{t("Auth.Settings.Title")}</h3>
+    <BoxedPage title={t("Auth.Settings.Title")}>
+      <Fragment>
+        <h5 className="text-info my-5">{t("Auth.Settings.System.Title")}</h5>
 
-      <h5 className="text-info my-5">{t("Auth.Settings.System.Title")}</h5>
+        <Form
+          inputs={beneficiaryInputs}
+          initialValues={{
+            fontSize: fontSize,
+            ...metadata,
+          }}
+          submitText={t("Global.Form.Labels.Save")}
+          onFormSubmit={(values) => {
+            dispatch(setFontSize(values.fontSize));
+            dispatch(
+              addNotification({
+                msg: t("Global.Form.SuccessMsg", {
+                  action: t("Global.Form.Labels.Update"),
+                  data: t("Auth.Settings.Title"),
+                }),
+              })
+            );
+          }}
+        />
 
-      <Form
-        inputs={beneficiaryInputs}
-        initialValues={{
-          fontSize: fontSize,
-          ...metadata,
-        }}
-        submitText={t("Global.Form.Labels.Save")}
-        onFormSubmit={(values) => {
-          dispatch(setFontSize(values.fontSize));
-          dispatch(
-            addNotification({
-              msg: t("Global.Form.SuccessMsg", {
-                action: t("Global.Form.Labels.Update"),
-                data: t("Auth.Settings.Title"),
-              }),
-            })
-          );
-        }}
-      />
+        <h5 className="text-info my-5">
+          {t("Auth.Settings.PasswordReset.Title")}
+        </h5>
 
-      <h5 className="text-info my-5">
-        {t("Auth.Settings.PasswordReset.Title")}
-      </h5>
+        <Form
+          inputs={() => [
+            {
+              type: "password",
+              name: "password",
+              label: t("Public.ForgotPassword.ResetPassword.NewPassword"),
+              required: true,
+            },
+            {
+              type: "password",
+              name: "passwordConfirmation",
+              label: t(
+                "Public.ForgotPassword.ResetPassword.NewPasswordConfirmation"
+              ),
+              required: true,
+            },
+          ]}
+          submitText={t("Global.Form.Labels.Save")}
+          onFormSubmit={(values) => {
+            onPasswordResetSubmit(values);
+          }}
+        />
 
-      <Form
-        inputs={() => [
-          {
-            type: "password",
-            name: "password",
-            label: t("Public.ForgotPassword.ResetPassword.NewPassword"),
-            required: true,
-          },
-          {
-            type: "password",
-            name: "passwordConfirmation",
-            label: t(
-              "Public.ForgotPassword.ResetPassword.NewPasswordConfirmation"
-            ),
-            required: true,
-          },
-        ]}
-        submitText={t("Global.Form.Labels.Save")}
-        onFormSubmit={(values) => {
-          onPasswordResetSubmit(values);
-        }}
-      />
+        {user.role !== "beneficiary" && user.role !== "researcher" && (
+          <Fragment>
+            <h5 className="text-info my-5">
+              {t("Auth.Settings.Metadata.Title")}
+            </h5>
 
-      {user.role !== "beneficiary" && user.role !== "researcher" && (
-        <Fragment>
-          <h5 className="text-info my-5">
-            {t("Auth.Settings.Metadata.Title")}
-          </h5>
+            <Form
+              inputs={staffInputs}
+              initialValues={{
+                fontSize: fontSize,
+                ...metadata,
+              }}
+              submitText={t("Global.Form.Labels.Save")}
+              onFormSubmit={(values) => {
+                onMetadataSubmit(values);
+              }}
+            />
+          </Fragment>
+        )}
 
-          <Form
-            inputs={staffInputs}
-            initialValues={{
-              fontSize: fontSize,
-              ...metadata,
-            }}
-            submitText={t("Global.Form.Labels.Save")}
-            onFormSubmit={(values) => {
-              onMetadataSubmit(values);
-            }}
-          />
-        </Fragment>
-      )}
+        {user.role === "beneficiary" ? (
+          <Fragment>
+            <Button
+              onClick={() => setOpenModal(true)}
+              color="danger"
+              className="my-3 w-100"
+            >
+              {t("Auth.Beneficiaries.Profile.DeleteData")}
+            </Button>
 
-      {user.role === "beneficiary" ? (
-        <Fragment>
-          <Button
-            onClick={() => setOpenModal(true)}
-            color="danger"
-            className="my-3 w-100"
-          >
-            {t("Auth.Beneficiaries.Profile.DeleteData")}
-          </Button>
+            <Modal
+              title={t("Auth.Beneficiaries.Profile.DeleteData")}
+              onClose={() => setOpenModal(false)}
+              isOpen={openModal}
+            >
+              <h3 className="text-center mb-3">
+                {t("Auth.Beneficiaries.Profile.SureToDeleteData")}
+              </h3>
 
-          <Modal
-            title={t("Auth.Beneficiaries.Profile.DeleteData")}
-            onClose={() => setOpenModal(false)}
-            isOpen={openModal}
-          >
-            <h3 className="text-center mb-3">
-              {t("Auth.Beneficiaries.Profile.SureToDeleteData")}
-            </h3>
+              <div className="btn-group w-100" role="group">
+                <Button
+                  onClick={() => deleteBeneficiary()}
+                  disabled={process.env.REACT_APP_ENVIRONMENT === "staging"}
+                  color="danger"
+                  className="my-3 me-1"
+                >
+                  {process.env.REACT_APP_ENVIRONMENT === "staging"
+                    ? t("Global.Form.Labels.UnAvailableForDemoMode")
+                    : t("Global.Form.Labels.Yes")}
+                </Button>
 
-            <div className="btn-group w-100" role="group">
-              <Button
-                onClick={() => deleteBeneficiary()}
-                disabled={process.env.REACT_APP_ENVIRONMENT === "staging"}
-                color="danger"
-                className="my-3 me-1"
-              >
-                {process.env.REACT_APP_ENVIRONMENT === "staging"
-                  ? t("Global.Form.Labels.UnAvailableForDemoMode")
-                  : t("Global.Form.Labels.Yes")}
-              </Button>
-
-              <Button
-                outline
-                onClick={() => setOpenModal(false)}
-                color="info"
-                className="my-3 ms-1"
-              >
-                {t("Global.Form.Labels.No")}
-              </Button>
-            </div>
-          </Modal>
-        </Fragment>
-      ) : (
-        ""
-      )}
-    </div>
+                <Button
+                  outline
+                  onClick={() => setOpenModal(false)}
+                  color="info"
+                  className="my-3 ms-1"
+                >
+                  {t("Global.Form.Labels.No")}
+                </Button>
+              </div>
+            </Modal>
+          </Fragment>
+        ) : (
+          ""
+        )}
+      </Fragment>
+    </BoxedPage>
   );
 };
 
