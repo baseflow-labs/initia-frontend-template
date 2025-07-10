@@ -3,19 +3,21 @@ import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
-import * as NotificationApi from "../../api/notifications";
+import * as NotificationApi from "../../../api/notifications";
 import {
   helpIcon,
   menuBarsIcon,
   notificationsIcon,
   searchIcon,
-} from "../../assets/icons/icons";
-import IconWrapperComp from "../../assets/icons/wrapper";
-import profilePhotoPlaceholder from "../../assets/images/profile-image-placeholder.png";
-import DropdownComp from "../../components/dropdown";
-import { logout } from "../../store/actions/auth";
-import { useAppSelector } from "../../store/hooks";
-import { apiCatchGlobalHandler } from "../../utils/function";
+} from "../../../assets/icons/icons";
+import IconWrapperComp from "../../../assets/icons/wrapper";
+import profilePhotoPlaceholder from "../../../assets/images/profile-image-placeholder.png";
+import LangButton from "../../../components/button/lang";
+import Spinner from "../../../components/core/spinner";
+import DropdownComp from "../../../components/dropdown";
+import { logout } from "../../../store/actions/auth";
+import { useAppSelector } from "../../../store/hooks";
+import { apiCatchGlobalHandler } from "../../../utils/function";
 
 export interface Notification {
   title: string;
@@ -30,12 +32,13 @@ const DashboardNavbar = () => {
   const { t } = useTranslation();
   const { logo } = useAppSelector((state) => state.settings);
   const [notifications, setNotification] = useState<Notification[]>([]);
+  const { loading } = useAppSelector((state) => state.loading);
 
   useLayoutEffect(() => {
     NotificationApi.get()
       .then((res: any) =>
         setNotification(
-          res.sort((a: Notification, b: Notification) =>
+          res.payload?.sort((a: Notification, b: Notification) =>
             a.createdAt > b.createdAt ? -1 : 1
           )
         )
@@ -58,7 +61,7 @@ const DashboardNavbar = () => {
           </button>
         </div>
 
-        <form className="col-12 col-lg-6 order-3 order-lg-1">
+        <form className="col-12 col-lg-5 order-3 order-lg-1">
           <div className="input-group w-100 ms-3">
             <input
               className="form-control"
@@ -72,8 +75,18 @@ const DashboardNavbar = () => {
           </div>
         </form>
 
-        <div className="col-6 col-lg-1 pb-3 order-2 order-lg-2">
+        <div className="col-6 col-lg-2 pb-3 order-2 order-lg-2">
           <div className="d-flex align-items-end gap-3 pe-5 float-end">
+            {loading.length > 0 ? (
+              <small className="text-info">
+                <Spinner />
+              </small>
+            ) : (
+              ""
+            )}
+
+            {/* <LangButton /> */}
+
             <DropdownComp
               button={
                 <IconWrapperComp

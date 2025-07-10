@@ -17,7 +17,7 @@ import {
 import { useAppSelector } from "../../store/hooks";
 import { useWindowWidth } from "../../utils/hooks";
 import AidsView from "../../views/auth/aids";
-import AidsBeneficiaryView from "../../views/auth/aids/request";
+import AidsBeneficiaryView from "../../views/auth/aids/beneficiary";
 import ApplicantsView from "../../views/auth/applicants";
 import BeneficiaryFormReview from "../../views/auth/applicants/review";
 import ApplicantsViewForSupervisor from "../../views/auth/applicants/supervisor";
@@ -27,6 +27,7 @@ import BeneficiaryProfileView from "../../views/auth/beneficiaries/profile";
 import BeneficiariesViewForSupervisor from "../../views/auth/beneficiaries/supervisor";
 import ContactUsPage from "../../views/auth/contact-us";
 import DashboardView from "../../views/auth/dashboard";
+import DashboardResearcherView from "../../views/auth/dashboard/researcher";
 import DashboardSupervisorView from "../../views/auth/dashboard/supervisor";
 import MembershipRegistrationView from "../../views/auth/membershipRegistration";
 import SettingsPage from "../../views/auth/settings";
@@ -35,16 +36,15 @@ import VisitsView from "../../views/auth/visits";
 import VisitReportsView from "../../views/auth/visits/addReport";
 import BeneficiariesVisitsView from "../../views/auth/visits/beneficiaryVisits";
 import VisitDetailView from "../../views/auth/visits/reportDetails";
-import DashboardNavbar from "./dashboardNavbar";
+import DashboardNavbar from "./navs/dashboardNavbar";
 import DemoWarning from "./demoWarning";
 import { FilePreviewModal } from "./globalModal";
-import Navbar from "./navbar";
-import OffCanvasNav from "./offcanvasNav";
-import Sidebar from "./sidebarNav";
-import DashboardResearcherView from "../../views/auth/dashboard/researcher";
+import Navbar from "./navs/navbar";
+import OffCanvasNav from "./navs/offcanvasNav";
+import Sidebar from "./navs/sidebarNav";
 
 const AuthLayout = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const location = useLocation();
   const { user } = useAppSelector((state) => state.auth);
   const width = useWindowWidth();
@@ -273,7 +273,21 @@ const AuthLayout = () => {
           className="flex-grow-1"
           style={{
             marginRight:
-              showSidebar && isPc ? (collapsed ? "80px" : "250px") : "0px",
+              i18n.language === "ar"
+                ? showSidebar && isPc
+                  ? collapsed
+                    ? "80px"
+                    : "250px"
+                  : "0px"
+                : undefined,
+            marginLeft:
+              i18n.language === "en"
+                ? showSidebar && isPc
+                  ? collapsed
+                    ? "80px"
+                    : "250px"
+                  : "0px"
+                : undefined,
             transition: "margin-right 0.3s",
           }}
         >

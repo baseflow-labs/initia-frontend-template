@@ -124,7 +124,6 @@ html {
   width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  direction: rtl;
 }
 
 @media (max-width: 768px) {

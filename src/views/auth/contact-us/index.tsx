@@ -4,16 +4,14 @@ import { contactUsIcon } from "../../../assets/icons/icons";
 import IconWrapperComp from "../../../assets/icons/wrapper";
 import Button from "../../../components/core/button";
 import { useAppSelector } from "../../../store/hooks";
+import BoxedPage from "../../../layouts/auth/pages/boxedPage";
 
 const ContactUsPage = () => {
   const { t } = useTranslation();
   const { phoneNumber } = useAppSelector((state) => state.settings);
 
   return (
-    <div
-      className="border border-2 border-dark rounded-5 mx-auto p-5"
-      style={{ maxWidth: "750px" }}
-    >
+    <BoxedPage>
       <div className="text-center">
         <h1 className="display-1">
           <IconWrapperComp height={120} icon={contactUsIcon} />
@@ -30,7 +28,7 @@ const ContactUsPage = () => {
           {t("Auth.ContactUs.ContactUsNow")}
         </Button>
       </div>
-    </div>
+    </BoxedPage>
   );
 };
 

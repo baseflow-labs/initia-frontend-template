@@ -1,21 +1,33 @@
-import axios, {
-  AxiosError,
-  AxiosResponse,
-  InternalAxiosRequestConfig,
-} from "axios";
+import axios, { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from "axios";
 
 import { logout } from "../store/actions/auth";
 import { endLoading, startLoading } from "../store/actions/loading";
 import { addNotification } from "../store/actions/notifications";
 import store, { RootState } from "../store/store";
 
-export const baseURL = "https://sawaed-api.mustaheq.org";
+export const baseURL =
+  process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
+
+export interface customFilterProps {
+  field: string;
+  filteredTerm: {
+    dataType: string;
+    value: string;
+  };
+  filterOperator: string;
+}
 
 export interface GetDataProps {
   filters?: object;
+  page?: number;
+  capacity?: number;
+  customFilters?: customFilterProps[];
 }
 
-export const formatGetFilters = (filters = {}) => {
+export const formatGetFilters = (
+  filters = {},
+  customFilters?: customFilterProps[]
+) => {
   const conditions = Object.keys(filters)
     .filter((key) => (filters as any)[key])
     .map((key) => {
@@ -30,9 +42,7 @@ export const formatGetFilters = (filters = {}) => {
     });
 
   return {
-    params: {
-      conditions: JSON.stringify(conditions),
-    },
+    conditions: JSON.stringify([...conditions, ...(customFilters || [])]),
   };
 };
 
@@ -52,6 +62,18 @@ service.interceptors.request.use(
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
+    }
+
+    if (config.method?.toLowerCase() === "get") {
+      const defaultParams = {
+        page: 1,
+        capacity: 500,
+      };
+
+      config.params = {
+        ...defaultParams,
+        ...(config.params || {}),
+      };
     }
 
     return config;
@@ -81,7 +103,7 @@ service.interceptors.response.use(
     }
 
     if ([200, 201, 202, 204].includes(status)) {
-      return res.data.payload;
+      return res.data;
     }
 
     store.dispatch(

@@ -1,6 +1,7 @@
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment } from "react/jsx-runtime";
+import BoxedPage from "../../../layouts/auth/pages/boxedPage";
 
 interface Props {
   currentStep: number;
@@ -73,12 +74,9 @@ const WizardFormStepper = ({ steps, currentStep, setCurrentStep }: Props) => {
         {steps[currentStep]?.label}
       </span>
 
-      <div
-        className="bs-stepper-content border border-2 border-gray rounded-5 p-5 mt-3 mx-auto"
-        style={{ maxWidth: "750px" }}
-      >
-        {steps[currentStep]?.contents}
-      </div>
+      <BoxedPage>
+        <Fragment>{steps[currentStep]?.contents}</Fragment>
+      </BoxedPage>
     </div>
   );
 };

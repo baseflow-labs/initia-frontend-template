@@ -80,7 +80,7 @@ const ForgotPassword = () => {
   ) => {
     authApi
       .resetPassword({ ...values, ...data })
-      .then((res) => {
+      .then(() => {
         dispatch(
           addNotification({
             msg: t("Global.Form.SuccessMsg", {

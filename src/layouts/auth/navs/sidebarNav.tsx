@@ -4,13 +4,13 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment } from "react";
+import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
-
-import IconWrapperComp from "../../assets/icons/wrapper";
-import Logo from "../../assets/images/brand/logo-full.png";
-import LogoOnly from "../../assets/images/brand/logo-only.png";
-import { useAppSelector } from "../../store/hooks";
-import CopyRightView from "../common/copyright";
+import IconWrapperComp from "../../../assets/icons/wrapper";
+import Logo from "../../../assets/images/brand/logo-full.png";
+import LogoOnly from "../../../assets/images/brand/logo-only.png";
+import { useAppSelector } from "../../../store/hooks";
+import CopyRightView from "../../common/copyright";
 
 interface Props {
   routes: {
@@ -29,6 +29,7 @@ interface Props {
 }
 
 const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
+  const { i18n } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const { user } = useAppSelector((state) => state.auth);
@@ -64,12 +65,16 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
                 }}
               >
                 <IconWrapperComp icon={icon} className="me-2" />
-                {!collapsed && <span>{name}</span>}
+                {!collapsed && (
+                  <span>
+                    {name}
 
-                {user.role === "admin" && (
-                  <div className="text-end w-100">
-                    <small>{labelNote}</small>
-                  </div>
+                    {user.role === "admin" && (
+                      <div className="text-end w-100">
+                        <small>{labelNote}</small>
+                      </div>
+                    )}
+                  </span>
                 )}
               </h5>
 
@@ -78,7 +83,8 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
                   className="btn toggle-btn float-end bg-white rounded-circle border-dark border-1 m-0 position-absolute"
                   style={{
                     zIndex: 5,
-                    left: -20,
+                    left: i18n.language === "ar" ? -20 : undefined,
+                    right: i18n.language === "en" ? -20 : undefined,
                   }}
                   onClick={toggleSidebar}
                 >

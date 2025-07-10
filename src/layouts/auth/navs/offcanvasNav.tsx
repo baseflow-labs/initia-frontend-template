@@ -1,9 +1,9 @@
 import { useLocation, useNavigate } from "react-router";
 import { Fragment } from "react/jsx-runtime";
 
-import IconWrapperComp from "../../assets/icons/wrapper";
-import { useAppSelector } from "../../store/hooks";
-import CopyRightView from "../common/copyright";
+import IconWrapperComp from "../../../assets/icons/wrapper";
+import { useAppSelector } from "../../../store/hooks";
+import CopyRightView from "../../common/copyright";
 
 interface Props {
   routes: {

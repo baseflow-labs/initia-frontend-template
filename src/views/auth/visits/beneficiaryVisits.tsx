@@ -9,7 +9,7 @@ import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import * as VisitApi from "../../../api/visits/visits";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
-import TablePage from "../../../layouts/auth/tablePage";
+import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import { viewDateFormat, viewDayFormat } from "../../../utils/consts";
 import {
@@ -26,17 +26,19 @@ const BeneficiariesVisitsView = () => {
 
   const [openModal, setOpenModal] = useState(false);
   const [crudData, setCrudData] = useState({});
-
   const [selectOptions, setSelectOptions] = useState({
     beneficiaries: [{ id: "", fullName: "" }],
   });
   const [visits, setVisits] = useState([]);
+  const [currentFilters, setCurrentFilters] = useState({});
 
-  const getData = () => {
-    VisitApi.getAll({})
-      .then((res) => {
+  const onSearch = ({ filters = {}, page = 1, capacity = 10 }) => {
+    setCurrentFilters(filters);
+
+    return VisitApi.getAll({ filters, page, capacity })
+      .then((res: any) => {
         setVisits(
-          (res as any).map(
+          res.payload.map(
             ({
               beneficiary = {
                 contactsBank: {},
@@ -53,18 +55,20 @@ const BeneficiariesVisitsView = () => {
             })
           ) as any
         );
+
+        return res;
       })
       .catch(apiCatchGlobalHandler);
   };
 
   useLayoutEffect(() => {
-    getData();
+    onSearch({ filters: {}, page: 1, capacity: 10 });
 
     BeneficiaryApi.getAll({})
-      .then((res) =>
+      .then((res: any) =>
         setSelectOptions((current) => ({
           ...current,
-          beneficiaries: res as any,
+          beneficiaries: res.payload,
         }))
       )
       .catch(apiCatchGlobalHandler);
@@ -187,36 +191,9 @@ const BeneficiariesVisitsView = () => {
     }
   };
 
-  const cancelVisit = (data: string) => {
-    VisitApi.cancel(typeof data === "string" ? data : "")
-      .then((res) => {
-        getData();
-        dispatch(
-          addNotification({
-            msg: t("Global.Form.SuccessMsg", {
-              action: t("Auth.Visits.CancelVisit"),
-              data: selectOptions.beneficiaries.find(({ id }) => id === data)
-                ?.fullName,
-            }),
-          })
-        );
-      })
-      .catch(apiCatchGlobalHandler);
-  };
-
-  const editData = (data: {}) => {
-    VisitApi.getById(data as string)
-      .then((res) => {
-        setCrudData(res);
-
-        setOpenModal(true);
-      })
-      .catch(apiCatchGlobalHandler);
-  };
-
   const onCrudSuccess = (e: { beneficiary: "" }, action = "") => {
     onModalClose();
-    getData();
+    onSearch({ filters: {}, page: 1, capacity: 10 });
     dispatch(
       addNotification({
         msg: t("Global.Form.SuccessMsg", {
@@ -249,8 +226,10 @@ const BeneficiariesVisitsView = () => {
         // ]}
         columns={columns}
         data={visits}
-        onPageChange={(i = 0, x = 0) => console.log(i, x)}
-        onSearch={(values) => console.log(values)}
+        onSearch={onSearch}
+        onPageChange={(page, capacity) => {
+          onSearch({ filters: currentFilters, page, capacity });
+        }}
       />
 
       <Modal
@@ -265,12 +244,12 @@ const BeneficiariesVisitsView = () => {
           onFormSubmit={(e) => {
             e.id
               ? VisitApi.update(e)
-                  .then((res) => {
+                  .then(() => {
                     onCrudSuccess(e, t("Auth.Visits.EditVisit"));
                   })
                   .catch(apiCatchGlobalHandler)
               : VisitApi.create(e)
-                  .then((res) => {
+                  .then(() => {
                     onCrudSuccess(e, t("Auth.Visits.AddVisit"));
                   })
                   .catch(apiCatchGlobalHandler);

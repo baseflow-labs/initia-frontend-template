@@ -31,6 +31,15 @@ export const statusColorRender = (status = "") => {
   }
 };
 
+export const booleanColorRender = (status = "No") => {
+  switch (status) {
+    case "Yes":
+      return "success";
+    default:
+      return "danger";
+  }
+};
+
 export const renderDataFromOptions = (
   data: string,
   options: { label?: string; value: string }[]

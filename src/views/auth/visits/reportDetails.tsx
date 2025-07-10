@@ -45,7 +45,7 @@ const VisitDetailView = () => {
   const getData = () => {
     VisitApi.getReportByVisitId(searchParams.get("id") || "")
       .then((res: any) => {
-        setVisit(res);
+        setVisit(res.payload);
       })
       .catch(apiCatchGlobalHandler);
   };

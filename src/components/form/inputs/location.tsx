@@ -10,7 +10,7 @@ import { commonInputClasses } from "../../../utils/consts";
 type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 
 const LocationInput: React.FC<FinalInput> = ({ name, ...input }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [, , helpers] = useField(name);
 
   const [location, setLocation] = useState<{
@@ -85,7 +85,7 @@ const LocationInput: React.FC<FinalInput> = ({ name, ...input }) => {
         </div>
       )}
 
-      <div className="mb-3 text-end" dir="rtl">
+      <div className="mb-3 text-end" dir={i18n.dir()}>
         {error && <div className="mt-2 text-danger small">{error}</div>}
       </div>
     </Fragment>

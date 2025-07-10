@@ -1,17 +1,16 @@
+import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 
-import { faEdit, faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { GetDataProps } from "../../../api";
 import * as ResearcherApi from "../../../api/staff/researcher";
-import Button from "../../../components/core/button";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
-import PageTemplate from "../../../layouts/auth/pageTemplate";
-import { apiCatchGlobalHandler } from "../../../utils/function";
-import { useDispatch } from "react-redux";
+import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
 import { addNotification } from "../../../store/actions/notifications";
+import { apiCatchGlobalHandler } from "../../../utils/function";
 
 const ResearcherMgmtPage = () => {
   const { t } = useTranslation();
@@ -32,9 +31,9 @@ const ResearcherMgmtPage = () => {
   >([]);
 
   const getData = (filters: GetDataProps) => {
-    ResearcherApi.getAll(filters)
-      .then((res) => {
-        setResearchers(res as any);
+    ResearcherApi.getAll({ filters })
+      .then((res: any) => {
+        setResearchers(res.payload);
       })
       .catch(apiCatchGlobalHandler);
   };
@@ -69,7 +68,7 @@ const ResearcherMgmtPage = () => {
               },
               i
             ) => (
-              <div className="col-12 col-md-4 col-lg-3" key={i}>
+              <div className="col-12 col-md-6 col-lg-4 col-xl-3" key={i}>
                 <div className="card rounded-4 py-4">
                   <div
                     className="mx-auto rounded-circle overflow-hidden"
@@ -92,6 +91,7 @@ const ResearcherMgmtPage = () => {
                       <a
                         href={"mailto:" + email}
                         target="_blank"
+                        rel="noreferrer"
                         className="text-decoration-none text-muted"
                       >
                         <FontAwesomeIcon icon={faEnvelope} /> {email}
@@ -102,6 +102,7 @@ const ResearcherMgmtPage = () => {
                       <a
                         href={"tel:966" + username}
                         target="_blank"
+                        rel="noreferrer"
                         className="text-decoration-none text-muted"
                       >
                         <FontAwesomeIcon icon={faPhone} /> +966{username}
@@ -197,7 +198,7 @@ const ResearcherMgmtPage = () => {
                 passwordConfirmation: e.username,
                 code: "654321",
               })
-                .then((res) => {
+                .then(() => {
                   dispatch(
                     addNotification({
                       msg: t("Global.Form.SuccessMsg", {

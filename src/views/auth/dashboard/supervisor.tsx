@@ -10,7 +10,7 @@ import * as OverviewApi from "../../../api/overview";
 import profilePhotoPlaceholder from "../../../assets/images/profile-image-placeholder.png";
 import DashboardCards from "../../../components/card/statisticCards";
 import UsersCard from "../../../components/card/usersCard";
-import PageTemplate from "../../../layouts/auth/pageTemplate";
+import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 
 const DashboardSupervisorView = () => {
@@ -44,7 +44,7 @@ const DashboardSupervisorView = () => {
   useLayoutEffect(() => {
     OverviewApi.forSupervisor()
       .then((res: any) => {
-        setData(res);
+        setData(res.payload);
       })
       .catch(apiCatchGlobalHandler);
   }, []);

@@ -2,8 +2,10 @@ import api, { formatGetFilters, GetDataProps } from "..";
 
 const mainPath = "/visitSchedule";
 
-const getAll = async (filters: GetDataProps) => {
-  const res = await api.get(mainPath, formatGetFilters(filters));
+const getAll = async ({ filters, page, capacity }: GetDataProps) => {
+  const res = await api.get(mainPath, {
+    params: { ...formatGetFilters(filters), page, capacity },
+  });
   return res;
 };
 
