@@ -77,7 +77,9 @@ const MembershipRegistrationView = () => {
         .catch(apiCatchGlobalHandler);
     } else {
       BeneficiaryApi.getByUserId()
-        .then((res: any) => (res.beneficiary?.id ? setFormData(res) : ""))
+        .then((res: any) =>
+          res.payload.beneficiary?.id ? setFormData(res.payload) : ""
+        )
         .catch(apiCatchGlobalHandler);
     }
   }, []);
@@ -899,8 +901,8 @@ const MembershipRegistrationView = () => {
               ...final,
               user: formData.user?.id,
             })
-              .then((res) => {
-                onNextStep({ ...e, ...res }, "beneficiary");
+              .then((res: any) => {
+                onNextStep({ ...e, ...res.payload }, "beneficiary");
               })
               .catch(apiCatchGlobalHandler);
           }}

@@ -32,9 +32,9 @@ const AidsView = () => {
 
   const getData = (filters: GetDataProps) => {
     AidApi.getAll(filters)
-      .then((res) => {
+      .then((res: any) => {
         setAids(
-          (res as any).map(
+          (res.payload as any).map(
             ({ beneficiary = { id: "" }, status = {}, ...rest }) => ({
               ...beneficiary,
               beneficiaryId: beneficiary.id,
@@ -51,10 +51,10 @@ const AidsView = () => {
     getData({});
 
     BeneficiaryApi.getAll({})
-      .then((res) =>
+      .then((res: any) =>
         setSelectOptions((current) => ({
           ...current,
-          beneficiaries: res as any,
+          beneficiaries: res.payload as any,
         }))
       )
       .catch(apiCatchGlobalHandler);
@@ -276,7 +276,7 @@ const AidsView = () => {
           submitText={t("Global.Form.Labels.SubmitApplication")}
           onFormSubmit={(e) => {
             AidApi.grant(e)
-              .then((res) => {
+              .then(() => {
                 setOpenModal(false);
                 getData({});
                 dispatch(

@@ -31,7 +31,7 @@ const Navbar = () => {
     NotificationApi.get()
       .then((res: any) =>
         setNotification(
-          res.sort((a: Notification, b: Notification) =>
+          res.payload?.sort((a: Notification, b: Notification) =>
             a.createdAt > b.createdAt ? -1 : 1
           )
         )

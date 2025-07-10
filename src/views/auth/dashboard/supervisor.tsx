@@ -44,7 +44,7 @@ const DashboardSupervisorView = () => {
   useLayoutEffect(() => {
     OverviewApi.forSupervisor()
       .then((res: any) => {
-        setData(res);
+        setData(res.payload);
       })
       .catch(apiCatchGlobalHandler);
   }, []);

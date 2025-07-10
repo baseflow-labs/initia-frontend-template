@@ -42,9 +42,9 @@ const ApplicantsView = () => {
 
   const getData = (filters: GetDataProps) => {
     BeneficiaryApi.getAll(filters)
-      .then((res) => {
+      .then((res: any) => {
         setBeneficiaries(
-          (res as any)
+          (res.payload as any)
             .map(
               ({ contactsBank = {}, housing = {}, status = {}, ...rest }) => ({
                 ...contactsBank,
@@ -411,7 +411,7 @@ const ApplicantsView = () => {
               label: t("Auth.Beneficiaries.Profile.AcceptApplication"),
               onClick: (data: string) =>
                 BeneficiaryApi.accept(data)
-                  .then((res) => {
+                  .then(() => {
                     dispatch(
                       addNotification({
                         msg: t("Global.Form.SuccessMsg", {
@@ -466,7 +466,7 @@ const ApplicantsView = () => {
           submitText={t("Auth.Beneficiaries.Profile.RejectApplication")}
           onFormSubmit={(e) => {
             BeneficiaryApi.reject(rejectModalOpen || "", e)
-              .then((res) => {
+              .then(() => {
                 dispatch(
                   addNotification({
                     msg: t("Global.Form.SuccessMsg", {

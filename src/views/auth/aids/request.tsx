@@ -25,13 +25,15 @@ const AidsBeneficiaryView = () => {
 
   const getData = () => {
     AidApi.getAll({})
-      .then((res) => {
+      .then((res: any) => {
         setAids(
-          (res as any).map(({ beneficiary = {}, status = {}, ...rest }) => ({
-            ...beneficiary,
-            ...status,
-            ...rest,
-          })) as any
+          (res.payload as any).map(
+            ({ beneficiary = {}, status = {}, ...rest }) => ({
+              ...beneficiary,
+              ...status,
+              ...rest,
+            })
+          ) as any
         );
       })
       .catch(apiCatchGlobalHandler);

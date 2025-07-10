@@ -23,14 +23,14 @@ const BeneficiaryProfileView = () => {
   useEffect(() => {
     if (searchParams.get("id")) {
       BeneficiaryApi.getById(searchParams.get("id") || "")
-        .then((res) => {
-          setBeneficiary(res as any);
+        .then((res: any) => {
+          setBeneficiary(res.payload as any);
         })
         .catch(apiCatchGlobalHandler);
     } else {
       BeneficiaryApi.getByUserId()
-        .then((res) => {
-          setBeneficiary(res as any);
+        .then((res: any) => {
+          setBeneficiary(res.payload as any);
         })
         .catch(apiCatchGlobalHandler);
     }
@@ -1041,7 +1041,7 @@ const BeneficiaryProfileView = () => {
 
   const downloadProfileAsFile = (type: string) => {
     BeneficiaryApi.downloadProfile(searchParams.get("id") || "", type)
-      .then((res) => downloadFile({ response: res as any, type }))
+      .then((res: any) => downloadFile({ response: res.payload as any, type }))
       .catch(apiCatchGlobalHandler);
   };
 

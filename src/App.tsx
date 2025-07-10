@@ -30,7 +30,7 @@ const App = () => {
   useEffect(() => {
     MetadataApi.get()
       .then((res: any) => {
-        dispatch(setMetadata(res));
+        dispatch(setMetadata(res.payload));
       })
       .catch(apiCatchGlobalHandler);
   }, []);

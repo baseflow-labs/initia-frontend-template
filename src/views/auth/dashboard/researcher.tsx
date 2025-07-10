@@ -28,7 +28,7 @@ const DashboardResearcherView = () => {
   useLayoutEffect(() => {
     OverviewApi.forResearcher()
       .then((res: any) => {
-        setData(res);
+        setData(res.payload);
       })
       .catch(apiCatchGlobalHandler);
   }, []);

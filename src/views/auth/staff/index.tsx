@@ -33,8 +33,8 @@ const ResearcherMgmtPage = () => {
 
   const getData = (filters: GetDataProps) => {
     ResearcherApi.getAll(filters)
-      .then((res) => {
-        setResearchers(res as any);
+      .then((res: any) => {
+        setResearchers(res.payload as any);
       })
       .catch(apiCatchGlobalHandler);
   };
@@ -197,7 +197,7 @@ const ResearcherMgmtPage = () => {
                 passwordConfirmation: e.username,
                 code: "654321",
               })
-                .then((res) => {
+                .then(() => {
                   dispatch(
                     addNotification({
                       msg: t("Global.Form.SuccessMsg", {

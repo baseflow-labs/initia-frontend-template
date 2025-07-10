@@ -29,12 +29,12 @@ const BeneficiaryOwnProfile = () => {
   const callData = () => {
     BeneficiaryApi.getByUserId()
       .then((res: any) => {
-        setBeneficiary(res);
+        setBeneficiary(res.payload);
       })
       .catch(apiCatchGlobalHandler);
 
     DataReviewApi.getNonUpdatedDataReview(user.id || "")
-      .then((res) => setDataReviews(res as any))
+      .then((res: any) => setDataReviews(res.payload as any))
       .catch(apiCatchGlobalHandler);
   };
 
@@ -1075,7 +1075,7 @@ const BeneficiaryOwnProfile = () => {
 
   const onDataUpdate = (data = {}) => {
     DataUpdateApi.create(data)
-      .then((res) => {
+      .then(() => {
         dispatch(
           addNotification({
             msg: t("Global.Form.SuccessMsg", {

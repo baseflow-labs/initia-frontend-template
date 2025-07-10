@@ -31,9 +31,9 @@ const BeneficiariesView = () => {
 
   const getData = (filters: GetDataProps) => {
     BeneficiaryApi.getAll(filters)
-      .then((res) => {
+      .then((res: any) => {
         setBeneficiaries(
-          (res as any)
+          (res.payload as any)
             .map(
               ({ contactsBank = {}, housing = {}, status = {}, ...rest }) => ({
                 ...contactsBank,
@@ -357,7 +357,7 @@ const BeneficiariesView = () => {
           submitText={t("Auth.Beneficiaries.Profile.CancelMembership")}
           onFormSubmit={(e) => {
             BeneficiaryApi.cancel(cancelModalOpen || "", e)
-              .then((res) => {
+              .then(() => {
                 dispatch(
                   addNotification({
                     msg: t("Global.Form.SuccessMsg", {

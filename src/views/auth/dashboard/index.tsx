@@ -31,8 +31,8 @@ const DashboardView = () => {
     OverviewApi.forBeneficiary()
       .then((res: any) =>
         setData({
-          ...res,
-          notifications: res.notifications?.sort(
+          ...res.payload,
+          notifications: res.payload.notifications?.sort(
             (a: Notification, b: Notification) =>
               a.createdAt > b.createdAt ? -1 : 1
           ),

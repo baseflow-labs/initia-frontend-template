@@ -34,9 +34,9 @@ const BeneficiariesVisitsView = () => {
 
   const getData = () => {
     VisitApi.getAll({})
-      .then((res) => {
+      .then((res: any) => {
         setVisits(
-          (res as any).map(
+          (res.payload as any).map(
             ({
               beneficiary = {
                 contactsBank: {},
@@ -61,10 +61,10 @@ const BeneficiariesVisitsView = () => {
     getData();
 
     BeneficiaryApi.getAll({})
-      .then((res) =>
+      .then((res: any) =>
         setSelectOptions((current) => ({
           ...current,
-          beneficiaries: res as any,
+          beneficiaries: res.payload as any,
         }))
       )
       .catch(apiCatchGlobalHandler);
@@ -189,7 +189,7 @@ const BeneficiariesVisitsView = () => {
 
   const cancelVisit = (data: string) => {
     VisitApi.cancel(typeof data === "string" ? data : "")
-      .then((res) => {
+      .then(() => {
         getData();
         dispatch(
           addNotification({
@@ -206,8 +206,8 @@ const BeneficiariesVisitsView = () => {
 
   const editData = (data: {}) => {
     VisitApi.getById(data as string)
-      .then((res) => {
-        setCrudData(res);
+      .then((res: any) => {
+        setCrudData(res.payload);
 
         setOpenModal(true);
       })
@@ -265,12 +265,12 @@ const BeneficiariesVisitsView = () => {
           onFormSubmit={(e) => {
             e.id
               ? VisitApi.update(e)
-                  .then((res) => {
+                  .then(() => {
                     onCrudSuccess(e, t("Auth.Visits.EditVisit"));
                   })
                   .catch(apiCatchGlobalHandler)
               : VisitApi.create(e)
-                  .then((res) => {
+                  .then(() => {
                     onCrudSuccess(e, t("Auth.Visits.AddVisit"));
                   })
                   .catch(apiCatchGlobalHandler);

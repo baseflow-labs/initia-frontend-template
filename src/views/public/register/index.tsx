@@ -1,8 +1,8 @@
 import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
-import { useDispatch } from "react-redux";
 import * as authApi from "../../../api/auth";
 import BelowInputButton from "../../../components/button/belowInput";
 import Form from "../../../components/form";
@@ -35,7 +35,7 @@ const RegisterView = () => {
   const onOtpSubmit = (values: authApi.registerProps) => {
     authApi
       .register({ ...values, ...data })
-      .then((res: any) => {
+      .then(() => {
         dispatch(addNotification({ msg: t("Public.Register.Labels.Success") }));
         navigate("/");
       })

@@ -90,7 +90,7 @@ service.interceptors.response.use(
     }
 
     if ([200, 201, 202, 204].includes(status)) {
-      return res.data.payload;
+      return res.data;
     }
 
     store.dispatch(

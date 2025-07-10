@@ -1,9 +1,4 @@
-import {
-  faCircle,
-  faEdit,
-  faNewspaper,
-  faXmark,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCircle, faEdit, faNewspaper, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useEffect, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -17,13 +12,9 @@ import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
-import { viewDayDateFormat } from "../../../utils/consts";
-import {
-  apiCatchGlobalHandler,
-  renderDataFromOptions,
-  statusColorRender,
-} from "../../../utils/function";
 import { useAppSelector } from "../../../store/hooks";
+import { viewDayDateFormat } from "../../../utils/consts";
+import { apiCatchGlobalHandler, renderDataFromOptions, statusColorRender } from "../../../utils/function";
 
 const VisitsView = () => {
   const { t } = useTranslation();
@@ -43,9 +34,9 @@ const VisitsView = () => {
 
   const getData = (filters: GetDataProps) => {
     VisitApi.getAll(filters)
-      .then((res) => {
+      .then((res: any) => {
         setVisits(
-          (res as any).map(
+          (res.payload as any).map(
             ({
               beneficiary = {
                 contactsBank: {},
@@ -70,10 +61,10 @@ const VisitsView = () => {
     getData({});
 
     BeneficiaryApi.getAll({})
-      .then((res) =>
+      .then((res: any) =>
         setSelectOptions((current) => ({
           ...current,
-          beneficiaries: res as any,
+          beneficiaries: res.payload as any,
         }))
       )
       .catch(apiCatchGlobalHandler);
@@ -179,7 +170,7 @@ const VisitsView = () => {
 
   const cancelVisit = (data: string) => {
     VisitApi.cancel(data)
-      .then((res) => {
+      .then(() => {
         getData({});
         dispatch(
           addNotification({
@@ -302,12 +293,12 @@ const VisitsView = () => {
             onFormSubmit={(e) => {
               e.id
                 ? VisitApi.update(e)
-                    .then((res) => {
+                    .then(() => {
                       onCrudSuccess(e, t("Auth.Visits.EditVisit"));
                     })
                     .catch(apiCatchGlobalHandler)
                 : VisitApi.create(e)
-                    .then((res) => {
+                    .then(() => {
                       onCrudSuccess(e, t("Auth.Visits.AddVisit"));
                     })
                     .catch(apiCatchGlobalHandler);

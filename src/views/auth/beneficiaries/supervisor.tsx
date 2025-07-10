@@ -32,9 +32,9 @@ const BeneficiariesViewForSupervisor = () => {
 
   const getData = (filters: GetDataProps) => {
     BeneficiaryApi.getAll(filters)
-      .then((res) => {
+      .then((res: any) => {
         setBeneficiaries(
-          (res as any)
+          (res.payload as any)
             .map(
               ({ contactsBank = {}, housing = {}, status = {}, ...rest }) => ({
                 ...contactsBank,
@@ -53,9 +53,11 @@ const BeneficiariesViewForSupervisor = () => {
     getData({});
 
     StaffApi.getAll({})
-      .then((res) => {
+      .then((res: any) => {
         setResearchers(
-          (res as any).filter(({ status = "" }) => status !== "Accepted") as any
+          (res.payload as any).filter(
+            ({ status = "" }) => status !== "Accepted"
+          ) as any
         );
       })
       .catch(apiCatchGlobalHandler);
@@ -370,7 +372,7 @@ const BeneficiariesViewForSupervisor = () => {
           submitText={t("Auth.Beneficiaries.Profile.CancelMembership")}
           onFormSubmit={(e) => {
             BeneficiaryApi.cancel(cancelModalOpen || "", e)
-              .then((res) => {
+              .then(() => {
                 dispatch(
                   addNotification({
                     msg: t("Global.Form.SuccessMsg", {
@@ -430,7 +432,7 @@ const BeneficiariesViewForSupervisor = () => {
             submitText={t("Auth.Researchers.Assign")}
             onFormSubmit={(e) => {
               BeneficiaryApi.assignResearcher(e.beneficiary || "", e)
-                .then((res) => {
+                .then(() => {
                   dispatch(
                     addNotification({
                       msg: t("Global.Form.SuccessMsg", {
