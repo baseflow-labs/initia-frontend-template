@@ -1,3 +1,6 @@
+import { Fragment } from "react/jsx-runtime";
+import CardComp from "./card";
+
 const DashboardCard = ({
   children,
   max,
@@ -6,12 +9,12 @@ const DashboardCard = ({
   max?: string;
 }) => {
   return (
-    <div
-      className="card p-4 my-4 rounded-4"
+    <CardComp
+      className="my-3"
       style={max ? { maxHeight: max, overflowY: "auto" } : {}}
     >
-      {children}
-    </div>
+      <Fragment>{children}</Fragment>
+    </CardComp>
   );
 };
 

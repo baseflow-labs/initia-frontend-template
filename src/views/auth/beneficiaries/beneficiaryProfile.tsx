@@ -11,6 +11,7 @@ import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
 import { dataDateFormat } from "../../../utils/consts";
 import { apiCatchGlobalHandler } from "../../../utils/function";
+import CardComp from "../../../components/card/card";
 
 const BeneficiaryOwnProfile = () => {
   const { t } = useTranslation();
@@ -1113,7 +1114,7 @@ const BeneficiaryOwnProfile = () => {
 
           return (
             <div className="col-lg-6" key={i}>
-              <div className="card h-100 rounded-4">
+              <CardComp>
                 <div className="card-body p-5">
                   {requestProperty && (
                     <Form
@@ -1133,7 +1134,7 @@ const BeneficiaryOwnProfile = () => {
                     />
                   )}
                 </div>
-              </div>
+              </CardComp>
             </div>
           );
         })}

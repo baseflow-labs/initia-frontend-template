@@ -1,13 +1,15 @@
-const BoxedPage = ({ title = "", children = <></> }) => {
-  return (
-    <div
-      className="border border-2 border-dark rounded-5 mx-auto p-5"
-      style={{ maxWidth: "750px" }}
-    >
-      <h3>{title}</h3>
+import { Fragment } from "react/jsx-runtime";
+import CardComp from "../../../components/card/card";
 
-      {children}
-    </div>
+const BoxedPage = ({ title = "", className = "", children = <></> }) => {
+  return (
+    <CardComp className={`mt-3 ${className}`} style={{ maxWidth: "750px" }}>
+      <Fragment>
+        <h3>{title}</h3>
+
+        {children}
+      </Fragment>
+    </CardComp>
   );
 };
 
