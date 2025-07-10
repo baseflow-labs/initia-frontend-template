@@ -37,29 +37,48 @@ const MapWithMarkers = ({ locations }: { locations: LocationProps[] }) => {
         zoom={10}
         onLoad={onLoad}
       >
-        {locations.map((loc, index) => (
-          <Marker
-            key={index}
-            position={{ lat: loc.latitude, lng: loc.longitude }}
-            onClick={() => setActiveMarker(index)}
-          >
-            {activeMarker === index && (
-              <InfoWindow onCloseClick={() => setActiveMarker(null)}>
-                <Fragment>
-                  <strong>{loc.name}</strong>
-                  <br />
-                  <a
-                    href={`tel:966${loc.phoneNumber}`}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {loc.phoneNumber}
-                  </a>
-                </Fragment>
-              </InfoWindow>
-            )}
-          </Marker>
-        ))}
+        {locations
+          .sort((a, b) => {
+            const dateA = new Date(`${a.date}T${a.time}`);
+            const dateB = new Date(`${b.date}T${b.time}`);
+
+            return dateA.getTime() - dateB.getTime();
+          })
+          .map((loc, index) => (
+            <Marker
+              key={index}
+              position={{ lat: loc.latitude, lng: loc.longitude }}
+              onClick={() => setActiveMarker(index)}
+              label={{
+                text: String(index + 1),
+                color: "white",
+                fontSize: "14px",
+                fontWeight: "bold",
+              }}
+            >
+              {activeMarker === index && (
+                <InfoWindow onCloseClick={() => setActiveMarker(null)}>
+                  <Fragment>
+                    <small>
+                      {loc.date} @ {loc.time}
+                    </small>
+
+                    <div>
+                      <strong>{loc.name}</strong>
+                    </div>
+
+                    <a
+                      href={`tel:966${loc.phoneNumber}`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {loc.phoneNumber}
+                    </a>
+                  </Fragment>
+                </InfoWindow>
+              )}
+            </Marker>
+          ))}
       </GoogleMap>
     </LoadScript>
   );
