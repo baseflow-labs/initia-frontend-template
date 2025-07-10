@@ -1,17 +1,17 @@
-import { Fragment, useLayoutEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-
 import { faEdit, faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Fragment, useLayoutEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+
 import { GetDataProps } from "../../../api";
 import * as ResearcherApi from "../../../api/staff/researcher";
 import Button from "../../../components/core/button";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import PageTemplate from "../../../layouts/auth/pageTemplate";
-import { apiCatchGlobalHandler } from "../../../utils/function";
-import { useDispatch } from "react-redux";
 import { addNotification } from "../../../store/actions/notifications";
+import { apiCatchGlobalHandler } from "../../../utils/function";
 
 const ResearcherMgmtPage = () => {
   const { t } = useTranslation();
@@ -69,7 +69,7 @@ const ResearcherMgmtPage = () => {
               },
               i
             ) => (
-              <div className="col-12 col-md-4 col-lg-3" key={i}>
+              <div className="col-12 col-md-6 col-lg-4 col-xl-3" key={i}>
                 <div className="card rounded-4 py-4">
                   <div
                     className="mx-auto rounded-circle overflow-hidden"
