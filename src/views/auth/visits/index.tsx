@@ -10,20 +10,20 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router";
 
-import { GetDataProps } from "../../../api";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import * as VisitApi from "../../../api/visits/visits";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
-import TablePage from "../../../layouts/auth/tablePage";
+import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
+import { useAppSelector } from "../../../store/hooks";
 import { viewDayDateFormat } from "../../../utils/consts";
 import {
   apiCatchGlobalHandler,
+  booleanColorRender,
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
-import { useAppSelector } from "../../../store/hooks";
 
 const VisitsView = () => {
   const { t } = useTranslation();
@@ -40,12 +40,15 @@ const VisitsView = () => {
   const [visits, setVisits] = useState<
     { id: string; visitReport: object; status: string }[]
   >([]);
+  const [currentFilters, setCurrentFilters] = useState({});
 
-  const getData = (filters: GetDataProps) => {
-    VisitApi.getAll(filters)
-      .then((res) => {
+  const onSearch = ({ filters = {}, page = 1, capacity = 10 }) => {
+    setCurrentFilters(filters);
+
+    return VisitApi.getAll({ filters, page, capacity })
+      .then((res: any) => {
         setVisits(
-          (res as any).map(
+          res.payload.map(
             ({
               beneficiary = {
                 contactsBank: {},
@@ -62,18 +65,20 @@ const VisitsView = () => {
             })
           ) as any
         );
+
+        return res;
       })
       .catch(apiCatchGlobalHandler);
   };
 
   useLayoutEffect(() => {
-    getData({});
+    onSearch({ filters: {}, page: 1, capacity: 10 });
 
     BeneficiaryApi.getAll({})
-      .then((res) =>
+      .then((res: any) =>
         setSelectOptions((current) => ({
           ...current,
-          beneficiaries: res as any,
+          beneficiaries: res.payload,
         }))
       )
       .catch(apiCatchGlobalHandler);
@@ -107,6 +112,17 @@ const VisitsView = () => {
     {
       value: "Delayed",
       label: t("Auth.Visits.Statuses.Delayed"),
+    },
+  ];
+
+  const surprise = [
+    {
+      value: "No",
+      label: t("Auth.Visits.Surprise.No"),
+    },
+    {
+      value: "Yes",
+      label: t("Auth.Visits.Surprise.Yes"),
     },
   ];
 
@@ -152,6 +168,27 @@ const VisitsView = () => {
         <Fragment>
           <FontAwesomeIcon
             icon={faCircle}
+            className={`text-${booleanColorRender(row.surprise)}`}
+          />{" "}
+          {renderDataFromOptions(
+            row.surprise ? "Yes" : "No",
+            surprise.map(({ value, label }) => ({
+              label,
+              value: value,
+            }))
+          )}
+          {}
+        </Fragment>
+      ),
+      name: "surprise",
+      label: t("Auth.Visits.Surprise.Title"),
+    },
+    {
+      type: "custom",
+      render: (row: any) => (
+        <Fragment>
+          <FontAwesomeIcon
+            icon={faCircle}
             className={`text-${statusColorRender(row.status)}`}
           />{" "}
           {renderDataFromOptions(row.status, statuses)}
@@ -179,8 +216,8 @@ const VisitsView = () => {
 
   const cancelVisit = (data: string) => {
     VisitApi.cancel(data)
-      .then((res) => {
-        getData({});
+      .then(() => {
+        onSearch({ filters: {}, page: 1, capacity: 10 });
         dispatch(
           addNotification({
             msg: t("Global.Form.SuccessMsg", {
@@ -196,7 +233,8 @@ const VisitsView = () => {
 
   const onCrudSuccess = (e: { beneficiary: "" }, action = "") => {
     onModalClose();
-    getData({});
+
+    onSearch({ filters: {}, page: 1, capacity: 10 });
     dispatch(
       addNotification({
         msg: t("Global.Form.SuccessMsg", {
@@ -229,6 +267,14 @@ const VisitsView = () => {
     {
       type: "date",
       name: "date",
+      required: true,
+    },
+    {
+      type: "radio",
+      options: surprise,
+      name: "surprise",
+      defaultValue: "No",
+      label: t("Auth.Visits.Surprise.Title"),
       required: true,
     },
     {
@@ -285,8 +331,10 @@ const VisitsView = () => {
         actionButtons={user.role !== "hod" ? actionButtons : undefined}
         columns={columns}
         data={visits}
-        onPageChange={(i = 0, x = 0) => console.log(i, x)}
-        onSearch={(values) => getData(values)}
+        onSearch={onSearch}
+        onPageChange={(page, capacity) => {
+          onSearch({ filters: currentFilters, page, capacity });
+        }}
       />
 
       <Modal
@@ -302,12 +350,12 @@ const VisitsView = () => {
             onFormSubmit={(e) => {
               e.id
                 ? VisitApi.update(e)
-                    .then((res) => {
+                    .then(() => {
                       onCrudSuccess(e, t("Auth.Visits.EditVisit"));
                     })
                     .catch(apiCatchGlobalHandler)
                 : VisitApi.create(e)
-                    .then((res) => {
+                    .then(() => {
                       onCrudSuccess(e, t("Auth.Visits.AddVisit"));
                     })
                     .catch(apiCatchGlobalHandler);

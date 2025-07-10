@@ -1,10 +1,11 @@
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
-import { useRef } from "react";
-
-type Location = {
-  lat: number;
-  lng: number;
-};
+import {
+  GoogleMap,
+  LoadScript,
+  Marker,
+  InfoWindow,
+} from "@react-google-maps/api";
+import { Fragment, useRef, useState } from "react";
+import { LocationProps } from "../card/mapCard";
 
 const containerStyle = {
   width: "100%",
@@ -12,8 +13,9 @@ const containerStyle = {
   borderRadius: "1.5rem",
 };
 
-const MapWithMarkers = ({ locations }: { locations: Location[] }) => {
+const MapWithMarkers = ({ locations }: { locations: LocationProps[] }) => {
   const mapRef = useRef<google.maps.Map | null>(null);
+  const [activeMarker, setActiveMarker] = useState<number | null>(null);
 
   const center = locations[0] || { lat: 0, lng: 0 };
 
@@ -21,21 +23,62 @@ const MapWithMarkers = ({ locations }: { locations: Location[] }) => {
     mapRef.current = map;
 
     const bounds = new window.google.maps.LatLngBounds();
-    locations.forEach((loc) => bounds.extend(loc));
+    locations.forEach((loc) =>
+      bounds.extend({ lat: loc.latitude, lng: loc.longitude })
+    );
     map.fitBounds(bounds);
   };
 
   return (
-    <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY!}>
+    <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAP_API_KEY!}>
       <GoogleMap
         mapContainerStyle={containerStyle}
-        center={center}
+        center={{ lat: center.latitude, lng: center.longitude }}
         zoom={10}
         onLoad={onLoad}
       >
-        {locations.map((loc, index) => (
-          <Marker key={index} position={loc} />
-        ))}
+        {locations
+          .sort((a, b) => {
+            const dateA = new Date(`${a.date}T${a.time}`);
+            const dateB = new Date(`${b.date}T${b.time}`);
+
+            return dateA.getTime() - dateB.getTime();
+          })
+          .map((loc, index) => (
+            <Marker
+              key={index}
+              position={{ lat: loc.latitude, lng: loc.longitude }}
+              onClick={() => setActiveMarker(index)}
+              label={{
+                text: String(index + 1),
+                color: "white",
+                fontSize: "14px",
+                fontWeight: "bold",
+              }}
+            >
+              {activeMarker === index && (
+                <InfoWindow onCloseClick={() => setActiveMarker(null)}>
+                  <Fragment>
+                    <small>
+                      {loc.date} @ {loc.time}
+                    </small>
+
+                    <div>
+                      <strong>{loc.name}</strong>
+                    </div>
+
+                    <a
+                      href={`tel:966${loc.phoneNumber}`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {loc.phoneNumber}
+                    </a>
+                  </Fragment>
+                </InfoWindow>
+              )}
+            </Marker>
+          ))}
       </GoogleMap>
     </LoadScript>
   );

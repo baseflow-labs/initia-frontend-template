@@ -4,13 +4,12 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
-import { GetDataProps } from "../../../api";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import * as StaffApi from "../../../api/staff/researcher";
 import Button from "../../../components/core/button";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
-import TablePage from "../../../layouts/auth/tablePage";
+import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 
@@ -29,34 +28,39 @@ const BeneficiariesViewForSupervisor = () => {
   const [researchers, setResearchers] = useState<
     { id: string; status: string; fullName: string }[]
   >([]);
+  const [currentFilters, setCurrentFilters] = useState({});
 
-  const getData = (filters: GetDataProps) => {
-    BeneficiaryApi.getAll(filters)
-      .then((res) => {
+  const onSearch = ({ filters = {}, page = 1, capacity = 10 }) => {
+    setCurrentFilters(filters);
+
+    return BeneficiaryApi.getAll({
+      filters: { ...filters, "membershipStatuses.status": "Accepted" } as any,
+      page,
+      capacity,
+    })
+      .then((res: any) => {
         setBeneficiaries(
-          (res as any)
-            .map(
-              ({ contactsBank = {}, housing = {}, status = {}, ...rest }) => ({
-                ...contactsBank,
-                ...housing,
-                ...status,
-                ...rest,
-              })
-            )
-            .filter(({ status = "" }) => status === "Accepted") as any
+          res.payload.map(
+            ({ contactsBank = {}, housing = {}, status = {}, ...rest }) => ({
+              ...contactsBank,
+              ...housing,
+              ...status,
+              ...rest,
+            })
+          )
         );
+
+        return res;
       })
       .catch(apiCatchGlobalHandler);
   };
 
   useLayoutEffect(() => {
-    getData({});
+    onSearch({ filters: {}, page: 1, capacity: 10 });
 
     StaffApi.getAll({})
-      .then((res) => {
-        setResearchers(
-          (res as any).filter(({ status = "" }) => status !== "Accepted") as any
-        );
+      .then((res: any) => {
+        setResearchers(res.payload);
       })
       .catch(apiCatchGlobalHandler);
   }, []);
@@ -168,39 +172,7 @@ const BeneficiariesViewForSupervisor = () => {
     },
   ];
 
-  const statuses = [
-    {
-      value: "New Member",
-      label: t("Auth.MembershipRegistration.Statuses.NewMember"),
-    },
-    {
-      value: "Incomplete",
-      label: t("Auth.MembershipRegistration.Statuses.Incomplete"),
-    },
-    {
-      value: "Need Help",
-      label: t("Auth.MembershipRegistration.Statuses.NeedHelp"),
-    },
-    {
-      value: "Rejected",
-      label: t("Auth.MembershipRegistration.Statuses.Rejected"),
-    },
-    {
-      value: "Accepted",
-      label: t("Auth.MembershipRegistration.Statuses.Accepted"),
-    },
-    {
-      value: "In Preview",
-      label: t("Auth.MembershipRegistration.Statuses.InPreview"),
-    },
-  ];
-
   const filters = [
-    {
-      label: t("Auth.MembershipRegistration.Statuses.Status"),
-      options: statuses,
-      name: "status=>status",
-    },
     {
       label: t("Auth.MembershipRegistration.Form.Nationality.Title"),
       options: nationalities,
@@ -298,10 +270,6 @@ const BeneficiariesViewForSupervisor = () => {
     navigate(`/profile/?id=${data}`);
   };
 
-  const scheduleVisit = (data: string) => {
-    navigate(`/visitSchedule/?id=${data}`);
-  };
-
   return (
     <Fragment>
       <TablePage
@@ -332,8 +300,10 @@ const BeneficiariesViewForSupervisor = () => {
             onClick: (data: string) => setCancelModalOpen(data),
           },
         ]}
-        onPageChange={(i = 0, x = 0) => console.log(i, x)}
-        onSearch={(values) => getData(values)}
+        onSearch={onSearch}
+        onPageChange={(page, capacity) => {
+          onSearch({ filters: currentFilters, page, capacity });
+        }}
       />
 
       <Modal
@@ -370,7 +340,7 @@ const BeneficiariesViewForSupervisor = () => {
           submitText={t("Auth.Beneficiaries.Profile.CancelMembership")}
           onFormSubmit={(e) => {
             BeneficiaryApi.cancel(cancelModalOpen || "", e)
-              .then((res) => {
+              .then(() => {
                 dispatch(
                   addNotification({
                     msg: t("Global.Form.SuccessMsg", {
@@ -380,7 +350,7 @@ const BeneficiariesViewForSupervisor = () => {
                     }),
                   })
                 );
-                getData({});
+                onSearch({ filters: {}, page: 1, capacity: 10 });
                 setCancelModalOpen(null);
               })
               .catch(apiCatchGlobalHandler);
@@ -430,7 +400,7 @@ const BeneficiariesViewForSupervisor = () => {
             submitText={t("Auth.Researchers.Assign")}
             onFormSubmit={(e) => {
               BeneficiaryApi.assignResearcher(e.beneficiary || "", e)
-                .then((res) => {
+                .then(() => {
                   dispatch(
                     addNotification({
                       msg: t("Global.Form.SuccessMsg", {
@@ -447,7 +417,7 @@ const BeneficiariesViewForSupervisor = () => {
                       }),
                     })
                   );
-                  getData({});
+                  onSearch({ filters: {}, page: 1, capacity: 10 });
                   setAssignResearcherModalOpen(undefined);
                 })
                 .catch(apiCatchGlobalHandler);

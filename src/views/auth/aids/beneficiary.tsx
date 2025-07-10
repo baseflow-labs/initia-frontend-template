@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import * as AidApi from "../../../api/aids/aids";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
-import TablePage from "../../../layouts/auth/tablePage";
+import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import {
   apiCatchGlobalHandler,
@@ -20,25 +20,29 @@ const AidsBeneficiaryView = () => {
   const dispatch = useDispatch();
 
   const [openModal, setOpenModal] = useState(false);
-
+  const [currentFilters, setCurrentFilters] = useState({});
   const [aids, setAids] = useState([]);
 
-  const getData = () => {
-    AidApi.getAll({})
-      .then((res) => {
+  const onSearch = ({ filters = {}, page = 1, capacity = 10 }) => {
+    setCurrentFilters(filters);
+
+    return AidApi.getAll({ filters, page, capacity })
+      .then((res: any) => {
         setAids(
-          (res as any).map(({ beneficiary = {}, status = {}, ...rest }) => ({
+          res.payload.map(({ beneficiary = {}, status = {}, ...rest }) => ({
             ...beneficiary,
             ...status,
             ...rest,
           })) as any
         );
+
+        return res;
       })
       .catch(apiCatchGlobalHandler);
   };
 
   useLayoutEffect(() => {
-    getData();
+    onSearch({ filters: currentFilters, page: 1, capacity: 10 });
   }, []);
 
   const title = t("Auth.Aids.Beneficiary.Title");
@@ -73,7 +77,7 @@ const AidsBeneficiaryView = () => {
     {
       label: t("Auth.MembershipRegistration.Statuses.Status"),
       options: statuses,
-      name: "status",
+      name: "aidStatuses=>status",
     },
     {
       label: t("Auth.Aids.AidType"),
@@ -188,8 +192,10 @@ const AidsBeneficiaryView = () => {
         actionButtons={actionButtons}
         columns={columns}
         data={aids}
-        onPageChange={(i = 0, x = 0) => console.log(i, x)}
-        onSearch={(values) => console.log(values)}
+        onSearch={onSearch}
+        onPageChange={(page, capacity) => {
+          onSearch({ filters: currentFilters, page, capacity });
+        }}
       />
 
       <Modal
@@ -204,7 +210,7 @@ const AidsBeneficiaryView = () => {
             AidApi.create(e)
               .then(() => {
                 setOpenModal(false);
-                getData();
+                onSearch({ filters: currentFilters, page: 1, capacity: 10 });
                 dispatch(
                   addNotification({
                     msg: t("Global.Form.SuccessMsg", {

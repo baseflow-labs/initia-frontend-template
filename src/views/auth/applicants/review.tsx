@@ -62,7 +62,7 @@ const BeneficiaryFormReview = () => {
   useLayoutEffect(() => {
     BeneficiaryApi.getById(searchParams.get("id") || "")
       .then((res: any) => {
-        setBeneficiary(res);
+        setBeneficiary(res.payload);
 
         const emptyReview: ReviewProps[] = [];
 
@@ -76,11 +76,13 @@ const BeneficiaryFormReview = () => {
           });
         });
 
-        DataReviewApi.getBeneficiaryDataReview(res.id)
+        DataReviewApi.getBeneficiaryDataReview(res.payload.id)
           .then((res: any) => {
-            setDataArchive(res.filter(({ dataUpdate = null }) => dataUpdate));
+            setDataArchive(
+              res.payload.filter(({ dataUpdate = null }) => dataUpdate)
+            );
 
-            const resp = res
+            const resp = res.payload
               .filter(({ dataUpdate = null }) => !dataUpdate)
               .map(({ needUpdate = false, ...rest }) => ({
                 ...rest,

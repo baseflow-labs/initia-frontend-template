@@ -7,10 +7,10 @@ import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import * as OverviewApi from "../../../api/overview";
-import MapCard from "../../../components/card/mapCard";
+import MapCard, { LocationProps } from "../../../components/card/mapCard";
 import DashboardCards from "../../../components/card/statisticCards";
 import TasksCard from "../../../components/card/tasksCard";
-import PageTemplate from "../../../layouts/auth/pageTemplate";
+import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 
 const DashboardResearcherView = () => {
@@ -19,16 +19,18 @@ const DashboardResearcherView = () => {
     beneficiaries: { all: number; applicants: number; accepted: number };
     visits: { all: number; toDo: number; done: number };
     aids: { all: number; granted: number; pending: number };
+    visitLocations: LocationProps[];
   }>({
     beneficiaries: { all: 0, applicants: 0, accepted: 0 },
     visits: { all: 0, toDo: 0, done: 0 },
     aids: { all: 0, granted: 0, pending: 0 },
+    visitLocations: [],
   });
 
   useLayoutEffect(() => {
     OverviewApi.forResearcher()
       .then((res: any) => {
-        setData(res);
+        setData(res.payload);
       })
       .catch(apiCatchGlobalHandler);
   }, []);
@@ -118,7 +120,7 @@ const DashboardResearcherView = () => {
         </div>
 
         <div className="col-xl-6">
-          <MapCard />
+          <MapCard locations={data.visitLocations} />
         </div>
       </div>
     </PageTemplate>

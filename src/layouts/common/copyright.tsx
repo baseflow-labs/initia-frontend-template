@@ -27,6 +27,7 @@ const CopyRightView = ({
         <a
           href="https://www.shai.sa/ar/business"
           target="_blank"
+          rel="noreferrer"
           className="text-muted"
         >
           {short ? t("CopyRight.ShaiShort") : t("CopyRight.ShaiFull")}

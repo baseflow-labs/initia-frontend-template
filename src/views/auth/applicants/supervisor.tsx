@@ -5,12 +5,11 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
-import { GetDataProps } from "../../../api";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import * as StaffApi from "../../../api/staff/researcher";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
-import TablePage from "../../../layouts/auth/tablePage";
+import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import {
   apiCatchGlobalHandler,
@@ -37,12 +36,26 @@ const ApplicantsViewForSupervisor = () => {
   const [assignResearcherModalOpen, setAssignResearcherModalOpen] = useState<
     { beneficiary: string; staff: string } | undefined
   >(undefined);
+  const [currentFilters, setCurrentFilters] = useState({});
 
-  const getData = (filters: GetDataProps) => {
-    BeneficiaryApi.getAll(filters)
-      .then((res) => {
+  const onSearch = ({ filters = {}, page = 1, capacity = 10 }) => {
+    setCurrentFilters(filters);
+
+    const customFilters = [
+      {
+        field: "membershipStatuses.status",
+        filteredTerm: {
+          dataType: "string",
+          value: "Accepted",
+        },
+        filterOperator: "stringNotEquals",
+      },
+    ];
+
+    return BeneficiaryApi.getAll({ filters, page, capacity, customFilters })
+      .then((res: any) => {
         setBeneficiaries(
-          (res as any)
+          res.payload
             .map(
               ({
                 contactsBank = {},
@@ -61,18 +74,18 @@ const ApplicantsViewForSupervisor = () => {
             )
             .filter(({ status = "" }) => status !== "Accepted") as any
         );
+
+        return res;
       })
       .catch(apiCatchGlobalHandler);
   };
 
   useLayoutEffect(() => {
-    getData({});
+    onSearch({ filters: {}, page: 1, capacity: 10 });
 
     StaffApi.getAll({})
-      .then((res) => {
-        setResearchers(
-          (res as any).filter(({ status = "" }) => status !== "Accepted") as any
-        );
+      .then((res: any) => {
+        setResearchers(res.payload);
       })
       .catch(apiCatchGlobalHandler);
   }, []);
@@ -120,10 +133,6 @@ const ApplicantsViewForSupervisor = () => {
       label: t("Auth.MembershipRegistration.Statuses.Cancelled"),
     },
     {
-      value: "Accepted",
-      label: t("Auth.MembershipRegistration.Statuses.Accepted"),
-    },
-    {
       value: "In Preview",
       label: t("Auth.MembershipRegistration.Statuses.InPreview"),
     },
@@ -133,7 +142,7 @@ const ApplicantsViewForSupervisor = () => {
     {
       label: t("Auth.MembershipRegistration.Statuses.Status"),
       options: statuses,
-      name: "status=>status",
+      name: "membershipStatuses=>status",
     },
     {
       label: t("Auth.MembershipRegistration.Form.Nationality.Title"),
@@ -258,7 +267,7 @@ const ApplicantsViewForSupervisor = () => {
             })
           );
 
-          getData({});
+          onSearch({ filters: {}, page: 1, capacity: 10 });
         });
   };
 
@@ -293,8 +302,10 @@ const ApplicantsViewForSupervisor = () => {
             onClick: (data: string) => deleteBeneficiary(data),
           },
         ]}
-        onPageChange={(i = 0, x = 0) => console.log(i, x)}
-        onSearch={(values) => getData(values)}
+        onSearch={onSearch}
+        onPageChange={(page, capacity) => {
+          onSearch({ filters: currentFilters, page, capacity });
+        }}
       />
 
       <Modal
@@ -339,7 +350,7 @@ const ApplicantsViewForSupervisor = () => {
             submitText={t("Auth.Researchers.Assign")}
             onFormSubmit={(e) => {
               BeneficiaryApi.assignResearcher(e.beneficiary || "", e)
-                .then((res) => {
+                .then(() => {
                   dispatch(
                     addNotification({
                       msg: t("Global.Form.SuccessMsg", {
@@ -356,7 +367,7 @@ const ApplicantsViewForSupervisor = () => {
                       }),
                     })
                   );
-                  getData({});
+                  onSearch({ filters: {}, page: 1, capacity: 10 });
                   setAssignResearcherModalOpen(undefined);
                 })
                 .catch(apiCatchGlobalHandler);

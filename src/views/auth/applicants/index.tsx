@@ -1,6 +1,4 @@
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import {
-  faCheck,
   faCheckSquare,
   faCircle,
   faEdit,
@@ -15,12 +13,11 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
-import { GetDataProps } from "../../../api";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import Button from "../../../components/core/button";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
-import TablePage from "../../../layouts/auth/tablePage";
+import TablePage from "../../../layouts/auth/pages/tablePage";
 import { logout } from "../../../store/actions/auth";
 import { addNotification } from "../../../store/actions/notifications";
 import {
@@ -28,7 +25,6 @@ import {
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
-import { actionProps } from "../../../components/table";
 
 const ApplicantsView = () => {
   const { t } = useTranslation();
@@ -39,12 +35,26 @@ const ApplicantsView = () => {
     { id: string; status: string; fullName: string }[]
   >([]);
   const [rejectModalOpen, setRejectModalOpen] = useState<string | null>(null);
+  const [currentFilters, setCurrentFilters] = useState({});
 
-  const getData = (filters: GetDataProps) => {
-    BeneficiaryApi.getAll(filters)
-      .then((res) => {
+  const onSearch = ({ filters = {}, page = 1, capacity = 10 }) => {
+    setCurrentFilters(filters);
+
+    const customFilters = [
+      {
+        field: "membershipStatuses.status",
+        filteredTerm: {
+          dataType: "string",
+          value: "Accepted",
+        },
+        filterOperator: "stringNotEquals",
+      },
+    ];
+
+    return BeneficiaryApi.getAll({ filters, page, capacity, customFilters })
+      .then((res: any) => {
         setBeneficiaries(
-          (res as any)
+          res.payload
             .map(
               ({ contactsBank = {}, housing = {}, status = {}, ...rest }) => ({
                 ...contactsBank,
@@ -55,12 +65,14 @@ const ApplicantsView = () => {
             )
             .filter(({ status = "" }) => status !== "Accepted") as any
         );
+
+        return res;
       })
       .catch(apiCatchGlobalHandler);
   };
 
   useLayoutEffect(() => {
-    getData({});
+    onSearch({ filters: {}, page: 1, capacity: 10 });
   }, []);
 
   const title = t("Auth.Beneficiaries.Applications");
@@ -196,10 +208,6 @@ const ApplicantsView = () => {
       label: t("Auth.MembershipRegistration.Statuses.Cancelled"),
     },
     {
-      value: "Accepted",
-      label: t("Auth.MembershipRegistration.Statuses.Accepted"),
-    },
-    {
       value: "In Preview",
       label: t("Auth.MembershipRegistration.Statuses.InPreview"),
     },
@@ -209,7 +217,7 @@ const ApplicantsView = () => {
     {
       label: t("Auth.MembershipRegistration.Statuses.Status"),
       options: statuses,
-      name: "status=>status",
+      name: "membershipStatuses=>status",
     },
     {
       label: t("Auth.MembershipRegistration.Form.Nationality.Title"),
@@ -341,7 +349,7 @@ const ApplicantsView = () => {
             })
           );
 
-          getData({});
+          onSearch({ filters: {}, page: 1, capacity: 10 });
         });
   };
 
@@ -411,7 +419,7 @@ const ApplicantsView = () => {
               label: t("Auth.Beneficiaries.Profile.AcceptApplication"),
               onClick: (data: string) =>
                 BeneficiaryApi.accept(data)
-                  .then((res) => {
+                  .then(() => {
                     dispatch(
                       addNotification({
                         msg: t("Global.Form.SuccessMsg", {
@@ -423,7 +431,7 @@ const ApplicantsView = () => {
                         }),
                       })
                     );
-                    getData({});
+                    onSearch({ filters: {}, page: 1, capacity: 10 });
                     setRejectModalOpen(null);
                   })
                   .catch(apiCatchGlobalHandler),
@@ -435,8 +443,10 @@ const ApplicantsView = () => {
             },
           ];
         }}
-        onPageChange={(i = 0, x = 0) => console.log(i, x)}
-        onSearch={(values) => getData(values)}
+        onSearch={onSearch}
+        onPageChange={(page, capacity) => {
+          onSearch({ filters: currentFilters, page, capacity });
+        }}
       />
 
       <Modal
@@ -466,7 +476,7 @@ const ApplicantsView = () => {
           submitText={t("Auth.Beneficiaries.Profile.RejectApplication")}
           onFormSubmit={(e) => {
             BeneficiaryApi.reject(rejectModalOpen || "", e)
-              .then((res) => {
+              .then(() => {
                 dispatch(
                   addNotification({
                     msg: t("Global.Form.SuccessMsg", {
@@ -476,7 +486,7 @@ const ApplicantsView = () => {
                     }),
                   })
                 );
-                getData({});
+                onSearch({ filters: {}, page: 1, capacity: 10 });
                 setRejectModalOpen(null);
               })
               .catch(apiCatchGlobalHandler);
