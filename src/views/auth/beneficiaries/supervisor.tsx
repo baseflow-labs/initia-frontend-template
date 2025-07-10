@@ -36,7 +36,7 @@ const BeneficiariesViewForSupervisor = () => {
     return BeneficiaryApi.getAll(filters, page, capacity)
       .then((res: any) => {
         setBeneficiaries(
-          (res.payload as any)
+          res.payload
             .map(
               ({ contactsBank = {}, housing = {}, status = {}, ...rest }) => ({
                 ...contactsBank,
@@ -47,6 +47,8 @@ const BeneficiariesViewForSupervisor = () => {
             )
             .filter(({ status = "" }) => status === "Accepted") as any
         );
+
+        return res;
       })
       .catch(apiCatchGlobalHandler);
   };
@@ -56,11 +58,7 @@ const BeneficiariesViewForSupervisor = () => {
 
     StaffApi.getAll({})
       .then((res: any) => {
-        setResearchers(
-          (res.payload as any).filter(
-            ({ status = "" }) => status !== "Accepted"
-          ) as any
-        );
+        setResearchers(res.payload);
       })
       .catch(apiCatchGlobalHandler);
   }, []);

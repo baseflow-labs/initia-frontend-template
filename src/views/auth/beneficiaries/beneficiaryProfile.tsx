@@ -33,7 +33,7 @@ const BeneficiaryOwnProfile = () => {
       .catch(apiCatchGlobalHandler);
 
     DataReviewApi.getNonUpdatedDataReview(user.id || "")
-      .then((res: any) => setDataReviews(res.payload as any))
+      .then((res: any) => setDataReviews(res.payload))
       .catch(apiCatchGlobalHandler);
   };
 

@@ -11,7 +11,11 @@ import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
-import { apiCatchGlobalHandler, renderDataFromOptions, statusColorRender } from "../../../utils/function";
+import {
+  apiCatchGlobalHandler,
+  renderDataFromOptions,
+  statusColorRender,
+} from "../../../utils/function";
 
 const ApplicantsViewForSupervisor = () => {
   const { t } = useTranslation();
@@ -40,7 +44,7 @@ const ApplicantsViewForSupervisor = () => {
     return BeneficiaryApi.getAll(filters, page, capacity)
       .then((res: any) => {
         setBeneficiaries(
-          (res.payload as any)
+          res.payload
             .map(
               ({
                 contactsBank = {},
@@ -59,6 +63,8 @@ const ApplicantsViewForSupervisor = () => {
             )
             .filter(({ status = "" }) => status !== "Accepted") as any
         );
+
+        return res;
       })
       .catch(apiCatchGlobalHandler);
   };
@@ -68,11 +74,7 @@ const ApplicantsViewForSupervisor = () => {
 
     StaffApi.getAll({})
       .then((res: any) => {
-        setResearchers(
-          (res.payload as any).filter(
-            ({ status = "" }) => status !== "Accepted"
-          ) as any
-        );
+        setResearchers(res.payload);
       })
       .catch(apiCatchGlobalHandler);
   }, []);

@@ -33,7 +33,7 @@ const ResearcherMgmtPage = () => {
   const getData = (filters: GetDataProps) => {
     ResearcherApi.getAll(filters)
       .then((res: any) => {
-        setResearchers(res.payload as any);
+        setResearchers(res.payload);
       })
       .catch(apiCatchGlobalHandler);
   };

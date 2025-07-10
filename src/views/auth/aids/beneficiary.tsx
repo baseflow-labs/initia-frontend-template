@@ -9,7 +9,11 @@ import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
-import { apiCatchGlobalHandler, renderDataFromOptions, statusColorRender } from "../../../utils/function";
+import {
+  apiCatchGlobalHandler,
+  renderDataFromOptions,
+  statusColorRender,
+} from "../../../utils/function";
 
 const AidsBeneficiaryView = () => {
   const { t } = useTranslation();
@@ -25,13 +29,11 @@ const AidsBeneficiaryView = () => {
     return AidApi.getAll(filters, page, capacity)
       .then((res: any) => {
         setAids(
-          (res.payload as any).map(
-            ({ beneficiary = {}, status = {}, ...rest }) => ({
-              ...beneficiary,
-              ...status,
-              ...rest,
-            })
-          ) as any
+          res.payload.map(({ beneficiary = {}, status = {}, ...rest }) => ({
+            ...beneficiary,
+            ...status,
+            ...rest,
+          })) as any
         );
       })
       .catch(apiCatchGlobalHandler);

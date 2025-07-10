@@ -1,4 +1,8 @@
-import { faCalendarDays, faUser, faUserMinus } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCalendarDays,
+  faUser,
+  faUserMinus,
+} from "@fortawesome/free-solid-svg-icons";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
@@ -29,7 +33,7 @@ const BeneficiariesView = () => {
     return BeneficiaryApi.getAll(filters, page, capacity)
       .then((res: any) => {
         setBeneficiaries(
-          (res.payload as any)
+          res.payload
             .map(
               ({ contactsBank = {}, housing = {}, status = {}, ...rest }) => ({
                 ...contactsBank,
@@ -40,6 +44,8 @@ const BeneficiariesView = () => {
             )
             .filter(({ status = "" }) => status === "Accepted") as any
         );
+
+        return res;
       })
       .catch(apiCatchGlobalHandler);
   };

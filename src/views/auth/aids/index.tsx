@@ -10,7 +10,11 @@ import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
-import { apiCatchGlobalHandler, renderDataFromOptions, statusColorRender } from "../../../utils/function";
+import {
+  apiCatchGlobalHandler,
+  renderDataFromOptions,
+  statusColorRender,
+} from "../../../utils/function";
 
 const AidsView = () => {
   const { t } = useTranslation();
@@ -31,7 +35,7 @@ const AidsView = () => {
     return AidApi.getAll(filters, page, capacity)
       .then((res: any) => {
         setAids(
-          (res.payload as any).map(
+          res.payload.map(
             ({ beneficiary = { id: "" }, status = {}, ...rest }) => ({
               ...beneficiary,
               beneficiaryId: beneficiary.id,

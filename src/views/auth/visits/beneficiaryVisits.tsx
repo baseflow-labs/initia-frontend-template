@@ -12,7 +12,11 @@ import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import { viewDateFormat, viewDayFormat } from "../../../utils/consts";
-import { apiCatchGlobalHandler, renderDataFromOptions, statusColorRender } from "../../../utils/function";
+import {
+  apiCatchGlobalHandler,
+  renderDataFromOptions,
+  statusColorRender,
+} from "../../../utils/function";
 
 const BeneficiariesVisitsView = () => {
   const { t } = useTranslation();
@@ -34,7 +38,7 @@ const BeneficiariesVisitsView = () => {
     return VisitApi.getAll(filters, page, capacity)
       .then((res: any) => {
         setVisits(
-          (res.payload as any).map(
+          res.payload.map(
             ({
               beneficiary = {
                 contactsBank: {},
@@ -51,6 +55,8 @@ const BeneficiariesVisitsView = () => {
             })
           ) as any
         );
+
+        return res;
       })
       .catch(apiCatchGlobalHandler);
   };
@@ -62,7 +68,7 @@ const BeneficiariesVisitsView = () => {
       .then((res: any) =>
         setSelectOptions((current) => ({
           ...current,
-          beneficiaries: res.payload as any,
+          beneficiaries: res.payload,
         }))
       )
       .catch(apiCatchGlobalHandler);

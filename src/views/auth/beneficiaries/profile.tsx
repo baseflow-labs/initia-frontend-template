@@ -23,13 +23,13 @@ const BeneficiaryProfileView = () => {
     if (searchParams.get("id")) {
       BeneficiaryApi.getById(searchParams.get("id") || "")
         .then((res: any) => {
-          setBeneficiary(res.payload as any);
+          setBeneficiary(res.payload);
         })
         .catch(apiCatchGlobalHandler);
     } else {
       BeneficiaryApi.getByUserId()
         .then((res: any) => {
-          setBeneficiary(res.payload as any);
+          setBeneficiary(res.payload);
         })
         .catch(apiCatchGlobalHandler);
     }
@@ -1040,7 +1040,7 @@ const BeneficiaryProfileView = () => {
 
   // const downloadProfileAsFile = (type: string) => {
   //   BeneficiaryApi.downloadProfile(searchParams.get("id") || "", type)
-  //     .then((res: any) => downloadFile({ response: res.payload as any, type }))
+  //     .then((res: any) => downloadFile({ response: res.payload , type }))
   //     .catch(apiCatchGlobalHandler);
   // };
 
