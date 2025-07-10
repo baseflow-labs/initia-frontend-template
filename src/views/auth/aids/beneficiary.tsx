@@ -9,11 +9,7 @@ import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
-import {
-  apiCatchGlobalHandler,
-  renderDataFromOptions,
-  statusColorRender,
-} from "../../../utils/function";
+import { apiCatchGlobalHandler, renderDataFromOptions, statusColorRender } from "../../../utils/function";
 
 const AidsBeneficiaryView = () => {
   const { t } = useTranslation();
@@ -26,7 +22,7 @@ const AidsBeneficiaryView = () => {
   const onSearch = ({ filters = {}, page = 1, capacity = 10 }) => {
     setCurrentFilters(filters);
 
-    return AidApi.getAll(filters, page, capacity)
+    return AidApi.getAll({ filters, page, capacity })
       .then((res: any) => {
         setAids(
           res.payload.map(({ beneficiary = {}, status = {}, ...rest }) => ({
@@ -35,6 +31,8 @@ const AidsBeneficiaryView = () => {
             ...rest,
           })) as any
         );
+
+        return res;
       })
       .catch(apiCatchGlobalHandler);
   };
@@ -75,7 +73,7 @@ const AidsBeneficiaryView = () => {
     {
       label: t("Auth.MembershipRegistration.Statuses.Status"),
       options: statuses,
-      name: "status",
+      name: "aidStatuses=>status",
     },
     {
       label: t("Auth.Aids.AidType"),

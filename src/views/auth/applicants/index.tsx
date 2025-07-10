@@ -40,7 +40,18 @@ const ApplicantsView = () => {
   const onSearch = ({ filters = {}, page = 1, capacity = 10 }) => {
     setCurrentFilters(filters);
 
-    return BeneficiaryApi.getAll(filters, page, capacity)
+    const customFilters = [
+      {
+        field: "membershipStatuses.status",
+        filteredTerm: {
+          dataType: "string",
+          value: "Accepted",
+        },
+        filterOperator: "stringNotEquals",
+      },
+    ];
+
+    return BeneficiaryApi.getAll({ filters, page, capacity, customFilters })
       .then((res: any) => {
         setBeneficiaries(
           res.payload
@@ -197,10 +208,6 @@ const ApplicantsView = () => {
       label: t("Auth.MembershipRegistration.Statuses.Cancelled"),
     },
     {
-      value: "Accepted",
-      label: t("Auth.MembershipRegistration.Statuses.Accepted"),
-    },
-    {
       value: "In Preview",
       label: t("Auth.MembershipRegistration.Statuses.InPreview"),
     },
@@ -210,7 +217,7 @@ const ApplicantsView = () => {
     {
       label: t("Auth.MembershipRegistration.Statuses.Status"),
       options: statuses,
-      name: "status=>status",
+      name: "membershipStatuses=>status",
     },
     {
       label: t("Auth.MembershipRegistration.Form.Nationality.Title"),

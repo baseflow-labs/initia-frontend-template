@@ -32,7 +32,7 @@ const AidsView = () => {
   const onSearch = ({ filters = {}, page = 1, capacity = 10 }) => {
     setCurrentFilters(filters);
 
-    return AidApi.getAll(filters, page, capacity)
+    return AidApi.getAll({ filters, page, capacity })
       .then((res: any) => {
         setAids(
           res.payload.map(
@@ -94,7 +94,7 @@ const AidsView = () => {
     {
       label: t("Auth.MembershipRegistration.Statuses.Status"),
       options: statuses,
-      name: "status=>status",
+      name: "aidStatuses=>status",
     },
     {
       label: t("Auth.Beneficiaries.BeneficiaryName"),

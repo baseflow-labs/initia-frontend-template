@@ -26,13 +26,14 @@ interface Props {
 const mainPath = "/beneficiary";
 const { user } = (store.getState() as RootState).auth;
 
-const getAll = async (
-  filters: GetDataProps,
-  page?: number,
-  capacity?: number
-) => {
+const getAll = async ({
+  filters,
+  page,
+  capacity,
+  customFilters,
+}: GetDataProps) => {
   const res = await api.get(mainPath, {
-    params: { ...formatGetFilters(filters), page, capacity },
+    params: { ...formatGetFilters(filters, customFilters), page, capacity },
   });
   return res;
 };

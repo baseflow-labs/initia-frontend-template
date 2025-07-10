@@ -31,7 +31,7 @@ const ResearcherMgmtPage = () => {
   >([]);
 
   const getData = (filters: GetDataProps) => {
-    ResearcherApi.getAll(filters)
+    ResearcherApi.getAll({ filters })
       .then((res: any) => {
         setResearchers(res.payload);
       })

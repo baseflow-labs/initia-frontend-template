@@ -1,8 +1,4 @@
-import {
-  faCalendarDays,
-  faUser,
-  faUserMinus,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCalendarDays, faUser, faUserMinus } from "@fortawesome/free-solid-svg-icons";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
@@ -30,19 +26,21 @@ const BeneficiariesView = () => {
   const onSearch = ({ filters = {}, page = 1, capacity = 10 }) => {
     setCurrentFilters(filters);
 
-    return BeneficiaryApi.getAll(filters, page, capacity)
+    return BeneficiaryApi.getAll({
+      filters: { ...filters, "membershipStatuses.status": "Accepted" } as any,
+      page,
+      capacity,
+    })
       .then((res: any) => {
         setBeneficiaries(
-          res.payload
-            .map(
-              ({ contactsBank = {}, housing = {}, status = {}, ...rest }) => ({
-                ...contactsBank,
-                ...housing,
-                ...status,
-                ...rest,
-              })
-            )
-            .filter(({ status = "" }) => status === "Accepted") as any
+          res.payload.map(
+            ({ contactsBank = {}, housing = {}, status = {}, ...rest }) => ({
+              ...contactsBank,
+              ...housing,
+              ...status,
+              ...rest,
+            })
+          )
         );
 
         return res;
@@ -161,39 +159,7 @@ const BeneficiariesView = () => {
     },
   ];
 
-  const statuses = [
-    {
-      value: "New Member",
-      label: t("Auth.MembershipRegistration.Statuses.NewMember"),
-    },
-    {
-      value: "Incomplete",
-      label: t("Auth.MembershipRegistration.Statuses.Incomplete"),
-    },
-    {
-      value: "Need Help",
-      label: t("Auth.MembershipRegistration.Statuses.NeedHelp"),
-    },
-    {
-      value: "Rejected",
-      label: t("Auth.MembershipRegistration.Statuses.Rejected"),
-    },
-    {
-      value: "Accepted",
-      label: t("Auth.MembershipRegistration.Statuses.Accepted"),
-    },
-    {
-      value: "In Preview",
-      label: t("Auth.MembershipRegistration.Statuses.InPreview"),
-    },
-  ];
-
   const filters = [
-    {
-      label: t("Auth.MembershipRegistration.Statuses.Status"),
-      options: statuses,
-      name: "status=>status",
-    },
     {
       label: t("Auth.MembershipRegistration.Form.Nationality.Title"),
       options: nationalities,

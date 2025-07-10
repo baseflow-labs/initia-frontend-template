@@ -1,9 +1,4 @@
-import {
-  faCircle,
-  faEdit,
-  faNewspaper,
-  faXmark,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCircle, faEdit, faNewspaper, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useEffect, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -18,11 +13,7 @@ import TablePage from "../../../layouts/auth/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
 import { viewDayDateFormat } from "../../../utils/consts";
-import {
-  apiCatchGlobalHandler,
-  renderDataFromOptions,
-  statusColorRender,
-} from "../../../utils/function";
+import { apiCatchGlobalHandler, renderDataFromOptions, statusColorRender } from "../../../utils/function";
 
 const VisitsView = () => {
   const { t } = useTranslation();
@@ -44,7 +35,7 @@ const VisitsView = () => {
   const onSearch = ({ filters = {}, page = 1, capacity = 10 }) => {
     setCurrentFilters(filters);
 
-    return VisitApi.getAll(filters, page, capacity)
+    return VisitApi.getAll({ filters, page, capacity })
       .then((res: any) => {
         setVisits(
           res.payload.map(

@@ -8,11 +8,26 @@ import store, { RootState } from "../store/store";
 export const baseURL =
   process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
 
-export interface GetDataProps {
-  filters?: object;
+export interface customFilterProps {
+  field: string;
+  filteredTerm: {
+    dataType: string;
+    value: string;
+  };
+  filterOperator: string;
 }
 
-export const formatGetFilters = (filters = {}) => {
+export interface GetDataProps {
+  filters?: object;
+  page?: number;
+  capacity?: number;
+  customFilters?: customFilterProps[];
+}
+
+export const formatGetFilters = (
+  filters = {},
+  customFilters?: customFilterProps[]
+) => {
   const conditions = Object.keys(filters)
     .filter((key) => (filters as any)[key])
     .map((key) => {
@@ -27,7 +42,7 @@ export const formatGetFilters = (filters = {}) => {
     });
 
   return {
-    conditions: JSON.stringify(conditions),
+    conditions: JSON.stringify([...conditions, ...(customFilters || [])]),
   };
 };
 

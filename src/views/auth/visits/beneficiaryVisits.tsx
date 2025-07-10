@@ -12,11 +12,7 @@ import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import { viewDateFormat, viewDayFormat } from "../../../utils/consts";
-import {
-  apiCatchGlobalHandler,
-  renderDataFromOptions,
-  statusColorRender,
-} from "../../../utils/function";
+import { apiCatchGlobalHandler, renderDataFromOptions, statusColorRender } from "../../../utils/function";
 
 const BeneficiariesVisitsView = () => {
   const { t } = useTranslation();
@@ -35,7 +31,7 @@ const BeneficiariesVisitsView = () => {
   const onSearch = ({ filters = {}, page = 1, capacity = 10 }) => {
     setCurrentFilters(filters);
 
-    return VisitApi.getAll(filters, page, capacity)
+    return VisitApi.getAll({ filters, page, capacity })
       .then((res: any) => {
         setVisits(
           res.payload.map(

@@ -4,11 +4,7 @@ import store, { RootState } from "../../store/store";
 const mainPath = "/aid";
 const { user } = (store.getState() as RootState).auth;
 
-const getAll = async (
-  filters: GetDataProps,
-  page?: number,
-  capacity?: number
-) => {
+const getAll = async ({ filters, page, capacity }: GetDataProps) => {
   const res = await api.get(mainPath, {
     params: { ...formatGetFilters(filters), page, capacity },
   });
