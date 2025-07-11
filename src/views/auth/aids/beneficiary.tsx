@@ -2,27 +2,19 @@ import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
 
 import * as AidApi from "../../../api/aids/aids";
-import Form from "../../../components/form";
-import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/pages/tablePage";
-import { addNotification } from "../../../store/actions/notifications";
-import {
-  getAidStatuses,
-  getAidTypes,
-  getYesNo,
-} from "../../../utils/dataOptions";
+import { getAidStatuses, getAidTypes } from "../../../utils/dataOptions";
 import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
+import RequestAid from "./requestAid";
 
 const AidsBeneficiaryView = () => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
 
   const [openModal, setOpenModal] = useState(false);
   const [currentFilters, setCurrentFilters] = useState({});
@@ -125,43 +117,6 @@ const AidsBeneficiaryView = () => {
     },
   ];
 
-  const requestAidInputs = () => [
-    {
-      type: "select",
-      options: aidTypes,
-      name: "type",
-      label: t("Auth.Aids.AidType"),
-      required: true,
-    },
-    {
-      type: "text",
-      name: "name",
-      label: t("Auth.Aids.AidName"),
-      required: true,
-    },
-    {
-      type: "select",
-      options: getYesNo(t),
-      name: "urgent",
-      label: t("Auth.Aids.Beneficiary.Urgent?"),
-      required: true,
-      halfCol: true,
-    },
-    {
-      type: "file",
-      name: "document",
-      label: t("Global.Form.Labels.SupportingDocument"),
-      required: false,
-      halfCol: true,
-    },
-    {
-      type: "textarea",
-      name: "note",
-      label: t("Auth.Aids.AidPurpose"),
-      required: true,
-    },
-  ];
-
   return (
     <Fragment>
       <TablePage
@@ -176,32 +131,12 @@ const AidsBeneficiaryView = () => {
         }}
       />
 
-      <Modal
-        title={t("Auth.Aids.Beneficiary.RequestAid")}
-        isOpen={openModal}
-        onClose={() => setOpenModal(false)}
-      >
-        <Form
-          inputs={requestAidInputs}
-          submitText={t("Global.Form.Labels.SubmitApplication")}
-          onFormSubmit={(e) => {
-            AidApi.create(e)
-              .then(() => {
-                setOpenModal(false);
-                onSearch({ filters: currentFilters, page: 1, capacity: 10 });
-                dispatch(
-                  addNotification({
-                    msg: t("Global.Form.SuccessMsg", {
-                      action: t("Auth.Aids.Beneficiary.RequestAid"),
-                      data: e.name,
-                    }),
-                  })
-                );
-              })
-              .catch(apiCatchGlobalHandler);
-          }}
-        />
-      </Modal>
+      <RequestAid
+        onSearch={onSearch}
+        currentFilters={currentFilters}
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+      />
     </Fragment>
   );
 };

@@ -14,9 +14,6 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
-import Button from "../../../components/core/button";
-import Form from "../../../components/form";
-import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { logout } from "../../../store/actions/auth";
 import { addNotification } from "../../../store/actions/notifications";
@@ -32,6 +29,7 @@ import {
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
+import RejectApplicant from "./rejectApplicant";
 
 const ApplicantsView = () => {
   const { t } = useTranslation();
@@ -301,50 +299,12 @@ const ApplicantsView = () => {
         }}
       />
 
-      <Modal
-        title={t("Auth.Beneficiaries.Profile.RejectApplication")}
-        onClose={() => setRejectModalOpen(null)}
-        isOpen={!!rejectModalOpen}
-      >
-        <Form
-          inputs={() => [
-            {
-              label: t("Auth.Beneficiaries.Profile.ApplicationRejectReason"),
-              name: "reason",
-              type: "textarea",
-              required: true,
-              rows: 3,
-            },
-          ]}
-          customButtons={
-            <Button
-              outline
-              onClick={() => setRejectModalOpen(null)}
-              className="w-50"
-            >
-              Back
-            </Button>
-          }
-          submitText={t("Auth.Beneficiaries.Profile.RejectApplication")}
-          onFormSubmit={(e) => {
-            BeneficiaryApi.reject(rejectModalOpen || "", e)
-              .then(() => {
-                dispatch(
-                  addNotification({
-                    msg: t("Global.Form.SuccessMsg", {
-                      action: t("Auth.Beneficiaries.Profile.RejectApplication"),
-                      data: beneficiaries.find((b) => b.id === rejectModalOpen)
-                        ?.fullName,
-                    }),
-                  })
-                );
-                onSearch({ filters: {}, page: 1, capacity: 10 });
-                setRejectModalOpen(null);
-              })
-              .catch(apiCatchGlobalHandler);
-          }}
-        />
-      </Modal>
+      <RejectApplicant
+        beneficiaries={beneficiaries}
+        onSearch={onSearch}
+        openModal={rejectModalOpen}
+        setOpenModal={setRejectModalOpen}
+      />
     </Fragment>
   );
 };

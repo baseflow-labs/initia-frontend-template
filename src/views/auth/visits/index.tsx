@@ -12,8 +12,6 @@ import { useNavigate, useSearchParams } from "react-router";
 
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import * as VisitApi from "../../../api/visits/visits";
-import Form from "../../../components/form";
-import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
@@ -25,6 +23,7 @@ import {
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
+import ScheduleVisit from "./scheduleVisit";
 
 const VisitsView = () => {
   const { t } = useTranslation();
@@ -184,14 +183,6 @@ const VisitsView = () => {
     },
   ];
 
-  const onModalClose = () => {
-    setOpenModal(false);
-    if (searchParams.get("id")) {
-      navigate("/visitSchedule");
-      window.location.reload();
-    }
-  };
-
   const cancelVisit = (data: string) => {
     VisitApi.cancel(data)
       .then(() => {
@@ -208,60 +199,6 @@ const VisitsView = () => {
       })
       .catch(apiCatchGlobalHandler);
   };
-
-  const onCrudSuccess = (e: { beneficiary: "" }, action = "") => {
-    onModalClose();
-
-    onSearch({ filters: {}, page: 1, capacity: 10 });
-    dispatch(
-      addNotification({
-        msg: t("Global.Form.SuccessMsg", {
-          action,
-          data: selectOptions.beneficiaries.find(
-            ({ id }) => id === e.beneficiary
-          )?.fullName,
-        }),
-      })
-    );
-  };
-
-  const inputs = () => [
-    {
-      type: "select",
-      options: selectOptions.beneficiaries.map(({ id, fullName }) => ({
-        value: id,
-        label: fullName,
-      })),
-      defaultValue: searchParams.get("id") || "",
-      name: "beneficiary",
-      label: t("Auth.Beneficiaries.BeneficiaryName"),
-      required: true,
-    },
-    {
-      type: "time",
-      name: "time",
-      required: true,
-    },
-    {
-      type: "date",
-      name: "date",
-      required: true,
-    },
-    {
-      type: "radio",
-      options: surprise,
-      name: "surprise",
-      defaultValue: "No",
-      label: t("Auth.Visits.Surprise.Title"),
-      required: true,
-    },
-    {
-      type: "textarea",
-      name: "reason",
-      label: t("Auth.Visits.VisitPurpose"),
-      required: true,
-    },
-  ];
 
   return (
     <Fragment>
@@ -315,32 +252,12 @@ const VisitsView = () => {
         }}
       />
 
-      <Modal
-        title={t("Auth.Visits.AddVisit")}
-        onClose={onModalClose}
-        isOpen={openModal}
-      >
-        {openModal && (
-          <Form
-            inputs={inputs}
-            submitText={t("Global.Form.Labels.Confirm")}
-            initialValues={{ beneficiary: searchParams.get("id") }}
-            onFormSubmit={(e) => {
-              e.id
-                ? VisitApi.update(e)
-                    .then(() => {
-                      onCrudSuccess(e, t("Auth.Visits.EditVisit"));
-                    })
-                    .catch(apiCatchGlobalHandler)
-                : VisitApi.create(e)
-                    .then(() => {
-                      onCrudSuccess(e, t("Auth.Visits.AddVisit"));
-                    })
-                    .catch(apiCatchGlobalHandler);
-            }}
-          />
-        )}
-      </Modal>
+      <ScheduleVisit
+        onSearch={onSearch}
+        selectOptions={selectOptions}
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+      />
     </Fragment>
   );
 };

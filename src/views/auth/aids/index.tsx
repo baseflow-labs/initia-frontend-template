@@ -6,8 +6,6 @@ import { useDispatch } from "react-redux";
 
 import * as AidApi from "../../../api/aids/aids";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
-import Form from "../../../components/form";
-import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import { getAidStatuses, getAidTypes } from "../../../utils/dataOptions";
@@ -16,6 +14,7 @@ import {
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
+import SendAid from "./sendAid";
 
 const AidsView = () => {
   const { t } = useTranslation();
@@ -151,40 +150,6 @@ const AidsView = () => {
     },
   ];
 
-  const grantAidInputs = () => [
-    {
-      type: "select",
-      options: selectOptions.beneficiaries
-        .filter(({ status }) => status.status === "Accepted")
-        .map(({ id, fullName }) => ({
-          value: id,
-          label: fullName,
-        })),
-      name: "beneficiary",
-      label: t("Auth.Beneficiaries.BeneficiaryName"),
-      required: true,
-    },
-    {
-      type: "select",
-      options: aidTypes,
-      name: "type",
-      label: t("Auth.Aids.AidType"),
-      required: true,
-    },
-    {
-      type: "text",
-      name: "name",
-      label: t("Auth.Aids.AidName"),
-      required: true,
-    },
-    {
-      type: "textarea",
-      name: "note",
-      label: t("Global.Form.Labels.Notes"),
-      required: false,
-    },
-  ];
-
   const grantLabel = t("Auth.Aids.Statuses.Grant");
   const rejectLabel = t("Auth.Aids.Statuses.Reject");
 
@@ -253,34 +218,13 @@ const AidsView = () => {
         }}
       />
 
-      <Modal
-        title={t("Auth.Aids.AddAid")}
-        onClose={() => setOpenModal(false)}
-        isOpen={openModal}
-      >
-        <Form
-          inputs={grantAidInputs}
-          submitText={t("Global.Form.Labels.SubmitApplication")}
-          onFormSubmit={(e) => {
-            AidApi.grant(e)
-              .then(() => {
-                setOpenModal(false);
-                onSearch({ filters: currentFilters, page: 1, capacity: 10 });
-                dispatch(
-                  addNotification({
-                    msg: t("Global.Form.SuccessMsg", {
-                      action: t("Auth.Aids.AddAid"),
-                      data: selectOptions.beneficiaries.find(
-                        ({ id }) => id === e.beneficiary
-                      )?.fullName,
-                    }),
-                  })
-                );
-              })
-              .catch(apiCatchGlobalHandler);
-          }}
-        />
-      </Modal>
+      <SendAid
+        onSearch={onSearch}
+        currentFilters={currentFilters}
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+        selectOptions={selectOptions}
+      />
     </Fragment>
   );
 };

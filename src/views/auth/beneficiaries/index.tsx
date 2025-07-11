@@ -5,15 +5,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
-import Button from "../../../components/core/button";
-import Form from "../../../components/form";
-import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/pages/tablePage";
-import { addNotification } from "../../../store/actions/notifications";
 import {
   getBeneficiaryCategories,
   getHomeTypes,
@@ -21,11 +16,11 @@ import {
   getProvinces,
 } from "../../../utils/dataOptions";
 import { apiCatchGlobalHandler } from "../../../utils/function";
+import CancelMembership from "./cancelMembership";
 
 const BeneficiariesView = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const [cancelModalOpen, setCancelModalOpen] = useState<string | null>(null);
   const [beneficiaries, setBeneficiaries] = useState<
@@ -177,57 +172,12 @@ const BeneficiariesView = () => {
         }}
       />
 
-      <Modal
-        title={t("Auth.Beneficiaries.Profile.CancelMembership")}
-        onClose={() => setCancelModalOpen(null)}
-        isOpen={!!cancelModalOpen}
-      >
-        <Form
-          inputs={() => [
-            {
-              label: t("Auth.Beneficiaries.Profile.CancelMembershipReason"),
-              name: "reason",
-              type: "textarea",
-              required: true,
-              belowComp: (
-                <div>
-                  <small className="text-info">
-                    {t("Auth.Beneficiaries.Profile.CancelMembershipNote")}
-                  </small>
-                </div>
-              ),
-              rows: 3,
-            },
-          ]}
-          customButtons={
-            <Button
-              outline
-              onClick={() => setCancelModalOpen(null)}
-              className="w-50"
-            >
-              Back
-            </Button>
-          }
-          submitText={t("Auth.Beneficiaries.Profile.CancelMembership")}
-          onFormSubmit={(e) => {
-            BeneficiaryApi.cancel(cancelModalOpen || "", e)
-              .then(() => {
-                dispatch(
-                  addNotification({
-                    msg: t("Global.Form.SuccessMsg", {
-                      action: t("Auth.Beneficiaries.Profile.CancelMembership"),
-                      data: beneficiaries.find((b) => b.id === cancelModalOpen)
-                        ?.fullName,
-                    }),
-                  })
-                );
-                onSearch({ filters: {}, page: 1, capacity: 10 });
-                setCancelModalOpen(null);
-              })
-              .catch(apiCatchGlobalHandler);
-          }}
-        />
-      </Modal>
+      <CancelMembership
+        beneficiaries={beneficiaries}
+        modelOpen={cancelModalOpen}
+        setModalOpen={setCancelModalOpen}
+        onSearch={onSearch}
+      />
     </Fragment>
   );
 };

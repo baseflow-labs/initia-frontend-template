@@ -2,19 +2,15 @@ import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
 
 import { GetDataProps } from "../../../api";
 import * as ResearcherApi from "../../../api/staff/researcher";
-import Form from "../../../components/form";
-import Modal from "../../../components/modal";
 import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
-import { addNotification } from "../../../store/actions/notifications";
 import { apiCatchGlobalHandler } from "../../../utils/function";
+import AddStaff from "./addStaff";
 
 const ResearcherMgmtPage = () => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
 
   const [openModal, setOpenModal] = useState<Object | undefined>(undefined);
   const [researchers, setResearchers] = useState<
@@ -149,72 +145,11 @@ const ResearcherMgmtPage = () => {
           )}
         </div>
 
-        <Modal
-          title={t("Auth.Researchers.AddResearcher")}
-          onClose={() => setOpenModal(undefined)}
-          isOpen={!!openModal}
-        >
-          <Form
-            inputs={() => [
-              {
-                label: t("Auth.Researchers.ResearcherName"),
-                name: "name",
-                type: "text",
-                required: true,
-              },
-              {
-                label: t("Global.Form.Label.PhoneNumber"),
-                name: "username",
-                type: "phoneNumber",
-                required: true,
-              },
-              {
-                label: t("Auth.MembershipRegistration.Form.IdNumber"),
-                name: "idNumber",
-                type: "numberText",
-                minLength: 10,
-                maxLength: 10,
-                required: true,
-              },
-              {
-                label: t("Global.Form.Label.Email"),
-                name: "email",
-                type: "email",
-                required: true,
-              },
-              // {
-              //   label: t("Auth.Researchers.AddProfilePhoto"),
-              //   name: "photo",
-              //   type: "file",
-              //   required: false,
-              // },
-            ]}
-            submitText={t("Auth.Researchers.AddResearcher")}
-            onFormSubmit={(e) => {
-              ResearcherApi.create({
-                ...e,
-                role: "researcher",
-                password: e.username,
-                passwordConfirmation: e.username,
-                code: "654321",
-              })
-                .then(() => {
-                  dispatch(
-                    addNotification({
-                      msg: t("Global.Form.SuccessMsg", {
-                        action: t("Auth.Researchers.AddResearcher"),
-                        data: e.name,
-                      }),
-                    })
-                  );
-                  getData({});
-                  setOpenModal(undefined);
-                })
-                .catch(apiCatchGlobalHandler);
-            }}
-            initialValues={openModal}
-          />
-        </Modal>
+        <AddStaff
+          openModal={openModal}
+          setOpenModal={setOpenModal}
+          getData={getData}
+        />
       </Fragment>
     </PageTemplate>
   );
