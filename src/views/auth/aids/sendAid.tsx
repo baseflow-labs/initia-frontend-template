@@ -5,8 +5,9 @@ import * as AidApi from "../../../api/aids/aids";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import { addNotification } from "../../../store/actions/notifications";
-import { getAidTypes } from "../../../utils/optionDataLists/aids";
+import { getGrantAidInputs } from "../../../utils/formInputs/aids";
 import { apiCatchGlobalHandler } from "../../../utils/function";
+import { getAidTypes } from "../../../utils/optionDataLists/aids";
 
 interface Props {
   onSearch: (p: Object) => void;
@@ -31,41 +32,6 @@ const SendAid = ({
 }: Props) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const aidTypes = getAidTypes(t);
-
-  const grantAidInputs = () => [
-    {
-      type: "select",
-      options: selectOptions.beneficiaries
-        .filter(({ status }) => status.status === "Accepted")
-        .map(({ id, fullName }) => ({
-          value: id,
-          label: fullName,
-        })),
-      name: "beneficiary",
-      label: t("Auth.Beneficiaries.BeneficiaryName"),
-      required: true,
-    },
-    {
-      type: "select",
-      options: aidTypes,
-      name: "type",
-      label: t("Auth.Aids.AidType"),
-      required: true,
-    },
-    {
-      type: "text",
-      name: "name",
-      label: t("Auth.Aids.AidName"),
-      required: true,
-    },
-    {
-      type: "textarea",
-      name: "note",
-      label: t("Global.Form.Labels.Notes"),
-      required: false,
-    },
-  ];
 
   return (
     <Modal
@@ -74,7 +40,7 @@ const SendAid = ({
       isOpen={openModal}
     >
       <Form
-        inputs={grantAidInputs}
+        inputs={() => getGrantAidInputs(t, getAidTypes(t), selectOptions)}
         submitText={t("Global.Form.Labels.SubmitApplication")}
         onFormSubmit={(e) => {
           AidApi.grant(e)

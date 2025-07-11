@@ -5,9 +5,9 @@ import * as AidApi from "../../../api/aids/aids";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import { addNotification } from "../../../store/actions/notifications";
-import { getAidTypes } from "../../../utils/optionDataLists/aids";
+import { getRequestAidInputs } from "../../../utils/formInputs/aids";
 import { apiCatchGlobalHandler } from "../../../utils/function";
-import { getYesNo } from "../../../utils/optionDataLists/common";
+import { getAidTypes } from "../../../utils/optionDataLists/aids";
 
 interface Props {
   onSearch: (p: Object) => void;
@@ -27,43 +27,6 @@ const RequestAid = ({
 
   const aidTypes = getAidTypes(t);
 
-  const requestAidInputs = () => [
-    {
-      type: "select",
-      options: aidTypes,
-      name: "type",
-      label: t("Auth.Aids.AidType"),
-      required: true,
-    },
-    {
-      type: "text",
-      name: "name",
-      label: t("Auth.Aids.AidName"),
-      required: true,
-    },
-    {
-      type: "select",
-      options: getYesNo(t),
-      name: "urgent",
-      label: t("Auth.Aids.Beneficiary.Urgent?"),
-      required: true,
-      halfCol: true,
-    },
-    {
-      type: "file",
-      name: "document",
-      label: t("Global.Form.Labels.SupportingDocument"),
-      required: false,
-      halfCol: true,
-    },
-    {
-      type: "textarea",
-      name: "note",
-      label: t("Auth.Aids.AidPurpose"),
-      required: true,
-    },
-  ];
-
   return (
     <Modal
       title={t("Auth.Aids.Beneficiary.RequestAid")}
@@ -71,7 +34,7 @@ const RequestAid = ({
       onClose={() => setOpenModal(false)}
     >
       <Form
-        inputs={requestAidInputs}
+        inputs={() => getRequestAidInputs(t, aidTypes)}
         submitText={t("Global.Form.Labels.SubmitApplication")}
         onFormSubmit={(e) => {
           AidApi.create(e)
