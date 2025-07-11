@@ -21,17 +21,17 @@ import TablePage from "../../../layouts/auth/pages/tablePage";
 import { logout } from "../../../store/actions/auth";
 import { addNotification } from "../../../store/actions/notifications";
 import {
-  apiCatchGlobalHandler,
-  renderDataFromOptions,
-  statusColorRender,
-} from "../../../utils/function";
-import {
   getBeneficiaryCategories,
   getBeneficiaryStatuses,
   getHomeTypes,
   getNationalities,
   getProvinces,
 } from "../../../utils/dataOptions";
+import {
+  apiCatchGlobalHandler,
+  renderDataFromOptions,
+  statusColorRender,
+} from "../../../utils/function";
 
 const ApplicantsView = () => {
   const { t } = useTranslation();

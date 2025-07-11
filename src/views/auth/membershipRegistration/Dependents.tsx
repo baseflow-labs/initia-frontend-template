@@ -18,7 +18,6 @@ import Form from "../../../components/form";
 import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
 import { dataDateFormat } from "../../../utils/consts";
-import { apiCatchGlobalHandler } from "../../../utils/function";
 import {
   getAgeGroups,
   getDependentRelations,
@@ -27,6 +26,7 @@ import {
   getHealthStatuses,
   getYesNo,
 } from "../../../utils/dataOptions";
+import { apiCatchGlobalHandler } from "../../../utils/function";
 
 interface Props {
   customButtons: React.ReactNode;

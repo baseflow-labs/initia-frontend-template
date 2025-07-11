@@ -11,7 +11,6 @@ import Button from "../../../components/core/button";
 import { InputSingleProps } from "../../../components/form";
 import { dataRender } from "../../../components/table";
 import { dataDateFormat } from "../../../utils/consts";
-import { apiCatchGlobalHandler } from "../../../utils/function";
 import {
   getAgeGroups,
   getBeneficiaryCategories,
@@ -29,6 +28,7 @@ import {
   getSocialStatuses,
   getYesNo,
 } from "../../../utils/dataOptions";
+import { apiCatchGlobalHandler } from "../../../utils/function";
 
 const BeneficiaryProfileView = () => {
   const { t } = useTranslation();

@@ -6,12 +6,11 @@ import { useDispatch } from "react-redux";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import * as DataReviewApi from "../../../api/profile/dataReview";
 import * as DataUpdateApi from "../../../api/profile/dataUpdate";
+import CardComp from "../../../components/card/card";
 import Form, { InputSingleProps } from "../../../components/form";
 import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
 import { dataDateFormat } from "../../../utils/consts";
-import { apiCatchGlobalHandler } from "../../../utils/function";
-import CardComp from "../../../components/card/card";
 import {
   getBeneficiaryCategories,
   getDiseases,
@@ -27,6 +26,7 @@ import {
   getSocialStatuses,
   getYesNo,
 } from "../../../utils/dataOptions";
+import { apiCatchGlobalHandler } from "../../../utils/function";
 
 const BeneficiaryOwnProfile = () => {
   const { t } = useTranslation();

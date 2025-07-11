@@ -12,15 +12,15 @@ import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import {
-  apiCatchGlobalHandler,
-  renderDataFromOptions,
-  statusColorRender,
-} from "../../../utils/function";
-import {
   getBeneficiaryCategories,
   getBeneficiaryStatuses,
   getNationalities,
 } from "../../../utils/dataOptions";
+import {
+  apiCatchGlobalHandler,
+  renderDataFromOptions,
+  statusColorRender,
+} from "../../../utils/function";
 
 const ApplicantsViewForSupervisor = () => {
   const { t } = useTranslation();

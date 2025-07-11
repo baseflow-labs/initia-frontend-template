@@ -12,12 +12,12 @@ import profilePhotoPlaceholder from "../../../assets/images/profile-image-placeh
 import DashboardCard from "../../../components/card/dashboardCard";
 import { Notification } from "../../../layouts/auth/navs/dashboardNavbar";
 import { useAppSelector } from "../../../store/hooks";
+import { getBeneficiaryStatuses } from "../../../utils/dataOptions";
 import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
-import { getBeneficiaryStatuses } from "../../../utils/dataOptions";
 
 const DashboardView = () => {
   const { t } = useTranslation();

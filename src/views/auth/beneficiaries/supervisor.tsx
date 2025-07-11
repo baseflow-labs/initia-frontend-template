@@ -11,13 +11,13 @@ import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
-import { apiCatchGlobalHandler } from "../../../utils/function";
 import {
   getBeneficiaryCategories,
   getHomeTypes,
   getNationalities,
   getProvinces,
 } from "../../../utils/dataOptions";
+import { apiCatchGlobalHandler } from "../../../utils/function";
 
 const BeneficiariesViewForSupervisor = () => {
   const { t } = useTranslation();

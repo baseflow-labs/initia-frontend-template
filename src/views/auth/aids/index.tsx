@@ -10,12 +10,12 @@ import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
+import { getAidStatuses, getAidTypes } from "../../../utils/dataOptions";
 import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
-import { getAidStatuses, getAidTypes } from "../../../utils/dataOptions";
 
 const AidsView = () => {
   const { t } = useTranslation();

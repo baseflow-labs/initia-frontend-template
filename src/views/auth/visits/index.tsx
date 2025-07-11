@@ -18,13 +18,13 @@ import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
 import { viewDayDateFormat } from "../../../utils/consts";
+import { getVisitStatuses } from "../../../utils/dataOptions";
 import {
   apiCatchGlobalHandler,
   booleanColorRender,
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
-import { getVisitStatuses } from "../../../utils/dataOptions";
 
 const VisitsView = () => {
   const { t } = useTranslation();

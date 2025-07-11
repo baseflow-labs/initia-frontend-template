@@ -12,12 +12,12 @@ import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import { viewDateFormat, viewDayFormat } from "../../../utils/consts";
+import { getVisitStatuses } from "../../../utils/dataOptions";
 import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
-import { getVisitStatuses } from "../../../utils/dataOptions";
 
 const BeneficiariesVisitsView = () => {
   const { t } = useTranslation();

@@ -9,11 +9,11 @@ import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import Button from "../../../components/core/button";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
+import BoxedPage from "../../../layouts/auth/pages/boxedPage";
 import { addNotification } from "../../../store/actions/notifications";
 import { setFontSize, setMetadata } from "../../../store/actions/settings";
 import { useAppSelector } from "../../../store/hooks";
 import { apiCatchGlobalHandler } from "../../../utils/function";
-import BoxedPage from "../../../layouts/auth/pages/boxedPage";
 
 const SettingsPage = () => {
   const { t } = useTranslation();

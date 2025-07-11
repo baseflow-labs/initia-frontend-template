@@ -25,8 +25,6 @@ import Form from "../../../components/form";
 import WizardFormStepper from "../../../components/form/wizard/stepper";
 import { addNotification } from "../../../store/actions/notifications";
 import { dataDateFormat } from "../../../utils/consts";
-import { apiCatchGlobalHandler } from "../../../utils/function";
-import DependentsFormView from "./Dependents";
 import {
   getDiseases,
   getEducationLevels,
@@ -41,6 +39,8 @@ import {
   getSocialStatuses,
   getYesNo,
 } from "../../../utils/dataOptions";
+import { apiCatchGlobalHandler } from "../../../utils/function";
+import DependentsFormView from "./Dependents";
 
 const MembershipRegistrationView = () => {
   const { t } = useTranslation();
