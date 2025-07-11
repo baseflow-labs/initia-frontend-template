@@ -23,7 +23,7 @@ const AidsBeneficiaryView = () => {
   const [currentFilters, setCurrentFilters] = useState({});
   const [aids, setAids] = useState([]);
 
-  const onSearch = ({ filters = {}, page = 1, capacity = 10 }) => {
+  const getData = ({ filters = {}, page = 1, capacity = 10 }) => {
     setCurrentFilters(filters);
 
     return AidApi.getAll({ filters, page, capacity })
@@ -42,7 +42,7 @@ const AidsBeneficiaryView = () => {
   };
 
   useLayoutEffect(() => {
-    onSearch({ filters: currentFilters, page: 1, capacity: 10 });
+    getData({ filters: currentFilters, page: 1, capacity: 10 });
   }, []);
 
   const aidTypes = getAidTypes(t);
@@ -128,14 +128,14 @@ const AidsBeneficiaryView = () => {
         actionButtons={actionButtons}
         columns={columns}
         data={aids}
-        onSearch={onSearch}
+        onGetData={getData}
         onPageChange={(page, capacity) => {
-          onSearch({ filters: currentFilters, page, capacity });
+          getData({ filters: currentFilters, page, capacity });
         }}
       />
 
       <RequestAid
-        onSearch={onSearch}
+        onGetData={getData}
         currentFilters={currentFilters}
         openModal={openModal}
         setOpenModal={setOpenModal}

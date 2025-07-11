@@ -11,12 +11,12 @@ import { getApplicantsRejectionInputs } from "../../../utils/formInputs/benefici
 
 const RejectApplicant = ({
   beneficiaries,
-  onSearch,
+  onGetData,
   openModal,
   setOpenModal,
 }: {
   beneficiaries: { id: string; status: string; fullName: string }[];
-  onSearch: (t: Object) => void;
+  onGetData: (t: Object) => void;
   openModal: string | null;
   setOpenModal: (t: string | null) => void;
 }) => {
@@ -49,7 +49,7 @@ const RejectApplicant = ({
                   }),
                 })
               );
-              onSearch({ filters: {}, page: 1, capacity: 10 });
+              onGetData({ filters: {}, page: 1, capacity: 10 });
               setOpenModal(null);
             })
             .catch(apiCatchGlobalHandler);

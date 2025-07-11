@@ -10,14 +10,14 @@ import { apiCatchGlobalHandler } from "../../../utils/function";
 import { getAidTypes } from "../../../utils/optionDataLists/aids";
 
 interface Props {
-  onSearch: (p: Object) => void;
+  onGetData: (p: Object) => void;
   currentFilters: Object;
   openModal: boolean;
   setOpenModal: (s: boolean) => void;
 }
 
 const RequestAid = ({
-  onSearch,
+  onGetData,
   currentFilters,
   openModal,
   setOpenModal,
@@ -40,7 +40,7 @@ const RequestAid = ({
           AidApi.create(e)
             .then(() => {
               setOpenModal(false);
-              onSearch({ filters: currentFilters, page: 1, capacity: 10 });
+              onGetData({ filters: currentFilters, page: 1, capacity: 10 });
               dispatch(
                 addNotification({
                   msg: t("Global.Form.SuccessMsg", {

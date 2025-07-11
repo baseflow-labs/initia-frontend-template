@@ -47,7 +47,7 @@ const ResearcherMgmtPage = () => {
           onClick: () => setOpenModal({}),
         },
       ]}
-      onSearch={(values) => console.log(values)}
+      onGetData={(values) => console.log(values)}
     >
       <Fragment>
         <div className="row g-5 justify-content-center">

@@ -32,7 +32,7 @@ const BeneficiariesViewForSupervisor = () => {
   >([]);
   const [currentFilters, setCurrentFilters] = useState({});
 
-  const onSearch = ({ filters = {}, page = 1, capacity = 10 }) => {
+  const getData = ({ filters = {}, page = 1, capacity = 10 }) => {
     setCurrentFilters(filters);
 
     return BeneficiaryApi.getAll({
@@ -58,7 +58,7 @@ const BeneficiariesViewForSupervisor = () => {
   };
 
   useLayoutEffect(() => {
-    onSearch({ filters: {}, page: 1, capacity: 10 });
+    getData({ filters: {}, page: 1, capacity: 10 });
 
     StaffApi.getAll({})
       .then((res: any) => {
@@ -176,9 +176,9 @@ const BeneficiariesViewForSupervisor = () => {
             onClick: (data: string) => setCancelModalOpen(data),
           },
         ]}
-        onSearch={onSearch}
+        onGetData={getData}
         onPageChange={(page, capacity) => {
-          onSearch({ filters: currentFilters, page, capacity });
+          getData({ filters: currentFilters, page, capacity });
         }}
       />
 
@@ -186,13 +186,13 @@ const BeneficiariesViewForSupervisor = () => {
         beneficiaries={beneficiaries}
         modelOpen={cancelModalOpen}
         setModalOpen={setCancelModalOpen}
-        onSearch={onSearch}
+        onGetData={getData}
       />
 
       <AssignResearcher
         beneficiaries={beneficiaries}
         researchers={researchers}
-        onSearch={onSearch}
+        onGetData={getData}
         openModal={assignResearcherModalOpen}
         setOpenModal={setAssignResearcherModalOpen}
       />

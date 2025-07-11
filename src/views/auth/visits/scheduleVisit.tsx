@@ -11,7 +11,7 @@ import { apiCatchGlobalHandler } from "../../../utils/function";
 import { getVisitScheduleInputs } from "../../../utils/formInputs/visits";
 
 interface Props {
-  onSearch: (p: Object) => void;
+  onGetData: (p: Object) => void;
   openModal: boolean;
   setOpenModal: (s: boolean) => void;
   selectOptions: {
@@ -23,7 +23,7 @@ interface Props {
 }
 
 const ScheduleVisit = ({
-  onSearch,
+  onGetData,
   selectOptions,
   openModal,
   setOpenModal,
@@ -50,7 +50,7 @@ const ScheduleVisit = ({
   const onCrudSuccess = (e: { beneficiary: "" }, action = "") => {
     onModalClose();
 
-    onSearch({ filters: {}, page: 1, capacity: 10 });
+    onGetData({ filters: {}, page: 1, capacity: 10 });
     dispatch(
       addNotification({
         msg: t("Global.Form.SuccessMsg", {

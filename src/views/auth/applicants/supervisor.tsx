@@ -42,7 +42,7 @@ const ApplicantsViewForSupervisor = () => {
   >(undefined);
   const [currentFilters, setCurrentFilters] = useState({});
 
-  const onSearch = ({ filters = {}, page = 1, capacity = 10 }) => {
+  const getData = ({ filters = {}, page = 1, capacity = 10 }) => {
     setCurrentFilters(filters);
 
     const customFilters = [
@@ -85,7 +85,7 @@ const ApplicantsViewForSupervisor = () => {
   };
 
   useLayoutEffect(() => {
-    onSearch({ filters: {}, page: 1, capacity: 10 });
+    getData({ filters: {}, page: 1, capacity: 10 });
 
     StaffApi.getAll({})
       .then((res: any) => {
@@ -202,7 +202,7 @@ const ApplicantsViewForSupervisor = () => {
             })
           );
 
-          onSearch({ filters: {}, page: 1, capacity: 10 });
+          getData({ filters: {}, page: 1, capacity: 10 });
         });
   };
 
@@ -237,16 +237,16 @@ const ApplicantsViewForSupervisor = () => {
             onClick: (data: string) => deleteBeneficiary(data),
           },
         ]}
-        onSearch={onSearch}
+        onGetData={getData}
         onPageChange={(page, capacity) => {
-          onSearch({ filters: currentFilters, page, capacity });
+          getData({ filters: currentFilters, page, capacity });
         }}
       />
 
       <AssignResearcher
         beneficiaries={beneficiaries}
         researchers={researchers}
-        onSearch={onSearch}
+        onGetData={getData}
         openModal={assignResearcherModalOpen}
         setOpenModal={setAssignResearcherModalOpen}
       />

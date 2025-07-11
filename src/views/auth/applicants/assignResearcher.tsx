@@ -11,7 +11,7 @@ import { getAssignResearcherInputs } from "../../../utils/formInputs/beneficiari
 const AssignResearcher = ({
   beneficiaries,
   researchers,
-  onSearch,
+  onGetData,
   openModal,
   setOpenModal,
 }: {
@@ -22,7 +22,7 @@ const AssignResearcher = ({
     staff?: { id: string };
   }[];
   researchers: { id: string; status: string; fullName: string }[];
-  onSearch: (t: Object) => void;
+  onGetData: (t: Object) => void;
   openModal: { beneficiary: string; staff: string } | undefined;
   setOpenModal: (t: { beneficiary: string; staff: string } | undefined) => void;
 }) => {
@@ -67,7 +67,7 @@ const AssignResearcher = ({
                     }),
                   })
                 );
-                onSearch({ filters: {}, page: 1, capacity: 10 });
+                onGetData({ filters: {}, page: 1, capacity: 10 });
                 setOpenModal(undefined);
               })
               .catch(apiCatchGlobalHandler);

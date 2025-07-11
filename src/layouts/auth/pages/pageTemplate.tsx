@@ -8,6 +8,7 @@ import Button from "../../../components/core/button";
 import SelectInput from "../../../components/form/inputs/select";
 import SelectManyInput from "../../../components/form/inputs/selectMany";
 import { columnsWidth } from "../../../utils/function";
+import DashboardNavbar from "../navs/dashboardNavbar";
 
 interface Props {
   title: string;
@@ -18,7 +19,7 @@ interface Props {
     multi?: boolean;
   }[];
   actionButtons?: { label: string; className?: string; onClick?: () => void }[];
-  onSearch?: (values: {}) => void;
+  onGetData?: (values: {}) => void;
   children: React.ReactNode;
 }
 
@@ -26,7 +27,7 @@ const PageTemplate = ({
   title,
   filters,
   actionButtons,
-  onSearch,
+  onGetData,
   children,
 }: Props) => {
   const initialValues =
@@ -39,10 +40,10 @@ const PageTemplate = ({
     initialValues,
     enableReinitialize: true,
     onSubmit: (values) => {
-      onSearch?.(values);
+      onGetData?.(values);
     },
     onReset: () => {
-      onSearch?.(initialValues);
+      onGetData?.(initialValues);
     },
   });
 

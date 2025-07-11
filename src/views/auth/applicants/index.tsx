@@ -42,7 +42,7 @@ const ApplicantsView = () => {
   const [rejectModalOpen, setRejectModalOpen] = useState<string | null>(null);
   const [currentFilters, setCurrentFilters] = useState({});
 
-  const onSearch = ({ filters = {}, page = 1, capacity = 10 }) => {
+  const getData = ({ filters = {}, page = 1, capacity = 10 }) => {
     setCurrentFilters(filters);
 
     const customFilters = [
@@ -77,7 +77,7 @@ const ApplicantsView = () => {
   };
 
   useLayoutEffect(() => {
-    onSearch({ filters: {}, page: 1, capacity: 10 });
+    getData({ filters: {}, page: 1, capacity: 10 });
   }, []);
 
   const nationalities = getNationalities(t);
@@ -199,7 +199,7 @@ const ApplicantsView = () => {
             })
           );
 
-          onSearch({ filters: {}, page: 1, capacity: 10 });
+          getData({ filters: {}, page: 1, capacity: 10 });
         });
   };
 
@@ -281,7 +281,7 @@ const ApplicantsView = () => {
                         }),
                       })
                     );
-                    onSearch({ filters: {}, page: 1, capacity: 10 });
+                    getData({ filters: {}, page: 1, capacity: 10 });
                     setRejectModalOpen(null);
                   })
                   .catch(apiCatchGlobalHandler),
@@ -293,15 +293,15 @@ const ApplicantsView = () => {
             },
           ];
         }}
-        onSearch={onSearch}
+        onGetData={getData}
         onPageChange={(page, capacity) => {
-          onSearch({ filters: currentFilters, page, capacity });
+          getData({ filters: currentFilters, page, capacity });
         }}
       />
 
       <RejectApplicant
         beneficiaries={beneficiaries}
-        onSearch={onSearch}
+        onGetData={getData}
         openModal={rejectModalOpen}
         setOpenModal={setRejectModalOpen}
       />

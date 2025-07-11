@@ -42,7 +42,7 @@ const VisitsView = () => {
   >([]);
   const [currentFilters, setCurrentFilters] = useState({});
 
-  const onSearch = ({ filters = {}, page = 1, capacity = 10 }) => {
+  const getData = ({ filters = {}, page = 1, capacity = 10 }) => {
     setCurrentFilters(filters);
 
     return VisitApi.getAll({ filters, page, capacity })
@@ -72,7 +72,7 @@ const VisitsView = () => {
   };
 
   useLayoutEffect(() => {
-    onSearch({ filters: {}, page: 1, capacity: 10 });
+    getData({ filters: {}, page: 1, capacity: 10 });
 
     BeneficiaryApi.getAll({})
       .then((res: any) =>
@@ -186,7 +186,7 @@ const VisitsView = () => {
   const cancelVisit = (data: string) => {
     VisitApi.cancel(data)
       .then(() => {
-        onSearch({ filters: {}, page: 1, capacity: 10 });
+        getData({ filters: {}, page: 1, capacity: 10 });
         dispatch(
           addNotification({
             msg: t("Global.Form.SuccessMsg", {
@@ -246,14 +246,14 @@ const VisitsView = () => {
         actionButtons={user.role !== "hod" ? actionButtons : undefined}
         columns={columns}
         data={visits}
-        onSearch={onSearch}
+        onGetData={getData}
         onPageChange={(page, capacity) => {
-          onSearch({ filters: currentFilters, page, capacity });
+          getData({ filters: currentFilters, page, capacity });
         }}
       />
 
       <ScheduleVisit
-        onSearch={onSearch}
+        onGetData={getData}
         selectOptions={selectOptions}
         openModal={openModal}
         setOpenModal={setOpenModal}

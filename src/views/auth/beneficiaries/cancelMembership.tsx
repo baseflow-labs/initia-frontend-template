@@ -12,14 +12,14 @@ interface Props {
   beneficiaries: { id: string; status: string; fullName: string }[];
   modelOpen: string | null;
   setModalOpen: (t: string | null) => void;
-  onSearch: (t: Object) => void;
+  onGetData: (t: Object) => void;
 }
 
 const CancelMembership = ({
   beneficiaries,
   modelOpen,
   setModalOpen,
-  onSearch,
+  onGetData,
 }: Props) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -65,7 +65,7 @@ const CancelMembership = ({
                   }),
                 })
               );
-              onSearch({ filters: {}, page: 1, capacity: 10 });
+              onGetData({ filters: {}, page: 1, capacity: 10 });
               setModalOpen(null);
             })
             .catch(apiCatchGlobalHandler);

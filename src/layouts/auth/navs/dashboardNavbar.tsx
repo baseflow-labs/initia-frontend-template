@@ -47,7 +47,7 @@ const DashboardNavbar = () => {
   }, []);
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-white py-4 mt-2 me-4 ms-0 ps-0">
+    <nav className="navbar navbar-expand-lg navbar-light bg-white py-4 mt-2 me-4 ms-0 ps-0 mb-3">
       <div className="row w-100 justify-content-between">
         <div className="col-6 col-lg-1 d-block d-lg-none order-1 order-lg-3">
           <button

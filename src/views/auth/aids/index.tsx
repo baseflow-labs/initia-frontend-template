@@ -32,7 +32,7 @@ const AidsView = () => {
   });
   const [currentFilters, setCurrentFilters] = useState({});
 
-  const onSearch = ({ filters = {}, page = 1, capacity = 10 }) => {
+  const getData = ({ filters = {}, page = 1, capacity = 10 }) => {
     setCurrentFilters(filters);
 
     return AidApi.getAll({ filters, page, capacity })
@@ -53,7 +53,7 @@ const AidsView = () => {
   };
 
   useLayoutEffect(() => {
-    onSearch({ filters: {}, page: 1, capacity: 10 });
+    getData({ filters: {}, page: 1, capacity: 10 });
 
     BeneficiaryApi.getAll({})
       .then((res: any) =>
@@ -160,7 +160,7 @@ const AidsView = () => {
     AidApi.updateStatus(id, status)
       .then(() => {
         const aid = aids.find((aid) => aid.id === id);
-        onSearch({ filters: currentFilters, page: 1, capacity: 10 });
+        getData({ filters: currentFilters, page: 1, capacity: 10 });
         dispatch(
           addNotification({
             msg: t("Global.Form.SuccessMsg", {
@@ -207,7 +207,7 @@ const AidsView = () => {
               )?.beneficiaryId;
 
               setCurrentFilters({ beneficiary });
-              onSearch({ filters: { beneficiary } });
+              getData({ filters: { beneficiary } });
             },
           });
 
@@ -215,14 +215,14 @@ const AidsView = () => {
         }}
         columns={columns}
         data={aids}
-        onSearch={onSearch}
+        onGetData={getData}
         onPageChange={(page, capacity) => {
-          onSearch({ filters: currentFilters, page, capacity });
+          getData({ filters: currentFilters, page, capacity });
         }}
       />
 
       <SendAid
-        onSearch={onSearch}
+        onGetData={getData}
         currentFilters={currentFilters}
         openModal={openModal}
         setOpenModal={setOpenModal}

@@ -19,7 +19,7 @@ const BeneficiariesVisitsView = () => {
   const [visits, setVisits] = useState([]);
   const [currentFilters, setCurrentFilters] = useState({});
 
-  const onSearch = ({ filters = {}, page = 1, capacity = 10 }) => {
+  const getData = ({ filters = {}, page = 1, capacity = 10 }) => {
     setCurrentFilters(filters);
 
     return VisitApi.getAll({ filters, page, capacity })
@@ -49,7 +49,7 @@ const BeneficiariesVisitsView = () => {
   };
 
   useLayoutEffect(() => {
-    onSearch({ filters: {}, page: 1, capacity: 10 });
+    getData({ filters: {}, page: 1, capacity: 10 });
   }, []);
 
   const statuses = getVisitStatuses(t);
@@ -120,9 +120,9 @@ const BeneficiariesVisitsView = () => {
       // ]}
       columns={columns}
       data={visits}
-      onSearch={onSearch}
+      onGetData={getData}
       onPageChange={(page, capacity) => {
-        onSearch({ filters: currentFilters, page, capacity });
+        getData({ filters: currentFilters, page, capacity });
       }}
     />
   );

@@ -28,7 +28,7 @@ const BeneficiariesView = () => {
   >([]);
   const [currentFilters, setCurrentFilters] = useState({});
 
-  const onSearch = ({ filters = {}, page = 1, capacity = 10 }) => {
+  const getData = ({ filters = {}, page = 1, capacity = 10 }) => {
     setCurrentFilters(filters);
 
     return BeneficiaryApi.getAll({
@@ -54,7 +54,7 @@ const BeneficiariesView = () => {
   };
 
   useLayoutEffect(() => {
-    onSearch({ filters: {}, page: 1, capacity: 10 });
+    getData({ filters: {}, page: 1, capacity: 10 });
   }, []);
 
   const nationalities = getNationalities(t);
@@ -166,9 +166,9 @@ const BeneficiariesView = () => {
             onClick: (data: string) => setCancelModalOpen(data),
           },
         ]}
-        onSearch={onSearch}
+        onGetData={getData}
         onPageChange={(page, capacity) => {
-          onSearch({ filters: currentFilters, page, capacity });
+          getData({ filters: currentFilters, page, capacity });
         }}
       />
 
@@ -176,7 +176,7 @@ const BeneficiariesView = () => {
         beneficiaries={beneficiaries}
         modelOpen={cancelModalOpen}
         setModalOpen={setCancelModalOpen}
-        onSearch={onSearch}
+        onGetData={getData}
       />
     </Fragment>
   );
