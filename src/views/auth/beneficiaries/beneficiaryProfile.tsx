@@ -17,6 +17,7 @@ import {
   getNationalRecordDataInputs,
 } from "../../../utils/formInputs/beneficiaryProfile";
 import { apiCatchGlobalHandler } from "../../../utils/function";
+import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
 
 const BeneficiaryOwnProfile = () => {
   const { t } = useTranslation();
@@ -143,58 +144,59 @@ const BeneficiaryOwnProfile = () => {
   };
 
   return (
-    <div className="row">
-      <div className="col-lg-12 mb-4">
-        <h3>{t("Auth.Beneficiary.Profile.Title")}</h3>
-      </div>
+    <PageTemplate>
+      <div className="row">
+        <div className="col-lg-12 mb-4">
+          <h3>{t("Auth.Beneficiary.Profile.Title")}</h3>
+        </div>
 
-      <div className="col-lg-12 mb-4 row">
-        <h5 className="mb-4">
-          {dataReviews?.length
-            ? t("Auth.Beneficiary.Profile.PleaseUpdateFollowingData")
-            : t("Auth.Beneficiary.Profile.NoDataUpdate")}
-        </h5>
+        <div className="col-lg-12 mb-4 row">
+          <h5 className="mb-4">
+            {dataReviews?.length
+              ? t("Auth.Beneficiary.Profile.PleaseUpdateFollowingData")
+              : t("Auth.Beneficiary.Profile.NoDataUpdate")}
+          </h5>
 
-        {dataReviews?.map(({ id, table, property, row, note }, i) => {
-          const requestTable = mapping.find(
-            ({ table: mapTable }) => mapTable === table
-          );
+          {dataReviews?.map(({ id, table, property, row, note }, i) => {
+            const requestTable = mapping.find(
+              ({ table: mapTable }) => mapTable === table
+            );
 
-          const requestProperty = requestTable?.inputs.find(
-            ({ name }) => name === property
-          );
+            const requestProperty = requestTable?.inputs.find(
+              ({ name }) => name === property
+            );
 
-          const currentData = requestTable?.data[property];
+            const currentData = requestTable?.data[property];
 
-          return (
-            <div className="col-lg-6" key={i}>
-              <CardComp>
-                <div className="card-body p-5">
-                  {requestProperty && (
-                    <Form
-                      inputs={() =>
-                        [requestProperty].map((prop) => ({
-                          ...prop,
-                          defaultValue: currentData,
-                          required: true,
-                        }))
-                      }
-                      onFormSubmit={(values) =>
-                        onDataUpdate({
-                          data: values[property],
-                          dataReview: id,
-                        })
-                      }
-                    />
-                  )}
-                </div>
-              </CardComp>
-            </div>
-          );
-        })}
-      </div>
+            return (
+              <div className="col-lg-6" key={i}>
+                <CardComp>
+                  <div className="card-body p-5">
+                    {requestProperty && (
+                      <Form
+                        inputs={() =>
+                          [requestProperty].map((prop) => ({
+                            ...prop,
+                            defaultValue: currentData,
+                            required: true,
+                          }))
+                        }
+                        onFormSubmit={(values) =>
+                          onDataUpdate({
+                            data: values[property],
+                            dataReview: id,
+                          })
+                        }
+                      />
+                    )}
+                  </div>
+                </CardComp>
+              </div>
+            );
+          })}
+        </div>
 
-      {/* <div className="col-lg-12 mt-5">
+        {/* <div className="col-lg-12 mt-5">
           <h5>{t("Auth.Beneficiary.Profile.CurrentData")}</h5>
         </div>
 
@@ -247,7 +249,8 @@ const BeneficiaryOwnProfile = () => {
             </div>
           </div>
         ))} */}
-    </div>
+      </div>
+    </PageTemplate>
   );
 };
 

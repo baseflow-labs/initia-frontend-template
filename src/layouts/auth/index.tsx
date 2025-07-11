@@ -36,10 +36,8 @@ import VisitsView from "../../views/auth/visits";
 import VisitReportsView from "../../views/auth/visits/addReport";
 import BeneficiariesVisitsView from "../../views/auth/visits/beneficiaryVisits";
 import VisitDetailView from "../../views/auth/visits/reportDetails";
-import DashboardNavbar from "./navs/dashboardNavbar";
 import DemoWarning from "./demoWarning";
 import { FilePreviewModal } from "./globalModal";
-import Navbar from "./navs/navbar";
 import OffCanvasNav from "./navs/offcanvasNav";
 import Sidebar from "./navs/sidebarNav";
 
@@ -239,8 +237,6 @@ const AuthLayout = () => {
 
   return (
     <Fragment>
-      {!showSidebar ? <Navbar /> : ""}
-
       <OffCanvasNav
         fixedRoutes={filteredFixedRoutes}
         routes={filteredRoutes
@@ -292,8 +288,6 @@ const AuthLayout = () => {
           }}
         >
           <DemoWarning />
-
-          {showSidebar && <DashboardNavbar />}
 
           <div className="p-0 px-2 px-lg-5 w-100">
             <Routes>

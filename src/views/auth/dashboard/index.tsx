@@ -10,7 +10,7 @@ import { helpIcon } from "../../../assets/icons/icons";
 import IconWrapperComp from "../../../assets/icons/wrapper";
 import profilePhotoPlaceholder from "../../../assets/images/profile-image-placeholder.png";
 import DashboardCard from "../../../components/card/dashboardCard";
-import { Notification } from "../../../layouts/auth/navs/dashboardNavbar";
+import { Notification } from "../../../layouts/auth/navs/navbar";
 import { useAppSelector } from "../../../store/hooks";
 import { getBeneficiaryStatuses } from "../../../utils/optionDataLists/beneficiaries";
 import {
@@ -18,6 +18,7 @@ import {
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
+import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
 
 const DashboardView = () => {
   const { t } = useTranslation();
@@ -45,90 +46,92 @@ const DashboardView = () => {
   const statuses = getBeneficiaryStatuses(t);
 
   return (
-    <div className="row">
-      <div className="col-lg-6">
-        <DashboardCard>
-          <div className="text-info text-center py-5">
-            <h1 className="mb-4">{t("Auth.Dashboard.Welcome")}</h1>
+    <PageTemplate title={t("Auth.Dashboard.Title")}>
+      <div className="row">
+        <div className="col-lg-6">
+          <DashboardCard>
+            <div className="text-info text-center py-5">
+              <h1 className="mb-4">{t("Auth.Dashboard.Welcome")}</h1>
 
-            <img
-              src={
-                logo
-                  ? (process.env.REACT_APP_STORAGE_DIRECTORY_URL ||
-                      "https://pdt-bucket.s3.us-east-1.amazonaws.com") +
-                    logo.replaceAll("\\", "/")
-                  : profilePhotoPlaceholder
-              }
-              height={250}
-              className="my-5"
-            />
+              <img
+                src={
+                  logo
+                    ? (process.env.REACT_APP_STORAGE_DIRECTORY_URL ||
+                        "https://pdt-bucket.s3.us-east-1.amazonaws.com") +
+                      logo.replaceAll("\\", "/")
+                    : profilePhotoPlaceholder
+                }
+                height={250}
+                className="my-5"
+              />
 
-            <h4 className="display-4 mt-5 text-success">{name}</h4>
-          </div>
-        </DashboardCard>
-      </div>
-
-      <div className="col-lg-6">
-        <DashboardCard>
-          <h3 className="mb-5">{t("Auth.Dashboard.BeneficiaryInfo")}</h3>
-
-          <div className="row">
-            <div className="col-6">
-              <h6 className="my-auto">
-                {t("Auth.Dashboard.BeneficiaryMembershipStatus")}
-              </h6>
+              <h4 className="display-4 mt-5 text-success">{name}</h4>
             </div>
+          </DashboardCard>
+        </div>
 
-            <div className="col-6">
-              <h3 className="my-auto">
-                <FontAwesomeIcon
-                  icon={faCircle}
-                  className={`text-${statusColorRender(data.status)}`}
-                />{" "}
-                {renderDataFromOptions(data.status || "", statuses)}
-              </h3>
-            </div>
+        <div className="col-lg-6">
+          <DashboardCard>
+            <h3 className="mb-5">{t("Auth.Dashboard.BeneficiaryInfo")}</h3>
 
-            <div className="col-12">
-              <h3 className="my-5">
-                {t("Auth.Dashboard.ImportantNotifications")}
-              </h3>
-            </div>
+            <div className="row">
+              <div className="col-6">
+                <h6 className="my-auto">
+                  {t("Auth.Dashboard.BeneficiaryMembershipStatus")}
+                </h6>
+              </div>
 
-            <div
-              className="col-12"
-              style={{ maxHeight: "40vh", overflowY: "auto" }}
-            >
-              {data.notifications?.length
-                ? data.notifications.map(
-                    ({ title, message, service, createdAt }, i) => (
-                      <div
-                        className="card mb-3 p-3 w-100"
-                        role="button"
-                        onClick={() => navigate("/" + service)}
-                        key={i}
-                      >
-                        <div className="row">
-                          <div className="col-1 col-lg-2 col-lg-1 my-auto text-warning">
-                            <h3>
-                              <IconWrapperComp icon={helpIcon} />
-                            </h3>
-                          </div>
+              <div className="col-6">
+                <h3 className="my-auto">
+                  <FontAwesomeIcon
+                    icon={faCircle}
+                    className={`text-${statusColorRender(data.status)}`}
+                  />{" "}
+                  {renderDataFromOptions(data.status || "", statuses)}
+                </h3>
+              </div>
 
-                          <div className="col-11 col-lg-10 col-lg-11 ps-4 text-break text-wrap">
-                            <h6 className="w-100">{message}</h6>
-                            <small>{moment(createdAt).fromNow()}</small>
+              <div className="col-12">
+                <h3 className="my-5">
+                  {t("Auth.Dashboard.ImportantNotifications")}
+                </h3>
+              </div>
+
+              <div
+                className="col-12"
+                style={{ maxHeight: "40vh", overflowY: "auto" }}
+              >
+                {data.notifications?.length
+                  ? data.notifications.map(
+                      ({ title, message, service, createdAt }, i) => (
+                        <div
+                          className="card mb-3 p-3 w-100"
+                          role="button"
+                          onClick={() => navigate("/" + service)}
+                          key={i}
+                        >
+                          <div className="row">
+                            <div className="col-1 col-lg-2 col-lg-1 my-auto text-warning">
+                              <h3>
+                                <IconWrapperComp icon={helpIcon} />
+                              </h3>
+                            </div>
+
+                            <div className="col-11 col-lg-10 col-lg-11 ps-4 text-break text-wrap">
+                              <h6 className="w-100">{message}</h6>
+                              <small>{moment(createdAt).fromNow()}</small>
+                            </div>
                           </div>
                         </div>
-                      </div>
+                      )
                     )
-                  )
-                : t("Global.Labels.NoNotifications")}
+                  : t("Global.Labels.NoNotifications")}
+              </div>
             </div>
-          </div>
-        </DashboardCard>
+          </DashboardCard>
+        </div>
       </div>
-    </div>
+    </PageTemplate>
   );
 };
 

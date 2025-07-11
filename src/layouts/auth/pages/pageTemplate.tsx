@@ -8,10 +8,10 @@ import Button from "../../../components/core/button";
 import SelectInput from "../../../components/form/inputs/select";
 import SelectManyInput from "../../../components/form/inputs/selectMany";
 import { columnsWidth } from "../../../utils/function";
-import DashboardNavbar from "../navs/dashboardNavbar";
+import DashboardNavbar from "../navs/navbar";
 
 interface Props {
-  title: string;
+  title?: string;
   filters?: {
     name: string;
     label: string;
@@ -21,6 +21,9 @@ interface Props {
   actionButtons?: { label: string; className?: string; onClick?: () => void }[];
   onGetData?: (values: {}) => void;
   children: React.ReactNode;
+  onSearch?: (e: string) => void;
+  searchPlaceholder?: string;
+  showNav?: Boolean;
 }
 
 const PageTemplate = ({
@@ -29,6 +32,9 @@ const PageTemplate = ({
   actionButtons,
   onGetData,
   children,
+  onSearch,
+  searchPlaceholder,
+  showNav,
 }: Props) => {
   const initialValues =
     filters?.reduce(
@@ -49,6 +55,12 @@ const PageTemplate = ({
 
   return (
     <Fragment>
+      <DashboardNavbar
+        onSearch={onSearch}
+        searchPlaceholder={searchPlaceholder}
+        showNav={showNav}
+      />
+
       <div className="row w-100">
         <div className="col-6 col-lg-3 order-2 order-lg-1">
           <h3 className="mt-4 mt-lg-0">{title}</h3>

@@ -38,6 +38,10 @@ const ResearcherMgmtPage = () => {
     getData({});
   }, []);
 
+  const onSearch = (e: string) => {
+    console.log({ e });
+  };
+
   return (
     <PageTemplate
       title={t("Auth.Researchers.Title")}
@@ -48,6 +52,8 @@ const ResearcherMgmtPage = () => {
         },
       ]}
       onGetData={(values) => console.log(values)}
+      onSearch={onSearch}
+      searchPlaceholder="بحث بـ اسم الباحث"
     >
       <Fragment>
         <div className="row g-5 justify-content-center">

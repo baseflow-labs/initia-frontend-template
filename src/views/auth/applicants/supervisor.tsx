@@ -10,15 +10,15 @@ import * as StaffApi from "../../../api/staff/researcher";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import {
-  getBeneficiaryCategories,
-  getBeneficiaryStatuses,
-  getNationalities,
-} from "../../../utils/optionDataLists/beneficiaries";
-import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
+import {
+  getBeneficiaryCategories,
+  getBeneficiaryStatuses,
+  getNationalities,
+} from "../../../utils/optionDataLists/beneficiaries";
 import AssignResearcher from "./assignResearcher";
 
 const ApplicantsViewForSupervisor = () => {
@@ -206,6 +206,10 @@ const ApplicantsViewForSupervisor = () => {
         });
   };
 
+  const onSearch = (e: string) => {
+    console.log({ e });
+  };
+
   return (
     <Fragment>
       <TablePage
@@ -214,6 +218,8 @@ const ApplicantsViewForSupervisor = () => {
         actionButtons={actionButtons}
         columns={columns}
         data={beneficiaries}
+        onSearch={onSearch}
+        searchPlaceholder="بحث بـ اسم المستفيد أو رقم الهاتف أو رقم الهوية"
         tableActions={() => [
           {
             icon: faUser,

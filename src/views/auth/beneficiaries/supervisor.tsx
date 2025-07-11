@@ -146,6 +146,10 @@ const BeneficiariesViewForSupervisor = () => {
     navigate(`/profile/?id=${data}`);
   };
 
+  const onSearch = (e: string) => {
+    console.log({ e });
+  };
+
   return (
     <Fragment>
       <TablePage
@@ -153,6 +157,8 @@ const BeneficiariesViewForSupervisor = () => {
         filters={filters}
         // actionButtons={actionButtons}
         columns={columns}
+        onSearch={onSearch}
+        searchPlaceholder="بحث بـ اسم المستفيد أو رقم الهاتف أو رقم الهوية"
         data={beneficiaries}
         tableActions={(id?: string) => [
           {

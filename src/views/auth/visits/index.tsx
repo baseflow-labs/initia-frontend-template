@@ -200,10 +200,16 @@ const VisitsView = () => {
       .catch(apiCatchGlobalHandler);
   };
 
+  const onSearch = (e: string) => {
+    console.log({ e });
+  };
+
   return (
     <Fragment>
       <TablePage
         title={t("Auth.Visits.Title")}
+        onSearch={onSearch}
+        searchPlaceholder="بحث بـ اسم المستفيد أو رقم الهاتف"
         filters={filters}
         tableActions={(id?: string) => {
           const visit = visits.find((v) => v.id === id);

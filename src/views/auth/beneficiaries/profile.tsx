@@ -18,6 +18,7 @@ import {
   getNationalRecordDataInputs,
 } from "../../../utils/formInputs/beneficiaryProfile";
 import { apiCatchGlobalHandler } from "../../../utils/function";
+import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
 
 const BeneficiaryProfileView = () => {
   const { t } = useTranslation();
@@ -161,13 +162,14 @@ const BeneficiaryProfileView = () => {
   };
 
   return (
-    <div className="row w-100 mx-auto">
-      <div className="col-6 col-md-9">
-        <h2>{beneficiary?.fullName || beneficiary?.beneficiary?.fullName}</h2>
-      </div>
+    <PageTemplate>
+      <div className="row w-100 mx-auto">
+        <div className="col-6 col-md-9">
+          <h2>{beneficiary?.fullName || beneficiary?.beneficiary?.fullName}</h2>
+        </div>
 
-      <div className="col-6 col-md-3">
-        {/* <Button
+        <div className="col-6 col-md-3">
+          {/* <Button
           className="float-end me-1"
           outline
           onClick={() => downloadProfileAsFile("pdf")}
@@ -175,77 +177,78 @@ const BeneficiaryProfileView = () => {
           <FontAwesomeIcon icon={faFilePdf} />
         </Button> */}
 
-        <Button
-          outline
-          color="success"
-          className="float-end"
-          onClick={() => exportToExcel()}
-        >
-          <FontAwesomeIcon icon={faFileExcel} />
-        </Button>
-      </div>
+          <Button
+            outline
+            color="success"
+            className="float-end"
+            onClick={() => exportToExcel()}
+          >
+            <FontAwesomeIcon icon={faFileExcel} />
+          </Button>
+        </div>
 
-      {[...commonCards1, ...dependentCards, ...commonCards2]?.map(
-        ({ title, data, map }, i) => (
-          <div className="col-md-6 my-5" key={i}>
-            <h4 className="mb-4">{title}</h4>
+        {[...commonCards1, ...dependentCards, ...commonCards2]?.map(
+          ({ title, data, map }, i) => (
+            <div className="col-md-6 my-5" key={i}>
+              <h4 className="mb-4">{title}</h4>
 
-            <div className="card h-100 rounded-4">
-              <div className="card-body">
-                <table className="table table-borderless">
-                  <tbody>
-                    {data &&
-                      map
-                        // .reduce(
-                        //   (
-                        //     final: {
-                        //       prop1: InputSingleProps;
-                        //       prop2?: InputSingleProps;
-                        //     }[],
-                        //     current,
-                        //     i
-                        //   ) => {
-                        //     if (i % 2 === 0) {
-                        //       final.push({
-                        //         prop1: current,
-                        //         prop2: map[i + 1] || null,
-                        //       });
-                        //     }
+              <div className="card h-100 rounded-4">
+                <div className="card-body">
+                  <table className="table table-borderless">
+                    <tbody>
+                      {data &&
+                        map
+                          // .reduce(
+                          //   (
+                          //     final: {
+                          //       prop1: InputSingleProps;
+                          //       prop2?: InputSingleProps;
+                          //     }[],
+                          //     current,
+                          //     i
+                          //   ) => {
+                          //     if (i % 2 === 0) {
+                          //       final.push({
+                          //         prop1: current,
+                          //         prop2: map[i + 1] || null,
+                          //       });
+                          //     }
 
-                        //     return final;
-                        //   },
-                        //   []
-                        // )
-                        ?.map((prop: InputSingleProps, y = 0) => (
-                          <tr key={y}>
-                            <td
-                              className="pb-3 text-break"
-                              style={{
-                                whiteSpace: "normal",
-                                wordBreak: "break-word",
-                                maxWidth: "200px",
-                              }}
-                            >
-                              {prop.label}
-                            </td>
+                          //     return final;
+                          //   },
+                          //   []
+                          // )
+                          ?.map((prop: InputSingleProps, y = 0) => (
+                            <tr key={y}>
+                              <td
+                                className="pb-3 text-break"
+                                style={{
+                                  whiteSpace: "normal",
+                                  wordBreak: "break-word",
+                                  maxWidth: "200px",
+                                }}
+                              >
+                                {prop.label}
+                              </td>
 
-                            <td className="pb-3">
-                              {dataRender({
-                                data: (data as any)[prop.name || "id"],
-                                type: prop.type,
-                                options: prop.options || [],
-                              })}
-                            </td>
-                          </tr>
-                        ))}
-                  </tbody>
-                </table>
+                              <td className="pb-3">
+                                {dataRender({
+                                  data: (data as any)[prop.name || "id"],
+                                  type: prop.type,
+                                  options: prop.options || [],
+                                })}
+                              </td>
+                            </tr>
+                          ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
-          </div>
-        )
-      )}
-    </div>
+          )
+        )}
+      </div>
+    </PageTemplate>
   );
 };
 

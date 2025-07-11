@@ -37,6 +37,7 @@ import {
 } from "../../../utils/optionDataLists/beneficiaries";
 import { getYesNo } from "../../../utils/optionDataLists/common";
 import DependentsFormView from "./Dependents";
+import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
 
 const MembershipRegistrationView = () => {
   const { t } = useTranslation();
@@ -546,13 +547,15 @@ const MembershipRegistrationView = () => {
   ];
 
   return (
-    <div className="container-fluid px-0 mx-0 px-lg-5">
-      <WizardFormStepper
-        steps={formSteps}
-        currentStep={currentStep}
-        setCurrentStep={setCurrentStep}
-      />
-    </div>
+    <PageTemplate showNav>
+      <div className="container-fluid px-0 mx-0 px-lg-5">
+        <WizardFormStepper
+          steps={formSteps}
+          currentStep={currentStep}
+          setCurrentStep={setCurrentStep}
+        />
+      </div>
+    </PageTemplate>
   );
 };
 

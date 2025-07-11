@@ -101,10 +101,16 @@ const BeneficiariesVisitsView = () => {
     },
   ];
 
+  const onSearch = (e: string) => {
+    console.log({ e });
+  };
+
   return (
     <TablePage
       title={t("Auth.Visits.Visits")}
       filters={filters}
+      onSearch={onSearch}
+      searchPlaceholder="بحث بـ اسم المستفيد أو رقم الهاتف"
       // tableActions={[
       //   // {
       //   //   icon: faEdit,

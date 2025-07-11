@@ -203,11 +203,17 @@ const ApplicantsView = () => {
         });
   };
 
+  const onSearch = (e: string) => {
+    console.log({ e });
+  };
+
   return (
     <Fragment>
       <TablePage
         title={t("Auth.Beneficiaries.Applications")}
         filters={filters}
+        onSearch={onSearch}
+        searchPlaceholder="بحث بـ اسم المستفيد أو رقم الهاتف أو رقم الهوية"
         actionButtons={actionButtons}
         columns={columns}
         data={beneficiaries}

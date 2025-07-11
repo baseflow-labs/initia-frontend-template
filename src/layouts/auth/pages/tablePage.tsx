@@ -18,6 +18,8 @@ interface Props extends TableProps {
   actionButtons?: { label: string }[];
   onGetData: (values: any) => Promise<any>;
   tableActions?: (id?: string) => actionProps[];
+  onSearch?: (e: string) => void;
+  searchPlaceholder?: string;
 }
 
 const TablePage = ({
@@ -28,6 +30,8 @@ const TablePage = ({
   data,
   onGetData,
   tableActions,
+  onSearch,
+  searchPlaceholder,
 }: Props) => {
   const [paginationMeta, setPaginationMeta] = useState({
     page: 1,
@@ -60,6 +64,8 @@ const TablePage = ({
       title={title}
       filters={filters}
       actionButtons={actionButtons}
+      onSearch={onSearch}
+      searchPlaceholder={searchPlaceholder}
       onGetData={(filters) => {
         const mergedFilters = filters || {};
         onGetData({

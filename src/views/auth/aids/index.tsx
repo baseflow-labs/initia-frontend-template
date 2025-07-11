@@ -175,11 +175,17 @@ const AidsView = () => {
       .catch(apiCatchGlobalHandler);
   };
 
+  const onSearch = (e: string) => {
+    console.log({ e });
+  };
+
   return (
     <Fragment>
       <TablePage
         title={t("Auth.Aids.Title")}
         filters={filters}
+        onSearch={onSearch}
+        searchPlaceholder="بحث بـ اسم المستفيد"
         actionButtons={actionButtons}
         tableActions={(id?: string) => {
           const aid = aids.find((a) => a.id === id);

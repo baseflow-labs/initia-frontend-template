@@ -120,6 +120,10 @@ const AidsBeneficiaryView = () => {
     },
   ];
 
+  const onSearch = (e: string) => {
+    console.log({ e });
+  };
+
   return (
     <Fragment>
       <TablePage
@@ -129,6 +133,8 @@ const AidsBeneficiaryView = () => {
         columns={columns}
         data={aids}
         onGetData={getData}
+        onSearch={onSearch}
+        searchPlaceholder="بحث بـ اسم المستفيد"
         onPageChange={(page, capacity) => {
           getData({ filters: currentFilters, page, capacity });
         }}
