@@ -7,6 +7,7 @@ import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import { addNotification } from "../../../store/actions/notifications";
 import { apiCatchGlobalHandler } from "../../../utils/function";
+import { getApplicantsRejectionInputs } from "../../../utils/formInputs/beneficiaries";
 
 const RejectApplicant = ({
   beneficiaries,
@@ -29,15 +30,7 @@ const RejectApplicant = ({
       isOpen={!!openModal}
     >
       <Form
-        inputs={() => [
-          {
-            label: t("Auth.Beneficiaries.Profile.ApplicationRejectReason"),
-            name: "reason",
-            type: "textarea",
-            required: true,
-            rows: 3,
-          },
-        ]}
+        inputs={() => getApplicantsRejectionInputs(t)}
         customButtons={
           <Button outline onClick={() => setOpenModal(null)} className="w-50">
             Back

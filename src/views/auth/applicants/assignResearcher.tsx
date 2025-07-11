@@ -6,6 +6,7 @@ import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import { addNotification } from "../../../store/actions/notifications";
 import { apiCatchGlobalHandler } from "../../../utils/function";
+import { getAssignResearcherInputs } from "../../../utils/formInputs/beneficiaries";
 
 const AssignResearcher = ({
   beneficiaries,
@@ -36,28 +37,9 @@ const AssignResearcher = ({
     >
       {openModal && (
         <Form
-          inputs={() => [
-            {
-              label: t("Auth.Beneficiaries.BeneficiaryName"),
-              name: "beneficiary",
-              type: "select",
-              required: true,
-              options: beneficiaries?.map(({ id, fullName }) => ({
-                value: id,
-                label: fullName,
-              })),
-            },
-            {
-              label: t("Auth.Researchers.ResearcherName"),
-              name: "staff",
-              type: "select",
-              required: true,
-              options: researchers.map(({ id, fullName }) => ({
-                value: id,
-                label: fullName,
-              })),
-            },
-          ]}
+          inputs={() =>
+            getAssignResearcherInputs(t, beneficiaries, researchers)
+          }
           // customButtons={
           //   <Button
           //     outline

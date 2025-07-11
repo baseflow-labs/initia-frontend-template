@@ -4,6 +4,7 @@ import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import { Dispatch } from "react";
 import { ReviewProps } from "./review";
+import { getRequestDataUpdateInputs } from "../../../utils/formInputs/beneficiaries";
 
 interface Props {
   openModal: ReviewProps;
@@ -30,13 +31,7 @@ const RequestDataUpdate = ({
     >
       <Form
         initialValues={dataReview}
-        inputs={() => [
-          {
-            name: "note",
-            type: "textarea",
-            label: t("Auth.Beneficiaries.Profile.UpdateNote"),
-          },
-        ]}
+        inputs={() => getRequestDataUpdateInputs(t)}
         submitText={t("Global.Form.Labels.SubmitApplication")}
         onFormSubmit={(e) => {
           setDataReview((current: ReviewProps[]) =>
