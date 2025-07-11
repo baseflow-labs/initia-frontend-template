@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { GetDataProps } from "../../../api";
 import * as ResearcherApi from "../../../api/staff/researcher";
 import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
 import { apiCatchGlobalHandler } from "../../../utils/function";
@@ -27,13 +26,7 @@ const ResearcherMgmtPage = () => {
     }[]
   >([]);
 
-  const getData = ({
-    filters,
-    search,
-  }: {
-    filters?: GetDataProps;
-    search?: string;
-  }) => {
+  const getData = ({ search }: { search?: string }) => {
     const customFilters = [];
 
     if (search) {
@@ -47,7 +40,7 @@ const ResearcherMgmtPage = () => {
       });
     }
 
-    ResearcherApi.getAll({ filters, customFilters })
+    ResearcherApi.getAll({ customFilters })
       .then((res: any) => {
         setResearchers(res.payload);
       })
@@ -55,12 +48,12 @@ const ResearcherMgmtPage = () => {
   };
 
   useLayoutEffect(() => {
-    getData({});
+    getData({ search: currentSearch });
   }, []);
 
   const onSearch = (e: string) => {
     setCurrentSearch(e);
-    getData({ filters: {}, search: e });
+    getData({ search: e });
   };
 
   return (
