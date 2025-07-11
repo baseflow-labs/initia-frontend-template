@@ -23,7 +23,7 @@ import {
   getHomeTypes,
   getNationalities,
   getProvinces,
-} from "../../../utils/dataOptions";
+} from "../../../utils/optionDataLists/beneficiaries";
 import {
   apiCatchGlobalHandler,
   renderDataFromOptions,

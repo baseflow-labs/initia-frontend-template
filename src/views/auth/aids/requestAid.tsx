@@ -5,8 +5,9 @@ import * as AidApi from "../../../api/aids/aids";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import { addNotification } from "../../../store/actions/notifications";
-import { getAidTypes, getYesNo } from "../../../utils/dataOptions";
+import { getAidTypes } from "../../../utils/optionDataLists/aids";
 import { apiCatchGlobalHandler } from "../../../utils/function";
+import { getYesNo } from "../../../utils/optionDataLists/common";
 
 interface Props {
   onSearch: (p: Object) => void;

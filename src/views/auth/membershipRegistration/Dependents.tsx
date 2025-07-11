@@ -24,9 +24,9 @@ import {
   getDiseases,
   getGenders,
   getHealthStatuses,
-  getYesNo,
-} from "../../../utils/dataOptions";
+} from "../../../utils/optionDataLists/beneficiaries";
 import { apiCatchGlobalHandler } from "../../../utils/function";
+import { getYesNo } from "../../../utils/optionDataLists/common";
 
 interface Props {
   customButtons: React.ReactNode;

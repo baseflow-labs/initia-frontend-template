@@ -8,7 +8,10 @@ import * as AidApi from "../../../api/aids/aids";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
-import { getAidStatuses, getAidTypes } from "../../../utils/dataOptions";
+import {
+  getAidStatuses,
+  getAidTypes,
+} from "../../../utils/optionDataLists/aids";
 import {
   apiCatchGlobalHandler,
   renderDataFromOptions,

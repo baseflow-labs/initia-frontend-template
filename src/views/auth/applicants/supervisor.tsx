@@ -13,7 +13,7 @@ import {
   getBeneficiaryCategories,
   getBeneficiaryStatuses,
   getNationalities,
-} from "../../../utils/dataOptions";
+} from "../../../utils/optionDataLists/beneficiaries";
 import {
   apiCatchGlobalHandler,
   renderDataFromOptions,

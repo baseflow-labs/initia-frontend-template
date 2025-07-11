@@ -11,7 +11,7 @@ import {
   getHomeTypes,
   getNationalities,
   getProvinces,
-} from "../../../utils/dataOptions";
+} from "../../../utils/optionDataLists/beneficiaries";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import AssignResearcher from "../applicants/assignResearcher";
 import CancelMembership from "./cancelMembership";

@@ -5,7 +5,10 @@ import { useTranslation } from "react-i18next";
 
 import * as AidApi from "../../../api/aids/aids";
 import TablePage from "../../../layouts/auth/pages/tablePage";
-import { getAidStatuses, getAidTypes } from "../../../utils/dataOptions";
+import {
+  getAidStatuses,
+  getAidTypes,
+} from "../../../utils/optionDataLists/aids";
 import {
   apiCatchGlobalHandler,
   renderDataFromOptions,

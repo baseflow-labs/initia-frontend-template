@@ -12,7 +12,7 @@ import {
   getRoomContentStatuses,
   getRoomContentTypes,
   getRoomTypes,
-} from "../../../utils/dataOptions";
+} from "../../../utils/optionDataLists/visitReports";
 import {
   apiCatchGlobalHandler,
   renderDataFromOptions,

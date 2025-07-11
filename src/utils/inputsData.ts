@@ -16,8 +16,8 @@ import {
   getOccupations,
   getProvinces,
   getSocialStatuses,
-  getYesNo,
-} from "./dataOptions";
+} from "./optionDataLists/beneficiaries";
+import { getYesNo } from "./optionDataLists/common";
 
 export function inputsData(t: (value: string) => string): {
   [key: string]: InputSingleProps[];

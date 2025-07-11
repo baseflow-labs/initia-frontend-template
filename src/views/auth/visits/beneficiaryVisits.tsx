@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import * as VisitApi from "../../../api/visits/visits";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { viewDateFormat, viewDayFormat } from "../../../utils/consts";
-import { getVisitStatuses } from "../../../utils/dataOptions";
+import { getVisitStatuses } from "../../../utils/optionDataLists/visits";
 import {
   apiCatchGlobalHandler,
   renderDataFromOptions,

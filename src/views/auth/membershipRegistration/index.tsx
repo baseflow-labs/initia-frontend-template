@@ -37,10 +37,10 @@ import {
   getOccupations,
   getProvinces,
   getSocialStatuses,
-  getYesNo,
-} from "../../../utils/dataOptions";
+} from "../../../utils/optionDataLists/beneficiaries";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import DependentsFormView from "./Dependents";
+import { getYesNo } from "../../../utils/optionDataLists/common";
 
 const MembershipRegistrationView = () => {
   const { t } = useTranslation();

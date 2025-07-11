@@ -26,9 +26,9 @@ import {
   getOccupations,
   getProvinces,
   getSocialStatuses,
-  getYesNo,
-} from "../../../utils/dataOptions";
+} from "../../../utils/optionDataLists/beneficiaries";
 import { apiCatchGlobalHandler } from "../../../utils/function";
+import { getYesNo } from "../../../utils/optionDataLists/common";
 
 const BeneficiaryProfileView = () => {
   const { t } = useTranslation();

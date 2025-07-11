@@ -1,52 +1,3 @@
-export const getAidTypes = (t: Function) => [
-  {
-    value: "Cash",
-    label: t("Auth.Aids.Cash"),
-  },
-  {
-    value: "In-Kind",
-    label: t("Auth.Aids.In-Kind"),
-  },
-];
-
-export const getAidStatuses = (t: Function) => [
-  {
-    value: "Pending",
-    label: t("Auth.Aids.Statuses.Pending"),
-  },
-  {
-    value: "Granted",
-    label: t("Auth.Aids.Statuses.Granted"),
-  },
-  {
-    value: "Rejected",
-    label: t("Auth.MembershipRegistration.Statuses.Rejected"),
-  },
-];
-
-export const getVisitStatuses = (t: Function) => [
-  {
-    value: "Pending",
-    label: t("Auth.Visits.Statuses.Pending"),
-  },
-  {
-    value: "Approved",
-    label: t("Auth.Visits.Statuses.Approved"),
-  },
-  {
-    value: "Delayed",
-    label: t("Auth.Visits.Statuses.Delayed"),
-  },
-  {
-    value: "Done",
-    label: t("Auth.Visits.Statuses.Done"),
-  },
-  {
-    value: "Cancelled",
-    label: t("Auth.Visits.Statuses.Cancelled"),
-  },
-];
-
 export const getNationalities = (t: Function) => [
   {
     value: "Saudi",
@@ -330,11 +281,6 @@ export const getDiseases = (t: Function) => [
   },
 ];
 
-export const getYesNo = (t: Function) => [
-  { value: "Yes", label: t("Global.Form.Labels.Yes") },
-  { value: "No", label: t("Global.Form.Labels.No") },
-];
-
 export const getSocialStatuses = (t: Function) => [
   {
     value: "Single",
@@ -389,66 +335,6 @@ export const getHomeRentalPayees = (t: Function) => [
   {
     value: "Free",
     label: t("Auth.MembershipRegistration.Form.Payee.Free"),
-  },
-];
-
-export const getRoomTypes = (t: Function) => [
-  { value: "Entry", label: t("Auth.Visits.Report.Entry") },
-  { value: "Living Room", label: t("Auth.Visits.Report.LivingRoom") },
-  { value: "Dining Room", label: t("Auth.Visits.Report.DiningRoom") },
-  { value: "Bedroom", label: t("Auth.Visits.Report.Bedroom") },
-  { value: "Kitchen", label: t("Auth.Visits.Report.Kitchen") },
-  { value: "Bathroom", label: t("Auth.Visits.Report.Bathroom") },
-  { value: "Maid Room", label: t("Auth.Visits.Report.MaidRoom") },
-  { value: "Storage", label: t("Auth.Visits.Report.Storage") },
-  { value: "Laundry", label: t("Auth.Visits.Report.Laundry") },
-  { value: "Guest Room", label: t("Auth.Visits.Report.GuestRoom") },
-  { value: "Prayer Room", label: t("Auth.Visits.Report.PrayerRoom") },
-  { value: "Hallway", label: t("Auth.Visits.Report.Hallway") },
-  { value: "Balcony", label: t("Auth.Visits.Report.Balcony") },
-];
-
-export const getRoomDeviceContents = (t: Function) => [
-  { label: t("Auth.Visits.Report.Fridge"), value: "Fridge" },
-  { label: t("Auth.Visits.Report.Freezer"), value: "Freezer" },
-  { label: t("Auth.Visits.Report.Oven"), value: "Oven" },
-  { label: t("Auth.Visits.Report.Microwave"), value: "Microwave" },
-  {
-    label: t("Auth.Visits.Report.AirConditioner"),
-    value: "Air Conditioner",
-  },
-  {
-    label: t("Auth.Visits.Report.WashingMachine"),
-    value: "Washing Machine",
-  },
-  { label: t("Auth.Visits.Report.Dishwasher"), value: "Dishwasher" },
-  { label: t("Auth.Visits.Report.WaterHeater"), value: "Water Heater" },
-  { label: t("Auth.Visits.Report.TV"), value: "TV" },
-  { label: t("Auth.Visits.Report.Router"), value: "Router" },
-];
-
-export const getRoomFurnitureContents = (t: Function) => [
-  { label: t("Auth.Visits.Report.DiningTable"), value: "Dining Table" },
-  { label: t("Auth.Visits.Report.Sofa"), value: "Sofa" },
-  { label: t("Auth.Visits.Report.Bed"), value: "Bed" },
-  { label: t("Auth.Visits.Report.Wardrobe"), value: "Wardrobe" },
-  {
-    label: t("Auth.Visits.Report.DressingTable"),
-    value: "Dressing Table",
-  },
-  { label: t("Auth.Visits.Report.Desk"), value: "Desk" },
-  { label: t("Auth.Visits.Report.Shelf"), value: "Shelf" },
-  { label: t("Auth.Visits.Report.Nightstand"), value: "Nightstand" },
-  { label: t("Auth.Visits.Report.PrayerMat"), value: "Prayer Mat" },
-  { label: t("Auth.Visits.Report.ShoeRack"), value: "Shoe Rack" },
-];
-
-export const getRoomContentStatuses = (t: Function) => [
-  { value: "Working", label: t("Auth.Visits.Report.Working") },
-  { value: "Not Working", label: t("Auth.Visits.Report.NotWorking") },
-  {
-    value: "Needs Maintenance",
-    label: t("Auth.Visits.Report.NeedsMaintenance"),
   },
 ];
 
@@ -566,18 +452,5 @@ export const getEducationLevels = (t: Function) => [
   {
     value: "Phd",
     label: t("Auth.MembershipRegistration.Form.EducationLevel.Phd"),
-  },
-];
-
-export const getRoomContentTypes = (t: Function) => [
-  {
-    value: "Device",
-    label: t("Auth.Visits.Report.Device"),
-    subList: getRoomDeviceContents(t),
-  },
-  {
-    value: "Furniture",
-    label: t("Auth.Visits.Report.Furniture"),
-    subList: getRoomFurnitureContents(t),
   },
 ];

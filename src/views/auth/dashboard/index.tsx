@@ -12,7 +12,7 @@ import profilePhotoPlaceholder from "../../../assets/images/profile-image-placeh
 import DashboardCard from "../../../components/card/dashboardCard";
 import { Notification } from "../../../layouts/auth/navs/dashboardNavbar";
 import { useAppSelector } from "../../../store/hooks";
-import { getBeneficiaryStatuses } from "../../../utils/dataOptions";
+import { getBeneficiaryStatuses } from "../../../utils/optionDataLists/beneficiaries";
 import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
