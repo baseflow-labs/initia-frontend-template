@@ -2,23 +2,21 @@ import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router";
 
+import { faFileExcel } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import * as XLSX from "xlsx";
 import * as VisitApi from "../../../api/visits/visits";
+import Button from "../../../components/core/button";
 import DynamicTable from "../../../components/table";
+import {
+  getRoomContentStatuses,
+  getRoomContentTypes,
+  getRoomTypes,
+} from "../../../utils/dataOptions";
 import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
 } from "../../../utils/function";
-import Button from "../../../components/core/button";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFileExcel } from "@fortawesome/free-solid-svg-icons";
-import * as XLSX from "xlsx";
-import {
-  getRoomContentStatuses,
-  getRoomContentTypes,
-  getRoomDeviceContents,
-  getRoomFurnitureContents,
-  getRoomTypes,
-} from "../../../utils/dataOptions";
 
 type visitReportRoomContentsType = {
   id: string;

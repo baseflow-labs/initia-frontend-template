@@ -16,20 +16,18 @@ import RadioInput from "../../../components/form/inputs/radio";
 import SelectInput from "../../../components/form/inputs/select";
 import StarsInput from "../../../components/form/inputs/stars";
 import TextareaInput from "../../../components/form/inputs/textarea";
+import BoxedPage from "../../../layouts/auth/pages/boxedPage";
 import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
+import {
+  getRoomContentStatuses,
+  getRoomContentTypes,
+  getRoomTypes,
+} from "../../../utils/dataOptions";
 import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
 } from "../../../utils/function";
-import BoxedPage from "../../../layouts/auth/pages/boxedPage";
-import {
-  getRoomContentStatuses,
-  getRoomContentTypes,
-  getRoomDeviceContents,
-  getRoomFurnitureContents,
-  getRoomTypes,
-} from "../../../utils/dataOptions";
 
 const getInitialContent = () => ({
   content: "",
