@@ -1,5 +1,3 @@
-import { FormikProps } from "formik";
-import moment from "moment";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
@@ -17,16 +15,8 @@ import Spinner from "../../../components/core/spinner";
 import Form from "../../../components/form";
 import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
-import { dataDateFormat } from "../../../utils/consts";
-import {
-  getAgeGroups,
-  getDependentRelations,
-  getDiseases,
-  getGenders,
-  getHealthStatuses,
-} from "../../../utils/optionDataLists/beneficiaries";
+import { getDependantDataInputs } from "../../../utils/formInputs/beneficiaryProfile";
 import { apiCatchGlobalHandler } from "../../../utils/function";
-import { getYesNo } from "../../../utils/optionDataLists/common";
 
 interface Props {
   customButtons: React.ReactNode;
@@ -59,89 +49,7 @@ const DependentsFormView = ({
     setDependents((current) => current.filter((_, y) => y !== i));
   };
 
-  const dependentsDataInputs = (formik: FormikProps<Record<string, any>>) => [
-    {
-      type: "text",
-      name: "fullName",
-      label: t("Auth.MembershipRegistration.Form.FullName"),
-      required: true,
-    },
-    {
-      type: "date",
-      name: "dob",
-      min: moment().locale("en").subtract(125, "y").format(dataDateFormat),
-      max: moment().locale("en").format(dataDateFormat),
-      label: t("Auth.MembershipRegistration.Form.Dob"),
-      required: true,
-    },
-    {
-      type: "date",
-      name: "idExpiryDate",
-      max: moment().locale("en").add(10, "y").format(dataDateFormat),
-      label: t("Auth.MembershipRegistration.Form.IdExpiryDate"),
-      required: true,
-    },
-    {
-      type: "numberText",
-      name: "idNumber",
-      minLength: 10,
-      maxLength: 10,
-      label: t("Auth.MembershipRegistration.Form.IdNumber"),
-      labelNote: t("Auth.MembershipRegistration.Form.IdNumberNote"),
-      required: true,
-    },
-    {
-      type: "radio",
-      options: getGenders(t),
-      name: "gender",
-      label: t("Auth.MembershipRegistration.Form.Gender.Title"),
-      required: true,
-      halfCol: true,
-    },
-    {
-      type: "phoneNumber",
-      name: "mobile",
-      label: t("Auth.MembershipRegistration.Form.DependentMobile"),
-      labelNote: t("Auth.MembershipRegistration.Form.DependentMobileNote"),
-      required: false,
-    },
-    {
-      type: "select",
-      options: getDependentRelations(t),
-      name: "relation",
-      label: t("Auth.MembershipRegistration.Form.Relation.Title"),
-      required: true,
-    },
-    {
-      type: "select",
-      options: getAgeGroups(t),
-      name: "ageGroup",
-      label: t("Auth.MembershipRegistration.Form.AgeGroup.Title"),
-      required: true,
-    },
-    {
-      type: "radio",
-      options: getHealthStatuses(t),
-      name: "healthStatus",
-      label: t("Auth.MembershipRegistration.Form.HealthStatus.Title"),
-      required: true,
-    },
-    {
-      type: "selectMany",
-      options: getDiseases(t),
-      placeholder: t("Auth.MembershipRegistration.Form.Diseases.None"),
-      name: "diseases",
-      label: t("Auth.MembershipRegistration.Form.Diseases.Title"),
-      required: false,
-    },
-    {
-      type: "radio",
-      options: getYesNo(t),
-      name: "incurableDisease",
-      label: t("Auth.MembershipRegistration.Form.IncurableDisease"),
-      required: false,
-    },
-  ];
+  const dependentsDataInputs = () => getDependantDataInputs(t);
 
   return (
     <Fragment>

@@ -25,7 +25,7 @@ import {
   beneficiaryMapping,
   beneficiaryTabs,
   inputsData,
-} from "../../../utils/inputsData";
+} from "../../../utils/formInputs/beneficiaryProfileMapping";
 import RequestDataUpdate from "./requestDataUpdate";
 import ViewDataArchive from "./viewDataArchive";
 

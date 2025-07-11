@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import Modal from "../../../components/modal";
 import { dataRender } from "../../../components/table";
 import { viewDayDateFormat } from "../../../utils/consts";
-import { inputsData } from "../../../utils/inputsData";
+import { inputsData } from "../../../utils/formInputs/beneficiaryProfileMapping";
 import { ReviewProps } from "./review";
 
 const ViewDataArchive = ({

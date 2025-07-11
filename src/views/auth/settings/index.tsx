@@ -1,4 +1,3 @@
-import { FormikProps } from "formik";
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
@@ -10,13 +9,13 @@ import BoxedPage from "../../../layouts/auth/pages/boxedPage";
 import { addNotification } from "../../../store/actions/notifications";
 import { setFontSize, setMetadata } from "../../../store/actions/settings";
 import { useAppSelector } from "../../../store/hooks";
-import { apiCatchGlobalHandler } from "../../../utils/function";
-import AccountDelete from "./accountDelete";
 import {
   getCommonSettingInputs,
   getPasswordResetSettingInputs,
   metadataSettingInputs,
 } from "../../../utils/formInputs/settings";
+import { apiCatchGlobalHandler } from "../../../utils/function";
+import AccountDelete from "./accountDelete";
 
 const SettingsPage = () => {
   const { t } = useTranslation();

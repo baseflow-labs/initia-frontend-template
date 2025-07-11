@@ -13,34 +13,30 @@ import * as IncomeApi from "../../../api/profile/income";
 import * as NationalRecordApi from "../../../api/profile/nationalRecord";
 import { helpIcon, successIcon } from "../../../assets/icons/icons";
 import IconWrapperComp from "../../../assets/icons/wrapper";
-import absherLogo from "../../../assets/images/partners/absher.svg";
-import eduMinistryLogo from "../../../assets/images/partners/eduMinistry.svg";
-import ejarLogo from "../../../assets/images/partners/ejar.svg";
-import masrafLogo from "../../../assets/images/partners/Masraf.svg";
-import ministryLogo from "../../../assets/images/partners/ministry.svg";
-import molimLogo from "../../../assets/images/partners/molim.svg";
-import tawakkalnaLogo from "../../../assets/images/partners/Tawakkalna.svg";
 import Button from "../../../components/core/button";
 import Form from "../../../components/form";
 import WizardFormStepper from "../../../components/form/wizard/stepper";
 import { addNotification } from "../../../store/actions/notifications";
 import { dataDateFormat } from "../../../utils/consts";
 import {
+  getContactBankDataInputs,
+  getIncomeQualificationDataInputs,
+  getNationalRecordDataInputs,
+} from "../../../utils/formInputs/beneficiaryProfile";
+import { apiCatchGlobalHandler } from "../../../utils/function";
+import {
   getDiseases,
-  getEducationLevels,
   getGenders,
   getHealthStatuses,
   getHomeOwnerships,
   getHomeRentalPayees,
   getHomeTypes,
   getNationalities,
-  getOccupations,
   getProvinces,
   getSocialStatuses,
 } from "../../../utils/optionDataLists/beneficiaries";
-import { apiCatchGlobalHandler } from "../../../utils/function";
-import DependentsFormView from "./Dependents";
 import { getYesNo } from "../../../utils/optionDataLists/common";
+import DependentsFormView from "./Dependents";
 
 const MembershipRegistrationView = () => {
   const { t } = useTranslation();
@@ -230,143 +226,9 @@ const MembershipRegistrationView = () => {
       : []),
   ];
 
-  const contactDataInputs = () => [
-    {
-      type: "phoneNumber",
-      name: "beneficiaryMobile",
-      label: t("Auth.MembershipRegistration.Form.BeneficiaryMobile"),
-      required: true,
-    },
-    {
-      type: "phoneNumber",
-      name: "secondaryMobile",
-      label: t("Auth.MembershipRegistration.Form.SecondaryMobile"),
-      required: false,
-    },
-    {
-      type: "phoneNumber",
-      name: "backupMobile",
-      label: t("Auth.MembershipRegistration.Form.BackupMobile"),
-      required: false,
-    },
-    {
-      type: "email",
-      name: "email",
-      label: t("Auth.MembershipRegistration.Form.Email"),
-      required: false,
-    },
-    {
-      type: "numberText",
-      name: "bankAccountNumber",
-      label: t("Auth.MembershipRegistration.Form.BankAccountNumber"),
-      labelNote: t("Auth.MembershipRegistration.Form.BankAccountNumberNote"),
-      required: false,
-    },
-    {
-      type: "file",
-      name: "ibanPhoto",
-      label: t("Auth.MembershipRegistration.Form.IbanPhoto"),
-      required: false,
-      halfCol: true,
-    },
-  ];
+  const contactDataInputs = () => getContactBankDataInputs(t);
 
-  const qualificationDataInputs = () => [
-    {
-      type: "select",
-      options: getOccupations(t),
-      name: "occupation",
-      label: t("Auth.MembershipRegistration.Form.Occupation.Title"),
-      required: true,
-    },
-    {
-      type: "select",
-      options: getEducationLevels(t),
-      name: "educationLevel",
-      label: t("Auth.MembershipRegistration.Form.EducationLevel.Title"),
-      required: true,
-    },
-    {
-      type: "title",
-      name: "title1",
-      defaultValue: t("Auth.MembershipRegistration.Form.IncomeResources"),
-    },
-    {
-      type: "number",
-      name: "salary",
-      label: t("Auth.MembershipRegistration.Form.Salary"),
-      min: 0,
-      step: 0.1,
-      required: false,
-      halfCol: true,
-    },
-    {
-      type: "file",
-      name: "salaryFile",
-      required: false,
-      halfCol: true,
-    },
-    {
-      type: "number",
-      name: "insurances",
-      label: t("Auth.MembershipRegistration.Form.Insurances"),
-      min: 0,
-      step: 0.1,
-      required: false,
-      halfCol: true,
-    },
-    {
-      type: "file",
-      name: "insurancesFile",
-      required: false,
-      halfCol: true,
-    },
-    {
-      type: "number",
-      name: "comprehensiveRehabilitation",
-      label: t("Auth.MembershipRegistration.Form.ComprehensiveRehabilitation"),
-      min: 0,
-      step: 0.1,
-      required: false,
-      halfCol: true,
-    },
-    {
-      type: "file",
-      name: "comprehensiveRehabilitationFile",
-      required: false,
-      halfCol: true,
-    },
-    {
-      type: "number",
-      name: "retirement",
-      label: t("Auth.MembershipRegistration.Form.Retirement"),
-      min: 0,
-      step: 0.1,
-      required: false,
-      halfCol: true,
-    },
-    {
-      type: "file",
-      name: "retirementFile",
-      required: false,
-      halfCol: true,
-    },
-    {
-      type: "number",
-      name: "socialSecurity",
-      label: t("Auth.MembershipRegistration.Form.SocialSecurity"),
-      min: 0,
-      step: 0.1,
-      required: false,
-      halfCol: true,
-    },
-    {
-      type: "file",
-      name: "socialSecurityFile",
-      required: false,
-      halfCol: true,
-    },
-  ];
+  const qualificationDataInputs = () => getIncomeQualificationDataInputs(t);
 
   const hostelDataInputs = (formik?: FormikProps<Record<string, any>>) => [
     {
@@ -465,60 +327,7 @@ const MembershipRegistrationView = () => {
       : []),
   ];
 
-  const attachmentInputs = () => [
-    {
-      type: "file",
-      logo: absherLogo,
-      name: "absherDocument",
-      label: t("Auth.MembershipRegistration.Form.AbsherDocument"),
-      required: true,
-    },
-    {
-      type: "file",
-      logo: tawakkalnaLogo,
-      name: "tawakkalnaDocument",
-      label: t("Auth.MembershipRegistration.Form.TawakkalnaDocument"),
-      required: true,
-    },
-    {
-      type: "file",
-      logo: ministryLogo,
-      name: "incomeDocument",
-      label: t("Auth.MembershipRegistration.Form.IncomeDocument"),
-      labelNote: t("Auth.MembershipRegistration.Form.IncomeDocumentNote"),
-      required: true,
-    },
-    {
-      type: "file",
-      logo: eduMinistryLogo,
-      name: "studentsDocument",
-      label: t("Auth.MembershipRegistration.Form.StudentsDocument"),
-      labelNote: t("Auth.MembershipRegistration.Form.StudentsDocumentNote"),
-      required: true,
-    },
-    {
-      type: "file",
-      logo: ejarLogo,
-      name: "rentalDocument",
-      label: t("Auth.MembershipRegistration.Form.RentalDocument"),
-      required: true,
-    },
-    {
-      type: "file",
-      logo: masrafLogo,
-      name: "masrefDocument",
-      label: t("Auth.MembershipRegistration.Form.MasrefDocument"),
-      required: true,
-    },
-    {
-      type: "file",
-      logo: molimLogo,
-      name: "creditStatement",
-      label: t("Auth.MembershipRegistration.Form.CreditStatement"),
-      labelNote: t("Auth.MembershipRegistration.Form.CreditStatementNote"),
-      required: true,
-    },
-  ];
+  const attachmentInputs = () => getNationalRecordDataInputs(t);
 
   const HelpButton = () => {
     const alreadyRequested = formData.status?.status === "Need Help";
