@@ -31,11 +31,24 @@ const AidsView = () => {
     beneficiaries: [{ id: "", fullName: "", status: { status: "" } }],
   });
   const [currentFilters, setCurrentFilters] = useState({});
+  const [currentSearch, setCurrentSearch] = useState("");
 
-  const getData = ({ filters = {}, page = 1, capacity = 10 }) => {
+  const getData = ({ filters = {}, page = 1, capacity = 10, search = "" }) => {
     setCurrentFilters(filters);
+    const customFilters = [];
 
-    return AidApi.getAll({ filters, page, capacity })
+    if (search) {
+      customFilters.push({
+        field: "beneficiary.fullName",
+        filteredTerm: {
+          dataType: "string",
+          value: search,
+        },
+        filterOperator: "contains",
+      });
+    }
+
+    return AidApi.getAll({ filters, page, capacity, customFilters })
       .then((res: any) => {
         setAids(
           res.payload.map(
@@ -53,7 +66,12 @@ const AidsView = () => {
   };
 
   useLayoutEffect(() => {
-    getData({ filters: {}, page: 1, capacity: 10 });
+    getData({
+      filters: currentFilters,
+      page: 1,
+      capacity: 10,
+      search: currentSearch,
+    });
 
     BeneficiaryApi.getAll({})
       .then((res: any) =>
@@ -160,7 +178,12 @@ const AidsView = () => {
     AidApi.updateStatus(id, status)
       .then(() => {
         const aid = aids.find((aid) => aid.id === id);
-        getData({ filters: currentFilters, page: 1, capacity: 10 });
+        getData({
+          filters: currentFilters,
+          page: 1,
+          capacity: 10,
+          search: currentSearch,
+        });
         dispatch(
           addNotification({
             msg: t("Global.Form.SuccessMsg", {
@@ -176,7 +199,8 @@ const AidsView = () => {
   };
 
   const onSearch = (e: string) => {
-    console.log({ e });
+    setCurrentSearch(e);
+    getData({ filters: currentFilters, page: 1, capacity: 10, search: e });
   };
 
   return (
@@ -213,7 +237,7 @@ const AidsView = () => {
               )?.beneficiaryId;
 
               setCurrentFilters({ beneficiary });
-              getData({ filters: { beneficiary } });
+              getData({ filters: { beneficiary }, search: currentSearch });
             },
           });
 
@@ -223,7 +247,12 @@ const AidsView = () => {
         data={aids}
         onGetData={getData}
         onPageChange={(page, capacity) => {
-          getData({ filters: currentFilters, page, capacity });
+          getData({
+            filters: currentFilters,
+            page,
+            capacity,
+            search: currentSearch,
+          });
         }}
       />
 

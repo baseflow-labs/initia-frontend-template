@@ -13,6 +13,7 @@ const ResearcherMgmtPage = () => {
   const { t } = useTranslation();
 
   const [openModal, setOpenModal] = useState<Object | undefined>(undefined);
+  const [currentSearch, setCurrentSearch] = useState("");
   const [researchers, setResearchers] = useState<
     {
       id?: string;
@@ -26,8 +27,27 @@ const ResearcherMgmtPage = () => {
     }[]
   >([]);
 
-  const getData = (filters: GetDataProps) => {
-    ResearcherApi.getAll({ filters })
+  const getData = ({
+    filters,
+    search,
+  }: {
+    filters?: GetDataProps;
+    search?: string;
+  }) => {
+    const customFilters = [];
+
+    if (search) {
+      customFilters.push({
+        field: "fullName",
+        filteredTerm: {
+          dataType: "string",
+          value: search,
+        },
+        filterOperator: "contains",
+      });
+    }
+
+    ResearcherApi.getAll({ filters, customFilters })
       .then((res: any) => {
         setResearchers(res.payload);
       })
@@ -39,7 +59,8 @@ const ResearcherMgmtPage = () => {
   }, []);
 
   const onSearch = (e: string) => {
-    console.log({ e });
+    setCurrentSearch(e);
+    getData({ filters: {}, search: e });
   };
 
   return (

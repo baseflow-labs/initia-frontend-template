@@ -41,8 +41,9 @@ const ApplicantsViewForSupervisor = () => {
     { beneficiary: string; staff: string } | undefined
   >(undefined);
   const [currentFilters, setCurrentFilters] = useState({});
+  const [currentSearch, setCurrentSearch] = useState("");
 
-  const getData = ({ filters = {}, page = 1, capacity = 10 }) => {
+  const getData = ({ filters = {}, page = 1, capacity = 10, search = "" }) => {
     setCurrentFilters(filters);
 
     const customFilters = [
@@ -55,6 +56,17 @@ const ApplicantsViewForSupervisor = () => {
         filterOperator: "stringNotEquals",
       },
     ];
+
+    if (search) {
+      customFilters.push({
+        field: "fullName",
+        filteredTerm: {
+          dataType: "string",
+          value: search,
+        },
+        filterOperator: "contains",
+      });
+    }
 
     return BeneficiaryApi.getAll({ filters, page, capacity, customFilters })
       .then((res: any) => {
@@ -85,7 +97,12 @@ const ApplicantsViewForSupervisor = () => {
   };
 
   useLayoutEffect(() => {
-    getData({ filters: {}, page: 1, capacity: 10 });
+    getData({
+      filters: currentFilters,
+      page: 1,
+      capacity: 10,
+      search: currentSearch,
+    });
 
     StaffApi.getAll({})
       .then((res: any) => {
@@ -202,12 +219,18 @@ const ApplicantsViewForSupervisor = () => {
             })
           );
 
-          getData({ filters: {}, page: 1, capacity: 10 });
+          getData({
+            filters: currentFilters,
+            page: 1,
+            capacity: 10,
+            search: currentSearch,
+          });
         });
   };
 
   const onSearch = (e: string) => {
-    console.log({ e });
+    setCurrentSearch(e);
+    getData({ filters: currentFilters, page: 1, capacity: 10, search: e });
   };
 
   return (
@@ -219,7 +242,7 @@ const ApplicantsViewForSupervisor = () => {
         columns={columns}
         data={beneficiaries}
         onSearch={onSearch}
-        searchPlaceholder="بحث بـ اسم المستفيد أو رقم الهاتف أو رقم الهوية"
+        searchPlaceholder="بحث بـ اسم المستفيد"
         tableActions={() => [
           {
             icon: faUser,
@@ -245,7 +268,12 @@ const ApplicantsViewForSupervisor = () => {
         ]}
         onGetData={getData}
         onPageChange={(page, capacity) => {
-          getData({ filters: currentFilters, page, capacity });
+          getData({
+            filters: currentFilters,
+            page,
+            capacity,
+            search: currentSearch,
+          });
         }}
       />
 

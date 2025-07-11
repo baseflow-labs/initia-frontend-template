@@ -27,14 +27,28 @@ const BeneficiariesView = () => {
     { id: string; status: string; fullName: string }[]
   >([]);
   const [currentFilters, setCurrentFilters] = useState({});
+  const [currentSearch, setCurrentSearch] = useState("");
 
-  const getData = ({ filters = {}, page = 1, capacity = 10 }) => {
+  const getData = ({ filters = {}, page = 1, capacity = 10, search = "" }) => {
     setCurrentFilters(filters);
+    const customFilters = [];
+
+    if (search) {
+      customFilters.push({
+        field: "fullName",
+        filteredTerm: {
+          dataType: "string",
+          value: search,
+        },
+        filterOperator: "contains",
+      });
+    }
 
     return BeneficiaryApi.getAll({
       filters: { ...filters, "membershipStatuses.status": "Accepted" } as any,
       page,
       capacity,
+      customFilters,
     })
       .then((res: any) => {
         setBeneficiaries(
@@ -54,7 +68,12 @@ const BeneficiariesView = () => {
   };
 
   useLayoutEffect(() => {
-    getData({ filters: {}, page: 1, capacity: 10 });
+    getData({
+      filters: currentFilters,
+      page: 1,
+      capacity: 10,
+      search: currentSearch,
+    });
   }, []);
 
   const nationalities = getNationalities(t);
@@ -141,7 +160,8 @@ const BeneficiariesView = () => {
   };
 
   const onSearch = (e: string) => {
-    console.log({ e });
+    setCurrentSearch(e);
+    getData({ filters: currentFilters, page: 1, capacity: 10, search: e });
   };
 
   return (
@@ -152,7 +172,7 @@ const BeneficiariesView = () => {
         // actionButtons={actionButtons}
         columns={columns}
         onSearch={onSearch}
-        searchPlaceholder="بحث بـ اسم المستفيد أو رقم الهاتف أو رقم الهوية"
+        searchPlaceholder="بحث بـ اسم المستفيد"
         data={beneficiaries}
         tableActions={(id?: string) => [
           {
@@ -174,7 +194,12 @@ const BeneficiariesView = () => {
         ]}
         onGetData={getData}
         onPageChange={(page, capacity) => {
-          getData({ filters: currentFilters, page, capacity });
+          getData({
+            filters: currentFilters,
+            page,
+            capacity,
+            search: currentSearch,
+          });
         }}
       />
 

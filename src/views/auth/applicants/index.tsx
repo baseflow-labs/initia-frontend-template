@@ -41,8 +41,9 @@ const ApplicantsView = () => {
   >([]);
   const [rejectModalOpen, setRejectModalOpen] = useState<string | null>(null);
   const [currentFilters, setCurrentFilters] = useState({});
+  const [currentSearch, setCurrentSearch] = useState("");
 
-  const getData = ({ filters = {}, page = 1, capacity = 10 }) => {
+  const getData = ({ filters = {}, page = 1, capacity = 10, search = "" }) => {
     setCurrentFilters(filters);
 
     const customFilters = [
@@ -55,6 +56,17 @@ const ApplicantsView = () => {
         filterOperator: "stringNotEquals",
       },
     ];
+
+    if (search) {
+      customFilters.push({
+        field: "fullName",
+        filteredTerm: {
+          dataType: "string",
+          value: search,
+        },
+        filterOperator: "contains",
+      });
+    }
 
     return BeneficiaryApi.getAll({ filters, page, capacity, customFilters })
       .then((res: any) => {
@@ -77,7 +89,12 @@ const ApplicantsView = () => {
   };
 
   useLayoutEffect(() => {
-    getData({ filters: {}, page: 1, capacity: 10 });
+    getData({
+      filters: currentFilters,
+      page: 1,
+      capacity: 10,
+      search: currentSearch,
+    });
   }, []);
 
   const nationalities = getNationalities(t);
@@ -199,12 +216,18 @@ const ApplicantsView = () => {
             })
           );
 
-          getData({ filters: {}, page: 1, capacity: 10 });
+          getData({
+            filters: currentFilters,
+            page: 1,
+            capacity: 10,
+            search: currentSearch,
+          });
         });
   };
 
   const onSearch = (e: string) => {
-    console.log({ e });
+    setCurrentSearch(e);
+    getData({ filters: currentFilters, page: 1, capacity: 10, search: e });
   };
 
   return (
@@ -213,7 +236,7 @@ const ApplicantsView = () => {
         title={t("Auth.Beneficiaries.Applications")}
         filters={filters}
         onSearch={onSearch}
-        searchPlaceholder="بحث بـ اسم المستفيد أو رقم الهاتف أو رقم الهوية"
+        searchPlaceholder="بحث بـ اسم المستفيد"
         actionButtons={actionButtons}
         columns={columns}
         data={beneficiaries}
@@ -287,7 +310,12 @@ const ApplicantsView = () => {
                         }),
                       })
                     );
-                    getData({ filters: {}, page: 1, capacity: 10 });
+                    getData({
+                      filters: currentFilters,
+                      page: 1,
+                      capacity: 10,
+                      search: currentSearch,
+                    });
                     setRejectModalOpen(null);
                   })
                   .catch(apiCatchGlobalHandler),
@@ -301,7 +329,12 @@ const ApplicantsView = () => {
         }}
         onGetData={getData}
         onPageChange={(page, capacity) => {
-          getData({ filters: currentFilters, page, capacity });
+          getData({
+            filters: currentFilters,
+            page,
+            capacity,
+            search: currentSearch,
+          });
         }}
       />
 

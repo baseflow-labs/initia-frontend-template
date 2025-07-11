@@ -41,11 +41,24 @@ const VisitsView = () => {
     { id: string; visitReport: object; status: string }[]
   >([]);
   const [currentFilters, setCurrentFilters] = useState({});
+  const [currentSearch, setCurrentSearch] = useState("");
 
-  const getData = ({ filters = {}, page = 1, capacity = 10 }) => {
+  const getData = ({ filters = {}, page = 1, capacity = 10, search = "" }) => {
     setCurrentFilters(filters);
+    const customFilters = [];
 
-    return VisitApi.getAll({ filters, page, capacity })
+    if (search) {
+      customFilters.push({
+        field: "beneficiary.fullName",
+        filteredTerm: {
+          dataType: "string",
+          value: search,
+        },
+        filterOperator: "contains",
+      });
+    }
+
+    return VisitApi.getAll({ filters, page, capacity, customFilters })
       .then((res: any) => {
         setVisits(
           res.payload.map(
@@ -72,7 +85,12 @@ const VisitsView = () => {
   };
 
   useLayoutEffect(() => {
-    getData({ filters: {}, page: 1, capacity: 10 });
+    getData({
+      filters: currentFilters,
+      page: 1,
+      capacity: 10,
+      search: currentSearch,
+    });
 
     BeneficiaryApi.getAll({})
       .then((res: any) =>
@@ -186,7 +204,12 @@ const VisitsView = () => {
   const cancelVisit = (data: string) => {
     VisitApi.cancel(data)
       .then(() => {
-        getData({ filters: {}, page: 1, capacity: 10 });
+        getData({
+          filters: currentFilters,
+          page: 1,
+          capacity: 10,
+          search: currentSearch,
+        });
         dispatch(
           addNotification({
             msg: t("Global.Form.SuccessMsg", {
@@ -201,7 +224,8 @@ const VisitsView = () => {
   };
 
   const onSearch = (e: string) => {
-    console.log({ e });
+    setCurrentSearch(e);
+    getData({ filters: currentFilters, page: 1, capacity: 10, search: e });
   };
 
   return (
@@ -209,7 +233,7 @@ const VisitsView = () => {
       <TablePage
         title={t("Auth.Visits.Title")}
         onSearch={onSearch}
-        searchPlaceholder="بحث بـ اسم المستفيد أو رقم الهاتف"
+        searchPlaceholder="بحث بـ اسم المستفيد"
         filters={filters}
         tableActions={(id?: string) => {
           const visit = visits.find((v) => v.id === id);
@@ -254,7 +278,12 @@ const VisitsView = () => {
         data={visits}
         onGetData={getData}
         onPageChange={(page, capacity) => {
-          getData({ filters: currentFilters, page, capacity });
+          getData({
+            filters: currentFilters,
+            page,
+            capacity,
+            search: currentSearch,
+          });
         }}
       />
 
