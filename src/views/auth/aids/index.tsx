@@ -15,6 +15,7 @@ import {
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
+import { getAidStatuses, getAidTypes } from "../../../utils/dataOptions";
 
 const AidsView = () => {
   const { t } = useTranslation();
@@ -62,33 +63,9 @@ const AidsView = () => {
       .catch(apiCatchGlobalHandler);
   }, []);
 
-  const title = t("Auth.Aids.Title");
+  const aidTypes = getAidTypes(t);
 
-  const aidTypes = [
-    {
-      value: "Cash",
-      label: t("Auth.Aids.Cash"),
-    },
-    {
-      value: "In-Kind",
-      label: t("Auth.Aids.In-Kind"),
-    },
-  ];
-
-  const statuses = [
-    {
-      value: "Pending",
-      label: t("Auth.Aids.Statuses.Pending"),
-    },
-    {
-      value: "Granted",
-      label: t("Auth.Aids.Statuses.Granted"),
-    },
-    {
-      value: "Rejected",
-      label: t("Auth.MembershipRegistration.Statuses.Rejected"),
-    },
-  ];
+  const statuses = getAidStatuses(t);
 
   const filters = [
     {
@@ -233,7 +210,7 @@ const AidsView = () => {
   return (
     <Fragment>
       <TablePage
-        title={title}
+        title={t("Auth.Aids.Title")}
         filters={filters}
         actionButtons={actionButtons}
         tableActions={(id?: string) => {

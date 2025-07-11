@@ -17,6 +17,7 @@ import {
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
+import { getVisitStatuses } from "../../../utils/dataOptions";
 
 const BeneficiariesVisitsView = () => {
   const { t } = useTranslation();
@@ -80,30 +81,7 @@ const BeneficiariesVisitsView = () => {
     }
   }, [searchParams.get("id")]);
 
-  const title = t("Auth.Visits.Visits");
-
-  const statuses = [
-    {
-      value: "Pending",
-      label: t("Auth.Visits.Statuses.Pending"),
-    },
-    {
-      value: "Approved",
-      label: t("Auth.Visits.Statuses.Approved"),
-    },
-    {
-      value: "Delayed",
-      label: t("Auth.Visits.Statuses.Delayed"),
-    },
-    {
-      value: "Done",
-      label: t("Auth.Visits.Statuses.Done"),
-    },
-    {
-      value: "Cancelled",
-      label: t("Auth.Visits.Statuses.Cancelled"),
-    },
-  ];
+  const statuses = getVisitStatuses(t);
 
   const filters = [
     {
@@ -209,7 +187,7 @@ const BeneficiariesVisitsView = () => {
   return (
     <Fragment>
       <TablePage
-        title={title}
+        title={t("Auth.Visits.Visits")}
         filters={filters}
         // tableActions={[
         //   // {

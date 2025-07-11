@@ -10,6 +10,11 @@ import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import {
+  getAidStatuses,
+  getAidTypes,
+  getYesNo,
+} from "../../../utils/dataOptions";
+import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
   statusColorRender,
@@ -45,33 +50,9 @@ const AidsBeneficiaryView = () => {
     onSearch({ filters: currentFilters, page: 1, capacity: 10 });
   }, []);
 
-  const title = t("Auth.Aids.Beneficiary.Title");
+  const aidTypes = getAidTypes(t);
 
-  const aidTypes = [
-    {
-      value: "Cash",
-      label: t("Auth.Aids.Cash"),
-    },
-    {
-      value: "In-Kind",
-      label: t("Auth.Aids.In-Kind"),
-    },
-  ];
-
-  const statuses = [
-    {
-      value: "Pending",
-      label: t("Auth.Aids.Statuses.Pending"),
-    },
-    {
-      value: "Granted",
-      label: t("Auth.Aids.Statuses.Granted"),
-    },
-    {
-      value: "Rejected",
-      label: t("Auth.MembershipRegistration.Statuses.Rejected"),
-    },
-  ];
+  const statuses = getAidStatuses(t);
 
   const filters = [
     {
@@ -160,10 +141,7 @@ const AidsBeneficiaryView = () => {
     },
     {
       type: "select",
-      options: [
-        { value: "Yes", label: t("Global.Form.Labels.Yes") },
-        { value: "No", label: t("Global.Form.Labels.No") },
-      ],
+      options: getYesNo(t),
       name: "urgent",
       label: t("Auth.Aids.Beneficiary.Urgent?"),
       required: true,
@@ -187,7 +165,7 @@ const AidsBeneficiaryView = () => {
   return (
     <Fragment>
       <TablePage
-        title={title}
+        title={t("Auth.Aids.Beneficiary.Title")}
         filters={filters}
         actionButtons={actionButtons}
         columns={columns}

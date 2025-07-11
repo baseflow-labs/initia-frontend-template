@@ -17,6 +17,7 @@ import {
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
+import { getBeneficiaryStatuses } from "../../../utils/dataOptions";
 
 const DashboardView = () => {
   const { t } = useTranslation();
@@ -41,40 +42,7 @@ const DashboardView = () => {
       .catch(apiCatchGlobalHandler);
   }, []);
 
-  const statuses = [
-    {
-      value: "New Member",
-      label: t("Auth.MembershipRegistration.Statuses.NewMember"),
-    },
-    {
-      value: "Incomplete",
-      label: t("Auth.MembershipRegistration.Statuses.Incomplete"),
-    },
-    {
-      value: "Need Help",
-      label: t("Auth.MembershipRegistration.Statuses.NeedHelp"),
-    },
-    {
-      value: "Rejected",
-      label: t("Auth.MembershipRegistration.Statuses.Rejected"),
-    },
-    {
-      value: "Reviewed",
-      label: t("Auth.MembershipRegistration.Statuses.Reviewed"),
-    },
-    {
-      value: "Cancelled",
-      label: t("Auth.MembershipRegistration.Statuses.Cancelled"),
-    },
-    {
-      value: "Accepted",
-      label: t("Auth.MembershipRegistration.Statuses.Accepted"),
-    },
-    {
-      value: "In Preview",
-      label: t("Auth.MembershipRegistration.Statuses.InPreview"),
-    },
-  ];
+  const statuses = getBeneficiaryStatuses(t);
 
   return (
     <div className="row">

@@ -109,8 +109,6 @@ const BeneficiaryFormReview = () => {
       .catch(apiCatchGlobalHandler);
   }, []);
 
-  const title = beneficiary?.fullName;
-
   const statuses = [
     {
       value: "Need Update",
@@ -226,7 +224,9 @@ const BeneficiaryFormReview = () => {
     <Fragment>
       <div className="row justify-content-between">
         <div className="col-6 col-lg-9">
-          <h2 className="text-dark fs-5 fw-semibold m-0 px-3 py-2">{title}</h2>
+          <h2 className="text-dark fs-5 fw-semibold m-0 px-3 py-2">
+            {beneficiary?.fullName}
+          </h2>
         </div>
 
         <div className="col-6 col-lg-3">

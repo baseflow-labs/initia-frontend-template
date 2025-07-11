@@ -24,6 +24,7 @@ import {
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
+import { getVisitStatuses } from "../../../utils/dataOptions";
 
 const VisitsView = () => {
   const { t } = useTranslation();
@@ -90,30 +91,7 @@ const VisitsView = () => {
     }
   }, [searchParams.get("id")]);
 
-  const title = t("Auth.Visits.Title");
-
-  const statuses = [
-    {
-      value: "Pending",
-      label: t("Auth.Visits.Statuses.Pending"),
-    },
-    {
-      value: "Done",
-      label: t("Auth.Visits.Statuses.Done"),
-    },
-    {
-      value: "Cancelled",
-      label: t("Auth.Visits.Statuses.Cancelled"),
-    },
-    {
-      value: "Approved",
-      label: t("Auth.Visits.Statuses.Approved"),
-    },
-    {
-      value: "Delayed",
-      label: t("Auth.Visits.Statuses.Delayed"),
-    },
-  ];
+  const statuses = getVisitStatuses(t);
 
   const surprise = [
     {
@@ -288,7 +266,7 @@ const VisitsView = () => {
   return (
     <Fragment>
       <TablePage
-        title={title}
+        title={t("Auth.Visits.Title")}
         filters={filters}
         tableActions={(id?: string) => {
           const visit = visits.find((v) => v.id === id);

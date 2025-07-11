@@ -16,6 +16,11 @@ import {
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
+import {
+  getBeneficiaryCategories,
+  getBeneficiaryStatuses,
+  getNationalities,
+} from "../../../utils/dataOptions";
 
 const ApplicantsViewForSupervisor = () => {
   const { t } = useTranslation();
@@ -90,53 +95,9 @@ const ApplicantsViewForSupervisor = () => {
       .catch(apiCatchGlobalHandler);
   }, []);
 
-  const title = t("Auth.Beneficiaries.Applications");
+  const nationalities = getNationalities(t);
 
-  const nationalities = [
-    {
-      value: "Saudi",
-      label: t("Auth.MembershipRegistration.Form.Nationality.Saudi"),
-    },
-    {
-      value: "Non Saudi",
-      label: t("Auth.MembershipRegistration.Form.Nationality.NonSaudi"),
-    },
-  ];
-
-  const statuses = [
-    {
-      value: "New Member",
-      label: t("Auth.MembershipRegistration.Statuses.NewMember"),
-    },
-    {
-      value: "Incomplete",
-      label: t("Auth.MembershipRegistration.Statuses.Incomplete"),
-    },
-    {
-      value: "Need Help",
-      label: t("Auth.MembershipRegistration.Statuses.NeedHelp"),
-    },
-    {
-      value: "Rejected",
-      label: t("Auth.MembershipRegistration.Statuses.Rejected"),
-    },
-    {
-      value: "Reviewed",
-      label: t("Auth.MembershipRegistration.Statuses.Reviewed"),
-    },
-    {
-      value: "Researcher Assigned",
-      label: t("Auth.MembershipRegistration.Statuses.ResearcherAssigned"),
-    },
-    {
-      value: "Cancelled",
-      label: t("Auth.MembershipRegistration.Statuses.Cancelled"),
-    },
-    {
-      value: "In Preview",
-      label: t("Auth.MembershipRegistration.Statuses.InPreview"),
-    },
-  ];
+  const statuses = getBeneficiaryStatuses(t);
 
   const filters = [
     {
@@ -187,32 +148,7 @@ const ApplicantsViewForSupervisor = () => {
     // },
     {
       type: "select",
-      options: [
-        {
-          value: "A",
-          label: t("Auth.MembershipRegistration.Form.Category.A"),
-        },
-        {
-          value: "B",
-          label: t("Auth.MembershipRegistration.Form.Category.B"),
-        },
-        {
-          value: "C",
-          label: t("Auth.MembershipRegistration.Form.Category.C"),
-        },
-        {
-          value: "D",
-          label: t("Auth.MembershipRegistration.Form.Category.D"),
-        },
-        {
-          value: "Uncategorized",
-          label: t("Auth.MembershipRegistration.Form.Category.Uncategorized"),
-        },
-        {
-          value: "Above Grading",
-          label: t("Auth.MembershipRegistration.Form.Category.AboveGrading"),
-        },
-      ],
+      options: getBeneficiaryCategories(t),
       name: "category",
       label: t("Auth.MembershipRegistration.Form.Category.Title"),
     },
@@ -274,7 +210,7 @@ const ApplicantsViewForSupervisor = () => {
   return (
     <Fragment>
       <TablePage
-        title={title}
+        title={t("Auth.Beneficiaries.Applications")}
         filters={filters}
         actionButtons={actionButtons}
         columns={columns}

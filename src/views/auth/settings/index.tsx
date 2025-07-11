@@ -85,7 +85,7 @@ const SettingsPage = () => {
       // {
       //   type: "selectMany",
       //   name: "provinces",
-      //   options: [{ value: "All", label: t("Auth.Settings.AllProvinces") }],
+      //   options: [{ value: "All", label: t("Auth.Settings.AllProvinces") }, ... getProvinces(t)],
       //   label: t("Auth.Settings.SocietyProvinces"),
       // },
     ];
