@@ -133,6 +133,10 @@ export const getBeneficiaryStatuses = (t: Function) => [
     label: t("Auth.MembershipRegistration.Statuses.Accepted"),
   },
   {
+    value: "Researcher Assigned",
+    label: t("Auth.MembershipRegistration.Statuses.ResearcherAssigned"),
+  },
+  {
     value: "In Preview",
     label: t("Auth.MembershipRegistration.Statuses.InPreview"),
   },
