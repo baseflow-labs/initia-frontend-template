@@ -13,6 +13,7 @@ export const getPasswordResetSettingInputs = (t: Function) => [
   {
     type: "password",
     name: "password",
+    minLength: 8,
     label: t("Public.ForgotPassword.ResetPassword.NewPassword"),
     required: true,
   },
@@ -30,6 +31,7 @@ export const metadataSettingInputs = (t: Function) => {
       type: "text",
       name: "name",
       label: t("Auth.Settings.SocietyName"),
+      required: true,
     },
     {
       type: "file",
@@ -79,6 +81,7 @@ export const metadataSettingInputs = (t: Function) => {
     type: "phoneNumber",
     name: "phoneNumber",
     label: t("Auth.Settings.SocietyPhoneNumber"),
+    required: true,
   });
 
   // final.push({

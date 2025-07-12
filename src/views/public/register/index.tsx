@@ -1,3 +1,4 @@
+import { FormikErrors } from "formik";
 import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
@@ -92,6 +93,14 @@ const RegisterView = () => {
     },
   ];
 
+  const validatePasswords = (values: Record<string, any>) => {
+    const errors: FormikErrors<Record<string, any>> = {};
+    if (values.password !== values.passwordConfirmation) {
+      errors.passwordConfirmation = t("Global.Form.Errors.PasswordMatch");
+    }
+    return errors;
+  };
+
   return (
     <div>
       {data.username ? (
@@ -113,6 +122,7 @@ const RegisterView = () => {
           inputs={registerInputs}
           submitText={t("Public.Register.Labels.Register")}
           onFormSubmit={onRegisterSubmit}
+          customValidate={validatePasswords}
         />
       )}
     </div>

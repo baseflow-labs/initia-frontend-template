@@ -16,6 +16,7 @@ import {
 } from "../../../utils/formInputs/settings";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import AccountDelete from "./accountDelete";
+import { FormikErrors } from "formik";
 
 const SettingsPage = () => {
   const { t } = useTranslation();
@@ -59,6 +60,14 @@ const SettingsPage = () => {
       .catch(apiCatchGlobalHandler);
   };
 
+  const validatePasswords = (values: Record<string, any>) => {
+    const errors: FormikErrors<Record<string, any>> = {};
+    if (values.password !== values.passwordConfirmation) {
+      errors.passwordConfirmation = t("Global.Form.Errors.PasswordMatch");
+    }
+    return errors;
+  };
+
   return (
     <BoxedPage title={t("Auth.Settings.Title")}>
       <Fragment>
@@ -94,6 +103,7 @@ const SettingsPage = () => {
           onFormSubmit={(values) => {
             onPasswordResetSubmit(values);
           }}
+          customValidate={validatePasswords}
         />
 
         {user.role !== "beneficiary" && user.role !== "researcher" && (
