@@ -465,6 +465,18 @@
   "Global": {
     "Form": {
       "CantDoIt": "لا يمكن القيام بهذا الإجراء",
+      "Errors": {
+        "InvalidEmail": "بريد إلكتروني غير صالح",
+        "InvalidNumber": "رقم غير صالح",
+        "InvalidPhoneNumber": "رقم جوال غير صحيح, يجب أن يكون الرقم على النحو التالي: 539886868",
+        "Max": "القيمة القصوى المسموحة هي",
+        "MaxLength": "أقصى طول مسموح هو",
+        "Min": "القيمة الدنيا المسموحة هي",
+        "MinLength": "أقل طول مسموح هو",
+        "PasswordMatch": "كلمة السر غير متطابقة",
+        "PhoneNumberLength": "طول رقم الجوال غير صحيح",
+        "Required": "إلزامي"
+      },
       "Label": {
         "Email": "البريد الإلكتروني",
         "PhoneNumber": "رقم الجوال"
@@ -475,7 +487,6 @@
         "BrowserDontSupportLocation": "المتصفح لا يدعم تحديد الموقع, نرجو إدخاله بشكل يدوي",
         "Confirm": "تأكيد",
         "Edit": "تعديل",
-        "InvalidEmail": "بريد إلكتروني غير صالح",
         "Location": "Google Map رابط",
         "No": "لا",
         "NoOptions": "لا يوجد خيارات",
@@ -485,7 +496,6 @@
         "PleaseSelect": "نرجو الاختيار...",
         "Previous": "السابق",
         "Record": "سجل",
-        "Required": "هذا الحقل إلزامي",
         "Save": "حفظ",
         "SaveContinue": "حفظ ومتابعة",
         "SaveData": "حفظ البيانات",
@@ -551,7 +561,7 @@
         "LoginAsHod": "تسجيل الدخول كمدير للباحثين",
         "LoginAsResearcher": "تسجيل الدخول كباحث اجتماعي",
         "Password": "كلمة السر",
-        "PhoneNo": "رقم الهاتف",
+        "PhoneNo": "رقم الجوال",
         "Success": "أهلاً بك مجدداً {{name}}"
       },
       "Title": "تسجيل الدخول"
@@ -577,7 +587,7 @@
         "Name": "الاسم",
         "Password": "كلمة السر",
         "PasswordConfirmation": "تأكيد كلمة السر",
-        "PhoneNo": "رقم الهاتف",
+        "PhoneNo": "رقم الجوال",
         "PrivacyPolicyTermsConditions": "سياسة الخصوصية وشروط الاستخدام",
         "Register": "إنشاء حساب",
         "ResendOtp": "إعادة الإرسال",
