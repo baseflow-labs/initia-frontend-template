@@ -24,6 +24,7 @@ const DashboardView = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { name, logo } = useAppSelector((state) => state.settings);
+  const { user } = useAppSelector((state) => state.auth);
   const [data, setData] = useState<{
     notifications?: Notification[];
     status?: string;
@@ -44,6 +45,9 @@ const DashboardView = () => {
   }, []);
 
   const statuses = getBeneficiaryStatuses(t);
+
+  const isUnacceptedBeneficiary =
+    user.role === "beneficiary" && user.status !== "Accepted";
 
   return (
     <PageTemplate title={t("Auth.Dashboard.Title")}>
@@ -90,6 +94,12 @@ const DashboardView = () => {
                   {renderDataFromOptions(data.status || "", statuses)}
                 </h3>
               </div>
+
+              {isUnacceptedBeneficiary && (
+                <div className="col-12 mt-5">
+                  {t("Auth.Dashboard.UnacceptedBeneficiaryNote")}
+                </div>
+              )}
 
               <div className="col-12">
                 <h3 className="my-5">

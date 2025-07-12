@@ -62,7 +62,8 @@
         "Title": "Profile",
         "UpdateNote": "Update Note"
       },
-      "Title": "Beneficiaries"
+      "Title": "Beneficiaries",
+      "UnacceptedNote": "Please wait until your membership application is accepted to use this service."
     },
     "Beneficiary": {
       "Profile": {
@@ -99,6 +100,7 @@
       "Title": "Overview",
       "ToDoVisitsCount": "To Do Visits Count",
       "ToReviewAidsCount": "To Review Aid sCount",
+      "UnacceptedBeneficiaryNote": "There might be requests to update your personal data at 'Profile' Page",
       "VisitsCount": "Visits Count",
       "VisitsMap": "Visits Map",
       "Welcome": "Welcome"
@@ -223,7 +225,6 @@
         "IdNumberNote": "ID Number Note",
         "IncomeDocument": "Income Document",
         "IncomeDocumentNote": "Income Document Note",
-        "IncomeResources": "Income Resources",
         "IncurableDisease": "Incurable Disease",
         "Insurances": "Insurances",
         "MasrefDocument": "Masref Document",
@@ -317,7 +318,6 @@
         "NeedHelp": "Need Help",
         "NewMember": "New Member",
         "Rejected": "Rejected",
-        "ResearcherAssigned": "Researcher Assigned",
         "Reviewed": "Reviewed",
         "Status": "Status"
       },

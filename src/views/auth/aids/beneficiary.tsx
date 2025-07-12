@@ -4,16 +4,19 @@ import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import * as AidApi from "../../../api/aids/aids";
+import UnacceptedBeneficiary from "../../../components/card/unacceptedBeneficiary";
+import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
 import TablePage from "../../../layouts/auth/pages/tablePage";
-import {
-  getAidStatuses,
-  getAidTypes,
-} from "../../../utils/optionDataLists/aids";
+import { useAppSelector } from "../../../store/hooks";
 import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
+import {
+  getAidStatuses,
+  getAidTypes,
+} from "../../../utils/optionDataLists/aids";
 import RequestAid from "./requestAid";
 
 const AidsBeneficiaryView = () => {
@@ -22,6 +25,7 @@ const AidsBeneficiaryView = () => {
   const [openModal, setOpenModal] = useState(false);
   const [currentFilters, setCurrentFilters] = useState({});
   const [aids, setAids] = useState([]);
+  const { user } = useAppSelector((state) => state.auth);
 
   const getData = ({ filters = {}, page = 1, capacity = 10 }) => {
     setCurrentFilters(filters);
@@ -120,7 +124,14 @@ const AidsBeneficiaryView = () => {
     },
   ];
 
-  return (
+  const isUnacceptedBeneficiary =
+    user.role === "beneficiary" && user.status !== "Accepted";
+
+  return isUnacceptedBeneficiary ? (
+    <PageTemplate>
+      <UnacceptedBeneficiary />
+    </PageTemplate>
+  ) : (
     <Fragment>
       <TablePage
         title={t("Auth.Aids.Beneficiary.Title")}

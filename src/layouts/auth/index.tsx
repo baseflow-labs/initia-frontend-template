@@ -48,13 +48,23 @@ const AuthLayout = () => {
   const width = useWindowWidth();
   const isPc = width > 992;
 
+  const isUnacceptedBeneficiary =
+    user.role === "beneficiary" &&
+    (user.status === "Incomplete" || user.status === "Need Help");
+
+  const denyMembershipFormPageAccess =
+    user.role === "beneficiary" &&
+    user.status !== "Incomplete" &&
+    user.status !== "Need Help";
+
   const [collapsed, setCollapsed] = useState(false);
 
   const authRoutes = [
     {
       name: t("Auth.MembershipRegistration.Title"),
       route: "/apply",
-      showInNav: user.role === "beneficiary",
+      showInNav: isUnacceptedBeneficiary,
+      exclude: denyMembershipFormPageAccess,
       view: <MembershipRegistrationView />,
       icon: membershipFormIcon,
       users: ["beneficiary", "researcher", "admin"],
@@ -220,7 +230,7 @@ const AuthLayout = () => {
   const showSidebar = !location.pathname.includes("apply");
 
   const filteredRoutes = authRoutes
-    .filter(({ users }) => users.includes(user.role))
+    .filter(({ users, exclude }) => users.includes(user.role) && !exclude)
     .map((r) =>
       user.role === "admin"
         ? {
