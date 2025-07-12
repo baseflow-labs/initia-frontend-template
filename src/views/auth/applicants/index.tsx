@@ -18,17 +18,17 @@ import TablePage from "../../../layouts/auth/pages/tablePage";
 import { logout } from "../../../store/actions/auth";
 import { addNotification } from "../../../store/actions/notifications";
 import {
+  apiCatchGlobalHandler,
+  renderDataFromOptions,
+  statusColorRender,
+} from "../../../utils/function";
+import {
   getBeneficiaryCategories,
   getBeneficiaryStatuses,
   getHomeTypes,
   getNationalities,
   getProvinces,
 } from "../../../utils/optionDataLists/beneficiaries";
-import {
-  apiCatchGlobalHandler,
-  renderDataFromOptions,
-  statusColorRender,
-} from "../../../utils/function";
 import RejectApplicant from "./rejectApplicant";
 
 const ApplicantsView = () => {
@@ -83,7 +83,12 @@ const ApplicantsView = () => {
             .filter(({ status = "" }) => status !== "Accepted") as any
         );
 
-        return res;
+        return {
+          ...res,
+          payload: res.payload.filter(
+            ({ status = { status: "" } }) => status.status !== "Accepted"
+          ) as any,
+        };
       })
       .catch(apiCatchGlobalHandler);
   };

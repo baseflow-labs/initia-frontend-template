@@ -91,7 +91,12 @@ const ApplicantsViewForSupervisor = () => {
             .filter(({ status = "" }) => status !== "Accepted") as any
         );
 
-        return res;
+        return {
+          ...res,
+          payload: res.payload.filter(
+            ({ status = { status: "" } }) => status.status !== "Accepted"
+          ) as any,
+        };
       })
       .catch(apiCatchGlobalHandler);
   };
