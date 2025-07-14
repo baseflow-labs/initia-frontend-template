@@ -40,7 +40,7 @@ const RequestAid = ({
           AidApi.create(e)
             .then(() => {
               setOpenModal(false);
-              onGetData({ filters: currentFilters, page: 1, capacity: 10 });
+              onGetData({ page: 1, capacity: 10 });
               dispatch(
                 addNotification({
                   msg: t("Global.Form.SuccessMsg", {

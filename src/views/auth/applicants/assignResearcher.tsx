@@ -67,7 +67,7 @@ const AssignResearcher = ({
                     }),
                   })
                 );
-                onGetData({ filters: {}, page: 1, capacity: 10 });
+                onGetData({});
                 setOpenModal(undefined);
               })
               .catch(apiCatchGlobalHandler);

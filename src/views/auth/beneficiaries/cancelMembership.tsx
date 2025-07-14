@@ -65,7 +65,7 @@ const CancelMembership = ({
                   }),
                 })
               );
-              onGetData({ filters: {}, page: 1, capacity: 10 });
+              onGetData({});
               setModalOpen(null);
             })
             .catch(apiCatchGlobalHandler);

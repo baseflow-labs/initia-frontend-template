@@ -25,7 +25,11 @@ const BeneficiariesVisitsView = () => {
     pagesCount: 1,
   });
 
-  const getData = ({ filters = {}, page = 1, capacity = 10 }) => {
+  const getData = ({
+    filters = currentFilters,
+    page = paginationMeta.page,
+    capacity = paginationMeta.capacity,
+  }) => {
     setCurrentFilters(filters);
 
     return VisitApi.getAll({ filters, page, capacity })
@@ -64,7 +68,7 @@ const BeneficiariesVisitsView = () => {
   };
 
   useLayoutEffect(() => {
-    getData({ filters: {}, page: 1, capacity: 10 });
+    getData({});
   }, []);
 
   const statuses = getVisitStatuses(t);
@@ -138,7 +142,7 @@ const BeneficiariesVisitsView = () => {
       paginationMeta={paginationMeta}
       onGetData={getData}
       onPageChange={(page, capacity) => {
-        getData({ filters: currentFilters, page, capacity });
+        getData({ page, capacity });
       }}
     />
   );

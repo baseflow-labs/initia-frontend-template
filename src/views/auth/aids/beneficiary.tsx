@@ -33,7 +33,11 @@ const AidsBeneficiaryView = () => {
     pagesCount: 1,
   });
 
-  const getData = ({ filters = {}, page = 1, capacity = 10 }) => {
+  const getData = ({
+    filters = currentFilters,
+    page = paginationMeta.page,
+    capacity = paginationMeta.capacity,
+  }) => {
     setCurrentFilters(filters);
 
     return AidApi.getAll({ filters, page, capacity })
@@ -61,7 +65,7 @@ const AidsBeneficiaryView = () => {
   };
 
   useLayoutEffect(() => {
-    getData({ filters: currentFilters, page: 1, capacity: 10 });
+    getData({});
   }, []);
 
   const aidTypes = getAidTypes(t);
@@ -161,7 +165,7 @@ const AidsBeneficiaryView = () => {
         onGetData={getData}
         paginationMeta={paginationMeta}
         onPageChange={(page, capacity) => {
-          getData({ filters: currentFilters, page, capacity });
+          getData({ page, capacity });
         }}
       />
 

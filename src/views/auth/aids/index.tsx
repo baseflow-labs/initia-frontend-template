@@ -39,7 +39,12 @@ const AidsView = () => {
     pagesCount: 1,
   });
 
-  const getData = ({ filters = {}, page = 1, capacity = 10, search = "" }) => {
+  const getData = ({
+    filters = currentFilters,
+    page = paginationMeta.page,
+    capacity = paginationMeta.capacity,
+    search = currentSearch,
+  }) => {
     setCurrentFilters(filters);
     const customFilters = [];
 
@@ -82,12 +87,7 @@ const AidsView = () => {
   };
 
   useLayoutEffect(() => {
-    getData({
-      filters: currentFilters,
-      page: 1,
-      capacity: 10,
-      search: currentSearch,
-    });
+    getData({});
 
     BeneficiaryApi.getAll({})
       .then((res: any) =>
@@ -194,12 +194,7 @@ const AidsView = () => {
     AidApi.updateStatus(id, status)
       .then(() => {
         const aid = aids.find((aid) => aid.id === id);
-        getData({
-          filters: currentFilters,
-          page: 1,
-          capacity: 10,
-          search: currentSearch,
-        });
+        getData({});
         dispatch(
           addNotification({
             msg: t("Global.Form.SuccessMsg", {
@@ -216,7 +211,7 @@ const AidsView = () => {
 
   const onSearch = (e: string) => {
     setCurrentSearch(e);
-    getData({ filters: currentFilters, page: 1, capacity: 10, search: e });
+    getData({ page: 1, capacity: 10, search: e });
   };
 
   return (
@@ -253,7 +248,7 @@ const AidsView = () => {
               )?.beneficiaryId;
 
               setCurrentFilters({ beneficiary });
-              getData({ filters: { beneficiary }, search: currentSearch });
+              getData({ filters: { beneficiary } });
             },
           });
 
@@ -265,10 +260,8 @@ const AidsView = () => {
         paginationMeta={paginationMeta}
         onPageChange={(page, capacity) => {
           getData({
-            filters: currentFilters,
             page,
             capacity,
-            search: currentSearch,
           });
         }}
       />

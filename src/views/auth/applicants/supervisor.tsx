@@ -49,7 +49,12 @@ const ApplicantsViewForSupervisor = () => {
     pagesCount: 1,
   });
 
-  const getData = ({ filters = {}, page = 1, capacity = 10, search = "" }) => {
+  const getData = ({
+    filters = currentFilters,
+    page = paginationMeta.page,
+    capacity = paginationMeta.capacity,
+    search = currentSearch,
+  }) => {
     setCurrentFilters(filters);
 
     const customFilters = [
@@ -117,12 +122,7 @@ const ApplicantsViewForSupervisor = () => {
   };
 
   useLayoutEffect(() => {
-    getData({
-      filters: currentFilters,
-      page: 1,
-      capacity: 10,
-      search: currentSearch,
-    });
+    getData({});
 
     StaffApi.getAll({})
       .then((res: any) => {
@@ -239,18 +239,13 @@ const ApplicantsViewForSupervisor = () => {
             })
           );
 
-          getData({
-            filters: currentFilters,
-            page: 1,
-            capacity: 10,
-            search: currentSearch,
-          });
+          getData({});
         });
   };
 
   const onSearch = (e: string) => {
     setCurrentSearch(e);
-    getData({ filters: currentFilters, page: 1, capacity: 10, search: e });
+    getData({ page: 1, capacity: 10, search: e });
   };
 
   return (
@@ -290,10 +285,8 @@ const ApplicantsViewForSupervisor = () => {
         onGetData={getData}
         onPageChange={(page, capacity) => {
           getData({
-            filters: currentFilters,
             page,
             capacity,
-            search: currentSearch,
           });
         }}
       />

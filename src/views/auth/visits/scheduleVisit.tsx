@@ -50,7 +50,7 @@ const ScheduleVisit = ({
   const onCrudSuccess = (e: { beneficiary: "" }, action = "") => {
     onModalClose();
 
-    onGetData({ filters: {}, page: 1, capacity: 10 });
+    onGetData({});
     dispatch(
       addNotification({
         msg: t("Global.Form.SuccessMsg", {

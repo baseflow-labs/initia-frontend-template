@@ -35,7 +35,12 @@ const BeneficiariesView = () => {
     pagesCount: 1,
   });
 
-  const getData = ({ filters = {}, page = 1, capacity = 10, search = "" }) => {
+  const getData = ({
+    filters = currentFilters,
+    page = paginationMeta.page,
+    capacity = paginationMeta.capacity,
+    search = currentSearch,
+  }) => {
     setCurrentFilters(filters);
     const customFilters = [];
 
@@ -83,12 +88,7 @@ const BeneficiariesView = () => {
   };
 
   useLayoutEffect(() => {
-    getData({
-      filters: currentFilters,
-      page: 1,
-      capacity: 10,
-      search: currentSearch,
-    });
+    getData({});
   }, []);
 
   const nationalities = getNationalities(t);
@@ -176,7 +176,7 @@ const BeneficiariesView = () => {
 
   const onSearch = (e: string) => {
     setCurrentSearch(e);
-    getData({ filters: currentFilters, page: 1, capacity: 10, search: e });
+    getData({ page: 1, capacity: 10, search: e });
   };
 
   return (
@@ -211,10 +211,8 @@ const BeneficiariesView = () => {
         onGetData={getData}
         onPageChange={(page, capacity) => {
           getData({
-            filters: currentFilters,
             page,
             capacity,
-            search: currentSearch,
           });
         }}
       />
