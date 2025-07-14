@@ -6,4 +6,8 @@ const get = async () => {
   return await api.get(mainPath);
 };
 
-export { get };
+const markAsRead = async (id: string) => {
+  return await api.get(mainPath + "/" + id + "/read");
+};
+
+export { get, markAsRead };

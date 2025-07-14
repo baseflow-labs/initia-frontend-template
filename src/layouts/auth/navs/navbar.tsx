@@ -2,15 +2,12 @@ import moment from "moment";
 import { FormEvent, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 
 import * as NotificationApi from "../../../api/notifications";
-import {
-  helpIcon,
-  menuBarsIcon,
-  notificationsIcon,
-  searchIcon,
-} from "../../../assets/icons/icons";
+import { helpIcon, menuBarsIcon, notificationsIcon, searchIcon } from "../../../assets/icons/icons";
 import IconWrapperComp from "../../../assets/icons/wrapper";
+import appLogo from "../../../assets/images/brand/logo-only.png";
 import profilePhotoPlaceholder from "../../../assets/images/profile-image-placeholder.png";
 // import LangButton from "../../../components/button/lang";
 import Spinner from "../../../components/core/spinner";
@@ -18,14 +15,14 @@ import DropdownComp from "../../../components/dropdown";
 import { logout } from "../../../store/actions/auth";
 import { useAppSelector } from "../../../store/hooks";
 import { apiCatchGlobalHandler } from "../../../utils/function";
-import appLogo from "../../../assets/images/brand/logo-only.png";
-import { useNavigate } from "react-router";
 
 export interface Notification {
+  id: string;
   title: string;
   message: string;
   service: string;
   important?: boolean;
+  isRead?: boolean;
   createdAt: string;
 }
 
@@ -147,18 +144,47 @@ const DashboardNavbar = ({
 
             <DropdownComp
               button={
-                <IconWrapperComp
-                  icon={notificationsIcon}
-                  className="text-secondary"
-                />
+                <div className="position-relative">
+                  <IconWrapperComp
+                    icon={notificationsIcon}
+                    className="text-secondary"
+                  />
+
+                  <div
+                    className={`position-absolute top-0 translate-middle badge rounded-circle bg-${
+                      notifications.filter((n) => !n.isRead).length
+                        ? "danger"
+                        : "success"
+                    } py-1`}
+                    style={{ fontSize: "0.75rem" }}
+                  >
+                    {notifications.filter((n) => !n.isRead).length}
+                  </div>
+                </div>
               }
               list={
                 notifications.length
                   ? notifications.map(
-                      ({ title, message, service, createdAt }, i) => ({
-                        route: "/" + service,
+                      (
+                        { id, title, message, service, createdAt, isRead },
+                        i
+                      ) => ({
+                        onClick: () => {
+                          navigate("/" + service);
+                          NotificationApi.markAsRead(id).catch(
+                            apiCatchGlobalHandler
+                          );
+                        },
                         label: (
-                          <div className="row" style={{ minWidth: "25vw" }}>
+                          <div
+                            className="row py-3"
+                            style={{
+                              minWidth: "25vw",
+                              backgroundColor: isRead
+                                ? "white"
+                                : "rgba(0,0,0,0.15)",
+                            }}
+                          >
                             <div className="d-none d-md-block col-md-2 col-lg-1 my-auto text-warning">
                               <h3>
                                 <IconWrapperComp icon={helpIcon} />
