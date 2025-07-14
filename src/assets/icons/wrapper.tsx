@@ -7,7 +7,12 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const IconWrapperComp = ({ icon, height, className }: Props) => {
   return (
-    <img src={icon} height={height || 20} className={`my-auto ${className}`} />
+    <img
+      src={icon}
+      height={height || 20}
+      className={`my-auto ${className}`}
+      alt="icon"
+    />
   );
 };
 

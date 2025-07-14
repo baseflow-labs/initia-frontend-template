@@ -67,6 +67,7 @@ const DashboardView = () => {
                       logo.replaceAll("\\", "/")
                     : profilePhotoPlaceholder
                 }
+                alt="logo"
                 height={250}
                 className="my-5"
               />
