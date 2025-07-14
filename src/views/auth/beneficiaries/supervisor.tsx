@@ -32,6 +32,12 @@ const BeneficiariesViewForSupervisor = () => {
   >([]);
   const [currentFilters, setCurrentFilters] = useState({});
   const [currentSearch, setCurrentSearch] = useState("");
+  const [paginationMeta, setPaginationMeta] = useState({
+    page: 1,
+    capacity: 10,
+    count: 0,
+    pagesCount: 1,
+  });
 
   const getData = ({ filters = {}, page = 1, capacity = 10, search = "" }) => {
     setCurrentFilters(filters);
@@ -65,6 +71,15 @@ const BeneficiariesViewForSupervisor = () => {
             })
           )
         );
+
+        if (res.extra) {
+          setPaginationMeta({
+            page: res.extra.page,
+            capacity: res.extra.capacity,
+            count: res.extra.count,
+            pagesCount: res.extra.pagesCount,
+          });
+        }
 
         return res;
       })
@@ -180,6 +195,7 @@ const BeneficiariesViewForSupervisor = () => {
         onSearch={onSearch}
         searchPlaceholder="بحث بـ اسم المستفيد"
         data={beneficiaries}
+        paginationMeta={paginationMeta}
         tableActions={(id?: string) => [
           {
             icon: faUser,

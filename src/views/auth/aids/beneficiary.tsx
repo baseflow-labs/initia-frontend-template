@@ -26,6 +26,12 @@ const AidsBeneficiaryView = () => {
   const [currentFilters, setCurrentFilters] = useState({});
   const [aids, setAids] = useState([]);
   const { user } = useAppSelector((state) => state.auth);
+  const [paginationMeta, setPaginationMeta] = useState({
+    page: 1,
+    capacity: 10,
+    count: 0,
+    pagesCount: 1,
+  });
 
   const getData = ({ filters = {}, page = 1, capacity = 10 }) => {
     setCurrentFilters(filters);
@@ -39,6 +45,15 @@ const AidsBeneficiaryView = () => {
             ...rest,
           })) as any
         );
+
+        if (res.extra) {
+          setPaginationMeta({
+            page: res.extra.page,
+            capacity: res.extra.capacity,
+            count: res.extra.count,
+            pagesCount: res.extra.pagesCount,
+          });
+        }
 
         return res;
       })
@@ -144,6 +159,7 @@ const AidsBeneficiaryView = () => {
         columns={columns}
         data={aids}
         onGetData={getData}
+        paginationMeta={paginationMeta}
         onPageChange={(page, capacity) => {
           getData({ filters: currentFilters, page, capacity });
         }}

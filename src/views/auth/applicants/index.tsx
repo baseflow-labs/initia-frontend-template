@@ -42,6 +42,12 @@ const ApplicantsView = () => {
   const [rejectModalOpen, setRejectModalOpen] = useState<string | null>(null);
   const [currentFilters, setCurrentFilters] = useState({});
   const [currentSearch, setCurrentSearch] = useState("");
+  const [paginationMeta, setPaginationMeta] = useState({
+    page: 1,
+    capacity: 10,
+    count: 0,
+    pagesCount: 1,
+  });
 
   const getData = ({ filters = {}, page = 1, capacity = 10, search = "" }) => {
     setCurrentFilters(filters);
@@ -82,6 +88,15 @@ const ApplicantsView = () => {
             )
             .filter(({ status = "" }) => status !== "Accepted") as any
         );
+
+        if (res.extra) {
+          setPaginationMeta({
+            page: res.extra.page,
+            capacity: res.extra.capacity,
+            count: res.extra.count,
+            pagesCount: res.extra.pagesCount,
+          });
+        }
 
         return {
           ...res,
@@ -245,6 +260,7 @@ const ApplicantsView = () => {
         actionButtons={actionButtons}
         columns={columns}
         data={beneficiaries}
+        paginationMeta={paginationMeta}
         tableActions={(id?: string) => {
           const row = beneficiaries.find((b) => b.id === id);
 

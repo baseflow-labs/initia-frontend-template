@@ -18,6 +18,12 @@ const BeneficiariesVisitsView = () => {
 
   const [visits, setVisits] = useState([]);
   const [currentFilters, setCurrentFilters] = useState({});
+  const [paginationMeta, setPaginationMeta] = useState({
+    page: 1,
+    capacity: 10,
+    count: 0,
+    pagesCount: 1,
+  });
 
   const getData = ({ filters = {}, page = 1, capacity = 10 }) => {
     setCurrentFilters(filters);
@@ -42,6 +48,15 @@ const BeneficiariesVisitsView = () => {
             })
           ) as any
         );
+
+        if (res.extra) {
+          setPaginationMeta({
+            page: res.extra.page,
+            capacity: res.extra.capacity,
+            count: res.extra.count,
+            pagesCount: res.extra.pagesCount,
+          });
+        }
 
         return res;
       })
@@ -120,6 +135,7 @@ const BeneficiariesVisitsView = () => {
       // ]}
       columns={columns}
       data={visits}
+      paginationMeta={paginationMeta}
       onGetData={getData}
       onPageChange={(page, capacity) => {
         getData({ filters: currentFilters, page, capacity });
