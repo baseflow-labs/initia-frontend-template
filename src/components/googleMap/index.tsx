@@ -22,11 +22,13 @@ const MapWithMarkers = ({ locations }: { locations: LocationProps[] }) => {
   const onLoad = (map: google.maps.Map) => {
     mapRef.current = map;
 
-    const bounds = new window.google.maps.LatLngBounds();
-    locations.forEach((loc) =>
-      bounds.extend({ lat: loc.latitude, lng: loc.longitude })
-    );
-    map.fitBounds(bounds);
+    if (locations.length) {
+      const center = {
+        lat: locations[0].latitude,
+        lng: locations[0].longitude,
+      };
+      map.setCenter(center);
+    }
   };
 
   return (
@@ -34,7 +36,7 @@ const MapWithMarkers = ({ locations }: { locations: LocationProps[] }) => {
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={{ lat: center.latitude, lng: center.longitude }}
-        zoom={10}
+        zoom={11}
         onLoad={onLoad}
       >
         {locations

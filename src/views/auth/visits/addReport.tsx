@@ -16,13 +16,18 @@ import RadioInput from "../../../components/form/inputs/radio";
 import SelectInput from "../../../components/form/inputs/select";
 import StarsInput from "../../../components/form/inputs/stars";
 import TextareaInput from "../../../components/form/inputs/textarea";
+import BoxedPage from "../../../layouts/auth/pages/boxedPage";
 import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
+import {
+  getRoomContentStatuses,
+  getRoomContentTypes,
+  getRoomTypes,
+} from "../../../utils/optionDataLists/visitReports";
 import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
 } from "../../../utils/function";
-import BoxedPage from "../../../layouts/auth/pages/boxedPage";
 
 const getInitialContent = () => ({
   content: "",
@@ -62,74 +67,9 @@ const VisitReportsView = () => {
     index: -1,
   });
 
-  const roomTypes = [
-    { value: "Entry", label: t("Auth.Visits.Report.Entry") },
-    { value: "Living Room", label: t("Auth.Visits.Report.LivingRoom") },
-    { value: "Dining Room", label: t("Auth.Visits.Report.DiningRoom") },
-    { value: "Bedroom", label: t("Auth.Visits.Report.Bedroom") },
-    { value: "Kitchen", label: t("Auth.Visits.Report.Kitchen") },
-    { value: "Bathroom", label: t("Auth.Visits.Report.Bathroom") },
-    { value: "Maid Room", label: t("Auth.Visits.Report.MaidRoom") },
-    { value: "Storage", label: t("Auth.Visits.Report.Storage") },
-    { value: "Laundry", label: t("Auth.Visits.Report.Laundry") },
-    { value: "Guest Room", label: t("Auth.Visits.Report.GuestRoom") },
-    { value: "Prayer Room", label: t("Auth.Visits.Report.PrayerRoom") },
-    { value: "Hallway", label: t("Auth.Visits.Report.Hallway") },
-    { value: "Balcony", label: t("Auth.Visits.Report.Balcony") },
-  ];
+  const roomTypes = getRoomTypes(t);
 
-  const contentTypes = [
-    {
-      value: "Device",
-      label: t("Auth.Visits.Report.Device"),
-      subList: [
-        { label: t("Auth.Visits.Report.Fridge"), value: "Fridge" },
-        { label: t("Auth.Visits.Report.Freezer"), value: "Freezer" },
-        { label: t("Auth.Visits.Report.Oven"), value: "Oven" },
-        { label: t("Auth.Visits.Report.Microwave"), value: "Microwave" },
-        {
-          label: t("Auth.Visits.Report.AirConditioner"),
-          value: "Air Conditioner",
-        },
-        {
-          label: t("Auth.Visits.Report.WashingMachine"),
-          value: "Washing Machine",
-        },
-        { label: t("Auth.Visits.Report.Dishwasher"), value: "Dishwasher" },
-        { label: t("Auth.Visits.Report.WaterHeater"), value: "Water Heater" },
-        { label: t("Auth.Visits.Report.TV"), value: "TV" },
-        { label: t("Auth.Visits.Report.Router"), value: "Router" },
-      ],
-    },
-    {
-      value: "Furniture",
-      label: t("Auth.Visits.Report.Furniture"),
-      subList: [
-        { label: t("Auth.Visits.Report.DiningTable"), value: "Dining Table" },
-        { label: t("Auth.Visits.Report.Sofa"), value: "Sofa" },
-        { label: t("Auth.Visits.Report.Bed"), value: "Bed" },
-        { label: t("Auth.Visits.Report.Wardrobe"), value: "Wardrobe" },
-        {
-          label: t("Auth.Visits.Report.DressingTable"),
-          value: "Dressing Table",
-        },
-        { label: t("Auth.Visits.Report.Desk"), value: "Desk" },
-        { label: t("Auth.Visits.Report.Shelf"), value: "Shelf" },
-        { label: t("Auth.Visits.Report.Nightstand"), value: "Nightstand" },
-        { label: t("Auth.Visits.Report.PrayerMat"), value: "Prayer Mat" },
-        { label: t("Auth.Visits.Report.ShoeRack"), value: "Shoe Rack" },
-      ],
-    },
-  ];
-
-  const roomContentStatuses = [
-    { value: "Working", label: t("Auth.Visits.Report.Working") },
-    { value: "Not Working", label: t("Auth.Visits.Report.NotWorking") },
-    {
-      value: "Needs Maintenance",
-      label: t("Auth.Visits.Report.NeedsMaintenance"),
-    },
-  ];
+  const contentTypes = getRoomContentTypes(t);
 
   const onFormSubmit = () => {
     VisitReportsApi.createOrUpdate({
@@ -321,7 +261,7 @@ const VisitReportsView = () => {
 
                       <RadioInput
                         name={`status-${i}`}
-                        options={roomContentStatuses}
+                        options={getRoomContentStatuses(t)}
                         value={content.status}
                         required
                         onChange={(e) =>

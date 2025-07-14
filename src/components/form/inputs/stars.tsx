@@ -12,7 +12,7 @@ type FinalInput = InputProps &
   };
 
 const StarsInput: React.FC<FinalInput> = ({ type, options, ...input }) => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
 
   return (
     <Fragment>

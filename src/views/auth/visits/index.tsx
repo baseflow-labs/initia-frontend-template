@@ -12,18 +12,18 @@ import { useNavigate, useSearchParams } from "react-router";
 
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import * as VisitApi from "../../../api/visits/visits";
-import Form from "../../../components/form";
-import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
 import { viewDayDateFormat } from "../../../utils/consts";
+import { getVisitStatuses } from "../../../utils/optionDataLists/visits";
 import {
   apiCatchGlobalHandler,
   booleanColorRender,
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
+import ScheduleVisit from "./scheduleVisit";
 
 const VisitsView = () => {
   const { t } = useTranslation();
@@ -41,11 +41,24 @@ const VisitsView = () => {
     { id: string; visitReport: object; status: string }[]
   >([]);
   const [currentFilters, setCurrentFilters] = useState({});
+  const [currentSearch, setCurrentSearch] = useState("");
 
-  const onSearch = ({ filters = {}, page = 1, capacity = 10 }) => {
+  const getData = ({ filters = {}, page = 1, capacity = 10, search = "" }) => {
     setCurrentFilters(filters);
+    const customFilters = [];
 
-    return VisitApi.getAll({ filters, page, capacity })
+    if (search) {
+      customFilters.push({
+        field: "beneficiary.fullName",
+        filteredTerm: {
+          dataType: "string",
+          value: search,
+        },
+        filterOperator: "contains",
+      });
+    }
+
+    return VisitApi.getAll({ filters, page, capacity, customFilters })
       .then((res: any) => {
         setVisits(
           res.payload.map(
@@ -72,7 +85,12 @@ const VisitsView = () => {
   };
 
   useLayoutEffect(() => {
-    onSearch({ filters: {}, page: 1, capacity: 10 });
+    getData({
+      filters: currentFilters,
+      page: 1,
+      capacity: 10,
+      search: currentSearch,
+    });
 
     BeneficiaryApi.getAll({})
       .then((res: any) =>
@@ -90,30 +108,7 @@ const VisitsView = () => {
     }
   }, [searchParams.get("id")]);
 
-  const title = t("Auth.Visits.Title");
-
-  const statuses = [
-    {
-      value: "Pending",
-      label: t("Auth.Visits.Statuses.Pending"),
-    },
-    {
-      value: "Done",
-      label: t("Auth.Visits.Statuses.Done"),
-    },
-    {
-      value: "Cancelled",
-      label: t("Auth.Visits.Statuses.Cancelled"),
-    },
-    {
-      value: "Approved",
-      label: t("Auth.Visits.Statuses.Approved"),
-    },
-    {
-      value: "Delayed",
-      label: t("Auth.Visits.Statuses.Delayed"),
-    },
-  ];
+  const statuses = getVisitStatuses(t);
 
   const surprise = [
     {
@@ -206,18 +201,15 @@ const VisitsView = () => {
     },
   ];
 
-  const onModalClose = () => {
-    setOpenModal(false);
-    if (searchParams.get("id")) {
-      navigate("/visitSchedule");
-      window.location.reload();
-    }
-  };
-
   const cancelVisit = (data: string) => {
     VisitApi.cancel(data)
       .then(() => {
-        onSearch({ filters: {}, page: 1, capacity: 10 });
+        getData({
+          filters: currentFilters,
+          page: 1,
+          capacity: 10,
+          search: currentSearch,
+        });
         dispatch(
           addNotification({
             msg: t("Global.Form.SuccessMsg", {
@@ -231,64 +223,17 @@ const VisitsView = () => {
       .catch(apiCatchGlobalHandler);
   };
 
-  const onCrudSuccess = (e: { beneficiary: "" }, action = "") => {
-    onModalClose();
-
-    onSearch({ filters: {}, page: 1, capacity: 10 });
-    dispatch(
-      addNotification({
-        msg: t("Global.Form.SuccessMsg", {
-          action,
-          data: selectOptions.beneficiaries.find(
-            ({ id }) => id === e.beneficiary
-          )?.fullName,
-        }),
-      })
-    );
+  const onSearch = (e: string) => {
+    setCurrentSearch(e);
+    getData({ filters: currentFilters, page: 1, capacity: 10, search: e });
   };
-
-  const inputs = () => [
-    {
-      type: "select",
-      options: selectOptions.beneficiaries.map(({ id, fullName }) => ({
-        value: id,
-        label: fullName,
-      })),
-      defaultValue: searchParams.get("id") || "",
-      name: "beneficiary",
-      label: t("Auth.Beneficiaries.BeneficiaryName"),
-      required: true,
-    },
-    {
-      type: "time",
-      name: "time",
-      required: true,
-    },
-    {
-      type: "date",
-      name: "date",
-      required: true,
-    },
-    {
-      type: "radio",
-      options: surprise,
-      name: "surprise",
-      defaultValue: "No",
-      label: t("Auth.Visits.Surprise.Title"),
-      required: true,
-    },
-    {
-      type: "textarea",
-      name: "reason",
-      label: t("Auth.Visits.VisitPurpose"),
-      required: true,
-    },
-  ];
 
   return (
     <Fragment>
       <TablePage
-        title={title}
+        title={t("Auth.Visits.Title")}
+        onSearch={onSearch}
+        searchPlaceholder="بحث بـ اسم المستفيد"
         filters={filters}
         tableActions={(id?: string) => {
           const visit = visits.find((v) => v.id === id);
@@ -331,38 +276,23 @@ const VisitsView = () => {
         actionButtons={user.role !== "hod" ? actionButtons : undefined}
         columns={columns}
         data={visits}
-        onSearch={onSearch}
+        onGetData={getData}
         onPageChange={(page, capacity) => {
-          onSearch({ filters: currentFilters, page, capacity });
+          getData({
+            filters: currentFilters,
+            page,
+            capacity,
+            search: currentSearch,
+          });
         }}
       />
 
-      <Modal
-        title={t("Auth.Visits.AddVisit")}
-        onClose={onModalClose}
-        isOpen={openModal}
-      >
-        {openModal && (
-          <Form
-            inputs={inputs}
-            submitText={t("Global.Form.Labels.Confirm")}
-            initialValues={{ beneficiary: searchParams.get("id") }}
-            onFormSubmit={(e) => {
-              e.id
-                ? VisitApi.update(e)
-                    .then(() => {
-                      onCrudSuccess(e, t("Auth.Visits.EditVisit"));
-                    })
-                    .catch(apiCatchGlobalHandler)
-                : VisitApi.create(e)
-                    .then(() => {
-                      onCrudSuccess(e, t("Auth.Visits.AddVisit"));
-                    })
-                    .catch(apiCatchGlobalHandler);
-            }}
-          />
-        )}
-      </Modal>
+      <ScheduleVisit
+        onGetData={getData}
+        selectOptions={selectOptions}
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+      />
     </Fragment>
   );
 };

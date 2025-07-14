@@ -16,8 +16,10 @@ interface Props extends TableProps {
     multi?: boolean;
   }[];
   actionButtons?: { label: string }[];
-  onSearch: (values: any) => Promise<any>;
+  onGetData: (values: any) => Promise<any>;
   tableActions?: (id?: string) => actionProps[];
+  onSearch?: (e: string) => void;
+  searchPlaceholder?: string;
 }
 
 const TablePage = ({
@@ -26,8 +28,10 @@ const TablePage = ({
   actionButtons,
   columns,
   data,
-  onSearch,
+  onGetData,
   tableActions,
+  onSearch,
+  searchPlaceholder,
 }: Props) => {
   const [paginationMeta, setPaginationMeta] = useState({
     page: 1,
@@ -37,7 +41,7 @@ const TablePage = ({
   });
 
   useEffect(() => {
-    onSearch({
+    onGetData({
       filters: {},
       page: paginationMeta.page,
       capacity: paginationMeta.capacity,
@@ -60,9 +64,11 @@ const TablePage = ({
       title={title}
       filters={filters}
       actionButtons={actionButtons}
-      onSearch={(filters) => {
+      onSearch={onSearch}
+      searchPlaceholder={searchPlaceholder}
+      onGetData={(filters) => {
         const mergedFilters = filters || {};
-        onSearch({
+        onGetData({
           filters: mergedFilters,
           page: 1,
           capacity: paginationMeta.capacity,
@@ -84,7 +90,7 @@ const TablePage = ({
         columns={columns}
         data={data}
         onPageChange={(page, capacity) => {
-          onSearch({ filters: {}, page, capacity })
+          onGetData({ filters: {}, page, capacity })
             .then((res: any) => {
               if (res?.extra) {
                 setPaginationMeta({

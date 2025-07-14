@@ -1,22 +1,24 @@
 import { faUser, faUserMinus } from "@fortawesome/free-solid-svg-icons";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import * as StaffApi from "../../../api/staff/researcher";
-import Button from "../../../components/core/button";
-import Form from "../../../components/form";
-import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/pages/tablePage";
-import { addNotification } from "../../../store/actions/notifications";
+import {
+  getBeneficiaryCategories,
+  getHomeTypes,
+  getNationalities,
+  getProvinces,
+} from "../../../utils/optionDataLists/beneficiaries";
 import { apiCatchGlobalHandler } from "../../../utils/function";
+import AssignResearcher from "../applicants/assignResearcher";
+import CancelMembership from "./cancelMembership";
 
 const BeneficiariesViewForSupervisor = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const [cancelModalOpen, setCancelModalOpen] = useState<string | null>(null);
   const [beneficiaries, setBeneficiaries] = useState<
@@ -29,14 +31,28 @@ const BeneficiariesViewForSupervisor = () => {
     { id: string; status: string; fullName: string }[]
   >([]);
   const [currentFilters, setCurrentFilters] = useState({});
+  const [currentSearch, setCurrentSearch] = useState("");
 
-  const onSearch = ({ filters = {}, page = 1, capacity = 10 }) => {
+  const getData = ({ filters = {}, page = 1, capacity = 10, search = "" }) => {
     setCurrentFilters(filters);
+    const customFilters = [];
+
+    if (search) {
+      customFilters.push({
+        field: "fullName",
+        filteredTerm: {
+          dataType: "string",
+          value: search,
+        },
+        filterOperator: "contains",
+      });
+    }
 
     return BeneficiaryApi.getAll({
       filters: { ...filters, "membershipStatuses.status": "Accepted" } as any,
       page,
       capacity,
+      customFilters,
     })
       .then((res: any) => {
         setBeneficiaries(
@@ -56,7 +72,12 @@ const BeneficiariesViewForSupervisor = () => {
   };
 
   useLayoutEffect(() => {
-    onSearch({ filters: {}, page: 1, capacity: 10 });
+    getData({
+      filters: currentFilters,
+      page: 1,
+      capacity: 10,
+      search: currentSearch,
+    });
 
     StaffApi.getAll({})
       .then((res: any) => {
@@ -65,112 +86,11 @@ const BeneficiariesViewForSupervisor = () => {
       .catch(apiCatchGlobalHandler);
   }, []);
 
-  const title = t("Auth.Beneficiaries.Title");
+  const nationalities = getNationalities(t);
 
-  const nationalities = [
-    {
-      value: "Saudi",
-      label: t("Auth.MembershipRegistration.Form.Nationality.Saudi"),
-    },
-    {
-      value: "Non Saudi",
-      label: t("Auth.MembershipRegistration.Form.Nationality.NonSaudi"),
-    },
-  ];
+  const provinces = getProvinces(t);
 
-  const provinces = [
-    {
-      value: "Riyadh",
-      label: t("Auth.MembershipRegistration.Form.Province.Riyadh"),
-    },
-    {
-      value: "Makkah",
-      label: t("Auth.MembershipRegistration.Form.Province.Makkah"),
-    },
-    {
-      value: "Madinah",
-      label: t("Auth.MembershipRegistration.Form.Province.Madinah"),
-    },
-    {
-      value: "Eastern Province",
-      label: t("Auth.MembershipRegistration.Form.Province.Eastern Province"),
-    },
-    {
-      value: "Asir",
-      label: t("Auth.MembershipRegistration.Form.Province.Asir"),
-    },
-    {
-      value: "Tabuk",
-      label: t("Auth.MembershipRegistration.Form.Province.Tabuk"),
-    },
-    {
-      value: "Hail",
-      label: t("Auth.MembershipRegistration.Form.Province.Hail"),
-    },
-    {
-      value: "Northern Borders",
-      label: t("Auth.MembershipRegistration.Form.Province.NorthernBorders"),
-    },
-    {
-      value: "Jazan",
-      label: t("Auth.MembershipRegistration.Form.Province.Jazan"),
-    },
-    {
-      value: "Najran",
-      label: t("Auth.MembershipRegistration.Form.Province.Najran"),
-    },
-    {
-      value: "Al-Bahah",
-      label: t("Auth.MembershipRegistration.Form.Province.AlBahah"),
-    },
-    {
-      value: "Al-Jawf",
-      label: t("Auth.MembershipRegistration.Form.Province.AlJawf"),
-    },
-    {
-      value: "Al-Qassim",
-      label: t("Auth.MembershipRegistration.Form.Province.AlQassim"),
-    },
-  ];
-
-  const homeTypes = [
-    {
-      value: "Apartment",
-      label: t("Auth.MembershipRegistration.Form.HomeType.Apartment"),
-    },
-    {
-      value: "Villa",
-      label: t("Auth.MembershipRegistration.Form.HomeType.Villa"),
-    },
-    {
-      value: "Independent Home",
-      label: t("Auth.MembershipRegistration.Form.HomeType.IndependentHome"),
-    },
-    {
-      value: "Folk House",
-      label: t("Auth.MembershipRegistration.Form.HomeType.FolkHouse"),
-    },
-    {
-      value: "Room(s) in Shared House",
-      label: t("Auth.MembershipRegistration.Form.HomeType.SharedHouse"),
-    },
-    {
-      value: "Roof",
-      label: t("Auth.MembershipRegistration.Form.HomeType.Roof"),
-    },
-    {
-      value: "Caravan",
-      label: t("Auth.MembershipRegistration.Form.HomeType.Caravan"),
-    },
-    {
-      value: "Incomplete Building",
-      label: t("Auth.MembershipRegistration.Form.HomeType.IncompleteBuilding"),
-    },
-    {
-      value: "No Permanent Home",
-      label: t("Auth.MembershipRegistration.Form.HomeType.NoPermanentHome"),
-    },
-  ];
+  const homeTypes = getHomeTypes(t);
 
   const filters = [
     {
@@ -221,32 +141,7 @@ const BeneficiariesViewForSupervisor = () => {
     },
     {
       type: "select",
-      options: [
-        {
-          value: "A",
-          label: t("Auth.MembershipRegistration.Form.Category.A"),
-        },
-        {
-          value: "B",
-          label: t("Auth.MembershipRegistration.Form.Category.B"),
-        },
-        {
-          value: "C",
-          label: t("Auth.MembershipRegistration.Form.Category.C"),
-        },
-        {
-          value: "D",
-          label: t("Auth.MembershipRegistration.Form.Category.D"),
-        },
-        {
-          value: "Uncategorized",
-          label: t("Auth.MembershipRegistration.Form.Category.Uncategorized"),
-        },
-        {
-          value: "Above Grading",
-          label: t("Auth.MembershipRegistration.Form.Category.AboveGrading"),
-        },
-      ],
+      options: getBeneficiaryCategories(t),
       name: "category",
       label: t("Auth.MembershipRegistration.Form.Category.Title"),
     },
@@ -270,13 +165,20 @@ const BeneficiariesViewForSupervisor = () => {
     navigate(`/profile/?id=${data}`);
   };
 
+  const onSearch = (e: string) => {
+    setCurrentSearch(e);
+    getData({ filters: currentFilters, page: 1, capacity: 10, search: e });
+  };
+
   return (
     <Fragment>
       <TablePage
-        title={title}
+        title={t("Auth.Beneficiaries.Title")}
         filters={filters}
         // actionButtons={actionButtons}
         columns={columns}
+        onSearch={onSearch}
+        searchPlaceholder="بحث بـ اسم المستفيد"
         data={beneficiaries}
         tableActions={(id?: string) => [
           {
@@ -300,131 +202,31 @@ const BeneficiariesViewForSupervisor = () => {
             onClick: (data: string) => setCancelModalOpen(data),
           },
         ]}
-        onSearch={onSearch}
+        onGetData={getData}
         onPageChange={(page, capacity) => {
-          onSearch({ filters: currentFilters, page, capacity });
+          getData({
+            filters: currentFilters,
+            page,
+            capacity,
+            search: currentSearch,
+          });
         }}
       />
 
-      <Modal
-        title={t("Auth.Beneficiaries.Profile.CancelMembership")}
-        onClose={() => setCancelModalOpen(null)}
-        isOpen={!!cancelModalOpen}
-      >
-        <Form
-          inputs={() => [
-            {
-              label: t("Auth.Beneficiaries.Profile.CancelMembershipReason"),
-              name: "reason",
-              type: "textarea",
-              required: true,
-              belowComp: (
-                <div>
-                  <small className="text-info">
-                    {t("Auth.Beneficiaries.Profile.CancelMembershipNote")}
-                  </small>
-                </div>
-              ),
-              rows: 3,
-            },
-          ]}
-          customButtons={
-            <Button
-              outline
-              onClick={() => setCancelModalOpen(null)}
-              className="w-50"
-            >
-              Back
-            </Button>
-          }
-          submitText={t("Auth.Beneficiaries.Profile.CancelMembership")}
-          onFormSubmit={(e) => {
-            BeneficiaryApi.cancel(cancelModalOpen || "", e)
-              .then(() => {
-                dispatch(
-                  addNotification({
-                    msg: t("Global.Form.SuccessMsg", {
-                      action: t("Auth.Beneficiaries.Profile.CancelMembership"),
-                      data: beneficiaries.find((b) => b.id === cancelModalOpen)
-                        ?.fullName,
-                    }),
-                  })
-                );
-                onSearch({ filters: {}, page: 1, capacity: 10 });
-                setCancelModalOpen(null);
-              })
-              .catch(apiCatchGlobalHandler);
-          }}
-        />
-      </Modal>
+      <CancelMembership
+        beneficiaries={beneficiaries}
+        modelOpen={cancelModalOpen}
+        setModalOpen={setCancelModalOpen}
+        onGetData={getData}
+      />
 
-      <Modal
-        title={t("Auth.Beneficiaries.Profile.AssignResearcher")}
-        onClose={() => setAssignResearcherModalOpen(undefined)}
-        isOpen={!!assignResearcherModalOpen}
-      >
-        {assignResearcherModalOpen && (
-          <Form
-            inputs={() => [
-              {
-                label: t("Auth.Beneficiaries.BeneficiaryName"),
-                name: "beneficiary",
-                type: "select",
-                required: true,
-                options: beneficiaries?.map(({ id, fullName }) => ({
-                  value: id,
-                  label: fullName,
-                })),
-              },
-              {
-                label: t("Auth.Researchers.ResearcherName"),
-                name: "staff",
-                type: "select",
-                required: true,
-                options: researchers.map(({ id, fullName }) => ({
-                  value: id,
-                  label: fullName,
-                })),
-              },
-            ]}
-            // customButtons={
-            //   <Button
-            //     outline
-            //     onClick={() => setAssignResearcherModalOpen(null)}
-            //     className="w-50"
-            //   >
-            //     Back
-            //   </Button>
-            // }
-            initialValues={assignResearcherModalOpen}
-            submitText={t("Auth.Researchers.Assign")}
-            onFormSubmit={(e) => {
-              BeneficiaryApi.assignResearcher(e.beneficiary || "", e)
-                .then(() => {
-                  dispatch(
-                    addNotification({
-                      msg: t("Global.Form.SuccessMsg", {
-                        action: t(
-                          "Auth.Beneficiaries.Profile.AssignResearcher",
-                          {
-                            researcher: researchers.find(
-                              ({ id }) => e.researcher === id
-                            )?.fullName,
-                          }
-                        ),
-                        data: beneficiaries.find((b) => b.id === e.beneficiary)
-                          ?.fullName,
-                      }),
-                    })
-                  );
-                  onSearch({ filters: {}, page: 1, capacity: 10 });
-                  setAssignResearcherModalOpen(undefined);
-                })
-                .catch(apiCatchGlobalHandler);
-            }}
-          />
-        )}
-      </Modal>
+      <AssignResearcher
+        beneficiaries={beneficiaries}
+        researchers={researchers}
+        onGetData={getData}
+        openModal={assignResearcherModalOpen}
+        setOpenModal={setAssignResearcherModalOpen}
+      />
     </Fragment>
   );
 };

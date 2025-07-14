@@ -1,0 +1,68 @@
+import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+
+import * as AidApi from "../../../api/aids/aids";
+import Form from "../../../components/form";
+import Modal from "../../../components/modal";
+import { addNotification } from "../../../store/actions/notifications";
+import { getGrantAidInputs } from "../../../utils/formInputs/aids";
+import { apiCatchGlobalHandler } from "../../../utils/function";
+import { getAidTypes } from "../../../utils/optionDataLists/aids";
+
+interface Props {
+  onGetData: (p: Object) => void;
+  currentFilters: Object;
+  openModal: boolean;
+  setOpenModal: (s: boolean) => void;
+  selectOptions: {
+    beneficiaries: {
+      id: string;
+      fullName: string;
+      status: { status: string };
+    }[];
+  };
+}
+
+const SendAid = ({
+  onGetData,
+  currentFilters,
+  openModal,
+  setOpenModal,
+  selectOptions,
+}: Props) => {
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
+
+  return (
+    <Modal
+      title={t("Auth.Aids.AddAid")}
+      onClose={() => setOpenModal(false)}
+      isOpen={openModal}
+    >
+      <Form
+        inputs={() => getGrantAidInputs(t, getAidTypes(t), selectOptions)}
+        submitText={t("Global.Form.Labels.SubmitApplication")}
+        onFormSubmit={(e) => {
+          AidApi.grant(e)
+            .then(() => {
+              setOpenModal(false);
+              onGetData({ filters: currentFilters, page: 1, capacity: 10 });
+              dispatch(
+                addNotification({
+                  msg: t("Global.Form.SuccessMsg", {
+                    action: t("Auth.Aids.AddAid"),
+                    data: selectOptions.beneficiaries.find(
+                      ({ id }) => id === e.beneficiary
+                    )?.fullName,
+                  }),
+                })
+              );
+            })
+            .catch(apiCatchGlobalHandler);
+        }}
+      />
+    </Modal>
+  );
+};
+
+export default SendAid;

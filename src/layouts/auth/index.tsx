@@ -36,10 +36,8 @@ import VisitsView from "../../views/auth/visits";
 import VisitReportsView from "../../views/auth/visits/addReport";
 import BeneficiariesVisitsView from "../../views/auth/visits/beneficiaryVisits";
 import VisitDetailView from "../../views/auth/visits/reportDetails";
-import DashboardNavbar from "./navs/dashboardNavbar";
 import DemoWarning from "./demoWarning";
 import { FilePreviewModal } from "./globalModal";
-import Navbar from "./navs/navbar";
 import OffCanvasNav from "./navs/offcanvasNav";
 import Sidebar from "./navs/sidebarNav";
 
@@ -50,13 +48,23 @@ const AuthLayout = () => {
   const width = useWindowWidth();
   const isPc = width > 992;
 
+  const isUnacceptedBeneficiary =
+    user.role === "beneficiary" &&
+    (user.status === "Incomplete" || user.status === "Need Help");
+
+  const denyMembershipFormPageAccess =
+    user.role === "beneficiary" &&
+    user.status !== "Incomplete" &&
+    user.status !== "Need Help";
+
   const [collapsed, setCollapsed] = useState(false);
 
   const authRoutes = [
     {
       name: t("Auth.MembershipRegistration.Title"),
       route: "/apply",
-      showInNav: user.role === "beneficiary",
+      showInNav: isUnacceptedBeneficiary,
+      exclude: denyMembershipFormPageAccess,
       view: <MembershipRegistrationView />,
       icon: membershipFormIcon,
       users: ["beneficiary", "researcher", "admin"],
@@ -222,7 +230,7 @@ const AuthLayout = () => {
   const showSidebar = !location.pathname.includes("apply");
 
   const filteredRoutes = authRoutes
-    .filter(({ users }) => users.includes(user.role))
+    .filter(({ users, exclude }) => users.includes(user.role) && !exclude)
     .map((r) =>
       user.role === "admin"
         ? {
@@ -239,8 +247,6 @@ const AuthLayout = () => {
 
   return (
     <Fragment>
-      {!showSidebar ? <Navbar /> : ""}
-
       <OffCanvasNav
         fixedRoutes={filteredFixedRoutes}
         routes={filteredRoutes
@@ -292,8 +298,6 @@ const AuthLayout = () => {
           }}
         >
           <DemoWarning />
-
-          {showSidebar && <DashboardNavbar />}
 
           <div className="p-0 px-2 px-lg-5 w-100">
             <Routes>

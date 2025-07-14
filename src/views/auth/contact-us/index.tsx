@@ -3,8 +3,8 @@ import { useTranslation } from "react-i18next";
 import { contactUsIcon } from "../../../assets/icons/icons";
 import IconWrapperComp from "../../../assets/icons/wrapper";
 import Button from "../../../components/core/button";
-import { useAppSelector } from "../../../store/hooks";
 import BoxedPage from "../../../layouts/auth/pages/boxedPage";
+import { useAppSelector } from "../../../store/hooks";
 
 const ContactUsPage = () => {
   const { t } = useTranslation();

@@ -62,7 +62,8 @@
         "Title": "Profile",
         "UpdateNote": "Update Note"
       },
-      "Title": "Beneficiaries"
+      "Title": "Beneficiaries",
+      "UnacceptedNote": "Please wait until your membership application is accepted to use this service."
     },
     "Beneficiary": {
       "Profile": {
@@ -99,6 +100,7 @@
       "Title": "Overview",
       "ToDoVisitsCount": "To Do Visits Count",
       "ToReviewAidsCount": "To Review Aid sCount",
+      "UnacceptedBeneficiaryNote": "There might be requests to update your personal data at 'Profile' Page",
       "VisitsCount": "Visits Count",
       "VisitsMap": "Visits Map",
       "Welcome": "Welcome"
@@ -223,7 +225,6 @@
         "IdNumberNote": "ID Number Note",
         "IncomeDocument": "Income Document",
         "IncomeDocumentNote": "Income Document Note",
-        "IncomeResources": "Income Resources",
         "IncurableDisease": "Incurable Disease",
         "Insurances": "Insurances",
         "MasrefDocument": "Masref Document",
@@ -464,6 +465,18 @@
   "Global": {
     "Form": {
       "CantDoIt": "Can't Do It",
+      "Errors": {
+        "InvalidEmail": "Invalid email format",
+        "InvalidNumber": "Invalid number",
+        "InvalidPhoneNumber": "Invalid phone number format",
+        "Max": "Maximum possible value is",
+        "MaxLength": "Maximum possible length is",
+        "Min": "Minimum possible value is",
+        "MinLength": "Minimum possible length is",
+        "PasswordMatch": "Password & confirmation aren't a match",
+        "PhoneNumberLength": "Phone number length is incorrect",
+        "Required": "Required"
+      },
       "Label": {
         "Email": "Email",
         "PhoneNumber": "Phone Number"
@@ -474,7 +487,6 @@
         "BrowserDontSupportLocation": "Browser Don't Support Location",
         "Confirm": "Confirm",
         "Edit": "Edit",
-        "InvalidEmail": "Invalid Email",
         "Location": "Location",
         "No": "No",
         "NoOptions": "No Options",
@@ -484,7 +496,6 @@
         "PleaseSelect": "Please Select",
         "Previous": "Previous",
         "Record": "Record",
-        "Required": "Required",
         "Save": "Save",
         "SaveContinue": "Save Continue",
         "SaveData": "Save Data",
