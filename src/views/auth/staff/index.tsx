@@ -1,9 +1,8 @@
-import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import * as ResearcherApi from "../../../api/staff/researcher";
+import { dataRender } from "../../../components/table";
 import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import AddStaff from "./addStaff";
@@ -104,25 +103,9 @@ const ResearcherMgmtPage = () => {
                     <h5 className="card-title">{fullName}</h5>
 
                     <p className="card-text my-4" style={{ direction: "ltr" }}>
-                      <a
-                        href={"mailto:" + email}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-decoration-none text-muted"
-                      >
-                        <FontAwesomeIcon icon={faEnvelope} /> {email}
-                      </a>
-
+                      {dataRender({ type: "email", data: email })}
                       <br />
-
-                      <a
-                        href={"tel:966" + username}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-decoration-none text-muted"
-                      >
-                        <FontAwesomeIcon icon={faPhone} /> +966{username}
-                      </a>
+                      {dataRender({ type: "phoneNumber", data: username })}
                     </p>
 
                     {/* <Button

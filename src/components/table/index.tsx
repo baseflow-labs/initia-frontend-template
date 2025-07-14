@@ -3,9 +3,11 @@ import {
   faChevronLeft,
   faChevronRight,
   faEllipsisVertical,
+  faEnvelope,
   faEye,
   faFile,
   faLocationPin,
+  faPhone,
   faStar,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -84,7 +86,23 @@ export const dataRender = ({
         .locale(i18n.language)
         .format(timestampFormat || viewTimeFormat);
     case "phoneNumber":
-      return <span dir="ltr"> {data && "+966" + data}</span>;
+      return (
+        <span dir="ltr">
+          <a href={"tel:966" + data} target="_blank">
+            <FontAwesomeIcon className="text-success" icon={faPhone} />
+          </a>{" "}
+          {data && "+966" + data}
+        </span>
+      );
+    case "email":
+      return (
+        <span dir="ltr">
+          <a href={"mailto:" + data} target="_blank">
+            <FontAwesomeIcon className="text-success" icon={faEnvelope} />
+          </a>{" "}
+          {data}
+        </span>
+      );
     case "select":
     case "radio":
       const option = options?.find(({ value }) => value === data);
