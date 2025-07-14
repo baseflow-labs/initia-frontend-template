@@ -1,7 +1,7 @@
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
-import { useLayoutEffect, useState } from "react";
+import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
@@ -11,14 +11,15 @@ import IconWrapperComp from "../../../assets/icons/wrapper";
 import profilePhotoPlaceholder from "../../../assets/images/profile-image-placeholder.png";
 import DashboardCard from "../../../components/card/dashboardCard";
 import { Notification } from "../../../layouts/auth/navs/navbar";
+import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
 import { useAppSelector } from "../../../store/hooks";
-import { getBeneficiaryStatuses } from "../../../utils/optionDataLists/beneficiaries";
+import { viewDayDateFormat, viewTimeFormat } from "../../../utils/consts";
 import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
-import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
+import { getBeneficiaryStatuses } from "../../../utils/optionDataLists/beneficiaries";
 
 const DashboardView = () => {
   const { t } = useTranslation();
@@ -27,6 +28,7 @@ const DashboardView = () => {
   const { user } = useAppSelector((state) => state.auth);
   const [data, setData] = useState<{
     notifications?: Notification[];
+    statuses?: { status: string; createdAt: string }[];
     status?: string;
   }>({});
 
@@ -96,9 +98,35 @@ const DashboardView = () => {
               </div>
 
               {isUnacceptedBeneficiary && (
-                <div className="col-12 mt-5">
-                  {t("Auth.Dashboard.UnacceptedBeneficiaryNote")}
-                </div>
+                <Fragment>
+                  <div className="col-12 mt-5">
+                    <h3 className="mb-4">
+                      {t("Auth.Dashboard.ApplicationTimeline")}
+                    </h3>
+
+                    <ul className="timeline">
+                      {data.statuses
+                        ?.sort((a, b) => (b.createdAt < a.createdAt ? -1 : 1))
+                        .map(({ status, createdAt }, i) => (
+                          <li key={i}>
+                            <div>
+                              {moment(createdAt).format(
+                                viewDayDateFormat + " @ " + viewTimeFormat
+                              )}
+                            </div>
+
+                            <div className="mt-3">
+                              {renderDataFromOptions(status || "", statuses)}
+                            </div>
+                          </li>
+                        ))}
+                    </ul>
+                  </div>
+
+                  <div className="col-12 mt-5">
+                    {t("Auth.Dashboard.UnacceptedBeneficiaryNote")}
+                  </div>
+                </Fragment>
               )}
 
               <div className="col-12">
