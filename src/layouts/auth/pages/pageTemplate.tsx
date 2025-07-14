@@ -136,9 +136,9 @@ const PageTemplate = ({
             </div>
           )}
         </div>
-      </div>
 
-      <div className="col-12 order-4 order-lg-4 py-4">{children}</div>
+        <div className="col-12 order-4 order-lg-4 py-4">{children}</div>
+      </div>
     </Fragment>
   );
 };
