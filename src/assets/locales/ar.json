@@ -543,6 +543,7 @@
       "ResetPassword": {
         "NewPassword": "كلمة السر الجديدة",
         "NewPasswordConfirmation": "تأكيد كلمة السر الجديدة",
+        "OldPassword": "كلمة السر الحالية",
         "ResetPassword": "إعادة تعيين كلمة السر",
         "Title": "إعادة تعيين كلمة السر"
       },

@@ -543,6 +543,7 @@
       "ResetPassword": {
         "NewPassword": "New Password",
         "NewPasswordConfirmation": "New Password Confirmation",
+        "OldPassword": "Current Password",
         "ResetPassword": "Reset Password",
         "Title": "Reset Password"
       },
