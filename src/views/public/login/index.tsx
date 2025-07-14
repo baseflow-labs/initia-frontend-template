@@ -3,11 +3,11 @@ import { useDispatch } from "react-redux";
 
 import * as authApi from "../../../api/auth";
 import BelowInputButton from "../../../components/button/belowInput";
+import Button from "../../../components/core/button";
 import Form from "../../../components/form";
 import { login } from "../../../store/actions/auth";
 import { addNotification } from "../../../store/actions/notifications";
 import { apiCatchGlobalHandler } from "../../../utils/function";
-import Button from "../../../components/core/button";
 
 const LoginView = () => {
   const { t } = useTranslation();
@@ -51,6 +51,22 @@ const LoginView = () => {
       .catch(apiCatchGlobalHandler);
   };
 
+  const onDummySubmit = (values: { type: string }) => {
+    authApi
+      .dummyLogin(values)
+      .then((res: any) => {
+        dispatch(
+          addNotification({
+            msg: t("Public.Login.Labels.Success", {
+              name: res.payload.user.name,
+            }),
+          })
+        );
+        dispatch(login(res.payload));
+      })
+      .catch(apiCatchGlobalHandler);
+  };
+
   const demoLogin = [
     // {
     //   label: t("Public.Login.Labels.LoginAsAdmin"),
@@ -68,31 +84,19 @@ const LoginView = () => {
     // },
     {
       label: t("Public.Login.Labels.LoginAsHod"),
-      credentials: {
-        identifier: "580000000",
-        password: "12345678",
-      },
+      type: "hod",
     },
     {
       label: t("Public.Login.Labels.LoginAsResearcher"),
-      credentials: {
-        identifier: "570000000",
-        password: "12345678",
-      },
+      type: "researcher",
     },
     {
       label: t("Public.Login.Labels.LoginAsApplicant"),
-      credentials: {
-        identifier: "560000000",
-        password: "12345678",
-      },
+      type: "applicant",
     },
     {
       label: t("Public.Login.Labels.LoginAsBeneficiary"),
-      credentials: {
-        identifier: "550000000",
-        password: "12345678",
-      },
+      type: "beneficiary",
     },
   ];
 
@@ -106,11 +110,11 @@ const LoginView = () => {
 
       {process.env.REACT_APP_ENVIRONMENT === "staging" ? (
         <div className="row g-2 mt-3">
-          {demoLogin.map(({ label, credentials }, i) => (
+          {demoLogin.map(({ label, type }, i) => (
             <div className="col-6" key={i}>
               <Button
                 className="w-100 h-100"
-                onClick={() => onSubmit(credentials)}
+                onClick={() => onDummySubmit({ type })}
               >
                 {label}
               </Button>

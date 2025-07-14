@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+
 import { APP_VERSION } from "../../documentation/version";
 
 const CopyRightView = ({
@@ -12,7 +13,7 @@ const CopyRightView = ({
 
   return (
     <div className={"px-1" + (onLine ? " d-flex justify-content-between" : "")}>
-      <small className="text-muted">{APP_VERSION}</small>
+      <small className="text-muted">V.{APP_VERSION}</small>
       {!onLine ? <br /> : ""}
       {!onLine ? (
         <small className="text-muted">
