@@ -58,7 +58,7 @@ const AddStaff = ({
                     addNotification({
                       msg: t("Global.Form.SuccessMsg", {
                         action: t("Auth.Researchers.EditResearcher"),
-                        data: e.name,
+                        data: e.fullName,
                       }),
                     })
                   );
@@ -78,7 +78,7 @@ const AddStaff = ({
                     addNotification({
                       msg: t("Global.Form.SuccessMsg", {
                         action: t("Auth.Researchers.AddResearcher"),
-                        data: e.name,
+                        data: e.fullName,
                       }),
                     })
                   );
