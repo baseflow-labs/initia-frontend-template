@@ -26,6 +26,10 @@ const login = async (credentials: loginCredentials) => {
   return await api.post(mainPath + "/login", credentials);
 };
 
+const dummyLogin = async (data: { type: string }) => {
+  return await api.post(mainPath + "/dummy-login", data);
+};
+
 // const logout = async () => {
 //   return await api.post(mainPath + "/logout");
 // };
@@ -58,6 +62,7 @@ const register = async (userData: registerProps) => {
 
 export {
   login,
+  dummyLogin,
   otpSend,
   requestPasswordReset,
   resetPassword,

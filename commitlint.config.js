@@ -12,6 +12,7 @@ module.exports = {
         "dashboard",
         "membershipRegistration",
         "settings",
+        "notifications",
         "staff",
         "visits",
         "visitReports",
