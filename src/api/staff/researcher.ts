@@ -2,25 +2,7 @@ import api, { formatGetFilters, GetDataProps } from "..";
 import store, { RootState } from "../../store/store";
 
 interface Props {
-  user?: string;
-  socialStatus: string;
-  category: string;
-  fullName: string;
-  nationality: string;
-  dob: string;
-  idExpiryDate: string;
-  idNumber: string;
-  familyRecordPhoto: string;
-  guardianIdPhoto: string;
-  gender: string;
-  healthStatus: string;
-  diseases: string;
-  incurableDisease?: string[];
-  healthStatementPhoto: string;
-  nationalRecord: string;
-  housing: string;
-  income: string;
-  contactsBank: string;
+  id?: string;
 }
 
 const mainPath = "/staff";
@@ -49,15 +31,7 @@ const getByUserId = async (id?: string) => {
 };
 
 const update = async (data: Props) => {
-  return await api.patch(
-    mainPath + "/create-update",
-    { ...data, user: data.user || user.id },
-    {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    }
-  );
+  return await api.patch(mainPath + "/" + data.id, data);
 };
 
 const remove = async (id: string) => {

@@ -6,11 +6,26 @@ import { dataRender } from "../../../components/table";
 import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import AddStaff from "./addStaff";
+import Button from "../../../components/core/button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
 
 const ResearcherMgmtPage = () => {
   const { t } = useTranslation();
 
-  const [openModal, setOpenModal] = useState<Object | undefined>(undefined);
+  const [openModal, setOpenModal] = useState<
+    | {
+        id?: string;
+        fullName?: string;
+        email?: string;
+        username?: string;
+        idNumber?: string;
+        image?: string;
+        beneficiariesCount?: number;
+        visitsCount?: number;
+      }
+    | undefined
+  >(undefined);
   const [currentSearch, setCurrentSearch] = useState("");
   const [researchers, setResearchers] = useState<
     {
@@ -78,6 +93,7 @@ const ResearcherMgmtPage = () => {
                 email,
                 username,
                 image,
+                idNumber,
                 beneficiariesCount,
                 visitsCount,
               },
@@ -108,23 +124,24 @@ const ResearcherMgmtPage = () => {
                       {dataRender({ type: "phoneNumber", data: username })}
                     </p>
 
-                    {/* <Button
+                    <Button
                       color="info"
                       outline
                       size="xs"
                       onClick={() =>
                         setOpenModal({
                           id,
-                          name: fullName,
+                          fullName,
                           email,
                           username,
+                          idNumber,
                           image,
                         })
                       }
                     >
                       <FontAwesomeIcon icon={faEdit} />{" "}
                       {t("Global.Form.Labels.Edit")}
-                    </Button> */}
+                    </Button>
                   </div>
                 </div>
 
