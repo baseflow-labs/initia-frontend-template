@@ -5,20 +5,17 @@ import {
   faEdit,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import moment from "moment";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router";
+
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import * as DataReviewApi from "../../../api/profile/dataReview";
 import Button from "../../../components/core/button";
-import Form from "../../../components/form";
-import Modal from "../../../components/modal";
 import TabsHeader from "../../../components/tab";
 import DynamicTable, { dataRender } from "../../../components/table";
 import { addNotification } from "../../../store/actions/notifications";
-import { viewDayDateFormat } from "../../../utils/consts";
 import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
@@ -28,9 +25,11 @@ import {
   beneficiaryMapping,
   beneficiaryTabs,
   inputsData,
-} from "../../../utils/inputsData";
+} from "../../../utils/formInputs/beneficiaryProfileMapping";
+import RequestDataUpdate from "./requestDataUpdate";
+import ViewDataArchive from "./viewDataArchive";
 
-interface ReviewProps {
+export interface ReviewProps {
   property?: string;
   table?: string;
   row?: string;
@@ -108,8 +107,6 @@ const BeneficiaryFormReview = () => {
       })
       .catch(apiCatchGlobalHandler);
   }, []);
-
-  const title = beneficiary?.fullName;
 
   const statuses = [
     {
@@ -226,7 +223,9 @@ const BeneficiaryFormReview = () => {
     <Fragment>
       <div className="row justify-content-between">
         <div className="col-6 col-lg-9">
-          <h2 className="text-dark fs-5 fw-semibold m-0 px-3 py-2">{title}</h2>
+          <h2 className="text-dark fs-5 fw-semibold m-0 px-3 py-2">
+            {beneficiary?.fullName}
+          </h2>
         </div>
 
         <div className="col-6 col-lg-3">
@@ -315,83 +314,17 @@ const BeneficiaryFormReview = () => {
         }}
       />
 
-      <Modal
-        title={t("Auth.Beneficiaries.Profile.RequestDataUpdate", {
-          property: updateModalData.label,
-        })}
-        onClose={() => setUpdateModalData({})}
-        isOpen={!!updateModalData.property}
-      >
-        <Form
-          initialValues={dataReview}
-          inputs={() => [
-            {
-              name: "note",
-              type: "textarea",
-              label: t("Auth.Beneficiaries.Profile.UpdateNote"),
-            },
-          ]}
-          submitText={t("Global.Form.Labels.SubmitApplication")}
-          onFormSubmit={(e) => {
-            setDataReview((current) =>
-              current.map((row) =>
-                row.property === updateModalData.property &&
-                row.table === updateModalData.table
-                  ? {
-                      ...row,
-                      note: e.note,
-                      needUpdate: true,
-                      new: true,
-                      confirm: false,
-                    }
-                  : row
-              )
-            );
-            setUpdateModalData({});
-          }}
-        />
-      </Modal>
+      <RequestDataUpdate
+        openModal={updateModalData}
+        setOpenModal={setUpdateModalData}
+        dataReview={dataReview}
+        setDataReview={setDataReview}
+      />
 
-      <Modal
-        title={t("Auth.Beneficiaries.Profile.Archive", {
-          property: fieldsToShow[archiveModalData[0]?.table || ""]?.find(
-            (field) => field.name === archiveModalData[0]?.property
-          )?.label,
-        })}
-        onClose={() => setArchiveModalData([])}
-        isOpen={!!archiveModalData[0]?.property}
-      >
-        <ul>
-          {archiveModalData
-            .sort((a, b) =>
-              moment(a.dataUpdate?.createdAt).isBefore(
-                moment(b.dataUpdate?.createdAt)
-              )
-                ? -1
-                : 1
-            )
-            .map((row, i) => {
-              const propertySpecs = fieldsToShow[row.table || ""].find(
-                (field) => field.name === row.property
-              );
-
-              return (
-                <li key={i}>
-                  {dataRender({
-                    data: row.dataUpdate?.data || "",
-                    type: propertySpecs?.type,
-                    options: propertySpecs?.options,
-                  })}
-                  <small className="float-end">
-                    {moment(row.dataUpdate?.createdAt).format(
-                      viewDayDateFormat
-                    )}
-                  </small>
-                </li>
-              );
-            })}
-        </ul>
-      </Modal>
+      <ViewDataArchive
+        openModal={archiveModalData}
+        setOpenModal={setArchiveModalData}
+      />
     </Fragment>
   );
 };

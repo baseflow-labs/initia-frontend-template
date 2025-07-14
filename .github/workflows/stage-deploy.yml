@@ -3,7 +3,7 @@ name: Deploy to Staging - stage.mustaheq.org
 on:
   push:
     branches:
-      - staging  # Push to 'staging' branch triggers this workflow
+      - staging # Push to 'staging' branch triggers this workflow
 
 jobs:
   build-and-deploy:
@@ -14,6 +14,52 @@ jobs:
       TIMESTAMP: ${{ github.run_id }}
 
     steps:
+      - name: Bump version based on last PR title
+        id: bump
+        run: |
+          VERSION_FILE="src/documentation/version.ts"
+          CURRENT_VERSION=$(grep -oP '[0-9]+\.[0-9]+\.[0-9]+' $VERSION_FILE)
+          BASE=$(echo $CURRENT_VERSION | cut -d. -f1,2)
+          PATCH=$(echo $CURRENT_VERSION | cut -d. -f3)
+          MAJOR=$(echo $CURRENT_VERSION | cut -d. -f1)
+          MINOR=$(echo $CURRENT_VERSION | cut -d. -f2)
+
+          echo "Current Version: $CURRENT_VERSION"
+
+          # Get last merged PR title
+          PR_TITLE=$(gh pr list --state merged --base stg --sort merged --limit 1 --json title --jq '.[0].title')
+          echo "Last PR Title: $PR_TITLE"
+
+          # Decide bump type
+          if [[ "$PR_TITLE" =~ ^(Fix|Enhance): ]]; then
+            PATCH=$((PATCH + 1))
+            NEW_VERSION="$MAJOR.$MINOR.$PATCH"
+          elif [[ "$PR_TITLE" =~ ^Build: ]]; then
+            MINOR=$((MINOR + 1))
+            NEW_VERSION="$MAJOR.$MINOR.0"
+          elif [[ "$PR_TITLE" =~ ^Upgrade: ]]; then
+            MAJOR=$((MAJOR + 1))
+            NEW_VERSION="$MAJOR.0.0"
+          else
+            echo "No bump. Title doesn't match Fix:, Enhance:, Build:", or Upgrade:
+            exit 0
+          fi
+
+          echo "export const APP_VERSION = \"$NEW_VERSION\";" > $VERSION_FILE
+          echo "🔢 Bumped version to $NEW_VERSION"
+          echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit and push version bump
+        if: steps.bump.outputs.new_version != ''
+        run: |
+          git config user.name "Makkahwi Bot"
+          git config user.email "SuhaibAhmadAi@hotmail.com"
+          git add src/documentation/version.ts
+          git commit -m "chore: bump version to ${{ steps.bump.outputs.new_version }} [ci skip]" || echo "Nothing to commit"
+          git push origin stg
+
       - name: Checkout Code
         uses: actions/checkout@v3
 

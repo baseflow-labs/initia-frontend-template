@@ -7,8 +7,6 @@ import { useNavigate } from "react-router";
 
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import * as StaffApi from "../../../api/staff/researcher";
-import Form from "../../../components/form";
-import Modal from "../../../components/modal";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import {
@@ -16,6 +14,12 @@ import {
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
+import {
+  getBeneficiaryCategories,
+  getBeneficiaryStatuses,
+  getNationalities,
+} from "../../../utils/optionDataLists/beneficiaries";
+import AssignResearcher from "./assignResearcher";
 
 const ApplicantsViewForSupervisor = () => {
   const { t } = useTranslation();
@@ -37,8 +41,9 @@ const ApplicantsViewForSupervisor = () => {
     { beneficiary: string; staff: string } | undefined
   >(undefined);
   const [currentFilters, setCurrentFilters] = useState({});
+  const [currentSearch, setCurrentSearch] = useState("");
 
-  const onSearch = ({ filters = {}, page = 1, capacity = 10 }) => {
+  const getData = ({ filters = {}, page = 1, capacity = 10, search = "" }) => {
     setCurrentFilters(filters);
 
     const customFilters = [
@@ -51,6 +56,17 @@ const ApplicantsViewForSupervisor = () => {
         filterOperator: "stringNotEquals",
       },
     ];
+
+    if (search) {
+      customFilters.push({
+        field: "fullName",
+        filteredTerm: {
+          dataType: "string",
+          value: search,
+        },
+        filterOperator: "contains",
+      });
+    }
 
     return BeneficiaryApi.getAll({ filters, page, capacity, customFilters })
       .then((res: any) => {
@@ -75,13 +91,23 @@ const ApplicantsViewForSupervisor = () => {
             .filter(({ status = "" }) => status !== "Accepted") as any
         );
 
-        return res;
+        return {
+          ...res,
+          payload: res.payload.filter(
+            ({ status = { status: "" } }) => status.status !== "Accepted"
+          ) as any,
+        };
       })
       .catch(apiCatchGlobalHandler);
   };
 
   useLayoutEffect(() => {
-    onSearch({ filters: {}, page: 1, capacity: 10 });
+    getData({
+      filters: currentFilters,
+      page: 1,
+      capacity: 10,
+      search: currentSearch,
+    });
 
     StaffApi.getAll({})
       .then((res: any) => {
@@ -90,53 +116,9 @@ const ApplicantsViewForSupervisor = () => {
       .catch(apiCatchGlobalHandler);
   }, []);
 
-  const title = t("Auth.Beneficiaries.Applications");
+  const nationalities = getNationalities(t);
 
-  const nationalities = [
-    {
-      value: "Saudi",
-      label: t("Auth.MembershipRegistration.Form.Nationality.Saudi"),
-    },
-    {
-      value: "Non Saudi",
-      label: t("Auth.MembershipRegistration.Form.Nationality.NonSaudi"),
-    },
-  ];
-
-  const statuses = [
-    {
-      value: "New Member",
-      label: t("Auth.MembershipRegistration.Statuses.NewMember"),
-    },
-    {
-      value: "Incomplete",
-      label: t("Auth.MembershipRegistration.Statuses.Incomplete"),
-    },
-    {
-      value: "Need Help",
-      label: t("Auth.MembershipRegistration.Statuses.NeedHelp"),
-    },
-    {
-      value: "Rejected",
-      label: t("Auth.MembershipRegistration.Statuses.Rejected"),
-    },
-    {
-      value: "Reviewed",
-      label: t("Auth.MembershipRegistration.Statuses.Reviewed"),
-    },
-    {
-      value: "Researcher Assigned",
-      label: t("Auth.MembershipRegistration.Statuses.ResearcherAssigned"),
-    },
-    {
-      value: "Cancelled",
-      label: t("Auth.MembershipRegistration.Statuses.Cancelled"),
-    },
-    {
-      value: "In Preview",
-      label: t("Auth.MembershipRegistration.Statuses.InPreview"),
-    },
-  ];
+  const statuses = getBeneficiaryStatuses(t);
 
   const filters = [
     {
@@ -187,32 +169,7 @@ const ApplicantsViewForSupervisor = () => {
     // },
     {
       type: "select",
-      options: [
-        {
-          value: "A",
-          label: t("Auth.MembershipRegistration.Form.Category.A"),
-        },
-        {
-          value: "B",
-          label: t("Auth.MembershipRegistration.Form.Category.B"),
-        },
-        {
-          value: "C",
-          label: t("Auth.MembershipRegistration.Form.Category.C"),
-        },
-        {
-          value: "D",
-          label: t("Auth.MembershipRegistration.Form.Category.D"),
-        },
-        {
-          value: "Uncategorized",
-          label: t("Auth.MembershipRegistration.Form.Category.Uncategorized"),
-        },
-        {
-          value: "Above Grading",
-          label: t("Auth.MembershipRegistration.Form.Category.AboveGrading"),
-        },
-      ],
+      options: getBeneficiaryCategories(t),
       name: "category",
       label: t("Auth.MembershipRegistration.Form.Category.Title"),
     },
@@ -267,18 +224,30 @@ const ApplicantsViewForSupervisor = () => {
             })
           );
 
-          onSearch({ filters: {}, page: 1, capacity: 10 });
+          getData({
+            filters: currentFilters,
+            page: 1,
+            capacity: 10,
+            search: currentSearch,
+          });
         });
+  };
+
+  const onSearch = (e: string) => {
+    setCurrentSearch(e);
+    getData({ filters: currentFilters, page: 1, capacity: 10, search: e });
   };
 
   return (
     <Fragment>
       <TablePage
-        title={title}
+        title={t("Auth.Beneficiaries.Applications")}
         filters={filters}
         actionButtons={actionButtons}
         columns={columns}
         data={beneficiaries}
+        onSearch={onSearch}
+        searchPlaceholder="بحث بـ اسم المستفيد"
         tableActions={() => [
           {
             icon: faUser,
@@ -302,79 +271,24 @@ const ApplicantsViewForSupervisor = () => {
             onClick: (data: string) => deleteBeneficiary(data),
           },
         ]}
-        onSearch={onSearch}
+        onGetData={getData}
         onPageChange={(page, capacity) => {
-          onSearch({ filters: currentFilters, page, capacity });
+          getData({
+            filters: currentFilters,
+            page,
+            capacity,
+            search: currentSearch,
+          });
         }}
       />
 
-      <Modal
-        title={t("Auth.Beneficiaries.Profile.AssignResearcher")}
-        onClose={() => setAssignResearcherModalOpen(undefined)}
-        isOpen={!!assignResearcherModalOpen}
-      >
-        {assignResearcherModalOpen && (
-          <Form
-            inputs={() => [
-              {
-                label: t("Auth.Beneficiaries.BeneficiaryName"),
-                name: "beneficiary",
-                type: "select",
-                required: true,
-                options: beneficiaries?.map(({ id, fullName }) => ({
-                  value: id,
-                  label: fullName,
-                })),
-              },
-              {
-                label: t("Auth.Researchers.ResearcherName"),
-                name: "staff",
-                type: "select",
-                required: true,
-                options: researchers.map(({ id, fullName }) => ({
-                  value: id,
-                  label: fullName,
-                })),
-              },
-            ]}
-            // customButtons={
-            //   <Button
-            //     outline
-            //     onClick={() => setAssignResearcherModalOpen(null)}
-            //     className="w-50"
-            //   >
-            //     Back
-            //   </Button>
-            // }
-            initialValues={assignResearcherModalOpen}
-            submitText={t("Auth.Researchers.Assign")}
-            onFormSubmit={(e) => {
-              BeneficiaryApi.assignResearcher(e.beneficiary || "", e)
-                .then(() => {
-                  dispatch(
-                    addNotification({
-                      msg: t("Global.Form.SuccessMsg", {
-                        action: t(
-                          "Auth.Beneficiaries.Profile.AssignResearcher",
-                          {
-                            researcher: researchers.find(
-                              ({ id }) => e.researcher === id
-                            )?.fullName,
-                          }
-                        ),
-                        data: beneficiaries.find((b) => b.id === e.beneficiary)
-                          ?.fullName,
-                      }),
-                    })
-                  );
-                  onSearch({ filters: {}, page: 1, capacity: 10 });
-                  setAssignResearcherModalOpen(undefined);
-                })
-                .catch(apiCatchGlobalHandler);
-            }}
-          />
-        )}
-      </Modal>
+      <AssignResearcher
+        beneficiaries={beneficiaries}
+        researchers={researchers}
+        onGetData={getData}
+        openModal={assignResearcherModalOpen}
+        setOpenModal={setAssignResearcherModalOpen}
+      />
     </Fragment>
   );
 };

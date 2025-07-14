@@ -2,28 +2,32 @@ import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
 
 import * as AidApi from "../../../api/aids/aids";
-import Form from "../../../components/form";
-import Modal from "../../../components/modal";
+import UnacceptedBeneficiary from "../../../components/card/unacceptedBeneficiary";
+import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
 import TablePage from "../../../layouts/auth/pages/tablePage";
-import { addNotification } from "../../../store/actions/notifications";
+import { useAppSelector } from "../../../store/hooks";
 import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
+import {
+  getAidStatuses,
+  getAidTypes,
+} from "../../../utils/optionDataLists/aids";
+import RequestAid from "./requestAid";
 
 const AidsBeneficiaryView = () => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
 
   const [openModal, setOpenModal] = useState(false);
   const [currentFilters, setCurrentFilters] = useState({});
   const [aids, setAids] = useState([]);
+  const { user } = useAppSelector((state) => state.auth);
 
-  const onSearch = ({ filters = {}, page = 1, capacity = 10 }) => {
+  const getData = ({ filters = {}, page = 1, capacity = 10 }) => {
     setCurrentFilters(filters);
 
     return AidApi.getAll({ filters, page, capacity })
@@ -42,36 +46,12 @@ const AidsBeneficiaryView = () => {
   };
 
   useLayoutEffect(() => {
-    onSearch({ filters: currentFilters, page: 1, capacity: 10 });
+    getData({ filters: currentFilters, page: 1, capacity: 10 });
   }, []);
 
-  const title = t("Auth.Aids.Beneficiary.Title");
+  const aidTypes = getAidTypes(t);
 
-  const aidTypes = [
-    {
-      value: "Cash",
-      label: t("Auth.Aids.Cash"),
-    },
-    {
-      value: "In-Kind",
-      label: t("Auth.Aids.In-Kind"),
-    },
-  ];
-
-  const statuses = [
-    {
-      value: "Pending",
-      label: t("Auth.Aids.Statuses.Pending"),
-    },
-    {
-      value: "Granted",
-      label: t("Auth.Aids.Statuses.Granted"),
-    },
-    {
-      value: "Rejected",
-      label: t("Auth.MembershipRegistration.Statuses.Rejected"),
-    },
-  ];
+  const statuses = getAidStatuses(t);
 
   const filters = [
     {
@@ -144,86 +124,33 @@ const AidsBeneficiaryView = () => {
     },
   ];
 
-  const requestAidInputs = () => [
-    {
-      type: "select",
-      options: aidTypes,
-      name: "type",
-      label: t("Auth.Aids.AidType"),
-      required: true,
-    },
-    {
-      type: "text",
-      name: "name",
-      label: t("Auth.Aids.AidName"),
-      required: true,
-    },
-    {
-      type: "select",
-      options: [
-        { value: "Yes", label: t("Global.Form.Labels.Yes") },
-        { value: "No", label: t("Global.Form.Labels.No") },
-      ],
-      name: "urgent",
-      label: t("Auth.Aids.Beneficiary.Urgent?"),
-      required: true,
-      halfCol: true,
-    },
-    {
-      type: "file",
-      name: "document",
-      label: t("Global.Form.Labels.SupportingDocument"),
-      required: false,
-      halfCol: true,
-    },
-    {
-      type: "textarea",
-      name: "note",
-      label: t("Auth.Aids.AidPurpose"),
-      required: true,
-    },
-  ];
+  const isUnacceptedBeneficiary =
+    user.role === "beneficiary" && user.status !== "Accepted";
 
-  return (
+  return isUnacceptedBeneficiary ? (
+    <PageTemplate>
+      <UnacceptedBeneficiary />
+    </PageTemplate>
+  ) : (
     <Fragment>
       <TablePage
-        title={title}
+        title={t("Auth.Aids.Beneficiary.Title")}
         filters={filters}
         actionButtons={actionButtons}
         columns={columns}
         data={aids}
-        onSearch={onSearch}
+        onGetData={getData}
         onPageChange={(page, capacity) => {
-          onSearch({ filters: currentFilters, page, capacity });
+          getData({ filters: currentFilters, page, capacity });
         }}
       />
 
-      <Modal
-        title={t("Auth.Aids.Beneficiary.RequestAid")}
-        isOpen={openModal}
-        onClose={() => setOpenModal(false)}
-      >
-        <Form
-          inputs={requestAidInputs}
-          submitText={t("Global.Form.Labels.SubmitApplication")}
-          onFormSubmit={(e) => {
-            AidApi.create(e)
-              .then(() => {
-                setOpenModal(false);
-                onSearch({ filters: currentFilters, page: 1, capacity: 10 });
-                dispatch(
-                  addNotification({
-                    msg: t("Global.Form.SuccessMsg", {
-                      action: t("Auth.Aids.Beneficiary.RequestAid"),
-                      data: e.name,
-                    }),
-                  })
-                );
-              })
-              .catch(apiCatchGlobalHandler);
-          }}
-        />
-      </Modal>
+      <RequestAid
+        onGetData={getData}
+        currentFilters={currentFilters}
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+      />
     </Fragment>
   );
 };

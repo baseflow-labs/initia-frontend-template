@@ -83,6 +83,9 @@ interface Props extends React.FormHTMLAttributes<HTMLFormElement> {
   submitText?: string;
   initialValues?: object;
   customButtons?: React.ReactNode;
+  customValidate?: (
+    values: Record<string, any>
+  ) => FormikErrors<Record<string, any>>;
 }
 
 export const LabelView = ({ labelNote, label, required }: InputSingleProps) => (
@@ -107,51 +110,30 @@ const Form: React.FC<Props> = ({
   submitText,
   customButtons,
   initialValues,
+  customValidate,
   ...rest
 }) => {
   const { t } = useTranslation();
   const { loading } = useAppSelector((state) => state.loading);
 
-  const formik = useFormik<Record<string, any>>({
-    initialValues: { ...initialValues },
+  const dummyFormik = useFormik<Record<string, any>>({
+    initialValues: {},
     enableReinitialize: true,
-    validate: (values: Record<string, any>) => {
-      const errors: FormikErrors<Record<string, any>> = {};
-      const dynamicInputs = inputs(formik);
-
-      dynamicInputs.forEach((input) => {
-        if (
-          input.required &&
-          ((input.type === "multipleEntries" && !values[input.name].length) ||
-            !values[input.name])
-        ) {
-          errors[input.name] = t("Global.Form.Labels.Required");
-        }
-
-        if (input.type === "email" && values[input.name]) {
-          const validEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-          if (!validEmail.test(values[input.name])) {
-            errors[input.name] = t("Global.Form.Labels.InvalidEmail");
-          }
-        }
-      });
-      return errors;
-    },
-    onSubmit: (values) => {
-      onFormSubmit?.(values);
-    },
+    onSubmit: async () => {},
   });
 
-  formik.initialValues = inputs(formik).reduce<Record<string, any>>(
+  const dynamicInputs = inputs(dummyFormik);
+
+  const generatedInitialValues = dynamicInputs.reduce<Record<string, any>>(
     (acc, input) => {
-      if (input.defaultValue) {
+      if (input.defaultValue !== undefined) {
         acc[input.name] = input.defaultValue;
         return acc;
       }
 
       switch (input.type) {
         case "radio":
-          acc[input.name] = input.options?.[0]?.value;
+          acc[input.name] = input.options?.[0]?.value ?? "";
           break;
         case "multipleEntries":
           acc[input.name] = [];
@@ -165,6 +147,106 @@ const Form: React.FC<Props> = ({
     },
     {}
   );
+
+  const formik = useFormik<Record<string, any>>({
+    initialValues: { ...generatedInitialValues, ...initialValues },
+    enableReinitialize: true,
+    validate: (values: Record<string, any>) => {
+      const errors: FormikErrors<Record<string, any>> = {};
+      const dynamicInputs = inputs(formik);
+
+      dynamicInputs.forEach((input) => {
+        const { name, required, type, min, max, minLength, maxLength } = input;
+        const value = values[name];
+
+        if (
+          required &&
+          (value === undefined ||
+            value === null ||
+            value === "" ||
+            (type === "multipleEntries" &&
+              Array.isArray(value) &&
+              value.length === 0))
+        ) {
+          errors[name] = t("Global.Form.Errors.Required");
+          return;
+        }
+
+        if (type === "phoneNumber") {
+          if (String(value).length !== 9) {
+            errors[name] = t("Global.Form.Errors.PhoneNumberLength");
+          }
+
+          if (
+            !String(value).startsWith("50") &&
+            !String(value).startsWith("53") &&
+            !String(value).startsWith("54") &&
+            !String(value).startsWith("55") &&
+            !String(value).startsWith("56") &&
+            !String(value).startsWith("57") &&
+            !String(value).startsWith("58") &&
+            !String(value).startsWith("59")
+          ) {
+            errors[name] = t("Global.Form.Errors.InvalidPhoneNumber");
+          }
+        }
+
+        if (value !== undefined && value !== null && value !== "") {
+          if (type === "email") {
+            const validEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+            if (!validEmail.test(value)) {
+              errors[name] = t("Global.Form.Errors.InvalidEmail");
+            }
+          }
+
+          if (type === "number" || type === "range") {
+            const numeric = Number(value);
+            if (isNaN(numeric)) {
+              errors[name] = t("Global.Form.Errors.InvalidNumber");
+            } else {
+              if (min !== undefined && numeric < Number(min)) {
+                errors[name] = `${t("Global.Form.Errors.Min")}: ${min}`;
+              }
+              if (max !== undefined && numeric > Number(max)) {
+                errors[name] = `${t("Global.Form.Errors.Max")}: ${max}`;
+              }
+            }
+          }
+
+          if (typeof value === "string") {
+            if (minLength !== undefined && value.length < minLength) {
+              errors[name] = `${t(
+                "Global.Form.Errors.MinLength"
+              )}: ${minLength}`;
+            }
+            if (maxLength !== undefined && value.length > maxLength) {
+              errors[name] = `${t(
+                "Global.Form.Errors.MaxLength"
+              )}: ${maxLength}`;
+            }
+          }
+        }
+      });
+
+      const customErrors = customValidate?.(values) ?? {};
+      return { ...errors, ...customErrors };
+    },
+    onSubmit: async (values, formikHelpers) => {
+      const errors = await formikHelpers.validateForm();
+
+      if (Object.keys(errors).length > 0) {
+        const touchedFields = Object.keys(errors).reduce((acc, key) => {
+          acc[key] = true;
+          return acc;
+        }, {} as Record<string, boolean>);
+
+        formikHelpers.setTouched(touchedFields, true);
+        return;
+      }
+
+      onFormSubmit?.(values);
+    },
+  });
 
   const InlineElement = ({
     flip,
@@ -196,6 +278,11 @@ const Form: React.FC<Props> = ({
               logo,
               halfCol,
               type,
+              required,
+              min,
+              max,
+              minLength,
+              maxLength,
               ...input
             }) => {
               const triggerError =
@@ -214,7 +301,7 @@ const Form: React.FC<Props> = ({
                 return (
                   <Fragment key={input.name}>
                     <div className="col-12">
-                      <LabelView {...input} />
+                      <LabelView required={required} {...input} />
                     </div>
 
                     <div className="col-md-6 mb-3">
@@ -260,7 +347,7 @@ const Form: React.FC<Props> = ({
                   }`}
                   key={input.name}
                 >
-                  <LabelView {...input} />
+                  <LabelView required={required} {...input} />
 
                   {aboveComp}
 
@@ -275,6 +362,8 @@ const Form: React.FC<Props> = ({
 
                     <InlineElement content={postfixText} />
                   </div>
+
+                  <ErrorView />
 
                   {belowComp}
 
@@ -350,8 +439,6 @@ const Form: React.FC<Props> = ({
                       )}
                     </Fragment>
                   )}
-
-                  <ErrorView />
                 </div>
               );
             }
