@@ -127,11 +127,15 @@ const AidsBeneficiaryView = () => {
   const isUnacceptedBeneficiary =
     user.role === "beneficiary" && user.status !== "Accepted";
 
-  return isUnacceptedBeneficiary ? (
-    <PageTemplate>
-      <UnacceptedBeneficiary />
-    </PageTemplate>
-  ) : (
+  if (isUnacceptedBeneficiary) {
+    return (
+      <PageTemplate>
+        <UnacceptedBeneficiary />
+      </PageTemplate>
+    );
+  }
+
+  return (
     <Fragment>
       <TablePage
         title={t("Auth.Aids.Beneficiary.Title")}
