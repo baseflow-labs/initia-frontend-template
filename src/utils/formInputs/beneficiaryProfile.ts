@@ -1,8 +1,6 @@
 import moment from "moment";
 
 import absherLogo from "../../assets/images/partners/absher.svg";
-import eduMinistryLogo from "../../assets/images/partners/eduMinistry.svg";
-import ministryLogo from "../../assets/images/partners/ministry.svg";
 import molimLogo from "../../assets/images/partners/molim.svg";
 import tawakkalnaLogo from "../../assets/images/partners/Tawakkalna.svg";
 import { InputSingleProps } from "../../components/form";
