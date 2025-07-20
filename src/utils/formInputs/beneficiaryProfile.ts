@@ -404,7 +404,8 @@ export const getDependantDataInputs = (t: Function): InputSingleProps[] => [
     options: getAgeGroups(t),
     name: "ageGroup",
     label: t("Auth.MembershipRegistration.Form.AgeGroup.Title"),
-    required: true,
+    required: false,
+    excludeInForm: true,
   },
   {
     type: "radio",

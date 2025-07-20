@@ -39,6 +39,8 @@ interface InputBasicProps {
     | "multipleEntries"
     | string;
   required?: boolean;
+  disabled?: boolean;
+  excludeInForm?: boolean;
   defaultValue?: string | number;
   placeholder?: string;
   min?: string | number;
@@ -122,7 +124,7 @@ const Form: React.FC<Props> = ({
     onSubmit: async () => {},
   });
 
-  const dynamicInputs = inputs(dummyFormik);
+  const dynamicInputs = inputs(dummyFormik).filter((i) => i.excludeInForm);
 
   const generatedInitialValues = dynamicInputs.reduce<Record<string, any>>(
     (acc, input) => {
@@ -153,7 +155,7 @@ const Form: React.FC<Props> = ({
     enableReinitialize: true,
     validate: (values: Record<string, any>) => {
       const errors: FormikErrors<Record<string, any>> = {};
-      const dynamicInputs = inputs(formik);
+      const dynamicInputs = inputs(formik).filter((i) => i.excludeInForm);
 
       dynamicInputs.forEach((input) => {
         const { name, required, type, min, max, minLength, maxLength } = input;
@@ -269,180 +271,190 @@ const Form: React.FC<Props> = ({
     <FormikProvider value={formik}>
       <FormikForm className="text-start" {...rest}>
         <div className="row">
-          {inputs(formik).map(
-            ({
-              prefixText,
-              postfixText,
-              aboveComp,
-              belowComp,
-              logo,
-              halfCol,
-              type,
-              required,
-              min,
-              max,
-              minLength,
-              maxLength,
-              ...input
-            }) => {
-              const triggerError =
-                formik.errors[input.name] && formik.touched[input.name];
+          {inputs(formik)
+            .filter((i) => i.excludeInForm)
+            .map(
+              ({
+                prefixText,
+                postfixText,
+                aboveComp,
+                belowComp,
+                logo,
+                halfCol,
+                type,
+                required,
+                min,
+                max,
+                minLength,
+                maxLength,
+                ...input
+              }) => {
+                const triggerError =
+                  formik.errors[input.name] && formik.touched[input.name];
 
-              const prefixTexts =
-                prefixText || (type === "phoneNumber" ? "+966" : undefined);
+                const prefixTexts =
+                  prefixText || (type === "phoneNumber" ? "+966" : undefined);
 
-              const ErrorView = () => (
-                <small className={triggerError ? "text-danger" : "text-white"}>
-                  {triggerError ? (formik.errors[input.name] as any) : "."}
-                </small>
-              );
+                const ErrorView = () => (
+                  <small
+                    className={triggerError ? "text-danger" : "text-white"}
+                  >
+                    {triggerError ? (formik.errors[input.name] as any) : "."}
+                  </small>
+                );
 
-              if (logo) {
-                return (
-                  <Fragment key={input.name}>
-                    <div className="col-12">
-                      <LabelView required={required} {...input} />
-                    </div>
-
-                    <div className="col-md-6 mb-3">
-                      <button
-                        type="button"
-                        className="btn btn-outline-success p-2 w-100 rounded-3 no-interaction"
-                      >
-                        <img
-                          alt={`${input.name}Logo`}
-                          src={logo}
-                          height="40px"
-                        />
-                      </button>
-                    </div>
-
-                    <div className="col-md-6 mb-2">
-                      {aboveComp}
-
-                      <div
-                        className={`input-group ${
-                          type === "phoneNumber" ? "phone-number-input" : ""
-                        }`}
-                      >
-                        <InlineElement content={prefixTexts} flip />
-
-                        <InputComp id={input.name} type={type} {...input} />
-
-                        <InlineElement content={postfixText} />
+                if (logo) {
+                  return (
+                    <Fragment key={input.name}>
+                      <div className="col-12">
+                        <LabelView required={required} {...input} />
                       </div>
 
-                      {belowComp}
+                      <div className="col-md-6 mb-3">
+                        <button
+                          type="button"
+                          className="btn btn-outline-success p-2 w-100 rounded-3 no-interaction"
+                        >
+                          <img
+                            alt={`${input.name}Logo`}
+                            src={logo}
+                            height="40px"
+                          />
+                        </button>
+                      </div>
 
-                      <ErrorView />
+                      <div className="col-md-6 mb-2">
+                        {aboveComp}
+
+                        <div
+                          className={`input-group ${
+                            type === "phoneNumber" ? "phone-number-input" : ""
+                          }`}
+                        >
+                          <InlineElement content={prefixTexts} flip />
+
+                          <InputComp id={input.name} type={type} {...input} />
+
+                          <InlineElement content={postfixText} />
+                        </div>
+
+                        {belowComp}
+
+                        <ErrorView />
+                      </div>
+                    </Fragment>
+                  );
+                }
+
+                return (
+                  <div
+                    className={`mb-2 ${
+                      halfCol ? "col-md-6" : logo ? "col-6" : "col-md-12"
+                    }`}
+                    key={input.name}
+                  >
+                    <LabelView required={required} {...input} />
+
+                    {aboveComp}
+
+                    <div
+                      className={`input-group ${
+                        type === "phoneNumber" ? "phone-number-input" : ""
+                      }`}
+                    >
+                      <InlineElement content={prefixTexts} flip />
+
+                      <InputComp id={input.name} type={type} {...input} />
+
+                      <InlineElement content={postfixText} />
                     </div>
-                  </Fragment>
+
+                    <ErrorView />
+
+                    {belowComp}
+
+                    {type === "range" && (
+                      <Fragment>
+                        <div className={`input-group`}>
+                          <DefaultInput
+                            name={input.name}
+                            className="form-control-md"
+                            value={formik.values[input.name]}
+                          />
+
+                          <InlineElement
+                            flip
+                            content={
+                              <IconWrapperComp
+                                icon={resetFilterIcon}
+                                role="button"
+                                onClick={() =>
+                                  formik.setFieldValue(
+                                    input.name,
+                                    input.defaultValue
+                                  )
+                                }
+                              />
+                            }
+                          />
+                        </div>
+
+                        {input.name === "fontSize" && (
+                          <div className="row mt-3">
+                            <h4 className="col-md-12 mb-3">
+                              {t("Auth.Settings.Samples.Title")}
+                            </h4>
+
+                            <h3
+                              className="col-md-6"
+                              style={{
+                                fontSize: 1.75 * formik.values.fontSize,
+                              }}
+                            >
+                              {t("Auth.Settings.Samples.H3Sample")}
+                            </h3>
+
+                            <h4
+                              className="col-md-6"
+                              style={{ fontSize: 1.5 * formik.values.fontSize }}
+                            >
+                              {t("Auth.Settings.Samples.H4Sample")}
+                            </h4>
+
+                            <h5
+                              className="col-md-6"
+                              style={{
+                                fontSize: 1.25 * formik.values.fontSize,
+                              }}
+                            >
+                              {t("Auth.Settings.Samples.H5Sample")}
+                            </h5>
+
+                            <label
+                              className="form-label col-md-6"
+                              style={{ fontSize: 1 * formik.values.fontSize }}
+                            >
+                              {t("Auth.Settings.Samples.LabelSample")}
+                            </label>
+
+                            <div
+                              className="col-md-6"
+                              style={{
+                                fontSize: 0.875 * formik.values.fontSize,
+                              }}
+                            >
+                              <small>
+                                {t("Auth.Settings.Samples.SmallSample")}
+                              </small>
+                            </div>
+                          </div>
+                        )}
+                      </Fragment>
+                    )}
+                  </div>
                 );
               }
-
-              return (
-                <div
-                  className={`mb-2 ${
-                    halfCol ? "col-md-6" : logo ? "col-6" : "col-md-12"
-                  }`}
-                  key={input.name}
-                >
-                  <LabelView required={required} {...input} />
-
-                  {aboveComp}
-
-                  <div
-                    className={`input-group ${
-                      type === "phoneNumber" ? "phone-number-input" : ""
-                    }`}
-                  >
-                    <InlineElement content={prefixTexts} flip />
-
-                    <InputComp id={input.name} type={type} {...input} />
-
-                    <InlineElement content={postfixText} />
-                  </div>
-
-                  <ErrorView />
-
-                  {belowComp}
-
-                  {type === "range" && (
-                    <Fragment>
-                      <div className={`input-group`}>
-                        <DefaultInput
-                          name={input.name}
-                          className="form-control-md"
-                          value={formik.values[input.name]}
-                        />
-
-                        <InlineElement
-                          flip
-                          content={
-                            <IconWrapperComp
-                              icon={resetFilterIcon}
-                              role="button"
-                              onClick={() =>
-                                formik.setFieldValue(
-                                  input.name,
-                                  input.defaultValue
-                                )
-                              }
-                            />
-                          }
-                        />
-                      </div>
-
-                      {input.name === "fontSize" && (
-                        <div className="row mt-3">
-                          <h4 className="col-md-12 mb-3">
-                            {t("Auth.Settings.Samples.Title")}
-                          </h4>
-
-                          <h3
-                            className="col-md-6"
-                            style={{ fontSize: 1.75 * formik.values.fontSize }}
-                          >
-                            {t("Auth.Settings.Samples.H3Sample")}
-                          </h3>
-
-                          <h4
-                            className="col-md-6"
-                            style={{ fontSize: 1.5 * formik.values.fontSize }}
-                          >
-                            {t("Auth.Settings.Samples.H4Sample")}
-                          </h4>
-
-                          <h5
-                            className="col-md-6"
-                            style={{ fontSize: 1.25 * formik.values.fontSize }}
-                          >
-                            {t("Auth.Settings.Samples.H5Sample")}
-                          </h5>
-
-                          <label
-                            className="form-label col-md-6"
-                            style={{ fontSize: 1 * formik.values.fontSize }}
-                          >
-                            {t("Auth.Settings.Samples.LabelSample")}
-                          </label>
-
-                          <div
-                            className="col-md-6"
-                            style={{ fontSize: 0.875 * formik.values.fontSize }}
-                          >
-                            <small>
-                              {t("Auth.Settings.Samples.SmallSample")}
-                            </small>
-                          </div>
-                        </div>
-                      )}
-                    </Fragment>
-                  )}
-                </div>
-              );
-            }
-          )}
+            )}
         </div>
 
         {customButtons}
