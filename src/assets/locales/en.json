@@ -257,6 +257,13 @@
           "Society": "Society",
           "Title": "Payee"
         },
+        "Ownership": {
+          "Free": "On-Borrow",
+          "Self": "Own",
+          "Parent": "Living With Parent",
+          "Sibling": "Living With Sibling",
+          "Title": "Ownership"
+        },
         "Province": {
           "AlBahah": "AlBahah",
           "AlJawf": "AlJawf",
