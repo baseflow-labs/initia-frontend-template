@@ -224,8 +224,8 @@
         "IdExpiryDate": "تاريخ انتهاء الهوية",
         "IdNumber": "رقم الهوية",
         "IdNumberNote": "مكون من 10 أرقام",
-        "IncomeDocument": "مصادر الدخل للموظفين",
-        "IncomeDocumentNote": "من يسكنون نفس البيت",
+        "IncomeDocument": "مصادر الدخل",
+        "IncomeDocumentNote": "إذا كان التابع عاملاً / موظفاً",
         "IncurableDisease": "هل المرض مستعص؟",
         "Insurances": "تأمينات",
         "NationalAddressDocument": "إثبات العنوان الوطني",
@@ -351,7 +351,7 @@
           "Title": "الحالة الاجتماعية",
           "Widower": "أرملة"
         },
-        "StudentsDocument": "تعريف طالب منتظم",
+        "StudentsDocument": "تعريف طالب",
         "StudentsDocumentNote": "من موقع نور أو من موقع الجامعة",
         "Success": {
           "Next": "الدخول للوحة التحكم",
