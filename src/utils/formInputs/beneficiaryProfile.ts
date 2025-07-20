@@ -466,20 +466,6 @@ export const getNationalRecordDataInputs = (
   },
   {
     type: "file",
-    logo: ejarLogo,
-    name: "rentalDocument",
-    label: t("Auth.MembershipRegistration.Form.RentalDocument"),
-    required: true,
-  },
-  {
-    type: "file",
-    logo: masrafLogo,
-    name: "masrefDocument",
-    label: t("Auth.MembershipRegistration.Form.MasrefDocument"),
-    required: true,
-  },
-  {
-    type: "file",
     logo: molimLogo,
     name: "creditStatement",
     label: t("Auth.MembershipRegistration.Form.CreditStatement"),

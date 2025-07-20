@@ -228,7 +228,6 @@
         "IncomeDocumentNote": "Income Document Note",
         "IncurableDisease": "Incurable Disease",
         "Insurances": "Insurances",
-        "MasrefDocument": "Masref Document",
         "NationalAddressDocument": "National Address Document",
         "Nationality": {
           "NonSaudi": "Non Saudi",
@@ -281,7 +280,6 @@
         },
         "RentalCharge": "Rental Charge",
         "RentalContractPhoto": "Rental Contract Photo",
-        "RentalDocument": "Rental Document",
         "Retirement": "Retirement",
         "Salary": "Salary",
         "SecondaryMobile": "Secondary Mobile",

@@ -228,7 +228,6 @@
         "IncomeDocumentNote": "من يسكنون نفس البيت",
         "IncurableDisease": "هل المرض مستعص؟",
         "Insurances": "تأمينات",
-        "MasrefDocument": "شهادة الآيبان من تطبيق المصرف",
         "NationalAddressDocument": "إثبات العنوان الوطني",
         "Nationality": {
           "Title": "الجنسية",
@@ -325,7 +324,6 @@
         },
         "RentalCharge": "قيمة الإيجار كما في العقد",
         "RentalContractPhoto": "عقد إيجار",
-        "RentalDocument": "للمستأجر عقد إيجار إلكتروني ساري المدة من موقع إيجار",
         "Retirement": "تقاعد",
         "Salary": "راتب",
         "SecondaryMobile": "رقم جوال آخر",
