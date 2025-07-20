@@ -55,7 +55,12 @@ const UsersCard = ({ label, researchers }: Props) => {
                 <td>
                   <div className="d-flex py-2">
                     <div>
-                      <img src={photo} height={60} className="me-3 rounded-4" />
+                      <img
+                        src={photo}
+                        height={60}
+                        className="me-3 rounded-4"
+                        alt="userPhoto"
+                      />
                     </div>
 
                     <div>

@@ -32,8 +32,19 @@ const AidsView = () => {
   });
   const [currentFilters, setCurrentFilters] = useState({});
   const [currentSearch, setCurrentSearch] = useState("");
+  const [paginationMeta, setPaginationMeta] = useState({
+    page: 1,
+    capacity: 10,
+    count: 0,
+    pagesCount: 1,
+  });
 
-  const getData = ({ filters = {}, page = 1, capacity = 10, search = "" }) => {
+  const getData = ({
+    filters = currentFilters,
+    page = paginationMeta.page,
+    capacity = paginationMeta.capacity,
+    search = currentSearch,
+  }) => {
     setCurrentFilters(filters);
     const customFilters = [];
 
@@ -60,18 +71,23 @@ const AidsView = () => {
             })
           )
         );
+
+        if (res.extra) {
+          setPaginationMeta({
+            page: res.extra.page,
+            capacity: res.extra.capacity,
+            count: res.extra.count,
+            pagesCount: res.extra.pagesCount,
+          });
+        }
+
         return res;
       })
       .catch(apiCatchGlobalHandler);
   };
 
   useLayoutEffect(() => {
-    getData({
-      filters: currentFilters,
-      page: 1,
-      capacity: 10,
-      search: currentSearch,
-    });
+    getData({});
 
     BeneficiaryApi.getAll({})
       .then((res: any) =>
@@ -178,12 +194,7 @@ const AidsView = () => {
     AidApi.updateStatus(id, status)
       .then(() => {
         const aid = aids.find((aid) => aid.id === id);
-        getData({
-          filters: currentFilters,
-          page: 1,
-          capacity: 10,
-          search: currentSearch,
-        });
+        getData({});
         dispatch(
           addNotification({
             msg: t("Global.Form.SuccessMsg", {
@@ -200,7 +211,7 @@ const AidsView = () => {
 
   const onSearch = (e: string) => {
     setCurrentSearch(e);
-    getData({ filters: currentFilters, page: 1, capacity: 10, search: e });
+    getData({ page: 1, capacity: 10, search: e });
   };
 
   return (
@@ -237,7 +248,7 @@ const AidsView = () => {
               )?.beneficiaryId;
 
               setCurrentFilters({ beneficiary });
-              getData({ filters: { beneficiary }, search: currentSearch });
+              getData({ filters: { beneficiary } });
             },
           });
 
@@ -246,12 +257,11 @@ const AidsView = () => {
         columns={columns}
         data={aids}
         onGetData={getData}
+        paginationMeta={paginationMeta}
         onPageChange={(page, capacity) => {
           getData({
-            filters: currentFilters,
             page,
             capacity,
-            search: currentSearch,
           });
         }}
       />

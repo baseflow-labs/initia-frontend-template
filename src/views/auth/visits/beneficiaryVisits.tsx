@@ -18,8 +18,18 @@ const BeneficiariesVisitsView = () => {
 
   const [visits, setVisits] = useState([]);
   const [currentFilters, setCurrentFilters] = useState({});
+  const [paginationMeta, setPaginationMeta] = useState({
+    page: 1,
+    capacity: 10,
+    count: 0,
+    pagesCount: 1,
+  });
 
-  const getData = ({ filters = {}, page = 1, capacity = 10 }) => {
+  const getData = ({
+    filters = currentFilters,
+    page = paginationMeta.page,
+    capacity = paginationMeta.capacity,
+  }) => {
     setCurrentFilters(filters);
 
     return VisitApi.getAll({ filters, page, capacity })
@@ -43,13 +53,22 @@ const BeneficiariesVisitsView = () => {
           ) as any
         );
 
+        if (res.extra) {
+          setPaginationMeta({
+            page: res.extra.page,
+            capacity: res.extra.capacity,
+            count: res.extra.count,
+            pagesCount: res.extra.pagesCount,
+          });
+        }
+
         return res;
       })
       .catch(apiCatchGlobalHandler);
   };
 
   useLayoutEffect(() => {
-    getData({ filters: {}, page: 1, capacity: 10 });
+    getData({});
   }, []);
 
   const statuses = getVisitStatuses(t);
@@ -120,9 +139,10 @@ const BeneficiariesVisitsView = () => {
       // ]}
       columns={columns}
       data={visits}
+      paginationMeta={paginationMeta}
       onGetData={getData}
       onPageChange={(page, capacity) => {
-        getData({ filters: currentFilters, page, capacity });
+        getData({ page, capacity });
       }}
     />
   );

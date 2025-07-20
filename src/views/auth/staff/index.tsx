@@ -1,17 +1,31 @@
-import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import * as ResearcherApi from "../../../api/staff/researcher";
+import { dataRender } from "../../../components/table";
 import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import AddStaff from "./addStaff";
+import Button from "../../../components/core/button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
 
 const ResearcherMgmtPage = () => {
   const { t } = useTranslation();
 
-  const [openModal, setOpenModal] = useState<Object | undefined>(undefined);
+  const [openModal, setOpenModal] = useState<
+    | {
+        id?: string;
+        fullName?: string;
+        email?: string;
+        username?: string;
+        idNumber?: string;
+        image?: string;
+        beneficiariesCount?: number;
+        visitsCount?: number;
+      }
+    | undefined
+  >(undefined);
   const [currentSearch, setCurrentSearch] = useState("");
   const [researchers, setResearchers] = useState<
     {
@@ -48,7 +62,7 @@ const ResearcherMgmtPage = () => {
   };
 
   useLayoutEffect(() => {
-    getData({ search: currentSearch });
+    getData({});
   }, []);
 
   const onSearch = (e: string) => {
@@ -79,6 +93,7 @@ const ResearcherMgmtPage = () => {
                 email,
                 username,
                 image,
+                idNumber,
                 beneficiariesCount,
                 visitsCount,
               },
@@ -104,44 +119,29 @@ const ResearcherMgmtPage = () => {
                     <h5 className="card-title">{fullName}</h5>
 
                     <p className="card-text my-4" style={{ direction: "ltr" }}>
-                      <a
-                        href={"mailto:" + email}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-decoration-none text-muted"
-                      >
-                        <FontAwesomeIcon icon={faEnvelope} /> {email}
-                      </a>
-
+                      {dataRender({ type: "email", data: email })}
                       <br />
-
-                      <a
-                        href={"tel:966" + username}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-decoration-none text-muted"
-                      >
-                        <FontAwesomeIcon icon={faPhone} /> +966{username}
-                      </a>
+                      {dataRender({ type: "phoneNumber", data: username })}
                     </p>
 
-                    {/* <Button
+                    <Button
                       color="info"
                       outline
                       size="xs"
                       onClick={() =>
                         setOpenModal({
                           id,
-                          name: fullName,
+                          fullName,
                           email,
                           username,
+                          idNumber,
                           image,
                         })
                       }
                     >
                       <FontAwesomeIcon icon={faEdit} />{" "}
                       {t("Global.Form.Labels.Edit")}
-                    </Button> */}
+                    </Button>
                   </div>
                 </div>
 

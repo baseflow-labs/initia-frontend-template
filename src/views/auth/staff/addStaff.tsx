@@ -14,42 +14,78 @@ const AddStaff = ({
   setOpenModal,
 }: {
   getData: (t: Object) => void;
-  openModal: Object | undefined;
+  openModal:
+    | {
+        id?: string;
+        fullName?: string;
+        email?: string;
+        username?: string;
+        idNumber?: string;
+        image?: string;
+        beneficiariesCount?: number;
+        visitsCount?: number;
+      }
+    | undefined;
   setOpenModal: (s: Object | undefined) => void;
 }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
+  const label = openModal?.id
+    ? t("Auth.Researchers.EditResearcher")
+    : t("Auth.Researchers.AddResearcher");
+
   return (
     <Modal
-      title={t("Auth.Researchers.AddResearcher")}
+      title={label}
       onClose={() => setOpenModal(undefined)}
       isOpen={!!openModal}
     >
       <Form
         inputs={() => getStaffCrudInputs(t)}
-        submitText={t("Auth.Researchers.AddResearcher")}
+        submitText={label}
         onFormSubmit={(e) => {
-          ResearcherApi.create({
-            ...e,
-            role: "researcher",
-            password: e.username,
-            passwordConfirmation: e.username,
-            code: "654321",
-          })
-            .then(() => {
-              dispatch(
-                addNotification({
-                  msg: t("Global.Form.SuccessMsg", {
-                    action: t("Auth.Researchers.AddResearcher"),
-                    data: e.name,
-                  }),
+          e.id
+            ? ResearcherApi.update({
+                ...e,
+                role: "researcher",
+                password: e.username,
+                passwordConfirmation: e.username,
+                code: "654321",
+              })
+                .then(() => {
+                  dispatch(
+                    addNotification({
+                      msg: t("Global.Form.SuccessMsg", {
+                        action: t("Auth.Researchers.EditResearcher"),
+                        data: e.fullName,
+                      }),
+                    })
+                  );
+                  getData({});
+                  setOpenModal(undefined);
                 })
-              );
-              getData({});
-              setOpenModal(undefined);
-            })
-            .catch(apiCatchGlobalHandler);
+                .catch(apiCatchGlobalHandler)
+            : ResearcherApi.create({
+                ...e,
+                role: "researcher",
+                password: e.username,
+                passwordConfirmation: e.username,
+                code: "654321",
+              })
+                .then(() => {
+                  dispatch(
+                    addNotification({
+                      msg: t("Global.Form.SuccessMsg", {
+                        action: t("Auth.Researchers.AddResearcher"),
+                        data: e.fullName,
+                      }),
+                    })
+                  );
+                  getData({});
+                  setOpenModal(undefined);
+                })
+                .catch(apiCatchGlobalHandler);
         }}
         initialValues={openModal}
       />
