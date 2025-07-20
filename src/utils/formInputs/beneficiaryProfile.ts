@@ -143,12 +143,12 @@ export const getContactBankDataInputs = (t: Function): InputSingleProps[] => [
     label: t("Auth.MembershipRegistration.Form.SecondaryMobile"),
     required: true,
   },
-  {
-    type: "phoneNumber",
-    name: "backupMobile",
-    label: t("Auth.MembershipRegistration.Form.BackupMobile"),
-    required: false,
-  },
+  // {
+  //   type: "phoneNumber",
+  //   name: "backupMobile",
+  //   label: t("Auth.MembershipRegistration.Form.BackupMobile"),
+  //   required: false,
+  // },
   {
     type: "email",
     name: "email",
