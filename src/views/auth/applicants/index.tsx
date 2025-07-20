@@ -30,6 +30,7 @@ import {
   getProvinces,
 } from "../../../utils/optionDataLists/beneficiaries";
 import RejectApplicant from "./rejectApplicant";
+import DemoLoginNote from "../../../layouts/auth/demoLoginNote";
 
 const ApplicantsView = () => {
   const { t } = useTranslation();
@@ -247,6 +248,8 @@ const ApplicantsView = () => {
 
   return (
     <Fragment>
+      <DemoLoginNote />
+
       <TablePage
         title={t("Auth.Beneficiaries.Applications")}
         filters={filters}

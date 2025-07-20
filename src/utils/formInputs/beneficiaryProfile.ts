@@ -2,8 +2,6 @@ import moment from "moment";
 
 import absherLogo from "../../assets/images/partners/absher.svg";
 import eduMinistryLogo from "../../assets/images/partners/eduMinistry.svg";
-import ejarLogo from "../../assets/images/partners/ejar.svg";
-import masrafLogo from "../../assets/images/partners/Masraf.svg";
 import ministryLogo from "../../assets/images/partners/ministry.svg";
 import molimLogo from "../../assets/images/partners/molim.svg";
 import tawakkalnaLogo from "../../assets/images/partners/Tawakkalna.svg";
@@ -18,6 +16,7 @@ import {
   getGenders,
   getHealthStatuses,
   getHomeOwnerships,
+  getHomeRentalPayees,
   getHomeTypes,
   getNationalities,
   getOccupations,
@@ -144,12 +143,12 @@ export const getContactBankDataInputs = (t: Function): InputSingleProps[] => [
     label: t("Auth.MembershipRegistration.Form.SecondaryMobile"),
     required: true,
   },
-  {
-    type: "phoneNumber",
-    name: "backupMobile",
-    label: t("Auth.MembershipRegistration.Form.BackupMobile"),
-    required: false,
-  },
+  // {
+  //   type: "phoneNumber",
+  //   name: "backupMobile",
+  //   label: t("Auth.MembershipRegistration.Form.BackupMobile"),
+  //   required: false,
+  // },
   {
     type: "email",
     name: "email",
@@ -160,13 +159,14 @@ export const getContactBankDataInputs = (t: Function): InputSingleProps[] => [
     type: "numberText",
     name: "bankAccountNumber",
     label: t("Auth.MembershipRegistration.Form.BankAccountNumber"),
-    required: true,
+    labelNote: t("Auth.MembershipRegistration.Form.BankAccountNumberNote"),
+    required: false,
   },
   {
     type: "file",
     name: "ibanPhoto",
     label: t("Auth.MembershipRegistration.Form.IbanPhoto"),
-    required: true,
+    required: false,
     halfCol: true,
   },
 ];
@@ -344,6 +344,13 @@ export const getHousingDataInputs = (t: Function): InputSingleProps[] => [
     step: 0.1,
     required: true,
   },
+  {
+    type: "select",
+    options: getHomeRentalPayees(t),
+    name: "payee",
+    label: t("Auth.MembershipRegistration.Form.Payee.Title"),
+    required: true,
+  },
 ];
 
 export const getDependantDataInputs = (t: Function): InputSingleProps[] => [
@@ -408,6 +415,22 @@ export const getDependantDataInputs = (t: Function): InputSingleProps[] => [
     excludeInForm: true,
   },
   {
+    type: "file",
+    name: "incomeDocument",
+    label: t("Auth.MembershipRegistration.Form.IncomeDocument"),
+    labelNote: t("Auth.MembershipRegistration.Form.IncomeDocumentNote"),
+    required: false,
+    halfCol: true,
+  },
+  {
+    type: "file",
+    name: "studentsDocument",
+    label: t("Auth.MembershipRegistration.Form.StudentsDocument"),
+    labelNote: t("Auth.MembershipRegistration.Form.StudentsDocumentNote"),
+    required: false,
+    halfCol: true,
+  },
+  {
     type: "radio",
     options: getHealthStatuses(t),
     name: "healthStatus",
@@ -446,22 +469,6 @@ export const getNationalRecordDataInputs = (
     logo: tawakkalnaLogo,
     name: "tawakkalnaDocument",
     label: t("Auth.MembershipRegistration.Form.TawakkalnaDocument"),
-    required: true,
-  },
-  {
-    type: "file",
-    logo: ministryLogo,
-    name: "incomeDocument",
-    label: t("Auth.MembershipRegistration.Form.IncomeDocument"),
-    labelNote: t("Auth.MembershipRegistration.Form.IncomeDocumentNote"),
-    required: true,
-  },
-  {
-    type: "file",
-    logo: eduMinistryLogo,
-    name: "studentsDocument",
-    label: t("Auth.MembershipRegistration.Form.StudentsDocument"),
-    labelNote: t("Auth.MembershipRegistration.Form.StudentsDocumentNote"),
     required: true,
   },
   {

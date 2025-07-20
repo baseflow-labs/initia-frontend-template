@@ -315,6 +315,52 @@ export const getHomeOwnerships = (t: Function) => [
   },
 ];
 
+export const getHomeRentalPayees = (t: Function) => [
+  {
+    value: "Self",
+    label: t("Auth.MembershipRegistration.Form.Payee.Self"),
+  },
+  {
+    value: "Relative",
+    label: t("Auth.MembershipRegistration.Form.Payee.Relative"),
+  },
+  {
+    value: "Society",
+    label: t("Auth.MembershipRegistration.Form.Payee.Society"),
+  },
+  {
+    value: "Government",
+    label: t("Auth.MembershipRegistration.Form.Payee.Government"),
+  },
+  {
+    value: "Installment",
+    label: t("Auth.MembershipRegistration.Form.Payee.Installment"),
+  },
+  {
+    value: "Free",
+    label: t("Auth.MembershipRegistration.Form.Payee.Free"),
+  },
+];
+
+export const getHomeOwners = (t: Function) => [
+  {
+    value: "Self",
+    label: t("Auth.MembershipRegistration.Form.Ownership.Self"),
+  },
+  {
+    value: "Parent",
+    label: t("Auth.MembershipRegistration.Form.Ownership.Parent"),
+  },
+  {
+    value: "Sibling",
+    label: t("Auth.MembershipRegistration.Form.Ownership.Sibling"),
+  },
+  {
+    value: "Free",
+    label: t("Auth.MembershipRegistration.Form.Ownership.Free"),
+  },
+];
+
 export const getBeneficiaryCategories = (t: Function) => [
   {
     value: "A",

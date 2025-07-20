@@ -20,6 +20,7 @@ import {
   getNationalities,
 } from "../../../utils/optionDataLists/beneficiaries";
 import AssignResearcher from "./assignResearcher";
+import DemoLoginNote from "../../../layouts/auth/demoLoginNote";
 
 const ApplicantsViewForSupervisor = () => {
   const { t } = useTranslation();
@@ -250,6 +251,8 @@ const ApplicantsViewForSupervisor = () => {
 
   return (
     <Fragment>
+      <DemoLoginNote />
+
       <TablePage
         title={t("Auth.Beneficiaries.Applications")}
         filters={filters}
