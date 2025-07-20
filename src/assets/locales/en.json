@@ -522,6 +522,7 @@
       "All": "All",
       "ApplicationDate": "Application Date",
       "Back": "Back",
+      "DemoLoginNote": "You may login using any of mobile numbers below and password of 12345678",
       "DemoWarning": "Please be aware that this is a demo version, accessible by the public. So we advise against sharing any real data like name, ID number and the like. Please note that the data will be automatically reset everyday",
       "Details": "Details",
       "Logout": "Logout",
