@@ -10,6 +10,7 @@
         "Title": "المعونات",
         "Urgent?": "هل الحالة مستعجلة؟"
       },
+      "CantGrantAlready": "تمت الموافقة على المعونة بالفعل",
       "Cash": "نقدية",
       "FilterByThisBeneficiary": "عرض معونات هذا المستفيد",
       "In-Kind": "عينية",
@@ -230,7 +231,6 @@
         "Insurances": "تأمينات",
         "NationalAddressDocument": "إثبات العنوان الوطني",
         "Nationality": {
-          "Title": "الجنسية",
           "Afghanistan": "أفغانستان",
           "Albania": "ألبانيا",
           "Algeria": "الجزائر",
@@ -263,6 +263,7 @@
           "Nepal": "نيبال",
           "Nigeria": "نيجيريا",
           "Oman": "عُمان",
+          "Other": "دولة أخرى",
           "Pakistan": "باكستان",
           "Palestine": "فلسطين",
           "Philippines": "الفلبين",
@@ -272,11 +273,11 @@
           "Somalia": "الصومال",
           "Sudan": "السودان",
           "Syria": "سوريا",
+          "Title": "الجنسية",
           "Tunisia": "تونس",
           "Turkey": "تركيا",
           "Uganda": "أوغندا",
-          "Yemen": "اليمن",
-          "Other": "دولة أخرى"
+          "Yemen": "اليمن"
         },
         "Occupation": {
           "GovernmentEmployee": "موظف حكومي",
@@ -291,6 +292,13 @@
           "UnableToWork": "غير قادر على العمل",
           "Unemployed": "عاطل عن العمل"
         },
+        "Ownership": {
+          "Free": "هبة مؤقتة",
+          "Parent": "السكن مع الأب / الأم",
+          "Self": "ملك شخصي",
+          "Sibling": "السكن مع الأخ / الأخت",
+          "Title": "الملكية"
+        },
         "OwnershipDocumentPhoto": "صك الملكية",
         "Payee": {
           "Free": "لا يتم دفع الإيجار (سكن مجاني)",
@@ -300,13 +308,6 @@
           "Self": "يدفعه المستفيد بنقسه",
           "Society": "تتحمله جهة خيرية / جمعية",
           "Title": "الجهة المتكفلة بالإيجار"
-        },
-        "Ownership": {
-          "Free": "هبة مؤقتة",
-          "Self": "ملك شخصي",
-          "Parent": "السكن مع الأب / الأم",
-          "Sibling": "السكن مع الأخ / الأخت",
-          "Title": "الملكية"
         },
         "Province": {
           "AlBahah": "الباحة",
@@ -384,9 +385,6 @@
       "VisitsCount": "عدد الزيارات"
     },
     "Settings": {
-      "AllCities": "جميع مدن المحافظات",
-      "AllDistricts": "جميع أحياء المدينة",
-      "AllGovernorate": "جميع محافظات المنطقة",
       "FontSize": "حجم الخط للتطبيق",
       "Metadata": {
         "Title": "إعدادات الجمعية"
@@ -402,15 +400,9 @@
         "SmallSample": " عينة ملاحظات",
         "Title": "عينات"
       },
-      "SocietyAddress": "عنوان الجمعية",
-      "SocietyCities": "المدن التي تخدمها الجمعية ضمن المحافظة",
-      "SocietyDistricts": "الأحياء التي تخدمها الجمعية ضمن المدينة",
-      "SocietyGovernorate": "المحافظات التي تخدمها الجمعية ضمن المنطقة",
-      "SocietyLocation": "موقع الجمعية",
       "SocietyLogo": "شعار الجمعية",
       "SocietyName": "اسم الجمعية",
       "SocietyPhoneNumber": "رقم الهاتف للجمعية",
-      "SocietyWebsite": "الموقع الإلكتروني للجمعية",
       "System": {
         "Title": "إعدادات النظام"
       },
@@ -462,9 +454,12 @@
         "NeedsMaintenance": "يحتاج لصيانة",
         "Nightstand": "طاولة جانبية",
         "NotWorking": "لا يعمل",
+        "OnlyResearchersCouldAdd": "إضافة تقرير متاحة للباحثين فقط",
         "Oven": "فرن",
+        "PleaseAddReportFirst": "نرجو إضافة التقرير أولاً",
         "PrayerMat": "سجادة صلاة",
         "PrayerRoom": "غرفة صلاة",
+        "ReportAddedAlready": "تم إضافة تقرير بالفعل",
         "RoomContentEvaluation": "تقييم {{type}}",
         "RoomContentPhoto": "صورة {{type}}",
         "RoomContentStatus": "حالة {{type}}",
@@ -501,6 +496,7 @@
         "Yes": "مفاجئة"
       },
       "Title": "الزيارات الميدانية",
+      "VisitCancelledAlready": "تم إلغاء الزيارة بالفعل",
       "VisitDate": "تاريخ الزيارة",
       "VisitPurpose": "سبب الزيارة",
       "Visits": "الزيارات",
