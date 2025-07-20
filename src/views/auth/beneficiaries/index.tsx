@@ -17,6 +17,7 @@ import {
 } from "../../../utils/optionDataLists/beneficiaries";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import CancelMembership from "./cancelMembership";
+import DemoLoginNote from "../../../layouts/auth/demoLoginNote";
 
 const BeneficiariesView = () => {
   const { t } = useTranslation();
@@ -181,6 +182,8 @@ const BeneficiariesView = () => {
 
   return (
     <Fragment>
+      <DemoLoginNote />
+
       <TablePage
         title={t("Auth.Beneficiaries.Title")}
         filters={filters}

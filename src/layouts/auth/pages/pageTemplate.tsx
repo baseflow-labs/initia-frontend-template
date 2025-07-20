@@ -24,6 +24,7 @@ interface Props {
   onSearch?: (e: string) => void;
   searchPlaceholder?: string;
   showNav?: Boolean;
+  hideHeader?: Boolean;
 }
 
 const PageTemplate = ({
@@ -35,6 +36,7 @@ const PageTemplate = ({
   onSearch,
   searchPlaceholder,
   showNav,
+  hideHeader,
 }: Props) => {
   const initialValues =
     filters?.reduce(
@@ -55,12 +57,13 @@ const PageTemplate = ({
 
   return (
     <Fragment>
-      <DashboardNavbar
-        onSearch={onSearch}
-        searchPlaceholder={searchPlaceholder}
-        showNav={showNav}
-      />
-
+      {!hideHeader && (
+        <DashboardNavbar
+          onSearch={onSearch}
+          searchPlaceholder={searchPlaceholder}
+          showNav={showNav}
+        />
+      )}
       <div className="row w-100">
         <div className="col-6 col-lg-3 order-2 order-lg-1">
           <h3 className="mt-4 mt-lg-0">{title}</h3>

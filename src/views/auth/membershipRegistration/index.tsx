@@ -29,7 +29,9 @@ import {
   getDiseases,
   getGenders,
   getHealthStatuses,
+  getHomeOwners,
   getHomeOwnerships,
+  getHomeRentalPayees,
   getHomeTypes,
   getNationalities,
   getProvinces,
@@ -316,8 +318,23 @@ const MembershipRegistrationView = () => {
             step: 0.1,
             required: true,
           },
+          {
+            type: "select",
+            options: getHomeRentalPayees(t),
+            name: "payee",
+            label: t("Auth.MembershipRegistration.Form.Payee.Title"),
+            required: true,
+          },
         ]
-      : []),
+      : [
+          {
+            type: "select",
+            options: getHomeOwners(t),
+            name: "payee",
+            label: t("Auth.MembershipRegistration.Form.Ownership.Title"),
+            required: true,
+          },
+        ]),
   ];
 
   const attachmentInputs = () => getNationalRecordDataInputs(t);
