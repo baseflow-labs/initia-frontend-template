@@ -124,7 +124,7 @@ const Form: React.FC<Props> = ({
     onSubmit: async () => {},
   });
 
-  const dynamicInputs = inputs(dummyFormik).filter((i) => i.excludeInForm);
+  const dynamicInputs = inputs(dummyFormik).filter((i) => !i.excludeInForm);
 
   const generatedInitialValues = dynamicInputs.reduce<Record<string, any>>(
     (acc, input) => {
@@ -155,7 +155,7 @@ const Form: React.FC<Props> = ({
     enableReinitialize: true,
     validate: (values: Record<string, any>) => {
       const errors: FormikErrors<Record<string, any>> = {};
-      const dynamicInputs = inputs(formik).filter((i) => i.excludeInForm);
+      const dynamicInputs = inputs(formik).filter((i) => !i.excludeInForm);
 
       dynamicInputs.forEach((input) => {
         const { name, required, type, min, max, minLength, maxLength } = input;
@@ -272,7 +272,7 @@ const Form: React.FC<Props> = ({
       <FormikForm className="text-start" {...rest}>
         <div className="row">
           {inputs(formik)
-            .filter((i) => i.excludeInForm)
+            .filter((i) => !i.excludeInForm)
             .map(
               ({
                 prefixText,
