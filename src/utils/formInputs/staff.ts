@@ -1,7 +1,7 @@
 export const getStaffCrudInputs = (t: Function) => [
   {
     label: t("Auth.Researchers.ResearcherName"),
-    name: "name",
+    name: "fullName",
     type: "text",
     required: true,
   },

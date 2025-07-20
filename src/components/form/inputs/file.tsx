@@ -5,7 +5,7 @@ import React, { Fragment, useRef } from "react";
 import { useTranslation } from "react-i18next";
 
 import { InputProps } from "..";
-import { attachmentIcon, deleteIcon } from "../../../assets/icons/icons";
+import { attachmentIcon } from "../../../assets/icons/icons";
 import IconWrapperComp from "../../../assets/icons/wrapper";
 
 interface FileUploadProps {

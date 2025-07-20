@@ -12,6 +12,13 @@ export const getCommonSettingInputs = (t: Function) => [
 export const getPasswordResetSettingInputs = (t: Function) => [
   {
     type: "password",
+    name: "oldPassword",
+    minLength: 8,
+    label: t("Public.ForgotPassword.ResetPassword.OldPassword"),
+    required: true,
+  },
+  {
+    type: "password",
     name: "password",
     minLength: 8,
     label: t("Public.ForgotPassword.ResetPassword.NewPassword"),

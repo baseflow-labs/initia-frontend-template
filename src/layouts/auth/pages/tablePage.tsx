@@ -20,6 +20,12 @@ interface Props extends TableProps {
   tableActions?: (id?: string) => actionProps[];
   onSearch?: (e: string) => void;
   searchPlaceholder?: string;
+  paginationMeta: {
+    page: number;
+    capacity: number;
+    count: number;
+    pagesCount: number;
+  };
 }
 
 const TablePage = ({
@@ -30,35 +36,10 @@ const TablePage = ({
   data,
   onGetData,
   tableActions,
+  paginationMeta,
   onSearch,
   searchPlaceholder,
 }: Props) => {
-  const [paginationMeta, setPaginationMeta] = useState({
-    page: 1,
-    capacity: 10,
-    count: 0,
-    pagesCount: 1,
-  });
-
-  useEffect(() => {
-    onGetData({
-      filters: {},
-      page: paginationMeta.page,
-      capacity: paginationMeta.capacity,
-    })
-      .then((res: any) => {
-        if (res?.extra) {
-          setPaginationMeta({
-            page: res.extra.page,
-            capacity: res.extra.capacity,
-            count: res.extra.count,
-            pagesCount: res.extra.pagesCount,
-          });
-        }
-      })
-      .catch(apiCatchGlobalHandler);
-  }, []);
-
   return (
     <PageTemplate
       title={title}
@@ -72,36 +53,14 @@ const TablePage = ({
           filters: mergedFilters,
           page: 1,
           capacity: paginationMeta.capacity,
-        })
-          .then((res: any) => {
-            if (res?.extra) {
-              setPaginationMeta({
-                page: res.extra.page,
-                capacity: res.extra.capacity,
-                count: res.extra.count,
-                pagesCount: res.extra.pagesCount,
-              });
-            }
-          })
-          .catch(apiCatchGlobalHandler);
+        });
       }}
     >
       <DynamicTable
         columns={columns}
         data={data}
         onPageChange={(page, capacity) => {
-          onGetData({ filters: {}, page, capacity })
-            .then((res: any) => {
-              if (res?.extra) {
-                setPaginationMeta({
-                  page: res.extra.page,
-                  capacity: res.extra.capacity,
-                  count: res.extra.count,
-                  pagesCount: res.extra.pagesCount,
-                });
-              }
-            })
-            .catch(apiCatchGlobalHandler);
+          onGetData({ filters: {}, page, capacity });
         }}
         actions={tableActions}
         size={paginationMeta.capacity}

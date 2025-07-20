@@ -46,7 +46,7 @@ const SendAid = ({
           AidApi.grant(e)
             .then(() => {
               setOpenModal(false);
-              onGetData({ filters: currentFilters, page: 1, capacity: 10 });
+              onGetData({});
               dispatch(
                 addNotification({
                   msg: t("Global.Form.SuccessMsg", {

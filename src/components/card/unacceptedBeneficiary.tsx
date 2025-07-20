@@ -12,6 +12,7 @@ const UnacceptedBeneficiary = () => {
         <img
           src={unAcceptedBeneficiaryIcon}
           height={70}
+          alt="unaccepted-beneficiary-icon"
           className="me-3 my-auto"
         />
 

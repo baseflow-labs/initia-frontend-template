@@ -46,18 +46,25 @@ const SettingsPage = () => {
   };
 
   const onPasswordResetSubmit = (values = {}) => {
-    AuthApi.resetMyPassword(values)
-      .then(() => {
-        dispatch(
+    process.env.REACT_APP_ENVIRONMENT === "staging"
+      ? dispatch(
           addNotification({
-            msg: t("Global.Form.SuccessMsg", {
-              action: t("Global.Form.Labels.Update"),
-              data: t("Auth.Settings.Title"),
-            }),
+            type: "err",
+            msg: t("Global.Form.Labels.UnAvailableForDemoMode"),
           })
-        );
-      })
-      .catch(apiCatchGlobalHandler);
+        )
+      : AuthApi.resetMyPassword(values)
+          .then(() => {
+            dispatch(
+              addNotification({
+                msg: t("Global.Form.SuccessMsg", {
+                  action: t("Global.Form.Labels.Update"),
+                  data: t("Auth.Settings.Title"),
+                }),
+              })
+            );
+          })
+          .catch(apiCatchGlobalHandler);
   };
 
   const validatePasswords = (values: Record<string, any>) => {

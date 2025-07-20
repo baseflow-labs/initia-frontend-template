@@ -26,8 +26,18 @@ const AidsBeneficiaryView = () => {
   const [currentFilters, setCurrentFilters] = useState({});
   const [aids, setAids] = useState([]);
   const { user } = useAppSelector((state) => state.auth);
+  const [paginationMeta, setPaginationMeta] = useState({
+    page: 1,
+    capacity: 10,
+    count: 0,
+    pagesCount: 1,
+  });
 
-  const getData = ({ filters = {}, page = 1, capacity = 10 }) => {
+  const getData = ({
+    filters = currentFilters,
+    page = paginationMeta.page,
+    capacity = paginationMeta.capacity,
+  }) => {
     setCurrentFilters(filters);
 
     return AidApi.getAll({ filters, page, capacity })
@@ -40,13 +50,22 @@ const AidsBeneficiaryView = () => {
           })) as any
         );
 
+        if (res.extra) {
+          setPaginationMeta({
+            page: res.extra.page,
+            capacity: res.extra.capacity,
+            count: res.extra.count,
+            pagesCount: res.extra.pagesCount,
+          });
+        }
+
         return res;
       })
       .catch(apiCatchGlobalHandler);
   };
 
   useLayoutEffect(() => {
-    getData({ filters: currentFilters, page: 1, capacity: 10 });
+    getData({});
   }, []);
 
   const aidTypes = getAidTypes(t);
@@ -127,11 +146,15 @@ const AidsBeneficiaryView = () => {
   const isUnacceptedBeneficiary =
     user.role === "beneficiary" && user.status !== "Accepted";
 
-  return isUnacceptedBeneficiary ? (
-    <PageTemplate>
-      <UnacceptedBeneficiary />
-    </PageTemplate>
-  ) : (
+  if (isUnacceptedBeneficiary) {
+    return (
+      <PageTemplate>
+        <UnacceptedBeneficiary />
+      </PageTemplate>
+    );
+  }
+
+  return (
     <Fragment>
       <TablePage
         title={t("Auth.Aids.Beneficiary.Title")}
@@ -140,8 +163,9 @@ const AidsBeneficiaryView = () => {
         columns={columns}
         data={aids}
         onGetData={getData}
+        paginationMeta={paginationMeta}
         onPageChange={(page, capacity) => {
-          getData({ filters: currentFilters, page, capacity });
+          getData({ page, capacity });
         }}
       />
 

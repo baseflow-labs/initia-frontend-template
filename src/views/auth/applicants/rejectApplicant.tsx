@@ -49,7 +49,7 @@ const RejectApplicant = ({
                   }),
                 })
               );
-              onGetData({ filters: {}, page: 1, capacity: 10 });
+              onGetData({});
               setOpenModal(null);
             })
             .catch(apiCatchGlobalHandler);

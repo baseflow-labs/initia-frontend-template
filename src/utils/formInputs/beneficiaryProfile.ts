@@ -1,4 +1,5 @@
 import moment from "moment";
+
 import absherLogo from "../../assets/images/partners/absher.svg";
 import eduMinistryLogo from "../../assets/images/partners/eduMinistry.svg";
 import ejarLogo from "../../assets/images/partners/ejar.svg";
@@ -17,7 +18,6 @@ import {
   getGenders,
   getHealthStatuses,
   getHomeOwnerships,
-  getHomeRentalPayees,
   getHomeTypes,
   getNationalities,
   getOccupations,
@@ -142,7 +142,7 @@ export const getContactBankDataInputs = (t: Function): InputSingleProps[] => [
     type: "phoneNumber",
     name: "secondaryMobile",
     label: t("Auth.MembershipRegistration.Form.SecondaryMobile"),
-    required: false,
+    required: true,
   },
   {
     type: "phoneNumber",
@@ -160,14 +160,13 @@ export const getContactBankDataInputs = (t: Function): InputSingleProps[] => [
     type: "numberText",
     name: "bankAccountNumber",
     label: t("Auth.MembershipRegistration.Form.BankAccountNumber"),
-    labelNote: t("Auth.MembershipRegistration.Form.BankAccountNumberNote"),
-    required: false,
+    required: true,
   },
   {
     type: "file",
     name: "ibanPhoto",
     label: t("Auth.MembershipRegistration.Form.IbanPhoto"),
-    required: false,
+    required: true,
     halfCol: true,
   },
 ];
@@ -345,13 +344,6 @@ export const getHousingDataInputs = (t: Function): InputSingleProps[] => [
     step: 0.1,
     required: true,
   },
-  {
-    type: "select",
-    options: getHomeRentalPayees(t),
-    name: "payee",
-    label: t("Auth.MembershipRegistration.Form.Payee.Title"),
-    required: true,
-  },
 ];
 
 export const getDependantDataInputs = (t: Function): InputSingleProps[] => [
@@ -412,7 +404,8 @@ export const getDependantDataInputs = (t: Function): InputSingleProps[] => [
     options: getAgeGroups(t),
     name: "ageGroup",
     label: t("Auth.MembershipRegistration.Form.AgeGroup.Title"),
-    required: true,
+    required: false,
+    excludeInForm: true,
   },
   {
     type: "radio",
@@ -469,20 +462,6 @@ export const getNationalRecordDataInputs = (
     name: "studentsDocument",
     label: t("Auth.MembershipRegistration.Form.StudentsDocument"),
     labelNote: t("Auth.MembershipRegistration.Form.StudentsDocumentNote"),
-    required: true,
-  },
-  {
-    type: "file",
-    logo: ejarLogo,
-    name: "rentalDocument",
-    label: t("Auth.MembershipRegistration.Form.RentalDocument"),
-    required: true,
-  },
-  {
-    type: "file",
-    logo: masrafLogo,
-    name: "masrefDocument",
-    label: t("Auth.MembershipRegistration.Form.MasrefDocument"),
     required: true,
   },
   {

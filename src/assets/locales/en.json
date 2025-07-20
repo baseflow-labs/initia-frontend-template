@@ -84,6 +84,7 @@
       "AidsCount": "Aids Count",
       "ApplicantsCount": "Applicants Count",
       "ApplicantsToReview": "Applicants To Review",
+      "ApplicationTimeline": "Application Timeline",
       "BeneficiariesCount": "Beneficiaries Count",
       "BeneficiaryInfo": "Your Info",
       "BeneficiaryMembershipStatus": "Your Membership Status",
@@ -227,7 +228,6 @@
         "IncomeDocumentNote": "Income Document Note",
         "IncurableDisease": "Incurable Disease",
         "Insurances": "Insurances",
-        "MasrefDocument": "Masref Document",
         "NationalAddressDocument": "National Address Document",
         "Nationality": {
           "NonSaudi": "Non Saudi",
@@ -248,15 +248,6 @@
           "Unemployed": "Unemployed"
         },
         "OwnershipDocumentPhoto": "Ownership Document Photo",
-        "Payee": {
-          "Free": "Free",
-          "Government": "Government",
-          "Installment": "Installment",
-          "Relative": "Relative",
-          "Self": "Self",
-          "Society": "Society",
-          "Title": "Payee"
-        },
         "Province": {
           "AlBahah": "AlBahah",
           "AlJawf": "AlJawf",
@@ -289,7 +280,6 @@
         },
         "RentalCharge": "Rental Charge",
         "RentalContractPhoto": "Rental Contract Photo",
-        "RentalDocument": "Rental Document",
         "Retirement": "Retirement",
         "Salary": "Salary",
         "SecondaryMobile": "Secondary Mobile",
@@ -328,6 +318,7 @@
       "AddResearcher": "Add Researcher",
       "Assign": "Assign",
       "BeneficiariesCount": "Beneficiaries sCount",
+      "EditResearcher": "Edit Researcher",
       "ResearcherName": "Researcher Name",
       "Title": "Researchers Mgmt",
       "VisitsCount": "Visits Count"
@@ -541,6 +532,7 @@
       "ResetPassword": {
         "NewPassword": "New Password",
         "NewPasswordConfirmation": "New Password Confirmation",
+        "OldPassword": "Current Password",
         "ResetPassword": "Reset Password",
         "Title": "Reset Password"
       },
