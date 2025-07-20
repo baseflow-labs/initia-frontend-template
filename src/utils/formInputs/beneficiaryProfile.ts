@@ -1,5 +1,4 @@
 import moment from "moment";
-
 import absherLogo from "../../assets/images/partners/absher.svg";
 import eduMinistryLogo from "../../assets/images/partners/eduMinistry.svg";
 import ejarLogo from "../../assets/images/partners/ejar.svg";
@@ -18,6 +17,7 @@ import {
   getGenders,
   getHealthStatuses,
   getHomeOwnerships,
+  getHomeRentalPayees,
   getHomeTypes,
   getNationalities,
   getOccupations,
@@ -142,7 +142,7 @@ export const getContactBankDataInputs = (t: Function): InputSingleProps[] => [
     type: "phoneNumber",
     name: "secondaryMobile",
     label: t("Auth.MembershipRegistration.Form.SecondaryMobile"),
-    required: true,
+    required: false,
   },
   {
     type: "phoneNumber",
@@ -160,13 +160,14 @@ export const getContactBankDataInputs = (t: Function): InputSingleProps[] => [
     type: "numberText",
     name: "bankAccountNumber",
     label: t("Auth.MembershipRegistration.Form.BankAccountNumber"),
-    required: true,
+    labelNote: t("Auth.MembershipRegistration.Form.BankAccountNumberNote"),
+    required: false,
   },
   {
     type: "file",
     name: "ibanPhoto",
     label: t("Auth.MembershipRegistration.Form.IbanPhoto"),
-    required: true,
+    required: false,
     halfCol: true,
   },
 ];
@@ -342,6 +343,13 @@ export const getHousingDataInputs = (t: Function): InputSingleProps[] => [
     label: t("Auth.MembershipRegistration.Form.RentalCharge"),
     min: 0,
     step: 0.1,
+    required: true,
+  },
+  {
+    type: "select",
+    options: getHomeRentalPayees(t),
+    name: "payee",
+    label: t("Auth.MembershipRegistration.Form.Payee.Title"),
     required: true,
   },
 ];

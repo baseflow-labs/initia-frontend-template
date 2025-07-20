@@ -16,7 +16,6 @@ import IconWrapperComp from "../../../assets/icons/wrapper";
 import Button from "../../../components/core/button";
 import Form from "../../../components/form";
 import WizardFormStepper from "../../../components/form/wizard/stepper";
-import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
 import { addNotification } from "../../../store/actions/notifications";
 import { dataDateFormat } from "../../../utils/consts";
 import {
@@ -30,6 +29,7 @@ import {
   getGenders,
   getHealthStatuses,
   getHomeOwnerships,
+  getHomeRentalPayees,
   getHomeTypes,
   getNationalities,
   getProvinces,
@@ -37,6 +37,7 @@ import {
 } from "../../../utils/optionDataLists/beneficiaries";
 import { getYesNo } from "../../../utils/optionDataLists/common";
 import DependentsFormView from "./Dependents";
+import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
 
 const MembershipRegistrationView = () => {
   const { t } = useTranslation();
@@ -314,6 +315,13 @@ const MembershipRegistrationView = () => {
             label: t("Auth.MembershipRegistration.Form.RentalCharge"),
             min: 0,
             step: 0.1,
+            required: true,
+          },
+          {
+            type: "select",
+            options: getHomeRentalPayees(t),
+            name: "payee",
+            label: t("Auth.MembershipRegistration.Form.Payee.Title"),
             required: true,
           },
         ]

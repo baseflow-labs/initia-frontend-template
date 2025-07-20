@@ -248,6 +248,15 @@
           "Unemployed": "Unemployed"
         },
         "OwnershipDocumentPhoto": "Ownership Document Photo",
+        "Payee": {
+          "Free": "Free",
+          "Government": "Government",
+          "Installment": "Installment",
+          "Relative": "Relative",
+          "Self": "Self",
+          "Society": "Society",
+          "Title": "Payee"
+        },
         "Province": {
           "AlBahah": "AlBahah",
           "AlJawf": "AlJawf",
