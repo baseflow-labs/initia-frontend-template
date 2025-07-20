@@ -63,7 +63,7 @@ const ResearcherMgmtPage = () => {
   };
 
   useLayoutEffect(() => {
-    getData({});
+    getData({ search: currentSearch });
   }, []);
 
   const onSearch = (e: string) => {
