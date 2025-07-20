@@ -228,31 +228,34 @@ const AidsView = () => {
           const granted = aid?.status === "Granted";
           const rejected = aid?.status === "Rejected";
 
-          const final = [];
-
-          if (!granted && !rejected) {
-            final.push({
+          return [
+            {
               label: t("Auth.Aids.Statuses.Grant"),
               icon: faCheck,
-              onClick: (data: string) => updateStatus(data, "Granted"),
-            });
-          }
-
-          final.push({
-            label: t("Auth.Aids.FilterByThisBeneficiary"),
-            icon: faFilter,
-            spread: true,
-            onClick: (data: string) => {
-              const beneficiary = aids.find(
-                (a) => a.id === data
-              )?.beneficiaryId;
-
-              setCurrentFilters({ beneficiary });
-              getData({ filters: { beneficiary } });
+              spread: false,
+              onClick: (data: string) =>
+                !granted
+                  ? updateStatus(data, "Granted")
+                  : dispatch(
+                      addNotification({
+                        msg: t("Auth.Aids.CantGrantAlready"),
+                      })
+                    ),
             },
-          });
+            {
+              label: t("Auth.Aids.FilterByThisBeneficiary"),
+              icon: faFilter,
+              spread: true,
+              onClick: (data: string) => {
+                const beneficiary = aids.find(
+                  (a) => a.id === data
+                )?.beneficiaryId;
 
-          return final;
+                setCurrentFilters({ beneficiary });
+                getData({ filters: { beneficiary } });
+              },
+            },
+          ];
         }}
         columns={columns}
         data={aids}

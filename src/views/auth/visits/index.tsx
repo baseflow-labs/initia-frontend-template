@@ -248,40 +248,59 @@ const VisitsView = () => {
         tableActions={(id?: string) => {
           const visit = visits.find((v) => v.id === id);
 
-          const final = [];
-
           const gotReport = !!visit?.visitReport;
           const cancelled = visit?.status === "Cancelled";
 
-          if (gotReport) {
-            final.push({
+          return [
+            {
               icon: faNewspaper,
               spread: true,
+              disabled: false,
               label: t("Auth.Visits.Report.ViewReport"),
               onClick: (id: string) =>
-                navigate("/visitSchedule/report/details/?id=" + id),
-            });
-          } else {
-            if (user.role !== "hod") {
-              final.push({
-                icon: faEdit,
-                spread: true,
-                label: t("Auth.Visits.Report.AddReport"),
-                onClick: (id: string) =>
-                  navigate("/visitSchedule/report?id=" + id),
-              });
-            }
-
-            if (!cancelled) {
-              final.push({
-                icon: faXmark,
-                label: t("Auth.Visits.CancelVisit"),
-                onClick: (id: string) => cancelVisit(id),
-              });
-            }
-          }
-
-          return final;
+                gotReport
+                  ? navigate("/visitSchedule/report/details/?id=" + id)
+                  : dispatch(
+                      addNotification({
+                        msg: t("Auth.Visits.Report.PleaseAddReportFirst"),
+                        type: "err",
+                      })
+                    ),
+            },
+            {
+              icon: faEdit,
+              spread: true,
+              label: t("Auth.Visits.Report.AddReport"),
+              onClick: (id: string) =>
+                gotReport
+                  ? dispatch(
+                      addNotification({
+                        msg: t("Auth.Visits.Report.ReportAddedAlready"),
+                        type: "err",
+                      })
+                    )
+                  : user.role === "hod"
+                  ? dispatch(
+                      addNotification({
+                        msg: t("Auth.Visits.Report.OnlyResearchersCouldAdd"),
+                        type: "err",
+                      })
+                    )
+                  : navigate("/visitSchedule/report?id=" + id),
+            },
+            {
+              icon: faXmark,
+              label: t("Auth.Visits.CancelVisit"),
+              onClick: (id: string) =>
+                cancelled
+                  ? dispatch(
+                      addNotification({
+                        msg: t("Auth.Visits.VisitCancelledAlready"),
+                      })
+                    )
+                  : cancelVisit(id),
+            },
+          ];
         }}
         actionButtons={user.role !== "hod" ? actionButtons : undefined}
         columns={columns}

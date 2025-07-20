@@ -4,8 +4,184 @@ export const getNationalities = (t: Function) => [
     label: t("Auth.MembershipRegistration.Form.Nationality.Saudi"),
   },
   {
-    value: "Non Saudi",
-    label: t("Auth.MembershipRegistration.Form.Nationality.NonSaudi"),
+    value: "Afghanistan",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Afghanistan"),
+  },
+  {
+    value: "Albania",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Albania"),
+  },
+  {
+    value: "Algeria",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Algeria"),
+  },
+  {
+    value: "America",
+    label: t("Auth.MembershipRegistration.Form.Nationality.America"),
+  },
+  {
+    value: "Argentina",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Argentina"),
+  },
+  {
+    value: "Australia",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Australia"),
+  },
+  {
+    value: "Bahrain",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Bahrain"),
+  },
+  {
+    value: "Bangladesh",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Bangladesh"),
+  },
+  {
+    value: "Brazil",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Brazil"),
+  },
+  {
+    value: "Britain",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Britain"),
+  },
+  {
+    value: "Canada",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Canada"),
+  },
+  {
+    value: "Chad",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Chad"),
+  },
+  {
+    value: "China",
+    label: t("Auth.MembershipRegistration.Form.Nationality.China"),
+  },
+  {
+    value: "Djibouti",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Djibouti"),
+  },
+  {
+    value: "Egypt",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Egypt"),
+  },
+  {
+    value: "Eritrea",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Eritrea"),
+  },
+  {
+    value: "Ethiopia",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Ethiopia"),
+  },
+  {
+    value: "France",
+    label: t("Auth.MembershipRegistration.Form.Nationality.France"),
+  },
+  {
+    value: "Germany",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Germany"),
+  },
+  {
+    value: "India",
+    label: t("Auth.MembershipRegistration.Form.Nationality.India"),
+  },
+  {
+    value: "Indonesia",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Indonesia"),
+  },
+  {
+    value: "Iraq",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Iraq"),
+  },
+  {
+    value: "Jordan",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Jordan"),
+  },
+  {
+    value: "Kuwait",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Kuwait"),
+  },
+  {
+    value: "Lebanon",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Lebanon"),
+  },
+  {
+    value: "Libya",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Libya"),
+  },
+  {
+    value: "Malaysia",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Malaysia"),
+  },
+  {
+    value: "Mauritania",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Mauritania"),
+  },
+  {
+    value: "Morocco",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Morocco"),
+  },
+  {
+    value: "Nepal",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Nepal"),
+  },
+  {
+    value: "Nigeria",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Nigeria"),
+  },
+  {
+    value: "Oman",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Oman"),
+  },
+  {
+    value: "Pakistan",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Pakistan"),
+  },
+  {
+    value: "Palestine",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Palestine"),
+  },
+  {
+    value: "Philippines",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Philippines"),
+  },
+  {
+    value: "Qatar",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Qatar"),
+  },
+  {
+    value: "Russia",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Russia"),
+  },
+  {
+    value: "Somalia",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Somalia"),
+  },
+  {
+    value: "Sudan",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Sudan"),
+  },
+  {
+    value: "Syria",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Syria"),
+  },
+  {
+    value: "Tunisia",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Tunisia"),
+  },
+  {
+    value: "Turkey",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Turkey"),
+  },
+  {
+    value: "Uganda",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Uganda"),
+  },
+  {
+    value: "Yemen",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Yemen"),
+  },
+  {
+    value: "Other",
+    label: t("Auth.MembershipRegistration.Form.Nationality.Other"),
   },
 ];
 
@@ -187,7 +363,7 @@ export const getDependentRelations = (t: Function) => [
     label: t("Auth.MembershipRegistration.Form.Relation.MaternalUncleAunt"),
   },
   {
-    value: "InLow",
+    value: "In-Low",
     label: t("Auth.MembershipRegistration.Form.Relation.InLow"),
   },
   {

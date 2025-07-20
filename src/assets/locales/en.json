@@ -10,6 +10,7 @@
         "Title": "Aids",
         "Urgent?": "Urgent?"
       },
+      "CantGrantAlready": "Aid Granted Already",
       "Cash": "Cash",
       "FilterByThisBeneficiary": "Filter By This Beneficiary",
       "In-Kind": "In-Kind",
@@ -230,9 +231,53 @@
         "Insurances": "Insurances",
         "NationalAddressDocument": "National Address Document",
         "Nationality": {
-          "NonSaudi": "Non Saudi",
+          "Afghanistan": "Afghanistan",
+          "Albania": "Albania",
+          "Algeria": "Algeria",
+          "America": "United States",
+          "Argentina": "Argentina",
+          "Australia": "Australia",
+          "Bahrain": "Bahrain",
+          "Bangladesh": "Bangladesh",
+          "Brazil": "Brazil",
+          "Britain": "United Kingdom",
+          "Canada": "Canada",
+          "Chad": "Chad",
+          "China": "China",
+          "Djibouti": "Djibouti",
+          "Egypt": "Egypt",
+          "Eritrea": "Eritrea",
+          "Ethiopia": "Ethiopia",
+          "France": "France",
+          "Germany": "Germany",
+          "India": "India",
+          "Indonesia": "Indonesia",
+          "Iraq": "Iraq",
+          "Jordan": "Jordan",
+          "Kuwait": "Kuwait",
+          "Lebanon": "Lebanon",
+          "Libya": "Libya",
+          "Malaysia": "Malaysia",
+          "Mauritania": "Mauritania",
+          "Morocco": "Morocco",
+          "Nepal": "Nepal",
+          "Nigeria": "Nigeria",
+          "Oman": "Oman",
+          "Other": "Other Country",
+          "Pakistan": "Pakistan",
+          "Palestine": "Palestine",
+          "Philippines": "Philippines",
+          "Qatar": "Qatar",
+          "Russia": "Russia",
           "Saudi": "Saudi",
-          "Title": "Nationality"
+          "Somalia": "Somalia",
+          "Sudan": "Sudan",
+          "Syria": "Syria",
+          "Title": "Nationality",
+          "Tunisia": "Tunisia",
+          "Turkey": "Turkey",
+          "Uganda": "Uganda",
+          "Yemen": "Yemen"
         },
         "Occupation": {
           "GovernmentEmployee": "Government Employee",
@@ -247,6 +292,13 @@
           "UnableToWork": "Unable To Work",
           "Unemployed": "Unemployed"
         },
+        "Ownership": {
+          "Free": "On-Borrow",
+          "Parent": "Living With Parent",
+          "Self": "Own",
+          "Sibling": "Living With Sibling",
+          "Title": "Ownership"
+        },
         "OwnershipDocumentPhoto": "Ownership Document Photo",
         "Payee": {
           "Free": "Free",
@@ -256,13 +308,6 @@
           "Self": "Self",
           "Society": "Society",
           "Title": "Payee"
-        },
-        "Ownership": {
-          "Free": "On-Borrow",
-          "Self": "Own",
-          "Parent": "Living With Parent",
-          "Sibling": "Living With Sibling",
-          "Title": "Ownership"
         },
         "Province": {
           "AlBahah": "AlBahah",
@@ -340,9 +385,6 @@
       "VisitsCount": "Visits Count"
     },
     "Settings": {
-      "AllCities": "All Cities",
-      "AllDistricts": "All Districts",
-      "AllGovernorate": "All Governorate",
       "FontSize": "Font Size",
       "Metadata": {
         "Title": "Metadata Settings"
@@ -358,15 +400,9 @@
         "SmallSample": "Small Sample",
         "Title": "Text Samples"
       },
-      "SocietyAddress": "Society Address",
-      "SocietyCities": "Society Cities",
-      "SocietyDistricts": "Society Districts",
-      "SocietyGovernorate": "Society Governorate",
-      "SocietyLocation": "Society Location",
       "SocietyLogo": "Society Logo",
       "SocietyName": "Society Name",
       "SocietyPhoneNumber": "Society PhoneNumber",
-      "SocietyWebsite": "Society Website",
       "System": {
         "Title": "System Settings"
       },
@@ -418,9 +454,12 @@
         "NeedsMaintenance": "Needs Maintenance",
         "Nightstand": "Nightstand",
         "NotWorking": "Not Working",
+        "OnlyResearchersCouldAdd": "Only Researchers Could Add Reports",
         "Oven": "Oven",
+        "PleaseAddReportFirst": "Please Add a Report First",
         "PrayerMat": "Prayer Mat",
         "PrayerRoom": "Prayer Room",
+        "ReportAddedAlready": "Report Added Already",
         "RoomContentEvaluation": "Room Content Evaluation",
         "RoomContentPhoto": "Room Content Photo",
         "RoomContentStatus": "Room Content Status",
@@ -457,6 +496,7 @@
         "Yes": "Surprising"
       },
       "Title": "Status",
+      "VisitCancelledAlready": "Visit Cancelled Already",
       "VisitDate": "Visit Date",
       "VisitPurpose": "Visit Purpose",
       "Visits": "Visits",
