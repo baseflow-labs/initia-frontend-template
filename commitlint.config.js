@@ -16,6 +16,7 @@ module.exports = {
         "staff",
         "visits",
         "visitReports",
+        "common",
         "code",
       ],
     ],

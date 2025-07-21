@@ -111,7 +111,6 @@
       "Address": "Address",
       "Form": {
         "AbsherDocument": "Absher Document",
-        "Address": "Address",
         "AgeGroup": {
           "AboveSixty": "Above Sixty",
           "BelowFive": "Below Five",
@@ -225,8 +224,8 @@
         "IdExpiryDate": "ID Expiry Date",
         "IdNumber": "ID Number",
         "IdNumberNote": "ID Number Note",
+        "IdPhoto": "ID Photo",
         "IncomeDocument": "Income Document",
-        "IncomeDocumentNote": "Income Document Note",
         "IncurableDisease": "Incurable Disease",
         "Insurances": "Insurances",
         "NationalAddressDocument": "National Address Document",
@@ -306,8 +305,7 @@
           "Installment": "Installment",
           "Relative": "Relative",
           "Self": "Self",
-          "Society": "Society",
-          "Title": "Payee"
+          "Society": "Society"
         },
         "Province": {
           "AlBahah": "AlBahah",
