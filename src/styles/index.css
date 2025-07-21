@@ -111,7 +111,7 @@ html {
 }
 
 .blink {
-  animation: blinker 2.5s linear infinite;
+  animation: blinker 4.5s linear infinite;
 }
 
 ul.timeline {
