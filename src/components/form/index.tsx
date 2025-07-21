@@ -40,6 +40,7 @@ interface InputBasicProps {
     | string;
   required?: boolean;
   disabled?: boolean;
+  accept?: string;
   excludeInForm?: boolean;
   defaultValue?: string | number;
   placeholder?: string;
