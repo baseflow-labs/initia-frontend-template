@@ -1,5 +1,6 @@
 import moment from "moment";
 
+import { FormikProps } from "formik";
 import absherLogo from "../../assets/images/partners/absher.svg";
 import molimLogo from "../../assets/images/partners/molim.svg";
 import tawakkalnaLogo from "../../assets/images/partners/Tawakkalna.svg";
@@ -13,8 +14,8 @@ import {
   getEducationLevels,
   getGenders,
   getHealthStatuses,
+  getHomeOwners,
   getHomeOwnerships,
-  getHomeRentalPayees,
   getHomeTypes,
   getNationalities,
   getOccupations,
@@ -23,110 +24,143 @@ import {
 } from "../optionDataLists/beneficiaries";
 import { getYesNo } from "../optionDataLists/common";
 
-export const getBasicDataInputs = (t: Function): InputSingleProps[] => [
-  {
-    type: "select",
-    options: getSocialStatuses(t),
-    name: "socialStatus",
-    label: t("Auth.MembershipRegistration.Form.SocialStatus.Title"),
-    required: true,
-  },
-  {
-    type: "text",
-    name: "fullName",
-    label: t("Auth.MembershipRegistration.Form.FullName"),
-    required: true,
-  },
-  {
-    type: "select",
-    options: getNationalities(t),
-    name: "nationality",
-    label: t("Auth.MembershipRegistration.Form.Nationality.Title"),
-    required: true,
-  },
-  {
-    type: "date",
-    name: "dob",
-    min: moment().locale("en").subtract(125, "y").format(dataDateFormat),
-    max: moment().locale("en").subtract(17, "y").format(dataDateFormat),
-    label: t("Auth.MembershipRegistration.Form.Dob"),
-    required: true,
-  },
-  {
-    type: "date",
-    name: "idExpiryDate",
-    max: moment().locale("en").add(10, "y").format(dataDateFormat),
-    label: t("Auth.MembershipRegistration.Form.IdExpiryDate"),
-    required: true,
-  },
-  {
-    type: "numberText",
-    name: "idNumber",
-    minLength: 10,
-    maxLength: 10,
-    label: t("Auth.MembershipRegistration.Form.IdNumber"),
-    labelNote: t("Auth.MembershipRegistration.Form.IdNumberNote"),
-    required: true,
-  },
-  {
-    type: "select",
-    name: "category",
-    options: getBeneficiaryCategories(t),
-    label: t("Auth.MembershipRegistration.Form.Category.Title"),
-    required: true,
-  },
-  {
-    type: "file",
-    name: "familyRecordPhoto",
-    label: t("Auth.MembershipRegistration.Form.FamilyRecordPhoto"),
-    required: true,
-    halfCol: true,
-  },
-  {
-    type: "file",
-    name: "guardianIdPhoto",
-    label: t("Auth.MembershipRegistration.Form.GuardianIdPhoto"),
-    required: true,
-    halfCol: true,
-  },
-  {
-    type: "radio",
-    options: getGenders(t),
-    name: "gender",
-    label: t("Auth.MembershipRegistration.Form.Gender.Title"),
-    required: true,
-    halfCol: true,
-  },
-  {
-    type: "radio",
-    options: getHealthStatuses(t),
-    name: "healthStatus",
-    label: t("Auth.MembershipRegistration.Form.HealthStatus.Title"),
-    required: true,
-    halfCol: true,
-  },
-  {
-    type: "selectMany",
-    options: getDiseases(t),
-    placeholder: t("Auth.MembershipRegistration.Form.Diseases.None"),
-    name: "diseases",
-    label: t("Auth.MembershipRegistration.Form.Diseases.Title"),
-    required: false,
-  },
-  {
-    type: "radio",
-    options: getYesNo(t),
-    name: "incurableDisease",
-    label: t("Auth.MembershipRegistration.Form.IncurableDisease"),
-    required: true,
-  },
-  {
-    type: "file",
-    name: "healthStatementPhoto",
-    label: t("Auth.MembershipRegistration.Form.HealthStatementPhoto"),
-    required: true,
-  },
-];
+export const getBasicDataInputs = (
+  t: Function,
+  formik?: FormikProps<Record<string, any>>
+): InputSingleProps[] => {
+  const final: InputSingleProps[] = [
+    {
+      type: "select",
+      options: getSocialStatuses(t),
+      name: "socialStatus",
+      label: t("Auth.MembershipRegistration.Form.SocialStatus.Title"),
+      required: true,
+    },
+    {
+      type: "text",
+      name: "fullName",
+      label: t("Auth.MembershipRegistration.Form.FullName"),
+      required: true,
+    },
+    {
+      type: "select",
+      options: getNationalities(t),
+      name: "nationality",
+      label: t("Auth.MembershipRegistration.Form.Nationality.Title"),
+      required: true,
+    },
+    {
+      type: "date",
+      name: "dob",
+      min: moment().locale("en").subtract(125, "y").format(dataDateFormat),
+      max: moment().locale("en").subtract(17, "y").format(dataDateFormat),
+      label: t("Auth.MembershipRegistration.Form.Dob"),
+      required: true,
+    },
+    {
+      type: "date",
+      name: "idExpiryDate",
+      max: moment().locale("en").add(10, "y").format(dataDateFormat),
+      label: t("Auth.MembershipRegistration.Form.IdExpiryDate"),
+      required: true,
+    },
+    {
+      type: "numberText",
+      name: "idNumber",
+      minLength: 10,
+      maxLength: 10,
+      label: t("Auth.MembershipRegistration.Form.IdNumber"),
+      labelNote: t("Auth.MembershipRegistration.Form.IdNumberNote"),
+      required: true,
+    },
+    {
+      type: "select",
+      name: "category",
+      options: getBeneficiaryCategories(t),
+      label: t("Auth.MembershipRegistration.Form.Category.Title"),
+      required: true,
+    },
+  ];
+
+  const familyInputs = [
+    {
+      type: "file",
+      name: "familyRecordPhoto",
+      label: t("Auth.MembershipRegistration.Form.FamilyRecordPhoto"),
+      required: true,
+      halfCol: true,
+    },
+    {
+      type: "file",
+      name: "guardianIdPhoto",
+      label: t("Auth.MembershipRegistration.Form.GuardianIdPhoto"),
+      required: true,
+      halfCol: true,
+    },
+  ];
+
+  if (!formik || formik.values.socialStatus !== "Single") {
+    familyInputs.forEach((i) => final.push(i));
+  } else {
+    final.push({
+      type: "file",
+      name: "guardianIdPhoto",
+      label: t("Auth.MembershipRegistration.Form.IdPhoto"),
+      required: true,
+    });
+  }
+
+  const commonInputs = [
+    {
+      type: "radio",
+      options: getGenders(t),
+      name: "gender",
+      label: t("Auth.MembershipRegistration.Form.Gender.Title"),
+      required: true,
+      halfCol: true,
+    },
+    {
+      type: "radio",
+      options: getHealthStatuses(t),
+      name: "healthStatus",
+      label: t("Auth.MembershipRegistration.Form.HealthStatus.Title"),
+      required: true,
+      halfCol: true,
+    },
+  ];
+
+  commonInputs.forEach((i) => final.push(i));
+
+  const sickInputs = [
+    {
+      type: "selectMany",
+      options: getDiseases(t),
+      placeholder: t("Auth.MembershipRegistration.Form.Diseases.None"),
+      name: "diseases",
+      label: t("Auth.MembershipRegistration.Form.Diseases.Title"),
+      required: false,
+    },
+    {
+      type: "radio",
+      options: getYesNo(t),
+      name: "incurableDisease",
+      label: t("Auth.MembershipRegistration.Form.IncurableDisease"),
+      required: true,
+    },
+    {
+      type: "file",
+      name: "healthStatementPhoto",
+      label: t("Auth.MembershipRegistration.Form.HealthStatementPhoto"),
+      required: true,
+    },
+  ];
+
+  if (!formik || formik?.values?.healthStatus === "Sick") {
+    sickInputs.forEach((i) => final.push(i));
+  }
+
+  return final;
+};
 
 export const getContactBankDataInputs = (t: Function): InputSingleProps[] => [
   {
@@ -157,300 +191,381 @@ export const getContactBankDataInputs = (t: Function): InputSingleProps[] => [
     type: "numberText",
     name: "bankAccountNumber",
     label: t("Auth.MembershipRegistration.Form.BankAccountNumber"),
-    labelNote: t("Auth.MembershipRegistration.Form.BankAccountNumberNote"),
-    required: false,
+    // labelNote: t("Auth.MembershipRegistration.Form.BankAccountNumberNote"),
+    required: true,
   },
   {
     type: "file",
     name: "ibanPhoto",
     label: t("Auth.MembershipRegistration.Form.IbanPhoto"),
-    required: false,
+    required: true,
     halfCol: true,
   },
 ];
 
 export const getIncomeQualificationDataInputs = (
-  t: Function
-): InputSingleProps[] => [
-  {
-    type: "select",
-    options: getOccupations(t),
-    name: "occupation",
-    label: t("Auth.MembershipRegistration.Form.Occupation.Title"),
-    required: true,
-  },
-  {
-    type: "select",
-    options: getEducationLevels(t),
-    name: "educationLevel",
-    label: t("Auth.MembershipRegistration.Form.EducationLevel.Title"),
-    required: true,
-  },
-  {
-    type: "number",
-    name: "salary",
-    label: t("Auth.MembershipRegistration.Form.Salary"),
-    min: 0,
-    step: 0.1,
-    required: false,
-    halfCol: true,
-  },
-  {
-    type: "file",
-    name: "salaryFile",
-    required: false,
-    halfCol: true,
-  },
-  {
-    type: "number",
-    name: "insurances",
-    label: t("Auth.MembershipRegistration.Form.Insurances"),
-    min: 0,
-    step: 0.1,
-    required: false,
-    halfCol: true,
-  },
-  {
-    type: "file",
-    name: "insurancesFile",
-    required: false,
-    halfCol: true,
-  },
-  {
-    type: "number",
-    name: "comprehensiveRehabilitation",
-    label: t("Auth.MembershipRegistration.Form.ComprehensiveRehabilitation"),
-    min: 0,
-    step: 0.1,
-    required: false,
-    halfCol: true,
-  },
-  {
-    type: "file",
-    name: "comprehensiveRehabilitationFile",
-    required: false,
-    halfCol: true,
-  },
-  {
-    type: "number",
-    name: "retirement",
-    label: t("Auth.MembershipRegistration.Form.Retirement"),
-    min: 0,
-    step: 0.1,
-    required: false,
-    halfCol: true,
-  },
-  {
-    type: "file",
-    name: "retirementFile",
-    required: false,
-    halfCol: true,
-  },
-  {
-    type: "number",
-    name: "socialSecurity",
-    label: t("Auth.MembershipRegistration.Form.SocialSecurity"),
-    min: 0,
-    step: 0.1,
-    required: false,
-    halfCol: true,
-  },
-  {
-    type: "file",
-    name: "socialSecurityFile",
-    required: false,
-    halfCol: true,
-  },
-];
+  t: Function,
+  formik?: FormikProps<Record<string, any>>
+): InputSingleProps[] => {
+  const final: InputSingleProps[] = [
+    {
+      type: "select",
+      options: getOccupations(t),
+      name: "occupation",
+      label: t("Auth.MembershipRegistration.Form.Occupation.Title"),
+      required: true,
+    },
+    {
+      type: "select",
+      options: getEducationLevels(t),
+      name: "educationLevel",
+      label: t("Auth.MembershipRegistration.Form.EducationLevel.Title"),
+      required: true,
+    },
+  ];
 
-export const getHousingDataInputs = (t: Function): InputSingleProps[] => [
-  {
-    type: "select",
-    options: getProvinces(t),
-    name: "province",
-    label: t("Auth.MembershipRegistration.Form.Province.Title"),
-    required: true,
-  },
-  {
-    type: "text",
-    name: "governorate",
-    label: t("Auth.MembershipRegistration.Form.Governorate"),
-    required: true,
-  },
-  {
-    type: "text",
-    name: "city",
-    label: t("Auth.MembershipRegistration.Form.City"),
-    required: true,
-  },
-  {
-    type: "text",
-    name: "district",
-    label: t("Auth.MembershipRegistration.Form.District"),
-    required: true,
-  },
-  {
-    type: "select",
-    options: getHomeTypes(t),
-    name: "homeType",
-    label: t("Auth.MembershipRegistration.Form.HomeType.Title"),
-    required: true,
-    halfCol: true,
-  },
-  {
-    type: "text",
-    name: "apartmentNo",
-    label: t("Auth.MembershipRegistration.Form.ApartmentNo"),
-    required: true,
-    halfCol: true,
-  },
-  {
-    type: "location",
-    name: "homeLocation",
-    label: t("Auth.MembershipRegistration.Form.HomeLocation"),
-    required: true,
-  },
-  {
-    type: "radio",
-    options: getHomeOwnerships(t),
-    name: "homeOwnership",
-    label: t("Auth.MembershipRegistration.Form.HomeOwnership.Title"),
-    required: true,
-  },
-  {
-    type: "file",
-    name: "homeDocumentPhoto",
-    label:
-      t("Auth.MembershipRegistration.Form.RentalContractPhoto") +
-      " / " +
-      t("Auth.MembershipRegistration.Form.OwnershipDocumentPhoto"),
-    required: true,
-    halfCol: true,
-  },
-  {
-    type: "file",
-    name: "nationalAddressDocument",
-    label: t("Auth.MembershipRegistration.Form.NationalAddressDocument"),
-    required: true,
-    halfCol: true,
-  },
-  {
-    type: "number",
-    name: "rentalCharge",
-    label: t("Auth.MembershipRegistration.Form.RentalCharge"),
-    min: 0,
-    step: 0.1,
-    required: true,
-  },
-  {
-    type: "select",
-    options: getHomeRentalPayees(t),
-    name: "payee",
-    label: t("Auth.MembershipRegistration.Form.Payee.Title"),
-    required: true,
-  },
-];
+  const employeeInputs = [
+    {
+      type: "number",
+      name: "salary",
+      label: t("Auth.MembershipRegistration.Form.Salary"),
+      min: 0,
+      step: 0.1,
+      required: true,
+      halfCol: true,
+    },
+    {
+      type: "file",
+      name: "salaryFile",
+      required: true,
+      halfCol: true,
+    },
+    {
+      type: "number",
+      name: "socialSecurity",
+      label: t("Auth.MembershipRegistration.Form.SocialSecurity"),
+      min: 0,
+      step: 0.1,
+      required: true,
+      halfCol: true,
+    },
+    {
+      type: "file",
+      name: "socialSecurityFile",
+      required: true,
+      halfCol: true,
+    },
+  ];
 
-export const getDependantDataInputs = (t: Function): InputSingleProps[] => [
-  {
-    type: "text",
-    name: "fullName",
-    label: t("Auth.MembershipRegistration.Form.FullName"),
-    required: true,
-  },
-  {
-    type: "date",
-    name: "dob",
-    min: moment().locale("en").subtract(125, "y").format(dataDateFormat),
-    max: moment().locale("en").format(dataDateFormat),
-    label: t("Auth.MembershipRegistration.Form.Dob"),
-    required: true,
-  },
-  {
-    type: "date",
-    name: "idExpiryDate",
-    max: moment().locale("en").add(10, "y").format(dataDateFormat),
-    label: t("Auth.MembershipRegistration.Form.IdExpiryDate"),
-    required: true,
-  },
-  {
-    type: "numberText",
-    name: "idNumber",
-    minLength: 10,
-    maxLength: 10,
-    label: t("Auth.MembershipRegistration.Form.IdNumber"),
-    labelNote: t("Auth.MembershipRegistration.Form.IdNumberNote"),
-    required: true,
-  },
-  {
-    type: "radio",
-    options: getGenders(t),
-    name: "gender",
-    label: t("Auth.MembershipRegistration.Form.Gender.Title"),
-    required: true,
-    halfCol: true,
-  },
-  {
-    type: "phoneNumber",
-    name: "mobile",
-    label: t("Auth.MembershipRegistration.Form.DependentMobile"),
-    labelNote: t("Auth.MembershipRegistration.Form.DependentMobileNote"),
-    required: false,
-  },
-  {
-    type: "select",
-    options: getDependentRelations(t),
-    name: "relation",
-    label: t("Auth.MembershipRegistration.Form.Relation.Title"),
-    required: true,
-  },
-  {
-    type: "select",
-    options: getAgeGroups(t),
-    name: "ageGroup",
-    label: t("Auth.MembershipRegistration.Form.AgeGroup.Title"),
-    required: false,
-    excludeInForm: true,
-  },
-  {
-    type: "file",
-    name: "incomeDocument",
-    label: t("Auth.MembershipRegistration.Form.IncomeDocument"),
-    labelNote: t("Auth.MembershipRegistration.Form.IncomeDocumentNote"),
-    required: false,
-    halfCol: true,
-  },
-  {
-    type: "file",
-    name: "studentsDocument",
-    label: t("Auth.MembershipRegistration.Form.StudentsDocument"),
-    labelNote: t("Auth.MembershipRegistration.Form.StudentsDocumentNote"),
-    required: false,
-    halfCol: true,
-  },
-  {
+  if (!formik || formik?.values?.occupation?.includes("Employee")) {
+    employeeInputs.forEach((i) => final.push(i));
+  }
+
+  const common = [
+    {
+      type: "number",
+      name: "insurances",
+      label: t("Auth.MembershipRegistration.Form.Insurances"),
+      min: 0,
+      step: 0.1,
+      required: false,
+      halfCol: true,
+    },
+    {
+      type: "file",
+      name: "insurancesFile",
+      required: false,
+      halfCol: true,
+    },
+    {
+      type: "number",
+      name: "comprehensiveRehabilitation",
+      label: t("Auth.MembershipRegistration.Form.ComprehensiveRehabilitation"),
+      min: 0,
+      step: 0.1,
+      required: false,
+      halfCol: true,
+    },
+    {
+      type: "file",
+      name: "comprehensiveRehabilitationFile",
+      required: false,
+      halfCol: true,
+    },
+    {
+      type: "number",
+      name: "retirement",
+      label: t("Auth.MembershipRegistration.Form.Retirement"),
+      min: 0,
+      step: 0.1,
+      required: false,
+      halfCol: true,
+    },
+    {
+      type: "file",
+      name: "retirementFile",
+      required: false,
+      halfCol: true,
+    },
+  ];
+
+  common.forEach((i) => final.push(i));
+
+  return final;
+};
+
+export const getHousingDataInputs = (
+  t: Function,
+  formik?: FormikProps<Record<string, any>>
+): InputSingleProps[] => {
+  const final = [
+    {
+      type: "select",
+      options: getProvinces(t),
+      name: "province",
+      label: t("Auth.MembershipRegistration.Form.Province.Title"),
+      required: true,
+    },
+    {
+      type: "text",
+      name: "governorate",
+      label: t("Auth.MembershipRegistration.Form.Governorate"),
+      required: true,
+    },
+    {
+      type: "text",
+      name: "city",
+      label: t("Auth.MembershipRegistration.Form.City"),
+      required: true,
+    },
+    {
+      type: "text",
+      name: "district",
+      label: t("Auth.MembershipRegistration.Form.District"),
+      required: true,
+    },
+    {
+      type: "select",
+      options: getHomeTypes(t),
+      name: "homeType",
+      label: t("Auth.MembershipRegistration.Form.HomeType.Title"),
+      required: true,
+      halfCol: true,
+    },
+    {
+      type: "text",
+      name: "apartmentNo",
+      label: t("Auth.MembershipRegistration.Form.ApartmentNo"),
+      required: true,
+      halfCol: true,
+    },
+    {
+      type: "location",
+      name: "homeLocation",
+      label: t("Auth.MembershipRegistration.Form.HomeLocation"),
+      required: true,
+    },
+    {
+      type: "radio",
+      options: getHomeOwnerships(t),
+      name: "homeOwnership",
+      label: t("Auth.MembershipRegistration.Form.HomeOwnership.Title"),
+      required: true,
+    },
+    {
+      type: "file",
+      name: "homeDocumentPhoto",
+      label: !formik
+        ? t("Auth.MembershipRegistration.Form.RentalContractPhoto") +
+          " / " +
+          t("Auth.MembershipRegistration.Form.OwnershipDocumentPhoto")
+        : formik?.values.homeOwnership === "Rental"
+        ? t("Auth.MembershipRegistration.Form.RentalContractPhoto")
+        : t("Auth.MembershipRegistration.Form.OwnershipDocumentPhoto"),
+      required: true,
+      halfCol: true,
+    },
+    {
+      type: "file",
+      name: "nationalAddressDocument",
+      label: t("Auth.MembershipRegistration.Form.NationalAddressDocument"),
+      required: true,
+      halfCol: true,
+    },
+  ];
+
+  const rentalInputs = [
+    {
+      type: "number",
+      name: "rentalCharge",
+      label: t("Auth.MembershipRegistration.Form.RentalCharge"),
+      min: 0,
+      step: 0.1,
+      required: true,
+    },
+  ];
+
+  if (!formik || formik.values?.homeOwnership === "Rental") {
+    rentalInputs.forEach((i) => final.push(i));
+  }
+
+  const ownerInputs = [
+    {
+      type: "select",
+      options: getHomeOwners(t),
+      name: "payee",
+      label: t("Auth.MembershipRegistration.Form.Ownership.Title"),
+      required: true,
+    },
+  ];
+
+  if (!formik || formik.values?.homeOwnership === "Ownership") {
+    ownerInputs.forEach((i) => final.push(i));
+  }
+
+  return final;
+};
+
+export const getDependantDataInputs = (
+  t: Function,
+  formik?: FormikProps<Record<string, any>>
+): InputSingleProps[] => {
+  const final: InputSingleProps[] = [
+    {
+      type: "text",
+      name: "fullName",
+      label: t("Auth.MembershipRegistration.Form.FullName"),
+      required: true,
+    },
+    {
+      type: "date",
+      name: "dob",
+      min: moment().locale("en").subtract(125, "y").format(dataDateFormat),
+      max: moment().locale("en").format(dataDateFormat),
+      label: t("Auth.MembershipRegistration.Form.Dob"),
+      required: true,
+    },
+    {
+      type: "date",
+      name: "idExpiryDate",
+      max: moment().locale("en").add(10, "y").format(dataDateFormat),
+      label: t("Auth.MembershipRegistration.Form.IdExpiryDate"),
+      required: true,
+    },
+    {
+      type: "numberText",
+      name: "idNumber",
+      minLength: 10,
+      maxLength: 10,
+      label: t("Auth.MembershipRegistration.Form.IdNumber"),
+      labelNote: t("Auth.MembershipRegistration.Form.IdNumberNote"),
+      required: true,
+    },
+    {
+      type: "radio",
+      options: getGenders(t),
+      name: "gender",
+      label: t("Auth.MembershipRegistration.Form.Gender.Title"),
+      required: true,
+      halfCol: true,
+    },
+    {
+      type: "phoneNumber",
+      name: "mobile",
+      label: t("Auth.MembershipRegistration.Form.DependentMobile"),
+      labelNote: t("Auth.MembershipRegistration.Form.DependentMobileNote"),
+      required: false,
+    },
+    {
+      type: "select",
+      options: getDependentRelations(t),
+      name: "relation",
+      label: t("Auth.MembershipRegistration.Form.Relation.Title"),
+      required: true,
+    },
+    {
+      type: "select",
+      options: getAgeGroups(t),
+      name: "ageGroup",
+      label: t("Auth.MembershipRegistration.Form.AgeGroup.Title"),
+      required: false,
+      excludeInForm: true,
+    },
+    {
+      type: "select",
+      options: getEducationLevels(t),
+      name: "educationLevel",
+      label: t("Auth.MembershipRegistration.Form.EducationLevel.Title"),
+      required: true,
+    },
+    {
+      type: "select",
+      options: getOccupations(t),
+      name: "occupation",
+      label: t("Auth.MembershipRegistration.Form.Occupation.Title"),
+      required: true,
+    },
+  ];
+
+  const studentInputs = [
+    {
+      type: "file",
+      name: "studentDocument",
+      label: t("Auth.MembershipRegistration.Form.StudentsDocument"),
+      labelNote: t("Auth.MembershipRegistration.Form.StudentsDocumentNote"),
+      required: true,
+    },
+  ];
+
+  const employeeInputs = [
+    {
+      type: "file",
+      name: "incomeDocument",
+      label: t("Auth.MembershipRegistration.Form.IncomeDocument"),
+      required: true,
+    },
+  ];
+
+  if (!formik || formik?.values?.occupation === "Student") {
+    studentInputs.forEach((i) => final.push(i));
+  }
+
+  if (!formik || formik?.values?.occupation?.includes("Employee")) {
+    employeeInputs.forEach((i) => final.push(i));
+  }
+
+  final.push({
     type: "radio",
     options: getHealthStatuses(t),
     name: "healthStatus",
     label: t("Auth.MembershipRegistration.Form.HealthStatus.Title"),
     required: true,
-  },
-  {
-    type: "selectMany",
-    options: getDiseases(t),
-    placeholder: t("Auth.MembershipRegistration.Form.Diseases.None"),
-    name: "diseases",
-    label: t("Auth.MembershipRegistration.Form.Diseases.Title"),
-    required: false,
-  },
-  {
-    type: "radio",
-    options: getYesNo(t),
-    name: "incurableDisease",
-    label: t("Auth.MembershipRegistration.Form.IncurableDisease"),
-    required: false,
-  },
-];
+  });
+
+  const sickInputs = [
+    {
+      type: "radio",
+      options: getYesNo(t),
+      name: "incurableDisease",
+      label: t("Auth.MembershipRegistration.Form.IncurableDisease"),
+      required: false,
+    },
+    {
+      type: "selectMany",
+      options: getDiseases(t),
+      placeholder: t("Auth.MembershipRegistration.Form.Diseases.None"),
+      name: "diseases",
+      label: t("Auth.MembershipRegistration.Form.Diseases.Title"),
+      required: false,
+    },
+  ];
+
+  if (!formik || formik?.values?.healthStatus === "Sick") {
+    sickInputs.forEach((i) => final.push(i));
+  }
+
+  return final;
+};
 
 export const getNationalRecordDataInputs = (
   t: Function
@@ -466,6 +581,7 @@ export const getNationalRecordDataInputs = (
     type: "file",
     logo: tawakkalnaLogo,
     name: "tawakkalnaDocument",
+    accept: ".png, .jpeg, .jpg, .pdf",
     label: t("Auth.MembershipRegistration.Form.TawakkalnaDocument"),
     required: true,
   },

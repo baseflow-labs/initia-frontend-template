@@ -111,7 +111,6 @@
       "Address": "العنوان",
       "Form": {
         "AbsherDocument": "لوحة المعلومات من موقع ابشر - المركبات - العمالة",
-        "Address": "عنوان السكن",
         "AgeGroup": {
           "AboveSixty": "60 سنة فأكثر",
           "BelowFive": "أقل من 5 سنوات",
@@ -183,7 +182,7 @@
           "Master": "ماجستير",
           "Phd": "دكتوراه",
           "PrimarySchool": "ابتدائية",
-          "Title": "المستوي التعليمي"
+          "Title": "المستوى التعليمي"
         },
         "Email": "البريد الإلكتروني",
         "FamilyRecordPhoto": "سجل الأسرة",
@@ -221,12 +220,12 @@
           "Villa": "فيلا"
         },
         "HostelData": "بيانات السكن",
-        "IbanPhoto": "صورة رقم الآييبان",
+        "IbanPhoto": "صورة رقم الآيبان",
         "IdExpiryDate": "تاريخ انتهاء الهوية",
         "IdNumber": "رقم الهوية",
         "IdNumberNote": "مكون من 10 أرقام",
+        "IdPhoto": "صورة الهوية",
         "IncomeDocument": "مصادر الدخل",
-        "IncomeDocumentNote": "إذا كان التابع عاملاً / موظفاً",
         "IncurableDisease": "هل المرض مستعص؟",
         "Insurances": "تأمينات",
         "NationalAddressDocument": "إثبات العنوان الوطني",
@@ -306,8 +305,7 @@
           "Installment": "يتم التقسيط مع المالك",
           "Relative": "يدفعه أحد الأقارب",
           "Self": "يدفعه المستفيد بنقسه",
-          "Society": "تتحمله جهة خيرية / جمعية",
-          "Title": "الجهة المتكفلة بالإيجار"
+          "Society": "تتحمله جهة خيرية / جمعية"
         },
         "Province": {
           "AlBahah": "الباحة",

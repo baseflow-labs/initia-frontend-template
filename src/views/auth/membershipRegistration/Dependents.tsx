@@ -17,6 +17,7 @@ import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
 import { getDependantDataInputs } from "../../../utils/formInputs/beneficiaryProfile";
 import { apiCatchGlobalHandler } from "../../../utils/function";
+import { FormikProps } from "formik";
 
 interface Props {
   customButtons: React.ReactNode;
@@ -49,7 +50,8 @@ const DependentsFormView = ({
     setDependents((current) => current.filter((_, y) => y !== i));
   };
 
-  const dependentsDataInputs = () => getDependantDataInputs(t);
+  const dependentsDataInputs = (formik: FormikProps<Record<string, any>>) =>
+    getDependantDataInputs(t, formik);
 
   return (
     <Fragment>

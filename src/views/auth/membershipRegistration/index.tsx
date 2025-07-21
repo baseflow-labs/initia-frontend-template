@@ -1,5 +1,4 @@
 import { FormikProps } from "formik";
-import moment from "moment";
 import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
@@ -18,26 +17,14 @@ import Form from "../../../components/form";
 import WizardFormStepper from "../../../components/form/wizard/stepper";
 import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
 import { addNotification } from "../../../store/actions/notifications";
-import { dataDateFormat } from "../../../utils/consts";
 import {
+  getBasicDataInputs,
   getContactBankDataInputs,
+  getHousingDataInputs,
   getIncomeQualificationDataInputs,
   getNationalRecordDataInputs,
 } from "../../../utils/formInputs/beneficiaryProfile";
 import { apiCatchGlobalHandler } from "../../../utils/function";
-import {
-  getDiseases,
-  getGenders,
-  getHealthStatuses,
-  getHomeOwners,
-  getHomeOwnerships,
-  getHomeRentalPayees,
-  getHomeTypes,
-  getNationalities,
-  getProvinces,
-  getSocialStatuses,
-} from "../../../utils/optionDataLists/beneficiaries";
-import { getYesNo } from "../../../utils/optionDataLists/common";
 import DependentsFormView from "./Dependents";
 
 const MembershipRegistrationView = () => {
@@ -126,216 +113,16 @@ const MembershipRegistrationView = () => {
     setCurrentStep((current = 0) => current - 1);
   };
 
-  const basicDataInputs = (formik?: FormikProps<Record<string, any>>) => [
-    {
-      type: "select",
-      options: getSocialStatuses(t),
-      name: "socialStatus",
-      label: t("Auth.MembershipRegistration.Form.SocialStatus.Title"),
-      required: true,
-    },
-    {
-      type: "text",
-      name: "fullName",
-      label: t("Auth.MembershipRegistration.Form.FullName"),
-      required: true,
-    },
-    {
-      type: "select",
-      options: getNationalities(t),
-      name: "nationality",
-      label: t("Auth.MembershipRegistration.Form.Nationality.Title"),
-      required: true,
-    },
-    {
-      type: "date",
-      name: "dob",
-      min: moment().locale("en").subtract(125, "y").format(dataDateFormat),
-      max: moment().locale("en").subtract(17, "y").format(dataDateFormat),
-      label: t("Auth.MembershipRegistration.Form.Dob"),
-      required: true,
-    },
-    {
-      type: "date",
-      name: "idExpiryDate",
-      max: moment().locale("en").add(10, "y").format(dataDateFormat),
-      label: t("Auth.MembershipRegistration.Form.IdExpiryDate"),
-      required: true,
-    },
-    {
-      type: "numberText",
-      name: "idNumber",
-      minLength: 10,
-      maxLength: 10,
-      label: t("Auth.MembershipRegistration.Form.IdNumber"),
-      labelNote: t("Auth.MembershipRegistration.Form.IdNumberNote"),
-      required: true,
-    },
-    {
-      type: "file",
-      name: "familyRecordPhoto",
-      label: t("Auth.MembershipRegistration.Form.FamilyRecordPhoto"),
-      required: false,
-      halfCol: true,
-    },
-    {
-      type: "file",
-      name: "guardianIdPhoto",
-      label: t("Auth.MembershipRegistration.Form.GuardianIdPhoto"),
-      required: true,
-      halfCol: true,
-    },
-    {
-      type: "radio",
-      options: getGenders(t),
-      name: "gender",
-      label: t("Auth.MembershipRegistration.Form.Gender.Title"),
-      required: true,
-      halfCol: true,
-    },
-    {
-      type: "radio",
-      options: getHealthStatuses(t),
-      name: "healthStatus",
-      label: t("Auth.MembershipRegistration.Form.HealthStatus.Title"),
-      required: true,
-      halfCol: true,
-    },
-    ...(formik?.values.healthStatus === "Sick"
-      ? [
-          {
-            type: "selectMany",
-            options: getDiseases(t),
-            placeholder: t("Auth.MembershipRegistration.Form.Diseases.None"),
-            name: "diseases",
-            label: t("Auth.MembershipRegistration.Form.Diseases.Title"),
-            required: false,
-          },
-          {
-            type: "radio",
-            options: getYesNo(t),
-            name: "incurableDisease",
-            label: t("Auth.MembershipRegistration.Form.IncurableDisease"),
-            required: true,
-          },
-          {
-            type: "file",
-            name: "healthStatementPhoto",
-            label: t("Auth.MembershipRegistration.Form.HealthStatementPhoto"),
-            required: true,
-          },
-        ]
-      : []),
-  ];
+  const basicDataInputs = (formik?: FormikProps<Record<string, any>>) =>
+    getBasicDataInputs(t, formik);
 
   const contactDataInputs = () => getContactBankDataInputs(t);
 
-  const qualificationDataInputs = () => getIncomeQualificationDataInputs(t);
+  const qualificationDataInputs = (formik?: FormikProps<Record<string, any>>) =>
+    getIncomeQualificationDataInputs(t, formik);
 
-  const hostelDataInputs = (formik?: FormikProps<Record<string, any>>) => [
-    {
-      type: "title",
-      name: "title2",
-      defaultValue: t("Auth.MembershipRegistration.Form.Address"),
-    },
-    {
-      type: "select",
-      options: getProvinces(t),
-      name: "province",
-      label: t("Auth.MembershipRegistration.Form.Province.Title"),
-      required: true,
-    },
-    {
-      type: "text",
-      name: "governorate",
-      label: t("Auth.MembershipRegistration.Form.Governorate"),
-      required: true,
-    },
-    {
-      type: "text",
-      name: "city",
-      label: t("Auth.MembershipRegistration.Form.City"),
-      required: true,
-    },
-    {
-      type: "text",
-      name: "district",
-      label: t("Auth.MembershipRegistration.Form.District"),
-      required: true,
-    },
-    {
-      type: "select",
-      options: getHomeTypes(t),
-      name: "homeType",
-      label: t("Auth.MembershipRegistration.Form.HomeType.Title"),
-      required: true,
-      halfCol: true,
-    },
-    {
-      type: "text",
-      name: "apartmentNo",
-      label: t("Auth.MembershipRegistration.Form.ApartmentNo"),
-      required: true,
-      halfCol: true,
-    },
-    {
-      type: "location",
-      name: "homeLocation",
-      label: t("Auth.MembershipRegistration.Form.HomeLocation"),
-      required: true,
-    },
-    {
-      type: "radio",
-      options: getHomeOwnerships(t),
-      name: "homeOwnership",
-      label: t("Auth.MembershipRegistration.Form.HomeOwnership.Title"),
-      required: true,
-    },
-    {
-      type: "file",
-      name: "homeDocumentPhoto",
-      label:
-        formik?.values.homeOwnership === "Rental"
-          ? t("Auth.MembershipRegistration.Form.RentalContractPhoto")
-          : t("Auth.MembershipRegistration.Form.OwnershipDocumentPhoto"),
-      required: true,
-      halfCol: true,
-    },
-    {
-      type: "file",
-      name: "nationalAddressDocument",
-      label: t("Auth.MembershipRegistration.Form.NationalAddressDocument"),
-      required: true,
-      halfCol: true,
-    },
-    ...(formik?.values.homeOwnership === "Rental"
-      ? [
-          {
-            type: "number",
-            name: "rentalCharge",
-            label: t("Auth.MembershipRegistration.Form.RentalCharge"),
-            min: 0,
-            step: 0.1,
-            required: true,
-          },
-          {
-            type: "select",
-            options: getHomeRentalPayees(t),
-            name: "payee",
-            label: t("Auth.MembershipRegistration.Form.Payee.Title"),
-            required: true,
-          },
-        ]
-      : [
-          {
-            type: "select",
-            options: getHomeOwners(t),
-            name: "payee",
-            label: t("Auth.MembershipRegistration.Form.Ownership.Title"),
-            required: true,
-          },
-        ]),
-  ];
+  const hostelDataInputs = (formik?: FormikProps<Record<string, any>>) =>
+    getHousingDataInputs(t, formik);
 
   const attachmentInputs = () => getNationalRecordDataInputs(t);
 
