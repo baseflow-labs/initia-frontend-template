@@ -17,6 +17,7 @@ import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
 } from "../../../utils/function";
+import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
 
 type visitReportRoomContentsType = {
   id: string;
@@ -210,7 +211,7 @@ const VisitDetailView = () => {
   };
 
   return (
-    <Fragment>
+    <PageTemplate>
       <div className="row">
         <div className="col-md-9">
           <h2>{t("Auth.Visits.Report.Title")}</h2>
@@ -263,7 +264,7 @@ const VisitDetailView = () => {
           />
         </div>
       ))}
-    </Fragment>
+    </PageTemplate>
   );
 };
 
