@@ -1,6 +1,6 @@
+import { FormikProps } from "formik";
 import moment from "moment";
 
-import { FormikProps } from "formik";
 import absherLogo from "../../assets/images/partners/absher.svg";
 import molimLogo from "../../assets/images/partners/molim.svg";
 import tawakkalnaLogo from "../../assets/images/partners/Tawakkalna.svg";
@@ -79,6 +79,7 @@ export const getBasicDataInputs = (
       options: getBeneficiaryCategories(t),
       label: t("Auth.MembershipRegistration.Form.Category.Title"),
       required: true,
+      excludeInForm: true,
     },
   ];
 
@@ -192,6 +193,14 @@ export const getContactBankDataInputs = (t: Function): InputSingleProps[] => [
     name: "bankAccountNumber",
     label: t("Auth.MembershipRegistration.Form.BankAccountNumber"),
     // labelNote: t("Auth.MembershipRegistration.Form.BankAccountNumberNote"),
+    required: true,
+  },
+  {
+    type: "text",
+    name: "bankName",
+    label: t("Auth.MembershipRegistration.Form.BankName"),
+    // labelNote: t("Auth.MembershipRegistration.Form.BankAccountNumberNote"),
+    excludeInForm: true,
     required: true,
   },
   {
