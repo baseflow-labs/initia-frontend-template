@@ -44,6 +44,7 @@ interface InputBasicProps {
   excludeInForm?: boolean;
   defaultValue?: string | number;
   placeholder?: string;
+  fileSizeLimit?: number;
   min?: string | number;
   max?: string | number;
   step?: number;
@@ -129,7 +130,7 @@ const Form: React.FC<Props> = ({
 
   const generatedInitialValues = dynamicInputs.reduce<Record<string, any>>(
     (acc, input) => {
-      if (input.defaultValue !== undefined) {
+      if (input.defaultValue) {
         acc[input.name] = input.defaultValue;
         return acc;
       }
@@ -194,7 +195,7 @@ const Form: React.FC<Props> = ({
           }
         }
 
-        if (value !== undefined && value !== null && value !== "") {
+        if (value && value !== null && value !== "") {
           if (type === "email") {
             const validEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
             if (!validEmail.test(value)) {
@@ -207,26 +208,21 @@ const Form: React.FC<Props> = ({
             if (isNaN(numeric)) {
               errors[name] = t("Global.Form.Errors.InvalidNumber");
             } else {
-              if (min !== undefined && numeric < Number(min)) {
+              if (min && numeric < Number(min)) {
                 errors[name] = `${t("Global.Form.Errors.Min")}: ${min}`;
               }
-              if (max !== undefined && numeric > Number(max)) {
+              if (max && numeric > Number(max)) {
                 errors[name] = `${t("Global.Form.Errors.Max")}: ${max}`;
               }
             }
           }
 
-          if (typeof value === "string") {
-            if (minLength !== undefined && value.length < minLength) {
-              errors[name] = `${t(
-                "Global.Form.Errors.MinLength"
-              )}: ${minLength}`;
-            }
-            if (maxLength !== undefined && value.length > maxLength) {
-              errors[name] = `${t(
-                "Global.Form.Errors.MaxLength"
-              )}: ${maxLength}`;
-            }
+          if (minLength && String(value).length < minLength) {
+            errors[name] = `${t("Global.Form.Errors.MinLength")}: ${minLength}`;
+          }
+
+          if (maxLength && String(value).length > maxLength) {
+            errors[name] = `${t("Global.Form.Errors.MaxLength")}: ${maxLength}`;
           }
         }
       });
@@ -287,7 +283,6 @@ const Form: React.FC<Props> = ({
                 min,
                 max,
                 minLength,
-                maxLength,
                 ...input
               }) => {
                 const triggerError =

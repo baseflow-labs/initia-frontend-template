@@ -21,6 +21,7 @@ import { triggerFilePreview } from "../../layouts/auth/globalModal";
 import { addNotification } from "../../store/actions/notifications";
 import { viewDateFormat, viewTimeFormat } from "../../utils/consts";
 import DropdownComp from "../dropdown";
+import TooltipComp from "../tooltip";
 
 export interface actionProps {
   label: string;
@@ -252,35 +253,33 @@ const DynamicTable = ({
                             y
                           ) => (
                             <h4 key={y}>
-                              <FontAwesomeIcon
-                                icon={icon}
-                                data-bs-toggle="tooltip"
-                                data-bs-placement="top"
-                                data-bs-custom-class="custom-tooltip"
-                                data-bs-title={label}
-                                role="button"
-                                className={
-                                  "me-1" +
-                                  (" text-" +
-                                    (disabled
-                                      ? "secondary"
-                                      : color || "secondary"))
-                                }
-                                onClick={
-                                  disabled
-                                    ? () => {
-                                        dispatch(
-                                          addNotification({
-                                            type: "err",
-                                            msg:
-                                              disabledMsg ||
-                                              t("Global.Form.CantDoIt"),
-                                          })
-                                        );
-                                      }
-                                    : () => onClick(row?.id || "")
-                                }
-                              />
+                              <TooltipComp label={label}>
+                                <FontAwesomeIcon
+                                  icon={icon}
+                                  role="button"
+                                  className={
+                                    "me-1" +
+                                    (" text-" +
+                                      (disabled
+                                        ? "secondary"
+                                        : color || "secondary"))
+                                  }
+                                  onClick={
+                                    disabled
+                                      ? () => {
+                                          dispatch(
+                                            addNotification({
+                                              type: "err",
+                                              msg:
+                                                disabledMsg ||
+                                                t("Global.Form.CantDoIt"),
+                                            })
+                                          );
+                                        }
+                                      : () => onClick(row?.id || "")
+                                  }
+                                />
+                              </TooltipComp>
                             </h4>
                           )
                         )}

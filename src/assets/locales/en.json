@@ -127,6 +127,23 @@
         "BackupMobile": "Backup Mobile",
         "BankAccountNumber": "Bank AccountN umber",
         "BankAccountNumberNote": "Bank Account Number Note",
+        "BankName": {
+          "Ahli": "Ahli",
+          "Arabi": "Arab National Bank",
+          "Bilad": "Bank Albilad",
+          "BNP": "BNP Paribas",
+          "Emirates": "Emirates NBD",
+          "Fransi": "Banque Saudi Fransi",
+          "Inma": "Alinma Bank",
+          "Istithmar": "The Saudi Investment Bank",
+          "Jazira": "Bank Aljazira",
+          "JPChase": "JP Morgan Chase",
+          "MUFG": "MUFG Bank",
+          "Muscat": "Bank Muscat",
+          "Rajhi": "Al Rajhi Bank",
+          "SAB": "Saudi Awwal Bank (SAB)",
+          "Title": "Bank Name"
+        },
         "BasicData": "Basic Data",
         "BeneficiaryMobile": "Beneficiary Mobile",
         "Category": {
@@ -511,6 +528,7 @@
     "Form": {
       "CantDoIt": "Can't Do It",
       "Errors": {
+        "FileTooLarge": "File Too Large. Limit is {{max}}MB",
         "InvalidEmail": "Invalid email format",
         "InvalidNumber": "Invalid number",
         "InvalidPhoneNumber": "Invalid phone number format",
@@ -532,6 +550,7 @@
         "BrowserDontSupportLocation": "Browser Don't Support Location",
         "Confirm": "Confirm",
         "Edit": "Edit",
+        "Filter": "Filter",
         "Location": "Location",
         "No": "No",
         "NoOptions": "No Options",
@@ -541,6 +560,7 @@
         "PleaseSelect": "Please Select",
         "Previous": "Previous",
         "Record": "Record",
+        "ResetFilter": "Reset Filter",
         "Save": "Save",
         "SaveContinue": "Save Continue",
         "SaveData": "Save Data",

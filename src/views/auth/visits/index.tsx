@@ -138,6 +138,14 @@ const VisitsView = () => {
 
   const filters = [
     {
+      label: t("Auth.Beneficiaries.BeneficiaryName"),
+      options: selectOptions.beneficiaries.map(({ id, fullName }) => ({
+        value: id,
+        label: fullName,
+      })),
+      name: "beneficiary",
+    },
+    {
       label: t("Auth.Visits.Statuses.Status"),
       options: statuses,
       name: "status",

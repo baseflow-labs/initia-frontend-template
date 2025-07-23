@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
 import * as OverviewApi from "../../../api/overview";
+import * as UserApi from "../../../api/profile/beneficiary";
 import { helpIcon } from "../../../assets/icons/icons";
 import IconWrapperComp from "../../../assets/icons/wrapper";
 import profilePhotoPlaceholder from "../../../assets/images/profile-image-placeholder.png";
@@ -31,6 +32,11 @@ const DashboardView = () => {
     statuses?: { status: string; createdAt: string }[];
     status?: string;
   }>({});
+  const [profile, setProfile] = useState<{ beneficiary: { fullName: string } }>(
+    {
+      beneficiary: { fullName: "" },
+    }
+  );
 
   useLayoutEffect(() => {
     OverviewApi.forBeneficiary()
@@ -41,6 +47,14 @@ const DashboardView = () => {
             (a: Notification, b: Notification) =>
               a.createdAt > b.createdAt ? -1 : 1
           ),
+        })
+      )
+      .catch(apiCatchGlobalHandler);
+
+    UserApi.getByUserId()
+      .then((res: any) =>
+        setProfile({
+          ...res.payload,
         })
       )
       .catch(apiCatchGlobalHandler);
@@ -63,8 +77,7 @@ const DashboardView = () => {
                 src={
                   logo
                     ? (process.env.REACT_APP_STORAGE_DIRECTORY_URL ||
-                        "https://pdt-bucket.s3.us-east-1.amazonaws.com") +
-                      logo.replaceAll("\\", "/")
+                        "https://pdt-bucket.s3.us-east-1.amazonaws.com") + logo
                     : profilePhotoPlaceholder
                 }
                 alt="logo"
@@ -79,9 +92,14 @@ const DashboardView = () => {
 
         <div className="col-lg-6">
           <DashboardCard>
-            <h3 className="mb-5">{t("Auth.Dashboard.BeneficiaryInfo")}</h3>
-
             <div className="row">
+              <div className="col-12 mb-5">
+                <h4>
+                  {t("Auth.Dashboard.BeneficiaryInfo")}{" "}
+                  {profile.beneficiary.fullName}
+                </h4>
+              </div>
+
               <div className="col-6">
                 <h6 className="my-auto">
                   {t("Auth.Dashboard.BeneficiaryMembershipStatus")}
