@@ -155,8 +155,8 @@ const BeneficiaryFormReview = () => {
 
   const dependentTabs = beneficiary?.dependents?.map(
     ({ id, fullName }: { id: string; fullName: string }) => ({
-      id: id,
-      name: fullName,
+      id,
+      name: id,
       title: fullName,
     })
   );
