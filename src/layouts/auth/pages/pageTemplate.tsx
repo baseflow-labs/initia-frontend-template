@@ -9,6 +9,7 @@ import SelectInput from "../../../components/form/inputs/select";
 import SelectManyInput from "../../../components/form/inputs/selectMany";
 import { columnsWidth } from "../../../utils/function";
 import DashboardNavbar from "../navs/navbar";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   title?: string;
@@ -38,6 +39,8 @@ const PageTemplate = ({
   showNav,
   hideHeader,
 }: Props) => {
+  const { t } = useTranslation();
+
   const initialValues =
     filters?.reduce(
       (final, current) => ({ ...final, [current.name]: "" }),
@@ -112,6 +115,7 @@ const PageTemplate = ({
                   <Button color="ghost" type="submit">
                     <IconWrapperComp
                       icon={filterIcon}
+                      label={t("Global.Form.Labels.Filter")}
                       className="me-1 my-auto px-0 px-lg-1"
                     />
                   </Button>
@@ -123,6 +127,7 @@ const PageTemplate = ({
                   >
                     <IconWrapperComp
                       icon={resetFilterIcon}
+                      label={t("Global.Form.Labels.ResetFilter")}
                       className="me-1 my-auto px-0 px-lg-1"
                     />
                   </Button>
