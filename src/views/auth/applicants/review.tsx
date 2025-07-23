@@ -215,7 +215,7 @@ const BeneficiaryFormReview = () => {
           })
         );
 
-        navigate("/beneficiary");
+        navigate("/applicant");
       })
       .catch(apiCatchGlobalHandler);
   };

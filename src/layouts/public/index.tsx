@@ -87,11 +87,11 @@ const AuthLayout = () => {
 
                       const settings = isSelected
                         ? {
-                            color: "info",
+                            color: "opacity-info",
                             style: {
                               backgroundColor: "rgba(24,180,191,0.15)",
                             },
-                            className: "text-white",
+                            className: "text-info",
                           }
                         : {
                             color: "ghost",
