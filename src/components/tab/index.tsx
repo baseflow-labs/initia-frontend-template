@@ -13,16 +13,21 @@ export default function TabsHeader({
       style={{ maxWidth: "90vw" }}
     >
       <div
-        className="d-flex justify-content-start gap-1 bg-teal"
+        className="d-flex justify-content-start gap-1 bg-teal rounded-5 p-2"
         style={{
           width: "max-content",
+          backgroundColor: "rgba(0,0,0,0.025)",
         }}
       >
         {tabs.map((tab) => (
           <button
             key={tab.id}
-            className={`btn px-4 py-3 rounded-5 w-fit  
-          ${activeTab === tab.id ? "bg-info text-white fs-6" : "text-dark"}`}
+            className={`btn mx-2 px-4 py-3 rounded-5 w-fit  
+          ${
+            activeTab === tab.id
+              ? "bg-opacity-info text-info fw-bold fs-6"
+              : "text-dark"
+          }`}
             onClick={() => setActiveTab(tab.name)}
             style={{
               background: "none",
