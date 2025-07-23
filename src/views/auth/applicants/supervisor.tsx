@@ -18,6 +18,7 @@ import {
   getBeneficiaryCategories,
   getBeneficiaryStatuses,
   getNationalities,
+  getProvinces,
 } from "../../../utils/optionDataLists/beneficiaries";
 import AssignResearcher from "./assignResearcher";
 import DemoLoginNote from "../../../layouts/auth/demoLoginNote";
@@ -136,6 +137,8 @@ const ApplicantsViewForSupervisor = () => {
 
   const statuses = getBeneficiaryStatuses(t);
 
+  const provinces = getProvinces(t);
+
   const filters = [
     {
       label: t("Auth.MembershipRegistration.Statuses.Status"),
@@ -146,6 +149,11 @@ const ApplicantsViewForSupervisor = () => {
       label: t("Auth.MembershipRegistration.Form.Nationality.Title"),
       options: nationalities,
       name: "nationality",
+    },
+    {
+      label: t("Auth.MembershipRegistration.Form.Province.Title"),
+      options: provinces,
+      name: "housing=>province",
     },
   ];
 

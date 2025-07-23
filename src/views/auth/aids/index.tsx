@@ -105,11 +105,6 @@ const AidsView = () => {
 
   const filters = [
     {
-      label: t("Auth.MembershipRegistration.Statuses.Status"),
-      options: statuses,
-      name: "aidStatuses=>status",
-    },
-    {
       label: t("Auth.Beneficiaries.BeneficiaryName"),
       options: selectOptions.beneficiaries.map(({ id, fullName }) => ({
         value: id,
@@ -121,6 +116,11 @@ const AidsView = () => {
       label: t("Auth.Aids.AidType"),
       options: aidTypes,
       name: "type",
+    },
+    {
+      label: t("Auth.MembershipRegistration.Statuses.Status"),
+      options: statuses,
+      name: "aidStatuses=>status",
     },
   ];
 
