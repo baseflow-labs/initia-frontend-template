@@ -127,6 +127,23 @@
         "BackupMobile": "رقم الجوال الاحتياطي",
         "BankAccountNumber": "رقم الآيبان للحساب البنكي",
         "BankAccountNumberNote": "مكون من 12 رقم",
+        "BankName": {
+          "Ahli": "البنك الأهلي",
+          "Arabi": "البنك العربي الوطني",
+          "Bilad": "بنك البلاد",
+          "BNP": "بنك باريس الوطني",
+          "Emirates": "بنك الإمارات الدولي",
+          "Fransi": "البنك السعودي الفرنسي",
+          "Inma": "مصرف الإنماء",
+          "Istithmar": "البنك السعودي للاستثمار",
+          "Jazira": "بنك الجزيرة",
+          "JPChase": "بنك JP Morgan Chase",
+          "MUFG": "بنك MUFG",
+          "Muscat": "بنك مسقط",
+          "Rajhi": "بنك الراجحي",
+          "SAB": "البنك السعودي الأول (SAB)",
+          "Title": "اسم البنك"
+        },
         "BasicData": "البيانات الأساسية",
         "BeneficiaryMobile": "رقم جوال المستفيد",
         "Category": {

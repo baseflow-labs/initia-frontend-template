@@ -127,6 +127,23 @@
         "BackupMobile": "Backup Mobile",
         "BankAccountNumber": "Bank AccountN umber",
         "BankAccountNumberNote": "Bank Account Number Note",
+        "BankName": {
+          "Ahli": "Ahli",
+          "Arabi": "Arab National Bank",
+          "Bilad": "Bank Albilad",
+          "BNP": "BNP Paribas",
+          "Emirates": "Emirates NBD",
+          "Fransi": "Banque Saudi Fransi",
+          "Inma": "Alinma Bank",
+          "Istithmar": "The Saudi Investment Bank",
+          "Jazira": "Bank Aljazira",
+          "JPChase": "JP Morgan Chase",
+          "MUFG": "MUFG Bank",
+          "Muscat": "Bank Muscat",
+          "Rajhi": "Al Rajhi Bank",
+          "SAB": "Saudi Awwal Bank (SAB)",
+          "Title": "Bank Name"
+        },
         "BasicData": "Basic Data",
         "BeneficiaryMobile": "Beneficiary Mobile",
         "Category": {

@@ -653,3 +653,50 @@ export const getEducationLevels = (t: Function) => [
     label: t("Auth.MembershipRegistration.Form.EducationLevel.Phd"),
   },
 ];
+
+export const banks = (t: Function) => [
+  {
+    name: t("Auth.MembershipRegistration.Form.BankName.Inma"),
+    code: "0500",
+  },
+  { name: t("Auth.MembershipRegistration.Form.BankName.Ahli"), code: "1000" },
+  {
+    name: t("Auth.MembershipRegistration.Form.BankName.Bilad"),
+    code: "1500",
+  },
+  {
+    name: t("Auth.MembershipRegistration.Form.BankName.Arabi"),
+    code: "3000",
+  },
+  { name: t("Auth.MembershipRegistration.Form.BankName.SAB"), code: "4500" },
+  {
+    name: t("Auth.MembershipRegistration.Form.BankName.Fransi"),
+    code: "5500",
+  },
+  {
+    name: t("Auth.MembershipRegistration.Form.BankName.Jazira"),
+    code: "6000",
+  },
+  {
+    name: t("Auth.MembershipRegistration.Form.BankName.Istithmar"),
+    code: "6500",
+  },
+  {
+    name: t("Auth.MembershipRegistration.Form.BankName.Muscat"),
+    code: "7600",
+  },
+  {
+    name: t("Auth.MembershipRegistration.Form.BankName.Rajhi"),
+    code: "8000",
+  },
+  {
+    name: t("Auth.MembershipRegistration.Form.BankName.Emirates"),
+    code: "8200",
+  },
+  { name: t("Auth.MembershipRegistration.Form.BankName.BNP"), code: "8500" },
+  {
+    name: t("Auth.MembershipRegistration.Form.BankName.JPChase"),
+    code: "8600",
+  },
+  { name: t("Auth.MembershipRegistration.Form.BankName.MUFG"), code: "8800" },
+];

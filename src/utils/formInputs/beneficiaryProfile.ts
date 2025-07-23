@@ -7,6 +7,7 @@ import tawakkalnaLogo from "../../assets/images/partners/Tawakkalna.svg";
 import { InputSingleProps } from "../../components/form";
 import { dataDateFormat } from "../consts";
 import {
+  banks,
   getAgeGroups,
   getBeneficiaryCategories,
   getDependentRelations,
@@ -189,16 +190,19 @@ export const getContactBankDataInputs = (t: Function): InputSingleProps[] => [
     required: false,
   },
   {
-    type: "numberText",
+    type: "text",
     name: "bankAccountNumber",
+    minLength: 24,
+    maxLength: 24,
     label: t("Auth.MembershipRegistration.Form.BankAccountNumber"),
     // labelNote: t("Auth.MembershipRegistration.Form.BankAccountNumberNote"),
     required: true,
   },
   {
-    type: "text",
+    type: "select",
     name: "bankName",
-    label: t("Auth.MembershipRegistration.Form.BankName"),
+    options: banks(t).map(({ name, code }) => ({ value: code, label: name })),
+    label: t("Auth.MembershipRegistration.Form.BankName.Title"),
     // labelNote: t("Auth.MembershipRegistration.Form.BankAccountNumberNote"),
     excludeInForm: true,
     required: true,
