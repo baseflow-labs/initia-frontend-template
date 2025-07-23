@@ -87,6 +87,7 @@ export const getBasicDataInputs = (
   const familyInputs = [
     {
       type: "file",
+      fileSizeLimit: 0.3,
       name: "familyRecordPhoto",
       label: t("Auth.MembershipRegistration.Form.FamilyRecordPhoto"),
       required: true,
@@ -94,6 +95,7 @@ export const getBasicDataInputs = (
     },
     {
       type: "file",
+      fileSizeLimit: 0.3,
       name: "guardianIdPhoto",
       label: t("Auth.MembershipRegistration.Form.GuardianIdPhoto"),
       required: true,
@@ -106,6 +108,7 @@ export const getBasicDataInputs = (
   } else {
     final.push({
       type: "file",
+      fileSizeLimit: 0.5,
       name: "guardianIdPhoto",
       label: t("Auth.MembershipRegistration.Form.IdPhoto"),
       required: true,
@@ -151,6 +154,7 @@ export const getBasicDataInputs = (
     },
     {
       type: "file",
+      fileSizeLimit: 0.4,
       name: "healthStatementPhoto",
       label: t("Auth.MembershipRegistration.Form.HealthStatementPhoto"),
       required: true,
@@ -209,6 +213,7 @@ export const getContactBankDataInputs = (t: Function): InputSingleProps[] => [
   },
   {
     type: "file",
+    fileSizeLimit: 1,
     name: "ibanPhoto",
     label: t("Auth.MembershipRegistration.Form.IbanPhoto"),
     required: true,
@@ -249,6 +254,7 @@ export const getIncomeQualificationDataInputs = (
     },
     {
       type: "file",
+      fileSizeLimit: 0.2,
       name: "salaryFile",
       required: true,
       halfCol: true,
@@ -264,6 +270,7 @@ export const getIncomeQualificationDataInputs = (
     },
     {
       type: "file",
+      fileSizeLimit: 0.2,
       name: "socialSecurityFile",
       required: true,
       halfCol: true,
@@ -286,6 +293,7 @@ export const getIncomeQualificationDataInputs = (
     },
     {
       type: "file",
+      fileSizeLimit: 0.2,
       name: "insurancesFile",
       required: false,
       halfCol: true,
@@ -301,6 +309,7 @@ export const getIncomeQualificationDataInputs = (
     },
     {
       type: "file",
+      fileSizeLimit: 0.2,
       name: "comprehensiveRehabilitationFile",
       required: false,
       halfCol: true,
@@ -316,6 +325,7 @@ export const getIncomeQualificationDataInputs = (
     },
     {
       type: "file",
+      fileSizeLimit: 0.2,
       name: "retirementFile",
       required: false,
       halfCol: true,
@@ -387,6 +397,7 @@ export const getHousingDataInputs = (
     },
     {
       type: "file",
+      fileSizeLimit: 0.5,
       name: "homeDocumentPhoto",
       label: !formik
         ? t("Auth.MembershipRegistration.Form.RentalContractPhoto") +
@@ -400,6 +411,7 @@ export const getHousingDataInputs = (
     },
     {
       type: "file",
+      fileSizeLimit: 0.5,
       name: "nationalAddressDocument",
       label: t("Auth.MembershipRegistration.Form.NationalAddressDocument"),
       required: true,
@@ -523,6 +535,7 @@ export const getDependantDataInputs = (
   const studentInputs = [
     {
       type: "file",
+      fileSizeLimit: 0.5,
       name: "studentDocument",
       label: t("Auth.MembershipRegistration.Form.StudentsDocument"),
       labelNote: t("Auth.MembershipRegistration.Form.StudentsDocumentNote"),
@@ -533,6 +546,7 @@ export const getDependantDataInputs = (
   const employeeInputs = [
     {
       type: "file",
+      fileSizeLimit: 0.5,
       name: "incomeDocument",
       label: t("Auth.MembershipRegistration.Form.IncomeDocument"),
       required: true,
@@ -585,6 +599,7 @@ export const getNationalRecordDataInputs = (
 ): InputSingleProps[] => [
   {
     type: "file",
+    fileSizeLimit: 0.3,
     logo: absherLogo,
     name: "absherDocument",
     label: t("Auth.MembershipRegistration.Form.AbsherDocument"),
@@ -592,6 +607,7 @@ export const getNationalRecordDataInputs = (
   },
   {
     type: "file",
+    fileSizeLimit: 0.3,
     logo: tawakkalnaLogo,
     name: "tawakkalnaDocument",
     accept: ".png, .jpeg, .jpg, .pdf",
@@ -600,6 +616,7 @@ export const getNationalRecordDataInputs = (
   },
   {
     type: "file",
+    fileSizeLimit: 0.3,
     logo: molimLogo,
     name: "creditStatement",
     label: t("Auth.MembershipRegistration.Form.CreditStatement"),

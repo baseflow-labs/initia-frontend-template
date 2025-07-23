@@ -27,6 +27,7 @@ export const getRequestAidInputs = (
   },
   {
     type: "file",
+    fileSizeLimit: 1,
     name: "document",
     label: t("Global.Form.Labels.SupportingDocument"),
     required: false,

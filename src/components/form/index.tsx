@@ -44,6 +44,7 @@ interface InputBasicProps {
   excludeInForm?: boolean;
   defaultValue?: string | number;
   placeholder?: string;
+  fileSizeLimit?: number;
   min?: string | number;
   max?: string | number;
   step?: number;

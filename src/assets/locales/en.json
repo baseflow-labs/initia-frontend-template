@@ -528,6 +528,7 @@
     "Form": {
       "CantDoIt": "Can't Do It",
       "Errors": {
+        "FileTooLarge": "File Too Large. Limit is {{max}}MB",
         "InvalidEmail": "Invalid email format",
         "InvalidNumber": "Invalid number",
         "InvalidPhoneNumber": "Invalid phone number format",
