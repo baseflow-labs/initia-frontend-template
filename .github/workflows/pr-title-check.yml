@@ -2,7 +2,7 @@ name: Check PR title format
 
 on:
   pull_request:
-    branches: [stg]
+    branches: [prod]
 
 jobs:
   pr-title-check:
