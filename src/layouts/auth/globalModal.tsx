@@ -22,8 +22,7 @@ export const FilePreviewModal = () => {
         <iframe
           src={
             (process.env.REACT_APP_STORAGE_DIRECTORY_URL ||
-              "https://pdt-bucket.s3.us-east-1.amazonaws.com") +
-            file?.replaceAll("\\", "/")
+              "https://pdt-bucket.s3.us-east-1.amazonaws.com") + file
           }
           width="100%"
           height="400px"
@@ -33,8 +32,7 @@ export const FilePreviewModal = () => {
         <img
           src={
             (process.env.REACT_APP_STORAGE_DIRECTORY_URL ||
-              "https://pdt-bucket.s3.us-east-1.amazonaws.com") +
-            file?.replaceAll("\\", "/")
+              "https://pdt-bucket.s3.us-east-1.amazonaws.com") + file
           }
           className="img-fluid"
           alt="preview"
