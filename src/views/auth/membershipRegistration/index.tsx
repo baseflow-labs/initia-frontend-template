@@ -1,4 +1,4 @@
-import { FormikProps } from "formik";
+import { FormikErrors, FormikProps } from "formik";
 import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
@@ -26,6 +26,7 @@ import {
 } from "../../../utils/formInputs/beneficiaryProfile";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import DependentsFormView from "./Dependents";
+import { banks } from "../../../utils/optionDataLists/beneficiaries";
 
 const MembershipRegistrationView = () => {
   const { t } = useTranslation();
@@ -168,6 +169,25 @@ const MembershipRegistrationView = () => {
     return data;
   };
 
+  const validateBankAccountNumber = (values: Record<string, any>) => {
+    const errors: FormikErrors<Record<string, any>> = {};
+    const iban: string = values.bankAccountNumber?.trim()?.toUpperCase() || "";
+
+    const allowedBankCodes = new Set(banks(t).map(({ code }) => code));
+
+    if (!iban.startsWith("SA")) {
+      errors.bankAccountNumber = "يجب أن يبدأ رقم الآيبان بـ SA";
+    } else {
+      const bankCode = iban.substring(4, 8);
+
+      if (!allowedBankCodes.has(bankCode)) {
+        errors.bankAccountNumber = "رقم الآيبان لا يتبع أي بنك سعودي";
+      }
+    }
+
+    return errors;
+  };
+
   const formSteps = [
     {
       label: t("Auth.MembershipRegistration.Form.BasicData"),
@@ -202,6 +222,7 @@ const MembershipRegistrationView = () => {
           submitText={t("Global.Form.Labels.SaveContinue")}
           customButtons={<BackButton />}
           initialValues={formData.contactsBank}
+          customValidate={validateBankAccountNumber}
           onFormSubmit={(e) => {
             const final = cleanData(contactDataInputs(), e);
 

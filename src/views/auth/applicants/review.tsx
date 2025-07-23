@@ -15,17 +15,18 @@ import * as DataReviewApi from "../../../api/profile/dataReview";
 import Button from "../../../components/core/button";
 import TabsHeader from "../../../components/tab";
 import DynamicTable, { dataRender } from "../../../components/table";
+import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
 import { addNotification } from "../../../store/actions/notifications";
-import {
-  apiCatchGlobalHandler,
-  renderDataFromOptions,
-  statusColorRender,
-} from "../../../utils/function";
 import {
   beneficiaryMapping,
   beneficiaryTabs,
   inputsData,
 } from "../../../utils/formInputs/beneficiaryProfileMapping";
+import {
+  apiCatchGlobalHandler,
+  renderDataFromOptions,
+  statusColorRender,
+} from "../../../utils/function";
 import RequestDataUpdate from "./requestDataUpdate";
 import ViewDataArchive from "./viewDataArchive";
 
@@ -154,8 +155,8 @@ const BeneficiaryFormReview = () => {
 
   const dependentTabs = beneficiary?.dependents?.map(
     ({ id, fullName }: { id: string; fullName: string }) => ({
-      id: id,
-      name: fullName,
+      id,
+      name: id,
       title: fullName,
     })
   );
@@ -214,13 +215,13 @@ const BeneficiaryFormReview = () => {
           })
         );
 
-        navigate("/beneficiary");
+        navigate("/applicant");
       })
       .catch(apiCatchGlobalHandler);
   };
 
   return (
-    <Fragment>
+    <PageTemplate>
       <div className="row justify-content-between">
         <div className="col-6 col-lg-9">
           <h2 className="text-dark fs-5 fw-semibold m-0 px-3 py-2">
@@ -325,7 +326,7 @@ const BeneficiaryFormReview = () => {
         openModal={archiveModalData}
         setOpenModal={setArchiveModalData}
       />
-    </Fragment>
+    </PageTemplate>
   );
 };
 
