@@ -9,6 +9,8 @@ import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import Button from "../../../components/core/button";
 import { InputSingleProps } from "../../../components/form";
 import { dataRender } from "../../../components/table";
+import TooltipComp from "../../../components/tooltip";
+import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
 import {
   getBasicDataInputs,
   getContactBankDataInputs,
@@ -18,7 +20,6 @@ import {
   getNationalRecordDataInputs,
 } from "../../../utils/formInputs/beneficiaryProfile";
 import { apiCatchGlobalHandler } from "../../../utils/function";
-import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
 
 const BeneficiaryProfileView = () => {
   const { t } = useTranslation();
@@ -183,7 +184,9 @@ const BeneficiaryProfileView = () => {
             className="float-end"
             onClick={() => exportToExcel()}
           >
-            <FontAwesomeIcon icon={faFileExcel} />
+            <TooltipComp label={t("Global.Labels.DownloadAsExcel")}>
+              <FontAwesomeIcon icon={faFileExcel} />
+            </TooltipComp>
           </Button>
         </div>
 

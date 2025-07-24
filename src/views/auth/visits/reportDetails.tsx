@@ -8,16 +8,17 @@ import * as XLSX from "xlsx";
 import * as VisitApi from "../../../api/visits/visits";
 import Button from "../../../components/core/button";
 import DynamicTable from "../../../components/table";
+import TooltipComp from "../../../components/tooltip";
+import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
+import {
+  apiCatchGlobalHandler,
+  renderDataFromOptions,
+} from "../../../utils/function";
 import {
   getRoomContentStatuses,
   getRoomContentTypes,
   getRoomTypes,
 } from "../../../utils/optionDataLists/visitReports";
-import {
-  apiCatchGlobalHandler,
-  renderDataFromOptions,
-} from "../../../utils/function";
-import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
 
 type visitReportRoomContentsType = {
   id: string;
@@ -224,7 +225,9 @@ const VisitDetailView = () => {
             className="float-end"
             onClick={() => exportToExcel()}
           >
-            <FontAwesomeIcon icon={faFileExcel} />
+            <TooltipComp label={t("Global.Labels.DownloadAsExcel")}>
+              <FontAwesomeIcon icon={faFileExcel} />
+            </TooltipComp>
           </Button>
         </div>
       </div>

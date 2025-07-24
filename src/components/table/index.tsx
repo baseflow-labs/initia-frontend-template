@@ -149,7 +149,9 @@ export const dataRender = ({
           {starsToDisplay.map((i) => (
             <FontAwesomeIcon
               icon={faStar}
-              className={i <= parseInt(data) ? "text-warning" : ""}
+              className={
+                i <= parseInt(data) ? "text-warning" : "text-secondary"
+              }
             />
           ))}
         </div>
