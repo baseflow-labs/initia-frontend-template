@@ -66,3 +66,22 @@ jobs:
           git add src/documentation/version.ts
           git commit -m "chore(code): bump version to ${{ steps.bump.outputs.new_version }} [ci skip]" || echo "Nothing to commit"
           git push origin stg
+
+                - name: Create Git Tag
+        if: steps.bump.outputs.new_version != ''
+        run: |
+          git tag v${{ steps.bump.outputs.new_version }}
+          git push origin v${{ steps.bump.outputs.new_version }}
+
+      - name: Create GitHub Release
+        if: steps.bump.outputs.new_version != ''
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ steps.bump.outputs.new_version }}
+          name: Release v${{ steps.bump.outputs.new_version }}
+          body: |
+            Automated release based on PR title:
+            - ${{ steps.bump.outputs.new_version }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
