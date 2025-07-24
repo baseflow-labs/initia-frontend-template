@@ -58,14 +58,56 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Update CHANGELOG.md
+        if: steps.bump.outputs.new_version != ''
+        run: |
+          VERSION=${{ steps.bump.outputs.new_version }}
+          DATE=$(date +"%Y-%m-%d")
+
+          # Get last tag
+          LAST_TAG=$(git describe --tags --abbrev=0 || echo "")
+
+          if [ -z "$LAST_TAG" ]; then
+            LOG=$(git log -n 10 --pretty=format:"- %s")
+          else
+            LOG=$(git log "$LAST_TAG"..HEAD --pretty=format:"- %s")
+          fi
+
+          mkdir -p src/documentation  # Ensure folder exists
+
+          {
+            echo "## v$VERSION - $DATE"
+            echo ""
+            echo "$LOG"
+            echo ""
+          } >> src/documentation/CHANGELOG.md
+
       - name: Commit and push version bump
         if: steps.bump.outputs.new_version != ''
         run: |
           git config user.name "Makkahwi Bot"
           git config user.email "SuhaibAhmadAi@hotmail.com"
-          git add src/documentation/version.ts
+          git add src/documentation/version.ts src/documentation/CHANGELOG.md
           git commit -m "chore(code): bump version to ${{ steps.bump.outputs.new_version }} [ci skip]" || echo "Nothing to commit"
           git push origin stg
+
+      - name: Generate changelog from recent commits
+        id: changelog
+        run: |
+          # Get the latest tag (previous version)
+          LAST_TAG=$(git describe --tags --abbrev=0 || echo "")
+
+          if [ -z "$LAST_TAG" ]; then
+            echo "No previous tag found. Showing last 10 commits."
+            LOG=$(git log -n 10 --pretty=format:"- %s")
+          else
+            echo "Previous tag: $LAST_TAG"
+            LOG=$(git log "$LAST_TAG"..HEAD --pretty=format:"- %s")
+          fi
+
+          echo "log<<EOF" >> $GITHUB_OUTPUT
+          echo "$LOG" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Create GitHub Release
         if: steps.bump.outputs.new_version != ''
@@ -74,7 +116,8 @@ jobs:
           tag_name: v${{ steps.bump.outputs.new_version }}
           name: Release v${{ steps.bump.outputs.new_version }}
           body: |
-            Automated release based on PR title:
-            - ${{ steps.bump.outputs.new_version }}
+            🚀 Auto-generated release based on recent commits:
+
+            ${{ steps.changelog.outputs.log }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
