@@ -65,7 +65,7 @@ jobs:
           DATE=$(date +"%Y-%m-%d")
 
           # Get last tag
-          LAST_TAG=$(git describe --tags --abbrev=0 || echo "")
+          LAST_TAG=$(git tag --sort=-creatordate | head -n 1 || echo "")
 
           if [ -z "$LAST_TAG" ]; then
             LOG=$(git log -n 10 --pretty=format:"- %s")
@@ -95,7 +95,7 @@ jobs:
         id: changelog
         run: |
           # Get the latest tag (previous version)
-          LAST_TAG=$(git describe --tags --abbrev=0 || echo "")
+          LAST_TAG=$(git tag --sort=-creatordate | head -n 1 || echo "")
 
           if [ -z "$LAST_TAG" ]; then
             echo "No previous tag found. Showing last 10 commits."
@@ -119,5 +119,7 @@ jobs:
             🚀 Auto-generated release based on recent commits:
 
             ${{ steps.changelog.outputs.log }}
+
+            **Full Changelog**: https://github.com/Shai-club/mustaheq-fe/commits/v${{ steps.bump.outputs.new_version }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
