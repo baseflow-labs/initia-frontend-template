@@ -27,6 +27,7 @@ import BeneficiaryProfileView from "../../views/auth/beneficiaries/profile";
 import BeneficiariesViewForSupervisor from "../../views/auth/beneficiaries/supervisor";
 import ContactUsPage from "../../views/auth/contact-us";
 import DashboardView from "../../views/auth/dashboard";
+import DashboardAdminView from "../../views/auth/dashboard/admin";
 import DashboardResearcherView from "../../views/auth/dashboard/researcher";
 import DashboardSupervisorView from "../../views/auth/dashboard/supervisor";
 import MembershipRegistrationView from "../../views/auth/membershipRegistration";
@@ -68,6 +69,14 @@ const AuthLayout = () => {
       view: <MembershipRegistrationView />,
       icon: membershipFormIcon,
       users: ["beneficiary", "researcher", "admin"],
+    },
+    {
+      name: t("Auth.Dashboard.Title"),
+      route: "/dashboard",
+      view: <DashboardAdminView />,
+      showInNav: true,
+      icon: dashboardIcon,
+      users: ["admin"],
     },
     {
       name: t("Auth.Dashboard.Title"),
