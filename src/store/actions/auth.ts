@@ -17,7 +17,6 @@ export const login = (resp: AuthResponse) => ({
   type: "login" as const,
   resp: {
     jwt: resp.token,
-    refreshToken: "thisIsFakeRefreshToken",
     user: resp.user || {
       id: "1",
       name: "Suhaib Ahmad",

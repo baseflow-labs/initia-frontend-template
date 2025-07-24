@@ -271,20 +271,23 @@ const Form: React.FC<Props> = ({
           {inputs(formik)
             .filter((i) => !i.excludeInForm)
             .map(
-              ({
-                prefixText,
-                postfixText,
-                aboveComp,
-                belowComp,
-                logo,
-                halfCol,
-                type,
-                required,
-                min,
-                max,
-                minLength,
-                ...input
-              }) => {
+              (
+                {
+                  prefixText,
+                  postfixText,
+                  aboveComp,
+                  belowComp,
+                  logo,
+                  halfCol,
+                  type,
+                  required,
+                  min,
+                  max,
+                  minLength,
+                  ...input
+                },
+                i
+              ) => {
                 const triggerError =
                   formik.errors[input.name] && formik.touched[input.name];
 
@@ -301,7 +304,7 @@ const Form: React.FC<Props> = ({
 
                 if (logo) {
                   return (
-                    <Fragment key={input.name}>
+                    <Fragment key={i}>
                       <div className="col-12">
                         <LabelView required={required} {...input} />
                       </div>
@@ -347,7 +350,7 @@ const Form: React.FC<Props> = ({
                     className={`mb-2 ${
                       halfCol ? "col-md-6" : logo ? "col-6" : "col-md-12"
                     }`}
-                    key={input.name}
+                    key={i}
                   >
                     <LabelView required={required} {...input} />
 

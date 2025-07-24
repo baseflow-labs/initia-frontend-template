@@ -1,10 +1,8 @@
-import { useEffect, useState } from "react";
-
+import { ActionButtonProps } from "../../../components/button/actionButtons";
 import DynamicTable, {
   actionProps,
   TableProps,
 } from "../../../components/table";
-import { apiCatchGlobalHandler } from "../../../utils/function";
 import PageTemplate from "./pageTemplate";
 
 interface Props extends TableProps {
@@ -15,7 +13,7 @@ interface Props extends TableProps {
     options: { value: string; label?: string }[];
     multi?: boolean;
   }[];
-  actionButtons?: { label: string }[];
+  actionButtons?: ActionButtonProps[];
   onGetData: (values: any) => Promise<any>;
   tableActions?: (id?: string) => actionProps[];
   onSearch?: (e: string) => void;

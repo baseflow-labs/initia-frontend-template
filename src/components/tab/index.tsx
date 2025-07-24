@@ -19,9 +19,9 @@ export default function TabsHeader({
           backgroundColor: "rgba(0,0,0,0.025)",
         }}
       >
-        {tabs.map((tab) => (
+        {tabs.map((tab, i) => (
           <button
-            key={tab.id}
+            key={i}
             className={`btn mx-2 px-4 py-3 rounded-5 w-fit  
           ${
             activeTab === tab.id
