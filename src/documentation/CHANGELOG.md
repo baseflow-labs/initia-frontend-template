@@ -2,3 +2,7 @@
 
 - Merge pull request #72 from Shai-club/dev
 
+## v1.4.2 - 2025-07-24
+
+- Merge pull request #73 from Shai-club/dev
+
