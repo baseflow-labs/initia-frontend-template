@@ -64,5 +64,5 @@ jobs:
           git config user.name "Makkahwi Bot"
           git config user.email "SuhaibAhmadAi@hotmail.com"
           git add src/documentation/version.ts
-          git commit -m "chore: bump version to ${{ steps.bump.outputs.new_version }} [ci skip]" || echo "Nothing to commit"
+          git commit -m "chore(code): bump version to ${{ steps.bump.outputs.new_version }} [ci skip]" || echo "Nothing to commit"
           git push origin stg
