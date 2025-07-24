@@ -236,7 +236,7 @@ const VisitDetailView = () => {
       </div>
 
       {visit?.visitReportRooms?.map((room, i) => (
-        <div key={room.id} className="mt-5">
+        <div key={i} className="mt-5">
           <h2>
             {i + 1 + "-"} {renderDataFromOptions(room.type, roomTypes)}
           </h2>

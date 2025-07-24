@@ -2,20 +2,18 @@ import { UserProps } from "../actions/auth";
 
 export interface AuthState {
   token: string | null;
-  refreshToken: string | null;
   user: UserProps;
 }
 
 export type AuthAction =
   | {
       type: "login";
-      resp: { jwt: string; refreshToken: string; user: UserProps };
+      resp: { jwt: string; user: UserProps };
     }
   | { type: "logout"; resp?: string };
 
 const initialState: AuthState = {
   token: localStorage.getItem("token") || "null",
-  refreshToken: localStorage.getItem("refreshToken") || "null",
   user: localStorage.getItem("user")?.length
     ? JSON.parse(localStorage.getItem("user")!)
     : {},
@@ -28,28 +26,24 @@ const auth = (
   switch (action.type) {
     case "login": {
       localStorage.setItem("token", action.resp.jwt);
-      localStorage.setItem("refreshToken", action.resp.refreshToken);
       localStorage.setItem("user", JSON.stringify(action.resp.user));
 
-      window.location.assign("/dashboard");
+      // window.location.assign("/dashboard");
 
       return {
         token: action.resp.jwt,
-        refreshToken: action.resp.refreshToken,
         user: action.resp.user,
       };
     }
 
     case "logout": {
       localStorage.removeItem("token");
-      localStorage.removeItem("refreshToken");
       localStorage.removeItem("user");
 
       window.location.assign(action.resp || "/");
 
       return {
         token: null,
-        refreshToken: null,
         user: { role: "" },
       };
     }
