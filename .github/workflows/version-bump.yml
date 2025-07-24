@@ -30,7 +30,12 @@ jobs:
 
           echo "Current Version: $CURRENT_VERSION"
 
-          PR_TITLE=$(gh pr list --state merged --base stg --sort merged --limit 1 --json title --jq '.[0].title')
+          PR_TITLE=$(gh pr list \
+            --state merged \
+            --base stg \
+            --limit 10 \
+            --json title,createdAt \
+            | jq -r 'sort_by(.createdAt) | last.title')
           echo "Last PR Title: $PR_TITLE"
 
           if [[ "$PR_TITLE" =~ ^(Fix|Enhance): ]]; then
