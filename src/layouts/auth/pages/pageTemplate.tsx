@@ -3,7 +3,9 @@ import { Fragment } from "react/jsx-runtime";
 
 import { filterIcon, resetFilterIcon } from "../../../assets/icons/icons";
 import IconWrapperComp from "../../../assets/icons/wrapper";
-import ActionButtons from "../../../components/button/actionButtons";
+import ActionButtons, {
+  ActionButtonProps,
+} from "../../../components/button/actionButtons";
 import Button from "../../../components/core/button";
 import SelectInput from "../../../components/form/inputs/select";
 import SelectManyInput from "../../../components/form/inputs/selectMany";
@@ -19,7 +21,7 @@ interface Props {
     options: { value: string; label?: string }[];
     multi?: boolean;
   }[];
-  actionButtons?: { label: string; className?: string; onClick?: () => void }[];
+  actionButtons?: ActionButtonProps[];
   onGetData?: (values: {}) => void;
   children: React.ReactNode;
   onSearch?: (e: string) => void;
