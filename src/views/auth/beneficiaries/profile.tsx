@@ -3,14 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router";
-import * as XLSX from "xlsx";
-
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import Button from "../../../components/core/button";
 import { InputSingleProps } from "../../../components/form";
 import { dataRender } from "../../../components/table";
 import TooltipComp from "../../../components/tooltip";
 import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
+import { exportDataToMultipleSheetsExcel } from "../../../utils/filesExport";
 import {
   getBasicDataInputs,
   getContactBankDataInputs,
@@ -103,17 +102,17 @@ const BeneficiaryProfileView = () => {
   };
 
   const exportToExcel = () => {
-    const workbook = XLSX.utils.book_new();
+    const sheets: { label: string; data: object[] }[] = [];
 
     [...commonCards1, ...commonCards2]
       .filter(({ data }) => data)
       .forEach(({ title, data, map }) => {
-        const worksheet = XLSX.utils.json_to_sheet([
+        const processedData = [
           map
             .filter(({ name = "" }) => (data as any)[name || "id"])
             .reduce(
               (
-                final = [{}],
+                final = {},
                 prop = { label: "", name: "", type: "", options: [] }
               ) => ({
                 ...final,
@@ -125,18 +124,21 @@ const BeneficiaryProfileView = () => {
               }),
               {}
             ),
-        ]);
+        ];
 
-        XLSX.utils.book_append_sheet(workbook, worksheet, title.slice(0, 29));
+        sheets.push({
+          label: title.slice(0, 29),
+          data: processedData,
+        });
       });
 
-    const worksheet = XLSX.utils.json_to_sheet(
-      beneficiary?.dependents.map((dependent: any) =>
+    if (beneficiary?.dependents?.length) {
+      const dependentsSheetData = beneficiary.dependents.map((dependent: any) =>
         getDependantDataInputs(t)
           .filter(({ name = "" }) => (dependent as any)[name || "id"])
           .reduce(
             (
-              final = [{}],
+              final = {},
               prop = { label: "", name: "", type: "", options: [] }
             ) => ({
               ...final,
@@ -148,17 +150,25 @@ const BeneficiaryProfileView = () => {
             }),
             {}
           )
-      )
-    );
+      );
 
-    XLSX.utils.book_append_sheet(
-      workbook,
-      worksheet,
-      t("Auth.MembershipRegistration.Form.DependentsData").slice(0, 29)
-    );
-    XLSX.writeFile(
-      workbook,
-      (beneficiary?.fullName || beneficiary?.beneficiary?.fullName) + ".xlsx"
+      sheets.push({
+        label: t("Auth.MembershipRegistration.Form.DependentsData").slice(
+          0,
+          29
+        ),
+        data: dependentsSheetData,
+      });
+    }
+
+    const fileName =
+      (beneficiary?.fullName ||
+        beneficiary?.beneficiary?.fullName ||
+        "Export") + ".xlsx";
+
+    exportDataToMultipleSheetsExcel(
+      fileName.replace(/[/\\?%*:|"<>]/g, "_"),
+      sheets
     );
   };
 

@@ -3,13 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router";
-import * as XLSX from "xlsx";
 
 import * as VisitApi from "../../../api/visits/visits";
 import Button from "../../../components/core/button";
 import DynamicTable from "../../../components/table";
 import TooltipComp from "../../../components/tooltip";
 import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
+import { exportDataToMultipleSheetsExcel } from "../../../utils/filesExport";
 import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
@@ -179,7 +179,7 @@ const VisitDetailView = () => {
   const roomTypes = getRoomTypes(t);
 
   const exportToExcel = () => {
-    const workbook = XLSX.utils.book_new();
+    const sheets: { label: string; data: object[] }[] = [];
 
     visit?.visitReportRooms.forEach((room, i) => {
       const {
@@ -189,26 +189,21 @@ const VisitDetailView = () => {
         visitReportRoomContents,
         ...finalRoom
       } = room;
-      const worksheet1 = XLSX.utils.json_to_sheet([finalRoom]);
 
-      XLSX.utils.book_append_sheet(workbook, worksheet1, "Room " + (i + 1));
+      sheets.push({
+        label: "Room " + (i + 1),
+        data: [finalRoom],
+      });
 
-      const worksheet2 = XLSX.utils.json_to_sheet(
-        visitReportRoomContents.map(
-          ({
-            id,
-            updatedAt,
-            createdAt,
-            // photo,
-            ...rest
-          }) => rest
-        )
-      );
-
-      XLSX.utils.book_append_sheet(workbook, worksheet2, "Contents " + (i + 1));
+      sheets.push({
+        label: "Contents " + (i + 1),
+        data: visitReportRoomContents.map(
+          ({ id, updatedAt, createdAt, ...rest }) => rest
+        ),
+      });
     });
 
-    XLSX.writeFile(workbook, "Visit Report" + ".xlsx");
+    exportDataToMultipleSheetsExcel("Visit Report", sheets);
   };
 
   return (
