@@ -14,8 +14,8 @@ const RadioInput: React.FC<FinalInput> = ({
   return (
     <Fragment>
       <span className={row ? "d-flex" : undefined}>
-        {options?.map((option) => (
-          <div className="form-check" key={option.value}>
+        {options?.map((option, i) => (
+          <div className="form-check" key={i}>
             <input
               {...input}
               value={option.value}

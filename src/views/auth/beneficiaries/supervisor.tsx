@@ -1,21 +1,30 @@
-import { faUser, faUserMinus } from "@fortawesome/free-solid-svg-icons";
+import {
+  faFileExcel,
+  faUser,
+  faUserMinus,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
-
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import * as StaffApi from "../../../api/staff/researcher";
+import DemoLoginNote from "../../../layouts/auth/demoLoginNote";
 import TablePage from "../../../layouts/auth/pages/tablePage";
+import { exportDataToSingleSheetExcel } from "../../../utils/filesExport";
+import {
+  apiCatchGlobalHandler,
+  renderDataFromOptions,
+} from "../../../utils/function";
 import {
   getBeneficiaryCategories,
+  getGenders,
   getHomeTypes,
   getNationalities,
   getProvinces,
 } from "../../../utils/optionDataLists/beneficiaries";
-import { apiCatchGlobalHandler } from "../../../utils/function";
 import AssignResearcher from "../applicants/assignResearcher";
 import CancelMembership from "./cancelMembership";
-import DemoLoginNote from "../../../layouts/auth/demoLoginNote";
 
 const BeneficiariesViewForSupervisor = () => {
   const { t } = useTranslation();
@@ -186,6 +195,39 @@ const BeneficiariesViewForSupervisor = () => {
     getData({ page: 1, capacity: 10, search: e });
   };
 
+  const actionButtons = [
+    {
+      tooltip: t("Auth.Beneficiaries.DownloadByNationalCenterForm"),
+      label: <FontAwesomeIcon icon={faFileExcel} />,
+      color: "success",
+      outline: true,
+      onClick: () =>
+        exportDataToSingleSheetExcel(
+          "بيانات المستفيدين",
+          beneficiaries.map(
+            ({
+              fullName,
+              nationality,
+              dob,
+              idNumber,
+              category,
+              gender,
+            }: any) => ({
+              الاسم: fullName,
+              "رقم الهوية": idNumber,
+              الجنس: renderDataFromOptions(gender, getGenders(t)),
+              "تاريخ الميلاد": dob,
+              الجنسية: renderDataFromOptions(nationality, getNationalities(t)),
+              الفئة: renderDataFromOptions(
+                category,
+                getBeneficiaryCategories(t)
+              ),
+            })
+          ) as any
+        ),
+    },
+  ];
+
   return (
     <Fragment>
       <DemoLoginNote />
@@ -193,7 +235,7 @@ const BeneficiariesViewForSupervisor = () => {
       <TablePage
         title={t("Auth.Beneficiaries.Title")}
         filters={filters}
-        // actionButtons={actionButtons}
+        actionButtons={actionButtons}
         columns={columns}
         onSearch={onSearch}
         searchPlaceholder="بحث بـ اسم المستفيد"

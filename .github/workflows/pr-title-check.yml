@@ -1,19 +1,25 @@
-name: Check PR title format
+name: 🔍 Check PR title format
 
 on:
   pull_request:
-    branches: [prod]
+    types: [opened, edited, reopened, synchronize]
+    branches: [prod, stg]
 
 jobs:
   pr-title-check:
+    name: Validate PR Title
     runs-on: ubuntu-latest
+
     steps:
       - name: Check PR title
         run: |
-          echo "PR Title: ${{ github.event.pull_request.title }}"
-          if [[ "${{ github.event.pull_request.title }}" =~ ^(Fix|Enhance|Build|Upgrade):\ .* ]]; then
-            echo "✅ Valid PR title"
+          TITLE="${{ github.event.pull_request.title }}"
+          echo "🔍 PR Title: $TITLE"
+
+          if [[ "$TITLE" =~ ^(Fix|Enhance|Build|Upgrade):\ .* ]]; then
+            echo "✅ Valid PR title format."
           else
-            echo "❌ Invalid PR title. Must start with Fix:, Enhance:, Build:, or Upgrade:"
+            echo "❌ Invalid PR title format."
+            echo "🔒 Title must start with one of the following prefixes: Fix:, Enhance:, Build:, or Upgrade:"
             exit 1
           fi

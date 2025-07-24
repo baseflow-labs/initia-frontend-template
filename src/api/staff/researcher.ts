@@ -6,7 +6,6 @@ interface Props {
 }
 
 const mainPath = "/staff";
-const { user } = (store.getState() as RootState).auth;
 
 const getAll = async ({ filters, customFilters }: GetDataProps) => {
   const res = await api.get(mainPath, {
@@ -26,6 +25,8 @@ const create = async (data: object) => {
 };
 
 const getByUserId = async (id?: string) => {
+  const { user } = (store.getState() as RootState).auth;
+
   const res = await api.get(mainPath + "/by-user/" + (id || user.id));
   return res;
 };

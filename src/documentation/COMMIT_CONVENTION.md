@@ -56,9 +56,11 @@ Every commit must specify a **service/module name** in parentheses after the typ
 - `dashboard`
 - `membershipRegistration`
 - `settings`
+- `notifications`
 - `staff`
 - `visits`
 - `visitReports`
+- `common`
 - `code`
 
 ### ✅ Examples

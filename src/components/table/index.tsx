@@ -149,7 +149,9 @@ export const dataRender = ({
           {starsToDisplay.map((i) => (
             <FontAwesomeIcon
               icon={faStar}
-              className={i <= parseInt(data) ? "text-warning" : ""}
+              className={
+                i <= parseInt(data) ? "text-warning" : "text-secondary"
+              }
             />
           ))}
         </div>
@@ -392,7 +394,7 @@ const DynamicTable = ({
                               const page = i + 1 + pageOffset;
 
                               return (
-                                <li className="page-item my-auto" key={page}>
+                                <li className="page-item my-auto" key={i}>
                                   <button
                                     className={`page-link border-0 rounded-2 me-1 ${
                                       pageNumber === page
