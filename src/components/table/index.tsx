@@ -1,4 +1,5 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import {
   faChevronLeft,
   faChevronRight,
@@ -89,6 +90,16 @@ export const dataRender = ({
     case "phoneNumber":
       return (
         <span dir="ltr">
+          <a
+            href={"https://wa.me/966" + data}
+            target="_blank"
+            className="h4 align-middle"
+          >
+            <FontAwesomeIcon
+              className="text-success"
+              icon={faWhatsapp as IconProp}
+            />
+          </a>{" "}
           <a href={"tel:966" + data} target="_blank">
             <FontAwesomeIcon className="text-success" icon={faPhone} />
           </a>{" "}
