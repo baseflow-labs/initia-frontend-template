@@ -28,6 +28,7 @@
       "Applications": "Membership Applications",
       "Beneficiaries": "Beneficiaries",
       "BeneficiaryName": "Beneficiary Name",
+      "DownloadByNationalCenterForm": "Download Data",
       "Profile": {
         "AcceptApplication": "Accept Application",
         "AcceptApplicationDisabledMsg": "Accept Application Disabled Msg",
