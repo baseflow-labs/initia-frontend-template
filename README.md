@@ -63,6 +63,8 @@ fix(user): fix avatar cropping on mobile
 - ✅ Code formatting via Prettier (if enabled)
 - ✅ Linting rules (optional — add if using ESLint)
 
+### 💬 [ChangeLog](./src/documentation/CHANGELOG.md)
+
 ### 📦 Build for Production
 
 ```bash
