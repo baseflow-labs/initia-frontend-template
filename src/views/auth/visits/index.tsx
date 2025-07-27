@@ -16,13 +16,13 @@ import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
 import { viewDayDateFormat } from "../../../utils/consts";
-import { getVisitStatuses } from "../../../utils/optionDataLists/visits";
 import {
   apiCatchGlobalHandler,
   booleanColorRender,
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
+import { getVisitStatuses } from "../../../utils/optionDataLists/visits";
 import ScheduleVisit from "./scheduleVisit";
 
 const VisitsView = () => {
@@ -259,23 +259,29 @@ const VisitsView = () => {
           const gotReport = !!visit?.visitReport;
           const cancelled = visit?.status === "Cancelled";
 
-          return [
+          const showReportsAdd = user.role === "researcher";
+
+          const final = [
             {
               icon: faNewspaper,
               spread: true,
-              disabled: false,
               label: t("Auth.Visits.Report.ViewReport"),
               onClick: (id: string) =>
                 gotReport
                   ? navigate("/visitSchedule/report/details/?id=" + id)
                   : dispatch(
                       addNotification({
-                        msg: t("Auth.Visits.Report.PleaseAddReportFirst"),
+                        msg: showReportsAdd
+                          ? t("Auth.Visits.Report.PleaseAddReportFirst")
+                          : t("Auth.Visits.Report.NoReportToView"),
                         type: "err",
                       })
                     ),
             },
-            {
+          ];
+
+          if (showReportsAdd) {
+            final.push({
               icon: faEdit,
               spread: true,
               label: t("Auth.Visits.Report.AddReport"),
@@ -295,20 +301,24 @@ const VisitsView = () => {
                       })
                     )
                   : navigate("/visitSchedule/report?id=" + id),
-            },
-            {
-              icon: faXmark,
-              label: t("Auth.Visits.CancelVisit"),
-              onClick: (id: string) =>
-                cancelled
-                  ? dispatch(
-                      addNotification({
-                        msg: t("Auth.Visits.VisitCancelledAlready"),
-                      })
-                    )
-                  : cancelVisit(id),
-            },
-          ];
+            });
+          }
+
+          final.push({
+            icon: faXmark,
+            spread: false,
+            label: t("Auth.Visits.CancelVisit"),
+            onClick: (id: string) =>
+              cancelled
+                ? dispatch(
+                    addNotification({
+                      msg: t("Auth.Visits.VisitCancelledAlready"),
+                    })
+                  )
+                : cancelVisit(id),
+          });
+
+          return final;
         }}
         actionButtons={user.role !== "hod" ? actionButtons : undefined}
         columns={columns}
