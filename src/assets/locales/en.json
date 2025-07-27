@@ -425,8 +425,12 @@
       "Title": "Settings"
     },
     "Visits": {
+      "AcceptedAlready": "Accepted Already",
+      "AcceptVisit": "Accept Visit",
       "AddVisit": "Add Visit",
       "CancelVisit": "Cancel Visit",
+      "DelayedAlready": "Delayed Already",
+      "DelayVisit": "Delay Visit",
       "Detail": {
         "devicesNumber": "Devices Number",
         "evaluation": "Evaluation",

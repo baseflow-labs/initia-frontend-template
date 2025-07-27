@@ -425,8 +425,12 @@
       "Title": "الإعدادات"
     },
     "Visits": {
+      "AcceptedAlready": "تم قبول موعد الزيارة بالفعل",
+      "AcceptVisit": "قبول موعد الزيارة",
       "AddVisit": "جدولة زيارة",
       "CancelVisit": "إلغاء الزيارة",
+      "DelayedAlready": "تم طلب تأجيل الزيارة بالفعل",
+      "DelayVisit": "تأجيل الزيارة",
       "Detail": {
         "devicesNumber": "عدد الاجهزة الكلي",
         "evaluation": "التقييم",
