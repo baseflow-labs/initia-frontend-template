@@ -186,7 +186,9 @@ const VisitsView = () => {
         <Fragment>
           <FontAwesomeIcon
             icon={faCircle}
-            className={`text-${booleanColorRender(row.surprise)}`}
+            className={`text-${booleanColorRender(
+              row.surprise ? "No" : "Yes"
+            )}`}
           />{" "}
           {renderDataFromOptions(
             row.surprise ? "Yes" : "No",
@@ -195,7 +197,6 @@ const VisitsView = () => {
               value: value,
             }))
           )}
-          {}
         </Fragment>
       ),
       name: "surprise",

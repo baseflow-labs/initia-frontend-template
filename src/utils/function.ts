@@ -14,13 +14,13 @@ export const statusColorRender = (status = "") => {
     case "Accept":
     case "Granted":
     case "Accepted":
-    case "Approved":
     case "Confirmed":
     case "Researcher Assigned":
       return "success";
     case "In Preview":
     case "Pending":
     case "Reviewed":
+    case "Approved":
     case "Pending Approval":
       return "warning";
     case "Incomplete":
