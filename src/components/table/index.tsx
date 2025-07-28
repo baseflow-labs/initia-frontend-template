@@ -74,7 +74,7 @@ export const dataRender = ({
   options,
   timestampFormat,
 }: Props) => {
-  if (!data) {
+  if (!data && !render) {
     return "-";
   }
 

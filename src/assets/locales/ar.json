@@ -27,6 +27,7 @@
       "AddBeneficiary": "إضافة مستفيد",
       "Applications": "طلبات التسجيل ",
       "Beneficiaries": "مستفيدون",
+      "Beneficiary": "المستفيد",
       "BeneficiaryName": "اسم المستفيد",
       "DownloadByNationalCenterForm": "تنزيل البيانات",
       "Profile": {
@@ -425,8 +426,12 @@
       "Title": "الإعدادات"
     },
     "Visits": {
+      "AcceptedAlready": "تم قبول موعد الزيارة بالفعل",
+      "AcceptVisit": "قبول موعد الزيارة",
       "AddVisit": "جدولة زيارة",
       "CancelVisit": "إلغاء الزيارة",
+      "DelayedAlready": "تم طلب تأجيل الزيارة بالفعل",
+      "DelayVisit": "تأجيل الزيارة",
       "Detail": {
         "devicesNumber": "عدد الاجهزة الكلي",
         "evaluation": "التقييم",
@@ -469,6 +474,7 @@
         "Microwave": "ميكروويف",
         "NeedsMaintenance": "يحتاج لصيانة",
         "Nightstand": "طاولة جانبية",
+        "NoReportToView": "لم يتم إضافة تقرير لعرضه",
         "NotWorking": "لا يعمل",
         "OnlyResearchersCouldAdd": "إضافة تقرير متاحة للباحثين فقط",
         "Oven": "فرن",

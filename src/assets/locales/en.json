@@ -27,6 +27,7 @@
       "AddBeneficiary": "Add Beneficiary",
       "Applications": "Membership Applications",
       "Beneficiaries": "Beneficiaries",
+      "Beneficiary": "Beneficiary",
       "BeneficiaryName": "Beneficiary Name",
       "DownloadByNationalCenterForm": "Download Data",
       "Profile": {
@@ -425,8 +426,12 @@
       "Title": "Settings"
     },
     "Visits": {
+      "AcceptedAlready": "Accepted Already",
+      "AcceptVisit": "Accept Visit",
       "AddVisit": "Add Visit",
       "CancelVisit": "Cancel Visit",
+      "DelayedAlready": "Delayed Already",
+      "DelayVisit": "Delay Visit",
       "Detail": {
         "devicesNumber": "Devices Number",
         "evaluation": "Evaluation",
@@ -469,6 +474,7 @@
         "Microwave": "Microwave",
         "NeedsMaintenance": "Needs Maintenance",
         "Nightstand": "Nightstand",
+        "NoReportToView": "No Report To View",
         "NotWorking": "Not Working",
         "OnlyResearchersCouldAdd": "Only Researchers Could Add Reports",
         "Oven": "Oven",
