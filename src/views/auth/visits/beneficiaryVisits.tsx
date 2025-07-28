@@ -1,4 +1,10 @@
-import { faCircle } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCheck,
+  faCheckSquare,
+  faCircle,
+  faXmark,
+  faXmarkSquare,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -12,11 +18,14 @@ import {
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
+import { useDispatch } from "react-redux";
+import { addNotification } from "../../../store/actions/notifications";
 
 const BeneficiariesVisitsView = () => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
 
-  const [visits, setVisits] = useState([]);
+  const [visits, setVisits] = useState([{ id: "", status: "", date: "" }]);
   const [currentFilters, setCurrentFilters] = useState({});
   const [paginationMeta, setPaginationMeta] = useState({
     page: 1,
@@ -120,23 +129,66 @@ const BeneficiariesVisitsView = () => {
     },
   ];
 
+  const acceptVisitStatus = (data: string, label: string) => {
+    VisitApi.accept(data)
+      .then(() => {
+        getData({});
+        dispatch(
+          addNotification({
+            msg: t("Global.Form.SuccessMsg", {
+              action: t("Auth.Visits.AcceptVisit"),
+              data: label,
+            }),
+          })
+        );
+      })
+      .catch(apiCatchGlobalHandler);
+  };
+
+  const delayVisitStatus = (data: string, label: string) => {
+    VisitApi.delay(data)
+      .then(() => {
+        getData({});
+        dispatch(
+          addNotification({
+            msg: t("Global.Form.SuccessMsg", {
+              action: t("Auth.Visits.DelayVisit"),
+              data: label,
+            }),
+          })
+        );
+      })
+      .catch(apiCatchGlobalHandler);
+  };
+
   return (
     <TablePage
       title={t("Auth.Visits.Visits")}
       filters={filters}
-      // tableActions={[
-      //   // {
-      //   //   icon: faEdit,
-      //   //   spread: true,
-      //   //   label: t("Global.Form.Labels.Edit"),
-      //   //   onClick: (data: string) => editData(data),
-      //   // },
-      //   {
-      //     icon: faXmark,
-      //     label: t("Auth.Visits.CancelVisit"),
-      //     onClick: (data: string) => cancelVisit(data),
-      //   },
-      // ]}
+      tableActions={(id?: string) => {
+        const row = visits.find((v) => v.id === id);
+
+        return [
+          {
+            icon: faXmarkSquare,
+            color: "danger",
+            spread: true,
+            disabled: !["Pending"].includes(row?.status || ""),
+            disabledMsg: t("Auth.Visits.DelayedAlready"),
+            label: t("Auth.Visits.DelayVisit"),
+            onClick: (data: string) => delayVisitStatus(data, row?.date || ""),
+          },
+          {
+            icon: faCheckSquare,
+            color: "success",
+            spread: true,
+            disabled: !["Pending"].includes(row?.status || ""),
+            disabledMsg: t("Auth.Visits.AcceptedAlready"),
+            label: t("Auth.Visits.AcceptVisit"),
+            onClick: (data: string) => acceptVisitStatus(data, row?.date || ""),
+          },
+        ];
+      }}
       columns={columns}
       data={visits}
       paginationMeta={paginationMeta}

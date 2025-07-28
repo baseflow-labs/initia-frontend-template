@@ -82,7 +82,7 @@ const VisitReportsView = () => {
           addNotification({
             msg: t("Global.Form.SuccessMsg", {
               action: t("Auth.Visits.Report.AddReport"),
-              data: t("Auth.Beneficiaries.Profile.Title"),
+              data: t("Auth.Beneficiaries.Beneficiary"),
             }),
           })
         );

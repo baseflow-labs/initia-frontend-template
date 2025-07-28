@@ -34,9 +34,28 @@ const update = async (data: { id: "" }) => {
   return res;
 };
 
+const accept = async (id: string) => {
+  const res = await api.patch(mainPath + "/accept/" + id);
+  return res;
+};
+
+const delay = async (id: string) => {
+  const res = await api.patch(mainPath + "/delay/" + id);
+  return res;
+};
+
 const cancel = async (id: string) => {
   const res = await api.patch(mainPath + "/cancel/" + id);
   return res;
 };
 
-export { cancel, create, getAll, getById, getReportByVisitId, update };
+export {
+  cancel,
+  create,
+  getAll,
+  getById,
+  getReportByVisitId,
+  accept,
+  delay,
+  update,
+};
