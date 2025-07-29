@@ -2,7 +2,6 @@ import api, { formatGetFilters, GetDataProps } from "..";
 import store, { RootState } from "../../store/store";
 
 const mainPath = "/aid";
-const { user } = (store.getState() as RootState).auth;
 
 const getAll = async ({
   filters,
@@ -17,6 +16,8 @@ const getAll = async ({
 };
 
 const create = async (data: object) => {
+  const { user } = (store.getState() as RootState).auth;
+
   const res = await api.post(
     mainPath,
     { beneficiary: user.id, ...data },
