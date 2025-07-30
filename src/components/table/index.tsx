@@ -122,11 +122,7 @@ export const dataRender = ({
       const option = options?.find(({ value }) => value === data);
       return option?.label || option?.value;
     case "file":
-      const files = (row as any)?.files[name]?.map(
-        ({ path = "" }) =>
-          (process.env.REACT_APP_STORAGE_DIRECTORY_URL ||
-            "https://pdt-bucket.s3.us-east-1.amazonaws.com") + path
-      );
+      const files = (row as any)?.files[name]?.map(({ path = "" }) => path);
 
       return files?.map((file = "") => (
         <FontAwesomeIcon
