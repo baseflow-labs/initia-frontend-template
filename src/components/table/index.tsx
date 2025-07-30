@@ -64,6 +64,7 @@ interface Props {
   type?: string;
   timestampFormat?: string;
   options?: { value: string | number; label?: string }[];
+  name: string;
 }
 
 export const dataRender = ({
@@ -73,8 +74,9 @@ export const dataRender = ({
   type,
   options,
   timestampFormat,
+  name,
 }: Props) => {
-  if (!data && !render) {
+  if (!data && !render && type !== "file") {
     return "-";
   }
 
@@ -120,13 +122,20 @@ export const dataRender = ({
       const option = options?.find(({ value }) => value === data);
       return option?.label || option?.value;
     case "file":
-      return (
+      const files = (row as any)?.files[name]?.map(
+        ({ path = "" }) =>
+          (process.env.REACT_APP_STORAGE_DIRECTORY_URL ||
+            "https://pdt-bucket.s3.us-east-1.amazonaws.com") + path
+      );
+
+      return files?.map((file = "") => (
         <FontAwesomeIcon
           icon={faFile}
           role="button"
-          onClick={() => triggerFilePreview(data)}
+          className="me-1"
+          onClick={() => triggerFilePreview(file)}
         />
-      );
+      ));
     case "location":
       return (
         <a href={data} target="_blank" rel="noreferrer">
@@ -243,6 +252,7 @@ const DynamicTable = ({
                         render,
                         options,
                         timestampFormat,
+                        name,
                       })}
                     </td>
                   )

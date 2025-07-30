@@ -120,6 +120,7 @@ const BeneficiaryProfileView = () => {
                   data: (data as any)[prop.name || "id"],
                   type: processTypesForExport(prop.type || ""),
                   options: prop.options || [],
+                  name: prop.name,
                 }),
               }),
               {}
@@ -146,6 +147,7 @@ const BeneficiaryProfileView = () => {
                 data: (dependent as any)[prop.name || "id"],
                 type: processTypesForExport(prop.type || ""),
                 options: prop.options || [],
+                name: prop.name,
               }),
             }),
             {}
@@ -249,6 +251,7 @@ const BeneficiaryProfileView = () => {
                                   data: (data as any)[prop.name || "id"],
                                   type: prop.type,
                                   options: prop.options || [],
+                                  name: prop.name,
                                 })}
                               </td>
                             </tr>

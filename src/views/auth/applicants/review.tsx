@@ -196,6 +196,7 @@ const BeneficiaryFormReview = () => {
           data: beneficiaryData?.[name],
           type,
           options,
+          name,
         }),
       };
     });
