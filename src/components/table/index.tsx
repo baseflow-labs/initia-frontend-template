@@ -1,8 +1,10 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import {
-  faChevronLeft,
-  faChevronRight,
+  faAngleLeft,
+  faAngleRight,
+  faAnglesLeft,
+  faAnglesRight,
   faEllipsisVertical,
   faEnvelope,
   faEye,
@@ -373,8 +375,7 @@ const DynamicTable = ({
                               onClick={() => onPageNumberChange(1)}
                               disabled={pageNumber === 1}
                             >
-                              <FontAwesomeIcon icon={faChevronRight} />
-                              <FontAwesomeIcon icon={faChevronRight} />
+                              <FontAwesomeIcon icon={faAnglesRight} />
                             </button>
                           </li>
 
@@ -386,7 +387,7 @@ const DynamicTable = ({
                               onClick={() => onPageNumberChange(pageNumber - 1)}
                               disabled={pageNumber === 1}
                             >
-                              <FontAwesomeIcon icon={faChevronRight} />
+                              <FontAwesomeIcon icon={faAngleRight} />
                             </button>
                           </li>
 
@@ -424,7 +425,7 @@ const DynamicTable = ({
                               onClick={() => onPageNumberChange(pageNumber + 1)}
                               disabled={pageNumber === pagesCount}
                             >
-                              <FontAwesomeIcon icon={faChevronLeft} />
+                              <FontAwesomeIcon icon={faAngleLeft} />
                             </button>
                           </li>
 
@@ -436,8 +437,7 @@ const DynamicTable = ({
                               onClick={() => onPageNumberChange(pagesCount)}
                               disabled={pageNumber === pagesCount}
                             >
-                              <FontAwesomeIcon icon={faChevronLeft} />
-                              <FontAwesomeIcon icon={faChevronLeft} />
+                              <FontAwesomeIcon icon={faAnglesLeft} />
                             </button>
                           </li>
                         </ul>
