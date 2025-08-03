@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router";
+
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import Button from "../../../components/core/button";
 import { InputSingleProps } from "../../../components/form";
@@ -248,6 +249,7 @@ const BeneficiaryProfileView = () => {
 
                               <td className="pb-3">
                                 {dataRender({
+                                  row: data,
                                   data: (data as any)[prop.name || "id"],
                                   type: prop.type,
                                   options: prop.options || [],
