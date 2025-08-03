@@ -18,3 +18,7 @@
 
 - Merge pull request #80 from Shai-club/stg
 
+## v1.5.2 - 2025-08-03
+
+- add REACT_APP_GOOGLE_MAP_API_KEY
+
