@@ -71,7 +71,7 @@ service.interceptors.request.use(
     if (config.method?.toLowerCase() === "get") {
       const defaultParams = {
         page: 1,
-        capacity: 500,
+        capacity: 999,
       };
 
       config.params = {
