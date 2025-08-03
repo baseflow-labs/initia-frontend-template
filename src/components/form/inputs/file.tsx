@@ -13,6 +13,7 @@ import { addNotification } from "../../../store/actions/notifications";
 interface FileUploadProps {
   accept?: string;
   fileSizeLimit?: number;
+  maxFiles?: number;
 }
 
 type FinalInput = InputProps &
@@ -23,6 +24,7 @@ const FileInput: React.FC<FinalInput> = ({
   name,
   accept,
   fileSizeLimit = 2,
+  maxFiles = 3,
   ...rest
 }) => {
   const dispatch = useDispatch();
@@ -36,11 +38,15 @@ const FileInput: React.FC<FinalInput> = ({
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = Array.from(e.currentTarget.files || []);
+    const currentFiles = Array.isArray(field.value) ? field.value : [];
+
+    const remainingSlots = maxFiles - currentFiles.length;
+    const filesToAdd = selectedFiles.slice(0, remainingSlots);
 
     const validFiles: File[] = [];
     const rejectedFiles: File[] = [];
 
-    selectedFiles.forEach((file) => {
+    filesToAdd.forEach((file) => {
       const fileSizeMB = file.size / (1024 * 1024);
       if (fileSizeMB <= fileSizeLimit) {
         validFiles.push(file);
@@ -49,7 +55,7 @@ const FileInput: React.FC<FinalInput> = ({
       }
     });
 
-    if (rejectedFiles.length) {
+    if (rejectedFiles.length > 0) {
       dispatch(
         addNotification({
           type: "err",
@@ -60,8 +66,18 @@ const FileInput: React.FC<FinalInput> = ({
       );
     }
 
+    if (selectedFiles.length > filesToAdd.length) {
+      dispatch(
+        addNotification({
+          type: "err",
+          msg: t("Global.Form.Errors.FileLimitExceeded", {
+            max: maxFiles,
+          }),
+        })
+      );
+    }
+
     if (validFiles.length > 0) {
-      const currentFiles = Array.isArray(field.value) ? field.value : [];
       helpers.setValue([...currentFiles, ...validFiles]);
       helpers.setTouched(true);
     }
