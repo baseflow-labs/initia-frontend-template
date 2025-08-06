@@ -49,6 +49,7 @@ const ViewDataArchive = ({
                   data: row.dataUpdate?.data || "",
                   type: propertySpecs?.type,
                   options: propertySpecs?.options,
+                  name: row.property || "",
                 })}
                 <small className="float-end">
                   {moment(row.dataUpdate?.createdAt).format(viewDayDateFormat)}

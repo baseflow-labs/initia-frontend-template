@@ -20,19 +20,19 @@ import BoxedPage from "../../../layouts/auth/pages/boxedPage";
 import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
 import {
+  apiCatchGlobalHandler,
+  renderDataFromOptions,
+} from "../../../utils/function";
+import {
   getRoomContentStatuses,
   getRoomContentTypes,
   getRoomTypes,
 } from "../../../utils/optionDataLists/visitReports";
-import {
-  apiCatchGlobalHandler,
-  renderDataFromOptions,
-} from "../../../utils/function";
 
 const getInitialContent = () => ({
   content: "",
   type: "",
-  photo: null,
+  photo: [],
   status: "",
   evaluation: 0,
   recommendation: "",
@@ -159,7 +159,7 @@ const VisitReportsView = () => {
                 }),
                 content: (
                   <div className="my-4 row" key={i}>
-                    <div className="col-lg-10">
+                    <div className="col-10">
                       <LabelView
                         name={`type-${i}`}
                         label={t("Auth.Visits.Report.ContentXType", {
@@ -178,7 +178,8 @@ const VisitReportsView = () => {
                         }
                       />
                     </div>
-                    <div className="col-lg-2 pt-4">
+
+                    <div className="col-2 pt-4">
                       <Button
                         color="white"
                         className="btn-lg border-dark w-100 mt-1"
@@ -198,6 +199,7 @@ const VisitReportsView = () => {
                         />
                       </Button>
                     </div>
+
                     <div className="col-lg-12 pt-3">
                       <LabelView
                         name={`content-${i}`}
@@ -209,6 +211,7 @@ const VisitReportsView = () => {
                         })}
                         required
                       />
+
                       <SelectInput
                         sizing="lg"
                         required
@@ -224,6 +227,7 @@ const VisitReportsView = () => {
                         }
                       />
                     </div>
+
                     <div className="col-lg-12 pt-3">
                       <LabelView
                         name={`photo-${i}`}
@@ -235,18 +239,21 @@ const VisitReportsView = () => {
                         })}
                         required
                       />
+
                       <DefaultInput
                         name={`photo-${i}`}
                         type="file"
+                        multiple
                         required
                         onChange={(e) =>
                           updateContentAtIndex(i, {
-                            photo: e.target.files?.[0],
+                            photo: e.target.files,
                           })
                         }
                         className="mb-4"
                       />
                     </div>
+
                     <div className="col-lg-12 pt-3">
                       <LabelView
                         name={`status-${i}`}
@@ -340,6 +347,7 @@ const VisitReportsView = () => {
               className="mt-4 w-100 btn-lg"
               onClick={() => {
                 const record = { ...roomDetails };
+
                 setRoomDetails({
                   type: "",
                   contents: [getInitialContent()],
@@ -347,6 +355,7 @@ const VisitReportsView = () => {
                   note: "",
                   index: -1,
                 });
+
                 setData((current) => ({
                   ...current,
                   rooms: current.rooms.map((room, i) =>
@@ -429,7 +438,7 @@ const VisitReportsView = () => {
                   />
                 </div>
 
-                <div className="col-lg-5">
+                <div className="col-10 col-lg-5">
                   <LabelView
                     name="room"
                     label={t("Auth.Visits.Report.Contents")}
@@ -447,7 +456,7 @@ const VisitReportsView = () => {
                   </div>
                 </div>
 
-                <div className="col-lg-1 pt-4">
+                <div className="col-2 col-lg-1 pt-4">
                   <div className="mt-2">
                     <Button
                       color="white"

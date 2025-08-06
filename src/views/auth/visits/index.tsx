@@ -107,7 +107,7 @@ const VisitsView = () => {
   useLayoutEffect(() => {
     getData({});
 
-    BeneficiaryApi.getAll({})
+    BeneficiaryApi.getAll({ capacity: 999 })
       .then((res: any) =>
         setSelectOptions((current) => ({
           ...current,

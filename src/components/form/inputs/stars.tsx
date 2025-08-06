@@ -1,9 +1,9 @@
 import React, { Fragment } from "react";
+import { useTranslation } from "react-i18next";
 
 import { InputProps } from "..";
 import { mutedStarIcon, pickedStarIcon } from "../../../assets/icons/icons";
 import IconWrapperComp from "../../../assets/icons/wrapper";
-import { useTranslation } from "react-i18next";
 
 type FinalInput = InputProps &
   React.InputHTMLAttributes<HTMLInputElement> & {
@@ -20,7 +20,11 @@ const StarsInput: React.FC<FinalInput> = ({ type, options, ...input }) => {
         {Array(5)
           .fill("")
           .map((_, i) => (
-            <h2 onClick={() => input.onChange && input.onChange(i + 1)} key={i}>
+            <h2
+              role="button"
+              onClick={() => input.onChange && input.onChange(i + 1)}
+              key={i}
+            >
               <IconWrapperComp
                 icon={
                   input.value && input.value > i

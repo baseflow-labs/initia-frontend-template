@@ -126,7 +126,7 @@ const ApplicantsViewForSupervisor = () => {
   useLayoutEffect(() => {
     getData({});
 
-    StaffApi.getAll({})
+    StaffApi.getAll({ capacity: 999 })
       .then((res: any) => {
         setResearchers(res.payload);
       })

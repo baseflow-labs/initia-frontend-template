@@ -535,7 +535,8 @@
     "Form": {
       "CantDoIt": "Can't Do It",
       "Errors": {
-        "FileTooLarge": "File Too Large. Limit is {{max}}MB",
+        "FileLimitExceeded": "You can upload a maximum of {{max}} files.",
+        "FileTooLarge": "Some files exceed the size limit ({{max}} MB).",
         "InvalidEmail": "Invalid email format",
         "InvalidNumber": "Invalid number",
         "InvalidPhoneNumber": "Invalid phone number format",
@@ -576,7 +577,7 @@
         "SupportingDocument": "Supporting Document",
         "UnAvailableForDemoMode": "Unavailable For Demo Mode",
         "Update": "Update",
-        "UploadAttachment": "Upload Attachment",
+        "UploadAttachments": "Upload Attachments",
         "ViewLocation": "View Location",
         "Yes": "Yes"
       },

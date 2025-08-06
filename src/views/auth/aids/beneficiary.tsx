@@ -115,13 +115,6 @@ const AidsBeneficiaryView = () => {
       label: t("Auth.Aids.RecaptionDate"),
     },
     {
-      type: "file",
-      name: "document",
-      label: t("Global.Form.Labels.SupportingDocument"),
-      required: false,
-      halfCol: true,
-    },
-    {
       type: "textarea",
       name: "note",
       label: t("Auth.Aids.AidPurpose"),
