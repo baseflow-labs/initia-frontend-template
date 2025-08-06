@@ -64,7 +64,7 @@ const MembershipRegistrationView = () => {
               ? setFormData({
                   contactsBank,
                   dependents,
-                  housing: [housing],
+                  housing,
                   status,
                   income,
                   nationalRecord,
@@ -77,9 +77,7 @@ const MembershipRegistrationView = () => {
     } else {
       BeneficiaryApi.getByUserId()
         .then((res: any) =>
-          res.payload.beneficiary?.id
-            ? setFormData({ ...res.payload, housing: [res.payload.housing] })
-            : ""
+          res.payload.beneficiary?.id ? setFormData({ ...res.payload }) : ""
         )
         .catch(apiCatchGlobalHandler);
     }
