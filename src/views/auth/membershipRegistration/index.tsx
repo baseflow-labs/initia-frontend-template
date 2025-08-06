@@ -33,7 +33,7 @@ const MembershipRegistrationView = () => {
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
 
-  const [currentStep, setCurrentStep] = useState(3);
+  const [currentStep, setCurrentStep] = useState(0);
 
   const [formData, setFormData] = useState({
     beneficiary: { id: "", fullName: "" },
