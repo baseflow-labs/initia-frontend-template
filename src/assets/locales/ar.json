@@ -239,6 +239,12 @@
           "Villa": "فيلا"
         },
         "HostelData": "بيانات السكن",
+        "Housing": {
+          "AddNew": "إضافة منزل جديد",
+          "Housing": "بيانات المنزل",
+          "HousingSaved": "حفظ بيانات المنزل",
+          "SaveHousing": "حفظ بيانات المنزل"
+        },
         "IbanPhoto": "صورة رقم الآيبان",
         "IdExpiryDate": "تاريخ انتهاء الهوية",
         "IdNumber": "رقم الهوية",
@@ -248,6 +254,8 @@
         "IncurableDisease": "هل المرض مستعص؟",
         "Insurances": "تأمينات",
         "NationalAddressDocument": "إثبات العنوان الوطني",
+        "NationalAddressNumber": "العنوان الوطني المختصر",
+        "NationalAddressNumberNote": "4 أحرف إنجليزية تليها 4 أرقام",
         "Nationality": {
           "Afghanistan": "أفغانستان",
           "Albania": "ألبانيا",
@@ -538,6 +546,7 @@
         "FileLimitExceeded": "لا يمكنكم تحميل أكثر من {{max}} ملفات.",
         "FileTooLarge": "حجم الملف أكبر من المسموح به: {{max}} ميجا بيكسل",
         "InvalidEmail": "بريد إلكتروني غير صالح",
+        "InvalidNationalAddressNumber": "رقم العنوان الوطني يجب أن يتكون من 4 أحرف إنجليزية تليها 4 أرقام بدون رموز أو فراغات",
         "InvalidNumber": "رقم غير صالح",
         "InvalidPhoneNumber": "رقم جوال غير صحيح, يجب أن يكون الرقم على النحو التالي: 539886868",
         "Max": "القيمة القصوى المسموحة هي",
