@@ -1,5 +1,4 @@
 import { faHome } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FormikErrors, FormikProps } from "formik";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -7,8 +6,7 @@ import { useDispatch } from "react-redux";
 import { Fragment } from "react/jsx-runtime";
 
 import * as HousingApi from "../../../api/profile/housing";
-import { deleteIcon } from "../../../assets/icons/icons";
-import IconWrapperComp from "../../../assets/icons/wrapper";
+import Accordion from "../../../components/accordion";
 import Button from "../../../components/core/button";
 import Spinner from "../../../components/core/spinner";
 import Form from "../../../components/form";
@@ -19,7 +17,7 @@ import { apiCatchGlobalHandler } from "../../../utils/function";
 
 interface Props {
   customButtons: React.ReactNode;
-  initialValues: object[];
+  initialValues: { nationalAddressNumber: string }[];
   beneficiary: string;
   onFormSubmit: (values: any) => void;
   saveData: (values: any) => void;
@@ -38,9 +36,6 @@ const HousingsFormView = ({
   const { loading } = useAppSelector((state) => state.loading);
 
   const [housing, setHousing] = useState(initialValues);
-  const [activeCollapse, setActiveCollapse] = useState<number>(
-    initialValues.length
-  );
 
   useEffect(() => setHousing(initialValues), [initialValues]);
 
@@ -69,114 +64,69 @@ const HousingsFormView = ({
 
   return (
     <Fragment>
-      {housing?.map((housing: any, i: number) => (
-        <div className="accordion-item my-4" key={i}>
-          <h2 className="accordion-header mb-3" id={"heading" + String(i)}>
-            <div className="d-flex align-items-center justify-content-between ">
-              <button
-                className="btn btn-ghost p-3 w-100 text-start collapsed bg-info rounded-4 text-white"
-                data-bs-toggle="collapse"
-                data-bs-target={"#collapse" + String(i)}
-                aria-expanded="false"
-                type="button"
-                aria-controls={"collapse" + String(i)}
-                onClick={() => {
-                  setActiveCollapse(activeCollapse === i ? housing.length : i);
-                }}
-              >
-                <FontAwesomeIcon icon={faHome} className="me-2" />{" "}
-                {t("Auth.MembershipRegistration.Form.Housing.Housing") +
-                  " " +
-                  (housing.nationalAddressNumber || i + 1)}
-              </button>
+      <Accordion
+        data={housing.map((record, i) => ({
+          header:
+            t("Auth.MembershipRegistration.Form.Housing.Housing") +
+            " " +
+            (record.nationalAddressNumber || i + 1),
+          body: (
+            <Form
+              inputs={housingDataInputs}
+              submitText={
+                t("Auth.MembershipRegistration.Form.Housing.SaveHousing") +
+                " " +
+                (record.nationalAddressNumber || i + 1)
+              }
+              customValidate={validateNationalAddressNumber}
+              initialValues={record}
+              onFormSubmit={(e) => {
+                HousingApi.createOrUpdate({
+                  beneficiary,
+                  ...e,
+                })
+                  .then(() => {
+                    dispatch(
+                      addNotification({
+                        msg: t(
+                          "Auth.MembershipRegistration.Form.Housing.HousingSaved",
+                          { name: e.nationalAddressNumber }
+                        ),
+                      })
+                    );
 
-              <Button
-                color="ghost"
-                text="danger"
-                size="sm"
-                type="button"
-                className="border border-1 rounded-4 py-3 ms-2 px-3"
-                onClick={() => remove(i)}
-              >
-                <IconWrapperComp icon={deleteIcon} />
-              </Button>
-            </div>
-          </h2>
+                    const data = [...housing, e]
+                      .filter((d) => d.nationalAddressNumber)
+                      .reverse()
+                      .reduce(
+                        (final, data) =>
+                          final.find(
+                            (f: any) =>
+                              f.nationalAddressNumber ===
+                              data.nationalAddressNumber
+                          )
+                            ? final
+                            : [...final, data],
+                        []
+                      )
+                      .reverse();
 
-          <div
-            id={`collapse${i}`}
-            className={`accordion-collapse collapse ${
-              activeCollapse === i ? "show" : ""
-            }`}
-            aria-labelledby={`heading${i}`}
-          >
-            <div className="accordion-body">
-              <Form
-                inputs={housingDataInputs}
-                submitText={
-                  t("Auth.MembershipRegistration.Form.Housing.SaveHousing") +
-                  " " +
-                  (housing.nationalAddressNumber || i + 1)
-                }
-                customValidate={validateNationalAddressNumber}
-                initialValues={housing}
-                onFormSubmit={(e) => {
-                  HousingApi.createOrUpdate({
-                    beneficiary,
-                    ...e,
+                    setHousing(data);
+                    saveData(data);
                   })
-                    .then(() => {
-                      setActiveCollapse(housing.length);
-
-                      dispatch(
-                        addNotification({
-                          msg: t(
-                            "Auth.MembershipRegistration.Form.Housing.HousingSaved",
-                            { name: e.nationalAddressNumber }
-                          ),
-                        })
-                      );
-
-                      const data = [...housing, e]
-                        .filter((d) => d.nationalAddressNumber)
-                        .reverse()
-                        .reduce(
-                          (final, data) =>
-                            final.find(
-                              (f: any) =>
-                                f.nationalAddressNumber ===
-                                data.nationalAddressNumber
-                            )
-                              ? final
-                              : [...final, data],
-                          []
-                        )
-                        .reverse();
-
-                      setHousing(data);
-                      saveData(data);
-                    })
-                    .catch(apiCatchGlobalHandler);
-                }}
-              />
-            </div>
-          </div>
-        </div>
-      ))}
-
-      <Button
-        color="success"
-        outline
-        type="button"
-        className="my-4"
-        onClick={() => {
-          setActiveCollapse(housing.length);
-          setHousing((current) => [...current, { nationalAddressNumber: "" }]);
-        }}
-      >
-        {t("Auth.MembershipRegistration.Form.Housing.AddNew")}{" "}
-        <FontAwesomeIcon icon={faHome} />
-      </Button>
+                  .catch(apiCatchGlobalHandler);
+              }}
+            />
+          ),
+        }))}
+        key="housing"
+        icon={faHome}
+        onAdd={() =>
+          setHousing((current) => [...current, { nationalAddressNumber: "" }])
+        }
+        addText={t("Auth.MembershipRegistration.Form.Housing.AddNew")}
+        onRemove={(i) => remove(i)}
+      />
 
       {customButtons}
 

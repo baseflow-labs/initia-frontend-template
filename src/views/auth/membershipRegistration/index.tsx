@@ -16,7 +16,12 @@ import Form from "../../../components/form";
 import WizardFormStepper from "../../../components/form/wizard/stepper";
 import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
 import { addNotification } from "../../../store/actions/notifications";
-import { getBasicDataInputs, getContactBankDataInputs, getIncomeQualificationDataInputs, getNationalRecordDataInputs } from "../../../utils/formInputs/beneficiaryProfile";
+import {
+  getBasicDataInputs,
+  getContactBankDataInputs,
+  getIncomeQualificationDataInputs,
+  getNationalRecordDataInputs,
+} from "../../../utils/formInputs/beneficiaryProfile";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import { banks } from "../../../utils/optionDataLists/beneficiaries";
 import DependentsFormView from "./Dependents";
@@ -34,7 +39,7 @@ const MembershipRegistrationView = () => {
     beneficiary: { id: "", fullName: "" },
     contactsBank: {},
     status: { status: "" },
-    housing: [{}],
+    housing: [{ nationalAddressNumber: "" }],
     income: {},
     user: { id: "" },
     dependents: [{ fullName: "", idNumber: "" }],
