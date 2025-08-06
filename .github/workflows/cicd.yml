@@ -125,6 +125,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   deployment:
+    needs: bump-version
     name: Production Deployment
     runs-on: ubuntu-latest
     environment: production
