@@ -1,10 +1,11 @@
 import {
   GoogleMap,
+  InfoWindow,
   LoadScript,
   Marker,
-  InfoWindow,
 } from "@react-google-maps/api";
 import { Fragment, useRef, useState } from "react";
+
 import { LocationProps } from "../card/mapCard";
 
 const containerStyle = {
@@ -74,7 +75,7 @@ const MapWithMarkers = ({ locations }: { locations: LocationProps[] }) => {
                       target="_blank"
                       rel="noreferrer"
                     >
-                      {loc.phoneNumber}
+                      966{loc.phoneNumber}
                     </a>
                   </Fragment>
                 </InfoWindow>
