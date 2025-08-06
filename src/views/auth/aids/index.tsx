@@ -9,14 +9,14 @@ import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import {
-  getAidStatuses,
-  getAidTypes,
-} from "../../../utils/optionDataLists/aids";
-import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
+import {
+  getAidStatuses,
+  getAidTypes,
+} from "../../../utils/optionDataLists/aids";
 import SendAid from "./sendAid";
 
 const AidsView = () => {
@@ -89,7 +89,7 @@ const AidsView = () => {
   useLayoutEffect(() => {
     getData({});
 
-    BeneficiaryApi.getAll({})
+    BeneficiaryApi.getAll({ capacity: 999 })
       .then((res: any) =>
         setSelectOptions((current) => ({
           ...current,
@@ -106,10 +106,12 @@ const AidsView = () => {
   const filters = [
     {
       label: t("Auth.Beneficiaries.BeneficiaryName"),
-      options: selectOptions.beneficiaries.map(({ id, fullName }) => ({
-        value: id,
-        label: fullName,
-      })),
+      options: selectOptions.beneficiaries
+        .filter(({ status }) => status.status === "Accepted")
+        .map(({ id, fullName }) => ({
+          value: id,
+          label: fullName,
+        })),
       name: "beneficiary",
     },
     {

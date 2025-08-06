@@ -1,15 +1,14 @@
-import { Fragment, useLayoutEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-
 import * as ResearcherApi from "../../../api/staff/researcher";
+import Button from "../../../components/core/button";
 import { dataRender } from "../../../components/table";
+import DemoLoginNote from "../../../layouts/auth/demoLoginNote";
 import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import AddStaff from "./addStaff";
-import Button from "../../../components/core/button";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
-import DemoLoginNote from "../../../layouts/auth/demoLoginNote";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Fragment, useLayoutEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const ResearcherMgmtPage = () => {
   const { t } = useTranslation();
@@ -126,9 +125,17 @@ const ResearcherMgmtPage = () => {
                         className="card-text my-4"
                         style={{ direction: "ltr" }}
                       >
-                        {dataRender({ type: "email", data: email })}
+                        {dataRender({
+                          type: "email",
+                          data: email,
+                          name: "email",
+                        })}
                         <br />
-                        {dataRender({ type: "phoneNumber", data: username })}
+                        {dataRender({
+                          type: "phoneNumber",
+                          data: username,
+                          name: "phoneNumber",
+                        })}
                       </p>
 
                       <Button

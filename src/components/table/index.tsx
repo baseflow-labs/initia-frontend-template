@@ -1,8 +1,10 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import {
-  faChevronLeft,
-  faChevronRight,
+  faAngleLeft,
+  faAngleRight,
+  faAnglesLeft,
+  faAnglesRight,
   faEllipsisVertical,
   faEnvelope,
   faEye,
@@ -64,6 +66,7 @@ interface Props {
   type?: string;
   timestampFormat?: string;
   options?: { value: string | number; label?: string }[];
+  name: string;
 }
 
 export const dataRender = ({
@@ -73,8 +76,9 @@ export const dataRender = ({
   type,
   options,
   timestampFormat,
+  name,
 }: Props) => {
-  if (!data && !render) {
+  if (!data && !render && type !== "file") {
     return "-";
   }
 
@@ -120,13 +124,16 @@ export const dataRender = ({
       const option = options?.find(({ value }) => value === data);
       return option?.label || option?.value;
     case "file":
-      return (
+      const files = (row as any)?.files[name]?.map(({ path = "" }) => path);
+
+      return files?.map((file = "") => (
         <FontAwesomeIcon
           icon={faFile}
           role="button"
-          onClick={() => triggerFilePreview(data)}
+          className="me-1"
+          onClick={() => triggerFilePreview(file)}
         />
-      );
+      ));
     case "location":
       return (
         <a href={data} target="_blank" rel="noreferrer">
@@ -243,6 +250,7 @@ const DynamicTable = ({
                         render,
                         options,
                         timestampFormat,
+                        name,
                       })}
                     </td>
                   )
@@ -367,8 +375,7 @@ const DynamicTable = ({
                               onClick={() => onPageNumberChange(1)}
                               disabled={pageNumber === 1}
                             >
-                              <FontAwesomeIcon icon={faChevronRight} />
-                              <FontAwesomeIcon icon={faChevronRight} />
+                              <FontAwesomeIcon icon={faAnglesRight} />
                             </button>
                           </li>
 
@@ -380,7 +387,7 @@ const DynamicTable = ({
                               onClick={() => onPageNumberChange(pageNumber - 1)}
                               disabled={pageNumber === 1}
                             >
-                              <FontAwesomeIcon icon={faChevronRight} />
+                              <FontAwesomeIcon icon={faAngleRight} />
                             </button>
                           </li>
 
@@ -418,7 +425,7 @@ const DynamicTable = ({
                               onClick={() => onPageNumberChange(pageNumber + 1)}
                               disabled={pageNumber === pagesCount}
                             >
-                              <FontAwesomeIcon icon={faChevronLeft} />
+                              <FontAwesomeIcon icon={faAngleLeft} />
                             </button>
                           </li>
 
@@ -430,8 +437,7 @@ const DynamicTable = ({
                               onClick={() => onPageNumberChange(pagesCount)}
                               disabled={pageNumber === pagesCount}
                             >
-                              <FontAwesomeIcon icon={faChevronLeft} />
-                              <FontAwesomeIcon icon={faChevronLeft} />
+                              <FontAwesomeIcon icon={faAnglesLeft} />
                             </button>
                           </li>
                         </ul>
