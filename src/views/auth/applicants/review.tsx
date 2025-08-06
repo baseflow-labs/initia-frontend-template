@@ -53,7 +53,7 @@ const BeneficiaryFormReview = () => {
 
   const [beneficiary, setBeneficiary] = useState<any>();
   const [tab, setTab] = useState<string>("beneficiary");
-  const [dependent, setDependent] = useState<string>("");
+  const [dependentTab, setDependentTab] = useState<string>("");
   const [dataReview, setDataReview] = useState<ReviewProps[]>([]);
   const [dataArchive, setDataArchive] = useState<ReviewProps[]>([]);
 
@@ -88,6 +88,7 @@ const BeneficiaryFormReview = () => {
                 ...rest,
                 needUpdate,
                 confirm: !needUpdate,
+                row: rest.row || null,
               }));
 
             setDataReview(() =>
@@ -108,6 +109,16 @@ const BeneficiaryFormReview = () => {
       })
       .catch(apiCatchGlobalHandler);
   }, []);
+
+  useLayoutEffect(() => {
+    if (
+      tab === "dependents" &&
+      beneficiary?.dependents?.length &&
+      !dependentTab
+    ) {
+      setDependentTab(beneficiary.dependents[0].id);
+    }
+  }, [tab, dependentTab]);
 
   const statuses = [
     {
@@ -168,18 +179,19 @@ const BeneficiaryFormReview = () => {
         ? beneficiary?.[beneficiaryMapping[tab]]
         : beneficiary;
 
-      if (tab === "dependents") {
-        if (!dependent) {
-          setDependent(beneficiaryData[0].id);
-        }
-        beneficiaryData = beneficiaryData?.find(
-          ({ id }: { id: string }) => dependent === id
+      if (tab === "dependents" && Array.isArray(beneficiaryData)) {
+        beneficiaryData = beneficiaryData.find(
+          ({ id }: { id: string }) => dependentTab === id
         );
       }
 
-      const dataReviewRow = dataReview.find(
-        (r) => r.property === name && r.table === tab
-      );
+      const dataReviewRow = dataReview.find((r) => {
+        if (r.property !== name || r.table !== tab) return false;
+        if (tab === "dependents") {
+          return r.row === dependentTab;
+        }
+        return true;
+      });
 
       const status = dataReviewRow?.needUpdate
         ? "Need Update"
@@ -246,8 +258,8 @@ const BeneficiaryFormReview = () => {
       {tab === "dependents" && (
         <TabsHeader
           tabs={dependentTabs}
-          activeTab={dependent}
-          setActiveTab={setDependent}
+          activeTab={dependentTab}
+          setActiveTab={setDependentTab}
         />
       )}
 
@@ -264,19 +276,25 @@ const BeneficiaryFormReview = () => {
               label: t("Auth.Beneficiaries.Profile.ConfirmData"),
               onClick: (property: string) => {
                 setDataReview((current) =>
-                  current.map((row) =>
-                    row.property === property && row.table === tab
+                  current.map((row) => {
+                    const isSameRow =
+                      row.property === property &&
+                      row.table === tab &&
+                      (tab !== "dependents" || row.row === dependentTab);
+
+                    return isSameRow
                       ? {
                           ...row,
                           note: "",
                           table: tab,
                           property,
+                          row: tab === "dependents" ? dependentTab : undefined,
                           needUpdate: false,
                           confirm: true,
                           new: true,
                         }
-                      : row
-                  )
+                      : row;
+                  })
                 );
               },
             },
