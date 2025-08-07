@@ -53,6 +53,7 @@ const BeneficiaryFormReview = () => {
 
   const [beneficiary, setBeneficiary] = useState<any>();
   const [tab, setTab] = useState<string>("beneficiary");
+  const [housingTab, setHousingTab] = useState<string>("");
   const [dependentTab, setDependentTab] = useState<string>("");
   const [dataReview, setDataReview] = useState<ReviewProps[]>([]);
   const [dataArchive, setDataArchive] = useState<ReviewProps[]>([]);
@@ -111,6 +112,12 @@ const BeneficiaryFormReview = () => {
   }, []);
 
   useLayoutEffect(() => {
+    if (tab === "housing" && beneficiary?.housing?.length && !housingTab) {
+      setHousingTab(beneficiary.housing[0].id);
+    }
+  }, [tab, housingTab]);
+
+  useLayoutEffect(() => {
     if (
       tab === "dependents" &&
       beneficiary?.dependents?.length &&
@@ -164,6 +171,20 @@ const BeneficiaryFormReview = () => {
     },
   ];
 
+  const housingTabs = beneficiary?.housing?.map(
+    ({
+      id,
+      nationalAddressNumber,
+    }: {
+      id: string;
+      nationalAddressNumber: string;
+    }) => ({
+      id,
+      name: id,
+      title: nationalAddressNumber,
+    })
+  );
+
   const dependentTabs = beneficiary?.dependents?.map(
     ({ id, fullName }: { id: string; fullName: string }) => ({
       id,
@@ -179,6 +200,12 @@ const BeneficiaryFormReview = () => {
         ? beneficiary?.[beneficiaryMapping[tab]]
         : beneficiary;
 
+      if (tab === "housing" && Array.isArray(beneficiaryData)) {
+        beneficiaryData = beneficiaryData.find(
+          ({ id }: { id: string }) => housingTab === id
+        );
+      }
+
       if (tab === "dependents" && Array.isArray(beneficiaryData)) {
         beneficiaryData = beneficiaryData.find(
           ({ id }: { id: string }) => dependentTab === id
@@ -187,6 +214,9 @@ const BeneficiaryFormReview = () => {
 
       const dataReviewRow = dataReview.find((r) => {
         if (r.property !== name || r.table !== tab) return false;
+        if (tab === "housing") {
+          return r.row === housingTab;
+        }
         if (tab === "dependents") {
           return r.row === dependentTab;
         }
@@ -255,6 +285,14 @@ const BeneficiaryFormReview = () => {
         setActiveTab={setTab}
       />
 
+      {tab === "housing" && (
+        <TabsHeader
+          tabs={housingTabs}
+          activeTab={housingTab}
+          setActiveTab={setHousingTab}
+        />
+      )}
+
       {tab === "dependents" && (
         <TabsHeader
           tabs={dependentTabs}
@@ -280,7 +318,8 @@ const BeneficiaryFormReview = () => {
                     const isSameRow =
                       row.property === property &&
                       row.table === tab &&
-                      (tab !== "dependents" || row.row === dependentTab);
+                      ((tab !== "housing" && tab !== "dependents") ||
+                        row.row === dependentTab);
 
                     return isSameRow
                       ? {
@@ -288,7 +327,12 @@ const BeneficiaryFormReview = () => {
                           note: "",
                           table: tab,
                           property,
-                          row: tab === "dependents" ? dependentTab : undefined,
+                          row:
+                            tab === "dependents"
+                              ? dependentTab
+                              : tab === "housing"
+                              ? housingTab
+                              : undefined,
                           needUpdate: false,
                           confirm: true,
                           new: true,

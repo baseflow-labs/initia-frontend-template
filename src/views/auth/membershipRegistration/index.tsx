@@ -7,7 +7,6 @@ import { Fragment } from "react/jsx-runtime";
 
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import * as ContactApi from "../../../api/profile/contact";
-import * as HousingApi from "../../../api/profile/housing";
 import * as IncomeApi from "../../../api/profile/income";
 import * as NationalRecordApi from "../../../api/profile/nationalRecord";
 import { helpIcon, successIcon } from "../../../assets/icons/icons";
@@ -20,13 +19,13 @@ import { addNotification } from "../../../store/actions/notifications";
 import {
   getBasicDataInputs,
   getContactBankDataInputs,
-  getHousingDataInputs,
   getIncomeQualificationDataInputs,
   getNationalRecordDataInputs,
 } from "../../../utils/formInputs/beneficiaryProfile";
 import { apiCatchGlobalHandler } from "../../../utils/function";
-import DependentsFormView from "./Dependents";
 import { banks } from "../../../utils/optionDataLists/beneficiaries";
+import DependentsFormView from "./Dependents";
+import HousingsFormView from "./Housings";
 
 const MembershipRegistrationView = () => {
   const { t } = useTranslation();
@@ -40,7 +39,7 @@ const MembershipRegistrationView = () => {
     beneficiary: { id: "", fullName: "" },
     contactsBank: {},
     status: { status: "" },
-    housing: {},
+    housing: [{ nationalAddressNumber: "" }],
     income: {},
     user: { id: "" },
     dependents: [{ fullName: "", idNumber: "" }],
@@ -78,7 +77,7 @@ const MembershipRegistrationView = () => {
     } else {
       BeneficiaryApi.getByUserId()
         .then((res: any) =>
-          res.payload.beneficiary?.id ? setFormData(res.payload) : ""
+          res.payload.beneficiary?.id ? setFormData({ ...res.payload }) : ""
         )
         .catch(apiCatchGlobalHandler);
     }
@@ -121,9 +120,6 @@ const MembershipRegistrationView = () => {
 
   const qualificationDataInputs = (formik?: FormikProps<Record<string, any>>) =>
     getIncomeQualificationDataInputs(t, formik);
-
-  const hostelDataInputs = (formik?: FormikProps<Record<string, any>>) =>
-    getHousingDataInputs(t, formik);
 
   const attachmentInputs = () => getNationalRecordDataInputs(t);
 
@@ -266,23 +262,24 @@ const MembershipRegistrationView = () => {
       label: t("Auth.MembershipRegistration.Form.HostelData"),
       name: "HostelData",
       contents: (
-        <Form
-          inputs={hostelDataInputs}
-          submitText={t("Global.Form.Labels.SaveContinue")}
+        <HousingsFormView
           customButtons={<BackButton />}
           initialValues={formData.housing}
-          onFormSubmit={(e) => {
-            const final = cleanData(hostelDataInputs(), e);
-
-            HousingApi.createOrUpdate({
-              ...final,
-              beneficiary: formData.beneficiary?.id,
-            })
-              .then(() => {
-                onNextStep(e, "housing");
-              })
-              .catch(apiCatchGlobalHandler);
+          saveData={(housing) => {
+            setFormData((current) => ({
+              ...current,
+              housing,
+            }));
           }}
+          onFormSubmit={(housing) => {
+            window.scrollTo(0, 0);
+            setFormData((current) => ({
+              ...current,
+              housing,
+            }));
+            setCurrentStep((current = 0) => current + 1);
+          }}
+          beneficiary={formData.beneficiary?.id}
         />
       ),
     },

@@ -1,31 +1,31 @@
+import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { FormikErrors, FormikProps } from "formik";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { Fragment } from "react/jsx-runtime";
 
-import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { FormikProps } from "formik";
-import * as DependentApi from "../../../api/profile/dependent";
+import * as HousingApi from "../../../api/profile/housing";
 import Accordion from "../../../components/accordion";
 import Button from "../../../components/core/button";
 import Spinner from "../../../components/core/spinner";
 import Form from "../../../components/form";
 import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
-import { getDependantDataInputs } from "../../../utils/formInputs/beneficiaryProfile";
+import { getHousingDataInputs } from "../../../utils/formInputs/beneficiaryProfile";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 
 interface Props {
   customButtons: React.ReactNode;
-  initialValues: { fullName: string; idNumber: string }[];
+  initialValues: { nationalAddressNumber: string }[];
   beneficiary: string;
   onFormSubmit: (values: any) => void;
   saveData: (values: any) => void;
 }
 
-const DependentsFormView = ({
+const HousingsFormView = ({
   customButtons = <></>,
-  initialValues = [],
+  initialValues = [{ nationalAddressNumber: "" }],
   beneficiary,
   onFormSubmit,
   saveData,
@@ -35,68 +35,83 @@ const DependentsFormView = ({
 
   const { loading } = useAppSelector((state) => state.loading);
 
-  const [dependents, setDependents] = useState(initialValues);
-  const [activeCollapse, setActiveCollapse] = useState<number>(
-    initialValues.length
-  );
+  const [housing, setHousing] = useState(initialValues);
 
-  useEffect(() => setDependents(initialValues), [initialValues]);
+  useEffect(() => setHousing(initialValues), [initialValues]);
 
   const remove = (i = 0) => {
-    setDependents((current) => current.filter((_, y) => y !== i));
+    setHousing((current) => current.filter((_, y) => y !== i));
   };
 
-  const dependentsDataInputs = (formik: FormikProps<Record<string, any>>) =>
-    getDependantDataInputs(t, formik);
+  const housingDataInputs = (formik: FormikProps<Record<string, any>>) =>
+    getHousingDataInputs(t, formik);
+
+  const validateNationalAddressNumber = (values: Record<string, any>) => {
+    const errors: FormikErrors<Record<string, any>> = {};
+    const addressCode: string =
+      values.nationalAddressNumber?.trim().toUpperCase() || "";
+
+    const regex = /^[A-Z]{4}[0-9]{4}$/;
+
+    if (!regex.test(addressCode)) {
+      errors.nationalAddressNumber = t(
+        "Global.Form.Errors.InvalidNationalAddressNumber"
+      );
+    }
+
+    return errors;
+  };
 
   return (
     <Fragment>
       <Accordion
-        data={dependents.map((dependent, i) => ({
+        data={housing.map((record, i) => ({
           header:
-            dependent.fullName ||
-            t("Auth.MembershipRegistration.Form.Dependents.Dependant") +
-              " " +
-              (i + 1),
+            t("Auth.MembershipRegistration.Form.Housing.Housing") +
+            " " +
+            (record.nationalAddressNumber || i + 1),
           body: (
             <Form
-              inputs={dependentsDataInputs}
+              inputs={housingDataInputs}
               submitText={
-                t("Auth.MembershipRegistration.Form.Dependents.SaveDependent") +
+                t("Auth.MembershipRegistration.Form.Housing.SaveHousing") +
                 " " +
-                (dependent.fullName || i + 1)
+                (record.nationalAddressNumber || i + 1)
               }
-              initialValues={dependent}
+              customValidate={validateNationalAddressNumber}
+              initialValues={record}
               onFormSubmit={(e) => {
-                DependentApi.createOrUpdate({
+                HousingApi.createOrUpdate({
                   beneficiary,
                   ...e,
                 })
                   .then(() => {
-                    setActiveCollapse(dependents.length);
-
                     dispatch(
                       addNotification({
                         msg: t(
-                          "Auth.MembershipRegistration.Form.Dependents.DependentSaved",
-                          { name: e.fullName }
+                          "Auth.MembershipRegistration.Form.Housing.HousingSaved",
+                          { name: e.nationalAddressNumber }
                         ),
                       })
                     );
 
-                    const data = [...dependents, e]
-                      .filter((d) => d.idNumber)
+                    const data = [...housing, e]
+                      .filter((d) => d.nationalAddressNumber)
                       .reverse()
                       .reduce(
                         (final, data) =>
-                          final.find((f: any) => f.idNumber === data.idNumber)
+                          final.find(
+                            (f: any) =>
+                              f.nationalAddressNumber ===
+                              data.nationalAddressNumber
+                          )
                             ? final
                             : [...final, data],
                         []
                       )
                       .reverse();
 
-                    setDependents(data);
+                    setHousing(data);
                     saveData(data);
                   })
                   .catch(apiCatchGlobalHandler);
@@ -104,15 +119,12 @@ const DependentsFormView = ({
             />
           ),
         }))}
-        key="dependents"
-        icon={faUser}
+        key="housing"
+        icon={faHome}
         onAdd={() =>
-          setDependents((current) => [
-            ...current,
-            { fullName: "", idNumber: "" },
-          ])
+          setHousing((current) => [...current, { nationalAddressNumber: "" }])
         }
-        addText={t("Auth.MembershipRegistration.Form.Dependents.AddNew")}
+        addText={t("Auth.MembershipRegistration.Form.Housing.AddNew")}
         onRemove={(i) => remove(i)}
       />
 
@@ -123,7 +135,7 @@ const DependentsFormView = ({
         disabled={loading.length > 0}
         color="info"
         className={`w-${customButtons ? "50" : "100"} p-2`}
-        onClick={() => onFormSubmit(dependents)}
+        onClick={() => onFormSubmit(housing)}
       >
         {loading.length > 0 ? (
           <small>
@@ -137,4 +149,4 @@ const DependentsFormView = ({
   );
 };
 
-export default DependentsFormView;
+export default HousingsFormView;

@@ -239,6 +239,12 @@
           "Villa": "Villa"
         },
         "HostelData": "Hostel Data",
+        "Housing": {
+          "AddNew": "Add New",
+          "Housing": "Housing",
+          "HousingSaved": "Housing Saved",
+          "SaveHousing": "Save Housing"
+        },
         "IbanPhoto": "Iban Photo",
         "IdExpiryDate": "ID Expiry Date",
         "IdNumber": "ID Number",
@@ -248,6 +254,8 @@
         "IncurableDisease": "Incurable Disease",
         "Insurances": "Insurances",
         "NationalAddressDocument": "National Address Document",
+        "NationalAddressNumber": "National Address Number",
+        "NationalAddressNumberNote": "National Address Number Note",
         "Nationality": {
           "Afghanistan": "Afghanistan",
           "Albania": "Albania",
@@ -538,6 +546,7 @@
         "FileLimitExceeded": "You can upload a maximum of {{max}} files.",
         "FileTooLarge": "Some files exceed the size limit ({{max}} MB).",
         "InvalidEmail": "Invalid email format",
+        "InvalidNationalAddressNumber": "Invalid National Address Number",
         "InvalidNumber": "Invalid number",
         "InvalidPhoneNumber": "Invalid phone number format",
         "Max": "Maximum possible value is",
