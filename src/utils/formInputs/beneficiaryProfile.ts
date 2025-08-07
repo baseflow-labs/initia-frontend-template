@@ -383,6 +383,17 @@ export const getHousingDataInputs = (
       halfCol: true,
     },
     {
+      type: "text",
+      name: "nationalAddressNumber",
+      maxLength: 8,
+      label: t("Auth.MembershipRegistration.Form.NationalAddressNumber"),
+      labelNote: t(
+        "Auth.MembershipRegistration.Form.NationalAddressNumberNote"
+      ),
+      required: true,
+      style: { textTransform: "uppercase" },
+    },
+    {
       type: "location",
       name: "homeLocation",
       label: t("Auth.MembershipRegistration.Form.HomeLocation"),
