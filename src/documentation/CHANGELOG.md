@@ -34,3 +34,7 @@
 
 - Merge pull request #84 from Shai-club/stg
 
+## v1.7.0 - 2025-08-07
+
+- Merge pull request #87 from Shai-club/stg
+
