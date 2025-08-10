@@ -1,6 +1,7 @@
 import {
   faCircle,
   faEdit,
+  faHome,
   faNewspaper,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
@@ -76,16 +77,16 @@ const VisitsView = () => {
             ({
               beneficiary = {
                 contactsBank: {},
-                housing: {},
+                housing: [{}],
                 user: { username: "" },
               },
               ...rest
             }) => ({
               beneficiaryMobile: beneficiary.user.username,
-              ...beneficiary.housing,
               ...beneficiary.contactsBank,
               ...beneficiary,
               ...rest,
+              housing: beneficiary.housing,
             })
           ) as any
         );
@@ -178,7 +179,13 @@ const VisitsView = () => {
       type: "custom",
       name: "city",
       label: t("Auth.MembershipRegistration.Address"),
-      render: (row: any) => row.city + " - " + row.district,
+      render: (row: any) =>
+        row.housing?.map((house: any, i: number) => (
+          <div key={i}>
+            <FontAwesomeIcon className="text-success" icon={faHome} />{" "}
+            {house.city + " - " + house.district}
+          </div>
+        )),
     },
     {
       type: "custom",

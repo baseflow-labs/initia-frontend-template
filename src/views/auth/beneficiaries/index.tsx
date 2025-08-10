@@ -1,6 +1,7 @@
 import {
   faCalendarDays,
   faFileExcel,
+  faHome,
   faUser,
   faUserMinus,
 } from "@fortawesome/free-solid-svg-icons";
@@ -72,9 +73,9 @@ const BeneficiariesView = () => {
       .then((res: any) => {
         setBeneficiaries(
           res.payload.map(
-            ({ contactsBank = {}, housing = {}, status = {}, ...rest }) => ({
+            ({ contactsBank = {}, housing = [{}], status = {}, ...rest }) => ({
               ...contactsBank,
-              ...housing,
+              housing,
               ...status,
               ...rest,
             })
@@ -150,7 +151,13 @@ const BeneficiariesView = () => {
       type: "custom",
       name: "city",
       label: t("Auth.MembershipRegistration.Address"),
-      render: (row: any) => row.city + " - " + row.district,
+      render: (row: any) =>
+        row.housing.map((house: any, i: number) => (
+          <div key={i}>
+            <FontAwesomeIcon className="text-success" icon={faHome} />{" "}
+            {house.city + " - " + house.district}
+          </div>
+        )),
     },
     {
       type: "select",
