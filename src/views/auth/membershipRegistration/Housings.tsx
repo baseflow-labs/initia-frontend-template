@@ -17,7 +17,7 @@ import { apiCatchGlobalHandler } from "../../../utils/function";
 
 interface Props {
   customButtons: React.ReactNode;
-  initialValues: { nationalAddressNumber: string }[];
+  initialValues: { id: string; nationalAddressNumber: string }[];
   beneficiary: string;
   onFormSubmit: (values: any) => void;
   saveData: (values: any) => void;
@@ -25,7 +25,7 @@ interface Props {
 
 const HousingsFormView = ({
   customButtons = <></>,
-  initialValues = [{ nationalAddressNumber: "" }],
+  initialValues = [{ id: "", nationalAddressNumber: "" }],
   beneficiary,
   onFormSubmit,
   saveData,
@@ -88,10 +88,12 @@ const HousingsFormView = ({
                   .then(() => {
                     dispatch(
                       addNotification({
-                        msg: t(
-                          "Auth.MembershipRegistration.Form.Housing.HousingSaved",
-                          { name: e.nationalAddressNumber }
-                        ),
+                        msg: t("Global.Form.SuccessMsg", {
+                          action: t(
+                            "Auth.MembershipRegistration.Form.Housing.HousingSaved"
+                          ),
+                          data: e.nationalAddressNumber,
+                        }),
                       })
                     );
 
@@ -122,7 +124,10 @@ const HousingsFormView = ({
         key="housing"
         icon={faHome}
         onAdd={() =>
-          setHousing((current) => [...current, { nationalAddressNumber: "" }])
+          setHousing((current) => [
+            ...current,
+            { id: "", nationalAddressNumber: "" },
+          ])
         }
         addText={t("Auth.MembershipRegistration.Form.Housing.AddNew")}
         onRemove={(i) => remove(i)}

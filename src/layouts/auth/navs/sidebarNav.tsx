@@ -7,7 +7,6 @@ import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
 import IconWrapperComp from "../../../assets/icons/wrapper";
-import Logo from "../../../assets/images/brand/logo-full.png";
 import LogoOnly from "../../../assets/images/brand/logo-only.png";
 import { useAppSelector } from "../../../store/hooks";
 import CopyRightView from "../../common/copyright";
@@ -33,6 +32,7 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { user } = useAppSelector((state) => state.auth);
+  const { logo } = useAppSelector((state) => state.settings);
 
   return (
     <Fragment>
@@ -47,7 +47,16 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
         }}
       >
         <div className="p-4">
-          <img src={collapsed ? LogoOnly : Logo} className="w-100" alt="Logo" />
+          <img
+            src={
+              collapsed
+                ? LogoOnly
+                : (process.env.REACT_APP_STORAGE_DIRECTORY_URL ||
+                    "https://pdt-bucket.s3.us-east-1.amazonaws.com") + logo
+            }
+            className="w-100"
+            alt="Logo"
+          />
         </div>
 
         <div className="nav flex-column px-2">

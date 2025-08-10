@@ -39,10 +39,10 @@ const MembershipRegistrationView = () => {
     beneficiary: { id: "", fullName: "" },
     contactsBank: {},
     status: { status: "" },
-    housing: [{ nationalAddressNumber: "" }],
+    housing: [{ id: "", nationalAddressNumber: "" }],
     income: {},
     user: { id: "" },
-    dependents: [{ fullName: "", idNumber: "" }],
+    dependents: [{ housing: "", fullName: "", idNumber: "" }],
     nationalRecord: {},
   });
 
@@ -288,6 +288,7 @@ const MembershipRegistrationView = () => {
       name: "DependentsData",
       contents: (
         <DependentsFormView
+          houses={formData.housing}
           customButtons={<BackButton />}
           initialValues={formData.dependents}
           saveData={(dependents) => {

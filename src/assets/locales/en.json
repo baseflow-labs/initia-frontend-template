@@ -534,7 +534,7 @@
     }
   },
   "CopyRight": {
-    "AllRightsReserved": "All Rights Reserved",
+    "AllRightsReserved": "All Rights Reserved © {{year}}",
     "DoneBy": "Designed & Executed By",
     "ShaiFull": "SHAI For AI",
     "ShaiShort": "SHAI"
