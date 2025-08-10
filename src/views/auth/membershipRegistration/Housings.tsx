@@ -88,10 +88,12 @@ const HousingsFormView = ({
                   .then(() => {
                     dispatch(
                       addNotification({
-                        msg: t(
-                          "Auth.MembershipRegistration.Form.Housing.HousingSaved",
-                          { name: e.nationalAddressNumber }
-                        ),
+                        msg: t("Global.Form.SuccessMsg", {
+                          action: t(
+                            "Auth.MembershipRegistration.Form.Housing.HousingSaved"
+                          ),
+                          data: e.nationalAddressNumber,
+                        }),
                       })
                     );
 
