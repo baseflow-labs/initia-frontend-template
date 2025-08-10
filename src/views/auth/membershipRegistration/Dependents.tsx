@@ -93,9 +93,9 @@ const DependentsFormView = ({
                               addNotification({
                                 msg: t("Global.Form.SuccessMsg", {
                                   action: t(
-                                    "Auth.MembershipRegistration.Form.Dependents.DependentSaved"
+                                    "Auth.MembershipRegistration.Form.Dependents.SaveDependent"
                                   ),
-                                  data: e.nationalAddressNumber,
+                                  data: e.fullName,
                                 }),
                               })
                             );
