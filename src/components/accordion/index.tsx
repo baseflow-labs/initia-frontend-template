@@ -22,7 +22,7 @@ const Accordion = ({ key, data, icon, onAdd, addText, onRemove }: Props) => {
     <Fragment>
       <div className="accordion accordion-flush" id={key}>
         {data?.map(({ header, body }, i) => (
-          <div className="accordion-item my-4" key={i}>
+          <div className="accordion-item mb-4" key={i}>
             <h2 className="accordion-header mb-3" id={"heading" + String(i)}>
               <div className="d-flex align-items-center justify-content-between">
                 <button

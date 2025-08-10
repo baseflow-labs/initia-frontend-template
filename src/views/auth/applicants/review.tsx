@@ -13,7 +13,7 @@ import { useNavigate, useSearchParams } from "react-router";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import * as DataReviewApi from "../../../api/profile/dataReview";
 import Button from "../../../components/core/button";
-import TabsHeader from "../../../components/tab";
+import TabsHeader from "../../../components/tab/header";
 import DynamicTable, { dataRender } from "../../../components/table";
 import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
 import { addNotification } from "../../../store/actions/notifications";
