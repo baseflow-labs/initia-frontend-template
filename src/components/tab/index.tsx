@@ -3,9 +3,9 @@ import { Fragment, useState } from "react";
 export default function TabsComp({
   tabs,
 }: {
-  tabs: { id: number; title: string; body: React.ReactNode }[];
+  tabs: { id: string; title: string; body: React.ReactNode }[];
 }) {
-  const [activeTab, setActiveTab] = useState(0);
+  const [activeTab, setActiveTab] = useState("0");
 
   return (
     <Fragment>
@@ -40,7 +40,7 @@ export default function TabsComp({
         </div>
       </div>
 
-      {tabs[activeTab]?.body}
+      {tabs?.find(({ id }) => id === activeTab)?.body}
     </Fragment>
   );
 }

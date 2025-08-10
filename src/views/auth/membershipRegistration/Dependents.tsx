@@ -42,8 +42,15 @@ const DependentsFormView = ({
 
   useEffect(() => setDependents(initialValues), [initialValues]);
 
-  const remove = (i = 0) => {
-    setDependents((current) => current.filter((_, y) => y !== i));
+  const remove = (y = 0, housingId = "") => {
+    const row = dependents
+      .map((dependent, originalIdx) => ({ ...dependent, originalIdx }))
+      .filter(({ housing }) => housing === housingId)
+      .find((_, i) => i === y);
+
+    setDependents((current) =>
+      current.filter((_, x) => x !== row?.originalIdx)
+    );
   };
 
   const dependentsDataInputs = (formik: FormikProps<Record<string, any>>) =>
@@ -52,13 +59,13 @@ const DependentsFormView = ({
   return (
     <Fragment>
       <TabsComp
-        tabs={houses.map(({ nationalAddressNumber }, i) => ({
-          id: i,
+        tabs={houses.map(({ id: housingId, nationalAddressNumber }, i) => ({
+          id: nationalAddressNumber,
           title: nationalAddressNumber,
           body: (
             <Accordion
               data={dependents
-                .filter(({ housing }) => housing === houses[i]?.id)
+                .filter(({ housing }) => housing === housingId)
                 .map((dependent, i) => ({
                   header:
                     dependent.fullName ||
@@ -120,11 +127,11 @@ const DependentsFormView = ({
               onAdd={() =>
                 setDependents((current) => [
                   ...current,
-                  { fullName: "", idNumber: "", housing: houses[i]?.id },
+                  { fullName: "", idNumber: "", housing: housingId },
                 ])
               }
               addText={t("Auth.MembershipRegistration.Form.Dependents.AddNew")}
-              onRemove={(i) => remove(i)}
+              onRemove={(y) => remove(y, housingId)}
             />
           ),
         }))}
