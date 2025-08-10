@@ -534,7 +534,7 @@
     }
   },
   "CopyRight": {
-    "AllRightsReserved": "جميع الحقوق محفوظة",
+    "AllRightsReserved": "جميع الحقوق محفوظة © {{year}}",
     "DoneBy": "تصميم وتنفيذ",
     "ShaiFull": "شاي للذكاء الاصطناعي",
     "ShaiShort": "شاي"

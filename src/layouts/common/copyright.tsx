@@ -1,40 +1,59 @@
 import { useTranslation } from "react-i18next";
 
 import { APP_VERSION } from "../../documentation/version";
+import Logo from "../../assets/images/brand/logo-full.png";
+import LogoOnly from "../../assets/images/brand/logo-only.png";
 
 const CopyRightView = ({
-  onLine,
+  oneLine,
   short,
 }: {
-  onLine?: boolean;
+  oneLine?: boolean;
   short?: boolean;
 }) => {
   const { t } = useTranslation();
 
   return (
-    <div className={"px-1" + (onLine ? " d-flex justify-content-between" : "")}>
-      <small className="text-muted">V.{APP_VERSION}</small>
-      {!onLine ? <br /> : ""}
-      {!onLine ? (
-        <small className="text-muted">
-          {!short ? t("CopyRight.AllRightsReserved") + " ©" : ""}{" "}
-          {new Date().getFullYear()}
-          <br />
-        </small>
-      ) : (
+    <div
+      className={"px-1" + (oneLine ? " d-flex justify-content-between" : "")}
+    >
+      {oneLine ? (
         ""
-      )}
-      <small className="text-muted">
-        {short ? "" : t("CopyRight.DoneBy")}{" "}
-        <a
-          href="https://www.shai.sa/ar/business"
-          target="_blank"
-          rel="noreferrer"
-          className="text-muted"
-        >
-          {short ? t("CopyRight.ShaiShort") : t("CopyRight.ShaiFull")}
+      ) : (
+        <a href="https://mustaheq.org" target="_blank">
+          <img src={short ? LogoOnly : Logo} height="65" alt="Logo" />
         </a>
-      </small>
+      )}
+
+      <div className={oneLine ? "" : "mt-3 mb-2"}>
+        <small className="text-muted">V.{APP_VERSION}</small>
+      </div>
+
+      {oneLine ? (
+        ""
+      ) : (
+        <small className="text-muted">
+          {!short
+            ? t("CopyRight.AllRightsReserved", {
+                year: new Date().getFullYear(),
+              })
+            : ""}
+        </small>
+      )}
+
+      <div>
+        <small className="text-muted">
+          {short ? "" : t("CopyRight.DoneBy")}{" "}
+          <a
+            href="https://www.shai.sa/ar/business"
+            target="_blank"
+            rel="noreferrer"
+            className="text-muted"
+          >
+            {short ? t("CopyRight.ShaiShort") : t("CopyRight.ShaiFull")}
+          </a>
+        </small>
+      </div>
     </div>
   );
 };

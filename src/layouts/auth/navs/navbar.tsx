@@ -12,7 +12,6 @@ import {
   searchIcon,
 } from "../../../assets/icons/icons";
 import IconWrapperComp from "../../../assets/icons/wrapper";
-import appLogo from "../../../assets/images/brand/logo-only.png";
 import profilePhotoPlaceholder from "../../../assets/images/profile-image-placeholder.png";
 // import LangButton from "../../../components/button/lang";
 import Spinner from "../../../components/core/spinner";
@@ -44,9 +43,9 @@ const DashboardNavbar = ({
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const { logo } = useAppSelector((state) => state.settings);
   const [notifications, setNotification] = useState<Notification[]>([]);
   const { loading } = useAppSelector((state) => state.loading);
+  const { logo } = useAppSelector((state) => state.settings);
 
   useLayoutEffect(() => {
     NotificationApi.get()
@@ -74,7 +73,7 @@ const DashboardNavbar = ({
       <div className="row w-100 justify-content-between">
         {showNav && (
           <div className="col-6 col-lg-1 order-1">
-            <img alt="logo" src={appLogo} height="40px" />
+            <img alt="logo" src={logo} height="40px" />
           </div>
         )}
 
@@ -215,13 +214,7 @@ const DashboardNavbar = ({
             <DropdownComp
               button={
                 <img
-                  src={
-                    logo
-                      ? (process.env.REACT_APP_STORAGE_DIRECTORY_URL ||
-                          "https://pdt-bucket.s3.us-east-1.amazonaws.com") +
-                        logo
-                      : profilePhotoPlaceholder
-                  }
+                  src={profilePhotoPlaceholder}
                   alt="avatar"
                   className="rounded-circle"
                   width="30"

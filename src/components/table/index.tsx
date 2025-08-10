@@ -94,6 +94,7 @@ export const dataRender = ({
     case "phoneNumber":
       return (
         <span dir="ltr">
+          {data && "+966" + data}{" "}
           <a
             href={"https://wa.me/966" + data}
             target="_blank"
@@ -106,8 +107,7 @@ export const dataRender = ({
           </a>{" "}
           <a href={"tel:966" + data} target="_blank">
             <FontAwesomeIcon className="text-success" icon={faPhone} />
-          </a>{" "}
-          {data && "+966" + data}
+          </a>
         </span>
       );
     case "email":

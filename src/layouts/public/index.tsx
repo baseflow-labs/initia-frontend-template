@@ -7,9 +7,8 @@ import {
   useNavigate,
 } from "react-router";
 
-import bgImage from "../../assets/images/brand/logo-full.png";
-import LangButton from "../../components/button/lang";
 import Button from "../../components/core/button";
+import { useAppSelector } from "../../store/hooks";
 import ForgotPasswordView from "../../views/public/forgotPassword";
 import LoginView from "../../views/public/login";
 import RegisterView from "../../views/public/register";
@@ -21,6 +20,7 @@ const AuthLayout = () => {
   const { t } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
+  const { logo } = useAppSelector((state) => state.settings);
 
   const publicRoutes = [
     {
@@ -69,7 +69,10 @@ const AuthLayout = () => {
           <div className="card-body text-center">
             <img
               alt="bg-image"
-              src={bgImage}
+              src={
+                (process.env.REACT_APP_STORAGE_DIRECTORY_URL ||
+                  "https://pdt-bucket.s3.us-east-1.amazonaws.com") + logo
+              }
               className="w-50 px-1 mb-4"
               style={{ maxWidth: "350px" }}
               role="button"
@@ -129,7 +132,7 @@ const AuthLayout = () => {
               </Routes>
 
               <div className="mt-4">
-                <CopyRightView onLine />
+                <CopyRightView oneLine />
               </div>
             </div>
           </div>
