@@ -154,7 +154,7 @@ const BeneficiariesView = () => {
       render: (row: any) =>
         row.housing.map((house: any, i: number) => (
           <div key={i}>
-            <FontAwesomeIcon className="text-success" icon={faHome} />{" "}
+            <FontAwesomeIcon className="text-info" icon={faHome} />{" "}
             {house.city + " - " + house.district}
           </div>
         )),
