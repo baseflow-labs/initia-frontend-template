@@ -10,7 +10,7 @@ export default function TabsComp({
   return (
     <Fragment>
       <div
-        className="mt-4 mx-3 mx-xl-5 mx-xxl-auto overflow-x-auto"
+        className="mt-1 mx-3 mx-xl-5 mx-xxl-auto overflow-x-auto"
         style={{ maxWidth: "80vw" }}
       >
         <div
