@@ -1,10 +1,4 @@
-import {
-  FormikErrors,
-  Form as FormikForm,
-  FormikProps,
-  FormikProvider,
-  useFormik,
-} from "formik";
+import { FormikErrors, Form as FormikForm, FormikProps, FormikProvider, useFormik } from "formik";
 import React, { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -348,13 +342,7 @@ const Form: React.FC<Props> = ({
                 return (
                   <div
                     className={`mb-2 ${
-                      type === "file"
-                        ? "col-md-12"
-                        : halfCol
-                        ? "col-md-6"
-                        : logo
-                        ? "col-6"
-                        : "col-md-12"
+                      halfCol ? "col-md-6" : logo ? "col-6" : "col-md-12"
                     }`}
                     key={i}
                   >
