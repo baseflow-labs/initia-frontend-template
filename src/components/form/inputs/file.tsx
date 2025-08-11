@@ -60,18 +60,24 @@ const FileInput: React.FC<FinalInput> = ({
 
     try {
       setUploading(true);
+
+      // Prepare new files and IDs arrays
+      const newFilesMeta: { name: string; type: string; id: string }[] = [];
+      const newFileIds: string[] = [];
+
       for (const file of filesToUpload) {
         const formData = new FormData();
         formData.append("file", file);
 
         const res: any = await FileApi.create(formData);
-
         const fileId = res.id;
-        const fileMeta = { name: file.name, type: file.type, id: fileId };
-
-        setFiles((prev) => [...prev, fileMeta]);
-        helpers.setValue([...(field.value || []), fileId]);
+        newFilesMeta.push({ name: file.name, type: file.type, id: fileId });
+        newFileIds.push(fileId);
       }
+
+      // Update React state and Formik field once
+      setFiles((prev) => [...prev, ...newFilesMeta]);
+      helpers.setValue([...(field.value || []), ...newFileIds]);
     } catch (error) {
       dispatch(
         addNotification({
