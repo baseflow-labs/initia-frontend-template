@@ -348,7 +348,13 @@ const Form: React.FC<Props> = ({
                 return (
                   <div
                     className={`mb-2 ${
-                      halfCol ? "col-md-6" : logo ? "col-6" : "col-md-12"
+                      type === "file"
+                        ? "col-md-12"
+                        : halfCol
+                        ? "col-md-6"
+                        : logo
+                        ? "col-6"
+                        : "col-md-12"
                     }`}
                     key={i}
                   >
