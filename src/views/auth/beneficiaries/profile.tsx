@@ -1,10 +1,18 @@
-import { faFileExcel } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChartSimple,
+  faFileExcel,
+  faHome,
+  faRing,
+  faUsers,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router";
 
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
+import { riyalIcon } from "../../../assets/icons/icons";
+import StatisticCards from "../../../components/card/statisticCards";
 import Button from "../../../components/core/button";
 import { InputSingleProps } from "../../../components/form";
 import { dataRender } from "../../../components/table";
@@ -19,19 +27,40 @@ import {
   getIncomeQualificationDataInputs,
   getNationalRecordDataInputs,
 } from "../../../utils/formInputs/beneficiaryProfile";
-import { apiCatchGlobalHandler } from "../../../utils/function";
+import {
+  apiCatchGlobalHandler,
+  renderDataFromOptions,
+} from "../../../utils/function";
+import { getBeneficiaryCategories } from "../../../utils/optionDataLists/beneficiaries";
 
 const BeneficiaryProfileView = () => {
   const { t } = useTranslation();
   const [searchParams] = useSearchParams();
 
   const [beneficiary, setBeneficiary] = useState<any>();
+  const [income, setIncome] = useState<number>(0);
 
   useEffect(() => {
     if (searchParams.get("id")) {
       BeneficiaryApi.getById(searchParams.get("id") || "")
         .then((res: any) => {
           setBeneficiary(res.payload);
+
+          const record = res.payload?.income;
+
+          setIncome(
+            [
+              record.salary,
+              record.socialSecurity,
+              record.insurances,
+              record.comprehensiveRehabilitation,
+              record.retirement,
+            ].reduce(
+              (final: number, current: string) =>
+                (final += parseFloat(current)),
+              0
+            )
+          );
         })
         .catch(apiCatchGlobalHandler);
     } else {
@@ -183,8 +212,17 @@ const BeneficiaryProfileView = () => {
   return (
     <PageTemplate>
       <div className="row w-100 mx-auto">
-        <div className="col-6 col-md-9">
-          <h2>{beneficiary?.fullName || beneficiary?.beneficiary?.fullName}</h2>
+        <div className="col-6 col-md-9 d-flex">
+          <h2>
+            {beneficiary?.fullName || beneficiary?.beneficiary?.fullName}{" "}
+          </h2>
+
+          <small className="bg-opacity-info p-2 rounded-4 text-sm ms-2 my-auto text-info">
+            {renderDataFromOptions(
+              beneficiary?.category || beneficiary?.beneficiary?.category,
+              getBeneficiaryCategories(t)
+            )}
+          </small>
         </div>
 
         <div className="col-6 col-md-3">
@@ -208,69 +246,103 @@ const BeneficiaryProfileView = () => {
           </Button>
         </div>
 
+        <div className="col-12">
+          <StatisticCards
+            statistics={[
+              {
+                label: "عدد التابعين",
+                count: dependentCards.length,
+                color: "success",
+                icon: faUsers,
+              },
+              {
+                label: "عدد الزوجات",
+                count: beneficiary?.dependents.filter(
+                  ({ relation = "" }) => relation === "Spouse"
+                )?.length,
+                color: "primary",
+                icon: faRing,
+              },
+              {
+                label: "عدد البيوت",
+                count: housingCards.length,
+                color: "warning",
+                icon: faHome,
+              },
+              {
+                label: "إجمالي الدخل",
+                count: income,
+                unit: <img src={riyalIcon} />,
+                color: "info",
+                icon: faChartSimple,
+              },
+            ]}
+          />
+        </div>
+
         {[
           ...commonCards1,
           ...housingCards,
           ...dependentCards,
           ...commonCards2,
         ]?.map(({ title, data, map }, i) => (
-          <div className="col-md-6 my-5" key={i}>
-            <h4 className="mb-4">{title}</h4>
+          <div className="col-md-6 my-3" key={i}>
+            <table className="table rounded-4 table-bordered">
+              <tbody>
+                <tr className="table-secondary">
+                  <th colSpan={2}>
+                    <h5>{title}</h5>
+                  </th>
+                </tr>
 
-            <div className="card h-100 rounded-4">
-              <div className="card-body">
-                <table className="table table-borderless">
-                  <tbody>
-                    {data &&
-                      map
-                        // .reduce(
-                        //   (
-                        //     final: {
-                        //       prop1: InputSingleProps;
-                        //       prop2?: InputSingleProps;
-                        //     }[],
-                        //     current,
-                        //     i
-                        //   ) => {
-                        //     if (i % 2 === 0) {
-                        //       final.push({
-                        //         prop1: current,
-                        //         prop2: map[i + 1] || null,
-                        //       });
-                        //     }
+                {data &&
+                  map
+                    // .reduce(
+                    //   (
+                    //     final: {
+                    //       prop1: InputSingleProps;
+                    //       prop2?: InputSingleProps;
+                    //     }[],
+                    //     current,
+                    //     i
+                    //   ) => {
+                    //     if (i % 2 === 0) {
+                    //       final.push({
+                    //         prop1: current,
+                    //         prop2: map[i + 1] || null,
+                    //       });
+                    //     }
 
-                        //     return final;
-                        //   },
-                        //   []
-                        // )
-                        ?.map((prop: InputSingleProps, y = 0) => (
-                          <tr key={y}>
-                            <td
-                              className="pb-3 text-break"
-                              style={{
-                                whiteSpace: "normal",
-                                wordBreak: "break-word",
-                                maxWidth: "200px",
-                              }}
-                            >
-                              {prop.label}
-                            </td>
+                    //     return final;
+                    //   },
+                    //   []
+                    // )
+                    ?.map((prop: InputSingleProps, y = 0) => (
+                      <tr key={y}>
+                        <td
+                          className="pb-3 text-break"
+                          style={{
+                            whiteSpace: "normal",
+                            wordBreak: "break-word",
+                            maxWidth: "125px",
+                          }}
+                        >
+                          {prop.label}
+                        </td>
 
-                            <td className="pb-3">
-                              {dataRender({
-                                row: data,
-                                data: (data as any)[prop.name || "id"],
-                                type: prop.type,
-                                options: prop.options || [],
-                                name: prop.name,
-                              })}
-                            </td>
-                          </tr>
-                        ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
+                        <td className="pb-3">
+                          {dataRender({
+                            row: data,
+                            data: (data as any)[prop.name || "id"],
+                            type: prop.type,
+                            options: prop.options || [],
+                            name: prop.name,
+                          })}
+                        </td>
+                      </tr>
+                    ))}
+              </tbody>
+            </table>
           </div>
         ))}
       </div>

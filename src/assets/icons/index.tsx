@@ -29,6 +29,7 @@ import {
   pickedStarIcon,
   profileIcon,
   resetFilterIcon,
+  riyalIcon,
   searchIcon,
   settingsIcon,
   successIcon,
@@ -41,6 +42,7 @@ import {
 
 interface Props {
   icon:
+    | "riyal"
     | "search"
     | "visits"
     | "view"
@@ -84,6 +86,8 @@ interface Props {
 const IconComp = ({ icon }: Props) => {
   const iconName = () => {
     switch (icon) {
+      case "riyal":
+        return riyalIcon;
       case "search":
         return searchIcon;
       case "visits":
