@@ -134,6 +134,11 @@ const BeneficiariesViewForSupervisor = () => {
   const columns = [
     {
       type: "text",
+      name: "fileNo",
+      label: t("Auth.MembershipRegistration.Form.FileNo"),
+    },
+    {
+      type: "text",
       name: "fullName",
       label: t("Auth.Beneficiaries.BeneficiaryName"),
     },
@@ -219,8 +224,10 @@ const BeneficiariesViewForSupervisor = () => {
               idNumber,
               category,
               gender,
+              fileNo,
             }: any) => ({
               الاسم: fullName,
+              "رقم الملف": fileNo,
               "رقم الهوية": idNumber,
               الجنس: renderDataFromOptions(gender, getGenders(t)),
               "تاريخ الميلاد": dob,

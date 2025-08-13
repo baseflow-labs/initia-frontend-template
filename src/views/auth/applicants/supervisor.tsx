@@ -160,6 +160,11 @@ const ApplicantsViewForSupervisor = () => {
   const columns = [
     {
       type: "text",
+      name: "fileNo",
+      label: t("Auth.MembershipRegistration.Form.FileNo"),
+    },
+    {
+      type: "text",
       name: "fullName",
       label: t("Auth.Beneficiaries.BeneficiaryName"),
     },
