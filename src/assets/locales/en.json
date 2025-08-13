@@ -11,6 +11,7 @@
         "Urgent?": "Urgent?"
       },
       "CantGrantAlready": "Aid Granted Already",
+      "CantRejectAlready": "Aid Rejected Already",
       "Cash": "Cash",
       "FilterByThisBeneficiary": "Filter By This Beneficiary",
       "In-Kind": "In-Kind",
@@ -587,7 +588,6 @@
         "SupportingDocument": "Supporting Document",
         "UnAvailableForDemoMode": "Unavailable For Demo Mode",
         "Update": "Update",
-        "Uploading": "Uploading...",
         "ViewLocation": "View Location",
         "Yes": "Yes"
       },

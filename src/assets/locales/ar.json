@@ -10,7 +10,8 @@
         "Title": "المعونات",
         "Urgent?": "هل الحالة مستعجلة؟"
       },
-      "CantGrantAlready": "تمت الموافقة على المعونة بالفعل",
+      "CantGrantAlready": "تمت الموافقة على طلب المعونة بالفعل",
+      "CantRejectAlready": "تمت رفض طلب المعونة بالفعل",
       "Cash": "نقدية",
       "FilterByThisBeneficiary": "عرض معونات هذا المستفيد",
       "In-Kind": "عينية",
@@ -587,7 +588,6 @@
         "SupportingDocument": "وثائق مدعمة",
         "UnAvailableForDemoMode": "غير متاح في نسخة العرض",
         "Update": "التحديث",
-        "Uploading": "جاري التحميل",
         "ViewLocation": "استعرض الموقع",
         "Yes": "نعم"
       },
