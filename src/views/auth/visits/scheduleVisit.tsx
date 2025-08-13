@@ -74,15 +74,17 @@ const ScheduleVisit = ({
           inputs={() => getVisitScheduleInputs(t, searchParams, selectOptions)}
           submitText={t("Global.Form.Labels.Confirm")}
           initialValues={{ beneficiary: searchParams.get("id") }}
-          onFormSubmit={(e) => {
+          onFormSubmit={(e, resetForm) => {
             e.id
               ? VisitApi.update(e)
                   .then(() => {
+                    resetForm();
                     onCrudSuccess(e, t("Auth.Visits.EditVisit"));
                   })
                   .catch(apiCatchGlobalHandler)
               : VisitApi.create(e)
                   .then(() => {
+                    resetForm();
                     onCrudSuccess(e, t("Auth.Visits.AddVisit"));
                   })
                   .catch(apiCatchGlobalHandler);

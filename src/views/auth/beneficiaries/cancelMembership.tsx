@@ -53,9 +53,10 @@ const CancelMembership = ({
           </Button>
         }
         submitText={t("Auth.Beneficiaries.Profile.CancelMembership")}
-        onFormSubmit={(e) => {
+        onFormSubmit={(e, resetForm) => {
           BeneficiaryApi.cancel(modelOpen || "", e)
             .then(() => {
+              resetForm();
               dispatch(
                 addNotification({
                   msg: t("Global.Form.SuccessMsg", {

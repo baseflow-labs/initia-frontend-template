@@ -36,10 +36,11 @@ const RequestAid = ({
       <Form
         inputs={() => getRequestAidInputs(t, aidTypes)}
         submitText={t("Global.Form.Labels.SubmitApplication")}
-        onFormSubmit={(e) => {
+        onFormSubmit={(e, resetForm) => {
           AidApi.create(e)
             .then(() => {
               setOpenModal(false);
+              resetForm();
               onGetData({ page: 1, capacity: 10 });
               dispatch(
                 addNotification({

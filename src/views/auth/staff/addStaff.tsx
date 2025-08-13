@@ -17,7 +17,7 @@ const AddStaff = ({
   openModal:
     | {
         id?: string;
-        fullName?: string;
+        name?: string;
         email?: string;
         username?: string;
         idNumber?: string;
@@ -44,7 +44,7 @@ const AddStaff = ({
       <Form
         inputs={() => getStaffCrudInputs(t)}
         submitText={label}
-        onFormSubmit={(e) => {
+        onFormSubmit={(e, resetForm) => {
           e.id
             ? ResearcherApi.update({
                 ...e,
@@ -54,11 +54,12 @@ const AddStaff = ({
                 code: "654321",
               })
                 .then(() => {
+                  resetForm();
                   dispatch(
                     addNotification({
                       msg: t("Global.Form.SuccessMsg", {
                         action: t("Auth.Researchers.EditResearcher"),
-                        data: e.fullName,
+                        data: e.name,
                       }),
                     })
                   );
@@ -74,11 +75,12 @@ const AddStaff = ({
                 code: "654321",
               })
                 .then(() => {
+                  resetForm();
                   dispatch(
                     addNotification({
                       msg: t("Global.Form.SuccessMsg", {
                         action: t("Auth.Researchers.AddResearcher"),
-                        data: e.fullName,
+                        data: e.name,
                       }),
                     })
                   );
