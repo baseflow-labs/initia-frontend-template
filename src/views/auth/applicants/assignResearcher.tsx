@@ -51,9 +51,10 @@ const AssignResearcher = ({
           // }
           initialValues={openModal}
           submitText={t("Auth.Researchers.Assign")}
-          onFormSubmit={(e) => {
+          onFormSubmit={(e, resetForm) => {
             BeneficiaryApi.assignResearcher(e.beneficiary || "", e)
               .then(() => {
+                resetForm();
                 dispatch(
                   addNotification({
                     msg: t("Global.Form.SuccessMsg", {

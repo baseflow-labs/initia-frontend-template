@@ -33,7 +33,7 @@ const RequestDataUpdate = ({
         initialValues={dataReview}
         inputs={() => getRequestDataUpdateInputs(t)}
         submitText={t("Global.Form.Labels.SubmitApplication")}
-        onFormSubmit={(e) => {
+        onFormSubmit={(e, resetForm) => {
           setDataReview((current: ReviewProps[]) =>
             current.map((row: ReviewProps) =>
               row.property === openModal.property &&
@@ -49,6 +49,7 @@ const RequestDataUpdate = ({
             )
           );
           setOpenModal({});
+          resetForm();
         }}
       />
     </Modal>

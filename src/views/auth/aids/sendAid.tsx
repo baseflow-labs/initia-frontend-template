@@ -42,11 +42,12 @@ const SendAid = ({
       <Form
         inputs={() => getGrantAidInputs(t, getAidTypes(t), selectOptions)}
         submitText={t("Global.Form.Labels.SubmitApplication")}
-        onFormSubmit={(e) => {
+        onFormSubmit={(e, resetForm) => {
           AidApi.grant(e)
             .then(() => {
               setOpenModal(false);
               onGetData({});
+              resetForm();
               dispatch(
                 addNotification({
                   msg: t("Global.Form.SuccessMsg", {

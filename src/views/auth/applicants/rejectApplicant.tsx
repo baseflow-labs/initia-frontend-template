@@ -37,9 +37,10 @@ const RejectApplicant = ({
           </Button>
         }
         submitText={t("Auth.Beneficiaries.Profile.RejectApplication")}
-        onFormSubmit={(e) => {
+        onFormSubmit={(e, resetForm) => {
           BeneficiaryApi.reject(openModal || "", e)
             .then(() => {
+              resetForm();
               dispatch(
                 addNotification({
                   msg: t("Global.Form.SuccessMsg", {
