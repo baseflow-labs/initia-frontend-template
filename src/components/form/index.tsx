@@ -243,8 +243,6 @@ const Form: React.FC<Props> = ({
         return;
       }
 
-      formikHelpers.resetForm();
-
       onFormSubmit?.(values, formikHelpers.resetForm);
     },
   });
