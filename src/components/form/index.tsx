@@ -1,10 +1,4 @@
-import {
-  FormikErrors,
-  Form as FormikForm,
-  FormikProps,
-  FormikProvider,
-  useFormik,
-} from "formik";
+import { FormikErrors, Form as FormikForm, FormikProps, FormikProvider, useFormik } from "formik";
 import React, { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 

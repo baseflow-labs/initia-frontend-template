@@ -58,14 +58,14 @@ const BeneficiaryFormReview = () => {
   const [dataReview, setDataReview] = useState<ReviewProps[]>([]);
   const [dataArchive, setDataArchive] = useState<ReviewProps[]>([]);
 
-  const fieldsToShow = inputsData(t);
-
   useLayoutEffect(() => {
     BeneficiaryApi.getById(searchParams.get("id") || "")
       .then((res: any) => {
         setBeneficiary(res.payload);
 
         const emptyReview: ReviewProps[] = [];
+
+        const fieldsToShow = inputsData(t);
 
         Object.keys(fieldsToShow).forEach((table) => {
           fieldsToShow[table].forEach(({ name, label }) => {
@@ -193,8 +193,8 @@ const BeneficiaryFormReview = () => {
     })
   );
 
-  const data = fieldsToShow[tab]
-    ?.filter(({ type = "" }) => type !== "title")
+  const data = inputsData(t)
+    [tab]?.filter(({ type = "" }) => type !== "title")
     .map(({ name, label, type, options }) => {
       let beneficiaryData = beneficiaryMapping[tab]
         ? beneficiary?.[beneficiaryMapping[tab]]

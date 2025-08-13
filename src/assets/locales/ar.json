@@ -10,7 +10,8 @@
         "Title": "المعونات",
         "Urgent?": "هل الحالة مستعجلة؟"
       },
-      "CantGrantAlready": "تمت الموافقة على المعونة بالفعل",
+      "CantGrantAlready": "تمت الموافقة على طلب المعونة بالفعل",
+      "CantRejectAlready": "تمت رفض طلب المعونة بالفعل",
       "Cash": "نقدية",
       "FilterByThisBeneficiary": "عرض معونات هذا المستفيد",
       "In-Kind": "عينية",
@@ -169,7 +170,6 @@
         "Dependents": {
           "AddNew": "إضافة تابع جديد",
           "Dependant": "تابع",
-          "DependentSaved": "تم حفظ بيانات التابع {{name}} بنجاح",
           "SaveDependent": "حفظ بيانات التابع"
         },
         "DependentsData": "بيانات التابعين",
@@ -543,7 +543,6 @@
     "Form": {
       "CantDoIt": "لا يمكن القيام بهذا الإجراء",
       "Errors": {
-        "FileLimitExceeded": "لا يمكنكم تحميل أكثر من {{max}} ملفات.",
         "FileTooLarge": "حجم الملف أكبر من المسموح به: {{max}} ميجا بيكسل",
         "InvalidEmail": "بريد إلكتروني غير صالح",
         "InvalidNationalAddressNumber": "رقم العنوان الوطني يجب أن يتكون من 4 أحرف إنجليزية تليها 4 أرقام بدون رموز أو فراغات",
@@ -555,7 +554,8 @@
         "MinLength": "أقل طول مسموح هو",
         "PasswordMatch": "كلمة السر غير متطابقة",
         "PhoneNumberLength": "طول رقم الجوال غير صحيح",
-        "Required": "إلزامي"
+        "Required": "إلزامي",
+        "UploadFailed": "فشل التحميل, نرجو إعادة المحاولة"
       },
       "Label": {
         "Email": "البريد الإلكتروني",
@@ -563,10 +563,12 @@
       },
       "Labels": {
         "Add": "إضافة",
+        "AddFiles": "إضافة مرفقات",
         "AddNew": "إضافة بيانات جديدة",
         "BrowserDontSupportLocation": "المتصفح لا يدعم تحديد الموقع, نرجو إدخاله بشكل يدوي",
         "Confirm": "تأكيد",
         "Edit": "تعديل",
+        "FilesMaxReached": "بلغت الحد الأقصى",
         "Filter": "فلترة",
         "Location": "Google Map رابط",
         "No": "لا",
@@ -586,7 +588,6 @@
         "SupportingDocument": "وثائق مدعمة",
         "UnAvailableForDemoMode": "غير متاح في نسخة العرض",
         "Update": "التحديث",
-        "UploadAttachments": "إضافة مرفقات",
         "ViewLocation": "استعرض الموقع",
         "Yes": "نعم"
       },

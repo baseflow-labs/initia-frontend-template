@@ -11,6 +11,7 @@
         "Urgent?": "Urgent?"
       },
       "CantGrantAlready": "Aid Granted Already",
+      "CantRejectAlready": "Aid Rejected Already",
       "Cash": "Cash",
       "FilterByThisBeneficiary": "Filter By This Beneficiary",
       "In-Kind": "In-Kind",
@@ -169,7 +170,6 @@
         "Dependents": {
           "AddNew": "Add New",
           "Dependant": "Dependant",
-          "DependentSaved": "Dependent Saved",
           "SaveDependent": "Save Dependent"
         },
         "DependentsData": "Dependents Data",
@@ -543,7 +543,6 @@
     "Form": {
       "CantDoIt": "Can't Do It",
       "Errors": {
-        "FileLimitExceeded": "You can upload a maximum of {{max}} files.",
         "FileTooLarge": "Some files exceed the size limit ({{max}} MB).",
         "InvalidEmail": "Invalid email format",
         "InvalidNationalAddressNumber": "Invalid National Address Number",
@@ -555,7 +554,8 @@
         "MinLength": "Minimum possible length is",
         "PasswordMatch": "Password & confirmation aren't a match",
         "PhoneNumberLength": "Phone number length is incorrect",
-        "Required": "Required"
+        "Required": "Required",
+        "UploadFailed": "Upload Failed, Please Try Again"
       },
       "Label": {
         "Email": "Email",
@@ -563,10 +563,12 @@
       },
       "Labels": {
         "Add": "Add",
+        "AddFiles": "Add Files",
         "AddNew": "Add New",
         "BrowserDontSupportLocation": "Browser Don't Support Location",
         "Confirm": "Confirm",
         "Edit": "Edit",
+        "FilesMaxReached": "Files Max Reached",
         "Filter": "Filter",
         "Location": "Location",
         "No": "No",
@@ -586,7 +588,6 @@
         "SupportingDocument": "Supporting Document",
         "UnAvailableForDemoMode": "Unavailable For Demo Mode",
         "Update": "Update",
-        "UploadAttachments": "Upload Attachments",
         "ViewLocation": "View Location",
         "Yes": "Yes"
       },

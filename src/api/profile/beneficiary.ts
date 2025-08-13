@@ -57,15 +57,10 @@ const getByUserId = async (id?: string) => {
 const createOrUpdate = async (data: Props) => {
   const { user } = (store.getState() as RootState).auth;
 
-  return await api.post(
-    mainPath + "/create-update",
-    { ...data, user: data.user || user.id },
-    {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    }
-  );
+  return await api.post(mainPath + "/create-update", {
+    ...data,
+    user: data.user || user.id,
+  });
 };
 
 const assignResearcher = async (id: string, data: string) => {

@@ -12,11 +12,7 @@ interface Props {
 const mainPath = "/contactsBank";
 
 const createOrUpdate = async (data: Props) => {
-  return await api.post(mainPath + "/create-update", data, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  });
+  return await api.post(mainPath + "/create-update", data);
 };
 
 export { createOrUpdate };

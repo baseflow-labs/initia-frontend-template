@@ -1,4 +1,9 @@
-import { faCheck, faCircle, faFilter } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCheck,
+  faCircle,
+  faFilter,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -241,6 +246,19 @@ const AidsView = () => {
                   : dispatch(
                       addNotification({
                         msg: t("Auth.Aids.CantGrantAlready"),
+                      })
+                    ),
+            },
+            {
+              label: t("Auth.Aids.Statuses.Reject"),
+              icon: faXmark,
+              spread: false,
+              onClick: (data: string) =>
+                !rejected
+                  ? updateStatus(data, "Rejected")
+                  : dispatch(
+                      addNotification({
+                        msg: t("Auth.Aids.CantRejectAlready"),
                       })
                     ),
             },
