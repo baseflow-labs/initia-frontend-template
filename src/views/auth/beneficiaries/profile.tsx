@@ -218,6 +218,10 @@ const BeneficiaryProfileView = () => {
           </h2>
 
           <small className="bg-opacity-info p-2 rounded-4 text-sm ms-2 my-auto text-info">
+            {beneficiary?.fileNo || beneficiary?.beneficiary?.fileNo}
+          </small>
+
+          <small className="bg-opacity-info p-2 rounded-4 text-sm ms-2 my-auto text-info">
             {renderDataFromOptions(
               beneficiary?.category || beneficiary?.beneficiary?.category,
               getBeneficiaryCategories(t)

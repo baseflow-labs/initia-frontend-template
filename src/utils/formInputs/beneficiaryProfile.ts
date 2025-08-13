@@ -31,6 +31,13 @@ export const getBasicDataInputs = (
 ): InputSingleProps[] => {
   const final: InputSingleProps[] = [
     {
+      type: "text",
+      name: "fileNo",
+      label: t("Auth.MembershipRegistration.Form.FileNo"),
+      required: true,
+      excludeInForm: true,
+    },
+    {
       type: "select",
       options: getSocialStatuses(t),
       name: "socialStatus",
