@@ -194,7 +194,7 @@ const MembershipRegistrationView = () => {
           submitText={t("Global.Form.Labels.SaveContinue")}
           customButtons={<HelpButton />}
           initialValues={formData.beneficiary}
-          onFormSubmit={(e) => {
+          onFormSubmit={(e, resetForm) => {
             const final = cleanData(basicDataInputs(), e);
 
             BeneficiaryApi.createOrUpdate({
@@ -202,6 +202,7 @@ const MembershipRegistrationView = () => {
               user: formData.user?.id,
             })
               .then((res: any) => {
+                resetForm();
                 onNextStep({ ...e, ...res.payload }, "beneficiary");
               })
               .catch(apiCatchGlobalHandler);
@@ -219,7 +220,7 @@ const MembershipRegistrationView = () => {
           customButtons={<BackButton />}
           initialValues={formData.contactsBank}
           customValidate={validateBankAccountNumber}
-          onFormSubmit={(e) => {
+          onFormSubmit={(e, resetForm) => {
             const final = cleanData(contactDataInputs(), e);
 
             ContactApi.createOrUpdate({
@@ -227,6 +228,7 @@ const MembershipRegistrationView = () => {
               beneficiary: formData.beneficiary?.id,
             })
               .then(() => {
+                resetForm();
                 onNextStep(e, "contactsBank");
               })
               .catch(apiCatchGlobalHandler);
@@ -243,7 +245,7 @@ const MembershipRegistrationView = () => {
           submitText={t("Global.Form.Labels.SaveContinue")}
           customButtons={<BackButton />}
           initialValues={formData.income}
-          onFormSubmit={(e) => {
+          onFormSubmit={(e, resetForm) => {
             const final = cleanData(qualificationDataInputs(), e);
 
             IncomeApi.createOrUpdate({
@@ -251,6 +253,7 @@ const MembershipRegistrationView = () => {
               beneficiary: formData.beneficiary?.id,
             })
               .then(() => {
+                resetForm();
                 onNextStep(e, "income");
               })
               .catch(apiCatchGlobalHandler);
@@ -317,7 +320,7 @@ const MembershipRegistrationView = () => {
           inputs={attachmentInputs}
           customButtons={<BackButton />}
           initialValues={formData.nationalRecord}
-          onFormSubmit={(e) => {
+          onFormSubmit={(e, resetForm) => {
             const final = cleanData(attachmentInputs(), e);
 
             NationalRecordApi.createOrUpdate({
@@ -325,6 +328,7 @@ const MembershipRegistrationView = () => {
               beneficiary: formData.beneficiary?.id,
             })
               .then(() => {
+                resetForm();
                 onNextStep(e, "nationalRecord");
               })
               .catch(apiCatchGlobalHandler);

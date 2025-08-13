@@ -83,12 +83,13 @@ const DependentsFormView = ({
                         (dependent.fullName || i + 1)
                       }
                       initialValues={dependent}
-                      onFormSubmit={(e) => {
+                      onFormSubmit={(e, resetForm) => {
                         DependentApi.createOrUpdate({
                           beneficiary,
                           ...e,
                         })
                           .then(() => {
+                            resetForm();
                             dispatch(
                               addNotification({
                                 msg: t("Global.Form.SuccessMsg", {

@@ -80,12 +80,13 @@ const HousingsFormView = ({
               }
               customValidate={validateNationalAddressNumber}
               initialValues={record}
-              onFormSubmit={(e) => {
+              onFormSubmit={(e, resetForm) => {
                 HousingApi.createOrUpdate({
                   beneficiary,
                   ...e,
                 })
                   .then(() => {
+                    resetForm();
                     dispatch(
                       addNotification({
                         msg: t("Global.Form.SuccessMsg", {

@@ -1,4 +1,10 @@
-import { FormikErrors, Form as FormikForm, FormikProps, FormikProvider, useFormik } from "formik";
+import {
+  FormikErrors,
+  Form as FormikForm,
+  FormikProps,
+  FormikProvider,
+  useFormik,
+} from "formik";
 import React, { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -76,7 +82,7 @@ export interface InputProps extends InputSingleProps {
 }
 
 interface Props extends React.FormHTMLAttributes<HTMLFormElement> {
-  onFormSubmit?: (values: any) => void;
+  onFormSubmit?: (values: any, reset: any) => void;
   inputs: (formik: FormikProps<Record<string, any>>) => InputProps[];
   submitText?: string;
   initialValues?: object;
@@ -237,7 +243,9 @@ const Form: React.FC<Props> = ({
         return;
       }
 
-      onFormSubmit?.(values);
+      formikHelpers.resetForm();
+
+      onFormSubmit?.(values, formikHelpers.resetForm);
     },
   });
 
