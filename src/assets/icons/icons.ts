@@ -28,6 +28,7 @@ import pdfIcon from "./pdf.svg";
 import pickedStarIcon from "./pickedStar.svg";
 import profileIcon from "./profile.svg";
 import resetFilterIcon from "./resetFilter.svg";
+import riyalIcon from "./riyal.svg";
 import searchIcon from "./search.svg";
 import settingsIcon from "./settings.svg";
 import successIcon from "./success.svg";
@@ -38,17 +39,12 @@ import visitReportIcon from "./visitReport.svg";
 import visitsIcon from "./visits.svg";
 
 export {
-  contactIcon,
-  searchIcon,
-  visitsIcon,
-  viewIcon,
-  visitReportIcon,
   aidsIcon,
   archiveIcon,
-  contactUsIcon,
   attachmentIcon,
   beneficiariesIcon,
-  menuBarsIcon,
+  contactIcon,
+  contactUsIcon,
   dashboardIcon,
   dateIcon,
   deleteIcon,
@@ -65,6 +61,7 @@ export {
   infoIcon,
   locationIcon,
   membershipFormIcon,
+  menuBarsIcon,
   messagesIcon,
   mutedStarIcon,
   notificationsIcon,
@@ -72,8 +69,13 @@ export {
   pickedStarIcon,
   profileIcon,
   resetFilterIcon,
+  riyalIcon,
+  searchIcon,
   settingsIcon,
   successIcon,
   supportIcon,
   takePhotoIcon,
+  viewIcon,
+  visitReportIcon,
+  visitsIcon,
 };

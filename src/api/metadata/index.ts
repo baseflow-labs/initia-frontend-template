@@ -7,11 +7,7 @@ const get = async () => {
 };
 
 const update = async (data: object) => {
-  return await api.put(mainPath, data, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  });
+  return await api.put(mainPath, data);
 };
 
 export { get, update };

@@ -18,15 +18,7 @@ const getAll = async ({
 const create = async (data: object) => {
   const { user } = (store.getState() as RootState).auth;
 
-  const res = await api.post(
-    mainPath,
-    { beneficiary: user.id, ...data },
-    {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    }
-  );
+  const res = await api.post(mainPath, { beneficiary: user.id, ...data });
   return res;
 };
 

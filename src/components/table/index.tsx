@@ -126,14 +126,16 @@ export const dataRender = ({
     case "file":
       const files = (row as any)?.files[name]?.map(({ path = "" }) => path);
 
-      return files?.map((file = "") => (
-        <FontAwesomeIcon
-          icon={faFile}
-          role="button"
-          className="me-1"
-          onClick={() => triggerFilePreview(file)}
-        />
-      ));
+      return files
+        ? files?.map((file = "") => (
+            <FontAwesomeIcon
+              icon={faFile}
+              role="button"
+              className="me-1"
+              onClick={() => triggerFilePreview(file)}
+            />
+          ))
+        : "-";
     case "location":
       return (
         <a href={data} target="_blank" rel="noreferrer">

@@ -9,7 +9,8 @@ interface Props {
     count: number;
     color: string; // "primary" | "success" | "warning" | "danger" | "info";
     icon: IconProp;
-    details: {
+    unit?: React.ReactNode | string;
+    details?: {
       label: string;
       count: number;
     }[];
@@ -43,7 +44,7 @@ const columnsMdWidth = (count: number) => {
 const StatisticCards = ({ statistics }: Props) => {
   return (
     <div className="row">
-      {statistics.map(({ label, count, icon, color, details }, i) => (
+      {statistics.map(({ label, count, icon, color, unit, details }, i) => (
         <div
           className={`col-sm-${columnsMdWidth(
             statistics.length
@@ -53,26 +54,31 @@ const StatisticCards = ({ statistics }: Props) => {
           <DashboardCard>
             <div className="card-body">
               <div className="row">
-                <div className="col-6">
+                <div className="col">
                   <h6 className="card-title">{label}</h6>
-                  <h1 className="card-title my-3 fw-bold">{count}</h1>
                 </div>
 
-                <div className="col-6 h2 text-end">
+                <div className="col h3 text-end">
                   <span className={`bg-opacity-${color} rounded-4 px-3 py-0`}>
                     <FontAwesomeIcon icon={icon} className={`text-${color}`} />
                   </span>
                 </div>
               </div>
 
-              <p className="card-text d-flex">
-                {details.map(({ label, count }, y) => (
-                  <div className="me-1" key={y}>
-                    <span className={`text-${color} fw-bold`}>{count}</span>{" "}
-                    <span className="text-secondary">{label}</span>
-                  </div>
-                ))}
-              </p>
+              <h1 className="card-title mt-2 mb-4 fw-bold">
+                {count?.toLocaleString()} {unit}
+              </h1>
+
+              {details && (
+                <p className="card-text d-flex">
+                  {details.map(({ label, count }, y) => (
+                    <div className="me-1" key={y}>
+                      <span className={`text-${color} fw-bold`}>{count}</span>{" "}
+                      <span className="text-secondary">{label}</span>
+                    </div>
+                  ))}
+                </p>
+              )}
             </div>
           </DashboardCard>
         </div>
