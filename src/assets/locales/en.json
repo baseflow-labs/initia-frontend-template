@@ -252,7 +252,6 @@
         "IdNumberNote": "ID Number Note",
         "IdPhoto": "ID Photo",
         "Income": "Income Total",
-        "IncomeDocument": "Income Document",
         "IncurableDisease": "Incurable Disease",
         "Insurances": "Insurances",
         "NationalAddressDocument": "National Address Document",
@@ -537,6 +536,7 @@
   },
   "CopyRight": {
     "AllRightsReserved": "All Rights Reserved © {{year}}",
+    "AppName": "Mustaheq",
     "DoneBy": "Designed & Executed By",
     "ShaiFull": "SHAI For AI",
     "ShaiShort": "SHAI"

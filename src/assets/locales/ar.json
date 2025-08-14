@@ -252,7 +252,6 @@
         "IdNumberNote": "مكون من 10 أرقام",
         "IdPhoto": "صورة الهوية",
         "Income": "إجمالي قيمة الدخل",
-        "IncomeDocument": "مصادر الدخل",
         "IncurableDisease": "هل المرض مستعص؟",
         "Insurances": "تأمينات",
         "NationalAddressDocument": "إثبات العنوان الوطني",
@@ -537,6 +536,7 @@
   },
   "CopyRight": {
     "AllRightsReserved": "جميع الحقوق محفوظة © {{year}}",
+    "AppName": "نظام مستحق",
     "DoneBy": "تصميم وتنفيذ",
     "ShaiFull": "شاي للذكاء الاصطناعي",
     "ShaiShort": "شاي"
