@@ -156,8 +156,8 @@ const VisitsView = () => {
   const columns = [
     {
       type: "text",
-      name: "fullName",
-      label: t("Auth.Beneficiaries.BeneficiaryName"),
+      name: "fileNo",
+      label: t("Auth.MembershipRegistration.Form.FileNo"),
     },
     {
       type: "date",
@@ -329,7 +329,18 @@ const VisitsView = () => {
           return final;
         }}
         actionButtons={user.role !== "hod" ? actionButtons : undefined}
-        columns={columns}
+        columns={
+          user.role === "researcher"
+            ? [
+                {
+                  type: "text",
+                  name: "fullName",
+                  label: t("Auth.Beneficiaries.BeneficiaryName"),
+                },
+                ...columns,
+              ]
+            : columns
+        }
         data={visits}
         onGetData={getData}
         paginationMeta={paginationMeta}

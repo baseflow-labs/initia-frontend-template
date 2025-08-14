@@ -18,6 +18,7 @@ import { InputSingleProps } from "../../../components/form";
 import { dataRender } from "../../../components/table";
 import TooltipComp from "../../../components/tooltip";
 import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
+import { useAppSelector } from "../../../store/hooks";
 import { exportDataToMultipleSheetsExcel } from "../../../utils/filesExport";
 import {
   getBasicDataInputs,
@@ -36,6 +37,7 @@ import { getBeneficiaryCategories } from "../../../utils/optionDataLists/benefic
 const BeneficiaryProfileView = () => {
   const { t } = useTranslation();
   const [searchParams] = useSearchParams();
+  const { user } = useAppSelector((state) => state.auth);
 
   const [beneficiary, setBeneficiary] = useState<any>();
   const [income, setIncome] = useState<number>(0);
@@ -214,12 +216,16 @@ const BeneficiaryProfileView = () => {
       <div className="row w-100 mx-auto">
         <div className="col-6 col-md-9 d-flex">
           <h2>
-            {beneficiary?.fullName || beneficiary?.beneficiary?.fullName}{" "}
+            {user.role === "researcher"
+              ? beneficiary?.fullName || beneficiary?.beneficiary?.fullName
+              : beneficiary?.fileNo || beneficiary?.beneficiary?.fileNo}{" "}
           </h2>
 
-          <small className="bg-opacity-info p-2 rounded-4 text-sm ms-2 my-auto text-info">
-            {beneficiary?.fileNo || beneficiary?.beneficiary?.fileNo}
-          </small>
+          {user.role === "researcher" && (
+            <small className="bg-opacity-info p-2 rounded-4 text-sm ms-2 my-auto text-info">
+              {beneficiary?.fileNo || beneficiary?.beneficiary?.fileNo}
+            </small>
+          )}
 
           <small className="bg-opacity-info p-2 rounded-4 text-sm ms-2 my-auto text-info">
             {renderDataFromOptions(

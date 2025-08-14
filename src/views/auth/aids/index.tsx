@@ -13,6 +13,7 @@ import * as AidApi from "../../../api/aids/aids";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
+import { useAppSelector } from "../../../store/hooks";
 import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
@@ -27,6 +28,7 @@ import SendAid from "./sendAid";
 const AidsView = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const { user } = useAppSelector((state) => state.auth);
 
   const [openModal, setOpenModal] = useState(false);
   const [aids, setAids] = useState<
@@ -141,8 +143,8 @@ const AidsView = () => {
   const columns = [
     {
       type: "text",
-      name: "fullName",
-      label: t("Auth.Beneficiaries.BeneficiaryName"),
+      name: "fileNo",
+      label: t("Auth.MembershipRegistration.Form.FileNo"),
     },
     {
       type: "text",
@@ -277,7 +279,18 @@ const AidsView = () => {
             },
           ];
         }}
-        columns={columns}
+        columns={
+          user.role === "researcher"
+            ? [
+                {
+                  type: "text",
+                  name: "fullName",
+                  label: t("Auth.Beneficiaries.BeneficiaryName"),
+                },
+                ...columns,
+              ]
+            : columns
+        }
         data={aids}
         onGetData={getData}
         paginationMeta={paginationMeta}
