@@ -327,7 +327,8 @@ const BeneficiaryProfileView = () => {
                     //   },
                     //   []
                     // )
-                    ?.map((prop: InputSingleProps, y = 0) => (
+                    ?.filter(({ hideFile = false }) => !hideFile)
+                    .map((prop: InputSingleProps, y = 0) => (
                       <tr key={y}>
                         <td
                           className="pb-3 text-break"
@@ -347,6 +348,8 @@ const BeneficiaryProfileView = () => {
                             type: prop.type,
                             options: prop.options || [],
                             name: prop.name,
+                            hasFile: prop.hasFile,
+                            money: prop.moneyUnit,
                           })}
                         </td>
                       </tr>

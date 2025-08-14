@@ -251,6 +251,7 @@
         "IdNumber": "رقم الهوية",
         "IdNumberNote": "مكون من 10 أرقام",
         "IdPhoto": "صورة الهوية",
+        "Income": "إجمالي قيمة الدخل",
         "IncomeDocument": "مصادر الدخل",
         "IncurableDisease": "هل المرض مستعص؟",
         "Insurances": "تأمينات",
