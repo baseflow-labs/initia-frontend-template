@@ -1,26 +1,59 @@
-import { faBox, faMapLocationDot, faUsers } from "@fortawesome/free-solid-svg-icons";
+import { faBoxOpen, faFile, faTableList, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import * as OverviewApi from "../../../api/overview";
-import MapCard, { LocationProps } from "../../../components/card/mapCard";
+import ProgramCards from "../../../components/card/programCards";
 import DashboardCards from "../../../components/card/statisticCards";
-import TasksCard from "../../../components/card/tasksCard";
 import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 
 const DashboardAccountantView = () => {
   const { t } = useTranslation();
   const [data, setData] = useState<{
-    beneficiaries: { all: number; applicants: number; accepted: number };
-    visits: { all: number; toDo: number; done: number };
-    aids: { all: number; granted: number; pending: number };
-    visitLocations: LocationProps[];
+    stats: {
+      allPrograms: number;
+      allCashPrograms: number;
+      allInKindPrograms: number;
+      allOpenedPrograms: number;
+      openedCashPrograms: number;
+      openedInKindPrograms: number;
+      allClosedPrograms: number;
+      closedCashPrograms: number;
+      closedInKindPrograms: number;
+    };
+    programs: {
+      name: string;
+      type: string;
+      status: string;
+      credit: number;
+      spent: number;
+      balance: number;
+      sponsor: string;
+    }[];
   }>({
-    beneficiaries: { all: 0, applicants: 0, accepted: 0 },
-    visits: { all: 0, toDo: 0, done: 0 },
-    aids: { all: 0, granted: 0, pending: 0 },
-    visitLocations: [],
+    stats: {
+      allPrograms: 0,
+      allCashPrograms: 0,
+      allInKindPrograms: 0,
+      allOpenedPrograms: 0,
+      openedCashPrograms: 0,
+      openedInKindPrograms: 0,
+      allClosedPrograms: 0,
+      closedCashPrograms: 0,
+      closedInKindPrograms: 0,
+    },
+    programs: [
+      {
+        name: "",
+        type: "",
+        status: "",
+        credit: 0,
+        spent: 0,
+        balance: 0,
+        sponsor: "",
+      },
+    ],
   });
 
   useLayoutEffect(() => {
@@ -33,67 +66,52 @@ const DashboardAccountantView = () => {
 
   const statistics = [
     {
-      label: t("Auth.Dashboard.BeneficiariesCount"),
-      count: data?.beneficiaries.all,
+      label: t("Auth.Dashboard.AllProgramsCount"),
+      count: data?.stats.allPrograms,
       details: [
         {
-          label: t("Auth.Dashboard.ApplicantsCount"),
-          count: data?.beneficiaries.applicants,
+          label: t("Auth.Dashboard.AllCashProgramsCount"),
+          count: data?.stats.allCashPrograms,
         },
         {
-          label: t("Auth.Dashboard.AcceptedBeneficiariesCount"),
-          count: data?.beneficiaries.accepted,
+          label: t("Auth.Dashboard.AllInKindProgramsCount"),
+          count: data?.stats.allInKindPrograms,
         },
       ],
       color: "success",
-      tasks: {
-        label: t("Auth.Dashboard.ApplicantsToReview"),
-        count: data?.beneficiaries.applicants,
-        route: "/beneficiary",
-      },
-      icon: faUsers,
+      icon: faTableList,
     },
     {
-      label: t("Auth.Dashboard.VisitsCount"),
-      count: data?.visits.all,
+      label: t("Auth.Dashboard.AllOpenedProgramsCount"),
+      count: data?.stats.allOpenedPrograms,
       details: [
         {
-          label: t("Auth.Dashboard.DoneVisitsCount"),
-          count: data?.visits.done,
+          label: t("Auth.Dashboard.OpenedCashProgramsCount"),
+          count: data?.stats.openedCashPrograms,
         },
         {
-          label: t("Auth.Dashboard.ToDoVisitsCount"),
-          count: data?.visits.toDo,
+          label: t("Auth.Dashboard.OpenedInKindProgramsCount"),
+          count: data?.stats.openedInKindPrograms,
         },
       ],
       color: "info",
-      tasks: {
-        label: t("Auth.Dashboard.ScheduledVisitsCount"),
-        count: data?.visits.toDo,
-        route: "/visitSchedule",
-      },
-      icon: faMapLocationDot,
+      icon: faBoxOpen,
     },
     {
-      label: t("Auth.Dashboard.AidsCount"),
-      count: data?.aids.all,
+      label: t("Auth.Dashboard.AllClosedProgramsCount"),
+      count: data?.stats.allClosedPrograms,
       details: [
         {
-          label: t("Auth.Dashboard.GrantedAidsCount"),
-          count: data?.aids.granted,
+          label: t("Auth.Dashboard.ClosedCashProgramsCount"),
+          count: data?.stats.closedCashPrograms,
         },
         {
-          label: t("Auth.Dashboard.PendingAidsCount"),
-          count: data?.aids.pending,
+          label: t("Auth.Dashboard.ClosedInKindProgramsCount"),
+          count: data?.stats.closedInKindPrograms,
         },
       ],
-      tasks: {
-        label: t("Auth.Dashboard.ToReviewAidsCount"),
-        count: data?.aids.pending,
-        route: "/aid",
-      },
       color: "warning",
-      icon: faBox,
+      icon: faFile,
     },
   ];
 
@@ -101,24 +119,8 @@ const DashboardAccountantView = () => {
     <PageTemplate title={t("Auth.Dashboard.Title")}>
       <DashboardCards statistics={statistics} />
 
-      <div className="row">
-        <div className="col-xl-6">
-          <TasksCard
-            label={t("Auth.Dashboard.Tasks")}
-            tasks={statistics.map(({ icon, color, tasks, ...rest }) => ({
-              icon,
-              color,
-              label: tasks.label,
-              count: tasks.count,
-              route: tasks.route,
-            }))}
-          />
-        </div>
-
-        <div className="col-xl-6">
-          <MapCard locations={data.visitLocations} />
-        </div>
-      </div>
+      <h3 className="mt-4 mb-3">{t("Auth.AidPrograms.Programs")}</h3>
+      <ProgramCards programs={data.programs} />
     </PageTemplate>
   );
 };
