@@ -42,6 +42,7 @@ import DemoWarning from "./demoWarning";
 import { FilePreviewModal } from "./globalModal";
 import OffCanvasNav from "./navs/offcanvasNav";
 import Sidebar from "./navs/sidebarNav";
+import AidProgramsView from "../../views/auth/aidPrograms";
 
 const AuthLayout = () => {
   const { t, i18n } = useTranslation();
@@ -219,6 +220,14 @@ const AuthLayout = () => {
       showInNav: true,
       icon: aidsIcon,
       users: ["beneficiary"],
+    },
+    {
+      name: t("Auth.AidPrograms.Title"),
+      route: "/aid-program",
+      view: <AidProgramsView />,
+      showInNav: true,
+      icon: aidsIcon,
+      users: ["accountant", "admin"],
     },
     {
       name: t("Auth.Beneficiary.Profile.Title"),

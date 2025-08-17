@@ -1,5 +1,20 @@
 {
   "Auth": {
+    "AidPrograms": {
+      "AddAidProgram": "إضافة برنامج معونة",
+      "AidProgramName": "اسم البرنامج",
+      "AidProgramPurpose": "Aid Program Purpose",
+      "AidProgramType": "نوع البرنامج",
+      "CantGrantAlready": "Can't Grant Already",
+      "CantRejectAlready": "Can't Reject Already",
+      "FilterByThisBeneficiary": "Filter By This Beneficiary",
+      "RecaptionDate": "Recaption Date",
+      "Statuses": {
+        "Grant": "Grant",
+        "Reject": "Reject"
+      },
+      "Title": "Aid Programs"
+    },
     "Aids": {
       "AddAid": "ارسال معونة",
       "AidName": "اسم المعونة",

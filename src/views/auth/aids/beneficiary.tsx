@@ -15,7 +15,7 @@ import {
 } from "../../../utils/function";
 import {
   getAidStatuses,
-  getAidTypes,
+  getAidProgramTypes,
 } from "../../../utils/optionDataLists/aids";
 import RequestAid from "./requestAid";
 
@@ -68,7 +68,7 @@ const AidsBeneficiaryView = () => {
     getData({});
   }, []);
 
-  const aidTypes = getAidTypes(t);
+  const aidTypes = getAidProgramTypes(t);
 
   const statuses = getAidStatuses(t);
 

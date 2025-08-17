@@ -1,11 +1,11 @@
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
-import * as AidApi from "../../../api/aids/aids";
+import * as AidProgramApi from "../../../api/aids/aidPrograms";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import { addNotification } from "../../../store/actions/notifications";
-import { getRequestAidInputs } from "../../../utils/formInputs/aids";
+import { geAddAidProgramInputs } from "../../../utils/formInputs/aids";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import { getAidProgramTypes } from "../../../utils/optionDataLists/aids";
 
@@ -14,39 +14,49 @@ interface Props {
   currentFilters: Object;
   openModal: boolean;
   setOpenModal: (s: boolean) => void;
+  selectOptions: {
+    beneficiaries: {
+      id: string;
+      fullName: string;
+      status: { status: string };
+    }[];
+  };
 }
 
-const RequestAid = ({
+const SendAidProgram = ({
   onGetData,
   currentFilters,
   openModal,
   setOpenModal,
+  selectOptions,
 }: Props) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
-  const aidTypes = getAidProgramTypes(t);
-
   return (
     <Modal
-      title={t("Auth.Aids.Beneficiary.RequestAid")}
-      isOpen={openModal}
+      title={t("Auth.AidPrograms.AddAidProgram")}
       onClose={() => setOpenModal(false)}
+      isOpen={openModal}
     >
       <Form
-        inputs={() => getRequestAidInputs(t, aidTypes)}
+        inputs={() =>
+          geAddAidProgramInputs(t, getAidProgramTypes(t), selectOptions)
+        }
         submitText={t("Global.Form.Labels.SubmitApplication")}
         onFormSubmit={(e, resetForm) => {
-          AidApi.create(e)
+          AidProgramApi.grant(e)
             .then(() => {
               setOpenModal(false);
+              onGetData({});
               resetForm();
-              onGetData({ page: 1, capacity: 10 });
               dispatch(
                 addNotification({
                   msg: t("Global.Form.SuccessMsg", {
-                    action: t("Auth.Aids.Beneficiary.RequestAid"),
-                    data: e.name,
+                    action: t("Auth.AidPrograms.AddAidProgram"),
+                    data: selectOptions.beneficiaries.find(
+                      ({ id }) => id === e.beneficiary
+                    )?.fullName,
                   }),
                 })
               );
@@ -58,4 +68,4 @@ const RequestAid = ({
   );
 };
 
-export default RequestAid;
+export default SendAidProgram;

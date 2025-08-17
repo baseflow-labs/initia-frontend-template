@@ -84,3 +84,47 @@ export const getGrantAidInputs = (
     required: false,
   },
 ];
+
+export const geAddAidProgramInputs = (
+  t: Function,
+  aidTypes: { label: string; value: string }[],
+  selectOptions: {
+    beneficiaries: {
+      id: string;
+      fullName: string;
+      status: { status: string };
+    }[];
+  }
+) => [
+  {
+    type: "select",
+    options: selectOptions.beneficiaries
+      .filter(({ status }) => status.status === "Accepted")
+      .map(({ id, fullName }) => ({
+        value: id,
+        label: fullName,
+      })),
+    name: "beneficiary",
+    label: t("Auth.Beneficiaries.BeneficiaryName"),
+    required: true,
+  },
+  {
+    type: "select",
+    options: aidTypes,
+    name: "type",
+    label: t("Auth.Aids.AidType"),
+    required: true,
+  },
+  {
+    type: "text",
+    name: "name",
+    label: t("Auth.Aids.AidName"),
+    required: true,
+  },
+  {
+    type: "textarea",
+    name: "note",
+    label: t("Global.Form.Labels.Notes"),
+    required: false,
+  },
+];

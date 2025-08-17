@@ -9,7 +9,7 @@ import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
-import * as AidApi from "../../../api/aids/aids";
+import * as AidProgramApi from "../../../api/aids/aidPrograms";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
@@ -20,18 +20,18 @@ import {
   statusColorRender,
 } from "../../../utils/function";
 import {
-  getAidStatuses,
+  getAidProgramStatuses,
   getAidProgramTypes,
 } from "../../../utils/optionDataLists/aids";
-import SendAid from "./sendAid";
+import SendAidProgram from "./sendAidProgram";
 
-const AidsView = () => {
+const AidProgramsView = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { user } = useAppSelector((state) => state.auth);
 
   const [openModal, setOpenModal] = useState(false);
-  const [aids, setAids] = useState<
+  const [aidPrograms, setAidPrograms] = useState<
     { id: string; beneficiaryId: string; status: string }[]
   >([]);
   const [selectOptions, setSelectOptions] = useState({
@@ -66,9 +66,9 @@ const AidsView = () => {
       });
     }
 
-    return AidApi.getAll({ filters, page, capacity, customFilters })
+    return AidProgramApi.getAll({ filters, page, capacity, customFilters })
       .then((res: any) => {
-        setAids(
+        setAidPrograms(
           res.payload.map(
             ({ beneficiary = { id: "" }, status = {}, ...rest }) => ({
               ...beneficiary,
@@ -106,9 +106,9 @@ const AidsView = () => {
       .catch(apiCatchGlobalHandler);
   }, []);
 
-  const aidTypes = getAidProgramTypes(t);
+  const aidProgramTypes = getAidProgramTypes(t);
 
-  const statuses = getAidStatuses(t);
+  const statuses = getAidProgramStatuses(t);
 
   const filters = [
     {
@@ -122,20 +122,20 @@ const AidsView = () => {
       name: "beneficiary",
     },
     {
-      label: t("Auth.Aids.AidType"),
-      options: aidTypes,
+      label: t("Auth.AidPrograms.AidProgramType"),
+      options: aidProgramTypes,
       name: "type",
     },
     {
       label: t("Auth.MembershipRegistration.Statuses.Status"),
       options: statuses,
-      name: "aidStatuses=>status",
+      name: "aidProgramStatuses=>status",
     },
   ];
 
   const actionButtons = [
     {
-      label: t("Auth.Aids.AddAid"),
+      label: t("Auth.AidPrograms.AddAidProgram"),
       onClick: () => setOpenModal(true),
     },
   ];
@@ -149,13 +149,13 @@ const AidsView = () => {
     {
       type: "text",
       name: "name",
-      label: t("Auth.Aids.AidName"),
+      label: t("Auth.AidPrograms.AidProgramName"),
     },
     {
       type: "select",
-      options: aidTypes,
+      options: aidProgramTypes,
       name: "type",
-      label: t("Auth.Aids.AidType"),
+      label: t("Auth.AidPrograms.AidProgramType"),
     },
     {
       type: "date",
@@ -165,7 +165,7 @@ const AidsView = () => {
     {
       type: "date",
       name: "collectionDate",
-      label: t("Auth.Aids.RecaptionDate"),
+      label: t("Auth.AidPrograms.RecaptionDate"),
     },
     {
       type: "file",
@@ -177,7 +177,7 @@ const AidsView = () => {
     {
       type: "textarea",
       name: "note",
-      label: t("Auth.Aids.AidPurpose"),
+      label: t("Auth.AidPrograms.AidProgramPurpose"),
       required: true,
     },
     {
@@ -196,20 +196,22 @@ const AidsView = () => {
     },
   ];
 
-  const grantLabel = t("Auth.Aids.Statuses.Grant");
-  const rejectLabel = t("Auth.Aids.Statuses.Reject");
+  const grantLabel = t("Auth.AidPrograms.Statuses.Grant");
+  const rejectLabel = t("Auth.AidPrograms.Statuses.Reject");
 
   const updateStatus = (id: string, status: string) => {
-    AidApi.updateStatus(id, status)
+    AidProgramApi.updateStatus(id, status)
       .then(() => {
-        const aid = aids.find((aid) => aid.id === id);
+        const aidProgram = aidPrograms.find(
+          (aidProgram) => aidProgram.id === id
+        );
         getData({});
         dispatch(
           addNotification({
             msg: t("Global.Form.SuccessMsg", {
               action: status === "Granted" ? grantLabel : rejectLabel,
               data: selectOptions.beneficiaries.find(
-                ({ id }) => id === aid?.beneficiaryId
+                ({ id }) => id === aidProgram?.beneficiaryId
               )?.fullName,
             }),
           })
@@ -226,20 +228,20 @@ const AidsView = () => {
   return (
     <Fragment>
       <TablePage
-        title={t("Auth.Aids.Title")}
+        title={t("Auth.AidPrograms.Title")}
         filters={filters}
         onSearch={onSearch}
         searchPlaceholder="بحث بـ اسم المستفيد"
         actionButtons={actionButtons}
         tableActions={(id?: string) => {
-          const aid = aids.find((a) => a.id === id);
+          const aidProgram = aidPrograms.find((a) => a.id === id);
 
-          const granted = aid?.status === "Granted";
-          const rejected = aid?.status === "Rejected";
+          const granted = aidProgram?.status === "Granted";
+          const rejected = aidProgram?.status === "Rejected";
 
           return [
             {
-              label: t("Auth.Aids.Statuses.Grant"),
+              label: t("Auth.AidPrograms.Statuses.Grant"),
               icon: faCheck,
               spread: false,
               onClick: (data: string) =>
@@ -247,12 +249,12 @@ const AidsView = () => {
                   ? updateStatus(data, "Granted")
                   : dispatch(
                       addNotification({
-                        msg: t("Auth.Aids.CantGrantAlready"),
+                        msg: t("Auth.AidPrograms.CantGrantAlready"),
                       })
                     ),
             },
             {
-              label: t("Auth.Aids.Statuses.Reject"),
+              label: t("Auth.AidPrograms.Statuses.Reject"),
               icon: faXmark,
               spread: false,
               onClick: (data: string) =>
@@ -260,16 +262,16 @@ const AidsView = () => {
                   ? updateStatus(data, "Rejected")
                   : dispatch(
                       addNotification({
-                        msg: t("Auth.Aids.CantRejectAlready"),
+                        msg: t("Auth.AidPrograms.CantRejectAlready"),
                       })
                     ),
             },
             {
-              label: t("Auth.Aids.FilterByThisBeneficiary"),
+              label: t("Auth.AidPrograms.FilterByThisBeneficiary"),
               icon: faFilter,
               spread: true,
               onClick: (data: string) => {
-                const beneficiary = aids.find(
+                const beneficiary = aidPrograms.find(
                   (a) => a.id === data
                 )?.beneficiaryId;
 
@@ -291,7 +293,7 @@ const AidsView = () => {
               ]
             : columns
         }
-        data={aids}
+        data={aidPrograms}
         onGetData={getData}
         paginationMeta={paginationMeta}
         onPageChange={(page, capacity) => {
@@ -302,7 +304,7 @@ const AidsView = () => {
         }}
       />
 
-      <SendAid
+      <SendAidProgram
         onGetData={getData}
         currentFilters={currentFilters}
         openModal={openModal}
@@ -313,4 +315,4 @@ const AidsView = () => {
   );
 };
 
-export default AidsView;
+export default AidProgramsView;

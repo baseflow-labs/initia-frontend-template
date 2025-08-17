@@ -1,5 +1,20 @@
 {
   "Auth": {
+    "Aid Programs": {
+      "AddAidProgram": "Add Aid Program",
+      "AidProgramName": "Aid Program Name",
+      "AidProgramPurpose": "Aid Program Purpose",
+      "AidProgramType": "Aid Program Type",
+      "CantGrantAlready": "Can't Grant Already",
+      "CantRejectAlready": "Can't Reject Already",
+      "FilterByThisBeneficiary": "FilterByThisBeneficiary",
+      "RecaptionDate": "RecaptionDate",
+      "Statuses": {
+        "Grant": "Grant",
+        "Reject": "Reject"
+      },
+      "Title": "Aid Programs"
+    },
     "Aids": {
       "AddAid": "Add Aid",
       "AidName": "Aid Name",

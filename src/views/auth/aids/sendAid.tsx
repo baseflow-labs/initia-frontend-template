@@ -7,7 +7,7 @@ import Modal from "../../../components/modal";
 import { addNotification } from "../../../store/actions/notifications";
 import { getGrantAidInputs } from "../../../utils/formInputs/aids";
 import { apiCatchGlobalHandler } from "../../../utils/function";
-import { getAidTypes } from "../../../utils/optionDataLists/aids";
+import { getAidProgramTypes } from "../../../utils/optionDataLists/aids";
 
 interface Props {
   onGetData: (p: Object) => void;
@@ -40,7 +40,9 @@ const SendAid = ({
       isOpen={openModal}
     >
       <Form
-        inputs={() => getGrantAidInputs(t, getAidTypes(t), selectOptions)}
+        inputs={() =>
+          getGrantAidInputs(t, getAidProgramTypes(t), selectOptions)
+        }
         submitText={t("Global.Form.Labels.SubmitApplication")}
         onFormSubmit={(e, resetForm) => {
           AidApi.grant(e)
