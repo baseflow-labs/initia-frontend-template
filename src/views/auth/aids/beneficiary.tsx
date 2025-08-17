@@ -11,6 +11,7 @@ import TablePage from "../../../layouts/auth/pages/tablePage";
 import { useAppSelector } from "../../../store/hooks";
 import {
   apiCatchGlobalHandler,
+  pluralLabelResolve,
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
@@ -132,7 +133,7 @@ const AidsBeneficiaryView = () => {
           {row.aidProgram.type === "Cash" ? (
             <MoneyUnit />
           ) : (
-            t("Auth.Aids.AidPiece")
+            pluralLabelResolve(t, row.value, "Auth.Aids.AidPiece")
           )}
         </>
       ),

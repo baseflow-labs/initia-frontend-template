@@ -17,6 +17,7 @@ import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
 import {
   apiCatchGlobalHandler,
+  pluralLabelResolve,
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
@@ -191,7 +192,7 @@ const AidsView = () => {
           {row.aidProgram.type === "Cash" ? (
             <MoneyUnit />
           ) : (
-            t("Auth.Aids.AidPiece")
+            pluralLabelResolve(t, row.value, "Auth.Aids.AidPiece")
           )}
         </>
       ),

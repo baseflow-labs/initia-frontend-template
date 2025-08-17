@@ -22,7 +22,12 @@
     "Aids": {
       "AddAid": "ارسال معونة",
       "AidName": "اسم المعونة",
-      "AidPiece": "حبة / حبات",
+      "AidPiece_0": "-",
+      "AidPiece_1": "حبة",
+      "AidPiece_2": "حبتان",
+      "AidPiece_few": "حبات",
+      "AidPiece_many": "حبة",
+      "AidPiece_other": "حبة / حبات",
       "AidPurpose": "سبب طلب المعونة",
       "AidQuantity": "كمية المعونة",
       "AidType": "نوع المعونة",
