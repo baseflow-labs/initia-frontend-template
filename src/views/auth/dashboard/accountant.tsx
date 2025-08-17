@@ -1,15 +1,11 @@
-import {
-  faBox,
-  faMapLocationDot,
-  faUsers,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBox, faMapLocationDot, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import * as OverviewApi from "../../../api/overview";
-import profilePhotoPlaceholder from "../../../assets/images/profile-image-placeholder.png";
+import MapCard, { LocationProps } from "../../../components/card/mapCard";
 import DashboardCards from "../../../components/card/statisticCards";
-import UsersCard from "../../../components/card/usersCard";
+import TasksCard from "../../../components/card/tasksCard";
 import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 
@@ -19,26 +15,12 @@ const DashboardAccountantView = () => {
     beneficiaries: { all: number; applicants: number; accepted: number };
     visits: { all: number; toDo: number; done: number };
     aids: { all: number; granted: number; pending: number };
-    researchers: {
-      name: string;
-      beneficiariesCount: number;
-      visitsCount: number;
-      aidsCount: number;
-      reportsCount: number;
-    }[];
+    visitLocations: LocationProps[];
   }>({
     beneficiaries: { all: 0, applicants: 0, accepted: 0 },
     visits: { all: 0, toDo: 0, done: 0 },
     aids: { all: 0, granted: 0, pending: 0 },
-    researchers: [
-      {
-        name: "",
-        beneficiariesCount: 0,
-        visitsCount: 0,
-        aidsCount: 0,
-        reportsCount: 0,
-      },
-    ],
+    visitLocations: [],
   });
 
   useLayoutEffect(() => {
@@ -119,13 +101,24 @@ const DashboardAccountantView = () => {
     <PageTemplate title={t("Auth.Dashboard.Title")}>
       <DashboardCards statistics={statistics} />
 
-      <UsersCard
-        label={t("Auth.Dashboard.Researchers")}
-        researchers={data.researchers.map((r) => ({
-          ...r,
-          photo: profilePhotoPlaceholder,
-        }))}
-      />
+      <div className="row">
+        <div className="col-xl-6">
+          <TasksCard
+            label={t("Auth.Dashboard.Tasks")}
+            tasks={statistics.map(({ icon, color, tasks, ...rest }) => ({
+              icon,
+              color,
+              label: tasks.label,
+              count: tasks.count,
+              route: tasks.route,
+            }))}
+          />
+        </div>
+
+        <div className="col-xl-6">
+          <MapCard locations={data.visitLocations} />
+        </div>
+      </div>
     </PageTemplate>
   );
 };
