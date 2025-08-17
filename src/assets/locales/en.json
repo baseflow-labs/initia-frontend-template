@@ -642,6 +642,7 @@
       "Labels": {
         "DidUForgotPassword": "Did You Forgot Password?",
         "Login": "Login",
+        "LoginAsAccountant": "Login As An Accountant",
         "LoginAsAdmin": "Login As System Admin",
         "LoginAsApplicant": "Login As Applicant",
         "LoginAsBeneficiary": "Login As Beneficiary",

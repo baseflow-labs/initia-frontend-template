@@ -27,6 +27,7 @@ import BeneficiaryProfileView from "../../views/auth/beneficiaries/profile";
 import BeneficiariesViewForSupervisor from "../../views/auth/beneficiaries/supervisor";
 import ContactUsPage from "../../views/auth/contact-us";
 import DashboardView from "../../views/auth/dashboard";
+import DashboardAccountantView from "../../views/auth/dashboard/accountant";
 import DashboardAdminView from "../../views/auth/dashboard/admin";
 import DashboardResearcherView from "../../views/auth/dashboard/researcher";
 import DashboardSupervisorView from "../../views/auth/dashboard/supervisor";
@@ -104,6 +105,15 @@ const AuthLayout = () => {
       showInNav: true,
       icon: dashboardIcon,
       users: ["researcher", "admin"],
+    },
+    {
+      name: t("Auth.Dashboard.Title"),
+      route: "/dashboard",
+      labelNote: "For Accountant",
+      view: <DashboardAccountantView />,
+      showInNav: true,
+      icon: dashboardIcon,
+      users: ["accountant", "admin"],
     },
     {
       name: t("Auth.Beneficiaries.Applications"),
@@ -232,7 +242,7 @@ const AuthLayout = () => {
       view: <SettingsPage />,
       icon: settingsIcon,
       fixed: true,
-      users: ["beneficiary", "researcher", "hod", "admin"],
+      users: ["beneficiary", "researcher", "hod", "accountant", "admin"],
     },
   ];
 

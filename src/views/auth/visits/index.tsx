@@ -301,7 +301,7 @@ const VisitsView = () => {
                         type: "err",
                       })
                     )
-                  : user.role === "hod"
+                  : user.role !== "researcher"
                   ? dispatch(
                       addNotification({
                         msg: t("Auth.Visits.Report.OnlyResearchersCouldAdd"),

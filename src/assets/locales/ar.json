@@ -642,6 +642,7 @@
       "Labels": {
         "DidUForgotPassword": "هل نسيت كلمة السر؟",
         "Login": "تسجيل الدخول",
+        "LoginAsAccountant": "تسجيل الدخول كمحاسب",
         "LoginAsAdmin": "تسجيل الدخول كمدير النظام",
         "LoginAsApplicant": "تسجيل الدخول كمتقدم بطلب تسجيل ",
         "LoginAsBeneficiary": "تسجيل الدخول كمستفيد مسجل بالجمعية",
