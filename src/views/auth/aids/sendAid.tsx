@@ -8,6 +8,7 @@ import { addNotification } from "../../../store/actions/notifications";
 import { getGrantAidInputs } from "../../../utils/formInputs/aids";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import { getAidProgramTypes } from "../../../utils/optionDataLists/aids";
+import { FormikProps } from "formik";
 
 interface Props {
   onGetData: (p: Object) => void;
@@ -20,7 +21,7 @@ interface Props {
       fullName: string;
       status: { status: string };
     }[];
-    aidPrograms: { id: string; name: string; status: string }[];
+    aidPrograms: { id: string; name: string; type: string; status: string }[];
   };
 }
 
@@ -41,8 +42,8 @@ const SendAid = ({
       isOpen={openModal}
     >
       <Form
-        inputs={() =>
-          getGrantAidInputs(t, getAidProgramTypes(t), selectOptions)
+        inputs={(formik: FormikProps<Record<string, any>>) =>
+          getGrantAidInputs(t, getAidProgramTypes(t), selectOptions, formik)
         }
         submitText={t("Global.Form.Labels.SubmitApplication")}
         onFormSubmit={(e, resetForm) => {

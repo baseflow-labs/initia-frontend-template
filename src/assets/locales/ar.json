@@ -23,6 +23,7 @@
       "AddAid": "ارسال معونة",
       "AidName": "اسم المعونة",
       "AidPurpose": "سبب طلب المعونة",
+      "AidQuantity": "كمية المعونة",
       "AidType": "نوع المعونة",
       "AidValue": "قيمة المعونة",
       "Beneficiary": {

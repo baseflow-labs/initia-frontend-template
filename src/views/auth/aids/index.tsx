@@ -37,7 +37,7 @@ const AidsView = () => {
   >([]);
   const [selectOptions, setSelectOptions] = useState({
     beneficiaries: [{ id: "", fullName: "", status: { status: "" } }],
-    aidPrograms: [{ id: "", name: "", status: "" }],
+    aidPrograms: [{ id: "", name: "", type: "", status: "" }],
   });
   const [currentFilters, setCurrentFilters] = useState({});
   const [currentSearch, setCurrentSearch] = useState("");

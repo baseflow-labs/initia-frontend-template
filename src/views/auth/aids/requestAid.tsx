@@ -8,6 +8,7 @@ import { addNotification } from "../../../store/actions/notifications";
 import { getRequestAidInputs } from "../../../utils/formInputs/aids";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import { getAidProgramTypes } from "../../../utils/optionDataLists/aids";
+import { FormikProps } from "formik";
 
 interface Props {
   onGetData: (p: Object) => void;
@@ -36,7 +37,9 @@ const RequestAid = ({
       onClose={() => setOpenModal(false)}
     >
       <Form
-        inputs={() => getRequestAidInputs(t, selectOptions)}
+        inputs={(formik: FormikProps<Record<string, any>>) =>
+          getRequestAidInputs(t, selectOptions, formik)
+        }
         submitText={t("Global.Form.Labels.SubmitApplication")}
         onFormSubmit={(e, resetForm) => {
           AidApi.create(e)

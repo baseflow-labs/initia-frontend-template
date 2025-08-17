@@ -23,6 +23,7 @@
       "AddAid": "Add Aid",
       "AidName": "Aid Name",
       "AidPurpose": "Aid Purpose",
+      "AidQuantity": "Aid Quantity",
       "AidType": "Aid Type",
       "AidValue": "Aid Value",
       "Beneficiary": {
