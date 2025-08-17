@@ -10,7 +10,6 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
 import * as AidProgramApi from "../../../api/aids/aidPrograms";
-import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
@@ -23,7 +22,7 @@ import {
   getAidProgramStatuses,
   getAidProgramTypes,
 } from "../../../utils/optionDataLists/aids";
-import SendAidProgram from "./sendAidProgram";
+import AddAidProgram from "./sendAidProgram";
 
 const AidProgramsView = () => {
   const { t } = useTranslation();
@@ -32,11 +31,8 @@ const AidProgramsView = () => {
 
   const [openModal, setOpenModal] = useState(false);
   const [aidPrograms, setAidPrograms] = useState<
-    { id: string; beneficiaryId: string; status: string }[]
+    { id: string; name: string; status: string }[]
   >([]);
-  const [selectOptions, setSelectOptions] = useState({
-    beneficiaries: [{ id: "", fullName: "", status: { status: "" } }],
-  });
   const [currentFilters, setCurrentFilters] = useState({});
   const [currentSearch, setCurrentSearch] = useState("");
   const [paginationMeta, setPaginationMeta] = useState({
@@ -53,31 +49,10 @@ const AidProgramsView = () => {
     search = currentSearch,
   }) => {
     setCurrentFilters(filters);
-    const customFilters = [];
 
-    if (search) {
-      customFilters.push({
-        field: "beneficiary.fullName",
-        filteredTerm: {
-          dataType: "string",
-          value: search,
-        },
-        filterOperator: "contains",
-      });
-    }
-
-    return AidProgramApi.getAll({ filters, page, capacity, customFilters })
+    return AidProgramApi.getAll({ filters, page, capacity })
       .then((res: any) => {
-        setAidPrograms(
-          res.payload.map(
-            ({ beneficiary = { id: "" }, status = {}, ...rest }) => ({
-              ...beneficiary,
-              beneficiaryId: beneficiary.id,
-              ...status,
-              ...rest,
-            })
-          )
-        );
+        setAidPrograms(res.payload);
 
         if (res.extra) {
           setPaginationMeta({
@@ -95,15 +70,6 @@ const AidProgramsView = () => {
 
   useLayoutEffect(() => {
     getData({});
-
-    BeneficiaryApi.getAll({ capacity: 999 })
-      .then((res: any) =>
-        setSelectOptions((current) => ({
-          ...current,
-          beneficiaries: res.payload,
-        }))
-      )
-      .catch(apiCatchGlobalHandler);
   }, []);
 
   const aidProgramTypes = getAidProgramTypes(t);
@@ -111,16 +77,6 @@ const AidProgramsView = () => {
   const statuses = getAidProgramStatuses(t);
 
   const filters = [
-    {
-      label: t("Auth.Beneficiaries.BeneficiaryName"),
-      options: selectOptions.beneficiaries
-        .filter(({ status }) => status.status === "Accepted")
-        .map(({ id, fullName }) => ({
-          value: id,
-          label: fullName,
-        })),
-      name: "beneficiary",
-    },
     {
       label: t("Auth.AidPrograms.AidProgramType"),
       options: aidProgramTypes,
@@ -143,11 +99,6 @@ const AidProgramsView = () => {
   const columns = [
     {
       type: "text",
-      name: "fileNo",
-      label: t("Auth.MembershipRegistration.Form.FileNo"),
-    },
-    {
-      type: "text",
       name: "name",
       label: t("Auth.AidPrograms.AidProgramName"),
     },
@@ -158,27 +109,23 @@ const AidProgramsView = () => {
       label: t("Auth.AidPrograms.AidProgramType"),
     },
     {
-      type: "date",
-      name: "createdAt",
-      label: t("Global.Labels.ApplicationDate"),
+      type: "text",
+      name: "sponsor",
+      label: t("Auth.AidPrograms.Sponsor"),
     },
     {
-      type: "date",
-      name: "collectionDate",
-      label: t("Auth.AidPrograms.RecaptionDate"),
+      type: "number",
+      moneyUnit: true,
+      step: 0.1,
+      name: "credit",
+      label: t("Auth.AidPrograms.TotalCredit"),
     },
     {
-      type: "file",
-      name: "document",
-      label: t("Global.Form.Labels.SupportingDocument"),
-      required: false,
-      halfCol: true,
-    },
-    {
-      type: "textarea",
-      name: "note",
-      label: t("Auth.AidPrograms.AidProgramPurpose"),
-      required: true,
+      type: "number",
+      moneyUnit: true,
+      step: 0.1,
+      name: "balance",
+      label: t("Auth.AidPrograms.RemainingCredit"),
     },
     {
       type: "custom",
@@ -192,12 +139,12 @@ const AidProgramsView = () => {
         </Fragment>
       ),
       name: "status",
-      label: t("Auth.MembershipRegistration.Statuses.Status"),
+      label: t("Auth.AidPrograms.Statuses.Title"),
     },
   ];
 
-  const grantLabel = t("Auth.AidPrograms.Statuses.Grant");
-  const rejectLabel = t("Auth.AidPrograms.Statuses.Reject");
+  const openLabel = t("Auth.AidPrograms.Statuses.Open");
+  const closedLabel = t("Auth.AidPrograms.Statuses.Closed");
 
   const updateStatus = (id: string, status: string) => {
     AidProgramApi.updateStatus(id, status)
@@ -209,10 +156,8 @@ const AidProgramsView = () => {
         dispatch(
           addNotification({
             msg: t("Global.Form.SuccessMsg", {
-              action: status === "Granted" ? grantLabel : rejectLabel,
-              data: selectOptions.beneficiaries.find(
-                ({ id }) => id === aidProgram?.beneficiaryId
-              )?.fullName,
+              action: status === "Granted" ? openLabel : closedLabel,
+              data: aidPrograms.find(({ id }) => id === aidProgram?.id)?.name,
             }),
           })
         );
@@ -266,33 +211,9 @@ const AidProgramsView = () => {
                       })
                     ),
             },
-            {
-              label: t("Auth.AidPrograms.FilterByThisBeneficiary"),
-              icon: faFilter,
-              spread: true,
-              onClick: (data: string) => {
-                const beneficiary = aidPrograms.find(
-                  (a) => a.id === data
-                )?.beneficiaryId;
-
-                setCurrentFilters({ beneficiary });
-                getData({ filters: { beneficiary } });
-              },
-            },
           ];
         }}
-        columns={
-          user.role === "researcher"
-            ? [
-                {
-                  type: "text",
-                  name: "fullName",
-                  label: t("Auth.Beneficiaries.BeneficiaryName"),
-                },
-                ...columns,
-              ]
-            : columns
-        }
+        columns={columns}
         data={aidPrograms}
         onGetData={getData}
         paginationMeta={paginationMeta}
@@ -304,12 +225,10 @@ const AidProgramsView = () => {
         }}
       />
 
-      <SendAidProgram
+      <AddAidProgram
         onGetData={getData}
-        currentFilters={currentFilters}
         openModal={openModal}
         setOpenModal={setOpenModal}
-        selectOptions={selectOptions}
       />
     </Fragment>
   );

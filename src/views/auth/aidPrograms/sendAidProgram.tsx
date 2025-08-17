@@ -11,25 +11,11 @@ import { getAidProgramTypes } from "../../../utils/optionDataLists/aids";
 
 interface Props {
   onGetData: (p: Object) => void;
-  currentFilters: Object;
   openModal: boolean;
   setOpenModal: (s: boolean) => void;
-  selectOptions: {
-    beneficiaries: {
-      id: string;
-      fullName: string;
-      status: { status: string };
-    }[];
-  };
 }
 
-const SendAidProgram = ({
-  onGetData,
-  currentFilters,
-  openModal,
-  setOpenModal,
-  selectOptions,
-}: Props) => {
+const AddAidProgram = ({ onGetData, openModal, setOpenModal }: Props) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
@@ -40,9 +26,7 @@ const SendAidProgram = ({
       isOpen={openModal}
     >
       <Form
-        inputs={() =>
-          geAddAidProgramInputs(t, getAidProgramTypes(t), selectOptions)
-        }
+        inputs={() => geAddAidProgramInputs(t, getAidProgramTypes(t))}
         submitText={t("Global.Form.Labels.SubmitApplication")}
         onFormSubmit={(e, resetForm) => {
           AidProgramApi.grant(e)
@@ -54,9 +38,7 @@ const SendAidProgram = ({
                 addNotification({
                   msg: t("Global.Form.SuccessMsg", {
                     action: t("Auth.AidPrograms.AddAidProgram"),
-                    data: selectOptions.beneficiaries.find(
-                      ({ id }) => id === e.beneficiary
-                    )?.fullName,
+                    data: e.name,
                   }),
                 })
               );
@@ -68,4 +50,4 @@ const SendAidProgram = ({
   );
 };
 
-export default SendAidProgram;
+export default AddAidProgram;

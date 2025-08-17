@@ -87,44 +87,33 @@ export const getGrantAidInputs = (
 
 export const geAddAidProgramInputs = (
   t: Function,
-  aidTypes: { label: string; value: string }[],
-  selectOptions: {
-    beneficiaries: {
-      id: string;
-      fullName: string;
-      status: { status: string };
-    }[];
-  }
+  aidProgramTypes: { label: string; value: string }[]
 ) => [
   {
-    type: "select",
-    options: selectOptions.beneficiaries
-      .filter(({ status }) => status.status === "Accepted")
-      .map(({ id, fullName }) => ({
-        value: id,
-        label: fullName,
-      })),
-    name: "beneficiary",
-    label: t("Auth.Beneficiaries.BeneficiaryName"),
+    type: "text",
+    name: "name",
+    label: t("Auth.AidPrograms.AidProgramName"),
     required: true,
   },
   {
     type: "select",
-    options: aidTypes,
+    options: aidProgramTypes,
     name: "type",
-    label: t("Auth.Aids.AidType"),
+    label: t("Auth.AidPrograms.AidProgramType"),
     required: true,
   },
   {
     type: "text",
-    name: "name",
-    label: t("Auth.Aids.AidName"),
+    name: "sponsor",
+    label: t("Auth.AidPrograms.Sponsor"),
     required: true,
   },
   {
-    type: "textarea",
-    name: "note",
-    label: t("Global.Form.Labels.Notes"),
-    required: false,
+    type: "number",
+    moneyUnit: true,
+    step: 0.1,
+    name: "credit",
+    label: t("Auth.AidPrograms.TotalCredit"),
+    required: true,
   },
 ];

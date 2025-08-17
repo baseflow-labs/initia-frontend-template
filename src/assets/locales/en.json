@@ -1,19 +1,22 @@
 {
   "Auth": {
-    "Aid Programs": {
-      "AddAidProgram": "Add Aid Program",
-      "AidProgramName": "Aid Program Name",
-      "AidProgramPurpose": "Aid Program Purpose",
-      "AidProgramType": "Aid Program Type",
-      "CantGrantAlready": "Can't Grant Already",
-      "CantRejectAlready": "Can't Reject Already",
-      "FilterByThisBeneficiary": "FilterByThisBeneficiary",
-      "RecaptionDate": "RecaptionDate",
+    "AidPrograms": {
+      "AddAidProgram": "AddAidProgram",
+      "AidProgramName": "AidProgramName",
+      "AidProgramType": "AidProgramType",
+      "CantGrantAlready": "CantGrantAlready",
+      "CantRejectAlready": "CantRejectAlready",
+      "RemainingCredit": "RemainingCredit",
+      "Sponsor": "Sponsor",
       "Statuses": {
+        "Closed": "Closed",
         "Grant": "Grant",
-        "Reject": "Reject"
+        "Open": "Open",
+        "Reject": "Reject",
+        "Title": "Title"
       },
-      "Title": "Aid Programs"
+      "Title": "Title",
+      "TotalCredit": "TotalCredit"
     },
     "Aids": {
       "AddAid": "Add Aid",

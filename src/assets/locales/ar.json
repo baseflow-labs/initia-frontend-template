@@ -3,17 +3,20 @@
     "AidPrograms": {
       "AddAidProgram": "إضافة برنامج معونة",
       "AidProgramName": "اسم البرنامج",
-      "AidProgramPurpose": "Aid Program Purpose",
       "AidProgramType": "نوع البرنامج",
       "CantGrantAlready": "Can't Grant Already",
       "CantRejectAlready": "Can't Reject Already",
-      "FilterByThisBeneficiary": "Filter By This Beneficiary",
-      "RecaptionDate": "Recaption Date",
+      "RemainingCredit": "الرصيد المتبقي",
+      "Sponsor": "الجهة المانحة",
       "Statuses": {
+        "Closed": "مغلق",
         "Grant": "Grant",
-        "Reject": "Reject"
+        "Open": "مفتوح للتقديم",
+        "Reject": "Reject",
+        "Title": "حالة البرنامج"
       },
-      "Title": "Aid Programs"
+      "Title": "برامج المعونة",
+      "TotalCredit": "الميزانية"
     },
     "Aids": {
       "AddAid": "ارسال معونة",
@@ -27,9 +30,9 @@
       },
       "CantGrantAlready": "تمت الموافقة على طلب المعونة بالفعل",
       "CantRejectAlready": "تمت رفض طلب المعونة بالفعل",
-      "Cash": "نقدية",
+      "Cash": "نقدي",
       "FilterByThisBeneficiary": "عرض معونات هذا المستفيد",
-      "In-Kind": "عينية",
+      "In-Kind": "عيني",
       "RecaptionDate": "تاريخ الاستلام",
       "Statuses": {
         "Grant": "منح المعونة",
