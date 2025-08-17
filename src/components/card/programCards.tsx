@@ -1,5 +1,3 @@
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslation } from "react-i18next";
 
 import { riyalIcon } from "../../assets/icons/icons";
@@ -8,7 +6,6 @@ import {
   renderDataFromOptions,
 } from "../../utils/function";
 import { getAidProgramTypes } from "../../utils/optionDataLists/aids";
-import { MoneyUnit } from "../table";
 import DashboardCard from "./dashboardCard";
 
 interface Props {

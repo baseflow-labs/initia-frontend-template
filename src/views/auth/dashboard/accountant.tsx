@@ -1,4 +1,8 @@
-import { faBoxOpen, faFile, faTableList, faUsers } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBoxOpen,
+  faFile,
+  faTableList,
+} from "@fortawesome/free-solid-svg-icons";
 import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
