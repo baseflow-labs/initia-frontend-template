@@ -80,7 +80,7 @@ const AidProgramsView = () => {
     {
       label: t("Auth.MembershipRegistration.Statuses.Status"),
       options: statuses,
-      name: "aidProgramStatuses=>status",
+      name: "status",
     },
   ];
 
