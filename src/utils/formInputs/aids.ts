@@ -5,21 +5,23 @@ import {
 } from "../optionDataLists/aids";
 import { getYesNo } from "../optionDataLists/common";
 
-export const getRequestAidInputs = (
-  t: Function,
-  aidTypes: { label: string; value: string }[]
-) => [
+export const getRequestAidInputs = (t: Function, selectOptions: any) => [
   {
     type: "select",
-    options: aidTypes,
-    name: "type",
+    options: selectOptions?.aidPrograms.map(({ id = "", name = "" }) => ({
+      label: name,
+      value: id,
+    })),
+    name: "aidProgram",
     label: t("Auth.Aids.AidType"),
     required: true,
   },
   {
-    type: "text",
-    name: "name",
-    label: t("Auth.Aids.AidName"),
+    type: "number",
+    moneyUnit: true,
+    step: 0.1,
+    name: "value",
+    label: t("Auth.Aids.AidValue"),
     required: true,
   },
   {
@@ -55,6 +57,7 @@ export const getGrantAidInputs = (
       fullName: string;
       status: { status: string };
     }[];
+    aidPrograms: { id: string; name: string; status: string }[];
   }
 ) => [
   {
@@ -71,15 +74,20 @@ export const getGrantAidInputs = (
   },
   {
     type: "select",
-    options: aidTypes,
-    name: "type",
+    options: selectOptions?.aidPrograms.map(({ id, name }) => ({
+      label: name,
+      value: id,
+    })),
+    name: "aidProgram",
     label: t("Auth.Aids.AidType"),
     required: true,
   },
   {
-    type: "text",
-    name: "name",
-    label: t("Auth.Aids.AidName"),
+    type: "number",
+    moneyUnit: true,
+    step: 0.1,
+    name: "value",
+    label: t("Auth.Aids.AidValue"),
     required: true,
   },
   {

@@ -14,6 +14,9 @@ interface Props {
   currentFilters: Object;
   openModal: boolean;
   setOpenModal: (s: boolean) => void;
+  selectOptions: {
+    aidPrograms: { id: string; name: string; status: string }[];
+  };
 }
 
 const RequestAid = ({
@@ -21,11 +24,10 @@ const RequestAid = ({
   currentFilters,
   openModal,
   setOpenModal,
+  selectOptions,
 }: Props) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-
-  const aidTypes = getAidProgramTypes(t);
 
   return (
     <Modal
@@ -34,7 +36,7 @@ const RequestAid = ({
       onClose={() => setOpenModal(false)}
     >
       <Form
-        inputs={() => getRequestAidInputs(t, aidTypes)}
+        inputs={() => getRequestAidInputs(t, selectOptions)}
         submitText={t("Global.Form.Labels.SubmitApplication")}
         onFormSubmit={(e, resetForm) => {
           AidApi.create(e)

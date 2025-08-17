@@ -24,6 +24,7 @@
       "AidName": "Aid Name",
       "AidPurpose": "Aid Purpose",
       "AidType": "Aid Type",
+      "AidValue": "Aid Value",
       "Beneficiary": {
         "RequestAid": "Request Aid",
         "Title": "Aids",

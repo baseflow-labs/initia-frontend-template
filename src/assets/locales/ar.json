@@ -24,6 +24,7 @@
       "AidName": "اسم المعونة",
       "AidPurpose": "سبب طلب المعونة",
       "AidType": "نوع المعونة",
+      "AidValue": "قيمة المعونة",
       "Beneficiary": {
         "RequestAid": "طلب معونة",
         "Title": "المعونات",

@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import * as AidApi from "../../../api/aids/aids";
 import UnacceptedBeneficiary from "../../../components/card/unacceptedBeneficiary";
 import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
+import * as AidProgramApi from "../../../api/aids/aidPrograms";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { useAppSelector } from "../../../store/hooks";
 import {
@@ -31,6 +32,9 @@ const AidsBeneficiaryView = () => {
     capacity: 10,
     count: 0,
     pagesCount: 1,
+  });
+  const [selectOptions, setSelectOptions] = useState({
+    aidPrograms: [{ id: "", name: "", status: "" }],
   });
 
   const getData = ({
@@ -65,6 +69,17 @@ const AidsBeneficiaryView = () => {
   };
 
   useLayoutEffect(() => {
+    AidProgramApi.getAll({ capacity: 999 })
+      .then((res: any) =>
+        setSelectOptions((current) => ({
+          ...current,
+          aidPrograms: res.payload.filter(
+            ({ status = "" }) => status === "Opened"
+          ),
+        }))
+      )
+      .catch(apiCatchGlobalHandler);
+
     getData({});
   }, []);
 
@@ -94,15 +109,22 @@ const AidsBeneficiaryView = () => {
 
   const columns = [
     {
-      type: "text",
+      type: "custom",
       name: "name",
       label: t("Auth.Aids.AidName"),
+      render: (row: any) => row.aidProgram.name,
     },
     {
-      type: "select",
-      options: aidTypes,
+      type: "custom",
       name: "type",
       label: t("Auth.Aids.AidType"),
+      render: (row: any) =>
+        renderDataFromOptions(row.aidProgram.type, aidTypes),
+    },
+    {
+      type: "number",
+      name: "value",
+      label: t("Auth.Aids.AidValue"),
     },
     {
       type: "date",
@@ -167,6 +189,7 @@ const AidsBeneficiaryView = () => {
         currentFilters={currentFilters}
         openModal={openModal}
         setOpenModal={setOpenModal}
+        selectOptions={selectOptions}
       />
     </Fragment>
   );

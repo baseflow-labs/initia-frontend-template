@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 
 import * as AidApi from "../../../api/aids/aids";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
+import * as AidProgramApi from "../../../api/aids/aidPrograms";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
@@ -36,6 +37,7 @@ const AidsView = () => {
   >([]);
   const [selectOptions, setSelectOptions] = useState({
     beneficiaries: [{ id: "", fullName: "", status: { status: "" } }],
+    aidPrograms: [{ id: "", name: "", status: "" }],
   });
   const [currentFilters, setCurrentFilters] = useState({});
   const [currentSearch, setCurrentSearch] = useState("");
@@ -104,6 +106,17 @@ const AidsView = () => {
         }))
       )
       .catch(apiCatchGlobalHandler);
+
+    AidProgramApi.getAll({ capacity: 999 })
+      .then((res: any) =>
+        setSelectOptions((current) => ({
+          ...current,
+          aidPrograms: res.payload.filter(
+            ({ status = "" }) => status === "Opened"
+          ),
+        }))
+      )
+      .catch(apiCatchGlobalHandler);
   }, []);
 
   const aidTypes = getAidProgramTypes(t);
@@ -122,8 +135,11 @@ const AidsView = () => {
       name: "beneficiary",
     },
     {
-      label: t("Auth.Aids.AidType"),
-      options: aidTypes,
+      label: t("Auth.AidPrograms.Title"),
+      options: selectOptions.aidPrograms.map(({ id, name }) => ({
+        value: id,
+        label: name,
+      })),
       name: "type",
     },
     {
@@ -147,20 +163,27 @@ const AidsView = () => {
       label: t("Auth.MembershipRegistration.Form.FileNo"),
     },
     {
-      type: "text",
+      type: "custom",
       name: "name",
       label: t("Auth.Aids.AidName"),
+      render: (row: any) => row.aidProgram.name,
     },
     {
-      type: "select",
-      options: aidTypes,
+      type: "custom",
       name: "type",
       label: t("Auth.Aids.AidType"),
+      render: (row: any) =>
+        renderDataFromOptions(row.aidProgram.type, aidTypes),
     },
     {
       type: "date",
       name: "createdAt",
       label: t("Global.Labels.ApplicationDate"),
+    },
+    {
+      type: "number",
+      name: "value",
+      label: t("Auth.Aids.AidValue"),
     },
     {
       type: "date",

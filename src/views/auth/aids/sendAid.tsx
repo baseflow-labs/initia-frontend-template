@@ -20,6 +20,7 @@ interface Props {
       fullName: string;
       status: { status: string };
     }[];
+    aidPrograms: { id: string; name: string; status: string }[];
   };
 }
 
