@@ -114,7 +114,7 @@ const AidProgramsView = () => {
       label: t("Auth.AidPrograms.TotalCredit"),
     },
     {
-      type: "number",
+      type: "text",
       name: "balance",
       label: t("Auth.AidPrograms.RemainingCredit"),
     },
