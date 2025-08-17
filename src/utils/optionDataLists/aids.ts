@@ -26,15 +26,11 @@ export const getAidStatuses = (t: Function) => [
 
 export const getAidProgramStatuses = (t: Function) => [
   {
-    value: "Pending",
-    label: t("Auth.Aids.Statuses.Pending"),
+    value: "Open",
+    label: t("Auth.AidPrograms.Statuses.Open"),
   },
   {
-    value: "Granted",
-    label: t("Auth.Aids.Statuses.Granted"),
-  },
-  {
-    value: "Rejected",
-    label: t("Auth.MembershipRegistration.Statuses.Rejected"),
+    value: "Closed",
+    label: t("Auth.AidPrograms.Statuses.Closed"),
   },
 ];

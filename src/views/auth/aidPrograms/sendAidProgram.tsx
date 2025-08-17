@@ -26,7 +26,7 @@ const AddAidProgram = ({ onGetData, openModal, setOpenModal }: Props) => {
       isOpen={openModal}
     >
       <Form
-        inputs={() => geAddAidProgramInputs(t, getAidProgramTypes(t))}
+        inputs={() => geAddAidProgramInputs(t)}
         submitText={t("Global.Form.Labels.SubmitApplication")}
         onFormSubmit={(e, resetForm) => {
           AidProgramApi.grant(e)

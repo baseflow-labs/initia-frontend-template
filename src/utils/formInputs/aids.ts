@@ -1,3 +1,7 @@
+import {
+  getAidProgramStatuses,
+  getAidProgramTypes,
+} from "../optionDataLists/aids";
 import { getYesNo } from "../optionDataLists/common";
 
 export const getRequestAidInputs = (
@@ -85,10 +89,7 @@ export const getGrantAidInputs = (
   },
 ];
 
-export const geAddAidProgramInputs = (
-  t: Function,
-  aidProgramTypes: { label: string; value: string }[]
-) => [
+export const geAddAidProgramInputs = (t: Function) => [
   {
     type: "text",
     name: "name",
@@ -97,7 +98,7 @@ export const geAddAidProgramInputs = (
   },
   {
     type: "select",
-    options: aidProgramTypes,
+    options: getAidProgramTypes(t),
     name: "type",
     label: t("Auth.AidPrograms.AidProgramType"),
     required: true,
@@ -114,6 +115,14 @@ export const geAddAidProgramInputs = (
     step: 0.1,
     name: "credit",
     label: t("Auth.AidPrograms.TotalCredit"),
+    required: true,
+  },
+  {
+    type: "select",
+    name: "status",
+    defaultValue: "Open",
+    options: getAidProgramStatuses(t),
+    label: t("Auth.AidPrograms.Statuses.Title"),
     required: true,
   },
 ];
