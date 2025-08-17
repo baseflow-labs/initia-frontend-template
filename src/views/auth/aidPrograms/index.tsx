@@ -110,15 +110,11 @@ const AidProgramsView = () => {
     },
     {
       type: "number",
-      moneyUnit: true,
-      step: 0.1,
       name: "credit",
       label: t("Auth.AidPrograms.TotalCredit"),
     },
     {
       type: "number",
-      moneyUnit: true,
-      step: 0.1,
       name: "balance",
       label: t("Auth.AidPrograms.RemainingCredit"),
     },

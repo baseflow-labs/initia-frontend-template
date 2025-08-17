@@ -7,6 +7,7 @@ import Modal from "../../../components/modal";
 import { addNotification } from "../../../store/actions/notifications";
 import { geAddAidProgramInputs } from "../../../utils/formInputs/aids";
 import { apiCatchGlobalHandler } from "../../../utils/function";
+import { FormikProps } from "formik";
 
 interface Props {
   onGetData: (p: Object) => void;
@@ -25,7 +26,9 @@ const AddAidProgram = ({ onGetData, openModal, setOpenModal }: Props) => {
       isOpen={openModal}
     >
       <Form
-        inputs={() => geAddAidProgramInputs(t)}
+        inputs={(formik: FormikProps<Record<string, any>>) =>
+          geAddAidProgramInputs(t, formik)
+        }
         submitText={t("Global.Form.Labels.SubmitApplication")}
         onFormSubmit={(e, resetForm) => {
           AidProgramApi.create(e)

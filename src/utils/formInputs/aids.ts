@@ -1,3 +1,4 @@
+import { FormikProps } from "formik";
 import {
   getAidProgramStatuses,
   getAidProgramTypes,
@@ -89,40 +90,69 @@ export const getGrantAidInputs = (
   },
 ];
 
-export const geAddAidProgramInputs = (t: Function) => [
-  {
-    type: "text",
-    name: "name",
-    label: t("Auth.AidPrograms.AidProgramName"),
-    required: true,
-  },
-  {
-    type: "select",
-    options: getAidProgramTypes(t),
-    name: "type",
-    label: t("Auth.AidPrograms.AidProgramType"),
-    required: true,
-  },
-  {
-    type: "text",
-    name: "sponsor",
-    label: t("Auth.AidPrograms.Sponsor"),
-    required: true,
-  },
-  {
-    type: "number",
-    moneyUnit: true,
-    step: 0.1,
-    name: "credit",
-    label: t("Auth.AidPrograms.TotalCredit"),
-    required: true,
-  },
-  {
-    type: "select",
-    name: "status",
-    defaultValue: "Opened",
-    options: getAidProgramStatuses(t),
-    label: t("Auth.AidPrograms.Statuses.Title"),
-    required: true,
-  },
-];
+export const geAddAidProgramInputs = (
+  t: Function,
+  formik?: FormikProps<Record<string, any>>
+) => {
+  const common1Inputs = [
+    {
+      type: "text",
+      name: "name",
+      label: t("Auth.AidPrograms.AidProgramName"),
+      required: true,
+    },
+    {
+      type: "select",
+      options: getAidProgramTypes(t),
+      name: "type",
+      label: t("Auth.AidPrograms.AidProgramType"),
+      required: true,
+    },
+    {
+      type: "text",
+      name: "sponsor",
+      label: t("Auth.AidPrograms.Sponsor"),
+      required: true,
+    },
+  ];
+
+  const cashInputs = [
+    {
+      type: "number",
+      moneyUnit: true,
+      step: 0.1,
+      name: "credit",
+      label: t("Auth.AidPrograms.TotalCredit"),
+      required: true,
+    },
+  ];
+
+  const inKindInputs = [
+    {
+      type: "number",
+      name: "credit",
+      label: t("Auth.AidPrograms.TotalQuantity"),
+      required: true,
+    },
+  ];
+
+  const common2Inputs = [
+    {
+      type: "select",
+      name: "status",
+      defaultValue: "Opened",
+      options: getAidProgramStatuses(t),
+      label: t("Auth.AidPrograms.Statuses.Title"),
+      required: true,
+    },
+  ];
+
+  const allInputs = [...common1Inputs, ...cashInputs, ...common2Inputs];
+
+  const conditionalInputs =
+    formik?.values.type === "Cash"
+      ? [...common1Inputs, ...cashInputs, ...common2Inputs]
+      : [...common1Inputs, ...inKindInputs, ...common2Inputs];
+
+  return formik ? conditionalInputs : allInputs;
+};

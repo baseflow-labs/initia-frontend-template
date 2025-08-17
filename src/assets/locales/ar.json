@@ -6,7 +6,7 @@
       "AidProgramType": "نوع البرنامج",
       "CantCloseAlready": "لا يمكن إغلاق البرنامح المغلق بالفعل",
       "CantOpenAlready": "لا يمكن فتح البرنامح المفتوح بالفعل",
-      "RemainingCredit": "الرصيد المتبقي",
+      "RemainingCredit": "المتبقي",
       "Sponsor": "الجهة المانحة",
       "Statuses": {
         "Close": "إغلاق التقديم",
@@ -16,7 +16,8 @@
         "Title": "حالة البرنامج"
       },
       "Title": "برامج المعونة",
-      "TotalCredit": "الميزانية"
+      "TotalCredit": "المخصصات",
+      "TotalQuantity": "الكمية"
     },
     "Aids": {
       "AddAid": "ارسال معونة",

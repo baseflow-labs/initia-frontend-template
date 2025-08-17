@@ -4,19 +4,20 @@
       "AddAidProgram": "AddAidProgram",
       "AidProgramName": "AidProgramName",
       "AidProgramType": "AidProgramType",
-      "CantCloseAlready": "Auth.AidPrograms.CantCloseAlready",
-      "CantOpenAlready": "Auth.AidPrograms.CantOpenAlready",
+      "CantCloseAlready": "CantCloseAlready",
+      "CantOpenAlready": "CantOpenAlready",
       "RemainingCredit": "RemainingCredit",
       "Sponsor": "Sponsor",
       "Statuses": {
-        "Close": "Auth.AidPrograms.Statuses.Close",
+        "Close": "Close",
         "Closed": "Closed",
         "Open": "Open",
-        "Opened": "Auth.AidPrograms.Statuses.Opened",
+        "Opened": "Opened",
         "Title": "Title"
       },
       "Title": "Title",
-      "TotalCredit": "TotalCredit"
+      "TotalCredit": "TotalCredit",
+      "TotalQuantity": "TotalQuantity"
     },
     "Aids": {
       "AddAid": "Add Aid",
