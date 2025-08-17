@@ -22,6 +22,7 @@
     "Aids": {
       "AddAid": "Add Aid",
       "AidName": "Aid Name",
+      "AidPiece": "Piece(s)",
       "AidPurpose": "Aid Purpose",
       "AidQuantity": "Aid Quantity",
       "AidType": "Aid Type",

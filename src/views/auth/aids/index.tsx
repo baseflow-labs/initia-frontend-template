@@ -25,6 +25,7 @@ import {
   getAidProgramTypes,
 } from "../../../utils/optionDataLists/aids";
 import SendAid from "./sendAid";
+import { MoneyUnit } from "../../../components/table";
 
 const AidsView = () => {
   const { t } = useTranslation();
@@ -181,9 +182,19 @@ const AidsView = () => {
       label: t("Global.Labels.ApplicationDate"),
     },
     {
-      type: "number",
+      type: "custom",
       name: "value",
       label: t("Auth.Aids.AidValue"),
+      render: (row: any) => (
+        <>
+          {row.value}{" "}
+          {row.aidProgram.type === "Cash" ? (
+            <MoneyUnit />
+          ) : (
+            t("Auth.Aids.AidPiece")
+          )}
+        </>
+      ),
     },
     {
       type: "date",

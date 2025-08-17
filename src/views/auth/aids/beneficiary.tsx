@@ -19,6 +19,7 @@ import {
   getAidProgramTypes,
 } from "../../../utils/optionDataLists/aids";
 import RequestAid from "./requestAid";
+import { MoneyUnit } from "../../../components/table";
 
 const AidsBeneficiaryView = () => {
   const { t } = useTranslation();
@@ -122,9 +123,19 @@ const AidsBeneficiaryView = () => {
         renderDataFromOptions(row.aidProgram.type, aidTypes),
     },
     {
-      type: "number",
+      type: "custom",
       name: "value",
       label: t("Auth.Aids.AidValue"),
+      render: (row: any) => (
+        <>
+          {row.value}{" "}
+          {row.aidProgram.type === "Cash" ? (
+            <MoneyUnit />
+          ) : (
+            t("Auth.Aids.AidPiece")
+          )}
+        </>
+      ),
     },
     {
       type: "date",

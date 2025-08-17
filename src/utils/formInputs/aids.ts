@@ -31,7 +31,7 @@ export const getRequestAidInputs = (
       type: "number",
       moneyUnit: type == "Cash",
       step: type == "Cash" ? 0.1 : 1,
-      postfixText: type == "Cash" ? undefined : "حبة / حبات",
+      postfixText: type == "Cash" ? undefined : t("Auth.Aids.AidPiece"),
       name: "value",
       label:
         type == "Cash" ? t("Auth.Aids.AidValue") : t("Auth.Aids.AidQuantity"),
@@ -108,7 +108,7 @@ export const getGrantAidInputs = (
       type: "number",
       moneyUnit: type == "Cash",
       step: type == "Cash" ? 0.1 : 1,
-      postfixText: type == "Cash" ? undefined : "حبة / حبات",
+      postfixText: type == "Cash" ? undefined : t("Auth.Aids.AidPiece"),
       name: "value",
       label:
         type == "Cash" ? t("Auth.Aids.AidValue") : t("Auth.Aids.AidQuantity"),

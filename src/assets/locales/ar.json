@@ -22,6 +22,7 @@
     "Aids": {
       "AddAid": "ارسال معونة",
       "AidName": "اسم المعونة",
+      "AidPiece": "حبة / حبات",
       "AidPurpose": "سبب طلب المعونة",
       "AidQuantity": "كمية المعونة",
       "AidType": "نوع المعونة",
