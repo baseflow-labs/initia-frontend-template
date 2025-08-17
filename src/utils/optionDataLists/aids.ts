@@ -26,8 +26,8 @@ export const getAidStatuses = (t: Function) => [
 
 export const getAidProgramStatuses = (t: Function) => [
   {
-    value: "Open",
-    label: t("Auth.AidPrograms.Statuses.Open"),
+    value: "Opened",
+    label: t("Auth.AidPrograms.Statuses.Opened"),
   },
   {
     value: "Closed",

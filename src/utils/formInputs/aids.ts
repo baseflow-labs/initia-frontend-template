@@ -120,7 +120,7 @@ export const geAddAidProgramInputs = (t: Function) => [
   {
     type: "select",
     name: "status",
-    defaultValue: "Open",
+    defaultValue: "Opened",
     options: getAidProgramStatuses(t),
     label: t("Auth.AidPrograms.Statuses.Title"),
     required: true,

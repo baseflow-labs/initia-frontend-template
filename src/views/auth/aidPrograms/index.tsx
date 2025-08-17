@@ -1,9 +1,4 @@
-import {
-  faCheck,
-  faCircle,
-  faFilter,
-  faXmark,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faCircle, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -22,7 +17,7 @@ import {
   getAidProgramStatuses,
   getAidProgramTypes,
 } from "../../../utils/optionDataLists/aids";
-import AddAidProgram from "./sendAidProgram";
+import AddAidProgram from "./createAidProgram";
 
 const AidProgramsView = () => {
   const { t } = useTranslation();
@@ -144,7 +139,7 @@ const AidProgramsView = () => {
   ];
 
   const openLabel = t("Auth.AidPrograms.Statuses.Open");
-  const closedLabel = t("Auth.AidPrograms.Statuses.Closed");
+  const closedLabel = t("Auth.AidPrograms.Statuses.Close");
 
   const updateStatus = (id: string, status: string) => {
     AidProgramApi.updateStatus(id, status)
@@ -156,7 +151,7 @@ const AidProgramsView = () => {
         dispatch(
           addNotification({
             msg: t("Global.Form.SuccessMsg", {
-              action: status === "Granted" ? openLabel : closedLabel,
+              action: status === "Opened" ? openLabel : closedLabel,
               data: aidPrograms.find(({ id }) => id === aidProgram?.id)?.name,
             }),
           })
@@ -181,33 +176,33 @@ const AidProgramsView = () => {
         tableActions={(id?: string) => {
           const aidProgram = aidPrograms.find((a) => a.id === id);
 
-          const granted = aidProgram?.status === "Granted";
-          const rejected = aidProgram?.status === "Rejected";
+          const closed = aidProgram?.status === "Closed";
+          const opened = aidProgram?.status === "Opened";
 
           return [
             {
-              label: t("Auth.AidPrograms.Statuses.Grant"),
-              icon: faCheck,
+              label: t("Auth.AidPrograms.Statuses.Close"),
+              icon: faXmark,
               spread: false,
               onClick: (data: string) =>
-                !granted
-                  ? updateStatus(data, "Granted")
+                !closed
+                  ? updateStatus(data, "Closed")
                   : dispatch(
                       addNotification({
-                        msg: t("Auth.AidPrograms.CantGrantAlready"),
+                        msg: t("Auth.AidPrograms.CantCloseAlready"),
                       })
                     ),
             },
             {
-              label: t("Auth.AidPrograms.Statuses.Reject"),
-              icon: faXmark,
+              label: t("Auth.AidPrograms.Statuses.Open"),
+              icon: faCheck,
               spread: false,
               onClick: (data: string) =>
-                !rejected
-                  ? updateStatus(data, "Rejected")
+                !opened
+                  ? updateStatus(data, "Opened")
                   : dispatch(
                       addNotification({
-                        msg: t("Auth.AidPrograms.CantRejectAlready"),
+                        msg: t("Auth.AidPrograms.CantOpenAlready"),
                       })
                     ),
             },

@@ -9,12 +9,14 @@ export const statusColorRender = (status = "") => {
     case "Cancelled":
     case "Cancel":
     case "Delayed":
+    case "Closed":
       return "danger";
     case "Done":
     case "Accept":
     case "Granted":
     case "Accepted":
     case "Confirmed":
+    case "Opened":
     case "Researcher Assigned":
       return "success";
     case "In Preview":
