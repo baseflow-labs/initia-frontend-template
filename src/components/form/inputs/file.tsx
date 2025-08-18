@@ -33,7 +33,7 @@ const FileInput: React.FC<FinalInput> = ({
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [uploading, setUploading] = useState(false);
   const [files, setFiles] = useState<
-    { name: string; type: string; id: string }[]
+    { name: string; type: string; id: string; path: string }[]
   >([]);
 
   const handleClick = () => {
@@ -62,7 +62,12 @@ const FileInput: React.FC<FinalInput> = ({
       setUploading(true);
 
       // Prepare new files and IDs arrays
-      const newFilesMeta: { name: string; type: string; id: string }[] = [];
+      const newFilesMeta: {
+        name: string;
+        type: string;
+        id: string;
+        path: string;
+      }[] = [];
       const newFileIds: string[] = [];
 
       for (const file of filesToUpload) {
@@ -71,7 +76,12 @@ const FileInput: React.FC<FinalInput> = ({
 
         const res: any = await FileApi.create(formData);
         const fileId = res.id;
-        newFilesMeta.push({ name: file.name, type: file.type, id: fileId });
+        newFilesMeta.push({
+          name: file.name,
+          type: file.type,
+          id: fileId,
+          path: res.path,
+        });
         newFileIds.push(fileId);
       }
 
@@ -128,7 +138,16 @@ const FileInput: React.FC<FinalInput> = ({
 
             <div className="d-flex mt-2 justify-content-center align-items-center">
               <div className="text-truncate" style={{ maxWidth: 80 }}>
-                {file.name}
+                <a
+                  href={
+                    (process.env.REACT_APP_STORAGE_DIRECTORY_URL ||
+                      "https://pdt-bucket.s3.us-east-1.amazonaws.com") +
+                    file.path
+                  }
+                  target="_blank"
+                >
+                  {file.name}
+                </a>
               </div>
 
               <button
