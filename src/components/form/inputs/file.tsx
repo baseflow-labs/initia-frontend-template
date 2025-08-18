@@ -29,7 +29,8 @@ const FileInput: React.FC<FinalInput> = ({
 }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const [field, , helpers] = useField<string[]>(name);
+  const [field, , helpers] =
+    useField<{ name: string; type: string; id: string; path: string }[]>(name);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [uploading, setUploading] = useState(false);
   const [files, setFiles] = useState<
@@ -91,8 +92,6 @@ const FileInput: React.FC<FinalInput> = ({
         id: string;
         path: string;
       }[] = [];
-      const newFileIds: string[] = [];
-
       for (const file of filesToUpload) {
         const formData = new FormData();
         formData.append("file", file);
@@ -105,12 +104,11 @@ const FileInput: React.FC<FinalInput> = ({
           id: fileId,
           path: res.path,
         });
-        newFileIds.push(fileId);
       }
 
       // Update React state and Formik field once
       setFiles((prev) => [...prev, ...newFilesMeta]);
-      helpers.setValue([...(field.value || []), ...newFileIds]);
+      helpers.setValue([...(field.value || []), ...newFilesMeta]);
     } catch (error) {
       dispatch(
         addNotification({
@@ -127,9 +125,8 @@ const FileInput: React.FC<FinalInput> = ({
   const handleRemoveFile = (index: number, id: string) => {
     FileApi.remove(id).then(() => {
       const updatedFiles = files.filter((_, i) => i !== index);
-      const updatedIds = updatedFiles.map((f) => f.id);
       setFiles(updatedFiles);
-      helpers.setValue(updatedIds);
+      helpers.setValue(updatedFiles);
     });
   };
 
