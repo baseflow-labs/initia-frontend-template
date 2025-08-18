@@ -17,6 +17,7 @@ interface Props {
   selectOptions: {
     beneficiaries: {
       id: string;
+      addresses: { id: string; address: string }[];
       fullName: string;
     }[];
   };
@@ -71,7 +72,9 @@ const ScheduleVisit = ({
     >
       {openModal && (
         <Form
-          inputs={() => getVisitScheduleInputs(t, searchParams, selectOptions)}
+          inputs={(formik) =>
+            getVisitScheduleInputs(t, searchParams, selectOptions, formik)
+          }
           submitText={t("Global.Form.Labels.Confirm")}
           initialValues={{ beneficiary: searchParams.get("id") }}
           onFormSubmit={(e, resetForm) => {
