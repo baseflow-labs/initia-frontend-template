@@ -1,7 +1,7 @@
 import { faFile, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useField } from "formik";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
@@ -39,6 +39,29 @@ const FileInput: React.FC<FinalInput> = ({
   const handleClick = () => {
     inputRef.current?.click();
   };
+
+  useEffect(() => {
+    if (field.value && field.value.length) {
+      const restoredFiles = field.value.map((pathOrObj: any) => {
+        const path = typeof pathOrObj === "string" ? pathOrObj : pathOrObj.path;
+
+        const name = path.split("/").pop() || "file";
+        const ext = name.split(".").pop()?.toLowerCase() || "";
+        const type = ext
+          ? `application/${ext === "jpg" || ext === "jpeg" ? "jpeg" : ext}`
+          : "application/octet-stream";
+
+        return {
+          id: typeof pathOrObj === "string" ? path : pathOrObj.id,
+          path,
+          name,
+          type,
+        };
+      });
+
+      setFiles(restoredFiles);
+    }
+  }, [field.value]);
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = Array.from(e.currentTarget.files || []);
