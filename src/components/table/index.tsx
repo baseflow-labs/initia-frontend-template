@@ -109,9 +109,7 @@ export const dataRender = ({
   }
 
   if (hasFile) {
-    const files = (row as any)?.files[`${name}File`]?.map(
-      ({ path = "" }) => path
-    );
+    const files = (row as any)[`${name}File`]?.map(({ path = "" }) => path);
 
     return files
       ? wrap(
@@ -176,7 +174,7 @@ export const dataRender = ({
       const option = options?.find(({ value }) => value === data);
       return wrap(option?.label || option?.value);
     case "file":
-      const files = (row as any)?.files[name]?.map(({ path = "" }) => path);
+      const files = (row as any)[name]?.map(({ path = "" }) => path);
       return wrap(
         files
           ? files?.map((file = "") => (
