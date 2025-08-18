@@ -3,7 +3,7 @@ import api from "..";
 const mainPath = "/file";
 
 const create = async (data: any) => {
-  const res = await api.post(mainPath + "/upload", data, {
+  const res = await api.post(mainPath + "/upload/" + "file", data, {
     headers: { "Content-Type": "multipart/form-data" },
   });
   return res;
