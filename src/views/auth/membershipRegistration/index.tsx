@@ -173,6 +173,11 @@ const MembershipRegistrationView = () => {
 
     if (!iban.startsWith("SA")) {
       errors.bankAccountNumber = "يجب أن يبدأ رقم الآيبان بـ SA";
+    } else if (iban.length !== 24) {
+      errors.bankAccountNumber = "رقم الآيبان يجب أن يتكون من 24 خانة بالضبط";
+    } else if (!/^[A-Z0-9]+$/.test(iban)) {
+      errors.bankAccountNumber =
+        "رقم الآيبان يجب أن يحتوي على أرقام وحروف فقط بدون مسافات أو رموز خاصة";
     } else {
       const bankCode = iban.substring(4, 8);
 
