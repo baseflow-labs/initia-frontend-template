@@ -1,12 +1,12 @@
 {
   "Auth": {
     "AidCategories": {
-      "AddAidCategory": "إضافة تصنيف لبرامج المعونة",
+      "AddAidCategory": "إضافة تصنيف المعونات",
       "AidCategory": "تصنيف البرنامج",
       "AidCategoryName": "اسم التصنيف",
       "AidCategoryType": "النوع",
       "Cash": "نقدي",
-      "EditAidCategory": "تعديل تصنيف لبرامج المعونة",
+      "EditAidCategory": "تعديل تصنيف المعونات",
       "In-Kind": "عيني",
       "ReapplyPeriods": {
         "EveryMonth": "كل شهر",
@@ -16,7 +16,7 @@
         "Once": "مرة واحدة فقط",
         "Title": "صلاحية التقديم للمستفيد"
       },
-      "Title": "تصنيف برامج المعونة"
+      "Title": "تصنيف المعونات"
     },
     "AidPrograms": {
       "AddAidProgram": "إضافة برنامج معونة",

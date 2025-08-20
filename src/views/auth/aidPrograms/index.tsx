@@ -50,7 +50,20 @@ const AidProgramsView = () => {
   }) => {
     setCurrentFilters(filters);
 
-    return AidProgramApi.getAll({ filters, page, capacity })
+    const customFilters = [];
+
+    if (search) {
+      customFilters.push({
+        field: "name",
+        filteredTerm: {
+          dataType: "string",
+          value: search,
+        },
+        filterOperator: "contains",
+      });
+    }
+
+    return AidProgramApi.getAll({ filters, page, capacity, customFilters })
       .then((res: any) => {
         setAidPrograms(res.payload);
 
@@ -180,7 +193,7 @@ const AidProgramsView = () => {
         title={t("Auth.AidPrograms.Title")}
         filters={filters}
         onSearch={onSearch}
-        searchPlaceholder="بحث بـ اسم المستفيد"
+        searchPlaceholder="بحث بـ اسم البرنامج"
         actionButtons={actionButtons}
         tableActions={(id?: string) => [
           {

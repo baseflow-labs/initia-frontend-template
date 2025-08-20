@@ -40,7 +40,20 @@ const AidCategoriesView = () => {
   }) => {
     setCurrentFilters(filters);
 
-    return AidCategoryApi.getAll({ filters, page, capacity })
+    const customFilters = [];
+
+    if (search) {
+      customFilters.push({
+        field: "name",
+        filteredTerm: {
+          dataType: "string",
+          value: search,
+        },
+        filterOperator: "contains",
+      });
+    }
+
+    return AidCategoryApi.getAll({ filters, page, capacity, customFilters })
       .then((res: any) => {
         setAidCategories(res.payload);
 
@@ -122,7 +135,7 @@ const AidCategoriesView = () => {
         title={t("Auth.AidCategories.Title")}
         filters={filters}
         onSearch={onSearch}
-        searchPlaceholder="بحث بـ اسم المستفيد"
+        searchPlaceholder="بحث بـ اسم التصنيف"
         actionButtons={actionButtons}
         tableActions={(id?: string) => [
           {
