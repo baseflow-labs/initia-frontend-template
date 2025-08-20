@@ -3,19 +3,11 @@ import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes, useLocation } from "react-router";
 import { Fragment } from "react/jsx-runtime";
 
-import {
-  aidsIcon,
-  beneficiariesIcon,
-  dashboardIcon,
-  infoIcon,
-  membershipFormIcon,
-  profileIcon,
-  settingsIcon,
-  visitReportIcon,
-  visitsIcon,
-} from "../../assets/icons/icons";
+import { aidsIcon, beneficiariesIcon, dashboardIcon, infoIcon, membershipFormIcon, profileIcon, settingsIcon, visitReportIcon, visitsIcon } from "../../assets/icons/icons";
 import { useAppSelector } from "../../store/hooks";
 import { useWindowWidth } from "../../utils/hooks";
+import AidCategoriesView from "../../views/auth/aidCategories";
+import AidProgramsView from "../../views/auth/aidPrograms";
 import AidsView from "../../views/auth/aids";
 import AidsBeneficiaryView from "../../views/auth/aids/beneficiary";
 import ApplicantsView from "../../views/auth/applicants";
@@ -27,6 +19,7 @@ import BeneficiaryProfileView from "../../views/auth/beneficiaries/profile";
 import BeneficiariesViewForSupervisor from "../../views/auth/beneficiaries/supervisor";
 import ContactUsPage from "../../views/auth/contact-us";
 import DashboardView from "../../views/auth/dashboard";
+import DashboardAccountantView from "../../views/auth/dashboard/accountant";
 import DashboardAdminView from "../../views/auth/dashboard/admin";
 import DashboardResearcherView from "../../views/auth/dashboard/researcher";
 import DashboardSupervisorView from "../../views/auth/dashboard/supervisor";
@@ -104,6 +97,15 @@ const AuthLayout = () => {
       showInNav: true,
       icon: dashboardIcon,
       users: ["researcher", "admin"],
+    },
+    {
+      name: t("Auth.Dashboard.Title"),
+      route: "/dashboard",
+      labelNote: "For Accountant",
+      view: <DashboardAccountantView />,
+      showInNav: true,
+      icon: dashboardIcon,
+      users: ["accountant", "admin"],
     },
     {
       name: t("Auth.Beneficiaries.Applications"),
@@ -211,6 +213,22 @@ const AuthLayout = () => {
       users: ["beneficiary"],
     },
     {
+      name: t("Auth.AidCategories.Title"),
+      route: "/aidCategory",
+      view: <AidCategoriesView />,
+      showInNav: true,
+      icon: aidsIcon,
+      users: ["accountant", "admin"],
+    },
+    {
+      name: t("Auth.AidPrograms.Title"),
+      route: "/aidProgram",
+      view: <AidProgramsView />,
+      showInNav: true,
+      icon: aidsIcon,
+      users: ["accountant", "admin"],
+    },
+    {
       name: t("Auth.Beneficiary.Profile.Title"),
       route: "/profile",
       view: <BeneficiaryOwnProfile />,
@@ -232,7 +250,7 @@ const AuthLayout = () => {
       view: <SettingsPage />,
       icon: settingsIcon,
       fixed: true,
-      users: ["beneficiary", "researcher", "hod", "admin"],
+      users: ["beneficiary", "researcher", "hod", "accountant", "admin"],
     },
   ];
 

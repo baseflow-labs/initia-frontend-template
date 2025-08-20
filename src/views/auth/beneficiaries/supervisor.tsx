@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
+
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import * as StaffApi from "../../../api/staff/researcher";
 import DemoLoginNote from "../../../layouts/auth/demoLoginNote";
@@ -136,11 +137,6 @@ const BeneficiariesViewForSupervisor = () => {
       type: "text",
       name: "fileNo",
       label: t("Auth.MembershipRegistration.Form.FileNo"),
-    },
-    {
-      type: "text",
-      name: "fullName",
-      label: t("Auth.Beneficiaries.BeneficiaryName"),
     },
     {
       type: "numberText",

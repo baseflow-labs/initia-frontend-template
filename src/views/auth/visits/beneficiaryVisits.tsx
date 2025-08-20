@@ -48,13 +48,11 @@ const BeneficiariesVisitsView = () => {
             ({
               beneficiary = {
                 contactsBank: {},
-                housing: {},
                 user: { username: "" },
               },
               ...rest
             }) => ({
               beneficiaryMobile: beneficiary.user.username,
-              ...beneficiary.housing,
               ...beneficiary.contactsBank,
               ...beneficiary,
               ...rest,
@@ -112,6 +110,12 @@ const BeneficiariesVisitsView = () => {
       type: "text",
       name: "reason",
       label: t("Auth.Visits.VisitPurpose"),
+    },
+    {
+      type: "custom",
+      name: "housing",
+      label: t("Auth.MembershipRegistration.Address"),
+      render: (row: any) => row.housing?.city + " - " + row.housing?.district,
     },
     {
       type: "custom",

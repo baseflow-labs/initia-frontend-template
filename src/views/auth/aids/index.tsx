@@ -9,24 +9,26 @@ import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
+import * as AidProgramApi from "../../../api/aids/aidPrograms";
 import * as AidApi from "../../../api/aids/aids";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
+import { MoneyUnit } from "../../../components/table";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
+import { useAppSelector } from "../../../store/hooks";
 import {
   apiCatchGlobalHandler,
+  pluralLabelResolve,
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
-import {
-  getAidStatuses,
-  getAidTypes,
-} from "../../../utils/optionDataLists/aids";
+import { getAidStatuses } from "../../../utils/optionDataLists/aids";
 import SendAid from "./sendAid";
 
 const AidsView = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const { user } = useAppSelector((state) => state.auth);
 
   const [openModal, setOpenModal] = useState(false);
   const [aids, setAids] = useState<
@@ -34,6 +36,7 @@ const AidsView = () => {
   >([]);
   const [selectOptions, setSelectOptions] = useState({
     beneficiaries: [{ id: "", fullName: "", status: { status: "" } }],
+    aidPrograms: [{ id: "", name: "", type: "", status: "" }],
   });
   const [currentFilters, setCurrentFilters] = useState({});
   const [currentSearch, setCurrentSearch] = useState("");
@@ -102,9 +105,18 @@ const AidsView = () => {
         }))
       )
       .catch(apiCatchGlobalHandler);
-  }, []);
 
-  const aidTypes = getAidTypes(t);
+    AidProgramApi.getAll({ capacity: 999 })
+      .then((res: any) =>
+        setSelectOptions((current) => ({
+          ...current,
+          aidPrograms: res.payload.filter(
+            ({ status = "" }) => status === "Opened"
+          ),
+        }))
+      )
+      .catch(apiCatchGlobalHandler);
+  }, []);
 
   const statuses = getAidStatuses(t);
 
@@ -120,8 +132,11 @@ const AidsView = () => {
       name: "beneficiary",
     },
     {
-      label: t("Auth.Aids.AidType"),
-      options: aidTypes,
+      label: t("Auth.AidPrograms.Title"),
+      options: selectOptions.aidPrograms.map(({ id, name }) => ({
+        value: id,
+        label: name,
+      })),
       name: "type",
     },
     {
@@ -141,24 +156,34 @@ const AidsView = () => {
   const columns = [
     {
       type: "text",
-      name: "fullName",
-      label: t("Auth.Beneficiaries.BeneficiaryName"),
+      name: "fileNo",
+      label: t("Auth.MembershipRegistration.Form.FileNo"),
     },
     {
-      type: "text",
+      type: "custom",
       name: "name",
       label: t("Auth.Aids.AidName"),
-    },
-    {
-      type: "select",
-      options: aidTypes,
-      name: "type",
-      label: t("Auth.Aids.AidType"),
+      render: (row: any) => row.aidProgram.name,
     },
     {
       type: "date",
       name: "createdAt",
       label: t("Global.Labels.ApplicationDate"),
+    },
+    {
+      type: "custom",
+      name: "value",
+      label: t("Auth.Aids.AidValue"),
+      render: (row: any) => (
+        <>
+          {row.value}{" "}
+          {row.aidProgram.type === "Cash" ? (
+            <MoneyUnit />
+          ) : (
+            pluralLabelResolve(t, row.value, "Auth.Aids.AidPiece")
+          )}
+        </>
+      ),
     },
     {
       type: "date",
@@ -277,7 +302,18 @@ const AidsView = () => {
             },
           ];
         }}
-        columns={columns}
+        columns={
+          user.role === "researcher"
+            ? [
+                {
+                  type: "text",
+                  name: "fullName",
+                  label: t("Auth.Beneficiaries.BeneficiaryName"),
+                },
+                ...columns,
+              ]
+            : columns
+        }
         data={aids}
         onGetData={getData}
         paginationMeta={paginationMeta}

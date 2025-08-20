@@ -9,17 +9,20 @@ export const statusColorRender = (status = "") => {
     case "Cancelled":
     case "Cancel":
     case "Delayed":
+    case "Closed":
       return "danger";
     case "Done":
     case "Accept":
     case "Granted":
     case "Accepted":
     case "Confirmed":
+    case "Opened":
     case "Researcher Assigned":
       return "success";
     case "In Preview":
     case "Pending":
     case "Reviewed":
+    case "Suspended":
     case "Approved":
     case "Pending Approval":
       return "warning";
@@ -60,5 +63,33 @@ export const columnsWidth = (count: number) => {
       return 4;
     default:
       return 3;
+  }
+};
+
+export const pluralLabelResolve = (
+  t: Function,
+  count: number,
+  standardLabel: string
+) => {
+  switch (count % 100) {
+    case -1:
+      return t(`${standardLabel}_other`);
+    case 0:
+      return t(`${standardLabel}_0`);
+    case 1:
+      return t(`${standardLabel}_1`);
+    case 2:
+      return t(`${standardLabel}_2`);
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+    case 9:
+    case 10:
+      return t(`${standardLabel}_few`);
+    default:
+      return t(`${standardLabel}_many`);
   }
 };

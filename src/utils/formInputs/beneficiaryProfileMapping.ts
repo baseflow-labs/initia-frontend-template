@@ -58,12 +58,3 @@ export const beneficiaryTabs = (t: (value: string) => string) => [
     title: t("Auth.MembershipRegistration.Form.Attachments"),
   },
 ];
-
-export const beneficiaryMapping: { [key: string]: string } = {
-  beneficiary: "",
-  contactsBank: "contactsBank",
-  income: "income",
-  housing: "housing",
-  dependents: "dependents",
-  nationalRecord: "staff",
-};

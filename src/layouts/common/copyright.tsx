@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 
-import { APP_VERSION } from "../../documentation/version";
 import Logo from "../../assets/images/brand/logo-full.png";
 import LogoOnly from "../../assets/images/brand/logo-only.png";
+import { APP_VERSION } from "../../documentation/version";
 
 const CopyRightView = ({
   oneLine,
@@ -18,7 +18,7 @@ const CopyRightView = ({
       className={"px-1" + (oneLine ? " d-flex justify-content-between" : "")}
     >
       {oneLine ? (
-        ""
+        <small>{t("CopyRight.AppName")}</small>
       ) : (
         <a href="https://mustaheq.org" target="_blank">
           <img src={short ? LogoOnly : Logo} height="65" alt="Logo" />

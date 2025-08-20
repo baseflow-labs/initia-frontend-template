@@ -83,6 +83,10 @@ const LoginView = () => {
     //   },
     // },
     {
+      label: t("Public.Login.Labels.LoginAsAccountant"),
+      type: "accountant",
+    },
+    {
       label: t("Public.Login.Labels.LoginAsHod"),
       type: "hod",
     },

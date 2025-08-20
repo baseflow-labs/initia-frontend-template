@@ -1,7 +1,7 @@
 import { faFile, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useField } from "formik";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
@@ -29,16 +29,40 @@ const FileInput: React.FC<FinalInput> = ({
 }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const [field, , helpers] = useField<string[]>(name);
+  const [field, , helpers] =
+    useField<{ name: string; type: string; id: string; path: string }[]>(name);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [uploading, setUploading] = useState(false);
   const [files, setFiles] = useState<
-    { name: string; type: string; id: string }[]
+    { name: string; type: string; id: string; path: string }[]
   >([]);
 
   const handleClick = () => {
     inputRef.current?.click();
   };
+
+  useEffect(() => {
+    if (field.value && field.value.length) {
+      const restoredFiles = field.value.map((pathOrObj: any) => {
+        const path = typeof pathOrObj === "string" ? pathOrObj : pathOrObj.path;
+
+        const name = path.split("/").pop() || "file";
+        const ext = name.split(".").pop()?.toLowerCase() || "";
+        const type = ext
+          ? `application/${ext === "jpg" || ext === "jpeg" ? "jpeg" : ext}`
+          : "application/octet-stream";
+
+        return {
+          id: typeof pathOrObj === "string" ? path : pathOrObj.id,
+          path,
+          name,
+          type,
+        };
+      });
+
+      setFiles(restoredFiles);
+    }
+  }, [field.value]);
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = Array.from(e.currentTarget.files || []);
@@ -62,22 +86,29 @@ const FileInput: React.FC<FinalInput> = ({
       setUploading(true);
 
       // Prepare new files and IDs arrays
-      const newFilesMeta: { name: string; type: string; id: string }[] = [];
-      const newFileIds: string[] = [];
-
+      const newFilesMeta: {
+        name: string;
+        type: string;
+        id: string;
+        path: string;
+      }[] = [];
       for (const file of filesToUpload) {
         const formData = new FormData();
         formData.append("file", file);
 
         const res: any = await FileApi.create(formData);
         const fileId = res.id;
-        newFilesMeta.push({ name: file.name, type: file.type, id: fileId });
-        newFileIds.push(fileId);
+        newFilesMeta.push({
+          name: file.name,
+          type: file.type,
+          id: fileId,
+          path: res.path,
+        });
       }
 
       // Update React state and Formik field once
       setFiles((prev) => [...prev, ...newFilesMeta]);
-      helpers.setValue([...(field.value || []), ...newFileIds]);
+      helpers.setValue([...(field.value || []), ...newFilesMeta]);
     } catch (error) {
       dispatch(
         addNotification({
@@ -94,9 +125,8 @@ const FileInput: React.FC<FinalInput> = ({
   const handleRemoveFile = (index: number, id: string) => {
     FileApi.remove(id).then(() => {
       const updatedFiles = files.filter((_, i) => i !== index);
-      const updatedIds = updatedFiles.map((f) => f.id);
       setFiles(updatedFiles);
-      helpers.setValue(updatedIds);
+      helpers.setValue(updatedFiles);
     });
   };
 
@@ -128,7 +158,16 @@ const FileInput: React.FC<FinalInput> = ({
 
             <div className="d-flex mt-2 justify-content-center align-items-center">
               <div className="text-truncate" style={{ maxWidth: 80 }}>
-                {file.name}
+                <a
+                  href={
+                    (process.env.REACT_APP_STORAGE_DIRECTORY_URL ||
+                      "https://pdt-bucket.s3.us-east-1.amazonaws.com") +
+                    file.path
+                  }
+                  target="_blank"
+                >
+                  {file.name}
+                </a>
               </div>
 
               <button

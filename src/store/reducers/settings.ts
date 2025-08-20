@@ -18,8 +18,8 @@ export type Action =
 
 const initialState: State = {
   fontSize: parseInt(localStorage.getItem("fontSize") || "") || 15,
-  name: localStorage.getItem("name") || "",
-  logo: localStorage.getItem("logo") || "",
+  name: localStorage.getItem("name") || "Society",
+  logo: localStorage.getItem("logo") || "/logo.png",
   phoneNumber: localStorage.getItem("phoneNumber") || "",
 };
 
