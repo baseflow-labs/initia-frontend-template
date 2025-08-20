@@ -61,12 +61,6 @@ const AidCategoriesView = () => {
 
   useLayoutEffect(() => {
     getData({});
-
-    AidCategoriesApi.getAll({})
-      .then((res: any) => {
-        setAidCategories(res.payload);
-      })
-      .catch(apiCatchGlobalHandler);
   }, []);
 
   const aidCategoryTypes = getAidCategoryTypes(t);

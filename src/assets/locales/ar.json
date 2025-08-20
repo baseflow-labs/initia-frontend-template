@@ -6,6 +6,7 @@
       "AidCategoryName": "اسم التصنيف",
       "AidCategoryType": "النوع",
       "Cash": "نقدي",
+      "EditAidCategory": "تعديل تصنيف لبرامج المعونة",
       "In-Kind": "عيني",
       "ReapplyPeriods": {
         "EveryMonth": "كل شهر",
@@ -22,7 +23,7 @@
       "AidProgramName": "اسم البرنامج",
       "CantCloseAlready": "لا يمكن إغلاق البرنامح المغلق بالفعل",
       "CantOpenAlready": "لا يمكن فتح البرنامح المفتوح بالفعل",
-      "Programs": "برامج المعونة",
+      "EditAidProgram": "تعديل برنامج معونة",
       "RemainingCredit": "المتبقي",
       "Sponsor": "الجهة المانحة",
       "Statuses": {
