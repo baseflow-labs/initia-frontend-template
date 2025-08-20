@@ -14,6 +14,7 @@ interface Props {
   openModal: boolean;
   setOpenModal: (s: boolean) => void;
   aidCategories: { id: string; name: string; type: string; reapply: string }[];
+  crudData: { id: string; aidCategory: string };
 }
 
 const AddAidProgram = ({
@@ -21,13 +22,18 @@ const AddAidProgram = ({
   openModal,
   setOpenModal,
   aidCategories,
+  crudData,
 }: Props) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
   return (
     <Modal
-      title={t("Auth.AidPrograms.AddAidProgram")}
+      title={
+        crudData.id
+          ? t("Auth.AidPrograms.EditAidProgram")
+          : t("Auth.AidPrograms.AddAidProgram")
+      }
       onClose={() => setOpenModal(false)}
       isOpen={openModal}
     >
@@ -36,22 +42,39 @@ const AddAidProgram = ({
           geAddAidProgramInputs(t, aidCategories, formik)
         }
         submitText={t("Global.Form.Labels.SubmitApplication")}
+        initialValues={crudData}
         onFormSubmit={(e, resetForm) => {
-          AidProgramApi.create(e)
-            .then(() => {
-              setOpenModal(false);
-              onGetData({});
-              resetForm();
-              dispatch(
-                addNotification({
-                  msg: t("Global.Form.SuccessMsg", {
-                    action: t("Auth.AidPrograms.AddAidProgram"),
-                    data: e.name,
-                  }),
+          e.id
+            ? AidProgramApi.update(e.id, e)
+                .then(() => {
+                  setOpenModal(false);
+                  onGetData({});
+                  resetForm();
+                  dispatch(
+                    addNotification({
+                      msg: t("Global.Form.SuccessMsg", {
+                        action: t("Auth.AidPrograms.EditAidProgram"),
+                        data: e.name,
+                      }),
+                    })
+                  );
                 })
-              );
-            })
-            .catch(apiCatchGlobalHandler);
+                .catch(apiCatchGlobalHandler)
+            : AidProgramApi.create(e)
+                .then(() => {
+                  setOpenModal(false);
+                  onGetData({});
+                  resetForm();
+                  dispatch(
+                    addNotification({
+                      msg: t("Global.Form.SuccessMsg", {
+                        action: t("Auth.AidPrograms.AddAidProgram"),
+                        data: e.name,
+                      }),
+                    })
+                  );
+                })
+                .catch(apiCatchGlobalHandler);
         }}
       />
     </Modal>

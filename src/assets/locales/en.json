@@ -6,6 +6,7 @@
       "AidCategoryName": "Name",
       "AidCategoryType": "Type",
       "Cash": "Cash",
+      "EditAidCategory": "Edit AidCategory",
       "In-Kind": "In-Kind",
       "ReapplyPeriods": {
         "EveryMonth": "Every Month",
@@ -18,12 +19,12 @@
       "Title": "Aid Categories"
     },
     "AidPrograms": {
-      "AddAidProgram": "AddAidProgram",
-      "AidProgramName": "AidProgramName",
-      "CantCloseAlready": "CantCloseAlready",
-      "CantOpenAlready": "CantOpenAlready",
-      "Programs": "Programs",
-      "RemainingCredit": "RemainingCredit",
+      "AddAidProgram": "Add Aid Program",
+      "AidProgramName": "Aid Program Name",
+      "CantCloseAlready": "Can't Close Already",
+      "CantOpenAlready": "Can't Open Already",
+      "EditAidProgram": "Edit Aid Program",
+      "RemainingCredit": "Remaining Credit",
       "Sponsor": "Sponsor",
       "Statuses": {
         "Close": "Close",

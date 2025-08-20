@@ -13,7 +13,7 @@ interface Props {
   onGetData: (p: Object) => void;
   openModal: boolean;
   setOpenModal: (s: boolean) => void;
-  crudData: object;
+  crudData: { id: string };
 }
 
 const AddAidCategory = ({
@@ -27,7 +27,11 @@ const AddAidCategory = ({
 
   return (
     <Modal
-      title={t("Auth.AidCategories.AddAidCategory")}
+      title={
+        crudData.id
+          ? t("Auth.AidCategories.EditAidCategory")
+          : t("Auth.AidCategories.AddAidCategory")
+      }
       onClose={() => setOpenModal(false)}
       isOpen={openModal}
     >
@@ -47,7 +51,7 @@ const AddAidCategory = ({
                   dispatch(
                     addNotification({
                       msg: t("Global.Form.SuccessMsg", {
-                        action: t("Auth.AidCategories.AddAidCategory"),
+                        action: t("Auth.AidCategories.EditAidCategory"),
                         data: e.name,
                       }),
                     })

@@ -19,6 +19,11 @@ const create = async (data: object) => {
   return res;
 };
 
+const update = async (id: string, data: object) => {
+  const res = await api.patch(mainPath + "/" + id, data);
+  return res;
+};
+
 const updateStatus = async (id: string, status: string) => {
   const res = await api.patch(mainPath + "/" + id + "/update-status/", {
     status,
@@ -26,4 +31,4 @@ const updateStatus = async (id: string, status: string) => {
   return res;
 };
 
-export { create, getAll, updateStatus };
+export { create, getAll, update, updateStatus };

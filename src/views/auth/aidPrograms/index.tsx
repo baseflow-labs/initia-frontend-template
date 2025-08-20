@@ -1,4 +1,9 @@
-import { faCheck, faCircle, faXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCheck,
+  faCircle,
+  faEdit,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -24,8 +29,14 @@ const AidProgramsView = () => {
 
   const [openModal, setOpenModal] = useState(false);
   const [aidPrograms, setAidPrograms] = useState<
-    { id: string; name: string; status: string }[]
+    { id: string; name: string; status: string; aidCategory: { id: string } }[]
   >([]);
+  const [crudData, setCrudData] = useState<{
+    id: string;
+    name: string;
+    status: string;
+    aidCategory: string;
+  }>({ id: "", name: "", status: "", aidCategory: "" });
   const [aidCategories, setAidCategories] = useState<
     { id: string; name: string; type: string; reapply: string }[]
   >([]);
@@ -67,7 +78,7 @@ const AidProgramsView = () => {
   useLayoutEffect(() => {
     getData({});
 
-    AidCategoriesApi.getAll({})
+    AidCategoriesApi.getAll({ capacity: 999 })
       .then((res: any) => {
         setAidCategories(res.payload);
       })
@@ -161,6 +172,15 @@ const AidProgramsView = () => {
     getData({ page: 1, capacity: 10, search: e });
   };
 
+  const update = (rowId: string) => {
+    setOpenModal(true);
+    const row = aidPrograms.find(({ id }) => id === rowId);
+
+    if (row) {
+      setCrudData({ ...row, aidCategory: row.aidCategory.id });
+    }
+  };
+
   return (
     <Fragment>
       <TablePage
@@ -169,41 +189,14 @@ const AidProgramsView = () => {
         onSearch={onSearch}
         searchPlaceholder="بحث بـ اسم المستفيد"
         actionButtons={actionButtons}
-        tableActions={(id?: string) => {
-          const aidProgram = aidPrograms.find((a) => a.id === id);
-
-          const closed = aidProgram?.status === "Closed";
-          const opened = aidProgram?.status === "Opened";
-
-          return [
-            {
-              label: t("Auth.AidPrograms.Statuses.Close"),
-              icon: faXmark,
-              spread: false,
-              onClick: (data: string) =>
-                !closed
-                  ? updateStatus(data, "Closed")
-                  : dispatch(
-                      addNotification({
-                        msg: t("Auth.AidPrograms.CantCloseAlready"),
-                      })
-                    ),
-            },
-            {
-              label: t("Auth.AidPrograms.Statuses.Open"),
-              icon: faCheck,
-              spread: false,
-              onClick: (data: string) =>
-                !opened
-                  ? updateStatus(data, "Opened")
-                  : dispatch(
-                      addNotification({
-                        msg: t("Auth.AidPrograms.CantOpenAlready"),
-                      })
-                    ),
-            },
-          ];
-        }}
+        tableActions={(id?: string) => [
+          {
+            label: t("Global.Form.Labels.Edit"),
+            icon: faEdit,
+            spread: true,
+            onClick: (data: string) => update(data),
+          },
+        ]}
         columns={columns}
         data={aidPrograms}
         onGetData={getData}
@@ -221,6 +214,7 @@ const AidProgramsView = () => {
         openModal={openModal}
         setOpenModal={setOpenModal}
         aidCategories={aidCategories}
+        crudData={crudData}
       />
     </Fragment>
   );
