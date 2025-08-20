@@ -142,12 +142,6 @@ const BeneficiariesView = () => {
       label: t("Auth.MembershipRegistration.Form.Nationality.Title"),
     },
     {
-      type: "select",
-      options: homeTypes,
-      name: "homeType",
-      label: t("Auth.MembershipRegistration.Form.HomeType.Title"),
-    },
-    {
       type: "phoneNumber",
       name: "beneficiaryMobile",
       label: t("Global.Labels.PhoneNumber"),
