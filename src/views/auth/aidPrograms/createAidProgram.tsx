@@ -1,3 +1,4 @@
+import { FormikProps } from "formik";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
@@ -7,15 +8,20 @@ import Modal from "../../../components/modal";
 import { addNotification } from "../../../store/actions/notifications";
 import { geAddAidProgramInputs } from "../../../utils/formInputs/aids";
 import { apiCatchGlobalHandler } from "../../../utils/function";
-import { FormikProps } from "formik";
 
 interface Props {
   onGetData: (p: Object) => void;
   openModal: boolean;
   setOpenModal: (s: boolean) => void;
+  aidCategories: { id: string; name: string; type: string; reapply: string }[];
 }
 
-const AddAidProgram = ({ onGetData, openModal, setOpenModal }: Props) => {
+const AddAidProgram = ({
+  onGetData,
+  openModal,
+  setOpenModal,
+  aidCategories,
+}: Props) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
@@ -27,7 +33,7 @@ const AddAidProgram = ({ onGetData, openModal, setOpenModal }: Props) => {
     >
       <Form
         inputs={(formik: FormikProps<Record<string, any>>) =>
-          geAddAidProgramInputs(t, formik)
+          geAddAidProgramInputs(t, aidCategories, formik)
         }
         submitText={t("Global.Form.Labels.SubmitApplication")}
         onFormSubmit={(e, resetForm) => {

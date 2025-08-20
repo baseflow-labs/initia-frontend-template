@@ -1,5 +1,10 @@
 {
   "Auth": {
+    "AidCategories": {
+      "AidCategory": "تصنيف البرنامج",
+      "AidCategoryName": "اسم التصنيف",
+      "AidCategoryType": "النوع"
+    },
     "AidPrograms": {
       "AddAidProgram": "إضافة برنامج معونة",
       "AidProgramName": "اسم البرنامج",

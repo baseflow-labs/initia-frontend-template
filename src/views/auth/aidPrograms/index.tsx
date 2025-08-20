@@ -4,6 +4,7 @@ import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
+import * as AidCategoriesApi from "../../../api/aids/aidCategories";
 import * as AidProgramApi from "../../../api/aids/aidPrograms";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
@@ -27,6 +28,9 @@ const AidProgramsView = () => {
   const [openModal, setOpenModal] = useState(false);
   const [aidPrograms, setAidPrograms] = useState<
     { id: string; name: string; status: string }[]
+  >([]);
+  const [aidCategories, setAidCategories] = useState<
+    { id: string; name: string; type: string; reapply: string }[]
   >([]);
   const [currentFilters, setCurrentFilters] = useState({});
   const [currentSearch, setCurrentSearch] = useState("");
@@ -65,6 +69,12 @@ const AidProgramsView = () => {
 
   useLayoutEffect(() => {
     getData({});
+
+    AidCategoriesApi.getAll({})
+      .then((res: any) => {
+        setAidCategories(res.payload);
+      })
+      .catch(apiCatchGlobalHandler);
   }, []);
 
   const aidProgramTypes = getAidProgramTypes(t);
@@ -98,10 +108,10 @@ const AidProgramsView = () => {
       label: t("Auth.AidPrograms.AidProgramName"),
     },
     {
-      type: "select",
-      options: aidProgramTypes,
-      name: "type",
-      label: t("Auth.AidPrograms.AidProgramType"),
+      type: "custom",
+      name: "aidCategory",
+      label: t("Auth.AidCategories.AidCategory"),
+      render: (row: any) => row.aidCategory?.name,
     },
     {
       type: "text",
@@ -220,6 +230,7 @@ const AidProgramsView = () => {
         onGetData={getData}
         openModal={openModal}
         setOpenModal={setOpenModal}
+        aidCategories={aidCategories}
       />
     </Fragment>
   );

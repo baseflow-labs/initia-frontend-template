@@ -1,5 +1,10 @@
 {
   "Auth": {
+    "AidCategories": {
+      "AidCategory": "AidCategory",
+      "AidCategoryName": "Name",
+      "AidCategoryType": "Type"
+    },
     "AidPrograms": {
       "AddAidProgram": "AddAidProgram",
       "AidProgramName": "AidProgramName",

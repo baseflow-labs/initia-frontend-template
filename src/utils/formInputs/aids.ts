@@ -1,8 +1,6 @@
 import { FormikProps } from "formik";
-import {
-  getAidProgramStatuses,
-  getAidProgramTypes,
-} from "../optionDataLists/aids";
+
+import { getAidProgramStatuses } from "../optionDataLists/aids";
 import { getYesNo } from "../optionDataLists/common";
 
 export const getRequestAidInputs = (
@@ -125,6 +123,7 @@ export const getGrantAidInputs = (
 
 export const geAddAidProgramInputs = (
   t: Function,
+  aidCategories: { id: string; name: string; type: string; reapply: string }[],
   formik?: FormikProps<Record<string, any>>
 ) => {
   const common1Inputs = [
@@ -136,9 +135,12 @@ export const geAddAidProgramInputs = (
     },
     {
       type: "select",
-      options: getAidProgramTypes(t),
-      name: "type",
-      label: t("Auth.AidPrograms.AidProgramType"),
+      options: aidCategories.map(({ id, name }) => ({
+        label: name,
+        value: id,
+      })),
+      name: "aidCategory",
+      label: t("Auth.AidCategories.AidCategory"),
       required: true,
     },
     {
