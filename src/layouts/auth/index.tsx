@@ -3,7 +3,17 @@ import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes, useLocation } from "react-router";
 import { Fragment } from "react/jsx-runtime";
 
-import { aidsIcon, beneficiariesIcon, dashboardIcon, infoIcon, membershipFormIcon, profileIcon, settingsIcon, visitReportIcon, visitsIcon } from "../../assets/icons/icons";
+import {
+  aidsIcon,
+  beneficiariesIcon,
+  dashboardIcon,
+  infoIcon,
+  membershipFormIcon,
+  profileIcon,
+  settingsIcon,
+  visitReportIcon,
+  visitsIcon,
+} from "../../assets/icons/icons";
 import { useAppSelector } from "../../store/hooks";
 import { useWindowWidth } from "../../utils/hooks";
 import AidCategoriesView from "../../views/auth/aidCategories";
@@ -198,15 +208,15 @@ const AuthLayout = () => {
     },
     {
       name: t("Auth.Aids.Title"),
-      route: "/aid",
+      route: "/aids",
       view: <AidsView />,
       showInNav: true,
       icon: aidsIcon,
-      users: ["researcher", "hod", "admin"],
+      users: ["accountant", "researcher", "hod", "admin"],
     },
     {
       name: t("Auth.Aids.Beneficiary.Title"),
-      route: "/aid",
+      route: "/aids",
       view: <AidsBeneficiaryView />,
       showInNav: true,
       icon: aidsIcon,
@@ -214,7 +224,7 @@ const AuthLayout = () => {
     },
     {
       name: t("Auth.AidCategories.Title"),
-      route: "/aidCategory",
+      route: "/aid-category",
       view: <AidCategoriesView />,
       showInNav: true,
       icon: aidsIcon,
@@ -222,7 +232,7 @@ const AuthLayout = () => {
     },
     {
       name: t("Auth.AidPrograms.Title"),
-      route: "/aidProgram",
+      route: "/aid-program",
       view: <AidProgramsView />,
       showInNav: true,
       icon: aidsIcon,

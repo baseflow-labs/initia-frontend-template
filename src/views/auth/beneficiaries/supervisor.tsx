@@ -21,7 +21,6 @@ import {
 import {
   getBeneficiaryCategories,
   getGenders,
-  getHomeTypes,
   getNationalities,
   getProvinces,
 } from "../../../utils/optionDataLists/beneficiaries";
@@ -116,8 +115,6 @@ const BeneficiariesViewForSupervisor = () => {
   const nationalities = getNationalities(t);
 
   const provinces = getProvinces(t);
-
-  const homeTypes = getHomeTypes(t);
 
   const filters = [
     {

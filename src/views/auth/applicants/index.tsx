@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
+import DemoLoginNote from "../../../layouts/auth/demoLoginNote";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { logout } from "../../../store/actions/auth";
 import { addNotification } from "../../../store/actions/notifications";
@@ -26,12 +27,10 @@ import {
 import {
   getBeneficiaryCategories,
   getBeneficiaryStatuses,
-  getHomeTypes,
   getNationalities,
   getProvinces,
 } from "../../../utils/optionDataLists/beneficiaries";
 import RejectApplicant from "./rejectApplicant";
-import DemoLoginNote from "../../../layouts/auth/demoLoginNote";
 
 const ApplicantsView = () => {
   const { t } = useTranslation();
@@ -127,8 +126,6 @@ const ApplicantsView = () => {
   const nationalities = getNationalities(t);
 
   const provinces = getProvinces(t);
-
-  const homeTypes = getHomeTypes(t);
 
   const statuses = getBeneficiaryStatuses(t);
 
