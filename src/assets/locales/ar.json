@@ -21,8 +21,6 @@
     "AidPrograms": {
       "AddAidProgram": "إضافة برنامج معونة",
       "AidProgramName": "اسم البرنامج",
-      "CantCloseAlready": "لا يمكن إغلاق البرنامح المغلق بالفعل",
-      "CantOpenAlready": "لا يمكن فتح البرنامح المفتوح بالفعل",
       "EditAidProgram": "تعديل برنامج معونة",
       "RemainingCredit": "المتبقي",
       "Sponsor": "الجهة المانحة",
@@ -31,6 +29,7 @@
         "Closed": "مغلق",
         "Open": "فتح التقديم",
         "Opened": "مفتوح للتقديم",
+        "Suspended": "متوقف مؤقتاً",
         "Title": "حالة البرنامج"
       },
       "Title": "برامج المعونة",
@@ -134,6 +133,7 @@
       "AllInKindProgramsCount": "برنامج عيني",
       "AllOpenedProgramsCount": "عدد برامج المعونة الجارية",
       "AllProgramsCount": "عدد برامج المعونة الكلي",
+      "AllSuspendedProgramsCount": "عدد برامج المعونة المتوقفة",
       "ApplicantsCount": "المتقدمين الجدد",
       "ApplicantsToReview": "طلبات تسجيل  للمراجعة",
       "ApplicationTimeline": "تسلسل الطلب",
@@ -153,6 +153,8 @@
       "ResearcherInfo": "معلومات الباحث",
       "Researchers": "الباحثون",
       "ScheduledVisitsCount": "زيارات مجدولة",
+      "SuspendedCashProgramsCount": "برنامج نقدي",
+      "SuspendedInKindProgramsCount": "برنامج عيني",
       "Tasks": "المهام",
       "Title": "نظرة عامة",
       "ToDoVisitsCount": "زيارة قادمة",

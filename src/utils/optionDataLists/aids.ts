@@ -56,4 +56,8 @@ export const getAidProgramStatuses = (t: Function) => [
     value: "Closed",
     label: t("Auth.AidPrograms.Statuses.Closed"),
   },
+  {
+    value: "Suspended",
+    label: t("Auth.AidPrograms.Statuses.Suspended"),
+  },
 ];

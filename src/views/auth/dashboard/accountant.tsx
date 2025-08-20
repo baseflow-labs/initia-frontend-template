@@ -1,12 +1,14 @@
 import {
   faBoxOpen,
   faFile,
+  faStopwatch,
   faTableList,
 } from "@fortawesome/free-solid-svg-icons";
 import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import * as OverviewApi from "../../../api/overview";
+import ProgramCards, { AidUnit } from "../../../components/card/programCards";
 import DashboardCards from "../../../components/card/statisticCards";
 import TabsComp from "../../../components/tab";
 import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
@@ -14,7 +16,6 @@ import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
 } from "../../../utils/function";
-import ProgramCards, { AidUnit } from "../../../components/card/programCards";
 import { getAidCategoryTypes } from "../../../utils/optionDataLists/aids";
 
 const DashboardAccountantView = () => {
@@ -30,6 +31,9 @@ const DashboardAccountantView = () => {
       allClosedPrograms: number;
       closedCashPrograms: number;
       closedInKindPrograms: number;
+      allSuspendedPrograms: number;
+      suspendedCashPrograms: number;
+      suspendedInKindPrograms: number;
     };
     programsPerCategory: {
       id: string;
@@ -61,6 +65,9 @@ const DashboardAccountantView = () => {
       allClosedPrograms: 0,
       closedCashPrograms: 0,
       closedInKindPrograms: 0,
+      allSuspendedPrograms: 0,
+      suspendedCashPrograms: 0,
+      suspendedInKindPrograms: 0,
     },
     categories: [
       {
@@ -145,6 +152,22 @@ const DashboardAccountantView = () => {
       ],
       color: "warning",
       icon: faFile,
+    },
+    {
+      label: t("Auth.Dashboard.AllSuspendedProgramsCount"),
+      count: data?.stats.allSuspendedPrograms,
+      details: [
+        {
+          label: t("Auth.Dashboard.SuspendedCashProgramsCount"),
+          count: data?.stats.suspendedCashPrograms,
+        },
+        {
+          label: t("Auth.Dashboard.SuspendedInKindProgramsCount"),
+          count: data?.stats.suspendedInKindPrograms,
+        },
+      ],
+      color: "primary",
+      icon: faStopwatch,
     },
   ];
 

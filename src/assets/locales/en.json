@@ -21,8 +21,6 @@
     "AidPrograms": {
       "AddAidProgram": "Add Aid Program",
       "AidProgramName": "Aid Program Name",
-      "CantCloseAlready": "Can't Close Already",
-      "CantOpenAlready": "Can't Open Already",
       "EditAidProgram": "Edit Aid Program",
       "RemainingCredit": "Remaining Credit",
       "Sponsor": "Sponsor",
@@ -31,6 +29,7 @@
         "Closed": "Closed",
         "Open": "Open",
         "Opened": "Opened",
+        "Suspended": "Suspended",
         "Title": "Title"
       },
       "Title": "Title",
@@ -134,6 +133,7 @@
       "AllInKindProgramsCount": "AllInKindProgramsCount",
       "AllOpenedProgramsCount": "AllOpenedProgramsCount",
       "AllProgramsCount": "AllProgramsCount",
+      "AllSuspendedProgramsCount": "AllSuspendedProgramsCount",
       "ApplicantsCount": "Applicants Count",
       "ApplicantsToReview": "Applicants To Review",
       "ApplicationTimeline": "Application Timeline",
@@ -153,6 +153,8 @@
       "ResearcherInfo": "Researcher Info",
       "Researchers": "Researchers",
       "ScheduledVisitsCount": "Scheduled Visits Count",
+      "SuspendedCashProgramsCount": "SuspendedCashProgramsCount",
+      "SuspendedInKindProgramsCount": "SuspendedInKindProgramsCount",
       "Tasks": "Tasks",
       "Title": "Overview",
       "ToDoVisitsCount": "To Do Visits Count",
