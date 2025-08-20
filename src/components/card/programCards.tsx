@@ -11,9 +11,7 @@ interface Props {
   programs: {
     name: string;
     type: string;
-    status: string;
     credit: number;
-    spent: number;
     balance: number;
     sponsor: string;
   }[];
@@ -41,57 +39,54 @@ const columnsMdWidth = (count: number) => {
   }
 };
 
+export const AidUnit = ({
+  t,
+  type,
+  amount,
+  big,
+}: {
+  t: Function;
+  type: string;
+  amount: number;
+  big?: boolean;
+}) =>
+  type === "Cash" ? (
+    <img src={riyalIcon} height={big ? 25 : 15} className="ms-1" />
+  ) : (
+    pluralLabelResolve(t, amount, "Auth.Aids.AidPiece")
+  );
+
 const ProgramCards = ({ programs }: Props) => {
   const { t } = useTranslation();
 
   return (
     <div className="row">
-      {programs.map(
-        ({ name, type, status, credit, spent, balance, sponsor }, i) => {
-          const Unit = ({ amount, big }: { amount: number; big?: boolean }) =>
-            type === "Cash" ? (
-              <img src={riyalIcon} height={big ? 25 : 15} className="ms-1" />
-            ) : (
-              pluralLabelResolve(t, amount, "Auth.Aids.AidPiece")
-            );
+      {programs.map(({ name, type, credit, balance, sponsor }, i) => {
+        return (
+          <div
+            className={`col-sm-${columnsMdWidth(
+              programs.length
+            )} col-xl-${columnsLgWidth(programs.length)}`}
+            key={i}
+          >
+            <DashboardCard>
+              <div className="card-body p-0">
+                <h3>{name}</h3>
 
-          return (
-            <div
-              className={`col-sm-${columnsMdWidth(
-                programs.length
-              )} col-xl-${columnsLgWidth(programs.length)}`}
-              key={i}
-            >
-              <DashboardCard>
-                <div className="card-body p-0">
-                  {/* <h6>
-                    <div className="d-flex w-100 justify-content-between">
-                      <h3>{name}</h3>
-                      <div
-                        className={`badge bg-${
-                          type === "Cash" ? "warning" : "success"
-                        } px-3 py-2 my-1 rounded-pill`}
-                      >
-                        {renderDataFromOptions(type, getAidProgramTypes(t))}
-                      </div>
-                    </div>
-                  </h6> */}
+                <h1>
+                  {balance} <AidUnit t={t} type={type} amount={balance} big />
+                </h1>
 
-                  <h1>
-                    {balance} <Unit amount={balance} big />
-                  </h1>
+                <h5 className="text-info">
+                  {credit} <AidUnit t={t} type={type} amount={credit} />
+                </h5>
 
-                  <h5 className="text-info">
-                    {credit} <Unit amount={credit} />
-                  </h5>
-
-                  <h6 className="mt-3">{sponsor}</h6>
-                </div>
-              </DashboardCard>
-            </div>
-          );
-        }
-      )}
+                <h6 className="mt-3">{sponsor}</h6>
+              </div>
+            </DashboardCard>
+          </div>
+        );
+      })}
     </div>
   );
 };

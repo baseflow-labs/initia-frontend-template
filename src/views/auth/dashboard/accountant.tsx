@@ -7,10 +7,15 @@ import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import * as OverviewApi from "../../../api/overview";
-import ProgramCards from "../../../components/card/programCards";
 import DashboardCards from "../../../components/card/statisticCards";
+import TabsComp from "../../../components/tab";
 import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
-import { apiCatchGlobalHandler } from "../../../utils/function";
+import {
+  apiCatchGlobalHandler,
+  renderDataFromOptions,
+} from "../../../utils/function";
+import ProgramCards, { AidUnit } from "../../../components/card/programCards";
+import { getAidCategoryTypes } from "../../../utils/optionDataLists/aids";
 
 const DashboardAccountantView = () => {
   const { t } = useTranslation();
@@ -26,14 +31,17 @@ const DashboardAccountantView = () => {
       closedCashPrograms: number;
       closedInKindPrograms: number;
     };
-    programs: {
+    programsPerCategory: {
+      id: string;
       name: string;
       type: string;
-      status: string;
-      credit: number;
-      spent: number;
       balance: number;
-      sponsor: string;
+      programs: {
+        name: string;
+        credit: number;
+        sponsor: string;
+        balance: number;
+      }[];
     }[];
   }>({
     stats: {
@@ -47,15 +55,20 @@ const DashboardAccountantView = () => {
       closedCashPrograms: 0,
       closedInKindPrograms: 0,
     },
-    programs: [
+    programsPerCategory: [
       {
+        id: "",
         name: "",
         type: "",
-        status: "",
-        credit: 0,
-        spent: 0,
         balance: 0,
-        sponsor: "",
+        programs: [
+          {
+            name: "",
+            credit: 0,
+            sponsor: "",
+            balance: 0,
+          },
+        ],
       },
     ],
   });
@@ -123,8 +136,46 @@ const DashboardAccountantView = () => {
     <PageTemplate title={t("Auth.Dashboard.Title")}>
       <DashboardCards statistics={statistics} />
 
-      <h3 className="mt-4 mb-3">{t("Auth.AidPrograms.Programs")}</h3>
-      <ProgramCards programs={data.programs} />
+      <h3 className="mt-4 mb-3">{t("Auth.AidCategories.Title")}</h3>
+
+      <TabsComp
+        tabs={data.programsPerCategory.map(
+          ({ id, name, balance, type, programs }) => ({
+            id,
+            title: name,
+            body: (
+              <div className="mt-4">
+                <div className="d-flex justify-content-between">
+                  <div>
+                    <h3 className="mb-3">{name}</h3>
+
+                    <h1>
+                      {balance}{" "}
+                      {id !== "0" && (
+                        <AidUnit t={t} big type={type} amount={balance} />
+                      )}
+                    </h1>
+                  </div>
+
+                  {id !== "0" && (
+                    <h4>
+                      <div className="badge bg-success p-3 px-4 rounded-pill">
+                        {renderDataFromOptions(type, getAidCategoryTypes(t))}
+                      </div>
+                    </h4>
+                  )}
+                </div>
+
+                <ProgramCards
+                  programs={programs
+                    .sort((a, b) => (a.balance > b.balance ? -1 : 1))
+                    .map((program) => ({ ...program, type }))}
+                />
+              </div>
+            ),
+          })
+        )}
+      />
     </PageTemplate>
   );
 };
