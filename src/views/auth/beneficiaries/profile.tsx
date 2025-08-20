@@ -77,7 +77,7 @@ const BeneficiaryProfileView = () => {
   const commonCards1 = [
     {
       title: t("Auth.MembershipRegistration.Form.BasicData"),
-      data: beneficiary?.beneficiary || beneficiary,
+      data: beneficiary?.beneficiary,
       map: getBasicDataInputs(t),
     },
     {
@@ -200,10 +200,7 @@ const BeneficiaryProfileView = () => {
       });
     }
 
-    const fileName =
-      (beneficiary?.fullName ||
-        beneficiary?.beneficiary?.fullName ||
-        "Export") + ".xlsx";
+    const fileName = (beneficiary?.beneficiary?.fullName || "Export") + ".xlsx";
 
     exportDataToMultipleSheetsExcel(
       fileName.replace(/[/\\?%*:|"<>]/g, "_"),
@@ -217,19 +214,19 @@ const BeneficiaryProfileView = () => {
         <div className="col-6 col-md-9 d-flex">
           <h2>
             {user.role === "researcher"
-              ? beneficiary?.fullName || beneficiary?.beneficiary?.fullName
-              : beneficiary?.fileNo || beneficiary?.beneficiary?.fileNo}{" "}
+              ? beneficiary?.beneficiary?.fullName
+              : beneficiary?.beneficiary?.fileNo}{" "}
           </h2>
 
           {user.role === "researcher" && (
             <small className="bg-opacity-info p-2 rounded-4 text-sm ms-2 my-auto text-info">
-              {beneficiary?.fileNo || beneficiary?.beneficiary?.fileNo}
+              {beneficiary?.beneficiary?.fileNo}
             </small>
           )}
 
           <small className="bg-opacity-info p-2 rounded-4 text-sm ms-2 my-auto text-info">
             {renderDataFromOptions(
-              beneficiary?.category || beneficiary?.beneficiary?.category,
+              beneficiary?.beneficiary?.category,
               getBeneficiaryCategories(t)
             )}
           </small>

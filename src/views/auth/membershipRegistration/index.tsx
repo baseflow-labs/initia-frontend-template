@@ -49,8 +49,8 @@ const MembershipRegistrationView = () => {
   useLayoutEffect(() => {
     if (searchParams.get("id")) {
       BeneficiaryApi.getById(searchParams.get("id") || "")
-        .then(
-          ({
+        .then((res: any) => {
+          const {
             contactsBank,
             dependents,
             housing,
@@ -58,21 +58,21 @@ const MembershipRegistrationView = () => {
             nationalRecord,
             user,
             status,
-            ...beneficiary
-          }: any) =>
-            beneficiary?.id
-              ? setFormData({
-                  contactsBank,
-                  dependents,
-                  housing,
-                  status,
-                  income,
-                  nationalRecord,
-                  user,
-                  beneficiary,
-                })
-              : ""
-        )
+            beneficiary,
+          } = res.payload;
+
+          if (beneficiary?.id)
+            setFormData({
+              contactsBank,
+              dependents,
+              housing,
+              status,
+              income,
+              nationalRecord,
+              user,
+              beneficiary,
+            });
+        })
         .catch(apiCatchGlobalHandler);
     } else {
       BeneficiaryApi.getByUserId()
@@ -204,7 +204,7 @@ const MembershipRegistrationView = () => {
 
             BeneficiaryApi.createOrUpdate({
               ...final,
-              user: formData.user?.id,
+              user: e.user?.id,
             })
               .then((res: any) => {
                 resetForm();
