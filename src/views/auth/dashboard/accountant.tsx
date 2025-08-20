@@ -37,11 +37,18 @@ const DashboardAccountantView = () => {
       type: string;
       balance: number;
       programs: {
+        aidCategory: { id: string; name: string };
         name: string;
         credit: number;
         sponsor: string;
         balance: number;
       }[];
+    }[];
+    categories: {
+      id: string;
+      name: string;
+      type: string;
+      balance: number;
     }[];
   }>({
     stats: {
@@ -55,6 +62,14 @@ const DashboardAccountantView = () => {
       closedCashPrograms: 0,
       closedInKindPrograms: 0,
     },
+    categories: [
+      {
+        id: "",
+        name: "",
+        type: "",
+        balance: 0,
+      },
+    ],
     programsPerCategory: [
       {
         id: "",
@@ -63,6 +78,7 @@ const DashboardAccountantView = () => {
         balance: 0,
         programs: [
           {
+            aidCategory: { id: "", name: "" },
             name: "",
             credit: 0,
             sponsor: "",
@@ -132,6 +148,52 @@ const DashboardAccountantView = () => {
     },
   ];
 
+  const CategoryView = ({
+    id,
+    name,
+    type,
+    balance,
+    programs,
+  }: {
+    id: string;
+    name: string;
+    type: string;
+    balance: number;
+    programs: {
+      name: string;
+      credit: number;
+      sponsor: string;
+      balance: number;
+    }[];
+  }) => (
+    <div className="card p-4 rounded-4 mt-4">
+      <div className="d-flex justify-content-between">
+        <div>
+          <h3 className="mb-3">{name}</h3>
+
+          <h1>
+            {balance}{" "}
+            {id !== "0" && <AidUnit t={t} big type={type} amount={balance} />}
+          </h1>
+        </div>
+
+        {id !== "0" && (
+          <h4>
+            <div className="badge bg-success p-3 px-4 rounded-pill">
+              {renderDataFromOptions(type, getAidCategoryTypes(t))}
+            </div>
+          </h4>
+        )}
+      </div>
+
+      <ProgramCards
+        programs={programs
+          .sort((a, b) => (a.balance > b.balance ? -1 : 1))
+          .map((program) => ({ ...program, type }))}
+      />
+    </div>
+  );
+
   return (
     <PageTemplate title={t("Auth.Dashboard.Title")}>
       <DashboardCards statistics={statistics} />
@@ -143,36 +205,31 @@ const DashboardAccountantView = () => {
           ({ id, name, balance, type, programs }) => ({
             id,
             title: name,
-            body: (
-              <div className="mt-4">
-                <div className="d-flex justify-content-between">
-                  <div>
-                    <h3 className="mb-3">{name}</h3>
-
-                    <h1>
-                      {balance}{" "}
-                      {id !== "0" && (
-                        <AidUnit t={t} big type={type} amount={balance} />
-                      )}
-                    </h1>
-                  </div>
-
-                  {id !== "0" && (
-                    <h4>
-                      <div className="badge bg-success p-3 px-4 rounded-pill">
-                        {renderDataFromOptions(type, getAidCategoryTypes(t))}
-                      </div>
-                    </h4>
-                  )}
-                </div>
-
-                <ProgramCards
-                  programs={programs
-                    .sort((a, b) => (a.balance > b.balance ? -1 : 1))
-                    .map((program) => ({ ...program, type }))}
+            body:
+              id !== "0" ? (
+                <CategoryView
+                  id={id}
+                  name={name}
+                  type={type}
+                  balance={balance}
+                  programs={programs}
                 />
-              </div>
-            ),
+              ) : (
+                <>
+                  {data.categories.map((category, i) => (
+                    <CategoryView
+                      id={category.id}
+                      name={category.name}
+                      type={category.type}
+                      balance={category.balance}
+                      programs={programs.filter(
+                        (program) => program.aidCategory.id === category.id
+                      )}
+                      key={i}
+                    />
+                  ))}
+                </>
+              ),
           })
         )}
       />
