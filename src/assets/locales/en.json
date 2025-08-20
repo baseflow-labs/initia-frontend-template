@@ -5,6 +5,7 @@
       "AidCategory": "AidCategory",
       "AidCategoryName": "Name",
       "AidCategoryType": "Type",
+      "AidRejectReason": "Aid Reject Reason",
       "Cash": "Cash",
       "EditAidCategory": "Edit AidCategory",
       "In-Kind": "In-Kind",

@@ -5,6 +5,7 @@
       "AidCategory": "تصنيف البرنامج",
       "AidCategoryName": "اسم التصنيف",
       "AidCategoryType": "النوع",
+      "AidRejectReason": "سبب رفض تقديم المعونة",
       "Cash": "نقدي",
       "EditAidCategory": "تعديل تصنيف المعونات",
       "In-Kind": "عيني",
