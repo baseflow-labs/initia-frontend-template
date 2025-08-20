@@ -22,6 +22,7 @@ export const statusColorRender = (status = "") => {
     case "In Preview":
     case "Pending":
     case "Reviewed":
+    case "Suspended":
     case "Approved":
     case "Pending Approval":
       return "warning";

@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { useNavigate, useSearchParams } from "react-router";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import * as DataReviewApi from "../../../api/profile/dataReview";
@@ -18,7 +18,6 @@ import DynamicTable, { dataRender } from "../../../components/table";
 import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
 import { addNotification } from "../../../store/actions/notifications";
 import {
-  beneficiaryMapping,
   beneficiaryTabs,
   inputsData,
 } from "../../../utils/formInputs/beneficiaryProfileMapping";
@@ -77,7 +76,7 @@ const BeneficiaryFormReview = () => {
           });
         });
 
-        DataReviewApi.getBeneficiaryDataReview(res.payload.id)
+        DataReviewApi.getBeneficiaryDataReview(res.payload.beneficiary.id)
           .then((res: any) => {
             setDataArchive(
               res.payload.filter(({ dataUpdate = null }) => dataUpdate)
@@ -194,58 +193,60 @@ const BeneficiaryFormReview = () => {
   );
 
   const data = inputsData(t)
-    [tab]?.filter(({ type = "" }) => type !== "title")
+    [tab]?.filter(({ type = "" }) => type !== "title" && type !== "file")
     .map(({ name, label, type, options }) => {
-      let beneficiaryData = beneficiaryMapping[tab]
-        ? beneficiary?.[beneficiaryMapping[tab]]
-        : beneficiary;
+      if (beneficiary?.beneficiary) {
+        let beneficiaryData = beneficiary?.[tab];
 
-      if (tab === "housing" && Array.isArray(beneficiaryData)) {
-        beneficiaryData = beneficiaryData.find(
-          ({ id }: { id: string }) => housingTab === id
-        );
+        if (tab === "housing" && Array.isArray(beneficiaryData)) {
+          beneficiaryData = beneficiaryData.find(
+            ({ id }: { id: string }) => housingTab === id
+          );
+        }
+
+        if (tab === "dependents" && Array.isArray(beneficiaryData)) {
+          beneficiaryData = beneficiaryData.find(
+            ({ id }: { id: string }) => dependentTab === id
+          );
+        }
+
+        const dataReviewRow = dataReview.find((r) => {
+          if (r.property !== name || r.table !== tab) return false;
+          if (tab === "housing") {
+            return r.row === housingTab;
+          }
+          if (tab === "dependents") {
+            return r.row === dependentTab;
+          }
+          return true;
+        });
+
+        const status = dataReviewRow?.needUpdate
+          ? "Need Update"
+          : dataReviewRow?.confirm
+          ? "Confirmed"
+          : "In Preview";
+
+        return {
+          id: name,
+          field: t(label || ""),
+          note: dataReviewRow?.note,
+          status,
+          info: dataRender({
+            data: beneficiaryData?.[name],
+            type,
+            options,
+            name,
+          }),
+        };
       }
 
-      if (tab === "dependents" && Array.isArray(beneficiaryData)) {
-        beneficiaryData = beneficiaryData.find(
-          ({ id }: { id: string }) => dependentTab === id
-        );
-      }
-
-      const dataReviewRow = dataReview.find((r) => {
-        if (r.property !== name || r.table !== tab) return false;
-        if (tab === "housing") {
-          return r.row === housingTab;
-        }
-        if (tab === "dependents") {
-          return r.row === dependentTab;
-        }
-        return true;
-      });
-
-      const status = dataReviewRow?.needUpdate
-        ? "Need Update"
-        : dataReviewRow?.confirm
-        ? "Confirmed"
-        : "In Preview";
-
-      return {
-        id: name,
-        field: t(label || ""),
-        note: dataReviewRow?.note,
-        status,
-        info: dataRender({
-          data: beneficiaryData?.[name],
-          type,
-          options,
-          name,
-        }),
-      };
+      return {};
     });
 
   const onSubmit = () => {
     DataReviewApi.submitReview(
-      beneficiary.id,
+      beneficiary.beneficiary?.id,
       dataReview.filter((row) => row.new)
     )
       .then(() => {
@@ -253,7 +254,7 @@ const BeneficiaryFormReview = () => {
           addNotification({
             msg: t("Global.Form.SuccessMsg", {
               action: t("Auth.Beneficiaries.Profile.ProfileReview"),
-              data: beneficiary.fullName,
+              data: beneficiary.beneficiary?.fullName,
             }),
           })
         );
@@ -268,7 +269,7 @@ const BeneficiaryFormReview = () => {
       <div className="row justify-content-between">
         <div className="col-6 col-lg-9">
           <h2 className="text-dark fs-5 fw-semibold m-0 px-3 py-2">
-            {beneficiary?.fullName}
+            {beneficiary?.beneficiary?.fullName}
           </h2>
         </div>
 
