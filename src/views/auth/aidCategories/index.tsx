@@ -1,8 +1,7 @@
-import { faEdit, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import * as AidCategoriesApi from "../../../api/aids/aidCategories";
 import * as AidCategoryApi from "../../../api/aids/aidCategories";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { apiCatchGlobalHandler } from "../../../utils/function";

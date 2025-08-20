@@ -1,9 +1,4 @@
-import {
-  faCheck,
-  faCircle,
-  faEdit,
-  faXmark,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCircle, faEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -13,7 +8,6 @@ import * as AidCategoriesApi from "../../../api/aids/aidCategories";
 import * as AidProgramApi from "../../../api/aids/aidPrograms";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
-import { useAppSelector } from "../../../store/hooks";
 import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
@@ -25,7 +19,6 @@ import AddAidProgram from "./createAidProgram";
 const AidProgramsView = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { user } = useAppSelector((state) => state.auth);
 
   const [openModal, setOpenModal] = useState(false);
   const [aidPrograms, setAidPrograms] = useState<

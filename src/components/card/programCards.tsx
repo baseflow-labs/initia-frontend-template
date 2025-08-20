@@ -1,10 +1,7 @@
 import { useTranslation } from "react-i18next";
 
 import { riyalIcon } from "../../assets/icons/icons";
-import {
-  pluralLabelResolve,
-  renderDataFromOptions,
-} from "../../utils/function";
+import { pluralLabelResolve } from "../../utils/function";
 import DashboardCard from "./dashboardCard";
 
 interface Props {

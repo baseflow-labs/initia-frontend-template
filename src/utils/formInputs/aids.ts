@@ -31,12 +31,12 @@ export const getRequestAidInputs = (
     },
     {
       type: "number",
-      moneyUnit: type == "Cash",
-      step: type == "Cash" ? 0.1 : 1,
-      postfixText: type == "Cash" ? undefined : t("Auth.Aids.AidPiece_other"),
+      moneyUnit: type === "Cash",
+      step: type === "Cash" ? 0.1 : 1,
+      postfixText: type === "Cash" ? undefined : t("Auth.Aids.AidPiece_other"),
       name: "value",
       label:
-        type == "Cash" ? t("Auth.Aids.AidValue") : t("Auth.Aids.AidQuantity"),
+        type === "Cash" ? t("Auth.Aids.AidValue") : t("Auth.Aids.AidQuantity"),
       required: true,
     },
     {
@@ -107,12 +107,12 @@ export const getGrantAidInputs = (
     },
     {
       type: "number",
-      moneyUnit: type == "Cash",
-      step: type == "Cash" ? 0.1 : 1,
-      postfixText: type == "Cash" ? undefined : t("Auth.Aids.AidPiece_other"),
+      moneyUnit: type === "Cash",
+      step: type === "Cash" ? 0.1 : 1,
+      postfixText: type === "Cash" ? undefined : t("Auth.Aids.AidPiece_other"),
       name: "value",
       label:
-        type == "Cash" ? t("Auth.Aids.AidValue") : t("Auth.Aids.AidQuantity"),
+        type === "Cash" ? t("Auth.Aids.AidValue") : t("Auth.Aids.AidQuantity"),
       required: true,
     },
     {
@@ -188,7 +188,7 @@ export const geAddAidProgramInputs = (
   const allInputs = [...common1Inputs, ...cashInputs, ...common2Inputs];
 
   const pickedCategoryType = aidCategories.find(
-    ({ id }) => id == formik?.values.aidCategory
+    ({ id }) => id === formik?.values.aidCategory
   )?.type;
 
   const conditionalInputs =

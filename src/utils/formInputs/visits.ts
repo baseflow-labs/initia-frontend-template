@@ -26,7 +26,7 @@ export const getVisitScheduleInputs = (
   {
     type: "select",
     options: selectOptions.beneficiaries
-      .find((beneficiary) => beneficiary.id == formik?.values?.beneficiary)
+      .find((beneficiary) => beneficiary.id === formik?.values?.beneficiary)
       ?.addresses.map(({ id, address }) => ({
         value: id,
         label: address,
