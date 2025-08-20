@@ -1,11 +1,34 @@
-export const getAidProgramTypes = (t: Function) => [
+export const getAidCategoryTypes = (t: Function) => [
   {
     value: "Cash",
-    label: t("Auth.Aids.Cash"),
+    label: t("Auth.AidCategories.Cash"),
   },
   {
     value: "In-Kind",
-    label: t("Auth.Aids.In-Kind"),
+    label: t("Auth.AidCategories.In-Kind"),
+  },
+];
+
+export const getAidCategoryReapplyPeriods = (t: Function) => [
+  {
+    value: "Once",
+    label: t("Auth.AidCategories.ReapplyPeriods.Once"),
+  },
+  {
+    value: "Multiple",
+    label: t("Auth.AidCategories.ReapplyPeriods.Multiple"),
+  },
+  {
+    value: "Every Week",
+    label: t("Auth.AidCategories.ReapplyPeriods.EveryWeek"),
+  },
+  {
+    value: "Every Month",
+    label: t("Auth.AidCategories.ReapplyPeriods.EveryMonth"),
+  },
+  {
+    value: "Every Year",
+    label: t("Auth.AidCategories.ReapplyPeriods.EveryYear"),
   },
 ];
 

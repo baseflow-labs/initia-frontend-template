@@ -1,6 +1,10 @@
 import { FormikProps } from "formik";
 
-import { getAidProgramStatuses } from "../optionDataLists/aids";
+import {
+  getAidCategoryReapplyPeriods,
+  getAidCategoryTypes,
+  getAidProgramStatuses,
+} from "../optionDataLists/aids";
 import { getYesNo } from "../optionDataLists/common";
 
 export const getRequestAidInputs = (
@@ -62,7 +66,6 @@ export const getRequestAidInputs = (
 
 export const getGrantAidInputs = (
   t: Function,
-  aidTypes: { label: string; value: string }[],
   selectOptions: {
     beneficiaries: {
       id: string;
@@ -184,10 +187,36 @@ export const geAddAidProgramInputs = (
 
   const allInputs = [...common1Inputs, ...cashInputs, ...common2Inputs];
 
+  const pickedCategoryType = aidCategories.find(
+    ({ id }) => id == formik?.values.aidCategory
+  )?.type;
+
   const conditionalInputs =
-    formik?.values.type === "Cash"
+    pickedCategoryType === "Cash"
       ? [...common1Inputs, ...cashInputs, ...common2Inputs]
       : [...common1Inputs, ...inKindInputs, ...common2Inputs];
 
   return formik ? conditionalInputs : allInputs;
 };
+
+export const geAddAidCategoryInputs = (t: Function) => [
+  {
+    type: "text",
+    name: "name",
+    label: t("Auth.AidCategories.AidCategoryName"),
+  },
+  {
+    type: "radio",
+    row: false,
+    options: getAidCategoryTypes(t),
+    name: "type",
+    label: t("Auth.AidCategories.AidCategoryType"),
+  },
+  {
+    type: "radio",
+    row: false,
+    options: getAidCategoryReapplyPeriods(t),
+    name: "reapply",
+    label: t("Auth.AidCategories.ReapplyPeriods.Title"),
+  },
+];

@@ -5,7 +5,6 @@ import {
   pluralLabelResolve,
   renderDataFromOptions,
 } from "../../utils/function";
-import { getAidProgramTypes } from "../../utils/optionDataLists/aids";
 import DashboardCard from "./dashboardCard";
 
 interface Props {
@@ -65,7 +64,7 @@ const ProgramCards = ({ programs }: Props) => {
             >
               <DashboardCard>
                 <div className="card-body p-0">
-                  <h6>
+                  {/* <h6>
                     <div className="d-flex w-100 justify-content-between">
                       <h3>{name}</h3>
                       <div
@@ -76,7 +75,7 @@ const ProgramCards = ({ programs }: Props) => {
                         {renderDataFromOptions(type, getAidProgramTypes(t))}
                       </div>
                     </div>
-                  </h6>
+                  </h6> */}
 
                   <h1>
                     {balance} <Unit amount={balance} big />

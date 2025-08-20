@@ -14,10 +14,7 @@ import {
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
-import {
-  getAidProgramStatuses,
-  getAidProgramTypes,
-} from "../../../utils/optionDataLists/aids";
+import { getAidProgramStatuses } from "../../../utils/optionDataLists/aids";
 import AddAidProgram from "./createAidProgram";
 
 const AidProgramsView = () => {
@@ -77,16 +74,9 @@ const AidProgramsView = () => {
       .catch(apiCatchGlobalHandler);
   }, []);
 
-  const aidProgramTypes = getAidProgramTypes(t);
-
   const statuses = getAidProgramStatuses(t);
 
   const filters = [
-    {
-      label: t("Auth.AidPrograms.AidProgramType"),
-      options: aidProgramTypes,
-      name: "type",
-    },
     {
       label: t("Auth.MembershipRegistration.Statuses.Status"),
       options: statuses,

@@ -1,14 +1,25 @@
 {
   "Auth": {
     "AidCategories": {
+      "AddAidCategory": "إضافة تصنيف لبرامج المعونة",
       "AidCategory": "تصنيف البرنامج",
       "AidCategoryName": "اسم التصنيف",
-      "AidCategoryType": "النوع"
+      "AidCategoryType": "النوع",
+      "Cash": "نقدي",
+      "In-Kind": "عيني",
+      "ReapplyPeriods": {
+        "EveryMonth": "كل شهر",
+        "EveryWeek": "كل أسبوع",
+        "EveryYear": "كل سنة",
+        "Multiple": "مفتوحة أكثر من مرة",
+        "Once": "مرة واحدة فقط",
+        "Title": "صلاحية التقديم للمستفيد"
+      },
+      "Title": "تصنيف برامج المعونة"
     },
     "AidPrograms": {
       "AddAidProgram": "إضافة برنامج معونة",
       "AidProgramName": "اسم البرنامج",
-      "AidProgramType": "نوع البرنامج",
       "CantCloseAlready": "لا يمكن إغلاق البرنامح المغلق بالفعل",
       "CantOpenAlready": "لا يمكن فتح البرنامح المفتوح بالفعل",
       "Programs": "برامج المعونة",
@@ -45,9 +56,7 @@
       },
       "CantGrantAlready": "تمت الموافقة على طلب المعونة بالفعل",
       "CantRejectAlready": "تمت رفض طلب المعونة بالفعل",
-      "Cash": "نقدي",
       "FilterByThisBeneficiary": "عرض معونات هذا المستفيد",
-      "In-Kind": "عيني",
       "RecaptionDate": "تاريخ الاستلام",
       "Statuses": {
         "Grant": "منح المعونة",

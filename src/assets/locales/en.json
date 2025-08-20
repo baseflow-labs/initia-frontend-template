@@ -1,14 +1,25 @@
 {
   "Auth": {
     "AidCategories": {
+      "AddAidCategory": "Add Aid Category",
       "AidCategory": "AidCategory",
       "AidCategoryName": "Name",
-      "AidCategoryType": "Type"
+      "AidCategoryType": "Type",
+      "Cash": "Cash",
+      "In-Kind": "In-Kind",
+      "ReapplyPeriods": {
+        "EveryMonth": "Every Month",
+        "EveryWeek": "Every Week",
+        "EveryYear": "Every Year",
+        "Multiple": "Multiple",
+        "Once": "Once",
+        "Title": "Reapply Periods"
+      },
+      "Title": "Aid Categories"
     },
     "AidPrograms": {
       "AddAidProgram": "AddAidProgram",
       "AidProgramName": "AidProgramName",
-      "AidProgramType": "AidProgramType",
       "CantCloseAlready": "CantCloseAlready",
       "CantOpenAlready": "CantOpenAlready",
       "Programs": "Programs",
@@ -45,9 +56,7 @@
       },
       "CantGrantAlready": "Aid Granted Already",
       "CantRejectAlready": "Aid Rejected Already",
-      "Cash": "Cash",
       "FilterByThisBeneficiary": "Filter By This Beneficiary",
-      "In-Kind": "In-Kind",
       "RecaptionDate": "Recaption Date",
       "Statuses": {
         "Grant": "Grant",

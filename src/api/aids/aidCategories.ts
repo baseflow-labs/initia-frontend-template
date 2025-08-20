@@ -19,11 +19,9 @@ const create = async (data: object) => {
   return res;
 };
 
-const updateStatus = async (id: string, status: string) => {
-  const res = await api.patch(mainPath + "/" + id + "/update-status/", {
-    status,
-  });
+const update = async (id: string, data: object) => {
+  const res = await api.patch(mainPath + "/" + id, data);
   return res;
 };
 
-export { create, getAll, updateStatus };
+export { create, getAll, update };

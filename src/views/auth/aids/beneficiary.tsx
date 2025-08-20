@@ -15,10 +15,7 @@ import {
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
-import {
-  getAidStatuses,
-  getAidProgramTypes,
-} from "../../../utils/optionDataLists/aids";
+import { getAidStatuses } from "../../../utils/optionDataLists/aids";
 import RequestAid from "./requestAid";
 import { MoneyUnit } from "../../../components/table";
 
@@ -85,8 +82,6 @@ const AidsBeneficiaryView = () => {
     getData({});
   }, []);
 
-  const aidTypes = getAidProgramTypes(t);
-
   const statuses = getAidStatuses(t);
 
   const filters = [
@@ -94,11 +89,6 @@ const AidsBeneficiaryView = () => {
       label: t("Auth.MembershipRegistration.Statuses.Status"),
       options: statuses,
       name: "aidStatuses=>status",
-    },
-    {
-      label: t("Auth.Aids.AidType"),
-      options: aidTypes,
-      name: "type",
     },
   ];
 
@@ -115,13 +105,6 @@ const AidsBeneficiaryView = () => {
       name: "name",
       label: t("Auth.Aids.AidName"),
       render: (row: any) => row.aidProgram.name,
-    },
-    {
-      type: "custom",
-      name: "type",
-      label: t("Auth.Aids.AidType"),
-      render: (row: any) =>
-        renderDataFromOptions(row.aidProgram.type, aidTypes),
     },
     {
       type: "custom",

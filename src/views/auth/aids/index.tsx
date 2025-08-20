@@ -9,9 +9,10 @@ import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
+import * as AidProgramApi from "../../../api/aids/aidPrograms";
 import * as AidApi from "../../../api/aids/aids";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
-import * as AidProgramApi from "../../../api/aids/aidPrograms";
+import { MoneyUnit } from "../../../components/table";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
@@ -21,12 +22,8 @@ import {
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
-import {
-  getAidStatuses,
-  getAidProgramTypes,
-} from "../../../utils/optionDataLists/aids";
+import { getAidStatuses } from "../../../utils/optionDataLists/aids";
 import SendAid from "./sendAid";
-import { MoneyUnit } from "../../../components/table";
 
 const AidsView = () => {
   const { t } = useTranslation();
@@ -121,8 +118,6 @@ const AidsView = () => {
       .catch(apiCatchGlobalHandler);
   }, []);
 
-  const aidTypes = getAidProgramTypes(t);
-
   const statuses = getAidStatuses(t);
 
   const filters = [
@@ -169,13 +164,6 @@ const AidsView = () => {
       name: "name",
       label: t("Auth.Aids.AidName"),
       render: (row: any) => row.aidProgram.name,
-    },
-    {
-      type: "custom",
-      name: "type",
-      label: t("Auth.Aids.AidType"),
-      render: (row: any) =>
-        renderDataFromOptions(row.aidProgram.type, aidTypes),
     },
     {
       type: "date",
