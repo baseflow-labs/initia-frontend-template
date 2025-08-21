@@ -8,29 +8,12 @@ import Modal from "../../../components/modal";
 import { addNotification } from "../../../store/actions/notifications";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import { CategoryView } from "../dashboard/accountant";
-import { AidProps, defaultAid } from ".";
 import { useLayoutEffect, useState } from "react";
-
-export interface AidProgram {
-  id: string;
-  name: string;
-  sponsor: string;
-  status: string;
-  credit: number;
-  balance: number;
-}
-
-export interface AidCategory {
-  id: string;
-  name: string;
-  type: string;
-  reapply: string;
-  aidPrograms: AidProgram[];
-}
+import { Aid, AidCategory, defaultAid } from "../../../types/aids";
 
 interface Props {
-  openModal: AidProps;
-  setOpenModal: (s: AidProps) => void;
+  openModal: Aid;
+  setOpenModal: (s: Aid) => void;
   onGetData: (p: Object) => void;
 }
 

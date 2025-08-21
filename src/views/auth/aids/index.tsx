@@ -28,36 +28,7 @@ import { getAidStatuses } from "../../../utils/optionDataLists/aids";
 import AccountantApproveAid from "./accountantApproveAid";
 import AccountantRejectAid from "./accountantRejectAid";
 import SendAid from "./sendAid";
-
-export interface AidProgramProps {
-  id: string;
-  name: string;
-}
-
-export const defaultAidProgram: AidProgramProps = {
-  id: "",
-  name: "",
-};
-
-export interface AidProps {
-  id: string;
-  beneficiaryId: string;
-  status: string;
-  fileNo: string;
-  value: number;
-  category: string;
-  aidProgram: AidProgramProps;
-}
-
-export const defaultAid: AidProps = {
-  id: "",
-  beneficiaryId: "",
-  status: "",
-  fileNo: "",
-  value: 0,
-  category: "",
-  aidProgram: defaultAidProgram,
-};
+import { Aid, defaultAid } from "../../../types/aids";
 
 const AidsView = () => {
   const { t } = useTranslation();
@@ -66,12 +37,12 @@ const AidsView = () => {
 
   const [openModal, setOpenModal] = useState(false);
   const [openAccountantApproveModal, setOpenAccountantApproveModal] =
-    useState<AidProps>(defaultAid);
+    useState<Aid>(defaultAid);
   const [openAccountantRejectModal, setOpenAccountantRejectModal] = useState<
     boolean | string
   >(false);
 
-  const [aids, setAids] = useState<AidProps[]>([]);
+  const [aids, setAids] = useState<Aid[]>([]);
   const [selectOptions, setSelectOptions] = useState({
     beneficiaries: [{ id: "", fullName: "", status: { status: "" } }],
     aidPrograms: [{ id: "", name: "", type: "", status: "" }],
