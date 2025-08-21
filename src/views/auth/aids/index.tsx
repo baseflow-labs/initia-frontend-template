@@ -1,10 +1,11 @@
 import {
   faCheck,
   faCircle,
-  faFilter,
+  faHandHoldingDollar,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import moment from "moment";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
@@ -16,6 +17,7 @@ import { MoneyUnit } from "../../../components/table";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
+import { dataDateFormat } from "../../../utils/consts";
 import {
   apiCatchGlobalHandler,
   pluralLabelResolve,
@@ -23,7 +25,10 @@ import {
   statusColorRender,
 } from "../../../utils/function";
 import { getAidStatuses } from "../../../utils/optionDataLists/aids";
+import AccountantApproveAid from "./accountantApproveAid";
+import AccountantRejectAid from "./accountantRejectAid";
 import SendAid from "./sendAid";
+import { Aid, defaultAid } from "../../../types/aids";
 
 const AidsView = () => {
   const { t } = useTranslation();
@@ -31,9 +36,13 @@ const AidsView = () => {
   const { user } = useAppSelector((state) => state.auth);
 
   const [openModal, setOpenModal] = useState(false);
-  const [aids, setAids] = useState<
-    { id: string; beneficiaryId: string; status: string }[]
-  >([]);
+  const [openAccountantApproveModal, setOpenAccountantApproveModal] =
+    useState<Aid>(defaultAid);
+  const [openAccountantRejectModal, setOpenAccountantRejectModal] = useState<
+    boolean | string
+  >(false);
+
+  const [aids, setAids] = useState<Aid[]>([]);
   const [selectOptions, setSelectOptions] = useState({
     beneficiaries: [{ id: "", fullName: "", status: { status: "" } }],
     aidPrograms: [{ id: "", name: "", type: "", status: "" }],
@@ -219,18 +228,20 @@ const AidsView = () => {
     },
   ];
 
-  const grantLabel = t("Auth.Aids.Statuses.Grant");
-  const rejectLabel = t("Auth.Aids.Statuses.Reject");
-
-  const updateStatus = (id: string, status: string) => {
-    AidApi.updateStatus(id, status)
+  const grant = (id: string) => {
+    AidApi.updateStatus(
+      id,
+      "Granted",
+      undefined,
+      moment().locale("en").format(dataDateFormat)
+    )
       .then(() => {
         const aid = aids.find((aid) => aid.id === id);
         getData({});
         dispatch(
           addNotification({
             msg: t("Global.Form.SuccessMsg", {
-              action: status === "Granted" ? grantLabel : rejectLabel,
+              action: t("Auth.Aids.Statuses.Grant"),
               data: selectOptions.beneficiaries.find(
                 ({ id }) => id === aid?.beneficiaryId
               )?.fullName,
@@ -246,6 +257,17 @@ const AidsView = () => {
     getData({ page: 1, capacity: 10, search: e });
   };
 
+  const openResponseModal = (data: string, response: string) => {
+    const row = aids.find(({ id }) => id === data);
+
+    if (response === "approve") {
+      setOpenAccountantApproveModal(row || defaultAid);
+      return;
+    }
+
+    setOpenAccountantRejectModal(row?.id || "");
+  };
+
   return (
     <Fragment>
       <TablePage
@@ -257,20 +279,21 @@ const AidsView = () => {
         tableActions={(id?: string) => {
           const aid = aids.find((a) => a.id === id);
 
+          const approved = aid?.status === "Approved";
           const granted = aid?.status === "Granted";
           const rejected = aid?.status === "Rejected";
 
           return [
             {
-              label: t("Auth.Aids.Statuses.Grant"),
+              label: t("Auth.Aids.Statuses.Approve"),
               icon: faCheck,
               spread: false,
               onClick: (data: string) =>
-                !granted
-                  ? updateStatus(data, "Granted")
+                !approved && !granted
+                  ? openResponseModal(data, "approve")
                   : dispatch(
                       addNotification({
-                        msg: t("Auth.Aids.CantGrantAlready"),
+                        msg: t("Auth.Aids.CantApproveAlready"),
                       })
                     ),
             },
@@ -279,8 +302,8 @@ const AidsView = () => {
               icon: faXmark,
               spread: false,
               onClick: (data: string) =>
-                !rejected
-                  ? updateStatus(data, "Rejected")
+                !rejected && !granted
+                  ? openResponseModal(data, "reject")
                   : dispatch(
                       addNotification({
                         msg: t("Auth.Aids.CantRejectAlready"),
@@ -288,17 +311,20 @@ const AidsView = () => {
                     ),
             },
             {
-              label: t("Auth.Aids.FilterByThisBeneficiary"),
-              icon: faFilter,
-              spread: true,
-              onClick: (data: string) => {
-                const beneficiary = aids.find(
-                  (a) => a.id === data
-                )?.beneficiaryId;
-
-                setCurrentFilters({ beneficiary });
-                getData({ filters: { beneficiary } });
-              },
+              label: t("Auth.Aids.Statuses.Grant"),
+              icon: faHandHoldingDollar,
+              spread: false,
+              onClick: (data: string) =>
+                !granted && approved
+                  ? grant(data)
+                  : dispatch(
+                      addNotification({
+                        msg: !approved
+                          ? t("Auth.Aids.CantGrantNonApproved")
+                          : t("Auth.Aids.CantGrantAlready"),
+                        type: !approved ? "err" : undefined,
+                      })
+                    ),
             },
           ];
         }}
@@ -326,11 +352,23 @@ const AidsView = () => {
       />
 
       <SendAid
-        onGetData={getData}
         currentFilters={currentFilters}
         openModal={openModal}
         setOpenModal={setOpenModal}
         selectOptions={selectOptions}
+        onGetData={getData}
+      />
+
+      <AccountantApproveAid
+        openModal={openAccountantApproveModal}
+        setOpenModal={setOpenAccountantApproveModal}
+        onGetData={getData}
+      />
+
+      <AccountantRejectAid
+        openModal={openAccountantRejectModal}
+        setOpenModal={setOpenAccountantRejectModal}
+        onGetData={getData}
       />
     </Fragment>
   );

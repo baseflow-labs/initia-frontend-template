@@ -21,7 +21,6 @@ import {
 import {
   getBeneficiaryCategories,
   getGenders,
-  getHomeTypes,
   getNationalities,
   getProvinces,
 } from "../../../utils/optionDataLists/beneficiaries";
@@ -117,8 +116,6 @@ const BeneficiariesViewForSupervisor = () => {
 
   const provinces = getProvinces(t);
 
-  const homeTypes = getHomeTypes(t);
-
   const filters = [
     {
       label: t("Auth.MembershipRegistration.Form.Nationality.Title"),
@@ -148,12 +145,6 @@ const BeneficiariesViewForSupervisor = () => {
       options: nationalities,
       name: "nationality",
       label: t("Auth.MembershipRegistration.Form.Nationality.Title"),
-    },
-    {
-      type: "select",
-      options: homeTypes,
-      name: "homeType",
-      label: t("Auth.MembershipRegistration.Form.HomeType.Title"),
     },
     {
       type: "phoneNumber",

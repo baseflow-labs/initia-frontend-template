@@ -3,7 +3,17 @@ import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes, useLocation } from "react-router";
 import { Fragment } from "react/jsx-runtime";
 
-import { aidsIcon, beneficiariesIcon, dashboardIcon, infoIcon, membershipFormIcon, profileIcon, settingsIcon, visitReportIcon, visitsIcon } from "../../assets/icons/icons";
+import {
+  aidsIcon,
+  beneficiariesIcon,
+  dashboardIcon,
+  infoIcon,
+  membershipFormIcon,
+  profileIcon,
+  settingsIcon,
+  visitReportIcon,
+  visitsIcon,
+} from "../../assets/icons/icons";
 import { useAppSelector } from "../../store/hooks";
 import { useWindowWidth } from "../../utils/hooks";
 import AidCategoriesView from "../../views/auth/aidCategories";
@@ -153,14 +163,14 @@ const AuthLayout = () => {
     },
     {
       name: t("Auth.Beneficiaries.Profile.Title"),
-      route: "/review/",
+      route: "/review",
       view: <BeneficiaryFormReview />,
       icon: beneficiariesIcon,
       users: ["researcher", "admin"],
     },
     {
       name: t("Auth.Beneficiaries.Profile.Title"),
-      route: "/profile/",
+      route: "/profile",
       view: <BeneficiaryProfileView />,
       icon: beneficiariesIcon,
       users: ["researcher", "hod", "admin"],
@@ -198,15 +208,15 @@ const AuthLayout = () => {
     },
     {
       name: t("Auth.Aids.Title"),
-      route: "/aid",
+      route: "/aids",
       view: <AidsView />,
       showInNav: true,
       icon: aidsIcon,
-      users: ["researcher", "hod", "admin"],
+      users: ["accountant", "researcher", "hod", "admin"],
     },
     {
       name: t("Auth.Aids.Beneficiary.Title"),
-      route: "/aid",
+      route: "/aids",
       view: <AidsBeneficiaryView />,
       showInNav: true,
       icon: aidsIcon,
