@@ -6,9 +6,9 @@ import * as AidProgramApi from "../../../api/aids/aidPrograms";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import { addNotification } from "../../../store/actions/notifications";
+import { AidCategory, AidProgram } from "../../../types/aids";
 import { geAddAidProgramInputs } from "../../../utils/formInputs/aids";
 import { apiCatchGlobalHandler } from "../../../utils/function";
-import { AidCategory, AidProgram } from "../../../types/aids";
 
 interface Props {
   onGetData: (p: Object) => void;

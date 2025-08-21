@@ -17,6 +17,7 @@ import { MoneyUnit } from "../../../components/table";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
+import { Aid, defaultAid } from "../../../types/aids";
 import { dataDateFormat } from "../../../utils/consts";
 import {
   apiCatchGlobalHandler,
@@ -28,7 +29,6 @@ import { getAidStatuses } from "../../../utils/optionDataLists/aids";
 import AccountantApproveAid from "./accountantApproveAid";
 import AccountantRejectAid from "./accountantRejectAid";
 import SendAid from "./sendAid";
-import { Aid, defaultAid } from "../../../types/aids";
 
 const AidsView = () => {
   const { t } = useTranslation();

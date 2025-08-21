@@ -4,13 +4,13 @@ import { useTranslation } from "react-i18next";
 
 import * as AidCategoryApi from "../../../api/aids/aidCategories";
 import TablePage from "../../../layouts/auth/pages/tablePage";
+import { AidCategory, defaultAidCategory } from "../../../types/aids";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import {
   getAidCategoryReapplyPeriods,
   getAidCategoryTypes,
 } from "../../../utils/optionDataLists/aids";
 import AddAidCategory from "./createAidCategory";
-import { AidCategory, defaultAidCategory } from "../../../types/aids";
 
 const AidCategoriesView = () => {
   const { t } = useTranslation();

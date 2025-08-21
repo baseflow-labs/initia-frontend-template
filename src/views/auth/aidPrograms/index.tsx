@@ -9,17 +9,17 @@ import * as AidProgramApi from "../../../api/aids/aidPrograms";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import {
+  AidCategory,
+  AidProgram,
+  defaultAidProgram,
+} from "../../../types/aids";
+import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
 import { getAidProgramStatuses } from "../../../utils/optionDataLists/aids";
 import AddAidProgram from "./createAidProgram";
-import {
-  AidCategory,
-  AidProgram,
-  defaultAidProgram,
-} from "../../../types/aids";
 
 const AidProgramsView = () => {
   const { t } = useTranslation();
