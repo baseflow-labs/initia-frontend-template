@@ -15,24 +15,20 @@ import {
 } from "../../../utils/function";
 import { getAidProgramStatuses } from "../../../utils/optionDataLists/aids";
 import AddAidProgram from "./createAidProgram";
+import {
+  AidCategory,
+  AidProgram,
+  defaultAidProgram,
+} from "../../../types/aids";
 
 const AidProgramsView = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const [openModal, setOpenModal] = useState(false);
-  const [aidPrograms, setAidPrograms] = useState<
-    { id: string; name: string; status: string; aidCategory: { id: string } }[]
-  >([]);
-  const [crudData, setCrudData] = useState<{
-    id: string;
-    name: string;
-    status: string;
-    aidCategory: string;
-  }>({ id: "", name: "", status: "", aidCategory: "" });
-  const [aidCategories, setAidCategories] = useState<
-    { id: string; name: string; type: string; reapply: string }[]
-  >([]);
+  const [aidPrograms, setAidPrograms] = useState<AidProgram[]>([]);
+  const [crudData, setCrudData] = useState<AidProgram>(defaultAidProgram);
+  const [aidCategories, setAidCategories] = useState<AidCategory[]>([]);
   const [currentFilters, setCurrentFilters] = useState({});
   const [currentSearch, setCurrentSearch] = useState("");
   const [paginationMeta, setPaginationMeta] = useState({
@@ -183,7 +179,7 @@ const AidProgramsView = () => {
     const row = aidPrograms.find(({ id }) => id === rowId);
 
     if (row) {
-      setCrudData({ ...row, aidCategory: row.aidCategory.id });
+      setCrudData(row);
     }
   };
 

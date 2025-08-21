@@ -8,13 +8,14 @@ import Modal from "../../../components/modal";
 import { addNotification } from "../../../store/actions/notifications";
 import { geAddAidProgramInputs } from "../../../utils/formInputs/aids";
 import { apiCatchGlobalHandler } from "../../../utils/function";
+import { AidCategory, AidProgram } from "../../../types/aids";
 
 interface Props {
   onGetData: (p: Object) => void;
   openModal: boolean;
   setOpenModal: (s: boolean) => void;
-  aidCategories: { id: string; name: string; type: string; reapply: string }[];
-  crudData: { id: string; aidCategory: string };
+  aidCategories: AidCategory[];
+  crudData: AidProgram;
 }
 
 const AddAidProgram = ({

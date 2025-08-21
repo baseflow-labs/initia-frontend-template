@@ -8,6 +8,7 @@ import Modal from "../../../components/modal";
 import { addNotification } from "../../../store/actions/notifications";
 import { getRequestAidInputs } from "../../../utils/formInputs/aids";
 import { apiCatchGlobalHandler } from "../../../utils/function";
+import { AidProgram } from "../../../types/aids";
 
 interface Props {
   onGetData: (p: Object) => void;
@@ -15,7 +16,7 @@ interface Props {
   openModal: boolean;
   setOpenModal: (s: boolean) => void;
   selectOptions: {
-    aidPrograms: { id: string; name: string; status: string }[];
+    aidPrograms: AidProgram[];
   };
 }
 

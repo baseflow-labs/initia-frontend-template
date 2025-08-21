@@ -18,6 +18,7 @@ import {
 import { getAidStatuses } from "../../../utils/optionDataLists/aids";
 import RequestAid from "./requestAid";
 import { MoneyUnit } from "../../../components/table";
+import { AidProgram, defaultAidProgram } from "../../../types/aids";
 
 const AidsBeneficiaryView = () => {
   const { t } = useTranslation();
@@ -32,8 +33,10 @@ const AidsBeneficiaryView = () => {
     count: 0,
     pagesCount: 1,
   });
-  const [selectOptions, setSelectOptions] = useState({
-    aidPrograms: [{ id: "", name: "", status: "" }],
+  const [selectOptions, setSelectOptions] = useState<{
+    aidPrograms: AidProgram[];
+  }>({
+    aidPrograms: [],
   });
 
   const getData = ({

@@ -6,6 +6,7 @@ import {
   getAidProgramStatuses,
 } from "../optionDataLists/aids";
 import { getYesNo } from "../optionDataLists/common";
+import { AidCategory, AidProgram } from "../../types/aids";
 
 export const getRequestAidInputs = (
   t: Function,
@@ -72,14 +73,14 @@ export const getGrantAidInputs = (
       fullName: string;
       status: { status: string };
     }[];
-    aidPrograms: { id: string; name: string; type: string }[];
+    aidPrograms: AidProgram[];
   },
   formik: FormikProps<Record<string, any>>
 ) => {
   const pickedProgram = formik?.values?.aidProgram;
   const type = pickedProgram
     ? selectOptions?.aidPrograms.find(({ id = "" }) => id === pickedProgram)
-        ?.type
+        ?.aidCategory.type
     : "";
 
   return [
@@ -126,7 +127,7 @@ export const getGrantAidInputs = (
 
 export const geAddAidProgramInputs = (
   t: Function,
-  aidCategories: { id: string; name: string; type: string; reapply: string }[],
+  aidCategories: AidCategory[],
   formik?: FormikProps<Record<string, any>>
 ) => {
   const common1Inputs = [

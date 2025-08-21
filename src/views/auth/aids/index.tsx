@@ -45,7 +45,7 @@ const AidsView = () => {
   const [aids, setAids] = useState<Aid[]>([]);
   const [selectOptions, setSelectOptions] = useState({
     beneficiaries: [{ id: "", fullName: "", status: { status: "" } }],
-    aidPrograms: [{ id: "", name: "", type: "", status: "" }],
+    aidPrograms: [],
   });
   const [currentFilters, setCurrentFilters] = useState({});
   const [currentSearch, setCurrentSearch] = useState("");

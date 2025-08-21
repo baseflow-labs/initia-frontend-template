@@ -8,6 +8,7 @@ import { addNotification } from "../../../store/actions/notifications";
 import { getGrantAidInputs } from "../../../utils/formInputs/aids";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import { FormikProps } from "formik";
+import { AidProgram } from "../../../types/aids";
 
 interface Props {
   onGetData: (p: Object) => void;
@@ -20,7 +21,7 @@ interface Props {
       fullName: string;
       status: { status: string };
     }[];
-    aidPrograms: { id: string; name: string; type: string; status: string }[];
+    aidPrograms: AidProgram[];
   };
 }
 
