@@ -19,6 +19,7 @@ import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
+import { riyalIcon } from "../../assets/icons/icons";
 import i18n from "../../i18next";
 import { triggerFilePreview } from "../../layouts/auth/globalModal";
 import { addNotification } from "../../store/actions/notifications";
@@ -45,6 +46,7 @@ export interface TableProps {
     type?: string;
     timestampFormat?: string;
     options?: { value: string; label?: string }[];
+    moneyUnit?: boolean;
   }[];
   data: { id?: string }[];
   onPageChange: (page: number, size: number) => void;
@@ -67,7 +69,23 @@ interface Props {
   timestampFormat?: string;
   options?: { value: string | number; label?: string }[];
   name: string;
+  hasFile?: boolean;
+  money?: boolean;
 }
+
+export const MoneyUnit = () => (
+  <img src={riyalIcon} height={15} className="ms-1" />
+);
+
+const withMoneyUnit = (content: React.ReactNode, money?: boolean) => {
+  return money ? (
+    <>
+      {content} <MoneyUnit />
+    </>
+  ) : (
+    <>{content}</>
+  );
+};
 
 export const dataRender = ({
   row,
@@ -77,20 +95,52 @@ export const dataRender = ({
   options,
   timestampFormat,
   name,
+  hasFile,
+  money,
 }: Props) => {
+  const wrap = (content: React.ReactNode) => withMoneyUnit(content, money);
+
+  if (!data && money) {
+    return wrap(0);
+  }
+
   if (!data && !render && type !== "file") {
     return "-";
   }
 
+  if (hasFile) {
+    const files = (row as any)[`${name}File`]?.map(({ path = "" }) => path);
+
+    return files
+      ? wrap(
+          <>
+            {files?.map((file = "") => (
+              <FontAwesomeIcon
+                icon={faFile}
+                role="button"
+                className="me-1"
+                onClick={() => triggerFilePreview(file)}
+              />
+            ))}{" "}
+            {(row as any)[name]}
+          </>
+        )
+      : "-";
+  }
+
   switch (type) {
     case "date":
-      return moment(data)
-        .locale(i18n.language)
-        .format(timestampFormat || viewDateFormat);
+      return wrap(
+        moment(data)
+          .locale(i18n.language)
+          .format(timestampFormat || viewDateFormat)
+      );
     case "time":
-      return moment("2025-06-08T" + data)
-        .locale(i18n.language)
-        .format(timestampFormat || viewTimeFormat);
+      return wrap(
+        moment("2025-06-08T" + data)
+          .locale(i18n.language)
+          .format(timestampFormat || viewTimeFormat)
+      );
     case "phoneNumber":
       return (
         <span dir="ltr">
@@ -122,28 +172,29 @@ export const dataRender = ({
     case "select":
     case "radio":
       const option = options?.find(({ value }) => value === data);
-      return option?.label || option?.value;
+      return wrap(option?.label || option?.value);
     case "file":
-      const files = (row as any)?.files[name]?.map(({ path = "" }) => path);
-
-      return files
-        ? files?.map((file = "") => (
-            <FontAwesomeIcon
-              icon={faFile}
-              role="button"
-              className="me-1"
-              onClick={() => triggerFilePreview(file)}
-            />
-          ))
-        : "-";
+      const files = (row as any)[name]?.map(({ path = "" }) => path);
+      return wrap(
+        files
+          ? files?.map((file = "") => (
+              <FontAwesomeIcon
+                icon={faFile}
+                role="button"
+                className="me-1"
+                onClick={() => triggerFilePreview(file)}
+              />
+            ))
+          : "-"
+      );
     case "location":
-      return (
+      return wrap(
         <a href={data} target="_blank" rel="noreferrer">
           <FontAwesomeIcon icon={faLocationPin} />
         </a>
       );
     case "image":
-      return (
+      return wrap(
         <FontAwesomeIcon
           icon={faEye}
           role="button"
@@ -152,8 +203,7 @@ export const dataRender = ({
       );
     case "stars":
       const starsToDisplay = [1, 2, 3, 4, 5];
-
-      return (
+      return wrap(
         <div className="d-flex">
           {starsToDisplay.map((i) => (
             <FontAwesomeIcon
@@ -165,11 +215,10 @@ export const dataRender = ({
           ))}
         </div>
       );
-
     case "custom":
-      return render && row ? render(row) : data;
+      return wrap(render && row ? render(row) : data);
     default:
-      return data;
+      return wrap(data);
   }
 };
 
@@ -243,7 +292,10 @@ const DynamicTable = ({
                 </td>
 
                 {columns.map(
-                  ({ name, type, options, render, timestampFormat }, y) => (
+                  (
+                    { name, type, options, render, timestampFormat, moneyUnit },
+                    y
+                  ) => (
                     <td className="py-3" key={y}>
                       {dataRender({
                         row,
@@ -253,6 +305,7 @@ const DynamicTable = ({
                         options,
                         timestampFormat,
                         name,
+                        money: moneyUnit,
                       })}
                     </td>
                   )

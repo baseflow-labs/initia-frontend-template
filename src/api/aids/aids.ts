@@ -22,10 +22,17 @@ const create = async (data: object) => {
   return res;
 };
 
-const updateStatus = async (id: string, status: string) => {
-  const res = await api.patch(mainPath + "/update-status/" + id, {
+const updateStatus = async (
+  id: string,
+  status: string,
+  note?: string,
+  collectionDate?: string
+) => {
+  const res = await api.patch(mainPath + "/update-status/", {
     status,
     aid: id,
+    note,
+    collectionDate,
   });
   return res;
 };

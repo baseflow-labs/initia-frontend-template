@@ -6,18 +6,18 @@ import { useTranslation } from "react-i18next";
 import * as AidApi from "../../../api/aids/aids";
 import UnacceptedBeneficiary from "../../../components/card/unacceptedBeneficiary";
 import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
+import * as AidProgramApi from "../../../api/aids/aidPrograms";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { useAppSelector } from "../../../store/hooks";
 import {
   apiCatchGlobalHandler,
+  pluralLabelResolve,
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
-import {
-  getAidStatuses,
-  getAidTypes,
-} from "../../../utils/optionDataLists/aids";
+import { getAidStatuses } from "../../../utils/optionDataLists/aids";
 import RequestAid from "./requestAid";
+import { MoneyUnit } from "../../../components/table";
 
 const AidsBeneficiaryView = () => {
   const { t } = useTranslation();
@@ -31,6 +31,9 @@ const AidsBeneficiaryView = () => {
     capacity: 10,
     count: 0,
     pagesCount: 1,
+  });
+  const [selectOptions, setSelectOptions] = useState({
+    aidPrograms: [{ id: "", name: "", status: "" }],
   });
 
   const getData = ({
@@ -65,10 +68,19 @@ const AidsBeneficiaryView = () => {
   };
 
   useLayoutEffect(() => {
+    AidProgramApi.getAll({ capacity: 999 })
+      .then((res: any) =>
+        setSelectOptions((current) => ({
+          ...current,
+          aidPrograms: res.payload.filter(
+            ({ status = "" }) => status === "Opened"
+          ),
+        }))
+      )
+      .catch(apiCatchGlobalHandler);
+
     getData({});
   }, []);
-
-  const aidTypes = getAidTypes(t);
 
   const statuses = getAidStatuses(t);
 
@@ -77,11 +89,6 @@ const AidsBeneficiaryView = () => {
       label: t("Auth.MembershipRegistration.Statuses.Status"),
       options: statuses,
       name: "aidStatuses=>status",
-    },
-    {
-      label: t("Auth.Aids.AidType"),
-      options: aidTypes,
-      name: "type",
     },
   ];
 
@@ -94,15 +101,25 @@ const AidsBeneficiaryView = () => {
 
   const columns = [
     {
-      type: "text",
+      type: "custom",
       name: "name",
       label: t("Auth.Aids.AidName"),
+      render: (row: any) => row.aidProgram.name,
     },
     {
-      type: "select",
-      options: aidTypes,
-      name: "type",
-      label: t("Auth.Aids.AidType"),
+      type: "custom",
+      name: "value",
+      label: t("Auth.Aids.AidValue"),
+      render: (row: any) => (
+        <>
+          {row.value}{" "}
+          {row.aidProgram.type === "Cash" ? (
+            <MoneyUnit />
+          ) : (
+            pluralLabelResolve(t, row.value, "Auth.Aids.AidPiece")
+          )}
+        </>
+      ),
     },
     {
       type: "date",
@@ -167,6 +184,7 @@ const AidsBeneficiaryView = () => {
         currentFilters={currentFilters}
         openModal={openModal}
         setOpenModal={setOpenModal}
+        selectOptions={selectOptions}
       />
     </Fragment>
   );

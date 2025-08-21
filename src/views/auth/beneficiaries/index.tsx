@@ -5,27 +5,25 @@ import {
   faUser,
   faUserMinus,
 } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
-
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
+import DemoLoginNote from "../../../layouts/auth/demoLoginNote";
 import TablePage from "../../../layouts/auth/pages/tablePage";
-import {
-  getBeneficiaryCategories,
-  getGenders,
-  getHomeTypes,
-  getNationalities,
-  getProvinces,
-} from "../../../utils/optionDataLists/beneficiaries";
+import { exportDataToSingleSheetExcel } from "../../../utils/filesExport";
 import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
 } from "../../../utils/function";
+import {
+  getBeneficiaryCategories,
+  getGenders,
+  getNationalities,
+  getProvinces,
+} from "../../../utils/optionDataLists/beneficiaries";
 import CancelMembership from "./cancelMembership";
-import DemoLoginNote from "../../../layouts/auth/demoLoginNote";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { exportDataToSingleSheetExcel } from "../../../utils/filesExport";
 
 const BeneficiariesView = () => {
   const { t } = useTranslation();
@@ -104,8 +102,6 @@ const BeneficiariesView = () => {
 
   const provinces = getProvinces(t);
 
-  const homeTypes = getHomeTypes(t);
-
   const filters = [
     {
       label: t("Auth.MembershipRegistration.Form.Nationality.Title"),
@@ -140,12 +136,6 @@ const BeneficiariesView = () => {
       options: nationalities,
       name: "nationality",
       label: t("Auth.MembershipRegistration.Form.Nationality.Title"),
-    },
-    {
-      type: "select",
-      options: homeTypes,
-      name: "homeType",
-      label: t("Auth.MembershipRegistration.Form.HomeType.Title"),
     },
     {
       type: "phoneNumber",

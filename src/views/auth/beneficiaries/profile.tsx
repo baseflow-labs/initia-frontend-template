@@ -18,6 +18,7 @@ import { InputSingleProps } from "../../../components/form";
 import { dataRender } from "../../../components/table";
 import TooltipComp from "../../../components/tooltip";
 import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
+import { useAppSelector } from "../../../store/hooks";
 import { exportDataToMultipleSheetsExcel } from "../../../utils/filesExport";
 import {
   getBasicDataInputs,
@@ -36,6 +37,7 @@ import { getBeneficiaryCategories } from "../../../utils/optionDataLists/benefic
 const BeneficiaryProfileView = () => {
   const { t } = useTranslation();
   const [searchParams] = useSearchParams();
+  const { user } = useAppSelector((state) => state.auth);
 
   const [beneficiary, setBeneficiary] = useState<any>();
   const [income, setIncome] = useState<number>(0);
@@ -75,7 +77,7 @@ const BeneficiaryProfileView = () => {
   const commonCards1 = [
     {
       title: t("Auth.MembershipRegistration.Form.BasicData"),
-      data: beneficiary?.beneficiary || beneficiary,
+      data: beneficiary?.beneficiary,
       map: getBasicDataInputs(t),
     },
     {
@@ -198,10 +200,7 @@ const BeneficiaryProfileView = () => {
       });
     }
 
-    const fileName =
-      (beneficiary?.fullName ||
-        beneficiary?.beneficiary?.fullName ||
-        "Export") + ".xlsx";
+    const fileName = (beneficiary?.beneficiary?.fullName || "Export") + ".xlsx";
 
     exportDataToMultipleSheetsExcel(
       fileName.replace(/[/\\?%*:|"<>]/g, "_"),
@@ -214,16 +213,20 @@ const BeneficiaryProfileView = () => {
       <div className="row w-100 mx-auto">
         <div className="col-6 col-md-9 d-flex">
           <h2>
-            {beneficiary?.fullName || beneficiary?.beneficiary?.fullName}{" "}
+            {user.role === "researcher"
+              ? beneficiary?.beneficiary?.fullName
+              : beneficiary?.beneficiary?.fileNo}{" "}
           </h2>
 
-          <small className="bg-opacity-info p-2 rounded-4 text-sm ms-2 my-auto text-info">
-            {beneficiary?.fileNo || beneficiary?.beneficiary?.fileNo}
-          </small>
+          {user.role === "researcher" && (
+            <small className="bg-opacity-info p-2 rounded-4 text-sm ms-2 my-auto text-info">
+              {beneficiary?.beneficiary?.fileNo}
+            </small>
+          )}
 
           <small className="bg-opacity-info p-2 rounded-4 text-sm ms-2 my-auto text-info">
             {renderDataFromOptions(
-              beneficiary?.category || beneficiary?.beneficiary?.category,
+              beneficiary?.beneficiary?.category,
               getBeneficiaryCategories(t)
             )}
           </small>
@@ -321,7 +324,8 @@ const BeneficiaryProfileView = () => {
                     //   },
                     //   []
                     // )
-                    ?.map((prop: InputSingleProps, y = 0) => (
+                    ?.filter(({ hideFile = false }) => !hideFile)
+                    .map((prop: InputSingleProps, y = 0) => (
                       <tr key={y}>
                         <td
                           className="pb-3 text-break"
@@ -341,6 +345,8 @@ const BeneficiaryProfileView = () => {
                             type: prop.type,
                             options: prop.options || [],
                             name: prop.name,
+                            hasFile: prop.hasFile,
+                            money: prop.moneyUnit,
                           })}
                         </td>
                       </tr>

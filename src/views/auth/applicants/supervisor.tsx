@@ -7,6 +7,7 @@ import { useNavigate } from "react-router";
 
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import * as StaffApi from "../../../api/staff/researcher";
+import DemoLoginNote from "../../../layouts/auth/demoLoginNote";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import {
@@ -21,7 +22,6 @@ import {
   getProvinces,
 } from "../../../utils/optionDataLists/beneficiaries";
 import AssignResearcher from "./assignResearcher";
-import DemoLoginNote from "../../../layouts/auth/demoLoginNote";
 
 const ApplicantsViewForSupervisor = () => {
   const { t } = useTranslation();
@@ -162,11 +162,6 @@ const ApplicantsViewForSupervisor = () => {
       type: "text",
       name: "fileNo",
       label: t("Auth.MembershipRegistration.Form.FileNo"),
-    },
-    {
-      type: "text",
-      name: "fullName",
-      label: t("Auth.Beneficiaries.BeneficiaryName"),
     },
     {
       type: "numberText",

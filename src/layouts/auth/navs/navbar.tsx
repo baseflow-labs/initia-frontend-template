@@ -73,7 +73,14 @@ const DashboardNavbar = ({
       <div className="row w-100 justify-content-between">
         {showNav && (
           <div className="col-6 col-lg-1 order-1">
-            <img alt="logo" src={logo} height="40px" />
+            <img
+              alt="logo"
+              src={
+                (process.env.REACT_APP_STORAGE_DIRECTORY_URL ||
+                  "https://pdt-bucket.s3.us-east-1.amazonaws.com") + logo
+              }
+              height="40px"
+            />
           </div>
         )}
 

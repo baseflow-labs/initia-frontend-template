@@ -13,6 +13,7 @@ import IconWrapperComp from "../../assets/icons/wrapper";
 import { useAppSelector } from "../../store/hooks";
 import Button from "../core/button";
 import Spinner from "../core/spinner";
+import { MoneyUnit } from "../table";
 import InputComp from "./Input";
 import DefaultInput from "./inputs/default";
 
@@ -60,6 +61,9 @@ export interface InputSingleProps extends InputBasicProps {
   logo?: string;
   sizing?: string;
   halfCol?: boolean;
+  hasFile?: boolean;
+  hideFile?: boolean;
+  moneyUnit?: boolean;
   prefixText?: string | number;
   postfixText?: string | number;
   aboveComp?: React.ReactNode;
@@ -284,6 +288,7 @@ const Form: React.FC<Props> = ({
                   min,
                   max,
                   minLength,
+                  moneyUnit,
                   ...input
                 },
                 i
@@ -334,7 +339,9 @@ const Form: React.FC<Props> = ({
 
                           <InputComp id={input.name} type={type} {...input} />
 
-                          <InlineElement content={postfixText} />
+                          <InlineElement
+                            content={moneyUnit ? <MoneyUnit /> : postfixText}
+                          />
                         </div>
 
                         {belowComp}
@@ -365,7 +372,9 @@ const Form: React.FC<Props> = ({
 
                       <InputComp id={input.name} type={type} {...input} />
 
-                      <InlineElement content={postfixText} />
+                      <InlineElement
+                        content={moneyUnit ? <MoneyUnit /> : postfixText}
+                      />
                     </div>
 
                     <ErrorView />

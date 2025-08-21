@@ -23,8 +23,7 @@ const DashboardAdminView = () => {
                 : profilePhotoPlaceholder
             }
             alt="logo"
-            height={250}
-            className="my-5"
+            className="my-5 w-100"
           />
 
           <h4 className="display-4 mt-5 text-success">{name}</h4>

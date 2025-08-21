@@ -1,39 +1,51 @@
 import {
   faCheck,
   faCircle,
-  faFilter,
+  faHandHoldingDollar,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import moment from "moment";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
+import * as AidProgramApi from "../../../api/aids/aidPrograms";
 import * as AidApi from "../../../api/aids/aids";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
+import { MoneyUnit } from "../../../components/table";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
+import { useAppSelector } from "../../../store/hooks";
+import { dataDateFormat } from "../../../utils/consts";
 import {
   apiCatchGlobalHandler,
+  pluralLabelResolve,
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
-import {
-  getAidStatuses,
-  getAidTypes,
-} from "../../../utils/optionDataLists/aids";
+import { getAidStatuses } from "../../../utils/optionDataLists/aids";
+import AccountantApproveAid from "./accountantApproveAid";
+import AccountantRejectAid from "./accountantRejectAid";
 import SendAid from "./sendAid";
+import { Aid, defaultAid } from "../../../types/aids";
 
 const AidsView = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const { user } = useAppSelector((state) => state.auth);
 
   const [openModal, setOpenModal] = useState(false);
-  const [aids, setAids] = useState<
-    { id: string; beneficiaryId: string; status: string }[]
-  >([]);
+  const [openAccountantApproveModal, setOpenAccountantApproveModal] =
+    useState<Aid>(defaultAid);
+  const [openAccountantRejectModal, setOpenAccountantRejectModal] = useState<
+    boolean | string
+  >(false);
+
+  const [aids, setAids] = useState<Aid[]>([]);
   const [selectOptions, setSelectOptions] = useState({
     beneficiaries: [{ id: "", fullName: "", status: { status: "" } }],
+    aidPrograms: [{ id: "", name: "", type: "", status: "" }],
   });
   const [currentFilters, setCurrentFilters] = useState({});
   const [currentSearch, setCurrentSearch] = useState("");
@@ -102,9 +114,18 @@ const AidsView = () => {
         }))
       )
       .catch(apiCatchGlobalHandler);
-  }, []);
 
-  const aidTypes = getAidTypes(t);
+    AidProgramApi.getAll({ capacity: 999 })
+      .then((res: any) =>
+        setSelectOptions((current) => ({
+          ...current,
+          aidPrograms: res.payload.filter(
+            ({ status = "" }) => status === "Opened"
+          ),
+        }))
+      )
+      .catch(apiCatchGlobalHandler);
+  }, []);
 
   const statuses = getAidStatuses(t);
 
@@ -120,8 +141,11 @@ const AidsView = () => {
       name: "beneficiary",
     },
     {
-      label: t("Auth.Aids.AidType"),
-      options: aidTypes,
+      label: t("Auth.AidPrograms.Title"),
+      options: selectOptions.aidPrograms.map(({ id, name }) => ({
+        value: id,
+        label: name,
+      })),
       name: "type",
     },
     {
@@ -141,24 +165,34 @@ const AidsView = () => {
   const columns = [
     {
       type: "text",
-      name: "fullName",
-      label: t("Auth.Beneficiaries.BeneficiaryName"),
+      name: "fileNo",
+      label: t("Auth.MembershipRegistration.Form.FileNo"),
     },
     {
-      type: "text",
+      type: "custom",
       name: "name",
       label: t("Auth.Aids.AidName"),
-    },
-    {
-      type: "select",
-      options: aidTypes,
-      name: "type",
-      label: t("Auth.Aids.AidType"),
+      render: (row: any) => row.aidProgram.name,
     },
     {
       type: "date",
       name: "createdAt",
       label: t("Global.Labels.ApplicationDate"),
+    },
+    {
+      type: "custom",
+      name: "value",
+      label: t("Auth.Aids.AidValue"),
+      render: (row: any) => (
+        <>
+          {row.value}{" "}
+          {row.aidProgram.type === "Cash" ? (
+            <MoneyUnit />
+          ) : (
+            pluralLabelResolve(t, row.value, "Auth.Aids.AidPiece")
+          )}
+        </>
+      ),
     },
     {
       type: "date",
@@ -194,18 +228,20 @@ const AidsView = () => {
     },
   ];
 
-  const grantLabel = t("Auth.Aids.Statuses.Grant");
-  const rejectLabel = t("Auth.Aids.Statuses.Reject");
-
-  const updateStatus = (id: string, status: string) => {
-    AidApi.updateStatus(id, status)
+  const grant = (id: string) => {
+    AidApi.updateStatus(
+      id,
+      "Granted",
+      undefined,
+      moment().locale("en").format(dataDateFormat)
+    )
       .then(() => {
         const aid = aids.find((aid) => aid.id === id);
         getData({});
         dispatch(
           addNotification({
             msg: t("Global.Form.SuccessMsg", {
-              action: status === "Granted" ? grantLabel : rejectLabel,
+              action: t("Auth.Aids.Statuses.Grant"),
               data: selectOptions.beneficiaries.find(
                 ({ id }) => id === aid?.beneficiaryId
               )?.fullName,
@@ -221,6 +257,17 @@ const AidsView = () => {
     getData({ page: 1, capacity: 10, search: e });
   };
 
+  const openResponseModal = (data: string, response: string) => {
+    const row = aids.find(({ id }) => id === data);
+
+    if (response === "approve") {
+      setOpenAccountantApproveModal(row || defaultAid);
+      return;
+    }
+
+    setOpenAccountantRejectModal(row?.id || "");
+  };
+
   return (
     <Fragment>
       <TablePage
@@ -232,20 +279,21 @@ const AidsView = () => {
         tableActions={(id?: string) => {
           const aid = aids.find((a) => a.id === id);
 
+          const approved = aid?.status === "Approved";
           const granted = aid?.status === "Granted";
           const rejected = aid?.status === "Rejected";
 
           return [
             {
-              label: t("Auth.Aids.Statuses.Grant"),
+              label: t("Auth.Aids.Statuses.Approve"),
               icon: faCheck,
               spread: false,
               onClick: (data: string) =>
-                !granted
-                  ? updateStatus(data, "Granted")
+                !approved && !granted
+                  ? openResponseModal(data, "approve")
                   : dispatch(
                       addNotification({
-                        msg: t("Auth.Aids.CantGrantAlready"),
+                        msg: t("Auth.Aids.CantApproveAlready"),
                       })
                     ),
             },
@@ -254,8 +302,8 @@ const AidsView = () => {
               icon: faXmark,
               spread: false,
               onClick: (data: string) =>
-                !rejected
-                  ? updateStatus(data, "Rejected")
+                !rejected && !granted
+                  ? openResponseModal(data, "reject")
                   : dispatch(
                       addNotification({
                         msg: t("Auth.Aids.CantRejectAlready"),
@@ -263,21 +311,35 @@ const AidsView = () => {
                     ),
             },
             {
-              label: t("Auth.Aids.FilterByThisBeneficiary"),
-              icon: faFilter,
-              spread: true,
-              onClick: (data: string) => {
-                const beneficiary = aids.find(
-                  (a) => a.id === data
-                )?.beneficiaryId;
-
-                setCurrentFilters({ beneficiary });
-                getData({ filters: { beneficiary } });
-              },
+              label: t("Auth.Aids.Statuses.Grant"),
+              icon: faHandHoldingDollar,
+              spread: false,
+              onClick: (data: string) =>
+                !granted && approved
+                  ? grant(data)
+                  : dispatch(
+                      addNotification({
+                        msg: !approved
+                          ? t("Auth.Aids.CantGrantNonApproved")
+                          : t("Auth.Aids.CantGrantAlready"),
+                        type: !approved ? "err" : undefined,
+                      })
+                    ),
             },
           ];
         }}
-        columns={columns}
+        columns={
+          user.role === "researcher"
+            ? [
+                {
+                  type: "text",
+                  name: "fullName",
+                  label: t("Auth.Beneficiaries.BeneficiaryName"),
+                },
+                ...columns,
+              ]
+            : columns
+        }
         data={aids}
         onGetData={getData}
         paginationMeta={paginationMeta}
@@ -290,11 +352,23 @@ const AidsView = () => {
       />
 
       <SendAid
-        onGetData={getData}
         currentFilters={currentFilters}
         openModal={openModal}
         setOpenModal={setOpenModal}
         selectOptions={selectOptions}
+        onGetData={getData}
+      />
+
+      <AccountantApproveAid
+        openModal={openAccountantApproveModal}
+        setOpenModal={setOpenAccountantApproveModal}
+        onGetData={getData}
+      />
+
+      <AccountantRejectAid
+        openModal={openAccountantRejectModal}
+        setOpenModal={setOpenAccountantRejectModal}
+        onGetData={getData}
       />
     </Fragment>
   );

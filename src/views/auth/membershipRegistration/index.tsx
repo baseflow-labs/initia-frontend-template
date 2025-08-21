@@ -49,8 +49,8 @@ const MembershipRegistrationView = () => {
   useLayoutEffect(() => {
     if (searchParams.get("id")) {
       BeneficiaryApi.getById(searchParams.get("id") || "")
-        .then(
-          ({
+        .then((res: any) => {
+          const {
             contactsBank,
             dependents,
             housing,
@@ -58,21 +58,21 @@ const MembershipRegistrationView = () => {
             nationalRecord,
             user,
             status,
-            ...beneficiary
-          }: any) =>
-            beneficiary?.id
-              ? setFormData({
-                  contactsBank,
-                  dependents,
-                  housing,
-                  status,
-                  income,
-                  nationalRecord,
-                  user,
-                  beneficiary,
-                })
-              : ""
-        )
+            beneficiary,
+          } = res.payload;
+
+          if (beneficiary?.id)
+            setFormData({
+              contactsBank,
+              dependents,
+              housing,
+              status,
+              income,
+              nationalRecord,
+              user,
+              beneficiary,
+            });
+        })
         .catch(apiCatchGlobalHandler);
     } else {
       BeneficiaryApi.getByUserId()
@@ -173,6 +173,11 @@ const MembershipRegistrationView = () => {
 
     if (!iban.startsWith("SA")) {
       errors.bankAccountNumber = "يجب أن يبدأ رقم الآيبان بـ SA";
+    } else if (iban.length !== 24) {
+      errors.bankAccountNumber = "رقم الآيبان يجب أن يتكون من 24 خانة بالضبط";
+    } else if (!/^[A-Z0-9]+$/.test(iban)) {
+      errors.bankAccountNumber =
+        "رقم الآيبان يجب أن يحتوي على أرقام وحروف فقط بدون مسافات أو رموز خاصة";
     } else {
       const bankCode = iban.substring(4, 8);
 
@@ -199,7 +204,7 @@ const MembershipRegistrationView = () => {
 
             BeneficiaryApi.createOrUpdate({
               ...final,
-              user: formData.user?.id,
+              user: e.user?.id,
             })
               .then((res: any) => {
                 resetForm();

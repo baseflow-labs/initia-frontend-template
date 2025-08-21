@@ -1,56 +1,49 @@
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-
-import { FormikProps } from "formik";
 import * as AidApi from "../../../api/aids/aids";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import { addNotification } from "../../../store/actions/notifications";
-import { getRequestAidInputs } from "../../../utils/formInputs/aids";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 
 interface Props {
-  onGetData: (p: Object) => void;
-  currentFilters: Object;
-  openModal: boolean;
+  openModal: boolean | string;
   setOpenModal: (s: boolean) => void;
-  selectOptions: {
-    aidPrograms: { id: string; name: string; status: string }[];
-  };
+  onGetData: (p: Object) => void;
 }
 
-const RequestAid = ({
-  onGetData,
-  currentFilters,
-  openModal,
-  setOpenModal,
-  selectOptions,
-}: Props) => {
+const AccountantRejectAid = ({ openModal, setOpenModal, onGetData }: Props) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
+  const rejectLabel = t("Auth.Aids.Statuses.Rejected");
+
   return (
     <Modal
-      title={t("Auth.Aids.Beneficiary.RequestAid")}
-      isOpen={openModal}
+      title={t("Auth.Aids.RejectAid")}
       onClose={() => setOpenModal(false)}
+      isOpen={!!openModal}
     >
       <Form
-        inputs={(formik: FormikProps<Record<string, any>>) =>
-          getRequestAidInputs(t, selectOptions, formik)
-        }
-        submitText={t("Global.Form.Labels.SubmitApplication")}
+        inputs={() => [
+          {
+            type: "textarea",
+            name: "note",
+            label: t("Auth.AidCategories.AidRejectReason"),
+            required: true,
+          },
+        ]}
         onFormSubmit={(e, resetForm) => {
-          AidApi.create(e)
+          AidApi.updateStatus(String(openModal), "Denied", e.note)
             .then(() => {
               setOpenModal(false);
               resetForm();
-              onGetData({ page: 1, capacity: 10 });
+              onGetData({});
               dispatch(
                 addNotification({
                   msg: t("Global.Form.SuccessMsg", {
-                    action: t("Auth.Aids.Beneficiary.RequestAid"),
-                    data: e.name,
+                    action: rejectLabel,
+                    data: "المستفيد",
                   }),
                 })
               );
@@ -62,4 +55,4 @@ const RequestAid = ({
   );
 };
 
-export default RequestAid;
+export default AccountantRejectAid;

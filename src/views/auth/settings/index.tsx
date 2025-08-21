@@ -1,4 +1,5 @@
-import { Fragment } from "react";
+import { FormikErrors } from "formik";
+import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
@@ -16,13 +17,13 @@ import {
 } from "../../../utils/formInputs/settings";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import AccountDelete from "./accountDelete";
-import { FormikErrors } from "formik";
 
 const SettingsPage = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { fontSize, ...metadata } = useAppSelector((state) => state.settings);
+  const { fontSize } = useAppSelector((state) => state.settings);
   const { user } = useAppSelector((state) => state.auth);
+  const [formMetadata, setFormMetadata] = useState({});
 
   const onMetadataSubmit = (values = {}) => {
     const data = Object.keys(values)
@@ -31,8 +32,6 @@ const SettingsPage = () => {
 
     MetadataApi.update(data)
       .then(() => {
-        dispatch(setMetadata(data as any));
-
         dispatch(
           addNotification({
             msg: t("Global.Form.SuccessMsg", {
@@ -41,6 +40,8 @@ const SettingsPage = () => {
             }),
           })
         );
+
+        window.location.reload();
       })
       .catch(apiCatchGlobalHandler);
   };
@@ -75,6 +76,15 @@ const SettingsPage = () => {
     return errors;
   };
 
+  useLayoutEffect(() => {
+    MetadataApi.get()
+      .then((res: any) => {
+        console.log({ res });
+        setFormMetadata(res.payload);
+      })
+      .catch(apiCatchGlobalHandler);
+  }, []);
+
   return (
     <BoxedPage title={t("Auth.Settings.Title")}>
       <Fragment>
@@ -84,7 +94,6 @@ const SettingsPage = () => {
           inputs={() => getCommonSettingInputs(t)}
           initialValues={{
             fontSize: fontSize,
-            ...metadata,
           }}
           submitText={t("Global.Form.Labels.Save")}
           onFormSubmit={(values) => {
@@ -123,7 +132,7 @@ const SettingsPage = () => {
               inputs={() => metadataSettingInputs(t)}
               initialValues={{
                 fontSize: fontSize,
-                ...metadata,
+                ...formMetadata,
               }}
               submitText={t("Global.Form.Labels.Save")}
               onFormSubmit={(values) => {

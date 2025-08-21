@@ -1,8 +1,8 @@
 import { Suspense, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router";
 
-import { useDispatch } from "react-redux";
 import * as MetadataApi from "./api/metadata";
 import Spinner from "./components/core/spinner";
 import NotificationsToaster from "./components/toaster";
@@ -31,7 +31,12 @@ const App = () => {
   useEffect(() => {
     MetadataApi.get()
       .then((res: any) => {
-        dispatch(setMetadata(res.payload));
+        dispatch(
+          setMetadata({
+            ...res.payload,
+            logo: (res.payload.logo && res.payload.logo[0].path) || "/logo.png",
+          })
+        );
       })
       .catch(apiCatchGlobalHandler);
   }, []);

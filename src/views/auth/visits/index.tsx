@@ -36,7 +36,9 @@ const VisitsView = () => {
   const [openModal, setOpenModal] = useState(false);
 
   const [selectOptions, setSelectOptions] = useState({
-    beneficiaries: [{ id: "", fullName: "" }],
+    beneficiaries: [
+      { id: "", fullName: "", addresses: [{ id: "", address: "" }] },
+    ],
   });
   const [visits, setVisits] = useState<
     { id: string; visitReport: object; status: string }[]
@@ -77,7 +79,7 @@ const VisitsView = () => {
             ({
               beneficiary = {
                 contactsBank: {},
-                housing: [{}],
+
                 user: { username: "" },
               },
               ...rest
@@ -86,7 +88,6 @@ const VisitsView = () => {
               ...beneficiary.contactsBank,
               ...beneficiary,
               ...rest,
-              housing: beneficiary.housing,
             })
           ) as any
         );
@@ -112,7 +113,14 @@ const VisitsView = () => {
       .then((res: any) =>
         setSelectOptions((current) => ({
           ...current,
-          beneficiaries: res.payload,
+          beneficiaries: res.payload.map((beneficiary: any) => ({
+            ...beneficiary,
+            addresses: beneficiary.housing?.map((house: any) => ({
+              id: house.id,
+              beneficiary: beneficiary.id,
+              address: house.city + " - " + house.district,
+            })),
+          })),
         }))
       )
       .catch(apiCatchGlobalHandler);
@@ -156,8 +164,8 @@ const VisitsView = () => {
   const columns = [
     {
       type: "text",
-      name: "fullName",
-      label: t("Auth.Beneficiaries.BeneficiaryName"),
+      name: "fileNo",
+      label: t("Auth.MembershipRegistration.Form.FileNo"),
     },
     {
       type: "date",
@@ -177,15 +185,9 @@ const VisitsView = () => {
     },
     {
       type: "custom",
-      name: "city",
+      name: "housing",
       label: t("Auth.MembershipRegistration.Address"),
-      render: (row: any) =>
-        row.housing?.map((house: any, i: number) => (
-          <div key={i}>
-            <FontAwesomeIcon className="text-info" icon={faHome} />{" "}
-            {house.city + " - " + house.district}
-          </div>
-        )),
+      render: (row: any) => row.housing?.city + " - " + row.housing?.district,
     },
     {
       type: "custom",
@@ -301,7 +303,7 @@ const VisitsView = () => {
                         type: "err",
                       })
                     )
-                  : user.role === "hod"
+                  : user.role !== "researcher"
                   ? dispatch(
                       addNotification({
                         msg: t("Auth.Visits.Report.OnlyResearchersCouldAdd"),
@@ -329,7 +331,18 @@ const VisitsView = () => {
           return final;
         }}
         actionButtons={user.role !== "hod" ? actionButtons : undefined}
-        columns={columns}
+        columns={
+          user.role === "researcher"
+            ? [
+                {
+                  type: "text",
+                  name: "fullName",
+                  label: t("Auth.Beneficiaries.BeneficiaryName"),
+                },
+                ...columns,
+              ]
+            : columns
+        }
         data={visits}
         onGetData={getData}
         paginationMeta={paginationMeta}

@@ -43,8 +43,10 @@ export const metadataSettingInputs = (t: Function) => {
     {
       type: "file",
       fileSizeLimit: 2,
+      maxFiles: 1,
       name: "logo",
       label: t("Auth.Settings.SocietyLogo"),
+      required: true,
     },
     {
       type: "phoneNumber",

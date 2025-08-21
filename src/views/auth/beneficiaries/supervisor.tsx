@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
+
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import * as StaffApi from "../../../api/staff/researcher";
 import DemoLoginNote from "../../../layouts/auth/demoLoginNote";
@@ -20,7 +21,6 @@ import {
 import {
   getBeneficiaryCategories,
   getGenders,
-  getHomeTypes,
   getNationalities,
   getProvinces,
 } from "../../../utils/optionDataLists/beneficiaries";
@@ -116,8 +116,6 @@ const BeneficiariesViewForSupervisor = () => {
 
   const provinces = getProvinces(t);
 
-  const homeTypes = getHomeTypes(t);
-
   const filters = [
     {
       label: t("Auth.MembershipRegistration.Form.Nationality.Title"),
@@ -138,11 +136,6 @@ const BeneficiariesViewForSupervisor = () => {
       label: t("Auth.MembershipRegistration.Form.FileNo"),
     },
     {
-      type: "text",
-      name: "fullName",
-      label: t("Auth.Beneficiaries.BeneficiaryName"),
-    },
-    {
       type: "numberText",
       name: "idNumber",
       label: t("Auth.MembershipRegistration.Form.IdNumber"),
@@ -152,12 +145,6 @@ const BeneficiariesViewForSupervisor = () => {
       options: nationalities,
       name: "nationality",
       label: t("Auth.MembershipRegistration.Form.Nationality.Title"),
-    },
-    {
-      type: "select",
-      options: homeTypes,
-      name: "homeType",
-      label: t("Auth.MembershipRegistration.Form.HomeType.Title"),
     },
     {
       type: "phoneNumber",

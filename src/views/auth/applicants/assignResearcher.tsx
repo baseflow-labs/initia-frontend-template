@@ -52,7 +52,7 @@ const AssignResearcher = ({
           initialValues={openModal}
           submitText={t("Auth.Researchers.Assign")}
           onFormSubmit={(e, resetForm) => {
-            BeneficiaryApi.assignResearcher(e.beneficiary || "", e)
+            BeneficiaryApi.assignResearcher(e)
               .then(() => {
                 resetForm();
                 dispatch(
