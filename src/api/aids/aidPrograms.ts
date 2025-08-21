@@ -25,7 +25,7 @@ const update = async (id: string, data: object) => {
 };
 
 const updateStatus = async (id: string, status: string) => {
-  const res = await api.patch(mainPath + "/" + id + "/update-status/", {
+  const res = await api.patch(mainPath + "/" + id + "/update-status", {
     status,
   });
   return res;
