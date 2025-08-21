@@ -65,7 +65,7 @@ const AccountantApproveAid = ({
       className="modal-lg"
       isOpen={!!openModal.id}
     >
-      <h5 className="mb-4">{openModal.fileNo}</h5>
+      <h5 className="mb-4">{openModal.value}</h5>
       <h5>القيمة المطلوبة</h5>
       <h3>{openModal.value}</h3>
 
