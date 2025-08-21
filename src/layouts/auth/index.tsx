@@ -163,14 +163,14 @@ const AuthLayout = () => {
     },
     {
       name: t("Auth.Beneficiaries.Profile.Title"),
-      route: "/review/",
+      route: "/review",
       view: <BeneficiaryFormReview />,
       icon: beneficiariesIcon,
       users: ["researcher", "admin"],
     },
     {
       name: t("Auth.Beneficiaries.Profile.Title"),
-      route: "/profile/",
+      route: "/profile",
       view: <BeneficiaryProfileView />,
       icon: beneficiariesIcon,
       users: ["researcher", "hod", "admin"],
@@ -224,7 +224,7 @@ const AuthLayout = () => {
     },
     {
       name: t("Auth.AidCategories.Title"),
-      route: "/aid-category",
+      route: "/aidCategory",
       view: <AidCategoriesView />,
       showInNav: true,
       icon: aidsIcon,
@@ -232,7 +232,7 @@ const AuthLayout = () => {
     },
     {
       name: t("Auth.AidPrograms.Title"),
-      route: "/aid-program",
+      route: "/aidProgram",
       view: <AidProgramsView />,
       showInNav: true,
       icon: aidsIcon,
