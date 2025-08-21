@@ -45,6 +45,18 @@ export const getAidStatuses = (t: Function) => [
     value: "Rejected",
     label: t("Auth.MembershipRegistration.Statuses.Rejected"),
   },
+  {
+    value: "Approved",
+    label: t("Auth.Aids.Statuses.Approved"),
+  },
+  {
+    value: "Recommended",
+    label: t("Auth.Aids.Statuses.Recommended"),
+  },
+  {
+    value: "Denied",
+    label: t("Auth.Aids.Statuses.Denied"),
+  },
 ];
 
 export const getAidProgramStatuses = (t: Function) => [

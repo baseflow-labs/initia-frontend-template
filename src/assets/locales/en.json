@@ -56,15 +56,22 @@
         "Title": "Aids",
         "Urgent?": "Urgent?"
       },
+      "CantApproveAlready": "CantApproveAlready",
       "CantGrantAlready": "Aid Granted Already",
+      "CantGrantNonApproved": "Can't Grant Non Approved",
       "CantRejectAlready": "Aid Rejected Already",
       "RecaptionDate": "Recaption Date",
       "RejectAid": "RejectAid",
       "Statuses": {
+        "Approve": "Approve",
+        "Approved": "Approved",
+        "Denied": "Denied",
         "Grant": "Grant",
         "Granted": "Granted",
         "Pending": "Pending",
-        "Reject": "Reject"
+        "Recommended": "Recommended",
+        "Reject": "Reject",
+        "Rejected": "Rejected"
       },
       "Title": "Aids"
     },
@@ -623,6 +630,7 @@
         "Add": "Add",
         "AddFiles": "Add Files",
         "AddNew": "Add New",
+        "Approve": "Approve",
         "BrowserDontSupportLocation": "Browser Don't Support Location",
         "Confirm": "Confirm",
         "Edit": "Edit",

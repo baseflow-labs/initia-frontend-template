@@ -1,26 +1,50 @@
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
+
 import * as AidApi from "../../../api/aids/aids";
-import Form from "../../../components/form";
+import Button from "../../../components/core/button";
 import Modal from "../../../components/modal";
 import { addNotification } from "../../../store/actions/notifications";
 import { apiCatchGlobalHandler } from "../../../utils/function";
-import Button from "../../../components/core/button";
 
 interface Props {
-  openModal: boolean;
+  openModal: boolean | string;
   setOpenModal: (s: boolean) => void;
+  onGetData: (p: Object) => void;
 }
 
-const AccountantApproveAid = ({ openModal, setOpenModal }: Props) => {
+const AccountantApproveAid = ({
+  openModal,
+  setOpenModal,
+  onGetData,
+}: Props) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+
+  const approveLabel = t("Auth.Aids.Statuses.Approved");
+
+  const onSubmit = () => {
+    AidApi.updateStatus(String(openModal), "Approved")
+      .then(() => {
+        setOpenModal(false);
+        onGetData({});
+        dispatch(
+          addNotification({
+            msg: t("Global.Form.SuccessMsg", {
+              action: approveLabel,
+              data: "المستفيد",
+            }),
+          })
+        );
+      })
+      .catch(apiCatchGlobalHandler);
+  };
 
   return (
     <Modal
       title={t("Auth.Aids.ApproveAid")}
       onClose={() => setOpenModal(false)}
-      isOpen={openModal}
+      isOpen={!!openModal}
     >
       <table className="table table-borderless">
         <tbody>
@@ -43,9 +67,10 @@ const AccountantApproveAid = ({ openModal, setOpenModal }: Props) => {
           </tr>
 
           <tr>
-            {" "}
             <td colSpan={2}>
-              <Button className="w-100">موافقة</Button>
+              <Button className="w-100" onClick={() => onSubmit()}>
+                {t("Global.Form.Labels.Approve")}
+              </Button>
             </td>
           </tr>
         </tbody>

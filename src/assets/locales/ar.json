@@ -56,15 +56,22 @@
         "Title": "المعونات",
         "Urgent?": "هل الحالة مستعجلة؟"
       },
+      "CantApproveAlready": "تم اعتماد طلب المعونة بالفعل",
       "CantGrantAlready": "تمت الموافقة على طلب المعونة بالفعل",
+      "CantGrantNonApproved": "لا يمكن تسليم المعونات غير المعتمدة",
       "CantRejectAlready": "تمت رفض طلب المعونة بالفعل",
       "RecaptionDate": "تاريخ الاستلام",
       "RejectAid": "رفض تقديم المعونة",
       "Statuses": {
-        "Grant": "منح المعونة",
-        "Granted": "اعتمد",
+        "Approve": "اعتماد المعونة",
+        "Approved": "اعتمدت",
+        "Denied": "رفضت",
+        "Grant": "تم اليوم تسليم المعونة",
+        "Granted": "سلمت",
         "Pending": "قيد المراجعة",
-        "Reject": "رفض طلب المعونة"
+        "Recommended": "بانتظار الموافقة",
+        "Reject": "رفض المعونة",
+        "Rejected": "رفضت المعونة"
       },
       "Title": "طلبات المعونة"
     },
@@ -623,6 +630,7 @@
         "Add": "إضافة",
         "AddFiles": "إضافة مرفقات",
         "AddNew": "إضافة بيانات جديدة",
+        "Approve": "موافقة",
         "BrowserDontSupportLocation": "المتصفح لا يدعم تحديد الموقع, نرجو إدخاله بشكل يدوي",
         "Confirm": "تأكيد",
         "Edit": "تعديل",

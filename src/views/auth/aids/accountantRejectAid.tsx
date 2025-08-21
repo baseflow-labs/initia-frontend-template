@@ -7,39 +7,43 @@ import { addNotification } from "../../../store/actions/notifications";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 
 interface Props {
-  openModal: boolean;
+  openModal: boolean | string;
   setOpenModal: (s: boolean) => void;
+  onGetData: (p: Object) => void;
 }
 
-const AccountantRejectAid = ({ openModal, setOpenModal }: Props) => {
+const AccountantRejectAid = ({ openModal, setOpenModal, onGetData }: Props) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+
+  const rejectLabel = t("Auth.Aids.Statuses.Rejected");
 
   return (
     <Modal
       title={t("Auth.Aids.RejectAid")}
       onClose={() => setOpenModal(false)}
-      isOpen={openModal}
+      isOpen={!!openModal}
     >
       <Form
         inputs={() => [
           {
             type: "textarea",
-            name: "reason",
+            name: "note",
             label: t("Auth.AidCategories.AidRejectReason"),
+            required: true,
           },
         ]}
-        submitText={t("Global.Form.Labels.SubmitApplication")}
         onFormSubmit={(e, resetForm) => {
-          AidApi.grant(e)
+          AidApi.updateStatus(String(openModal), "Denied", e.note)
             .then(() => {
               setOpenModal(false);
               resetForm();
+              onGetData({});
               dispatch(
                 addNotification({
                   msg: t("Global.Form.SuccessMsg", {
-                    action: t("Auth.Aids.RejectAid"),
-                    data: "",
+                    action: rejectLabel,
+                    data: "المستفيد",
                   }),
                 })
               );
