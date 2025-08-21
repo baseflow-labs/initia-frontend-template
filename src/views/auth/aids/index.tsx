@@ -5,6 +5,7 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import moment from "moment";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
@@ -16,6 +17,7 @@ import { MoneyUnit } from "../../../components/table";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
+import { dataDateFormat } from "../../../utils/consts";
 import {
   apiCatchGlobalHandler,
   pluralLabelResolve,
@@ -26,8 +28,36 @@ import { getAidStatuses } from "../../../utils/optionDataLists/aids";
 import AccountantApproveAid from "./accountantApproveAid";
 import AccountantRejectAid from "./accountantRejectAid";
 import SendAid from "./sendAid";
-import moment from "moment";
-import { dataDateFormat } from "../../../utils/consts";
+
+export interface AidProgramProps {
+  id: string;
+  name: string;
+}
+
+export const defaultAidProgram: AidProgramProps = {
+  id: "",
+  name: "",
+};
+
+export interface AidProps {
+  id: string;
+  beneficiaryId: string;
+  status: string;
+  fileNo: string;
+  value: number;
+  category: string;
+  aidProgram: AidProgramProps;
+}
+
+export const defaultAid: AidProps = {
+  id: "",
+  beneficiaryId: "",
+  status: "",
+  fileNo: "",
+  value: 0,
+  category: "",
+  aidProgram: defaultAidProgram,
+};
 
 const AidsView = () => {
   const { t } = useTranslation();
@@ -35,16 +65,13 @@ const AidsView = () => {
   const { user } = useAppSelector((state) => state.auth);
 
   const [openModal, setOpenModal] = useState(false);
-  const [openAccountantApproveModal, setOpenAccountantApproveModal] = useState<
-    boolean | string
-  >(false);
+  const [openAccountantApproveModal, setOpenAccountantApproveModal] =
+    useState<AidProps>(defaultAid);
   const [openAccountantRejectModal, setOpenAccountantRejectModal] = useState<
     boolean | string
   >(false);
 
-  const [aids, setAids] = useState<
-    { id: string; beneficiaryId: string; status: string }[]
-  >([]);
+  const [aids, setAids] = useState<AidProps[]>([]);
   const [selectOptions, setSelectOptions] = useState({
     beneficiaries: [{ id: "", fullName: "", status: { status: "" } }],
     aidPrograms: [{ id: "", name: "", type: "", status: "" }],
@@ -260,12 +287,14 @@ const AidsView = () => {
   };
 
   const openResponseModal = (data: string, response: string) => {
+    const row = aids.find(({ id }) => id === data);
+
     if (response === "approve") {
-      setOpenAccountantApproveModal(data);
+      setOpenAccountantApproveModal(row || defaultAid);
       return;
     }
 
-    setOpenAccountantRejectModal(data);
+    setOpenAccountantRejectModal(row?.id || "");
   };
 
   return (

@@ -14,6 +14,14 @@ const getAll = async ({
   return res;
 };
 
+const getAllOfProgram = async (program: string) => {
+  const res = await api.get(mainPath + "/by-program/" + program, {
+    params: { ...formatGetFilters(), capacity: 999 },
+  });
+
+  return res;
+};
+
 const create = async (data: object) => {
   const res = await api.post(mainPath, { ...data, files: {} });
   return res;
@@ -24,4 +32,4 @@ const update = async (id: string, data: object) => {
   return res;
 };
 
-export { create, getAll, update };
+export { create, getAll, getAllOfProgram, update };

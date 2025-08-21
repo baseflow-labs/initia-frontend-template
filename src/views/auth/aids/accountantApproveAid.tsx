@@ -2,14 +2,35 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
 import * as AidApi from "../../../api/aids/aids";
+import * as AidCategoryApi from "../../../api/aids/aidCategories";
 import Button from "../../../components/core/button";
 import Modal from "../../../components/modal";
 import { addNotification } from "../../../store/actions/notifications";
 import { apiCatchGlobalHandler } from "../../../utils/function";
+import { CategoryView } from "../dashboard/accountant";
+import { AidProps, defaultAid } from ".";
+import { useLayoutEffect, useState } from "react";
+
+export interface AidProgram {
+  id: string;
+  name: string;
+  sponsor: string;
+  status: string;
+  credit: number;
+  balance: number;
+}
+
+export interface AidCategory {
+  id: string;
+  name: string;
+  type: string;
+  reapply: string;
+  aidPrograms: AidProgram[];
+}
 
 interface Props {
-  openModal: boolean | string;
-  setOpenModal: (s: boolean) => void;
+  openModal: AidProps;
+  setOpenModal: (s: AidProps) => void;
   onGetData: (p: Object) => void;
 }
 
@@ -21,13 +42,19 @@ const AccountantApproveAid = ({
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
+  const [category, setCategory] = useState<AidCategory>();
+
   const approveLabel = t("Auth.Aids.Statuses.Approved");
 
+  const onClose = () => {
+    setOpenModal(defaultAid);
+  };
+
   const onSubmit = () => {
-    AidApi.updateStatus(String(openModal), "Approved")
+    AidApi.updateStatus(openModal.id, "Approved")
       .then(() => {
-        setOpenModal(false);
         onGetData({});
+        onClose();
         dispatch(
           addNotification({
             msg: t("Global.Form.SuccessMsg", {
@@ -40,41 +67,48 @@ const AccountantApproveAid = ({
       .catch(apiCatchGlobalHandler);
   };
 
+  useLayoutEffect(() => {
+    if (openModal.id) {
+      AidCategoryApi.getAllOfProgram(openModal.aidProgram.id)
+        .then((res: any) => setCategory(res.payload))
+        .catch(apiCatchGlobalHandler);
+    }
+  }, [openModal.id]);
+
   return (
     <Modal
       title={t("Auth.Aids.ApproveAid")}
-      onClose={() => setOpenModal(false)}
-      isOpen={!!openModal}
+      onClose={() => onClose()}
+      className="modal-lg"
+      isOpen={!!openModal.id}
     >
-      <table className="table table-borderless">
-        <tbody>
-          <tr>
-            <td colSpan={2}>
-              <h5 className="mb-4">KHD123</h5>
-            </td>
-          </tr>
+      <h5 className="mb-4">{openModal.fileNo}</h5>
+      <h5>القيمة المطلوبة</h5>
+      <h3>{openModal.value}</h3>
 
-          <tr>
-            <td>
-              <h5>القيمة المطلوبة</h5>
-              <h3>5000</h3>
-            </td>
+      {category && (
+        <CategoryView
+          t={t}
+          id={category.id}
+          name={category.name}
+          type={category.type}
+          balance={category.aidPrograms.reduce(
+            (final, { credit }) => (final += parseFloat(String(credit))),
+            0
+          )}
+          programs={
+            category.aidPrograms.map(({ credit, ...rest }) => ({
+              ...rest,
+              credit,
+              balance: credit,
+            })) || []
+          }
+        />
+      )}
 
-            <td>
-              <h5>الرصيد المتبقي</h5>
-              <h3>5000</h3>
-            </td>
-          </tr>
-
-          <tr>
-            <td colSpan={2}>
-              <Button className="w-100" onClick={() => onSubmit()}>
-                {t("Global.Form.Labels.Approve")}
-              </Button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <Button className="w-100 mt-4" onClick={() => onSubmit()}>
+        {t("Global.Form.Labels.Approve")}
+      </Button>
     </Modal>
   );
 };
