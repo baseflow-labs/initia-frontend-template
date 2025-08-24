@@ -2,12 +2,11 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
-import Button from "../../../components/core/button";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import { addNotification } from "../../../store/actions/notifications";
-import { apiCatchGlobalHandler } from "../../../utils/function";
 import { getApplicantsRejectionInputs } from "../../../utils/formInputs/beneficiaries";
+import { apiCatchGlobalHandler } from "../../../utils/function";
 
 const RejectApplicant = ({
   beneficiaries,
@@ -31,11 +30,6 @@ const RejectApplicant = ({
     >
       <Form
         inputs={() => getApplicantsRejectionInputs(t)}
-        customButtons={
-          <Button outline onClick={() => setOpenModal(null)} className="w-50">
-            Back
-          </Button>
-        }
         submitText={t("Auth.Beneficiaries.Profile.RejectApplication")}
         onFormSubmit={(e, resetForm) => {
           BeneficiaryApi.reject(openModal || "", e)
