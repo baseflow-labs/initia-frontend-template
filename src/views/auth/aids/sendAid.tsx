@@ -1,3 +1,4 @@
+import { FormikProps } from "formik";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
@@ -5,9 +6,9 @@ import * as AidApi from "../../../api/aids/aids";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import { addNotification } from "../../../store/actions/notifications";
+import { AidProgram } from "../../../types/aids";
 import { getGrantAidInputs } from "../../../utils/formInputs/aids";
 import { apiCatchGlobalHandler } from "../../../utils/function";
-import { FormikProps } from "formik";
 
 interface Props {
   onGetData: (p: Object) => void;
@@ -20,7 +21,7 @@ interface Props {
       fullName: string;
       status: { status: string };
     }[];
-    aidPrograms: { id: string; name: string; type: string; status: string }[];
+    aidPrograms: AidProgram[];
   };
 }
 

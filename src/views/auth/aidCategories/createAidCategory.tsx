@@ -6,6 +6,7 @@ import * as AidCategoryApi from "../../../api/aids/aidCategories";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import { addNotification } from "../../../store/actions/notifications";
+import { AidCategory } from "../../../types/aids";
 import { geAddAidCategoryInputs } from "../../../utils/formInputs/aids";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 
@@ -13,7 +14,7 @@ interface Props {
   onGetData: (p: Object) => void;
   openModal: boolean;
   setOpenModal: (s: boolean) => void;
-  crudData: { id: string };
+  crudData: AidCategory;
 }
 
 const AddAidCategory = ({

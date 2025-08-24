@@ -28,7 +28,7 @@ const updateStatus = async (
   note?: string,
   collectionDate?: string
 ) => {
-  const res = await api.patch(mainPath + "/update-status/", {
+  const res = await api.patch(mainPath + "/update-status", {
     status,
     aid: id,
     note,

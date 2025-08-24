@@ -3,12 +3,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import * as AidProgramApi from "../../../api/aids/aidPrograms";
 import * as AidApi from "../../../api/aids/aids";
 import UnacceptedBeneficiary from "../../../components/card/unacceptedBeneficiary";
+import { MoneyUnit } from "../../../components/table";
 import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
-import * as AidProgramApi from "../../../api/aids/aidPrograms";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { useAppSelector } from "../../../store/hooks";
+import { AidProgram } from "../../../types/aids";
 import {
   apiCatchGlobalHandler,
   pluralLabelResolve,
@@ -17,7 +19,6 @@ import {
 } from "../../../utils/function";
 import { getAidStatuses } from "../../../utils/optionDataLists/aids";
 import RequestAid from "./requestAid";
-import { MoneyUnit } from "../../../components/table";
 
 const AidsBeneficiaryView = () => {
   const { t } = useTranslation();
@@ -32,8 +33,10 @@ const AidsBeneficiaryView = () => {
     count: 0,
     pagesCount: 1,
   });
-  const [selectOptions, setSelectOptions] = useState({
-    aidPrograms: [{ id: "", name: "", status: "" }],
+  const [selectOptions, setSelectOptions] = useState<{
+    aidPrograms: AidProgram[];
+  }>({
+    aidPrograms: [],
   });
 
   const getData = ({

@@ -38,9 +38,9 @@ export interface Aid {
   id: string;
   beneficiaryId: string;
   status: string;
-  fileNo: string;
+  urgent: boolean;
   value: number;
-  category: string;
+  note?: string;
   aidProgram: AidProgram;
 }
 
@@ -48,8 +48,8 @@ export const defaultAid: Aid = {
   id: "",
   beneficiaryId: "",
   status: "",
-  fileNo: "",
+  note: "",
   value: 0,
-  category: "",
+  urgent: false,
   aidProgram: defaultAidProgram,
 };
