@@ -40,6 +40,30 @@ export const getApplicantsRejectionInputs = (t: Function) => [
   },
 ];
 
+export const getApplicantsRegistrationInputs = (t: Function) => [
+  {
+    type: "text",
+    name: "name",
+    label: t("Public.Register.Labels.Name"),
+    required: true,
+  },
+  {
+    type: "phoneNumber",
+    name: "username",
+    label: t("Public.Register.Labels.PhoneNo"),
+    required: true,
+  },
+  {
+    type: "numberText",
+    name: "idNumber",
+    minLength: 10,
+    maxLength: 10,
+    label: t("Auth.MembershipRegistration.Form.IdNumber"),
+    labelNote: t("Auth.MembershipRegistration.Form.IdNumberNote"),
+    required: true,
+  },
+];
+
 export const getRequestDataUpdateInputs = (t: Function) => [
   {
     name: "note",

@@ -17,7 +17,6 @@ import { useNavigate } from "react-router";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import DemoLoginNote from "../../../layouts/auth/demoLoginNote";
 import TablePage from "../../../layouts/auth/pages/tablePage";
-import { logout } from "../../../store/actions/auth";
 import { addNotification } from "../../../store/actions/notifications";
 import {
   apiCatchGlobalHandler,
@@ -30,6 +29,7 @@ import {
   getNationalities,
   getProvinces,
 } from "../../../utils/optionDataLists/beneficiaries";
+import RegisterApplicant from "./registerApplicant";
 import RejectApplicant from "./rejectApplicant";
 
 const ApplicantsView = () => {
@@ -43,6 +43,7 @@ const ApplicantsView = () => {
   const [rejectModalOpen, setRejectModalOpen] = useState<string | null>(null);
   const [currentFilters, setCurrentFilters] = useState({});
   const [currentSearch, setCurrentSearch] = useState("");
+  const [openRegisterModal, setOpenRegisterModal] = useState(false);
   const [paginationMeta, setPaginationMeta] = useState({
     page: 1,
     capacity: 10,
@@ -223,7 +224,7 @@ const ApplicantsView = () => {
   const actionButtons = [
     {
       label: t("Auth.Beneficiaries.AddBeneficiary"),
-      onClick: () => dispatch(logout("/register")),
+      onClick: () => setOpenRegisterModal(true),
     },
   ];
 
@@ -356,6 +357,11 @@ const ApplicantsView = () => {
             capacity,
           });
         }}
+      />
+
+      <RegisterApplicant
+        openModal={openRegisterModal}
+        setOpenModal={setOpenRegisterModal}
       />
 
       <RejectApplicant
