@@ -63,8 +63,8 @@ const createOrUpdate = async (data: Props) => {
   });
 };
 
-const assignResearcher = async (data: string) => {
-  return await api.patch(mainPath + "/assign-researcher/", data);
+const assignResearcher = async (data: object) => {
+  return await api.patch(mainPath + "/assign-researcher", data);
 };
 
 const requestHelp = async (id: string) => {

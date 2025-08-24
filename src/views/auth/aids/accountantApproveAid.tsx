@@ -1,15 +1,15 @@
+import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
-import * as AidApi from "../../../api/aids/aids";
 import * as AidCategoryApi from "../../../api/aids/aidCategories";
+import * as AidApi from "../../../api/aids/aids";
 import Button from "../../../components/core/button";
 import Modal from "../../../components/modal";
 import { addNotification } from "../../../store/actions/notifications";
+import { Aid, AidCategory, defaultAid } from "../../../types/aids";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import { CategoryView } from "../dashboard/accountant";
-import { useLayoutEffect, useState } from "react";
-import { Aid, AidCategory, defaultAid } from "../../../types/aids";
 
 interface Props {
   openModal: Aid;
@@ -65,7 +65,7 @@ const AccountantApproveAid = ({
       className="modal-lg"
       isOpen={!!openModal.id}
     >
-      <h5 className="mb-4">{openModal.fileNo}</h5>
+      <h5 className="mb-4">{openModal.value}</h5>
       <h5>القيمة المطلوبة</h5>
       <h3>{openModal.value}</h3>
 

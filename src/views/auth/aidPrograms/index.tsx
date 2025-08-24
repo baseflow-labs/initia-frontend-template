@@ -9,6 +9,11 @@ import * as AidProgramApi from "../../../api/aids/aidPrograms";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import {
+  AidCategory,
+  AidProgram,
+  defaultAidProgram,
+} from "../../../types/aids";
+import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
   statusColorRender,
@@ -21,18 +26,9 @@ const AidProgramsView = () => {
   const dispatch = useDispatch();
 
   const [openModal, setOpenModal] = useState(false);
-  const [aidPrograms, setAidPrograms] = useState<
-    { id: string; name: string; status: string; aidCategory: { id: string } }[]
-  >([]);
-  const [crudData, setCrudData] = useState<{
-    id: string;
-    name: string;
-    status: string;
-    aidCategory: string;
-  }>({ id: "", name: "", status: "", aidCategory: "" });
-  const [aidCategories, setAidCategories] = useState<
-    { id: string; name: string; type: string; reapply: string }[]
-  >([]);
+  const [aidPrograms, setAidPrograms] = useState<AidProgram[]>([]);
+  const [crudData, setCrudData] = useState<AidProgram>(defaultAidProgram);
+  const [aidCategories, setAidCategories] = useState<AidCategory[]>([]);
   const [currentFilters, setCurrentFilters] = useState({});
   const [currentSearch, setCurrentSearch] = useState("");
   const [paginationMeta, setPaginationMeta] = useState({
@@ -183,7 +179,7 @@ const AidProgramsView = () => {
     const row = aidPrograms.find(({ id }) => id === rowId);
 
     if (row) {
-      setCrudData({ ...row, aidCategory: row.aidCategory.id });
+      setCrudData(row);
     }
   };
 

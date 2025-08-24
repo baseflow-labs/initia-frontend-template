@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 
 import * as AidCategoryApi from "../../../api/aids/aidCategories";
 import TablePage from "../../../layouts/auth/pages/tablePage";
+import { AidCategory, defaultAidCategory } from "../../../types/aids";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import {
   getAidCategoryReapplyPeriods,
@@ -15,16 +16,10 @@ const AidCategoriesView = () => {
   const { t } = useTranslation();
 
   const [openModal, setOpenModal] = useState(false);
-  const [aidCategories, setAidCategories] = useState<
-    { id: string; name: string; type: string }[]
-  >([]);
+  const [aidCategories, setAidCategories] = useState<AidCategory[]>([]);
   const [currentFilters, setCurrentFilters] = useState({});
   const [currentSearch, setCurrentSearch] = useState("");
-  const [crudData, setCrudData] = useState<{
-    id: string;
-    name: string;
-    type: string;
-  }>({ id: "", name: "", type: "" });
+  const [crudData, setCrudData] = useState<AidCategory>(defaultAidCategory);
   const [paginationMeta, setPaginationMeta] = useState({
     page: 1,
     capacity: 10,
@@ -121,11 +116,7 @@ const AidCategoriesView = () => {
   const update = (row: string) => {
     setOpenModal(true);
     setCrudData(
-      aidCategories.find(({ id }) => id === row) || {
-        id: "",
-        name: "",
-        type: "",
-      }
+      aidCategories.find(({ id }) => id === row) || defaultAidCategory
     );
   };
 

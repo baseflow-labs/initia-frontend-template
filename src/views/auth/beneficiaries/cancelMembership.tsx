@@ -2,7 +2,6 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
-import Button from "../../../components/core/button";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import { addNotification } from "../../../store/actions/notifications";
@@ -47,11 +46,6 @@ const CancelMembership = ({
             rows: 3,
           },
         ]}
-        customButtons={
-          <Button outline onClick={() => setModalOpen(null)} className="w-50">
-            Back
-          </Button>
-        }
         submitText={t("Auth.Beneficiaries.Profile.CancelMembership")}
         onFormSubmit={(e, resetForm) => {
           BeneficiaryApi.cancel(modelOpen || "", e)
