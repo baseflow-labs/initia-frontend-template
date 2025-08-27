@@ -50,7 +50,7 @@ const ApproveAid = ({ openModal, setOpenModal, onGetData }: Props) => {
         dispatch(
           addNotification({
             msg: t("Global.Form.SuccessMsg", {
-              action: "تحديث حالة الطلب إلى" + approveLabel,
+              action: "تحديث حالة الطلب إلى " + approveLabel,
               data: "المستفيد",
             }),
           })
