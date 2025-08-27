@@ -54,6 +54,10 @@ export const getAidStatuses = (t: Function) => [
     label: t("Auth.Aids.Statuses.Recommended"),
   },
   {
+    value: "Seconded",
+    label: t("Auth.Aids.Statuses.Seconded"),
+  },
+  {
     value: "Denied",
     label: t("Auth.Aids.Statuses.Denied"),
   },

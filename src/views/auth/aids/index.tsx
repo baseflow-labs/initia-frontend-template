@@ -26,8 +26,8 @@ import {
   statusColorRender,
 } from "../../../utils/function";
 import { getAidStatuses } from "../../../utils/optionDataLists/aids";
-import AccountantApproveAid from "./accountantApproveAid";
-import AccountantRejectAid from "./accountantRejectAid";
+import ApproveAid from "./approveAid";
+import RejectAid from "./rejectAid";
 import SendAid from "./sendAid";
 
 const AidsView = () => {
@@ -36,11 +36,10 @@ const AidsView = () => {
   const { user } = useAppSelector((state) => state.auth);
 
   const [openModal, setOpenModal] = useState(false);
-  const [openAccountantApproveModal, setOpenAccountantApproveModal] =
-    useState<Aid>(defaultAid);
-  const [openAccountantRejectModal, setOpenAccountantRejectModal] = useState<
-    boolean | string
-  >(false);
+  const [openApproveModal, setOpenApproveModal] = useState<Aid>(defaultAid);
+  const [openRejectModal, setOpenRejectModal] = useState<boolean | string>(
+    false
+  );
 
   const [aids, setAids] = useState<Aid[]>([]);
   const [selectOptions, setSelectOptions] = useState({
@@ -263,11 +262,11 @@ const AidsView = () => {
     const row = aids.find(({ id }) => id === data);
 
     if (response === "approve") {
-      setOpenAccountantApproveModal(row || defaultAid);
+      setOpenApproveModal(row || defaultAid);
       return;
     }
 
-    setOpenAccountantRejectModal(row?.id || "");
+    setOpenRejectModal(row?.id || "");
   };
 
   return (
@@ -361,15 +360,15 @@ const AidsView = () => {
         onGetData={getData}
       />
 
-      <AccountantApproveAid
-        openModal={openAccountantApproveModal}
-        setOpenModal={setOpenAccountantApproveModal}
+      <ApproveAid
+        openModal={openApproveModal}
+        setOpenModal={setOpenApproveModal}
         onGetData={getData}
       />
 
-      <AccountantRejectAid
-        openModal={openAccountantRejectModal}
-        setOpenModal={setOpenAccountantRejectModal}
+      <RejectAid
+        openModal={openRejectModal}
+        setOpenModal={setOpenRejectModal}
         onGetData={getData}
       />
     </Fragment>

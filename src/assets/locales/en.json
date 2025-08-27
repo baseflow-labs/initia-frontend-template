@@ -71,7 +71,8 @@
         "Pending": "Pending",
         "Recommended": "Recommended",
         "Reject": "Reject",
-        "Rejected": "Rejected"
+        "Rejected": "Rejected",
+        "Seconded": "Seconded"
       },
       "Title": "Aids"
     },

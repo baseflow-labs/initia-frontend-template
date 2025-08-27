@@ -26,13 +26,15 @@ const updateStatus = async (
   id: string,
   status: string,
   note?: string,
-  collectionDate?: string
+  collectionDate?: string,
+  value?: number
 ) => {
   const res = await api.patch(mainPath + "/update-status", {
     status,
     aid: id,
     note,
     collectionDate,
+    value,
   });
   return res;
 };
