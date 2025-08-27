@@ -13,7 +13,7 @@ import { useDispatch } from "react-redux";
 import * as AidProgramApi from "../../../api/aids/aidPrograms";
 import * as AidApi from "../../../api/aids/aids";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
-import { MoneyUnit } from "../../../components/table";
+import { actionProps, MoneyUnit } from "../../../components/table";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
@@ -284,7 +284,7 @@ const AidsView = () => {
           const granted = aid?.status === "Granted";
           const rejected = aid?.status === "Rejected";
 
-          return [
+          const final: actionProps[] = [
             {
               label: t("Auth.Aids.Statuses.Approve"),
               icon: faCheck,
@@ -311,7 +311,10 @@ const AidsView = () => {
                       })
                     ),
             },
-            {
+          ];
+
+          if (user.role === "researcher") {
+            final.push({
               label: t("Auth.Aids.Statuses.Grant"),
               icon: faHandHoldingDollar,
               spread: false,
@@ -326,8 +329,10 @@ const AidsView = () => {
                         type: !approved ? "err" : undefined,
                       })
                     ),
-            },
-          ];
+            });
+          }
+
+          return final;
         }}
         columns={
           user.role === "researcher"
