@@ -33,7 +33,13 @@ const BeneficiariesViewForSupervisor = () => {
 
   const [cancelModalOpen, setCancelModalOpen] = useState<string | null>(null);
   const [beneficiaries, setBeneficiaries] = useState<
-    { id: string; status: string; fullName: string; staff: { id: string } }[]
+    {
+      id: string;
+      status: string;
+      fullName: string;
+      fileNo: string;
+      staff: { id: string };
+    }[]
   >([]);
   const [assignResearcherModalOpen, setAssignResearcherModalOpen] = useState<
     { beneficiary: string; staff: string } | undefined

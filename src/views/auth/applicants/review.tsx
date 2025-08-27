@@ -254,7 +254,7 @@ const BeneficiaryFormReview = () => {
           addNotification({
             msg: t("Global.Form.SuccessMsg", {
               action: t("Auth.Beneficiaries.Profile.ProfileReview"),
-              data: beneficiary.beneficiary?.fullName,
+              data: beneficiary.beneficiary?.fileNo,
             }),
           })
         );

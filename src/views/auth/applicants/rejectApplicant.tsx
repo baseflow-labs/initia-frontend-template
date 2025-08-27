@@ -14,7 +14,12 @@ const RejectApplicant = ({
   openModal,
   setOpenModal,
 }: {
-  beneficiaries: { id: string; status: string; fullName: string }[];
+  beneficiaries: {
+    id: string;
+    status: string;
+    fileNo: string;
+    fullName: string;
+  }[];
   onGetData: (t: Object) => void;
   openModal: string | null;
   setOpenModal: (t: string | null) => void;
@@ -39,8 +44,7 @@ const RejectApplicant = ({
                 addNotification({
                   msg: t("Global.Form.SuccessMsg", {
                     action: t("Auth.Beneficiaries.Profile.RejectApplication"),
-                    data: beneficiaries.find((b) => b.id === openModal)
-                      ?.fullName,
+                    data: beneficiaries.find((b) => b.id === openModal)?.fileNo,
                   }),
                 })
               );

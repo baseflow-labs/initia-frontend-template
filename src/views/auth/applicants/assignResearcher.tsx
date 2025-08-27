@@ -19,6 +19,7 @@ const AssignResearcher = ({
     id: string;
     status: string;
     fullName: string;
+    fileNo: string;
     staff?: { id: string };
   }[];
   researchers: { id: string; status: string; fullName: string }[];
@@ -64,7 +65,7 @@ const AssignResearcher = ({
                         )?.fullName,
                       }),
                       data: beneficiaries.find((b) => b.id === e.beneficiary)
-                        ?.fullName,
+                        ?.fileNo,
                     }),
                   })
                 );

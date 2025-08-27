@@ -44,7 +44,9 @@ const AidsView = () => {
 
   const [aids, setAids] = useState<Aid[]>([]);
   const [selectOptions, setSelectOptions] = useState({
-    beneficiaries: [{ id: "", fullName: "", status: { status: "" } }],
+    beneficiaries: [
+      { id: "", fullName: "", fileNo: "", status: { status: "" } },
+    ],
     aidPrograms: [],
   });
   const [currentFilters, setCurrentFilters] = useState({});
@@ -244,7 +246,7 @@ const AidsView = () => {
               action: t("Auth.Aids.Statuses.Grant"),
               data: selectOptions.beneficiaries.find(
                 ({ id }) => id === aid?.beneficiaryId
-              )?.fullName,
+              )?.fileNo,
             }),
           })
         );
