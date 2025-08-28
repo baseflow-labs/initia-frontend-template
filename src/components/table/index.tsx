@@ -148,6 +148,7 @@ export const dataRender = ({
           <a
             href={"https://wa.me/966" + data}
             target="_blank"
+            rel="noreferrer"
             className="h4 align-middle"
           >
             <FontAwesomeIcon
@@ -155,7 +156,7 @@ export const dataRender = ({
               icon={faWhatsapp as IconProp}
             />
           </a>{" "}
-          <a href={"tel:966" + data} target="_blank">
+          <a href={"tel:966" + data} target="_blank" rel="noreferrer">
             <FontAwesomeIcon className="text-success" icon={faPhone} />
           </a>
         </span>
@@ -163,7 +164,7 @@ export const dataRender = ({
     case "email":
       return (
         <span dir="ltr">
-          <a href={"mailto:" + data} target="_blank">
+          <a href={"mailto:" + data} target="_blank" rel="noreferrer">
             <FontAwesomeIcon className="text-success" icon={faEnvelope} />
           </a>{" "}
           {data}
@@ -287,9 +288,7 @@ const DynamicTable = ({
 
             {data.map((row, i) => (
               <tr className="align-middle" key={i}>
-                <td className="py-3" scope="row">
-                  {i + pageSize * (pageNumber - 1) + 1}
-                </td>
+                <td className="py-3">{i + pageSize * (pageNumber - 1) + 1}</td>
 
                 {columns.map(
                   (
@@ -312,7 +311,7 @@ const DynamicTable = ({
                 )}
 
                 {actions && actions()?.length && (
-                  <td className="py-3" scope="row">
+                  <td className="py-3">
                     <div className="d-flex">
                       {actions(row.id)
                         .filter(({ spread }) => spread)
