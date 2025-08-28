@@ -74,7 +74,7 @@ interface Props {
 }
 
 export const MoneyUnit = () => (
-  <img src={riyalIcon} height={15} className="ms-1" />
+  <img src={riyalIcon} height={15} className="ms-1" alt="moneyUnit" />
 );
 
 const withMoneyUnit = (content: React.ReactNode, money?: boolean) => {
