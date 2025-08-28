@@ -169,7 +169,7 @@ const BeneficiaryOwnProfile = () => {
             const currentData = requestTable?.data[property];
 
             return (
-              <div className="col-lg-6" key={i}>
+              <div className="col-lg-6 mb-4" key={i}>
                 <CardComp>
                   <div className="card-body p-5">
                     {requestProperty && (
