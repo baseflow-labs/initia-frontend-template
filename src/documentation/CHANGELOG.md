@@ -62,3 +62,7 @@
 
 - Merge pull request #102 from Shai-club/stg
 
+## v1.11.1 - 2025-08-28
+
+- Merge pull request #104 from Shai-club/stg
+
