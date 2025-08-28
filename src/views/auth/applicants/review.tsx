@@ -3,6 +3,7 @@ import {
   faCheck,
   faCircle,
   faEdit,
+  faSave,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
@@ -275,7 +276,7 @@ const BeneficiaryFormReview = () => {
 
         <div className="col-6 col-lg-3">
           <Button className="float-end" onClick={() => onSubmit()}>
-            {t("Global.Form.Labels.SaveData")}
+            <FontAwesomeIcon icon={faSave} /> {t("Global.Form.Labels.SaveData")}
           </Button>
         </div>
       </div>
