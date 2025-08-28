@@ -530,7 +530,7 @@ export const getDependantDataInputs = (
     },
     {
       type: "phoneNumber",
-      name: "mobile",
+      name: "phoneNumber",
       label: t("Auth.MembershipRegistration.Form.DependentMobile"),
       labelNote: t("Auth.MembershipRegistration.Form.DependentMobileNote"),
       required: false,
