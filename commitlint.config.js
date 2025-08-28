@@ -9,6 +9,8 @@ module.exports = {
         "aids",
         "applicants",
         "beneficiaries",
+        "profile",
+        "membershipForm",
         "dashboard",
         "membershipRegistration",
         "settings",
