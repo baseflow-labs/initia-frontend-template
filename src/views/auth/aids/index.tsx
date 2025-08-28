@@ -13,7 +13,7 @@ import { useDispatch } from "react-redux";
 import * as AidProgramApi from "../../../api/aids/aidPrograms";
 import * as AidApi from "../../../api/aids/aids";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
-import { MoneyUnit } from "../../../components/table";
+import { actionProps, MoneyUnit } from "../../../components/table";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
@@ -26,8 +26,8 @@ import {
   statusColorRender,
 } from "../../../utils/function";
 import { getAidStatuses } from "../../../utils/optionDataLists/aids";
-import AccountantApproveAid from "./accountantApproveAid";
-import AccountantRejectAid from "./accountantRejectAid";
+import ApproveAid from "./approveAid";
+import RejectAid from "./rejectAid";
 import SendAid from "./sendAid";
 
 const AidsView = () => {
@@ -36,15 +36,16 @@ const AidsView = () => {
   const { user } = useAppSelector((state) => state.auth);
 
   const [openModal, setOpenModal] = useState(false);
-  const [openAccountantApproveModal, setOpenAccountantApproveModal] =
-    useState<Aid>(defaultAid);
-  const [openAccountantRejectModal, setOpenAccountantRejectModal] = useState<
-    boolean | string
-  >(false);
+  const [openApproveModal, setOpenApproveModal] = useState<Aid>(defaultAid);
+  const [openRejectModal, setOpenRejectModal] = useState<boolean | string>(
+    false
+  );
 
   const [aids, setAids] = useState<Aid[]>([]);
   const [selectOptions, setSelectOptions] = useState({
-    beneficiaries: [{ id: "", fullName: "", status: { status: "" } }],
+    beneficiaries: [
+      { id: "", fullName: "", fileNo: "", status: { status: "" } },
+    ],
     aidPrograms: [],
   });
   const [currentFilters, setCurrentFilters] = useState({});
@@ -244,7 +245,7 @@ const AidsView = () => {
               action: t("Auth.Aids.Statuses.Grant"),
               data: selectOptions.beneficiaries.find(
                 ({ id }) => id === aid?.beneficiaryId
-              )?.fullName,
+              )?.fileNo,
             }),
           })
         );
@@ -261,11 +262,11 @@ const AidsView = () => {
     const row = aids.find(({ id }) => id === data);
 
     if (response === "approve") {
-      setOpenAccountantApproveModal(row || defaultAid);
+      setOpenApproveModal(row || defaultAid);
       return;
     }
 
-    setOpenAccountantRejectModal(row?.id || "");
+    setOpenRejectModal(row?.id || "");
   };
 
   return (
@@ -283,7 +284,7 @@ const AidsView = () => {
           const granted = aid?.status === "Granted";
           const rejected = aid?.status === "Rejected";
 
-          return [
+          const final: actionProps[] = [
             {
               label: t("Auth.Aids.Statuses.Approve"),
               icon: faCheck,
@@ -310,7 +311,10 @@ const AidsView = () => {
                       })
                     ),
             },
-            {
+          ];
+
+          if (user.role === "researcher") {
+            final.push({
               label: t("Auth.Aids.Statuses.Grant"),
               icon: faHandHoldingDollar,
               spread: false,
@@ -325,8 +329,10 @@ const AidsView = () => {
                         type: !approved ? "err" : undefined,
                       })
                     ),
-            },
-          ];
+            });
+          }
+
+          return final;
         }}
         columns={
           user.role === "researcher"
@@ -359,15 +365,15 @@ const AidsView = () => {
         onGetData={getData}
       />
 
-      <AccountantApproveAid
-        openModal={openAccountantApproveModal}
-        setOpenModal={setOpenAccountantApproveModal}
+      <ApproveAid
+        openModal={openApproveModal}
+        setOpenModal={setOpenApproveModal}
         onGetData={getData}
       />
 
-      <AccountantRejectAid
-        openModal={openAccountantRejectModal}
-        setOpenModal={setOpenAccountantRejectModal}
+      <RejectAid
+        openModal={openRejectModal}
+        setOpenModal={setOpenRejectModal}
         onGetData={getData}
       />
     </Fragment>

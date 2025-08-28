@@ -6,6 +6,7 @@ import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import { addNotification } from "../../../store/actions/notifications";
 import { apiCatchGlobalHandler } from "../../../utils/function";
+import { useAppSelector } from "../../../store/hooks";
 
 interface Props {
   openModal: boolean | string;
@@ -13,9 +14,10 @@ interface Props {
   onGetData: (p: Object) => void;
 }
 
-const AccountantRejectAid = ({ openModal, setOpenModal, onGetData }: Props) => {
+const RejectAid = ({ openModal, setOpenModal, onGetData }: Props) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const { user } = useAppSelector((state) => state.auth);
 
   const rejectLabel = t("Auth.Aids.Statuses.Rejected");
 
@@ -35,7 +37,11 @@ const AccountantRejectAid = ({ openModal, setOpenModal, onGetData }: Props) => {
           },
         ]}
         onFormSubmit={(e, resetForm) => {
-          AidApi.updateStatus(String(openModal), "Denied", e.note)
+          AidApi.updateStatus(
+            String(openModal),
+            user.role === "accountant" ? "Denied" : "Rejected",
+            e.note
+          )
             .then(() => {
               setOpenModal(false);
               resetForm();
@@ -56,4 +62,4 @@ const AccountantRejectAid = ({ openModal, setOpenModal, onGetData }: Props) => {
   );
 };
 
-export default AccountantRejectAid;
+export default RejectAid;

@@ -64,14 +64,15 @@
       "RejectAid": "رفض تقديم المعونة",
       "Statuses": {
         "Approve": "اعتماد المعونة",
-        "Approved": "اعتمدت",
+        "Approved": "بانتظار التسليم",
         "Denied": "رفضت",
         "Grant": "تم اليوم تسليم المعونة",
         "Granted": "سلمت",
         "Pending": "قيد المراجعة",
-        "Recommended": "بانتظار الموافقة",
+        "Recommended": "بانتظار موافقة مدير الباحثين",
         "Reject": "رفض المعونة",
-        "Rejected": "رفضت المعونة"
+        "Rejected": "رفضت المعونة",
+        "Seconded": "بانتظار مراجعة المحاسب"
       },
       "Title": "طلبات المعونة"
     },
@@ -374,6 +375,7 @@
           "Housewife": "ربة منزل",
           "LookingForJob": "باحث عن عمل",
           "NoFixed": "بدون عمل ثابت",
+          "NonStudent": "طفل وغير ملتحق بالتعليم",
           "PerDayWorker": "عامل باليوم",
           "PrivateSectorEmployee": "موظف قطاع خاص",
           "Retiree": "متقاعد",

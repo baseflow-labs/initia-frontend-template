@@ -20,7 +20,7 @@ const Accordion = ({ key, data, icon, onAdd, addText, onRemove }: Props) => {
 
   return (
     <Fragment>
-      <div className="accordion accordion-flush" id={key}>
+      <div className="accordion accordion-flush mt-4" id={key}>
         {data?.map(({ header, body }, i) => (
           <div className="accordion-item mb-4" key={i}>
             <h2 className="accordion-header mb-3" id={"heading" + String(i)}>

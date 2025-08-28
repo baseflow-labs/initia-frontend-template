@@ -42,7 +42,7 @@ const RequestAid = ({
         }
         submitText={t("Global.Form.Labels.SubmitApplication")}
         onFormSubmit={(e, resetForm) => {
-          AidApi.create(e)
+          AidApi.create({ ...e, requestedValue: e.value })
             .then(() => {
               setOpenModal(false);
               resetForm();

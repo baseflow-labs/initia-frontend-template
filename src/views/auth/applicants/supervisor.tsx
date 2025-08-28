@@ -32,6 +32,7 @@ const ApplicantsViewForSupervisor = () => {
     {
       id: string;
       status: string;
+      fileNo: string;
       fullName: string;
       staff?: { id: string };
     }[]
@@ -243,7 +244,7 @@ const ApplicantsViewForSupervisor = () => {
             addNotification({
               msg: t("Global.Form.SuccessMsg", {
                 action: t("Auth.Beneficiaries.Profile.DeleteBeneficiary"),
-                data: beneficiaries.find((b) => b.id === id)?.fullName,
+                data: beneficiaries.find((b) => b.id === id)?.fileNo,
               }),
             })
           );

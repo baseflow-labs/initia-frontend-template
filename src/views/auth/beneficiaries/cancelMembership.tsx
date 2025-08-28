@@ -8,7 +8,12 @@ import { addNotification } from "../../../store/actions/notifications";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 
 interface Props {
-  beneficiaries: { id: string; status: string; fullName: string }[];
+  beneficiaries: {
+    id: string;
+    status: string;
+    fileNo: string;
+    fullName: string;
+  }[];
   modelOpen: string | null;
   setModalOpen: (t: string | null) => void;
   onGetData: (t: Object) => void;
@@ -55,8 +60,7 @@ const CancelMembership = ({
                 addNotification({
                   msg: t("Global.Form.SuccessMsg", {
                     action: t("Auth.Beneficiaries.Profile.CancelMembership"),
-                    data: beneficiaries.find((b) => b.id === modelOpen)
-                      ?.fullName,
+                    data: beneficiaries.find((b) => b.id === modelOpen)?.fileNo,
                   }),
                 })
               );

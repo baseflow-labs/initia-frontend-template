@@ -71,7 +71,8 @@
         "Pending": "Pending",
         "Recommended": "Recommended",
         "Reject": "Reject",
-        "Rejected": "Rejected"
+        "Rejected": "Rejected",
+        "Seconded": "Seconded"
       },
       "Title": "Aids"
     },
@@ -374,6 +375,7 @@
           "Housewife": "Housewife",
           "LookingForJob": "Looking For Job",
           "NoFixed": "No Fixed Job",
+          "NonStudent": "Non Student Minor",
           "PerDayWorker": "Per-Day Worker",
           "PrivateSectorEmployee": "Private-Sector Employee",
           "Retiree": "Retiree",
