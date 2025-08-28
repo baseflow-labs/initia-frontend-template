@@ -177,6 +177,7 @@ const BeneficiaryOwnProfile = () => {
                         inputs={() =>
                           [requestProperty].map((prop) => ({
                             ...prop,
+                            halfCol: false,
                             labelNote: "سبب طلب التعديل: " + note,
                             defaultValue: currentData,
                             required: true,
