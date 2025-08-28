@@ -61,7 +61,10 @@ const DependentsFormView = ({
       <TabsComp
         tabs={houses.map(({ id: housingId, nationalAddressNumber }, i) => ({
           id: nationalAddressNumber,
-          title: nationalAddressNumber,
+          title:
+            t("Auth.MembershipRegistration.Form.Housing.Housing") +
+            " " +
+            String(i + 1),
           body: (
             <Accordion
               data={dependents

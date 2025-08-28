@@ -596,6 +596,10 @@ export const getOccupations = (t: Function) => [
     label: t("Auth.MembershipRegistration.Form.Occupation.Student"),
   },
   {
+    value: "Non Student",
+    label: t("Auth.MembershipRegistration.Form.Occupation.NonStudent"),
+  },
+  {
     value: "Housewife",
     label: t("Auth.MembershipRegistration.Form.Occupation.Housewife"),
   },

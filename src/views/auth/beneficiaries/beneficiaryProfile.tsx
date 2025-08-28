@@ -7,6 +7,7 @@ import * as DataReviewApi from "../../../api/profile/dataReview";
 import * as DataUpdateApi from "../../../api/profile/dataUpdate";
 import CardComp from "../../../components/card/card";
 import Form from "../../../components/form";
+import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
 import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
 import {
@@ -17,7 +18,6 @@ import {
   getNationalRecordDataInputs,
 } from "../../../utils/formInputs/beneficiaryProfile";
 import { apiCatchGlobalHandler } from "../../../utils/function";
-import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
 
 const BeneficiaryOwnProfile = () => {
   const { t } = useTranslation();
@@ -35,11 +35,11 @@ const BeneficiaryOwnProfile = () => {
     BeneficiaryApi.getByUserId()
       .then((res: any) => {
         setBeneficiary(res.payload);
-      })
-      .catch(apiCatchGlobalHandler);
 
-    DataReviewApi.getNonUpdatedDataReview(user.id || "")
-      .then((res: any) => setDataReviews(res.payload))
+        DataReviewApi.getNonUpdatedDataReview(user.id || "")
+          .then((res: any) => setDataReviews(res.payload))
+          .catch(apiCatchGlobalHandler);
+      })
       .catch(apiCatchGlobalHandler);
   };
 
@@ -169,7 +169,7 @@ const BeneficiaryOwnProfile = () => {
             const currentData = requestTable?.data[property];
 
             return (
-              <div className="col-lg-6" key={i}>
+              <div className="col-lg-6 mb-4" key={i}>
                 <CardComp>
                   <div className="card-body p-5">
                     {requestProperty && (
@@ -177,6 +177,7 @@ const BeneficiaryOwnProfile = () => {
                         inputs={() =>
                           [requestProperty].map((prop) => ({
                             ...prop,
+                            labelNote: "سبب طلب التعديل: " + note,
                             defaultValue: currentData,
                             required: true,
                           }))

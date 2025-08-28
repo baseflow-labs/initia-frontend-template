@@ -18,6 +18,7 @@ interface Props {
   selectOptions: {
     beneficiaries: {
       id: string;
+      fileNo: string;
       fullName: string;
       status: { status: string };
     }[];
@@ -58,7 +59,7 @@ const SendAid = ({
                     action: t("Auth.Aids.AddAid"),
                     data: selectOptions.beneficiaries.find(
                       ({ id }) => id === e.beneficiary
-                    )?.fullName,
+                    )?.fileNo,
                   }),
                 })
               );

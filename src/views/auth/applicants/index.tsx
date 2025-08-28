@@ -38,7 +38,7 @@ const ApplicantsView = () => {
   const dispatch = useDispatch();
 
   const [beneficiaries, setBeneficiaries] = useState<
-    { id: string; status: string; fullName: string }[]
+    { id: string; status: string; fileNo: string; fullName: string }[]
   >([]);
   const [rejectModalOpen, setRejectModalOpen] = useState<string | null>(null);
   const [currentFilters, setCurrentFilters] = useState({});
@@ -241,7 +241,7 @@ const ApplicantsView = () => {
             addNotification({
               msg: t("Global.Form.SuccessMsg", {
                 action: t("Auth.Beneficiaries.Profile.DeleteBeneficiary"),
-                data: beneficiaries.find((b) => b.id === id)?.fullName,
+                data: beneficiaries.find((b) => b.id === id)?.fileNo,
               }),
             })
           );
@@ -334,7 +334,7 @@ const ApplicantsView = () => {
                             "Auth.Beneficiaries.Profile.AcceptApplication"
                           ),
                           data: beneficiaries.find((b) => b.id === data)
-                            ?.fullName,
+                            ?.fileNo,
                         }),
                       })
                     );

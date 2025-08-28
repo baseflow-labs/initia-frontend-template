@@ -31,7 +31,7 @@ const BeneficiariesView = () => {
 
   const [cancelModalOpen, setCancelModalOpen] = useState<string | null>(null);
   const [beneficiaries, setBeneficiaries] = useState<
-    { id: string; status: string; fullName: string }[]
+    { id: string; status: string; fileNo: string; fullName: string }[]
   >([]);
   const [currentFilters, setCurrentFilters] = useState({});
   const [currentSearch, setCurrentSearch] = useState("");

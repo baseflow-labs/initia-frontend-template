@@ -26,19 +26,26 @@ const updateStatus = async (
   id: string,
   status: string,
   note?: string,
-  collectionDate?: string
+  collectionDate?: string,
+  value?: number
 ) => {
+  const { user } = (store.getState() as RootState).auth;
+
   const res = await api.patch(mainPath + "/update-status", {
     status,
     aid: id,
     note,
     collectionDate,
+    value,
+    staff: user,
   });
   return res;
 };
 
 const grant = async (data: object) => {
-  const res = await api.post(mainPath + "/grant", data);
+  const { user } = (store.getState() as RootState).auth;
+
+  const res = await api.post(mainPath + "/grant", { ...data, staff: user });
   return res;
 };
 

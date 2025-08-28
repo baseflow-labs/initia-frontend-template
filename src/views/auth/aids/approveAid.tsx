@@ -10,6 +10,9 @@ import { addNotification } from "../../../store/actions/notifications";
 import { Aid, AidCategory, defaultAid } from "../../../types/aids";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import { CategoryView } from "../dashboard/accountant";
+import { useAppSelector } from "../../../store/hooks";
+import Form from "../../../components/form";
+import { AidUnit } from "../../../components/card/programCards";
 
 interface Props {
   openModal: Aid;
@@ -17,13 +20,10 @@ interface Props {
   onGetData: (p: Object) => void;
 }
 
-const AccountantApproveAid = ({
-  openModal,
-  setOpenModal,
-  onGetData,
-}: Props) => {
+const ApproveAid = ({ openModal, setOpenModal, onGetData }: Props) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const { user } = useAppSelector((state) => state.auth);
 
   const [category, setCategory] = useState<AidCategory>();
 
@@ -33,15 +33,24 @@ const AccountantApproveAid = ({
     setOpenModal(defaultAid);
   };
 
-  const onSubmit = () => {
-    AidApi.updateStatus(openModal.id, "Approved")
+  const isAccountant = user.role === "accountant";
+  const isResearcher = user.role === "researcher";
+
+  const onSubmit = (value?: number) => {
+    AidApi.updateStatus(
+      openModal.id,
+      isAccountant ? "Approved" : isResearcher ? "Recommended" : "Seconded",
+      "",
+      "",
+      value
+    )
       .then(() => {
         onGetData({});
         onClose();
         dispatch(
           addNotification({
             msg: t("Global.Form.SuccessMsg", {
-              action: approveLabel,
+              action: "تحديث حالة الطلب إلى " + approveLabel,
               data: "المستفيد",
             }),
           })
@@ -67,7 +76,10 @@ const AccountantApproveAid = ({
     >
       <h5 className="mb-4">{openModal.value}</h5>
       <h5>القيمة المطلوبة</h5>
-      <h3>{openModal.value}</h3>
+      <h3>
+        {openModal.value}{" "}
+        <AidUnit t={t} type={category?.type || ""} amount={0} />
+      </h3>
 
       {category && (
         <CategoryView
@@ -80,20 +92,38 @@ const AccountantApproveAid = ({
             0
           )}
           programs={
-            category.aidPrograms.map(({ credit, ...rest }) => ({
-              ...rest,
-              credit,
-              balance: credit,
-            })) || []
+            isAccountant
+              ? category.aidPrograms.map(({ credit, ...rest }) => ({
+                  ...rest,
+                  credit,
+                  balance: credit,
+                })) || []
+              : []
           }
         />
       )}
 
-      <Button className="w-100 mt-4" onClick={() => onSubmit()}>
-        {t("Global.Form.Labels.Approve")}
-      </Button>
+      {isResearcher ? (
+        <Form
+          inputs={() => [
+            {
+              label: t("Auth.Aids.AidValue"),
+              name: "value",
+              type: "number",
+              moneyUnit: category?.type === "Cash",
+            },
+          ]}
+          submitText={t("Global.Form.Labels.Approve")}
+          initialValues={{ value: openModal.value }}
+          onFormSubmit={(e) => onSubmit(e.value)}
+        />
+      ) : (
+        <Button className="w-100 mt-4" onClick={() => onSubmit()}>
+          {t("Global.Form.Labels.Approve")}
+        </Button>
+      )}
     </Modal>
   );
 };
 
-export default AccountantApproveAid;
+export default ApproveAid;

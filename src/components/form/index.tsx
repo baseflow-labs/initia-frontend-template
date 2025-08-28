@@ -180,26 +180,26 @@ const Form: React.FC<Props> = ({
           return;
         }
 
-        if (type === "phoneNumber") {
-          if (String(value).length !== 9) {
-            errors[name] = t("Global.Form.Errors.PhoneNumberLength");
-          }
-
-          if (
-            !String(value).startsWith("50") &&
-            !String(value).startsWith("53") &&
-            !String(value).startsWith("54") &&
-            !String(value).startsWith("55") &&
-            !String(value).startsWith("56") &&
-            !String(value).startsWith("57") &&
-            !String(value).startsWith("58") &&
-            !String(value).startsWith("59")
-          ) {
-            errors[name] = t("Global.Form.Errors.InvalidPhoneNumber");
-          }
-        }
-
         if (value && value !== null && value !== "") {
+          if (type === "phoneNumber") {
+            if (String(value).length !== 9) {
+              errors[name] = t("Global.Form.Errors.PhoneNumberLength");
+            }
+
+            if (
+              !String(value).startsWith("50") &&
+              !String(value).startsWith("53") &&
+              !String(value).startsWith("54") &&
+              !String(value).startsWith("55") &&
+              !String(value).startsWith("56") &&
+              !String(value).startsWith("57") &&
+              !String(value).startsWith("58") &&
+              !String(value).startsWith("59")
+            ) {
+              errors[name] = t("Global.Form.Errors.InvalidPhoneNumber");
+            }
+          }
+
           if (type === "email") {
             const validEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
             if (!validEmail.test(value)) {

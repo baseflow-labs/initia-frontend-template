@@ -69,7 +69,7 @@ const HousingsFormView = ({
           header:
             t("Auth.MembershipRegistration.Form.Housing.Housing") +
             " " +
-            (record.nationalAddressNumber || i + 1),
+            (i + 1),
           body: (
             <Form
               inputs={housingDataInputs}
