@@ -3,14 +3,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import * as AidProgramApi from "../../../api/aids/aidPrograms";
+import * as AidProgramsApi from "../../../api/aids/aidPrograms";
+import * as AidCategoriesApi from "../../../api/aids/aidCategories";
 import * as AidApi from "../../../api/aids/aids";
 import UnacceptedBeneficiary from "../../../components/card/unacceptedBeneficiary";
 import { MoneyUnit } from "../../../components/table";
 import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { useAppSelector } from "../../../store/hooks";
-import { AidProgram } from "../../../types/aids";
+import { AidCategory, AidProgram } from "../../../types/aids";
 import {
   apiCatchGlobalHandler,
   pluralLabelResolve,
@@ -34,8 +35,10 @@ const AidsBeneficiaryView = () => {
     pagesCount: 1,
   });
   const [selectOptions, setSelectOptions] = useState<{
+    aidCategories: AidCategory[];
     aidPrograms: AidProgram[];
   }>({
+    aidCategories: [],
     aidPrograms: [],
   });
 
@@ -71,7 +74,21 @@ const AidsBeneficiaryView = () => {
   };
 
   useLayoutEffect(() => {
-    AidProgramApi.getAll({ capacity: 999 })
+    AidCategoriesApi.getAll({ capacity: 999 })
+      .then((res: any) =>
+        setSelectOptions((current) => ({
+          ...current,
+          aidCategories: res.payload.filter(
+            ({ aidPrograms = [] }) =>
+              aidPrograms?.filter(
+                (p: { status: string }) => p.status === "Opened"
+              )?.length
+          ),
+        }))
+      )
+      .catch(apiCatchGlobalHandler);
+
+    AidProgramsApi.getAll({ capacity: 999 })
       .then((res: any) =>
         setSelectOptions((current) => ({
           ...current,

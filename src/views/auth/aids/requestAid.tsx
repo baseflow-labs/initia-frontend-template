@@ -6,7 +6,7 @@ import * as AidApi from "../../../api/aids/aids";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import { addNotification } from "../../../store/actions/notifications";
-import { AidProgram } from "../../../types/aids";
+import { AidCategory } from "../../../types/aids";
 import { getRequestAidInputs } from "../../../utils/formInputs/aids";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 
@@ -16,7 +16,7 @@ interface Props {
   openModal: boolean;
   setOpenModal: (s: boolean) => void;
   selectOptions: {
-    aidPrograms: AidProgram[];
+    aidCategories: AidCategory[];
   };
 }
 

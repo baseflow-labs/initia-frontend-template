@@ -1,12 +1,12 @@
 import { FormikProps } from "formik";
 
+import { AidCategory, AidProgram } from "../../types/aids";
 import {
   getAidCategoryReapplyPeriods,
   getAidCategoryTypes,
   getAidProgramStatuses,
 } from "../optionDataLists/aids";
 import { getYesNo } from "../optionDataLists/common";
-import { AidCategory, AidProgram } from "../../types/aids";
 
 export const getRequestAidInputs = (
   t: Function,
@@ -15,18 +15,18 @@ export const getRequestAidInputs = (
 ) => {
   const pickedProgram = formik?.values?.aidProgram;
   const type = pickedProgram
-    ? selectOptions?.aidPrograms.find(({ id = "" }) => id === pickedProgram)
+    ? selectOptions?.aidCategories.find(({ id = "" }) => id === pickedProgram)
         ?.type
     : "";
 
   return [
     {
       type: "select",
-      options: selectOptions?.aidPrograms.map(({ id = "", name = "" }) => ({
+      options: selectOptions?.aidCategories.map(({ id = "", name = "" }) => ({
         label: name,
         value: id,
       })),
-      name: "aidProgram",
+      name: "aidCategory",
       label: t("Auth.Aids.AidType"),
       required: true,
     },

@@ -1,7 +1,6 @@
 import {
   faCircle,
   faEdit,
-  faHome,
   faNewspaper,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
