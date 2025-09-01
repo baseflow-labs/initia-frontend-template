@@ -29,11 +29,7 @@ import {
   getIncomeQualificationDataInputs,
   getNationalRecordDataInputs,
 } from "../../../utils/formInputs/beneficiaryProfile";
-import {
-  apiCatchGlobalHandler,
-  renderDataFromOptions,
-} from "../../../utils/function";
-import { getBeneficiaryCategories } from "../../../utils/optionDataLists/beneficiaries";
+import { apiCatchGlobalHandler } from "../../../utils/function";
 
 const BeneficiaryProfileView = () => {
   const { t } = useTranslation();
@@ -275,7 +271,7 @@ const BeneficiaryProfileView = () => {
               {
                 label: t("Auth.Beneficiaries.IncomeTotal"),
                 count: income,
-                unit: <img src={riyalIcon} />,
+                unit: <img src={riyalIcon} alt="riyalIcon" />,
                 color: "info",
                 icon: faChartSimple,
               },
