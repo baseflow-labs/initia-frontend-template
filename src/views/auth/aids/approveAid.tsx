@@ -13,7 +13,7 @@ import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
 import { Aid, AidCategory, defaultAid } from "../../../types/aids";
 import { apiCatchGlobalHandler } from "../../../utils/function";
-import { CategoryView } from "../dashboard/accountant";
+import { CategoryView } from "./selectProgram";
 
 interface Props {
   openModal: any;
