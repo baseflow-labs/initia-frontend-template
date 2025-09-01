@@ -272,7 +272,7 @@ const ApplicantsViewForSupervisor = () => {
         data={beneficiaries}
         onSearch={onSearch}
         paginationMeta={paginationMeta}
-        searchPlaceholder="بحث بـ اسم المستفيد"
+        searchPlaceholder={t("Auth.Beneficiaries.SearchBarPlaceholder")}
         tableActions={() => [
           {
             icon: faUser,

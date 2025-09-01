@@ -177,8 +177,12 @@ const BeneficiaryOwnProfile = () => {
 
             const rowLabel =
               table === "dependent"
-                ? `للتابع(ة) ${currentData.fullName}`
-                : `للمنزل صاحب العنوان الوطني ${currentData.nationalAddressNumber}`;
+                ? t("Auth.Beneficiary.ForDependent", {
+                    name: currentData.fullName,
+                  })
+                : t("Auth.Beneficiary.ForHouse", {
+                    house: currentData.nationalAddressNumber,
+                  });
 
             return (
               <div className="col-lg-6 mb-4" key={i}>
@@ -193,7 +197,10 @@ const BeneficiaryOwnProfile = () => {
                               ? `${prop.label} ${rowLabel}`
                               : prop.label,
                             halfCol: false,
-                            labelNote: "سبب طلب التعديل: " + note,
+                            labelNote:
+                              t("Auth.Beneficiaries.Profile.UpdateNote") +
+                              " " +
+                              note,
                             defaultValue: currentData[property],
                             required: true,
                           }))

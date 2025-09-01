@@ -27,8 +27,6 @@ const ApproveAid = ({ openModal, setOpenModal, onGetData }: Props) => {
 
   const [category, setCategory] = useState<AidCategory>();
 
-  const approveLabel = t("Auth.Aids.Statuses.Approved");
-
   const onClose = () => {
     setOpenModal(defaultAid);
   };
@@ -50,8 +48,11 @@ const ApproveAid = ({ openModal, setOpenModal, onGetData }: Props) => {
         dispatch(
           addNotification({
             msg: t("Global.Form.SuccessMsg", {
-              action: "تحديث حالة الطلب إلى " + approveLabel,
-              data: "المستفيد",
+              action:
+                t("Auth.Aids.StatusUpdated") +
+                " " +
+                t("Auth.Aids.Statuses.Approved"),
+              data: t("Auth.Beneficiaries.Beneficiary"),
             }),
           })
         );
@@ -75,7 +76,7 @@ const ApproveAid = ({ openModal, setOpenModal, onGetData }: Props) => {
       isOpen={!!openModal.id}
     >
       <h5 className="mb-4">{openModal.fileNo}</h5>
-      <h5>القيمة المطلوبة</h5>
+      <h5>{t("Auth.Aids.RequiredValue")}</h5>
       <h3>
         {openModal.value}{" "}
         <AidUnit t={t} type={category?.type || ""} amount={0} />

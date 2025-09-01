@@ -172,17 +172,16 @@ const MembershipRegistrationView = () => {
     const allowedBankCodes = new Set(banks(t).map(({ code }) => code));
 
     if (!iban.startsWith("SA")) {
-      errors.bankAccountNumber = "يجب أن يبدأ رقم الآيبان بـ SA";
+      errors.bankAccountNumber = t("Global.Form.Errors.IbanStart");
     } else if (iban.length !== 24) {
-      errors.bankAccountNumber = "رقم الآيبان يجب أن يتكون من 24 خانة بالضبط";
+      errors.bankAccountNumber = t("Global.Form.Errors.IbanLength");
     } else if (!/^[A-Z0-9]+$/.test(iban)) {
-      errors.bankAccountNumber =
-        "رقم الآيبان يجب أن يحتوي على أرقام وحروف فقط بدون مسافات أو رموز خاصة";
+      errors.bankAccountNumber = t("Global.Form.Errors.IbanContents");
     } else {
       const bankCode = iban.substring(4, 8);
 
       if (!allowedBankCodes.has(bankCode)) {
-        errors.bankAccountNumber = "رقم الآيبان لا يتبع أي بنك سعودي";
+        errors.bankAccountNumber = t("Global.Form.Errors.IbanWrong");
       }
     }
 

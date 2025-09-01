@@ -189,7 +189,7 @@ const AidProgramsView = () => {
         title={t("Auth.AidPrograms.Title")}
         filters={filters}
         onSearch={onSearch}
-        searchPlaceholder="بحث بـ اسم البرنامج"
+        searchPlaceholder={t("Auth.AidPrograms.SearchBarPlaceholder")}
         actionButtons={actionButtons}
         tableActions={(id?: string) => [
           {

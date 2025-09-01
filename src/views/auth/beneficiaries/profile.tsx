@@ -257,13 +257,13 @@ const BeneficiaryProfileView = () => {
           <StatisticCards
             statistics={[
               {
-                label: "عدد التابعين",
+                label: t("Auth.Beneficiaries.DependentsCount"),
                 count: dependentCards.length,
                 color: "success",
                 icon: faUsers,
               },
               {
-                label: "عدد الزوجات",
+                label: t("Auth.Beneficiaries.WivesCount"),
                 count: beneficiary?.dependents.filter(
                   ({ relation = "" }) => relation === "Spouse"
                 )?.length,
@@ -271,13 +271,13 @@ const BeneficiaryProfileView = () => {
                 icon: faRing,
               },
               {
-                label: "عدد البيوت",
+                label: t("Auth.Beneficiaries.HousesCount"),
                 count: housingCards.length,
                 color: "warning",
                 icon: faHome,
               },
               {
-                label: "إجمالي الدخل",
+                label: t("Auth.Beneficiaries.IncomeTotal"),
                 count: income,
                 unit: <img src={riyalIcon} />,
                 color: "info",

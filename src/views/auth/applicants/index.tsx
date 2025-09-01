@@ -265,7 +265,7 @@ const ApplicantsView = () => {
         title={t("Auth.Beneficiaries.Applications")}
         filters={filters}
         onSearch={onSearch}
-        searchPlaceholder="بحث بـ اسم المستفيد"
+        searchPlaceholder={t("Auth.Beneficiaries.SearchBarPlaceholder")}
         actionButtons={actionButtons}
         columns={columns}
         data={beneficiaries}

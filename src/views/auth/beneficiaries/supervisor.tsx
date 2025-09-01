@@ -208,7 +208,7 @@ const BeneficiariesViewForSupervisor = () => {
       outline: true,
       onClick: () =>
         exportDataToSingleSheetExcel(
-          "بيانات المستفيدين",
+          t("Auth.Beneficiaries.BeneficiariesData"),
           beneficiaries.map(
             ({
               fullName,
@@ -245,7 +245,7 @@ const BeneficiariesViewForSupervisor = () => {
         actionButtons={actionButtons}
         columns={columns}
         onSearch={onSearch}
-        searchPlaceholder="بحث بـ اسم المستفيد"
+        searchPlaceholder={t("Auth.Beneficiaries.SearchBarPlaceholder")}
         data={beneficiaries}
         paginationMeta={paginationMeta}
         tableActions={(id?: string) => [

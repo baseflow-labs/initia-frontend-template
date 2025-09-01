@@ -260,7 +260,7 @@ const VisitsView = () => {
       <TablePage
         title={t("Auth.Visits.Title")}
         onSearch={onSearch}
-        searchPlaceholder="بحث بـ اسم المستفيد"
+        searchPlaceholder={t("Auth.Visits.SearchBarPlaceholder")}
         filters={filters}
         tableActions={(id?: string) => {
           const visit = visits.find((v) => v.id === id);

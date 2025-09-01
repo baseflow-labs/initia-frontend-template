@@ -292,7 +292,7 @@ const AidsView = () => {
         title={t("Auth.Aids.Title")}
         filters={filters}
         onSearch={onSearch}
-        searchPlaceholder="بحث بـ اسم المستفيد"
+        searchPlaceholder={t("Auth.Aids.SearchBarPlaceholder")}
         actionButtons={actionButtons}
         tableActions={(id?: string) => {
           const aid = aids.find((a) => a.id === id);
