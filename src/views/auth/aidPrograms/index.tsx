@@ -2,12 +2,13 @@ import { faCircle, faEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
+
+// import { useDispatch } from "react-redux";
 
 import * as AidCategoriesApi from "../../../api/aids/aidCategories";
 import * as AidProgramApi from "../../../api/aids/aidPrograms";
 import TablePage from "../../../layouts/auth/pages/tablePage";
-// import { addNotification } from "../../../store/actions/notifications";
+// import { AidCategory, AidProgram, defaultAidProgram } from "../../../store/actions/notifications";
 import {
   AidCategory,
   AidProgram,
@@ -152,6 +153,7 @@ const AidProgramsView = () => {
 
   // const updateStatus = (id: string, status: string) => {
   //   AidProgramApi.updateStatus(id, status)
+
   //     .then(() => {
   //       const aidProgram = aidPrograms.find(
   //         (aidProgram) => aidProgram.id === id
