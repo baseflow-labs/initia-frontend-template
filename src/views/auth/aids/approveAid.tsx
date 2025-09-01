@@ -4,18 +4,18 @@ import { useDispatch } from "react-redux";
 
 import * as AidCategoryApi from "../../../api/aids/aidCategories";
 import * as AidApi from "../../../api/aids/aids";
+import { AidUnit } from "../../../components/card/programCards";
 import Button from "../../../components/core/button";
+import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import { addNotification } from "../../../store/actions/notifications";
+import { useAppSelector } from "../../../store/hooks";
 import { Aid, AidCategory, defaultAid } from "../../../types/aids";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import { CategoryView } from "../dashboard/accountant";
-import { useAppSelector } from "../../../store/hooks";
-import Form from "../../../components/form";
-import { AidUnit } from "../../../components/card/programCards";
 
 interface Props {
-  openModal: Aid;
+  openModal: any;
   setOpenModal: (s: Aid) => void;
   onGetData: (p: Object) => void;
 }
@@ -74,7 +74,7 @@ const ApproveAid = ({ openModal, setOpenModal, onGetData }: Props) => {
       className="modal-lg"
       isOpen={!!openModal.id}
     >
-      <h5 className="mb-4">{openModal.value}</h5>
+      <h5 className="mb-4">{openModal.fileNo}</h5>
       <h5>القيمة المطلوبة</h5>
       <h3>
         {openModal.value}{" "}

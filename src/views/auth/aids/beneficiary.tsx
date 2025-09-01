@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import * as AidProgramsApi from "../../../api/aids/aidPrograms";
 import * as AidCategoriesApi from "../../../api/aids/aidCategories";
+import * as AidProgramsApi from "../../../api/aids/aidPrograms";
 import * as AidApi from "../../../api/aids/aids";
 import UnacceptedBeneficiary from "../../../components/card/unacceptedBeneficiary";
 import { MoneyUnit } from "../../../components/table";
@@ -124,7 +124,10 @@ const AidsBeneficiaryView = () => {
       type: "custom",
       name: "name",
       label: t("Auth.Aids.AidName"),
-      render: (row: any) => row.aidProgram.name,
+      render: (row: any) =>
+        selectOptions.aidCategories.find(
+          (cat) => cat.id === row.aidProgram.aidCategory
+        )?.name,
     },
     {
       type: "custom",
@@ -133,7 +136,9 @@ const AidsBeneficiaryView = () => {
       render: (row: any) => (
         <>
           {row.value}{" "}
-          {row.aidProgram.type === "Cash" ? (
+          {selectOptions.aidCategories.find(
+            (cat) => cat.id === row.aidProgram.aidCategory
+          )?.type === "Cash" ? (
             <MoneyUnit />
           ) : (
             pluralLabelResolve(t, row.value, "Auth.Aids.AidPiece")

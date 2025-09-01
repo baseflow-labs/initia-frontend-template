@@ -13,7 +13,7 @@ export const getRequestAidInputs = (
   selectOptions: any,
   formik: FormikProps<Record<string, any>>
 ) => {
-  const pickedProgram = formik?.values?.aidProgram;
+  const pickedProgram = formik?.values?.aidCategory;
   const type = pickedProgram
     ? selectOptions?.aidCategories.find(({ id = "" }) => id === pickedProgram)
         ?.type

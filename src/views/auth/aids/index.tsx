@@ -10,6 +10,7 @@ import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
+import * as AidCategoryApi from "../../../api/aids/aidCategories";
 import * as AidProgramApi from "../../../api/aids/aidPrograms";
 import * as AidApi from "../../../api/aids/aids";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
@@ -17,7 +18,8 @@ import { actionProps, MoneyUnit } from "../../../components/table";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
-import { Aid, defaultAid } from "../../../types/aids";
+import { Aid, AidCategory, AidProgram, defaultAid } from "../../../types/aids";
+import { Beneficiary } from "../../../types/beneficiaries";
 import { dataDateFormat } from "../../../utils/consts";
 import {
   apiCatchGlobalHandler,
@@ -42,11 +44,14 @@ const AidsView = () => {
   );
 
   const [aids, setAids] = useState<Aid[]>([]);
-  const [selectOptions, setSelectOptions] = useState({
-    beneficiaries: [
-      { id: "", fullName: "", fileNo: "", status: { status: "" } },
-    ],
+  const [selectOptions, setSelectOptions] = useState<{
+    beneficiaries: Beneficiary[];
+    aidCategories: AidCategory[];
+    aidPrograms: AidProgram[];
+  }>({
+    beneficiaries: [],
     aidPrograms: [],
+    aidCategories: [],
   });
   const [currentFilters, setCurrentFilters] = useState({});
   const [currentSearch, setCurrentSearch] = useState("");
@@ -120,9 +125,16 @@ const AidsView = () => {
       .then((res: any) =>
         setSelectOptions((current) => ({
           ...current,
-          aidPrograms: res.payload.filter(
-            ({ status = "" }) => status === "Opened"
-          ),
+          aidPrograms: res.payload,
+        }))
+      )
+      .catch(apiCatchGlobalHandler);
+
+    AidCategoryApi.getAll({ capacity: 999 })
+      .then((res: any) =>
+        setSelectOptions((current) => ({
+          ...current,
+          aidCategories: res.payload,
         }))
       )
       .catch(apiCatchGlobalHandler);
@@ -173,7 +185,10 @@ const AidsView = () => {
       type: "custom",
       name: "name",
       label: t("Auth.Aids.AidName"),
-      render: (row: any) => row.aidProgram.name,
+      render: (row: any) =>
+        selectOptions.aidCategories.find(
+          (cat) => cat.id === row.aidProgram.aidCategory
+        )?.name,
     },
     {
       type: "date",
@@ -187,7 +202,9 @@ const AidsView = () => {
       render: (row: any) => (
         <>
           {row.value}{" "}
-          {row.aidProgram.type === "Cash" ? (
+          {selectOptions.aidCategories.find(
+            (cat) => cat.id === row.aidProgram.aidCategory
+          )?.type === "Cash" ? (
             <MoneyUnit />
           ) : (
             pluralLabelResolve(t, row.value, "Auth.Aids.AidPiece")
