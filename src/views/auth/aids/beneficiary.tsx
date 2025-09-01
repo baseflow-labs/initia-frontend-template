@@ -119,6 +119,17 @@ const AidsBeneficiaryView = () => {
     },
   ];
 
+  const processStatusForBeneficiary = (status: string) => {
+    switch (status) {
+      case "Recommended":
+      case "Seconded":
+      case "Pending":
+        return "Pending";
+      default:
+        return status;
+    }
+  };
+
   const columns = [
     {
       type: "custom",
@@ -170,7 +181,10 @@ const AidsBeneficiaryView = () => {
             icon={faCircle}
             className={`text-${statusColorRender(row.status)}`}
           />{" "}
-          {renderDataFromOptions(row.status, statuses)}
+          {renderDataFromOptions(
+            processStatusForBeneficiary(row.status),
+            statuses
+          )}
         </Fragment>
       ),
       name: "status",
