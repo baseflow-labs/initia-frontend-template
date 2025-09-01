@@ -35,9 +35,14 @@ const RequestDataUpdate = ({
         submitText={t("Global.Form.Labels.SubmitApplication")}
         onFormSubmit={(e, resetForm) => {
           setDataReview((current: ReviewProps[]) =>
-            current.map((row: ReviewProps) =>
-              row.property === openModal.property &&
-              row.table === openModal.table
+            current.map((row: ReviewProps) => {
+              const isSameRow =
+                row.property === openModal.property &&
+                row.table === openModal.table &&
+                ((row.table !== "housing" && row.table !== "dependents") ||
+                  row.row === openModal.row);
+
+              return isSameRow
                 ? {
                     ...row,
                     note: e.note,
@@ -45,9 +50,10 @@ const RequestDataUpdate = ({
                     new: true,
                     confirm: false,
                   }
-                : row
-            )
+                : row;
+            })
           );
+
           setOpenModal({});
           resetForm();
         }}

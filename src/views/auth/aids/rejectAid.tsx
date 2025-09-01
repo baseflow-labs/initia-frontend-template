@@ -50,7 +50,7 @@ const RejectAid = ({ openModal, setOpenModal, onGetData }: Props) => {
                 addNotification({
                   msg: t("Global.Form.SuccessMsg", {
                     action: rejectLabel,
-                    data: "المستفيد",
+                    data: t("Auth.Beneficiaries.Beneficiary"),
                   }),
                 })
               );

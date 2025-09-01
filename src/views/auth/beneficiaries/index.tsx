@@ -1,3 +1,4 @@
+import CancelMembership from "./cancelMembership";
 import {
   faCalendarDays,
   faFileExcel,
@@ -9,6 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
+
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import DemoLoginNote from "../../../layouts/auth/demoLoginNote";
 import TablePage from "../../../layouts/auth/pages/tablePage";
@@ -23,7 +25,7 @@ import {
   getNationalities,
   getProvinces,
 } from "../../../utils/optionDataLists/beneficiaries";
-import CancelMembership from "./cancelMembership";
+import { downloadNationalReport } from "./excelExport";
 
 const BeneficiariesView = () => {
   const { t } = useTranslation();
@@ -195,32 +197,7 @@ const BeneficiariesView = () => {
       label: <FontAwesomeIcon icon={faFileExcel} />,
       color: "success",
       outline: true,
-      onClick: () =>
-        exportDataToSingleSheetExcel(
-          "بيانات المستفيدين",
-          beneficiaries.map(
-            ({
-              fullName,
-              nationality,
-              dob,
-              idNumber,
-              category,
-              gender,
-              fileNo,
-            }: any) => ({
-              الاسم: fullName,
-              "رقم الهوية": idNumber,
-              الجنس: renderDataFromOptions(gender, getGenders(t)),
-              "تاريخ الميلاد": dob,
-              الجنسية: renderDataFromOptions(nationality, getNationalities(t)),
-              الفئة: renderDataFromOptions(
-                category,
-                getBeneficiaryCategories(t)
-              ),
-              "رقم الملف": fileNo,
-            })
-          ) as any
-        ),
+      onClick: () => downloadNationalReport(t, beneficiaries),
     },
   ];
 
@@ -234,7 +211,7 @@ const BeneficiariesView = () => {
         actionButtons={actionButtons}
         columns={columns}
         onSearch={onSearch}
-        searchPlaceholder="بحث بـ اسم المستفيد"
+        searchPlaceholder={t("Auth.Beneficiaries.SearchBarPlaceholder")}
         data={beneficiaries}
         paginationMeta={paginationMeta}
         tableActions={(id?: string) => [

@@ -13,6 +13,7 @@ import { useAppSelector } from "../../../store/hooks";
 import {
   getBasicDataInputs,
   getContactBankDataInputs,
+  getDependantDataInputs,
   getHousingDataInputs,
   getIncomeQualificationDataInputs,
   getNationalRecordDataInputs,
@@ -55,7 +56,7 @@ const BeneficiaryOwnProfile = () => {
 
   const hostelDataInputs = getHousingDataInputs(t);
 
-  // const dependentsDataInputs = getDependantDataInputs(t);
+  const dependentsDataInputs = getDependantDataInputs(t);
 
   const attachmentInputs = getNationalRecordDataInputs(t);
 
@@ -114,12 +115,14 @@ const BeneficiaryOwnProfile = () => {
       table: "housing",
       inputs: hostelDataInputs,
       data: beneficiary?.housing,
+      multiple: true,
     },
-    // {
-    //   table: "dependant",
-    //   inputs: dependentsDataInputs,
-    //   data: beneficiary?.dependents
-    // },
+    {
+      table: "dependent",
+      inputs: dependentsDataInputs,
+      data: beneficiary?.dependents,
+      multiple: true,
+    },
     {
       table: "nationalRecord",
       inputs: attachmentInputs,
@@ -162,11 +165,24 @@ const BeneficiaryOwnProfile = () => {
               ({ table: mapTable }) => mapTable === table
             );
 
+            const isMulti = requestTable?.multiple;
+
             const requestProperty = requestTable?.inputs.find(
               ({ name }) => name === property
             );
 
-            const currentData = requestTable?.data[property];
+            const currentData = isMulti
+              ? requestTable?.data.find((r: { id: string }) => r.id === row)
+              : requestTable?.data;
+
+            const rowLabel =
+              table === "dependent"
+                ? t("Auth.Beneficiary.ForDependent", {
+                    name: currentData.fullName,
+                  })
+                : t("Auth.Beneficiary.ForHouse", {
+                    house: currentData.nationalAddressNumber,
+                  });
 
             return (
               <div className="col-lg-6 mb-4" key={i}>
@@ -177,8 +193,15 @@ const BeneficiaryOwnProfile = () => {
                         inputs={() =>
                           [requestProperty].map((prop) => ({
                             ...prop,
-                            labelNote: "سبب طلب التعديل: " + note,
-                            defaultValue: currentData,
+                            label: isMulti
+                              ? `${prop.label} ${rowLabel}`
+                              : prop.label,
+                            halfCol: false,
+                            labelNote:
+                              t("Auth.Beneficiaries.Profile.UpdateNote") +
+                              " " +
+                              note,
+                            defaultValue: currentData[property],
                             required: true,
                           }))
                         }

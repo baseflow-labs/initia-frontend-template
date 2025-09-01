@@ -13,6 +13,7 @@ import { useSearchParams } from "react-router";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import { riyalIcon } from "../../../assets/icons/icons";
 import StatisticCards from "../../../components/card/statisticCards";
+import RenderCategory from "../../../components/category";
 import Button from "../../../components/core/button";
 import { InputSingleProps } from "../../../components/form";
 import { dataRender } from "../../../components/table";
@@ -28,11 +29,7 @@ import {
   getIncomeQualificationDataInputs,
   getNationalRecordDataInputs,
 } from "../../../utils/formInputs/beneficiaryProfile";
-import {
-  apiCatchGlobalHandler,
-  renderDataFromOptions,
-} from "../../../utils/function";
-import { getBeneficiaryCategories } from "../../../utils/optionDataLists/beneficiaries";
+import { apiCatchGlobalHandler } from "../../../utils/function";
 
 const BeneficiaryProfileView = () => {
   const { t } = useTranslation();
@@ -224,12 +221,7 @@ const BeneficiaryProfileView = () => {
             </small>
           )}
 
-          <small className="bg-opacity-info p-2 rounded-4 text-sm ms-2 my-auto text-info">
-            {renderDataFromOptions(
-              beneficiary?.beneficiary?.category,
-              getBeneficiaryCategories(t)
-            )}
-          </small>
+          <RenderCategory data={beneficiary?.beneficiary?.category} />
         </div>
 
         <div className="col-6 col-md-3">
@@ -257,13 +249,13 @@ const BeneficiaryProfileView = () => {
           <StatisticCards
             statistics={[
               {
-                label: "عدد التابعين",
+                label: t("Auth.Beneficiaries.DependentsCount"),
                 count: dependentCards.length,
                 color: "success",
                 icon: faUsers,
               },
               {
-                label: "عدد الزوجات",
+                label: t("Auth.Beneficiaries.WivesCount"),
                 count: beneficiary?.dependents.filter(
                   ({ relation = "" }) => relation === "Spouse"
                 )?.length,
@@ -271,15 +263,15 @@ const BeneficiaryProfileView = () => {
                 icon: faRing,
               },
               {
-                label: "عدد البيوت",
+                label: t("Auth.Beneficiaries.HousesCount"),
                 count: housingCards.length,
                 color: "warning",
                 icon: faHome,
               },
               {
-                label: "إجمالي الدخل",
+                label: t("Auth.Beneficiaries.IncomeTotal"),
                 count: income,
-                unit: <img src={riyalIcon} />,
+                unit: <img src={riyalIcon} alt="riyalIcon" />,
                 color: "info",
                 icon: faChartSimple,
               },

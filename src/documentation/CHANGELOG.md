@@ -30,3 +30,39 @@
 
 - Merge pull request #82 from Shai-club/stg
 
+## v1.6.1 - 2025-08-06
+
+- Merge pull request #84 from Shai-club/stg
+
+## v1.7.0 - 2025-08-07
+
+- Merge pull request #87 from Shai-club/stg
+
+## v1.8.0 - 2025-08-10
+
+- Merge pull request #90 from Shai-club/stg
+
+## v1.9.0 - 2025-08-13
+
+- Merge pull request #92 from Shai-club/stg
+
+## v1.9.1 - 2025-08-13
+
+- Merge pull request #94 from Shai-club/stg
+
+## v1.10.0 - 2025-08-13
+
+- Merge pull request #96 from Shai-club/stg
+
+## v1.10.1 - 2025-08-21
+
+- Merge pull request #100 from Shai-club/stg
+
+## v1.11.0 - 2025-08-24
+
+- Merge pull request #102 from Shai-club/stg
+
+## v1.11.1 - 2025-08-28
+
+- Merge pull request #104 from Shai-club/stg
+

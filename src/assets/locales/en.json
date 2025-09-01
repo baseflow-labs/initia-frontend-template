@@ -17,6 +17,7 @@
         "Once": "Once",
         "Title": "Reapply Periods"
       },
+      "SearchBarPlaceholder": "Search Bar Placeholder",
       "Title": "Aid Categories"
     },
     "AidPrograms": {
@@ -24,6 +25,7 @@
       "AidProgramName": "Aid Program Name",
       "EditAidProgram": "Edit Aid Program",
       "RemainingCredit": "Remaining Credit",
+      "SearchBarPlaceholder": "Search Bar Placeholder",
       "Sponsor": "Sponsor",
       "Statuses": {
         "Close": "Close",
@@ -62,6 +64,8 @@
       "CantRejectAlready": "Aid Rejected Already",
       "RecaptionDate": "Recaption Date",
       "RejectAid": "RejectAid",
+      "RequiredValue": "Required Value",
+      "SearchBarPlaceholder": "Search Bar Placeholder",
       "Statuses": {
         "Approve": "Approve",
         "Approved": "Approved",
@@ -74,15 +78,20 @@
         "Rejected": "Rejected",
         "Seconded": "Seconded"
       },
+      "StatusUpdated": "Status Updated",
       "Title": "Aids"
     },
     "Beneficiaries": {
       "AddBeneficiary": "Add Beneficiary",
       "Applications": "Membership Applications",
       "Beneficiaries": "Beneficiaries",
+      "BeneficiariesData": "Beneficiaries Data",
       "Beneficiary": "Beneficiary",
       "BeneficiaryName": "Beneficiary Name",
+      "DependentsCount": "Dependents Count",
       "DownloadByNationalCenterForm": "Download Data",
+      "HousesCount": "Houses Count",
+      "IncomeTotal": "Income Total",
       "Profile": {
         "AcceptApplication": "Accept Application",
         "AcceptApplicationDisabledMsg": "Accept Application Disabled Msg",
@@ -118,10 +127,14 @@
         "Title": "Profile",
         "UpdateNote": "Update Note"
       },
+      "SearchBarPlaceholder": "Search Bar Placeholder",
       "Title": "Beneficiaries",
-      "UnacceptedNote": "Please wait until your membership application is accepted to use this service."
+      "UnacceptedNote": "Please wait until your membership application is accepted to use this service.",
+      "WivesCount": "Wives Count"
     },
     "Beneficiary": {
+      "ForDependent": "For Dependent",
+      "ForHouse": "For House",
       "Profile": {
         "NoDataUpdate": "No Data Update Requests",
         "PleaseUpdateFollowingData": "Please Update Following Data...",
@@ -472,6 +485,7 @@
       "BeneficiariesCount": "Beneficiaries sCount",
       "EditResearcher": "Edit Researcher",
       "ResearcherName": "Researcher Name",
+      "SearchBarPlaceholder": "Search Bar Placeholder",
       "Title": "Researchers Mgmt",
       "VisitsCount": "Visits Count"
     },
@@ -578,6 +592,7 @@
         "WaterHeater": "Water Heater",
         "Working": "Working"
       },
+      "SearchBarPlaceholder": "Search Bar Placeholder",
       "Statuses": {
         "Approved": "Beneficiary Approved",
         "Cancelled": "Cancelled",
@@ -611,6 +626,10 @@
       "CantDoIt": "Can't Do It",
       "Errors": {
         "FileTooLarge": "Some files exceed the size limit ({{max}} MB).",
+        "IbanContents": "IbanContents",
+        "IbanLength": "IbanLength",
+        "IbanStart": "IbanStart",
+        "IbanWrong": "IbanWrong",
         "InvalidEmail": "Invalid email format",
         "InvalidNationalAddressNumber": "Invalid National Address Number",
         "InvalidNumber": "Invalid number",

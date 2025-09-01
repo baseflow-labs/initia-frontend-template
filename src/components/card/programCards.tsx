@@ -14,28 +14,6 @@ interface Props {
   }[];
 }
 
-const columnsLgWidth = (count: number) => {
-  switch (count) {
-    case 1:
-      return 12;
-    case 2:
-      return 6;
-    case 3:
-      return 4;
-    default:
-      return 3;
-  }
-};
-
-const columnsMdWidth = (count: number) => {
-  switch (count) {
-    case 1:
-      return 12;
-    default:
-      return 6;
-  }
-};
-
 export const AidUnit = ({
   t,
   type,
@@ -48,7 +26,12 @@ export const AidUnit = ({
   big?: boolean;
 }) =>
   type === "Cash" ? (
-    <img src={riyalIcon} height={big ? 25 : 15} className="ms-1" />
+    <img
+      src={riyalIcon}
+      height={big ? 25 : 15}
+      className="ms-1"
+      alt="riyalUnit"
+    />
   ) : (
     pluralLabelResolve(t, amount, "Auth.Aids.AidPiece")
   );
@@ -60,12 +43,7 @@ const ProgramCards = ({ programs }: Props) => {
     <div className="row">
       {programs.map(({ name, type, credit, balance, sponsor }, i) => {
         return (
-          <div
-            className={`col-sm-${columnsMdWidth(
-              programs.length
-            )} col-xl-${columnsLgWidth(programs.length)}`}
-            key={i}
-          >
+          <div className="col-sm-3 col-xl-6" key={i}>
             <DashboardCard>
               <div className="card-body p-0">
                 <h3>{name}</h3>

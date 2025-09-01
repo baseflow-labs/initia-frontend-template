@@ -60,8 +60,8 @@ const BeneficiaryFormReview = () => {
 
   useLayoutEffect(() => {
     BeneficiaryApi.getById(searchParams.get("id") || "")
-      .then((res: any) => {
-        setBeneficiary(res.payload);
+      .then((beneficiaryRes: any) => {
+        setBeneficiary(beneficiaryRes.payload);
 
         const emptyReview: ReviewProps[] = [];
 
@@ -69,27 +69,49 @@ const BeneficiaryFormReview = () => {
 
         Object.keys(fieldsToShow).forEach((table) => {
           fieldsToShow[table].forEach(({ name, label }) => {
-            emptyReview.push({
-              table,
-              property: name,
-              label,
-            });
+            if (table === "housing") {
+              beneficiaryRes.payload.housing.forEach((h: { id: string }) => {
+                emptyReview.push({
+                  table,
+                  property: name,
+                  label,
+                  row: h.id,
+                });
+              });
+            } else if (table === "dependents") {
+              beneficiaryRes.payload.dependents.forEach((d: { id: string }) => {
+                emptyReview.push({
+                  table,
+                  property: name,
+                  label,
+                  row: d.id,
+                });
+              });
+            } else {
+              emptyReview.push({
+                table,
+                property: name,
+                label,
+              });
+            }
           });
         });
 
-        DataReviewApi.getBeneficiaryDataReview(res.payload.beneficiary.id)
-          .then((res: any) => {
+        DataReviewApi.getBeneficiaryDataReview(
+          beneficiaryRes.payload.beneficiary.id
+        )
+          .then((reviewResp: any) => {
             setDataArchive(
-              res.payload.filter(({ dataUpdate = null }) => dataUpdate)
+              reviewResp.payload.filter(({ dataUpdate = null }) => dataUpdate)
             );
 
-            const resp = res.payload
+            const resp = reviewResp.payload
               .filter(({ dataUpdate = null }) => !dataUpdate)
-              .map(({ needUpdate = false, ...rest }) => ({
+              .map(({ needUpdate = false, table = "", ...rest }) => ({
                 ...rest,
+                table: table === "dependent" ? "dependents" : table,
                 needUpdate,
                 confirm: !needUpdate,
-                row: rest.row || null,
               }));
 
             setDataReview(() =>
@@ -98,7 +120,8 @@ const BeneficiaryFormReview = () => {
                   final.find(
                     (f) =>
                       f.property === current.property &&
-                      f.table === current.table
+                      f.table === current.table &&
+                      f.row === current.row
                   )
                     ? final
                     : [...final, current],
@@ -248,7 +271,11 @@ const BeneficiaryFormReview = () => {
   const onSubmit = () => {
     DataReviewApi.submitReview(
       beneficiary.beneficiary?.id,
-      dataReview.filter((row) => row.new)
+      dataReview
+        .filter((row) => row.new)
+        .map((d) =>
+          d.table === "dependents" ? { ...d, table: "dependent" } : d
+        )
     )
       .then(() => {
         dispatch(
@@ -320,8 +347,11 @@ const BeneficiaryFormReview = () => {
                     const isSameRow =
                       row.property === property &&
                       row.table === tab &&
-                      ((tab !== "housing" && tab !== "dependents") ||
-                        row.row === dependentTab);
+                      (tab === "dependents"
+                        ? row.row === dependentTab
+                        : tab === "housing"
+                        ? row.row === housingTab
+                        : true);
 
                     return isSameRow
                       ? {
@@ -348,12 +378,19 @@ const BeneficiaryFormReview = () => {
               icon: faEdit,
               spread: true,
               label: t("Auth.Beneficiaries.Profile.editRequest"),
-              onClick: (data: string) =>
-                setUpdateModalData(
-                  dataReview.find(
-                    (r) => r.property === data && r.table === tab
-                  ) || {}
-                ),
+              onClick: (property: string) => {
+                const match = dataReview.find(
+                  (r) =>
+                    r.property === property &&
+                    r.table === tab &&
+                    (tab === "dependents"
+                      ? r.row === dependentTab
+                      : tab === "housing"
+                      ? r.row === housingTab
+                      : true)
+                );
+                setUpdateModalData(match || {});
+              },
             },
           ];
 
@@ -362,21 +399,36 @@ const BeneficiaryFormReview = () => {
               icon: faBoxOpen,
               spread: true,
               label: t("Auth.Beneficiaries.Profile.archive"),
-              onClick: (id: string) => {
+              onClick: (property: string) => {
                 const archive = dataArchive.filter(
-                  (r) => r.property === id && r.table === tab
+                  (r) =>
+                    r.property === property &&
+                    r.table === tab &&
+                    (tab === "dependents"
+                      ? r.row === dependentTab
+                      : tab === "housing"
+                      ? r.row === housingTab
+                      : true)
                 );
-                if (archive) {
+                if (archive.length) {
                   setArchiveModalData(archive);
                 }
               },
             },
           ];
 
-          return dataArchive.filter((r) => r.property === id && r.table === tab)
-            ?.length
-            ? [...fixed, ...conditional]
-            : fixed;
+          const hasArchive = dataArchive.some(
+            (r) =>
+              r.property === id &&
+              r.table === tab &&
+              (tab === "dependents"
+                ? r.row === dependentTab
+                : tab === "housing"
+                ? r.row === housingTab
+                : true)
+          );
+
+          return hasArchive ? [...fixed, ...conditional] : fixed;
         }}
       />
 
