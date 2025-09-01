@@ -27,7 +27,8 @@ const updateStatus = async (
   status: string,
   note?: string,
   collectionDate?: string,
-  value?: number
+  value?: number,
+  aidProgram?: string
 ) => {
   const { user } = (store.getState() as RootState).auth;
 
@@ -37,6 +38,7 @@ const updateStatus = async (
     note,
     collectionDate,
     value,
+    aidProgram,
     staff: user,
   });
   return res;

@@ -13,7 +13,7 @@ import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
 import { Aid, AidCategory, defaultAid } from "../../../types/aids";
 import { apiCatchGlobalHandler } from "../../../utils/function";
-import { CategoryView } from "./selectProgram";
+import { CategoryProgramPicker, CategoryView } from "./selectProgram";
 
 interface Props {
   openModal: any;
@@ -27,6 +27,7 @@ const ApproveAid = ({ openModal, setOpenModal, onGetData }: Props) => {
   const { user } = useAppSelector((state) => state.auth);
 
   const [category, setCategory] = useState<AidCategory>();
+  const [selectedProgram, setSelectedProgram] = useState<string>("");
 
   const onClose = () => {
     setOpenModal(defaultAid);
@@ -41,7 +42,8 @@ const ApproveAid = ({ openModal, setOpenModal, onGetData }: Props) => {
       isAccountant ? "Approved" : isResearcher ? "Recommended" : "Seconded",
       "",
       "",
-      value
+      value,
+      isAccountant ? selectedProgram : undefined
     )
       .then(() => {
         onGetData({});
@@ -91,27 +93,39 @@ const ApproveAid = ({ openModal, setOpenModal, onGetData }: Props) => {
         <AidUnit t={t} type={category?.type || ""} amount={0} />
       </h3>
 
-      {category && (
-        <CategoryView
-          t={t}
-          id={category.id}
-          name={category.name}
-          type={category.type}
-          balance={category.aidPrograms.reduce(
-            (final, { credit }) => (final += parseFloat(String(credit))),
-            0
-          )}
-          programs={
-            isAccountant
-              ? category.aidPrograms.map(({ credit, ...rest }) => ({
-                  ...rest,
-                  credit,
-                  balance: credit,
-                })) || []
-              : []
-          }
-        />
-      )}
+      {category &&
+        (isAccountant ? (
+          <CategoryProgramPicker
+            t={t}
+            id={category.id}
+            name={category.name}
+            type={category.type}
+            balance={category.aidPrograms.reduce(
+              (final, { credit }) => (final += parseFloat(String(credit))),
+              0
+            )}
+            programs={
+              category.aidPrograms.map(({ credit, ...rest }) => ({
+                ...rest,
+                credit,
+                balance: credit,
+              })) || []
+            }
+            onPick={(programId: string) => setSelectedProgram(programId)}
+          />
+        ) : (
+          <CategoryView
+            t={t}
+            id={category.id}
+            name={category.name}
+            type={category.type}
+            balance={category.aidPrograms.reduce(
+              (final, { credit }) => (final += parseFloat(String(credit))),
+              0
+            )}
+            programs={[]}
+          />
+        ))}
 
       {isResearcher ? (
         <Form
