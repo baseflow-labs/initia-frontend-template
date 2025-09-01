@@ -48,7 +48,12 @@ export const AidUnit = ({
   big?: boolean;
 }) =>
   type === "Cash" ? (
-    <img src={riyalIcon} height={big ? 25 : 15} className="ms-1" />
+    <img
+      src={riyalIcon}
+      height={big ? 25 : 15}
+      className="ms-1"
+      alt="riyalUnit"
+    />
   ) : (
     pluralLabelResolve(t, amount, "Auth.Aids.AidPiece")
   );
