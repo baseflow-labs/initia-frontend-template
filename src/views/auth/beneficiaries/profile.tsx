@@ -13,6 +13,7 @@ import { useSearchParams } from "react-router";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import { riyalIcon } from "../../../assets/icons/icons";
 import StatisticCards from "../../../components/card/statisticCards";
+import RenderCategory from "../../../components/category";
 import Button from "../../../components/core/button";
 import { InputSingleProps } from "../../../components/form";
 import { dataRender } from "../../../components/table";
@@ -224,12 +225,7 @@ const BeneficiaryProfileView = () => {
             </small>
           )}
 
-          <small className="bg-opacity-info p-2 rounded-4 text-sm ms-2 my-auto text-info">
-            {renderDataFromOptions(
-              beneficiary?.beneficiary?.category,
-              getBeneficiaryCategories(t)
-            )}
-          </small>
+          <RenderCategory data={beneficiary?.beneficiary?.category} />
         </div>
 
         <div className="col-6 col-md-3">
