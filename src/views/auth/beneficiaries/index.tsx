@@ -25,6 +25,7 @@ import {
   getNationalities,
   getProvinces,
 } from "../../../utils/optionDataLists/beneficiaries";
+import { downloadNationalReport } from "./excelExport";
 
 const BeneficiariesView = () => {
   const { t } = useTranslation();
@@ -196,32 +197,7 @@ const BeneficiariesView = () => {
       label: <FontAwesomeIcon icon={faFileExcel} />,
       color: "success",
       outline: true,
-      onClick: () =>
-        exportDataToSingleSheetExcel(
-          t("Auth.Beneficiaries.BeneficiariesData"),
-          beneficiaries.map(
-            ({
-              fullName,
-              nationality,
-              dob,
-              idNumber,
-              category,
-              gender,
-              fileNo,
-            }: any) => ({
-              الاسم: fullName,
-              "رقم الهوية": idNumber,
-              الجنس: renderDataFromOptions(gender, getGenders(t)),
-              "تاريخ الميلاد": dob,
-              الجنسية: renderDataFromOptions(nationality, getNationalities(t)),
-              الفئة: renderDataFromOptions(
-                category,
-                getBeneficiaryCategories(t)
-              ),
-              "رقم الملف": fileNo,
-            })
-          ) as any
-        ),
+      onClick: () => downloadNationalReport(t, beneficiaries),
     },
   ];
 
