@@ -1,4 +1,5 @@
 name: 🚀 Deploy and Debug Demo Server
+run-name: 🚀 Demo Deploy - ${{ github.actor }} on ${{ github.ref_name }}
 
 concurrency:
   group: ${{ github.ref }}
@@ -9,7 +10,7 @@ on:
     branches:
       - prod
   
-  
+jobs:  
   deployment:
     name: Demo Deployment
     runs-on: ubuntu-latest
