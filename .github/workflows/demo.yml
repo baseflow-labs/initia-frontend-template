@@ -9,6 +9,8 @@ on:
   push:
     branches:
       - prod
+    paths-ignore:
+      - '.github/workflows/**'
   
 jobs:  
   deployment:
