@@ -1,6 +1,7 @@
 import {
   faCheck,
   faCircle,
+  faEye,
   faHandHoldingDollar,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
@@ -31,6 +32,7 @@ import { getAidStatuses } from "../../../utils/optionDataLists/aids";
 import ApproveAid from "./approveAid";
 import RejectAid from "./rejectAid";
 import SendAid from "./sendAid";
+import ViewAidDetails from "./viewDetails";
 
 const AidsView = () => {
   const { t } = useTranslation();
@@ -38,6 +40,7 @@ const AidsView = () => {
   const { user } = useAppSelector((state) => state.auth);
 
   const [openModal, setOpenModal] = useState(false);
+  const [openDetailsModal, setOpenDetailsModal] = useState<string>("");
   const [openApproveModal, setOpenApproveModal] = useState<Aid>(defaultAid);
   const [openRejectModal, setOpenRejectModal] = useState<boolean | string>(
     false
@@ -310,6 +313,12 @@ const AidsView = () => {
 
           const final: actionProps[] = [
             {
+              label: t("Auth.Aids.ViewAidDetails"),
+              icon: faEye,
+              spread: false,
+              onClick: (data: string) => setOpenDetailsModal(data),
+            },
+            {
               label: t("Auth.Aids.Statuses.Approve"),
               icon: faCheck,
               spread: false,
@@ -379,6 +388,11 @@ const AidsView = () => {
             capacity,
           });
         }}
+      />
+
+      <ViewAidDetails
+        openModal={openDetailsModal}
+        setOpenModal={setOpenDetailsModal}
       />
 
       <SendAid
