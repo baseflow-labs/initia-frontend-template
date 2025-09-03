@@ -20,7 +20,7 @@ const CopyRightView = ({
       {oneLine ? (
         <small>{t("CopyRight.AppName")}</small>
       ) : (
-        <a href="https://mustaheq.org" target="_blank" rel="noopener">
+        <a href="https://mustaheq.org" target="_blank" rel="noreferrer">
           <img src={short ? LogoOnly : Logo} height="65" alt="Logo" />
         </a>
       )}

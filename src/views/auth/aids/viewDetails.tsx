@@ -1,14 +1,8 @@
-import {
-  faHome,
-  faRing,
-  faUser,
-  faUsers,
-} from "@fortawesome/free-solid-svg-icons";
+import { faHome, faRing, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import * as AidApi from "../../../api/aids/aids";
-import DashboardCard from "../../../components/card/dashboardCard";
 import StatisticCards from "../../../components/card/statisticCards";
 import RenderCategory from "../../../components/category";
 import Button from "../../../components/core/button";
