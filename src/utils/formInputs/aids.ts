@@ -22,10 +22,17 @@ export const getRequestAidInputs = (
   return [
     {
       type: "select",
-      options: selectOptions?.aidCategories.map(({ id = "", name = "" }) => ({
-        label: name,
-        value: id,
-      })),
+      options: selectOptions?.aidCategories
+        .filter(
+          ({ aidPrograms = [] }) =>
+            aidPrograms?.filter(
+              (p: { status: string }) => p.status === "Opened"
+            )?.length
+        )
+        .map(({ id = "", name = "" }) => ({
+          label: name,
+          value: id,
+        })),
       name: "aidCategory",
       label: t("Auth.Aids.AidType"),
       required: true,

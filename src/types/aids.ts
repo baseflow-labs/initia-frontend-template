@@ -1,3 +1,5 @@
+import { MembershipStatus } from "./beneficiaries";
+
 export interface AidCategory {
   id: string;
   name: string;
@@ -37,7 +39,7 @@ export const defaultAidProgram: AidProgram = {
 export interface Aid {
   id: string;
   beneficiaryId: string;
-  status: string;
+  status: MembershipStatus;
   urgent: boolean;
   value: number;
   note?: string;
@@ -47,7 +49,7 @@ export interface Aid {
 export const defaultAid: Aid = {
   id: "",
   beneficiaryId: "",
-  status: "",
+  status: { id: "", status: "" },
   note: "",
   value: 0,
   urgent: false,

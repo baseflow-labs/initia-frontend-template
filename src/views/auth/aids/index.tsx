@@ -89,7 +89,7 @@ const AidsView = () => {
             ({ beneficiary = { id: "" }, status = {}, ...rest }) => ({
               ...beneficiary,
               beneficiaryId: beneficiary.id,
-              ...status,
+              status,
               ...rest,
             })
           )
@@ -232,13 +232,20 @@ const AidsView = () => {
     },
     {
       type: "custom",
+      name: "note",
+      label: t("Auth.AidCategories.AidRejectReason"),
+      render: (row: any) => row.status.note,
+      required: true,
+    },
+    {
+      type: "custom",
       render: (row: any) => (
         <Fragment>
           <FontAwesomeIcon
             icon={faCircle}
-            className={`text-${statusColorRender(row.status)}`}
+            className={`text-${statusColorRender(row.status.status)}`}
           />{" "}
-          {renderDataFromOptions(row.status, statuses)}
+          {renderDataFromOptions(row.status.status, statuses)}
         </Fragment>
       ),
       name: "status",
@@ -297,9 +304,9 @@ const AidsView = () => {
         tableActions={(id?: string) => {
           const aid = aids.find((a) => a.id === id);
 
-          const approved = aid?.status === "Approved";
-          const granted = aid?.status === "Granted";
-          const rejected = aid?.status === "Rejected";
+          const approved = aid?.status?.status === "Approved";
+          const granted = aid?.status?.status === "Granted";
+          const rejected = aid?.status?.status === "Rejected";
 
           const final: actionProps[] = [
             {
