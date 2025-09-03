@@ -1,16 +1,3 @@
-import {
-  faCheck,
-  faCircle,
-  faEye,
-  faHandHoldingDollar,
-  faXmark,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import moment from "moment";
-import { Fragment, useLayoutEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
-
 import * as AidCategoryApi from "../../../api/aids/aidCategories";
 import * as AidProgramApi from "../../../api/aids/aidPrograms";
 import * as AidApi from "../../../api/aids/aids";
@@ -22,17 +9,18 @@ import { useAppSelector } from "../../../store/hooks";
 import { Aid, AidCategory, AidProgram, defaultAid } from "../../../types/aids";
 import { Beneficiary } from "../../../types/beneficiaries";
 import { dataDateFormat } from "../../../utils/consts";
-import {
-  apiCatchGlobalHandler,
-  pluralLabelResolve,
-  renderDataFromOptions,
-  statusColorRender,
-} from "../../../utils/function";
+import { apiCatchGlobalHandler, pluralLabelResolve, renderDataFromOptions, statusColorRender } from "../../../utils/function";
 import { getAidStatuses } from "../../../utils/optionDataLists/aids";
 import ApproveAid from "./approveAid";
 import RejectAid from "./rejectAid";
 import SendAid from "./sendAid";
 import ViewAidDetails from "./viewDetails";
+import { faCheck, faCircle, faEye, faHandHoldingDollar, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import moment from "moment";
+import { Fragment, useLayoutEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 
 const AidsView = () => {
   const { t } = useTranslation();
@@ -190,7 +178,7 @@ const AidsView = () => {
       label: t("Auth.Aids.AidName"),
       render: (row: any) =>
         selectOptions.aidCategories.find(
-          (cat) => cat.id === row.aidProgram.aidCategory
+          (cat) => cat.id === row.aidProgram.aidCategoryId
         )?.name,
     },
     {
@@ -206,7 +194,7 @@ const AidsView = () => {
         <>
           {row.value}{" "}
           {selectOptions.aidCategories.find(
-            (cat) => cat.id === row.aidProgram.aidCategory
+            (cat) => cat.id === row.aidProgram.aidCategoryId
           )?.type === "Cash" ? (
             <MoneyUnit />
           ) : (

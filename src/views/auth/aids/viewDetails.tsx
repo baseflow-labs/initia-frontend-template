@@ -13,12 +13,13 @@ import StatisticCards from "../../../components/card/statisticCards";
 import RenderCategory from "../../../components/category";
 import Button from "../../../components/core/button";
 import Modal from "../../../components/modal";
-import DynamicTable, { MoneyUnit } from "../../../components/table";
+import DynamicTable, { dataRender, MoneyUnit } from "../../../components/table";
 import { useAppSelector } from "../../../store/hooks";
 import {
   apiCatchGlobalHandler,
   pluralLabelResolve,
 } from "../../../utils/function";
+import { CategoryView } from "./selectProgram";
 
 interface Props {
   openModal: string;
@@ -50,7 +51,7 @@ const ViewAidDetails = ({ openModal, setOpenModal }: Props) => {
       type: "custom",
       name: "name",
       label: t("Auth.Aids.AidName"),
-      render: (row: any) => row.aidProgram?.aidCategory,
+      render: (row: any) => row.aidProgram?.aidCategory?.name,
     },
     {
       type: "custom",
@@ -99,7 +100,7 @@ const ViewAidDetails = ({ openModal, setOpenModal }: Props) => {
 
           <h5>
             <span className="me-2">{t("Auth.Beneficiaries.IncomeTotal")}</span>
-            <b className="fw-bold">
+            <b className="fw-bold text-success">
               {data.incomeTotal}
               <MoneyUnit />
             </b>
@@ -128,6 +129,34 @@ const ViewAidDetails = ({ openModal, setOpenModal }: Props) => {
             ]}
           />
 
+          <h5 className="my-4 d-flex justify-content-between">
+            {t("Auth.Aids.AidDetails")}
+            <div>
+              <span className="text-success">
+                {dataRender({
+                  row: data,
+                  data: data.document,
+                  type: "file",
+                  name: "document",
+                })}
+              </span>{" "}
+              {t("Global.Form.Labels.SupportingDocument")}
+            </div>
+          </h5>
+
+          {/* <pre style={{ direction: "ltr" }}>
+            {JSON.stringify(data, null, 2)}{" "}
+          </pre> */}
+
+          <CategoryView
+            t={t}
+            id={data.aidProgram?.aidCategory?.id}
+            name={data.aidProgram?.aidCategory?.name}
+            type={data.aidProgram?.aidCategory?.type}
+            balance={data.value}
+            programs={[]}
+          />
+
           <h5 className="mt-4 mb-2">{t("Auth.Aids.OldAids")}</h5>
 
           <DynamicTable
@@ -141,7 +170,7 @@ const ViewAidDetails = ({ openModal, setOpenModal }: Props) => {
           <h5 className="my-4">{t("Auth.Aids.AidPurpose")}</h5>
 
           <textarea
-            className="form-control w-100 mb-5"
+            className="form-control w-100 mb-5 border border-info bg-white text-info"
             value={data.note}
             disabled
           />

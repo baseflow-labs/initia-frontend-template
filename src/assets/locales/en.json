@@ -41,6 +41,7 @@
     },
     "Aids": {
       "AddAid": "Add Aid",
+      "AidDetails": "Aid Details",
       "AidName": "Aid Name",
       "AidPiece_0": "-",
       "AidPiece_1": "Piece",

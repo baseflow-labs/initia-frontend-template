@@ -135,7 +135,7 @@ const AidsBeneficiaryView = () => {
       label: t("Auth.Aids.AidName"),
       render: (row: any) =>
         selectOptions.aidCategories.find(
-          (cat) => cat.id === row.aidProgram.aidCategory
+          (cat) => cat.id === row.aidProgram.aidCategoryId
         )?.name,
     },
     {
@@ -146,7 +146,7 @@ const AidsBeneficiaryView = () => {
         <>
           {row.value}{" "}
           {selectOptions.aidCategories.find(
-            (cat) => cat.id === row.aidProgram.aidCategory
+            (cat) => cat.id === row.aidProgram.aidCategoryId
           )?.type === "Cash" ? (
             <MoneyUnit />
           ) : (
