@@ -3,19 +3,31 @@ import * as AidProgramApi from "../../../api/aids/aidPrograms";
 import * as AidApi from "../../../api/aids/aids";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import { actionProps, MoneyUnit } from "../../../components/table";
+import TooltipComp from "../../../components/tooltip";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
 import { Aid, AidCategory, AidProgram, defaultAid } from "../../../types/aids";
 import { Beneficiary } from "../../../types/beneficiaries";
 import { dataDateFormat } from "../../../utils/consts";
-import { apiCatchGlobalHandler, pluralLabelResolve, renderDataFromOptions, statusColorRender } from "../../../utils/function";
+import {
+  apiCatchGlobalHandler,
+  pluralLabelResolve,
+  renderDataFromOptions,
+  statusColorRender,
+} from "../../../utils/function";
 import { getAidStatuses } from "../../../utils/optionDataLists/aids";
 import ApproveAid from "./approveAid";
 import RejectAid from "./rejectAid";
 import SendAid from "./sendAid";
 import ViewAidDetails from "./viewDetails";
-import { faCheck, faCircle, faEye, faHandHoldingDollar, faXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCheck,
+  faCircle,
+  faEye,
+  faHandHoldingDollar,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
 import { Fragment, useLayoutEffect, useState } from "react";
@@ -168,11 +180,6 @@ const AidsView = () => {
 
   const columns = [
     {
-      type: "text",
-      name: "fileNo",
-      label: t("Auth.MembershipRegistration.Form.FileNo"),
-    },
-    {
       type: "custom",
       name: "name",
       label: t("Auth.Aids.AidName"),
@@ -180,11 +187,6 @@ const AidsView = () => {
         selectOptions.aidCategories.find(
           (cat) => cat.id === row.aidProgram.aidCategoryId
         )?.name,
-    },
-    {
-      type: "date",
-      name: "createdAt",
-      label: t("Global.Labels.ApplicationDate"),
     },
     {
       type: "custom",
@@ -205,38 +207,25 @@ const AidsView = () => {
     },
     {
       type: "date",
+      name: "createdAt",
+      label: t("Global.Labels.ApplicationDate"),
+    },
+    {
+      type: "date",
       name: "collectionDate",
       label: t("Auth.Aids.RecaptionDate"),
-    },
-    {
-      type: "file",
-      name: "document",
-      label: t("Global.Form.Labels.SupportingDocument"),
-      required: false,
-      halfCol: true,
-    },
-    {
-      type: "textarea",
-      name: "note",
-      label: t("Auth.Aids.AidPurpose"),
-      required: true,
-    },
-    {
-      type: "custom",
-      name: "note",
-      label: t("Auth.AidCategories.AidRejectReason"),
-      render: (row: any) => row.status.note,
-      required: true,
     },
     {
       type: "custom",
       render: (row: any) => (
         <Fragment>
-          <FontAwesomeIcon
-            icon={faCircle}
-            className={`text-${statusColorRender(row.status.status)}`}
-          />{" "}
-          {renderDataFromOptions(row.status.status, statuses)}
+          <TooltipComp label={row.status.note}>
+            <FontAwesomeIcon
+              icon={faCircle}
+              className={`text-${statusColorRender(row.status.status)}`}
+            />{" "}
+            {renderDataFromOptions(row.status.status, statuses)}{" "}
+          </TooltipComp>
         </Fragment>
       ),
       name: "status",
@@ -355,18 +344,20 @@ const AidsView = () => {
 
           return final;
         }}
-        columns={
+        columns={[
           user.role === "researcher"
-            ? [
-                {
-                  type: "text",
-                  name: "fullName",
-                  label: t("Auth.Beneficiaries.BeneficiaryName"),
-                },
-                ...columns,
-              ]
-            : columns
-        }
+            ? {
+                type: "text",
+                name: "fullName",
+                label: t("Auth.Beneficiaries.BeneficiaryName"),
+              }
+            : {
+                type: "text",
+                name: "fileNo",
+                label: t("Auth.MembershipRegistration.Form.FileNo"),
+              },
+          ...columns,
+        ]}
         data={aids}
         onGetData={getData}
         paginationMeta={paginationMeta}
