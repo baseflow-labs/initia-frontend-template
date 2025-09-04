@@ -78,3 +78,7 @@
 
 - optimized dockerfile
 
+## v1.11.5 - 2025-09-04
+
+- better optimized dockerfile
+
