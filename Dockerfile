@@ -29,7 +29,7 @@ ENV GENERATE_SOURCEMAP=false
 ENV CI=true
 
 RUN echo "Using backend URL: $REACT_APP_BACKEND_URL"
-RUN yarn build
+RUN npm run build
 
 # Production stage with Alpine nginx for smaller size
 FROM nginx:1.29.0-alpine AS production
