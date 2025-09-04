@@ -41,6 +41,7 @@
     },
     "Aids": {
       "AddAid": "Add Aid",
+      "AidDetails": "Aid Details",
       "AidName": "Aid Name",
       "AidPiece_0": "-",
       "AidPiece_1": "Piece",
@@ -62,6 +63,7 @@
       "CantGrantAlready": "Aid Granted Already",
       "CantGrantNonApproved": "Can't Grant Non Approved",
       "CantRejectAlready": "Aid Rejected Already",
+      "OldAids": "Previous Aids",
       "RecaptionDate": "Recaption Date",
       "RejectAid": "RejectAid",
       "RequiredValue": "Required Value",
@@ -78,8 +80,8 @@
         "Rejected": "Rejected",
         "Seconded": "Seconded"
       },
-      "StatusUpdated": "Status Updated",
-      "Title": "Aids"
+      "Title": "Aids",
+      "ViewAidDetails": "View Aid Details"
     },
     "Beneficiaries": {
       "AddBeneficiary": "Add Beneficiary",

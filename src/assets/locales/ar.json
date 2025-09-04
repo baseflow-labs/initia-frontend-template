@@ -41,13 +41,14 @@
     },
     "Aids": {
       "AddAid": "ارسال معونة",
+      "AidDetails": "معلومات المعونة",
       "AidName": "اسم المعونة",
-      "AidPiece_0": "حبة",
-      "AidPiece_1": "حبة",
-      "AidPiece_2": "حبتان",
-      "AidPiece_few": "حبات",
-      "AidPiece_many": "حبة",
-      "AidPiece_other": "حبة / حبات",
+      "AidPiece_0": "قطعة",
+      "AidPiece_1": "قطعة",
+      "AidPiece_2": "قطعتان",
+      "AidPiece_few": "قطع",
+      "AidPiece_many": "قطعة",
+      "AidPiece_other": "قطعة / قطع",
       "AidPurpose": "سبب طلب المعونة",
       "AidQuantity": "كمية المعونة",
       "AidType": "نوع المعونة",
@@ -62,6 +63,7 @@
       "CantGrantAlready": "تمت الموافقة على طلب المعونة بالفعل",
       "CantGrantNonApproved": "لا يمكن تسليم المعونات غير المعتمدة",
       "CantRejectAlready": "تمت رفض طلب المعونة بالفعل",
+      "OldAids": "المعونات السابقة",
       "RecaptionDate": "تاريخ الاستلام",
       "RejectAid": "رفض تقديم المعونة",
       "RequiredValue": "القيمة المطلوبة",
@@ -78,8 +80,8 @@
         "Rejected": "رفضت المعونة",
         "Seconded": "بانتظار مراجعة المحاسب"
       },
-      "StatusUpdated": "تحديث حالة الطلب إلى",
-      "Title": "طلبات المعونة"
+      "Title": "طلبات المعونة",
+      "ViewAidDetails": "عرض تفاصيل طلب المعونة"
     },
     "Beneficiaries": {
       "AddBeneficiary": "إضافة مستفيد",

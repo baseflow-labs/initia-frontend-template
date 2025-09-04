@@ -54,7 +54,7 @@ const AidsBeneficiaryView = () => {
         setAids(
           res.payload.map(({ beneficiary = {}, status = {}, ...rest }) => ({
             ...beneficiary,
-            ...status,
+            status,
             ...rest,
           })) as any
         );
@@ -78,12 +78,7 @@ const AidsBeneficiaryView = () => {
       .then((res: any) =>
         setSelectOptions((current) => ({
           ...current,
-          aidCategories: res.payload.filter(
-            ({ aidPrograms = [] }) =>
-              aidPrograms?.filter(
-                (p: { status: string }) => p.status === "Opened"
-              )?.length
-          ),
+          aidCategories: res.payload,
         }))
       )
       .catch(apiCatchGlobalHandler);
@@ -125,6 +120,9 @@ const AidsBeneficiaryView = () => {
       case "Seconded":
       case "Pending":
         return "Pending";
+      case "Rejected":
+      case "Denied":
+        return "Rejected";
       default:
         return status;
     }
@@ -137,7 +135,7 @@ const AidsBeneficiaryView = () => {
       label: t("Auth.Aids.AidName"),
       render: (row: any) =>
         selectOptions.aidCategories.find(
-          (cat) => cat.id === row.aidProgram.aidCategory
+          (cat) => cat.id === row.aidProgram.aidCategoryId
         )?.name,
     },
     {
@@ -148,7 +146,7 @@ const AidsBeneficiaryView = () => {
         <>
           {row.value}{" "}
           {selectOptions.aidCategories.find(
-            (cat) => cat.id === row.aidProgram.aidCategory
+            (cat) => cat.id === row.aidProgram.aidCategoryId
           )?.type === "Cash" ? (
             <MoneyUnit />
           ) : (
@@ -175,14 +173,21 @@ const AidsBeneficiaryView = () => {
     },
     {
       type: "custom",
+      name: "note",
+      label: t("Auth.AidCategories.AidRejectReason"),
+      render: (row: any) => row.status.note,
+      required: true,
+    },
+    {
+      type: "custom",
       render: (row: any) => (
         <Fragment>
           <FontAwesomeIcon
             icon={faCircle}
-            className={`text-${statusColorRender(row.status)}`}
+            className={`text-${statusColorRender(row.status.status)}`}
           />{" "}
           {renderDataFromOptions(
-            processStatusForBeneficiary(row.status),
+            processStatusForBeneficiary(row.status.status),
             statuses
           )}
         </Fragment>
