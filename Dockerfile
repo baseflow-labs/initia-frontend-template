@@ -26,10 +26,10 @@ ENV REACT_APP_STORAGE_DIRECTORY_URL=$REACT_APP_STORAGE_DIRECTORY_URL
 ENV REACT_APP_GOOGLE_MAP_API_KEY=$REACT_APP_GOOGLE_MAP_API_KEY
 ENV NODE_OPTIONS="--max-old-space-size=1024"
 ENV GENERATE_SOURCEMAP=false
-ENV CI=true
+ENV ESLINT_NO_DEV_ERRORS=true
 
 RUN echo "Using backend URL: $REACT_APP_BACKEND_URL"
-RUN npm run build
+RUN yarn build
 
 # Production stage with Alpine nginx for smaller size
 FROM nginx:1.29.0-alpine AS production
