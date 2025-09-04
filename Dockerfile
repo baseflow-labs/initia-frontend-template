@@ -1,29 +1,37 @@
-FROM node:20 AS build
+# Use specific Node.js version with Alpine for smaller size
+FROM node:20-alpine AS build
 
 WORKDIR /app
 
+# Copy only package files first for better caching
 COPY package*.json ./
 COPY yarn.lock ./
 
-RUN yarn install --frozen-lockfile
+# Install dependencies with optimizations
+RUN yarn install --frozen-lockfile --production=false --network-timeout 100000
 
+# Copy source code
 COPY . .
 
-# COPY .env ./
+# Build arguments
 ARG REACT_APP_BACKEND_URL
 ARG REACT_APP_ENVIRONMENT
 ARG REACT_APP_STORAGE_DIRECTORY_URL
 ARG REACT_APP_GOOGLE_MAP_API_KEY
 
+# Set environment variables
 ENV REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL
 ENV REACT_APP_ENVIRONMENT=$REACT_APP_ENVIRONMENT
 ENV REACT_APP_STORAGE_DIRECTORY_URL=$REACT_APP_STORAGE_DIRECTORY_URL
 ENV REACT_APP_GOOGLE_MAP_API_KEY=$REACT_APP_GOOGLE_MAP_API_KEY
+ENV NODE_OPTIONS="--max-old-space-size=4096"
+ENV GENERATE_SOURCEMAP=false
 
 RUN echo "Using backend URL: $REACT_APP_BACKEND_URL"
-RUN npm run build
+RUN yarn build
 
-FROM nginx:1.29.0 AS production
+# Production stage with Alpine nginx for smaller size
+FROM nginx:1.29.0-alpine AS production
 
 WORKDIR /app
 

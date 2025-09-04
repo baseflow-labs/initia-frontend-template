@@ -51,12 +51,14 @@ jobs:
           echo "📥 Pulling latest code..."
           GIT_SSH_COMMAND="ssh -i ${{ secrets.DEMO_PULL_KEY_PATH }}" git pull
 
-          echo "🐳 Building and restarting fe"
+          echo "🐳 Building and restarting fe with optimizations"
 
           cd ${{ secrets.DEMO_DOCKER_COMPOSE_DIR }}
           for dir in */; do
             cd ${{ secrets.DEMO_DOCKER_COMPOSE_DIR }}/$dir
             set +x
+            export DOCKER_BUILDKIT=1
+            export COMPOSE_DOCKER_CLI_BUILD=1
             docker compose build "fe"
             docker compose up -d "fe"
             set -x
