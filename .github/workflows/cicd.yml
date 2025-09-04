@@ -57,7 +57,7 @@ jobs:
             set +x
             export DOCKER_BUILDKIT=1
             export COMPOSE_DOCKER_CLI_BUILD=1
-            docker compose build "fe"
+            docker compose build --memory=1g "fe"
             docker compose up -d "fe"
             set -x
             echo "✅ Deployment complete for $dir"

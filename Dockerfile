@@ -7,8 +7,8 @@ WORKDIR /app
 COPY package*.json ./
 COPY yarn.lock ./
 
-# Install dependencies with optimizations
-RUN yarn install --frozen-lockfile --production=false --network-timeout 100000
+# Install dependencies with optimizations for low-memory systems
+RUN yarn install --frozen-lockfile --production=false --network-timeout 100000 --cache-folder /tmp/.yarn-cache
 
 # Copy source code
 COPY . .
@@ -24,8 +24,9 @@ ENV REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL
 ENV REACT_APP_ENVIRONMENT=$REACT_APP_ENVIRONMENT
 ENV REACT_APP_STORAGE_DIRECTORY_URL=$REACT_APP_STORAGE_DIRECTORY_URL
 ENV REACT_APP_GOOGLE_MAP_API_KEY=$REACT_APP_GOOGLE_MAP_API_KEY
-ENV NODE_OPTIONS="--max-old-space-size=4096"
+ENV NODE_OPTIONS="--max-old-space-size=1024"
 ENV GENERATE_SOURCEMAP=false
+ENV CI=true
 
 RUN echo "Using backend URL: $REACT_APP_BACKEND_URL"
 RUN yarn build
