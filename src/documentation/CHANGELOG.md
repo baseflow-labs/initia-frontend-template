@@ -82,3 +82,7 @@
 
 - better optimized dockerfile
 
+## v1.11.6 - 2025-09-04
+
+- fix build
+
