@@ -6,9 +6,12 @@ concurrency:
   cancel-in-progress: true
 
 on:
-  push:
-    tags:
-      - 'v*'
+  workflow_run:
+    workflows: ["🏷️ Version Bump and Tag Creation"]
+    types:
+      - completed
+    branches:
+      - prod
   workflow_dispatch:
   
 jobs:  
@@ -16,6 +19,7 @@ jobs:
     name: Demo Deployment
     runs-on: ubuntu-latest
     environment: demo
+    if: github.event.workflow_run.conclusion == 'success'
 
     steps:
       - name: Configure SSH
