@@ -70,3 +70,7 @@
 
 - add demo cicd
 
+## v1.11.3 - 2025-09-04
+
+- Merge pull request #106 from Shai-club/stg
+
