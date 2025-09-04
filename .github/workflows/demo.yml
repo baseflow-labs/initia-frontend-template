@@ -7,10 +7,8 @@ concurrency:
 
 on:
   push:
-    branches:
-      - prod
-    paths-ignore:
-      - '.github/workflows/**'
+    tags:
+      - 'v*'
   workflow_dispatch:
   
 jobs:  
