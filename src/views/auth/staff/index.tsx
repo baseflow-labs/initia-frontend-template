@@ -84,7 +84,7 @@ const ResearcherMgmtPage = () => {
         ]}
         onGetData={(values) => console.log(values)}
         onSearch={onSearch}
-        searchPlaceholder="بحث بـ اسم الباحث"
+        searchPlaceholder={t("Auth.Researchers.SearchBarPlaceholder")}
       >
         <Fragment>
           <div className="row g-5 justify-content-center">

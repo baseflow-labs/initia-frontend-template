@@ -17,6 +17,7 @@
         "Once": "مرة واحدة فقط",
         "Title": "صلاحية التقديم للمستفيد"
       },
+      "SearchBarPlaceholder": "بحث باسم التصنيف",
       "Title": "تصنيف المعونات"
     },
     "AidPrograms": {
@@ -24,6 +25,7 @@
       "AidProgramName": "اسم البرنامج",
       "EditAidProgram": "تعديل برنامج معونة",
       "RemainingCredit": "المتبقي",
+      "SearchBarPlaceholder": "بحث باسم البرنامج",
       "Sponsor": "الجهة المانحة",
       "Statuses": {
         "Close": "إغلاق التقديم",
@@ -39,13 +41,14 @@
     },
     "Aids": {
       "AddAid": "ارسال معونة",
+      "AidDetails": "معلومات المعونة",
       "AidName": "اسم المعونة",
-      "AidPiece_0": "حبة",
-      "AidPiece_1": "حبة",
-      "AidPiece_2": "حبتان",
-      "AidPiece_few": "حبات",
-      "AidPiece_many": "حبة",
-      "AidPiece_other": "حبة / حبات",
+      "AidPiece_0": "قطعة",
+      "AidPiece_1": "قطعة",
+      "AidPiece_2": "قطعتان",
+      "AidPiece_few": "قطع",
+      "AidPiece_many": "قطعة",
+      "AidPiece_other": "قطعة / قطع",
       "AidPurpose": "سبب طلب المعونة",
       "AidQuantity": "كمية المعونة",
       "AidType": "نوع المعونة",
@@ -60,8 +63,11 @@
       "CantGrantAlready": "تمت الموافقة على طلب المعونة بالفعل",
       "CantGrantNonApproved": "لا يمكن تسليم المعونات غير المعتمدة",
       "CantRejectAlready": "تمت رفض طلب المعونة بالفعل",
+      "OldAids": "المعونات السابقة",
       "RecaptionDate": "تاريخ الاستلام",
       "RejectAid": "رفض تقديم المعونة",
+      "RequiredValue": "القيمة المطلوبة",
+      "SearchBarPlaceholder": "بحث باسم المستفيد",
       "Statuses": {
         "Approve": "اعتماد المعونة",
         "Approved": "بانتظار التسليم",
@@ -74,15 +80,20 @@
         "Rejected": "رفضت المعونة",
         "Seconded": "بانتظار مراجعة المحاسب"
       },
-      "Title": "طلبات المعونة"
+      "Title": "طلبات المعونة",
+      "ViewAidDetails": "عرض تفاصيل طلب المعونة"
     },
     "Beneficiaries": {
       "AddBeneficiary": "إضافة مستفيد",
       "Applications": "طلبات التسجيل ",
       "Beneficiaries": "مستفيدون",
+      "BeneficiariesData": "بيانات المستفيدين",
       "Beneficiary": "المستفيد",
       "BeneficiaryName": "اسم المستفيد",
+      "DependentsCount": "عدد التابعين",
       "DownloadByNationalCenterForm": "تنزيل البيانات",
+      "HousesCount": "عدد المنازل",
+      "IncomeTotal": "إجمالي الدخل",
       "Profile": {
         "AcceptApplication": "قبول الطلب",
         "AcceptApplicationDisabledMsg": "لا يمكن قبول الطلبات غير التي 'تم تدقيقها'",
@@ -118,10 +129,14 @@
         "Title": "ملف المستفيد",
         "UpdateNote": "سبب التعديل"
       },
+      "SearchBarPlaceholder": "بحث باسم المستفيد",
       "Title": "المستفيدون",
-      "UnacceptedNote": "يرجى الانتظار لحين قبول طلبكم للعضوية في الجمعية لتتمكنوا من الاستفادة من الخدمة"
+      "UnacceptedNote": "يرجى الانتظار لحين قبول طلبكم للعضوية في الجمعية لتتمكنوا من الاستفادة من الخدمة",
+      "WivesCount": "عدد الزوجات"
     },
     "Beneficiary": {
+      "ForDependent": "للتابع(ة) {{name}}",
+      "ForHouse": "للمنزل صاحب العنوان الوطني {{house}}",
       "Profile": {
         "NoDataUpdate": "لا يوجد طلبات لتعديل بياناتكم الشخصية",
         "PleaseUpdateFollowingData": "يرجى تعبئة الحقول بالبيانات الصحيحة...",
@@ -247,7 +262,7 @@
           "LiverDiseases": "أمراض كبد وكلى",
           "MentalDisability": "إعاقة ذهنية / تطورية",
           "NeurologicalDiseases": "أمراض نفسية وعصبية",
-          "None": "لا يجود",
+          "None": "لا يوجد",
           "SkinDiseases": "أمراض جلدية",
           "Title": "نوع المرض / الأمراض",
           "VisualImpairment": "إعاقة بصرية"
@@ -472,6 +487,7 @@
       "BeneficiariesCount": "عدد المستفيدين",
       "EditResearcher": "تعديل باحث",
       "ResearcherName": "اسم الباحث",
+      "SearchBarPlaceholder": "بحث باسم الباحث",
       "Title": "إدارة الباحثين",
       "VisitsCount": "عدد الزيارات"
     },
@@ -578,6 +594,7 @@
         "WaterHeater": "سخان مياه",
         "Working": "يعمل"
       },
+      "SearchBarPlaceholder": "بحث باسم المستفيد",
       "Statuses": {
         "Approved": "وافق المستفيد",
         "Cancelled": "ألغيت الزيارة",
@@ -611,6 +628,10 @@
       "CantDoIt": "لا يمكن القيام بهذا الإجراء",
       "Errors": {
         "FileTooLarge": "حجم الملف أكبر من المسموح به: {{max}} ميجا بيكسل",
+        "IbanContents": "رقم الآيبان يجب أن يحتوي على أرقام وحروف فقط بدون مسافات أو رموز خاصة",
+        "IbanLength": "رقم الآيبان يجب أن يتكون من 24 خانة بالضبط",
+        "IbanStart": "يجب أن يبدأ رقم الآيبان بـ SA",
+        "IbanWrong": "رقم الآيبان لا يتبع أي بنك سعودي",
         "InvalidEmail": "بريد إلكتروني غير صالح",
         "InvalidNationalAddressNumber": "رقم العنوان الوطني يجب أن يتكون من 4 أحرف إنجليزية تليها 4 أرقام بدون رموز أو فراغات",
         "InvalidNumber": "رقم غير صالح",

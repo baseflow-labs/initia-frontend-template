@@ -7,6 +7,7 @@ import Button from "../../../components/core/button";
 import Modal from "../../../components/modal";
 import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
+import { apiCatchGlobalHandler } from "../../../utils/function";
 
 const AccountDelete = () => {
   const { t } = useTranslation();
@@ -16,17 +17,19 @@ const AccountDelete = () => {
   const [openModal, setOpenModal] = useState(false);
 
   const deleteBeneficiary = () => {
-    BeneficiaryApi.removeByUser(user.id || "").then(() => {
-      setOpenModal(false);
-      dispatch(
-        addNotification({
-          msg: t("Global.Form.SuccessMsg", {
-            action: t("Auth.Beneficiaries.Profile.DeleteData"),
-            data: t("Global.Labels.YourOwn"),
-          }),
-        })
-      );
-    });
+    BeneficiaryApi.removeByUser(user.id || "")
+      .then(() => {
+        setOpenModal(false);
+        dispatch(
+          addNotification({
+            msg: t("Global.Form.SuccessMsg", {
+              action: t("Auth.Beneficiaries.Profile.DeleteData"),
+              data: t("Global.Labels.YourOwn"),
+            }),
+          })
+        );
+      })
+      .catch(apiCatchGlobalHandler);
   };
 
   return (

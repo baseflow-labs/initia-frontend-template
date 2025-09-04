@@ -1,23 +1,14 @@
-import {
-  faCheck,
-  faCircle,
-  faHandHoldingDollar,
-  faXmark,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import moment from "moment";
-import { Fragment, useLayoutEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
-
+import * as AidCategoryApi from "../../../api/aids/aidCategories";
 import * as AidProgramApi from "../../../api/aids/aidPrograms";
 import * as AidApi from "../../../api/aids/aids";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import { actionProps, MoneyUnit } from "../../../components/table";
+import TooltipComp from "../../../components/tooltip";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
-import { Aid, defaultAid } from "../../../types/aids";
+import { Aid, AidCategory, AidProgram, defaultAid } from "../../../types/aids";
+import { Beneficiary } from "../../../types/beneficiaries";
 import { dataDateFormat } from "../../../utils/consts";
 import {
   apiCatchGlobalHandler,
@@ -29,6 +20,19 @@ import { getAidStatuses } from "../../../utils/optionDataLists/aids";
 import ApproveAid from "./approveAid";
 import RejectAid from "./rejectAid";
 import SendAid from "./sendAid";
+import ViewAidDetails from "./viewDetails";
+import {
+  faCheck,
+  faCircle,
+  faEye,
+  faHandHoldingDollar,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import moment from "moment";
+import { Fragment, useLayoutEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 
 const AidsView = () => {
   const { t } = useTranslation();
@@ -36,17 +40,21 @@ const AidsView = () => {
   const { user } = useAppSelector((state) => state.auth);
 
   const [openModal, setOpenModal] = useState(false);
+  const [openDetailsModal, setOpenDetailsModal] = useState<string>("");
   const [openApproveModal, setOpenApproveModal] = useState<Aid>(defaultAid);
   const [openRejectModal, setOpenRejectModal] = useState<boolean | string>(
     false
   );
 
   const [aids, setAids] = useState<Aid[]>([]);
-  const [selectOptions, setSelectOptions] = useState({
-    beneficiaries: [
-      { id: "", fullName: "", fileNo: "", status: { status: "" } },
-    ],
+  const [selectOptions, setSelectOptions] = useState<{
+    beneficiaries: Beneficiary[];
+    aidCategories: AidCategory[];
+    aidPrograms: AidProgram[];
+  }>({
+    beneficiaries: [],
     aidPrograms: [],
+    aidCategories: [],
   });
   const [currentFilters, setCurrentFilters] = useState({});
   const [currentSearch, setCurrentSearch] = useState("");
@@ -84,7 +92,7 @@ const AidsView = () => {
             ({ beneficiary = { id: "" }, status = {}, ...rest }) => ({
               ...beneficiary,
               beneficiaryId: beneficiary.id,
-              ...status,
+              status,
               ...rest,
             })
           )
@@ -120,9 +128,16 @@ const AidsView = () => {
       .then((res: any) =>
         setSelectOptions((current) => ({
           ...current,
-          aidPrograms: res.payload.filter(
-            ({ status = "" }) => status === "Opened"
-          ),
+          aidPrograms: res.payload,
+        }))
+      )
+      .catch(apiCatchGlobalHandler);
+
+    AidCategoryApi.getAll({ capacity: 999 })
+      .then((res: any) =>
+        setSelectOptions((current) => ({
+          ...current,
+          aidCategories: res.payload,
         }))
       )
       .catch(apiCatchGlobalHandler);
@@ -165,20 +180,13 @@ const AidsView = () => {
 
   const columns = [
     {
-      type: "text",
-      name: "fileNo",
-      label: t("Auth.MembershipRegistration.Form.FileNo"),
-    },
-    {
       type: "custom",
       name: "name",
       label: t("Auth.Aids.AidName"),
-      render: (row: any) => row.aidProgram.name,
-    },
-    {
-      type: "date",
-      name: "createdAt",
-      label: t("Global.Labels.ApplicationDate"),
+      render: (row: any) =>
+        selectOptions.aidCategories.find(
+          (cat) => cat.id === row.aidProgram.aidCategoryId
+        )?.name,
     },
     {
       type: "custom",
@@ -187,7 +195,9 @@ const AidsView = () => {
       render: (row: any) => (
         <>
           {row.value}{" "}
-          {row.aidProgram.type === "Cash" ? (
+          {selectOptions.aidCategories.find(
+            (cat) => cat.id === row.aidProgram.aidCategoryId
+          )?.type === "Cash" ? (
             <MoneyUnit />
           ) : (
             pluralLabelResolve(t, row.value, "Auth.Aids.AidPiece")
@@ -197,31 +207,25 @@ const AidsView = () => {
     },
     {
       type: "date",
+      name: "createdAt",
+      label: t("Global.Labels.ApplicationDate"),
+    },
+    {
+      type: "date",
       name: "collectionDate",
       label: t("Auth.Aids.RecaptionDate"),
-    },
-    {
-      type: "file",
-      name: "document",
-      label: t("Global.Form.Labels.SupportingDocument"),
-      required: false,
-      halfCol: true,
-    },
-    {
-      type: "textarea",
-      name: "note",
-      label: t("Auth.Aids.AidPurpose"),
-      required: true,
     },
     {
       type: "custom",
       render: (row: any) => (
         <Fragment>
-          <FontAwesomeIcon
-            icon={faCircle}
-            className={`text-${statusColorRender(row.status)}`}
-          />{" "}
-          {renderDataFromOptions(row.status, statuses)}
+          <TooltipComp label={row.status.note}>
+            <FontAwesomeIcon
+              icon={faCircle}
+              className={`text-${statusColorRender(row.status.status)}`}
+            />{" "}
+            {renderDataFromOptions(row.status.status, statuses)}{" "}
+          </TooltipComp>
         </Fragment>
       ),
       name: "status",
@@ -275,16 +279,22 @@ const AidsView = () => {
         title={t("Auth.Aids.Title")}
         filters={filters}
         onSearch={onSearch}
-        searchPlaceholder="بحث بـ اسم المستفيد"
+        searchPlaceholder={t("Auth.Aids.SearchBarPlaceholder")}
         actionButtons={actionButtons}
         tableActions={(id?: string) => {
           const aid = aids.find((a) => a.id === id);
 
-          const approved = aid?.status === "Approved";
-          const granted = aid?.status === "Granted";
-          const rejected = aid?.status === "Rejected";
+          const approved = aid?.status?.status === "Approved";
+          const granted = aid?.status?.status === "Granted";
+          const rejected = aid?.status?.status === "Rejected";
 
           const final: actionProps[] = [
+            {
+              label: t("Auth.Aids.ViewAidDetails"),
+              icon: faEye,
+              spread: false,
+              onClick: (data: string) => setOpenDetailsModal(data),
+            },
             {
               label: t("Auth.Aids.Statuses.Approve"),
               icon: faCheck,
@@ -334,18 +344,20 @@ const AidsView = () => {
 
           return final;
         }}
-        columns={
+        columns={[
           user.role === "researcher"
-            ? [
-                {
-                  type: "text",
-                  name: "fullName",
-                  label: t("Auth.Beneficiaries.BeneficiaryName"),
-                },
-                ...columns,
-              ]
-            : columns
-        }
+            ? {
+                type: "text",
+                name: "fullName",
+                label: t("Auth.Beneficiaries.BeneficiaryName"),
+              }
+            : {
+                type: "text",
+                name: "fileNo",
+                label: t("Auth.MembershipRegistration.Form.FileNo"),
+              },
+          ...columns,
+        ]}
         data={aids}
         onGetData={getData}
         paginationMeta={paginationMeta}
@@ -355,6 +367,11 @@ const AidsView = () => {
             capacity,
           });
         }}
+      />
+
+      <ViewAidDetails
+        openModal={openDetailsModal}
+        setOpenModal={setOpenDetailsModal}
       />
 
       <SendAid

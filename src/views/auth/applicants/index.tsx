@@ -236,18 +236,20 @@ const ApplicantsView = () => {
             msg: t("Global.Form.Labels.UnAvailableForDemoMode"),
           })
         )
-      : BeneficiaryApi.remove(id).then(() => {
-          dispatch(
-            addNotification({
-              msg: t("Global.Form.SuccessMsg", {
-                action: t("Auth.Beneficiaries.Profile.DeleteBeneficiary"),
-                data: beneficiaries.find((b) => b.id === id)?.fileNo,
-              }),
-            })
-          );
+      : BeneficiaryApi.remove(id)
+          .then(() => {
+            dispatch(
+              addNotification({
+                msg: t("Global.Form.SuccessMsg", {
+                  action: t("Auth.Beneficiaries.Profile.DeleteBeneficiary"),
+                  data: beneficiaries.find((b) => b.id === id)?.fileNo,
+                }),
+              })
+            );
 
-          getData({});
-        });
+            getData({});
+          })
+          .catch(apiCatchGlobalHandler);
   };
 
   const onSearch = (e: string) => {
@@ -263,7 +265,7 @@ const ApplicantsView = () => {
         title={t("Auth.Beneficiaries.Applications")}
         filters={filters}
         onSearch={onSearch}
-        searchPlaceholder="بحث بـ اسم المستفيد"
+        searchPlaceholder={t("Auth.Beneficiaries.SearchBarPlaceholder")}
         actionButtons={actionButtons}
         columns={columns}
         data={beneficiaries}

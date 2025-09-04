@@ -15,6 +15,11 @@ const getAll = async ({
   return res;
 };
 
+const getDetails = async (id: string) => {
+  const res = await api.get(mainPath + "/" + id);
+  return res;
+};
+
 const create = async (data: object) => {
   const { user } = (store.getState() as RootState).auth;
 
@@ -27,7 +32,8 @@ const updateStatus = async (
   status: string,
   note?: string,
   collectionDate?: string,
-  value?: number
+  value?: number,
+  aidProgram?: string
 ) => {
   const { user } = (store.getState() as RootState).auth;
 
@@ -37,6 +43,7 @@ const updateStatus = async (
     note,
     collectionDate,
     value,
+    aidProgram,
     staff: user,
   });
   return res;
@@ -49,4 +56,4 @@ const grant = async (data: object) => {
   return res;
 };
 
-export { updateStatus, create, getAll, grant };
+export { updateStatus, getDetails, create, getAll, grant };

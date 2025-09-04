@@ -4,18 +4,19 @@ import { useDispatch } from "react-redux";
 
 import * as AidCategoryApi from "../../../api/aids/aidCategories";
 import * as AidApi from "../../../api/aids/aids";
+import { AidUnit } from "../../../components/card/programCards";
+import RenderCategory from "../../../components/category";
 import Button from "../../../components/core/button";
+import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import { addNotification } from "../../../store/actions/notifications";
+import { useAppSelector } from "../../../store/hooks";
 import { Aid, AidCategory, defaultAid } from "../../../types/aids";
 import { apiCatchGlobalHandler } from "../../../utils/function";
-import { CategoryView } from "../dashboard/accountant";
-import { useAppSelector } from "../../../store/hooks";
-import Form from "../../../components/form";
-import { AidUnit } from "../../../components/card/programCards";
+import { CategoryProgramPicker, CategoryView } from "./selectProgram";
 
 interface Props {
-  openModal: Aid;
+  openModal: any;
   setOpenModal: (s: Aid) => void;
   onGetData: (p: Object) => void;
 }
@@ -26,8 +27,7 @@ const ApproveAid = ({ openModal, setOpenModal, onGetData }: Props) => {
   const { user } = useAppSelector((state) => state.auth);
 
   const [category, setCategory] = useState<AidCategory>();
-
-  const approveLabel = t("Auth.Aids.Statuses.Approved");
+  const [selectedProgram, setSelectedProgram] = useState<string>("");
 
   const onClose = () => {
     setOpenModal(defaultAid);
@@ -42,7 +42,8 @@ const ApproveAid = ({ openModal, setOpenModal, onGetData }: Props) => {
       isAccountant ? "Approved" : isResearcher ? "Recommended" : "Seconded",
       "",
       "",
-      value
+      value,
+      isAccountant ? selectedProgram : undefined
     )
       .then(() => {
         onGetData({});
@@ -50,8 +51,11 @@ const ApproveAid = ({ openModal, setOpenModal, onGetData }: Props) => {
         dispatch(
           addNotification({
             msg: t("Global.Form.SuccessMsg", {
-              action: "تحديث حالة الطلب إلى " + approveLabel,
-              data: "المستفيد",
+              action:
+                t("Auth.Aids.StatusUpdated") +
+                " " +
+                t("Auth.Aids.Statuses.Approved"),
+              data: t("Auth.Beneficiaries.Beneficiary"),
             }),
           })
         );
@@ -74,34 +78,54 @@ const ApproveAid = ({ openModal, setOpenModal, onGetData }: Props) => {
       className="modal-lg"
       isOpen={!!openModal.id}
     >
-      <h5 className="mb-4">{openModal.value}</h5>
-      <h5>القيمة المطلوبة</h5>
+      <h5 className="mb-4">
+        <b className="fw-bold">{openModal.fileNo}</b>
+
+        <span>
+          <RenderCategory data={openModal.category} />
+        </span>
+      </h5>
+
+      <h5>{t("Auth.Aids.RequiredValue")}</h5>
+
       <h3>
         {openModal.value}{" "}
         <AidUnit t={t} type={category?.type || ""} amount={0} />
       </h3>
 
-      {category && (
-        <CategoryView
-          t={t}
-          id={category.id}
-          name={category.name}
-          type={category.type}
-          balance={category.aidPrograms.reduce(
-            (final, { credit }) => (final += parseFloat(String(credit))),
-            0
-          )}
-          programs={
-            isAccountant
-              ? category.aidPrograms.map(({ credit, ...rest }) => ({
-                  ...rest,
-                  credit,
-                  balance: credit,
-                })) || []
-              : []
-          }
-        />
-      )}
+      {category &&
+        (isAccountant ? (
+          <CategoryProgramPicker
+            t={t}
+            id={category.id}
+            name={category.name}
+            type={category.type}
+            balance={category.aidPrograms.reduce(
+              (final, { credit }) => (final += parseFloat(String(credit))),
+              0
+            )}
+            programs={
+              category.aidPrograms.map(({ credit, ...rest }) => ({
+                ...rest,
+                credit,
+                balance: credit,
+              })) || []
+            }
+            onPick={(programId: string) => setSelectedProgram(programId)}
+          />
+        ) : (
+          <CategoryView
+            t={t}
+            id={category.id}
+            name={category.name}
+            type={category.type}
+            balance={category.aidPrograms.reduce(
+              (final, { credit }) => (final += parseFloat(String(credit))),
+              0
+            )}
+            programs={[]}
+          />
+        ))}
 
       {isResearcher ? (
         <Form

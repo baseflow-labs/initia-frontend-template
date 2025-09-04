@@ -13,19 +13,15 @@ import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import * as StaffApi from "../../../api/staff/researcher";
 import DemoLoginNote from "../../../layouts/auth/demoLoginNote";
 import TablePage from "../../../layouts/auth/pages/tablePage";
-import { exportDataToSingleSheetExcel } from "../../../utils/filesExport";
-import {
-  apiCatchGlobalHandler,
-  renderDataFromOptions,
-} from "../../../utils/function";
+import { apiCatchGlobalHandler } from "../../../utils/function";
 import {
   getBeneficiaryCategories,
-  getGenders,
   getNationalities,
   getProvinces,
 } from "../../../utils/optionDataLists/beneficiaries";
 import AssignResearcher from "../applicants/assignResearcher";
 import CancelMembership from "./cancelMembership";
+import { downloadNationalReport } from "./excelExport";
 
 const BeneficiariesViewForSupervisor = () => {
   const { t } = useTranslation();
@@ -206,32 +202,7 @@ const BeneficiariesViewForSupervisor = () => {
       label: <FontAwesomeIcon icon={faFileExcel} />,
       color: "success",
       outline: true,
-      onClick: () =>
-        exportDataToSingleSheetExcel(
-          "بيانات المستفيدين",
-          beneficiaries.map(
-            ({
-              fullName,
-              nationality,
-              dob,
-              idNumber,
-              category,
-              gender,
-              fileNo,
-            }: any) => ({
-              الاسم: fullName,
-              "رقم الملف": fileNo,
-              "رقم الهوية": idNumber,
-              الجنس: renderDataFromOptions(gender, getGenders(t)),
-              "تاريخ الميلاد": dob,
-              الجنسية: renderDataFromOptions(nationality, getNationalities(t)),
-              الفئة: renderDataFromOptions(
-                category,
-                getBeneficiaryCategories(t)
-              ),
-            })
-          ) as any
-        ),
+      onClick: () => downloadNationalReport(t, beneficiaries),
     },
   ];
 
@@ -245,7 +216,7 @@ const BeneficiariesViewForSupervisor = () => {
         actionButtons={actionButtons}
         columns={columns}
         onSearch={onSearch}
-        searchPlaceholder="بحث بـ اسم المستفيد"
+        searchPlaceholder={t("Auth.Beneficiaries.SearchBarPlaceholder")}
         data={beneficiaries}
         paginationMeta={paginationMeta}
         tableActions={(id?: string) => [

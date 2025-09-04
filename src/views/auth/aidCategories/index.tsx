@@ -126,7 +126,7 @@ const AidCategoriesView = () => {
         title={t("Auth.AidCategories.Title")}
         filters={filters}
         onSearch={onSearch}
-        searchPlaceholder="بحث بـ اسم التصنيف"
+        searchPlaceholder={t("Auth.AidCategories.SearchBarPlaceholder")}
         actionButtons={actionButtons}
         tableActions={(id?: string) => [
           {

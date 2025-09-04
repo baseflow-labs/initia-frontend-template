@@ -2,12 +2,13 @@ import { faCircle, faEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
+
+// import { useDispatch } from "react-redux";
 
 import * as AidCategoriesApi from "../../../api/aids/aidCategories";
 import * as AidProgramApi from "../../../api/aids/aidPrograms";
 import TablePage from "../../../layouts/auth/pages/tablePage";
-import { addNotification } from "../../../store/actions/notifications";
+// import { AidCategory, AidProgram, defaultAidProgram } from "../../../store/actions/notifications";
 import {
   AidCategory,
   AidProgram,
@@ -23,7 +24,7 @@ import AddAidProgram from "./createAidProgram";
 
 const AidProgramsView = () => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const [openModal, setOpenModal] = useState(false);
   const [aidPrograms, setAidPrograms] = useState<AidProgram[]>([]);
@@ -147,27 +148,28 @@ const AidProgramsView = () => {
     },
   ];
 
-  const openLabel = t("Auth.AidPrograms.Statuses.Open");
-  const closedLabel = t("Auth.AidPrograms.Statuses.Close");
+  // const openLabel = t("Auth.AidPrograms.Statuses.Open");
+  // const closedLabel = t("Auth.AidPrograms.Statuses.Close");
 
-  const updateStatus = (id: string, status: string) => {
-    AidProgramApi.updateStatus(id, status)
-      .then(() => {
-        const aidProgram = aidPrograms.find(
-          (aidProgram) => aidProgram.id === id
-        );
-        getData({});
-        dispatch(
-          addNotification({
-            msg: t("Global.Form.SuccessMsg", {
-              action: status === "Opened" ? openLabel : closedLabel,
-              data: aidPrograms.find(({ id }) => id === aidProgram?.id)?.name,
-            }),
-          })
-        );
-      })
-      .catch(apiCatchGlobalHandler);
-  };
+  // const updateStatus = (id: string, status: string) => {
+  //   AidProgramApi.updateStatus(id, status)
+
+  //     .then(() => {
+  //       const aidProgram = aidPrograms.find(
+  //         (aidProgram) => aidProgram.id === id
+  //       );
+  //       getData({});
+  //       dispatch(
+  //         addNotification({
+  //           msg: t("Global.Form.SuccessMsg", {
+  //             action: status === "Opened" ? openLabel : closedLabel,
+  //             data: aidPrograms.find(({ id }) => id === aidProgram?.id)?.name,
+  //           }),
+  //         })
+  //       );
+  //     })
+  //     .catch(apiCatchGlobalHandler);
+  // };
 
   const onSearch = (e: string) => {
     setCurrentSearch(e);
@@ -189,7 +191,7 @@ const AidProgramsView = () => {
         title={t("Auth.AidPrograms.Title")}
         filters={filters}
         onSearch={onSearch}
-        searchPlaceholder="بحث بـ اسم البرنامج"
+        searchPlaceholder={t("Auth.AidPrograms.SearchBarPlaceholder")}
         actionButtons={actionButtons}
         tableActions={(id?: string) => [
           {

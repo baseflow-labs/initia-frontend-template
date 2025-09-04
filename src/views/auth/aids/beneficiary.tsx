@@ -3,14 +3,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import * as AidProgramApi from "../../../api/aids/aidPrograms";
+import * as AidCategoriesApi from "../../../api/aids/aidCategories";
+import * as AidProgramsApi from "../../../api/aids/aidPrograms";
 import * as AidApi from "../../../api/aids/aids";
 import UnacceptedBeneficiary from "../../../components/card/unacceptedBeneficiary";
 import { MoneyUnit } from "../../../components/table";
 import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { useAppSelector } from "../../../store/hooks";
-import { AidProgram } from "../../../types/aids";
+import { AidCategory, AidProgram } from "../../../types/aids";
 import {
   apiCatchGlobalHandler,
   pluralLabelResolve,
@@ -34,8 +35,10 @@ const AidsBeneficiaryView = () => {
     pagesCount: 1,
   });
   const [selectOptions, setSelectOptions] = useState<{
+    aidCategories: AidCategory[];
     aidPrograms: AidProgram[];
   }>({
+    aidCategories: [],
     aidPrograms: [],
   });
 
@@ -51,7 +54,7 @@ const AidsBeneficiaryView = () => {
         setAids(
           res.payload.map(({ beneficiary = {}, status = {}, ...rest }) => ({
             ...beneficiary,
-            ...status,
+            status,
             ...rest,
           })) as any
         );
@@ -71,7 +74,16 @@ const AidsBeneficiaryView = () => {
   };
 
   useLayoutEffect(() => {
-    AidProgramApi.getAll({ capacity: 999 })
+    AidCategoriesApi.getAll({ capacity: 999 })
+      .then((res: any) =>
+        setSelectOptions((current) => ({
+          ...current,
+          aidCategories: res.payload,
+        }))
+      )
+      .catch(apiCatchGlobalHandler);
+
+    AidProgramsApi.getAll({ capacity: 999 })
       .then((res: any) =>
         setSelectOptions((current) => ({
           ...current,
@@ -102,12 +114,29 @@ const AidsBeneficiaryView = () => {
     },
   ];
 
+  const processStatusForBeneficiary = (status: string) => {
+    switch (status) {
+      case "Recommended":
+      case "Seconded":
+      case "Pending":
+        return "Pending";
+      case "Rejected":
+      case "Denied":
+        return "Rejected";
+      default:
+        return status;
+    }
+  };
+
   const columns = [
     {
       type: "custom",
       name: "name",
       label: t("Auth.Aids.AidName"),
-      render: (row: any) => row.aidProgram.name,
+      render: (row: any) =>
+        selectOptions.aidCategories.find(
+          (cat) => cat.id === row.aidProgram.aidCategoryId
+        )?.name,
     },
     {
       type: "custom",
@@ -116,7 +145,9 @@ const AidsBeneficiaryView = () => {
       render: (row: any) => (
         <>
           {row.value}{" "}
-          {row.aidProgram.type === "Cash" ? (
+          {selectOptions.aidCategories.find(
+            (cat) => cat.id === row.aidProgram.aidCategoryId
+          )?.type === "Cash" ? (
             <MoneyUnit />
           ) : (
             pluralLabelResolve(t, row.value, "Auth.Aids.AidPiece")
@@ -142,13 +173,23 @@ const AidsBeneficiaryView = () => {
     },
     {
       type: "custom",
+      name: "note",
+      label: t("Auth.AidCategories.AidRejectReason"),
+      render: (row: any) => row.status.note,
+      required: true,
+    },
+    {
+      type: "custom",
       render: (row: any) => (
         <Fragment>
           <FontAwesomeIcon
             icon={faCircle}
-            className={`text-${statusColorRender(row.status)}`}
+            className={`text-${statusColorRender(row.status.status)}`}
           />{" "}
-          {renderDataFromOptions(row.status, statuses)}
+          {renderDataFromOptions(
+            processStatusForBeneficiary(row.status.status),
+            statuses
+          )}
         </Fragment>
       ),
       name: "status",
