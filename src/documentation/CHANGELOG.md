@@ -74,3 +74,7 @@
 
 - Merge pull request #106 from Shai-club/stg
 
+## v1.11.4 - 2025-09-04
+
+- optimized dockerfile
+
