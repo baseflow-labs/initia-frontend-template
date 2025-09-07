@@ -39,23 +39,36 @@ const RegisterApplicant = ({
             role: "beneficiary",
           })
             .then((res: any) => {
-              BeneficiaryApi.assignResearcher({
-                beneficiary: res.payload.id,
-                staffUser: user.id,
-              })
-                .then(() => {
-                  resetForm();
-                  dispatch(
-                    addNotification({
-                      msg: t("Global.Form.SuccessMsg", {
-                        action: t("Auth.Beneficiaries.AddBeneficiary"),
-                        data: e.name,
-                      }),
-                    })
-                  );
-                  setOpenModal(false);
+              if (user.role === "researcher") {
+                BeneficiaryApi.assignResearcher({
+                  beneficiary: res.payload.id,
+                  staffUser: user.id,
                 })
-                .catch(apiCatchGlobalHandler);
+                  .then(() => {
+                    resetForm();
+                    dispatch(
+                      addNotification({
+                        msg: t("Global.Form.SuccessMsg", {
+                          action: t("Auth.Beneficiaries.AddBeneficiary"),
+                          data: e.name,
+                        }),
+                      })
+                    );
+                    setOpenModal(false);
+                  })
+                  .catch(apiCatchGlobalHandler);
+              } else {
+                resetForm();
+                dispatch(
+                  addNotification({
+                    msg: t("Global.Form.SuccessMsg", {
+                      action: t("Auth.Beneficiaries.AddBeneficiary"),
+                      data: e.name,
+                    }),
+                  })
+                );
+                setOpenModal(false);
+              }
             })
             .catch(apiCatchGlobalHandler);
         }}
