@@ -9,9 +9,14 @@ interface Props {
   children: React.ReactNode;
   actions?: React.ReactNode;
   className?: string;
-
   isOpen?: boolean;
   onClose: () => void;
+}
+
+declare global {
+  interface Window {
+    bootstrap: any;
+  }
 }
 
 const Modal = ({
@@ -21,29 +26,52 @@ const Modal = ({
   title,
   children,
   actions,
-  isOpen,
+  isOpen = false,
   onClose,
   className,
   ...rest
 }: Props) => {
   const modalRef = useRef<HTMLDivElement | null>(null);
+  const instanceRef = useRef<any>(null);
 
   useEffect(() => {
     if (!modalRef.current) return;
 
-    const modalElement = modalRef.current;
+    instanceRef.current = window.bootstrap.Modal.getOrCreateInstance(
+      modalRef.current,
+      {
+        backdrop: true,
+        keyboard: true,
+        focus: true,
+      }
+    );
 
+    const handleHidden = () => {
+      onClose();
+    };
+
+    modalRef.current.addEventListener("hidden.bs.modal", handleHidden);
+
+    return () => {
+      modalRef.current?.removeEventListener("hidden.bs.modal", handleHidden);
+      instanceRef.current?.hide();
+      instanceRef.current?.dispose?.();
+      instanceRef.current = null;
+
+      document.body.classList.remove("modal-open");
+      document.querySelectorAll(".modal-backdrop").forEach((el) => el.remove());
+    };
+  }, []);
+
+  useEffect(() => {
+    const inst = instanceRef.current;
+    if (!inst) return;
     if (isOpen) {
-      const modal = new (window as any).bootstrap.Modal(modalRef.current);
-      modal.show();
-
-      // Close handler to sync Bootstrap close with your onClose
-      modalElement.addEventListener("hidden.bs.modal", onClose, { once: true });
+      inst.show();
     } else {
-      const instance = window.bootstrap.Modal.getInstance(modalElement);
-      if (instance) instance.hide();
+      inst.hide();
     }
-  }, [isOpen, onClose]);
+  }, [isOpen]);
 
   return (
     <Fragment>
@@ -51,20 +79,21 @@ const Modal = ({
         <button
           type="button"
           className="btn btn-primary"
-          data-bs-toggle="modal"
-          data-bs-target={`#${name}`}
+          onClick={() => {
+            instanceRef.current?.show();
+          }}
         >
           {triggerLabel}
         </button>
       )}
 
       <div
-        className={"modal fade " + className}
+        className={`modal fade ${className ?? ""}`}
         id={name}
         ref={modalRef}
         tabIndex={-1}
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
+        aria-labelledby={`${name}-label`}
+        aria-hidden={!isOpen}
         {...rest}
       >
         <div className="modal-dialog">
@@ -72,13 +101,15 @@ const Modal = ({
             <div className="modal-body">
               <div className="row">
                 <div className="col-10">
-                  <h4 className="modal-title my-5">{title}</h4>
+                  <h4 id={`${name}-label`} className="modal-title my-5">
+                    {title}
+                  </h4>
                 </div>
-
                 <div className="col-2">
                   <button
                     type="button"
                     className="btn-close float-end"
+                    // Let Bootstrap close it; hidden.bs.modal will call onClose
                     data-bs-dismiss="modal"
                     aria-label="Close"
                   />
@@ -86,7 +117,6 @@ const Modal = ({
               </div>
               {children}
             </div>
-
             {actions && <div className="modal-footer">{actions}</div>}
           </div>
         </div>
