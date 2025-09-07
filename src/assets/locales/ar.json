@@ -40,6 +40,7 @@
       "TotalQuantity": "الكمية"
     },
     "Aids": {
+      "StatusUpdated": "تحديث حالة طلب المعونة",
       "AddAid": "ارسال معونة",
       "AidDetails": "معلومات المعونة",
       "AidName": "اسم المعونة",
@@ -127,7 +128,7 @@
         },
         "SureToDeleteData": "هل أنت متأكد؟",
         "Title": "ملف المستفيد",
-        "UpdateNote": "سبب التعديل"
+        "UpdateNote": "سبب التعديل:"
       },
       "SearchBarPlaceholder": "بحث باسم المستفيد",
       "Title": "المستفيدون",
@@ -321,6 +322,7 @@
         "HostelData": "بيانات السكن",
         "Housing": {
           "AddNew": "إضافة منزل جديد",
+          "House": "المنزل",
           "Housing": "بيانات المنزل",
           "HousingSaved": "حفظ بيانات المنزل",
           "SaveHousing": "حفظ بيانات المنزل"
