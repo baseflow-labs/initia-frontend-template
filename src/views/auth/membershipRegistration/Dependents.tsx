@@ -62,7 +62,7 @@ const DependentsFormView = ({
         tabs={houses.map(({ id: housingId, nationalAddressNumber }, i) => ({
           id: nationalAddressNumber,
           title:
-            t("Auth.MembershipRegistration.Form.Housing.Housing") +
+            t("Auth.MembershipRegistration.Form.Housing.House") +
             " " +
             String(i + 1),
           body: (
