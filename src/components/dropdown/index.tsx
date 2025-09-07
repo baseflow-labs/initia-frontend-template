@@ -1,10 +1,11 @@
-import { useState, useRef, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 
 interface Props {
   button: React.ReactNode;
   start?: boolean;
   list: {
+    disabled?: boolean;
     route?: string;
     onClick?: () => void;
     label: string | React.ReactNode;
@@ -48,12 +49,14 @@ const DropdownComp = ({ button, list, start }: Props) => {
         }`}
         aria-labelledby="dropdown"
       >
-        {list.map(({ onClick, route, label }, i) => (
+        {list.map(({ onClick, route, label, disabled }, i) => (
           <li key={i}>
             <span
-              className="dropdown-item"
-              role="button"
-              onClick={route ? () => navigate(route) : onClick}
+              className={"dropdown-item" + (disabled ? " disabled" : "")}
+              role={disabled ? undefined : "button"}
+              onClick={
+                disabled ? undefined : route ? () => navigate(route) : onClick
+              }
             >
               {label}
             </span>
