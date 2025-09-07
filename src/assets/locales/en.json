@@ -696,6 +696,15 @@
       "NoNotifications": "No Notifications",
       "Of": "Of",
       "PageNo": "Page No",
+      "UserRoleX": "{{role}}",
+      "Roles": {
+        "ceo": "CEO",
+        "beneficiary": "Beneficiary",
+        "applicant": "Applicant",
+        "hod": "HOD",
+        "researcher": "Researcher",
+        "accountant": "Accountant"
+      },
       "PageSize": "Page Size",
       "PhoneNumber": "Phone Number",
       "Results": "Results",

@@ -75,13 +75,10 @@ const LoginView = () => {
     //     password: "12345678",
     //   },
     // },
-    // {
-    //   label: t("Public.Login.Labels.LoginAsCeo"),
-    //   credentials: {
-    //     identifier: "540000000",
-    //     password: "12345678",
-    //   },
-    // },
+    {
+      label: t("Public.Login.Labels.LoginAsCeo"),
+      type: "ceo",
+    },
     {
       label: t("Public.Login.Labels.LoginAsAccountant"),
       type: "accountant",
