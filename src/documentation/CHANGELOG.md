@@ -66,3 +66,27 @@
 
 - Merge pull request #104 from Shai-club/stg
 
+## v1.11.2 - 2025-09-02
+
+- add demo cicd
+
+## v1.11.3 - 2025-09-04
+
+- Merge pull request #106 from Shai-club/stg
+
+## v1.11.4 - 2025-09-04
+
+- optimized dockerfile
+
+## v1.11.5 - 2025-09-04
+
+- better optimized dockerfile
+
+## v1.11.6 - 2025-09-04
+
+- fix build
+
+## v1.11.7 - 2025-09-04
+
+- fix build
+

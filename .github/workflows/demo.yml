@@ -1,7 +1,8 @@
-name: 🚀 Deploy Production Server
+name: 🚀 Deploy and Debug Demo Server
+run-name: 🚀 Demo Deploy - ${{ github.actor }} on ${{ github.ref_name }}
 
 concurrency:
-  group: production-deploy-${{ github.ref }}
+  group: demo-${{ github.ref }}
   cancel-in-progress: true
 
 on:
@@ -11,49 +12,50 @@ on:
       - completed
     branches:
       - prod
-
-jobs:
+  workflow_dispatch:
+  
+jobs:  
   deployment:
-    name: Production Deployment
+    name: Demo Deployment
     runs-on: ubuntu-latest
-    environment: production
+    environment: demo
     if: github.event.workflow_run.conclusion == 'success'
 
     steps:
       - name: Configure SSH
         run: |
           mkdir -p ~/.ssh
-          echo "$SSH_KEY" > ~/.ssh/production.key
-          chmod 600 ~/.ssh/production.key
+          echo "$SSH_KEY" > ~/.ssh/demo.key
+          chmod 600 ~/.ssh/demo.key
 
           cat >>~/.ssh/config <<END
-          Host production
+          Host demo
             HostName $SSH_SERVER
             User $SSH_USER
-            IdentityFile ~/.ssh/production.key
+            IdentityFile ~/.ssh/demo.key
             StrictHostKeyChecking no
           END
         env:
-          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_USER: ${{ secrets.DEMO_SSH_USER }}
           SSH_KEY: ${{ secrets.SSH_KEY }}
-          SSH_SERVER: ${{ secrets.SSH_SERVER }}
+          SSH_SERVER: ${{ secrets.DEMO_SSH_SERVER }}
 
-      - name: Deploy to production
+      - name: Deploy to demo
         run: |
-          ssh -tt production << 'EOF'
+          ssh -tt demo << 'EOF'
           set -e
-          echo "🔐 Connected to production machine"
+          echo "🔐 Connected to demo machine"
 
-          cd ${{ secrets.APP_DIR }}
+          cd ${{ secrets.DEMO_APP_DIR }}
 
           echo "📥 Pulling latest code..."
-          GIT_SSH_COMMAND="ssh -i ${{ secrets.PULL_KEY_PATH }}" git pull
+          GIT_SSH_COMMAND="ssh -i ${{ secrets.DEMO_PULL_KEY_PATH }}" git pull
 
           echo "🐳 Building and restarting fe with optimizations"
 
-          cd ${{ secrets.DOCKER_COMPOSE_DIR }}
+          cd ${{ secrets.DEMO_DOCKER_COMPOSE_DIR }}
           for dir in */; do
-            cd ${{ secrets.DOCKER_COMPOSE_DIR }}/$dir
+            cd ${{ secrets.DEMO_DOCKER_COMPOSE_DIR }}/$dir
             set +x
             export DOCKER_BUILDKIT=1
             export COMPOSE_DOCKER_CLI_BUILD=1

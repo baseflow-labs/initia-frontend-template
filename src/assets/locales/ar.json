@@ -697,6 +697,15 @@
       "Of": "من",
       "PageNo": "رقم الصفحة",
       "PageSize": "حجم الصفحة",
+      "UserRoleX": "نوع المستخدم :{{role}}",
+      "Roles": {
+        "ceo": "مدير الجمعية",
+        "beneficiary": "مستفيد",
+        "applicant": "متقدم بطلب تسجيل",
+        "hod": "مدير الباحثين",
+        "researcher": "باحث اجتماعي",
+        "accountant": "محاسب"
+      },
       "PhoneNumber": "رقم الجوال",
       "Results": "نتائج",
       "Search": "بحث",

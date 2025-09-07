@@ -46,6 +46,7 @@ const DashboardNavbar = ({
   const [notifications, setNotification] = useState<Notification[]>([]);
   const { loading } = useAppSelector((state) => state.loading);
   const { logo } = useAppSelector((state) => state.settings);
+  const { user } = useAppSelector((state) => state.auth);
 
   useLayoutEffect(() => {
     NotificationApi.get()
@@ -229,6 +230,13 @@ const DashboardNavbar = ({
                 />
               }
               list={[
+                {
+                  disabled: true,
+                  onClick: () => "",
+                  label: t("Global.Labels.UserRoleX", {
+                    role: t("Global.Labels.Roles." + user.role),
+                  }),
+                },
                 {
                   onClick: () => dispatch(logout()),
                   label: t("Global.Labels.Logout"),

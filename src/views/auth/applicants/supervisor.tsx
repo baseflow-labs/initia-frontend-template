@@ -22,6 +22,7 @@ import {
   getProvinces,
 } from "../../../utils/optionDataLists/beneficiaries";
 import AssignResearcher from "./assignResearcher";
+import RegisterApplicant from "./registerApplicant";
 
 const ApplicantsViewForSupervisor = () => {
   const { t } = useTranslation();
@@ -44,6 +45,7 @@ const ApplicantsViewForSupervisor = () => {
     { beneficiary: string; staff: string } | undefined
   >(undefined);
   const [currentFilters, setCurrentFilters] = useState({});
+  const [openRegisterModal, setOpenRegisterModal] = useState(false);
   const [currentSearch, setCurrentSearch] = useState("");
   const [paginationMeta, setPaginationMeta] = useState({
     page: 1,
@@ -225,9 +227,8 @@ const ApplicantsViewForSupervisor = () => {
 
   const actionButtons = [
     {
-      label: t("Auth.Beneficiaries.Profile.AssignResearcher"),
-      onClick: () =>
-        setAssignResearcherModalOpen({ beneficiary: "", staff: "" }),
+      label: t("Auth.Beneficiaries.AddBeneficiary"),
+      onClick: () => setOpenRegisterModal(true),
     },
   ];
 
@@ -303,6 +304,11 @@ const ApplicantsViewForSupervisor = () => {
             capacity,
           });
         }}
+      />
+
+      <RegisterApplicant
+        openModal={openRegisterModal}
+        setOpenModal={setOpenRegisterModal}
       />
 
       <AssignResearcher
