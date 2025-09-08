@@ -7,6 +7,7 @@ import {
   getAidProgramStatuses,
 } from "../optionDataLists/aids";
 import { getYesNo } from "../optionDataLists/common";
+import { pluralLabelResolve, renderDataFromOptions } from "../function";
 
 export const getRequestAidInputs = (
   t: Function,
@@ -81,6 +82,7 @@ export const getGrantAidInputs = (
       status: { status: string };
     }[];
     aidPrograms: AidProgram[];
+    aidCategories: AidCategory[];
   },
   formik: FormikProps<Record<string, any>>
 ) => {
@@ -93,41 +95,74 @@ export const getGrantAidInputs = (
   return [
     {
       type: "select",
-      options: selectOptions.beneficiaries
-        .filter(({ status }) => status.status === "Accepted")
-        .map(({ id, fullName }) => ({
-          value: id,
-          label: fullName,
-        })),
-      name: "beneficiary",
-      label: t("Auth.Beneficiaries.BeneficiaryName"),
+      options: selectOptions?.aidCategories.map(({ id, name }) => ({
+        label: name,
+        value: id,
+      })),
+      name: "aidCategory",
+      label: t("Auth.AidCategories.AidCategory"),
       required: true,
     },
     {
       type: "select",
-      options: selectOptions?.aidPrograms.map(({ id, name }) => ({
-        label: name,
-        value: id,
-      })),
+      options: selectOptions?.aidPrograms
+        .filter((a) => a.aidCategory.id === formik.values.aidCategory)
+        .map(({ id, name, credit, aidCategory }) => ({
+          label:
+            name +
+            " | " +
+            renderDataFromOptions(type || "", getAidCategoryTypes(t)) +
+            " | " +
+            credit +
+            " " +
+            (type === "Cash"
+              ? "ريال"
+              : pluralLabelResolve(t, credit, "Auth.Aids.AidPiece")),
+          value: id,
+        })),
       name: "aidProgram",
-      label: t("Auth.Aids.AidType"),
+      label: t("Auth.AidPrograms.AidProgramName"),
       required: true,
     },
     {
-      type: "number",
-      moneyUnit: type === "Cash",
-      step: type === "Cash" ? 0.1 : 1,
-      postfixText: type === "Cash" ? undefined : t("Auth.Aids.AidPiece_other"),
-      name: "value",
-      label:
-        type === "Cash" ? t("Auth.Aids.AidValue") : t("Auth.Aids.AidQuantity"),
+      type: "multipleEntries",
+      name: "beneficiaries",
+      label: t("Auth.Aids.Beneficiary.Title"),
+      inputs: [
+        {
+          type: "select",
+          options: selectOptions.beneficiaries
+            .filter(({ status }) => status.status === "Accepted")
+            .map(({ id, fullName }) => ({
+              value: id,
+              label: fullName,
+            })),
+          name: "beneficiary",
+          label: t("Auth.Beneficiaries.BeneficiaryName"),
+          required: true,
+        },
+        {
+          type: "number",
+          moneyUnit: type === "Cash",
+          step: type === "Cash" ? 0.1 : 1,
+          postfixText:
+            type === "Cash" ? undefined : t("Auth.Aids.AidPiece_other"),
+          name: "value",
+          label:
+            type === "Cash"
+              ? t("Auth.Aids.AidValue")
+              : t("Auth.Aids.AidQuantity"),
+          required: true,
+        },
+        {
+          type: "textarea",
+          name: "note",
+          label: t("Global.Form.Labels.Notes"),
+          required: false,
+          rows: 1,
+        },
+      ],
       required: true,
-    },
-    {
-      type: "textarea",
-      name: "note",
-      label: t("Global.Form.Labels.Notes"),
-      required: false,
     },
   ];
 };
