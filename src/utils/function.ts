@@ -71,6 +71,9 @@ export const columnsWidth = (count: number) => {
   }
 };
 
+export const commaNumbers = (number: string) =>
+  parseFloat(number).toLocaleString("en-US");
+
 export const pluralLabelResolve = (
   t: Function,
   count: number,

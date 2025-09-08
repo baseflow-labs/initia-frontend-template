@@ -13,8 +13,7 @@ type RowType = Record<string, any> & { _locked?: boolean };
 
 const MultipleEntriesInput: React.FC<FinalInput> = (input) => {
   const { t } = useTranslation();
-  const { values, setFieldValue, setFieldTouched } =
-    useFormikContext<Record<string, any>>();
+  const { values, setFieldValue } = useFormikContext<Record<string, any>>();
 
   const rows: RowType[] = values[input.name] || [];
   const columns = useMemo(

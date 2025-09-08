@@ -10,7 +10,6 @@ import moment from "moment";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-
 import * as AidCategoryApi from "../../../api/aids/aidCategories";
 import * as AidProgramApi from "../../../api/aids/aidPrograms";
 import * as AidApi from "../../../api/aids/aids";
@@ -25,6 +24,7 @@ import { Beneficiary } from "../../../types/beneficiaries";
 import { dataDateFormat } from "../../../utils/consts";
 import {
   apiCatchGlobalHandler,
+  commaNumbers,
   pluralLabelResolve,
   renderDataFromOptions,
   statusColorRender,
@@ -195,7 +195,7 @@ const AidsView = () => {
       label: t("Auth.Aids.AidValue"),
       render: (row: any) => (
         <>
-          {row.value}{" "}
+          {commaNumbers(row.value)}{" "}
           {selectOptions.aidCategories.find(
             (cat) => cat.id === row.aidProgram.aidCategoryId
           )?.type === "Cash" ? (
