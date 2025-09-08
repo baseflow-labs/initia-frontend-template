@@ -122,7 +122,7 @@ const SettingsPage = () => {
           customValidate={validatePasswords}
         />
 
-        {user.role !== "beneficiary" && user.role !== "researcher" && (
+        {(user.role === "ceo" || user.role === "admin") && (
           <Fragment>
             <h5 className="text-info my-5">
               {t("Auth.Settings.Metadata.Title")}

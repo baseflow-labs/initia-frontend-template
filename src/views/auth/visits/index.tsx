@@ -255,6 +255,8 @@ const VisitsView = () => {
     getData({ page: 1, capacity: 10, search: e });
   };
 
+  const isResearcher = user.role === "researcher";
+
   return (
     <Fragment>
       <TablePage
@@ -266,9 +268,9 @@ const VisitsView = () => {
           const visit = visits.find((v) => v.id === id);
 
           const gotReport = !!visit?.visitReport;
-          const cancelled = visit?.status === "Cancelled";
+          const isCancelled = visit?.status === "Cancelled";
 
-          const showReportsAdd = user.role === "researcher";
+          const showReportsAdd = isResearcher;
 
           const final = [
             {
@@ -313,25 +315,27 @@ const VisitsView = () => {
             });
           }
 
-          final.push({
-            icon: faXmark,
-            spread: false,
-            label: t("Auth.Visits.CancelVisit"),
-            onClick: (id: string) =>
-              cancelled
-                ? dispatch(
-                    addNotification({
-                      msg: t("Auth.Visits.VisitCancelledAlready"),
-                    })
-                  )
-                : cancelVisit(id),
-          });
+          if (isResearcher) {
+            final.push({
+              icon: faXmark,
+              spread: false,
+              label: t("Auth.Visits.CancelVisit"),
+              onClick: (id: string) =>
+                isCancelled
+                  ? dispatch(
+                      addNotification({
+                        msg: t("Auth.Visits.VisitCancelledAlready"),
+                      })
+                    )
+                  : cancelVisit(id),
+            });
+          }
 
           return final;
         }}
-        actionButtons={user.role !== "hod" ? actionButtons : undefined}
+        actionButtons={isResearcher ? actionButtons : undefined}
         columns={
-          user.role === "researcher"
+          isResearcher
             ? [
                 {
                   type: "text",
