@@ -1,12 +1,12 @@
-import React, { Fragment, useEffect, useMemo, useState } from "react";
-import { FieldArray, useField, useFormikContext } from "formik";
-import { useTranslation } from "react-i18next";
 import { faSave, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FieldArray, useFormikContext } from "formik";
+import React, { Fragment, useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 
+import { InputProps } from "..";
 import Button from "../../core/button";
 import InputComp from "../Input";
-import { InputProps } from "..";
 
 type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 type RowType = Record<string, any> & { _locked?: boolean };
@@ -15,7 +15,6 @@ const MultipleEntriesInput: React.FC<FinalInput> = (input) => {
   const { t } = useTranslation();
   const { values, setFieldValue, setFieldTouched } =
     useFormikContext<Record<string, any>>();
-  const [, , helpers] = useField<RowType[]>(input.name);
 
   const rows: RowType[] = values[input.name] || [];
   const columns = useMemo(
@@ -40,13 +39,6 @@ const MultipleEntriesInput: React.FC<FinalInput> = (input) => {
       if (Array.isArray(v)) return v.length > 0;
       if (typeof v === "number") return !Number.isNaN(v);
       return v !== undefined && v !== null && String(v).trim().length > 0;
-    });
-  };
-
-  const touchRowRequiredFields = (rowIndex: number) => {
-    columns.forEach((col) => {
-      if (!col.required) return;
-      setFieldTouched(`${input.name}[${rowIndex}].${col.name}`, true, true);
     });
   };
 

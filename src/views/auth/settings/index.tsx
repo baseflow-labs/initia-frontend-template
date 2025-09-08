@@ -8,7 +8,7 @@ import * as MetadataApi from "../../../api/metadata";
 import Form from "../../../components/form";
 import BoxedPage from "../../../layouts/auth/pages/boxedPage";
 import { addNotification } from "../../../store/actions/notifications";
-import { setFontSize, setMetadata } from "../../../store/actions/settings";
+import { setFontSize } from "../../../store/actions/settings";
 import { useAppSelector } from "../../../store/hooks";
 import {
   getCommonSettingInputs,
