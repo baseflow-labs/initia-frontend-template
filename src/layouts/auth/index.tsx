@@ -228,7 +228,7 @@ const AuthLayout = () => {
       view: <AidProgramsView />,
       showInNav: true,
       icon: aidsIcon,
-      users: ["accountant", "admin"],
+      users: ["ceo", "accountant", "admin"],
     },
     {
       name: t("Auth.AidCategories.Title"),
@@ -236,7 +236,7 @@ const AuthLayout = () => {
       view: <AidCategoriesView />,
       showInNav: true,
       icon: aidsIcon,
-      users: ["accountant", "admin"],
+      users: ["ceo", "accountant", "admin"],
     },
     {
       name: t("Auth.Beneficiary.Profile.Title"),

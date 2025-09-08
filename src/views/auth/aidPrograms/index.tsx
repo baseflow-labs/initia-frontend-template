@@ -21,6 +21,7 @@ import {
 } from "../../../utils/function";
 import { getAidProgramStatuses } from "../../../utils/optionDataLists/aids";
 import AddAidProgram from "./createAidProgram";
+import { useAppSelector } from "../../../store/hooks";
 
 const AidProgramsView = () => {
   const { t } = useTranslation();
@@ -38,6 +39,9 @@ const AidProgramsView = () => {
     count: 0,
     pagesCount: 1,
   });
+  const { user } = useAppSelector((state) => state.auth);
+
+  const isAccountant = user.role === "accountant";
 
   const getData = ({
     filters = currentFilters,
@@ -192,15 +196,19 @@ const AidProgramsView = () => {
         filters={filters}
         onSearch={onSearch}
         searchPlaceholder={t("Auth.AidPrograms.SearchBarPlaceholder")}
-        actionButtons={actionButtons}
-        tableActions={(id?: string) => [
-          {
-            label: t("Global.Form.Labels.Edit"),
-            icon: faEdit,
-            spread: true,
-            onClick: (data: string) => update(data),
-          },
-        ]}
+        actionButtons={isAccountant ? actionButtons : undefined}
+        tableActions={
+          isAccountant
+            ? (id?: string) => [
+                {
+                  label: t("Global.Form.Labels.Edit"),
+                  icon: faEdit,
+                  spread: true,
+                  onClick: (data: string) => update(data),
+                },
+              ]
+            : undefined
+        }
         columns={columns}
         data={aidPrograms}
         onGetData={getData}
