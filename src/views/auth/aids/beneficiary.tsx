@@ -146,9 +146,7 @@ const AidsBeneficiaryView = () => {
       render: (row: any) => (
         <>
           {row.value}{" "}
-          {selectOptions.aidCategories.find(
-            (cat) => cat.id === row.aidProgram.aidCategoryId
-          )?.type === "Cash" ? (
+          {row.aidProgram?.aidCategory?.type === "Cash" ? (
             <MoneyUnit />
           ) : (
             pluralLabelResolve(t, row.value, "Auth.Aids.AidPiece")

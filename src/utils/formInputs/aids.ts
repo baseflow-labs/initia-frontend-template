@@ -13,7 +13,7 @@ export const getRequestAidInputs = (
   selectOptions: any,
   formik: FormikProps<Record<string, any>>
 ) => {
-  const pickedProgram = formik?.values?.aidCategoryId;
+  const pickedProgram = formik?.values?.aidCategory;
   const type = pickedProgram
     ? selectOptions?.aidCategories.find(({ id = "" }) => id === pickedProgram)
         ?.type
@@ -212,6 +212,7 @@ export const geAddAidCategoryInputs = (t: Function) => [
     type: "text",
     name: "name",
     label: t("Auth.AidCategories.AidCategoryName"),
+    required: true,
   },
   {
     type: "radio",
@@ -219,6 +220,7 @@ export const geAddAidCategoryInputs = (t: Function) => [
     options: getAidCategoryTypes(t),
     name: "type",
     label: t("Auth.AidCategories.AidCategoryType"),
+    required: true,
   },
   {
     type: "radio",
@@ -226,5 +228,6 @@ export const geAddAidCategoryInputs = (t: Function) => [
     options: getAidCategoryReapplyPeriods(t),
     name: "reapply",
     label: t("Auth.AidCategories.ReapplyPeriods.Title"),
+    required: true,
   },
 ];

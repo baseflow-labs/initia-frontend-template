@@ -281,7 +281,7 @@ const AidsView = () => {
         filters={filters}
         onSearch={onSearch}
         searchPlaceholder={t("Auth.Aids.SearchBarPlaceholder")}
-        actionButtons={actionButtons}
+        actionButtons={user.role === "researcher" ? actionButtons : undefined}
         tableActions={(id?: string) => {
           const aid = aids.find((a) => a.id === id);
 
