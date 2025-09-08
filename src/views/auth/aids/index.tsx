@@ -1,3 +1,16 @@
+import {
+  faCheck,
+  faCircle,
+  faEye,
+  faHandHoldingDollar,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import moment from "moment";
+import { Fragment, useLayoutEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+
 import * as AidCategoryApi from "../../../api/aids/aidCategories";
 import * as AidProgramApi from "../../../api/aids/aidPrograms";
 import * as AidApi from "../../../api/aids/aids";
@@ -21,18 +34,6 @@ import ApproveAid from "./approveAid";
 import RejectAid from "./rejectAid";
 import SendAid from "./sendAid";
 import ViewAidDetails from "./viewDetails";
-import {
-  faCheck,
-  faCircle,
-  faEye,
-  faHandHoldingDollar,
-  faXmark,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import moment from "moment";
-import { Fragment, useLayoutEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
 
 const AidsView = () => {
   const { t } = useTranslation();
@@ -284,9 +285,40 @@ const AidsView = () => {
         tableActions={(id?: string) => {
           const aid = aids.find((a) => a.id === id);
 
-          const approved = aid?.status?.status === "Approved";
-          const granted = aid?.status?.status === "Granted";
-          const rejected = aid?.status?.status === "Rejected";
+          const status = aid?.status?.status;
+
+          const isRecommended = status === "RecommendedByResearcher";
+          const isSeconded = status === "SecondedByHod";
+          const isAllowed = status === "AllowedByCeo";
+          const isApproved = status === "ApprovedByAccountant";
+
+          const isGranted = status === "Granted";
+          const isPending = status === "Pending";
+
+          const isResearcher = user.role === "researcher";
+          const isHod = user.role === "hod";
+          const isCeo = user.role === "ceo";
+          const isAccountant = user.role === "accountant";
+
+          const allowResponse =
+            (isResearcher && isPending) ||
+            (isHod && isRecommended) ||
+            (isCeo && isSeconded) ||
+            (isAccountant && isAllowed);
+
+          const allowGrant = isResearcher && isApproved;
+
+          const errorStatus = t("Auth.Aids.Statuses.CantButIfStatus", {
+            status: isResearcher
+              ? t("Auth.Aids.Statuses.Pending")
+              : isHod
+              ? t("Auth.Aids.Statuses.Recommended")
+              : isCeo
+              ? t("Auth.Aids.Statuses.Seconded")
+              : isAccountant
+              ? t("Auth.Aids.Statuses.Allowed")
+              : "",
+          });
 
           const final: actionProps[] = [
             {
@@ -300,11 +332,14 @@ const AidsView = () => {
               icon: faCheck,
               spread: false,
               onClick: (data: string) =>
-                !approved && !granted
+                allowResponse
                   ? openResponseModal(data, "approve")
                   : dispatch(
                       addNotification({
-                        msg: t("Auth.Aids.CantApproveAlready"),
+                        msg: t("Auth.Aids.CantApprove", {
+                          message: errorStatus,
+                        }),
+                        type: "err",
                       })
                     ),
             },
@@ -313,30 +348,35 @@ const AidsView = () => {
               icon: faXmark,
               spread: false,
               onClick: (data: string) =>
-                !rejected && !granted
+                allowResponse
                   ? openResponseModal(data, "reject")
                   : dispatch(
                       addNotification({
-                        msg: t("Auth.Aids.CantRejectAlready"),
+                        msg: t("Auth.Aids.CantReject", {
+                          message: errorStatus,
+                        }),
+                        type: "err",
                       })
                     ),
             },
           ];
 
-          if (user.role === "researcher") {
+          if (isResearcher) {
             final.push({
               label: t("Auth.Aids.Statuses.Grant"),
               icon: faHandHoldingDollar,
               spread: false,
               onClick: (data: string) =>
-                !granted && approved
+                allowGrant
                   ? grant(data)
                   : dispatch(
                       addNotification({
-                        msg: !approved
+                        msg: isGranted
+                          ? t("Auth.Aids.CantGrantAlready")
+                          : !isApproved
                           ? t("Auth.Aids.CantGrantNonApproved")
-                          : t("Auth.Aids.CantGrantAlready"),
-                        type: !approved ? "err" : undefined,
+                          : t("Auth.Aids.CantGrant"),
+                        type: !isApproved && !isGranted ? "err" : undefined,
                       })
                     ),
             });

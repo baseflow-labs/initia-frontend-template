@@ -116,8 +116,9 @@ const AidsBeneficiaryView = () => {
 
   const processStatusForBeneficiary = (status: string) => {
     switch (status) {
-      case "Recommended":
-      case "Seconded":
+      case "RecommendedByResearcher":
+      case "SecondedByHod":
+      case "AllowedByCeo":
       case "Pending":
         return "Pending";
       case "Rejected":

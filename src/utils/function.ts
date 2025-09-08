@@ -25,8 +25,10 @@ export const statusColorRender = (status = "") => {
     case "Reviewed":
     case "Suspended":
     case "Approved":
-    case "Seconded":
-    case "Recommended":
+    case "ApprovedByAccountant":
+    case "AllowedByCeo":
+    case "SecondedByHod":
+    case "RecommendedByResearcher":
     case "Pending Approval":
       return "warning";
     case "Incomplete":
