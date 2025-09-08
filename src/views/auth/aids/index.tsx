@@ -375,7 +375,7 @@ const AidsView = () => {
                           ? t("Auth.Aids.CantGrantAlready")
                           : !isApproved
                           ? t("Auth.Aids.CantGrantNonApproved")
-                          : t("Auth.Aids.CantGrant"),
+                          : "",
                         type: !isApproved && !isGranted ? "err" : undefined,
                       })
                     ),

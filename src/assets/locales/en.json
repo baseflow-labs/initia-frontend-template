@@ -73,6 +73,7 @@
         "Allowed": "Allowed",
         "Approve": "Approve",
         "Approved": "Approved",
+        "CantButIfStatus": "CantButIfStatus",
         "Denied": "Denied",
         "Grant": "Grant",
         "Granted": "Granted",
@@ -323,6 +324,7 @@
         "HostelData": "Hostel Data",
         "Housing": {
           "AddNew": "Add New",
+          "House": "House",
           "Housing": "Housing",
           "HousingSaved": "Housing Saved",
           "SaveHousing": "Save Housing"
@@ -789,5 +791,6 @@
       "Point4": "Point4",
       "Title": "Title"
     }
-  }
+  },
+  "SelectProgram": "SelectProgram"
 }
