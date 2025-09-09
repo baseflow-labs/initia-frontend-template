@@ -6,7 +6,7 @@ import * as AidApi from "../../../api/aids/aids";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import { addNotification } from "../../../store/actions/notifications";
-import { AidProgram } from "../../../types/aids";
+import { AidCategory, AidProgram } from "../../../types/aids";
 import { getGrantAidInputs } from "../../../utils/formInputs/aids";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 
@@ -23,6 +23,7 @@ interface Props {
       status: { status: string };
     }[];
     aidPrograms: AidProgram[];
+    aidCategories: AidCategory[];
   };
 }
 
@@ -39,6 +40,7 @@ const SendAid = ({
   return (
     <Modal
       title={t("Auth.Aids.AddAid")}
+      className="modal-xl"
       onClose={() => setOpenModal(false)}
       isOpen={openModal}
     >

@@ -26,6 +26,7 @@ import { addNotification } from "../../store/actions/notifications";
 import { viewDateFormat, viewTimeFormat } from "../../utils/consts";
 import DropdownComp from "../dropdown";
 import TooltipComp from "../tooltip";
+import { commaNumbers } from "../../utils/function";
 
 export interface actionProps {
   label: string;
@@ -129,6 +130,8 @@ export const dataRender = ({
   }
 
   switch (type) {
+    case "number":
+      return wrap(commaNumbers(String(data)));
     case "date":
       return wrap(
         moment(data)

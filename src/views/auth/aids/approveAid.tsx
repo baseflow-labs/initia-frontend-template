@@ -33,13 +33,28 @@ const ApproveAid = ({ openModal, setOpenModal, onGetData }: Props) => {
     setOpenModal(defaultAid);
   };
 
-  const isAccountant = user.role === "accountant";
+  const recommend = "RecommendedByResearcher";
+  const second = "SecondedByHod";
+  const allow = "AllowedByCeo";
+  const approve = "ApprovedByAccountant";
+
   const isResearcher = user.role === "researcher";
+  const isHod = user.role === "hod";
+  const isCeo = user.role === "ceo";
+  const isAccountant = user.role === "accountant";
 
   const onSubmit = (value?: number) => {
     AidApi.updateStatus(
       openModal.id,
-      isAccountant ? "Approved" : isResearcher ? "Recommended" : "Seconded",
+      isResearcher
+        ? recommend
+        : isHod
+        ? second
+        : isCeo
+        ? allow
+        : isAccountant
+        ? approve
+        : "",
       "",
       "",
       value,

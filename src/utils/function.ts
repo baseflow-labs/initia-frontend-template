@@ -25,8 +25,10 @@ export const statusColorRender = (status = "") => {
     case "Reviewed":
     case "Suspended":
     case "Approved":
-    case "Seconded":
-    case "Recommended":
+    case "ApprovedByAccountant":
+    case "AllowedByCeo":
+    case "SecondedByHod":
+    case "RecommendedByResearcher":
     case "Pending Approval":
       return "warning";
     case "Incomplete":
@@ -68,6 +70,9 @@ export const columnsWidth = (count: number) => {
       return 3;
   }
 };
+
+export const commaNumbers = (number: string) =>
+  parseFloat(number).toLocaleString("en-US");
 
 export const pluralLabelResolve = (
   t: Function,
