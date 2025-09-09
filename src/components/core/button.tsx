@@ -22,6 +22,7 @@ const Button = ({
   p = 2,
   route,
   size = "",
+  type = "button",
   outline,
   onClick,
   ...rest
@@ -46,7 +47,7 @@ const Button = ({
   const textClass = !outline ? `text-${textColor()}` : "";
   const sizeClass = size ? `btn-${size}` : "";
 
-  const finalClass = `btn btn-${
+  const finalClass = `${outline ? "" : "border-0"} btn btn-${
     outline ? "outline-" : ""
   }${color} ${textClass} ${sizeClass} ${paddingY} ${paddingX} rounded-${rounded} ${className}`;
 
@@ -63,6 +64,7 @@ const Button = ({
           }
         }
       }}
+      type={type}
       {...rest}
     >
       {children}

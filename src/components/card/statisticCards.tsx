@@ -2,6 +2,7 @@ import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import DashboardCard from "./dashboardCard";
+import { commaNumbers } from "../../utils/function";
 
 interface Props {
   statistics: {
@@ -66,7 +67,7 @@ const StatisticCards = ({ statistics }: Props) => {
               </div>
 
               <h1 className="card-title mt-2 mb-4 fw-bold">
-                {count?.toLocaleString()} {unit}
+                {commaNumbers(String(count))} {unit}
               </h1>
 
               {details && (

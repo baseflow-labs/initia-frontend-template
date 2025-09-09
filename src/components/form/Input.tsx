@@ -1,5 +1,6 @@
-import { useField } from "formik";
+// src/components/form/Input.tsx
 import React from "react";
+import { useField } from "formik";
 import { InputProps } from ".";
 import DateInput from "./inputs/date";
 import DefaultInput from "./inputs/default";
@@ -18,64 +19,45 @@ import RangeInput from "./inputs/range";
 type FinalInput = InputProps &
   React.InputHTMLAttributes<HTMLInputElement> &
   React.SelectHTMLAttributes<HTMLSelectElement> &
-  React.TextareaHTMLAttributes<HTMLTextAreaElement>;
+  React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
+    bypassFormik?: boolean;
+  };
 
-const InputComp: React.FC<FinalInput> = ({ name, type, ...input }) => {
-  const [field] = useField<string>(name);
-
-  if (type === "select" && input.options) {
-    return <SelectInput {...input} {...field} />;
-  }
-
-  if (type === "selectMany" && input.options) {
-    return <SelectManyInput {...input} {...field} />;
-  }
-
-  if (type === "radio" && input.options) {
-    return <RadioInput {...input} {...field} />;
-  }
-
-  if (type === "range") {
-    return <RangeInput {...input} {...field} />;
-  }
-
-  if (type === "phoneNumber") {
-    return <PhoneNoInput {...input} {...field} />;
-  }
-
-  if (type === "date") {
-    return <DateInput {...input} {...field} />;
-  }
-
-  if (type === "password") {
-    return <PasswordInput {...input} {...field} />;
-  }
-
-  if (type === "file") {
-    return <FileInput {...input} {...field} />;
-  }
-
-  if (type === "location") {
-    return <LocationInput {...input} {...field} />;
-  }
-
-  if (type === "otp") {
-    return <OtpInput {...input} {...field} />;
-  }
-
-  if (type === "textarea") {
-    return <TextareaInput {...input} {...field} />;
-  }
-
-  if (type === "multipleEntries") {
-    return <MultipleEntriesInput {...input} {...field} />;
-  }
-
-  if (type === "title") {
+function renderByType(type: any, props: any) {
+  const input = props as any;
+  if (type === "select" && input.options) return <SelectInput {...input} />;
+  if (type === "selectMany" && input.options)
+    return <SelectManyInput {...input} />;
+  if (type === "radio" && input.options) return <RadioInput {...input} />;
+  if (type === "range") return <RangeInput {...input} />;
+  if (type === "phoneNumber") return <PhoneNoInput {...input} />;
+  if (type === "date") return <DateInput {...input} />;
+  if (type === "password") return <PasswordInput {...input} />;
+  if (type === "file") return <FileInput {...input} />;
+  if (type === "location") return <LocationInput {...input} />;
+  if (type === "otp") return <OtpInput {...input} />;
+  if (type === "textarea") return <TextareaInput {...input} />;
+  if (type === "multipleEntries") return <MultipleEntriesInput {...input} />;
+  if (type === "title")
     return <div className="h4 text-success">{input.defaultValue}</div>;
-  }
+  return <DefaultInput type={type} {...input} />;
+}
 
-  return <DefaultInput type={type} {...input} {...field} />;
+const FormikBoundInput: React.FC<FinalInput> = ({ name, type, ...rest }) => {
+  const [field] = useField<string>(name);
+  const props = { ...rest, ...field };
+  return renderByType(type, props);
+};
+
+const RawInput: React.FC<FinalInput> = ({ type, ...rest }) => {
+  return renderByType(type, rest);
+};
+
+const InputComp: React.FC<FinalInput> = ({ bypassFormik, ...props }) => {
+  if (bypassFormik) {
+    return <RawInput {...props} />;
+  }
+  return <FormikBoundInput {...props} />;
 };
 
 export default InputComp;

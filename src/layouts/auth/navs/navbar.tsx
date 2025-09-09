@@ -233,9 +233,8 @@ const DashboardNavbar = ({
                 {
                   disabled: true,
                   onClick: () => "",
-                  label: t("Global.Labels.UserRoleX", {
-                    role: t("Global.Labels.Roles." + user.role),
-                  }),
+                  label:
+                    user.name + " | " + t("Global.Labels.Roles." + user.role),
                 },
                 {
                   onClick: () => dispatch(logout()),

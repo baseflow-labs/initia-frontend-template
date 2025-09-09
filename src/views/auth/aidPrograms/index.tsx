@@ -2,13 +2,11 @@ import { faCircle, faEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-
-// import { useDispatch } from "react-redux";
-
 import * as AidCategoriesApi from "../../../api/aids/aidCategories";
 import * as AidProgramApi from "../../../api/aids/aidPrograms";
+import { MoneyUnit } from "../../../components/table";
 import TablePage from "../../../layouts/auth/pages/tablePage";
-// import { AidCategory, AidProgram, defaultAidProgram } from "../../../store/actions/notifications";
+import { useAppSelector } from "../../../store/hooks";
 import {
   AidCategory,
   AidProgram,
@@ -16,6 +14,8 @@ import {
 } from "../../../types/aids";
 import {
   apiCatchGlobalHandler,
+  commaNumbers,
+  pluralLabelResolve,
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
@@ -38,6 +38,9 @@ const AidProgramsView = () => {
     count: 0,
     pagesCount: 1,
   });
+  const { user } = useAppSelector((state) => state.auth);
+
+  const isAccountant = user.role === "accountant";
 
   const getData = ({
     filters = currentFilters,
@@ -123,14 +126,34 @@ const AidProgramsView = () => {
       label: t("Auth.AidPrograms.Sponsor"),
     },
     {
-      type: "number",
+      type: "custom",
       name: "credit",
       label: t("Auth.AidPrograms.TotalCredit"),
+      render: (row: any) => (
+        <>
+          {commaNumbers(row.credit)}{" "}
+          {row.aidCategory?.type === "Cash" ? (
+            <MoneyUnit />
+          ) : (
+            pluralLabelResolve(t, row.credit, "Auth.Aids.AidPiece")
+          )}
+        </>
+      ),
     },
     {
-      type: "text",
+      type: "custom",
       name: "balance",
       label: t("Auth.AidPrograms.RemainingCredit"),
+      render: (row: any) => (
+        <>
+          {commaNumbers(row.balance)}{" "}
+          {row.aidCategory?.type === "Cash" ? (
+            <MoneyUnit />
+          ) : (
+            pluralLabelResolve(t, row.balance, "Auth.Aids.AidPiece")
+          )}
+        </>
+      ),
     },
     {
       type: "custom",
@@ -147,29 +170,6 @@ const AidProgramsView = () => {
       label: t("Auth.AidPrograms.Statuses.Title"),
     },
   ];
-
-  // const openLabel = t("Auth.AidPrograms.Statuses.Open");
-  // const closedLabel = t("Auth.AidPrograms.Statuses.Close");
-
-  // const updateStatus = (id: string, status: string) => {
-  //   AidProgramApi.updateStatus(id, status)
-
-  //     .then(() => {
-  //       const aidProgram = aidPrograms.find(
-  //         (aidProgram) => aidProgram.id === id
-  //       );
-  //       getData({});
-  //       dispatch(
-  //         addNotification({
-  //           msg: t("Global.Form.SuccessMsg", {
-  //             action: status === "Opened" ? openLabel : closedLabel,
-  //             data: aidPrograms.find(({ id }) => id === aidProgram?.id)?.name,
-  //           }),
-  //         })
-  //       );
-  //     })
-  //     .catch(apiCatchGlobalHandler);
-  // };
 
   const onSearch = (e: string) => {
     setCurrentSearch(e);
@@ -192,15 +192,19 @@ const AidProgramsView = () => {
         filters={filters}
         onSearch={onSearch}
         searchPlaceholder={t("Auth.AidPrograms.SearchBarPlaceholder")}
-        actionButtons={actionButtons}
-        tableActions={(id?: string) => [
-          {
-            label: t("Global.Form.Labels.Edit"),
-            icon: faEdit,
-            spread: true,
-            onClick: (data: string) => update(data),
-          },
-        ]}
+        actionButtons={isAccountant ? actionButtons : undefined}
+        tableActions={
+          isAccountant
+            ? (id?: string) => [
+                {
+                  label: t("Global.Form.Labels.Edit"),
+                  icon: faEdit,
+                  spread: true,
+                  onClick: (data: string) => update(data),
+                },
+              ]
+            : undefined
+        }
         columns={columns}
         data={aidPrograms}
         onGetData={getData}

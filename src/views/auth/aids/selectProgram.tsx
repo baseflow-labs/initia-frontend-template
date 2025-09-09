@@ -137,7 +137,7 @@ const ProgramCardsPicker = ({
             <DashboardClickableCard
               onClick={() => onSelect(i)}
               selected={selected}
-              titleForA11y={`${t("Select program")}: ${name}`}
+              titleForA11y={`${t("SelectProgram")}: ${name}`}
             >
               <div className="card-body p-3">
                 <div className="d-flex justify-content-between align-items-start">

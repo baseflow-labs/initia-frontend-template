@@ -11,6 +11,7 @@ import {
   getAidCategoryTypes,
 } from "../../../utils/optionDataLists/aids";
 import AddAidCategory from "./createAidCategory";
+import { useAppSelector } from "../../../store/hooks";
 
 const AidCategoriesView = () => {
   const { t } = useTranslation();
@@ -26,6 +27,9 @@ const AidCategoriesView = () => {
     count: 0,
     pagesCount: 1,
   });
+  const { user } = useAppSelector((state) => state.auth);
+
+  const isAccountant = user.role === "accountant";
 
   const getData = ({
     filters = currentFilters,
@@ -127,15 +131,19 @@ const AidCategoriesView = () => {
         filters={filters}
         onSearch={onSearch}
         searchPlaceholder={t("Auth.AidCategories.SearchBarPlaceholder")}
-        actionButtons={actionButtons}
-        tableActions={(id?: string) => [
-          {
-            label: t("Global.Form.Labels.Edit"),
-            icon: faEdit,
-            spread: true,
-            onClick: (data: string) => update(data),
-          },
-        ]}
+        actionButtons={isAccountant ? actionButtons : undefined}
+        tableActions={
+          isAccountant
+            ? (id?: string) => [
+                {
+                  label: t("Global.Form.Labels.Edit"),
+                  icon: faEdit,
+                  spread: true,
+                  onClick: (data: string) => update(data),
+                },
+              ]
+            : undefined
+        }
         columns={columns}
         data={aidCategories}
         onGetData={getData}

@@ -2,7 +2,6 @@ import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-
 import * as AidCategoriesApi from "../../../api/aids/aidCategories";
 import * as AidProgramsApi from "../../../api/aids/aidPrograms";
 import * as AidApi from "../../../api/aids/aids";
@@ -14,6 +13,7 @@ import { useAppSelector } from "../../../store/hooks";
 import { AidCategory, AidProgram } from "../../../types/aids";
 import {
   apiCatchGlobalHandler,
+  commaNumbers,
   pluralLabelResolve,
   renderDataFromOptions,
   statusColorRender,
@@ -116,8 +116,9 @@ const AidsBeneficiaryView = () => {
 
   const processStatusForBeneficiary = (status: string) => {
     switch (status) {
-      case "Recommended":
-      case "Seconded":
+      case "RecommendedByResearcher":
+      case "SecondedByHod":
+      case "AllowedByCeo":
       case "Pending":
         return "Pending";
       case "Rejected":
@@ -144,10 +145,8 @@ const AidsBeneficiaryView = () => {
       label: t("Auth.Aids.AidValue"),
       render: (row: any) => (
         <>
-          {row.value}{" "}
-          {selectOptions.aidCategories.find(
-            (cat) => cat.id === row.aidProgram.aidCategoryId
-          )?.type === "Cash" ? (
+          {commaNumbers(row.value)}{" "}
+          {row.aidProgram?.aidCategory?.type === "Cash" ? (
             <MoneyUnit />
           ) : (
             pluralLabelResolve(t, row.value, "Auth.Aids.AidPiece")
