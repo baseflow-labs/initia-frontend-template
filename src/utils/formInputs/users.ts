@@ -1,6 +1,6 @@
 export const getUserCrudInputs = (t: Function) => [
   {
-    label: t("Auth.Researchers.ResearcherName"),
+    label: t("Auth.Users.Name"),
     name: "name",
     type: "text",
     required: true,
@@ -13,6 +13,7 @@ export const getUserCrudInputs = (t: Function) => [
   },
   {
     label: t("Auth.MembershipRegistration.Form.IdNumber"),
+    labelNote: t("Auth.Users.AsPassword"),
     name: "idNumber",
     type: "numberText",
     minLength: 10,
@@ -23,12 +24,6 @@ export const getUserCrudInputs = (t: Function) => [
     label: t("Global.Form.Label.Email"),
     name: "email",
     type: "email",
-    required: true,
+    required: false,
   },
-  // {
-  //   label: t("Auth.Researchers.AddProfilePhoto"),
-  //   name: "photo",
-  //   type: "file",
-  //   required: false,
-  // },
 ];

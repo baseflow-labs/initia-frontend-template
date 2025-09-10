@@ -1,51 +1,44 @@
-import * as UserApi from "../../../api/staff/researcher";
-import Button from "../../../components/core/button";
-import { dataRender } from "../../../components/table";
-import DemoLoginNote from "../../../layouts/auth/demoLoginNote";
-import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
-import { apiCatchGlobalHandler } from "../../../utils/function";
-import AddUsers from "./addUser";
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserGear } from "@fortawesome/free-solid-svg-icons";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import AddUsers from "./addUser";
 
-const UserMgmtPage = () => {
+import * as UserApi from "../../../api/profile/user";
+import DemoLoginNote from "../../../layouts/auth/demoLoginNote";
+import TablePage from "../../../layouts/auth/pages/tablePage";
+import {
+  apiCatchGlobalHandler,
+  renderDataFromOptions,
+} from "../../../utils/function";
+import { getUserRoles } from "../../../utils/optionDataLists/users";
+import { User } from "../../../types/beneficiaries";
+
+const UsersView = () => {
   const { t } = useTranslation();
 
-  const [openModal, setOpenModal] = useState<
-    | {
-        id?: string;
-        fullName?: string;
-        email?: string;
-        username?: string;
-        idNumber?: string;
-        image?: string;
-        beneficiariesCount?: number;
-        visitsCount?: number;
-      }
-    | undefined
-  >(undefined);
+  const [openModal, setOpenModal] = useState<User | null>(null);
+  const [users, setUsers] = useState<User[]>([]);
+  const [currentFilters, setCurrentFilters] = useState({});
   const [currentSearch, setCurrentSearch] = useState("");
-  const [researchers, setUsers] = useState<
-    {
-      id?: string;
-      fullName: string;
-      email: string;
-      username: string;
-      idNumber: string;
-      image: string;
-      beneficiariesCount: number;
-      visitsCount: number;
-    }[]
-  >([]);
+  const [paginationMeta, setPaginationMeta] = useState({
+    page: 1,
+    capacity: 10,
+    count: 0,
+    pagesCount: 1,
+  });
 
-  const getData = ({ search }: { search?: string }) => {
+  const getData = ({
+    filters = currentFilters,
+    page = paginationMeta.page,
+    capacity = paginationMeta.capacity,
+    search = currentSearch,
+  }) => {
+    setCurrentFilters(filters);
     const customFilters = [];
 
     if (search) {
       customFilters.push({
-        field: "fullName",
+        field: "name",
         filteredTerm: {
           dataType: "string",
           value: search,
@@ -54,146 +47,123 @@ const UserMgmtPage = () => {
       });
     }
 
-    UserApi.getAll({ customFilters })
+    return UserApi.getAll({
+      filters,
+      page,
+      capacity,
+      customFilters,
+    })
       .then((res: any) => {
-        setUsers(res.payload);
+        setUsers(
+          res.payload.map(
+            ({ contactsBank = {}, housing = [{}], status = {}, ...rest }) => ({
+              ...contactsBank,
+              housing,
+              ...status,
+              ...rest,
+            })
+          )
+        );
+
+        if (res.extra) {
+          setPaginationMeta({
+            page: res.extra.page,
+            capacity: res.extra.capacity,
+            count: res.extra.count,
+            pagesCount: res.extra.pagesCount,
+          });
+        }
+
+        return res;
       })
       .catch(apiCatchGlobalHandler);
   };
 
   useLayoutEffect(() => {
-    getData({ search: currentSearch });
+    getData({});
   }, []);
+
+  const columns = [
+    {
+      type: "text",
+      name: "id",
+      label: t("Auth.Users.Id"),
+    },
+    {
+      type: "custom",
+      name: "name",
+      label: t("Auth.Users.Name"),
+      render: (row: any) => row.staff?.fullName || row.beneficiary?.fullName,
+    },
+    {
+      type: "phoneNumber",
+      name: "username",
+      label: t("Global.Labels.PhoneNumber"),
+    },
+    {
+      type: "custom",
+      name: "role",
+      label: t("Auth.Users.Role"),
+      render: (row: any) => renderDataFromOptions(row.role, getUserRoles(t)),
+    },
+  ];
 
   const onSearch = (e: string) => {
     setCurrentSearch(e);
-    getData({ search: e });
+    getData({ page: 1, capacity: 10, search: e });
   };
+
+  const actionButtons = [
+    {
+      label: t("Auth.Users.AddUser"),
+      onClick: () => setOpenModal({ id: "", name: "", username: "", role: "" }),
+    },
+  ];
 
   return (
     <Fragment>
       <DemoLoginNote />
 
-      <PageTemplate
+      <TablePage
         title={t("Auth.Users.Title")}
-        actionButtons={[
-          {
-            label: t("Auth.Users.AddUser"),
-            onClick: () => setOpenModal({}),
-          },
-        ]}
-        onGetData={(values) => console.log(values)}
+        actionButtons={actionButtons}
+        columns={columns}
         onSearch={onSearch}
         searchPlaceholder={t("Auth.Users.SearchBarPlaceholder")}
-      >
-        <Fragment>
-          <div className="row g-5 justify-content-center">
-            {researchers?.length ? (
-              researchers.map(
-                (
-                  {
-                    id,
-                    fullName,
-                    email,
-                    username,
-                    image,
-                    idNumber,
-                    beneficiariesCount,
-                    visitsCount,
-                  },
-                  i
-                ) => (
-                  <div className="col-12 col-md-6 col-lg-4 col-xl-3" key={i}>
-                    <div className="card rounded-4 py-4">
-                      <div
-                        className="mx-auto rounded-circle overflow-hidden"
-                        style={{ width: "150px", height: "150px" }}
-                      >
-                        <img
-                          src={
-                            image ||
-                            "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"
-                          }
-                          alt="..."
-                          className="w-100 h-100 object-fit-cover"
-                        />
-                      </div>
+        data={users}
+        paginationMeta={paginationMeta}
+        tableActions={(id?: string) => [
+          {
+            icon: faUserGear,
+            label: t("Global.Form.Labels.Edit"),
+            spread: true,
+            onClick: (id: string) =>
+              setOpenModal(
+                users?.find((u) => u.id === id) || {
+                  id: "",
+                  name: "",
+                  username: "",
+                  role: "",
+                }
+              ),
+          },
+        ]}
+        onGetData={getData}
+        onPageChange={(page, capacity) => {
+          getData({
+            page,
+            capacity,
+          });
+        }}
+      />
 
-                      <div className="card-body text-center">
-                        <h5 className="card-title">{fullName}</h5>
-
-                        <p
-                          className="card-text my-4"
-                          style={{ direction: "ltr" }}
-                        >
-                          {dataRender({
-                            type: "email",
-                            data: email,
-                            name: "email",
-                          })}
-                          <br />
-                          {dataRender({
-                            type: "phoneNumber",
-                            data: username,
-                            name: "phoneNumber",
-                          })}
-                        </p>
-
-                        <Button
-                          color="info"
-                          outline
-                          size="xs"
-                          onClick={() =>
-                            setOpenModal({
-                              id,
-                              fullName,
-                              email,
-                              username,
-                              idNumber,
-                              image,
-                            })
-                          }
-                        >
-                          <FontAwesomeIcon icon={faEdit} />{" "}
-                          {t("Global.Form.Labels.Edit")}
-                        </Button>
-                      </div>
-                    </div>
-
-                    <div className="row mt-4 gx-5">
-                      <div className="col-6 text-center">
-                        <div className="rounded-4 bg-info p-2">
-                          <h6>{t("Auth.Users.BeneficiariesCount")}</h6>
-                          <h2>{Math.floor(beneficiariesCount)}</h2>
-                        </div>
-                      </div>
-
-                      <div className="col-6 text-center">
-                        <div className="rounded-4 bg-success p-2">
-                          <h6>{t("Auth.Users.VisitsCount")}</h6>
-                          <h2>{visitsCount}</h2>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )
-              )
-            ) : (
-              <h6 className="mt-5 pt-5 text-center">
-                {t("Global.Labels.NoData")}
-              </h6>
-            )}
-          </div>
-
-          <AddUsers
-            openModal={openModal}
-            setOpenModal={setOpenModal}
-            getData={getData}
-          />
-        </Fragment>
-      </PageTemplate>
+      <AddUsers
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+        getData={getData}
+      />
     </Fragment>
   );
 };
 
-export default UserMgmtPage;
+export default UsersView;

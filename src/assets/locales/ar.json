@@ -523,6 +523,16 @@
       },
       "Title": "الإعدادات"
     },
+    "Users": {
+      "AddUser": "إضافة مستخدم",
+      "AsPassword": "ككلمة سر",
+      "EditUser": "تعديل المستخدم",
+      "Id": "الرقم المميز",
+      "Name": "الاسم",
+      "Role": "الدور",
+      "SearchBarPlaceholder": "بحث بالاسم",
+      "Title": "إدارة المستخدمين"
+    },
     "Visits": {
       "AcceptedAlready": "تم قبول موعد الزيارة بالفعل",
       "AcceptVisit": "قبول موعد الزيارة",
@@ -703,17 +713,17 @@
       "Of": "من",
       "PageNo": "رقم الصفحة",
       "PageSize": "حجم الصفحة",
-      "Roles": {
-        "admin": "مدير النظام",
-        "ceo": "مدير الجمعية",
-        "beneficiary": "مستفيد",
-        "applicant": "متقدم بطلب تسجيل",
-        "hod": "مدير الباحثين",
-        "researcher": "باحث اجتماعي",
-        "accountant": "محاسب"
-      },
       "PhoneNumber": "رقم الجوال",
       "Results": "نتائج",
+      "Roles": {
+        "accountant": "محاسب",
+        "admin": "مدير النظام",
+        "applicant": "متقدم بطلب تسجيل",
+        "beneficiary": "مستفيد",
+        "ceo": "مدير الجمعية",
+        "hod": "مدير الباحثين",
+        "researcher": "باحث اجتماعي"
+      },
       "Search": "بحث",
       "Showing": "عرض",
       "ThisWeek": "هذا الأسبوع",

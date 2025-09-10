@@ -523,6 +523,16 @@
       },
       "Title": "Settings"
     },
+    "Users": {
+      "AddUser": "AddUser",
+      "AsPassword": "AsPassword",
+      "EditUser": "EditUser",
+      "Id": "Id",
+      "Name": "Name",
+      "Role": "Role",
+      "SearchBarPlaceholder": "SearchBarPlaceholder",
+      "Title": "Users"
+    },
     "Visits": {
       "AcceptedAlready": "Accepted Already",
       "AcceptVisit": "Accept Visit",
@@ -702,18 +712,18 @@
       "NoNotifications": "No Notifications",
       "Of": "Of",
       "PageNo": "Page No",
-      "Roles": {
-        "admin": "Admin",
-        "ceo": "CEO",
-        "beneficiary": "Beneficiary",
-        "applicant": "Applicant",
-        "hod": "HOD",
-        "researcher": "Researcher",
-        "accountant": "Accountant"
-      },
       "PageSize": "Page Size",
       "PhoneNumber": "Phone Number",
       "Results": "Results",
+      "Roles": {
+        "accountant": "Accountant",
+        "admin": "Admin",
+        "applicant": "Applicant",
+        "beneficiary": "Beneficiary",
+        "ceo": "CEO",
+        "hod": "HOD",
+        "researcher": "Researcher"
+      },
       "Search": "Search",
       "Showing": "Showing",
       "ThisWeek": "This Week",

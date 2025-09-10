@@ -7,6 +7,7 @@ import Modal from "../../../components/modal";
 import { addNotification } from "../../../store/actions/notifications";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import { getUserCrudInputs } from "../../../utils/formInputs/users";
+import { User } from "../../../types/beneficiaries";
 
 const AddUsers = ({
   getData,
@@ -14,19 +15,8 @@ const AddUsers = ({
   setOpenModal,
 }: {
   getData: (t: Object) => void;
-  openModal:
-    | {
-        id?: string;
-        name?: string;
-        email?: string;
-        username?: string;
-        idNumber?: string;
-        image?: string;
-        beneficiariesCount?: number;
-        visitsCount?: number;
-      }
-    | undefined;
-  setOpenModal: (s: Object | undefined) => void;
+  openModal: User | null;
+  setOpenModal: (s: User | null) => void;
 }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -38,7 +28,7 @@ const AddUsers = ({
   return (
     <Modal
       title={label}
-      onClose={() => setOpenModal(undefined)}
+      onClose={() => setOpenModal(null)}
       isOpen={!!openModal}
     >
       <Form
@@ -64,7 +54,7 @@ const AddUsers = ({
                     })
                   );
                   getData({});
-                  setOpenModal(undefined);
+                  setOpenModal(null);
                 })
                 .catch(apiCatchGlobalHandler)
             : UserApi.create({
@@ -85,11 +75,11 @@ const AddUsers = ({
                     })
                   );
                   getData({});
-                  setOpenModal(undefined);
+                  setOpenModal(null);
                 })
                 .catch(apiCatchGlobalHandler);
         }}
-        initialValues={openModal}
+        initialValues={openModal as object}
       />
     </Modal>
   );
