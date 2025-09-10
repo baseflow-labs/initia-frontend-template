@@ -101,6 +101,11 @@ const UsersView = () => {
       label: t("Global.Labels.PhoneNumber"),
     },
     {
+      type: "email",
+      name: "email",
+      label: t("Global.Form.Label.Email"),
+    },
+    {
       type: "custom",
       name: "role",
       label: t("Auth.Users.Role"),
