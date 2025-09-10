@@ -54,7 +54,9 @@ const AuthLayout = () => {
 
   const isUnacceptedBeneficiary =
     user.role === "beneficiary" &&
-    (user.status === "Incomplete" || user.status === "Need Help");
+    (!user.status ||
+      user.status === "Incomplete" ||
+      user.status === "Need Help");
 
   const denyMembershipFormPageAccess =
     user.role === "beneficiary" &&
