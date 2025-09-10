@@ -28,9 +28,7 @@
       "SearchBarPlaceholder": "Search Bar Placeholder",
       "Sponsor": "Sponsor",
       "Statuses": {
-        "Close": "Close",
         "Closed": "Closed",
-        "Open": "Open",
         "Opened": "Opened",
         "Suspended": "Suspended",
         "Title": "Title"
@@ -656,7 +654,6 @@
       "Labels": {
         "Add": "Add",
         "AddFiles": "Add Files",
-        "AddNew": "Add New",
         "Approve": "Approve",
         "BrowserDontSupportLocation": "Browser Don't Support Location",
         "Confirm": "Confirm",
@@ -671,7 +668,6 @@
         "PleaseAllowLocation": "Please Allow Location",
         "PleaseSelect": "Please Select",
         "Previous": "Previous",
-        "Record": "Record",
         "ResetFilter": "Reset Filter",
         "Save": "Save",
         "SaveContinue": "Save Continue",
@@ -700,7 +696,6 @@
       "NoNotifications": "No Notifications",
       "Of": "Of",
       "PageNo": "Page No",
-      "UserRoleX": "{{role}}",
       "Roles": {
         "ceo": "CEO",
         "beneficiary": "Beneficiary",

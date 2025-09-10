@@ -28,9 +28,7 @@
       "SearchBarPlaceholder": "بحث باسم البرنامج",
       "Sponsor": "الجهة المانحة",
       "Statuses": {
-        "Close": "إغلاق التقديم",
         "Closed": "مغلق",
-        "Open": "فتح التقديم",
         "Opened": "مفتوح للتقديم",
         "Suspended": "متوقف مؤقتاً",
         "Title": "حالة البرنامج"
@@ -656,7 +654,6 @@
       "Labels": {
         "Add": "إضافة",
         "AddFiles": "إضافة مرفقات",
-        "AddNew": "إضافة بيانات جديدة",
         "Approve": "موافقة",
         "BrowserDontSupportLocation": "المتصفح لا يدعم تحديد الموقع, نرجو إدخاله بشكل يدوي",
         "Confirm": "تأكيد",
@@ -671,7 +668,6 @@
         "PleaseAllowLocation": "لم نتمكن من تحديد موقعك. الرجاء السماح بالوصول",
         "PleaseSelect": "نرجو الاختيار...",
         "Previous": "السابق",
-        "Record": "سجل",
         "ResetFilter": "إعادة ضبط",
         "Save": "حفظ",
         "SaveContinue": "حفظ ومتابعة",
@@ -715,7 +711,6 @@
       "Showing": "عرض",
       "ThisWeek": "هذا الأسبوع",
       "Today": "هذا اليوم",
-      "UserRoleX": "نوع المستخدم :{{role}}",
       "WrongUrl": "عذراً, العنوان المطلوب خاطئ",
       "YourOwn": "الخاص بكم"
     }

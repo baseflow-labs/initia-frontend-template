@@ -118,7 +118,6 @@ const MultipleEntriesInput: React.FC<FinalInput> = (input) => {
                             text="danger"
                             size="sm"
                             onClick={() => handleDelete(remove, i)}
-                            title={t("Global.Common.Delete") || "Delete"}
                           >
                             <FontAwesomeIcon icon={faTrash} />
                           </Button>
@@ -154,7 +153,6 @@ const MultipleEntriesInput: React.FC<FinalInput> = (input) => {
                       type="button"
                       color="success"
                       onClick={(e) => handleSaveDraftAndAdd(push, e)}
-                      title={t("Global.Form.Labels.SaveAndAdd") || "Save & Add"}
                     >
                       <FontAwesomeIcon icon={faSave} />
                     </Button>
