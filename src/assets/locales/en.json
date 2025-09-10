@@ -494,6 +494,12 @@
       "VisitsCount": "Visits Count"
     },
     "Settings": {
+      "BulkDataInsertion": {
+        "AllowedFileTypes": "Excel & JSON Files Only",
+        "BeneficiariesData": "Beneficiaries Data",
+        "DependentsData": "Dependents Data",
+        "Title": "Bulk Data Insertion"
+      },
       "FontSize": "Font Size",
       "Metadata": {
         "Title": "Metadata Settings"
