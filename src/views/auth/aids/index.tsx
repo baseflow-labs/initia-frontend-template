@@ -38,7 +38,13 @@ import ViewAidDetails from "./viewDetails";
 const AidsView = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+
   const { user } = useAppSelector((state) => state.auth);
+  const isResearcher = user.role === "researcher";
+  const isAdmin = user.role === "admin";
+  const isHod = user.role === "hod";
+  const isCeo = user.role === "ceo";
+  const isAccountant = user.role === "accountant";
 
   const [openModal, setOpenModal] = useState(false);
   const [openDetailsModal, setOpenDetailsModal] = useState<string>("");
@@ -281,111 +287,111 @@ const AidsView = () => {
         filters={filters}
         onSearch={onSearch}
         searchPlaceholder={t("Auth.Aids.SearchBarPlaceholder")}
-        actionButtons={user.role === "researcher" ? actionButtons : undefined}
-        tableActions={(id?: string) => {
-          const aid = aids.find((a) => a.id === id);
+        actionButtons={isResearcher ? actionButtons : undefined}
+        tableActions={
+          isAdmin
+            ? undefined
+            : (id?: string) => {
+                const aid = aids.find((a) => a.id === id);
 
-          const status = aid?.status?.status;
+                const status = aid?.status?.status;
 
-          const isRecommended = status === "RecommendedByResearcher";
-          const isSeconded = status === "SecondedByHod";
-          const isAllowed = status === "AllowedByCeo";
-          const isApproved = status === "ApprovedByAccountant";
+                const isRecommended = status === "RecommendedByResearcher";
+                const isSeconded = status === "SecondedByHod";
+                const isAllowed = status === "AllowedByCeo";
+                const isApproved = status === "ApprovedByAccountant";
 
-          const isGranted = status === "Granted";
-          const isPending = status === "Pending";
+                const isGranted = status === "Granted";
+                const isPending = status === "Pending";
 
-          const isResearcher = user.role === "researcher";
-          const isHod = user.role === "hod";
-          const isCeo = user.role === "ceo";
-          const isAccountant = user.role === "accountant";
+                const allowResponse =
+                  (isResearcher && isPending) ||
+                  (isHod && isRecommended) ||
+                  (isCeo && isSeconded) ||
+                  (isAccountant && isAllowed);
 
-          const allowResponse =
-            (isResearcher && isPending) ||
-            (isHod && isRecommended) ||
-            (isCeo && isSeconded) ||
-            (isAccountant && isAllowed);
+                const allowGrant = isResearcher && isApproved;
 
-          const allowGrant = isResearcher && isApproved;
+                const errorStatus = t("Auth.Aids.Statuses.CantButIfStatus", {
+                  status: isResearcher
+                    ? t("Auth.Aids.Statuses.Pending")
+                    : isHod
+                    ? t("Auth.Aids.Statuses.Recommended")
+                    : isCeo
+                    ? t("Auth.Aids.Statuses.Seconded")
+                    : isAccountant
+                    ? t("Auth.Aids.Statuses.Allowed")
+                    : "",
+                });
 
-          const errorStatus = t("Auth.Aids.Statuses.CantButIfStatus", {
-            status: isResearcher
-              ? t("Auth.Aids.Statuses.Pending")
-              : isHod
-              ? t("Auth.Aids.Statuses.Recommended")
-              : isCeo
-              ? t("Auth.Aids.Statuses.Seconded")
-              : isAccountant
-              ? t("Auth.Aids.Statuses.Allowed")
-              : "",
-          });
+                const final: actionProps[] = [
+                  {
+                    label: t("Auth.Aids.ViewAidDetails"),
+                    icon: faEye,
+                    spread: false,
+                    onClick: (data: string) => setOpenDetailsModal(data),
+                  },
+                  {
+                    label: t("Auth.Aids.Statuses.Approve"),
+                    icon: faCheck,
+                    spread: false,
+                    onClick: (data: string) =>
+                      allowResponse
+                        ? openResponseModal(data, "approve")
+                        : dispatch(
+                            addNotification({
+                              msg: t("Auth.Aids.CantApprove", {
+                                message: errorStatus,
+                              }),
+                              type: "err",
+                            })
+                          ),
+                  },
+                  {
+                    label: t("Auth.Aids.Statuses.Reject"),
+                    icon: faXmark,
+                    spread: false,
+                    onClick: (data: string) =>
+                      allowResponse
+                        ? openResponseModal(data, "reject")
+                        : dispatch(
+                            addNotification({
+                              msg: t("Auth.Aids.CantReject", {
+                                message: errorStatus,
+                              }),
+                              type: "err",
+                            })
+                          ),
+                  },
+                ];
 
-          const final: actionProps[] = [
-            {
-              label: t("Auth.Aids.ViewAidDetails"),
-              icon: faEye,
-              spread: false,
-              onClick: (data: string) => setOpenDetailsModal(data),
-            },
-            {
-              label: t("Auth.Aids.Statuses.Approve"),
-              icon: faCheck,
-              spread: false,
-              onClick: (data: string) =>
-                allowResponse
-                  ? openResponseModal(data, "approve")
-                  : dispatch(
-                      addNotification({
-                        msg: t("Auth.Aids.CantApprove", {
-                          message: errorStatus,
-                        }),
-                        type: "err",
-                      })
-                    ),
-            },
-            {
-              label: t("Auth.Aids.Statuses.Reject"),
-              icon: faXmark,
-              spread: false,
-              onClick: (data: string) =>
-                allowResponse
-                  ? openResponseModal(data, "reject")
-                  : dispatch(
-                      addNotification({
-                        msg: t("Auth.Aids.CantReject", {
-                          message: errorStatus,
-                        }),
-                        type: "err",
-                      })
-                    ),
-            },
-          ];
+                if (isResearcher) {
+                  final.push({
+                    label: t("Auth.Aids.Statuses.Grant"),
+                    icon: faHandHoldingDollar,
+                    spread: false,
+                    onClick: (data: string) =>
+                      allowGrant
+                        ? grant(data)
+                        : dispatch(
+                            addNotification({
+                              msg: isGranted
+                                ? t("Auth.Aids.CantGrantAlready")
+                                : !isApproved
+                                ? t("Auth.Aids.CantGrantNonApproved")
+                                : "",
+                              type:
+                                !isApproved && !isGranted ? "err" : undefined,
+                            })
+                          ),
+                  });
+                }
 
-          if (isResearcher) {
-            final.push({
-              label: t("Auth.Aids.Statuses.Grant"),
-              icon: faHandHoldingDollar,
-              spread: false,
-              onClick: (data: string) =>
-                allowGrant
-                  ? grant(data)
-                  : dispatch(
-                      addNotification({
-                        msg: isGranted
-                          ? t("Auth.Aids.CantGrantAlready")
-                          : !isApproved
-                          ? t("Auth.Aids.CantGrantNonApproved")
-                          : "",
-                        type: !isApproved && !isGranted ? "err" : undefined,
-                      })
-                    ),
-            });
-          }
-
-          return final;
-        }}
+                return final;
+              }
+        }
         columns={[
-          user.role === "researcher"
+          isResearcher
             ? {
                 type: "text",
                 name: "fullName",

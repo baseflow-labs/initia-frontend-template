@@ -153,7 +153,7 @@ const AuthLayout = () => {
       view: <ResearcherMgmtPage />,
       showInNav: true,
       icon: beneficiariesIcon,
-      users: ["ceo", "hod", "admin"],
+      users: ["ceo", "hod"],
     },
     {
       name: t("Auth.Beneficiaries.Profile.Title"),

@@ -703,6 +703,7 @@
       "Of": "Of",
       "PageNo": "Page No",
       "Roles": {
+        "admin": "Admin",
         "ceo": "CEO",
         "beneficiary": "Beneficiary",
         "applicant": "Applicant",

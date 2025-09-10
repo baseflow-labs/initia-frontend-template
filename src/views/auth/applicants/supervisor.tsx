@@ -23,11 +23,15 @@ import {
 } from "../../../utils/optionDataLists/beneficiaries";
 import AssignResearcher from "./assignResearcher";
 import RegisterApplicant from "./registerApplicant";
+import { useAppSelector } from "../../../store/hooks";
 
 const ApplicantsViewForSupervisor = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const { user } = useAppSelector((state) => state.auth);
+  const isAdmin = user.role === "admin";
 
   const [beneficiaries, setBeneficiaries] = useState<
     {
@@ -268,35 +272,40 @@ const ApplicantsViewForSupervisor = () => {
       <TablePage
         title={t("Auth.Beneficiaries.Applications")}
         filters={filters}
-        actionButtons={actionButtons}
+        actionButtons={isAdmin ? undefined : actionButtons}
         columns={columns}
         data={beneficiaries}
         onSearch={onSearch}
         paginationMeta={paginationMeta}
         searchPlaceholder={t("Auth.Beneficiaries.SearchBarPlaceholder")}
-        tableActions={() => [
-          {
-            icon: faUser,
-            spread: true,
-            label: t("Auth.Beneficiaries.Profile.AssignResearcher"),
-            onClick: (data: string) =>
-              setAssignResearcherModalOpen({
-                beneficiary: data,
-                staff:
-                  beneficiaries.find((b) => b.id === data)?.staff?.id || "",
-              }),
-          },
-          {
-            icon: faUser,
-            label: t("Auth.Beneficiaries.Profile.ProfileDetails"),
-            onClick: (data: string) => viewProfile(data),
-          },
-          {
-            icon: faTrash,
-            label: t("Auth.Beneficiaries.Profile.DeleteApplication"),
-            onClick: (data: string) => deleteBeneficiary(data),
-          },
-        ]}
+        tableActions={
+          isAdmin
+            ? undefined
+            : () => [
+                {
+                  icon: faUser,
+                  spread: true,
+                  label: t("Auth.Beneficiaries.Profile.AssignResearcher"),
+                  onClick: (data: string) =>
+                    setAssignResearcherModalOpen({
+                      beneficiary: data,
+                      staff:
+                        beneficiaries.find((b) => b.id === data)?.staff?.id ||
+                        "",
+                    }),
+                },
+                {
+                  icon: faUser,
+                  label: t("Auth.Beneficiaries.Profile.ProfileDetails"),
+                  onClick: (data: string) => viewProfile(data),
+                },
+                {
+                  icon: faTrash,
+                  label: t("Auth.Beneficiaries.Profile.DeleteApplication"),
+                  onClick: (data: string) => deleteBeneficiary(data),
+                },
+              ]
+        }
         onGetData={getData}
         onPageChange={(page, capacity) => {
           getData({
