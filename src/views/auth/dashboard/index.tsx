@@ -95,7 +95,7 @@ const DashboardView = () => {
               <div className="col-12 mb-5">
                 <h4>
                   {t("Auth.Dashboard.BeneficiaryInfo")}{" "}
-                  {profile.beneficiary.fullName}
+                  {profile?.beneficiary?.fullName}
                 </h4>
               </div>
 
