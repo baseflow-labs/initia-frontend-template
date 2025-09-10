@@ -68,13 +68,10 @@ const LoginView = () => {
   };
 
   const demoLogin = [
-    // {
-    //   label: t("Public.Login.Labels.LoginAsAdmin"),
-    //   credentials: {
-    //     identifier: "590000000",
-    //     password: "12345678",
-    //   },
-    // },
+    {
+      label: t("Public.Login.Labels.LoginAsAdmin"),
+      type: "admin",
+    },
     {
       label: t("Public.Login.Labels.LoginAsCeo"),
       type: "ceo",
