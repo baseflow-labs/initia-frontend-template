@@ -44,6 +44,7 @@ import DemoWarning from "./demoWarning";
 import { FilePreviewModal } from "./globalModal";
 import OffCanvasNav from "./navs/offcanvasNav";
 import Sidebar from "./navs/sidebarNav";
+import UserMgmtPage from "../../views/auth/users";
 
 const AuthLayout = () => {
   const { t, i18n } = useTranslation();
@@ -146,6 +147,14 @@ const AuthLayout = () => {
       showInNav: true,
       icon: beneficiariesIcon,
       users: ["ceo", "hod", "admin"],
+    },
+    {
+      name: t("Auth.Users.Title"),
+      route: "/user",
+      view: <UserMgmtPage />,
+      showInNav: true,
+      icon: beneficiariesIcon,
+      users: ["admin"],
     },
     {
       name: t("Auth.Researchers.Title"),
