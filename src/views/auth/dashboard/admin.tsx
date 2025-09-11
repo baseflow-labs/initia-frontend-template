@@ -15,16 +15,20 @@ const DashboardAdminView = () => {
         <div className="text-info text-center py-5">
           <h1 className="mb-4">{t("Auth.Dashboard.Welcome")}</h1>
 
-          <img
-            src={
-              logo
-                ? (process.env.REACT_APP_STORAGE_DIRECTORY_URL ||
-                    "https://pdt-bucket.s3.us-east-1.amazonaws.com") + logo
-                : profilePhotoPlaceholder
-            }
-            alt="logo"
-            className="my-5 w-100"
-          />
+          <div className="row justify-content-center">
+            <div className="col-md-4">
+              <img
+                src={
+                  logo
+                    ? (process.env.REACT_APP_STORAGE_DIRECTORY_URL ||
+                        "https://pdt-bucket.s3.us-east-1.amazonaws.com") + logo
+                    : profilePhotoPlaceholder
+                }
+                alt="logo"
+                className="my-5 w-100"
+              />
+            </div>
+          </div>
 
           <h4 className="display-4 mt-5 text-success">{name}</h4>
         </div>

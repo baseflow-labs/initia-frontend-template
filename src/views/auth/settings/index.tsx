@@ -46,6 +46,21 @@ const SettingsPage = () => {
       .catch(apiCatchGlobalHandler);
   };
 
+  const onBulkDataInsertionSubmit = (values = {}) => {
+    MetadataApi.bulkDataInsert(values)
+      .then(() => {
+        dispatch(
+          addNotification({
+            msg: t("Global.Form.SuccessMsg", {
+              action: t("Global.Form.Labels.Update"),
+              data: t("Auth.Settings.Title"),
+            }),
+          })
+        );
+      })
+      .catch(apiCatchGlobalHandler);
+  };
+
   const onPasswordResetSubmit = (values = {}) => {
     process.env.REACT_APP_ENVIRONMENT === "staging"
       ? dispatch(
@@ -79,7 +94,6 @@ const SettingsPage = () => {
   useLayoutEffect(() => {
     MetadataApi.get()
       .then((res: any) => {
-        console.log({ res });
         setFormMetadata(res.payload);
       })
       .catch(apiCatchGlobalHandler);
@@ -122,7 +136,7 @@ const SettingsPage = () => {
           customValidate={validatePasswords}
         />
 
-        {(user.role === "ceo" || user.role === "admin") && (
+        {user.role === "admin" && (
           <Fragment>
             <h5 className="text-info my-5">
               {t("Auth.Settings.Metadata.Title")}
@@ -137,6 +151,45 @@ const SettingsPage = () => {
               submitText={t("Global.Form.Labels.Save")}
               onFormSubmit={(values) => {
                 onMetadataSubmit(values);
+              }}
+            />
+
+            <h5 className="text-info my-5">
+              {t("Auth.Settings.BulkDataInsertion.Title")}
+            </h5>
+
+            <Form
+              inputs={() => [
+                {
+                  type: "file",
+                  fileSizeLimit: 5,
+                  maxFiles: 1,
+                  name: "beneficiariesData",
+                  accept: ".xlsx,.xls,.json",
+                  labelNote: t(
+                    "Auth.Settings.BulkDataInsertion.AllowedFileTypes"
+                  ),
+                  label: t("Auth.Settings.BulkDataInsertion.BeneficiariesData"),
+                  halfCol: true,
+                  required: false,
+                },
+                {
+                  type: "file",
+                  fileSizeLimit: 5,
+                  accept: ".xlsx,.xls,.json",
+                  maxFiles: 1,
+                  name: "dependentsData",
+                  labelNote: t(
+                    "Auth.Settings.BulkDataInsertion.AllowedFileTypes"
+                  ),
+                  label: t("Auth.Settings.BulkDataInsertion.DependentsData"),
+                  halfCol: true,
+                  required: false,
+                },
+              ]}
+              submitText={t("Global.Form.Labels.Save")}
+              onFormSubmit={(values) => {
+                onBulkDataInsertionSubmit(values);
               }}
             />
           </Fragment>

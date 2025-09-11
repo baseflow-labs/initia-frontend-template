@@ -22,10 +22,14 @@ import {
 import AssignResearcher from "../applicants/assignResearcher";
 import CancelMembership from "./cancelMembership";
 import { downloadNationalReport } from "./excelExport";
+import { useAppSelector } from "../../../store/hooks";
 
 const BeneficiariesViewForSupervisor = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+
+  const { user } = useAppSelector((state) => state.auth);
+  const isAdmin = user.role === "admin";
 
   const [cancelModalOpen, setCancelModalOpen] = useState<string | null>(null);
   const [beneficiaries, setBeneficiaries] = useState<
@@ -213,34 +217,39 @@ const BeneficiariesViewForSupervisor = () => {
       <TablePage
         title={t("Auth.Beneficiaries.Title")}
         filters={filters}
-        actionButtons={actionButtons}
+        actionButtons={isAdmin ? undefined : actionButtons}
         columns={columns}
         onSearch={onSearch}
         searchPlaceholder={t("Auth.Beneficiaries.SearchBarPlaceholder")}
         data={beneficiaries}
         paginationMeta={paginationMeta}
-        tableActions={(id?: string) => [
-          {
-            icon: faUser,
-            label: t("Auth.Beneficiaries.Profile.ProfileDetails"),
-            onClick: (data: string) => viewProfile(data),
-          },
-          {
-            icon: faUser,
-            label: t("Auth.Beneficiaries.Profile.AssignResearcher"),
-            onClick: (data: string) =>
-              setAssignResearcherModalOpen({
-                beneficiary: data,
-                staff:
-                  beneficiaries.find((b) => b.id === data)?.staff?.id || "",
-              }),
-          },
-          {
-            icon: faUserMinus,
-            label: t("Auth.Beneficiaries.Profile.CancelMembership"),
-            onClick: (data: string) => setCancelModalOpen(data),
-          },
-        ]}
+        tableActions={
+          isAdmin
+            ? undefined
+            : (id?: string) => [
+                {
+                  icon: faUser,
+                  label: t("Auth.Beneficiaries.Profile.ProfileDetails"),
+                  onClick: (data: string) => viewProfile(data),
+                },
+                {
+                  icon: faUser,
+                  label: t("Auth.Beneficiaries.Profile.AssignResearcher"),
+                  onClick: (data: string) =>
+                    setAssignResearcherModalOpen({
+                      beneficiary: data,
+                      staff:
+                        beneficiaries.find((b) => b.id === data)?.staff?.id ||
+                        "",
+                    }),
+                },
+                {
+                  icon: faUserMinus,
+                  label: t("Auth.Beneficiaries.Profile.CancelMembership"),
+                  onClick: (data: string) => setCancelModalOpen(data),
+                },
+              ]
+        }
         onGetData={getData}
         onPageChange={(page, capacity) => {
           getData({

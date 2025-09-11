@@ -28,9 +28,7 @@
       "SearchBarPlaceholder": "Search Bar Placeholder",
       "Sponsor": "Sponsor",
       "Statuses": {
-        "Close": "Close",
         "Closed": "Closed",
-        "Open": "Open",
         "Opened": "Opened",
         "Suspended": "Suspended",
         "Title": "Title"
@@ -496,6 +494,12 @@
       "VisitsCount": "Visits Count"
     },
     "Settings": {
+      "BulkDataInsertion": {
+        "AllowedFileTypes": "Excel & JSON Files Only",
+        "BeneficiariesData": "Beneficiaries Data",
+        "DependentsData": "Dependents Data",
+        "Title": "Bulk Data Insertion"
+      },
       "FontSize": "Font Size",
       "Metadata": {
         "Title": "Metadata Settings"
@@ -518,6 +522,16 @@
         "Title": "System Settings"
       },
       "Title": "Settings"
+    },
+    "Users": {
+      "AddUser": "AddUser",
+      "AsPassword": "AsPassword",
+      "EditUser": "EditUser",
+      "Id": "Id",
+      "Name": "Name",
+      "Role": "Role",
+      "SearchBarPlaceholder": "SearchBarPlaceholder",
+      "Title": "Users"
     },
     "Visits": {
       "AcceptedAlready": "Accepted Already",
@@ -656,7 +670,6 @@
       "Labels": {
         "Add": "Add",
         "AddFiles": "Add Files",
-        "AddNew": "Add New",
         "Approve": "Approve",
         "BrowserDontSupportLocation": "Browser Don't Support Location",
         "Confirm": "Confirm",
@@ -671,7 +684,6 @@
         "PleaseAllowLocation": "Please Allow Location",
         "PleaseSelect": "Please Select",
         "Previous": "Previous",
-        "Record": "Record",
         "ResetFilter": "Reset Filter",
         "Save": "Save",
         "SaveContinue": "Save Continue",
@@ -694,24 +706,26 @@
       "DemoLoginNote": "You may login using any of mobile numbers below and password of 12345678",
       "DemoWarning": "Please be aware that this is a demo version, accessible by the public. So we advise against sharing any real data like name, ID number and the like. Please note that the data will be automatically reset everyday",
       "Details": "Details",
+      "Download": "Download",
       "DownloadAsExcel": "Download As Excel",
+      "FileCantBeReviewed": "FileCantBeReviewed",
       "Logout": "Logout",
       "NoData": "No Data",
       "NoNotifications": "No Notifications",
       "Of": "Of",
       "PageNo": "Page No",
-      "UserRoleX": "{{role}}",
-      "Roles": {
-        "ceo": "CEO",
-        "beneficiary": "Beneficiary",
-        "applicant": "Applicant",
-        "hod": "HOD",
-        "researcher": "Researcher",
-        "accountant": "Accountant"
-      },
       "PageSize": "Page Size",
       "PhoneNumber": "Phone Number",
       "Results": "Results",
+      "Roles": {
+        "accountant": "Accountant",
+        "admin": "Admin",
+        "applicant": "Applicant",
+        "beneficiary": "Beneficiary",
+        "ceo": "CEO",
+        "hod": "HOD",
+        "researcher": "Researcher"
+      },
       "Search": "Search",
       "Showing": "Showing",
       "ThisWeek": "This Week",
