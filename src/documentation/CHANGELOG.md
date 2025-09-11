@@ -110,3 +110,7 @@
 
 - Merge pull request #117 from Shai-club/stg
 
+## v1.12.5 - 2025-09-11
+
+- Merge pull request #119 from Shai-club/stg
+
