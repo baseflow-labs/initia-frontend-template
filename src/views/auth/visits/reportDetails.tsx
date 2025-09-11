@@ -97,7 +97,7 @@ const VisitDetailView = () => {
       label: t("Auth.Visits.Detail.evaluation"),
     },
     {
-      type: "image",
+      type: "file",
       name: "photo",
       label: t("Auth.Visits.Report.RoomContentPhoto", {
         type: t("Auth.Visits.Report.TheDevice"),
@@ -138,7 +138,7 @@ const VisitDetailView = () => {
       label: t("Auth.Visits.Detail.evaluation"),
     },
     {
-      type: "image",
+      type: "file",
       name: "photo",
       label: t("Auth.Visits.Report.RoomContentPhoto", {
         type: t("Auth.Visits.Report.TheFurniture"),
