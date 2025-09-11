@@ -35,9 +35,9 @@ const AddUsers = ({
         inputs={() => getUserCrudInputs(t)}
         submitText={label}
         onFormSubmit={(e, resetForm) => {
-          const { id, ...formData } = e;
+          const { id, name, ...formData } = e;
           id?.length
-            ? UserApi.update(e)
+            ? UserApi.updateUser({ id, ...formData })
                 .then(() => {
                   resetForm();
                   dispatch(
@@ -54,6 +54,7 @@ const AddUsers = ({
                 .catch(apiCatchGlobalHandler)
             : UserApi.create({
                 ...formData,
+                name,
                 password: e.idNumber,
                 passwordConfirmation: e.idNumber,
                 code: "654321",
