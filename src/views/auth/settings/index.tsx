@@ -94,7 +94,6 @@ const SettingsPage = () => {
   useLayoutEffect(() => {
     MetadataApi.get()
       .then((res: any) => {
-        console.log({ res });
         setFormMetadata(res.payload);
       })
       .catch(apiCatchGlobalHandler);
