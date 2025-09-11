@@ -28,6 +28,7 @@ import {
   getRoomContentTypes,
   getRoomTypes,
 } from "../../../utils/optionDataLists/visitReports";
+import FileInput from "./fileInput";
 
 const getInitialContent = () => ({
   content: "",
@@ -240,17 +241,20 @@ const VisitReportsView = () => {
                         required
                       />
 
-                      <DefaultInput
+                      <FileInput
                         name={`photo-${i}`}
                         type="file"
                         multiple
                         required
+                        className="mb-4"
                         onChange={(e) =>
                           updateContentAtIndex(i, {
-                            photo: e.target.files,
+                            photo: (e.target as HTMLInputElement).files,
                           })
                         }
-                        className="mb-4"
+                        onUploaded={(uploadedList) =>
+                          updateContentAtIndex(i, { photo: uploadedList })
+                        }
                       />
                     </div>
 

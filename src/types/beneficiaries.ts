@@ -34,7 +34,8 @@ export interface ContactsBank {
 export interface User {
   id: string;
   username: string;
-  email: string;
+  email?: string;
+  name?: string;
   role: string;
 }
 

@@ -10,4 +10,8 @@ const update = async (data: object) => {
   return await api.put(mainPath, data);
 };
 
-export { get, update };
+const bulkDataInsert = async (data: object) => {
+  return await api.post("/onBoarding", data);
+};
+
+export { get, update, bulkDataInsert };

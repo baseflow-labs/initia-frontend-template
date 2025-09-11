@@ -44,6 +44,7 @@ import DemoWarning from "./demoWarning";
 import { FilePreviewModal } from "./globalModal";
 import OffCanvasNav from "./navs/offcanvasNav";
 import Sidebar from "./navs/sidebarNav";
+import UserMgmtPage from "../../views/auth/users";
 
 const AuthLayout = () => {
   const { t, i18n } = useTranslation();
@@ -86,52 +87,46 @@ const AuthLayout = () => {
     {
       name: t("Auth.Dashboard.Title"),
       route: "/dashboard",
-      labelNote: "For Beneficiary",
       view: <DashboardView />,
       showInNav: true,
       icon: dashboardIcon,
-      users: ["beneficiary", "admin"],
+      users: ["beneficiary"],
     },
     {
       name: t("Auth.Dashboard.Title"),
       route: "/dashboard",
-      labelNote: "For Supervisor",
       view: <DashboardSupervisorView />,
       showInNav: true,
       icon: dashboardIcon,
-      users: ["ceo", "hod", "admin"],
+      users: ["ceo", "hod"],
     },
     {
       name: t("Auth.Dashboard.Title"),
       route: "/dashboard",
-      labelNote: "For Researchers",
       view: <DashboardResearcherView />,
       showInNav: true,
       icon: dashboardIcon,
-      users: ["researcher", "admin"],
+      users: ["researcher"],
     },
     {
       name: t("Auth.Dashboard.Title"),
       route: "/dashboard",
-      labelNote: "For Accountant",
       view: <DashboardAccountantView />,
       showInNav: true,
       icon: dashboardIcon,
-      users: ["accountant", "admin"],
+      users: ["accountant"],
     },
     {
       name: t("Auth.Beneficiaries.Applications"),
       route: "/applicant",
-      labelNote: "For Researchers",
       view: <ApplicantsView />,
       showInNav: true,
       icon: beneficiariesIcon,
-      users: ["researcher", "admin"],
+      users: ["researcher"],
     },
     {
       name: t("Auth.Beneficiaries.Applications"),
       route: "/applicant",
-      labelNote: "For Supervisor",
       view: <ApplicantsViewForSupervisor />,
       showInNav: true,
       icon: beneficiariesIcon,
@@ -140,20 +135,26 @@ const AuthLayout = () => {
     {
       name: t("Auth.Beneficiaries.Title"),
       route: "/beneficiary",
-      labelNote: "For Researchers",
       view: <BeneficiariesView />,
       showInNav: true,
       icon: beneficiariesIcon,
-      users: ["researcher", "admin"],
+      users: ["researcher"],
     },
     {
       name: t("Auth.Beneficiaries.Title"),
       route: "/beneficiary",
-      labelNote: "For Supervisor",
       view: <BeneficiariesViewForSupervisor />,
       showInNav: true,
       icon: beneficiariesIcon,
       users: ["ceo", "hod", "admin"],
+    },
+    {
+      name: t("Auth.Users.Title"),
+      route: "/user",
+      view: <UserMgmtPage />,
+      showInNav: true,
+      icon: beneficiariesIcon,
+      users: ["admin"],
     },
     {
       name: t("Auth.Researchers.Title"),
@@ -161,14 +162,14 @@ const AuthLayout = () => {
       view: <ResearcherMgmtPage />,
       showInNav: true,
       icon: beneficiariesIcon,
-      users: ["ceo", "hod", "admin"],
+      users: ["ceo", "hod"],
     },
     {
       name: t("Auth.Beneficiaries.Profile.Title"),
       route: "/review",
       view: <BeneficiaryFormReview />,
       icon: beneficiariesIcon,
-      users: ["researcher", "admin"],
+      users: ["researcher"],
     },
     {
       name: t("Auth.Beneficiaries.Profile.Title"),
@@ -199,7 +200,7 @@ const AuthLayout = () => {
       view: <VisitReportsView />,
       showInNav: false,
       icon: visitsIcon,
-      users: ["researcher", "admin"],
+      users: ["researcher"],
     },
     {
       name: t("Auth.Visits.Detail.title"),
@@ -268,17 +269,9 @@ const AuthLayout = () => {
 
   const showSidebar = !location.pathname.includes("apply");
 
-  const filteredRoutes = authRoutes
-    .filter(({ users, exclude }) => users.includes(user.role) && !exclude)
-    .map((r) =>
-      user.role === "admin"
-        ? {
-            ...r,
-            route:
-              r.route + (r.labelNote ? r.labelNote?.replaceAll(" ", "") : ""),
-          }
-        : r
-    );
+  const filteredRoutes = authRoutes.filter(
+    ({ users, exclude }) => users.includes(user.role) && !exclude
+  );
 
   const filteredFixedRoutes = filteredRoutes.filter(({ fixed }) => fixed);
 
