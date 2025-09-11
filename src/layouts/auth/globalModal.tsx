@@ -48,19 +48,7 @@ export const FilePreviewModal = () => {
 
   const onClose = () => setShowModal(false);
 
-  const isImage = (file: string) => {
-    if (file) {
-      const lowerFile = file.toLowerCase();
-
-      return (
-        lowerFile.includes(".jpg") ||
-        lowerFile.includes(".jpeg") ||
-        lowerFile.includes(".png")
-      );
-    }
-
-    return false;
-  };
+  const isImage = (file: string) => /\.(jpe?g|png)$/i.test(file);
 
   return (
     <Modal
