@@ -27,7 +27,10 @@ export const getRequestAidInputs = (
         .filter(
           ({ aidPrograms = [] }) =>
             aidPrograms?.filter(
-              (p: { status: string }) => p.status === "Opened"
+              (p: { status: string; approved?: boolean }) =>
+                (p.status === "Opened" ||
+                  p.status === "Opened To Grant Without Regular Process") &&
+                p.approved
             )?.length
         )
         .map(({ id = "", name = "" }) => ({
@@ -106,7 +109,13 @@ export const getGrantAidInputs = (
     {
       type: "select",
       options: selectOptions?.aidPrograms
-        .filter((a) => a.aidCategory.id === formik.values.aidCategory)
+        .filter(
+          (a) =>
+            a.aidCategory.id === formik.values.aidCategory &&
+            (a.status === "Opened" ||
+              a.status === "Opened To Grant Without Regular Process") &&
+            a.approved
+        )
         .map(({ id, name, credit, aidCategory }) => ({
           label:
             name +
@@ -222,7 +231,7 @@ export const geAddAidProgramInputs = (
       type: "select",
       name: "status",
       defaultValue: "Opened",
-      options: getAidProgramStatuses(t),
+      options: getAidProgramStatuses(t).filter((t) => t.value !== "Pending"),
       label: t("Auth.AidPrograms.Statuses.Title"),
       required: true,
     },

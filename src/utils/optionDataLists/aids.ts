@@ -69,8 +69,16 @@ export const getAidStatuses = (t: Function) => [
 
 export const getAidProgramStatuses = (t: Function) => [
   {
+    value: "Pending",
+    label: t("Auth.Aids.Statuses.Pending"),
+  },
+  {
     value: "Opened",
     label: t("Auth.AidPrograms.Statuses.Opened"),
+  },
+  {
+    value: "Opened To Grant Without Regular Process",
+    label: t("Auth.AidPrograms.Statuses.OpenedToGrantWithoutRegularProcess"),
   },
   {
     value: "Closed",

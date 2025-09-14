@@ -157,15 +157,18 @@ const AidProgramsView = () => {
     },
     {
       type: "custom",
-      render: (row: any) => (
-        <Fragment>
-          <FontAwesomeIcon
-            icon={faCircle}
-            className={`text-${statusColorRender(row.status)}`}
-          />{" "}
-          {renderDataFromOptions(row.status, statuses)}
-        </Fragment>
-      ),
+      render: (row: any) => {
+        const status = row.approved ? row.status : "Pending";
+        return (
+          <Fragment>
+            <FontAwesomeIcon
+              icon={faCircle}
+              className={`text-${statusColorRender(status)}`}
+            />{" "}
+            {renderDataFromOptions(status, statuses)}
+          </Fragment>
+        );
+      },
       name: "status",
       label: t("Auth.AidPrograms.Statuses.Title"),
     },

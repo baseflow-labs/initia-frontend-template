@@ -30,6 +30,7 @@
       "Statuses": {
         "Closed": "Closed",
         "Opened": "Opened",
+        "OpenedToGrantWithoutRegularProcess": "OpenedToGrantWithoutRegularProcess",
         "Suspended": "Suspended",
         "Title": "Title"
       },
