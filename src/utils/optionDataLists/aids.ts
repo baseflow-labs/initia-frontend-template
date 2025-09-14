@@ -73,6 +73,10 @@ export const getAidProgramStatuses = (t: Function) => [
     label: t("Auth.Aids.Statuses.Pending"),
   },
   {
+    value: "Rejected",
+    label: t("Auth.MembershipRegistration.Statuses.Rejected"),
+  },
+  {
     value: "Opened",
     label: t("Auth.AidPrograms.Statuses.Opened"),
   },

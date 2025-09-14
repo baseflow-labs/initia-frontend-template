@@ -231,7 +231,9 @@ export const geAddAidProgramInputs = (
       type: "select",
       name: "status",
       defaultValue: "Opened",
-      options: getAidProgramStatuses(t).filter((t) => t.value !== "Pending"),
+      options: getAidProgramStatuses(t).filter(
+        (t) => t.value !== "Pending" && t.value !== "Rejected"
+      ),
       label: t("Auth.AidPrograms.Statuses.Title"),
       required: true,
     },
