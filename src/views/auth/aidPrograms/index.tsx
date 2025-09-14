@@ -1,4 +1,9 @@
-import { faCircle, faEdit } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCheck,
+  faCircle,
+  faEdit,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -21,10 +26,12 @@ import {
 } from "../../../utils/function";
 import { getAidProgramStatuses } from "../../../utils/optionDataLists/aids";
 import AddAidProgram from "./createAidProgram";
+import { useDispatch } from "react-redux";
+import { addNotification } from "../../../store/actions/notifications";
 
 const AidProgramsView = () => {
   const { t } = useTranslation();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const [openModal, setOpenModal] = useState(false);
   const [aidPrograms, setAidPrograms] = useState<AidProgram[]>([]);
@@ -41,6 +48,7 @@ const AidProgramsView = () => {
   const { user } = useAppSelector((state) => state.auth);
 
   const isAccountant = user.role === "accountant";
+  const isCeo = user.role === "ceo";
 
   const getData = ({
     filters = currentFilters,
@@ -196,9 +204,9 @@ const AidProgramsView = () => {
         onSearch={onSearch}
         searchPlaceholder={t("Auth.AidPrograms.SearchBarPlaceholder")}
         actionButtons={isAccountant ? actionButtons : undefined}
-        tableActions={
+        tableActions={(id?: string) =>
           isAccountant
-            ? (id?: string) => [
+            ? [
                 {
                   label: t("Global.Form.Labels.Edit"),
                   icon: faEdit,
@@ -206,7 +214,46 @@ const AidProgramsView = () => {
                   onClick: (data: string) => update(data),
                 },
               ]
-            : undefined
+            : isCeo
+            ? [
+                {
+                  label: t("Global.Form.Labels.Approve"),
+                  icon: faCheck,
+                  spread: false,
+                  onClick: (data: string) =>
+                    AidProgramApi.approve(data, { status: true })
+                      .then(() => {
+                        dispatch(
+                          addNotification({
+                            msg: t("Global.Form.SuccessMsg", {
+                              action: t("Global.Form.Labels.Approve"),
+                              data: "البرنامج",
+                            }),
+                          })
+                        );
+                      })
+                      .catch(apiCatchGlobalHandler),
+                },
+                {
+                  label: t("Global.Form.Labels.Reject"),
+                  icon: faXmark,
+                  spread: false,
+                  onClick: (data: string) =>
+                    AidProgramApi.approve(data, { status: false })
+                      .then(() => {
+                        dispatch(
+                          addNotification({
+                            msg: t("Global.Form.SuccessMsg", {
+                              action: t("Global.Form.Labels.Reject"),
+                              data: "البرنامج",
+                            }),
+                          })
+                        );
+                      })
+                      .catch(apiCatchGlobalHandler),
+                },
+              ]
+            : []
         }
         columns={columns}
         data={aidPrograms}
