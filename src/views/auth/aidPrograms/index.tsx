@@ -223,6 +223,7 @@ const AidProgramsView = () => {
                   onClick: (data: string) =>
                     AidProgramApi.approve(data, { status: true })
                       .then(() => {
+                        getData({});
                         dispatch(
                           addNotification({
                             msg: t("Global.Form.SuccessMsg", {
@@ -241,6 +242,7 @@ const AidProgramsView = () => {
                   onClick: (data: string) =>
                     AidProgramApi.approve(data, { status: false })
                       .then(() => {
+                        getData({});
                         dispatch(
                           addNotification({
                             msg: t("Global.Form.SuccessMsg", {
