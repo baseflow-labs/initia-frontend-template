@@ -255,7 +255,7 @@
         },
         "DependentsData": "بيانات التابعين",
         "Debts": "الديون",
-        "DebtMonthlyPayment": "القسط الشهري لسداد الديون",
+        "DebtMonthlyPayment": "القسط الشهري لسداد الديون الرسمية",
         "Diseases": {
           "Cancerous": "أمراض سرطانية",
           "ChestDiseases": "أمراض صدرية وتنفسية",
@@ -450,7 +450,7 @@
           "Spouse": "زوج(ة)",
           "Title": "صلة القرابة"
         },
-        "RentalCharge": "قيمة الإيجار كما في العقد",
+        "RentalCharge": "قيمة الإيجار السنوي للمنزل",
         "RentalContractPhoto": "عقد إيجار",
         "Retirement": "تقاعد",
         "Salary": "راتب",

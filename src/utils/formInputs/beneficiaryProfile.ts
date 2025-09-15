@@ -359,7 +359,7 @@ export const getIncomeQualificationDataInputs = (
     },
     {
       type: "number",
-      name: "deptMonthlyPayment",
+      name: "debtMonthlyPayment",
       label: t("Auth.MembershipRegistration.Form.DebtMonthlyPayment"),
       min: 0,
       step: 0.1,
@@ -371,7 +371,7 @@ export const getIncomeQualificationDataInputs = (
     {
       type: "file",
       fileSizeLimit: 2,
-      name: "deptMonthlyPaymentFile",
+      name: "debtMonthlyPaymentFile",
       hideFile: true,
       required: false,
       halfCol: true,
