@@ -30,6 +30,7 @@
       "Statuses": {
         "Closed": "Closed",
         "Opened": "Opened",
+        "OpenedToGrantWithoutRegularProcess": "OpenedToGrantWithoutRegularProcess",
         "Suspended": "Suspended",
         "Title": "Title"
       },
@@ -671,6 +672,7 @@
         "Add": "Add",
         "AddFiles": "Add Files",
         "Approve": "Approve",
+        "Reject": "Reject",
         "BrowserDontSupportLocation": "Browser Don't Support Location",
         "Confirm": "Confirm",
         "Edit": "Edit",

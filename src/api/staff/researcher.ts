@@ -35,6 +35,10 @@ const update = async (data: Props) => {
   return await api.patch(mainPath + "/" + data.id, data);
 };
 
+const updateUser = async (data: Props) => {
+  return await api.patch("/user/" + data.id, data);
+};
+
 const remove = async (id: string) => {
   return await api.delete(mainPath + "?id=" + id);
 };
@@ -43,4 +47,13 @@ const removeByUser = async (id: string) => {
   return await api.delete(mainPath + "/" + id);
 };
 
-export { getAll, create, getById, getByUserId, update, remove, removeByUser };
+export {
+  getAll,
+  create,
+  getById,
+  getByUserId,
+  update,
+  updateUser,
+  remove,
+  removeByUser,
+};
