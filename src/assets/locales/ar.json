@@ -638,9 +638,7 @@
   "CopyRight": {
     "AllRightsReserved": "جميع الحقوق محفوظة © {{year}}",
     "AppName": "نظام مستحق",
-    "DoneBy": "تصميم وتنفيذ",
-    "ShaiFull": "شاي للذكاء الاصطناعي",
-    "ShaiShort": "شاي"
+    "ShaiShort": "Shai"
   },
   "Global": {
     "Form": {

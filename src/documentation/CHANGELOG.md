@@ -90,3 +90,31 @@
 
 - fix build
 
+## v1.12.0 - 2025-09-07
+
+- Merge pull request #109 from Shai-club/stg
+
+## v1.12.1 - 2025-09-07
+
+- Merge pull request #111 from Shai-club/stg
+
+## v1.12.2 - 2025-09-09
+
+- Merge pull request #113 from Shai-club/stg
+
+## v1.12.3 - 2025-09-10
+
+- Merge pull request #115 from Shai-club/stg
+
+## v1.12.4 - 2025-09-10
+
+- Merge pull request #117 from Shai-club/stg
+
+## v1.12.5 - 2025-09-11
+
+- Merge pull request #119 from Shai-club/stg
+
+## v1.12.6 - 2025-09-15
+
+- Merge pull request #121 from Shai-club/stg
+
