@@ -72,6 +72,7 @@ interface Props {
   name: string;
   hasFile?: boolean;
   money?: boolean;
+  withoutWrap?: boolean;
 }
 
 export const MoneyUnit = () => (
@@ -98,8 +99,10 @@ export const dataRender = ({
   name,
   hasFile,
   money,
+  withoutWrap,
 }: Props) => {
-  const wrap = (content: React.ReactNode) => withMoneyUnit(content, money);
+  const wrap = (content: React.ReactNode) =>
+    withoutWrap ? content : withMoneyUnit(content, money);
 
   if (!data && money) {
     return wrap(0);

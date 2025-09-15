@@ -69,7 +69,7 @@
       "RequiredValue": "القيمة المطلوبة",
       "SearchBarPlaceholder": "بحث باسم المستفيد",
       "Statuses": {
-        "Allowed": "بانتظار مراجعة المحاسب",
+        "Allowed": "بانتظار مراجعة المدير المالي",
         "Approve": "قبول طلب المعونة",
         "Approved": "بانتظار التسليم",
         "CantButIfStatus": "غير التي ما زالت '{{status}}'",
@@ -254,6 +254,8 @@
           "SaveDependent": "حفظ بيانات التابع"
         },
         "DependentsData": "بيانات التابعين",
+        "Debts": "الديون",
+        "DebtMonthlyPayment": "القسط الشهري لسداد الديون الرسمية",
         "Diseases": {
           "Cancerous": "أمراض سرطانية",
           "ChestDiseases": "أمراض صدرية وتنفسية",
@@ -448,7 +450,7 @@
           "Spouse": "زوج(ة)",
           "Title": "صلة القرابة"
         },
-        "RentalCharge": "قيمة الإيجار كما في العقد",
+        "RentalCharge": "قيمة الإيجار السنوي للمنزل",
         "RentalContractPhoto": "عقد إيجار",
         "Retirement": "تقاعد",
         "Salary": "راتب",
@@ -670,7 +672,6 @@
         "Add": "إضافة",
         "AddFiles": "إضافة مرفقات",
         "Approve": "موافقة",
-        "Reject": "الرفض",
         "BrowserDontSupportLocation": "المتصفح لا يدعم تحديد الموقع, نرجو إدخاله بشكل يدوي",
         "Confirm": "تأكيد",
         "Edit": "تعديل",
@@ -684,6 +685,7 @@
         "PleaseAllowLocation": "لم نتمكن من تحديد موقعك. الرجاء السماح بالوصول",
         "PleaseSelect": "نرجو الاختيار...",
         "Previous": "السابق",
+        "Reject": "الرفض",
         "ResetFilter": "إعادة ضبط",
         "Save": "حفظ",
         "SaveContinue": "حفظ ومتابعة",
@@ -718,11 +720,11 @@
       "PhoneNumber": "رقم الجوال",
       "Results": "نتائج",
       "Roles": {
-        "accountant": "محاسب",
+        "accountant": "مدير مالي",
         "admin": "مدير النظام",
         "applicant": "متقدم بطلب تسجيل",
         "beneficiary": "مستفيد",
-        "ceo": "مدير الجمعية",
+        "ceo": "مدير / رئيس",
         "hod": "مدير الباحثين",
         "researcher": "باحث اجتماعي"
       },
@@ -756,11 +758,12 @@
       "Labels": {
         "DidUForgotPassword": "هل نسيت كلمة السر؟",
         "Login": "تسجيل الدخول",
-        "LoginAsAccountant": "تسجيل الدخول كمحاسب",
+        "LoginAsAccountant": "تسجيل الدخول كمدير مالي",
         "LoginAsAdmin": "تسجيل الدخول كمدير النظام",
         "LoginAsApplicant": "تسجيل الدخول كمتقدم بطلب تسجيل ",
         "LoginAsBeneficiary": "تسجيل الدخول كمستفيد مسجل بالجمعية",
-        "LoginAsCeo": "تسجيل الدخول كمدير الجمعية",
+        "LoginAsCeo": "تسجيل الدخول كمدير تنفيذي",
+        "LoginAsCommitteeHead": "تسجيل الدخول كرئيس لجنة",
         "LoginAsHod": "تسجيل الدخول كمدير للباحثين",
         "LoginAsResearcher": "تسجيل الدخول كباحث اجتماعي",
         "Password": "كلمة السر",
