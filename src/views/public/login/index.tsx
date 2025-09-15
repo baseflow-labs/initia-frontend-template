@@ -71,10 +71,13 @@ const LoginView = () => {
     {
       label: t("Public.Login.Labels.LoginAsAdmin"),
       type: "admin",
-      fullWidth: true,
     },
     {
       label: t("Public.Login.Labels.LoginAsCeo"),
+      type: "ceo",
+    },
+    {
+      label: t("Public.Login.Labels.LoginAsCommitteeHead"),
       type: "ceo",
     },
     {
@@ -109,8 +112,8 @@ const LoginView = () => {
 
       {process.env.REACT_APP_ENVIRONMENT === "staging" ? (
         <div className="row g-2 mt-3">
-          {demoLogin.map(({ label, type, fullWidth }, i) => (
-            <div className={fullWidth ? "col-12" : "col-6"} key={i}>
+          {demoLogin.map(({ label, type }, i) => (
+            <div className={"col-6"} key={i}>
               <Button
                 className="w-100 h-100"
                 onClick={() => onDummySubmit({ type })}

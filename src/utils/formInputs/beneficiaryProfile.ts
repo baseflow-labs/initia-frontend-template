@@ -291,7 +291,7 @@ export const getIncomeQualificationDataInputs = (
   ];
 
   if (!formik || formik?.values?.occupation?.includes("Employee")) {
-    employeeInputs.forEach((i) => final.push(i));
+    employeeInputs.forEach((x) => final.push(x));
   }
 
   const common = [
@@ -348,6 +348,30 @@ export const getIncomeQualificationDataInputs = (
       type: "file",
       fileSizeLimit: 2,
       name: "retirementFile",
+      hideFile: true,
+      required: false,
+      halfCol: true,
+    },
+    {
+      type: "title",
+      name: "title",
+      label: t("Auth.MembershipRegistration.Form.Debts"),
+    },
+    {
+      type: "number",
+      name: "debtMonthlyPayment",
+      label: t("Auth.MembershipRegistration.Form.DebtMonthlyPayment"),
+      min: 0,
+      step: 0.1,
+      moneyUnit: true,
+      hasFile: true,
+      required: false,
+      halfCol: true,
+    },
+    {
+      type: "file",
+      fileSizeLimit: 2,
+      name: "debtMonthlyPaymentFile",
       hideFile: true,
       required: false,
       halfCol: true,

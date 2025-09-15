@@ -143,20 +143,27 @@ const BeneficiaryProfileView = () => {
       .forEach(({ title, data, map }) => {
         const processedData = [
           map
-            .filter(({ name = "" }) => (data as any)[name || "id"])
+            .filter(
+              ({ name = "", type }) =>
+                (data as any)[name || "id"] && type !== "file"
+            )
             .reduce(
               (
                 final = {},
                 prop = { label: "", name: "", type: "", options: [] }
-              ) => ({
-                ...final,
-                [prop.label || ""]: dataRender({
-                  data: (data as any)[prop.name || "id"],
-                  type: processTypesForExport(prop.type || ""),
-                  options: prop.options || [],
-                  name: prop.name,
-                }),
-              }),
+              ) => {
+                return {
+                  ...final,
+                  [prop.label || ""]: dataRender({
+                    row: data,
+                    data: (data as any)[prop.name || "id"],
+                    type: processTypesForExport(prop.type || ""),
+                    options: prop.options || [],
+                    name: prop.name,
+                    withoutWrap: true,
+                  }),
+                };
+              },
               {}
             ),
         ];
@@ -170,7 +177,10 @@ const BeneficiaryProfileView = () => {
     if (beneficiary?.dependents?.length) {
       const dependentsSheetData = beneficiary.dependents.map((dependent: any) =>
         getDependantDataInputs(t)
-          .filter(({ name = "" }) => (dependent as any)[name || "id"])
+          .filter(
+            ({ name = "", type }) =>
+              (dependent as any)[name || "id"] && type !== "file"
+          )
           .reduce(
             (
               final = {},
@@ -178,10 +188,12 @@ const BeneficiaryProfileView = () => {
             ) => ({
               ...final,
               [prop.label || ""]: dataRender({
+                row: dependent,
                 data: (dependent as any)[prop.name || "id"],
                 type: processTypesForExport(prop.type || ""),
                 options: prop.options || [],
                 name: prop.name,
+                withoutWrap: true,
               }),
             }),
             {}
@@ -194,6 +206,41 @@ const BeneficiaryProfileView = () => {
           29
         ),
         data: dependentsSheetData,
+      });
+    }
+
+    if (beneficiary?.housing?.length) {
+      const housingSheetData = beneficiary.housing.map((house: any) =>
+        getHousingDataInputs(t)
+          .filter(
+            ({ name = "", type }) =>
+              (house as any)[name || "id"] && type !== "file"
+          )
+          .reduce(
+            (
+              final = {},
+              prop = { label: "", name: "", type: "", options: [] }
+            ) => ({
+              ...final,
+              [prop.label || ""]: dataRender({
+                row: house,
+                data: (house as any)[prop.name || "id"],
+                type: processTypesForExport(prop.type || ""),
+                options: prop.options || [],
+                name: prop.name,
+                withoutWrap: true,
+              }),
+            }),
+            {}
+          )
+      );
+
+      sheets.push({
+        label: t("Auth.MembershipRegistration.Form.Housing.Housing").slice(
+          0,
+          29
+        ),
+        data: housingSheetData,
       });
     }
 

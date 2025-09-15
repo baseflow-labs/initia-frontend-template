@@ -254,6 +254,8 @@
           "SaveDependent": "Save Dependent"
         },
         "DependentsData": "Dependents Data",
+        "Debts": "Debts",
+        "DebtMonthlyPayment": "DebtMonthlyPayment",
         "Diseases": {
           "Cancerous": "Cancerous",
           "ChestDiseases": "Chest Diseases",
@@ -638,8 +640,6 @@
   "CopyRight": {
     "AllRightsReserved": "All Rights Reserved © {{year}}",
     "AppName": "Mustaheq",
-    "DoneBy": "Designed & Executed By",
-    "ShaiFull": "SHAI For AI",
     "ShaiShort": "SHAI"
   },
   "Global": {
@@ -672,7 +672,6 @@
         "Add": "Add",
         "AddFiles": "Add Files",
         "Approve": "Approve",
-        "Reject": "Reject",
         "BrowserDontSupportLocation": "Browser Don't Support Location",
         "Confirm": "Confirm",
         "Edit": "Edit",
@@ -686,6 +685,7 @@
         "PleaseAllowLocation": "Please Allow Location",
         "PleaseSelect": "Please Select",
         "Previous": "Previous",
+        "Reject": "Reject",
         "ResetFilter": "Reset Filter",
         "Save": "Save",
         "SaveContinue": "Save Continue",
@@ -763,6 +763,7 @@
         "LoginAsApplicant": "Login As Applicant",
         "LoginAsBeneficiary": "Login As Beneficiary",
         "LoginAsCeo": "Login As CEO",
+        "LoginAsCommitteeHead": "Login As Aids Committee Head",
         "LoginAsHod": "Login As Researchers Supervisor",
         "LoginAsResearcher": "Login As Researcher",
         "Password": "Password",
