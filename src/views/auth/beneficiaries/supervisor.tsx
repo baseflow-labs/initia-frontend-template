@@ -13,6 +13,7 @@ import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import * as StaffApi from "../../../api/staff/researcher";
 import DemoLoginNote from "../../../layouts/auth/demoLoginNote";
 import TablePage from "../../../layouts/auth/pages/tablePage";
+import { useAppSelector } from "../../../store/hooks";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import {
   getBeneficiaryCategories,
@@ -22,7 +23,6 @@ import {
 import AssignResearcher from "../applicants/assignResearcher";
 import CancelMembership from "./cancelMembership";
 import { downloadNationalReport } from "./excelExport";
-import { useAppSelector } from "../../../store/hooks";
 
 const BeneficiariesViewForSupervisor = () => {
   const { t } = useTranslation();
@@ -140,6 +140,11 @@ const BeneficiariesViewForSupervisor = () => {
       type: "text",
       name: "fileNo",
       label: t("Auth.MembershipRegistration.Form.FileNo"),
+    },
+    {
+      type: "text",
+      name: "fullName",
+      label: t("Auth.Beneficiaries.BeneficiaryName"),
     },
     {
       type: "numberText",

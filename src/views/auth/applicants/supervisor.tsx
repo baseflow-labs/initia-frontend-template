@@ -171,6 +171,11 @@ const ApplicantsViewForSupervisor = () => {
       label: t("Auth.MembershipRegistration.Form.FileNo"),
     },
     {
+      type: "text",
+      name: "fullName",
+      label: t("Auth.Beneficiaries.BeneficiaryName"),
+    },
+    {
       type: "numberText",
       name: "idNumber",
       label: t("Auth.MembershipRegistration.Form.IdNumber"),
