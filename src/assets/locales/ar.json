@@ -69,7 +69,7 @@
       "RequiredValue": "القيمة المطلوبة",
       "SearchBarPlaceholder": "بحث باسم المستفيد",
       "Statuses": {
-        "Allowed": "بانتظار مراجعة المحاسب",
+        "Allowed": "بانتظار مراجعة المدير المالي",
         "Approve": "قبول طلب المعونة",
         "Approved": "بانتظار التسليم",
         "CantButIfStatus": "غير التي ما زالت '{{status}}'",
@@ -718,7 +718,7 @@
       "PhoneNumber": "رقم الجوال",
       "Results": "نتائج",
       "Roles": {
-        "accountant": "محاسب",
+        "accountant": "مدير مالي",
         "admin": "مدير النظام",
         "applicant": "متقدم بطلب تسجيل",
         "beneficiary": "مستفيد",
@@ -756,7 +756,7 @@
       "Labels": {
         "DidUForgotPassword": "هل نسيت كلمة السر؟",
         "Login": "تسجيل الدخول",
-        "LoginAsAccountant": "تسجيل الدخول كمحاسب",
+        "LoginAsAccountant": "تسجيل الدخول كمدير مالي",
         "LoginAsAdmin": "تسجيل الدخول كمدير النظام",
         "LoginAsApplicant": "تسجيل الدخول كمتقدم بطلب تسجيل ",
         "LoginAsBeneficiary": "تسجيل الدخول كمستفيد مسجل بالجمعية",
