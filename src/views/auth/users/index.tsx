@@ -56,11 +56,13 @@ const UsersView = () => {
       .then((res: any) => {
         setUsers(
           res.payload.map(
-            ({ contactsBank = {}, housing = [{}], status = {}, ...rest }) => ({
-              ...contactsBank,
-              housing,
-              ...status,
+            ({
+              staff = { fullName: "" },
+              beneficiary = { fullName: "" },
+              ...rest
+            }) => ({
               ...rest,
+              name: staff?.fullName || beneficiary?.fullName,
             })
           )
         );
@@ -93,7 +95,6 @@ const UsersView = () => {
       type: "custom",
       name: "name",
       label: t("Auth.Users.Name"),
-      render: (row: any) => row.staff?.fullName || row.beneficiary?.fullName,
     },
     {
       type: "phoneNumber",

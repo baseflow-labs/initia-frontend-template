@@ -17,7 +17,7 @@ export const getUserCrudInputs = (t: Function) => [
     label: t("Auth.Users.Role"),
     name: "role",
     type: "select",
-    options: getUserRoles(t),
+    options: getUserRoles(t).filter((r) => r.value !== "applicant"),
     required: true,
   },
   {

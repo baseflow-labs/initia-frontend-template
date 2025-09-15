@@ -24,6 +24,7 @@ export interface AidProgram {
   credit: number;
   balance: number;
   aidCategory: AidCategory;
+  approved?: boolean;
 }
 
 export const defaultAidProgram: AidProgram = {
