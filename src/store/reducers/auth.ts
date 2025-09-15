@@ -10,7 +10,8 @@ export type AuthAction =
       type: "login";
       resp: { jwt: string; user: UserProps };
     }
-  | { type: "logout"; resp?: string };
+  | { type: "logout"; resp?: string }
+  | { type: "updateBeneficiaryStatus"; resp?: string };
 
 const initialState: AuthState = {
   token: localStorage.getItem("token") || "null",
@@ -45,6 +46,19 @@ const auth = (
       return {
         token: null,
         user: { role: "" },
+      };
+    }
+
+    case "updateBeneficiaryStatus": {
+      const currentUser = JSON.parse(localStorage.getItem("user") || "{}");
+
+      const newUser = { ...currentUser, status: "In Preview" };
+
+      localStorage.setItem("user", JSON.stringify(newUser));
+
+      return {
+        ...state,
+        user: newUser,
       };
     }
 

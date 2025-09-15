@@ -15,7 +15,9 @@ import Button from "../../../components/core/button";
 import Form from "../../../components/form";
 import WizardFormStepper from "../../../components/form/wizard/stepper";
 import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
+import { updateBeneficiaryStatus } from "../../../store/actions/auth";
 import { addNotification } from "../../../store/actions/notifications";
+import { useAppSelector } from "../../../store/hooks";
 import {
   getBasicDataInputs,
   getContactBankDataInputs,
@@ -32,6 +34,7 @@ const MembershipRegistrationView = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
+  const { user } = useAppSelector((state) => state.auth);
 
   const [currentStep, setCurrentStep] = useState(0);
 
@@ -333,6 +336,9 @@ const MembershipRegistrationView = () => {
             })
               .then(() => {
                 resetForm();
+                if (user.role === "beneficiary") {
+                  dispatch(updateBeneficiaryStatus());
+                }
                 onNextStep(e, "nationalRecord");
               })
               .catch(apiCatchGlobalHandler);
