@@ -254,6 +254,8 @@
           "SaveDependent": "حفظ بيانات التابع"
         },
         "DependentsData": "بيانات التابعين",
+        "Debts": "الديون",
+        "DebtMonthlyPayment": "القسط الشهري لسداد الديون",
         "Diseases": {
           "Cancerous": "أمراض سرطانية",
           "ChestDiseases": "أمراض صدرية وتنفسية",
@@ -670,7 +672,6 @@
         "Add": "إضافة",
         "AddFiles": "إضافة مرفقات",
         "Approve": "موافقة",
-        "Reject": "الرفض",
         "BrowserDontSupportLocation": "المتصفح لا يدعم تحديد الموقع, نرجو إدخاله بشكل يدوي",
         "Confirm": "تأكيد",
         "Edit": "تعديل",
@@ -684,6 +685,7 @@
         "PleaseAllowLocation": "لم نتمكن من تحديد موقعك. الرجاء السماح بالوصول",
         "PleaseSelect": "نرجو الاختيار...",
         "Previous": "السابق",
+        "Reject": "الرفض",
         "ResetFilter": "إعادة ضبط",
         "Save": "حفظ",
         "SaveContinue": "حفظ ومتابعة",
