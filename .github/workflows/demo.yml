@@ -1,5 +1,5 @@
 name: 🚀 Deploy and Debug Demo Server
-run-name: 🚀 Demo Deploy - ${{ github.actor }} on ${{ github.ref_name }}
+run-name: 🚀 Demo Deployment - ${{ github.actor }} on ${{ github.ref_name }}
 
 concurrency:
   group: demo-${{ github.ref }}
@@ -13,8 +13,8 @@ on:
     branches:
       - prod
   workflow_dispatch:
-  
-jobs:  
+
+jobs:
   deployment:
     name: Demo Deployment
     runs-on: ubuntu-latest
