@@ -95,10 +95,6 @@ const ApproveAid = ({ openModal, setOpenModal, onGetData }: Props) => {
     >
       <h5 className="mb-4">
         <b className="fw-bold">{openModal.fileNo}</b>
-
-        <span>
-          <RenderCategory data={openModal.category} />
-        </span>
       </h5>
 
       <h5>{t("Auth.Aids.RequiredValue")}</h5>

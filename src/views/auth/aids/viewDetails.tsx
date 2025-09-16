@@ -89,7 +89,6 @@ const ViewAidDetails = ({ openModal, setOpenModal }: Props) => {
                 ? data.beneficiary?.fullName
                 : data.beneficiary?.fileNo}
             </b>{" "}
-            <RenderCategory data={data.beneficiary?.category} />
           </h5>
 
           <h5>

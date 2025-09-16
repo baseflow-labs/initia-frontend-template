@@ -374,6 +374,30 @@ export const getIncomeQualificationDataInputs = (
   return final;
 };
 
+export const getCategoryInputs = (
+  t: Function,
+  formik?: FormikProps<Record<string, any>>
+): InputSingleProps[] => [
+  {
+    type: "select",
+    options: getBeneficiaryCategories(t),
+    name: "name",
+    label: "Auth.Beneficiaries.Profile.CategoryXName",
+  },
+  {
+    type: "number",
+    name: "min",
+    label: "Auth.Beneficiaries.Profile.CategoryXMinimum",
+    moneyUnit: true,
+  },
+  {
+    type: "number",
+    name: "max",
+    label: "Auth.Beneficiaries.Profile.CategoryXMaximum",
+    moneyUnit: true,
+  },
+];
+
 export const getCategoryDetailsInputs = (
   t: Function,
   formik?: FormikProps<Record<string, any>>
