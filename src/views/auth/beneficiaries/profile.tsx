@@ -23,6 +23,7 @@ import { useAppSelector } from "../../../store/hooks";
 import { exportDataToMultipleSheetsExcel } from "../../../utils/filesExport";
 import {
   getBasicDataInputs,
+  getCategoryDetailsInputs,
   getContactBankDataInputs,
   getDependantDataInputs,
   getHousingDataInputs,
@@ -86,6 +87,11 @@ const BeneficiaryProfileView = () => {
       title: t("Auth.MembershipRegistration.Form.QualificationData"),
       data: beneficiary?.income,
       map: getIncomeQualificationDataInputs(t),
+    },
+    {
+      title: t("Auth.Beneficiaries.Profile.CategorizationDetails"),
+      data: beneficiary?.categoryDetails,
+      map: getCategoryDetailsInputs(t),
     },
   ];
 

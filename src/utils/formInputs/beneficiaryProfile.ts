@@ -81,14 +81,6 @@ export const getBasicDataInputs = (
       labelNote: t("Auth.MembershipRegistration.Form.IdNumberNote"),
       required: true,
     },
-    {
-      type: "select",
-      name: "category",
-      options: getBeneficiaryCategories(t),
-      label: t("Auth.MembershipRegistration.Form.Category.Title"),
-      required: true,
-      excludeInForm: true,
-    },
   ];
 
   const familyInputs = [
@@ -364,7 +356,6 @@ export const getIncomeQualificationDataInputs = (
       min: 0,
       step: 0.1,
       moneyUnit: true,
-      hasFile: true,
       required: false,
       halfCol: true,
     },
@@ -382,6 +373,43 @@ export const getIncomeQualificationDataInputs = (
 
   return final;
 };
+
+export const getCategoryDetailsInputs = (
+  t: Function,
+  formik?: FormikProps<Record<string, any>>
+): InputSingleProps[] => [
+  {
+    type: "number",
+    name: "incomeTotal",
+    label: t("Auth.Beneficiaries.Profile.GuardianTotalMonthlyIncome"),
+    moneyUnit: true,
+  },
+  {
+    type: "number",
+    name: "debtMonthlyPayment",
+    label: t("Auth.Beneficiaries.Profile.GuardianDebtMonthlyPayment"),
+    moneyUnit: true,
+  },
+  {
+    type: "number",
+    name: "totalIncomeMinusDebts",
+    label: t("Auth.Beneficiaries.Profile.GuardianTotalMonthlyIncomeMinusDebts"),
+    moneyUnit: true,
+  },
+  {
+    type: "number",
+    name: "totalMembersCount",
+    label: t("Auth.Beneficiaries.Profile.FamilyTotalMembersCount"),
+  },
+  {
+    type: "number",
+    name: "familyMemberIncomeShare",
+    label: t(
+      "Auth.Beneficiaries.Profile.FamilyMemberShareOfGuardianTotalMonthlyIncomeMinusDebts"
+    ),
+    moneyUnit: true,
+  },
+];
 
 export const getHousingDataInputs = (
   t: Function,
@@ -473,24 +501,9 @@ export const getHousingDataInputs = (
       label: t("Auth.MembershipRegistration.Form.NationalAddressDocument"),
       required: true,
       halfCol: true,
+      excludeInForm: false,
     },
   ];
-
-  const rentalInputs = [
-    {
-      type: "number",
-      name: "rentalCharge",
-      label: t("Auth.MembershipRegistration.Form.RentalCharge"),
-      min: 0,
-      step: 0.1,
-      moneyUnit: true,
-      required: true,
-    },
-  ];
-
-  if (!formik || formik.values?.homeOwnership === "Rental") {
-    rentalInputs.forEach((i) => final.push(i));
-  }
 
   const ownerInputs = [
     {
@@ -505,6 +518,95 @@ export const getHousingDataInputs = (
   if (!formik || formik.values?.homeOwnership === "Ownership") {
     ownerInputs.forEach((i) => final.push(i));
   }
+
+  const categoryDetailsData = [
+    {
+      type: "select",
+      name: "category",
+      options: getBeneficiaryCategories(t),
+      label: t("Auth.MembershipRegistration.Form.Category.Title"),
+      required: true,
+      excludeInForm: true,
+    },
+    {
+      type: "number",
+      name: "familyMemberIncomeShare",
+      label: t(
+        "Auth.Beneficiaries.Profile.FamilyMemberShareOfGuardianTotalMonthlyIncomeMinusDebts"
+      ),
+      moneyUnit: true,
+      required: false,
+      excludeInForm: true,
+    },
+    {
+      type: "number",
+      name: "houseDependentsCount",
+      label: t("Auth.Beneficiaries.Profile.HouseDependentsCount"),
+      required: false,
+      excludeInForm: true,
+    },
+    {
+      type: "number",
+      name: "houseIncomeShareOfFamily",
+      label: t("Auth.Beneficiaries.Profile.HouseMonthlyIncomeShareOfFamily"),
+      moneyUnit: true,
+      required: false,
+      excludeInForm: true,
+    },
+    {
+      type: "number",
+      name: "dependentsIncomeContribution",
+      label: t(
+        "Auth.Beneficiaries.Profile.DependentsMonthlyIncomeContribution"
+      ),
+      moneyUnit: true,
+      required: false,
+      excludeInForm: true,
+    },
+    {
+      type: "number",
+      name: "totalHouseIncome",
+      label: t("Auth.Beneficiaries.Profile.TotalHouseMonthlyIncome"),
+      moneyUnit: true,
+      required: false,
+      excludeInForm: true,
+    },
+    {
+      type: "number",
+      name: "rentalCharge",
+      label: t("Auth.MembershipRegistration.Form.RentalCharge"),
+      min: 0,
+      step: 0.1,
+      moneyUnit: true,
+      required: true,
+    },
+    {
+      type: "number",
+      name: "rentalMonthlyCharge",
+      label: t("Auth.Beneficiaries.Profile.RentalMonthlyCharge"),
+      moneyUnit: true,
+      required: false,
+      excludeInForm: true,
+    },
+    {
+      type: "number",
+      name: "totalHouseIncomeMinusRent",
+      label: t("Auth.Beneficiaries.Profile.TotalHouseIncomeMinusRent"),
+      moneyUnit: true,
+      required: false,
+      excludeInForm: true,
+    },
+    {
+      type: "number",
+      name: "perIndividualFinalIncome",
+      label: t("Auth.Beneficiaries.Profile.PerIndividualFinalIncome"),
+      moneyUnit: true,
+      required: false,
+      excludeInForm: true,
+    },
+  ];
+
+  categoryDetailsData.forEach((i: any) => final.push(i));
 
   return final;
 };
