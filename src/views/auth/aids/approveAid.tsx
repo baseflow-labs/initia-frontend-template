@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux";
 import * as AidCategoryApi from "../../../api/aids/aidCategories";
 import * as AidApi from "../../../api/aids/aids";
 import { AidUnit } from "../../../components/card/programCards";
-import RenderCategory from "../../../components/category";
 import Button from "../../../components/core/button";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
