@@ -6,9 +6,9 @@ import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import { addNotification } from "../../../store/actions/notifications";
+import { useAppSelector } from "../../../store/hooks";
 import { getApplicantsRegistrationInputs } from "../../../utils/formInputs/beneficiaries";
 import { apiCatchGlobalHandler } from "../../../utils/function";
-import { useAppSelector } from "../../../store/hooks";
 
 const RegisterApplicant = ({
   openModal,
@@ -41,7 +41,7 @@ const RegisterApplicant = ({
             .then((res: any) => {
               if (user.role === "researcher") {
                 BeneficiaryApi.assignResearcher({
-                  beneficiary: res.payload.id,
+                  beneficiary: res.payload.profile.id,
                   staffUser: user.id,
                 })
                   .then(() => {
