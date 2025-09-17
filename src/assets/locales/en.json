@@ -516,7 +516,7 @@
     },
     "Settings": {
       "BulkDataInsertion": {
-        "AllowedFileTypes": "Excel & JSON Files Only",
+        "AllowedFileTypes": "'Rafed' Exported Excel Files Only",
         "BeneficiariesData": "Beneficiaries Data",
         "DependentsData": "Dependents Data",
         "Title": "Bulk Data Insertion"

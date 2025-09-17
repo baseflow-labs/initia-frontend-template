@@ -516,7 +516,7 @@
     },
     "Settings": {
       "BulkDataInsertion": {
-        "AllowedFileTypes": "يمكن تحميل ملفات اكسل أو JSON حصراً",
+        "AllowedFileTypes": "يمكن تحميل ملفات اكسل المصدرة من نظام 'رافد' حصراً",
         "BeneficiariesData": "بيانات المستفيدين",
         "DependentsData": "بيانات التابعين",
         "Title": "إدخال البيانات القديمة للجمعية"

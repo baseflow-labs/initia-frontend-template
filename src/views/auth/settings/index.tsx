@@ -164,27 +164,25 @@ const SettingsPage = () => {
                   type: "file",
                   fileSizeLimit: 5,
                   maxFiles: 1,
-                  name: "beneficiariesData",
-                  accept: ".xlsx,.xls,.json",
+                  name: "beneficiariesFile",
+                  accept: ".xlsx,.csv",
                   labelNote: t(
                     "Auth.Settings.BulkDataInsertion.AllowedFileTypes"
                   ),
                   label: t("Auth.Settings.BulkDataInsertion.BeneficiariesData"),
-                  halfCol: true,
-                  required: false,
+                  required: true,
                 },
                 {
                   type: "file",
                   fileSizeLimit: 5,
-                  accept: ".xlsx,.xls,.json",
+                  accept: ".xlsx,.csv",
                   maxFiles: 1,
-                  name: "dependentsData",
+                  name: "dependentsFile",
                   labelNote: t(
                     "Auth.Settings.BulkDataInsertion.AllowedFileTypes"
                   ),
                   label: t("Auth.Settings.BulkDataInsertion.DependentsData"),
-                  halfCol: true,
-                  required: false,
+                  required: true,
                 },
               ]}
               submitText={t("Global.Form.Labels.Save")}
