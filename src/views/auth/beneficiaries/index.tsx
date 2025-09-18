@@ -1,4 +1,3 @@
-import CancelMembership from "./cancelMembership";
 import {
   faCalendarDays,
   faFileExcel,
@@ -10,23 +9,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
+import CancelMembership from "./cancelMembership";
 
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import DemoLoginNote from "../../../layouts/auth/demoLoginNote";
 import TablePage from "../../../layouts/auth/pages/tablePage";
-import { exportDataToSingleSheetExcel } from "../../../utils/filesExport";
-import {
-  apiCatchGlobalHandler,
-  renderDataFromOptions,
-} from "../../../utils/function";
+import { useAppSelector } from "../../../store/hooks";
+import { apiCatchGlobalHandler } from "../../../utils/function";
 import {
   getBeneficiaryCategories,
-  getGenders,
   getNationalities,
   getProvinces,
 } from "../../../utils/optionDataLists/beneficiaries";
 import { downloadNationalReport } from "./excelExport";
-import { useAppSelector } from "../../../store/hooks";
 
 const BeneficiariesView = () => {
   const { t } = useTranslation();
