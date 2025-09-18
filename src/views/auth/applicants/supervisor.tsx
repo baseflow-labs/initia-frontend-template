@@ -10,6 +10,7 @@ import * as StaffApi from "../../../api/staff/researcher";
 import DemoLoginNote from "../../../layouts/auth/demoLoginNote";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
+import { useAppSelector } from "../../../store/hooks";
 import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
@@ -23,7 +24,6 @@ import {
 } from "../../../utils/optionDataLists/beneficiaries";
 import AssignResearcher from "./assignResearcher";
 import RegisterApplicant from "./registerApplicant";
-import { useAppSelector } from "../../../store/hooks";
 
 const ApplicantsViewForSupervisor = () => {
   const { t } = useTranslation();
@@ -32,6 +32,9 @@ const ApplicantsViewForSupervisor = () => {
 
   const { user } = useAppSelector((state) => state.auth);
   const isAdmin = user.role === "admin";
+  const isResearcher = user.role === "researcher";
+  const isHod = user.role === "hod";
+  const isResearcherOrHod = isResearcher || isHod;
 
   const [beneficiaries, setBeneficiaries] = useState<
     {
@@ -171,11 +174,6 @@ const ApplicantsViewForSupervisor = () => {
       label: t("Auth.MembershipRegistration.Form.FileNo"),
     },
     {
-      type: "text",
-      name: "fullName",
-      label: t("Auth.Beneficiaries.BeneficiaryName"),
-    },
-    {
       type: "numberText",
       name: "idNumber",
       label: t("Auth.MembershipRegistration.Form.IdNumber"),
@@ -278,7 +276,18 @@ const ApplicantsViewForSupervisor = () => {
         title={t("Auth.Beneficiaries.Applications")}
         filters={filters}
         actionButtons={isAdmin ? undefined : actionButtons}
-        columns={columns}
+        columns={
+          isResearcherOrHod
+            ? [
+                {
+                  type: "text",
+                  name: "fullName",
+                  label: t("Auth.Beneficiaries.BeneficiaryName"),
+                },
+                ...columns,
+              ]
+            : columns
+        }
         data={beneficiaries}
         onSearch={onSearch}
         paginationMeta={paginationMeta}

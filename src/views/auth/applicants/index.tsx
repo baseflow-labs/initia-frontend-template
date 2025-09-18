@@ -18,6 +18,7 @@ import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import DemoLoginNote from "../../../layouts/auth/demoLoginNote";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
+import { useAppSelector } from "../../../store/hooks";
 import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
@@ -50,6 +51,11 @@ const ApplicantsView = () => {
     count: 0,
     pagesCount: 1,
   });
+
+  const { user } = useAppSelector((state) => state.auth);
+  const isResearcher = user.role === "researcher";
+  const isHod = user.role === "hod";
+  const isResearcherOrHod = isResearcher || isHod;
 
   const getData = ({
     filters = currentFilters,
@@ -153,11 +159,6 @@ const ApplicantsView = () => {
       type: "text",
       name: "fileNo",
       label: t("Auth.MembershipRegistration.Form.FileNo"),
-    },
-    {
-      type: "text",
-      name: "fullName",
-      label: t("Auth.Beneficiaries.BeneficiaryName"),
     },
     {
       type: "numberText",
@@ -267,7 +268,18 @@ const ApplicantsView = () => {
         onSearch={onSearch}
         searchPlaceholder={t("Auth.Beneficiaries.SearchBarPlaceholder")}
         actionButtons={actionButtons}
-        columns={columns}
+        columns={
+          isResearcherOrHod
+            ? [
+                {
+                  type: "text",
+                  name: "fullName",
+                  label: t("Auth.Beneficiaries.BeneficiaryName"),
+                },
+                ...columns,
+              ]
+            : columns
+        }
         data={beneficiaries}
         paginationMeta={paginationMeta}
         tableActions={(id?: string) => {
