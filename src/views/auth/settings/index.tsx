@@ -5,7 +5,8 @@ import { useDispatch } from "react-redux";
 
 import * as AuthApi from "../../../api/auth/index";
 import * as MetadataApi from "../../../api/metadata";
-import Form from "../../../components/form";
+import Form, { LabelView } from "../../../components/form";
+import DefaultInput from "../../../components/form/inputs/default";
 import BoxedPage from "../../../layouts/auth/pages/boxedPage";
 import { addNotification } from "../../../store/actions/notifications";
 import { setFontSize } from "../../../store/actions/settings";
@@ -23,6 +24,7 @@ const SettingsPage = () => {
   const dispatch = useDispatch();
   const { fontSize } = useAppSelector((state) => state.settings);
   const { user } = useAppSelector((state) => state.auth);
+  const { loading } = useAppSelector((state) => state.loading);
   const [formMetadata, setFormMetadata] = useState({});
 
   const onMetadataSubmit = (values = {}) => {
@@ -42,21 +44,6 @@ const SettingsPage = () => {
         );
 
         window.location.reload();
-      })
-      .catch(apiCatchGlobalHandler);
-  };
-
-  const onBulkDataInsertionSubmit = (values = {}) => {
-    MetadataApi.bulkDataInsert(values)
-      .then(() => {
-        dispatch(
-          addNotification({
-            msg: t("Global.Form.SuccessMsg", {
-              action: t("Global.Form.Labels.Update"),
-              data: t("Auth.Settings.Title"),
-            }),
-          })
-        );
       })
       .catch(apiCatchGlobalHandler);
   };
@@ -158,38 +145,77 @@ const SettingsPage = () => {
               {t("Auth.Settings.BulkDataInsertion.Title")}
             </h5>
 
-            <Form
-              inputs={() => [
-                {
-                  type: "file",
-                  fileSizeLimit: 5,
-                  maxFiles: 1,
-                  name: "beneficiariesFile",
-                  accept: ".xlsx,.csv",
-                  labelNote: t(
-                    "Auth.Settings.BulkDataInsertion.AllowedFileTypes"
-                  ),
-                  label: t("Auth.Settings.BulkDataInsertion.BeneficiariesData"),
-                  required: true,
-                },
-                {
-                  type: "file",
-                  fileSizeLimit: 5,
-                  accept: ".xlsx,.csv",
-                  maxFiles: 1,
-                  name: "dependentsFile",
-                  labelNote: t(
-                    "Auth.Settings.BulkDataInsertion.AllowedFileTypes"
-                  ),
-                  label: t("Auth.Settings.BulkDataInsertion.DependentsData"),
-                  required: true,
-                },
-              ]}
-              submitText={t("Global.Form.Labels.Save")}
-              onFormSubmit={(values) => {
-                onBulkDataInsertionSubmit(values);
-              }}
-            />
+            <div>
+              <LabelView
+                labelNote={t(
+                  "Auth.Settings.BulkDataInsertion.AllowedFileTypes"
+                )}
+                label={t("Auth.Settings.BulkDataInsertion.BeneficiariesData")}
+                required
+              />
+
+              <DefaultInput
+                name="beneficiariesFile"
+                type="file"
+                className="form-control"
+                accept=".xlsx,.csv"
+                disabled={loading.length > 0}
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file)
+                    MetadataApi.bulkBeneficiariesDataInsert(file)
+                      .then(() => {
+                        dispatch(
+                          addNotification({
+                            msg: t("Global.Form.SuccessMsg", {
+                              action: t("Global.Form.Labels.Upload"),
+                              data: t(
+                                "Auth.Settings.BulkDataInsertion.BeneficiariesData"
+                              ),
+                            }),
+                          })
+                        );
+                      })
+                      .catch(apiCatchGlobalHandler);
+                }}
+              />
+            </div>
+
+            <div className="mt-5">
+              <LabelView
+                labelNote={t(
+                  "Auth.Settings.BulkDataInsertion.AllowedFileTypes"
+                )}
+                label={t("Auth.Settings.BulkDataInsertion.DependentsData")}
+                required
+              />
+
+              <DefaultInput
+                name="dependentsFile"
+                type="file"
+                className="form-control"
+                disabled={loading.length > 0}
+                accept=".xlsx,.csv"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file)
+                    MetadataApi.bulkDependentsDataInsert(file)
+                      .then(() => {
+                        dispatch(
+                          addNotification({
+                            msg: t("Global.Form.SuccessMsg", {
+                              action: t("Global.Form.Labels.Upload"),
+                              data: t(
+                                "Auth.Settings.BulkDataInsertion.DependentsData"
+                              ),
+                            }),
+                          })
+                        );
+                      })
+                      .catch(apiCatchGlobalHandler);
+                }}
+              />
+            </div>
           </Fragment>
         )}
 
