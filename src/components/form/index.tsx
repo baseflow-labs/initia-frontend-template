@@ -96,7 +96,11 @@ interface Props extends React.FormHTMLAttributes<HTMLFormElement> {
   ) => FormikErrors<Record<string, any>>;
 }
 
-export const LabelView = ({ labelNote, label, required }: InputSingleProps) => (
+export const LabelView = ({
+  labelNote,
+  label,
+  required,
+}: Partial<InputSingleProps>) => (
   <label className={`form-label ${label ? "" : "text-white"}`}>
     <small>
       {label ? label : "."}{" "}

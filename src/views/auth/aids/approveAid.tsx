@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux";
 import * as AidCategoryApi from "../../../api/aids/aidCategories";
 import * as AidApi from "../../../api/aids/aids";
 import { AidUnit } from "../../../components/card/programCards";
-import RenderCategory from "../../../components/category";
 import Button from "../../../components/core/button";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
@@ -95,10 +94,6 @@ const ApproveAid = ({ openModal, setOpenModal, onGetData }: Props) => {
     >
       <h5 className="mb-4">
         <b className="fw-bold">{openModal.fileNo}</b>
-
-        <span>
-          <RenderCategory data={openModal.category} />
-        </span>
       </h5>
 
       <h5>{t("Auth.Aids.RequiredValue")}</h5>

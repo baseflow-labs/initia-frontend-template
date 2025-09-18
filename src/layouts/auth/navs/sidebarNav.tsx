@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
+
 import IconWrapperComp from "../../../assets/icons/wrapper";
 import LogoOnly from "../../../assets/images/brand/logo-only.png";
 import { useAppSelector } from "../../../store/hooks";
@@ -46,7 +47,7 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
           zIndex: 4,
         }}
       >
-        <div className="p-4">
+        <div className="p-4 text-center">
           <img
             src={
               collapsed
@@ -54,7 +55,7 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
                 : (process.env.REACT_APP_STORAGE_DIRECTORY_URL ||
                     "https://pdt-bucket.s3.us-east-1.amazonaws.com") + logo
             }
-            className="w-100"
+            style={{ height: "70px" }}
             alt="Logo"
           />
         </div>

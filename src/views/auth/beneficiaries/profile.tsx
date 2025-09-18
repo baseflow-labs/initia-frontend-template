@@ -13,7 +13,6 @@ import { useSearchParams } from "react-router";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import { riyalIcon } from "../../../assets/icons/icons";
 import StatisticCards from "../../../components/card/statisticCards";
-import RenderCategory from "../../../components/category";
 import Button from "../../../components/core/button";
 import { InputSingleProps } from "../../../components/form";
 import { dataRender } from "../../../components/table";
@@ -24,6 +23,7 @@ import { exportDataToMultipleSheetsExcel } from "../../../utils/filesExport";
 import {
   getBasicDataInputs,
   getCategoryDetailsInputs,
+  getCategoryInputs,
   getContactBankDataInputs,
   getDependantDataInputs,
   getHousingDataInputs,
@@ -89,6 +89,35 @@ const BeneficiaryProfileView = () => {
       map: getIncomeQualificationDataInputs(t),
     },
     {
+      title: t("Auth.Beneficiaries.Profile.CategoriesList"),
+      data: beneficiary?.categories?.reduce(
+        (final: any, current: any, idx: number) => {
+          const withIndex = Object.keys(current).reduce(
+            (acc: any, key: string) => {
+              acc[`${key}_${idx}`] = current[key];
+              return acc;
+            },
+            {}
+          );
+          return { ...final, ...withIndex };
+        },
+        {}
+      ),
+      map: beneficiary?.categories?.reduce(
+        (finalInputs: any[], _cur: any, idx: number) => {
+          const indexed = getCategoryInputs(t).map((input) => ({
+            ...input,
+            name: `${input.name}_${idx}`,
+            label: t(input.label, {
+              index: t("Global.Labels.Order." + (idx + 1)),
+            }),
+          }));
+          return [...finalInputs, ...indexed];
+        },
+        []
+      ),
+    },
+    {
       title: t("Auth.Beneficiaries.Profile.CategorizationDetails"),
       data: beneficiary?.categoryDetails,
       map: getCategoryDetailsInputs(t),
@@ -150,7 +179,7 @@ const BeneficiaryProfileView = () => {
         const processedData = [
           map
             .filter(
-              ({ name = "", type }) =>
+              ({ name = "", type = "" }) =>
                 (data as any)[name || "id"] && type !== "file"
             )
             .reduce(
@@ -273,8 +302,6 @@ const BeneficiaryProfileView = () => {
               {beneficiary?.beneficiary?.fileNo}
             </small>
           )}
-
-          <RenderCategory data={beneficiary?.beneficiary?.category} />
         </div>
 
         <div className="col-6 col-md-3">

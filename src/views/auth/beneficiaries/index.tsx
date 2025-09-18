@@ -26,6 +26,7 @@ import {
   getProvinces,
 } from "../../../utils/optionDataLists/beneficiaries";
 import { downloadNationalReport } from "./excelExport";
+import { useAppSelector } from "../../../store/hooks";
 
 const BeneficiariesView = () => {
   const { t } = useTranslation();
@@ -43,6 +44,11 @@ const BeneficiariesView = () => {
     count: 0,
     pagesCount: 1,
   });
+
+  const { user } = useAppSelector((state) => state.auth);
+  const isResearcher = user.role === "researcher";
+  const isHod = user.role === "hod";
+  const isResearcherOrHod = isResearcher || isHod;
 
   const getData = ({
     filters = currentFilters,
@@ -122,11 +128,6 @@ const BeneficiariesView = () => {
       type: "text",
       name: "fileNo",
       label: t("Auth.MembershipRegistration.Form.FileNo"),
-    },
-    {
-      type: "text",
-      name: "fullName",
-      label: t("Auth.Beneficiaries.BeneficiaryName"),
     },
     {
       type: "numberText",
@@ -209,7 +210,18 @@ const BeneficiariesView = () => {
         title={t("Auth.Beneficiaries.Title")}
         filters={filters}
         actionButtons={actionButtons}
-        columns={columns}
+        columns={
+          isResearcherOrHod
+            ? [
+                {
+                  type: "text",
+                  name: "fullName",
+                  label: t("Auth.Beneficiaries.BeneficiaryName"),
+                },
+                ...columns,
+              ]
+            : columns
+        }
         onSearch={onSearch}
         searchPlaceholder={t("Auth.Beneficiaries.SearchBarPlaceholder")}
         data={beneficiaries}

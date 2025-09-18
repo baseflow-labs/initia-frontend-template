@@ -256,6 +256,8 @@ const VisitsView = () => {
   };
 
   const isResearcher = user.role === "researcher";
+  const isHod = user.role === "hod";
+  const isResearcherOrHod = isResearcher || isHod;
 
   return (
     <Fragment>
@@ -335,7 +337,7 @@ const VisitsView = () => {
         }}
         actionButtons={isResearcher ? actionButtons : undefined}
         columns={
-          isResearcher
+          isResearcherOrHod
             ? [
                 {
                   type: "text",
