@@ -30,6 +30,9 @@ const BeneficiariesViewForSupervisor = () => {
 
   const { user } = useAppSelector((state) => state.auth);
   const isAdmin = user.role === "admin";
+  const isResearcher = user.role === "researcher";
+  const isHod = user.role === "hod";
+  const isResearcherOrHod = isResearcher || isHod;
 
   const [cancelModalOpen, setCancelModalOpen] = useState<string | null>(null);
   const [beneficiaries, setBeneficiaries] = useState<
@@ -142,11 +145,6 @@ const BeneficiariesViewForSupervisor = () => {
       label: t("Auth.MembershipRegistration.Form.FileNo"),
     },
     {
-      type: "text",
-      name: "fullName",
-      label: t("Auth.Beneficiaries.BeneficiaryName"),
-    },
-    {
       type: "numberText",
       name: "idNumber",
       label: t("Auth.MembershipRegistration.Form.IdNumber"),
@@ -223,7 +221,18 @@ const BeneficiariesViewForSupervisor = () => {
         title={t("Auth.Beneficiaries.Title")}
         filters={filters}
         actionButtons={isAdmin ? undefined : actionButtons}
-        columns={columns}
+        columns={
+          isResearcherOrHod
+            ? [
+                {
+                  type: "text",
+                  name: "fullName",
+                  label: t("Auth.Beneficiaries.BeneficiaryName"),
+                },
+                ...columns,
+              ]
+            : columns
+        }
         onSearch={onSearch}
         searchPlaceholder={t("Auth.Beneficiaries.SearchBarPlaceholder")}
         data={beneficiaries}

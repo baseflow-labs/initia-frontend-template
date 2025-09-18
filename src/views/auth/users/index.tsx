@@ -1,17 +1,16 @@
 import { faUserGear } from "@fortawesome/free-solid-svg-icons";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import AddUsers from "./addUser";
-
 import * as UserApi from "../../../api/profile/user";
 import DemoLoginNote from "../../../layouts/auth/demoLoginNote";
 import TablePage from "../../../layouts/auth/pages/tablePage";
+import { User } from "../../../types/beneficiaries";
 import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
 } from "../../../utils/function";
 import { getUserRoles } from "../../../utils/optionDataLists/users";
-import { User } from "../../../types/beneficiaries";
+import AddUsers from "./addUser";
 
 const UsersView = () => {
   const { t } = useTranslation();
@@ -86,11 +85,11 @@ const UsersView = () => {
   }, []);
 
   const columns = [
-    {
-      type: "text",
-      name: "id",
-      label: t("Auth.Users.Id"),
-    },
+    // {
+    //   type: "text",
+    //   name: "id",
+    //   label: t("Auth.Users.Id"),
+    // },
     {
       type: "custom",
       name: "name",

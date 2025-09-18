@@ -10,6 +10,7 @@ import moment from "moment";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
+
 import * as AidCategoryApi from "../../../api/aids/aidCategories";
 import * as AidProgramApi from "../../../api/aids/aidPrograms";
 import * as AidApi from "../../../api/aids/aids";
@@ -45,6 +46,7 @@ const AidsView = () => {
   const isHod = user.role === "hod";
   const isCeo = user.role === "ceo";
   const isAccountant = user.role === "accountant";
+  const isResearcherOrHod = isResearcher || isHod;
 
   const [openModal, setOpenModal] = useState(false);
   const [openDetailsModal, setOpenDetailsModal] = useState<string>("");
@@ -391,7 +393,7 @@ const AidsView = () => {
               }
         }
         columns={[
-          isResearcher
+          isResearcherOrHod
             ? {
                 type: "text",
                 name: "fullName",

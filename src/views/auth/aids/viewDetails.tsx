@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 
 import * as AidApi from "../../../api/aids/aids";
 import StatisticCards from "../../../components/card/statisticCards";
-import RenderCategory from "../../../components/category";
 import Button from "../../../components/core/button";
 import Modal from "../../../components/modal";
 import DynamicTable, { dataRender, MoneyUnit } from "../../../components/table";
@@ -89,7 +88,6 @@ const ViewAidDetails = ({ openModal, setOpenModal }: Props) => {
                 ? data.beneficiary?.fullName
                 : data.beneficiary?.fileNo}
             </b>{" "}
-            <RenderCategory data={data.beneficiary?.category} />
           </h5>
 
           <h5>

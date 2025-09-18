@@ -21,13 +21,9 @@ const CopyRightView = ({
         <small>{t("CopyRight.AppName")}</small>
       ) : (
         <a href="https://mustaheq.org" target="_blank" rel="noreferrer">
-          <img src={short ? LogoOnly : Logo} height="65" alt="Logo" />
+          <img src={short ? LogoOnly : Logo} height="45" alt="Logo" />
         </a>
       )}
-
-      <div className={oneLine ? "" : "mt-3 mb-2"}>
-        <small className="text-muted">V.{APP_VERSION}</small>
-      </div>
 
       {oneLine ? (
         ""
@@ -49,6 +45,12 @@ const CopyRightView = ({
         </div>
       ) : (
         ""
+      )}
+
+      {oneLine && (
+        <div>
+          <small className="text-muted">V.{APP_VERSION}</small>
+        </div>
       )}
     </div>
   );
