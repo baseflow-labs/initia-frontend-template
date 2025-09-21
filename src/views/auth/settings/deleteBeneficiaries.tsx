@@ -60,13 +60,13 @@ const DeleteBeneficiaries = () => {
           <Button
             onClick={() => deleteBeneficiary()}
             disabled={
-              process.env.REACT_APP_ENVIRONMENT === "stagging" ||
+              process.env.REACT_APP_ENVIRONMENT === "staging" ||
               loading.length > 0
             }
             color="danger"
             className="my-3 me-1"
           >
-            {process.env.REACT_APP_ENVIRONMENT === "stagging"
+            {process.env.REACT_APP_ENVIRONMENT === "staging"
               ? t("Global.Form.Labels.UnAvailableForDemoMode")
               : t("Global.Form.Labels.Yes")}
           </Button>
