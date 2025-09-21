@@ -125,9 +125,9 @@ const SettingsPage = () => {
 
         {user.role === "admin" && (
           <Fragment>
-            <h5 className="text-info my-5">
+            <h4 className="text-info my-5">
               {t("Auth.Settings.Metadata.Title")}
-            </h5>
+            </h4>
 
             <Form
               inputs={() => metadataSettingInputs(t)}
@@ -141,9 +141,9 @@ const SettingsPage = () => {
               }}
             />
 
-            <h5 className="text-info my-5">
+            <h4 className="text-info my-5">
               {t("Auth.Settings.BulkDataInsertion.Title")}
-            </h5>
+            </h4>
 
             <div className="text-danger lh-lg">
               <h5 className="text-justify lh-lg">
@@ -193,7 +193,7 @@ const SettingsPage = () => {
               </h6>
             </div>
 
-            <div>
+            <div className="mt-5">
               <LabelView
                 labelNote={t(
                   "Auth.Settings.BulkDataInsertion.AllowedFileTypes"

@@ -52,6 +52,7 @@ export const metadataSettingInputs = (t: Function) => {
       type: "phoneNumber",
       name: "phoneNumber",
       label: t("Auth.Settings.SocietyPhoneNumber"),
+      labelNote: t("Auth.Settings.SocietyPhoneNumberNote"),
       required: true,
     },
   ];

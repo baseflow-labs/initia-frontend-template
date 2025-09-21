@@ -548,7 +548,8 @@
       },
       "SocietyLogo": "Society Logo",
       "SocietyName": "Society Name",
-      "SocietyPhoneNumber": "Society PhoneNumber",
+      "SocietyPhoneNumber": "Society Phone Number",
+      "SocietyPhoneNumberNote": "Society Phone Number Note",
       "System": {
         "Title": "System Settings"
       },
