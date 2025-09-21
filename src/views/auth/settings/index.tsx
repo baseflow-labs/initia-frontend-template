@@ -19,6 +19,7 @@ import {
 } from "../../../utils/formInputs/settings";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import AccountDelete from "./accountDelete";
+import DeleteBeneficiaries from "./deleteBeneficiaries";
 
 const SettingsPage = () => {
   const { t } = useTranslation();
@@ -196,7 +197,9 @@ const SettingsPage = () => {
               </h6>
             </div>
 
-            <div className="my-3">{loading.length > 0 && <Spinner />}</div>
+            <div className="my-3">
+              {loading.length > 0 && <Spinner color="warning" />}
+            </div>
 
             <div>
               <LabelView
@@ -272,7 +275,7 @@ const SettingsPage = () => {
           </Fragment>
         )}
 
-        {user.role === "admin" ? "" : <AccountDelete />}
+        {user.role === "admin" ? <DeleteBeneficiaries /> : <AccountDelete />}
       </Fragment>
     </BoxedPage>
   );

@@ -36,4 +36,8 @@ const remove = async (id: string) => {
   return await api.delete(mainPath + "/" + id);
 };
 
-export { getAll, create, getById, getByUserId, remove };
+const removeAllBeneficiaries = async () => {
+  return await api.delete(mainPath + "/all-beneficiaries");
+};
+
+export { getAll, create, getById, getByUserId, remove, removeAllBeneficiaries };
