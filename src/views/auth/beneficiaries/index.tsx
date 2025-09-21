@@ -1,4 +1,3 @@
-import CancelMembership from "./cancelMembership";
 import {
   faCalendarDays,
   faFileExcel,
@@ -14,19 +13,15 @@ import { useNavigate } from "react-router";
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import DemoLoginNote from "../../../layouts/auth/demoLoginNote";
 import TablePage from "../../../layouts/auth/pages/tablePage";
-import { exportDataToSingleSheetExcel } from "../../../utils/filesExport";
-import {
-  apiCatchGlobalHandler,
-  renderDataFromOptions,
-} from "../../../utils/function";
+import { useAppSelector } from "../../../store/hooks";
+import { apiCatchGlobalHandler } from "../../../utils/function";
 import {
   getBeneficiaryCategories,
-  getGenders,
   getNationalities,
   getProvinces,
 } from "../../../utils/optionDataLists/beneficiaries";
+import CancelMembership from "./cancelMembership";
 import { downloadNationalReport } from "./excelExport";
-import { useAppSelector } from "../../../store/hooks";
 
 const BeneficiariesView = () => {
   const { t } = useTranslation();
@@ -48,7 +43,8 @@ const BeneficiariesView = () => {
   const { user } = useAppSelector((state) => state.auth);
   const isResearcher = user.role === "researcher";
   const isHod = user.role === "hod";
-  const isResearcherOrHod = isResearcher || isHod;
+  const isCeo = user.role === "ceo";
+  const isResearcherOrHodOrCeo = isResearcher || isHod || isCeo;
 
   const getData = ({
     filters = currentFilters,
@@ -211,7 +207,7 @@ const BeneficiariesView = () => {
         filters={filters}
         actionButtons={actionButtons}
         columns={
-          isResearcherOrHod
+          isResearcherOrHodOrCeo
             ? [
                 {
                   type: "text",

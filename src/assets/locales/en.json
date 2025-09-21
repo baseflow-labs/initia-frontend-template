@@ -92,6 +92,7 @@
       "BeneficiariesData": "Beneficiaries Data",
       "Beneficiary": "Beneficiary",
       "BeneficiaryName": "Beneficiary Name",
+      "DeleteAll": "Delete All",
       "DependentsCount": "Dependents Count",
       "DownloadByNationalCenterForm": "Download Data",
       "HousesCount": "Houses Count",
@@ -519,6 +520,17 @@
         "AllowedFileTypes": "'Rafed' Exported Excel Files Only",
         "BeneficiariesData": "Beneficiaries Data",
         "DependentsData": "Dependents Data",
+        "PleaseCheck": {
+          "Highlight": "Highlight",
+          "Clarification": "Clarification",
+          "DataReviewWarningContent": "Data Review Warning Content",
+          "Eg1": "Eg1",
+          "Eg2": "Eg2",
+          "Eg3": "Eg3",
+          "Eg4": "Eg4",
+          "WarningTitle": "⚠️ WarningTitle",
+          "WarningContent": "WarningContent"
+        },
         "Title": "Bulk Data Insertion"
       },
       "FontSize": "Font Size",
@@ -538,7 +550,8 @@
       },
       "SocietyLogo": "Society Logo",
       "SocietyName": "Society Name",
-      "SocietyPhoneNumber": "Society PhoneNumber",
+      "SocietyPhoneNumber": "Society Phone Number",
+      "SocietyPhoneNumberNote": "Society Phone Number Note",
       "System": {
         "Title": "System Settings"
       },

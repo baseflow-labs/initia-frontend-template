@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 
 import * as AuthApi from "../../../api/auth/index";
 import * as MetadataApi from "../../../api/metadata";
+import Spinner from "../../../components/core/spinner";
 import Form, { LabelView } from "../../../components/form";
 import DefaultInput from "../../../components/form/inputs/default";
 import BoxedPage from "../../../layouts/auth/pages/boxedPage";
@@ -18,6 +19,7 @@ import {
 } from "../../../utils/formInputs/settings";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import AccountDelete from "./accountDelete";
+import DeleteBeneficiaries from "./deleteBeneficiaries";
 
 const SettingsPage = () => {
   const { t } = useTranslation();
@@ -125,9 +127,9 @@ const SettingsPage = () => {
 
         {user.role === "admin" && (
           <Fragment>
-            <h5 className="text-info my-5">
+            <h4 className="text-info my-5">
               {t("Auth.Settings.Metadata.Title")}
-            </h5>
+            </h4>
 
             <Form
               inputs={() => metadataSettingInputs(t)}
@@ -141,9 +143,63 @@ const SettingsPage = () => {
               }}
             />
 
-            <h5 className="text-info my-5">
+            <h4 className="text-info my-5">
               {t("Auth.Settings.BulkDataInsertion.Title")}
-            </h5>
+            </h4>
+
+            <div className="text-danger lh-lg">
+              <h5 className="text-justify lh-lg">
+                <span className="fw-bold">
+                  {t("Auth.Settings.BulkDataInsertion.PleaseCheck.Highlight")}
+                </span>
+              </h5>
+
+              <h6 className="text-justify lh-lg">
+                {t("Auth.Settings.BulkDataInsertion.PleaseCheck.Clarification")}
+              </h6>
+
+              <ul className="lh-lg">
+                <li>{t("Auth.Settings.BulkDataInsertion.PleaseCheck.Eg1")}</li>
+
+                <li>{t("Auth.Settings.BulkDataInsertion.PleaseCheck.Eg2")}</li>
+
+                <li>{t("Auth.Settings.BulkDataInsertion.PleaseCheck.Eg4")}</li>
+
+                <li>{t("Auth.Settings.BulkDataInsertion.PleaseCheck.Eg3")}</li>
+              </ul>
+
+              <h5 className="text-justify lh-lg">
+                <span className="fw-bold">
+                  {t(
+                    "Auth.Settings.BulkDataInsertion.PleaseCheck.WarningTitle"
+                  )}
+                </span>
+              </h5>
+
+              <h6 className="text-justify lh-lg">
+                {t(
+                  "Auth.Settings.BulkDataInsertion.PleaseCheck.WarningContent"
+                )}
+              </h6>
+
+              <h5 className="text-justify lh-lg">
+                <span className="fw-bold">
+                  {t(
+                    "Auth.Settings.BulkDataInsertion.PleaseCheck.WarningTitle"
+                  )}
+                </span>
+              </h5>
+
+              <h6 className="text-justify lh-lg">
+                {t(
+                  "Auth.Settings.BulkDataInsertion.PleaseCheck.DataReviewWarningContent"
+                )}
+              </h6>
+            </div>
+
+            <div className="my-3 text-center">
+              {loading.length > 0 && <Spinner color="danger" />}
+            </div>
 
             <div>
               <LabelView
@@ -219,7 +275,7 @@ const SettingsPage = () => {
           </Fragment>
         )}
 
-        {user.role === "beneficiary" ? <AccountDelete /> : ""}
+        {user.role === "admin" ? <DeleteBeneficiaries /> : <AccountDelete />}
       </Fragment>
     </BoxedPage>
   );
