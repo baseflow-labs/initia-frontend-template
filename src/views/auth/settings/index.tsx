@@ -161,6 +161,8 @@ const SettingsPage = () => {
 
                 <li>{t("Auth.Settings.BulkDataInsertion.PleaseCheck.Eg2")}</li>
 
+                <li>{t("Auth.Settings.BulkDataInsertion.PleaseCheck.Eg4")}</li>
+
                 <li>{t("Auth.Settings.BulkDataInsertion.PleaseCheck.Eg3")}</li>
               </ul>
 
