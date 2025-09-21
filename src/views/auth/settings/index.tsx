@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 
 import * as AuthApi from "../../../api/auth/index";
 import * as MetadataApi from "../../../api/metadata";
+import Spinner from "../../../components/core/spinner";
 import Form, { LabelView } from "../../../components/form";
 import DefaultInput from "../../../components/form/inputs/default";
 import BoxedPage from "../../../layouts/auth/pages/boxedPage";
@@ -195,7 +196,9 @@ const SettingsPage = () => {
               </h6>
             </div>
 
-            <div className="mt-5">
+            <div className="my-3">{loading.length > 0 && <Spinner />}</div>
+
+            <div>
               <LabelView
                 labelNote={t(
                   "Auth.Settings.BulkDataInsertion.AllowedFileTypes"
