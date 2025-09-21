@@ -75,10 +75,6 @@ const remove = async (id: string) => {
   return await api.delete(mainPath + "?id=" + id);
 };
 
-const removeByUser = async (id: string) => {
-  return await api.delete(mainPath + "/" + id);
-};
-
 const downloadProfile = async (id: string, type: string) => {
   return await api.get(mainPath + "/" + id + "/" + type);
 };
@@ -104,7 +100,6 @@ export {
   assignResearcher,
   requestHelp,
   remove,
-  removeByUser,
   downloadProfile,
   reject,
   accept,

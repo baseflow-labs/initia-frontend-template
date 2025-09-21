@@ -2,7 +2,7 @@ import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
-import * as BeneficiaryApi from "../../../api/profile/beneficiary";
+import * as UserApi from "../../../api/profile/user";
 import Button from "../../../components/core/button";
 import Modal from "../../../components/modal";
 import { addNotification } from "../../../store/actions/notifications";
@@ -17,7 +17,7 @@ const AccountDelete = () => {
   const [openModal, setOpenModal] = useState(false);
 
   const deleteBeneficiary = () => {
-    BeneficiaryApi.removeByUser(user.id || "")
+    UserApi.remove(user.id || "")
       .then(() => {
         setOpenModal(false);
         dispatch(

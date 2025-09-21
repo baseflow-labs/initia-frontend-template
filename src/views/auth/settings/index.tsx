@@ -219,7 +219,7 @@ const SettingsPage = () => {
           </Fragment>
         )}
 
-        {user.role === "beneficiary" ? <AccountDelete /> : ""}
+        {user.role === "ceo" ? "" : <AccountDelete />}
       </Fragment>
     </BoxedPage>
   );
