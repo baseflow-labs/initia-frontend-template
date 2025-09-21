@@ -197,7 +197,7 @@ const SettingsPage = () => {
               </h6>
             </div>
 
-            <div className="my-3">
+            <div className="my-3 text-center">
               {loading.length > 0 && <Spinner color="danger" />}
             </div>
 
