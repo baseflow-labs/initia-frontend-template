@@ -8,6 +8,7 @@ import Modal from "../../../components/modal";
 import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
 import { apiCatchGlobalHandler } from "../../../utils/function";
+import { logout } from "../../../store/actions/auth";
 
 const AccountDelete = () => {
   const { t } = useTranslation();
@@ -28,6 +29,8 @@ const AccountDelete = () => {
             }),
           })
         );
+
+        dispatch(logout());
       })
       .catch(apiCatchGlobalHandler);
   };
