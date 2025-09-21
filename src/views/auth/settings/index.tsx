@@ -198,7 +198,7 @@ const SettingsPage = () => {
             </div>
 
             <div className="my-3">
-              {loading.length > 0 && <Spinner color="warning" />}
+              {loading.length > 0 && <Spinner color="danger" />}
             </div>
 
             <div>
