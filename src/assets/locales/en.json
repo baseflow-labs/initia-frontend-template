@@ -519,6 +519,16 @@
         "AllowedFileTypes": "'Rafed' Exported Excel Files Only",
         "BeneficiariesData": "Beneficiaries Data",
         "DependentsData": "Dependents Data",
+        "PleaseCheck": {
+          "Highlight": "Highlight",
+          "Clarification": "Clarification",
+          "DataReviewWarningContent": "Data Review Warning Content",
+          "Eg1": "Eg1",
+          "Eg2": "Eg2",
+          "Eg3": "Eg3",
+          "WarningTitle": "⚠️ WarningTitle",
+          "WarningContent": "WarningContent"
+        },
         "Title": "Bulk Data Insertion"
       },
       "FontSize": "Font Size",

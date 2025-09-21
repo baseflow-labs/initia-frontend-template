@@ -145,6 +145,54 @@ const SettingsPage = () => {
               {t("Auth.Settings.BulkDataInsertion.Title")}
             </h5>
 
+            <div className="text-danger lh-lg">
+              <h5 className="text-justify lh-lg">
+                <span className="fw-bold">
+                  {t("Auth.Settings.BulkDataInsertion.PleaseCheck.Highlight")}
+                </span>
+              </h5>
+
+              <h6 className="text-justify lh-lg">
+                {t("Auth.Settings.BulkDataInsertion.PleaseCheck.Clarification")}
+              </h6>
+
+              <ul className="lh-lg">
+                <li>{t("Auth.Settings.BulkDataInsertion.PleaseCheck.Eg1")}</li>
+
+                <li>{t("Auth.Settings.BulkDataInsertion.PleaseCheck.Eg2")}</li>
+
+                <li>{t("Auth.Settings.BulkDataInsertion.PleaseCheck.Eg3")}</li>
+              </ul>
+
+              <h5 className="text-justify lh-lg">
+                <span className="fw-bold">
+                  {t(
+                    "Auth.Settings.BulkDataInsertion.PleaseCheck.WarningTitle"
+                  )}
+                </span>
+              </h5>
+
+              <h6 className="text-justify lh-lg">
+                {t(
+                  "Auth.Settings.BulkDataInsertion.PleaseCheck.WarningContent"
+                )}
+              </h6>
+
+              <h5 className="text-justify lh-lg">
+                <span className="fw-bold">
+                  {t(
+                    "Auth.Settings.BulkDataInsertion.PleaseCheck.WarningTitle"
+                  )}
+                </span>
+              </h5>
+
+              <h6 className="text-justify lh-lg">
+                {t(
+                  "Auth.Settings.BulkDataInsertion.PleaseCheck.DataReviewWarningContent"
+                )}
+              </h6>
+            </div>
+
             <div>
               <LabelView
                 labelNote={t(
@@ -219,7 +267,7 @@ const SettingsPage = () => {
           </Fragment>
         )}
 
-        {user.role === "ceo" ? "" : <AccountDelete />}
+        {user.role === "admin" ? "" : <AccountDelete />}
       </Fragment>
     </BoxedPage>
   );
