@@ -9,7 +9,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
-import CancelMembership from "./cancelMembership";
 
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import DemoLoginNote from "../../../layouts/auth/demoLoginNote";
@@ -21,6 +20,7 @@ import {
   getNationalities,
   getProvinces,
 } from "../../../utils/optionDataLists/beneficiaries";
+import CancelMembership from "./cancelMembership";
 import { downloadNationalReport } from "./excelExport";
 
 const BeneficiariesView = () => {
@@ -43,7 +43,8 @@ const BeneficiariesView = () => {
   const { user } = useAppSelector((state) => state.auth);
   const isResearcher = user.role === "researcher";
   const isHod = user.role === "hod";
-  const isResearcherOrHod = isResearcher || isHod;
+  const isCeo = user.role === "ceo";
+  const isResearcherOrHodOrCeo = isResearcher || isHod || isCeo;
 
   const getData = ({
     filters = currentFilters,
@@ -206,7 +207,7 @@ const BeneficiariesView = () => {
         filters={filters}
         actionButtons={actionButtons}
         columns={
-          isResearcherOrHod
+          isResearcherOrHodOrCeo
             ? [
                 {
                   type: "text",

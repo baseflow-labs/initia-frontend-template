@@ -55,7 +55,8 @@ const ApplicantsView = () => {
   const { user } = useAppSelector((state) => state.auth);
   const isResearcher = user.role === "researcher";
   const isHod = user.role === "hod";
-  const isResearcherOrHod = isResearcher || isHod;
+  const isCeo = user.role === "ceo";
+  const isResearcherOrHodOrCeo = isResearcher || isHod || isCeo;
 
   const getData = ({
     filters = currentFilters,
@@ -269,7 +270,7 @@ const ApplicantsView = () => {
         searchPlaceholder={t("Auth.Beneficiaries.SearchBarPlaceholder")}
         actionButtons={actionButtons}
         columns={
-          isResearcherOrHod
+          isResearcherOrHodOrCeo
             ? [
                 {
                   type: "text",
