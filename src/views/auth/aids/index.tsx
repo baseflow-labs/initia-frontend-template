@@ -46,7 +46,7 @@ const AidsView = () => {
   const isHod = user.role === "hod";
   const isCeo = user.role === "ceo";
   const isAccountant = user.role === "accountant";
-  const isResearcherOrHod = isResearcher || isHod;
+  const isResearcherOrHodOrCeo = isResearcher || isHod || isCeo;
 
   const [openModal, setOpenModal] = useState(false);
   const [openDetailsModal, setOpenDetailsModal] = useState<string>("");
@@ -188,6 +188,11 @@ const AidsView = () => {
   ];
 
   const columns = [
+    {
+      type: "text",
+      name: "fileNo",
+      label: t("Auth.MembershipRegistration.Form.FileNo"),
+    },
     {
       type: "custom",
       name: "name",
@@ -392,20 +397,18 @@ const AidsView = () => {
                 return final;
               }
         }
-        columns={[
-          isResearcherOrHod
-            ? {
-                type: "text",
-                name: "fullName",
-                label: t("Auth.Beneficiaries.BeneficiaryName"),
-              }
-            : {
-                type: "text",
-                name: "fileNo",
-                label: t("Auth.MembershipRegistration.Form.FileNo"),
-              },
-          ...columns,
-        ]}
+        columns={
+          isResearcherOrHodOrCeo
+            ? [
+                {
+                  type: "text",
+                  name: "fullName",
+                  label: t("Auth.Beneficiaries.BeneficiaryName"),
+                },
+                ...columns,
+              ]
+            : columns
+        }
         data={aids}
         onGetData={getData}
         paginationMeta={paginationMeta}

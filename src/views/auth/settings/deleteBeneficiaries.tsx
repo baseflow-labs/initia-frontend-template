@@ -8,29 +8,27 @@ import Modal from "../../../components/modal";
 import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
 import { apiCatchGlobalHandler } from "../../../utils/function";
-import { logout } from "../../../store/actions/auth";
+import Spinner from "../../../components/core/spinner";
 
-const AccountDelete = () => {
+const DeleteBeneficiaries = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { user } = useAppSelector((state) => state.auth);
+  const { loading } = useAppSelector((state) => state.loading);
 
   const [openModal, setOpenModal] = useState(false);
 
   const deleteBeneficiary = () => {
-    UserApi.remove(user.id || "")
+    UserApi.removeAllBeneficiaries()
       .then(() => {
         setOpenModal(false);
         dispatch(
           addNotification({
             msg: t("Global.Form.SuccessMsg", {
               action: t("Auth.Beneficiaries.Profile.DeleteData"),
-              data: t("Global.Labels.YourOwn"),
+              data: t("Auth.Settings.BulkDataInsertion.BeneficiariesData"),
             }),
           })
         );
-
-        dispatch(logout());
       })
       .catch(apiCatchGlobalHandler);
   };
@@ -42,11 +40,11 @@ const AccountDelete = () => {
         color="danger"
         className="my-3 w-100"
       >
-        {t("Auth.Beneficiaries.Profile.DeleteData")}
+        {t("Auth.Beneficiaries.DeleteAll")}
       </Button>
 
       <Modal
-        title={t("Auth.Beneficiaries.Profile.DeleteData")}
+        title={t("Auth.Beneficiaries.DeleteAll")}
         onClose={() => setOpenModal(false)}
         isOpen={openModal}
       >
@@ -54,10 +52,17 @@ const AccountDelete = () => {
           {t("Auth.Beneficiaries.Profile.SureToDeleteData")}
         </h3>
 
+        <div className="text-center">
+          {loading.length > 0 && <Spinner color="danger" />}
+        </div>
+
         <div className="btn-group w-100" role="group">
           <Button
             onClick={() => deleteBeneficiary()}
-            disabled={process.env.REACT_APP_ENVIRONMENT === "staging"}
+            disabled={
+              process.env.REACT_APP_ENVIRONMENT === "staging" ||
+              loading.length > 0
+            }
             color="danger"
             className="my-3 me-1"
           >
@@ -80,4 +85,4 @@ const AccountDelete = () => {
   );
 };
 
-export default AccountDelete;
+export default DeleteBeneficiaries;

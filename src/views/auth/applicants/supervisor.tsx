@@ -34,7 +34,8 @@ const ApplicantsViewForSupervisor = () => {
   const isAdmin = user.role === "admin";
   const isResearcher = user.role === "researcher";
   const isHod = user.role === "hod";
-  const isResearcherOrHod = isResearcher || isHod;
+  const isCeo = user.role === "ceo";
+  const isResearcherOrHodOrCeo = isResearcher || isHod || isCeo;
 
   const [beneficiaries, setBeneficiaries] = useState<
     {
@@ -277,7 +278,7 @@ const ApplicantsViewForSupervisor = () => {
         filters={filters}
         actionButtons={isAdmin ? undefined : actionButtons}
         columns={
-          isResearcherOrHod
+          isResearcherOrHodOrCeo
             ? [
                 {
                   type: "text",

@@ -37,6 +37,11 @@ const BeneficiaryProfileView = () => {
   const [searchParams] = useSearchParams();
   const { user } = useAppSelector((state) => state.auth);
 
+  const isResearcher = user.role === "researcher";
+  const isHod = user.role === "hod";
+  const isCeo = user.role === "ceo";
+  const isResearcherOrHodOrCeo = isResearcher || isHod || isCeo;
+
   const [beneficiary, setBeneficiary] = useState<any>();
   const [income, setIncome] = useState<number>(0);
 
@@ -292,12 +297,12 @@ const BeneficiaryProfileView = () => {
       <div className="row w-100 mx-auto">
         <div className="col-6 col-md-9 d-flex">
           <h2>
-            {user.role === "researcher"
+            {isResearcherOrHodOrCeo
               ? beneficiary?.beneficiary?.fullName
               : beneficiary?.beneficiary?.fileNo}{" "}
           </h2>
 
-          {user.role === "researcher" && (
+          {isResearcherOrHodOrCeo && (
             <small className="bg-opacity-info p-2 rounded-4 text-sm ms-2 my-auto text-info">
               {beneficiary?.beneficiary?.fileNo}
             </small>
@@ -359,74 +364,76 @@ const BeneficiaryProfileView = () => {
           />
         </div>
 
-        {[
-          ...commonCards1,
-          ...housingCards,
-          ...dependentCards,
-          ...commonCards2,
-        ]?.map(({ title, data, map }, i) => (
-          <div className="col-md-6 my-3" key={i}>
-            <table className="table rounded-4 table-bordered">
-              <tbody>
-                <tr className="table-secondary">
-                  <th colSpan={2}>
-                    <h5>{title}</h5>
-                  </th>
-                </tr>
+        {isResearcherOrHodOrCeo
+          ? [
+              ...commonCards1,
+              ...housingCards,
+              ...dependentCards,
+              ...commonCards2,
+            ]?.map(({ title, data, map }, i) => (
+              <div className="col-md-6 my-3" key={i}>
+                <table className="table rounded-4 table-bordered">
+                  <tbody>
+                    <tr className="table-secondary">
+                      <th colSpan={2}>
+                        <h5>{title}</h5>
+                      </th>
+                    </tr>
 
-                {data &&
-                  map
-                    // .reduce(
-                    //   (
-                    //     final: {
-                    //       prop1: InputSingleProps;
-                    //       prop2?: InputSingleProps;
-                    //     }[],
-                    //     current,
-                    //     i
-                    //   ) => {
-                    //     if (i % 2 === 0) {
-                    //       final.push({
-                    //         prop1: current,
-                    //         prop2: map[i + 1] || null,
-                    //       });
-                    //     }
+                    {data &&
+                      map
+                        // .reduce(
+                        //   (
+                        //     final: {
+                        //       prop1: InputSingleProps;
+                        //       prop2?: InputSingleProps;
+                        //     }[],
+                        //     current,
+                        //     i
+                        //   ) => {
+                        //     if (i % 2 === 0) {
+                        //       final.push({
+                        //         prop1: current,
+                        //         prop2: map[i + 1] || null,
+                        //       });
+                        //     }
 
-                    //     return final;
-                    //   },
-                    //   []
-                    // )
-                    ?.filter(({ hideFile = false }) => !hideFile)
-                    .map((prop: InputSingleProps, y = 0) => (
-                      <tr key={y}>
-                        <td
-                          className="pb-3 text-break"
-                          style={{
-                            whiteSpace: "normal",
-                            wordBreak: "break-word",
-                            maxWidth: "125px",
-                          }}
-                        >
-                          {prop.label}
-                        </td>
+                        //     return final;
+                        //   },
+                        //   []
+                        // )
+                        ?.filter(({ hideFile = false }) => !hideFile)
+                        .map((prop: InputSingleProps, y = 0) => (
+                          <tr key={y}>
+                            <td
+                              className="pb-3 text-break"
+                              style={{
+                                whiteSpace: "normal",
+                                wordBreak: "break-word",
+                                maxWidth: "125px",
+                              }}
+                            >
+                              {prop.label}
+                            </td>
 
-                        <td className="pb-3">
-                          {dataRender({
-                            row: data,
-                            data: (data as any)[prop.name || "id"],
-                            type: prop.type,
-                            options: prop.options || [],
-                            name: prop.name,
-                            hasFile: prop.hasFile,
-                            money: prop.moneyUnit,
-                          })}
-                        </td>
-                      </tr>
-                    ))}
-              </tbody>
-            </table>
-          </div>
-        ))}
+                            <td className="pb-3">
+                              {dataRender({
+                                row: data,
+                                data: (data as any)[prop.name || "id"],
+                                type: prop.type,
+                                options: prop.options || [],
+                                name: prop.name,
+                                hasFile: prop.hasFile,
+                                money: prop.moneyUnit,
+                              })}
+                            </td>
+                          </tr>
+                        ))}
+                  </tbody>
+                </table>
+              </div>
+            ))
+          : ""}
       </div>
     </PageTemplate>
   );

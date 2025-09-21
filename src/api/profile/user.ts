@@ -32,4 +32,12 @@ const getByUserId = async (id?: string) => {
   return res;
 };
 
-export { getAll, create, getById, getByUserId };
+const remove = async (id: string) => {
+  return await api.delete(mainPath + "/" + id);
+};
+
+const removeAllBeneficiaries = async () => {
+  return await api.delete(mainPath + "/all-beneficiaries");
+};
+
+export { getAll, create, getById, getByUserId, remove, removeAllBeneficiaries };
