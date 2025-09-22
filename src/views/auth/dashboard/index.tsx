@@ -76,8 +76,7 @@ const DashboardView = () => {
               <img
                 src={
                   logo
-                    ? (process.env.REACT_APP_STORAGE_DIRECTORY_URL ||
-                        "https://pdt-bucket.s3.us-east-1.amazonaws.com") + logo
+                    ? process.env.REACT_APP_STORAGE_DIRECTORY_URL + logo
                     : profilePhotoPlaceholder
                 }
                 alt="logo"
