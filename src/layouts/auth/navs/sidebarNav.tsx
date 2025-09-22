@@ -52,8 +52,7 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
             src={
               collapsed
                 ? LogoOnly
-                : (process.env.REACT_APP_STORAGE_DIRECTORY_URL ||
-                    "https://pdt-bucket.s3.us-east-1.amazonaws.com") + logo
+                : process.env.REACT_APP_STORAGE_DIRECTORY_URL + logo
             }
             style={{ height: "70px" }}
             alt="Logo"
