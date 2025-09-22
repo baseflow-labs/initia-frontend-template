@@ -1,12 +1,15 @@
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
+
 import Button from "../core/button";
 import MapWithMarkers from "../googleMap";
 import DashboardCard from "./dashboardCard";
-import { useState } from "react";
 
 export interface LocationProps {
-  latitude: number;
-  longitude: number;
+  location: {
+    latitude: number;
+    longitude: number;
+  };
   name: string;
   phoneNumber: string;
   date: string;
