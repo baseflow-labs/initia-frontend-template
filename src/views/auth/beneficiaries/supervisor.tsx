@@ -175,12 +175,6 @@ const BeneficiariesViewForSupervisor = () => {
           </div>
         )),
     },
-    {
-      type: "select",
-      options: getBeneficiaryCategories(t),
-      name: "category",
-      label: t("Auth.MembershipRegistration.Form.Category.Title"),
-    },
     // {
     //   type: "custom",
     //   render: (row: any) => (

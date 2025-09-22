@@ -1,4 +1,9 @@
-import { faCircle, faTrash, faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircle,
+  faHome,
+  faTrash,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -24,6 +29,7 @@ import {
 } from "../../../utils/optionDataLists/beneficiaries";
 import AssignResearcher from "./assignResearcher";
 import RegisterApplicant from "./registerApplicant";
+import RenderCategory from "../../../components/category";
 
 const ApplicantsViewForSupervisor = () => {
   const { t } = useTranslation();
@@ -99,12 +105,12 @@ const ApplicantsViewForSupervisor = () => {
             .map(
               ({
                 contactsBank = {},
-                housing = {},
+                housing = [{}],
                 status: originalStatus = { status: "" },
                 ...rest
               }) => ({
                 ...contactsBank,
-                ...housing,
+                housing,
                 ...rest,
                 researcher: rest.staff?.fullName,
                 status: rest.staff
@@ -203,10 +209,17 @@ const ApplicantsViewForSupervisor = () => {
     //   render: (row: any) => row.city + " - " + row.district,
     // },
     {
-      type: "select",
-      options: getBeneficiaryCategories(t),
+      type: "custom",
       name: "category",
       label: t("Auth.MembershipRegistration.Form.Category.Title"),
+      render: (row: any) =>
+        row.housing?.map((house: any, i: number) => (
+          <div key={i}>
+            <FontAwesomeIcon className="text-info" icon={faHome} />{" "}
+            {house.city + " - " + house.district}{" "}
+            <RenderCategory data={house.category} />
+          </div>
+        )),
     },
     {
       type: "text",
