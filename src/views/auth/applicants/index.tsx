@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
+import RenderCategory from "../../../components/category";
 import DemoLoginNote from "../../../layouts/auth/demoLoginNote";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
@@ -30,6 +31,7 @@ import {
   getNationalities,
   getProvinces,
 } from "../../../utils/optionDataLists/beneficiaries";
+import { CategoryView } from "../aids/selectProgram";
 import RegisterApplicant from "./registerApplicant";
 import RejectApplicant from "./rejectApplicant";
 
@@ -185,7 +187,8 @@ const ApplicantsView = () => {
         row.housing.map((house: any, i: number) => (
           <div key={i}>
             <FontAwesomeIcon className="text-info" icon={faHome} />{" "}
-            {house.city + " - " + house.district}
+            {house.city + " - " + house.district}{" "}
+            <RenderCategory data={house.category} />
           </div>
         )),
     },

@@ -22,6 +22,7 @@ import {
 } from "../../../utils/optionDataLists/beneficiaries";
 import CancelMembership from "./cancelMembership";
 import { downloadNationalReport } from "./excelExport";
+import RenderCategory from "../../../components/category";
 
 const BeneficiariesView = () => {
   const { t } = useTranslation();
@@ -149,7 +150,8 @@ const BeneficiariesView = () => {
         row.housing.map((house: any, i: number) => (
           <div key={i}>
             <FontAwesomeIcon className="text-info" icon={faHome} />{" "}
-            {house.city + " - " + house.district}
+            {house.city + " - " + house.district}{" "}
+            <RenderCategory data={house.category} />
           </div>
         )),
     },
