@@ -68,6 +68,7 @@ export interface Housing {
   nationalAddressNumber: string;
   homeLocation: string;
   homeOwnership: string;
+  category: string;
   rentalCharge?: number;
   payee: string;
 }

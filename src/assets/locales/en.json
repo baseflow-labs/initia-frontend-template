@@ -96,7 +96,9 @@
       "DependentsCount": "Dependents Count",
       "DownloadByNationalCenterForm": "Download Data",
       "HousesCount": "Houses Count",
-      "IncomeTotal": "Income Total",
+      "GuardianIncomeTotal": "Guardian Income Total",
+      "FamilyIncomeTotal": "Family Income Total",
+      "DependentsIncomeTotal": "Dependents Income Total",
       "Profile": {
         "AcceptApplication": "Accept Application",
         "AcceptApplicationDisabledMsg": "Accept Application Disabled Msg",

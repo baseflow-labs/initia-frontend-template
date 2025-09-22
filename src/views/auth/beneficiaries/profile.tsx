@@ -19,6 +19,7 @@ import { dataRender } from "../../../components/table";
 import TooltipComp from "../../../components/tooltip";
 import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
 import { useAppSelector } from "../../../store/hooks";
+import { Dependent, Housing } from "../../../types/beneficiaries";
 import { exportDataToMultipleSheetsExcel } from "../../../utils/filesExport";
 import {
   getBasicDataInputs,
@@ -30,7 +31,14 @@ import {
   getIncomeQualificationDataInputs,
   getNationalRecordDataInputs,
 } from "../../../utils/formInputs/beneficiaryProfile";
-import { apiCatchGlobalHandler } from "../../../utils/function";
+import {
+  apiCatchGlobalHandler,
+  renderDataFromOptions,
+} from "../../../utils/function";
+import {
+  getBeneficiaryCategories,
+  getDependentRelations,
+} from "../../../utils/optionDataLists/beneficiaries";
 
 const BeneficiaryProfileView = () => {
   const { t } = useTranslation();
@@ -99,7 +107,10 @@ const BeneficiaryProfileView = () => {
         (final: any, current: any, idx: number) => {
           const withIndex = Object.keys(current).reduce(
             (acc: any, key: string) => {
-              acc[`${key}_${idx}`] = current[key];
+              const value = current[key];
+              const finalValue =
+                typeof value === "number" ? (value < 0 ? 0 : value) : value;
+              acc[`${key}_${idx}`] = finalValue;
               return acc;
             },
             {}
@@ -338,6 +349,29 @@ const BeneficiaryProfileView = () => {
                 count: dependentCards.length,
                 color: "success",
                 icon: faUsers,
+                details: Object.values(
+                  beneficiary?.dependents
+                    ?.map((d: Dependent) => d.relation)
+                    .filter(Boolean)
+                    .reduce(
+                      (
+                        acc: Record<string, { label: string; count: number }>,
+                        relation: string
+                      ) => {
+                        const label = renderDataFromOptions(
+                          relation,
+                          getDependentRelations(t)
+                        );
+
+                        acc[label] = acc[label]
+                          ? { label, count: acc[label].count + 1 }
+                          : { label, count: 1 };
+
+                        return acc;
+                      },
+                      {}
+                    ) || {}
+                ),
               },
               {
                 label: t("Auth.Beneficiaries.WivesCount"),
@@ -352,13 +386,62 @@ const BeneficiaryProfileView = () => {
                 count: housingCards.length,
                 color: "warning",
                 icon: faHome,
+                details: Object.values(
+                  beneficiary?.housing
+                    .map((h: Housing) => h.category)
+                    .filter(Boolean)
+                    .reduce(
+                      (
+                        acc: Record<string, { label: string; count: number }>,
+                        data: string
+                      ) => {
+                        const label = renderDataFromOptions(
+                          data,
+                          getBeneficiaryCategories(t)
+                        );
+
+                        if (acc[label]) {
+                          acc[label].count += 1;
+                        } else {
+                          acc[label] = { label, count: 1 };
+                        }
+
+                        return acc;
+                      },
+                      {}
+                    ) || {}
+                ),
               },
               {
-                label: t("Auth.Beneficiaries.IncomeTotal"),
+                label: t("Auth.Beneficiaries.FamilyIncomeTotal"),
                 count: income,
                 unit: <img src={riyalIcon} alt="riyalIcon" />,
                 color: "info",
                 icon: faChartSimple,
+                details: [
+                  {
+                    label: t("Auth.Beneficiaries.GuardianIncomeTotal"),
+                    count: [
+                      beneficiary?.income?.salary,
+                      beneficiary?.income?.socialSecurity,
+                      beneficiary?.income?.insurances,
+                      beneficiary?.income?.comprehensiveRehabilitation,
+                      beneficiary?.income?.retirement,
+                    ]?.reduce(
+                      (final: number, d: number) =>
+                        (final += parseFloat(String(d) || "0")),
+                      0
+                    ),
+                  },
+                  {
+                    label: t("Auth.Beneficiaries.DependentsIncomeTotal"),
+                    count: beneficiary?.dependents?.reduce(
+                      (final: number, d: Dependent) =>
+                        (final += parseFloat(String(d.income) || "0")),
+                      0
+                    ),
+                  },
+                ],
               },
             ]}
           />
@@ -402,7 +485,10 @@ const BeneficiaryProfileView = () => {
                         //   },
                         //   []
                         // )
-                        ?.filter(({ hideFile = false }) => !hideFile)
+                        ?.filter(
+                          ({ hideFile = false, type = "" }) =>
+                            !hideFile && type !== "title"
+                        )
                         .map((prop: InputSingleProps, y = 0) => (
                           <tr key={y}>
                             <td

@@ -44,22 +44,22 @@ const columnsMdWidth = (count: number) => {
 
 const StatisticCards = ({ statistics }: Props) => {
   return (
-    <div className="row">
+    <div className="row align-items-stretch">
       {statistics.map(({ label, count, icon, color, unit, details }, i) => (
         <div
           className={`col-sm-${columnsMdWidth(
             statistics.length
-          )} col-xl-${columnsLgWidth(statistics.length)}`}
+          )} col-xl-${columnsLgWidth(statistics.length)} d-flex`}
           key={i}
         >
           <DashboardCard>
-            <div className="card-body">
+            <div className="card-body w-100">
               <div className="row">
-                <div className="col">
+                <div className="col-lg-9">
                   <h6 className="card-title">{label}</h6>
                 </div>
 
-                <div className="col h3 text-end">
+                <div className="col-lg-3 h3 text-end">
                   <span className={`bg-opacity-${color} rounded-4 px-3 py-0`}>
                     <FontAwesomeIcon icon={icon} className={`text-${color}`} />
                   </span>
