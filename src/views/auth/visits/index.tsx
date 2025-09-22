@@ -24,6 +24,7 @@ import {
 } from "../../../utils/function";
 import { getVisitStatuses } from "../../../utils/optionDataLists/visits";
 import ScheduleVisit from "./scheduleVisit";
+import RenderCategory from "../../../components/category";
 
 const VisitsView = () => {
   const { t } = useTranslation();
@@ -186,7 +187,12 @@ const VisitsView = () => {
       type: "custom",
       name: "housing",
       label: t("Auth.MembershipRegistration.Address"),
-      render: (row: any) => row.housing?.city + " - " + row.housing?.district,
+      render: (row: any) => (
+        <>
+          {row.housing?.city + " - " + row.housing?.district}{" "}
+          <RenderCategory data={row.housing?.category} />
+        </>
+      ),
     },
     {
       type: "custom",

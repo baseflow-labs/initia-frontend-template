@@ -11,6 +11,7 @@ import { useNavigate } from "react-router";
 
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import * as StaffApi from "../../../api/staff/researcher";
+import RenderCategory from "../../../components/category";
 import DemoLoginNote from "../../../layouts/auth/demoLoginNote";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { useAppSelector } from "../../../store/hooks";
@@ -169,7 +170,8 @@ const BeneficiariesViewForSupervisor = () => {
         row.housing?.map((house: any, i: number) => (
           <div key={i}>
             <FontAwesomeIcon className="text-info" icon={faHome} />{" "}
-            {house.city + " - " + house.district}
+            {house.city + " - " + house.district}{" "}
+            <RenderCategory data={house.category} />
           </div>
         )),
     },
