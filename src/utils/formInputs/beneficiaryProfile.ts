@@ -541,6 +541,16 @@ export const getHousingDataInputs = (
 
   if (!formik || formik.values?.homeOwnership === "Ownership") {
     ownerInputs.forEach((i) => final.push(i));
+  } else {
+    final.push({
+      type: "number",
+      name: "rentalCharge",
+      label: t("Auth.MembershipRegistration.Form.RentalCharge"),
+      min: 0,
+      step: 0.1,
+      moneyUnit: true,
+      required: true,
+    } as any);
   }
 
   const categoryDetailsData = [
@@ -594,15 +604,6 @@ export const getHousingDataInputs = (
       moneyUnit: true,
       required: false,
       excludeInForm: true,
-    },
-    {
-      type: "number",
-      name: "rentalCharge",
-      label: t("Auth.MembershipRegistration.Form.RentalCharge"),
-      min: 0,
-      step: 0.1,
-      moneyUnit: true,
-      required: true,
     },
     {
       type: "number",
