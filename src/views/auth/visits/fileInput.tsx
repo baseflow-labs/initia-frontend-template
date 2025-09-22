@@ -51,11 +51,7 @@ const FileInput: React.FC<FinalInput> = ({
   const [uploading, setUploading] = useState(false);
   const [files, setFiles] = useState<UploadedFileMeta[]>([]);
 
-  const baseUrl =
-    storageBaseUrl ||
-    process.env.REACT_APP_STORAGE_DIRECTORY_URL ||
-    "https://pdt-bucket.s3.us-east-1.amazonaws.com";
-
+  const baseUrl = storageBaseUrl || process.env.REACT_APP_STORAGE_DIRECTORY_URL;
   // Sync from controlled prop `uploaded`
   useEffect(() => {
     if (uploaded && Array.isArray(uploaded)) {

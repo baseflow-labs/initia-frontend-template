@@ -13,9 +13,7 @@ export const FilePreviewModal = () => {
   const [showModal, setShowModal] = useState(false);
 
   show = (fileData) => {
-    const fullPath =
-      (process.env.REACT_APP_STORAGE_DIRECTORY_URL ||
-        "https://pdt-bucket.s3.us-east-1.amazonaws.com") + fileData;
+    const fullPath = process.env.REACT_APP_STORAGE_DIRECTORY_URL + fileData;
 
     setFile(fullPath);
     setShowModal(true);

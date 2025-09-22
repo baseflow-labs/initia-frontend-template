@@ -76,10 +76,7 @@ const DashboardNavbar = ({
           <div className="col-6 col-lg-1 order-1">
             <img
               alt="logo"
-              src={
-                (process.env.REACT_APP_STORAGE_DIRECTORY_URL ||
-                  "https://pdt-bucket.s3.us-east-1.amazonaws.com") + logo
-              }
+              src={process.env.REACT_APP_STORAGE_DIRECTORY_URL + logo}
               height="40px"
             />
           </div>

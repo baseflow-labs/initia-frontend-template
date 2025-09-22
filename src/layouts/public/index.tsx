@@ -69,10 +69,7 @@ const AuthLayout = () => {
           <div className="card-body text-center">
             <img
               alt="bg-image"
-              src={
-                (process.env.REACT_APP_STORAGE_DIRECTORY_URL ||
-                  "https://pdt-bucket.s3.us-east-1.amazonaws.com") + logo
-              }
+              src={process.env.REACT_APP_STORAGE_DIRECTORY_URL + logo}
               className="w-50 px-1 mb-4"
               style={{ maxWidth: "350px" }}
               role="button"

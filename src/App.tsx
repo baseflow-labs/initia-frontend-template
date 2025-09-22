@@ -34,7 +34,9 @@ const App = () => {
         dispatch(
           setMetadata({
             ...res.payload,
-            logo: (res.payload.logo && res.payload.logo[0].path) || "/logo.png",
+            logo:
+              (res.payload.logo && res.payload.logo[0].path) ||
+              "/mustaheq/samples/logo.png",
           })
         );
       })
