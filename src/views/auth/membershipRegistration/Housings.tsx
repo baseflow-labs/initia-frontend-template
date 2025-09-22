@@ -85,7 +85,14 @@ const HousingsFormView = ({
                   beneficiary,
                   ...e,
                 })
-                  .then(() => {
+                  .then((res: any) => {
+                    const updated = !!res.payload.newRecord;
+
+                    const row = {
+                      ...e,
+                      ...(res.payload.newRecord || res.payload),
+                    };
+
                     resetForm();
                     dispatch(
                       addNotification({
@@ -98,21 +105,17 @@ const HousingsFormView = ({
                       })
                     );
 
-                    const data = [...housing, e]
-                      .filter((d) => d.nationalAddressNumber)
-                      .reverse()
-                      .reduce(
-                        (final, data) =>
-                          final.find(
-                            (f: any) =>
-                              f.nationalAddressNumber ===
-                              data.nationalAddressNumber
-                          )
-                            ? final
-                            : [...final, data],
-                        []
-                      )
-                      .reverse();
+                    const newArray = [...housing, row].filter(
+                      (d) => d.nationalAddressNumber
+                    );
+
+                    const data = updated
+                      ? housing.map((h) =>
+                          h.nationalAddressNumber === row.nationalAddressNumber
+                            ? row
+                            : h
+                        )
+                      : newArray;
 
                     setHousing(data);
                     saveData(data);
