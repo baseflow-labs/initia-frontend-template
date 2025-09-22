@@ -1,25 +1,23 @@
 import {
-  faCheck,
   faCheckSquare,
   faCircle,
-  faXmark,
   faXmarkSquare,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import { useDispatch } from "react-redux";
 import * as VisitApi from "../../../api/visits/visits";
 import TablePage from "../../../layouts/auth/pages/tablePage";
+import { addNotification } from "../../../store/actions/notifications";
 import { viewDateFormat, viewDayFormat } from "../../../utils/consts";
-import { getVisitStatuses } from "../../../utils/optionDataLists/visits";
 import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
-import { useDispatch } from "react-redux";
-import { addNotification } from "../../../store/actions/notifications";
+import { getVisitStatuses } from "../../../utils/optionDataLists/visits";
 
 const BeneficiariesVisitsView = () => {
   const { t } = useTranslation();

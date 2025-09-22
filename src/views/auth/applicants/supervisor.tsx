@@ -12,6 +12,7 @@ import { useNavigate } from "react-router";
 
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import * as StaffApi from "../../../api/staff/researcher";
+import RenderCategory from "../../../components/category";
 import DemoLoginNote from "../../../layouts/auth/demoLoginNote";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
@@ -22,14 +23,12 @@ import {
   statusColorRender,
 } from "../../../utils/function";
 import {
-  getBeneficiaryCategories,
   getBeneficiaryStatuses,
   getNationalities,
   getProvinces,
 } from "../../../utils/optionDataLists/beneficiaries";
 import AssignResearcher from "./assignResearcher";
 import RegisterApplicant from "./registerApplicant";
-import RenderCategory from "../../../components/category";
 
 const ApplicantsViewForSupervisor = () => {
   const { t } = useTranslation();

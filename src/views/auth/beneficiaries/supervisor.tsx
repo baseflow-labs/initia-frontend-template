@@ -17,7 +17,6 @@ import TablePage from "../../../layouts/auth/pages/tablePage";
 import { useAppSelector } from "../../../store/hooks";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import {
-  getBeneficiaryCategories,
   getNationalities,
   getProvinces,
 } from "../../../utils/optionDataLists/beneficiaries";
