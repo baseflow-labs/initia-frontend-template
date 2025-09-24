@@ -1,8 +1,8 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import DashboardCard from "./dashboardCard";
 import { commaNumbers } from "../../utils/function";
+import DashboardCard from "./dashboardCard";
 
 interface Props {
   statistics: {
@@ -14,6 +14,7 @@ interface Props {
     details?: {
       label: string;
       count: number;
+      unit?: React.ReactNode | string;
     }[];
   }[];
 }
@@ -72,9 +73,11 @@ const StatisticCards = ({ statistics }: Props) => {
 
               {details && (
                 <p className="card-text d-flex">
-                  {details.map(({ label, count }, y) => (
+                  {details.map(({ label, count, unit }, y) => (
                     <div className="me-1" key={y}>
-                      <span className={`text-${color} fw-bold`}>{count}</span>{" "}
+                      <span className={`text-${color} fw-bold`}>
+                        {count} {unit}
+                      </span>{" "}
                       <span className="text-secondary">{label}</span>
                     </div>
                   ))}

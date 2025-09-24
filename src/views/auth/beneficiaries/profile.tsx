@@ -15,7 +15,7 @@ import { riyalIcon } from "../../../assets/icons/icons";
 import StatisticCards from "../../../components/card/statisticCards";
 import Button from "../../../components/core/button";
 import { InputSingleProps } from "../../../components/form";
-import { dataRender } from "../../../components/table";
+import DynamicTable, { dataRender, MoneyUnit } from "../../../components/table";
 import TooltipComp from "../../../components/tooltip";
 import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
 import { useAppSelector } from "../../../store/hooks";
@@ -33,6 +33,7 @@ import {
 } from "../../../utils/formInputs/beneficiaryProfile";
 import {
   apiCatchGlobalHandler,
+  pluralLabelResolve,
   renderDataFromOptions,
 } from "../../../utils/function";
 import {
@@ -124,7 +125,7 @@ const BeneficiaryProfileView = () => {
           const indexed = getCategoryInputs(t).map((input) => ({
             ...input,
             name: `${input.name}_${idx}`,
-            label: t(input.label, {
+            label: t(input.label || "", {
               index: t("Global.Labels.Order." + (idx + 1)),
             }),
           }));
@@ -303,6 +304,40 @@ const BeneficiaryProfileView = () => {
     );
   };
 
+  const oldAidColumns = [
+    {
+      type: "custom",
+      name: "name",
+      label: t("Auth.Aids.AidName"),
+      render: (row: any) => row.aidProgram?.aidCategory?.name,
+    },
+    {
+      type: "custom",
+      name: "value",
+      label: t("Auth.Aids.AidValue"),
+      render: (row: any) => (
+        <>
+          {row.value}{" "}
+          {row.aidCategories?.type === "Cash" ? (
+            <MoneyUnit />
+          ) : (
+            pluralLabelResolve(t, row.value, "Auth.Aids.AidPiece")
+          )}
+        </>
+      ),
+    },
+    {
+      type: "date",
+      name: "createdAt",
+      label: t("Global.Labels.ApplicationDate"),
+    },
+    {
+      type: "date",
+      name: "collectionDate",
+      label: t("Auth.Aids.RecaptionDate"),
+    },
+  ];
+
   return (
     <PageTemplate>
       <div className="row w-100 mx-auto">
@@ -415,12 +450,13 @@ const BeneficiaryProfileView = () => {
               {
                 label: t("Auth.Beneficiaries.FamilyIncomeTotal"),
                 count: income,
-                unit: <img src={riyalIcon} alt="riyalIcon" />,
+                unit: <MoneyUnit big />,
                 color: "info",
                 icon: faChartSimple,
                 details: [
                   {
                     label: t("Auth.Beneficiaries.GuardianIncomeTotal"),
+                    unit: <MoneyUnit />,
                     count: [
                       beneficiary?.income?.salary,
                       beneficiary?.income?.socialSecurity,
@@ -435,6 +471,7 @@ const BeneficiaryProfileView = () => {
                   },
                   {
                     label: t("Auth.Beneficiaries.DependentsIncomeTotal"),
+                    unit: <MoneyUnit />,
                     count: beneficiary?.dependents?.reduce(
                       (final: number, d: Dependent) =>
                         (final += parseFloat(String(d.income) || "0")),
@@ -520,6 +557,20 @@ const BeneficiaryProfileView = () => {
               </div>
             ))
           : ""}
+
+        <div className="col my-3 px-2">
+          <div className="border border-1 p-3">
+            <h5 className="mt-4 mb-2">{t("Auth.Aids.OldAids")}</h5>
+
+            <DynamicTable
+              columns={oldAidColumns}
+              data={beneficiary?.aids || []}
+              fitHeight
+              noPagination
+              onPageChange={() => ""}
+            />
+          </div>
+        </div>
       </div>
     </PageTemplate>
   );
