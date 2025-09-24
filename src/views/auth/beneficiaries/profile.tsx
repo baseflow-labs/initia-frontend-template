@@ -26,6 +26,7 @@ import {
   getCategoryDetailsInputs,
   getCategoryInputs,
   getContactBankDataInputs,
+  getDebtsDataInputs,
   getDependantDataInputs,
   getHousingDataInputs,
   getIncomeQualificationDataInputs,
@@ -96,6 +97,38 @@ const BeneficiaryProfileView = () => {
       title: t("Auth.MembershipRegistration.Form.ContactData"),
       data: beneficiary?.contactsBank,
       map: getContactBankDataInputs(t),
+    },
+    {
+      title: t("Auth.Beneficiaries.Profile.DebtsData"),
+      data: beneficiary?.debts?.reduce(
+        (final: any, current: any, idx: number) => {
+          const withIndex = Object.keys(current).reduce(
+            (acc: any, key: string) => {
+              const value = current[key];
+              const finalValue =
+                typeof value === "number" ? (value < 0 ? 0 : value) : value;
+              acc[`${key}_${idx}`] = finalValue;
+              return acc;
+            },
+            {}
+          );
+          return { ...final, ...withIndex };
+        },
+        {}
+      ),
+      map: beneficiary?.debts?.reduce(
+        (finalInputs: any[], _cur: any, idx: number) => {
+          const indexed = getDebtsDataInputs(t).map((input) => ({
+            ...input,
+            name: `${input.name}_${idx}`,
+            label: t(input.label || "", {
+              index: t("Global.Labels.Order.0" + (idx + 1)),
+            }),
+          }));
+          return [...finalInputs, ...indexed];
+        },
+        []
+      ),
     },
     {
       title: t("Auth.MembershipRegistration.Form.QualificationData"),

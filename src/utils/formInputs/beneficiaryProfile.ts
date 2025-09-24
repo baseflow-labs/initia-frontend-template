@@ -220,6 +220,22 @@ export const getContactBankDataInputs = (t: Function): InputSingleProps[] => [
   },
 ];
 
+export const getDebtsDataInputs = (t: Function): InputSingleProps[] => [
+  {
+    type: "number",
+    moneyUnit: true,
+    name: "value",
+    label: t("Auth.MembershipRegistration.Form.DebtMonthlyInstallment"),
+    required: true,
+  },
+  {
+    type: "date",
+    name: "lastPaymentDate",
+    label: t("Auth.MembershipRegistration.Form.DebtLastPaymentDate"),
+    required: true,
+  },
+];
+
 export const getIncomeQualificationDataInputs = (
   t: Function,
   formik?: FormikProps<Record<string, any>>
