@@ -250,6 +250,14 @@ const ApplicantsViewForSupervisor = () => {
       label: t("Auth.Beneficiaries.AddBeneficiary"),
       onClick: () => setOpenRegisterModal(true),
     },
+    {
+      label: t("Auth.Beneficiaries.Profile.AssignResearcher"),
+      onClick: () =>
+        setAssignResearcherModalOpen({
+          beneficiary: "",
+          staff: "",
+        }),
+    },
   ];
 
   const deleteBeneficiary = (id: string) => {

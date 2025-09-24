@@ -11,7 +11,7 @@ export const getAssignResearcherInputs = (
   {
     label: t("Auth.Beneficiaries.BeneficiaryName"),
     name: "beneficiary",
-    type: "select",
+    type: "selectMany",
     required: true,
     options: beneficiaries?.map(({ id, fullName }) => ({
       value: id,
