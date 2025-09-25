@@ -19,7 +19,7 @@ A frontend application for Mustaheq — the eligibility and entitlements platfor
 
 | Key                               | Value (Dev)                                     | Value (Stg)                                     | Value (Prod)                       |
 | --------------------------------- | ----------------------------------------------- | -----------------------------------             | ---------------------------------- |
-| `REACT_APP_BACKEND_URL`           | `http://127.0.0.1:8000`                         | `https://demo-api.mustaheq.org/`             | `https://zad-api.mustaheq.org/` |
+| `REACT_APP_BACKEND_URL`           | `http://127.0.0.1:8000`                         | `https://demo-api.mustaheq.org/`                | `https://zad-api.mustaheq.org/`    |
 | `REACT_APP_STORAGE_DIRECTORY_URL` | `http://mustaheq.oss-me-central-1.aliyuncs.com` | `http://mustaheq.oss-me-central-1.aliyuncs.com` | `https://assets.mustaheq.org/`     |
 | `REACT_APP_GOOGLE_MAP_API_KEY`    | `AIzaSyAgboGKtbUjn8v5EW1KG4ofubRCQkok3w4`       | `AIzaSyAgboGKtbUjn8v5EW1KG4ofubRCQkok3w4`       | `googleMapApiKeyProvidedByGoogle`  |
 | `REACT_APP_ENVIRONMENT`           | `staging`                                       | `staging`                                       | `production`                       |

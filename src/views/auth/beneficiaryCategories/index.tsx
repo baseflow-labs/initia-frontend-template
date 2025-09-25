@@ -1,17 +1,14 @@
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 import * as BeneficiaryCategoryApi from "../../../api/profile/beneficiaryCategory";
 import DemoLoginNote from "../../../layouts/auth/demoLoginNote";
 import TablePage from "../../../layouts/auth/pages/tablePage";
-import { BeneficiaryCategory } from "../../../types/beneficiaries";
-import {
-  apiCatchGlobalHandler,
-  renderDataFromOptions,
-} from "../../../utils/function";
-import AddBeneficiaryCategories from "./addBeneficiaryCategory";
-import { faEdit, faList, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { addNotification } from "../../../store/actions/notifications";
-import { useDispatch } from "react-redux";
+import { BeneficiaryCategory } from "../../../types/beneficiaries";
+import { apiCatchGlobalHandler } from "../../../utils/function";
+import AddBeneficiaryCategories from "./addBeneficiaryCategory";
 
 const BeneficiaryCategoriesView = () => {
   const { t } = useTranslation();

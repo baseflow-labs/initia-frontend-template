@@ -1,5 +1,4 @@
 import api, { formatGetFilters, GetDataProps } from "..";
-import store, { RootState } from "../../store/store";
 
 const mainPath = "/beneficiaryCategory";
 
@@ -33,4 +32,4 @@ const update = async (data: { id: String }) => {
 const remove = async (id: string) => {
   return await api.delete(mainPath + "?id=" + id);
 };
-export { getAll, create, update, getById, remove };
+export { create, getAll, getById, remove, update };
