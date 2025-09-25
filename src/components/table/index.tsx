@@ -24,9 +24,9 @@ import i18n from "../../i18next";
 import { triggerFilePreview } from "../../layouts/auth/globalModal";
 import { addNotification } from "../../store/actions/notifications";
 import { viewDateFormat, viewTimeFormat } from "../../utils/consts";
+import { commaNumbers } from "../../utils/function";
 import DropdownComp from "../dropdown";
 import TooltipComp from "../tooltip";
-import { commaNumbers } from "../../utils/function";
 
 export interface actionProps {
   label: string;
@@ -75,8 +75,13 @@ interface Props {
   withoutWrap?: boolean;
 }
 
-export const MoneyUnit = () => (
-  <img src={riyalIcon} height={15} className="ms-1" alt="moneyUnit" />
+export const MoneyUnit = ({ big }: { big?: boolean }) => (
+  <img
+    src={riyalIcon}
+    height={big ? 25 : 15}
+    className="ms-1"
+    alt="moneyUnit"
+  />
 );
 
 const withMoneyUnit = (content: React.ReactNode, money?: boolean) => {

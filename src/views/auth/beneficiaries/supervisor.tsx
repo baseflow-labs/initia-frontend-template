@@ -17,7 +17,6 @@ import TablePage from "../../../layouts/auth/pages/tablePage";
 import { useAppSelector } from "../../../store/hooks";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import {
-  getBeneficiaryCategories,
   getNationalities,
   getProvinces,
 } from "../../../utils/optionDataLists/beneficiaries";
@@ -174,12 +173,6 @@ const BeneficiariesViewForSupervisor = () => {
             <RenderCategory data={house.category} />
           </div>
         )),
-    },
-    {
-      type: "select",
-      options: getBeneficiaryCategories(t),
-      name: "category",
-      label: t("Auth.MembershipRegistration.Form.Category.Title"),
     },
     // {
     //   type: "custom",

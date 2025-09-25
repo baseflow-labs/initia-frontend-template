@@ -1,4 +1,9 @@
-import { faCircle, faTrash, faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircle,
+  faHome,
+  faTrash,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -7,6 +12,7 @@ import { useNavigate } from "react-router";
 
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import * as StaffApi from "../../../api/staff/researcher";
+import RenderCategory from "../../../components/category";
 import DemoLoginNote from "../../../layouts/auth/demoLoginNote";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
@@ -17,7 +23,6 @@ import {
   statusColorRender,
 } from "../../../utils/function";
 import {
-  getBeneficiaryCategories,
   getBeneficiaryStatuses,
   getNationalities,
   getProvinces,
@@ -99,12 +104,12 @@ const ApplicantsViewForSupervisor = () => {
             .map(
               ({
                 contactsBank = {},
-                housing = {},
+                housing = [{}],
                 status: originalStatus = { status: "" },
                 ...rest
               }) => ({
                 ...contactsBank,
-                ...housing,
+                housing,
                 ...rest,
                 researcher: rest.staff?.fullName,
                 status: rest.staff
@@ -203,10 +208,17 @@ const ApplicantsViewForSupervisor = () => {
     //   render: (row: any) => row.city + " - " + row.district,
     // },
     {
-      type: "select",
-      options: getBeneficiaryCategories(t),
+      type: "custom",
       name: "category",
       label: t("Auth.MembershipRegistration.Form.Category.Title"),
+      render: (row: any) =>
+        row.housing?.map((house: any, i: number) => (
+          <div key={i}>
+            <FontAwesomeIcon className="text-info" icon={faHome} />{" "}
+            {house.city + " - " + house.district}{" "}
+            <RenderCategory data={house.category} />
+          </div>
+        )),
     },
     {
       type: "text",
@@ -237,6 +249,14 @@ const ApplicantsViewForSupervisor = () => {
     {
       label: t("Auth.Beneficiaries.AddBeneficiary"),
       onClick: () => setOpenRegisterModal(true),
+    },
+    {
+      label: t("Auth.Beneficiaries.Profile.AssignResearcher"),
+      onClick: () =>
+        setAssignResearcherModalOpen({
+          beneficiary: "",
+          staff: "",
+        }),
     },
   ];
 
