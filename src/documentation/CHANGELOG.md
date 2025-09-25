@@ -150,3 +150,7 @@
 
 - Merge pull request #138 from Shai-club/stg
 
+## v1.13.0 - 2025-09-25
+
+- Merge pull request #140 from Shai-club/stg
+
