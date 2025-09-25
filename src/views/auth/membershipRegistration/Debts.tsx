@@ -74,7 +74,6 @@ const DebtsFormView = ({
                       ...(res.payload.newRecord || res.payload),
                     };
 
-                    resetForm();
                     dispatch(
                       addNotification({
                         msg: t("Global.Form.SuccessMsg", {
