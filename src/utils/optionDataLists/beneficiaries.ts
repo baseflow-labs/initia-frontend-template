@@ -537,33 +537,6 @@ export const getHomeOwners = (t: Function) => [
   },
 ];
 
-export const getBeneficiaryCategories = (t: Function) => [
-  {
-    value: "A",
-    label: t("Auth.MembershipRegistration.Form.Category.A"),
-  },
-  {
-    value: "B",
-    label: t("Auth.MembershipRegistration.Form.Category.B"),
-  },
-  {
-    value: "C",
-    label: t("Auth.MembershipRegistration.Form.Category.C"),
-  },
-  {
-    value: "D",
-    label: t("Auth.MembershipRegistration.Form.Category.D"),
-  },
-  {
-    value: "Uncategorized",
-    label: t("Auth.MembershipRegistration.Form.Category.Uncategorized"),
-  },
-  {
-    value: "Above Grading",
-    label: t("Auth.MembershipRegistration.Form.Category.AboveGrading"),
-  },
-];
-
 export const getOccupations = (t: Function) => [
   {
     value: "Government Employee",

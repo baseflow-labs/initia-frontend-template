@@ -9,7 +9,6 @@ import { dataDateFormat } from "../consts";
 import {
   banks,
   getAgeGroups,
-  getBeneficiaryCategories,
   getDependentRelations,
   getDiseases,
   getEducationLevels,
@@ -551,9 +550,8 @@ export const getHousingDataInputs = (
 
   const categoryDetailsData = [
     {
-      type: "select",
+      type: "text",
       name: "category",
-      options: getBeneficiaryCategories(t),
       label: t("Auth.MembershipRegistration.Form.Category.Title"),
       required: true,
       excludeInForm: true,

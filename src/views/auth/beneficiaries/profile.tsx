@@ -11,7 +11,6 @@ import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router";
 
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
-import { riyalIcon } from "../../../assets/icons/icons";
 import StatisticCards from "../../../components/card/statisticCards";
 import Button from "../../../components/core/button";
 import { InputSingleProps } from "../../../components/form";
@@ -37,10 +36,7 @@ import {
   pluralLabelResolve,
   renderDataFromOptions,
 } from "../../../utils/function";
-import {
-  getBeneficiaryCategories,
-  getDependentRelations,
-} from "../../../utils/optionDataLists/beneficiaries";
+import { getDependentRelations } from "../../../utils/optionDataLists/beneficiaries";
 
 const BeneficiaryProfileView = () => {
   const { t } = useTranslation();
@@ -159,7 +155,7 @@ const BeneficiaryProfileView = () => {
             ...input,
             name: `${input.name}_${idx}`,
             label: t(input.label || "", {
-              index: t("Global.Labels.Order." + (idx + 1)),
+              index: t("Global.Labels.Order.0" + (idx + 1)),
             }),
           }));
           return [...finalInputs, ...indexed];
@@ -463,10 +459,7 @@ const BeneficiaryProfileView = () => {
                         acc: Record<string, { label: string; count: number }>,
                         data: string
                       ) => {
-                        const label = renderDataFromOptions(
-                          data,
-                          getBeneficiaryCategories(t)
-                        );
+                        const label = data;
 
                         if (acc[label]) {
                           acc[label].count += 1;

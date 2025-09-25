@@ -5,7 +5,6 @@ import {
   getAidStatuses,
 } from "../../../utils/optionDataLists/aids";
 import {
-  getBeneficiaryCategories,
   getGenders,
   getNationalities,
 } from "../../../utils/optionDataLists/beneficiaries";
@@ -39,7 +38,7 @@ export const downloadNationalReport = (
             الجنس: renderDataFromOptions(gender, getGenders(t)),
             "تاريخ الميلاد": dob,
             الجنسية: renderDataFromOptions(nationality, getNationalities(t)),
-            الفئة: renderDataFromOptions(category, getBeneficiaryCategories(t)),
+            الفئة: category,
             "رقم الملف": fileNo,
             "نوع الدعم": aid.aidProgram?.aidCategory?.name,
             "فئة الدعم": renderDataFromOptions(
