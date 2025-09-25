@@ -280,10 +280,12 @@ const DynamicTable = ({
                 </th>
               ))}
 
-              {actions && actions()?.length && (
+              {actions && actions()?.length ? (
                 <th className="py-3" scope="col">
                   {t("Global.Labels.Action")}
                 </th>
+              ) : (
+                ""
               )}
             </tr>
           </thead>
@@ -321,7 +323,7 @@ const DynamicTable = ({
                   )
                 )}
 
-                {actions && actions()?.length && (
+                {actions && actions()?.length ? (
                   <td className="py-3">
                     <div className="d-flex">
                       {actions(row.id)
@@ -400,6 +402,8 @@ const DynamicTable = ({
                       )}
                     </div>
                   </td>
+                ) : (
+                  ""
                 )}
               </tr>
             ))}
