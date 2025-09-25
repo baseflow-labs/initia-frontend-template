@@ -376,20 +376,19 @@ export const getCategoryInputs = (
   formik?: FormikProps<Record<string, any>>
 ): InputSingleProps[] => [
   {
-    type: "select",
-    options: getBeneficiaryCategories(t),
+    type: "text",
     name: "name",
     label: "Auth.Beneficiaries.Profile.CategoryXName",
   },
   {
     type: "number",
-    name: "min",
+    name: "minIncome",
     label: "Auth.Beneficiaries.Profile.CategoryXMinimum",
     moneyUnit: true,
   },
   {
     type: "number",
-    name: "max",
+    name: "maxIncome",
     label: "Auth.Beneficiaries.Profile.CategoryXMaximum",
     moneyUnit: true,
   },
