@@ -270,8 +270,13 @@
         "CreditStatementNote": "Credit StatementNote",
         "DebtLastPaymentDate": "Debt Last Payment Date",
         "DebtMonthlyInstallment": "Debt Monthly Installment",
-        "DebtMonthlyPayment": "DebtMonthlyPayment",
-        "Debts": "Debts",
+        "Debts": {
+          "AddNew": "Add New",
+          "Debt": "Debt",
+          "DebtsSaved": "Debts Saved",
+          "SaveDebt": "Save Debt"
+        },
+        "DebtsData": "Debts Data",
         "DependantData": "Dependant Data",
         "DependentMobile": "Dependent Mobile",
         "DependentMobileNote": "Dependent Mobile Note",

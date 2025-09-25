@@ -270,8 +270,13 @@
         "CreditStatementNote": "في حال وجود ديون رسمية",
         "DebtLastPaymentDate": "تاريخ سداد آخر قسط من الدين {{index}}",
         "DebtMonthlyInstallment": "قيمة القسط الشهري لسداد الدين {{index}}",
-        "DebtMonthlyPayment": "القسط الشهري لسداد الديون الرسمية",
-        "Debts": "الديون",
+        "Debts": {
+          "AddNew": "إضافة دين جديد",
+          "Debt": "الدين رقم",
+          "DebtsSaved": "حفظ بيانات الدين",
+          "SaveDebt": "حفظ بيانات الدين"
+        },
+        "DebtsData": "بيانات الديون",
         "DependantData": "بيانات التابع {{name}}",
         "DependentMobile": "رقم جوال التابع",
         "DependentMobileNote": "إن وجد",

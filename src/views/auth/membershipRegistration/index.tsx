@@ -26,6 +26,7 @@ import {
 } from "../../../utils/formInputs/beneficiaryProfile";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import { banks } from "../../../utils/optionDataLists/beneficiaries";
+import DebtsFormView from "./Debts";
 import DependentsFormView from "./Dependents";
 import HousingsFormView from "./Housings";
 
@@ -46,6 +47,7 @@ const MembershipRegistrationView = () => {
     income: {},
     user: { id: "" },
     dependents: [{ housing: "", fullName: "", idNumber: "" }],
+    debts: [{ id: "", value: 0, lastPaymentDate: "" }],
     nationalRecord: {},
   });
 
@@ -62,6 +64,7 @@ const MembershipRegistrationView = () => {
             user,
             status,
             beneficiary,
+            debts,
           } = res.payload;
 
           if (beneficiary?.id)
@@ -74,6 +77,7 @@ const MembershipRegistrationView = () => {
               nationalRecord,
               user,
               beneficiary,
+              debts,
             });
         })
         .catch(apiCatchGlobalHandler);
@@ -265,6 +269,31 @@ const MembershipRegistrationView = () => {
               })
               .catch(apiCatchGlobalHandler);
           }}
+        />
+      ),
+    },
+    {
+      label: t("Auth.MembershipRegistration.Form.DebtsData"),
+      name: "DebtsData",
+      contents: (
+        <DebtsFormView
+          customButtons={<BackButton />}
+          initialValues={formData.debts}
+          saveData={(debts) => {
+            setFormData((current) => ({
+              ...current,
+              debts,
+            }));
+          }}
+          onFormSubmit={(debts) => {
+            window.scrollTo(0, 0);
+            setFormData((current) => ({
+              ...current,
+              debts,
+            }));
+            setCurrentStep((current = 0) => current + 1);
+          }}
+          beneficiary={formData.beneficiary?.id}
         />
       ),
     },
