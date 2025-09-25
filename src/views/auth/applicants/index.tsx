@@ -26,12 +26,10 @@ import {
   statusColorRender,
 } from "../../../utils/function";
 import {
-  getBeneficiaryCategories,
   getBeneficiaryStatuses,
   getNationalities,
   getProvinces,
 } from "../../../utils/optionDataLists/beneficiaries";
-import { CategoryView } from "../aids/selectProgram";
 import RegisterApplicant from "./registerApplicant";
 import RejectApplicant from "./rejectApplicant";
 
@@ -191,12 +189,6 @@ const ApplicantsView = () => {
             <RenderCategory data={house.category} />
           </div>
         )),
-    },
-    {
-      type: "select",
-      options: getBeneficiaryCategories(t),
-      name: "category",
-      label: t("Auth.MembershipRegistration.Form.Category.Title"),
     },
     {
       type: "custom",

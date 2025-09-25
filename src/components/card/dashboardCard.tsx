@@ -11,7 +11,7 @@ const DashboardCard = ({
 }) => {
   return (
     <CardComp
-      className="my-3"
+      className="my-3 w-100"
       style={max ? { maxHeight: max, overflowY: "auto" } : {}}
     >
       <Fragment>{children}</Fragment>

@@ -11,18 +11,17 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
+import RenderCategory from "../../../components/category";
 import DemoLoginNote from "../../../layouts/auth/demoLoginNote";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { useAppSelector } from "../../../store/hooks";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import {
-  getBeneficiaryCategories,
   getNationalities,
   getProvinces,
 } from "../../../utils/optionDataLists/beneficiaries";
 import CancelMembership from "./cancelMembership";
 import { downloadNationalReport } from "./excelExport";
-import RenderCategory from "../../../components/category";
 
 const BeneficiariesView = () => {
   const { t } = useTranslation();
@@ -154,12 +153,6 @@ const BeneficiariesView = () => {
             <RenderCategory data={house.category} />
           </div>
         )),
-    },
-    {
-      type: "select",
-      options: getBeneficiaryCategories(t),
-      name: "category",
-      label: t("Auth.MembershipRegistration.Form.Category.Title"),
     },
     // {
     //   type: "custom",

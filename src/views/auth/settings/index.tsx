@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 
 import * as AuthApi from "../../../api/auth/index";
 import * as MetadataApi from "../../../api/metadata";
+import Button from "../../../components/core/button";
 import Spinner from "../../../components/core/spinner";
 import Form, { LabelView } from "../../../components/form";
 import DefaultInput from "../../../components/form/inputs/default";
@@ -87,6 +88,15 @@ const SettingsPage = () => {
       })
       .catch(apiCatchGlobalHandler);
   }, []);
+
+  const downloadTemplate = async (filename: string) => {
+    const url =
+      process.env.REACT_APP_STORAGE_DIRECTORY_URL +
+      "/mustaheq/samples/dataTemplates/" +
+      filename;
+
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
 
   return (
     <BoxedPage title={t("Auth.Settings.Title")}>
@@ -210,6 +220,18 @@ const SettingsPage = () => {
                 required
               />
 
+              <div className="mb-3">
+                <Button
+                  onClick={() =>
+                    downloadTemplate("نموذج بيانات المستفيدين - مستحق.xlsx")
+                  }
+                >
+                  {t(
+                    "Auth.Settings.BulkDataInsertion.BeneficiariesDataTemplate"
+                  )}
+                </Button>
+              </div>
+
               <DefaultInput
                 name="beneficiariesFile"
                 type="file"
@@ -245,6 +267,16 @@ const SettingsPage = () => {
                 label={t("Auth.Settings.BulkDataInsertion.DependentsData")}
                 required
               />
+
+              <div className="mb-3">
+                <Button
+                  onClick={() =>
+                    downloadTemplate("نموذج بيانات التابعين - مستحق.xlsx")
+                  }
+                >
+                  {t("Auth.Settings.BulkDataInsertion.DependentsDataTemplate")}
+                </Button>
+              </div>
 
               <DefaultInput
                 name="dependentsFile"

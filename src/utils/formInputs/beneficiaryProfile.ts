@@ -9,7 +9,6 @@ import { dataDateFormat } from "../consts";
 import {
   banks,
   getAgeGroups,
-  getBeneficiaryCategories,
   getDependentRelations,
   getDiseases,
   getEducationLevels,
@@ -220,6 +219,26 @@ export const getContactBankDataInputs = (t: Function): InputSingleProps[] => [
   },
 ];
 
+export const getDebtsDataInputs = (t: Function): InputSingleProps[] => [
+  {
+    type: "number",
+    moneyUnit: true,
+    name: "value",
+    label: t("Auth.MembershipRegistration.Form.DebtMonthlyInstallment", {
+      index: "",
+    }),
+    required: true,
+  },
+  {
+    type: "date",
+    name: "lastPaymentDate",
+    label: t("Auth.MembershipRegistration.Form.DebtLastPaymentDate", {
+      index: "",
+    }),
+    required: true,
+  },
+];
+
 export const getIncomeQualificationDataInputs = (
   t: Function,
   formik?: FormikProps<Record<string, any>>
@@ -344,29 +363,6 @@ export const getIncomeQualificationDataInputs = (
       required: false,
       halfCol: true,
     },
-    {
-      type: "title",
-      name: "title",
-      label: t("Auth.MembershipRegistration.Form.Debts"),
-    },
-    {
-      type: "number",
-      name: "debtMonthlyPayment",
-      label: t("Auth.MembershipRegistration.Form.DebtMonthlyPayment"),
-      min: 0,
-      step: 0.1,
-      moneyUnit: true,
-      required: false,
-      halfCol: true,
-    },
-    {
-      type: "file",
-      fileSizeLimit: 2,
-      name: "debtMonthlyPaymentFile",
-      hideFile: true,
-      required: false,
-      halfCol: true,
-    },
   ];
 
   common.forEach((i) => final.push(i));
@@ -379,20 +375,19 @@ export const getCategoryInputs = (
   formik?: FormikProps<Record<string, any>>
 ): InputSingleProps[] => [
   {
-    type: "select",
-    options: getBeneficiaryCategories(t),
+    type: "text",
     name: "name",
     label: "Auth.Beneficiaries.Profile.CategoryXName",
   },
   {
     type: "number",
-    name: "min",
+    name: "minIncome",
     label: "Auth.Beneficiaries.Profile.CategoryXMinimum",
     moneyUnit: true,
   },
   {
     type: "number",
-    name: "max",
+    name: "maxIncome",
     label: "Auth.Beneficiaries.Profile.CategoryXMaximum",
     moneyUnit: true,
   },
@@ -555,9 +550,8 @@ export const getHousingDataInputs = (
 
   const categoryDetailsData = [
     {
-      type: "select",
+      type: "text",
       name: "category",
-      options: getBeneficiaryCategories(t),
       label: t("Auth.MembershipRegistration.Form.Category.Title"),
       required: true,
       excludeInForm: true,

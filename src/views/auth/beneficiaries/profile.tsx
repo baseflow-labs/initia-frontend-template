@@ -11,26 +11,32 @@ import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router";
 
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
-import { riyalIcon } from "../../../assets/icons/icons";
 import StatisticCards from "../../../components/card/statisticCards";
 import Button from "../../../components/core/button";
 import { InputSingleProps } from "../../../components/form";
-import { dataRender } from "../../../components/table";
+import DynamicTable, { dataRender, MoneyUnit } from "../../../components/table";
 import TooltipComp from "../../../components/tooltip";
 import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
 import { useAppSelector } from "../../../store/hooks";
+import { Dependent, Housing } from "../../../types/beneficiaries";
 import { exportDataToMultipleSheetsExcel } from "../../../utils/filesExport";
 import {
   getBasicDataInputs,
   getCategoryDetailsInputs,
   getCategoryInputs,
   getContactBankDataInputs,
+  getDebtsDataInputs,
   getDependantDataInputs,
   getHousingDataInputs,
   getIncomeQualificationDataInputs,
   getNationalRecordDataInputs,
 } from "../../../utils/formInputs/beneficiaryProfile";
-import { apiCatchGlobalHandler } from "../../../utils/function";
+import {
+  apiCatchGlobalHandler,
+  pluralLabelResolve,
+  renderDataFromOptions,
+} from "../../../utils/function";
+import { getDependentRelations } from "../../../utils/optionDataLists/beneficiaries";
 
 const BeneficiaryProfileView = () => {
   const { t } = useTranslation();
@@ -89,6 +95,38 @@ const BeneficiaryProfileView = () => {
       map: getContactBankDataInputs(t),
     },
     {
+      title: t("Auth.Beneficiaries.Profile.DebtsData"),
+      data: beneficiary?.debts?.reduce(
+        (final: any, current: any, idx: number) => {
+          const withIndex = Object.keys(current).reduce(
+            (acc: any, key: string) => {
+              const value = current[key];
+              const finalValue =
+                typeof value === "number" ? (value < 0 ? 0 : value) : value;
+              acc[`${key}_${idx}`] = finalValue;
+              return acc;
+            },
+            {}
+          );
+          return { ...final, ...withIndex };
+        },
+        {}
+      ),
+      map: beneficiary?.debts?.reduce(
+        (finalInputs: any[], _cur: any, idx: number) => {
+          const indexed = getDebtsDataInputs(t).map((input) => ({
+            ...input,
+            name: `${input.name}_${idx}`,
+            label: t(input.label || "", {
+              index: t("Global.Labels.Order.0" + (idx + 1)),
+            }),
+          }));
+          return [...finalInputs, ...indexed];
+        },
+        []
+      ),
+    },
+    {
       title: t("Auth.MembershipRegistration.Form.QualificationData"),
       data: beneficiary?.income,
       map: getIncomeQualificationDataInputs(t),
@@ -99,7 +137,10 @@ const BeneficiaryProfileView = () => {
         (final: any, current: any, idx: number) => {
           const withIndex = Object.keys(current).reduce(
             (acc: any, key: string) => {
-              acc[`${key}_${idx}`] = current[key];
+              const value = current[key];
+              const finalValue =
+                typeof value === "number" ? (value < 0 ? 0 : value) : value;
+              acc[`${key}_${idx}`] = finalValue;
               return acc;
             },
             {}
@@ -113,8 +154,8 @@ const BeneficiaryProfileView = () => {
           const indexed = getCategoryInputs(t).map((input) => ({
             ...input,
             name: `${input.name}_${idx}`,
-            label: t(input.label, {
-              index: t("Global.Labels.Order." + (idx + 1)),
+            label: t(input.label || "", {
+              index: t("Global.Labels.Order.0" + (idx + 1)),
             }),
           }));
           return [...finalInputs, ...indexed];
@@ -292,6 +333,40 @@ const BeneficiaryProfileView = () => {
     );
   };
 
+  const oldAidColumns = [
+    {
+      type: "custom",
+      name: "name",
+      label: t("Auth.Aids.AidName"),
+      render: (row: any) => row.aidProgram?.aidCategory?.name,
+    },
+    {
+      type: "custom",
+      name: "value",
+      label: t("Auth.Aids.AidValue"),
+      render: (row: any) => (
+        <>
+          {row.value}{" "}
+          {row.aidCategories?.type === "Cash" ? (
+            <MoneyUnit />
+          ) : (
+            pluralLabelResolve(t, row.value, "Auth.Aids.AidPiece")
+          )}
+        </>
+      ),
+    },
+    {
+      type: "date",
+      name: "createdAt",
+      label: t("Global.Labels.ApplicationDate"),
+    },
+    {
+      type: "date",
+      name: "collectionDate",
+      label: t("Auth.Aids.RecaptionDate"),
+    },
+  ];
+
   return (
     <PageTemplate>
       <div className="row w-100 mx-auto">
@@ -338,6 +413,29 @@ const BeneficiaryProfileView = () => {
                 count: dependentCards.length,
                 color: "success",
                 icon: faUsers,
+                details: Object.values(
+                  beneficiary?.dependents
+                    ?.map((d: Dependent) => d.relation)
+                    .filter(Boolean)
+                    .reduce(
+                      (
+                        acc: Record<string, { label: string; count: number }>,
+                        relation: string
+                      ) => {
+                        const label = renderDataFromOptions(
+                          relation,
+                          getDependentRelations(t)
+                        );
+
+                        acc[label] = acc[label]
+                          ? { label, count: acc[label].count + 1 }
+                          : { label, count: 1 };
+
+                        return acc;
+                      },
+                      {}
+                    ) || {}
+                ),
               },
               {
                 label: t("Auth.Beneficiaries.WivesCount"),
@@ -352,13 +450,61 @@ const BeneficiaryProfileView = () => {
                 count: housingCards.length,
                 color: "warning",
                 icon: faHome,
+                details: Object.values(
+                  beneficiary?.housing
+                    .map((h: Housing) => h.category)
+                    .filter(Boolean)
+                    .reduce(
+                      (
+                        acc: Record<string, { label: string; count: number }>,
+                        data: string
+                      ) => {
+                        const label = data;
+
+                        if (acc[label]) {
+                          acc[label].count += 1;
+                        } else {
+                          acc[label] = { label, count: 1 };
+                        }
+
+                        return acc;
+                      },
+                      {}
+                    ) || {}
+                ),
               },
               {
-                label: t("Auth.Beneficiaries.IncomeTotal"),
+                label: t("Auth.Beneficiaries.FamilyIncomeTotal"),
                 count: income,
-                unit: <img src={riyalIcon} alt="riyalIcon" />,
+                unit: <MoneyUnit big />,
                 color: "info",
                 icon: faChartSimple,
+                details: [
+                  {
+                    label: t("Auth.Beneficiaries.GuardianIncomeTotal"),
+                    unit: <MoneyUnit />,
+                    count: [
+                      beneficiary?.income?.salary,
+                      beneficiary?.income?.socialSecurity,
+                      beneficiary?.income?.insurances,
+                      beneficiary?.income?.comprehensiveRehabilitation,
+                      beneficiary?.income?.retirement,
+                    ]?.reduce(
+                      (final: number, d: number) =>
+                        (final += parseFloat(String(d) || "0")),
+                      0
+                    ),
+                  },
+                  {
+                    label: t("Auth.Beneficiaries.DependentsIncomeTotal"),
+                    unit: <MoneyUnit />,
+                    count: beneficiary?.dependents?.reduce(
+                      (final: number, d: Dependent) =>
+                        (final += parseFloat(String(d.income) || "0")),
+                      0
+                    ),
+                  },
+                ],
               },
             ]}
           />
@@ -402,7 +548,10 @@ const BeneficiaryProfileView = () => {
                         //   },
                         //   []
                         // )
-                        ?.filter(({ hideFile = false }) => !hideFile)
+                        ?.filter(
+                          ({ hideFile = false, type = "" }) =>
+                            !hideFile && type !== "title"
+                        )
                         .map((prop: InputSingleProps, y = 0) => (
                           <tr key={y}>
                             <td
@@ -434,6 +583,20 @@ const BeneficiaryProfileView = () => {
               </div>
             ))
           : ""}
+
+        <div className="col my-3 px-2">
+          <div className="border border-1 p-3">
+            <h5 className="mt-4 mb-2">{t("Auth.Aids.OldAids")}</h5>
+
+            <DynamicTable
+              columns={oldAidColumns}
+              data={beneficiary?.aids || []}
+              fitHeight
+              noPagination
+              onPageChange={() => ""}
+            />
+          </div>
+        </div>
       </div>
     </PageTemplate>
   );

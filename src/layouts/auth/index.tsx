@@ -45,6 +45,7 @@ import { FilePreviewModal } from "./globalModal";
 import OffCanvasNav from "./navs/offcanvasNav";
 import Sidebar from "./navs/sidebarNav";
 import UserMgmtPage from "../../views/auth/users";
+import BeneficiaryCategoriesView from "../../views/auth/beneficiaryCategories";
 
 const AuthLayout = () => {
   const { t, i18n } = useTranslation();
@@ -240,6 +241,14 @@ const AuthLayout = () => {
       showInNav: true,
       icon: aidsIcon,
       users: ["ceo", "accountant", "admin"],
+    },
+    {
+      name: t("Auth.BeneficiaryCategories.Title"),
+      route: "/categories",
+      view: <BeneficiaryCategoriesView />,
+      showInNav: true,
+      icon: settingsIcon,
+      users: ["admin"],
     },
     {
       name: t("Auth.Beneficiary.Profile.Title"),

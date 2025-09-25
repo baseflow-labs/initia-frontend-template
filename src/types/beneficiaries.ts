@@ -21,6 +21,13 @@ export interface Beneficiary {
   incurableDiseases?: boolean;
 }
 
+export interface BeneficiaryCategory {
+  id: string;
+  name: string;
+  minIncome: number;
+  maxIncome: number;
+}
+
 export interface ContactsBank {
   id: string;
   beneficiaryMobile: string;
@@ -68,6 +75,7 @@ export interface Housing {
   nationalAddressNumber: string;
   homeLocation: string;
   homeOwnership: string;
+  category: string;
   rentalCharge?: number;
   payee: string;
 }
