@@ -5,8 +5,8 @@ import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import { addNotification } from "../../../store/actions/notifications";
-import { apiCatchGlobalHandler } from "../../../utils/function";
 import { getAssignResearcherInputs } from "../../../utils/formInputs/beneficiaries";
+import { apiCatchGlobalHandler } from "../../../utils/function";
 
 const AssignResearcher = ({
   beneficiaries,
@@ -24,8 +24,10 @@ const AssignResearcher = ({
   }[];
   researchers: { id: string; status: string; fullName: string }[];
   onGetData: (t: Object) => void;
-  openModal: { beneficiary: string; staff: string } | undefined;
-  setOpenModal: (t: { beneficiary: string; staff: string } | undefined) => void;
+  openModal: { beneficiary: string[]; staff: string } | undefined;
+  setOpenModal: (
+    t: { beneficiary: string[]; staff: string } | undefined
+  ) => void;
 }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
