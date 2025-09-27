@@ -55,7 +55,7 @@ const ApplicantsViewForSupervisor = () => {
     { id: string; status: string; fullName: string }[]
   >([]);
   const [assignResearcherModalOpen, setAssignResearcherModalOpen] = useState<
-    { beneficiary: string; staff: string } | undefined
+    { beneficiary: string[]; staff: string } | undefined
   >(undefined);
   const [currentFilters, setCurrentFilters] = useState({});
   const [openRegisterModal, setOpenRegisterModal] = useState(false);
@@ -254,7 +254,7 @@ const ApplicantsViewForSupervisor = () => {
       label: t("Auth.Beneficiaries.Profile.AssignResearcher"),
       onClick: () =>
         setAssignResearcherModalOpen({
-          beneficiary: "",
+          beneficiary: [],
           staff: "",
         }),
     },
@@ -323,7 +323,7 @@ const ApplicantsViewForSupervisor = () => {
                   label: t("Auth.Beneficiaries.Profile.AssignResearcher"),
                   onClick: (data: string) =>
                     setAssignResearcherModalOpen({
-                      beneficiary: data,
+                      beneficiary: [data],
                       staff:
                         beneficiaries.find((b) => b.id === data)?.staff?.id ||
                         "",
