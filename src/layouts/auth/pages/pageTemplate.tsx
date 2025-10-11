@@ -1,4 +1,5 @@
 import { Form as FormikForm, FormikProvider, useFormik } from "formik";
+import { useTranslation } from "react-i18next";
 import { Fragment } from "react/jsx-runtime";
 
 import { filterIcon, resetFilterIcon } from "../../../assets/icons/icons";
@@ -11,7 +12,6 @@ import SelectInput from "../../../components/form/inputs/select";
 import SelectManyInput from "../../../components/form/inputs/selectMany";
 import { columnsWidth } from "../../../utils/function";
 import DashboardNavbar from "../navs/navbar";
-import { useTranslation } from "react-i18next";
 
 interface Props {
   title?: string;
@@ -85,7 +85,7 @@ const PageTemplate = ({
                     >
                       <SelectManyInput
                         name={name}
-                        placeholder={label}
+                        placeholder={label + "..."}
                         options={options}
                         className="me-2"
                         key={i}
@@ -98,7 +98,7 @@ const PageTemplate = ({
                       <SelectInput
                         id={name}
                         name={name}
-                        placeholder={label}
+                        placeholder={label + "..."}
                         value={formik.values[name]}
                         onChange={formik.handleChange}
                         options={options}
