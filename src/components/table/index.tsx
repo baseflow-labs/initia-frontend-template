@@ -114,7 +114,7 @@ export const dataRender = ({
   }
 
   if (!data && !render && type !== "file") {
-    return "-";
+    return "غير معبئة";
   }
 
   if (hasFile) {
@@ -134,7 +134,7 @@ export const dataRender = ({
             {(row as any)[name]}
           </>
         )
-      : "-";
+      : "غير معبئة";
   }
 
   switch (type) {
@@ -197,7 +197,7 @@ export const dataRender = ({
                 onClick={() => triggerFilePreview(file)}
               />
             ))
-          : "-"
+          : "غير معبئة"
       );
     case "location":
       return wrap(

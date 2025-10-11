@@ -7,10 +7,13 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+
 import * as AidCategoriesApi from "../../../api/aids/aidCategories";
 import * as AidProgramApi from "../../../api/aids/aidPrograms";
 import { MoneyUnit } from "../../../components/table";
 import TablePage from "../../../layouts/auth/pages/tablePage";
+import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
 import {
   AidCategory,
@@ -26,8 +29,6 @@ import {
 } from "../../../utils/function";
 import { getAidProgramStatuses } from "../../../utils/optionDataLists/aids";
 import AddAidProgram from "./createAidProgram";
-import { useDispatch } from "react-redux";
-import { addNotification } from "../../../store/actions/notifications";
 
 const AidProgramsView = () => {
   const { t } = useTranslation();
@@ -102,10 +103,18 @@ const AidProgramsView = () => {
   const statuses = getAidProgramStatuses(t);
 
   const filters = [
+    // {
+    //   label: t("Auth.MembershipRegistration.Statuses.Status"),
+    //   options: statuses,
+    //   name: "aidStatuses=>status",
+    // },
     {
-      label: t("Auth.MembershipRegistration.Statuses.Status"),
-      options: statuses,
-      name: "status",
+      label: t("Auth.AidCategories.Title"),
+      options: aidCategories.map(({ id, name }) => ({
+        value: id,
+        label: name,
+      })),
+      name: "aidCategory",
     },
   ];
 

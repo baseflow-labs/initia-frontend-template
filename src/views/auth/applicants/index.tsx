@@ -138,11 +138,11 @@ const ApplicantsView = () => {
   const statuses = getBeneficiaryStatuses(t);
 
   const filters = [
-    {
-      label: t("Auth.MembershipRegistration.Statuses.Status"),
-      options: statuses,
-      name: "membershipStatuses=>status",
-    },
+    // {
+    //   label: t("Auth.MembershipRegistration.Statuses.Status"),
+    //   options: statuses,
+    //   name: "membershipStatuses=>status",
+    // },
     {
       label: t("Auth.MembershipRegistration.Form.Nationality.Title"),
       options: nationalities,
