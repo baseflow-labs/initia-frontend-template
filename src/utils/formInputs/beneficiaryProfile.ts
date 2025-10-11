@@ -791,6 +791,7 @@ export const getNationalRecordDataInputs = (
   {
     type: "file",
     fileSizeLimit: 2,
+    maxFiles: 12,
     logo: absherLogo,
     name: "absherDocument",
     label: t("Auth.MembershipRegistration.Form.AbsherDocument"),
@@ -799,6 +800,7 @@ export const getNationalRecordDataInputs = (
   {
     type: "file",
     fileSizeLimit: 2,
+    maxFiles: 12,
     logo: tawakkalnaLogo,
     name: "tawakkalnaDocument",
     accept: ".png, .jpeg, .jpg, .pdf",
