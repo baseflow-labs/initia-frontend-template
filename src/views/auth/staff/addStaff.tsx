@@ -5,8 +5,8 @@ import * as ResearcherApi from "../../../api/staff/researcher";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import { addNotification } from "../../../store/actions/notifications";
-import { apiCatchGlobalHandler } from "../../../utils/function";
 import { getStaffCrudInputs } from "../../../utils/formInputs/staff";
+import { apiCatchGlobalHandler } from "../../../utils/function";
 
 const AddStaff = ({
   getData,
@@ -89,7 +89,7 @@ const AddStaff = ({
                 })
                 .catch(apiCatchGlobalHandler);
         }}
-        initialValues={openModal}
+        initialValues={openModal?.id ? openModal : undefined}
       />
     </Modal>
   );

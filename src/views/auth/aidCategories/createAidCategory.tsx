@@ -40,7 +40,7 @@ const AddAidCategory = ({
         inputs={(formik: FormikProps<Record<string, any>>) =>
           geAddAidCategoryInputs(t)
         }
-        initialValues={crudData}
+        initialValues={crudData.id ? crudData : undefined}
         submitText={t("Global.Form.Labels.SubmitApplication")}
         onFormSubmit={(e, resetForm) => {
           e.id

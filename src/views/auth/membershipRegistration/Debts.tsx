@@ -60,7 +60,7 @@ const DebtsFormView = ({
                 " " +
                 (i + 1)
               }
-              initialValues={record}
+              initialValues={record.id ? record : undefined}
               onFormSubmit={(e, resetForm) => {
                 DebtsApi[e.id ? "update" : "create"]({
                   beneficiary,

@@ -43,7 +43,7 @@ const AddAidProgram = ({
           geAddAidProgramInputs(t, aidCategories, formik)
         }
         submitText={t("Global.Form.Labels.SubmitApplication")}
-        initialValues={crudData}
+        initialValues={crudData.id ? crudData : undefined}
         onFormSubmit={(e, resetForm) => {
           e.id
             ? AidProgramApi.update(e.id, e)

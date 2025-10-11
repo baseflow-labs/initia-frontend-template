@@ -5,9 +5,9 @@ import * as UserApi from "../../../api/staff/researcher";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import { addNotification } from "../../../store/actions/notifications";
-import { apiCatchGlobalHandler } from "../../../utils/function";
-import { getUserCrudInputs } from "../../../utils/formInputs/users";
 import { User } from "../../../types/beneficiaries";
+import { getUserCrudInputs } from "../../../utils/formInputs/users";
+import { apiCatchGlobalHandler } from "../../../utils/function";
 
 const AddUsers = ({
   getData,
@@ -74,7 +74,7 @@ const AddUsers = ({
                 })
                 .catch(apiCatchGlobalHandler);
         }}
-        initialValues={openModal as object}
+        initialValues={openModal?.id ? openModal : undefined}
       />
     </Modal>
   );

@@ -280,6 +280,13 @@ export const getIncomeQualificationDataInputs = (
       required: true,
       halfCol: true,
     },
+  ];
+
+  if (!formik || formik?.values?.occupation?.includes("Employee")) {
+    employeeInputs.forEach((x) => final.push(x));
+  }
+
+  const common = [
     {
       type: "number",
       name: "socialSecurity",
@@ -288,7 +295,7 @@ export const getIncomeQualificationDataInputs = (
       step: 0.1,
       moneyUnit: true,
       hasFile: true,
-      required: true,
+      required: false,
       halfCol: true,
     },
     {
@@ -296,16 +303,9 @@ export const getIncomeQualificationDataInputs = (
       fileSizeLimit: 2,
       name: "socialSecurityFile",
       hideFile: true,
-      required: true,
+      required: false,
       halfCol: true,
     },
-  ];
-
-  if (!formik || formik?.values?.occupation?.includes("Employee")) {
-    employeeInputs.forEach((x) => final.push(x));
-  }
-
-  const common = [
     {
       type: "number",
       name: "insurances",
@@ -791,6 +791,7 @@ export const getNationalRecordDataInputs = (
   {
     type: "file",
     fileSizeLimit: 2,
+    maxFiles: 12,
     logo: absherLogo,
     name: "absherDocument",
     label: t("Auth.MembershipRegistration.Form.AbsherDocument"),
@@ -799,6 +800,7 @@ export const getNationalRecordDataInputs = (
   {
     type: "file",
     fileSizeLimit: 2,
+    maxFiles: 12,
     logo: tawakkalnaLogo,
     name: "tawakkalnaDocument",
     accept: ".png, .jpeg, .jpg, .pdf",

@@ -1,7 +1,8 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
+
 import { InputProps } from "..";
 import { commonInputClasses } from "../../../utils/consts";
-import { useTranslation } from "react-i18next";
 
 type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 
@@ -14,6 +15,7 @@ const DateInput: React.FC<FinalInput> = (input) => {
     <input
       {...input}
       type="date"
+      lang="en-GB"
       dir={i18n.dir()}
       placeholder={input.placeholder || t("Global.Form.Labels.PickDate")}
       className={`form-control form-control-sm ${commonInputClasses}`}

@@ -12,6 +12,7 @@ import { useNavigate, useSearchParams } from "react-router";
 
 import * as BeneficiaryApi from "../../../api/profile/beneficiary";
 import * as VisitApi from "../../../api/visits/visits";
+import RenderCategory from "../../../components/category";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { addNotification } from "../../../store/actions/notifications";
 import { useAppSelector } from "../../../store/hooks";
@@ -24,7 +25,6 @@ import {
 } from "../../../utils/function";
 import { getVisitStatuses } from "../../../utils/optionDataLists/visits";
 import ScheduleVisit from "./scheduleVisit";
-import RenderCategory from "../../../components/category";
 
 const VisitsView = () => {
   const { t } = useTranslation();
@@ -146,14 +146,14 @@ const VisitsView = () => {
   ];
 
   const filters = [
-    {
-      label: t("Auth.Beneficiaries.BeneficiaryName"),
-      options: selectOptions.beneficiaries.map(({ id, fullName }) => ({
-        value: id,
-        label: fullName,
-      })),
-      name: "beneficiary",
-    },
+    // {
+    //   label: t("Auth.Beneficiaries.BeneficiaryName"),
+    //   options: selectOptions.beneficiaries.map(({ id, fullName }) => ({
+    //     value: id,
+    //     label: fullName,
+    //   })),
+    //   name: "beneficiary",
+    // },
     {
       label: t("Auth.Visits.Statuses.Status"),
       options: statuses,

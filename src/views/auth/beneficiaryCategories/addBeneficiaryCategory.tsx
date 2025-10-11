@@ -5,9 +5,9 @@ import * as BeneficiaryCategoryApi from "../../../api/profile/beneficiaryCategor
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import { addNotification } from "../../../store/actions/notifications";
-import { apiCatchGlobalHandler } from "../../../utils/function";
 import { BeneficiaryCategory } from "../../../types/beneficiaries";
 import { getCategoryInputs } from "../../../utils/formInputs/beneficiaryProfile";
+import { apiCatchGlobalHandler } from "../../../utils/function";
 
 const AddBeneficiaryCategories = ({
   getData,
@@ -58,7 +58,7 @@ const AddBeneficiaryCategories = ({
             })
             .catch(apiCatchGlobalHandler);
         }}
-        initialValues={openModal as object}
+        initialValues={openModal?.id ? openModal : undefined}
       />
     </Modal>
   );

@@ -46,6 +46,7 @@ interface InputBasicProps {
   defaultValue?: string | number;
   placeholder?: string;
   fileSizeLimit?: number;
+  maxFiles?: number;
   min?: string | number;
   max?: string | number;
   step?: number;
