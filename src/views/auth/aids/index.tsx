@@ -167,17 +167,17 @@ const AidsView = () => {
     },
     {
       label: t("Auth.AidPrograms.Title"),
-      options: selectOptions.aidPrograms.map(({ id, name }) => ({
+      options: selectOptions.aidCategories.map(({ id, name }) => ({
         value: id,
         label: name,
       })),
-      name: "type",
+      name: "aidProgram=>aidCategory",
     },
-    {
-      label: t("Auth.MembershipRegistration.Statuses.Status"),
-      options: statuses,
-      name: "aidStatuses=>status",
-    },
+    // {
+    //   label: t("Auth.MembershipRegistration.Statuses.Status"),
+    //   options: statuses,
+    //   name: "aidStatuses=>status", fix
+    // },
   ];
 
   const actionButtons = [

@@ -156,11 +156,11 @@ const ApplicantsViewForSupervisor = () => {
   const provinces = getProvinces(t);
 
   const filters = [
-    {
-      label: t("Auth.MembershipRegistration.Statuses.Status"),
-      options: statuses,
-      name: "membershipStatuses=>status",
-    },
+    // {
+    //   label: t("Auth.MembershipRegistration.Statuses.Status"),
+    //   options: statuses,
+    //   name: "membershipStatuses=>status",
+    // }, replace by assigned research status
     {
       label: t("Auth.MembershipRegistration.Form.Nationality.Title"),
       options: nationalities,
