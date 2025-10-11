@@ -159,14 +159,14 @@ const AidsView = () => {
       label: t("Auth.Beneficiaries.BeneficiaryName"),
       options: selectOptions.beneficiaries
         .filter(({ status }) => status.status === "Accepted")
-        .map(({ id, fullName }) => ({
+        .map(({ id, fullName, fileNo }) => ({
           value: id,
-          label: fullName,
+          label: isAccountant ? fileNo : fullName,
         })),
       name: "beneficiary",
     },
     {
-      label: t("Auth.AidPrograms.Title"),
+      label: t("Auth.AidCategories.Title"),
       options: selectOptions.aidCategories.map(({ id, name }) => ({
         value: id,
         label: name,
