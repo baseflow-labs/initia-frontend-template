@@ -39,11 +39,13 @@ export const getVisitScheduleInputs = (
     type: "time",
     name: "time",
     required: true,
+    label: t("Auth.MembershipRegistration.Time"),
   },
   {
     type: "date",
     name: "date",
     required: true,
+    label: t("Auth.MembershipRegistration.Date"),
   },
   {
     type: "radio",
