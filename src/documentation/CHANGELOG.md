@@ -166,3 +166,7 @@
 
 - Merge pull request #146 from Shai-club/stg
 
+## v1.13.4 - 2025-10-16
+
+- Merge pull request #148 from Shai-club/stg
+
