@@ -82,27 +82,30 @@ export const getBasicDataInputs = (
     },
   ];
 
-  const familyInputs = [
-    {
+  if (
+    !formik ||
+    (formik.values.socialStatus !== "Single" &&
+      formik.values.nationality === "Saudi")
+  ) {
+    final.push({
       type: "file",
       fileSizeLimit: 2,
       name: "familyRecordPhoto",
       label: t("Auth.MembershipRegistration.Form.FamilyRecordPhoto"),
       required: true,
       halfCol: true,
-    },
-    {
+    });
+  }
+
+  if (!formik || formik.values.socialStatus !== "Single") {
+    final.push({
       type: "file",
       fileSizeLimit: 2,
       name: "guardianIdPhoto",
       label: t("Auth.MembershipRegistration.Form.GuardianIdPhoto"),
       required: true,
       halfCol: true,
-    },
-  ];
-
-  if (!formik || formik.values.socialStatus !== "Single") {
-    familyInputs.forEach((i) => final.push(i));
+    });
   } else {
     final.push({
       type: "file",
