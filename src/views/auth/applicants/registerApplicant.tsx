@@ -41,7 +41,7 @@ const RegisterApplicant = ({
             .then((res: any) => {
               if (user.role === "researcher") {
                 BeneficiaryApi.assignResearcher({
-                  beneficiary: res.payload.profile.id,
+                  beneficiary: [res.payload.profile.id],
                   staffUser: user.id,
                 })
                   .then(() => {
