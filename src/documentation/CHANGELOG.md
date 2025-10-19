@@ -170,3 +170,7 @@
 
 - Merge pull request #148 from Shai-club/stg
 
+## v1.13.5 - 2025-10-19
+
+- Merge pull request #150 from Shai-club/stg
+
