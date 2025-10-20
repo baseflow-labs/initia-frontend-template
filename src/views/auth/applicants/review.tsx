@@ -217,56 +217,84 @@ const BeneficiaryFormReview = () => {
   );
 
   const data = inputsData(t)
-    [tab]?.filter(({ type = "" }) => type !== "title" && type !== "file")
-    .map(({ name, label, type, options }) => {
-      if (beneficiary?.beneficiary) {
-        let beneficiaryData = beneficiary?.[tab];
+    [tab]?.filter(({ type = "" }) => type !== "title")
+    .reduce(
+      (
+        final: { id: string; field: string; status: string }[],
+        { name, label, type, options }
+      ) => {
+        if (beneficiary?.beneficiary) {
+          let beneficiaryData = beneficiary?.[tab];
 
-        if (tab === "housing" && Array.isArray(beneficiaryData)) {
-          beneficiaryData = beneficiaryData.find(
-            ({ id }: { id: string }) => housingTab === id
-          );
+          if (tab === "housing" && Array.isArray(beneficiaryData)) {
+            beneficiaryData = beneficiaryData.find(
+              ({ id }: { id: string }) => housingTab === id
+            );
+          }
+
+          if (tab === "dependents" && Array.isArray(beneficiaryData)) {
+            beneficiaryData = beneficiaryData.find(
+              ({ id }: { id: string }) => dependentTab === id
+            );
+          }
+
+          const dataReviewRow = dataReview.find((r) => {
+            if (r.property !== name || r.table !== tab) return false;
+            if (tab === "housing") {
+              return r.row === housingTab;
+            }
+            if (tab === "dependents") {
+              return r.row === dependentTab;
+            }
+            return true;
+          });
+
+          const status = dataReviewRow?.needUpdate
+            ? "Need Update"
+            : dataReviewRow?.confirm
+            ? "Confirmed"
+            : "In Preview";
+
+          if (type === "file") {
+            return [
+              ...final,
+              {
+                id: name,
+                field: t(label || ""),
+                note: dataReviewRow?.note,
+                status,
+                info: dataRender({
+                  row: { [name]: beneficiaryData?.[name] },
+                  data: "",
+                  type,
+                  options,
+                  name,
+                }),
+              },
+            ];
+          }
+
+          return [
+            ...final,
+            {
+              id: name,
+              field: t(label || ""),
+              note: dataReviewRow?.note,
+              status,
+              info: dataRender({
+                data: beneficiaryData?.[name],
+                type,
+                options,
+                name,
+              }),
+            },
+          ];
         }
 
-        if (tab === "dependents" && Array.isArray(beneficiaryData)) {
-          beneficiaryData = beneficiaryData.find(
-            ({ id }: { id: string }) => dependentTab === id
-          );
-        }
-
-        const dataReviewRow = dataReview.find((r) => {
-          if (r.property !== name || r.table !== tab) return false;
-          if (tab === "housing") {
-            return r.row === housingTab;
-          }
-          if (tab === "dependents") {
-            return r.row === dependentTab;
-          }
-          return true;
-        });
-
-        const status = dataReviewRow?.needUpdate
-          ? "Need Update"
-          : dataReviewRow?.confirm
-          ? "Confirmed"
-          : "In Preview";
-
-        return {
-          id: name,
-          field: t(label || ""),
-          note: dataReviewRow?.note,
-          status,
-          info: dataRender({
-            data: beneficiaryData?.[name],
-            type,
-            options,
-            name,
-          }),
-        };
-      }
-
-      return {};
-    });
+        return final;
+      },
+      []
+    );
 
   const onSubmit = () => {
     DataReviewApi.submitReview(
