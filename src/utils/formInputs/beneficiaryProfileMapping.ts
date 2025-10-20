@@ -2,6 +2,7 @@ import { InputSingleProps } from "../../components/form";
 import {
   getBasicDataInputs,
   getContactBankDataInputs,
+  getDebtsDataInputs,
   getDependantDataInputs,
   getHousingDataInputs,
   getIncomeQualificationDataInputs,
@@ -17,6 +18,8 @@ export function inputsData(t: Function): {
     contactsBank: getContactBankDataInputs(t),
 
     income: getIncomeQualificationDataInputs(t),
+
+    debts: getDebtsDataInputs(t),
 
     housing: getHousingDataInputs(t),
 
@@ -41,6 +44,11 @@ export const beneficiaryTabs = (t: (value: string) => string) => [
     id: "income",
     name: "income",
     title: t("Auth.MembershipRegistration.Form.QualificationData"),
+  },
+  {
+    id: "debts",
+    name: "debts",
+    title: t("Auth.Beneficiaries.Profile.DebtsData"),
   },
   {
     id: "housing",
