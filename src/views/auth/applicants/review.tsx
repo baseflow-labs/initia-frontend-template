@@ -53,6 +53,7 @@ const BeneficiaryFormReview = () => {
 
   const [beneficiary, setBeneficiary] = useState<any>();
   const [tab, setTab] = useState<string>("beneficiary");
+  const [debtTab, setDebtTab] = useState<string>("");
   const [housingTab, setHousingTab] = useState<string>("");
   const [dependentTab, setDependentTab] = useState<string>("");
   const [dataReview, setDataReview] = useState<ReviewProps[]>([]);
@@ -69,7 +70,16 @@ const BeneficiaryFormReview = () => {
 
         Object.keys(fieldsToShow).forEach((table) => {
           fieldsToShow[table].forEach(({ name, label }) => {
-            if (table === "housing") {
+            if (table === "debts") {
+              beneficiaryRes.payload.debts.forEach((h: { id: string }) => {
+                emptyReview.push({
+                  table,
+                  property: name,
+                  label,
+                  row: h.id,
+                });
+              });
+            } else if (table === "housing") {
               beneficiaryRes.payload.housing.forEach((h: { id: string }) => {
                 emptyReview.push({
                   table,
@@ -135,6 +145,12 @@ const BeneficiaryFormReview = () => {
   }, []);
 
   useLayoutEffect(() => {
+    if (tab === "debts" && beneficiary?.debts?.length && !debtTab) {
+      setDebtTab(beneficiary.debts[0].id);
+    }
+  }, [tab, debtTab]);
+
+  useLayoutEffect(() => {
     if (tab === "housing" && beneficiary?.housing?.length && !housingTab) {
       setHousingTab(beneficiary.housing[0].id);
     }
@@ -194,6 +210,21 @@ const BeneficiaryFormReview = () => {
     },
   ];
 
+  const debtTabs = beneficiary?.debts?.map(
+    (
+      {
+        id,
+      }: {
+        id: string;
+      },
+      i = 0
+    ) => ({
+      id,
+      name: id,
+      title: `الدين ${i + 1}`,
+    })
+  );
+
   const housingTabs = beneficiary?.housing?.map(
     ({
       id,
@@ -217,56 +248,93 @@ const BeneficiaryFormReview = () => {
   );
 
   const data = inputsData(t)
-    [tab]?.filter(({ type = "" }) => type !== "title" && type !== "file")
-    .map(({ name, label, type, options }) => {
-      if (beneficiary?.beneficiary) {
-        let beneficiaryData = beneficiary?.[tab];
+    [tab]?.filter(({ type = "" }) => type !== "title")
+    .reduce(
+      (
+        final: { id: string; field: string; status: string }[],
+        { name, label, type, options }
+      ) => {
+        if (beneficiary?.beneficiary) {
+          let beneficiaryData = beneficiary?.[tab];
 
-        if (tab === "housing" && Array.isArray(beneficiaryData)) {
-          beneficiaryData = beneficiaryData.find(
-            ({ id }: { id: string }) => housingTab === id
-          );
+          if (tab === "debts" && Array.isArray(beneficiaryData)) {
+            beneficiaryData = beneficiaryData.find(
+              ({ id }: { id: string }) => debtTab === id
+            );
+          }
+
+          if (tab === "housing" && Array.isArray(beneficiaryData)) {
+            beneficiaryData = beneficiaryData.find(
+              ({ id }: { id: string }) => housingTab === id
+            );
+          }
+
+          if (tab === "dependents" && Array.isArray(beneficiaryData)) {
+            beneficiaryData = beneficiaryData.find(
+              ({ id }: { id: string }) => dependentTab === id
+            );
+          }
+
+          const dataReviewRow = dataReview.find((r) => {
+            if (r.property !== name || r.table !== tab) return false;
+            if (tab === "debts") {
+              return r.row === debtTab;
+            }
+            if (tab === "housing") {
+              return r.row === housingTab;
+            }
+            if (tab === "dependents") {
+              return r.row === dependentTab;
+            }
+            return true;
+          });
+
+          const status = dataReviewRow?.needUpdate
+            ? "Need Update"
+            : dataReviewRow?.confirm
+            ? "Confirmed"
+            : "In Preview";
+
+          if (type === "file") {
+            return [
+              ...final,
+              {
+                id: name,
+                field: t(label || ""),
+                note: dataReviewRow?.note,
+                status,
+                info: dataRender({
+                  row: { [name]: beneficiaryData?.[name] },
+                  data: "",
+                  type,
+                  options,
+                  name,
+                }),
+              },
+            ];
+          }
+
+          return [
+            ...final,
+            {
+              id: name,
+              field: t(label || ""),
+              note: dataReviewRow?.note,
+              status,
+              info: dataRender({
+                data: beneficiaryData?.[name],
+                type,
+                options,
+                name,
+              }),
+            },
+          ];
         }
 
-        if (tab === "dependents" && Array.isArray(beneficiaryData)) {
-          beneficiaryData = beneficiaryData.find(
-            ({ id }: { id: string }) => dependentTab === id
-          );
-        }
-
-        const dataReviewRow = dataReview.find((r) => {
-          if (r.property !== name || r.table !== tab) return false;
-          if (tab === "housing") {
-            return r.row === housingTab;
-          }
-          if (tab === "dependents") {
-            return r.row === dependentTab;
-          }
-          return true;
-        });
-
-        const status = dataReviewRow?.needUpdate
-          ? "Need Update"
-          : dataReviewRow?.confirm
-          ? "Confirmed"
-          : "In Preview";
-
-        return {
-          id: name,
-          field: t(label || ""),
-          note: dataReviewRow?.note,
-          status,
-          info: dataRender({
-            data: beneficiaryData?.[name],
-            type,
-            options,
-            name,
-          }),
-        };
-      }
-
-      return {};
-    });
+        return final;
+      },
+      []
+    );
 
   const onSubmit = () => {
     DataReviewApi.submitReview(
@@ -314,6 +382,14 @@ const BeneficiaryFormReview = () => {
         setActiveTab={setTab}
       />
 
+      {tab === "debts" && (
+        <TabsHeader
+          tabs={debtTabs}
+          activeTab={debtTab}
+          setActiveTab={setDebtTab}
+        />
+      )}
+
       {tab === "housing" && (
         <TabsHeader
           tabs={housingTabs}
@@ -351,6 +427,8 @@ const BeneficiaryFormReview = () => {
                         ? row.row === dependentTab
                         : tab === "housing"
                         ? row.row === housingTab
+                        : tab === "debts"
+                        ? row.row === debtTab
                         : true);
 
                     return isSameRow
@@ -364,6 +442,8 @@ const BeneficiaryFormReview = () => {
                               ? dependentTab
                               : tab === "housing"
                               ? housingTab
+                              : tab === "debts"
+                              ? debtTab
                               : undefined,
                           needUpdate: false,
                           confirm: true,
@@ -387,6 +467,8 @@ const BeneficiaryFormReview = () => {
                       ? r.row === dependentTab
                       : tab === "housing"
                       ? r.row === housingTab
+                      : tab === "debts"
+                      ? r.row === debtTab
                       : true)
                 );
                 setUpdateModalData(match || {});
@@ -408,6 +490,8 @@ const BeneficiaryFormReview = () => {
                       ? r.row === dependentTab
                       : tab === "housing"
                       ? r.row === housingTab
+                      : tab === "debts"
+                      ? r.row === debtTab
                       : true)
                 );
                 if (archive.length) {
@@ -425,6 +509,8 @@ const BeneficiaryFormReview = () => {
                 ? r.row === dependentTab
                 : tab === "housing"
                 ? r.row === housingTab
+                : tab === "debts"
+                ? r.row === debtTab
                 : true)
           );
 
