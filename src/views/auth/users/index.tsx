@@ -1,6 +1,7 @@
 import { faUserGear } from "@fortawesome/free-solid-svg-icons";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+
 import * as UserApi from "../../../api/profile/user";
 import DemoLoginNote from "../../../layouts/auth/demoLoginNote";
 import TablePage from "../../../layouts/auth/pages/tablePage";
@@ -118,6 +119,14 @@ const UsersView = () => {
     getData({ page: 1, capacity: 10, search: e });
   };
 
+  const filters = [
+    {
+      label: t("Auth.Users.Role"),
+      options: getUserRoles(t).filter((r) => r.value !== "applicant"),
+      name: "role",
+    },
+  ];
+
   const actionButtons = [
     {
       label: t("Auth.Users.AddUser"),
@@ -131,6 +140,7 @@ const UsersView = () => {
 
       <TablePage
         title={t("Auth.Users.Title")}
+        filters={filters}
         actionButtons={actionButtons}
         columns={columns}
         onSearch={onSearch}

@@ -155,16 +155,16 @@ const AidsView = () => {
   const statuses = getAidStatuses(t);
 
   const filters = [
-    {
-      label: t("Auth.Beneficiaries.BeneficiaryName"),
-      options: selectOptions.beneficiaries
-        .filter(({ status }) => status.status === "Accepted")
-        .map(({ id, fullName, fileNo }) => ({
-          value: id,
-          label: isAccountant ? fileNo : fullName,
-        })),
-      name: "beneficiary",
-    },
+    // {
+    //   label: t("Auth.Beneficiaries.BeneficiaryName"),
+    //   options: selectOptions.beneficiaries
+    //     .filter(({ status }) => status.status === "Accepted")
+    //     .map(({ id, fullName, fileNo }) => ({
+    //       value: id,
+    //       label: isAccountant ? fileNo : fullName,
+    //     })),
+    //   name: "beneficiary",
+    // },
     {
       label: t("Auth.AidCategories.Title"),
       options: selectOptions.aidCategories.map(({ id, name }) => ({
