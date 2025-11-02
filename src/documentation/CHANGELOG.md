@@ -182,3 +182,7 @@
 
 - Merge pull request #154 from Shai-club/stg
 
+## v1.15.0 - 2025-11-02
+
+- Refactor form submission to exclude category
+
