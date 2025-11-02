@@ -59,7 +59,7 @@ const HousingsFormView = ({
       );
     }
 
-    return errors;category
+    return errors;
   };
 
   return (
@@ -80,7 +80,7 @@ const HousingsFormView = ({
               }
               customValidate={validateNationalAddressNumber}
               initialValues={record}
-              onFormSubmit={({category, ...e}, resetForm) => {
+              onFormSubmit={({ category, ...e }, resetForm) => {
                 HousingApi.createOrUpdate({
                   beneficiary,
                   ...e,
