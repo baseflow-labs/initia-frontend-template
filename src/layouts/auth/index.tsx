@@ -4,23 +4,13 @@ import { Navigate, Route, Routes, useLocation } from "react-router";
 import { Fragment } from "react/jsx-runtime";
 
 import {
-  aidsIcon,
   beneficiariesIcon,
   dashboardIcon,
-  infoIcon,
-  membershipFormIcon,
-  profileIcon,
   settingsIcon,
-  visitReportIcon,
-  visitsIcon,
 } from "../../assets/icons/icons";
 import { useAppSelector } from "../../store/hooks";
 import { useWindowWidth } from "../../utils/hooks";
 import DashboardView from "../../views/auth/dashboard";
-import DashboardAccountantView from "../../views/auth/dashboard/accountant";
-import DashboardAdminView from "../../views/auth/dashboard/admin";
-import DashboardResearcherView from "../../views/auth/dashboard/researcher";
-import DashboardSupervisorView from "../../views/auth/dashboard/supervisor";
 import SettingsPage from "../../views/auth/settings";
 import UserMgmtPage from "../../views/auth/users";
 import DemoWarning from "./demoWarning";
@@ -52,42 +42,9 @@ const AuthLayout = () => {
     {
       name: t("Auth.Dashboard.Title"),
       route: "/dashboard",
-      view: <DashboardAdminView />,
-      showInNav: true,
-      icon: dashboardIcon,
-      users: ["admin"],
-    },
-    {
-      name: t("Auth.Dashboard.Title"),
-      route: "/dashboard",
       view: <DashboardView />,
       showInNav: true,
       icon: dashboardIcon,
-      users: ["beneficiary"],
-    },
-    {
-      name: t("Auth.Dashboard.Title"),
-      route: "/dashboard",
-      view: <DashboardSupervisorView />,
-      showInNav: true,
-      icon: dashboardIcon,
-      users: ["ceo", "hod"],
-    },
-    {
-      name: t("Auth.Dashboard.Title"),
-      route: "/dashboard",
-      view: <DashboardResearcherView />,
-      showInNav: true,
-      icon: dashboardIcon,
-      users: ["researcher"],
-    },
-    {
-      name: t("Auth.Dashboard.Title"),
-      route: "/dashboard",
-      view: <DashboardAccountantView />,
-      showInNav: true,
-      icon: dashboardIcon,
-      users: ["accountant"],
     },
     {
       name: t("Auth.Users.Title"),
@@ -95,7 +52,6 @@ const AuthLayout = () => {
       view: <UserMgmtPage />,
       showInNav: true,
       icon: beneficiariesIcon,
-      users: ["admin"],
     },
     {
       name: t("Auth.Settings.Title"),
@@ -103,17 +59,16 @@ const AuthLayout = () => {
       view: <SettingsPage />,
       icon: settingsIcon,
       fixed: true,
-      users: ["ceo", "beneficiary", "researcher", "hod", "accountant", "admin"],
     },
   ];
 
   const showSidebar = !location.pathname.includes("apply");
 
-  const filteredRoutes = authRoutes.filter(({ users }) =>
-    users.includes(user.role)
-  );
+  // const filteredRoutes = authRoutes.filter(({ users }) =>
+  //   users.includes(user.role)
+  // );
 
-  const filteredFixedRoutes = filteredRoutes.filter(({ fixed }) => fixed);
+  const filteredFixedRoutes = authRoutes.filter(({ fixed }) => fixed);
 
   const toggleSidebar = () => setCollapsed((current) => !current);
 
@@ -121,7 +76,7 @@ const AuthLayout = () => {
     <Fragment>
       <OffCanvasNav
         fixedRoutes={filteredFixedRoutes}
-        routes={filteredRoutes
+        routes={authRoutes
           .filter(({ showInNav }) => showInNav)
           .map(({ view, ...rest }) => ({ ...rest }))}
       />
@@ -140,7 +95,7 @@ const AuthLayout = () => {
               collapsed={collapsed}
               toggleSidebar={toggleSidebar}
               fixedRoutes={filteredFixedRoutes}
-              routes={filteredRoutes
+              routes={authRoutes
                 .filter(({ showInNav }) => showInNav)
                 .map(({ view, ...rest }) => ({ ...rest }))}
             />
@@ -173,7 +128,7 @@ const AuthLayout = () => {
 
           <div className="p-0 px-2 px-lg-5 w-100">
             <Routes>
-              {filteredRoutes.map(({ name, route, view }, i) => (
+              {authRoutes.map(({ name, route, view }, i) => (
                 <Route path={route} element={view} key={i} />
               ))}
 
