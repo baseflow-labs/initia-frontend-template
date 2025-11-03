@@ -1,6 +1,17 @@
 # Mustaheq Frontend App
 
-A frontend application for Mustaheq — the eligibility and entitlements platform — built with modern TypeScript and React-based tooling.
+## To Do
+
+- Build Fixed Example Page
+- Build Fixed Views of
+  - User Profile
+  - Settings & Support Page
+  - Dashboard
+- Add Token Refresh to Auth API Setup
+- Build Dynamic Access Roles (API Integration)
+- Centralize identity control (theme color, logo ,name)
+- Fix changelog generating script
+- Update documentation (read me, commit convention)
 
 ## 🚀 Getting Started
 
@@ -17,12 +28,12 @@ A frontend application for Mustaheq — the eligibility and entitlements platfor
 - Copy .env.example to .env
 - Update the following variables:
 
-| Key                               | Value (Dev)                                     | Value (Stg)                                     | Value (Prod)                       |
-| --------------------------------- | ----------------------------------------------- | -----------------------------------             | ---------------------------------- |
-| `REACT_APP_BACKEND_URL`           | `http://127.0.0.1:8000`                         | `https://demo-api.mustaheq.org/`                | `https://zad-api.mustaheq.org/`    |
-| `REACT_APP_STORAGE_DIRECTORY_URL` | `http://mustaheq.oss-me-central-1.aliyuncs.com` | `http://mustaheq.oss-me-central-1.aliyuncs.com` | `https://assets.mustaheq.org/`     |
-| `REACT_APP_GOOGLE_MAP_API_KEY`    | `AIzaSyAgboGKtbUjn8v5EW1KG4ofubRCQkok3w4`       | `AIzaSyAgboGKtbUjn8v5EW1KG4ofubRCQkok3w4`       | `googleMapApiKeyProvidedByGoogle`  |
-| `REACT_APP_ENVIRONMENT`           | `staging`                                       | `staging`                                       | `production`                       |
+| Key                               | Value (Dev)                                     | Value (Stg)                                     | Value (Prod)                      |
+| --------------------------------- | ----------------------------------------------- | ----------------------------------------------- | --------------------------------- |
+| `REACT_APP_BACKEND_URL`           | `http://127.0.0.1:8000`                         | `https://demo-api.mustaheq.org/`                | `https://zad-api.mustaheq.org/`   |
+| `REACT_APP_STORAGE_DIRECTORY_URL` | `http://mustaheq.oss-me-central-1.aliyuncs.com` | `http://mustaheq.oss-me-central-1.aliyuncs.com` | `https://assets.mustaheq.org/`    |
+| `REACT_APP_GOOGLE_MAP_API_KEY`    | `AIzaSyAgboGKtbUjn8v5EW1KG4ofubRCQkok3w4`       | `AIzaSyAgboGKtbUjn8v5EW1KG4ofubRCQkok3w4`       | `googleMapApiKeyProvidedByGoogle` |
+| `REACT_APP_ENVIRONMENT`           | `staging`                                       | `staging`                                       | `production`                      |
 
 ### 3. Run the App
 
@@ -35,16 +46,16 @@ A frontend application for Mustaheq — the eligibility and entitlements platfor
 ### 📦 Project Structure
 
 src/
-  api/
-  assets/
-  components/
-  documentation/
-  layouts/
-  store/
-  styles/
-  types/
-  utils/
-  views/
+api/
+assets/
+components/
+documentation/
+layouts/
+store/
+styles/
+types/
+utils/
+views/
 
 ### 💬 Commit Message Convention
 
@@ -85,9 +96,9 @@ Output will be in the build/ directory, ready for deployment.
 
 ### 🔐 Environment Profiles
 
-| Profile           | Description               |
-| ----------------- | ------------------------- |
-| `.env`            | Default/local development |
+| Profile | Description               |
+| ------- | ------------------------- |
+| `.env`  | Default/local development |
 
 ### 📤 Deployment
 
