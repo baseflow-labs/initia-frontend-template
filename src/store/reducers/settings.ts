@@ -18,7 +18,7 @@ export type Action =
 
 const initialState: State = {
   fontSize: parseInt(localStorage.getItem("fontSize") || "") || 15,
-  name: localStorage.getItem("name") || "Society",
+  name: localStorage.getItem("name") || "App X",
   logo: localStorage.getItem("logo") || "/samples/logo.png",
   phoneNumber: localStorage.getItem("phoneNumber") || "",
 };

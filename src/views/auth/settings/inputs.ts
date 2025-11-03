@@ -37,7 +37,7 @@ export const metadataSettingInputs = (t: Function) => {
     {
       type: "text",
       name: "name",
-      label: t("Auth.Settings.SocietyName"),
+      label: t("Auth.Settings.AppName"),
       required: true,
     },
     {
@@ -45,14 +45,14 @@ export const metadataSettingInputs = (t: Function) => {
       fileSizeLimit: 2,
       maxFiles: 1,
       name: "logo",
-      label: t("Auth.Settings.SocietyLogo"),
+      label: t("Auth.Settings.AppLogo"),
       required: true,
     },
     {
       type: "phoneNumber",
       name: "phoneNumber",
-      label: t("Auth.Settings.SocietyPhoneNumber"),
-      labelNote: t("Auth.Settings.SocietyPhoneNumberNote"),
+      label: t("Auth.Settings.AppPhoneNumber"),
+      labelNote: t("Auth.Settings.AppPhoneNumberNote"),
       required: true,
     },
   ];
