@@ -14,6 +14,7 @@ import SettingsPage from "../../views/auth/settings";
 import UserMgmtPage from "../../views/auth/users";
 import DemoWarning from "./demoWarning";
 import { FilePreviewModal } from "./globalModal";
+import DashboardNavbar from "./navs/navbar";
 import OffCanvasNav from "./navs/offcanvasNav";
 import Sidebar from "./navs/sidebarNav";
 
@@ -61,6 +62,8 @@ const AuthLayout = () => {
 
   return (
     <Fragment>
+      <DashboardNavbar showNav={true} />
+
       <OffCanvasNav
         fixedRoutes={filteredFixedRoutes}
         routes={authRoutes

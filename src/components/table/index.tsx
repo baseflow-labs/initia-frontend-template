@@ -19,17 +19,17 @@ import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
+import service, { customFilterProps, formatGetFilters } from "../../api";
 import { riyalIcon } from "../../assets/icons/icons";
 import i18n from "../../i18next";
 import { triggerFilePreview } from "../../layouts/auth/globalModal";
 import { addNotification } from "../../store/actions/notifications";
 import { viewDateFormat, viewTimeFormat } from "../../utils/consts";
-import { commaNumbers } from "../../utils/function";
-import DropdownComp from "../dropdown";
-import TooltipComp from "../tooltip";
-import service, { customFilterProps, formatGetFilters } from "../../api";
-import InputComp from "../form/Input";
+import { apiCatchGlobalHandler, commaNumbers } from "../../utils/function";
 import Button from "../core/button";
+import DropdownComp from "../dropdown";
+import InputComp from "../form/Input";
+import TooltipComp from "../tooltip";
 
 export interface actionProps {
   label: string;
@@ -283,7 +283,8 @@ const DynamicTable = ({
       .then((res: any) => {
         setData(res.payload);
         setPaginationMeta(res.extra.paginationMeta);
-      });
+      })
+      .catch(apiCatchGlobalHandler);
   };
 
   useLayoutEffect(() => {
