@@ -2,7 +2,7 @@ import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
-import * as UserApi from "../../../api/profile/user";
+import * as UserApi from "../../../api/users";
 import Button from "../../../components/core/button";
 import Modal from "../../../components/modal";
 import { addNotification } from "../../../store/actions/notifications";

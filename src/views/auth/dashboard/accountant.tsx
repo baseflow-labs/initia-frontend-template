@@ -7,7 +7,7 @@ import {
 import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import * as OverviewApi from "../../../api/overview";
+import * as OverviewApi from "../../../api/dashboard";
 import DashboardCards from "../../../components/card/statisticCards";
 import TabsComp from "../../../components/tab";
 import PageTemplate from "../../../layouts/auth/pages/pageTemplate";

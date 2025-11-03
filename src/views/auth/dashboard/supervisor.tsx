@@ -7,7 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useLayoutEffect, useState } from "react";
 
-import * as OverviewApi from "../../../api/overview";
+import * as OverviewApi from "../../../api/dashboard";
 import profilePhotoPlaceholder from "../../../assets/images/profile-image-placeholder.png";
 import DashboardCards from "../../../components/card/statisticCards";
 import UsersCard from "../../../components/card/usersCard";

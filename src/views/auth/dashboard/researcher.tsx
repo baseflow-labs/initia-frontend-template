@@ -6,7 +6,7 @@ import {
 import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import * as OverviewApi from "../../../api/overview";
+import * as OverviewApi from "../../../api/dashboard";
 import MapCard, { LocationProps } from "../../../components/card/mapCard";
 import DashboardCards from "../../../components/card/statisticCards";
 import TasksCard from "../../../components/card/tasksCard";

@@ -5,8 +5,8 @@ import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
-import * as OverviewApi from "../../../api/overview";
-import * as UserApi from "../../../api/profile/beneficiary";
+import * as OverviewApi from "../../../api/dashboard";
+import * as UserApi from "../../../api/users/beneficiary";
 import { helpIcon } from "../../../assets/icons/icons";
 import IconWrapperComp from "../../../assets/icons/wrapper";
 import profilePhotoPlaceholder from "../../../assets/images/profile-image-placeholder.png";

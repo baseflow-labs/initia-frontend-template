@@ -2,7 +2,7 @@ import { faUserGear } from "@fortawesome/free-solid-svg-icons";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import * as UserApi from "../../../api/profile/user";
+import * as UserApi from "../../../api/users";
 import DemoLoginNote from "../../../layouts/auth/demoLoginNote";
 import TablePage from "../../../layouts/auth/pages/tablePage";
 import { User } from "../../../types/beneficiaries";
