@@ -7,62 +7,35 @@ import PageTemplate from "./pageTemplate";
 
 interface Props extends TableProps {
   title: string;
-  filters?: {
-    name: string;
-    label: string;
-    options: { value: string; label?: string }[];
-    multi?: boolean;
-  }[];
   actionButtons?: ActionButtonProps[];
-  onGetData: (values: any) => Promise<any>;
-  tableActions?: (id?: string) => actionProps[];
-  onSearch?: (e: string) => void;
-  searchPlaceholder?: string;
-  paginationMeta: {
-    page: number;
-    capacity: number;
-    count: number;
-    pagesCount: number;
-  };
+  tableExtraActions?: (id?: string) => actionProps[];
 }
 
 const TablePage = ({
   title,
-  filters,
   actionButtons,
   columns,
-  data,
-  onGetData,
-  tableActions,
-  paginationMeta,
-  onSearch,
+  dataApiEndpoint,
+  tableExtraActions,
+  searchProp,
   searchPlaceholder,
+  includeCreate,
+  includeView,
+  includeUpdate,
+  includeDelete,
 }: Props) => {
   return (
-    <PageTemplate
-      title={title}
-      filters={filters}
-      actionButtons={actionButtons}
-      onSearch={onSearch}
-      searchPlaceholder={searchPlaceholder}
-      onGetData={(filters) => {
-        const mergedFilters = filters || {};
-        onGetData({
-          filters: mergedFilters,
-          page: 1,
-          capacity: paginationMeta.capacity,
-        });
-      }}
-    >
+    <PageTemplate title={title} actionButtons={actionButtons}>
       <DynamicTable
+        dataApiEndpoint={dataApiEndpoint}
         columns={columns}
-        data={data}
-        onPageChange={(page, capacity) => {
-          onGetData({ filters: {}, page, capacity });
-        }}
-        actions={tableActions}
-        size={paginationMeta.capacity}
-        paginationMeta={paginationMeta}
+        extraActions={tableExtraActions}
+        searchProp={searchProp}
+        searchPlaceholder={searchPlaceholder}
+        includeCreate={includeCreate}
+        includeDelete={includeDelete}
+        includeUpdate={includeUpdate}
+        includeView={includeView}
       />
     </PageTemplate>
   );

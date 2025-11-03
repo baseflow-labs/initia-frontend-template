@@ -15,7 +15,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
-import { Fragment, useState } from "react";
+import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
@@ -27,6 +27,9 @@ import { viewDateFormat, viewTimeFormat } from "../../utils/consts";
 import { commaNumbers } from "../../utils/function";
 import DropdownComp from "../dropdown";
 import TooltipComp from "../tooltip";
+import service, { customFilterProps, formatGetFilters } from "../../api";
+import InputComp from "../form/Input";
+import Button from "../core/button";
 
 export interface actionProps {
   label: string;
@@ -49,17 +52,15 @@ export interface TableProps {
     options?: { value: string; label?: string }[];
     moneyUnit?: boolean;
   }[];
-  data: { id?: string }[];
-  onPageChange: (page: number, size: number) => void;
-  noPagination?: boolean;
   fitHeight?: boolean;
-  actions?: (id?: string) => actionProps[];
-  paginationMeta?: {
-    page: number;
-    capacity: number;
-    count: number;
-    pagesCount: number;
-  };
+  extraActions?: (id?: string) => actionProps[];
+  dataApiEndpoint: string;
+  includeCreate?: boolean;
+  includeView?: boolean;
+  includeUpdate?: boolean;
+  includeDelete?: boolean;
+  searchProp?: string;
+  searchPlaceholder?: string;
 }
 
 interface Props {
@@ -236,39 +237,135 @@ export const dataRender = ({
 
 const DynamicTable = ({
   columns,
-  data,
-  onPageChange,
-  actions,
+  extraActions,
   size = 10,
-  noPagination,
   fitHeight,
-  paginationMeta,
+  dataApiEndpoint,
+  searchProp,
+  searchPlaceholder,
+  includeCreate,
+  includeView,
+  includeUpdate,
+  includeDelete,
 }: TableProps) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const [pageSize, setPageSize] = useState(size);
-
-  const pageNumber = paginationMeta?.page || 1;
-  const pagesCount = paginationMeta?.pagesCount || 1;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [data, setData] = useState<{ id?: string }[]>([]);
+  const [currentFilters, setCurrentFilters] = useState<customFilterProps[]>([]);
+  const [currentSearch, setCurrentSearch] = useState("");
+  const [paginationMeta, setPaginationMeta] = useState({
+    page: 1,
+    capacity: 10,
+    count: 0,
+    pagesCount: 1,
+  });
 
   const onPageNumberChange = (i = 0) => {
-    onPageChange(i, pageSize);
+    setCurrentPage(i);
   };
 
   const onPageSizeChange = (i = 0) => {
-    onPageChange(1, i);
     setPageSize(i);
   };
+
+  const getData = async () => {
+    service
+      .get(dataApiEndpoint, {
+        params: {
+          ...formatGetFilters(columns, currentFilters),
+          page: currentPage,
+          capacity: pageSize,
+        },
+      })
+      .then((res: any) => {
+        setData(res.payload);
+        setPaginationMeta(res.extra.paginationMeta);
+      });
+  };
+
+  useLayoutEffect(() => {
+    getData();
+  }, []);
+
+  const defaultActionsIncluded = [
+    includeView,
+    includeUpdate,
+    includeDelete,
+  ].filter(Boolean);
+  const haveDefaultActions = defaultActionsIncluded.length > 0;
+
+  const SpreadActionView = ({
+    onClick,
+    label,
+    icon,
+    disabled,
+    disabledMsg,
+    color,
+    row,
+  }: any) => (
+    <h4>
+      <TooltipComp label={label}>
+        <FontAwesomeIcon
+          icon={icon}
+          role="button"
+          className={
+            "me-1" +
+            (" text-" + (disabled ? "secondary" : color || "secondary"))
+          }
+          onClick={
+            disabled
+              ? () => {
+                  dispatch(
+                    addNotification({
+                      type: "err",
+                      msg: disabledMsg || t("Global.Form.CantDoIt"),
+                    })
+                  );
+                }
+              : () => onClick(row?.id || "")
+          }
+        />
+      </TooltipComp>
+    </h4>
+  );
 
   return (
     <div
       className="overflow-x-auto mx-auto"
       style={{ maxWidth: "90vw", minHeight: fitHeight ? undefined : "60vh" }}
     >
+      {includeCreate ? (
+        <div>
+          <Button>{t("Global.Form.Labels.CreateNew")}</Button>
+        </div>
+      ) : (
+        ""
+      )}
+
       <div className="table-responsive">
         <table className="table mt-4 w-100">
           <thead className="table-light">
+            {searchProp ? (
+              <tr>
+                <th>
+                  <InputComp
+                    name="search"
+                    placeholder={
+                      searchPlaceholder ??
+                      t("Global.Placeholders.Search", { prop: searchProp })
+                    }
+                    value={currentSearch}
+                    onChange={(e) => setCurrentSearch(e.target.value)}
+                  />
+                </th>
+              </tr>
+            ) : (
+              ""
+            )}
+
             <tr>
               <th className="py-3" scope="col">
                 #
@@ -280,7 +377,8 @@ const DynamicTable = ({
                 </th>
               ))}
 
-              {actions && actions()?.length ? (
+              {(extraActions && extraActions()?.length) ||
+              haveDefaultActions ? (
                 <th className="py-3" scope="col">
                   {t("Global.Labels.Action")}
                 </th>
@@ -301,7 +399,7 @@ const DynamicTable = ({
 
             {data.map((row, i) => (
               <tr className="align-middle" key={i}>
-                <td className="py-3">{i + pageSize * (pageNumber - 1) + 1}</td>
+                <td className="py-3">{i + pageSize * (currentPage - 1) + 1}</td>
 
                 {columns.map(
                   (
@@ -323,56 +421,74 @@ const DynamicTable = ({
                   )
                 )}
 
-                {actions && actions()?.length ? (
+                {(extraActions && extraActions()?.length) ||
+                haveDefaultActions ? (
                   <td className="py-3">
                     <div className="d-flex">
-                      {actions(row.id)
-                        .filter(({ spread }) => spread)
-                        .map(
-                          (
-                            {
-                              icon,
-                              label,
-                              onClick,
-                              color,
-                              disabled,
-                              disabledMsg,
-                            },
-                            y
-                          ) => (
-                            <h4 key={y}>
-                              <TooltipComp label={label}>
-                                <FontAwesomeIcon
-                                  icon={icon}
-                                  role="button"
-                                  className={
-                                    "me-1" +
-                                    (" text-" +
-                                      (disabled
-                                        ? "secondary"
-                                        : color || "secondary"))
-                                  }
-                                  onClick={
-                                    disabled
-                                      ? () => {
-                                          dispatch(
-                                            addNotification({
-                                              type: "err",
-                                              msg:
-                                                disabledMsg ||
-                                                t("Global.Form.CantDoIt"),
-                                            })
-                                          );
-                                        }
-                                      : () => onClick(row?.id || "")
-                                  }
-                                />
-                              </TooltipComp>
-                            </h4>
-                          )
-                        )}
+                      {extraActions &&
+                        extraActions(row.id)
+                          .filter(({ spread }) => spread)
+                          .map(
+                            (
+                              {
+                                icon,
+                                label,
+                                onClick,
+                                color,
+                                disabled,
+                                disabledMsg,
+                              },
+                              y
+                            ) => (
+                              <SpreadActionView
+                                key={y}
+                                onClick={onClick}
+                                label={label}
+                                icon={icon}
+                                color={color}
+                                disabled={disabled}
+                                disabledMsg={disabledMsg}
+                                row={row}
+                              />
+                            )
+                          )}
 
-                      {actions(row.id).filter(({ spread }) => !spread)
+                      {defaultActionsIncluded.includes(true) && (
+                        <Fragment>
+                          {includeView && (
+                            <SpreadActionView
+                              onClick={() => {}}
+                              label={t("Global.Form.Labels.View")}
+                              icon={faEye}
+                              color="info"
+                              row={row}
+                            />
+                          )}
+
+                          {includeUpdate && (
+                            <SpreadActionView
+                              onClick={() => {}}
+                              label={t("Global.Form.Labels.Edit")}
+                              icon={faEnvelope}
+                              color="warning"
+                              row={row}
+                            />
+                          )}
+
+                          {includeDelete && (
+                            <SpreadActionView
+                              onClick={() => {}}
+                              label={t("Global.Form.Labels.Delete")}
+                              icon={faStar}
+                              color="danger"
+                              row={row}
+                            />
+                          )}
+                        </Fragment>
+                      )}
+
+                      {extraActions &&
+                      extraActions(row.id).filter(({ spread }) => !spread)
                         .length ? (
                         <DropdownComp
                           start
@@ -382,7 +498,7 @@ const DynamicTable = ({
                               className="ms-1"
                             />
                           }
-                          list={actions(row.id)
+                          list={extraActions(row.id)
                             .filter(({ spread }) => !spread)
                             .map(({ icon, label, onClick }) => ({
                               onClick: () => onClick(row.id || ""),
@@ -409,12 +525,14 @@ const DynamicTable = ({
             ))}
           </tbody>
 
-          {!noPagination && data.length !== 0 && (
+          {data.length !== 0 && (
             <tfoot>
               <tr>
                 <th
                   colSpan={
-                    columns.length + 1 + (actions && actions()?.length ? 1 : 0)
+                    columns.length +
+                    1 +
+                    (extraActions && extraActions()?.length ? 1 : 0)
                   }
                 >
                   <div className="d-flex justify-content-between">
@@ -422,8 +540,8 @@ const DynamicTable = ({
                       <small>
                         {t("Global.Labels.Showing")}{" "}
                         {data.length > 0
-                          ? `${(pageNumber - 1) * pageSize + 1} – ${Math.min(
-                              pageNumber * pageSize,
+                          ? `${(currentPage - 1) * pageSize + 1} – ${Math.min(
+                              currentPage * pageSize,
                               paginationMeta?.count || data.length
                             )}`
                           : 0}{" "}
@@ -439,10 +557,10 @@ const DynamicTable = ({
                           <li className="page-item my-auto">
                             <button
                               className={`page-link text-${
-                                pageNumber === 1 ? "secondary" : "info"
+                                currentPage === 1 ? "secondary" : "info"
                               } border-0 px-3`}
                               onClick={() => onPageNumberChange(1)}
-                              disabled={pageNumber === 1}
+                              disabled={currentPage === 1}
                             >
                               <FontAwesomeIcon icon={faAnglesRight} />
                             </button>
@@ -451,21 +569,31 @@ const DynamicTable = ({
                           <li className="page-item my-auto">
                             <button
                               className={`page-link text-${
-                                pageNumber === 1 ? "secondary" : "info"
+                                currentPage === 1 ? "secondary" : "info"
                               } border-0 px-3`}
-                              onClick={() => onPageNumberChange(pageNumber - 1)}
-                              disabled={pageNumber === 1}
+                              onClick={() =>
+                                onPageNumberChange(currentPage - 1)
+                              }
+                              disabled={currentPage === 1}
                             >
                               <FontAwesomeIcon icon={faAngleRight} />
                             </button>
                           </li>
 
                           {Array.from(
-                            { length: Math.min(5, pagesCount) },
+                            {
+                              length: Math.min(
+                                5,
+                                paginationMeta?.pagesCount || 0
+                              ),
+                            },
                             (_, i) => {
                               let pageOffset = Math.max(
                                 0,
-                                Math.min(pageNumber - 3, pagesCount - 5)
+                                Math.min(
+                                  currentPage - 3,
+                                  paginationMeta?.pagesCount - 5
+                                )
                               );
                               const page = i + 1 + pageOffset;
 
@@ -473,7 +601,7 @@ const DynamicTable = ({
                                 <li className="page-item my-auto" key={i}>
                                   <button
                                     className={`page-link border-0 rounded-2 me-1 ${
-                                      pageNumber === page
+                                      currentPage === page
                                         ? "bg-info"
                                         : "border-info text-info"
                                     }`}
@@ -489,10 +617,16 @@ const DynamicTable = ({
                           <li className="page-item my-auto">
                             <button
                               className={`page-link text-${
-                                pageNumber === pagesCount ? "secondary" : "info"
+                                currentPage === paginationMeta?.pagesCount
+                                  ? "secondary"
+                                  : "info"
                               } border-0 px-3`}
-                              onClick={() => onPageNumberChange(pageNumber + 1)}
-                              disabled={pageNumber === pagesCount}
+                              onClick={() =>
+                                onPageNumberChange(currentPage + 1)
+                              }
+                              disabled={
+                                currentPage === paginationMeta?.pagesCount
+                              }
                             >
                               <FontAwesomeIcon icon={faAngleLeft} />
                             </button>
@@ -501,10 +635,16 @@ const DynamicTable = ({
                           <li className="page-item my-auto">
                             <button
                               className={`page-link text-${
-                                pageNumber === pagesCount ? "secondary" : "info"
+                                currentPage === paginationMeta?.pagesCount
+                                  ? "secondary"
+                                  : "info"
                               } border-0 px-3`}
-                              onClick={() => onPageNumberChange(pagesCount)}
-                              disabled={pageNumber === pagesCount}
+                              onClick={() =>
+                                onPageNumberChange(paginationMeta?.pagesCount)
+                              }
+                              disabled={
+                                currentPage === paginationMeta?.pagesCount
+                              }
                             >
                               <FontAwesomeIcon icon={faAnglesLeft} />
                             </button>
@@ -521,12 +661,12 @@ const DynamicTable = ({
                               </small>
 
                               <input
-                                value={pageNumber}
+                                value={currentPage}
                                 className="form-control ms-1"
                                 style={{ width: "55px" }}
                                 type="number"
                                 min={1}
-                                max={pagesCount}
+                                max={paginationMeta?.pagesCount}
                                 onChange={(e) =>
                                   onPageNumberChange(parseInt(e.target.value))
                                 }

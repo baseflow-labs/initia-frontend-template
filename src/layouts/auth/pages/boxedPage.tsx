@@ -9,7 +9,7 @@ const BoxedPage = ({
   hideHeader = false,
 }) => {
   return (
-    <PageTemplate hideHeader={hideHeader}>
+    <PageTemplate>
       <CardComp className={className} style={{ maxWidth: "750px" }}>
         <Fragment>
           <h3>{title}</h3>

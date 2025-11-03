@@ -8,7 +8,6 @@ import {
   dashboardIcon,
   settingsIcon,
 } from "../../assets/icons/icons";
-import { useAppSelector } from "../../store/hooks";
 import { useWindowWidth } from "../../utils/hooks";
 import DashboardView from "../../views/auth/dashboard";
 import SettingsPage from "../../views/auth/settings";
@@ -21,20 +20,8 @@ import Sidebar from "./navs/sidebarNav";
 const AuthLayout = () => {
   const { t, i18n } = useTranslation();
   const location = useLocation();
-  const { user } = useAppSelector((state) => state.auth);
   const width = useWindowWidth();
   const isPc = width > 992;
-
-  const isUnacceptedBeneficiary =
-    user.role === "beneficiary" &&
-    (!user.status ||
-      user.status === "Incomplete" ||
-      user.status === "Need Help");
-
-  const denyMembershipFormPageAccess =
-    user.role === "beneficiary" &&
-    user.status !== "Incomplete" &&
-    user.status !== "Need Help";
 
   const [collapsed, setCollapsed] = useState(false);
 
