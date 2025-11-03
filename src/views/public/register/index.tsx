@@ -6,31 +6,11 @@ import Form from "../../../components/form";
 import { login } from "../../../store/actions/auth";
 import { addNotification } from "../../../store/actions/notifications";
 import { apiCatchGlobalHandler } from "../../../utils/function";
+import { formInputs } from "./inputs";
 
 const RegisterView = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-
-  const formInputs = () => [
-    {
-      type: "phoneNumber",
-      name: "identifier",
-      label: t("Public.Register.Labels.PhoneNo"),
-      required: true,
-    },
-    {
-      type: "password",
-      name: "password",
-      label: t("Public.Register.Labels.Password"),
-      required: true,
-    },
-    {
-      type: "password",
-      name: "passwordConfirmation",
-      label: t("Public.Register.Labels.PasswordConfirmation"),
-      required: true,
-    },
-  ];
 
   const onSubmit = (values: authApi.registerProps) => {
     authApi
@@ -51,7 +31,7 @@ const RegisterView = () => {
   return (
     <div>
       <Form
-        inputs={formInputs}
+        inputs={() => formInputs(t)}
         submitText={t("Public.Register.Labels.Register")}
         onFormSubmit={onSubmit}
       />
