@@ -8,7 +8,7 @@ module.exports = {
         "auth",
         "aids",
         "applicants",
-        "beneficiaries",
+        "users",
         "profile",
         "membershipForm",
         "dashboard",

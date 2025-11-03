@@ -93,8 +93,8 @@ const LoginView = () => {
       type: "researcher",
     },
     {
-      label: t("Public.Login.Labels.LoginAsBeneficiary"),
-      type: "beneficiary",
+      label: t("Public.Login.Labels.LoginAsUser"),
+      type: "user",
     },
     {
       label: t("Public.Login.Labels.LoginAsApplicant"),

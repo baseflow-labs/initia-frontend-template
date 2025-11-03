@@ -2,7 +2,7 @@ import {
   aidsIcon,
   archiveIcon,
   attachmentIcon,
-  beneficiariesIcon,
+  usersIcon,
   contactIcon,
   contactUsIcon,
   dashboardIcon,
@@ -50,7 +50,7 @@ interface Props {
     | "aids"
     | "archive"
     | "attachment"
-    | "beneficiaries"
+    | "users"
     | "menuBars"
     | "dashboard"
     | "date"
@@ -102,8 +102,8 @@ const IconComp = ({ icon }: Props) => {
         return archiveIcon;
       case "attachment":
         return attachmentIcon;
-      case "beneficiaries":
-        return beneficiariesIcon;
+      case "users":
+        return usersIcon;
       case "menuBars":
         return menuBarsIcon;
       case "dashboard":

@@ -20,8 +20,8 @@ export const getUserRoles = (t: Function) => [
     label: t("Global.Labels.Roles.researcher"),
   },
   {
-    value: "beneficiary",
-    label: t("Global.Labels.Roles.beneficiary"),
+    value: "user",
+    label: t("Global.Labels.Roles.user"),
   },
   {
     value: "applicant",

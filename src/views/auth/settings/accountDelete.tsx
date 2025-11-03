@@ -17,14 +17,14 @@ const AccountDelete = () => {
 
   const [openModal, setOpenModal] = useState(false);
 
-  const deleteBeneficiary = () => {
+  const deleteUser = () => {
     UserApi.remove(user.id || "")
       .then(() => {
         setOpenModal(false);
         dispatch(
           addNotification({
             msg: t("Global.Form.SuccessMsg", {
-              action: t("Auth.Beneficiaries.Profile.DeleteData"),
+              action: t("Auth.Users.Profile.DeleteData"),
               data: t("Global.Labels.YourOwn"),
             }),
           })
@@ -42,21 +42,21 @@ const AccountDelete = () => {
         color="danger"
         className="my-3 w-100"
       >
-        {t("Auth.Beneficiaries.Profile.DeleteData")}
+        {t("Auth.Users.Profile.DeleteData")}
       </Button>
 
       <Modal
-        title={t("Auth.Beneficiaries.Profile.DeleteData")}
+        title={t("Auth.Users.Profile.DeleteData")}
         onClose={() => setOpenModal(false)}
         isOpen={openModal}
       >
         <h3 className="text-center mb-3">
-          {t("Auth.Beneficiaries.Profile.SureToDeleteData")}
+          {t("Auth.Users.Profile.SureToDeleteData")}
         </h3>
 
         <div className="btn-group w-100" role="group">
           <Button
-            onClick={() => deleteBeneficiary()}
+            onClick={() => deleteUser()}
             disabled={process.env.REACT_APP_ENVIRONMENT === "staging"}
             color="danger"
             className="my-3 me-1"

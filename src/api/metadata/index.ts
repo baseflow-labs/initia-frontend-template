@@ -10,10 +10,10 @@ const update = async (data: object) => {
   return await api.put(mainPath, data);
 };
 
-const bulkBeneficiariesDataInsert = async (file: File) => {
+const bulkUsersDataInsert = async (file: File) => {
   const formData = new FormData();
-  formData.append("beneficiariesFile", file);
-  return await api.post("/onBoarding/beneficiaries", formData, {
+  formData.append("usersFile", file);
+  return await api.post("/onBoarding/users", formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
@@ -30,4 +30,4 @@ const bulkDependentsDataInsert = async (file: File) => {
   });
 };
 
-export { get, update, bulkBeneficiariesDataInsert, bulkDependentsDataInsert };
+export { get, update, bulkUsersDataInsert, bulkDependentsDataInsert };

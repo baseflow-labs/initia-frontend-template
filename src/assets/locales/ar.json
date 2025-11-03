@@ -1,7 +1,7 @@
 {
   "Auth": {
-    "Beneficiaries": {
-      "Beneficiaries": "مستفيدون",
+    "Users": {
+      "Users": "مستفيدون",
       "DeleteAll": "حذف بيانات كل المستفيدين والتابعين",
       "Profile": {
         "DeleteData": "حذف بيانات الحساب",
@@ -15,8 +15,8 @@
     "Dashboard": {
       "AidsCount": "عدد المعونات",
       "ApplicationTimeline": "تسلسل الطلب",
-      "BeneficiaryInfo": "معلوماتك",
-      "BeneficiaryMembershipStatus": "حالة عضويتكم الآن في النظام",
+      "UserInfo": "معلوماتك",
+      "UserMembershipStatus": "حالة عضويتكم الآن في النظام",
       "ImportantNotifications": "الإشعارات الهامة",
       "Main": "الرئيسية",
       "NoVisits": "لا يوجد زيارات مجدولة",
@@ -25,7 +25,7 @@
         "Pending": "Auth.Dashboard.Statuses.Pending"
       },
       "Title": "نظرة عامة",
-      "UnacceptedBeneficiaryNote": "قد يكون مطلوب منكم تعديل بعض بياناتكم الشخصية في تبويب 'معلوماتي'",
+      "UnacceptedUserNote": "قد يكون مطلوب منكم تعديل بعض بياناتكم الشخصية في تبويب 'معلوماتي'",
       "VisitsCount": "عدد الزيارات",
       "VisitsMap": "خريطة الزيارات",
       "Welcome": "أهلاً بكم"
@@ -37,8 +37,8 @@
       "AppPhoneNumberNote": "هذا الرقم سيظهر في صفحة 'تواصل معنا' للمستفيدين",
       "BulkDataInsertion": {
         "AllowedFileTypes": "يمكن تحميل ملفات اكسل المصدرة من نظام 'رافد' حصراً",
-        "BeneficiariesData": "بيانات المستفيدين",
-        "BeneficiariesDataTemplate": "تحميل نموذج بيانات المستفيدين",
+        "UsersData": "بيانات المستفيدين",
+        "UsersDataTemplate": "تحميل نموذج بيانات المستفيدين",
         "DependentsData": "بيانات التابعين",
         "DependentsDataTemplate": "تحميل نموذج بيانات التابعين",
         "PleaseCheck": {
@@ -154,7 +154,7 @@
         "accountant": "مدير مالي",
         "admin": "مدير النظام",
         "applicant": "متقدم بطلب تسجيل",
-        "beneficiary": "مستفيد",
+        "user": "مستفيد",
         "ceo": "مدير / رئيس",
         "hod": "مدير الباحثين",
         "researcher": "باحث اجتماعي"
@@ -195,7 +195,7 @@
         "LoginAsAccountant": "تسجيل الدخول كمدير مالي",
         "LoginAsAdmin": "تسجيل الدخول كمدير النظام",
         "LoginAsApplicant": "تسجيل الدخول كمتقدم بطلب تسجيل ",
-        "LoginAsBeneficiary": "تسجيل الدخول كمستفيد مسجل بالنظام",
+        "LoginAsUser": "تسجيل الدخول كمستفيد مسجل بالنظام",
         "LoginAsCeo": "تسجيل الدخول كمدير تنفيذي",
         "LoginAsCommitteeHead": "تسجيل الدخول كرئيس لجنة",
         "LoginAsHod": "تسجيل الدخول كمدير للباحثين",

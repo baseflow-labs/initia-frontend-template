@@ -4,7 +4,7 @@ export interface MembershipStatus {
   note?: string;
 }
 
-export interface Beneficiary {
+export interface User {
   id: string;
   socialStatus: string;
   fullName: string;
@@ -21,7 +21,7 @@ export interface Beneficiary {
   incurableDiseases?: boolean;
 }
 
-export interface BeneficiaryCategory {
+export interface UserCategory {
   id: string;
   name: string;
   minIncome: number;
@@ -30,7 +30,7 @@ export interface BeneficiaryCategory {
 
 export interface ContactsBank {
   id: string;
-  beneficiaryMobile: string;
+  userMobile: string;
   secondaryMobile: string;
   backupMobile?: string;
   email?: string;

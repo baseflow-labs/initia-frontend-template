@@ -1,7 +1,7 @@
 {
   "Auth": {
-    "Beneficiaries": {
-      "Beneficiaries": "Beneficiaries",
+    "Users": {
+      "Users": "Users",
       "DeleteAll": "Delete All",
       "Profile": {
         "DeleteData": "Delete Your Data",
@@ -15,8 +15,8 @@
     "Dashboard": {
       "AidsCount": "Aids Count",
       "ApplicationTimeline": "Application Timeline",
-      "BeneficiaryInfo": "Your Info",
-      "BeneficiaryMembershipStatus": "Your Membership Status",
+      "UserInfo": "Your Info",
+      "UserMembershipStatus": "Your Membership Status",
       "ImportantNotifications": "Important Notifications",
       "Main": "Main",
       "NoVisits": "No Visits Scheduled",
@@ -25,7 +25,7 @@
         "Pending": "Auth.Dashboard.Statuses.Pending"
       },
       "Title": "Overview",
-      "UnacceptedBeneficiaryNote": "There might be requests to update your personal data at 'Profile' Page",
+      "UnacceptedUserNote": "There might be requests to update your personal data at 'Profile' Page",
       "VisitsCount": "Visits Count",
       "VisitsMap": "Visits Map",
       "Welcome": "Welcome"
@@ -37,8 +37,8 @@
       "AppPhoneNumberNote": "App Phone Number Note",
       "BulkDataInsertion": {
         "AllowedFileTypes": "'Rafed' Exported Excel Files Only",
-        "BeneficiariesData": "Beneficiaries Data",
-        "BeneficiariesDataTemplate": "Download Beneficiaries Data Template",
+        "UsersData": "Users Data",
+        "UsersDataTemplate": "Download Users Data Template",
         "DependentsData": "Dependents Data",
         "DependentsDataTemplate": "Download Dependents Data Template",
         "PleaseCheck": {
@@ -154,7 +154,7 @@
         "accountant": "Accountant",
         "admin": "Admin",
         "applicant": "Applicant",
-        "beneficiary": "Beneficiary",
+        "user": "User",
         "ceo": "CEO",
         "hod": "HOD",
         "researcher": "Researcher"
@@ -195,7 +195,7 @@
         "LoginAsAccountant": "Login As An Accountant",
         "LoginAsAdmin": "Login As System Admin",
         "LoginAsApplicant": "Login As Applicant",
-        "LoginAsBeneficiary": "Login As Beneficiary",
+        "LoginAsUser": "Login As User",
         "LoginAsCeo": "Login As CEO",
         "LoginAsCommitteeHead": "Login As Aids Committee Head",
         "LoginAsHod": "Login As Researchers Supervisor",

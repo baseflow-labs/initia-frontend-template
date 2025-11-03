@@ -11,7 +11,7 @@ export type AuthAction =
       resp: { jwt: string; user: UserProps };
     }
   | { type: "logout"; resp?: string }
-  | { type: "updateBeneficiaryStatus"; resp?: string };
+  | { type: "updateUserStatus"; resp?: string };
 
 const initialState: AuthState = {
   token: localStorage.getItem("token") || "null",
@@ -49,7 +49,7 @@ const auth = (
       };
     }
 
-    case "updateBeneficiaryStatus": {
+    case "updateUserStatus": {
       const currentUser = JSON.parse(localStorage.getItem("user") || "{}");
 
       const newUser = { ...currentUser, status: "In Preview" };

@@ -4,7 +4,7 @@ import { Navigate, Route, Routes, useLocation } from "react-router";
 import { Fragment } from "react/jsx-runtime";
 
 import {
-  beneficiariesIcon,
+  usersIcon,
   dashboardIcon,
   settingsIcon,
 } from "../../assets/icons/icons";
@@ -39,7 +39,7 @@ const AuthLayout = () => {
       route: "/user",
       view: <UserMgmtPage />,
       showInNav: true,
-      icon: beneficiariesIcon,
+      icon: usersIcon,
     },
     {
       name: t("Auth.Settings.Title"),

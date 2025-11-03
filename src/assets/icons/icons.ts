@@ -1,7 +1,7 @@
 import aidsIcon from "./aids.svg";
 import archiveIcon from "./archive.svg";
 import attachmentIcon from "./attachment.svg";
-import beneficiariesIcon from "./beneficiaries.svg";
+import usersIcon from "./users.svg";
 import contactIcon from "./contact.svg";
 import contactUsIcon from "./contactUs.svg";
 import dashboardIcon from "./dashboard.svg";
@@ -42,7 +42,7 @@ export {
   aidsIcon,
   archiveIcon,
   attachmentIcon,
-  beneficiariesIcon,
+  usersIcon,
   contactIcon,
   contactUsIcon,
   dashboardIcon,

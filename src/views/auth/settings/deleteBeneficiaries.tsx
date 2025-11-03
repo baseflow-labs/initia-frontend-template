@@ -10,22 +10,22 @@ import { useAppSelector } from "../../../store/hooks";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import Spinner from "../../../components/core/spinner";
 
-const DeleteBeneficiaries = () => {
+const DeleteUsers = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { loading } = useAppSelector((state) => state.loading);
 
   const [openModal, setOpenModal] = useState(false);
 
-  const deleteBeneficiary = () => {
-    UserApi.removeAllBeneficiaries()
+  const deleteUser = () => {
+    UserApi.removeAllUsers()
       .then(() => {
         setOpenModal(false);
         dispatch(
           addNotification({
             msg: t("Global.Form.SuccessMsg", {
-              action: t("Auth.Beneficiaries.Profile.DeleteData"),
-              data: t("Auth.Settings.BulkDataInsertion.BeneficiariesData"),
+              action: t("Auth.Users.Profile.DeleteData"),
+              data: t("Auth.Settings.BulkDataInsertion.UsersData"),
             }),
           })
         );
@@ -40,16 +40,16 @@ const DeleteBeneficiaries = () => {
         color="danger"
         className="my-3 w-100"
       >
-        {t("Auth.Beneficiaries.DeleteAll")}
+        {t("Auth.Users.DeleteAll")}
       </Button>
 
       <Modal
-        title={t("Auth.Beneficiaries.DeleteAll")}
+        title={t("Auth.Users.DeleteAll")}
         onClose={() => setOpenModal(false)}
         isOpen={openModal}
       >
         <h3 className="text-center mb-3">
-          {t("Auth.Beneficiaries.Profile.SureToDeleteData")}
+          {t("Auth.Users.Profile.SureToDeleteData")}
         </h3>
 
         <div className="text-center">
@@ -58,7 +58,7 @@ const DeleteBeneficiaries = () => {
 
         <div className="btn-group w-100" role="group">
           <Button
-            onClick={() => deleteBeneficiary()}
+            onClick={() => deleteUser()}
             disabled={
               process.env.REACT_APP_ENVIRONMENT === "staging" ||
               loading.length > 0
@@ -85,4 +85,4 @@ const DeleteBeneficiaries = () => {
   );
 };
 
-export default DeleteBeneficiaries;
+export default DeleteUsers;

@@ -15,7 +15,7 @@ import { setFontSize } from "../../../store/actions/settings";
 import { useAppSelector } from "../../../store/hooks";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import AccountDelete from "./accountDelete";
-import DeleteBeneficiaries from "./deleteBeneficiaries";
+import DeleteUsers from "./deleteUsers";
 import {
   getCommonSettingInputs,
   getPasswordResetSettingInputs,
@@ -216,20 +216,18 @@ const SettingsPage = () => {
                 labelNote={t(
                   "Auth.Settings.BulkDataInsertion.AllowedFileTypes"
                 )}
-                label={t("Auth.Settings.BulkDataInsertion.BeneficiariesData")}
+                label={t("Auth.Settings.BulkDataInsertion.UsersData")}
                 required
               />
 
               <div className="mb-3">
                 <Button onClick={() => downloadTemplate("template.xlsx")}>
-                  {t(
-                    "Auth.Settings.BulkDataInsertion.BeneficiariesDataTemplate"
-                  )}
+                  {t("Auth.Settings.BulkDataInsertion.UsersDataTemplate")}
                 </Button>
               </div>
 
               <DefaultInput
-                name="beneficiariesFile"
+                name="usersFile"
                 type="file"
                 className="form-control"
                 accept=".xlsx,.csv"
@@ -237,14 +235,14 @@ const SettingsPage = () => {
                 onChange={(e) => {
                   const file = e.target.files?.[0];
                   if (file)
-                    MetadataApi.bulkBeneficiariesDataInsert(file)
+                    MetadataApi.bulkUsersDataInsert(file)
                       .then(() => {
                         dispatch(
                           addNotification({
                             msg: t("Global.Form.SuccessMsg", {
                               action: t("Global.Form.Labels.Upload"),
                               data: t(
-                                "Auth.Settings.BulkDataInsertion.BeneficiariesData"
+                                "Auth.Settings.BulkDataInsertion.UsersData"
                               ),
                             }),
                           })
@@ -299,7 +297,7 @@ const SettingsPage = () => {
           </Fragment>
         )}
 
-        {user.role === "admin" ? <DeleteBeneficiaries /> : <AccountDelete />}
+        {user.role === "admin" ? <DeleteUsers /> : <AccountDelete />}
       </Fragment>
     </BoxedPage>
   );

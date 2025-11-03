@@ -14,18 +14,18 @@ To maintain a clean, readable Git history and support automated tools like versi
 
 ## 🎯 Allowed Commit Types
 
-| Type        | Description                                 |
-|-------------|---------------------------------------------|
-| `feat`      | A new feature                               |
-| `fix`       | A bug fix                                   |
-| `build`     | Build system or dependency changes          |
-| `chore`     | General maintenance (e.g., config tweaks)   |
-| `docs`      | Documentation-only changes                  |
-| `style`     | Code style, formatting (no logic changes)   |
-| `refactor`  | Code refactoring (no new features/fixes)    |
-| `perf`      | Performance improvements                    |
-| `test`      | Adding or updating tests                    |
-| `revert`    | Reverting a previous commit                 |
+| Type       | Description                               |
+| ---------- | ----------------------------------------- |
+| `feat`     | A new feature                             |
+| `fix`      | A bug fix                                 |
+| `build`    | Build system or dependency changes        |
+| `chore`    | General maintenance (e.g., config tweaks) |
+| `docs`     | Documentation-only changes                |
+| `style`    | Code style, formatting (no logic changes) |
+| `refactor` | Code refactoring (no new features/fixes)  |
+| `perf`     | Performance improvements                  |
+| `test`     | Adding or updating tests                  |
+| `revert`   | Reverting a previous commit               |
 
 ---
 
@@ -50,16 +50,10 @@ Every commit must specify a **service/module name** in parentheses after the typ
 ### 🎯 Allowed Scopes
 
 - `auth`
-- `aids`
-- `applicants`
-- `beneficiaries`
+- `users`
 - `dashboard`
-- `membershipRegistration`
 - `settings`
 - `notifications`
-- `staff`
-- `visits`
-- `visitReports`
 - `common`
 - `code`
 

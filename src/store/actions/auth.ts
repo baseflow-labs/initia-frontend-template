@@ -30,6 +30,6 @@ export const logout = (resp?: string) => ({
   resp,
 });
 
-export const updateBeneficiaryStatus = () => ({
-  type: "updateBeneficiaryStatus" as const,
+export const updateUserStatus = () => ({
+  type: "updateUserStatus" as const,
 });

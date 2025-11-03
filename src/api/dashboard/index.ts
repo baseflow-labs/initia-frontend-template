@@ -2,8 +2,8 @@ import api from "..";
 
 const mainPath = "/overview";
 
-const forBeneficiary = async () => {
-  const res = await api.get(mainPath + "/beneficiary");
+const forUser = async () => {
+  const res = await api.get(mainPath + "/user");
   return res;
 };
 
@@ -22,4 +22,4 @@ const forAccountant = async () => {
   return res;
 };
 
-export { forBeneficiary, forResearcher, forSupervisor, forAccountant };
+export { forUser, forResearcher, forSupervisor, forAccountant };
