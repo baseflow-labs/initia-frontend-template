@@ -36,7 +36,7 @@ const App = () => {
             ...res.payload,
             logo:
               (res.payload.logo && res.payload.logo[0].path) ||
-              "/mustaheq/samples/logo.png",
+              "/samples/logo.png",
           })
         );
       })

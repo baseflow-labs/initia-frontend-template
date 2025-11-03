@@ -92,7 +92,7 @@ const SettingsPage = () => {
   const downloadTemplate = async (filename: string) => {
     const url =
       process.env.REACT_APP_STORAGE_DIRECTORY_URL +
-      "/mustaheq/samples/dataTemplates/" +
+      "/samples/dataTemplates/" +
       filename;
 
     window.open(url, "_blank", "noopener,noreferrer");
@@ -221,11 +221,7 @@ const SettingsPage = () => {
               />
 
               <div className="mb-3">
-                <Button
-                  onClick={() =>
-                    downloadTemplate("نموذج بيانات المستفيدين - مستحق.xlsx")
-                  }
-                >
+                <Button onClick={() => downloadTemplate("template.xlsx")}>
                   {t(
                     "Auth.Settings.BulkDataInsertion.BeneficiariesDataTemplate"
                   )}
@@ -269,11 +265,7 @@ const SettingsPage = () => {
               />
 
               <div className="mb-3">
-                <Button
-                  onClick={() =>
-                    downloadTemplate("نموذج بيانات التابعين - مستحق.xlsx")
-                  }
-                >
+                <Button onClick={() => downloadTemplate("template.xlsx")}>
                   {t("Auth.Settings.BulkDataInsertion.DependentsDataTemplate")}
                 </Button>
               </div>

@@ -9,7 +9,7 @@ on:
     branches:
       - prod
     paths-ignore:
-      - '.github/workflows/**'
+      - ".github/workflows/**"
 
 jobs:
   bump-version:
@@ -122,6 +122,6 @@ jobs:
 
             ${{ steps.changelog.outputs.log }}
 
-            **Full Changelog**: https://github.com/Shai-club/mustaheq-fe/commits/v${{ steps.bump.outputs.new_version }}
+            **Full Changelog**: https://github.com/<your-username>/<your-repo>/commits/v${{ steps.bump.outputs.new_version }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
