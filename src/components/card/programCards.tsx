@@ -1,6 +1,7 @@
+import { faDollar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslation } from "react-i18next";
 
-import { riyalIcon } from "../../assets/icons/icons";
 import { pluralLabelResolve } from "../../utils/function";
 import DashboardCard from "./dashboardCard";
 
@@ -26,12 +27,7 @@ export const AidUnit = ({
   big?: boolean;
 }) =>
   type === "Cash" ? (
-    <img
-      src={riyalIcon}
-      height={big ? 25 : 15}
-      className="ms-1"
-      alt="riyalUnit"
-    />
+    <FontAwesomeIcon icon={faDollar} height={big ? 25 : 15} className="ms-1" />
   ) : (
     pluralLabelResolve(t, amount, "Auth.Aids.AidPiece")
   );

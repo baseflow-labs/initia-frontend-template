@@ -1,3 +1,5 @@
+import { faFilter } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   FormikErrors,
   Form as FormikForm,
@@ -8,8 +10,6 @@ import {
 import React, { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 
-import { resetFilterIcon } from "../../assets/icons/icons";
-import IconWrapperComp from "../../assets/icons/wrapper";
 import { useAppSelector } from "../../store/hooks";
 import Button from "../core/button";
 import Spinner from "../core/spinner";
@@ -398,8 +398,8 @@ const Form: React.FC<Props> = ({
                           <InlineElement
                             flip
                             content={
-                              <IconWrapperComp
-                                icon={resetFilterIcon}
+                              <FontAwesomeIcon
+                                icon={faFilter}
                                 role="button"
                                 onClick={() =>
                                   formik.setFieldValue(

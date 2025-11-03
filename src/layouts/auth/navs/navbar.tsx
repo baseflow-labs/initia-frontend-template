@@ -1,3 +1,10 @@
+import {
+  faBars,
+  faBell,
+  faInfoCircle,
+  faMagnifyingGlass,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
 import { FormEvent, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -5,13 +12,6 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
 import * as NotificationApi from "../../../api/notifications";
-import {
-  helpIcon,
-  menuBarsIcon,
-  notificationsIcon,
-  searchIcon,
-} from "../../../assets/icons/icons";
-import IconWrapperComp from "../../../assets/icons/wrapper";
 import profilePhotoPlaceholder from "../../../assets/images/profile-image-placeholder.png";
 // import LangButton from "../../../components/button/lang";
 import Spinner from "../../../components/core/spinner";
@@ -90,7 +90,7 @@ const DashboardNavbar = ({
             data-bs-target="#offcanvasNav"
             aria-controls="offcanvasNav"
           >
-            <IconWrapperComp icon={menuBarsIcon} />
+            <FontAwesomeIcon icon={faBars} />
           </button>
         </div>
 
@@ -106,7 +106,7 @@ const DashboardNavbar = ({
                 />
 
                 <button className="input-group-text bg-info" type="submit">
-                  <IconWrapperComp icon={searchIcon} />
+                  <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </button>
               </div>
             </form>
@@ -154,10 +154,7 @@ const DashboardNavbar = ({
             <DropdownComp
               button={
                 <div className="position-relative">
-                  <IconWrapperComp
-                    icon={notificationsIcon}
-                    className="text-secondary"
-                  />
+                  <FontAwesomeIcon icon={faBell} className="text-secondary" />
 
                   <div
                     className={`position-absolute top-0 translate-middle badge rounded-circle bg-${
@@ -196,7 +193,7 @@ const DashboardNavbar = ({
                           >
                             <div className="d-none d-md-block col-md-2 col-lg-1 my-auto text-warning">
                               <h3>
-                                <IconWrapperComp icon={helpIcon} />
+                                <FontAwesomeIcon icon={faInfoCircle} />
                               </h3>
                             </div>
 

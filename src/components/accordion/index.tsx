@@ -1,9 +1,8 @@
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useState } from "react";
 
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { deleteIcon } from "../../assets/icons/icons";
-import IconWrapperComp from "../../assets/icons/wrapper";
 import Button from "../../components/core/button";
 
 interface Props {
@@ -46,7 +45,7 @@ const Accordion = ({ key, data, icon, onAdd, addText, onRemove }: Props) => {
                   className="border border-1 rounded-4 py-3 ms-2 px-3"
                   onClick={() => onRemove(i)}
                 >
-                  <IconWrapperComp icon={deleteIcon} />
+                  <FontAwesomeIcon icon={faTrash} />
                 </Button>
               </div>
             </h2>

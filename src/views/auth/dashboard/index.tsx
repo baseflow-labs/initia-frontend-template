@@ -1,4 +1,4 @@
-import { faCircle } from "@fortawesome/free-solid-svg-icons";
+import { faCircle, faInfo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
 import { Fragment, useLayoutEffect, useState } from "react";
@@ -7,8 +7,6 @@ import { useNavigate } from "react-router";
 
 import * as OverviewApi from "../../../api/dashboard";
 import * as UserApi from "../../../api/users";
-import { helpIcon } from "../../../assets/icons/icons";
-import IconWrapperComp from "../../../assets/icons/wrapper";
 import profilePhotoPlaceholder from "../../../assets/images/profile-image-placeholder.png";
 import DashboardCard from "../../../components/card/dashboardCard";
 import { Notification } from "../../../layouts/auth/navs/navbar";
@@ -165,7 +163,7 @@ const DashboardView = () => {
                           <div className="row">
                             <div className="col-1 col-lg-2 col-lg-1 my-auto text-warning">
                               <h3>
-                                <IconWrapperComp icon={helpIcon} />
+                                <FontAwesomeIcon icon={faInfo} />
                               </h3>
                             </div>
 

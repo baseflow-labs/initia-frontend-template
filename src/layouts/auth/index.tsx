@@ -1,13 +1,13 @@
+import {
+  faDashboard,
+  faGear,
+  faUsers,
+} from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes, useLocation } from "react-router";
 import { Fragment } from "react/jsx-runtime";
 
-import {
-  usersIcon,
-  dashboardIcon,
-  settingsIcon,
-} from "../../assets/icons/icons";
 import { useWindowWidth } from "../../utils/hooks";
 import DashboardView from "../../views/auth/dashboard";
 import SettingsPage from "../../views/auth/settings";
@@ -32,20 +32,20 @@ const AuthLayout = () => {
       route: "/dashboard",
       view: <DashboardView />,
       showInNav: true,
-      icon: dashboardIcon,
+      icon: faDashboard,
     },
     {
       name: t("Auth.Users.Title"),
       route: "/user",
       view: <UserMgmtPage />,
       showInNav: true,
-      icon: usersIcon,
+      icon: faUsers,
     },
     {
       name: t("Auth.Settings.Title"),
       route: "/settings",
       view: <SettingsPage />,
-      icon: settingsIcon,
+      icon: faGear,
       fixed: true,
     },
   ];

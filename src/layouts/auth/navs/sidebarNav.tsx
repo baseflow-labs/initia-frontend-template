@@ -7,7 +7,6 @@ import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
 
-import IconWrapperComp from "../../../assets/icons/wrapper";
 import LogoOnly from "../../../assets/images/brand/logo-only.png";
 import { useAppSelector } from "../../../store/hooks";
 import CopyRightView from "../../common/copyright";
@@ -73,7 +72,7 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
                   navigate(route);
                 }}
               >
-                <IconWrapperComp icon={icon} className="me-2" />
+                <FontAwesomeIcon icon={icon} className="me-2" />
                 {!collapsed && (
                   <span>
                     {name}
@@ -122,7 +121,7 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
                 navigate(route);
               }}
             >
-              <IconWrapperComp icon={icon} className="me-2" />
+              <FontAwesomeIcon icon={icon} className="me-2" />
               {!collapsed && <span>{name}</span>}
             </h5>
           ))}

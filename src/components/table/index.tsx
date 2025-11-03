@@ -5,6 +5,7 @@ import {
   faAngleRight,
   faAnglesLeft,
   faAnglesRight,
+  faDollar,
   faEllipsisVertical,
   faEnvelope,
   faEye,
@@ -20,7 +21,6 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
 import service, { customFilterProps, formatGetFilters } from "../../api";
-import { riyalIcon } from "../../assets/icons/icons";
 import i18n from "../../i18next";
 import { triggerFilePreview } from "../../layouts/auth/globalModal";
 import { addNotification } from "../../store/actions/notifications";
@@ -77,12 +77,7 @@ interface Props {
 }
 
 export const MoneyUnit = ({ big }: { big?: boolean }) => (
-  <img
-    src={riyalIcon}
-    height={big ? 25 : 15}
-    className="ms-1"
-    alt="moneyUnit"
-  />
+  <FontAwesomeIcon icon={faDollar} height={big ? 25 : 15} className="ms-1" />
 );
 
 const withMoneyUnit = (content: React.ReactNode, money?: boolean) => {
