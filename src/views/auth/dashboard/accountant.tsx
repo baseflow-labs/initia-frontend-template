@@ -12,7 +12,6 @@ import DashboardCards from "../../../components/card/statisticCards";
 import TabsComp from "../../../components/tab";
 import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
 import { apiCatchGlobalHandler } from "../../../utils/function";
-import { CategoryView } from "../aids/selectProgram";
 
 const DashboardAccountantView = () => {
   const { t } = useTranslation();
@@ -178,33 +177,7 @@ const DashboardAccountantView = () => {
           ({ id, name, balance, type, programs }) => ({
             id,
             title: name,
-            body:
-              id !== "0" ? (
-                <CategoryView
-                  t={t}
-                  id={id}
-                  name={name}
-                  type={type}
-                  balance={balance}
-                  programs={programs}
-                />
-              ) : (
-                <>
-                  {data.categories.map((category, i) => (
-                    <CategoryView
-                      t={t}
-                      id={category.id}
-                      name={category.name}
-                      type={category.type}
-                      balance={category.balance}
-                      programs={programs.filter(
-                        (program) => program.aidCategory.id === category.id
-                      )}
-                      key={i}
-                    />
-                  ))}
-                </>
-              ),
+            body: <></>,
           })
         )}
       />

@@ -122,7 +122,9 @@ const UsersView = () => {
   const filters = [
     {
       label: t("Auth.Users.Role"),
-      options: getUserRoles(t).filter((r) => r.value !== "applicant"),
+      options: getUserRoles(t).filter(
+        (r = { value: "", label: "" }) => r.value !== "applicant"
+      ),
       name: "role",
     },
   ];

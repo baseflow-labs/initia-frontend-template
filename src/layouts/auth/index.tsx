@@ -16,36 +16,17 @@ import {
 } from "../../assets/icons/icons";
 import { useAppSelector } from "../../store/hooks";
 import { useWindowWidth } from "../../utils/hooks";
-import AidCategoriesView from "../../views/auth/aidCategories";
-import AidProgramsView from "../../views/auth/aidPrograms";
-import AidsView from "../../views/auth/aids";
-import AidsBeneficiaryView from "../../views/auth/aids/beneficiary";
-import ApplicantsView from "../../views/auth/applicants";
-import BeneficiaryFormReview from "../../views/auth/applicants/review";
-import ApplicantsViewForSupervisor from "../../views/auth/applicants/supervisor";
-import BeneficiariesView from "../../views/auth/beneficiaries";
-import BeneficiaryOwnProfile from "../../views/auth/beneficiaries/beneficiaryProfile";
-import BeneficiaryProfileView from "../../views/auth/beneficiaries/profile";
-import BeneficiariesViewForSupervisor from "../../views/auth/beneficiaries/supervisor";
-import ContactUsPage from "../../views/auth/contact-us";
 import DashboardView from "../../views/auth/dashboard";
 import DashboardAccountantView from "../../views/auth/dashboard/accountant";
 import DashboardAdminView from "../../views/auth/dashboard/admin";
 import DashboardResearcherView from "../../views/auth/dashboard/researcher";
 import DashboardSupervisorView from "../../views/auth/dashboard/supervisor";
-import MembershipRegistrationView from "../../views/auth/membershipRegistration";
 import SettingsPage from "../../views/auth/settings";
-import ResearcherMgmtPage from "../../views/auth/staff";
-import VisitsView from "../../views/auth/visits";
-import VisitReportsView from "../../views/auth/visits/addReport";
-import BeneficiariesVisitsView from "../../views/auth/visits/beneficiaryVisits";
-import VisitDetailView from "../../views/auth/visits/reportDetails";
+import UserMgmtPage from "../../views/auth/users";
 import DemoWarning from "./demoWarning";
 import { FilePreviewModal } from "./globalModal";
 import OffCanvasNav from "./navs/offcanvasNav";
 import Sidebar from "./navs/sidebarNav";
-import UserMgmtPage from "../../views/auth/users";
-import BeneficiaryCategoriesView from "../../views/auth/beneficiaryCategories";
 
 const AuthLayout = () => {
   const { t, i18n } = useTranslation();
@@ -68,15 +49,6 @@ const AuthLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
 
   const authRoutes = [
-    {
-      name: t("Auth.MembershipRegistration.Title"),
-      route: "/apply",
-      showInNav: isUnacceptedBeneficiary,
-      exclude: denyMembershipFormPageAccess,
-      view: <MembershipRegistrationView />,
-      icon: membershipFormIcon,
-      users: ["beneficiary", "researcher", "admin"],
-    },
     {
       name: t("Auth.Dashboard.Title"),
       route: "/dashboard",
@@ -118,153 +90,12 @@ const AuthLayout = () => {
       users: ["accountant"],
     },
     {
-      name: t("Auth.Beneficiaries.Applications"),
-      route: "/applicant",
-      view: <ApplicantsView />,
-      showInNav: true,
-      icon: beneficiariesIcon,
-      users: ["researcher"],
-    },
-    {
-      name: t("Auth.Beneficiaries.Applications"),
-      route: "/applicant",
-      view: <ApplicantsViewForSupervisor />,
-      showInNav: true,
-      icon: beneficiariesIcon,
-      users: ["ceo", "hod", "admin"],
-    },
-    {
-      name: t("Auth.Beneficiaries.Title"),
-      route: "/beneficiary",
-      view: <BeneficiariesView />,
-      showInNav: true,
-      icon: beneficiariesIcon,
-      users: ["researcher"],
-    },
-    {
-      name: t("Auth.Beneficiaries.Title"),
-      route: "/beneficiary",
-      view: <BeneficiariesViewForSupervisor />,
-      showInNav: true,
-      icon: beneficiariesIcon,
-      users: ["ceo", "hod", "admin"],
-    },
-    {
       name: t("Auth.Users.Title"),
       route: "/user",
       view: <UserMgmtPage />,
       showInNav: true,
       icon: beneficiariesIcon,
       users: ["admin"],
-    },
-    {
-      name: t("Auth.Researchers.Title"),
-      route: "/staff",
-      view: <ResearcherMgmtPage />,
-      showInNav: true,
-      icon: beneficiariesIcon,
-      users: ["ceo", "hod"],
-    },
-    {
-      name: t("Auth.Beneficiaries.Profile.Title"),
-      route: "/review",
-      view: <BeneficiaryFormReview />,
-      icon: beneficiariesIcon,
-      users: ["researcher"],
-    },
-    {
-      name: t("Auth.Beneficiaries.Profile.Title"),
-      route: "/profile",
-      view: <BeneficiaryProfileView />,
-      icon: beneficiariesIcon,
-      users: ["ceo", "researcher", "hod", "admin"],
-    },
-    {
-      name: t("Auth.Visits.Title"),
-      route: "/visitSchedule",
-      view: <VisitsView />,
-      showInNav: true,
-      icon: visitsIcon,
-      users: ["ceo", "researcher", "hod", "admin"],
-    },
-    {
-      name: t("Auth.Visits.Visits"),
-      route: "/visitSchedule",
-      view: <BeneficiariesVisitsView />,
-      showInNav: true,
-      icon: visitsIcon,
-      users: ["beneficiary"],
-    },
-    {
-      name: t("Auth.Visits.Report.Title"),
-      route: "/visitSchedule/report",
-      view: <VisitReportsView />,
-      showInNav: false,
-      icon: visitsIcon,
-      users: ["researcher"],
-    },
-    {
-      name: t("Auth.Visits.Detail.title"),
-      route: "/visitSchedule/report/details",
-      view: <VisitDetailView />,
-      icon: visitReportIcon,
-      users: ["ceo", "researcher", "hod", "admin"],
-    },
-    {
-      name: t("Auth.Aids.Title"),
-      route: "/aids",
-      view: <AidsView />,
-      showInNav: true,
-      icon: aidsIcon,
-      users: ["ceo", "accountant", "researcher", "hod", "admin"],
-    },
-    {
-      name: t("Auth.Aids.Beneficiary.Title"),
-      route: "/aids",
-      view: <AidsBeneficiaryView />,
-      showInNav: true,
-      icon: aidsIcon,
-      users: ["beneficiary"],
-    },
-    {
-      name: t("Auth.AidPrograms.Title"),
-      route: "/aidProgram",
-      view: <AidProgramsView />,
-      showInNav: true,
-      icon: aidsIcon,
-      users: ["ceo", "accountant", "admin"],
-    },
-    {
-      name: t("Auth.AidCategories.Title"),
-      route: "/aidCategory",
-      view: <AidCategoriesView />,
-      showInNav: true,
-      icon: aidsIcon,
-      users: ["ceo", "accountant", "admin"],
-    },
-    {
-      name: t("Auth.BeneficiaryCategories.Title"),
-      route: "/categories",
-      view: <BeneficiaryCategoriesView />,
-      showInNav: true,
-      icon: settingsIcon,
-      users: ["admin"],
-    },
-    {
-      name: t("Auth.Beneficiary.Profile.Title"),
-      route: "/profile",
-      view: <BeneficiaryOwnProfile />,
-      showInNav: true,
-      icon: profileIcon,
-      users: ["beneficiary"],
-    },
-    {
-      name: t("Auth.ContactUs.Title"),
-      route: "/contact-us",
-      view: <ContactUsPage />,
-      icon: infoIcon,
-      fixed: true,
-      users: ["beneficiary", "admin"],
     },
     {
       name: t("Auth.Settings.Title"),
@@ -278,8 +109,8 @@ const AuthLayout = () => {
 
   const showSidebar = !location.pathname.includes("apply");
 
-  const filteredRoutes = authRoutes.filter(
-    ({ users, exclude }) => users.includes(user.role) && !exclude
+  const filteredRoutes = authRoutes.filter(({ users }) =>
+    users.includes(user.role)
   );
 
   const filteredFixedRoutes = filteredRoutes.filter(({ fixed }) => fixed);

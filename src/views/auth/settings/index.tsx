@@ -13,14 +13,14 @@ import BoxedPage from "../../../layouts/auth/pages/boxedPage";
 import { addNotification } from "../../../store/actions/notifications";
 import { setFontSize } from "../../../store/actions/settings";
 import { useAppSelector } from "../../../store/hooks";
+import { apiCatchGlobalHandler } from "../../../utils/function";
+import AccountDelete from "./accountDelete";
+import DeleteBeneficiaries from "./deleteBeneficiaries";
 import {
   getCommonSettingInputs,
   getPasswordResetSettingInputs,
   metadataSettingInputs,
-} from "../../../utils/formInputs/settings";
-import { apiCatchGlobalHandler } from "../../../utils/function";
-import AccountDelete from "./accountDelete";
-import DeleteBeneficiaries from "./deleteBeneficiaries";
+} from "./inputs";
 
 const SettingsPage = () => {
   const { t } = useTranslation();

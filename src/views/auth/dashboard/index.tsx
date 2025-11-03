@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
 import * as OverviewApi from "../../../api/dashboard";
-import * as UserApi from "../../../api/users/beneficiary";
+import * as UserApi from "../../../api/users";
 import { helpIcon } from "../../../assets/icons/icons";
 import IconWrapperComp from "../../../assets/icons/wrapper";
 import profilePhotoPlaceholder from "../../../assets/images/profile-image-placeholder.png";
@@ -20,7 +20,6 @@ import {
   renderDataFromOptions,
   statusColorRender,
 } from "../../../utils/function";
-import { getBeneficiaryStatuses } from "../../../utils/optionDataLists/beneficiaries";
 
 const DashboardView = () => {
   const { t } = useTranslation();
@@ -60,7 +59,9 @@ const DashboardView = () => {
       .catch(apiCatchGlobalHandler);
   }, []);
 
-  const statuses = getBeneficiaryStatuses(t);
+  const statuses = [
+    { value: "Pending", label: t("Auth.Dashboard.Statuses.Pending") },
+  ];
 
   const isUnacceptedBeneficiary =
     user.role === "beneficiary" && user.status !== "Accepted";

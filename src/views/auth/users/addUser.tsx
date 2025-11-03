@@ -1,12 +1,11 @@
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
-import * as UserApi from "../../../api/staff/researcher";
+import * as UserApi from "../../../api/users";
 import Form from "../../../components/form";
 import Modal from "../../../components/modal";
 import { addNotification } from "../../../store/actions/notifications";
 import { User } from "../../../types/beneficiaries";
-import { getUserCrudInputs } from "../../../utils/formInputs/users";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 
 const AddUsers = ({
@@ -32,12 +31,12 @@ const AddUsers = ({
       isOpen={!!openModal}
     >
       <Form
-        inputs={() => getUserCrudInputs(t)}
+        inputs={() => []}
         submitText={label}
         onFormSubmit={(e, resetForm) => {
           const { id, name, ...formData } = e;
           id?.length
-            ? UserApi.updateUser({ id, ...formData })
+            ? UserApi.create({ id, ...formData })
                 .then(() => {
                   resetForm();
                   dispatch(
