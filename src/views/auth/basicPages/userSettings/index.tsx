@@ -18,7 +18,7 @@ import AccountDelete from "./accountDelete";
 import DeleteUsers from "./deleteUsers";
 import { getCommonSettingInputs, getPasswordResetSettingInputs, metadataSettingInputs } from "./inputs";
 
-const SettingsPage = () => {
+const UserSettingsView = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { fontSize } = useAppSelector((state) => state.settings);
@@ -299,4 +299,4 @@ const SettingsPage = () => {
   );
 };
 
-export default SettingsPage;
+export default UserSettingsView;

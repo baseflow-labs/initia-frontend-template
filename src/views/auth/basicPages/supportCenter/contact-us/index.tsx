@@ -5,7 +5,7 @@ import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-const ContactUs = () => {
+const ContactUsView = () => {
   const { t } = useTranslation();
   const [formData, setFormData] = useState({
     name: "",
@@ -407,4 +407,4 @@ const ContactUs = () => {
   );
 };
 
-export default ContactUs;
+export default ContactUsView;

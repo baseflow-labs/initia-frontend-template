@@ -4,7 +4,7 @@ import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-const FAQ = () => {
+const FaqView = () => {
   const { t } = useTranslation();
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
@@ -255,4 +255,4 @@ const FAQ = () => {
   );
 };
 
-export default FAQ;
+export default FaqView;

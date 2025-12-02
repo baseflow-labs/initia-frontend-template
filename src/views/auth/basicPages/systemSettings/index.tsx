@@ -6,7 +6,7 @@ import SystemLoggerView from "./logger";
 import UserActivityView from "./userActivity";
 import UsersView from "./users";
 
-const AdminSettingsPage = () => {
+const SystemSettingsView = () => {
   const { t } = useTranslation();
 
 
@@ -32,4 +32,4 @@ const AdminSettingsPage = () => {
   );
 };
 
-export default AdminSettingsPage;
+export default SystemSettingsView;

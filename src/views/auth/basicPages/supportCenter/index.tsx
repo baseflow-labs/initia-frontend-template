@@ -4,7 +4,7 @@ import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-const SupportCenter = () => {
+const SupportCenterView = () => {
   const { t } = useTranslation();
 
   const quickLinks = [
@@ -283,4 +283,4 @@ const SupportCenter = () => {
   );
 };
 
-export default SupportCenter;
+export default SupportCenterView;

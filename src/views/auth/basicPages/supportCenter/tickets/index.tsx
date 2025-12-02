@@ -14,7 +14,7 @@ interface Ticket {
   lastUpdate: string;
 }
 
-const Tickets = () => {
+const SupportTicketsView = () => {
   const { t } = useTranslation();
   const [showForm, setShowForm] = useState(false);
   const [activeTab, setActiveTab] = useState<"submit" | "view">("submit");
@@ -518,4 +518,4 @@ const Tickets = () => {
   );
 };
 
-export default Tickets;
+export default SupportTicketsView;

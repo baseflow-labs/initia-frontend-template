@@ -7,14 +7,16 @@ import { Fragment } from "react/jsx-runtime";
 import { useWindowWidth } from "../../utils/hooks";
 import MessagingView from "../../views/auth/basicPages/messaging";
 import NotificationsView from "../../views/auth/basicPages/notifications";
-import SupportCenter from "../../views/auth/basicPages/supportCenter";
-import ContactUs from "../../views/auth/basicPages/supportCenter/contact-us";
-import FAQ from "../../views/auth/basicPages/supportCenter/faq";
-import Tickets from "../../views/auth/basicPages/supportCenter/tickets";
-import UserManual from "../../views/auth/basicPages/supportCenter/user-manual";
-import AdminSettingsView from "../../views/auth/basicPages/systemSettings";
-import SettingsPage from "../../views/auth/basicPages/userSettings";
+import SupportCenterView from "../../views/auth/basicPages/supportCenter";
+import ContactUsView from "../../views/auth/basicPages/supportCenter/contact-us";
+import FaqView from "../../views/auth/basicPages/supportCenter/faq";
+import SupportTicketsView from "../../views/auth/basicPages/supportCenter/tickets";
+import UserManualView from "../../views/auth/basicPages/supportCenter/user-manual";
+import SystemSettingsView from "../../views/auth/basicPages/systemSettings";
+import UserSettingsView from "../../views/auth/basicPages/userSettings";
 import DashboardView from "../../views/auth/dashboard";
+import TemplateDataViewExamplesView from "../../views/auth/templateExamples/dataView";
+import TemplateFormExamplesView from "../../views/auth/templateExamples/forms";
 import DemoWarning from "./demoWarning";
 import { FilePreviewModal } from "./globalModal";
 import DashboardNavbar from "./navs/navbar";
@@ -54,17 +56,17 @@ const AuthLayout = () => {
       fixed: true,
     },
     {
-      name: t("Auth.Settings.Title"),
+      name: t("Auth.UserSettings.Title"),
       route: "/settings",
-      view: <SettingsPage />,
+      view: <UserSettingsView />,
       showInNav: true,
       icon: faGear,
       fixed: true,
     },
     {
-      name: t("Auth.AdminSettings.Title"),
-      route: "/admin-settings",
-      view: <AdminSettingsView />,
+      name: t("Auth.SystemSettings.Title"),
+      route: "/system-settings",
+      view: <SystemSettingsView />,
       showInNav: true,
       icon: faGear,
       fixed: true,
@@ -72,37 +74,53 @@ const AuthLayout = () => {
     {
       name: t("Auth.SupportCenter.Title"),
       route: "/support-center",
-      view: <SupportCenter />,
+      view: <SupportCenterView />,
       showInNav: true,
       icon: faGear,
       fixed: true,
     },
     {
-      name: t("Auth.Faq.Title"),
+      name: t("Auth.SupportCenter.Faq.Title"),
       route: "/support-center/faq",
-      view: <FAQ />,
+      view: <FaqView />,
       icon: faGear,
       fixed: true,
     },
     {
-      name: t("Auth.ContactUs.Title"),
+      name: t("Auth.SupportCenter.ContactUs.Title"),
       route: "/support-center/contact-us",
-      view: <ContactUs />,
+      view: <ContactUsView />,
       icon: faGear,
       fixed: true,
     },
     {
-      name: t("Auth.Tickets.Title"),
+      name: t("Auth.SupportCenter.Tickets.Title"),
       route: "/support-center/tickets",
-      view: <Tickets />,
+      view: <SupportTicketsView />,
       icon: faGear,
       fixed: true,
     },
     {
-      name: t("Auth.UserManual.Title"),
+      name: t("Auth.SupportCenter.UserManual.Title"),
       route: "/support-center/user-manual",
-      view: <UserManual />,
+      view: <UserManualView />,
       icon: faGear,
+      fixed: true,
+    },
+    {
+      name: t("Auth.TemplateExamples.DataView.Title"),
+      route: "/template-examples/data-view",
+      view: <TemplateDataViewExamplesView />,
+      icon: faGear,
+      showInNav: true,
+      fixed: true,
+    },
+    {
+      name: t("Auth.TemplateExamples.Forms.Title"),
+      route: "/template-examples/forms",
+      view: <TemplateFormExamplesView />,
+      icon: faGear,
+      showInNav: true,
       fixed: true,
     },
   ];

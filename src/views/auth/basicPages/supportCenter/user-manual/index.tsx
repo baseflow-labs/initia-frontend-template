@@ -1,17 +1,10 @@
+import { faArrowLeft, faBook, faChevronRight, faDownload, faFileAlt, faVideo } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowLeft,
-  faBook,
-  faDownload,
-  faVideo,
-  faFileAlt,
-  faChevronRight,
-} from "@fortawesome/free-solid-svg-icons";
 
-const UserManual = () => {
+const UserManualView = () => {
   const { t } = useTranslation();
   const [activeSection, setActiveSection] = useState("getting-started");
 
@@ -343,4 +336,4 @@ const UserManual = () => {
   );
 };
 
-export default UserManual;
+export default UserManualView;
