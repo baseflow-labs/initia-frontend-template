@@ -6,6 +6,11 @@ import { Fragment } from "react/jsx-runtime";
 
 import { useWindowWidth } from "../../utils/hooks";
 import SettingsPage from "../../views/auth/basicPages/settings";
+import SupportCenter from "../../views/auth/basicPages/supportCenter";
+import ContactUs from "../../views/auth/basicPages/supportCenter/contact-us";
+import FAQ from "../../views/auth/basicPages/supportCenter/faq";
+import Tickets from "../../views/auth/basicPages/supportCenter/tickets";
+import UserManual from "../../views/auth/basicPages/supportCenter/user-manual";
 import UserMgmtPage from "../../views/auth/basicPages/users";
 import DashboardView from "../../views/auth/dashboard";
 import DemoWarning from "./demoWarning";
@@ -44,6 +49,42 @@ const AuthLayout = () => {
       icon: faGear,
       fixed: true,
     },
+    {
+      name: t("Auth.SupportCenter.Title"),
+      route: "/support-center",
+      view: <SupportCenter />,
+      showInNav: true,
+      icon: faGear,
+      fixed: true,
+    },
+    {
+      name: t("Auth.Faq.Title"),
+      route: "/support-center/faq",
+      view: <FAQ />,
+      icon: faGear,
+      fixed: true,
+    },
+    {
+      name: t("Auth.ContactUs.Title"),
+      route: "/support-center/contact-us",
+      view: <ContactUs />,
+      icon: faGear,
+      fixed: true,
+    },
+    {
+      name: t("Auth.Tickets.Title"),
+      route: "/support-center/tickets",
+      view: <Tickets />,
+      icon: faGear,
+      fixed: true,
+    },
+    {
+      name: t("Auth.UserManual.Title"),
+      route: "/support-center/user-manual",
+      view: <UserManual />,
+      icon: faGear,
+      fixed: true,
+    },
   ];
 
   const showSidebar = !location.pathname.includes("apply");
@@ -52,7 +93,7 @@ const AuthLayout = () => {
   //   users.includes(user.role)
   // );
 
-  const filteredFixedRoutes = authRoutes.filter(({ fixed }) => fixed);
+  const filteredFixedRoutes = authRoutes.filter(({ fixed, showInNav }) => fixed && showInNav);
 
   const toggleSidebar = () => setCollapsed((current) => !current);
 
@@ -82,7 +123,7 @@ const AuthLayout = () => {
               toggleSidebar={toggleSidebar}
               fixedRoutes={filteredFixedRoutes}
               routes={authRoutes
-                .filter(({ showInNav }) => showInNav)
+                .filter(({ showInNav, fixed }) => showInNav && !fixed)
                 .map(({ view, ...rest }) => ({ ...rest }))}
             />
           </div>
