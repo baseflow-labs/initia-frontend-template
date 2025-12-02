@@ -1,13 +1,14 @@
-import * as UserApi from "../../../api/users";
-import Button from "../../../components/core/button";
-import Modal from "../../../components/modal";
-import { logout } from "../../../store/actions/auth";
-import { addNotification } from "../../../store/actions/notifications";
-import { useAppSelector } from "../../../store/hooks";
-import { apiCatchGlobalHandler } from "../../../utils/function";
 import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
+
+import * as UserApi from "../../../../api/users";
+import Button from "../../../../components/core/button";
+import Modal from "../../../../components/modal";
+import { logout } from "../../../../store/actions/auth";
+import { addNotification } from "../../../../store/actions/notifications";
+import { useAppSelector } from "../../../../store/hooks";
+import { apiCatchGlobalHandler } from "../../../../utils/function";
 
 const AccountDelete = () => {
   const { t } = useTranslation();

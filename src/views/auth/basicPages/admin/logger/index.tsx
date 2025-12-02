@@ -1,4 +1,3 @@
-import TablePage from "../../../../layouts/auth/pages/tablePage";
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 
