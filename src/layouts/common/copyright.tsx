@@ -34,12 +34,12 @@ const CopyRightView = ({
               year: new Date().getFullYear(),
             })}{" "}
             <a
-              href="https://www.shai.sa/ar/business"
+              href="https://www.alembicsoft.com/"
               target="_blank"
               rel="noreferrer"
               className="text-muted"
             >
-              {t("CopyRight.ShaiShort")}
+              {t("CopyRight.BuilderShort")}
             </a>
           </small>
         </div>

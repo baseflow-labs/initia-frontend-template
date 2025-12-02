@@ -12,11 +12,11 @@ const AdminSettingsPage = () => {
 
   const tabs = [
     {
-      title: t("Auth.Settings.System.Title"),
+      title: t("Auth.Settings.UserActivity.Title"),
       body: <UserActivityView />,
     },
     {
-      title: t("Auth.Settings.PasswordReset.Title"),
+      title: t("Auth.Settings.SystemLogger.Title"),
       body: <SystemLoggerView />
     },
     {

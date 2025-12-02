@@ -5,15 +5,15 @@ import { Navigate, Route, Routes, useLocation } from "react-router";
 import { Fragment } from "react/jsx-runtime";
 
 import { useWindowWidth } from "../../utils/hooks";
-import AdminSettingsView from "../../views/auth/basicPages/admin";
 import MessagingView from "../../views/auth/basicPages/messaging";
 import NotificationsView from "../../views/auth/basicPages/notifications";
-import SettingsPage from "../../views/auth/basicPages/settings";
 import SupportCenter from "../../views/auth/basicPages/supportCenter";
 import ContactUs from "../../views/auth/basicPages/supportCenter/contact-us";
 import FAQ from "../../views/auth/basicPages/supportCenter/faq";
 import Tickets from "../../views/auth/basicPages/supportCenter/tickets";
 import UserManual from "../../views/auth/basicPages/supportCenter/user-manual";
+import AdminSettingsView from "../../views/auth/basicPages/systemSettings";
+import SettingsPage from "../../views/auth/basicPages/userSettings";
 import DashboardView from "../../views/auth/dashboard";
 import DemoWarning from "./demoWarning";
 import { FilePreviewModal } from "./globalModal";

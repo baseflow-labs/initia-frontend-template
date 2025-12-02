@@ -11,15 +11,15 @@ const AdminUserSettingsPage = () => {
 
   const tabs = [
     {
-      title: t("Auth.Settings.System.Title"),
+      title: t("Auth.Settings.UsersView.Title"),
       body: <UsersView />,
     },
     {
-      title: t("Auth.Settings.PasswordReset.Title"),
+      title: t("Auth.Settings.UserRoles.Title"),
       body: <UserRolesView />
     },
     {
-      title: t("Auth.Settings.Users.Title"),
+      title: t("Auth.Settings.UserRolePermissions.Title"),
       body: <UserRolePermissionsView />
     },
   ];
