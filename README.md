@@ -12,6 +12,25 @@
 - add .nvmrc file
 - wrap with vite
 - build analysis tools integration prep
+- build datatable with ...
+  - actions column (standard + custom)
+  - auto handle of sub-props
+  - server side pagination / infinite scroll
+  - server side sorting
+  - server side filtering
+  - server side search
+  - column visibility control (show / hide + re-order)
+  - export with customization to csv, excel, pdf
+  - row selection (bulk actions)
+  - responsiveness to cards view
+  - details panel option
+  - column custom cell rendering (badges, progress, boolean, select, avatar, type-based)
+  - grouping option
+  - fixed header & footer
+  - record duplicates option
+  - export template & import
+  - data localization support
+  - width control
 
 ## 🚀 Getting Started
 
