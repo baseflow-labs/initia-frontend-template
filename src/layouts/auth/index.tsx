@@ -1,17 +1,13 @@
-import {
-  faDashboard,
-  faGear,
-  faUsers,
-} from "@fortawesome/free-solid-svg-icons";
+import { faDashboard, faGear, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes, useLocation } from "react-router";
 import { Fragment } from "react/jsx-runtime";
 
 import { useWindowWidth } from "../../utils/hooks";
+import SettingsPage from "../../views/auth/basicPages/settings";
+import UserMgmtPage from "../../views/auth/basicPages/users";
 import DashboardView from "../../views/auth/dashboard";
-import SettingsPage from "../../views/auth/settings";
-import UserMgmtPage from "../../views/auth/users";
 import DemoWarning from "./demoWarning";
 import { FilePreviewModal } from "./globalModal";
 import DashboardNavbar from "./navs/navbar";

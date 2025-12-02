@@ -3,24 +3,20 @@ import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
-import * as AuthApi from "../../../api/auth/index";
-import * as MetadataApi from "../../../api/metadata";
-import Button from "../../../components/core/button";
-import Spinner from "../../../components/core/spinner";
-import Form, { LabelView } from "../../../components/form";
-import DefaultInput from "../../../components/form/inputs/default";
-import BoxedPage from "../../../layouts/auth/pages/boxedPage";
-import { addNotification } from "../../../store/actions/notifications";
-import { setFontSize } from "../../../store/actions/settings";
-import { useAppSelector } from "../../../store/hooks";
-import { apiCatchGlobalHandler } from "../../../utils/function";
+import * as AuthApi from "../../../../api/auth/index";
+import * as MetadataApi from "../../../../api/metadata";
+import Button from "../../../../components/core/button";
+import Spinner from "../../../../components/core/spinner";
+import Form, { LabelView } from "../../../../components/form";
+import DefaultInput from "../../../../components/form/inputs/default";
+import BoxedPage from "../../../../layouts/auth/pages/boxedPage";
+import { addNotification } from "../../../../store/actions/notifications";
+import { setFontSize } from "../../../../store/actions/settings";
+import { useAppSelector } from "../../../../store/hooks";
+import { apiCatchGlobalHandler } from "../../../../utils/function";
 import AccountDelete from "./accountDelete";
 import DeleteUsers from "./deleteUsers";
-import {
-  getCommonSettingInputs,
-  getPasswordResetSettingInputs,
-  metadataSettingInputs,
-} from "./inputs";
+import { getCommonSettingInputs, getPasswordResetSettingInputs, metadataSettingInputs } from "./inputs";
 
 const SettingsPage = () => {
   const { t } = useTranslation();
