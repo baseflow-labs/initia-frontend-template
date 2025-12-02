@@ -20,7 +20,7 @@ module.exports = {
         "visitReports",
         "common",
         "code",
-        "documentation",
+        "docs",
       ],
     ],
     "scope-empty": [2, "never"],

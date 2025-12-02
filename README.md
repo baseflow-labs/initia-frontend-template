@@ -9,6 +9,9 @@
 - Fix changelog generating script
 - Update documentation (read me, commit convention)
 - Split localization files into smaller chunks
+- add .nvmrc file
+- wrap with vite
+- build analysis tools integration prep
 
 ## 🚀 Getting Started
 
