@@ -1,8 +1,8 @@
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 
-import DemoLoginNote from "../../../../layouts/auth/demoLoginNote";
-import TablePage from "../../../../layouts/auth/pages/tablePage";
+import DemoLoginNote from "../../../../../../layouts/auth/demoLoginNote";
+import TablePage from "../../../../../../layouts/auth/pages/tablePage";
 import { inputs } from "./inputs";
 
 const UsersView = () => {

@@ -1,4 +1,4 @@
-import { faDashboard, faGear, faUsers } from "@fortawesome/free-solid-svg-icons";
+import { faDashboard, faGear } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes, useLocation } from "react-router";
@@ -14,7 +14,6 @@ import ContactUs from "../../views/auth/basicPages/supportCenter/contact-us";
 import FAQ from "../../views/auth/basicPages/supportCenter/faq";
 import Tickets from "../../views/auth/basicPages/supportCenter/tickets";
 import UserManual from "../../views/auth/basicPages/supportCenter/user-manual";
-import UserMgmtPage from "../../views/auth/basicPages/users";
 import DashboardView from "../../views/auth/dashboard";
 import DemoWarning from "./demoWarning";
 import { FilePreviewModal } from "./globalModal";
@@ -37,13 +36,6 @@ const AuthLayout = () => {
       view: <DashboardView />,
       showInNav: true,
       icon: faDashboard,
-    },
-    {
-      name: t("Auth.Users.Title"),
-      route: "/user",
-      view: <UserMgmtPage />,
-      showInNav: true,
-      icon: faUsers,
     },
     {
       name: t("Auth.Messaging.Title"),
