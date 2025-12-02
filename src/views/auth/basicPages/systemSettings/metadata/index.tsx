@@ -1,14 +1,14 @@
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 
-const UserRolePermissionsView = () => {
+const SystemMetadataSettingsView = () => {
   const { t } = useTranslation();
 
   return (
     <Fragment>
-      role permission placeholder
+      metadata placeholder
     </Fragment>
   );
 };
 
-export default UserRolePermissionsView;
+export default SystemMetadataSettingsView;

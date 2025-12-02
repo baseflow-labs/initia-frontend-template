@@ -5,6 +5,8 @@ import PageTemplate from "../../../../layouts/auth/pages/pageTemplate";
 import SystemLoggerView from "./logger";
 import UserActivityView from "./userActivity";
 import UsersView from "./users";
+import SystemMetadataSettingsView from "./metadata";
+import SystemDataBulkInsertionView from "./bulkInseration";
 
 const SystemSettingsView = () => {
   const { t } = useTranslation();
@@ -22,6 +24,14 @@ const SystemSettingsView = () => {
     {
       title: t("Auth.Settings.Users.Title"),
       body: <UsersView />
+    },
+    {
+      title: t("Auth.Settings.Metadata.Title"),
+      body: <SystemMetadataSettingsView />
+    },
+    {
+      title: t("Auth.Settings.BulkDataInsertion.Title"),
+      body: <SystemDataBulkInsertionView />
     },
   ];
 

@@ -6,7 +6,7 @@ const NotificationsView = () => {
 
   return (
     <Fragment>
-      This is to list notifications
+      notifications placeholder
     </Fragment>
   );
 };

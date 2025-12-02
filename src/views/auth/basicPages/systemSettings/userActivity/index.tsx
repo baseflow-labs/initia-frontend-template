@@ -6,7 +6,7 @@ const UserActivityView = () => {
 
   return (
     <Fragment>
-      This is to show user activity
+      user activity placeholder
     </Fragment>
   );
 };

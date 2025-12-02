@@ -1,34 +1,31 @@
 {
   "Auth": {
-    "Users": {
-      "Users": "Users",
-      "DeleteAll": "Delete All",
-      "Profile": {
-        "DeleteData": "Delete Your Data",
-        "SureToDeleteData": "Are You Sure?"
-      },
-      "UnacceptedNote": "Please wait until your membership application is accepted to use this service."
-    },
     "ContactUs": {
-      "Title": "Title"
+      "Title": "Contact Us"
     },
     "Dashboard": {
       "AidsCount": "Aids Count",
       "ApplicationTimeline": "Application Timeline",
-      "UserInfo": "Your Info",
-      "UserMembershipStatus": "Your Membership Status",
       "ImportantNotifications": "Important Notifications",
       "Main": "Main",
       "NoVisits": "No Visits Scheduled",
       "ResearcherInfo": "Researcher Info",
       "Statuses": {
-        "Pending": "Auth.Dashboard.Statuses.Pending"
+        "Pending": "Dashboard.Statuses.Pending"
       },
       "Title": "Overview",
       "UnacceptedUserNote": "There might be requests to update your personal data at 'Profile' Page",
+      "UserInfo": "Your Info",
+      "UserMembershipStatus": "Your Membership Status",
       "VisitsCount": "Visits Count",
       "VisitsMap": "Visits Map",
       "Welcome": "Welcome"
+    },
+    "Messaging": {
+      "Title": "Messaging"
+    },
+    "Notifications": {
+      "Title": "Notifications"
     },
     "Settings": {
       "AppLogo": "App Logo",
@@ -37,8 +34,6 @@
       "AppPhoneNumberNote": "App Phone Number Note",
       "BulkDataInsertion": {
         "AllowedFileTypes": "'Rafed' Exported Excel Files Only",
-        "UsersData": "Users Data",
-        "UsersDataTemplate": "Download Users Data Template",
         "DependentsData": "Dependents Data",
         "DependentsDataTemplate": "Download Dependents Data Template",
         "PleaseCheck": {
@@ -52,7 +47,9 @@
           "WarningContent": "WarningContent",
           "WarningTitle": "⚠️ WarningTitle"
         },
-        "Title": "Bulk Data Insertion"
+        "Title": "Bulk Data Insertion",
+        "UsersData": "Users Data",
+        "UsersDataTemplate": "Download Users Data Template"
       },
       "FontSize": "Font Size",
       "Metadata": {
@@ -72,16 +69,75 @@
       "System": {
         "Title": "System Settings"
       },
-      "Title": "Settings"
+      "SystemLogger": {
+        "Title": "SystemLogger"
+      },
+      "Title": "Settings",
+      "UserActivity": {
+        "Title": "User Activity"
+      },
+      "UserRolePermissions": {
+        "Title": "User Role Permissions"
+      },
+      "UserRoles": {
+        "Title": "User Roles"
+      },
+      "Users": {
+        "Title": "Users"
+      },
+      "UsersView": {
+        "Title": "Users View"
+      }
+    },
+    "SupportCenter": {
+      "ContactUs": {
+        "Title": "Contact Us"
+      },
+      "Faq": {
+        "Title": "Faq"
+      },
+      "Tickets": {
+        "Title": "Tickets"
+      },
+      "Title": "Support Center",
+      "UserManual": {
+        "Title": "UserManual"
+      }
+    },
+    "SystemSettings": {
+      "Title": "System Settings"
+    },
+    "TABLE_PLURAL_UPPER_NAME": {
+      "Label": {
+        "Email": "Email"
+      },
+      "Name": "Name",
+      "PhoneNumber": "PhoneNumber",
+      "Title": "TABLE_PLURAL_UPPER_NAME"
+    },
+    "TemplateExamples": {
+      "DataView": {
+        "Title": "Data View"
+      },
+      "Forms": {
+        "Title": "Forms"
+      }
     },
     "Users": {
       "Name": "Name",
+      "Profile": {
+        "DeleteData": "Delete Data",
+        "SureToDeleteData": "Sure To Delete Data"
+      },
       "Role": "Role",
       "Title": "Users"
+    },
+    "UserSettings": {
+      "Title": "UserSettings"
     }
   },
   "Common": {
-    "Edit": "Common.Edit"
+    "Edit": "Edit"
   },
   "CopyRight": {
     "AllRightsReserved": "All Rights Reserved © {{year}}",
@@ -154,10 +210,10 @@
         "accountant": "Accountant",
         "admin": "Admin",
         "applicant": "Applicant",
-        "user": "User",
         "ceo": "CEO",
         "hod": "HOD",
-        "researcher": "Researcher"
+        "researcher": "Researcher",
+        "user": "User"
       },
       "Search": "Search",
       "Showing": "Showing",
@@ -195,11 +251,11 @@
         "LoginAsAccountant": "Login As An Accountant",
         "LoginAsAdmin": "Login As System Admin",
         "LoginAsApplicant": "Login As Applicant",
-        "LoginAsUser": "Login As User",
         "LoginAsCeo": "Login As CEO",
         "LoginAsCommitteeHead": "Login As Aids Committee Head",
         "LoginAsHod": "Login As Researchers Supervisor",
         "LoginAsResearcher": "Login As Researcher",
+        "LoginAsUser": "Login As User",
         "Password": "Password",
         "PhoneNo": "PhoneNo",
         "Success": "Success"

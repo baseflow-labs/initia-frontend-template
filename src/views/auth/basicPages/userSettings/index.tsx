@@ -15,7 +15,6 @@ import { setFontSize } from "../../../../store/actions/settings";
 import { useAppSelector } from "../../../../store/hooks";
 import { apiCatchGlobalHandler } from "../../../../utils/function";
 import AccountDelete from "./accountDelete";
-import DeleteUsers from "./deleteUsers";
 import { getCommonSettingInputs, getPasswordResetSettingInputs, metadataSettingInputs } from "./inputs";
 
 const UserSettingsView = () => {
@@ -293,7 +292,7 @@ const UserSettingsView = () => {
           </Fragment>
         )}
 
-        {user.role === "admin" ? <DeleteUsers /> : <AccountDelete />}
+        {user.role !== "admin" && <AccountDelete />}
       </Fragment>
     </BoxedPage>
   );

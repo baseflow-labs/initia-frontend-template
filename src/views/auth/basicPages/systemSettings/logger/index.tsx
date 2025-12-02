@@ -6,7 +6,7 @@ const SystemLoggerView = () => {
 
   return (
     <Fragment>
-      This is to show db logger
+      db logger placeholder
     </Fragment>
   );
 };

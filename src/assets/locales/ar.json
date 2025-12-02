@@ -1,170 +1,226 @@
 {
   "Auth": {
-    "Users": {
-      "Users": "مستفيدون",
-      "DeleteAll": "حذف بيانات كل المستفيدين والتابعين",
-      "Profile": {
-        "DeleteData": "حذف بيانات الحساب",
-        "SureToDeleteData": "هل أنت متأكد؟"
-      },
-      "UnacceptedNote": "يرجى الانتظار لحين قبول طلبكم للعضوية في النظام لتتمكنوا من الاستفادة من الخدمة"
-    },
     "ContactUs": {
-      "Title": "تواصل معنا"
+      "Title": "Contact Us"
     },
     "Dashboard": {
-      "AidsCount": "عدد المعونات",
-      "ApplicationTimeline": "تسلسل الطلب",
-      "UserInfo": "معلوماتك",
-      "UserMembershipStatus": "حالة عضويتكم الآن في النظام",
-      "ImportantNotifications": "الإشعارات الهامة",
-      "Main": "الرئيسية",
-      "NoVisits": "لا يوجد زيارات مجدولة",
-      "ResearcherInfo": "معلومات الباحث",
+      "AidsCount": "Aids Count",
+      "ApplicationTimeline": "Application Timeline",
+      "ImportantNotifications": "Important Notifications",
+      "Main": "Main",
+      "NoVisits": "No Visits Scheduled",
+      "ResearcherInfo": "Researcher Info",
       "Statuses": {
-        "Pending": "Auth.Dashboard.Statuses.Pending"
+        "Pending": "Dashboard.Statuses.Pending"
       },
-      "Title": "نظرة عامة",
-      "UnacceptedUserNote": "قد يكون مطلوب منكم تعديل بعض بياناتكم الشخصية في تبويب 'معلوماتي'",
-      "VisitsCount": "عدد الزيارات",
-      "VisitsMap": "خريطة الزيارات",
-      "Welcome": "أهلاً بكم"
+      "Title": "Overview",
+      "UnacceptedUserNote": "There might be requests to update your personal data at 'Profile' Page",
+      "UserInfo": "Your Info",
+      "UserMembershipStatus": "Your Membership Status",
+      "VisitsCount": "Visits Count",
+      "VisitsMap": "Visits Map",
+      "Welcome": "Welcome"
+    },
+    "Messaging": {
+      "Title": "Messaging"
+    },
+    "Notifications": {
+      "Title": "Notifications"
     },
     "Settings": {
-      "AppLogo": "شعار النظام",
-      "AppName": "اسم النظام",
-      "AppPhoneNumber": "رقم الهاتف لادارة النظام",
-      "AppPhoneNumberNote": "هذا الرقم سيظهر في صفحة 'تواصل معنا' للمستفيدين",
+      "AppLogo": "App Logo",
+      "AppName": "App Name",
+      "AppPhoneNumber": "App Phone Number",
+      "AppPhoneNumberNote": "App Phone Number Note",
       "BulkDataInsertion": {
-        "AllowedFileTypes": "يمكن تحميل ملفات اكسل المصدرة من نظام 'رافد' حصراً",
-        "UsersData": "بيانات المستفيدين",
-        "UsersDataTemplate": "تحميل نموذج بيانات المستفيدين",
-        "DependentsData": "بيانات التابعين",
-        "DependentsDataTemplate": "تحميل نموذج بيانات التابعين",
+        "AllowedFileTypes": "'Rafed' Exported Excel Files Only",
+        "DependentsData": "Dependents Data",
+        "DependentsDataTemplate": "Download Dependents Data Template",
         "PleaseCheck": {
-          "Clarification": "وذلك نظرًا لوجود بعض المشاكل في الملفات المصدّرة من نظام 'رافد', مثل:",
-          "DataReviewWarningContent": "سيتم استيراد جميع الملفات للمستفيدين كطلبات تسجيل في حالة 'طلب غير مكتمل', لإتاحة الإمكانية للمستفيدين لتدقيق ملفاتهم والتأكد من صحة البيانات, قبل التدقيق والتأكد من قبل الباحثيين الاجتماعيين أيضاً.",
-          "Eg1": "عدم تطابق العناوين (رؤوس الأعمدة) مع البيانات الموجودة تحتها.",
-          "Eg2": "شكل البيانات غير صحيح, حيث يصدر نظام 'رافد' التواريخ الرقمية أحياناً كتاريخ الميلاد أو تاريخ انتهاء الهوية في صيغة خاطئة.",
-          "Eg3": "احتمالية وجود بيانات ناقصة أو غير صحيحة.",
-          "Eg4": "وجود تكرار في بيانات يجب أن تكون غير مكررة لدى المستفيدين أو تابعيهم. وتشمل البيانات: رقم الجوال للمستفيد, رقم الهوية للمستفيد أو التابع.",
-          "Highlight": "الرجاء التأكد بعناية من صحة ودقة البيانات المستوردة من نظام 'رافد' قبل إدخالها في نظامنا.",
-          "WarningContent": "أي بيانات يتم استيرادها بشكل غير صحيح قد تؤدي إلى أخطاء في النظام أو معلومات مضللة, أو قد لا يتم استيرادها إلى النظام. لذا يُرجى مراجعة الملف والتأكد من النقاط أعلاه قبل الاستيراد.",
-          "WarningTitle": "⚠️ تنبيه مهم"
+          "Clarification": "Clarification",
+          "DataReviewWarningContent": "Data Review Warning Content",
+          "Eg1": "Eg1",
+          "Eg2": "Eg2",
+          "Eg3": "Eg3",
+          "Eg4": "Eg4",
+          "Highlight": "Highlight",
+          "WarningContent": "WarningContent",
+          "WarningTitle": "⚠️ WarningTitle"
         },
-        "Title": "إدخال البيانات القديمة للنظام"
+        "Title": "Bulk Data Insertion",
+        "UsersData": "Users Data",
+        "UsersDataTemplate": "Download Users Data Template"
       },
-      "FontSize": "حجم الخط للتطبيق",
+      "FontSize": "Font Size",
       "Metadata": {
-        "Title": "إعدادات هوية النظام"
+        "Title": "Metadata Settings"
       },
       "PasswordReset": {
-        "Title": "إعادة ضبط كلمة السر"
+        "Title": "Password Reset"
       },
       "Samples": {
-        "H3Sample": "عينة عنوان رئيسيي",
-        "H4Sample": "عينة عنوان فرعي",
-        "H5Sample": "عينة روابط الصفحات",
-        "LabelSample": "عينة عنوان لحقل ادخال",
-        "SmallSample": " عينة ملاحظات",
-        "Title": "عينات"
+        "H3Sample": "H3 Sample",
+        "H4Sample": "H4 Sample",
+        "H5Sample": "H5 Sample",
+        "LabelSample": "Label Sample",
+        "SmallSample": "Small Sample",
+        "Title": "Text Samples"
       },
       "System": {
-        "Title": "إعدادات النظام"
+        "Title": "System Settings"
       },
-      "Title": "الإعدادات"
+      "SystemLogger": {
+        "Title": "SystemLogger"
+      },
+      "Title": "Settings",
+      "UserActivity": {
+        "Title": "User Activity"
+      },
+      "UserRolePermissions": {
+        "Title": "User Role Permissions"
+      },
+      "UserRoles": {
+        "Title": "User Roles"
+      },
+      "Users": {
+        "Title": "Users"
+      },
+      "UsersView": {
+        "Title": "Users View"
+      }
+    },
+    "SupportCenter": {
+      "ContactUs": {
+        "Title": "Contact Us"
+      },
+      "Faq": {
+        "Title": "Faq"
+      },
+      "Tickets": {
+        "Title": "Tickets"
+      },
+      "Title": "Support Center",
+      "UserManual": {
+        "Title": "UserManual"
+      }
+    },
+    "SystemSettings": {
+      "Title": "System Settings"
+    },
+    "TABLE_PLURAL_UPPER_NAME": {
+      "Label": {
+        "Email": "Email"
+      },
+      "Name": "Name",
+      "PhoneNumber": "PhoneNumber",
+      "Title": "TABLE_PLURAL_UPPER_NAME"
+    },
+    "TemplateExamples": {
+      "DataView": {
+        "Title": "Data View"
+      },
+      "Forms": {
+        "Title": "Forms"
+      }
     },
     "Users": {
-      "Name": "الاسم",
-      "Role": "الدور",
-      "Title": "إدارة المستخدمين"
+      "Name": "Name",
+      "Profile": {
+        "DeleteData": "Delete Data",
+        "SureToDeleteData": "Sure To Delete Data"
+      },
+      "Role": "Role",
+      "Title": "Users"
+    },
+    "UserSettings": {
+      "Title": "UserSettings"
     }
   },
   "Common": {
-    "Edit": "Common.Edit"
+    "Edit": "Edit"
   },
   "CopyRight": {
-    "AllRightsReserved": "جميع الحقوق محفوظة © {{year}}",
-    "AppName": "نظام",
+    "AllRightsReserved": "All Rights Reserved © {{year}}",
+    "AppName": "AppNest",
     "BuilderShort": "AlembicSoft"
   },
   "Global": {
     "Form": {
-      "CantDoIt": "لا يمكن القيام بهذا الإجراء",
+      "CantDoIt": "Can't Do It",
       "Errors": {
-        "FileTooLarge": "حجم الملف أكبر من المسموح به: {{max}} ميجا بيكسل",
-        "InvalidEmail": "بريد إلكتروني غير صالح",
-        "InvalidNumber": "رقم غير صالح",
-        "InvalidPhoneNumber": "رقم جوال غير صحيح, يجب أن يكون الرقم على النحو التالي: 539886868",
-        "Max": "القيمة القصوى المسموحة هي",
-        "MaxLength": "أقصى طول مسموح هو",
-        "Min": "القيمة الدنيا المسموحة هي",
-        "MinLength": "أقل طول مسموح هو",
-        "PasswordMatch": "كلمة السر غير متطابقة",
-        "PhoneNumberLength": "طول رقم الجوال غير صحيح",
-        "Required": "إلزامي",
-        "UploadFailed": "فشل التحميل, نرجو إعادة المحاولة"
+        "FileTooLarge": "Some files exceed the size limit ({{max}} MB).",
+        "InvalidEmail": "Invalid email format",
+        "InvalidNumber": "Invalid number",
+        "InvalidPhoneNumber": "Invalid phone number format",
+        "Max": "Maximum possible value is",
+        "MaxLength": "Maximum possible length is",
+        "Min": "Minimum possible value is",
+        "MinLength": "Minimum possible length is",
+        "PasswordMatch": "Password & confirmation aren't a match",
+        "PhoneNumberLength": "Phone number length is incorrect",
+        "Required": "Required",
+        "UploadFailed": "Upload Failed, Please Try Again"
       },
       "Label": {
-        "Email": "البريد الإلكتروني"
+        "Email": "Email"
       },
       "Labels": {
-        "Add": "إضافة",
-        "AddFiles": "إضافة مرفقات",
-        "BrowserDontSupportLocation": "المتصفح لا يدعم تحديد الموقع, نرجو إدخاله بشكل يدوي",
+        "Add": "Add",
+        "AddFiles": "Add Files",
+        "BrowserDontSupportLocation": "Browser Don't Support Location",
         "CreateNew": "Global.Form.Labels.CreateNew",
-        "Delete": "حذف",
-        "Edit": "تعديل",
-        "FilesMaxReached": "بلغت الحد الأقصى",
-        "Location": "Google Map رابط",
-        "No": "لا",
-        "NoOptions": "لا يوجد خيارات",
-        "PickDate": "اختر التاريخ",
-        "PleaseAllowLocation": "لم نتمكن من تحديد موقعك. الرجاء السماح بالوصول",
-        "PleaseSelect": "نرجو الاختيار...",
-        "Save": "حفظ",
-        "Submit": "إرسال",
-        "UnAvailableForDemoMode": "غير متاح في نسخة العرض",
-        "Update": "التحديث",
+        "Delete": "Global.Form.Labels.Delete",
+        "Edit": "Edit",
+        "FilesMaxReached": "Files Max Reached",
+        "Location": "Location",
+        "No": "No",
+        "NoOptions": "No Options",
+        "PickDate": "Pick Date",
+        "PleaseAllowLocation": "Please Allow Location",
+        "PleaseSelect": "Please Select",
+        "Save": "Save",
+        "Submit": "Submit",
+        "UnAvailableForDemoMode": "Unavailable For Demo Mode",
+        "Update": "Update",
         "Upload": "التحميل",
         "View": "Global.Form.Labels.View",
-        "ViewLocation": "استعرض الموقع",
-        "Yes": "نعم"
+        "ViewLocation": "View Location",
+        "Yes": "Yes"
       },
-      "SuccessMsg": "تم {{action}} لـ {{data}} بنجاح"
+      "SuccessMsg": "Data {{action}} for {{data}} has been done successfully"
     },
     "Labels": {
-      "Action": "إجراء",
-      "All": "الكل",
-      "Back": "عودة",
-      "DemoLoginNote": "بإمكانك تسجيل الدخول بأي من أرقام الهاتف الجوال أدناه وكلمة السر 12345678",
-      "DemoWarning": "نرجو الانتباه أن هذه النسخة الخاصة بالعرض متاح الوصول إليها للجميع, لذا ننصح بعدم مشاركة أي بيانات حقيقية مثل الاسم أو رقم البطاقة أو ما سواها. كما نرجو أخذ العلم بأن البيانات سيتم إعادة ضبطها آلياً كل يوم",
-      "Details": "التفاصيل",
-      "Download": "تحميل الملف",
-      "FileCantBeReviewed": "لا يمكن عرض الملف",
-      "Logout": "خروج",
-      "NoData": "عذراً, لا يوجد بيانات للعرض",
-      "NoNotifications": "لا يوجد إشعارات",
-      "Of": "من",
-      "PageNo": "رقم الصفحة",
-      "PageSize": "حجم الصفحة",
-      "PhoneNumber": "رقم الجوال",
-      "Results": "نتائج",
+      "Action": "Action",
+      "All": "All",
+      "Back": "Back",
+      "DemoLoginNote": "You may login using any of mobile numbers below and password of 12345678",
+      "DemoWarning": "Please be aware that this is a demo version, accessible by the public. So we advise against sharing any real data like name, ID number and the like. Please note that the data will be automatically reset everyday",
+      "Details": "Details",
+      "Download": "Download",
+      "FileCantBeReviewed": "FileCantBeReviewed",
+      "Logout": "Logout",
+      "NoData": "No Data",
+      "NoNotifications": "No Notifications",
+      "Of": "Of",
+      "PageNo": "Page No",
+      "PageSize": "Page Size",
+      "PhoneNumber": "Phone Number",
+      "Results": "Results",
       "Roles": {
-        "accountant": "مدير مالي",
-        "admin": "مدير النظام",
-        "applicant": "متقدم بطلب تسجيل",
-        "user": "مستفيد",
-        "ceo": "مدير / رئيس",
-        "hod": "مدير الباحثين",
-        "researcher": "باحث اجتماعي"
+        "accountant": "Accountant",
+        "admin": "Admin",
+        "applicant": "Applicant",
+        "ceo": "CEO",
+        "hod": "HOD",
+        "researcher": "Researcher",
+        "user": "User"
       },
-      "Search": "بحث",
-      "Showing": "عرض",
-      "ThisWeek": "هذا الأسبوع",
-      "Today": "هذا اليوم",
-      "WrongUrl": "عذراً, العنوان المطلوب خاطئ",
-      "YourOwn": "الخاص بكم"
+      "Search": "Search",
+      "Showing": "Showing",
+      "ThisWeek": "This Week",
+      "Today": "Today",
+      "WrongUrl": "Wrong Url",
+      "YourOwn": "Your Own"
     },
     "Placeholders": {
       "Search": "Global.Placeholders.Search"
@@ -173,71 +229,71 @@
   "Public": {
     "ForgotPassword": {
       "GotOtp": {
-        "Title": "استلام رمز التحقق OTP"
+        "Title": "Title"
       },
       "ResetPassword": {
-        "NewPassword": "كلمة السر الجديدة",
-        "NewPasswordConfirmation": "تأكيد كلمة السر الجديدة",
-        "OldPassword": "كلمة السر الحالية",
-        "ResetPassword": "إعادة تعيين كلمة السر",
-        "Title": "إعادة تعيين كلمة السر"
+        "NewPassword": "New Password",
+        "NewPasswordConfirmation": "New Password Confirmation",
+        "OldPassword": "Current Password",
+        "ResetPassword": "Reset Password",
+        "Title": "Reset Password"
       },
       "SendOtp": {
-        "ConfirmOTP": "تأكيد رمز التحقق OTP",
-        "SendOtp": "إرسال رمز التحقق"
+        "ConfirmOTP": "Confirm OTP",
+        "SendOtp": "Send OTP"
       },
-      "Title": "نسيت كلمة السر"
+      "Title": "Forgot Password"
     },
     "Login": {
       "Labels": {
-        "DidUForgotPassword": "هل نسيت كلمة السر؟",
-        "Login": "تسجيل الدخول",
-        "LoginAsAccountant": "تسجيل الدخول كمدير مالي",
-        "LoginAsAdmin": "تسجيل الدخول كمدير النظام",
-        "LoginAsApplicant": "تسجيل الدخول كمتقدم بطلب تسجيل ",
-        "LoginAsUser": "تسجيل الدخول كمستفيد مسجل بالنظام",
-        "LoginAsCeo": "تسجيل الدخول كمدير تنفيذي",
-        "LoginAsCommitteeHead": "تسجيل الدخول كرئيس لجنة",
-        "LoginAsHod": "تسجيل الدخول كمدير للباحثين",
-        "LoginAsResearcher": "تسجيل الدخول كباحث اجتماعي",
-        "Password": "كلمة السر",
-        "PhoneNo": "رقم الجوال",
-        "Success": "أهلاً بكم مجدداً {{name}}"
+        "DidUForgotPassword": "Did You Forgot Password?",
+        "Login": "Login",
+        "LoginAsAccountant": "Login As An Accountant",
+        "LoginAsAdmin": "Login As System Admin",
+        "LoginAsApplicant": "Login As Applicant",
+        "LoginAsCeo": "Login As CEO",
+        "LoginAsCommitteeHead": "Login As Aids Committee Head",
+        "LoginAsHod": "Login As Researchers Supervisor",
+        "LoginAsResearcher": "Login As Researcher",
+        "LoginAsUser": "Login As User",
+        "Password": "Password",
+        "PhoneNo": "PhoneNo",
+        "Success": "Success"
       },
-      "Title": "تسجيل الدخول"
+      "Title": "Login"
     },
     "Otp": {
-      "CheckSms": "تحقق من رسائل هاتفك وادخل رقم التحقق (OTP)",
-      "Title": "رمز التحقق OTP"
+      "CheckSms": "Check SMS",
+      "Title": "OTP Code"
     },
     "PrivacyPolicy": {
-      "Acknowledgment": "الأقرار بما يلي:",
-      "Point1": "النقطة ١",
-      "Point2": "النقطة ٢",
-      "Point3": "النقطة ٣",
-      "Point4": "النقطة ٤",
-      "Point5": "النقطة ٥",
-      "Point6": "النقطة ٦",
-      "Title": "سياسية الخصوصية"
+      "Acknowledgment": "Acknowledgment",
+      "Point1": "Point1",
+      "Point2": "Point2",
+      "Point3": "Point3",
+      "Point4": "Point4",
+      "Point5": "Point5",
+      "Point6": "Point6",
+      "Title": "Title"
     },
     "Register": {
       "Labels": {
-        "DidNotGetOtp": "لم تصلك الرسالة؟",
-        "Password": "كلمة السر",
-        "PasswordConfirmation": "تأكيد كلمة السر",
-        "PhoneNo": "رقم الجوال",
-        "Register": "إنشاء حساب",
-        "ResendOtp": "إعادة الإرسال",
-        "Success": "تم التسجيل بنجاح. يمكنك الآن تسجيل الدخول"
+        "DidNotGetOtp": "Did Not Get OTP?",
+        "Password": "Password",
+        "PasswordConfirmation": "Password Confirmation",
+        "PhoneNo": "Phone No",
+        "Register": "Register",
+        "ResendOtp": "Resend OTP",
+        "Success": "Success"
       },
-      "Title": "إنشاء حساب"
+      "Title": "Register"
     },
     "TermsConditions": {
-      "Point1": "يقر المستخدم بأن البيانات المقدمة صحيحة وكاملة وحديثة.",
-      "Point2": "يلتزم المستخدم باستخدام المنصة فقط للأغراض المخصصة لها, وعدم إساءة استخدامها.",
-      "Point3": "تحتفظ الجهة القائمة على النظام بالحق في تعديل شروط الاستخدام وسياسة الخصوصية في أي وقت.",
-      "Point4": "يعتبر إنشاء الحساب أو استخدام المنصة موافقة صريحة على هذه الشروط والسياسات.",
-      "Title": "شروط الاستخدام"
+      "Point1": "Point1",
+      "Point2": "Point2",
+      "Point3": "Point3",
+      "Point4": "Point4",
+      "Title": "Title"
     }
   }
 }

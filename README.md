@@ -2,16 +2,13 @@
 
 ## To Do
 
-- Build Fixed Example Page
-- Build Fixed Views of
-  - User Profile
-  - Settings & Support Page
-  - Dashboard
+- Build contents of page placeholders.
 - Add Token Refresh to Auth API Setup
 - Build Dynamic Access Roles (API Integration)
 - Centralize identity control (theme color, logo ,name)
 - Fix changelog generating script
 - Update documentation (read me, commit convention)
+- Split localization files into smaller chunks
 
 ## 🚀 Getting Started
 

@@ -6,7 +6,7 @@ const UserRolesView = () => {
 
   return (
     <Fragment>
-      This is to show user activity
+      user role placeholder
     </Fragment>
   );
 };
