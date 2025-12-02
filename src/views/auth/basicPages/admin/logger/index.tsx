@@ -1,14 +1,14 @@
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 
-const UsersView = () => {
+const SystemLoggerView = () => {
   const { t } = useTranslation();
 
   return (
     <Fragment>
-      This is to show user activity
+      This is to show db logger
     </Fragment>
   );
 };
 
-export default UsersView;
+export default SystemLoggerView;

@@ -5,6 +5,9 @@ import { Navigate, Route, Routes, useLocation } from "react-router";
 import { Fragment } from "react/jsx-runtime";
 
 import { useWindowWidth } from "../../utils/hooks";
+import AdminSettingsView from "../../views/auth/basicPages/admin";
+import MessagingView from "../../views/auth/basicPages/messaging";
+import NotificationsView from "../../views/auth/basicPages/notifications";
 import SettingsPage from "../../views/auth/basicPages/settings";
 import SupportCenter from "../../views/auth/basicPages/supportCenter";
 import ContactUs from "../../views/auth/basicPages/supportCenter/contact-us";
@@ -43,9 +46,34 @@ const AuthLayout = () => {
       icon: faUsers,
     },
     {
+      name: t("Auth.Messaging.Title"),
+      route: "/messaging",
+      view: <MessagingView />,
+      showInNav: true,
+      icon: faGear,
+      fixed: true,
+    },
+    {
+      name: t("Auth.Notifications.Title"),
+      route: "/notifications",
+      view: <NotificationsView />,
+      showInNav: true,
+      icon: faGear,
+      fixed: true,
+    },
+    {
       name: t("Auth.Settings.Title"),
       route: "/settings",
       view: <SettingsPage />,
+      showInNav: true,
+      icon: faGear,
+      fixed: true,
+    },
+    {
+      name: t("Auth.AdminSettings.Title"),
+      route: "/admin-settings",
+      view: <AdminSettingsView />,
+      showInNav: true,
       icon: faGear,
       fixed: true,
     },

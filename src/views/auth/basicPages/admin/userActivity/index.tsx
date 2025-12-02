@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 
-const UsersView = () => {
+const UserActivityView = () => {
   const { t } = useTranslation();
 
   return (
@@ -11,4 +11,4 @@ const UsersView = () => {
   );
 };
 
-export default UsersView;
+export default UserActivityView;

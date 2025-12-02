@@ -1,9 +1,7 @@
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 
-import TablePage from "../../../../layouts/auth/pages/tablePage";
-
-const UsersView = () => {
+const MessagingView = () => {
   const { t } = useTranslation();
 
   return (
@@ -13,4 +11,4 @@ const UsersView = () => {
   );
 };
 
-export default UsersView;
+export default MessagingView;
