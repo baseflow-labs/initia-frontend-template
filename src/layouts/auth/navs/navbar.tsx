@@ -1,8 +1,12 @@
 import {
   faBars,
   faBell,
+  faEnvelope,
+  faGear,
+  faInfo,
   faInfoCircle,
   faMagnifyingGlass,
+  faRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
@@ -207,7 +211,7 @@ const DashboardNavbar = ({
                     )
                   : [{ label: t("Global.Labels.NoNotifications") }]
               }
-              link={{text: 'View Notifications', route: "/notifications"}}
+              link={{text: 'All Notifications', route: "/notifications"}}
             />
 
             {/* <button className="btn btn-link position-relative">
@@ -215,6 +219,11 @@ const DashboardNavbar = ({
           </button> */}
 
             <DropdownComp
+              header={
+                <div className="text-center border-bottom pb-2">
+                  { user.name + " | " + t("Global.Labels.Roles." + user.role) }
+                </div>
+              }
               button={
                 <img
                   src={profilePhotoPlaceholder}
@@ -226,14 +235,24 @@ const DashboardNavbar = ({
               }
               list={[
                 {
-                  disabled: true,
-                  onClick: () => "",
-                  label:
-                    user.name + " | " + t("Global.Labels.Roles." + user.role),
+                  onClick: () => navigate("/messaging"),
+                  label: 'Messaging',
+                  icon: faEnvelope
+                },
+                {
+                  onClick: () => navigate("/settings"),
+                  label: 'Settings',
+                  icon: faGear
+                },
+                {
+                  onClick: () => navigate("/support-center"),
+                  label: 'Support Center',
+                  icon: faInfo
                 },
                 {
                   onClick: () => dispatch(logout()),
                   label: t("Global.Labels.Logout"),
+                  icon: faRightFromBracket
                 },
               ]}
             />

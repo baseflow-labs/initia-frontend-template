@@ -1,7 +1,10 @@
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 
 interface Props {
+  header?: React.ReactNode;
   button: React.ReactNode;
   start?: boolean;
   link?: {text: string; route: string};
@@ -10,10 +13,11 @@ interface Props {
     route?: string;
     onClick?: () => void;
     label: string | React.ReactNode;
+    icon?: IconProp
   }[];
 }
 
-const DropdownComp = ({ button, list, start, link }: Props) => {
+const DropdownComp = ({header,  button, list, start, link }: Props) => {
   const navigate = useNavigate();
 
   const [open, setOpen] = useState(false);
@@ -50,7 +54,9 @@ const DropdownComp = ({ button, list, start, link }: Props) => {
         }`}
         aria-labelledby="dropdown"
       >
-        {list.map(({ onClick, route, label, disabled }, i) => (
+        {header}
+        
+        {list.map(({ onClick, route, label, disabled, icon }, i) => (
           <li key={i}>
             <span
               className={"dropdown-item" + (disabled ? " disabled" : "")}
@@ -59,6 +65,7 @@ const DropdownComp = ({ button, list, start, link }: Props) => {
                 disabled ? undefined : route ? () => navigate(route) : onClick
               }
             >
+              {icon && (<FontAwesomeIcon icon={icon} className="me-2" />)}
               {label}
             </span>
           </li>
