@@ -132,7 +132,7 @@ const FaqView = () => {
   return (
     <Fragment>
       {/* Header */}
-      <div className="bg-info text-white py-5 mb-5">
+      <div className="bg-primary text-white py-5 mb-5">
         <div className="container">
           <div className="row">
             <div className="col-12">
@@ -217,7 +217,7 @@ const FaqView = () => {
             </div>
           ))
         ) : (
-          <div className="alert alert-info text-center">
+          <div className="alert alert-primary text-center">
             <h5>No FAQs found</h5>
             <p className="mb-0">
               Try different search terms or{" "}
@@ -236,10 +236,10 @@ const FaqView = () => {
                   Our support team is here to help you with any questions
                 </p>
                 <div className="d-flex justify-content-center gap-3 flex-wrap">
-                  <Link to="/support-center/contact-us" className="btn btn-info">
+                  <Link to="/support-center/contact-us" className="btn btn-primary">
                     Contact Support
                   </Link>
-                  <Link to="/support-center/tickets" className="btn btn-outline-info">
+                  <Link to="/support-center/tickets" className="btn btn-outline-primary">
                     Submit a Ticket
                   </Link>
                   <Link to="/support-center/user-manual" className="btn btn-outline-secondary">

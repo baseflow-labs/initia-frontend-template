@@ -92,7 +92,7 @@ const SupportCenterView = () => {
   return (
     <Fragment>
       {/* Hero Section */}
-      <div className="bg-info text-white py-5 mb-5">
+      <div className="bg-primary text-white py-5 mb-5">
         <div className="container">
           <div className="row justify-content-center text-center">
             <div className="col-lg-8">
@@ -156,10 +156,10 @@ const SupportCenterView = () => {
             <div key={index} className="col-lg-4 col-md-6 mb-4">
               <div className="card h-100 shadow-sm">
                 <div className="card-body">
-                  <span className="badge bg-info mb-2">{article.category}</span>
+                  <span className="badge bg-primary mb-2">{article.category}</span>
                   <h5 className="card-title">{article.title}</h5>
                   <p className="card-text text-muted">{article.description}</p>
-                  <a href="#" className="text-info text-decoration-none fw-bold">
+                  <a href="#" className="text-primary text-decoration-none fw-bold">
                     Read More <FontAwesomeIcon icon={faArrowRight} size="sm" />
                   </a>
                 </div>
@@ -184,13 +184,13 @@ const SupportCenterView = () => {
                     {category.articles.map((article, articleIndex) => (
                       <li key={articleIndex} className="mb-2">
                         <a href="#" className="text-decoration-none text-muted">
-                          <FontAwesomeIcon icon={faArrowRight} size="sm" className="me-2 text-info" />
+                          <FontAwesomeIcon icon={faArrowRight} size="sm" className="me-2 text-primary" />
                           {article}
                         </a>
                       </li>
                     ))}
                   </ul>
-                  <a href="#" className="text-info text-decoration-none fw-bold">
+                  <a href="#" className="text-primary text-decoration-none fw-bold">
                     See all {category.articleCount} articles
                   </a>
                 </div>
@@ -207,14 +207,14 @@ const SupportCenterView = () => {
           <div className="col-lg-4 col-md-6 mb-4">
             <div className="card shadow-sm h-100">
               <div className="card-body">
-                <div className="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style={{ width: '60px', height: '60px' }}>
-                  <FontAwesomeIcon icon={faBook} className="text-success fa-2x" />
+                <div className="bg-dark bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style={{ width: '60px', height: '60px' }}>
+                  <FontAwesomeIcon icon={faBook} className="text-dark fa-2x" />
                 </div>
                 <h5 className="card-title">Documentation</h5>
                 <p className="card-text text-muted">
                   Expert tips and tools to improve your experience using our comprehensive documentation.
                 </p>
-                <a href="#" className="text-success text-decoration-none fw-bold">
+                <a href="#" className="text-dark text-decoration-none fw-bold">
                   Read More <FontAwesomeIcon icon={faArrowRight} size="sm" />
                 </a>
               </div>
@@ -223,14 +223,14 @@ const SupportCenterView = () => {
           <div className="col-lg-4 col-md-6 mb-4">
             <div className="card shadow-sm h-100">
               <div className="card-body">
-                <div className="bg-info bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style={{ width: '60px', height: '60px' }}>
-                  <FontAwesomeIcon icon={faLifeRing} className="text-info fa-2x" />
+                <div className="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style={{ width: '60px', height: '60px' }}>
+                  <FontAwesomeIcon icon={faLifeRing} className="text-primary fa-2x" />
                 </div>
                 <h5 className="card-title">Tutorials</h5>
                 <p className="card-text text-muted">
                   Step-by-step guides from experts to help you start and grow your projects.
                 </p>
-                <a href="#" className="text-info text-decoration-none fw-bold">
+                <a href="#" className="text-primary text-decoration-none fw-bold">
                   Read More <FontAwesomeIcon icon={faArrowRight} size="sm" />
                 </a>
               </div>
@@ -265,11 +265,11 @@ const SupportCenterView = () => {
                   or email us 24/7 and we'll get back to you.
                 </p>
                 <div className="d-flex justify-content-center gap-3">
-                  <Link to="/support-center/contact-us" className="btn btn-info btn-lg">
+                  <Link to="/support-center/contact-us" className="btn btn-primary btn-lg">
                     <FontAwesomeIcon icon={faEnvelope} className="me-2" />
                     Contact Us
                   </Link>
-                  <Link to="/support-center/tickets" className="btn btn-outline-info btn-lg">
+                  <Link to="/support-center/tickets" className="btn btn-outline-primary btn-lg">
                     <FontAwesomeIcon icon={faTicket} className="me-2" />
                     Submit a Ticket
                   </Link>

@@ -54,14 +54,14 @@ const ContactUsView = () => {
       title: "Call Us",
       details: "+1 (555) 123-4567",
       subDetails: "Mon-Fri, 9AM-6PM EST",
-      color: "success",
+      color: "dark",
     },
     {
       icon: faMapMarkerAlt,
       title: "Visit Us",
       details: "123 Main Street, Suite 100",
       subDetails: "New York, NY 10001",
-      color: "info",
+      color: "primary",
     },
     {
       icon: faClock,
@@ -85,7 +85,7 @@ const ContactUsView = () => {
   return (
     <Fragment>
       {/* Header */}
-      <div className="bg-info text-white py-5 mb-5">
+      <div className="bg-primary text-white py-5 mb-5">
         <div className="container">
           <div className="row">
             <div className="col-12">
@@ -134,7 +134,7 @@ const ContactUsView = () => {
           {/* Contact Form */}
           <div className="col-lg-8 mb-4">
             <div className="card shadow-sm">
-              <div className="card-header bg-info text-white">
+              <div className="card-header bg-primary text-white">
                 <h4 className="mb-0">
                   <FontAwesomeIcon icon={faPaperPlane} className="me-2" />
                   Send us a Message
@@ -142,7 +142,7 @@ const ContactUsView = () => {
               </div>
               <div className="card-body p-4">
                 {submitted && (
-                  <div className="alert alert-success alert-dismissible fade show">
+                  <div className="alert alert-dark alert-dismissible fade show">
                     <strong>Success!</strong> Your message has been sent. We'll get
                     back to you soon.
                   </div>
@@ -248,17 +248,17 @@ const ContactUsView = () => {
                     />
                     <label className="form-check-label" htmlFor="agree">
                       I agree to the{" "}
-                      <a href="#" className="text-info">
+                      <a href="#" className="text-primary">
                         Privacy Policy
                       </a>{" "}
                       and{" "}
-                      <a href="#" className="text-info">
+                      <a href="#" className="text-primary">
                         Terms of Service
                       </a>
                     </label>
                   </div>
 
-                  <button type="submit" className="btn btn-info text-white px-4">
+                  <button type="submit" className="btn btn-primary text-white px-4">
                     <FontAwesomeIcon icon={faPaperPlane} className="me-2" />
                     Send Message
                   </button>
@@ -273,7 +273,7 @@ const ContactUsView = () => {
             <div className="card shadow-sm mb-4">
               <div className="card-header bg-light">
                 <h5 className="mb-0">
-                  <FontAwesomeIcon icon={faClock} className="me-2 text-info" />
+                  <FontAwesomeIcon icon={faClock} className="me-2 text-primary" />
                   Office Hours
                 </h5>
               </div>
@@ -316,7 +316,7 @@ const ContactUsView = () => {
                   >
                     <FontAwesomeIcon icon={faFacebook as any} />
                   </a>
-                  <a href="#" className="btn btn-outline-info btn-sm flex-fill">
+                  <a href="#" className="btn btn-outline-primary btn-sm flex-fill">
                     <FontAwesomeIcon icon={faTwitter as any} />
                   </a>
                   <a
@@ -381,7 +381,7 @@ const ContactUsView = () => {
             <div className="card shadow-sm">
               <div className="card-header bg-light">
                 <h5 className="mb-0">
-                  <FontAwesomeIcon icon={faMapMarkerAlt} className="me-2 text-info" />
+                  <FontAwesomeIcon icon={faMapMarkerAlt} className="me-2 text-primary" />
                   Our Location
                 </h5>
               </div>

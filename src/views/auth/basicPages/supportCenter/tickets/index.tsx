@@ -70,7 +70,7 @@ const SupportTicketsView = () => {
   ];
 
   const priorities = [
-    { value: "low", label: "Low", color: "info" },
+    { value: "low", label: "Low", color: "primary" },
     { value: "medium", label: "Medium", color: "warning" },
     { value: "high", label: "High", color: "danger" },
     { value: "urgent", label: "Urgent", color: "dark" },
@@ -110,7 +110,7 @@ const SupportTicketsView = () => {
     const statusConfig = {
       open: { color: "primary", icon: faExclamationCircle },
       "in-progress": { color: "warning", icon: faClock },
-      resolved: { color: "success", icon: faCheckCircle },
+      resolved: { color: "dark", icon: faCheckCircle },
       closed: { color: "secondary", icon: faCheckCircle },
     };
     const config = statusConfig[status as keyof typeof statusConfig];
@@ -124,7 +124,7 @@ const SupportTicketsView = () => {
 
   const getPriorityBadge = (priority: string) => {
     const priorityConfig = {
-      low: "info",
+      low: "primary",
       medium: "warning",
       high: "danger",
       urgent: "dark",
@@ -200,14 +200,14 @@ const SupportTicketsView = () => {
                 </div>
                 <div className="card-body p-4">
                   {submitted && (
-                    <div className="alert alert-success alert-dismissible fade show">
+                    <div className="alert alert-dark alert-dismissible fade show">
                       <strong>Ticket Created!</strong> Your support ticket has been
-                      submitted successfully. Ticket ID: TKT-2024-
+                      submitted darkfully. Ticket ID: TKT-2024-
                       {Math.floor(Math.random() * 1000)}
                     </div>
                   )}
 
-                  <div className="alert alert-info mb-4">
+                  <div className="alert alert-primary mb-4">
                     <strong>Before submitting a ticket:</strong>
                     <ul className="mb-0 mt-2">
                       <li>
@@ -492,7 +492,7 @@ const SupportTicketsView = () => {
                   </div>
                 </div>
                 <div className="col-md-3 mb-3">
-                  <div className="card bg-success text-white shadow-sm">
+                  <div className="card bg-dark text-white shadow-sm">
                     <div className="card-body text-center">
                       <h3 className="mb-0">
                         {myTickets.filter((t) => t.status === "resolved").length}
@@ -502,7 +502,7 @@ const SupportTicketsView = () => {
                   </div>
                 </div>
                 <div className="col-md-3 mb-3">
-                  <div className="card bg-info text-white shadow-sm">
+                  <div className="card bg-primary text-white shadow-sm">
                     <div className="card-body text-center">
                       <h3 className="mb-0">24h</h3>
                       <small>Avg Response Time</small>

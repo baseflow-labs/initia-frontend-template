@@ -126,7 +126,7 @@ const UserManualView = () => {
   return (
     <Fragment>
       {/* Header */}
-      <div className="bg-success text-white py-5 mb-5">
+      <div className="bg-dark text-white py-5 mb-5">
         <div className="container">
           <div className="row">
             <div className="col-12">
@@ -151,7 +151,7 @@ const UserManualView = () => {
           {/* Sidebar Navigation */}
           <div className="col-lg-3 mb-4">
             <div className="card shadow-sm sticky-top" style={{ top: "20px" }}>
-              <div className="card-header bg-success text-white">
+              <div className="card-header bg-dark text-white">
                 <h5 className="mb-0">
                   <FontAwesomeIcon icon={faBook} className="me-2" />
                   Contents
@@ -178,11 +178,11 @@ const UserManualView = () => {
             <div className="card shadow-sm mt-3">
               <div className="card-body">
                 <h6 className="card-title mb-3">Download Manual</h6>
-                <button className="btn btn-outline-success btn-sm w-100 mb-2">
+                <button className="btn btn-outline-dark btn-sm w-100 mb-2">
                   <FontAwesomeIcon icon={faDownload} className="me-2" />
                   PDF Version
                 </button>
-                <button className="btn btn-outline-success btn-sm w-100">
+                <button className="btn btn-outline-dark btn-sm w-100">
                   <FontAwesomeIcon icon={faDownload} className="me-2" />
                   Offline Guide
                 </button>
@@ -201,7 +201,7 @@ const UserManualView = () => {
                       manualSections.find((s) => s.id === activeSection)?.icon ||
                       faBook
                     }
-                    className="text-success fa-2x me-3"
+                    className="text-dark fa-2x me-3"
                   />
                   <h2 className="mb-0">
                     {manualSections.find((s) => s.id === activeSection)?.title}
@@ -227,7 +227,7 @@ const UserManualView = () => {
                             className={`badge ${
                               subsection.type === "video"
                                 ? "bg-danger"
-                                : "bg-info"
+                                : "bg-primary"
                             }`}
                           >
                             {subsection.type === "video" ? (
@@ -250,7 +250,7 @@ const UserManualView = () => {
                         </p>
                         <a
                           href="#"
-                          className="text-success text-decoration-none fw-bold"
+                          className="text-dark text-decoration-none fw-bold"
                         >
                           {subsection.type === "video" ? "Watch Now" : "Read More"}
                           <FontAwesomeIcon
@@ -320,10 +320,10 @@ const UserManualView = () => {
                   Can't find what you're looking for? Our support team is ready to assist you.
                 </p>
                 <div className="d-flex justify-content-center gap-3 flex-wrap">
-                  <Link to="/support-center/faq" className="btn btn-success">
+                  <Link to="/support-center/faq" className="btn btn-dark">
                     View FAQ
                   </Link>
-                  <Link to="/support-center/contact-us" className="btn btn-outline-success">
+                  <Link to="/support-center/contact-us" className="btn btn-outline-dark">
                     Contact Support
                   </Link>
                 </div>
