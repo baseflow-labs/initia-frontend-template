@@ -1,13 +1,25 @@
-import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
+import TablePage from "../../../../../../layouts/auth/pages/tablePage";
+import { inputs } from "./inputs";
 
 const UserRolesView = () => {
   const { t } = useTranslation();
 
   return (
-    <Fragment>
-      user role placeholder
-    </Fragment>
+    <TablePage
+      title="User Roles"
+      // actionButtons={actionButtons}
+      columns={inputs(t)}
+      // searchProp="name"
+      // searchPlaceholder={t("Auth.Users.SearchBarPlaceholder")}
+      // tableExtraActions={(id?: string) => [
+      //   {
+      //     label: t("Common.Edit"),
+      //     icon: faEdit
+      //   },
+      // ]}
+      dataApiEndpoint="users"
+    />
   );
 };
 
