@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 interface Props {
   button: React.ReactNode;
   start?: boolean;
+  link?: {text: string; route: string};
   list: {
     disabled?: boolean;
     route?: string;
@@ -12,7 +13,7 @@ interface Props {
   }[];
 }
 
-const DropdownComp = ({ button, list, start }: Props) => {
+const DropdownComp = ({ button, list, start, link }: Props) => {
   const navigate = useNavigate();
 
   const [open, setOpen] = useState(false);
@@ -62,6 +63,15 @@ const DropdownComp = ({ button, list, start }: Props) => {
             </span>
           </li>
         ))}
+
+       {link?.route && (
+          <button
+            className="btn btn-primary w-100 rounded-0"
+            onClick={() => navigate(link.route)}
+          >
+            {link.text}
+          </button>
+        )}
       </ul>
     </div>
   );

@@ -207,6 +207,7 @@ const DashboardNavbar = ({
                     )
                   : [{ label: t("Global.Labels.NoNotifications") }]
               }
+              link={{text: 'View Notifications', route: "/notifications"}}
             />
 
             {/* <button className="btn btn-link position-relative">

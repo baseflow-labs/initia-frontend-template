@@ -51,7 +51,6 @@ const AuthLayout = () => {
       name: t("Auth.Notifications.Title"),
       route: "/notifications",
       view: <NotificationsView />,
-      showInNav: true,
       icon: faGear,
       fixed: true,
     },
