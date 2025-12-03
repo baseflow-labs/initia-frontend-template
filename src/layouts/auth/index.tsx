@@ -22,6 +22,7 @@ import { FilePreviewModal } from "./globalModal";
 import DashboardNavbar from "./navs/navbar";
 import OffCanvasNav from "./navs/offcanvasNav";
 import Sidebar from "./navs/sidebarNav";
+import UserProfileView from "../../views/auth/basicPages/userProfile";
 
 const AuthLayout = () => {
   const { t, i18n } = useTranslation();
@@ -38,6 +39,13 @@ const AuthLayout = () => {
       view: <DashboardView />,
       showInNav: true,
       icon: faDashboard,
+    },
+    {
+      name: t("Auth.Profile.Title"),
+      route: "/profile",
+      view: <UserProfileView />,
+      icon: faGear,
+      fixed: true,
     },
     {
       name: t("Auth.Messaging.Title"),

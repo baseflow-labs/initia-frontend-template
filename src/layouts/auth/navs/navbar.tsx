@@ -7,6 +7,7 @@ import {
   faInfoCircle,
   faMagnifyingGlass,
   faRightFromBracket,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
@@ -234,6 +235,11 @@ const DashboardNavbar = ({
                 />
               }
               list={[
+                {
+                  onClick: () => navigate("/profile"),
+                  label: 'Profile',
+                  icon: faUser
+                },
                 {
                   onClick: () => navigate("/messaging"),
                   label: 'Messaging',
