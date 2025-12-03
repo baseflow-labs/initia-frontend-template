@@ -48,7 +48,7 @@ const ProgramCards = ({ programs }: Props) => {
                   {balance} <AidUnit t={t} type={type} amount={balance} big />
                 </h1>
 
-                <h5 className="text-info">
+                <h5 className="text-primary">
                   {credit} <AidUnit t={t} type={type} amount={credit} />
                 </h5>
 

@@ -26,7 +26,7 @@ export default function TabsComp({
               className={`btn mx-2 px-4 py-3 rounded-5 w-fit  
           ${
             activeTab === tab.id
-              ? "bg-opacity-info text-info fw-bold fs-6"
+              ? "bg-opacity-primary text-primary fw-bold fs-6"
               : "text-dark"
           }`}
               onClick={() => setActiveTab(tab.id)}

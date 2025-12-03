@@ -131,7 +131,7 @@ const FileInput: React.FC<FinalInput> = ({
   };
 
   const generateFileIcon = (type: string) => {
-    return <FontAwesomeIcon icon={faFile} className="text-success" />;
+    return <FontAwesomeIcon icon={faFile} className="text-dark" />;
   };
 
   return (
@@ -212,7 +212,7 @@ const FileInput: React.FC<FinalInput> = ({
         justify-content: center;
         width: 80px;
         height: 80px;
-        border: 1px solid var(--bs-success);
+        border: 1px solid var(--bs-dark);
         border-radius: 6px;
         box-sizing: border-box;
         background: #fafafa;
@@ -262,13 +262,13 @@ const FileInput: React.FC<FinalInput> = ({
         justify-content: center;
         width: 80px;
         height: 80px;
-        border: 2px dashed var(--bs-info);
+        border: 2px dashed var(--bs-primary);
         border-radius: 6px;
         text-align: center;
         cursor: pointer;
         user-select: none;
         font-size: 0.9rem;
-        color: var(--bs-info);
+        color: var(--bs-primary);
         padding: 0.5rem;
         box-sizing: border-box;
         min-width: 80px;

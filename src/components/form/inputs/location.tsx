@@ -78,7 +78,7 @@ const LocationInput: React.FC<FinalInput> = ({ name, ...input }) => {
             href={location.link}
             target="_blank"
             rel="noreferrer"
-            className="d-block mt-2 text-success small"
+            className="d-block mt-2 text-dark small"
           >
             {t("Global.Form.Labels.ViewLocation")}
           </a>

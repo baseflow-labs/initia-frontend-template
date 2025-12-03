@@ -69,7 +69,7 @@ const AccountDelete = () => {
           <Button
             outline
             onClick={() => setOpenModal(false)}
-            color="info"
+            color="primary"
             className="my-3 ms-1"
           >
             {t("Global.Form.Labels.No")}

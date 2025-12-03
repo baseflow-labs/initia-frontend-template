@@ -42,7 +42,7 @@ const NotificationsToaster = () => {
               ? "danger"
               : type === "warning"
               ? "warning"
-              : "success"
+              : "dark"
           }`}
           role="alert"
           aria-live="assertive"

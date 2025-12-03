@@ -39,7 +39,7 @@ function renderByType(type: any, props: any) {
   if (type === "textarea") return <TextareaInput {...input} />;
   if (type === "multipleEntries") return <MultipleEntriesInput {...input} />;
   if (type === "title")
-    return <div className="h4 text-success">{input.defaultValue}</div>;
+    return <div className="h4 text-dark">{input.defaultValue}</div>;
   return <DefaultInput type={type} {...input} />;
 }
 

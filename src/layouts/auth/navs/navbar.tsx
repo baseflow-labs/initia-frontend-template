@@ -105,7 +105,7 @@ const DashboardNavbar = ({
                   placeholder={searchPlaceholder || t("Global.Labels.Search")}
                 />
 
-                <button className="input-group-text bg-info" type="submit">
+                <button className="input-group-text bg-primary" type="submit">
                   <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </button>
               </div>
@@ -142,7 +142,7 @@ const DashboardNavbar = ({
         <div className="col-6 col-lg-2 pb-3 order-2 order-lg-2">
           <div className="d-flex align-items-end gap-3 pe-5 float-end">
             {loading.length > 0 ? (
-              <small className="text-info">
+              <small className="text-primary">
                 <Spinner />
               </small>
             ) : (
@@ -160,7 +160,7 @@ const DashboardNavbar = ({
                     className={`position-absolute top-0 translate-middle badge rounded-circle bg-${
                       notifications.filter((n) => !n.isRead).length
                         ? "danger"
-                        : "success"
+                        : "dark"
                     } py-1`}
                     style={{ fontSize: "0.75rem" }}
                   >

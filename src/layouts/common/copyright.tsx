@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 
-import Logo from "../../assets/images/brand/logo-full.png";
-import LogoOnly from "../../assets/images/brand/logo-only.png";
+import Logo from "../../assets/images/brand/logo.png";
+import LogoOnly from "../../assets/images/brand/logo.png";
 import { APP_VERSION } from "../../documentation/version";
 
 const CopyRightView = ({

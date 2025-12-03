@@ -1,13 +1,10 @@
-import {
-  faChevronLeft,
-  faChevronRight,
-} from "@fortawesome/free-solid-svg-icons";
+import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
 
-import LogoOnly from "../../../assets/images/brand/logo-only.png";
+import LogoOnly from "../../../assets/images/brand/logo.png";
 import { useAppSelector } from "../../../store/hooks";
 import CopyRightView from "../../common/copyright";
 
@@ -64,7 +61,7 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
               <h5
                 className={`sidebar-link text-decoration-none p-3 rounded-3 ${
                   location.pathname.includes(route)
-                    ? "bg-info text-white"
+                    ? "bg-primary text-white"
                     : "text-dark"
                 }`}
                 role="button"
@@ -113,7 +110,7 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
               key={i}
               className={`sidebar-link text-decoration-none p-3 rounded-3 ${
                 location.pathname.includes(route)
-                  ? "bg-info text-white"
+                  ? "bg-primary text-white"
                   : "text-dark"
               }`}
               role="button"

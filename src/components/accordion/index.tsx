@@ -25,7 +25,7 @@ const Accordion = ({ key, data, icon, onAdd, addText, onRemove }: Props) => {
             <h2 className="accordion-header mb-3" id={"heading" + String(i)}>
               <div className="d-flex align-items-center justify-content-between">
                 <button
-                  className="btn btn-ghost p-3 w-100 text-start collapsed bg-info rounded-4 text-white"
+                  className="btn btn-ghost p-3 w-100 text-start collapsed bg-primary rounded-4 text-white"
                   aria-expanded="false"
                   type="button"
                   aria-controls={"collapse" + String(i)}
@@ -64,7 +64,7 @@ const Accordion = ({ key, data, icon, onAdd, addText, onRemove }: Props) => {
       </div>
 
       <Button
-        color="success"
+        color="dark"
         outline
         type="button"
         className="my-4"

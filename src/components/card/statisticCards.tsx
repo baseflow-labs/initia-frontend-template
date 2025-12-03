@@ -8,7 +8,7 @@ interface Props {
   statistics: {
     label: string;
     count: number;
-    color: string; // "primary" | "success" | "warning" | "danger" | "info";
+    color: string; // "primary" | "dark" | "warning" | "danger" | "info";
     icon: IconProp;
     unit?: React.ReactNode | string;
     details?: {

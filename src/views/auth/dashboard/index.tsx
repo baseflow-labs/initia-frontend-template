@@ -66,7 +66,7 @@ const DashboardView = () => {
       <div className="row">
         <div className="col-lg-6">
           <DashboardCard>
-            <div className="text-info text-center py-5">
+            <div className="text-primary text-center py-5">
               <h1 className="mb-4">{t("Auth.Dashboard.Welcome")}</h1>
 
               <img
@@ -79,7 +79,7 @@ const DashboardView = () => {
                 className="my-5 w-100"
               />
 
-              <h4 className="display-4 mt-5 text-success">{name}</h4>
+              <h4 className="display-4 mt-5 text-dark">{name}</h4>
             </div>
           </DashboardCard>
         </div>

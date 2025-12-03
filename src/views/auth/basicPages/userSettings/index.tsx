@@ -96,7 +96,7 @@ const UserSettingsView = () => {
   return (
     <BoxedPage title={t("Auth.Settings.Title")}>
       <Fragment>
-        <h5 className="text-info my-5">{t("Auth.Settings.System.Title")}</h5>
+        <h5 className="text-primary my-5">{t("Auth.Settings.System.Title")}</h5>
 
         <Form
           inputs={() => getCommonSettingInputs(t)}
@@ -117,7 +117,7 @@ const UserSettingsView = () => {
           }}
         />
 
-        <h5 className="text-info my-5">
+        <h5 className="text-primary my-5">
           {t("Auth.Settings.PasswordReset.Title")}
         </h5>
 
@@ -132,7 +132,7 @@ const UserSettingsView = () => {
 
         {user.role === "admin" && (
           <Fragment>
-            <h4 className="text-info my-5">
+            <h4 className="text-primary my-5">
               {t("Auth.Settings.Metadata.Title")}
             </h4>
 
@@ -148,7 +148,7 @@ const UserSettingsView = () => {
               }}
             />
 
-            <h4 className="text-info my-5">
+            <h4 className="text-primary my-5">
               {t("Auth.Settings.BulkDataInsertion.Title")}
             </h4>
 

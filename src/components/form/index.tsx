@@ -322,7 +322,7 @@ const Form: React.FC<Props> = ({
                       <div className="col-md-6 mb-3">
                         <button
                           type="button"
-                          className="btn btn-outline-success p-2 w-100 rounded-3 no-interaction"
+                          className="btn btn-outline-dark p-2 w-100 rounded-3 no-interaction"
                         >
                           <img
                             alt={`${input.name}Logo`}
@@ -475,7 +475,7 @@ const Form: React.FC<Props> = ({
         <Button
           type="submit"
           disabled={loading.length > 0}
-          color="info"
+          color="primary"
           className={`w-${customButtons ? "50" : "100"} p-2`}
         >
           {loading.length > 0 ? (

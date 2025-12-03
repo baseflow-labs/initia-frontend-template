@@ -159,12 +159,12 @@ export const dataRender = ({
             className="h4 align-middle"
           >
             <FontAwesomeIcon
-              className="text-success"
+              className="text-dark"
               icon={faWhatsapp as IconProp}
             />
           </a>{" "}
           <a href={"tel:966" + data} target="_blank" rel="noreferrer">
-            <FontAwesomeIcon className="text-success" icon={faPhone} />
+            <FontAwesomeIcon className="text-dark" icon={faPhone} />
           </a>
         </span>
       );
@@ -172,7 +172,7 @@ export const dataRender = ({
       return (
         <span dir="ltr">
           <a href={"mailto:" + data} target="_blank" rel="noreferrer">
-            <FontAwesomeIcon className="text-success" icon={faEnvelope} />
+            <FontAwesomeIcon className="text-dark" icon={faEnvelope} />
           </a>{" "}
           {data}
         </span>
@@ -456,7 +456,7 @@ const DynamicTable = ({
                               onClick={() => {}}
                               label={t("Global.Form.Labels.View")}
                               icon={faEye}
-                              color="info"
+                              color="primary"
                               row={row}
                             />
                           )}
@@ -502,7 +502,7 @@ const DynamicTable = ({
                                 <Fragment>
                                   <FontAwesomeIcon
                                     icon={icon}
-                                    className="text-info"
+                                    className="text-primary"
                                   />{" "}
                                   {label}
                                 </Fragment>
@@ -553,7 +553,7 @@ const DynamicTable = ({
                           <li className="page-item my-auto">
                             <button
                               className={`page-link text-${
-                                currentPage === 1 ? "secondary" : "info"
+                                currentPage === 1 ? "secondary" : "primary"
                               } border-0 px-3`}
                               onClick={() => onPageNumberChange(1)}
                               disabled={currentPage === 1}
@@ -565,7 +565,7 @@ const DynamicTable = ({
                           <li className="page-item my-auto">
                             <button
                               className={`page-link text-${
-                                currentPage === 1 ? "secondary" : "info"
+                                currentPage === 1 ? "secondary" : "primary"
                               } border-0 px-3`}
                               onClick={() =>
                                 onPageNumberChange(currentPage - 1)
@@ -598,8 +598,8 @@ const DynamicTable = ({
                                   <button
                                     className={`page-link border-0 rounded-2 me-1 ${
                                       currentPage === page
-                                        ? "bg-info"
-                                        : "border-info text-info"
+                                        ? "bg-primary"
+                                        : "border-primary text-primary"
                                     }`}
                                     onClick={() => onPageNumberChange(page)}
                                   >
@@ -615,7 +615,7 @@ const DynamicTable = ({
                               className={`page-link text-${
                                 currentPage === paginationMeta?.pagesCount
                                   ? "secondary"
-                                  : "info"
+                                  : "primary"
                               } border-0 px-3`}
                               onClick={() =>
                                 onPageNumberChange(currentPage + 1)
@@ -633,7 +633,7 @@ const DynamicTable = ({
                               className={`page-link text-${
                                 currentPage === paginationMeta?.pagesCount
                                   ? "secondary"
-                                  : "info"
+                                  : "primary"
                               } border-0 px-3`}
                               onClick={() =>
                                 onPageNumberChange(paginationMeta?.pagesCount)
@@ -652,7 +652,7 @@ const DynamicTable = ({
                         <ul className="pagination">
                           <li className="page-item my-auto">
                             <span className="page-link border-0 d-flex">
-                              <small className="my-auto text-info">
+                              <small className="my-auto text-primary">
                                 {t("Global.Labels.PageNo")}
                               </small>
 
@@ -672,7 +672,7 @@ const DynamicTable = ({
 
                           <li className="page-item my-auto">
                             <span className="page-link border-0 d-flex">
-                              <small className="my-auto text-info">
+                              <small className="my-auto text-primary">
                                 {t("Global.Labels.PageSize")}
                               </small>
 

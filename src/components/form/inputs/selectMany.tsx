@@ -46,7 +46,7 @@ const SelectManyInput: React.FC<SelectManyInputProps> = ({
     <components.DropdownIndicator {...props}>
       <div
         style={{
-          backgroundColor: "var(--bs-info)",
+          backgroundColor: "var(--bs-primary)",
           borderRadius: "20%",
           padding: "5px",
           display: "flex",
@@ -87,13 +87,13 @@ const SelectManyInput: React.FC<SelectManyInputProps> = ({
       borderRadius: 7,
       boxShadow: "none",
       "&:hover": {
-        borderColor: "var(--bs-info)",
+        borderColor: "var(--bs-primary)",
       },
     }),
     multiValue: (base) => ({
       ...base,
       backgroundColor: "transparent",
-      border: `1px solid var(--bs-info)`,
+      border: `1px solid var(--bs-primary)`,
       borderRadius: 6,
       padding: "2px 4px",
       display: "flex",
@@ -101,7 +101,7 @@ const SelectManyInput: React.FC<SelectManyInputProps> = ({
     }),
     multiValueLabel: (base) => ({
       ...base,
-      color: "var(--bs-info)",
+      color: "var(--bs-primary)",
       padding: 0,
       margin: "auto 4px",
     }),

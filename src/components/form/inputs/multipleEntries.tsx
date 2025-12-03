@@ -151,7 +151,7 @@ const MultipleEntriesInput: React.FC<FinalInput> = (input) => {
                   <td className="pt-5">
                     <Button
                       type="button"
-                      color="success"
+                      color="dark"
                       onClick={(e) => handleSaveDraftAndAdd(push, e)}
                     >
                       <FontAwesomeIcon icon={faSave} />

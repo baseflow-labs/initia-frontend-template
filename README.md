@@ -31,6 +31,7 @@
   - export template & import
   - data localization support
   - width control
+- Build documentation 
 
 ## 🚀 Getting Started
 

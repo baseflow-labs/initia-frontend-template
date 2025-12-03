@@ -47,7 +47,7 @@ const OffCanvasNav = ({ routes, fixedRoutes }: Props) => {
               <h5
                 className={`sidebar-link text-decoration-none p-3 rounded-3 ${
                   location.pathname.includes(route)
-                    ? "bg-info text-white"
+                    ? "bg-primary text-white"
                     : "text-dark"
                 }`}
                 data-bs-dismiss="offcanvas"
@@ -78,7 +78,7 @@ const OffCanvasNav = ({ routes, fixedRoutes }: Props) => {
               <h5
                 className={`sidebar-link text-decoration-none p-3 rounded-3 ${
                   location.pathname.includes(route)
-                    ? "bg-info text-white"
+                    ? "bg-primary text-white"
                     : "text-dark"
                 }`}
                 role="button"
