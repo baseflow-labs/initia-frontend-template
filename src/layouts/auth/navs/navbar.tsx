@@ -1,16 +1,4 @@
-import {
-  faBars,
-  faBell,
-  faEnvelope,
-  faGear,
-  faInfo,
-  faInfoCircle,
-  faMagnifyingGlass,
-  faMoon,
-  faRightFromBracket,
-  faSun,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBars, faBell, faEnvelope, faGear, faInfoCircle, faMagnifyingGlass, faRightFromBracket, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
 import { FormEvent, useLayoutEffect, useState } from "react";
@@ -20,12 +8,12 @@ import { useNavigate } from "react-router";
 
 import * as NotificationApi from "../../../api/notifications";
 import profilePhotoPlaceholder from "../../../assets/images/profile-image-placeholder.png";
+import LangButton from "../../../components/button/lang";
 import Spinner from "../../../components/core/spinner";
 import DropdownComp from "../../../components/dropdown";
 import { logout } from "../../../store/actions/auth";
 import { useAppSelector } from "../../../store/hooks";
 import { apiCatchGlobalHandler } from "../../../utils/function";
-import LangButton from "../../../components/button/lang";
 
 export interface Notification {
   id: string;
@@ -126,12 +114,10 @@ const DashboardNavbar = ({
               ""
             )}
 
-            <LangButton />
-
             <DropdownComp
               button={
                 <div className="position-relative">
-                  <FontAwesomeIcon icon={faBell} className="text-secondary" />
+                  <FontAwesomeIcon icon={faBell} className="text-primary" />
 
                   <div
                     className={`position-absolute top-0 translate-middle badge rounded-circle bg-${
@@ -188,8 +174,10 @@ const DashboardNavbar = ({
             />
 
             <button className="btn btn-link py-auto" onClick={() => navigate("/messaging")}>
-              <FontAwesomeIcon icon={faEnvelope} className="text-secondary" />
+              <FontAwesomeIcon icon={faEnvelope} className="text-primary" />
             </button>
+
+            <LangButton />
 
             {/* <button className="btn btn-link py-auto" onClick={() => toggleTheme()}>
               <FontAwesomeIcon icon={document.documentElement.getAttribute("data-bs-theme") === "dark" ? faMoon : faSun} className="text-secondary" />

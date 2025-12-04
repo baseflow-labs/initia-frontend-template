@@ -93,10 +93,10 @@
     "Settings": {
       "Admin": {
         "BulkDataInsertion": {
-          "Title": "إدخال البيانات بالدفعات"
+          "Title": "إدخال البيانات لأول مرة"
         },
         "Metadata": {
-          "Title": "البيانات الوصفية"
+          "Title": "هويةالنظام"
         },
         "SystemLogger": {
           "Title": "سجل النظام"

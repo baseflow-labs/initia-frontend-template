@@ -7,7 +7,7 @@ export default function TabsComp({
 }: {
   tabs: { id: string; title: string; icon?:IconProp; body: React.ReactNode }[];
 }) {
-  const [activeTab, setActiveTab] = useState("0");
+  const [activeTab, setActiveTab] = useState(tabs[0].id);
 
   return (
     <Fragment>
