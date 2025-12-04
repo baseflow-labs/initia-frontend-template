@@ -32,7 +32,22 @@
       "TypeAMessage": "Type A Message"
     },
     "Notifications": {
-      "Title": "Notifications"
+      "Empty": {
+        "Badge": "Badge",
+        "Body": "Body",
+        "Title": "Empty"
+      },
+      "Filters": {
+        "All": "All",
+        "Important": "Important",
+        "Unread": "Unread"
+      },
+      "LoadMore": "LoadMore",
+      "MarkAllRead": "MarkAllRead",
+      "Refresh": "Refresh",
+      "SearchPlaceholder": "SearchPlaceholder",
+      "Title": "Notifications",
+      "Unread": "Unread"
     },
     "Profile": {
       "About": "About",
@@ -392,39 +407,5 @@
       "Point4": "Point4",
       "Title": "Terms & Conditions"
     }
-  },
-  "notifications": {
-    "actions": {
-      "delete": "delete",
-      "loadMore": "loadMore",
-      "markAllRead": "markAllRead",
-      "markRead": "markRead",
-      "refresh": "refresh"
-    },
-    "badges": {
-      "unread": "notifications.badges.unread"
-    },
-    "empty": {
-      "badge": "notifications.empty.badge",
-      "body": "notifications.empty.body",
-      "title": "notifications.empty.title"
-    },
-    "filters": {
-      "all": "notifications.filters.all",
-      "important": "notifications.filters.important",
-      "unread": "notifications.filters.unread"
-    },
-    "items": {
-      "orderShippedBody": "notifications.items.orderShippedBody",
-      "orderShippedTitle": "notifications.items.orderShippedTitle",
-      "passwordChangedBody": "notifications.items.passwordChangedBody",
-      "passwordChangedTitle": "notifications.items.passwordChangedTitle",
-      "paymentReceivedBody": "notifications.items.paymentReceivedBody",
-      "paymentReceivedTitle": "notifications.items.paymentReceivedTitle"
-    },
-    "search": {
-      "placeholder": "notifications.search.placeholder"
-    },
-    "title": "notifications.title"
   }
 }
