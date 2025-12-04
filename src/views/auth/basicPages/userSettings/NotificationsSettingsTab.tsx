@@ -3,30 +3,118 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { addNotification } from "../../../../store/actions/notifications";
 
+type ChannelKey = "email" | "inApp";
+
+type NotificationTypeKey =
+  | "announcements"
+  | "security"
+  | "productUpdates"
+  | "reminders"
+  | "mentions"
+  | "system";
+
+// horizontal axis
+const NOTIFICATION_CHANNELS: {
+  key: ChannelKey;
+  labelKey: string;
+  defaultLabel: string;
+}[] = [
+  {
+    key: "email",
+    labelKey: "Auth.Settings.User.Notifications.Channels.Email",
+    defaultLabel: "Email notifications",
+  },
+  {
+    key: "inApp",
+    labelKey: "Auth.Settings.User.Notifications.Channels.InApp",
+    defaultLabel: "In-app notifications",
+  },
+];
+
+// vertical axis
+const NOTIFICATION_TYPES: {
+  key: NotificationTypeKey;
+  labelKey: string;
+  defaultLabel: string;
+}[] = [
+  {
+    key: "announcements",
+    // reuse text for announcements
+    labelKey: "Auth.Settings.User.Notifications.EmailAnnouncements",
+    defaultLabel: "Announcements & tips",
+  },
+  {
+    key: "security",
+    labelKey: "Auth.Settings.User.Notifications.EmailSecurity",
+    defaultLabel: "Security alerts & login notifications",
+  },
+  {
+    key: "productUpdates",
+    labelKey: "Auth.Settings.User.Notifications.EmailProductUpdates",
+    defaultLabel: "Product updates & changelog",
+  },
+  {
+    key: "reminders",
+    labelKey: "Auth.Settings.User.Notifications.InAppReminders",
+    defaultLabel: "Reminders & tasks",
+  },
+  {
+    key: "mentions",
+    labelKey: "Auth.Settings.User.Notifications.InAppMentions",
+    defaultLabel: "Mentions & comments",
+  },
+  {
+    key: "system",
+    labelKey: "Auth.Settings.User.Notifications.InAppSystem",
+    defaultLabel: "System & billing alerts",
+  },
+];
+
+// nested state: prefs[channel][type] = boolean
+type PrefsState = Record<ChannelKey, Record<NotificationTypeKey, boolean>>;
+
 const NotificationsSettingsTab = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
-  const [prefs, setPrefs] = useState({
-    emailAnnouncements: true,
-    emailSecurity: true,
-    emailProductUpdates: false,
-    inAppReminders: true,
-    inAppMentions: true,
-    inAppSystem: true,
+  const [prefs, setPrefs] = useState<PrefsState>({
+    email: {
+      announcements: true,
+      security: true,
+      productUpdates: false,
+      reminders: false, // not in original email prefs
+      mentions: false,
+      system: false,
+    },
+    inApp: {
+      announcements: false,
+      security: false,
+      productUpdates: false,
+      reminders: true,
+      mentions: true,
+      system: true,
+    },
   });
 
-  const toggle = (key: keyof typeof prefs) => {
-    setPrefs((prev) => ({ ...prev, [key]: !prev[key] }));
+  const toggle = (channel: ChannelKey, type: NotificationTypeKey) => {
+    setPrefs((prev) => ({
+      ...prev,
+      [channel]: {
+        ...prev[channel],
+        [type]: !prev[channel][type],
+      },
+    }));
   };
 
   const onSave = () => {
-    // later you call API here
+    // later: send `prefs` to API
+    // e.g. NotificationsApi.updateUserPrefs(prefs)
+
     dispatch(
       addNotification({
         msg: t("Global.Form.SuccessMsg", {
           action: t("Global.Form.Labels.Update"),
-          data: t("Auth.Settings.Notifications.Title", {
+          data: t("Auth.Settings.User.Notifications.Title", {
             defaultValue: "Notifications",
           }),
         }),
@@ -35,144 +123,69 @@ const NotificationsSettingsTab = () => {
   };
 
   return (
-    <div className="card">
-      <div className="card-header border-bottom">
-        <h5 className="card-title mb-0">
-          {t("Auth.Settings.Notifications.Title", {
-            defaultValue: "Notifications",
-          })}
-        </h5>
+    <div>
+      <p className="text-muted mb-4">
+        {t("Auth.Settings.User.Notifications.Description", {
+          defaultValue:
+            "Choose which types of notifications you want to receive.",
+        })}
+      </p>
+
+      <div className="table-responsive">
+        <table className="table align-middle">
+          <thead>
+            <tr>
+              <th className="text-start">
+                {t("Auth.Settings.User.Notifications.TypeHeader", {
+                  defaultValue: "Notification type",
+                })}
+              </th>
+
+              {NOTIFICATION_CHANNELS.map((channel) => (
+                <th key={channel.key} className="text-center">
+                  {t(channel.labelKey, {
+                    defaultValue: channel.defaultLabel,
+                  })}
+                </th>
+              ))}
+            </tr>
+          </thead>
+
+          <tbody>
+            {NOTIFICATION_TYPES.map((type) => (
+              <tr key={type.key}>
+                <td className="text-start">
+                  {t(type.labelKey, {
+                    defaultValue: type.defaultLabel,
+                  })}
+                </td>
+
+                {NOTIFICATION_CHANNELS.map((channel) => {
+                  const id = `notif-${channel.key}-${type.key}`;
+
+                  return (
+                    <td key={channel.key} className="text-center">
+                      <div className="form-check form-switch d-inline-flex align-items-center justify-content-center mb-0">
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
+                          id={id}
+                          checked={prefs[channel.key][type.key]}
+                          onChange={() => toggle(channel.key, type.key)}
+                        />
+                      </div>
+                    </td>
+                  );
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
-      <div className="card-body">
-        <p className="text-muted mb-4">
-          {t("Auth.Settings.Notifications.Description", {
-            defaultValue:
-              "Choose which types of notifications you want to receive.",
-          })}
-        </p>
 
-        <h6 className="mb-2">
-          {t("Auth.Settings.Notifications.EmailTitle", {
-            defaultValue: "Email notifications",
-          })}
-        </h6>
-        <ul className="list-unstyled mb-4">
-          <li className="mb-2 form-check form-switch">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              id="notif-email-announcements"
-              checked={prefs.emailAnnouncements}
-              onChange={() => toggle("emailAnnouncements")}
-            />
-            <label
-              className="form-check-label"
-              htmlFor="notif-email-announcements"
-            >
-              {t("Auth.Settings.Notifications.EmailAnnouncements", {
-                defaultValue: "Announcements & tips",
-              })}
-            </label>
-          </li>
-          <li className="mb-2 form-check form-switch">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              id="notif-email-security"
-              checked={prefs.emailSecurity}
-              onChange={() => toggle("emailSecurity")}
-            />
-            <label
-              className="form-check-label"
-              htmlFor="notif-email-security"
-            >
-              {t("Auth.Settings.Notifications.EmailSecurity", {
-                defaultValue: "Security alerts & login notifications",
-              })}
-            </label>
-          </li>
-          <li className="mb-2 form-check form-switch">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              id="notif-email-updates"
-              checked={prefs.emailProductUpdates}
-              onChange={() => toggle("emailProductUpdates")}
-            />
-            <label
-              className="form-check-label"
-              htmlFor="notif-email-updates"
-            >
-              {t("Auth.Settings.Notifications.EmailProductUpdates", {
-                defaultValue: "Product updates & changelog",
-              })}
-            </label>
-          </li>
-        </ul>
-
-        <h6 className="mb-2">
-          {t("Auth.Settings.Notifications.InAppTitle", {
-            defaultValue: "In-app notifications",
-          })}
-        </h6>
-        <ul className="list-unstyled mb-4">
-          <li className="mb-2 form-check form-switch">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              id="notif-inapp-reminders"
-              checked={prefs.inAppReminders}
-              onChange={() => toggle("inAppReminders")}
-            />
-            <label
-              className="form-check-label"
-              htmlFor="notif-inapp-reminders"
-            >
-              {t("Auth.Settings.Notifications.InAppReminders", {
-                defaultValue: "Reminders & tasks",
-              })}
-            </label>
-          </li>
-          <li className="mb-2 form-check form-switch">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              id="notif-inapp-mentions"
-              checked={prefs.inAppMentions}
-              onChange={() => toggle("inAppMentions")}
-            />
-            <label
-              className="form-check-label"
-              htmlFor="notif-inapp-mentions"
-            >
-              {t("Auth.Settings.Notifications.InAppMentions", {
-                defaultValue: "Mentions & comments",
-              })}
-            </label>
-          </li>
-          <li className="mb-2 form-check form-switch">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              id="notif-inapp-system"
-              checked={prefs.inAppSystem}
-              onChange={() => toggle("inAppSystem")}
-            />
-            <label
-              className="form-check-label"
-              htmlFor="notif-inapp-system"
-            >
-              {t("Auth.Settings.Notifications.InAppSystem", {
-                defaultValue: "System & billing alerts",
-              })}
-            </label>
-          </li>
-        </ul>
-
-        <button type="button" className="btn btn-primary" onClick={onSave}>
-          {t("Global.Form.Labels.Save")}
-        </button>
-      </div>
+      <button type="button" className="btn btn-primary" onClick={onSave}>
+        {t("Global.Form.Labels.Save")}
+      </button>
     </div>
   );
 };

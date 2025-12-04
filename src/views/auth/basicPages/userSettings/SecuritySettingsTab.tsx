@@ -8,8 +8,8 @@ import Form from "../../../../components/form";
 import { addNotification } from "../../../../store/actions/notifications";
 import { useAppSelector } from "../../../../store/hooks";
 import { apiCatchGlobalHandler } from "../../../../utils/function";
-import { getPasswordResetSettingInputs } from "./inputs";
 import AccountDelete from "./accountDelete";
+import { getPasswordResetSettingInputs } from "./inputs";
 
 const SecuritySettingsTab = () => {
   const { t } = useTranslation();
@@ -30,7 +30,7 @@ const SecuritySettingsTab = () => {
               addNotification({
                 msg: t("Global.Form.SuccessMsg", {
                   action: t("Global.Form.Labels.Update"),
-                  data: t("Auth.Settings.Title"),
+                  data: t("Auth.Settings.User.Security.Title"),
                 }),
               })
             );
@@ -48,35 +48,15 @@ const SecuritySettingsTab = () => {
 
   return (
     <Fragment>
-      <div className="card mb-4">
-        <div className="card-header border-bottom">
-          <h5 className="card-title mb-0">
-            {t("Auth.Settings.PasswordReset.Title")}
-          </h5>
-        </div>
-        <div className="card-body">
-          <Form
-            inputs={() => getPasswordResetSettingInputs(t)}
-            submitText={t("Global.Form.Labels.Save")}
-            onFormSubmit={onPasswordResetSubmit}
-            customValidate={validatePasswords}
-          />
-        </div>
-      </div>
+      <Form
+        inputs={() => getPasswordResetSettingInputs(t)}
+        submitText={t("Global.Form.Labels.Save")}
+        onFormSubmit={onPasswordResetSubmit}
+        customValidate={validatePasswords}
+      />
 
       {user.role !== "admin" && (
-        <div className="card">
-          <div className="card-header border-bottom">
-            <h5 className="card-title mb-0 text-danger">
-              {t("Auth.Settings.DeleteAccount.Title", {
-                defaultValue: "Delete Account",
-              })}
-            </h5>
-          </div>
-          <div className="card-body">
-            <AccountDelete />
-          </div>
-        </div>
+        <AccountDelete />
       )}
     </Fragment>
   );
