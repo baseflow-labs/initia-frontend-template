@@ -70,6 +70,7 @@
     - Personal-portfolio
     - SIS
     - Encyclopedia
+- build dark / light mode, color themes switcher, horizontal / vertical layout switcher, boxed / full-width layout switcher
 - Build technical & business documentation 
 
 ## 🚀 Getting Started
