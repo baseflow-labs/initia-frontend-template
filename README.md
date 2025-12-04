@@ -2,7 +2,6 @@
 
 ## To Do
 
-- Build contents of page placeholders.
 - Add Token Refresh to Auth API Setup
 - Build Dynamic Access Roles (API Integration)
 - Centralize identity control (theme color, logo ,name)
@@ -12,6 +11,16 @@
 - add .nvmrc file
 - wrap with vite
 - build analysis tools integration prep
+- build form various input types
+  - rich text editor
+  - google maps picker
+  - color picker
+  - toggle switch
+  - slider
+  - card-based / photo-based radio & checkbox
+  - searchable & clearable select
+  - nested form
+- build form wizard
 - build datatable with ...
   - actions column (standard + custom)
   - auto handle of sub-props
@@ -31,7 +40,29 @@
   - export template & import
   - data localization support
   - width control
-- Build documentation 
+- build initial dashboard contents
+  - Non-Admin
+    - Account Info
+    - Calendar
+    - Chat
+    - Notifications
+  - Admin
+    - Users stats & list
+    - System health
+    - System reviews
+    - Subscriptions
+  - Template-based dashboards
+    - e-Commerce
+    - e-Learning
+    - SIS
+    - HRMS
+    - CRM
+    - Project Management
+    - Community / Social
+    - Encyclopedia
+    - Financial
+    - Personal-portfolio
+- Build technical & business documentation 
 
 ## 🚀 Getting Started
 
