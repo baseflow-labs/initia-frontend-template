@@ -10,29 +10,29 @@ const SupportCenterView = () => {
   const quickLinks = [
     {
       icon: faQuestionCircle,
-      title: "FAQ",
-      description: "Find answers to frequently asked questions",
+      title: t("Auth.SupportCenter.Faq.Title"),
+      description: t("Auth.SupportCenter.Faq.Description"),
       link: "/support-center/faq",
       color: "primary",
     },
     {
       icon: faBook,
-      title: "User Manual",
-      description: "Comprehensive guides and documentation",
+      title: t("Auth.SupportCenter.UserManual.Title"),
+      description: t("Auth.SupportCenter.UserManual.Description"),
       link: "/support-center/user-manual",
       color: "success",
     },
     {
       icon: faEnvelope,
-      title: "Contact Us",
-      description: "Get in touch with our support team",
+      title: t("Auth.SupportCenter.ContactUs.Title"),
+      description: t("Auth.SupportCenter.ContactUs.Description"),
       link: "/support-center/contact-us",
       color: "info",
     },
     {
       icon: faTicket,
-      title: "Submit Ticket",
-      description: "Create a support ticket for assistance",
+      title: t("Auth.SupportCenter.Tickets.Title"),
+      description: t("Auth.SupportCenter.Tickets.Description"),
       link: "/support-center/tickets",
       color: "warning",
     },
@@ -58,7 +58,7 @@ const SupportCenterView = () => {
 
   const knowledgeBaseCategories = [
     {
-      title: "Account & Password",
+      title: t("Auth.SupportCenter.KnowledgeBase.AccountPassword.Title"),
       articles: [
         "How do I change my password?",
         "Forgotten Username or Password",
@@ -68,7 +68,7 @@ const SupportCenterView = () => {
       articleCount: 16,
     },
     {
-      title: "Account Settings",
+      title: t("Auth.SupportCenter.KnowledgeBase.AccountSettings.Title"),
       articles: [
         "How do I change my email address?",
         "How do I close my account?",
@@ -78,7 +78,7 @@ const SupportCenterView = () => {
       articleCount: 12,
     },
     {
-      title: "Getting Started",
+      title: t("Auth.SupportCenter.KnowledgeBase.GettingStarted.Title"),
       articles: [
         "What are the system requirements?",
         "How to create your first project?",
@@ -91,54 +91,39 @@ const SupportCenterView = () => {
 
   return (
     <Fragment>
-      {/* Hero Section */}
       <div className="bg-primary text-white py-5 mb-5">
         <div className="container">
           <div className="row justify-content-center text-center">
             <div className="col-lg-8">
-              <h1 className="display-4 mb-3">Hello, how can we help?</h1>
-              <p className="lead mb-4">
-                Common troubleshooting topics: Account Management, Getting Started, and Support
-              </p>
-              <div className="input-group input-group-lg shadow-sm">
-                <span className="input-group-text bg-white">
-                  <FontAwesomeIcon icon={faSearch} className="text-muted" />
-                </span>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Search for articles..."
-                />
-                <button className="btn btn-light" type="button">
-                  Search
-                </button>
-              </div>
+              <h1 className="mb-3">{t("Auth.SupportCenter.Title")}</h1>
             </div>
           </div>
         </div>
       </div>
 
       <div className="container mb-5">
-        {/* Quick Access Cards */}
         <div className="row mb-5">
           <div className="col-12 mb-4">
-            <h2 className="text-center mb-4">Quick Access</h2>
+            <h2 className="mb-4">{t("Auth.SupportCenter.QuickAccess.Title")}</h2>
           </div>
+
           {quickLinks.map((item, index) => (
             <div key={index} className="col-lg-3 col-md-6 mb-4">
               <Link to={item.link} className="text-decoration-none">
                 <div className={`card h-100 border-${item.color} shadow-sm hover-shadow transition`}>
                   <div className="card-body text-center">
-                    <div className={`bg-${item.color} bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3`} style={{ width: '80px', height: '80px' }}>
+                    <div className={`bg-${item.color} rounded-circle d-inline-flex align-items-center justify-content-center mb-3`} style={{ width: '80px', height: '80px' }}>
                       <FontAwesomeIcon
                         icon={item.icon}
-                        className={`text-${item.color} fa-2x`}
+                        className={`text-white fa-2x`}
                       />
                     </div>
+
                     <h5 className="card-title text-dark">{item.title}</h5>
                     <p className="card-text text-muted">{item.description}</p>
+
                     <span className={`text-${item.color} fw-bold`}>
-                      Learn More <FontAwesomeIcon icon={faArrowRight} size="sm" />
+                      {t("Global.Labels.More")}
                     </span>
                   </div>
                 </div>
@@ -147,32 +132,12 @@ const SupportCenterView = () => {
           ))}
         </div>
 
-        {/* Popular Articles */}
-        <div className="row mb-5">
-          <div className="col-12 mb-4">
-            <h2 className="mb-4">Popular Articles</h2>
-          </div>
-          {popularArticles.map((article, index) => (
-            <div key={index} className="col-lg-4 col-md-6 mb-4">
-              <div className="card h-100 shadow-sm">
-                <div className="card-body">
-                  <span className="badge bg-primary mb-2">{article.category}</span>
-                  <h5 className="card-title">{article.title}</h5>
-                  <p className="card-text text-muted">{article.description}</p>
-                  <a href="#" className="text-primary text-decoration-none fw-bold">
-                    Read More <FontAwesomeIcon icon={faArrowRight} size="sm" />
-                  </a>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
         {/* Knowledge Base */}
         <div className="row mb-5">
           <div className="col-12 mb-4">
-            <h2 className="mb-4">Knowledge Base</h2>
+            <h2 className="mb-4">{t("Auth.SupportCenter.KnowledgeBase.Title")}</h2>
           </div>
+
           {knowledgeBaseCategories.map((category, index) => (
             <div key={index} className="col-lg-4 col-md-6 mb-4">
               <div className="card shadow-sm h-100">
@@ -199,79 +164,26 @@ const SupportCenterView = () => {
           ))}
         </div>
 
-        {/* Keep Learning Section */}
-        <div className="row mb-5">
-          <div className="col-12 mb-4">
-            <h2 className="mb-4">Keep Learning</h2>
-          </div>
-          <div className="col-lg-4 col-md-6 mb-4">
-            <div className="card shadow-sm h-100">
-              <div className="card-body">
-                <div className="bg-dark bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style={{ width: '60px', height: '60px' }}>
-                  <FontAwesomeIcon icon={faBook} className="text-dark fa-2x" />
-                </div>
-                <h5 className="card-title">Documentation</h5>
-                <p className="card-text text-muted">
-                  Expert tips and tools to improve your experience using our comprehensive documentation.
-                </p>
-                <a href="#" className="text-dark text-decoration-none fw-bold">
-                  Read More <FontAwesomeIcon icon={faArrowRight} size="sm" />
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-4 col-md-6 mb-4">
-            <div className="card shadow-sm h-100">
-              <div className="card-body">
-                <div className="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style={{ width: '60px', height: '60px' }}>
-                  <FontAwesomeIcon icon={faLifeRing} className="text-primary fa-2x" />
-                </div>
-                <h5 className="card-title">Tutorials</h5>
-                <p className="card-text text-muted">
-                  Step-by-step guides from experts to help you start and grow your projects.
-                </p>
-                <a href="#" className="text-primary text-decoration-none fw-bold">
-                  Read More <FontAwesomeIcon icon={faArrowRight} size="sm" />
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-4 col-md-6 mb-4">
-            <div className="card shadow-sm h-100">
-              <div className="card-body">
-                <div className="bg-warning bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style={{ width: '60px', height: '60px' }}>
-                  <FontAwesomeIcon icon={faComments} className="text-warning fa-2x" />
-                </div>
-                <h5 className="card-title">Community</h5>
-                <p className="card-text text-muted">
-                  Join our community forum to connect with other users and share experiences.
-                </p>
-                <a href="#" className="text-warning text-decoration-none fw-bold">
-                  Join Now <FontAwesomeIcon icon={faArrowRight} size="sm" />
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
         {/* Still Need Help Section */}
         <div className="row">
           <div className="col-12">
             <div className="card bg-light shadow-sm">
               <div className="card-body text-center py-5">
-                <h3 className="mb-3">Still need help?</h3>
+                <h3 className="mb-3">{t("Auth.SupportCenter.StillNeedHelp.Title")}</h3>
+
                 <p className="text-muted mb-4">
-                  Our specialists are always happy to help. Contact us during standard business hours<br />
-                  or email us 24/7 and we'll get back to you.
+                  {t("Auth.SupportCenter.StillNeedHelp.Description")}
                 </p>
+
                 <div className="d-flex justify-content-center gap-3">
                   <Link to="/support-center/contact-us" className="btn btn-primary btn-lg">
                     <FontAwesomeIcon icon={faEnvelope} className="me-2" />
-                    Contact Us
+                    {t("Auth.SupportCenter.ContactUs.Title")}
                   </Link>
+
                   <Link to="/support-center/tickets" className="btn btn-outline-primary btn-lg">
                     <FontAwesomeIcon icon={faTicket} className="me-2" />
-                    Submit a Ticket
+                    {t("Auth.SupportCenter.SubmitTicket.Title")}
                   </Link>
                 </div>
               </div>

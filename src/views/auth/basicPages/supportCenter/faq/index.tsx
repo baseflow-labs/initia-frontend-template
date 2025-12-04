@@ -1,8 +1,9 @@
-import { faArrowLeft, faChevronDown, faChevronUp, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown, faChevronUp, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import BackToSupportCenterButton from "../BackButton";
 
 const FaqView = () => {
   const { t } = useTranslation();
@@ -136,17 +137,9 @@ const FaqView = () => {
         <div className="container">
           <div className="row">
             <div className="col-12">
-              <Link
-                to="/support-center"
-                className="text-white text-decoration-none d-inline-block mb-3"
-              >
-                <FontAwesomeIcon icon={faArrowLeft} className="me-2" />
-                Back to Support Center
-              </Link>
-              <h1 className="display-5 mb-3">Frequently Asked Questions</h1>
-              <p className="lead">
-                Find quick answers to common questions about our platform
-              </p>
+              <BackToSupportCenterButton />
+
+              <h1 className="mb-3 text-center">{t("Auth.SupportCenter.FAQ.Title")}</h1>
             </div>
           </div>
         </div>
@@ -160,10 +153,11 @@ const FaqView = () => {
               <span className="input-group-text bg-white">
                 <FontAwesomeIcon icon={faSearch} className="text-muted" />
               </span>
+
               <input
                 type="text"
                 className="form-control"
-                placeholder="Search FAQs..."
+                placeholder={t("Auth.SupportCenter.FAQ.SearchPlaceholder")}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
@@ -190,15 +184,6 @@ const FaqView = () => {
                           onClick={() => toggleAccordion(currentIndex)}
                         >
                           <span className="me-2">{item.question}</span>
-                          <FontAwesomeIcon
-                            icon={
-                              activeIndex === currentIndex
-                                ? faChevronUp
-                                : faChevronDown
-                            }
-                            className="ms-auto"
-                            size="sm"
-                          />
                         </button>
                       </h2>
                       <div
@@ -217,38 +202,16 @@ const FaqView = () => {
             </div>
           ))
         ) : (
-          <div className="alert alert-primary text-center">
-            <h5>No FAQs found</h5>
-            <p className="mb-0">
-              Try different search terms or{" "}
-              <Link to="/support-center/contact-us">contact us</Link> for help.
-            </p>
+          <div className="text-center">
+            <h5>{t("Auth.SupportCenter.FAQ.NoFAQsFound")}</h5>
           </div>
         )}
 
-        {/* Still Need Help Section */}
-        <div className="row mt-5">
-          <div className="col-12">
-            <div className="card bg-light shadow-sm">
-              <div className="card-body text-center py-4">
-                <h4 className="mb-3">Didn't find what you're looking for?</h4>
-                <p className="text-muted mb-4">
-                  Our support team is here to help you with any questions
-                </p>
-                <div className="d-flex justify-content-center gap-3 flex-wrap">
-                  <Link to="/support-center/contact-us" className="btn btn-primary">
-                    Contact Support
-                  </Link>
-                  <Link to="/support-center/tickets" className="btn btn-outline-primary">
-                    Submit a Ticket
-                  </Link>
-                  <Link to="/support-center/user-manual" className="btn btn-outline-secondary">
-                    View User Manual
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div className="text-center mt-4">
+          <h2 className="mb-0">
+            {t("Auth.SupportCenter.FAQ.DidNotFindWhatYouAreLookingFor")}{" "}
+            <Link to="/support-center/contact-us">{t("Auth.SupportCenter.ContactUs.Title")}</Link>
+          </h2>
         </div>
       </div>
     </Fragment>
