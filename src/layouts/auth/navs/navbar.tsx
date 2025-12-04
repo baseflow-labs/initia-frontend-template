@@ -6,7 +6,9 @@ import {
   faInfo,
   faInfoCircle,
   faMagnifyingGlass,
+  faMoon,
   faRightFromBracket,
+  faSun,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -70,6 +72,14 @@ const DashboardNavbar = ({
     const search = formData.get("search");
 
     onSearch && onSearch(String(search));
+  };
+
+  const toggleTheme = () => {
+    const current = document.documentElement.getAttribute("data-bs-theme");
+    document.documentElement.setAttribute(
+      "data-bs-theme",
+      current === "dark" ? "light" : "dark"
+    );
   };
 
   return (
@@ -180,6 +190,10 @@ const DashboardNavbar = ({
             <button className="btn btn-link py-auto" onClick={() => navigate("/messaging")}>
               <FontAwesomeIcon icon={faEnvelope} className="text-secondary" />
             </button>
+
+            {/* <button className="btn btn-link py-auto" onClick={() => toggleTheme()}>
+              <FontAwesomeIcon icon={document.documentElement.getAttribute("data-bs-theme") === "dark" ? faMoon : faSun} className="text-secondary" />
+            </button> */}
 
             <DropdownComp
               header={
