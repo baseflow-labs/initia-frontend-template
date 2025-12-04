@@ -28,7 +28,7 @@ const UserProfileView = () => {
     },
     {
       id: "connections",
-      title: t("Auth.Profile.Connections.Title", "Connections"),
+      title: t("Auth.Profile.Connections", "Connections"),
       body: <UserProfileConnectionsView />
     },
   ]

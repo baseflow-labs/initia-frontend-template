@@ -32,6 +32,7 @@
       "TypeAMessage": "Type A Message"
     },
     "Notifications": {
+      "AllNotifications": "All Notifications",
       "Empty": {
         "Badge": "Badge",
         "Body": "Body",
@@ -44,6 +45,7 @@
       },
       "LoadMore": "Load More",
       "MarkAllRead": "Mark All Read",
+      "NoNotifications": "No Notifications",
       "Refresh": "Refresh",
       "SearchPlaceholder": "Search...",
       "Title": "Notifications",
@@ -327,7 +329,7 @@
       }
     },
     "TABLE_PLURAL_UPPER_NAME": {
-      "Label": {
+      "Labels": {
         "Email": "Email"
       },
       "Name": "Name",

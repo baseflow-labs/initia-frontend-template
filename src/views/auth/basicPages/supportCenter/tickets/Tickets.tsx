@@ -9,13 +9,13 @@ const SupportTicketsListingView = () => {
 
   return (
     <div>
-      <div>
+      <div className="text-end">
         <button
-          className="btn btn-warning btn-sm float-end"
+          className="btn btn-warning btn-sm"
           // onClick={() => setActiveTab("submit")}
         >
           <FontAwesomeIcon icon={faPlus} className="me-2" />
-          {t("Auth.SupportCenter.Tickets.SubmitNewTicket")}
+          {t("Auth.SupportCenter.Tickets.SubmitNewTicket.Title")}
         </button>
       </div>
 

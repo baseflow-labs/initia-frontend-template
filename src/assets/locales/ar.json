@@ -32,6 +32,7 @@
       "TypeAMessage": "اكتب رسالة"
     },
     "Notifications": {
+      "AllNotifications": "جميع الإشعارات",
       "Empty": {
         "Badge": "الشارة",
         "Body": "النص",
@@ -44,6 +45,7 @@
       },
       "LoadMore": "تحميل المزيد",
       "MarkAllRead": "اعتبار الكل مقروءاً",
+      "NoNotifications": "لا توجد إشعارات",
       "Refresh": "تحديث",
       "SearchPlaceholder": "بحث...",
       "Title": "الإشعارات",
@@ -99,7 +101,7 @@
         "SystemLogger": {
           "Title": "سجل النظام"
         },
-        "Title": "إعدادات المسؤول",
+        "Title": "إعدادات مدير النظام",
         "UserActivity": {
           "Title": "نشاط المستخدم"
         },
@@ -327,7 +329,7 @@
       }
     },
     "TABLE_PLURAL_UPPER_NAME": {
-      "Label": {
+      "Labels": {
         "Email": "البريد الإلكتروني"
       },
       "Name": "الاسم",

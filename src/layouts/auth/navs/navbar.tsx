@@ -210,9 +210,9 @@ const DashboardNavbar = ({
                         ),
                       })
                     )
-                  : [{ label: t("Global.Labels.NoNotifications") }]
+                  : [{ label: t("Auth.Notifications.NoNotifications") }]
               }
-              link={{text: 'All Notifications', route: "/notifications"}}
+              link={{text: t('Auth.Notifications.AllNotifications'), route: "/notifications"}}
             />
 
             {/* <button className="btn btn-link position-relative">
@@ -237,22 +237,22 @@ const DashboardNavbar = ({
               list={[
                 {
                   onClick: () => navigate("/profile"),
-                  label: 'Profile',
+                  label: t('Auth.Profile.Title'),
                   icon: faUser
                 },
                 {
                   onClick: () => navigate("/messaging"),
-                  label: 'Messaging',
+                  label: t('Auth.Messaging.Title'),
                   icon: faEnvelope
                 },
                 {
                   onClick: () => navigate("/settings"),
-                  label: 'Settings',
+                  label: t('Auth.Settings.User.Title'),
                   icon: faGear
                 },
                 {
                   onClick: () => navigate("/support-center"),
-                  label: 'Support Center',
+                  label: t('Auth.SupportCenter.Title'),
                   icon: faInfo
                 },
                 {
