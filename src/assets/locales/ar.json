@@ -22,19 +22,61 @@
       "Welcome": "Welcome"
     },
     "Messaging": {
-      "Title": "Messaging"
+      "Chats": "Chats",
+      "SearchChatsOrMessages": "Search Chats Or Messages",
+      "Send": "Send",
+      "Status": {
+        "Online": "Online"
+      },
+      "Title": "Messaging",
+      "TypeAMessage": "Type A Message"
     },
     "Notifications": {
       "Title": "Notifications"
     },
     "Profile": {
-      "Title": "Profile"
+      "About": "About",
+      "Connect": "Connect",
+      "Connections": "Connections",
+      "Contact": "Contact",
+      "Contacts": "Contacts",
+      "Country": "Country",
+      "Email": "Email",
+      "FullName": "FullName",
+      "Languages": "Languages",
+      "Overview": "Overview",
+      "Profile": {
+        "Title": "Profile"
+      },
+      "Projects": {
+        "Leader": "Leader",
+        "Progress": "Progress",
+        "Status": "Status",
+        "Team": "Team",
+        "Title": "Projects"
+      },
+      "Role": "Role",
+      "ShareConnections": "Share Connections",
+      "ShareProfile": "Share Profile",
+      "ShareTimeline": "Share Timeline",
+      "Skype": "Skype",
+      "Stats": {
+        "Connections": "Connections",
+        "Projects": "Projects",
+        "Tasks": "Tasks"
+      },
+      "Status": "Status",
+      "SuggestEdits": "Suggest Edits",
+      "Teams": {
+        "Title": "Teams"
+      },
+      "TeamsShort": "Teams Short",
+      "Timeline": "Timeline",
+      "Title": "Profile",
+      "ViewAllConnections": "View All Connections",
+      "ViewProfile": "View Profile"
     },
     "Settings": {
-      "AppLogo": "App Logo",
-      "AppName": "App Name",
-      "AppPhoneNumber": "App Phone Number",
-      "AppPhoneNumberNote": "App Phone Number Note",
       "BulkDataInsertion": {
         "Title": "Bulk Data Insertion"
       },
@@ -179,7 +221,7 @@
       }
     },
     "UserSettings": {
-      "Title": "UserSettings"
+      "Title": "User Settings"
     },
     "Users": {
       "Name": "Name",
@@ -223,7 +265,6 @@
         "Add": "Add",
         "AddFiles": "Add Files",
         "BrowserDontSupportLocation": "Browser Don't Support Location",
-        "Cancel": "Cancel",
         "CreateNew": "CreateNew",
         "Delete": "Delete",
         "Edit": "Edit",
@@ -235,16 +276,12 @@
         "PleaseAllowLocation": "Please Allow Location",
         "PleaseSelect": "Please Select",
         "Save": "Save",
-        "Saving": "Saving",
         "Submit": "Submit",
         "UnAvailableForDemoMode": "Unavailable For Demo Mode",
         "Update": "Update",
         "View": "View",
         "ViewLocation": "View Location",
         "Yes": "Yes"
-      },
-      "Placeholders": {
-        "Select": "Please Select..."
       },
       "SuccessMsg": "Data {{action}} for {{data}} has been done successfully"
     },
@@ -280,10 +317,6 @@
       "Today": "Today",
       "WrongUrl": "Wrong Url",
       "YourOwn": "Your Own"
-    },
-    "Language": {
-      "Ar": "Ar",
-      "En": "En"
     },
     "Loading": "Loading",
     "Placeholders": {
@@ -393,54 +426,5 @@
       "placeholder": "notifications.search.placeholder"
     },
     "title": "notifications.title"
-  },
-  "profile": {
-    "actions": {
-      "connect": "profile.actions.connect",
-      "shareConnections": "profile.actions.shareConnections",
-      "shareProfile": "profile.actions.shareProfile",
-      "shareTeams": "profile.actions.shareTeams",
-      "shareTimeline": "profile.actions.shareTimeline",
-      "suggestEdits": "profile.actions.suggestEdits",
-      "viewAllConnections": "profile.actions.viewAllConnections",
-      "viewAllTeams": "profile.actions.viewAllTeams",
-      "viewProfile": "profile.actions.viewProfile"
-    },
-    "coverAlt": "profile.coverAlt",
-    "fields": {
-      "contact": "profile.fields.contact",
-      "country": "profile.fields.country",
-      "email": "profile.fields.email",
-      "fullName": "profile.fields.fullName",
-      "languages": "profile.fields.languages",
-      "role": "profile.fields.role",
-      "status": "profile.fields.status"
-    },
-    "projects": {
-      "leader": "profile.projects.leader",
-      "progress": "profile.projects.progress",
-      "status": "profile.projects.status",
-      "team": "profile.projects.team"
-    },
-    "sections": {
-      "about": "profile.sections.about",
-      "connections": "profile.sections.connections",
-      "contacts": "profile.sections.contacts",
-      "overview": "profile.sections.overview",
-      "teams": "profile.sections.teams",
-      "teamsShort": "profile.sections.teamsShort",
-      "timeline": "profile.sections.timeline"
-    },
-    "stats": {
-      "connections": "profile.stats.connections",
-      "projects": "profile.stats.projects",
-      "tasks": "profile.stats.tasks"
-    },
-    "tabs": {
-      "connections": "profile.tabs.connections",
-      "profile": "profile.tabs.profile",
-      "projects": "profile.tabs.projects",
-      "teams": "profile.tabs.teams"
-    }
   }
 }
