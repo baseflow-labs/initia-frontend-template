@@ -1,5 +1,7 @@
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
+import TempCover from "../../../../../assets/images/public-bg.jpg";
+import TempProfilePhoto from "../../../../../assets/images/profile-image-placeholder.png";
 
 const UserProfileHeaderView = () => {
   const { t } = useTranslation();
@@ -10,8 +12,8 @@ const UserProfileHeaderView = () => {
     location: "Vatican City",
     status: "Connected",
     joinedAt: "Joined April 2021",
-    avatarUrl: "https://via.placeholder.com/120x120.png?text=JD",
-    coverUrl: "https://via.placeholder.com/1200x260.png?text=Profile+Cover",
+    avatarUrl: TempProfilePhoto,
+    coverUrl: TempCover,
     about: {
       fullName: "John Doe",
       status: "Active",
@@ -42,10 +44,11 @@ const UserProfileHeaderView = () => {
           <div className="card border-0 shadow-sm mb-4">
             {/* Cover */}
             <div className="position-relative">
-              <div className="ratio ratio-21x9">
+              <div className="ratio" 
+                  style={{height: '25vh'}}>
                 <img
                   src={user.coverUrl}
-                  alt={t("profile.coverAlt", "Profile cover")}
+                  alt="cover"
                   className="img-fluid rounded-top object-fit-cover"
                 />
               </div>
@@ -84,10 +87,10 @@ const UserProfileHeaderView = () => {
                 <div className="col-md-4 col-sm-12 d-flex justify-content-md-end justify-content-start mt-3 mt-md-0">
                   <div className="d-flex flex-wrap gap-2">
                     <button type="button" className="btn btn-outline-secondary btn-sm">
-                      {t("profile.actions.shareProfile", "Share")}
+                      {t("Auth.Profile.ShareProfile", "Share")}
                     </button>
                     <button type="button" className="btn btn-primary btn-sm">
-                      {t("profile.actions.connect", "Connect")}
+                      {t("Auth.Profile.Connect", "Connect")}
                     </button>
                   </div>
                 </div>

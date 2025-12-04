@@ -13,22 +13,22 @@ const UserProfileView = () => {
   const tabs = [
     {
       id: "profile",
-      title: t("profile.tabs.profile", "Profile"),
+      title: t("Auth.Profile.Profile.Title", "Profile"),
       body: <UserProfileTabView />
     },
     {
       id: "teams",
-      title: t("profile.tabs.teams", "Teams"),
+      title: t("Auth.Profile.Teams.Title", "Teams"),
       body: <UserProfileTeamsView />
     },
     {
       id: "projects",
-      title: t("profile.tabs.projects", "Projects"),
+      title: t("Auth.Profile.Projects.Title", "Projects"),
       body: <UserProfileProjectsView />
     },
     {
       id: "connections",
-      title: t("profile.tabs.connections", "Connections"),
+      title: t("Auth.Profile.Connections.Title", "Connections"),
       body: <UserProfileConnectionsView />
     },
   ]

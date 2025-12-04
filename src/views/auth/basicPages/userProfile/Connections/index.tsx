@@ -1,4 +1,7 @@
 import { useTranslation } from "react-i18next";
+import TempCover from "../../../../../assets/images/public-bg.jpg";
+import TempProfilePhoto from "../../../../../assets/images/profile-image-placeholder.png";
+
 
 const UserProfileConnectionsView = () => {
   const { t } = useTranslation();
@@ -13,11 +16,6 @@ const UserProfileConnectionsView = () => {
 
   return (
     <div className="card shadow-sm border-0">
-      <div className="card-header bg-white border-0 d-flex justify-content-between align-items-center">
-        <h5 className="card-title mb-0">
-          {t("profile.tabs.connections", "Connections")}
-        </h5>
-      </div>
       <div className="card-body">
         <div className="row g-3">
           {connections.map((c) => (
@@ -27,17 +25,25 @@ const UserProfileConnectionsView = () => {
                   <div
                     className="rounded-circle bg-secondary-subtle me-3"
                     style={{ width: 40, height: 40 }}
-                  />
+                  >
+                    <img
+                      src={TempProfilePhoto}
+                      alt={c.name}
+                      className="rounded-circle w-100 h-100"
+                    />
+                  </div>
+
                   <div>
                     <div className="small fw-semibold">{c.name}</div>
                     <div className="small text-muted">{c.connections}</div>
                   </div>
                 </div>
+                
                 <button
                   type="button"
                   className="btn btn-outline-secondary btn-sm w-100 mt-2"
                 >
-                  {t("profile.actions.viewProfile", "View profile")}
+                  {t("Auth.Profile.ViewProfile", "View profile")}
                 </button>
               </div>
             </div>

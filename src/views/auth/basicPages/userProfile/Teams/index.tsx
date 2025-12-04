@@ -13,11 +13,6 @@ const UserProfileTeamsView = () => {
 
   return (
      <div className="card shadow-sm border-0">
-      <div className="card-header bg-white border-0 d-flex justify-content-between align-items-center">
-        <h5 className="card-title mb-0">
-          {t("profile.tabs.teams", "Teams")}
-        </h5>
-      </div>
       <div className="card-body">
         <ul className="list-group list-group-flush">
           {teams.map((team) => (
@@ -30,11 +25,13 @@ const UserProfileTeamsView = () => {
                   className="rounded-circle bg-secondary-subtle me-3"
                   style={{ width: 40, height: 40 }}
                 />
+
                 <div>
                   <div className="small fw-semibold">{team.name}</div>
                   <div className="small text-muted">{team.members}</div>
                 </div>
               </div>
+              
               <span className="badge bg-light text-muted border">{team.role}</span>
             </li>
           ))}

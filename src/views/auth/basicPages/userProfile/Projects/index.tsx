@@ -11,22 +11,18 @@ const UserProfileProjectsView = () => {
 
   return (
     <div className="card shadow-sm border-0">
-      <div className="card-header bg-white border-0 d-flex justify-content-between align-items-center">
-        <h5 className="card-title mb-0">
-          {t("profile.tabs.projects", "Projects")}
-        </h5>
-      </div>
       <div className="card-body">
         <div className="table-responsive">
           <table className="table align-middle">
             <thead>
               <tr>
-                <th>{t("profile.projects.leader", "Project Leader")}</th>
-                <th>{t("profile.projects.team", "Team")}</th>
-                <th>{t("profile.projects.progress", "Progress")}</th>
-                <th>{t("profile.projects.status", "Status")}</th>
+                <th>{t("Auth.Profile.Projects.Leader", "Project Leader")}</th>
+                <th>{t("Auth.Profile.Projects.Team", "Team")}</th>
+                <th>{t("Auth.Profile.Projects.Progress", "Progress")}</th>
+                <th>{t("Auth.Profile.Projects.Status", "Status")}</th>
               </tr>
             </thead>
+            
             <tbody>
               {projects.map((p) => (
                 <tr key={p.id}>
