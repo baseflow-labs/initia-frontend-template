@@ -3,12 +3,12 @@ import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
-import * as AuthApi from "../../../../api/auth";
-import Form from "../../../../components/form";
-import { addNotification } from "../../../../store/actions/notifications";
-import { useAppSelector } from "../../../../store/hooks";
-import { apiCatchGlobalHandler } from "../../../../utils/function";
-import AccountDelete from "./accountDelete";
+import * as AuthApi from "../../../../../api/auth";
+import Form from "../../../../../components/form";
+import { addNotification } from "../../../../../store/actions/notifications";
+import { useAppSelector } from "../../../../../store/hooks";
+import { apiCatchGlobalHandler } from "../../../../../utils/function";
+import AccountDelete from "./AccountDelete";
 import { getPasswordResetSettingInputs } from "./inputs";
 
 const SecuritySettingsTab = () => {

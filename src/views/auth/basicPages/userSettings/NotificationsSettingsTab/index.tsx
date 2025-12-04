@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { addNotification } from "../../../../store/actions/notifications";
+import { addNotification } from "../../../../../store/actions/notifications";
 
 type ChannelKey = "email" | "inApp";
 
