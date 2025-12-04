@@ -8,8 +8,7 @@
 - Fix changelog generating script
 - Update documentation (read me, commit convention)
 - Split localization files into smaller chunks
-- add .nvmrc file
-- wrap with vite
+- wrap with vite / turbo-back
 - build analysis tools integration prep
 - build form various input types
   - rich text editor
@@ -40,6 +39,7 @@
   - export template & import
   - data localization support
   - width control
+- build initial next.js landing page templates
 - build initial dashboard contents
   - Non-Admin
     - Account Info
@@ -53,15 +53,23 @@
     - Subscriptions
   - Template-based dashboards
     - e-Commerce
+    - Marketplace / 3rd party sellers
+    - Delivery
+    - Ride Hailing
+    - Booking system (venue, tickets, events, appointments)
     - e-Learning
-    - SIS
-    - HRMS
-    - CRM
-    - Project Management
+    - Telemedicine
+    - Real estate listing
     - Community / Social
-    - Encyclopedia
-    - Financial
+    - Personal Financials
+    - Project Management
+    - CRM
+    - Recruiting platform
+    - HRMS
+    - News portal
     - Personal-portfolio
+    - SIS
+    - Encyclopedia
 - Build technical & business documentation 
 
 ## 🚀 Getting Started

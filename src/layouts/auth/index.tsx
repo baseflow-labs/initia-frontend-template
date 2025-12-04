@@ -141,7 +141,7 @@ const AuthLayout = () => {
 
   return (
     <Fragment>
-      <DashboardNavbar showNav={true} />
+      <DashboardNavbar />
 
       <OffCanvasNav
         fixedRoutes={filteredFixedRoutes}

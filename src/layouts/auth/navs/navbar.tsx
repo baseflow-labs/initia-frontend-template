@@ -24,6 +24,7 @@ import DropdownComp from "../../../components/dropdown";
 import { logout } from "../../../store/actions/auth";
 import { useAppSelector } from "../../../store/hooks";
 import { apiCatchGlobalHandler } from "../../../utils/function";
+import LangButton from "../../../components/button/lang";
 
 export interface Notification {
   id: string;
@@ -38,11 +39,9 @@ export interface Notification {
 const DashboardNavbar = ({
   onSearch,
   searchPlaceholder,
-  showNav,
 }: {
   onSearch?: (e: string) => void;
   searchPlaceholder?: string;
-  showNav?: Boolean;
 }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -77,16 +76,6 @@ const DashboardNavbar = ({
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white py-4 mt-2 me-4 ms-0 ps-0 mb-3">
       <div className="row w-100 justify-content-between">
-        {showNav && (
-          <div className="col-6 col-lg-1 order-1">
-            <img
-              alt="logo"
-              src={process.env.REACT_APP_STORAGE_DIRECTORY_URL + logo}
-              height="40px"
-            />
-          </div>
-        )}
-
         <div className="col-6 col-lg-1 d-block d-lg-none order-1 order-lg-3">
           <button
             className="btn btn-ghost"
@@ -116,32 +105,6 @@ const DashboardNavbar = ({
               </div>
             </form>
           )}
-
-          {showNav && (
-            <div className="collapse navbar-collapse justify-content-center">
-              <ul className="navbar-nav mb-2 mb-lg-0">
-                <li className="nav-item">
-                  <span
-                    className="nav-link active"
-                    role="button"
-                    onClick={() => navigate("/dashboard")}
-                  >
-                    {t("Auth.Dashboard.Main")}
-                  </span>
-                </li>
-
-                <li className="nav-item">
-                  <span
-                    className="nav-link"
-                    role="button"
-                    onClick={() => navigate("/contact-us")}
-                  >
-                    {t("Auth.ContactUs.Title")}
-                  </span>
-                </li>
-              </ul>
-            </div>
-          )}
         </div>
 
         <div className="col-6 col-lg-2 pb-3 order-2 order-lg-2">
@@ -154,7 +117,7 @@ const DashboardNavbar = ({
               ""
             )}
 
-            {/* <LangButton /> */}
+            <LangButton />
 
             <DropdownComp
               button={
