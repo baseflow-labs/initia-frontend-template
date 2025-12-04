@@ -16,7 +16,9 @@ const LangButton = () => {
   return (
     <DropdownComp
       button={
-        <FontAwesomeIcon icon={faLanguage} className="text-primary" />
+        <button className="btn btn-link py-auto">
+          <FontAwesomeIcon icon={faLanguage} className="text-primary" />
+        </button>
       }
       list={languages}
     />

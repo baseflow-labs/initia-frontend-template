@@ -18,7 +18,6 @@ import { useNavigate } from "react-router";
 
 import * as NotificationApi from "../../../api/notifications";
 import profilePhotoPlaceholder from "../../../assets/images/profile-image-placeholder.png";
-// import LangButton from "../../../components/button/lang";
 import Spinner from "../../../components/core/spinner";
 import DropdownComp from "../../../components/dropdown";
 import { logout } from "../../../store/actions/auth";
@@ -178,9 +177,9 @@ const DashboardNavbar = ({
               link={{text: t('Auth.Notifications.AllNotifications'), route: "/notifications"}}
             />
 
-            {/* <button className="btn btn-link position-relative">
-            <FontAwesomeIcon icon={faEnvelope} className="text-secondary" />
-          </button> */}
+            <button className="btn btn-link py-auto" onClick={() => navigate("/messaging")}>
+              <FontAwesomeIcon icon={faEnvelope} className="text-secondary" />
+            </button>
 
             <DropdownComp
               header={
@@ -204,11 +203,6 @@ const DashboardNavbar = ({
                   icon: faUser
                 },
                 {
-                  onClick: () => navigate("/messaging"),
-                  label: t('Auth.Messaging.Title'),
-                  icon: faEnvelope
-                },
-                {
                   onClick: () => navigate("/settings"),
                   label: t('Auth.Settings.User.Title'),
                   icon: faGear
@@ -216,7 +210,7 @@ const DashboardNavbar = ({
                 {
                   onClick: () => navigate("/support-center"),
                   label: t('Auth.SupportCenter.Title'),
-                  icon: faInfo
+                  icon: faInfoCircle
                 },
                 {
                   onClick: () => dispatch(logout()),
