@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 
-import Logo from "../../assets/images/brand/logo.png";
-import LogoOnly from "../../assets/images/brand/logo.png";
+import tempLogo from "../../assets/images/brand/logo.png";
 import { APP_VERSION } from "../../documentation/version";
+import { useAppSelector } from "../../store/hooks";
 
 const CopyRightView = ({
   oneLine,
@@ -12,6 +12,7 @@ const CopyRightView = ({
   short?: boolean;
 }) => {
   const { t } = useTranslation();
+  const { logo } = useAppSelector((state) => state.settings);
 
   return (
     <div
@@ -21,7 +22,7 @@ const CopyRightView = ({
         <small>{t("CopyRight.AppName")}</small>
       ) : (
         <a href="https://google.com" target="_blank" rel="noreferrer">
-          <img src={short ? LogoOnly : Logo} height="45" alt="Logo" />
+          <img src={logo || tempLogo} height="45" alt="Logo" />
         </a>
       )}
 

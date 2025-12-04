@@ -1,7 +1,7 @@
 export interface State {
   fontSize: number;
   name: string;
-  logo: string;
+  logo: string | null;
   phoneNumber: string;
 }
 
@@ -18,8 +18,8 @@ export type Action =
 
 const initialState: State = {
   fontSize: parseInt(localStorage.getItem("fontSize") || "") || 15,
-  name: localStorage.getItem("name") || "App X",
-  logo: localStorage.getItem("logo") || "/samples/logo.png",
+  name: localStorage.getItem("name") || "AppNest",
+  logo: localStorage.getItem("logo") || null,
   phoneNumber: localStorage.getItem("phoneNumber") || "",
 };
 

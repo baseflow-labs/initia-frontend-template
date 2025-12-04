@@ -7,7 +7,7 @@ import { useNavigate } from "react-router";
 
 import * as OverviewApi from "../../../api/dashboard";
 import * as UserApi from "../../../api/users";
-import profilePhotoPlaceholder from "../../../assets/images/profile-image-placeholder.png";
+import tempLogo from "../../../assets/images/brand/logo.png";
 import DashboardCard from "../../../components/card/dashboardCard";
 import { Notification } from "../../../layouts/auth/navs/navbar";
 import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
@@ -70,11 +70,7 @@ const DashboardView = () => {
               <h1 className="mb-4">{t("Auth.Dashboard.Welcome")}</h1>
 
               <img
-                src={
-                  logo
-                    ? process.env.REACT_APP_STORAGE_DIRECTORY_URL + logo
-                    : profilePhotoPlaceholder
-                }
+                src={logo || tempLogo}
                 alt="logo"
                 className="my-5 w-100"
               />

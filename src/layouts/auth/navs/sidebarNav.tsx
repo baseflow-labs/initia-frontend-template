@@ -4,7 +4,7 @@ import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
 
-import LogoOnly from "../../../assets/images/brand/logo.png";
+import tempLogo from "../../../assets/images/brand/logo.png";
 import { useAppSelector } from "../../../store/hooks";
 import CopyRightView from "../../common/copyright";
 
@@ -45,11 +45,7 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
       >
         <div className="p-4 text-center">
           <img
-            src={
-              collapsed
-                ? LogoOnly
-                : process.env.REACT_APP_STORAGE_DIRECTORY_URL + logo
-            }
+            src={logo || tempLogo}
             style={{ height: "70px" }}
             alt="Logo"
           />
