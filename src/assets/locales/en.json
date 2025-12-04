@@ -11,7 +11,7 @@
       "NoVisits": "No Visits Scheduled",
       "ResearcherInfo": "Researcher Info",
       "Statuses": {
-        "Pending": "Dashboard.Statuses.Pending"
+        "Pending": "Pending"
       },
       "Title": "Overview",
       "UnacceptedUserNote": "There might be requests to update your personal data at 'Profile' Page",
@@ -42,10 +42,10 @@
         "Important": "Important",
         "Unread": "Unread"
       },
-      "LoadMore": "LoadMore",
-      "MarkAllRead": "MarkAllRead",
+      "LoadMore": "Load More",
+      "MarkAllRead": "Mark All Read",
       "Refresh": "Refresh",
-      "SearchPlaceholder": "SearchPlaceholder",
+      "SearchPlaceholder": "Search...",
       "Title": "Notifications",
       "Unread": "Unread"
     },
@@ -57,12 +57,9 @@
       "Contacts": "Contacts",
       "Country": "Country",
       "Email": "Email",
-      "FullName": "FullName",
+      "FullName": "Full Name",
       "Languages": "Languages",
       "Overview": "Overview",
-      "Profile": {
-        "Title": "Profile"
-      },
       "Projects": {
         "Leader": "Leader",
         "Progress": "Progress",
@@ -94,29 +91,29 @@
     "Settings": {
       "Admin": {
         "BulkDataInsertion": {
-          "Title": "BulkDataInsertion"
+          "Title": "Bulk Data Insertion"
         },
         "Metadata": {
           "Title": "Metadata"
         },
         "SystemLogger": {
-          "Title": "SystemLogger"
+          "Title": "System Logger"
         },
         "Title": "Admin Settings",
         "UserActivity": {
-          "Title": "UserActivity"
+          "Title": "User Activity"
         },
         "UserRolePermissions": {
-          "Title": "UserRolePermissions"
+          "Title": "User Role Permissions"
         },
         "UserRoles": {
-          "Title": "UserRoles"
+          "Title": "User Roles"
         },
         "Users": {
           "Title": "Users"
         },
         "UsersView": {
-          "Title": "UsersView"
+          "Title": "Users View"
         }
       },
       "FontSize": "Font Size",
@@ -131,27 +128,27 @@
       "User": {
         "Account": {
           "Avatar": "Avatar",
-          "AvatarHint": "AvatarHint",
-          "ChangeAvatar": "ChangeAvatar",
+          "AvatarHint": "Avatar Hint",
+          "ChangeAvatar": "Change Avatar",
           "Company": "Company",
           "Country": "Country",
           "Email": "Email",
-          "FullName": "FullName",
-          "JobTitle": "JobTitle",
+          "FullName": "Full Name",
+          "JobTitle": "Job Title",
           "Language": "Language",
           "Phone": "Phone",
-          "ResetAvatar": "ResetAvatar",
+          "ResetAvatar": "Reset Avatar",
           "Title": "Account",
           "Username": "Username"
         },
         "Billing": {
-          "AvailablePlans": "AvailablePlans",
-          "AvailablePlansDescription": "AvailablePlansDescription",
-          "CancelSubscription": "CancelSubscription",
-          "ChangePlan": "ChangePlan",
-          "ContactUs": "ContactUs",
+          "AvailablePlans": "Available Plans",
+          "AvailablePlansDescription": "Available Plans Description",
+          "CancelSubscription": "Cancel Subscription",
+          "ChangePlan": "Change Plan",
+          "ContactUs": "Contact Us",
           "Current": "Current",
-          "CurrentPlan": "CurrentPlan",
+          "CurrentPlan": "Current Plan",
           "Projects_few": "Projects",
           "Projects_many": "Projects",
           "Projects_one": "Projects",
@@ -185,8 +182,8 @@
             "Description": "Description",
             "Title": "Slack"
           },
-          "StatusConnected": "StatusConnected",
-          "StatusNotConnected": "StatusNotConnected",
+          "StatusConnected": "Status Connected",
+          "StatusNotConnected": "Status Not Connected",
           "Title": "Connections"
         },
         "Notifications": {
@@ -205,17 +202,128 @@
     },
     "SupportCenter": {
       "ContactUs": {
-        "Title": "Contact Us"
+        "BusinessHours": {
+          "Description": "Description",
+          "Title": "Business Hours"
+        },
+        "CallUs": {
+          "Description": "Description",
+          "Title": "Call Us"
+        },
+        "ConnectWithUs": {
+          "Description": "Description",
+          "Title": "Connect With Us"
+        },
+        "Description": "Description",
+        "EmailUs": {
+          "Description": "Description",
+          "Title": "Email Us"
+        },
+        "OfficeHours": {
+          "Title": "Office Hours"
+        },
+        "OurLocation": {
+          "Title": "Our Location"
+        },
+        "SendMessage": {
+          "Title": "Send Message"
+        },
+        "Title": "Contact Us",
+        "VisitUs": {
+          "Description": "Description",
+          "Title": "Visit Us"
+        }
+      },
+      "FAQ": {
+        "CheckFaq": "Check FAQ",
+        "DidNotFindWhatYouAreLookingFor": "Did Not Find What You Are Looking For?",
+        "NoFAQsFound": "No FAQs Found",
+        "SearchPlaceholder": "Search...",
+        "Title": "FAQ"
       },
       "Faq": {
+        "Description": "Description",
         "Title": "Faq"
       },
+      "KnowledgeBase": {
+        "AccountPassword": {
+          "Title": "Account Password"
+        },
+        "AccountSettings": {
+          "Title": "Account Settings"
+        },
+        "GettingStarted": {
+          "Title": "Getting Started"
+        },
+        "Title": "Knowledge Base"
+      },
+      "QuickAccess": {
+        "Title": "Quick Access"
+      },
+      "StillNeedHelp": {
+        "Description": "Description",
+        "Title": "Still Need Help?"
+      },
+      "SubmitTicket": {
+        "Title": "Submit Ticket"
+      },
       "Tickets": {
+        "BeforeSubmitting": "Before Submitting",
+        "Description": "Description",
+        "MyTickets": {
+          "Table": {
+            "Column1": "Column1",
+            "Column2": "Column2",
+            "Column3": "Column3",
+            "Column4": "Column4",
+            "Column5": "Column5",
+            "Column6": "Column6",
+            "Column7": "Column7"
+          },
+          "Title": "My Tickets"
+        },
+        "SubmitNewTicket": {
+          "Title": "Submit New Ticket"
+        },
+        "SubmitTicket": {
+          "Form": {
+            "Attachment": {
+              "Label": "Attachment",
+              "Placeholder": "Placeholder"
+            },
+            "Category": {
+              "Label": "Category",
+              "Option1": "Option1",
+              "Option2": "Option2",
+              "Option3": "Option3",
+              "Placeholder": "Placeholder"
+            },
+            "Description": {
+              "Label": "Description",
+              "Placeholder": "Placeholder"
+            },
+            "Priority": {
+              "Label": "Priority",
+              "OptionHigh": "Option High",
+              "OptionLow": "Option Low",
+              "OptionMedium": "Option Medium",
+              "Placeholder": "Placeholder"
+            },
+            "Subject": {
+              "Label": "Subject",
+              "Placeholder": "Placeholder"
+            }
+          }
+        },
         "Title": "Tickets"
       },
       "Title": "Support Center",
       "UserManual": {
-        "Title": "UserManual"
+        "Contents": "Contents",
+        "Description": "Description",
+        "DownloadManual": "Download Manual",
+        "ReviewUserManual": "Review User Manual",
+        "Title": "User Manual"
       }
     },
     "TABLE_PLURAL_UPPER_NAME": {
@@ -223,7 +331,7 @@
         "Email": "Email"
       },
       "Name": "Name",
-      "PhoneNumber": "PhoneNumber",
+      "PhoneNumber": "Phone Number",
       "Title": "TABLE_PLURAL_UPPER_NAME"
     },
     "TemplateExamples": {
@@ -272,9 +380,6 @@
         "Required": "Required",
         "UploadFailed": "Upload Failed, Please Try Again"
       },
-      "Label": {
-        "Email": "Email"
-      },
       "Labels": {
         "Add": "Add",
         "AddFiles": "Add Files",
@@ -282,6 +387,7 @@
         "CreateNew": "CreateNew",
         "Delete": "Delete",
         "Edit": "Edit",
+        "Email": "Email",
         "FilesMaxReached": "Files Max Reached",
         "Location": "Location",
         "No": "No",
@@ -307,8 +413,9 @@
       "DemoWarning": "Please be aware that this is a demo version, accessible by the public. So we advise against sharing any real data like name, ID number and the like. Please note that the data will be automatically reset everyday",
       "Details": "Details",
       "Download": "Download",
-      "FileCantBeReviewed": "FileCantBeReviewed",
+      "FileCantBeReviewed": "File Can't Be Reviewed",
       "Logout": "Logout",
+      "More": "More",
       "NoData": "No Data",
       "NoNotifications": "No Notifications",
       "Of": "Of",
@@ -340,7 +447,7 @@
   "Public": {
     "ForgotPassword": {
       "GotOtp": {
-        "Title": "Title"
+        "Title": "Got OTP?"
       },
       "ResetPassword": {
         "NewPassword": "New Password",
@@ -368,7 +475,7 @@
         "LoginAsResearcher": "Login As Researcher",
         "LoginAsUser": "Login As User",
         "Password": "Password",
-        "PhoneNo": "PhoneNo",
+        "PhoneNo": "Phone No",
         "Success": "Success"
       },
       "Title": "Login"

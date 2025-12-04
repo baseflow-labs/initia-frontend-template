@@ -12,6 +12,6 @@ export const inputs = (t: Function) => () => [
   {
     type: "email",
     name: "email",
-    label: t("Global.Form.Label.Email"),
+    label: t("Global.Form.Labels.Email"),
   },
 ];

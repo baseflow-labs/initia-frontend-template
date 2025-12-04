@@ -1,8 +1,9 @@
-import { faArrowLeft, faBook, faChevronRight, faDownload, faFileAlt, faVideo } from "@fortawesome/free-solid-svg-icons";
+import { faBook, faChevronRight, faDownload, faFileAlt, faVideo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import BackToSupportCenterButton from "../BackButton";
 
 const UserManualView = () => {
   const { t } = useTranslation();
@@ -130,17 +131,9 @@ const UserManualView = () => {
         <div className="container">
           <div className="row">
             <div className="col-12">
-              <Link
-                to="/support-center"
-                className="text-white text-decoration-none d-inline-block mb-3"
-              >
-                <FontAwesomeIcon icon={faArrowLeft} className="me-2" />
-                Back to Support Center
-              </Link>
-              <h1 className="display-5 mb-3">User Manual & Documentation</h1>
-              <p className="lead">
-                Comprehensive guides and tutorials to help you make the most of our platform
-              </p>
+              <BackToSupportCenterButton />
+
+              <h1 className="mb-3 text-center">{t("Auth.SupportCenter.UserManual.Title")}</h1>
             </div>
           </div>
         </div>
@@ -154,9 +147,10 @@ const UserManualView = () => {
               <div className="card-header bg-dark text-white">
                 <h5 className="mb-0">
                   <FontAwesomeIcon icon={faBook} className="me-2" />
-                  Contents
+                  {t("Auth.SupportCenter.UserManual.Contents")}
                 </h5>
               </div>
+
               <div className="list-group list-group-flush">
                 {manualSections.map((section) => (
                   <div key={section.id}>
@@ -177,14 +171,9 @@ const UserManualView = () => {
             {/* Download Options */}
             <div className="card shadow-sm mt-3">
               <div className="card-body">
-                <h6 className="card-title mb-3">Download Manual</h6>
                 <button className="btn btn-outline-dark btn-sm w-100 mb-2">
                   <FontAwesomeIcon icon={faDownload} className="me-2" />
-                  PDF Version
-                </button>
-                <button className="btn btn-outline-dark btn-sm w-100">
-                  <FontAwesomeIcon icon={faDownload} className="me-2" />
-                  Offline Guide
+                  {t("Auth.SupportCenter.UserManual.DownloadManual")}
                 </button>
               </div>
             </div>
@@ -203,10 +192,12 @@ const UserManualView = () => {
                     }
                     className="text-dark fa-2x me-3"
                   />
+
                   <h2 className="mb-0">
                     {manualSections.find((s) => s.id === activeSection)?.title}
                   </h2>
                 </div>
+
                 <p className="text-muted mb-0">
                   Explore the topics below to learn more about this section
                 </p>
@@ -282,6 +273,7 @@ const UserManualView = () => {
                   Video Tutorials
                 </h4>
               </div>
+
               <div className="card-body">
                 <div className="row">
                   <div className="col-md-6 mb-3">
@@ -293,9 +285,11 @@ const UserManualView = () => {
                         />
                       </div>
                     </div>
+
                     <h6 className="mt-2">Getting Started Tutorial</h6>
                     <p className="text-muted small">Duration: 5:30</p>
                   </div>
+
                   <div className="col-md-6 mb-3">
                     <div className="ratio ratio-16x9 bg-light rounded">
                       <div className="d-flex align-items-center justify-content-center">
@@ -305,6 +299,7 @@ const UserManualView = () => {
                         />
                       </div>
                     </div>
+
                     <h6 className="mt-2">Advanced Features Overview</h6>
                     <p className="text-muted small">Duration: 8:45</p>
                   </div>
@@ -316,13 +311,16 @@ const UserManualView = () => {
             <div className="card bg-light shadow-sm mt-4">
               <div className="card-body text-center py-4">
                 <h5 className="mb-3">Need More Help?</h5>
+                
                 <p className="text-muted mb-4">
                   Can't find what you're looking for? Our support team is ready to assist you.
                 </p>
+
                 <div className="d-flex justify-content-center gap-3 flex-wrap">
                   <Link to="/support-center/faq" className="btn btn-dark">
                     View FAQ
                   </Link>
+
                   <Link to="/support-center/contact-us" className="btn btn-outline-dark">
                     Contact Support
                   </Link>

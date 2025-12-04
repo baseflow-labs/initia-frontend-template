@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import Form from "../../../../../components/form";
-import { inputs } from "./consts";
+import { submitTicketInputs } from "./consts";
 
 const SupportTicketsSubmissionView = () => {
   const { t } = useTranslation();
@@ -34,7 +34,7 @@ const SupportTicketsSubmissionView = () => {
         </div>
 
         <Form
-          inputs={() => inputs(t)}
+          inputs={() => submitTicketInputs(t)}
         />
       </div>
 

@@ -13,7 +13,7 @@ const UserProfileView = () => {
   const tabs = [
     {
       id: "profile",
-      title: t("Auth.Profile.Profile.Title", "Profile"),
+      title: t("Auth.Profile.Title", "Profile"),
       body: <UserProfileTabView />
     },
     {

@@ -45,7 +45,7 @@ export const inputs = (t: Function) => [
   {
     type: "email",
     name: "email",
-    label: t("Auth.TABLE_PLURAL_UPPER_NAME.Label.Email"),
+    label: t("Auth.TABLE_PLURAL_UPPER_NAME.Labels.Email"),
   },
   {
     type: "custom",
