@@ -69,7 +69,7 @@ const AuthLayout = () => {
       fixed: true,
     },
     {
-      name: t("Auth.SystemSettings.Title"),
+      name: t("Auth.Settings.Admin.Title"),
       route: "/system-settings",
       view: <SystemSettingsView />,
       showInNav: true,

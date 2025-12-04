@@ -1,24 +1,14 @@
 import { useTranslation } from "react-i18next";
-import TablePage from "../../../../../../layouts/auth/pages/tablePage";
+import DynamicTable from "../../../../../../components/table";
 import { inputs } from "./inputs";
 
 const UserRolesView = () => {
   const { t } = useTranslation();
 
-  return (
-    <TablePage
-      title="User Roles"
-      // actionButtons={actionButtons}
-      columns={inputs(t)}
-      // searchProp="name"
-      // searchPlaceholder={t("Auth.Users.SearchBarPlaceholder")}
-      // tableExtraActions={(id?: string) => [
-      //   {
-      //     label: t("Common.Edit"),
-      //     icon: faEdit
-      //   },
-      // ]}
+  return (    
+    <DynamicTable
       dataApiEndpoint="users"
+      columns={inputs(t)}
     />
   );
 };

@@ -14,30 +14,44 @@ const SystemSettingsView = () => {
 
   const tabs = [
     {
-      title: t("Auth.Settings.UserActivity.Title"),
+      title: t("Auth.Settings.Admin.UserActivity.Title"),
       body: <UserActivityView />,
     },
     {
-      title: t("Auth.Settings.SystemLogger.Title"),
+      title: t("Auth.Settings.Admin.SystemLogger.Title"),
       body: <SystemLoggerView />
     },
     {
-      title: t("Auth.Settings.Users.Title"),
+      title: t("Auth.Settings.Admin.Users.Title"),
       body: <UsersView />
     },
     {
-      title: t("Auth.Settings.Metadata.Title"),
+      title: t("Auth.Settings.Admin.Metadata.Title"),
       body: <SystemMetadataSettingsView />
     },
     {
-      title: t("Auth.Settings.BulkDataInsertion.Title"),
+      title: t("Auth.Settings.Admin.BulkDataInsertion.Title"),
       body: <SystemDataBulkInsertionView />
     },
   ];
 
   return (
-    <PageTemplate title={t("Auth.Settings.Title")}>
-      <TabsComp tabs={tabs.map((tab, idx) => ({ ...tab, body: <div className="mt-5 card shadow-sm"><div className="card-body p-5">{tab.body}</div></div>, id: String(idx) }))} />
+    <PageTemplate title={t("Auth.Settings.Admin.Title")}>
+      <TabsComp
+        tabs={tabs.map((tab, idx) =>
+          ({
+            ...tab,
+            body: (
+              <div className="mt-5 card shadow-sm">
+                <div className="card-body p-5">
+                  {tab.body}
+                </div>
+              </div>
+            ),
+            id: String(idx)
+          })
+        )}
+      />
     </PageTemplate>
   );
 };
