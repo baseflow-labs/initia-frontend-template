@@ -12,6 +12,7 @@ module.exports = {
         "notifications",
         "common",
         "code",
+        "layout",
         "docs",
       ],
     ],

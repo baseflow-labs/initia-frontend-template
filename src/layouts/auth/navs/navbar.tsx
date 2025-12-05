@@ -9,7 +9,6 @@ import { useNavigate } from "react-router";
 import * as NotificationApi from "../../../api/notifications";
 import profilePhotoPlaceholder from "../../../assets/images/profile-image-placeholder.png";
 import LangButton from "../../../components/button/lang";
-import Spinner from "../../../components/core/spinner";
 import DropdownComp from "../../../components/dropdown";
 import { logout } from "../../../store/actions/auth";
 import { useAppSelector } from "../../../store/hooks";
@@ -37,8 +36,6 @@ const DashboardNavbar = ({
   const navigate = useNavigate();
 
   const [notifications, setNotification] = useState<Notification[]>([]);
-  const { loading } = useAppSelector((state) => state.loading);
-  const { logo } = useAppSelector((state) => state.settings);
   const { user } = useAppSelector((state) => state.auth);
 
   useLayoutEffect(() => {
@@ -106,14 +103,6 @@ const DashboardNavbar = ({
 
         <div className="col-6 col-lg-2 pb-3 order-2 order-lg-2">
           <div className="d-flex align-items-end gap-3 pe-5 float-end">
-            {loading.length > 0 ? (
-              <small className="text-primary">
-                <Spinner />
-              </small>
-            ) : (
-              ""
-            )}
-
             <DropdownComp
               button={
                 <div className="position-relative">
