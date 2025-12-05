@@ -1,8 +1,18 @@
-import api from "..";
+import api, { demoStatus } from "..";
 
 const mainPath = "/metadata";
 
 const get = async () => {
+  if (demoStatus)
+  {
+    return {
+      payload: {
+        logo: [{ path: "https://www.fmt.se/wp-content/uploads/2023/02/logo-placeholder-image.png" }],
+        appName: "AppNest Demo Application",
+        version: "1.0.0-demo",
+      }
+    }
+  }
   return await api.get(mainPath);
 };
 

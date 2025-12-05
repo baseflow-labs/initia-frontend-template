@@ -83,19 +83,7 @@
   yarn   # or npm install
 ```
 
-### 2. Environment Setup
-
-- Copy .env.example to .env
-- Update the following variables:
-
-| Key                               | Value (Dev)                                    | Value (Stg)                                    | Value (Prod)                      |
-| --------------------------------- | ---------------------------------------------- | ---------------------------------------------- | --------------------------------- |
-| `REACT_APP_BACKEND_URL`           | `http://127.0.0.1:8000`                        | `https://demo-api.appnest.org/`                | `https://zad-api.appnest.org/ `   |
-| `REACT_APP_STORAGE_DIRECTORY_URL` | `http://appnest.oss-me-central-1.aliyuncs.com` | `http://appnest.oss-me-central-1.aliyuncs.com` | `https://assets.appnest.org/`     |
-| `REACT_APP_GOOGLE_MAP_API_KEY`    | `AIzaSyAgboGKtbUjn8v5EW1KG4ofubRCQkok3w4`      | `AIzaSyAgboGKtbUjn8v5EW1KG4ofubRCQkok3w4`      | `googleMapApiKeyProvidedByGoogle` |
-| `REACT_APP_ENVIRONMENT`           | `staging`                                      | `staging`                                      | `production`                      |
-
-### 3. Run the App
+### 2. Run the App
 
 ```bash
   yarn start

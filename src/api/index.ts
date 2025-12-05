@@ -12,6 +12,8 @@ import store, { RootState } from "../store/store";
 export const baseURL =
   process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
 
+export const demoStatus = process.env.REACT_APP_ENVIRONMENT === "staging";
+
 export interface customFilterProps {
   field: string;
   filteredTerm: {
