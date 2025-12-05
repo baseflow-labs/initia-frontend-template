@@ -6,5 +6,6 @@ export const getCommonSettingInputs = (t: Function) => [
     max: 25,
     label: t("Auth.Settings.FontSize"),
     defaultValue: 15,
+    fullWidth: true
   },
 ];

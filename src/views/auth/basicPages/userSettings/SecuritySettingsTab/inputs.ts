@@ -5,6 +5,7 @@ export const getPasswordResetSettingInputs = (t: Function) => [
     minLength: 8,
     label: t("Public.ForgotPassword.ResetPassword.OldPassword"),
     required: true,
+    fullWidth: true,
   },
   {
     type: "password",
@@ -12,11 +13,13 @@ export const getPasswordResetSettingInputs = (t: Function) => [
     minLength: 8,
     label: t("Public.ForgotPassword.ResetPassword.NewPassword"),
     required: true,
+    double: true
   },
   {
     type: "password",
     name: "passwordConfirmation",
     label: t("Public.ForgotPassword.ResetPassword.NewPasswordConfirmation"),
     required: true,
+    double: true
   },
 ];

@@ -25,6 +25,7 @@ const TABLE_PLURAL_UPPER_NAMEView = () => {
         //   },
         // ]}
         dataApiEndpoint="TABLE_PLURAL_UPPER_NAME"
+        singleItem={t("Auth.TABLE_PLURAL_UPPER_NAME.SINGLE_ITEM_NAME")}
       />
     </Fragment>
   );

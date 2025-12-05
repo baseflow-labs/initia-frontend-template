@@ -1,14 +1,18 @@
 import { ActionButtonProps } from "../../../components/button/actionButtons";
-import DynamicTable, {
+import {
   actionProps,
   TableProps,
 } from "../../../components/table";
+import ApiDataTable from "../../../components/table/apiDatatable";
 import PageTemplate from "./pageTemplate";
 
 interface Props extends TableProps {
   title: string;
   actionButtons?: ActionButtonProps[];
+  dataApiEndpoint: string;
+  includeCreate?: boolean;
   tableExtraActions?: (id?: string) => actionProps[];
+  singleItem: string;
 }
 
 const TablePage = ({
@@ -17,21 +21,19 @@ const TablePage = ({
   columns,
   dataApiEndpoint,
   tableExtraActions,
-  searchProp,
-  searchPlaceholder,
   includeCreate,
   includeView,
   includeUpdate,
   includeDelete,
+  singleItem,
 }: Props) => {
   return (
     <PageTemplate title={title} actionButtons={actionButtons}>
-      <DynamicTable
+      <ApiDataTable
         dataApiEndpoint={dataApiEndpoint}
-        columns={columns}
+        inputs={columns}
+        singleItem={singleItem}
         extraActions={tableExtraActions}
-        searchProp={searchProp}
-        searchPlaceholder={searchPlaceholder}
         includeCreate={includeCreate}
         includeDelete={includeDelete}
         includeUpdate={includeUpdate}

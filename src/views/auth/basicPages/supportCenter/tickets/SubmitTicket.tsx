@@ -21,21 +21,24 @@ const SupportTicketsSubmissionView = () => {
   return (
     <Fragment>
       <div className="card shadow-sm">
-        <div className="mb-4">
-          <strong>{t("Auth.SupportCenter.Tickets.BeforeSubmitting")}</strong>
-          
-          <ul className="mb-0 mt-2">
-            {links.map((link, index) => (
-              <li key={index}>
-                <Link to={link.route}>{link.label}</Link>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <div className="card-body">
+          <div className="mb-5">
+            <strong>{t("Auth.SupportCenter.Tickets.BeforeSubmitting")}</strong>
+            
+            <ul className="list-group mb-0 mt-2">
+              {links.map((link, index) => (
+                <li className="list-group-item" key={index}>
+                  <Link to={link.route}>{link.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-        <Form
-          inputs={() => submitTicketInputs(t)}
-        />
+          <Form
+            inputs={() => submitTicketInputs(t)}
+            onFormSubmit={() => ''}
+          />
+        </div>
       </div>
 
       <div className="card bg-light shadow-sm mt-4">

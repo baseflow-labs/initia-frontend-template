@@ -1,4 +1,4 @@
-import { faSave, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faAdd, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FieldArray, useFormikContext } from "formik";
 import React, { Fragment, useEffect, useMemo, useState } from "react";
@@ -151,10 +151,10 @@ const MultipleEntriesInput: React.FC<FinalInput> = (input) => {
                   <td className="pt-5">
                     <Button
                       type="button"
-                      color="dark"
+                      color="success"
                       onClick={(e) => handleSaveDraftAndAdd(push, e)}
                     >
-                      <FontAwesomeIcon icon={faSave} />
+                      <FontAwesomeIcon icon={faAdd} />
                     </Button>
                   </td>
                 </tr>

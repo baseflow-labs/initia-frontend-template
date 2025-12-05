@@ -61,7 +61,9 @@ interface InputBasicProps {
 export interface InputSingleProps extends InputBasicProps {
   logo?: string;
   sizing?: string;
-  halfCol?: boolean;
+  double?: boolean;
+  triple?: boolean;
+  fullWidth?: boolean;
   hasFile?: boolean;
   hideFile?: boolean;
   moneyUnit?: boolean;
@@ -77,7 +79,6 @@ export interface InputProps extends InputSingleProps {
   singleRecordLabel?: string;
   recordDynamicLabelKey?: string;
   logo?: string;
-  halfCol?: boolean;
   onRecordSubmit?: (formik?: any) => any;
   recordSubmitButtonText?: string;
   prefixText?: string | number;
@@ -90,6 +91,7 @@ interface Props extends React.FormHTMLAttributes<HTMLFormElement> {
   onFormSubmit?: (values: any, reset: any) => void;
   inputs: (formik: FormikProps<Record<string, any>>) => InputProps[];
   submitText?: string;
+  submitColor?: string;
   initialValues?: object;
   customButtons?: React.ReactNode;
   customValidate?: (
@@ -121,6 +123,7 @@ const Form: React.FC<Props> = ({
   onFormSubmit,
   inputs,
   submitText,
+  submitColor,
   customButtons,
   initialValues,
   customValidate,
@@ -192,14 +195,9 @@ const Form: React.FC<Props> = ({
             }
 
             if (
-              !String(value).startsWith("50") &&
-              !String(value).startsWith("53") &&
-              !String(value).startsWith("54") &&
-              !String(value).startsWith("55") &&
-              !String(value).startsWith("56") &&
-              !String(value).startsWith("57") &&
-              !String(value).startsWith("58") &&
-              !String(value).startsWith("59")
+              !String(value).startsWith("77") &&
+              !String(value).startsWith("78") &&
+              !String(value).startsWith("79") 
             ) {
               errors[name] = t("Global.Form.Errors.InvalidPhoneNumber");
             }
@@ -287,7 +285,9 @@ const Form: React.FC<Props> = ({
                   aboveComp,
                   belowComp,
                   logo,
-                  halfCol,
+                  double,
+                  triple,
+                  fullWidth,
                   type,
                   required,
                   min,
@@ -315,7 +315,7 @@ const Form: React.FC<Props> = ({
                 if (logo) {
                   return (
                     <Fragment key={i}>
-                      <div className="col-12">
+                      <div className="col-md-6">
                         <LabelView required={required} {...input} />
                       </div>
 
@@ -359,9 +359,7 @@ const Form: React.FC<Props> = ({
 
                 return (
                   <div
-                    className={`mb-2 ${
-                      halfCol ? "col-md-6" : logo ? "col-6" : "col-md-12"
-                    }`}
+                    className={`mb-2 ${fullWidth ? "col-md-12" : double ? "col-md-6" : triple ? "col-md-9" : "col-md-3"}`}
                     key={i}
                   >
                     <LabelView required={required} {...input} />
@@ -472,22 +470,24 @@ const Form: React.FC<Props> = ({
 
         {customButtons}
 
-        <Button
-          type="submit"
-          disabled={loading.length > 0}
-          color="primary"
-          className={`w-${customButtons ? "50" : "100"} p-2`}
-        >
-          {loading.length > 0 ? (
-            <small>
-              <Spinner />
-            </small>
-          ) : (
-            <div className="my-auto">
-              {submitText || t("Global.Form.Labels.Submit")}
-            </div>
-          )}
-        </Button>
+        {onFormSubmit && (
+          <Button
+            type="submit"
+            disabled={loading.length > 0}
+            color={submitColor}
+            className={`w-${customButtons ? "50" : "100"} p-2`}
+          >
+            {loading.length > 0 ? (
+              <small>
+                <Spinner />
+              </small>
+            ) : (
+              <div className="my-auto">
+                {submitText || t("Global.Form.Labels.Submit")}
+              </div>
+            )}
+          </Button>
+        )}
       </FormikForm>
     </FormikProvider>
   );

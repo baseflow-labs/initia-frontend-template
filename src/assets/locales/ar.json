@@ -17,6 +17,28 @@
       "VisitsMap": "خريطة الزيارات",
       "Welcome": "مرحباً"
     },
+    "Examples": {
+      "Form": {
+        "Date": "التاريخ",
+        "Email": "البريد الإلكتروني",
+        "File": "ملف",
+        "Location": "الموقع",
+        "MultipleEntries": "إدخالات متعددة",
+        "Number": "رقم",
+        "NumberText": "نص رقمي",
+        "OTP": "رمز التحقق",
+        "Option1": "الخيار 1",
+        "Option2": "الخيار 2",
+        "Option3": "الخيار 3",
+        "Password": "كلمة المرور",
+        "PhoneNumber": "رقم الهاتف",
+        "Radio": "اختيار دائري",
+        "Select": "اختيار",
+        "SelectMany": "اختيار متعدد",
+        "Text": "نص",
+        "Textarea": "منطقة نص"
+      }
+    },
     "Messaging": {
       "Chats": "المحادثات",
       "SearchChatsOrMessages": "ابحث في المحادثات أو الرسائل",
@@ -91,24 +113,29 @@
         "BulkDataInsertion": {
           "Title": "إدخال البيانات لأول مرة"
         },
+        "Log": "سجل النظام",
         "Metadata": {
-          "Title": "هويةالنظام"
+          "Title": "هوية النظام"
         },
+        "RolePermissions": "صلاحيات الأدوار",
         "SystemLogger": {
           "Title": "سجل النظام"
         },
         "Title": "إعدادات مدير النظام",
         "UserActivity": {
-          "Title": "نشاط المستخدم"
+          "Title": "نشاط المستخدم",
+          "UserActivity": "نشاط مستخدم"
         },
         "UserRolePermissions": {
           "Title": "صلاحيات أدوار المستخدمين"
         },
         "UserRoles": {
-          "Title": "أدوار المستخدمين"
+          "Title": "أدوار المستخدمين",
+          "UserRole": "دور مستخدم"
         },
         "Users": {
-          "Title": "المستخدمون"
+          "Title": "المستخدمون",
+          "User": "مستخدم"
         },
         "UsersView": {
           "Title": "عرض المستخدمين"
@@ -273,10 +300,7 @@
             "Column1": "العمود 1",
             "Column2": "العمود 2",
             "Column3": "العمود 3",
-            "Column4": "العمود 4",
-            "Column5": "العمود 5",
-            "Column6": "العمود 6",
-            "Column7": "العمود 7"
+            "Column4": "العمود 4"
           },
           "Title": "تذاكري"
         },
@@ -313,6 +337,7 @@
             }
           }
         },
+        "Ticket": "تذكرة",
         "Title": "التذاكر"
       },
       "Title": "مركز الدعم",
@@ -330,14 +355,18 @@
       },
       "Name": "الاسم",
       "PhoneNumber": "رقم الهاتف",
+      "SINGLE_ITEM_NAME": "SINGLE_ITEM_NAME",
       "Title": "TABLE_PLURAL_UPPER_NAME"
     },
     "TemplateExamples": {
+      "DataTable": {
+        "Title": "مثال صفحة إدارة البيانات"
+      },
       "DataView": {
-        "Title": "عرض البيانات"
+        "Title": "أمثلة عرض البيانات"
       },
       "Forms": {
-        "Title": "النماذج"
+        "Title": "أمثلة الإدخالات في النماذج"
       }
     },
     "UserSettings": {
@@ -382,7 +411,6 @@
         "Add": "إضافة",
         "AddFiles": "إضافة ملفات",
         "BrowserDontSupportLocation": "المتصفح لا يدعم تحديد الموقع",
-        "CreateNew": "إنشاء جديد",
         "Delete": "حذف",
         "Edit": "تعديل",
         "Email": "البريد الإلكتروني",
@@ -407,6 +435,8 @@
       "Action": "إجراء",
       "All": "الكل",
       "Back": "رجوع",
+      "CreateNew": "إنشاء {{item}} جديد",
+      "Delete": "حذف {{item}}",
       "DemoLoginNote": "يمكنك تسجيل الدخول باستخدام أي من أرقام الجوال أدناه وكلمة المرور 12345678",
       "DemoWarning": "يرجى الانتباه إلى أن هذا إصدار تجريبي متاح للجميع، لذلك نوصي بعدم مشاركة أي بيانات حقيقية مثل الاسم أو رقم الهوية وما شابه. سيتم إعادة تعيين البيانات تلقائياً كل يوم.",
       "Details": "التفاصيل",
@@ -434,10 +464,15 @@
       "Showing": "عرض",
       "ThisWeek": "هذا الأسبوع",
       "Today": "اليوم",
+      "Update": "تعديل {{item}}",
+      "View": "عرض {{item}}",
       "WrongUrl": "رابط غير صحيح",
       "YourOwn": "الخاصة بك"
     },
     "Loading": "جاري التحميل",
+    "Notifications": {
+      "Successful": "تم بنجاح {{action}}"
+    },
     "Placeholders": {
       "Search": "بحث..."
     }

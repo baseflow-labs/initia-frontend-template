@@ -1,14 +1,16 @@
 import { useTranslation } from "react-i18next";
-import DynamicTable from "../../../../../components/table";
+import ApiDataTable from "../../../../../components/table/apiDatatable";
 import { inputs } from "./inputs";
 
 const SystemLoggerView = () => {
   const { t } = useTranslation();
 
   return (
-    <DynamicTable
-      dataApiEndpoint="users"
-      columns={inputs(t)}
+    <ApiDataTable
+      dataApiEndpoint="/support/logger"
+      inputs={inputs(t)}
+      singleItem={t("Auth.Settings.Admin.Log")}
+      includeView
     />
   );
 };

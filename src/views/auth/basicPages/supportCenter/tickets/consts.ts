@@ -5,6 +5,7 @@ export const submitTicketInputs = (t: Function) => [
     type: 'text',
     placeholder: t("Auth.SupportCenter.Tickets.SubmitTicket.Form.Subject.Placeholder"),
     required: true,
+    double: true
   },
   {
     name: 'category',
@@ -36,6 +37,7 @@ export const submitTicketInputs = (t: Function) => [
     type: 'textarea',
     placeholder: t("Auth.SupportCenter.Tickets.SubmitTicket.Form.Description.Placeholder"),
     required: true,
+    fullWidth: true
   },
   {
     name: 'attachment',
@@ -43,6 +45,7 @@ export const submitTicketInputs = (t: Function) => [
     type: 'file',
     placeholder: t("Auth.SupportCenter.Tickets.SubmitTicket.Form.Attachment.Placeholder"),
     required: false,
+    double: true
   }
 ]
 
@@ -53,33 +56,18 @@ export const ticketTableColumns = (t: Function) => [
     sortable: true,
   },
   {
-    name: 'subject',
+    name: 'name',
     label: t("Auth.SupportCenter.Tickets.MyTickets.Table.Column2"),
     sortable: true,
   },
   {
-    name: 'category',
-    label: t("Auth.SupportCenter.Tickets.MyTickets.Table.Column3"),
-    sortable: true,
-  },
-  {
-    name: 'status',
+    name: 'email',
     label: t("Auth.SupportCenter.Tickets.MyTickets.Table.Column4"),
     sortable: true,
   },
   {
-    name: 'priority',
-    label: t("Auth.SupportCenter.Tickets.MyTickets.Table.Column5"),
+    name: 'username',
+    label: t("Auth.SupportCenter.Tickets.MyTickets.Table.Column3"),
     sortable: true,
   },
-  {
-    name: 'created',
-    label: t("Auth.SupportCenter.Tickets.MyTickets.Table.Column6"),
-    sortable: true,
-  },
-  {
-    name: 'lastUpdate',
-    label: t("Auth.SupportCenter.Tickets.MyTickets.Table.Column7"),
-    sortable: true,
-  }
 ]

@@ -1,14 +1,19 @@
 import { useTranslation } from "react-i18next";
-import DynamicTable from "../../../../../../components/table";
+import ApiDataTable from "../../../../../../components/table/apiDatatable";
 import { inputs } from "./inputs";
 
 const UserRolesView = () => {
   const { t } = useTranslation();
 
-  return (    
-    <DynamicTable
-      dataApiEndpoint="users"
-      columns={inputs(t)}
+  return (        
+    <ApiDataTable
+      dataApiEndpoint="/support/userRoles"
+      inputs={inputs(t)}
+      singleItem={t("Auth.Settings.Admin.UserRoles.UserRole")}
+      includeCreate
+      includeView
+      includeUpdate
+      includeDelete
     />
   );
 };

@@ -100,6 +100,7 @@ const ContactUsView = () => {
               <div className="card-body p-4">
                 <Form
                   inputs={() => inputs(t)}
+                  onFormSubmit={() => ''}
                 />
               </div>
             </div>
