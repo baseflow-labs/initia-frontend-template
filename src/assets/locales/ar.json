@@ -278,10 +278,7 @@
             "Column1": "العمود 1",
             "Column2": "العمود 2",
             "Column3": "العمود 3",
-            "Column4": "العمود 4",
-            "Column5": "العمود 5",
-            "Column6": "العمود 6",
-            "Column7": "العمود 7"
+            "Column4": "العمود 4"
           },
           "Title": "تذاكري"
         },
@@ -340,11 +337,14 @@
       "Title": "TABLE_PLURAL_UPPER_NAME"
     },
     "TemplateExamples": {
+      "DataTable": {
+        "Title": "مثال صفحة إدارة البيانات"
+      },
       "DataView": {
-        "Title": "عرض البيانات"
+        "Title": "أمثلة عرض البيانات"
       },
       "Forms": {
-        "Title": "النماذج"
+        "Title": "أمثلة الإدخالات في النماذج"
       }
     },
     "UserSettings": {
@@ -449,7 +449,6 @@
     },
     "Loading": "جاري التحميل",
     "Notifications": {
-      "DemoMode": "وضع العرض التجريبي",
       "Successful": "تم بنجاح {{action}}"
     },
     "Placeholders": {

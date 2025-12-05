@@ -1,9 +1,10 @@
-import { faDashboard, faGear } from "@fortawesome/free-solid-svg-icons";
+import { faDashboard, faGear, faTable } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes, useLocation } from "react-router";
 import { Fragment } from "react/jsx-runtime";
 
+import { faWpforms } from "@fortawesome/free-brands-svg-icons";
 import { useWindowWidth } from "../../utils/hooks";
 import MessagingView from "../../views/auth/basicPages/messaging";
 import NotificationsView from "../../views/auth/basicPages/notifications";
@@ -16,6 +17,7 @@ import SystemSettingsView from "../../views/auth/basicPages/systemSettings";
 import UserProfileView from "../../views/auth/basicPages/userProfile";
 import UserSettingsView from "../../views/auth/basicPages/userSettings";
 import DashboardView from "../../views/auth/dashboard";
+import TemplateDataTableExampleView from "../../views/auth/templateExamples/datatablePage";
 import TemplateDataViewExamplesView from "../../views/auth/templateExamples/dataView";
 import TemplateFormExamplesView from "../../views/auth/templateExamples/forms";
 import { FilePreviewModal } from "./globalModal";
@@ -114,7 +116,15 @@ const AuthLayout = () => {
       name: t("Auth.TemplateExamples.DataView.Title"),
       route: "/template-examples/data-view",
       view: <TemplateDataViewExamplesView />,
-      icon: faGear,
+      icon: faDashboard,
+      showInNav: true,
+      fixed: true,
+    },
+    {
+      name: t("Auth.TemplateExamples.DataTable.Title"),
+      route: "/template-examples/data-table",
+      view: <TemplateDataTableExampleView />,
+      icon: faTable,
       showInNav: true,
       fixed: true,
     },
@@ -122,7 +132,7 @@ const AuthLayout = () => {
       name: t("Auth.TemplateExamples.Forms.Title"),
       route: "/template-examples/forms",
       view: <TemplateFormExamplesView />,
-      icon: faGear,
+      icon: faWpforms,
       showInNav: true,
       fixed: true,
     },

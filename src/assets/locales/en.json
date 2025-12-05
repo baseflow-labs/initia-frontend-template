@@ -278,10 +278,7 @@
             "Column1": "Column1",
             "Column2": "Column2",
             "Column3": "Column3",
-            "Column4": "Column4",
-            "Column5": "Column5",
-            "Column6": "Column6",
-            "Column7": "Column7"
+            "Column4": "Column4"
           },
           "Title": "My Tickets"
         },
@@ -340,11 +337,14 @@
       "Title": "TABLE_PLURAL_UPPER_NAME"
     },
     "TemplateExamples": {
+      "DataTable": {
+        "Title": "DataTable Example"
+      },
       "DataView": {
-        "Title": "Data View"
+        "Title": "Data View Examples"
       },
       "Forms": {
-        "Title": "Forms"
+        "Title": "Form Input Examples"
       }
     },
     "UserSettings": {
@@ -449,7 +449,6 @@
     },
     "Loading": "Loading",
     "Notifications": {
-      "DemoMode": "Demo Mode",
       "Successful": "Successful {{action}}"
     },
     "Placeholders": {
