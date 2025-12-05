@@ -12,21 +12,23 @@ import {
   faFile,
   faLocationPin,
   faPhone,
+  faSort,
+  faSortDown,
+  faSortUp,
   faStar,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
-import { Fragment, useLayoutEffect, useState } from "react";
+import React, { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
-import service, { customFilterProps, demoStatus, formatGetFilters } from "../../api";
+import { customFilterProps } from "../../api";
 import i18n from "../../i18next";
 import { triggerFilePreview } from "../../layouts/auth/globalModal";
 import { addNotification } from "../../store/actions/notifications";
 import { viewDateFormat, viewTimeFormat } from "../../utils/consts";
-import { apiCatchGlobalHandler, commaNumbers } from "../../utils/function";
-import Button from "../core/button";
+import { commaNumbers } from "../../utils/function";
 import DropdownComp from "../dropdown";
 import InputComp from "../form/Input";
 import TooltipComp from "../tooltip";
@@ -41,21 +43,22 @@ export interface actionProps {
   onClick: (data: string) => void;
 }
 
+export interface TableColumn {
+  label: string;
+  name: string;
+  render?: (row: any) => string | React.ReactNode;
+  type?: string;
+  timestampFormat?: string;
+  options?: { value: string | number; label?: string }[];
+  moneyUnit?: boolean;
+  sortable?: boolean;
+}
+
 export interface TableProps {
   size?: number;
-  columns: {
-    label: string;
-    name: string;
-    render?: (row: any) => string | React.ReactNode;
-    type?: string;
-    timestampFormat?: string;
-    options?: { value: string; label?: string }[];
-    moneyUnit?: boolean;
-  }[];
+  columns: TableColumn[];
   fitHeight?: boolean;
   extraActions?: (id?: string) => actionProps[];
-  dataApiEndpoint: string;
-  includeCreate?: boolean;
   includeView?: boolean;
   includeUpdate?: boolean;
   includeDelete?: boolean;
@@ -63,7 +66,7 @@ export interface TableProps {
   searchPlaceholder?: string;
 }
 
-interface Props {
+interface DataRenderProps {
   row?: object;
   data: string;
   render?: (row: {}) => string | React.ReactNode;
@@ -101,7 +104,7 @@ export const dataRender = ({
   hasFile,
   money,
   withoutWrap,
-}: Props) => {
+}: DataRenderProps) => {
   const wrap = (content: React.ReactNode) =>
     withoutWrap ? content : withMoneyUnit(content, money);
 
@@ -119,8 +122,9 @@ export const dataRender = ({
     return files
       ? wrap(
           <>
-            {files?.map((file = "") => (
+            {files?.map((file = "", idx: number) => (
               <FontAwesomeIcon
+                key={file + idx}
                 icon={faFile}
                 role="button"
                 className="me-1"
@@ -178,15 +182,17 @@ export const dataRender = ({
         </span>
       );
     case "select":
-    case "radio":
+    case "radio": {
       const option = options?.find(({ value }) => value === data);
-      return wrap(option?.label || option?.value);
-    case "file":
+      return wrap(option?.label || option?.value || data);
+    }
+    case "file": {
       const files = (row as any)[name]?.map(({ path = "" }) => path);
       return wrap(
         files
-          ? files?.map((file = "") => (
+          ? files?.map((file = "", idx: number) => (
               <FontAwesomeIcon
+                key={file + idx}
                 icon={faFile}
                 role="button"
                 className="me-1"
@@ -195,6 +201,7 @@ export const dataRender = ({
             ))
           : "غير معبئة"
       );
+    }
     case "location":
       return wrap(
         <a href={data} target="_blank" rel="noreferrer">
@@ -209,12 +216,13 @@ export const dataRender = ({
           onClick={() => triggerFilePreview(data)}
         />
       );
-    case "stars":
+    case "stars": {
       const starsToDisplay = [1, 2, 3, 4, 5];
       return wrap(
         <div className="d-flex">
           {starsToDisplay.map((i) => (
             <FontAwesomeIcon
+              key={i}
               icon={faStar}
               className={
                 i <= parseInt(data) ? "text-warning" : "text-secondary"
@@ -223,6 +231,7 @@ export const dataRender = ({
           ))}
         </div>
       );
+    }
     case "custom":
       return wrap(render && row ? render(row) : data);
     default:
@@ -230,78 +239,59 @@ export const dataRender = ({
   }
 };
 
-const DynamicTable = ({
+interface Props extends TableProps {
+  data: { id: string }[];
+  onRowClick: (rowData?: object, action?: string) => void;
+
+  // pagination state from parent
+  paginationMeta: {
+    page: number;
+    capacity: number;
+    count: number;
+    pagesCount: number;
+  };
+  currentPage: number;
+  pageSize: number;
+  onPageChange: (page: number) => void;
+  onPageSizeChange: (size: number) => void;
+
+  // search
+  currentSearch?: string;
+  onSearchChange?: (value: string) => void;
+
+  // sorting
+  sortField?: string;
+  sortDirection?: "asc" | "desc" | null;
+  onSortChange?: (field: string, direction: "asc" | "desc") => void;
+
+  // filters
+  onFiltersChange?: (filters: customFilterProps[]) => void;
+}
+
+const DynamicTable: React.FC<Props> = ({
   columns,
+  data,
   extraActions,
-  size = 10,
   fitHeight,
-  dataApiEndpoint,
   searchProp,
   searchPlaceholder,
-  includeCreate,
   includeView,
   includeUpdate,
   includeDelete,
-}: TableProps) => {
+  onRowClick,
+  paginationMeta,
+  currentPage,
+  pageSize,
+  onPageChange,
+  onPageSizeChange,
+  currentSearch,
+  onSearchChange,
+  sortField,
+  sortDirection,
+  onSortChange,
+}: Props) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-
-  const [pageSize, setPageSize] = useState(size);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [data, setData] = useState<{ id?: string; name?: string; username?: string; email?: string; }[]>([]);
-  const [currentFilters, setCurrentFilters] = useState<customFilterProps[]>([]);
-  const [currentSearch, setCurrentSearch] = useState("");
-  const [paginationMeta, setPaginationMeta] = useState({
-    page: 1,
-    capacity: 10,
-    count: 0,
-    pagesCount: 1,
-  });
-
-  const onPageNumberChange = (i = 0) => {
-    setCurrentPage(i);
-  };
-
-  const onPageSizeChange = (i = 0) => {
-    setPageSize(i);
-  };
-
-  const getData = async () => {
-    if (demoStatus) {
-      setData([
-        {
-          id: "1",
-          name: "Demo Admin User",
-          username: "5551234567",
-          email: "demo.admin@appnest.com",
-        },
-        {
-          id: "2",
-          name: "Demo User",
-          username: "5551234567",
-          email: "demo.user@appnest.com",
-        },
-      ]);
-    } else {
-    service
-      .get(dataApiEndpoint, {
-        params: {
-          ...formatGetFilters(columns, currentFilters),
-          page: currentPage,
-          capacity: pageSize,
-        },
-      })
-      .then((res: any) => {
-        setData(res.payload);
-        setPaginationMeta(res.extra.paginationMeta);
-      })
-      .catch(apiCatchGlobalHandler);
-    }
-  };
-
-  useLayoutEffect(() => {
-    getData();
-  }, []);
 
   const defaultActionsIncluded = [
     includeView,
@@ -345,59 +335,84 @@ const DynamicTable = ({
     </h4>
   );
 
+  const handleSortClick = (col: TableColumn) => {
+    if (!col.sortable || !onSortChange) return;
+
+    const isSameField = sortField === col.name;
+    const nextDirection: "asc" | "desc" =
+      !isSameField || sortDirection === "desc" ? "asc" : "desc";
+
+    onSortChange(col.name, nextDirection);
+  };
+
+  const renderSortIcon = (col: TableColumn) => {
+    if (!col.sortable) return null;
+    if (sortField !== col.name || !sortDirection) {
+      return <FontAwesomeIcon icon={faSort} className="ms-1 text-muted" />;
+    }
+    return (
+      <FontAwesomeIcon
+        icon={sortDirection === "asc" ? faSortUp : faSortDown}
+        className="ms-1 text-primary"
+      />
+    );
+  };
+
+  const count = paginationMeta?.count || data.length;
+  const pagesCount = paginationMeta?.pagesCount || 1;
+  const from = count > 0 ? (currentPage - 1) * pageSize + 1 : 0;
+  const to = Math.min(currentPage * pageSize, count);
+
   return (
     <div
       className="overflow-x-auto mx-auto"
       style={{ maxWidth: "90vw", minHeight: fitHeight ? undefined : "60vh" }}
     >
-      {includeCreate ? (
-        <div>
-          <Button>{t("Global.Form.Labels.CreateNew")}</Button>
-        </div>
-      ) : (
-        ""
-      )}
-
       <div className="table-responsive">
         <table className="table mt-4 w-100">
           <thead className="table-light">
             {searchProp ? (
               <tr>
-                <th>
+                <th colSpan={columns.length + (haveDefaultActions ? 2 : 1)}>
                   <InputComp
                     name="search"
                     placeholder={
                       searchPlaceholder ??
                       t("Global.Placeholders.Search", { prop: searchProp })
                     }
-                    value={currentSearch}
-                    onChange={(e) => setCurrentSearch(e.target.value)}
+                    value={currentSearch || ""}
+                    onChange={(e) => onSearchChange?.(e.target.value)}
                   />
                 </th>
               </tr>
-            ) : (
-              ""
-            )}
+            ) : null}
 
             <tr>
               <th className="py-3" scope="col">
                 #
               </th>
 
-              {columns.map(({ label }, i) => (
-                <th className="py-3 fw-bold" scope="col" key={i}>
-                  {label}
+              {columns.map((col, i) => (
+                <th
+                  className={
+                    "py-3 fw-bold" + (col.sortable ? " cursor-pointer" : "")
+                  }
+                  scope="col"
+                  key={i}
+                  onClick={() => handleSortClick(col)}
+                >
+                  <span className="d-inline-flex align-items-center">
+                    {col.label}
+                    {renderSortIcon(col)}
+                  </span>
                 </th>
               ))}
 
-              {(extraActions && extraActions()?.length) ||
-              haveDefaultActions ? (
+              {(extraActions && extraActions()?.length) || haveDefaultActions ? (
                 <th className="py-3" scope="col">
                   {t("Global.Labels.Action")}
                 </th>
-              ) : (
-                ""
-              )}
+              ) : null}
             </tr>
           </thead>
 
@@ -411,8 +426,10 @@ const DynamicTable = ({
             )}
 
             {data.map((row, i) => (
-              <tr className="align-middle" key={i}>
-                <td className="py-3">{i + pageSize * (currentPage - 1) + 1}</td>
+              <tr className="align-middle" key={(row as any).id || i}>
+                <td className="py-3">
+                  {i + pageSize * (currentPage - 1) + 1}
+                </td>
 
                 {columns.map(
                   (
@@ -422,7 +439,7 @@ const DynamicTable = ({
                     <td className="py-3" key={y}>
                       {dataRender({
                         row,
-                        data: (row as any)[name],
+                        data: String((row as any)[name] ?? ""),
                         type,
                         render,
                         options,
@@ -439,7 +456,7 @@ const DynamicTable = ({
                   <td className="py-3">
                     <div className="d-flex">
                       {extraActions &&
-                        extraActions(row.id)
+                        extraActions((row as any).id)
                           .filter(({ spread }) => spread)
                           .map(
                             (
@@ -470,7 +487,7 @@ const DynamicTable = ({
                         <Fragment>
                           {includeView && (
                             <SpreadActionView
-                              onClick={() => {}}
+                              onClick={() => onRowClick(row, "view")}
                               label={t("Global.Form.Labels.View")}
                               icon={faEye}
                               color="primary"
@@ -480,7 +497,7 @@ const DynamicTable = ({
 
                           {includeUpdate && (
                             <SpreadActionView
-                              onClick={() => {}}
+                              onClick={() => onRowClick(row, "update")}
                               label={t("Global.Form.Labels.Edit")}
                               icon={faEnvelope}
                               color="warning"
@@ -490,7 +507,7 @@ const DynamicTable = ({
 
                           {includeDelete && (
                             <SpreadActionView
-                              onClick={() => {}}
+                              onClick={() => onRowClick(row, "delete")}
                               label={t("Global.Form.Labels.Delete")}
                               icon={faStar}
                               color="danger"
@@ -501,7 +518,7 @@ const DynamicTable = ({
                       )}
 
                       {extraActions &&
-                      extraActions(row.id).filter(({ spread }) => !spread)
+                      extraActions((row as any).id).filter(({ spread }) => !spread)
                         .length ? (
                         <DropdownComp
                           start
@@ -511,10 +528,10 @@ const DynamicTable = ({
                               className="ms-1"
                             />
                           }
-                          list={extraActions(row.id)
+                          list={extraActions((row as any).id)
                             .filter(({ spread }) => !spread)
                             .map(({ icon, label, onClick }) => ({
-                              onClick: () => onClick(row.id || ""),
+                              onClick: () => onClick((row as any).id || ""),
                               label: (
                                 <Fragment>
                                   <FontAwesomeIcon
@@ -526,14 +543,10 @@ const DynamicTable = ({
                               ),
                             }))}
                         />
-                      ) : (
-                        ""
-                      )}
+                      ) : null}
                     </div>
                   </td>
-                ) : (
-                  ""
-                )}
+                ) : null}
               </tr>
             ))}
           </tbody>
@@ -541,25 +554,12 @@ const DynamicTable = ({
           {data.length !== 0 && (
             <tfoot>
               <tr>
-                <th
-                  colSpan={
-                    columns.length +
-                    1 +
-                    (extraActions && extraActions()?.length ? 1 : 0)
-                  }
-                >
+                <th colSpan={columns.length + (haveDefaultActions ? 2 : 1)}>
                   <div className="d-flex justify-content-between">
                     <div className="my-auto text-muted me-3">
                       <small>
                         {t("Global.Labels.Showing")}{" "}
-                        {data.length > 0
-                          ? `${(currentPage - 1) * pageSize + 1} – ${Math.min(
-                              currentPage * pageSize,
-                              paginationMeta?.count || data.length
-                            )}`
-                          : 0}{" "}
-                        {t("Global.Labels.Of")}{" "}
-                        {paginationMeta?.count || data.length}{" "}
+                        {from} – {to} {t("Global.Labels.Of")} {count}{" "}
                         {t("Global.Labels.Results")}
                       </small>
                     </div>
@@ -572,7 +572,7 @@ const DynamicTable = ({
                               className={`page-link text-${
                                 currentPage === 1 ? "secondary" : "primary"
                               } border-0 px-3`}
-                              onClick={() => onPageNumberChange(1)}
+                              onClick={() => onPageChange(1)}
                               disabled={currentPage === 1}
                             >
                               <FontAwesomeIcon icon={faAnglesRight} />
@@ -584,9 +584,7 @@ const DynamicTable = ({
                               className={`page-link text-${
                                 currentPage === 1 ? "secondary" : "primary"
                               } border-0 px-3`}
-                              onClick={() =>
-                                onPageNumberChange(currentPage - 1)
-                              }
+                              onClick={() => onPageChange(currentPage - 1)}
                               disabled={currentPage === 1}
                             >
                               <FontAwesomeIcon icon={faAngleRight} />
@@ -595,30 +593,27 @@ const DynamicTable = ({
 
                           {Array.from(
                             {
-                              length: Math.min(
-                                5,
-                                paginationMeta?.pagesCount || 0
-                              ),
+                              length: Math.min(5, pagesCount || 0),
                             },
                             (_, i) => {
-                              let pageOffset = Math.max(
+                              const offset = Math.max(
                                 0,
                                 Math.min(
                                   currentPage - 3,
-                                  paginationMeta?.pagesCount - 5
+                                  pagesCount - 5
                                 )
                               );
-                              const page = i + 1 + pageOffset;
+                              const page = i + 1 + offset;
 
                               return (
                                 <li className="page-item my-auto" key={i}>
                                   <button
                                     className={`page-link border-0 rounded-2 me-1 ${
                                       currentPage === page
-                                        ? "bg-primary"
+                                        ? "bg-primary text-white"
                                         : "border-primary text-primary"
                                     }`}
-                                    onClick={() => onPageNumberChange(page)}
+                                    onClick={() => onPageChange(page)}
                                   >
                                     {page}
                                   </button>
@@ -630,16 +625,12 @@ const DynamicTable = ({
                           <li className="page-item my-auto">
                             <button
                               className={`page-link text-${
-                                currentPage === paginationMeta?.pagesCount
+                                currentPage === pagesCount
                                   ? "secondary"
                                   : "primary"
                               } border-0 px-3`}
-                              onClick={() =>
-                                onPageNumberChange(currentPage + 1)
-                              }
-                              disabled={
-                                currentPage === paginationMeta?.pagesCount
-                              }
+                              onClick={() => onPageChange(currentPage + 1)}
+                              disabled={currentPage === pagesCount}
                             >
                               <FontAwesomeIcon icon={faAngleLeft} />
                             </button>
@@ -648,16 +639,12 @@ const DynamicTable = ({
                           <li className="page-item my-auto">
                             <button
                               className={`page-link text-${
-                                currentPage === paginationMeta?.pagesCount
+                                currentPage === pagesCount
                                   ? "secondary"
                                   : "primary"
                               } border-0 px-3`}
-                              onClick={() =>
-                                onPageNumberChange(paginationMeta?.pagesCount)
-                              }
-                              disabled={
-                                currentPage === paginationMeta?.pagesCount
-                              }
+                              onClick={() => onPageChange(pagesCount)}
+                              disabled={currentPage === pagesCount}
                             >
                               <FontAwesomeIcon icon={faAnglesLeft} />
                             </button>
@@ -679,9 +666,14 @@ const DynamicTable = ({
                                 style={{ width: "55px" }}
                                 type="number"
                                 min={1}
-                                max={paginationMeta?.pagesCount}
+                                max={pagesCount}
                                 onChange={(e) =>
-                                  onPageNumberChange(parseInt(e.target.value))
+                                  onPageChange(
+                                    Math.min(
+                                      pagesCount,
+                                      Math.max(1, parseInt(e.target.value) || 1)
+                                    )
+                                  )
                                 }
                               />
                             </span>
