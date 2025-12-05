@@ -46,7 +46,7 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
         <div className="p-4 text-center">
           <img
             src={logo || tempLogo}
-            style={{ height: "70px" }}
+            style={{ height: "40px" }}
             alt="Logo"
           />
         </div>
@@ -81,11 +81,11 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
 
               {i === 0 && (
                 <button
-                  className="btn toggle-btn float-end bg-white rounded-circle border-dark border-1 m-0 position-absolute"
+                  className="btn toggle-btn float-end bg-white rounded-circle border-dark border-1 px-2 m-0 position-absolute"
                   style={{
                     zIndex: 5,
-                    left: i18n.language === "ar" ? -20 : undefined,
-                    right: i18n.language === "en" ? -20 : undefined,
+                    left: i18n.language === "ar" ? -12.5 : undefined,
+                    right: i18n.language === "en" ? -12.5 : undefined,
                   }}
                   onClick={toggleSidebar}
                 >
