@@ -5,6 +5,7 @@ export const submitTicketInputs = (t: Function) => [
     type: 'text',
     placeholder: t("Auth.SupportCenter.Tickets.SubmitTicket.Form.Subject.Placeholder"),
     required: true,
+    double: true
   },
   {
     name: 'category',
@@ -36,6 +37,7 @@ export const submitTicketInputs = (t: Function) => [
     type: 'textarea',
     placeholder: t("Auth.SupportCenter.Tickets.SubmitTicket.Form.Description.Placeholder"),
     required: true,
+    fullWidth: true
   },
   {
     name: 'attachment',
@@ -43,6 +45,7 @@ export const submitTicketInputs = (t: Function) => [
     type: 'file',
     placeholder: t("Auth.SupportCenter.Tickets.SubmitTicket.Form.Attachment.Placeholder"),
     required: false,
+    double: true
   }
 ]
 

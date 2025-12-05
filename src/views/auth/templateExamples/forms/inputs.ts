@@ -82,6 +82,7 @@ export const inputs = (t: Function) => [
     type: "multipleEntries",
     name: "multipleEntries",
     label: t("Auth.Examples.Form.MultipleEntries"),
+    fullWidth: true,
     inputs: [
       { type: "text", name: "entryTitle", label: t("Auth.Examples.Form.Text") },
       { type: "number", name: "entryValue", label: t("Auth.Examples.Form.Number") },

@@ -280,6 +280,7 @@ const ApiDataTable: React.FC<Props> = ({
 
       <Modal
         title={modalTitle}
+        className="modal-lg"
         isOpen={modal.open}
         onClose={() => setModal({ open: false, data: {}, action: "view" })}
       >
@@ -288,6 +289,7 @@ const ApiDataTable: React.FC<Props> = ({
             inputs.map((item) => ({
               ...item,
               disabled: modal.action === "view" || modal.action === "delete" || item.name === "id",
+              double: true,
             }))
           }
           initialValues={modal.data}

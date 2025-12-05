@@ -22,12 +22,9 @@
   - nested form
 - build form wizard
 - build datatable with ...
-  - actions column (standard + custom)
-  - auto handle of sub-props
-  - server side pagination / infinite scroll
-  - server side sorting
   - server side filtering
   - server side search
+  - scroll vs pagination
   - column visibility control (show / hide + re-order)
   - export with customization to csv, excel, pdf
   - row selection (bulk actions)

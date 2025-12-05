@@ -22,12 +22,12 @@ const SupportTicketsSubmissionView = () => {
     <Fragment>
       <div className="card shadow-sm">
         <div className="card-body">
-          <div className="mb-4">
+          <div className="mb-5">
             <strong>{t("Auth.SupportCenter.Tickets.BeforeSubmitting")}</strong>
             
-            <ul className="mb-0 mt-2">
+            <ul className="list-group mb-0 mt-2">
               {links.map((link, index) => (
-                <li key={index}>
+                <li className="list-group-item" key={index}>
                   <Link to={link.route}>{link.label}</Link>
                 </li>
               ))}

@@ -61,7 +61,9 @@ interface InputBasicProps {
 export interface InputSingleProps extends InputBasicProps {
   logo?: string;
   sizing?: string;
-  halfCol?: boolean;
+  double?: boolean;
+  triple?: boolean;
+  fullWidth?: boolean;
   hasFile?: boolean;
   hideFile?: boolean;
   moneyUnit?: boolean;
@@ -77,7 +79,6 @@ export interface InputProps extends InputSingleProps {
   singleRecordLabel?: string;
   recordDynamicLabelKey?: string;
   logo?: string;
-  halfCol?: boolean;
   onRecordSubmit?: (formik?: any) => any;
   recordSubmitButtonText?: string;
   prefixText?: string | number;
@@ -284,7 +285,9 @@ const Form: React.FC<Props> = ({
                   aboveComp,
                   belowComp,
                   logo,
-                  halfCol,
+                  double,
+                  triple,
+                  fullWidth,
                   type,
                   required,
                   min,
@@ -356,7 +359,7 @@ const Form: React.FC<Props> = ({
 
                 return (
                   <div
-                    className={`mb-2 ${input.name === 'fontSize' ? "col-md-12" : "col-md-6"}`}
+                    className={`mb-2 ${fullWidth ? "col-md-12" : double ? "col-md-6" : triple ? "col-md-9" : "col-md-3"}`}
                     key={i}
                   >
                     <LabelView required={required} {...input} />
