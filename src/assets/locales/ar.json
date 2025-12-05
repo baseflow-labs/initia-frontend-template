@@ -1,13 +1,9 @@
 {
   "Auth": {
-    "ContactUs": {
-      "Title": "تواصل معنا"
-    },
     "Dashboard": {
       "AidsCount": "عدد المساعدات",
       "ApplicationTimeline": "الجدول الزمني للطلبات",
       "ImportantNotifications": "الإشعارات المهمة",
-      "Main": "الرئيسية",
       "NoVisits": "لا توجد زيارات مجدولة",
       "ResearcherInfo": "معلومات الباحث",
       "Statuses": {
@@ -467,15 +463,8 @@
     "Login": {
       "Labels": {
         "DidUForgotPassword": "هل نسيت كلمة المرور؟",
+        "DummyLogin": "تسجيل دخول تجريبي",
         "Login": "تسجيل الدخول",
-        "LoginAsAccountant": "تسجيل الدخول كمحاسب",
-        "LoginAsAdmin": "تسجيل الدخول كمدير نظام",
-        "LoginAsApplicant": "تسجيل الدخول كمُتقدِّم",
-        "LoginAsCeo": "تسجيل الدخول كمدير تنفيذي",
-        "LoginAsCommitteeHead": "تسجيل الدخول كرئيس لجنة المساعدات",
-        "LoginAsHod": "تسجيل الدخول كمشرف الباحثين",
-        "LoginAsResearcher": "تسجيل الدخول كباحث",
-        "LoginAsUser": "تسجيل الدخول كمستخدم",
         "Password": "كلمة المرور",
         "PhoneNo": "رقم الجوال",
         "Success": "تم تسجيل الدخول بنجاح"

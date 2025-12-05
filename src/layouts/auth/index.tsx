@@ -13,16 +13,15 @@ import FaqView from "../../views/auth/basicPages/supportCenter/faq";
 import SupportTicketsView from "../../views/auth/basicPages/supportCenter/tickets";
 import UserManualView from "../../views/auth/basicPages/supportCenter/user-manual";
 import SystemSettingsView from "../../views/auth/basicPages/systemSettings";
+import UserProfileView from "../../views/auth/basicPages/userProfile";
 import UserSettingsView from "../../views/auth/basicPages/userSettings";
 import DashboardView from "../../views/auth/dashboard";
 import TemplateDataViewExamplesView from "../../views/auth/templateExamples/dataView";
 import TemplateFormExamplesView from "../../views/auth/templateExamples/forms";
-import DemoWarning from "./demoWarning";
 import { FilePreviewModal } from "./globalModal";
 import DashboardNavbar from "./navs/navbar";
 import OffCanvasNav from "./navs/offcanvasNav";
 import Sidebar from "./navs/sidebarNav";
-import UserProfileView from "../../views/auth/basicPages/userProfile";
 
 const AuthLayout = () => {
   const { t, i18n } = useTranslation();
@@ -30,7 +29,7 @@ const AuthLayout = () => {
   const width = useWindowWidth();
   const isPc = width > 992;
 
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
 
   const authRoutes = [
     {
@@ -141,6 +140,7 @@ const AuthLayout = () => {
 
   return (
     <Fragment>
+      {/* <DemoWarning /> */}
       <DashboardNavbar />
 
       <OffCanvasNav
@@ -193,8 +193,6 @@ const AuthLayout = () => {
             transition: "margin-right 0.3s",
           }}
         >
-          <DemoWarning />
-
           <div className="p-0 px-2 px-lg-5 w-100">
             <Routes>
               {authRoutes.map(({ name, route, view }, i) => (

@@ -20,7 +20,7 @@ import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
-import service, { customFilterProps, formatGetFilters } from "../../api";
+import service, { customFilterProps, demoStatus, formatGetFilters } from "../../api";
 import i18n from "../../i18next";
 import { triggerFilePreview } from "../../layouts/auth/globalModal";
 import { addNotification } from "../../store/actions/notifications";
@@ -248,7 +248,7 @@ const DynamicTable = ({
 
   const [pageSize, setPageSize] = useState(size);
   const [currentPage, setCurrentPage] = useState(1);
-  const [data, setData] = useState<{ id?: string }[]>([]);
+  const [data, setData] = useState<{ id?: string; name?: string; username?: string; email?: string; }[]>([]);
   const [currentFilters, setCurrentFilters] = useState<customFilterProps[]>([]);
   const [currentSearch, setCurrentSearch] = useState("");
   const [paginationMeta, setPaginationMeta] = useState({
@@ -267,6 +267,22 @@ const DynamicTable = ({
   };
 
   const getData = async () => {
+    if (demoStatus) {
+      setData([
+        {
+          id: "1",
+          name: "Demo Admin User",
+          username: "5551234567",
+          email: "demo.admin@appnest.com",
+        },
+        {
+          id: "2",
+          name: "Demo User",
+          username: "5551234567",
+          email: "demo.user@appnest.com",
+        },
+      ]);
+    } else {
     service
       .get(dataApiEndpoint, {
         params: {
@@ -280,6 +296,7 @@ const DynamicTable = ({
         setPaginationMeta(res.extra.paginationMeta);
       })
       .catch(apiCatchGlobalHandler);
+    }
   };
 
   useLayoutEffect(() => {

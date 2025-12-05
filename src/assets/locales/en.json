@@ -1,13 +1,9 @@
 {
   "Auth": {
-    "ContactUs": {
-      "Title": "Contact Us"
-    },
     "Dashboard": {
       "AidsCount": "Aids Count",
       "ApplicationTimeline": "Application Timeline",
       "ImportantNotifications": "Important Notifications",
-      "Main": "Main",
       "NoVisits": "No Visits Scheduled",
       "ResearcherInfo": "Researcher Info",
       "Statuses": {
@@ -467,15 +463,8 @@
     "Login": {
       "Labels": {
         "DidUForgotPassword": "Did You Forgot Password?",
+        "DummyLogin": "Dummy Login",
         "Login": "Login",
-        "LoginAsAccountant": "Login As An Accountant",
-        "LoginAsAdmin": "Login As System Admin",
-        "LoginAsApplicant": "Login As Applicant",
-        "LoginAsCeo": "Login As CEO",
-        "LoginAsCommitteeHead": "Login As Aids Committee Head",
-        "LoginAsHod": "Login As Researchers Supervisor",
-        "LoginAsResearcher": "Login As Researcher",
-        "LoginAsUser": "Login As User",
         "Password": "Password",
         "PhoneNo": "Phone No",
         "Success": "Success"

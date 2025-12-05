@@ -51,56 +51,27 @@ const LoginView = () => {
       .catch(apiCatchGlobalHandler);
   };
 
-  const onDummySubmit = (values: { type: string }) => {
-    authApi
-      .dummyLogin(values)
-      .then((res: any) => {
+  const onDummySubmit = () => {
+    
         dispatch(
           addNotification({
             msg: t("Public.Login.Labels.Success", {
-              name: res.payload.user.name,
+              name: 'Dummy Admin User',
             }),
           })
         );
-        dispatch(login(res.payload));
-      })
-      .catch(apiCatchGlobalHandler);
+        dispatch(login({
+          token: 'thisIsDummyToken',
+          user: {
+            id: "1",
+            name: "Suhaib Ahmad",
+            email: "SuhaibAhmadAi@hotmail.com",
+            username: "admin",
+            status: "active",
+            role: "admin"
+          }
+        }));
   };
-
-  const demoLogin = [
-    {
-      label: t("Public.Login.Labels.LoginAsAdmin"),
-      type: "admin",
-    },
-    {
-      label: t("Public.Login.Labels.LoginAsCeo"),
-      type: "ceo",
-    },
-    {
-      label: t("Public.Login.Labels.LoginAsCommitteeHead"),
-      type: "ceo",
-    },
-    {
-      label: t("Public.Login.Labels.LoginAsAccountant"),
-      type: "accountant",
-    },
-    {
-      label: t("Public.Login.Labels.LoginAsHod"),
-      type: "hod",
-    },
-    {
-      label: t("Public.Login.Labels.LoginAsResearcher"),
-      type: "researcher",
-    },
-    {
-      label: t("Public.Login.Labels.LoginAsUser"),
-      type: "user",
-    },
-    {
-      label: t("Public.Login.Labels.LoginAsApplicant"),
-      type: "applicant",
-    },
-  ];
 
   return (
     <div>
@@ -111,18 +82,12 @@ const LoginView = () => {
       />
 
       {process.env.REACT_APP_ENVIRONMENT === "staging" ? (
-        <div className="row g-2 mt-3">
-          {demoLogin.map(({ label, type }, i) => (
-            <div className={"col-6"} key={i}>
-              <Button
-                className="w-100 h-100"
-                onClick={() => onDummySubmit({ type })}
-              >
-                {label}
-              </Button>
-            </div>
-          ))}
-        </div>
+        <Button
+          className="w-100 mt-3"
+          onClick={() => onDummySubmit()}
+        >
+          {t("Public.Login.Labels.DummyLogin", { type: "User" })}
+        </Button>
       ) : (
         ""
       )}
