@@ -14,6 +14,7 @@ import { apiCatchGlobalHandler } from "../../utils/function";
 import Form from "../form";
 import Modal from "../modal";
 import { addNotification } from "../../store/actions/notifications";
+import Button from "../core/button";
 
 interface Props {
   dataApiEndpoint: string;
@@ -91,6 +92,19 @@ const ApiDataTable: React.FC<Props> = ({
     }
   };
 
+  const onSuccess = () => {    
+    dispatch(
+      addNotification({
+        msg: t("Global.Notifications.Successful", {
+          action: renderActionLabel(modal.action),
+        }),
+      })
+    );
+    // refresh data
+    fetchData();
+    setModal({ action: "view", open: false, data: {} });
+  }
+
   const onFormSubmit = (formData: { id?: string }) => {
     const apiCall = async () => {
       switch (modal.action) {
@@ -109,67 +123,69 @@ const ApiDataTable: React.FC<Props> = ({
     };
 
     if (demoStatus) {
-      dispatch(
-        addNotification({
-          msg: t("Global.Notifications.DemoMode"),
-          type: "warning",
-        })
-      );
+     onSuccess()
     } else {
       apiCall()
         .then(() => {
-          dispatch(
-            addNotification({
-              msg: t("Global.Notifications.Successful", {
-                item: singleItem,
-                action: renderActionLabel(modal.action),
-              }),
-            })
-          );
-          // refresh data
-          fetchData();
-          setModal({ action: "view", open: false, data: {} });
+          onSuccess()
         })
         .catch(apiCatchGlobalHandler);
     }
   };
 
   const fetchData = () => {
-    service
-      .get(dataApiEndpoint, {
-        params: {
-          ...formatGetFilters(inputs, filters),
-          page: currentPage,
-          capacity: pageSize,
-          search: search || undefined,
-          sortField,
-          sortDirection,
+    if (demoStatus) {
+      setData([
+        {
+          id: "1",
+          name: "Demo Item 1",
+          username: "790035342",
+          email: "demo@example.com",
         },
-      })
-      .then((res: any) => {
-        // Adjust depending on your API shape
-        const payload = res.payload || res.data || {};
-        const rows = payload.data || payload.rows || payload || [];
-        const meta =
-          payload.meta ||
-          res.meta || {
+        {
+          id: "2",
+          name: "Demo Item 2",
+          username: "788424973",
+          email: "demo@example.com",
+        },
+      ])
+    } else {
+      service
+        .get(dataApiEndpoint, {
+          params: {
+            ...formatGetFilters(inputs, filters),
             page: currentPage,
             capacity: pageSize,
-            count: Array.isArray(rows) ? rows.length : 0,
-            pagesCount: Array.isArray(rows)
-              ? Math.max(1, Math.ceil(rows.length / pageSize))
-              : 1,
-          };
+            search: search || undefined,
+            sortField,
+            sortDirection,
+          },
+        })
+        .then((res: any) => {
+          // Adjust depending on your API shape
+          const payload = res.payload || res.data || {};
+          const rows = payload.data || payload.rows || payload || [];
+          const meta =
+            payload.meta ||
+            res.meta || {
+              page: currentPage,
+              capacity: pageSize,
+              count: Array.isArray(rows) ? rows.length : 0,
+              pagesCount: Array.isArray(rows)
+                ? Math.max(1, Math.ceil(rows.length / pageSize))
+                : 1,
+            };
 
-        setData(rows);
-        setPaginationMeta({
-          page: meta.page || currentPage,
-          capacity: meta.capacity || pageSize,
-          count: meta.count || 0,
-          pagesCount: meta.pagesCount || 1,
-        });
-      })
-      .catch(apiCatchGlobalHandler);
+          setData(rows);
+          setPaginationMeta({
+            page: meta.page || currentPage,
+            capacity: meta.capacity || pageSize,
+            count: meta.count || 0,
+            pagesCount: meta.pagesCount || 1,
+          });
+        })
+        .catch(apiCatchGlobalHandler);
+    }
   };
 
   // refetch whenever these change
@@ -219,13 +235,13 @@ const ApiDataTable: React.FC<Props> = ({
     <div>
       {includeCreate && (
         <div className="text-end mb-3">
-          <button
-            className="btn btn-warning btn-sm"
+          <Button
+            className="btn btn-success"
             onClick={() => setModal({ action: "create", open: true, data: {} })}
           >
             <FontAwesomeIcon icon={faPlus} className="me-2" />
             {t("Global.Labels.CreateNew", { item: singleItem })}
-          </button>
+          </Button>
         </div>
       )}
 
@@ -264,17 +280,20 @@ const ApiDataTable: React.FC<Props> = ({
 
       <Modal
         title={modalTitle}
+        isOpen={modal.open}
         onClose={() => setModal({ open: false, data: {}, action: "view" })}
       >
         <Form
           inputs={() =>
             inputs.map((item) => ({
               ...item,
-              disabled: modal.action === "view" || item.name === "id",
+              disabled: modal.action === "view" || modal.action === "delete" || item.name === "id",
             }))
           }
           initialValues={modal.data}
-          onFormSubmit={onFormSubmit}
+          onFormSubmit={modal.action === "view" ? undefined : onFormSubmit}
+          submitText={modal.action === "delete" ? t("Global.Labels.Delete", { item: singleItem }) : undefined}
+          submitColor={modal.action === "delete" ? "danger" : modal.action === "update" ? "warning" : "success" }
         />
       </Modal>
     </div>

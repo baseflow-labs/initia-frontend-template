@@ -90,6 +90,7 @@ interface Props extends React.FormHTMLAttributes<HTMLFormElement> {
   onFormSubmit?: (values: any, reset: any) => void;
   inputs: (formik: FormikProps<Record<string, any>>) => InputProps[];
   submitText?: string;
+  submitColor?: string;
   initialValues?: object;
   customButtons?: React.ReactNode;
   customValidate?: (
@@ -121,6 +122,7 @@ const Form: React.FC<Props> = ({
   onFormSubmit,
   inputs,
   submitText,
+  submitColor,
   customButtons,
   initialValues,
   customValidate,
@@ -192,14 +194,9 @@ const Form: React.FC<Props> = ({
             }
 
             if (
-              !String(value).startsWith("50") &&
-              !String(value).startsWith("53") &&
-              !String(value).startsWith("54") &&
-              !String(value).startsWith("55") &&
-              !String(value).startsWith("56") &&
-              !String(value).startsWith("57") &&
-              !String(value).startsWith("58") &&
-              !String(value).startsWith("59")
+              !String(value).startsWith("77") &&
+              !String(value).startsWith("78") &&
+              !String(value).startsWith("79") 
             ) {
               errors[name] = t("Global.Form.Errors.InvalidPhoneNumber");
             }
@@ -359,7 +356,7 @@ const Form: React.FC<Props> = ({
 
                 return (
                   <div
-                    className={`mb-2 col-md-6`}
+                    className={`mb-2 ${input.name === 'fontSize' ? "col-md-12" : "col-md-6"}`}
                     key={i}
                   >
                     <LabelView required={required} {...input} />
@@ -470,22 +467,24 @@ const Form: React.FC<Props> = ({
 
         {customButtons}
 
-        <Button
-          type="submit"
-          disabled={loading.length > 0}
-          color="primary"
-          className={`w-${customButtons ? "50" : "100"} p-2`}
-        >
-          {loading.length > 0 ? (
-            <small>
-              <Spinner />
-            </small>
-          ) : (
-            <div className="my-auto">
-              {submitText || t("Global.Form.Labels.Submit")}
-            </div>
-          )}
-        </Button>
+        {onFormSubmit && (
+          <Button
+            type="submit"
+            disabled={loading.length > 0}
+            color={submitColor}
+            className={`w-${customButtons ? "50" : "100"} p-2`}
+          >
+            {loading.length > 0 ? (
+              <small>
+                <Spinner />
+              </small>
+            ) : (
+              <div className="my-auto">
+                {submitText || t("Global.Form.Labels.Submit")}
+              </div>
+            )}
+          </Button>
+        )}
       </FormikForm>
     </FormikProvider>
   );

@@ -16,6 +16,7 @@
   - color picker
   - toggle switch
   - slider
+  - rating stars
   - card-based / photo-based radio & checkbox
   - searchable & clearable select
   - nested form

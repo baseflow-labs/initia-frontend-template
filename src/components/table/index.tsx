@@ -6,6 +6,7 @@ import {
   faAnglesLeft,
   faAnglesRight,
   faDollar,
+  faEdit,
   faEllipsisVertical,
   faEnvelope,
   faEye,
@@ -16,6 +17,7 @@ import {
   faSortDown,
   faSortUp,
   faStar,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
@@ -499,7 +501,7 @@ const DynamicTable: React.FC<Props> = ({
                             <SpreadActionView
                               onClick={() => onRowClick(row, "update")}
                               label={t("Global.Form.Labels.Edit")}
-                              icon={faEnvelope}
+                              icon={faEdit}
                               color="warning"
                               row={row}
                             />
@@ -509,7 +511,7 @@ const DynamicTable: React.FC<Props> = ({
                             <SpreadActionView
                               onClick={() => onRowClick(row, "delete")}
                               label={t("Global.Form.Labels.Delete")}
-                              icon={faStar}
+                              icon={faTrash}
                               color="danger"
                               row={row}
                             />

@@ -91,24 +91,29 @@
         "BulkDataInsertion": {
           "Title": "Bulk Data Insertion"
         },
+        "Log": "Log",
         "Metadata": {
           "Title": "Metadata"
         },
+        "RolePermissions": "Role Permissions",
         "SystemLogger": {
           "Title": "System Logger"
         },
         "Title": "Admin Settings",
         "UserActivity": {
-          "Title": "User Activity"
+          "Title": "User Activity",
+          "UserActivity": "User Activity"
         },
         "UserRolePermissions": {
           "Title": "User Role Permissions"
         },
         "UserRoles": {
-          "Title": "User Roles"
+          "Title": "User Roles",
+          "UserRole": "User Role"
         },
         "Users": {
-          "Title": "Users"
+          "Title": "Users",
+          "User": "User"
         },
         "UsersView": {
           "Title": "Users View"
@@ -313,6 +318,7 @@
             }
           }
         },
+        "Ticket": "Ticket",
         "Title": "Tickets"
       },
       "Title": "Support Center",
@@ -330,6 +336,7 @@
       },
       "Name": "Name",
       "PhoneNumber": "Phone Number",
+      "SINGLE_ITEM_NAME": "SINGLE_ITEM_NAME",
       "Title": "TABLE_PLURAL_UPPER_NAME"
     },
     "TemplateExamples": {
@@ -382,7 +389,6 @@
         "Add": "Add",
         "AddFiles": "Add Files",
         "BrowserDontSupportLocation": "Browser Don't Support Location",
-        "CreateNew": "CreateNew",
         "Delete": "Delete",
         "Edit": "Edit",
         "Email": "Email",
@@ -407,6 +413,8 @@
       "Action": "Action",
       "All": "All",
       "Back": "Back",
+      "CreateNew": "Create New {{item}}",
+      "Delete": "Delete {{item",
       "DemoLoginNote": "You may login using any of mobile numbers below and password of 12345678",
       "DemoWarning": "Please be aware that this is a demo version, accessible by the public. So we advise against sharing any real data like name, ID number and the like. Please note that the data will be automatically reset everyday",
       "Details": "Details",
@@ -434,10 +442,16 @@
       "Showing": "Showing",
       "ThisWeek": "This Week",
       "Today": "Today",
+      "Update": "Update {{item}}",
+      "View": "View {{item}}",
       "WrongUrl": "Wrong Url",
       "YourOwn": "Your Own"
     },
     "Loading": "Loading",
+    "Notifications": {
+      "DemoMode": "Demo Mode",
+      "Successful": "Successful {{action}}"
+    },
     "Placeholders": {
       "Search": "Search..."
     }

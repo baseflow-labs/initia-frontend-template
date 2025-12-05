@@ -91,24 +91,29 @@
         "BulkDataInsertion": {
           "Title": "إدخال البيانات لأول مرة"
         },
+        "Log": "سجل النظام",
         "Metadata": {
           "Title": "هوية النظام"
         },
+        "RolePermissions": "صلاحيات الأدوار",
         "SystemLogger": {
           "Title": "سجل النظام"
         },
         "Title": "إعدادات مدير النظام",
         "UserActivity": {
-          "Title": "نشاط المستخدم"
+          "Title": "نشاط المستخدم",
+          "UserActivity": "نشاط مستخدم"
         },
         "UserRolePermissions": {
           "Title": "صلاحيات أدوار المستخدمين"
         },
         "UserRoles": {
-          "Title": "أدوار المستخدمين"
+          "Title": "أدوار المستخدمين",
+          "UserRole": "دور مستخدم"
         },
         "Users": {
-          "Title": "المستخدمون"
+          "Title": "المستخدمون",
+          "User": "مستخدم"
         },
         "UsersView": {
           "Title": "عرض المستخدمين"
@@ -313,6 +318,7 @@
             }
           }
         },
+        "Ticket": "تذكرة",
         "Title": "التذاكر"
       },
       "Title": "مركز الدعم",
@@ -330,6 +336,7 @@
       },
       "Name": "الاسم",
       "PhoneNumber": "رقم الهاتف",
+      "SINGLE_ITEM_NAME": "SINGLE_ITEM_NAME",
       "Title": "TABLE_PLURAL_UPPER_NAME"
     },
     "TemplateExamples": {
@@ -382,7 +389,6 @@
         "Add": "إضافة",
         "AddFiles": "إضافة ملفات",
         "BrowserDontSupportLocation": "المتصفح لا يدعم تحديد الموقع",
-        "CreateNew": "إنشاء جديد",
         "Delete": "حذف",
         "Edit": "تعديل",
         "Email": "البريد الإلكتروني",
@@ -407,6 +413,8 @@
       "Action": "إجراء",
       "All": "الكل",
       "Back": "رجوع",
+      "CreateNew": "إنشاء {{item}} جديد",
+      "Delete": "حذف {{item}}",
       "DemoLoginNote": "يمكنك تسجيل الدخول باستخدام أي من أرقام الجوال أدناه وكلمة المرور 12345678",
       "DemoWarning": "يرجى الانتباه إلى أن هذا إصدار تجريبي متاح للجميع، لذلك نوصي بعدم مشاركة أي بيانات حقيقية مثل الاسم أو رقم الهوية وما شابه. سيتم إعادة تعيين البيانات تلقائياً كل يوم.",
       "Details": "التفاصيل",
@@ -434,10 +442,16 @@
       "Showing": "عرض",
       "ThisWeek": "هذا الأسبوع",
       "Today": "اليوم",
+      "Update": "تعديل {{item}}",
+      "View": "عرض {{item}}",
       "WrongUrl": "رابط غير صحيح",
       "YourOwn": "الخاصة بك"
     },
     "Loading": "جاري التحميل",
+    "Notifications": {
+      "DemoMode": "وضع العرض التجريبي",
+      "Successful": "تم بنجاح {{action}}"
+    },
     "Placeholders": {
       "Search": "بحث..."
     }
