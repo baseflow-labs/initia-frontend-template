@@ -2,16 +2,76 @@
 
 ## To Do
 
-- Build Fixed Example Page
-- Build Fixed Views of
-  - User Profile
-  - Settings & Support Page
-  - Dashboard
 - Add Token Refresh to Auth API Setup
 - Build Dynamic Access Roles (API Integration)
 - Centralize identity control (theme color, logo ,name)
 - Fix changelog generating script
 - Update documentation (read me, commit convention)
+- Split localization files into smaller chunks
+- wrap with vite / turbo-back
+- build analysis tools integration prep
+- build form various input types
+  - rich text editor
+  - google maps picker
+  - color picker
+  - toggle switch
+  - slider
+  - card-based / photo-based radio & checkbox
+  - searchable & clearable select
+  - nested form
+- build form wizard
+- build datatable with ...
+  - actions column (standard + custom)
+  - auto handle of sub-props
+  - server side pagination / infinite scroll
+  - server side sorting
+  - server side filtering
+  - server side search
+  - column visibility control (show / hide + re-order)
+  - export with customization to csv, excel, pdf
+  - row selection (bulk actions)
+  - responsiveness to cards view
+  - details panel option
+  - column custom cell rendering (badges, progress, boolean, select, avatar, type-based)
+  - grouping option
+  - fixed header & footer
+  - record duplicates option
+  - export template & import
+  - data localization support
+  - width control
+- build initial next.js landing page templates
+- build initial dashboard contents
+  - Non-Admin
+    - Account Info
+    - Calendar
+    - Chat
+    - Notifications
+  - Admin
+    - Users stats & list
+    - System health
+    - System reviews
+    - Subscriptions
+  - Template-based dashboards
+    - e-Commerce
+    - Marketplace / 3rd party sellers
+    - Delivery
+    - Ride Hailing
+    - Booking system (venue, tickets, events, appointments)
+    - e-Learning
+    - Telemedicine
+    - Real estate listing
+    - Community / Social
+    - Personal Financials
+    - Project Management
+    - CRM
+    - Recruiting platform
+    - HRMS
+    - News portal
+    - Personal-portfolio
+    - SIS
+    - Encyclopedia
+- build dark / light mode, color themes switcher, horizontal / vertical layout switcher, boxed / full-width layout switcher
+- Build technical & business documentation 
 
 ## 🚀 Getting Started
 

@@ -1,4 +1,4 @@
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useField } from "formik";
 import React from "react";
@@ -6,8 +6,6 @@ import { useTranslation } from "react-i18next";
 import Select, { components, MultiValue, StylesConfig } from "react-select";
 
 import { InputProps } from "..";
-import { deleteIcon } from "../../../assets/icons/icons";
-import IconWrapperComp from "../../../assets/icons/wrapper";
 
 interface OptionType {
   value: string;
@@ -48,7 +46,7 @@ const SelectManyInput: React.FC<SelectManyInputProps> = ({
     <components.DropdownIndicator {...props}>
       <div
         style={{
-          backgroundColor: "var(--bs-info)",
+          backgroundColor: "var(--bs-primary)",
           borderRadius: "20%",
           padding: "5px",
           display: "flex",
@@ -77,7 +75,7 @@ const SelectManyInput: React.FC<SelectManyInputProps> = ({
           fontSize: 8,
         }}
       >
-        <IconWrapperComp icon={deleteIcon} />
+        <FontAwesomeIcon icon={faTrash} />
       </div>
     </components.MultiValueRemove>
   );
@@ -89,13 +87,13 @@ const SelectManyInput: React.FC<SelectManyInputProps> = ({
       borderRadius: 7,
       boxShadow: "none",
       "&:hover": {
-        borderColor: "var(--bs-info)",
+        borderColor: "var(--bs-primary)",
       },
     }),
     multiValue: (base) => ({
       ...base,
       backgroundColor: "transparent",
-      border: `1px solid var(--bs-info)`,
+      border: `1px solid var(--bs-primary)`,
       borderRadius: 6,
       padding: "2px 4px",
       display: "flex",
@@ -103,7 +101,7 @@ const SelectManyInput: React.FC<SelectManyInputProps> = ({
     }),
     multiValueLabel: (base) => ({
       ...base,
-      color: "var(--bs-info)",
+      color: "var(--bs-primary)",
       padding: 0,
       margin: "auto 4px",
     }),

@@ -20,7 +20,7 @@ const BelowInputButton = ({
         <span
           role="button"
           onClick={route ? () => navigate(route) : action}
-          className="text-decoration-underline text-info"
+          className="text-decoration-underline text-primary"
         >
           {buttonText}
         </span>

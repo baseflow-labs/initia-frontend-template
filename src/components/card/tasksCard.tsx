@@ -47,7 +47,7 @@ const TasksCard = ({ label, tasks }: Props) => {
               </td>
 
               <td className="text-end">
-                <Button route={route} color="info">
+                <Button route={route} color="primary">
                   {t("Global.Labels.Details")}
                 </Button>
               </td>

@@ -60,7 +60,7 @@ const UsersCard = ({ label, researchers }: Props) => {
                       <h5>{name}</h5>
 
                       <div className="text-secondary">
-                        {usersCount} {t("Auth.Users.Users")}
+                        {usersCount} {t("Auth.Users.Title")}
                       </div>
                     </div>
                   </div>

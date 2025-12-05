@@ -1,3 +1,5 @@
+import { faFilter } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   FormikErrors,
   Form as FormikForm,
@@ -8,8 +10,6 @@ import {
 import React, { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 
-import { resetFilterIcon } from "../../assets/icons/icons";
-import IconWrapperComp from "../../assets/icons/wrapper";
 import { useAppSelector } from "../../store/hooks";
 import Button from "../core/button";
 import Spinner from "../core/spinner";
@@ -322,7 +322,7 @@ const Form: React.FC<Props> = ({
                       <div className="col-md-6 mb-3">
                         <button
                           type="button"
-                          className="btn btn-outline-success p-2 w-100 rounded-3 no-interaction"
+                          className="btn btn-outline-dark p-2 w-100 rounded-3 no-interaction"
                         >
                           <img
                             alt={`${input.name}Logo`}
@@ -398,8 +398,8 @@ const Form: React.FC<Props> = ({
                           <InlineElement
                             flip
                             content={
-                              <IconWrapperComp
-                                icon={resetFilterIcon}
+                              <FontAwesomeIcon
+                                icon={faFilter}
                                 role="button"
                                 onClick={() =>
                                   formik.setFieldValue(
@@ -475,7 +475,7 @@ const Form: React.FC<Props> = ({
         <Button
           type="submit"
           disabled={loading.length > 0}
-          color="info"
+          color="primary"
           className={`w-${customButtons ? "50" : "100"} p-2`}
         >
           {loading.length > 0 ? (

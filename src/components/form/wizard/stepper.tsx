@@ -70,7 +70,7 @@ const WizardFormStepper = ({ steps, currentStep, setCurrentStep }: Props) => {
         </div>
       )}
 
-      <span className="d-block d-lg-none text-info text-center mt-4">
+      <span className="d-block d-lg-none text-primary text-center mt-4">
         {steps[currentStep]?.label}
       </span>
 

@@ -1,14 +1,10 @@
-import {
-  faChevronLeft,
-  faChevronRight,
-} from "@fortawesome/free-solid-svg-icons";
+import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
 
-import IconWrapperComp from "../../../assets/icons/wrapper";
-import LogoOnly from "../../../assets/images/brand/logo-only.png";
+import tempLogo from "../../../assets/images/brand/logo.png";
 import { useAppSelector } from "../../../store/hooks";
 import CopyRightView from "../../common/copyright";
 
@@ -49,11 +45,7 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
       >
         <div className="p-4 text-center">
           <img
-            src={
-              collapsed
-                ? LogoOnly
-                : process.env.REACT_APP_STORAGE_DIRECTORY_URL + logo
-            }
+            src={logo || tempLogo}
             style={{ height: "70px" }}
             alt="Logo"
           />
@@ -65,7 +57,7 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
               <h5
                 className={`sidebar-link text-decoration-none p-3 rounded-3 ${
                   location.pathname.includes(route)
-                    ? "bg-info text-white"
+                    ? "bg-primary text-white"
                     : "text-dark"
                 }`}
                 role="button"
@@ -73,7 +65,7 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
                   navigate(route);
                 }}
               >
-                <IconWrapperComp icon={icon} className="me-2" />
+                <FontAwesomeIcon icon={icon} className="me-2" />
                 {!collapsed && (
                   <span>
                     {name}
@@ -114,7 +106,7 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
               key={i}
               className={`sidebar-link text-decoration-none p-3 rounded-3 ${
                 location.pathname.includes(route)
-                  ? "bg-info text-white"
+                  ? "bg-primary text-white"
                   : "text-dark"
               }`}
               role="button"
@@ -122,7 +114,7 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
                 navigate(route);
               }}
             >
-              <IconWrapperComp icon={icon} className="me-2" />
+              <FontAwesomeIcon icon={icon} className="me-2" />
               {!collapsed && <span>{name}</span>}
             </h5>
           ))}

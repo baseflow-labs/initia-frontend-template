@@ -1,243 +1,519 @@
 {
   "Auth": {
-    "Users": {
-      "Users": "مستفيدون",
-      "DeleteAll": "حذف بيانات كل المستفيدين والتابعين",
-      "Profile": {
-        "DeleteData": "حذف بيانات الحساب",
-        "SureToDeleteData": "هل أنت متأكد؟"
-      },
-      "UnacceptedNote": "يرجى الانتظار لحين قبول طلبكم للعضوية في النظام لتتمكنوا من الاستفادة من الخدمة"
-    },
     "ContactUs": {
       "Title": "تواصل معنا"
     },
     "Dashboard": {
-      "AidsCount": "عدد المعونات",
-      "ApplicationTimeline": "تسلسل الطلب",
-      "UserInfo": "معلوماتك",
-      "UserMembershipStatus": "حالة عضويتكم الآن في النظام",
-      "ImportantNotifications": "الإشعارات الهامة",
+      "AidsCount": "عدد المساعدات",
+      "ApplicationTimeline": "الجدول الزمني للطلبات",
+      "ImportantNotifications": "الإشعارات المهمة",
       "Main": "الرئيسية",
-      "NoVisits": "لا يوجد زيارات مجدولة",
+      "NoVisits": "لا توجد زيارات مجدولة",
       "ResearcherInfo": "معلومات الباحث",
       "Statuses": {
-        "Pending": "Auth.Dashboard.Statuses.Pending"
+        "Pending": "قيد الانتظار"
       },
       "Title": "نظرة عامة",
-      "UnacceptedUserNote": "قد يكون مطلوب منكم تعديل بعض بياناتكم الشخصية في تبويب 'معلوماتي'",
+      "UnacceptedUserNote": "قد تكون هناك طلبات لتحديث بياناتك الشخصية في صفحة «الملف الشخصي»",
+      "UserInfo": "معلوماتك",
+      "UserMembershipStatus": "حالة عضويتك",
       "VisitsCount": "عدد الزيارات",
       "VisitsMap": "خريطة الزيارات",
-      "Welcome": "أهلاً بكم"
+      "Welcome": "مرحباً"
+    },
+    "Messaging": {
+      "Chats": "المحادثات",
+      "SearchChatsOrMessages": "ابحث في المحادثات أو الرسائل",
+      "Send": "إرسال",
+      "Status": {
+        "Online": "متصل"
+      },
+      "Title": "الرسائل",
+      "TypeAMessage": "اكتب رسالة"
+    },
+    "Notifications": {
+      "AllNotifications": "جميع الإشعارات",
+      "Empty": {
+        "Badge": "الشارة",
+        "Body": "النص",
+        "Title": "فارغ"
+      },
+      "Filters": {
+        "All": "الكل",
+        "Important": "مهم",
+        "Unread": "غير مقروء"
+      },
+      "LoadMore": "تحميل المزيد",
+      "MarkAllRead": "اعتبار الكل مقروءاً",
+      "NoNotifications": "لا توجد إشعارات",
+      "Refresh": "تحديث",
+      "SearchPlaceholder": "بحث...",
+      "Title": "الإشعارات",
+      "Unread": "غير مقروءة"
+    },
+    "Profile": {
+      "About": "نبذة",
+      "Connect": "اتصال",
+      "Connections": "جهات الاتصال",
+      "Contact": "تواصل",
+      "Contacts": "جهات الاتصال",
+      "Country": "الدولة",
+      "Email": "البريد الإلكتروني",
+      "FullName": "الاسم الكامل",
+      "Languages": "اللغات",
+      "Overview": "نظرة عامة",
+      "Projects": {
+        "Leader": "القائد",
+        "Progress": "التقدم",
+        "Status": "الحالة",
+        "Team": "الفريق",
+        "Title": "المشاريع"
+      },
+      "Role": "الدور",
+      "ShareConnections": "مشاركة جهات الاتصال",
+      "ShareProfile": "مشاركة الملف الشخصي",
+      "ShareTimeline": "مشاركة المخطط الزمني",
+      "Skype": "سكايب",
+      "Stats": {
+        "Connections": "جهات الاتصال",
+        "Projects": "المشاريع",
+        "Tasks": "المهام"
+      },
+      "Status": "الحالة",
+      "SuggestEdits": "اقتراح تعديلات",
+      "Teams": {
+        "Title": "الفرق"
+      },
+      "TeamsShort": "الفرق",
+      "Timeline": "الجدول الزمني",
+      "Title": "الملف الشخصي",
+      "ViewAllConnections": "عرض جميع جهات الاتصال",
+      "ViewProfile": "عرض الملف الشخصي"
     },
     "Settings": {
-      "AppLogo": "شعار النظام",
-      "AppName": "اسم النظام",
-      "AppPhoneNumber": "رقم الهاتف لادارة النظام",
-      "AppPhoneNumberNote": "هذا الرقم سيظهر في صفحة 'تواصل معنا' للمستفيدين",
-      "BulkDataInsertion": {
-        "AllowedFileTypes": "يمكن تحميل ملفات اكسل المصدرة من نظام 'رافد' حصراً",
-        "UsersData": "بيانات المستفيدين",
-        "UsersDataTemplate": "تحميل نموذج بيانات المستفيدين",
-        "DependentsData": "بيانات التابعين",
-        "DependentsDataTemplate": "تحميل نموذج بيانات التابعين",
-        "PleaseCheck": {
-          "Clarification": "وذلك نظرًا لوجود بعض المشاكل في الملفات المصدّرة من نظام 'رافد', مثل:",
-          "DataReviewWarningContent": "سيتم استيراد جميع الملفات للمستفيدين كطلبات تسجيل في حالة 'طلب غير مكتمل', لإتاحة الإمكانية للمستفيدين لتدقيق ملفاتهم والتأكد من صحة البيانات, قبل التدقيق والتأكد من قبل الباحثيين الاجتماعيين أيضاً.",
-          "Eg1": "عدم تطابق العناوين (رؤوس الأعمدة) مع البيانات الموجودة تحتها.",
-          "Eg2": "شكل البيانات غير صحيح, حيث يصدر نظام 'رافد' التواريخ الرقمية أحياناً كتاريخ الميلاد أو تاريخ انتهاء الهوية في صيغة خاطئة.",
-          "Eg3": "احتمالية وجود بيانات ناقصة أو غير صحيحة.",
-          "Eg4": "وجود تكرار في بيانات يجب أن تكون غير مكررة لدى المستفيدين أو تابعيهم. وتشمل البيانات: رقم الجوال للمستفيد, رقم الهوية للمستفيد أو التابع.",
-          "Highlight": "الرجاء التأكد بعناية من صحة ودقة البيانات المستوردة من نظام 'رافد' قبل إدخالها في نظامنا.",
-          "WarningContent": "أي بيانات يتم استيرادها بشكل غير صحيح قد تؤدي إلى أخطاء في النظام أو معلومات مضللة, أو قد لا يتم استيرادها إلى النظام. لذا يُرجى مراجعة الملف والتأكد من النقاط أعلاه قبل الاستيراد.",
-          "WarningTitle": "⚠️ تنبيه مهم"
+      "Admin": {
+        "BulkDataInsertion": {
+          "Title": "إدخال البيانات لأول مرة"
         },
-        "Title": "إدخال البيانات القديمة للنظام"
+        "Metadata": {
+          "Title": "هويةالنظام"
+        },
+        "SystemLogger": {
+          "Title": "سجل النظام"
+        },
+        "Title": "إعدادات مدير النظام",
+        "UserActivity": {
+          "Title": "نشاط المستخدم"
+        },
+        "UserRolePermissions": {
+          "Title": "صلاحيات أدوار المستخدمين"
+        },
+        "UserRoles": {
+          "Title": "أدوار المستخدمين"
+        },
+        "Users": {
+          "Title": "المستخدمون"
+        },
+        "UsersView": {
+          "Title": "عرض المستخدمين"
+        }
       },
-      "FontSize": "حجم الخط للتطبيق",
-      "Metadata": {
-        "Title": "إعدادات هوية النظام"
-      },
-      "PasswordReset": {
-        "Title": "إعادة ضبط كلمة السر"
-      },
+      "FontSize": "حجم الخط",
       "Samples": {
-        "H3Sample": "عينة عنوان رئيسيي",
-        "H4Sample": "عينة عنوان فرعي",
-        "H5Sample": "عينة روابط الصفحات",
-        "LabelSample": "عينة عنوان لحقل ادخال",
-        "SmallSample": " عينة ملاحظات",
-        "Title": "عينات"
+        "H3Sample": "عينة عنوان H3",
+        "H4Sample": "عينة عنوان H4",
+        "H5Sample": "عينة عنوان H5",
+        "LabelSample": "عينة تسمية",
+        "SmallSample": "عينة نص صغير",
+        "Title": "عينات النصوص"
       },
-      "System": {
-        "Title": "إعدادات النظام"
+      "User": {
+        "Account": {
+          "Avatar": "الصورة الشخصية",
+          "AvatarHint": "تلميح الصورة الشخصية",
+          "ChangeAvatar": "تغيير الصورة الشخصية",
+          "Company": "الشركة",
+          "Country": "الدولة",
+          "Email": "البريد الإلكتروني",
+          "FullName": "الاسم الكامل",
+          "JobTitle": "المسمى الوظيفي",
+          "Language": "اللغة",
+          "Phone": "رقم الهاتف",
+          "ResetAvatar": "إرجاع الصورة الافتراضية",
+          "Title": "الحساب",
+          "Username": "اسم المستخدم"
+        },
+        "Billing": {
+          "AvailablePlans": "الباقات المتاحة",
+          "AvailablePlansDescription": "وصف الباقات المتاحة",
+          "CancelSubscription": "إلغاء الاشتراك",
+          "ChangePlan": "تغيير الباقة",
+          "ContactUs": "تواصل معنا",
+          "Current": "الحالية",
+          "CurrentPlan": "الباقة الحالية",
+          "Projects_few": "مشاريع",
+          "Projects_many": "مشاريع",
+          "Projects_one": "مشروع",
+          "Projects_other": "مشاريع",
+          "Projects_two": "مشروعان",
+          "Projects_zero": "لا مشاريع",
+          "Renewal": "تجديد الاشتراك",
+          "Seats_few": "مقاعد",
+          "Seats_many": "مقاعد",
+          "Seats_one": "مقعد",
+          "Seats_other": "مقاعد",
+          "Seats_two": "مقعدان",
+          "Seats_zero": "لا مقاعد",
+          "Select": "اختر",
+          "Title": "الفوترة"
+        },
+        "Connections": {
+          "Connect": "ربط",
+          "Description": "الوصف",
+          "Disconnect": "إلغاء الربط",
+          "GitHub": {
+            "Description": "الوصف",
+            "Title": "GitHub"
+          },
+          "Google": {
+            "Description": "الوصف",
+            "Title": "Google"
+          },
+          "LastSync": "آخر مزامنة",
+          "Slack": {
+            "Description": "الوصف",
+            "Title": "Slack"
+          },
+          "StatusConnected": "مرتبط",
+          "StatusNotConnected": "غير مرتبط",
+          "Title": "الاتصالات"
+        },
+        "Notifications": {
+          "Description": "الوصف",
+          "Title": "الإشعارات",
+          "TypeHeader": "نوع الإشعار"
+        },
+        "Security": {
+          "Title": "الأمان"
+        },
+        "System": {
+          "Title": "النظام"
+        },
+        "Title": "إعدادات المستخدم"
+      }
+    },
+    "SupportCenter": {
+      "ContactUs": {
+        "BusinessHours": {
+          "Description": "وصف ساعات العمل",
+          "Title": "ساعات العمل"
+        },
+        "CallUs": {
+          "Description": "وصف الاتصال بنا",
+          "Title": "اتصل بنا"
+        },
+        "ConnectWithUs": {
+          "Description": "وصف طرق التواصل",
+          "Title": "تواصل معنا"
+        },
+        "Description": "وصف صفحة التواصل",
+        "EmailUs": {
+          "Description": "وصف البريد الإلكتروني",
+          "Title": "راسلنا بالبريد الإلكتروني"
+        },
+        "OfficeHours": {
+          "Title": "ساعات الدوام"
+        },
+        "OurLocation": {
+          "Title": "موقعنا"
+        },
+        "SendMessage": {
+          "Title": "إرسال رسالة"
+        },
+        "Title": "تواصل معنا",
+        "VisitUs": {
+          "Description": "وصف الزيارة",
+          "Title": "قم بزيارتنا"
+        }
       },
-      "Title": "الإعدادات"
+      "FAQ": {
+        "CheckFaq": "تصفّح الأسئلة الشائعة",
+        "DidNotFindWhatYouAreLookingFor": "لم تجد ما تبحث عنه؟",
+        "NoFAQsFound": "لا توجد أسئلة شائعة",
+        "SearchPlaceholder": "بحث...",
+        "Title": "الأسئلة الشائعة"
+      },
+      "Faq": {
+        "Description": "وصف الأسئلة الشائعة",
+        "Title": "الأسئلة الشائعة"
+      },
+      "KnowledgeBase": {
+        "AccountPassword": {
+          "Title": "حساب وكلمة المرور"
+        },
+        "AccountSettings": {
+          "Title": "إعدادات الحساب"
+        },
+        "GettingStarted": {
+          "Title": "البدء"
+        },
+        "Title": "قاعدة المعرفة"
+      },
+      "QuickAccess": {
+        "Title": "وصول سريع"
+      },
+      "StillNeedHelp": {
+        "Description": "وصف الحاجة للمساعدة",
+        "Title": "ما زلت تحتاج مساعدة؟"
+      },
+      "SubmitTicket": {
+        "Title": "إرسال تذكرة"
+      },
+      "Tickets": {
+        "BeforeSubmitting": "قبل إرسال التذكرة",
+        "Description": "وصف التذاكر",
+        "MyTickets": {
+          "Table": {
+            "Column1": "العمود 1",
+            "Column2": "العمود 2",
+            "Column3": "العمود 3",
+            "Column4": "العمود 4",
+            "Column5": "العمود 5",
+            "Column6": "العمود 6",
+            "Column7": "العمود 7"
+          },
+          "Title": "تذاكري"
+        },
+        "SubmitNewTicket": {
+          "Title": "إرسال تذكرة جديدة"
+        },
+        "SubmitTicket": {
+          "Form": {
+            "Attachment": {
+              "Label": "مرفق",
+              "Placeholder": "اختر ملفاً"
+            },
+            "Category": {
+              "Label": "الفئة",
+              "Option1": "خيار 1",
+              "Option2": "خيار 2",
+              "Option3": "خيار 3",
+              "Placeholder": "اختر الفئة"
+            },
+            "Description": {
+              "Label": "الوصف",
+              "Placeholder": "اكتب وصف المشكلة أو الطلب"
+            },
+            "Priority": {
+              "Label": "الأولوية",
+              "OptionHigh": "عالية",
+              "OptionLow": "منخفضة",
+              "OptionMedium": "متوسطة",
+              "Placeholder": "اختر أولوية"
+            },
+            "Subject": {
+              "Label": "الموضوع",
+              "Placeholder": "اكتب عنواناً مناسباً"
+            }
+          }
+        },
+        "Title": "التذاكر"
+      },
+      "Title": "مركز الدعم",
+      "UserManual": {
+        "Contents": "المحتويات",
+        "Description": "وصف دليل المستخدم",
+        "DownloadManual": "تحميل الدليل",
+        "ReviewUserManual": "استعراض دليل المستخدم",
+        "Title": "دليل المستخدم"
+      }
+    },
+    "TABLE_PLURAL_UPPER_NAME": {
+      "Labels": {
+        "Email": "البريد الإلكتروني"
+      },
+      "Name": "الاسم",
+      "PhoneNumber": "رقم الهاتف",
+      "Title": "TABLE_PLURAL_UPPER_NAME"
+    },
+    "TemplateExamples": {
+      "DataView": {
+        "Title": "عرض البيانات"
+      },
+      "Forms": {
+        "Title": "النماذج"
+      }
+    },
+    "UserSettings": {
+      "Title": "إعدادات المستخدم"
     },
     "Users": {
       "Name": "الاسم",
+      "Profile": {
+        "DeleteData": "حذف البيانات",
+        "SureToDeleteData": "هل أنت متأكد من حذف البيانات؟"
+      },
       "Role": "الدور",
-      "Title": "إدارة المستخدمين"
+      "Title": "المستخدمون"
     }
   },
   "Common": {
-    "Edit": "Common.Edit"
+    "Edit": "تعديل"
   },
   "CopyRight": {
     "AllRightsReserved": "جميع الحقوق محفوظة © {{year}}",
-    "AppName": "نظام",
-    "ShaiShort": "Shai"
+    "AppName": "AppNest",
+    "BuilderShort": "AlembicSoft"
   },
   "Global": {
     "Form": {
-      "CantDoIt": "لا يمكن القيام بهذا الإجراء",
+      "CantDoIt": "لا يمكن تنفيذ ذلك",
       "Errors": {
-        "FileTooLarge": "حجم الملف أكبر من المسموح به: {{max}} ميجا بيكسل",
-        "InvalidEmail": "بريد إلكتروني غير صالح",
+        "FileTooLarge": "بعض الملفات تتجاوز الحد المسموح ({{max}} م.ب).",
+        "InvalidEmail": "صيغة البريد الإلكتروني غير صحيحة",
         "InvalidNumber": "رقم غير صالح",
-        "InvalidPhoneNumber": "رقم جوال غير صحيح, يجب أن يكون الرقم على النحو التالي: 539886868",
-        "Max": "القيمة القصوى المسموحة هي",
+        "InvalidPhoneNumber": "صيغة رقم الهاتف غير صحيحة",
+        "Max": "أقصى قيمة مسموحة هي",
         "MaxLength": "أقصى طول مسموح هو",
-        "Min": "القيمة الدنيا المسموحة هي",
+        "Min": "أقل قيمة مسموحة هي",
         "MinLength": "أقل طول مسموح هو",
-        "PasswordMatch": "كلمة السر غير متطابقة",
-        "PhoneNumberLength": "طول رقم الجوال غير صحيح",
-        "Required": "إلزامي",
-        "UploadFailed": "فشل التحميل, نرجو إعادة المحاولة"
-      },
-      "Label": {
-        "Email": "البريد الإلكتروني"
+        "PasswordMatch": "كلمة المرور والتأكيد غير متطابقين",
+        "PhoneNumberLength": "طول رقم الهاتف غير صحيح",
+        "Required": "حقل مطلوب",
+        "UploadFailed": "فشل في رفع الملفات، يرجى المحاولة مرة أخرى"
       },
       "Labels": {
         "Add": "إضافة",
-        "AddFiles": "إضافة مرفقات",
-        "BrowserDontSupportLocation": "المتصفح لا يدعم تحديد الموقع, نرجو إدخاله بشكل يدوي",
-        "CreateNew": "Global.Form.Labels.CreateNew",
+        "AddFiles": "إضافة ملفات",
+        "BrowserDontSupportLocation": "المتصفح لا يدعم تحديد الموقع",
+        "CreateNew": "إنشاء جديد",
         "Delete": "حذف",
         "Edit": "تعديل",
-        "FilesMaxReached": "بلغت الحد الأقصى",
-        "Location": "Google Map رابط",
+        "Email": "البريد الإلكتروني",
+        "FilesMaxReached": "تم الوصول للحد الأقصى للملفات",
+        "Location": "الموقع",
         "No": "لا",
-        "NoOptions": "لا يوجد خيارات",
+        "NoOptions": "لا توجد خيارات",
         "PickDate": "اختر التاريخ",
-        "PleaseAllowLocation": "لم نتمكن من تحديد موقعك. الرجاء السماح بالوصول",
-        "PleaseSelect": "نرجو الاختيار...",
+        "PleaseAllowLocation": "يرجى السماح بالوصول للموقع",
+        "PleaseSelect": "يرجى الاختيار",
         "Save": "حفظ",
         "Submit": "إرسال",
-        "UnAvailableForDemoMode": "غير متاح في نسخة العرض",
-        "Update": "التحديث",
-        "Upload": "التحميل",
-        "View": "Global.Form.Labels.View",
-        "ViewLocation": "استعرض الموقع",
+        "UnAvailableForDemoMode": "غير متاح في وضع التجربة",
+        "Update": "تحديث",
+        "View": "عرض",
+        "ViewLocation": "عرض الموقع",
         "Yes": "نعم"
       },
-      "SuccessMsg": "تم {{action}} لـ {{data}} بنجاح"
+      "SuccessMsg": "تم {{action}} بيانات {{data}} بنجاح"
     },
     "Labels": {
       "Action": "إجراء",
       "All": "الكل",
-      "Back": "عودة",
-      "DemoLoginNote": "بإمكانك تسجيل الدخول بأي من أرقام الهاتف الجوال أدناه وكلمة السر 12345678",
-      "DemoWarning": "نرجو الانتباه أن هذه النسخة الخاصة بالعرض متاح الوصول إليها للجميع, لذا ننصح بعدم مشاركة أي بيانات حقيقية مثل الاسم أو رقم البطاقة أو ما سواها. كما نرجو أخذ العلم بأن البيانات سيتم إعادة ضبطها آلياً كل يوم",
+      "Back": "رجوع",
+      "DemoLoginNote": "يمكنك تسجيل الدخول باستخدام أي من أرقام الجوال أدناه وكلمة المرور 12345678",
+      "DemoWarning": "يرجى الانتباه إلى أن هذا إصدار تجريبي متاح للجميع، لذلك نوصي بعدم مشاركة أي بيانات حقيقية مثل الاسم أو رقم الهوية وما شابه. سيتم إعادة تعيين البيانات تلقائياً كل يوم.",
       "Details": "التفاصيل",
-      "Download": "تحميل الملف",
-      "FileCantBeReviewed": "لا يمكن عرض الملف",
-      "Logout": "خروج",
-      "NoData": "عذراً, لا يوجد بيانات للعرض",
-      "NoNotifications": "لا يوجد إشعارات",
+      "Download": "تحميل",
+      "FileCantBeReviewed": "لا يمكن معاينة الملف",
+      "Logout": "تسجيل الخروج",
+      "More": "المزيد",
+      "NoData": "لا توجد بيانات",
+      "NoNotifications": "لا توجد إشعارات",
       "Of": "من",
       "PageNo": "رقم الصفحة",
       "PageSize": "حجم الصفحة",
-      "PhoneNumber": "رقم الجوال",
-      "Results": "نتائج",
+      "PhoneNumber": "رقم الهاتف",
+      "Results": "النتائج",
       "Roles": {
-        "accountant": "مدير مالي",
+        "accountant": "محاسب",
         "admin": "مدير النظام",
-        "applicant": "متقدم بطلب تسجيل",
-        "user": "مستفيد",
-        "ceo": "مدير / رئيس",
-        "hod": "مدير الباحثين",
-        "researcher": "باحث اجتماعي"
+        "applicant": "مُتقدِّم",
+        "ceo": "المدير التنفيذي",
+        "hod": "رئيس القسم",
+        "researcher": "باحث",
+        "user": "مستخدم"
       },
       "Search": "بحث",
       "Showing": "عرض",
       "ThisWeek": "هذا الأسبوع",
-      "Today": "هذا اليوم",
-      "WrongUrl": "عذراً, العنوان المطلوب خاطئ",
-      "YourOwn": "الخاص بكم"
+      "Today": "اليوم",
+      "WrongUrl": "رابط غير صحيح",
+      "YourOwn": "الخاصة بك"
     },
+    "Loading": "جاري التحميل",
     "Placeholders": {
-      "Search": "Global.Placeholders.Search"
+      "Search": "بحث..."
     }
   },
   "Public": {
     "ForgotPassword": {
       "GotOtp": {
-        "Title": "استلام رمز التحقق OTP"
+        "Title": "هل وصلك رمز التحقق؟"
       },
       "ResetPassword": {
-        "NewPassword": "كلمة السر الجديدة",
-        "NewPasswordConfirmation": "تأكيد كلمة السر الجديدة",
-        "OldPassword": "كلمة السر الحالية",
-        "ResetPassword": "إعادة تعيين كلمة السر",
-        "Title": "إعادة تعيين كلمة السر"
+        "NewPassword": "كلمة المرور الجديدة",
+        "NewPasswordConfirmation": "تأكيد كلمة المرور الجديدة",
+        "OldPassword": "كلمة المرور الحالية",
+        "ResetPassword": "إعادة تعيين كلمة المرور",
+        "Title": "إعادة تعيين كلمة المرور"
       },
       "SendOtp": {
-        "ConfirmOTP": "تأكيد رمز التحقق OTP",
+        "ConfirmOTP": "تأكيد رمز التحقق",
         "SendOtp": "إرسال رمز التحقق"
       },
-      "Title": "نسيت كلمة السر"
+      "Title": "نسيت كلمة المرور"
     },
     "Login": {
       "Labels": {
-        "DidUForgotPassword": "هل نسيت كلمة السر؟",
+        "DidUForgotPassword": "هل نسيت كلمة المرور؟",
         "Login": "تسجيل الدخول",
-        "LoginAsAccountant": "تسجيل الدخول كمدير مالي",
-        "LoginAsAdmin": "تسجيل الدخول كمدير النظام",
-        "LoginAsApplicant": "تسجيل الدخول كمتقدم بطلب تسجيل ",
-        "LoginAsUser": "تسجيل الدخول كمستفيد مسجل بالنظام",
+        "LoginAsAccountant": "تسجيل الدخول كمحاسب",
+        "LoginAsAdmin": "تسجيل الدخول كمدير نظام",
+        "LoginAsApplicant": "تسجيل الدخول كمُتقدِّم",
         "LoginAsCeo": "تسجيل الدخول كمدير تنفيذي",
-        "LoginAsCommitteeHead": "تسجيل الدخول كرئيس لجنة",
-        "LoginAsHod": "تسجيل الدخول كمدير للباحثين",
-        "LoginAsResearcher": "تسجيل الدخول كباحث اجتماعي",
-        "Password": "كلمة السر",
+        "LoginAsCommitteeHead": "تسجيل الدخول كرئيس لجنة المساعدات",
+        "LoginAsHod": "تسجيل الدخول كمشرف الباحثين",
+        "LoginAsResearcher": "تسجيل الدخول كباحث",
+        "LoginAsUser": "تسجيل الدخول كمستخدم",
+        "Password": "كلمة المرور",
         "PhoneNo": "رقم الجوال",
-        "Success": "أهلاً بكم مجدداً {{name}}"
+        "Success": "تم تسجيل الدخول بنجاح"
       },
       "Title": "تسجيل الدخول"
     },
     "Otp": {
-      "CheckSms": "تحقق من رسائل هاتفك وادخل رقم التحقق (OTP)",
-      "Title": "رمز التحقق OTP"
+      "CheckSms": "تحقق من الرسائل القصيرة",
+      "Title": "رمز التحقق (OTP)"
     },
     "PrivacyPolicy": {
-      "Acknowledgment": "الأقرار بما يلي:",
-      "Point1": "النقطة ١",
-      "Point2": "النقطة ٢",
-      "Point3": "النقطة ٣",
-      "Point4": "النقطة ٤",
-      "Point5": "النقطة ٥",
-      "Point6": "النقطة ٦",
-      "Title": "سياسية الخصوصية"
+      "Acknowledgment": "إقرار",
+      "Point1": "البند 1",
+      "Point2": "البند 2",
+      "Point3": "البند 3",
+      "Point4": "البند 4",
+      "Point5": "البند 5",
+      "Point6": "البند 6",
+      "Title": "سياسة الخصوصية"
     },
     "Register": {
       "Labels": {
-        "DidNotGetOtp": "لم تصلك الرسالة؟",
-        "Password": "كلمة السر",
-        "PasswordConfirmation": "تأكيد كلمة السر",
+        "DidNotGetOtp": "لم يصلك رمز التحقق؟",
+        "Password": "كلمة المرور",
+        "PasswordConfirmation": "تأكيد كلمة المرور",
         "PhoneNo": "رقم الجوال",
-        "Register": "إنشاء حساب",
-        "ResendOtp": "إعادة الإرسال",
-        "Success": "تم التسجيل بنجاح. يمكنك الآن تسجيل الدخول"
+        "Register": "تسجيل",
+        "ResendOtp": "إعادة إرسال رمز التحقق",
+        "Success": "تم التسجيل بنجاح"
       },
-      "Title": "إنشاء حساب"
+      "Title": "تسجيل حساب جديد"
     },
     "TermsConditions": {
-      "Point1": "يقر المستخدم بأن البيانات المقدمة صحيحة وكاملة وحديثة.",
-      "Point2": "يلتزم المستخدم باستخدام المنصة فقط للأغراض المخصصة لها, وعدم إساءة استخدامها.",
-      "Point3": "تحتفظ الجهة القائمة على النظام بالحق في تعديل شروط الاستخدام وسياسة الخصوصية في أي وقت.",
-      "Point4": "يعتبر إنشاء الحساب أو استخدام المنصة موافقة صريحة على هذه الشروط والسياسات.",
-      "Title": "شروط الاستخدام"
+      "Point1": "البند 1",
+      "Point2": "البند 2",
+      "Point3": "البند 3",
+      "Point4": "البند 4",
+      "Title": "الشروط والأحكام"
     }
   }
 }

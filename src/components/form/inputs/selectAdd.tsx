@@ -92,7 +92,7 @@ const SelectAddInput: React.FC<FinalInput> = ({
           ) : searchTerm.trim() ? (
             <li>
               <button
-                className="dropdown-item text-success"
+                className="dropdown-item text-dark"
                 type="button"
                 onClick={handleCreate}
               >

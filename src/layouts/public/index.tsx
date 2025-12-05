@@ -7,6 +7,7 @@ import {
   useNavigate,
 } from "react-router";
 
+import tempLogo from "../../assets/images/brand/logo.png";
 import Button from "../../components/core/button";
 import { useAppSelector } from "../../store/hooks";
 import ForgotPasswordView from "../../views/public/forgotPassword";
@@ -69,7 +70,7 @@ const AuthLayout = () => {
           <div className="card-body text-center">
             <img
               alt="bg-image"
-              src={process.env.REACT_APP_STORAGE_DIRECTORY_URL + logo}
+              src={logo || tempLogo}
               className="w-50 px-1 mb-4"
               style={{ maxWidth: "350px" }}
               role="button"
@@ -87,11 +88,11 @@ const AuthLayout = () => {
 
                       const settings = isSelected
                         ? {
-                            color: "opacity-info",
+                            color: "opacity-primary",
                             style: {
                               backgroundColor: "rgba(24,180,191,0.15)",
                             },
-                            className: "text-info",
+                            className: "text-primary",
                           }
                         : {
                             color: "ghost",

@@ -1,7 +1,7 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useLocation, useNavigate } from "react-router";
 import { Fragment } from "react/jsx-runtime";
 
-import IconWrapperComp from "../../../assets/icons/wrapper";
 import { useAppSelector } from "../../../store/hooks";
 import CopyRightView from "../../common/copyright";
 
@@ -47,7 +47,7 @@ const OffCanvasNav = ({ routes, fixedRoutes }: Props) => {
               <h5
                 className={`sidebar-link text-decoration-none p-3 rounded-3 ${
                   location.pathname.includes(route)
-                    ? "bg-info text-white"
+                    ? "bg-primary text-white"
                     : "text-dark"
                 }`}
                 data-bs-dismiss="offcanvas"
@@ -57,7 +57,7 @@ const OffCanvasNav = ({ routes, fixedRoutes }: Props) => {
                   navigate(route);
                 }}
               >
-                <IconWrapperComp icon={icon} className="me-2" />
+                <FontAwesomeIcon icon={icon} className="me-2" />
                 {<span>{name}</span>}
 
                 {user.role === "admin" && (
@@ -78,7 +78,7 @@ const OffCanvasNav = ({ routes, fixedRoutes }: Props) => {
               <h5
                 className={`sidebar-link text-decoration-none p-3 rounded-3 ${
                   location.pathname.includes(route)
-                    ? "bg-info text-white"
+                    ? "bg-primary text-white"
                     : "text-dark"
                 }`}
                 role="button"
@@ -88,7 +88,7 @@ const OffCanvasNav = ({ routes, fixedRoutes }: Props) => {
                   navigate(route);
                 }}
               >
-                <IconWrapperComp icon={icon} className="me-2" />
+                <FontAwesomeIcon icon={icon} className="me-2" />
                 {<span>{name}</span>}
               </h5>
             </Fragment>

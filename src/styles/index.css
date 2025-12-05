@@ -1,12 +1,12 @@
 :root {
-  --bs-primary: #007bff !important;
+  --bs-primary: #3A8DFF !important;
   --bs-secondary: #6c757d !important;
-  --bs-success: #8ec156 !important;
+  --bs-success: #198754 !important;
   --bs-danger: #dc3545 !important;
-  --bs-warning: #ffc107 !important;
-  --bs-info: #18b4bf !important;
+  --bs-warning: #FFE53B !important;
+  --bs-info: #0dcaf0 !important;
   --bs-light: #f8f9fa !important;
-  --bs-dark: #343a40 !important;
+  --bs-dark: #0F192E !important;
   --base-font-size: 16px;
 }
 

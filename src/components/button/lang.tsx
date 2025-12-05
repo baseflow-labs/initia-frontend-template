@@ -1,16 +1,27 @@
 import { useTranslation } from "react-i18next";
+import DropdownComp from "../dropdown";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLanguage } from "@fortawesome/free-solid-svg-icons";
 
 const LangButton = () => {
   const { i18n } = useTranslation();
 
+  const languages = (i18n.options.supportedLngs || []).filter((lang = '') => lang !== "cimode").map((lang = "") => (
+    {
+      label: lang === 'ar' ? 'العربية' : lang.toUpperCase(),
+      onClick: () => i18n.changeLanguage(lang)
+    }
+  ));
+
   return (
-    <div
-      className="my-auto fw-bold"
-      role="button"
-      onClick={() => i18n.changeLanguage(i18n.language === "ar" ? "en" : "ar")}
-    >
-      {i18n.language === "ar" ? "En" : "ع"}
-    </div>
+    <DropdownComp
+      button={
+        <button className="btn btn-link py-auto">
+          <FontAwesomeIcon icon={faLanguage} className="text-primary" />
+        </button>
+      }
+      list={languages}
+    />
   );
 };
 
