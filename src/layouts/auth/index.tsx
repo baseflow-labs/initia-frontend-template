@@ -146,7 +146,7 @@ const AuthLayout = () => {
       <OffCanvasNav
         fixedRoutes={filteredFixedRoutes}
         routes={authRoutes
-          .filter(({ showInNav }) => showInNav)
+          .filter(({ showInNav, fixed }) => showInNav && !fixed)
           .map(({ view, ...rest }) => ({ ...rest }))}
       />
 

@@ -315,7 +315,7 @@ const Form: React.FC<Props> = ({
                 if (logo) {
                   return (
                     <Fragment key={i}>
-                      <div className="col-12">
+                      <div className="col-md-6">
                         <LabelView required={required} {...input} />
                       </div>
 
@@ -359,9 +359,7 @@ const Form: React.FC<Props> = ({
 
                 return (
                   <div
-                    className={`mb-2 ${
-                      halfCol ? "col-md-6" : logo ? "col-6" : "col-md-12"
-                    }`}
+                    className={`mb-2 col-md-6`}
                     key={i}
                   >
                     <LabelView required={required} {...input} />
