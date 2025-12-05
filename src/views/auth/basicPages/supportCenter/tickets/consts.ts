@@ -53,33 +53,18 @@ export const ticketTableColumns = (t: Function) => [
     sortable: true,
   },
   {
-    name: 'subject',
+    name: 'name',
     label: t("Auth.SupportCenter.Tickets.MyTickets.Table.Column2"),
     sortable: true,
   },
   {
-    name: 'category',
-    label: t("Auth.SupportCenter.Tickets.MyTickets.Table.Column3"),
-    sortable: true,
-  },
-  {
-    name: 'status',
+    name: 'email',
     label: t("Auth.SupportCenter.Tickets.MyTickets.Table.Column4"),
     sortable: true,
   },
   {
-    name: 'priority',
-    label: t("Auth.SupportCenter.Tickets.MyTickets.Table.Column5"),
+    name: 'username',
+    label: t("Auth.SupportCenter.Tickets.MyTickets.Table.Column3"),
     sortable: true,
   },
-  {
-    name: 'created',
-    label: t("Auth.SupportCenter.Tickets.MyTickets.Table.Column6"),
-    sortable: true,
-  },
-  {
-    name: 'lastUpdate',
-    label: t("Auth.SupportCenter.Tickets.MyTickets.Table.Column7"),
-    sortable: true,
-  }
 ]
