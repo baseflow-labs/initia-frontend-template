@@ -111,6 +111,33 @@
     "Settings": {
       "Admin": {
         "BulkDataInsertion": {
+          "DataFileUpload": "Data Upload",
+          "DataProcessing": {
+            "Description": "To process the uploaded data file, please follow the steps below:",
+            "Step1": {
+              "Description": "Upload the file of data already stored in the system to be linked with.",
+              "Title": "Step 1"
+            },
+            "Step2": {
+              "Description": "Define the column name to be used as a unique identifier for matching existing records.",
+              "Title": "Step 2"
+            },
+            "Step3": {
+              "Description": "Upload the file of data to be inserted into the system.",
+              "Title": "Step 3"
+            },
+            "Step4": {
+              "Description": "Define the column name to be used as a unique identifier for matching new records.",
+              "Title": "Step 4"
+            },
+            "Step5": {
+              "Description": "Download the processed data which you may upload to the database of the system.",
+              "Title": "Step 5"
+            },
+            "Title": "Data Processing"
+          },
+          "DownloadAllData": "Download All Data",
+          "DownloadTemplate": "Download Template for Data Upload",
           "Title": "Bulk Data Insertion"
         },
         "Logger": {

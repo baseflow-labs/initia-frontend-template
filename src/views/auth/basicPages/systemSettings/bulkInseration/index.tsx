@@ -1,13 +1,27 @@
 import { useTranslation } from "react-i18next";
-import Form from "../../../../../components/form";
-import { inputs } from "./inputs";
+import TabsComp from "../../../../../components/tab";
+import SystemDataBulkInsertionView from "./dataInsertion";
+import SystemDataProcessingView from "./dataProccessing";
 
-const SystemDataBulkInsertionView = () => {
+const SystemDataInsertionView = () => {
   const { t } = useTranslation();
 
+  const tabs = [
+    {
+      id: 'dataInsertion',
+      title: t("Auth.Settings.Admin.BulkDataInsertion.Title"),
+      body: <SystemDataBulkInsertionView />
+    },
+    {
+      id: 'dataProcessing',
+      title: t("Auth.Settings.Admin.BulkDataInsertion.DataProcessing.Title"),
+      body: <SystemDataProcessingView />
+    }
+  ]
+
   return (
-    <Form inputs={inputs(t)} />
+    <TabsComp tabs={tabs} />
   );
 };
 
-export default SystemDataBulkInsertionView;
+export default SystemDataInsertionView;
