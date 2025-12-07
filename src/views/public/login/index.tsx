@@ -61,7 +61,8 @@ const LoginView = () => {
           })
         );
         dispatch(login({
-          token: 'thisIsDummyToken',
+          accessToken: 'thisIsDummyToken',
+          refreshToken: 'thisIsDummyRefreshToken',
           user: {
             id: "1",
             name: "Suhaib Ahmad",

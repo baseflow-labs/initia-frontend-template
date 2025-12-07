@@ -2,7 +2,6 @@
 
 ## To Do
 
-- Add Token Refresh to Auth API Setup
 - Build Dynamic Access Roles (API Integration)
 - Centralize identity control (theme color, logo ,name)
 - Fix changelog generating script
