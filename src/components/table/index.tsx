@@ -12,6 +12,7 @@ import {
   faEnvelope,
   faEye,
   faFile,
+  faFileDownload,
   faGripVertical,
   faLocationPin,
   faPhone,
@@ -38,6 +39,8 @@ import CustomItemsDropdownComp from "../dropdown/customItems";
 import { InputProps } from "../form";
 import InputComp from "../form/Input";
 import TooltipComp from "../tooltip";
+import Button from "../core/button";
+import ExportModal from "./exportModal";
 
 export interface actionProps {
   label: string;
@@ -430,7 +433,9 @@ const DynamicTable: React.FC<Props> = ({
               </th>
 
               <th colSpan={haveDefaultActions ? 2 : 1}>
-                <div className="text-end">
+                <div className="d-flex justify-content-end align-items-center">
+                  <ExportModal data={data} columns={columns} />
+
                   <CustomItemsDropdownComp
                     start
                     button={

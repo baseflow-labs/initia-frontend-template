@@ -19,6 +19,7 @@
     },
     "Examples": {
       "Form": {
+        "Checkbox": "Checkbox",
         "Date": "Date",
         "Email": "Email",
         "File": "File",
@@ -546,6 +547,25 @@
     },
     "Placeholders": {
       "Search": "Search..."
+    },
+    "Table": {
+      "Export": {
+        "Export": "Export",
+        "Filters": {
+          "AddFilters": "Add Filters",
+          "Field": "Field",
+          "Operator": "Operator",
+          "Value": "Value"
+        },
+        "SelectFieldsToExport": "Select  Fields To Export...",
+        "Title": "Export",
+        "Type": {
+          "CSV": "CSV",
+          "Excel": "Excel",
+          "PDF": "PDF",
+          "Title": "Export Type"
+        }
+      }
     }
   },
   "Public": {

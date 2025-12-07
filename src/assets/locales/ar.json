@@ -19,6 +19,7 @@
     },
     "Examples": {
       "Form": {
+        "Checkbox": "اختيار متعدد",
         "Date": "التاريخ",
         "Email": "البريد الإلكتروني",
         "File": "ملف",
@@ -546,6 +547,25 @@
     },
     "Placeholders": {
       "Search": "بحث..."
+    },
+    "Table": {
+      "Export": {
+        "Export": "تصدير",
+        "Filters": {
+          "AddFilters": "إضافة فلاتر",
+          "Field": "الحقل",
+          "Operator": "العملية",
+          "Value": "القيمة"
+        },
+        "SelectFieldsToExport": "اختيار الحقول للتصدير...",
+        "Title": "تصدير",
+        "Type": {
+          "CSV": "CSV",
+          "Excel": "Excel",
+          "PDF": "PDF",
+          "Title": "نوع الملف"
+        }
+      }
     }
   },
   "Public": {
