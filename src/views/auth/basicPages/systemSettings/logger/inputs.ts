@@ -1,17 +1,27 @@
 export const inputs = (t: Function) => [
   {
-    type: "custom",
-    name: "name",
-    label: t("Auth.Users.Name"),
+    name: "level",
+    label: t("Auth.Settings.Admin.Logger.Level"),
   },
   {
-    type: "phoneNumber",
-    name: "username",
-    label: t("Global.Labels.PhoneNumber"),
+    name: "message",
+    label: t("Auth.Settings.Admin.Logger.Message"),
   },
   {
-    type: "email",
-    name: "email",
-    label: t("Global.Form.Labels.Email"),
+    name: "context",
+    label: t("Auth.Settings.Admin.Logger.Context"),
+  },
+  {
+    name: "stack",
+    label: t("Auth.Settings.Admin.Logger.Stack"),
+  },
+  {
+    name: "meta",
+    label: t("Auth.Settings.Admin.Logger.Metadata"),
+  },
+  {
+    name: "createdAt",
+    label: t("Auth.Settings.Admin.Logger.Timestamp"),
+    type: "date"
   },
 ];

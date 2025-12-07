@@ -26,10 +26,10 @@
         "MultipleEntries": "Multiple Entries",
         "Number": "Number",
         "NumberText": "Number Text",
+        "OTP": "OTP",
         "Option1": "Option 1",
         "Option2": "Option 2",
         "Option3": "Option 3",
-        "OTP": "OTP",
         "Password": "Password",
         "PhoneNumber": "Phone Number",
         "Radio": "Radio",
@@ -113,8 +113,20 @@
         "BulkDataInsertion": {
           "Title": "Bulk Data Insertion"
         },
-        "Log": "Log",
+        "Logger": {
+          "Context": "Context",
+          "Level": "Level",
+          "Message": "Message",
+          "Metadata": "Metadata",
+          "Stack": "Stack",
+          "Timestamp": "Timestamp",
+          "Title": "System Logger"
+        },
         "Metadata": {
+          "Logo": "Logo",
+          "Name": "Name",
+          "PhoneNumber": "Phone Number",
+          "Slogan": "Slogan",
           "Title": "Metadata"
         },
         "RolePermissions": {
@@ -187,19 +199,19 @@
           "ContactUs": "Contact Us",
           "Current": "Current",
           "CurrentPlan": "Current Plan",
-          "Projects_zero": "Projects",
-          "Projects_one": "Projects",
-          "Projects_two": "Projects",
           "Projects_few": "Projects",
           "Projects_many": "Projects",
+          "Projects_one": "Projects",
           "Projects_other": "Projects",
+          "Projects_two": "Projects",
+          "Projects_zero": "Projects",
           "Renewal": "Renewal",
-          "Seats_zero": "Seats",
-          "Seats_one": "Seats",
-          "Seats_two": "Seats",
           "Seats_few": "Seats",
           "Seats_many": "Seats",
+          "Seats_one": "Seats",
           "Seats_other": "Seats",
+          "Seats_two": "Seats",
+          "Seats_zero": "Seats",
           "Select": "Select",
           "Title": "Billing"
         },
@@ -272,16 +284,16 @@
           "Title": "Visit Us"
         }
       },
-      "Faq": {
-        "Description": "Description",
-        "Title": "Faq"
-      },
       "FAQ": {
         "CheckFaq": "Check FAQ",
         "DidNotFindWhatYouAreLookingFor": "Did Not Find What You Are Looking For?",
         "NoFAQsFound": "No FAQs Found",
         "SearchPlaceholder": "Search...",
         "Title": "FAQ"
+      },
+      "Faq": {
+        "Description": "Description",
+        "Title": "Faq"
       },
       "KnowledgeBase": {
         "AccountPassword": {
@@ -382,6 +394,9 @@
         "Title": "Form Input Examples"
       }
     },
+    "UserSettings": {
+      "Title": "User Settings"
+    },
     "Users": {
       "Name": "Name",
       "Profile": {
@@ -390,9 +405,6 @@
       },
       "Role": "Role",
       "Title": "Users"
-    },
-    "UserSettings": {
-      "Title": "User Settings"
     }
   },
   "Common": {

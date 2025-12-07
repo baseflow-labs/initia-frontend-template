@@ -113,8 +113,20 @@
         "BulkDataInsertion": {
           "Title": "إدخال البيانات لأول مرة"
         },
-        "Log": "سجل النظام",
+        "Logger": {
+          "Context": "السياق",
+          "Level": "المستوى",
+          "Message": "الرسالة",
+          "Metadata": "البيانات",
+          "Stack": "سجل النظام",
+          "Timestamp": "الطابع الزمني",
+          "Title": "سجل النظام"
+        },
         "Metadata": {
+          "Logo": "الشعار",
+          "Name": "اسم النظام",
+          "PhoneNumber": "رقم الهاتف",
+          "Slogan": "الشعار اللفظي§",
           "Title": "هوية النظام"
         },
         "RolePermissions": {
