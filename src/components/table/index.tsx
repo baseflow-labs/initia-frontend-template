@@ -45,13 +45,18 @@ export interface actionProps {
   onClick: (data: string) => void;
 }
 
+export interface SelectOption {
+  value: string | number;
+  label?: string;
+}
+
 export interface TableColumn {
   label: string;
   name: string;
   render?: (row: any) => string | React.ReactNode;
   type?: string;
   timestampFormat?: string;
-  options?: { value: string | number; label?: string }[];
+  options?: SelectOption[];
   moneyUnit?: boolean;
   sortable?: boolean;
 }

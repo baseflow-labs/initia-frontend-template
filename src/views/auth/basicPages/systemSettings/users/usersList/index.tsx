@@ -6,10 +6,16 @@ import { inputs } from "./inputs";
 const UsersView = () => {
   const { t } = useTranslation();
 
+  const roles = [
+    { value: "admin" },
+    { value: "editor" },
+    { value: "viewer" },
+  ];
+
   return (
     <ApiDataTable
       dataApiEndpoint="/support/users"
-      inputs={inputs(t)}
+      inputs={inputs(t, roles)}
       singleItem={t("Auth.Settings.Admin.Users.User")}
       includeCreate
       includeView

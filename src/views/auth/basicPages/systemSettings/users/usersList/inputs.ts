@@ -1,56 +1,20 @@
-import { renderDataFromOptions } from "../../../../../../utils/function";
+import { SelectOption } from "../../../../../../components/table";
 
-export const getUserRoles = (t: Function) => [
+export const inputs = (t: Function, roles: SelectOption[]) => [
   {
-    value: "admin",
-    label: t("Global.Labels.Roles.admin"),
-  },
-  {
-    value: "ceo",
-    label: t("Global.Labels.Roles.ceo"),
-  },
-  {
-    value: "accountant",
-    label: t("Global.Labels.Roles.accountant"),
-  },
-  {
-    value: "hod",
-    label: t("Global.Labels.Roles.hod"),
-  },
-  {
-    value: "researcher",
-    label: t("Global.Labels.Roles.researcher"),
-  },
-  {
-    value: "user",
-    label: t("Global.Labels.Roles.user"),
-  },
-  {
-    value: "applicant",
-    label: t("Global.Labels.Roles.applicant"),
-  },
-];
-
-export const inputs = (t: Function) => [
-  {
-    type: "custom",
     name: "name",
-    label: t("Auth.Users.Name"),
+    label: t("Auth.Settings.Admin.Users.Name"),
+    type: "text",
   },
   {
-    type: "phoneNumber",
-    name: "username",
-    label: t("Global.Labels.PhoneNumber"),
-  },
-  {
-    type: "email",
-    name: "email",
-    label: t("Global.Form.Labels.Email"),
-  },
-  {
-    type: "custom",
     name: "role",
-    label: t("Auth.Users.Role"),
-    render: (row: any) => renderDataFromOptions(row.role, getUserRoles(t)),
+    label: t("Auth.Settings.Admin.Users.Role"),
+    type: "select",
+    options: roles
+  },
+  {
+    name: "email",
+    label: t("Auth.Settings.Admin.Users.Email"),
+    type: "email",
   },
 ];

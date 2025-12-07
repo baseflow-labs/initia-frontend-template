@@ -144,6 +144,9 @@
           "UserRole": "User Role"
         },
         "Users": {
+          "Email": "Email",
+          "Name": "Name",
+          "Role": "Role",
           "Title": "Users",
           "User": "User"
         },
