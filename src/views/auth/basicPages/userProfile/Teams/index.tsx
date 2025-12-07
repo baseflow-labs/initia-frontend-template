@@ -1,8 +1,4 @@
-import { useTranslation } from "react-i18next";
-
 const UserProfileTeamsView = () => {
-  const { t } = useTranslation();
-
   const teams = [
     { id: 1, name: "React Developers", members: "72 Members", role: "Developer" },
     { id: 2, name: "Support Team", members: "122 Members", role: "Support" },

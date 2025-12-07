@@ -1,8 +1,7 @@
 import { useTranslation } from "react-i18next";
 
-import DynamicTable from "../../../../../../components/table";
-import { inputs } from "./inputs";
 import ApiDataTable from "../../../../../../components/table/apiDatatable";
+import { inputs } from "./inputs";
 
 const UsersView = () => {
   const { t } = useTranslation();

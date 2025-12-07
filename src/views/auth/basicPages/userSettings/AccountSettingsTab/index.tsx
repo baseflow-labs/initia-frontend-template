@@ -1,26 +1,13 @@
-import { FormEvent, useState, ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
-import { useAppSelector } from "../../../../../store/hooks";
-import { addNotification } from "../../../../../store/actions/notifications";
 import * as AuthApi from "../../../../../api/auth";
-import DefaultInput from "../../../../../components/form/inputs/default";
-import Button from "../../../../../components/core/button";
-import { apiCatchGlobalHandler } from "../../../../../utils/function";
 import Form from "../../../../../components/form";
+import { addNotification } from "../../../../../store/actions/notifications";
+import { useAppSelector } from "../../../../../store/hooks";
+import { apiCatchGlobalHandler } from "../../../../../utils/function";
 import { inputs } from "./consts";
-
-interface ProfileFormState {
-  fullName: string;
-  username: string;
-  email: string;
-  phone: string;
-  company: string;
-  jobTitle: string;
-  country: string;
-  language: string;
-}
 
 const AccountProfileTab = () => {
   const { t } = useTranslation();
