@@ -144,8 +144,27 @@
         },
         "Title": "Admin Settings",
         "UserActivity": {
+          "Action": "Action",
+          "After": "Data After",
+          "Before": "Data Before",
+          "DataId": "Data ID",
+          "DataType": "Data Type",
+          "Difference": "Data Difference",
+          "ErrorMessage": "Error Message",
+          "Ip": "IP",
+          "Method": "Method",
+          "Path": "Path",
+          "RequestId": "Request ID",
+          "SessionId": "Session ID",
+          "Source": "Source",
+          "StatusCode": "Status Code",
+          "Success": "Success",
+          "Timestamp": "Timestamp",
           "Title": "User Activity",
-          "UserActivity": "User Activity"
+          "UserActivity": "User Activity",
+          "UserAgent": "User Agent",
+          "UserId": "User ID",
+          "UserType": "User Type"
         },
         "UserRolePermissions": {
           "Title": "User Role Permissions"

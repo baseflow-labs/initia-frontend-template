@@ -144,8 +144,27 @@
         },
         "Title": "إعدادات مدير النظام",
         "UserActivity": {
+          "Action": "الإجراء",
+          "After": "البيانات بعد الإجراء",
+          "Before": "البيانات قبل الإجراء",
+          "DataId": "رقم البيانات",
+          "DataType": "نوع البيانات",
+          "Difference": "الفرق في البيانات",
+          "ErrorMessage": "رسالة الخطأ",
+          "Ip": "عنوان IP",
+          "Method": "الأداة",
+          "Path": "العنوان",
+          "RequestId": "رقم الطلب",
+          "SessionId": "رقم الجلسة",
+          "Source": "المصدر",
+          "StatusCode": "الحالة",
+          "Success": "تم بنجاح",
+          "Timestamp": "الطابع الزمني",
           "Title": "نشاط المستخدم",
-          "UserActivity": "نشاط مستخدم"
+          "UserActivity": "نشاط مستخدم",
+          "UserAgent": "المستخدم",
+          "UserId": "رقم المستخدم",
+          "UserType": "نوع المستخدم"
         },
         "UserRolePermissions": {
           "Title": "صلاحيات أدوار المستخدمين"
