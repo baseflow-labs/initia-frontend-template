@@ -1,7 +1,6 @@
 import { useTranslation } from "react-i18next";
-import Form from "../../../../../../components/form";
-import { o } from "react-router/dist/development/index-react-server-client-CCjKYJTH";
 import Button from "../../../../../../components/core/button";
+import Form from "../../../../../../components/form";
 
 const SystemDataProcessingView = () => {
   const { t } = useTranslation();
