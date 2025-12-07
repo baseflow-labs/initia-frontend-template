@@ -5,6 +5,7 @@ import {
   faAngleRight,
   faAnglesLeft,
   faAnglesRight,
+  faColumns,
   faDollar,
   faEdit,
   faEllipsisVertical,
@@ -21,7 +22,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
@@ -34,6 +35,8 @@ import { commaNumbers } from "../../utils/function";
 import DropdownComp from "../dropdown";
 import InputComp from "../form/Input";
 import TooltipComp from "../tooltip";
+import { InputProps } from "../form";
+import CustomItemsDropdownComp from "../dropdown/customItems";
 
 export interface actionProps {
   label: string;
@@ -50,7 +53,7 @@ export interface SelectOption {
   label?: string;
 }
 
-export interface TableColumn {
+export interface TableColumn extends InputProps {
   label: string;
   name: string;
   render?: (row: any) => string | React.ReactNode;
@@ -300,6 +303,8 @@ const DynamicTable: React.FC<Props> = ({
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
+  const [columnsToShow, setColumnsToShow] = useState<TableColumn[]>(columns.filter(c => !c.defaultHide));
+
   const defaultActionsIncluded = [
     includeView,
     includeUpdate,
@@ -378,9 +383,9 @@ const DynamicTable: React.FC<Props> = ({
       <div className="table-responsive">
         <table className="table mt-4 w-100">
           <thead className="table-light">
-            {searchProp ? (
-              <tr>
-                <th colSpan={columns.length + (haveDefaultActions ? 2 : 1)}>
+            <tr>
+              <th colSpan={columnsToShow.length}>
+                {searchProp ? (
                   <InputComp
                     name="search"
                     placeholder={
@@ -390,16 +395,61 @@ const DynamicTable: React.FC<Props> = ({
                     value={currentSearch || ""}
                     onChange={(e) => onSearchChange?.(e.target.value)}
                   />
-                </th>
-              </tr>
-            ) : null}
+                ) : ''}
+              </th>
+
+              <th colSpan={haveDefaultActions ? 2 : 1}>
+                <div className="text-end">
+                  <CustomItemsDropdownComp
+                    start
+                    button={
+                      <FontAwesomeIcon
+                        icon={faColumns}
+                        className="ms-1 text-muted"
+                      />
+                    }
+                    list={columns.map((col, i) => (
+                      <li className="dropdown-item" key={i}>
+                        <div className="form-check">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            checked={
+                              columnsToShow.findIndex(
+                                (c) => c.name === col.name
+                              ) > -1
+                            }
+                            id={`col-toggle-${col.name}`}
+                            onChange={(e) => {
+                              if (e.target.checked) {
+                                setColumnsToShow((prev) => [...prev, col]);
+                              } else {
+                                setColumnsToShow((prev) =>
+                                  prev.filter((c) => c.name !== col.name)
+                                );
+                              }
+                            }}
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor={`col-toggle-${col.name}`}
+                          >
+                            {col.label}
+                          </label>
+                        </div>
+                      </li>
+                    ))}
+                  />
+                </div>
+              </th>
+            </tr>
 
             <tr>
               <th className="py-3" scope="col">
                 #
               </th>
 
-              {columns.map((col, i) => (
+              {columnsToShow.map((col, i) => (
                 <th
                   className={
                     "py-3 fw-bold" + (col.sortable ? " cursor-pointer" : "")
@@ -426,7 +476,7 @@ const DynamicTable: React.FC<Props> = ({
           <tbody>
             {data.length === 0 && (
               <tr>
-                <td colSpan={columns.length + 2} className="text-center py-4">
+                <td colSpan={columnsToShow.length + 2} className="text-center py-4">
                   {t("Global.Labels.NoData")}
                 </td>
               </tr>
@@ -438,7 +488,7 @@ const DynamicTable: React.FC<Props> = ({
                   {i + pageSize * (currentPage - 1) + 1}
                 </td>
 
-                {columns.map(
+                {columnsToShow.map(
                   (
                     { name, type, options, render, timestampFormat, moneyUnit },
                     y
@@ -561,7 +611,7 @@ const DynamicTable: React.FC<Props> = ({
           {data.length !== 0 && (
             <tfoot>
               <tr>
-                <th colSpan={columns.length + (haveDefaultActions ? 2 : 1)}>
+                <th colSpan={columnsToShow.length + (haveDefaultActions ? 2 : 1)}>
                   <div className="d-flex justify-content-between">
                     <div className="my-auto text-muted me-3">
                       <small>

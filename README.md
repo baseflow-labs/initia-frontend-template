@@ -24,7 +24,7 @@
   - server side filtering
   - server side search
   - scroll vs pagination
-  - column visibility control (show / hide + re-order)
+  - column visibility control (re-order)
   - export with customization to csv, excel, pdf
   - row selection (bulk actions)
   - responsiveness to cards view

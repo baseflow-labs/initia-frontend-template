@@ -71,6 +71,7 @@ export interface InputSingleProps extends InputBasicProps {
   postfixText?: string | number;
   aboveComp?: React.ReactNode;
   belowComp?: React.ReactNode;
+  defaultHide?: boolean;
 }
 
 export interface InputProps extends InputSingleProps {
