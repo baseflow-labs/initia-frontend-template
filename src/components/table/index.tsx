@@ -303,7 +303,7 @@ const DynamicTable: React.FC<Props> = ({
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
-  const [columnsToShow, setColumnsToShow] = useState<TableColumn[]>(columns.filter(c => !c.defaultHide));
+  const [columnsToShow, setColumnsToShow] = useState<string[]>(columns.filter(c => !c.defaultHide).map(c => c.name));
 
   const defaultActionsIncluded = [
     includeView,
@@ -408,7 +408,7 @@ const DynamicTable: React.FC<Props> = ({
                         className="ms-1 text-muted"
                       />
                     }
-                    list={columns.map((col, i) => (
+                    list={columns.sort((a) => columnsToShow.includes(a.name) ? -1 : 1).map((col, i) => (
                       <li className="dropdown-item" key={i}>
                         <div className="form-check">
                           <input
@@ -416,16 +416,16 @@ const DynamicTable: React.FC<Props> = ({
                             type="checkbox"
                             checked={
                               columnsToShow.findIndex(
-                                (c) => c.name === col.name
+                                (c) => c === col.name
                               ) > -1
                             }
                             id={`col-toggle-${col.name}`}
                             onChange={(e) => {
                               if (e.target.checked) {
-                                setColumnsToShow((prev) => [...prev, col]);
+                                setColumnsToShow((prev) => [...prev, col.name]);
                               } else {
                                 setColumnsToShow((prev) =>
-                                  prev.filter((c) => c.name !== col.name)
+                                  prev.filter((c) => c !== col.name)
                                 );
                               }
                             }}
@@ -449,7 +449,7 @@ const DynamicTable: React.FC<Props> = ({
                 #
               </th>
 
-              {columnsToShow.map((col, i) => (
+              {columns.filter(c => columnsToShow.includes(c.name)).map((col, i) => (
                 <th
                   className={
                     "py-3 fw-bold" + (col.sortable ? " cursor-pointer" : "")
@@ -488,7 +488,7 @@ const DynamicTable: React.FC<Props> = ({
                   {i + pageSize * (currentPage - 1) + 1}
                 </td>
 
-                {columnsToShow.map(
+                {columns.filter(c => columnsToShow.includes(c.name)).map(
                   (
                     { name, type, options, render, timestampFormat, moneyUnit },
                     y
