@@ -19,6 +19,7 @@ const LoginView = () => {
       name: "identifier",
       label: t("Public.Login.Labels.PhoneNo"),
       required: true,
+      fullWidth: true
     },
     {
       type: "password",
@@ -32,6 +33,7 @@ const LoginView = () => {
         />
       ),
       required: true,
+      fullWidth: true
     },
   ];
 
@@ -51,27 +53,26 @@ const LoginView = () => {
       .catch(apiCatchGlobalHandler);
   };
 
-  const onDummySubmit = () => {
-    
-        dispatch(
-          addNotification({
-            msg: t("Public.Login.Labels.Success", {
-              name: 'Dummy Admin User',
-            }),
-          })
-        );
-        dispatch(login({
-          accessToken: 'thisIsDummyToken',
-          refreshToken: 'thisIsDummyRefreshToken',
-          user: {
-            id: "1",
-            name: "Suhaib Ahmad",
-            email: "SuhaibAhmadAi@hotmail.com",
-            username: "admin",
-            status: "active",
-            role: "admin"
-          }
-        }));
+  const onDummySubmit = () => {    
+    dispatch(
+      addNotification({
+        msg: t("Public.Login.Labels.Success", {
+          name: 'Dummy Admin User',
+        }),
+      })
+    );
+    dispatch(login({
+      accessToken: 'thisIsDummyToken',
+      refreshToken: 'thisIsDummyRefreshToken',
+      user: {
+        id: "1",
+        name: "Suhaib Ahmad",
+        email: "SuhaibAhmadAi@hotmail.com",
+        username: "admin",
+        status: "active",
+        role: "admin"
+      }
+    }));
   };
 
   return (

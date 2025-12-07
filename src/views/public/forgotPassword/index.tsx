@@ -42,6 +42,7 @@ const ForgotPassword = () => {
       type: "otp",
       name: "code",
       required: true,
+      fullWidth: true,
       belowComp: (
         <BelowInputButton
           introText={t("Public.Register.Labels.DidNotGetOtp")}
