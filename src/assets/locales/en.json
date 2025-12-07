@@ -117,7 +117,16 @@
         "Metadata": {
           "Title": "Metadata"
         },
-        "RolePermissions": "Role Permissions",
+        "RolePermissions": {
+          "Actions": {
+            "Create": "Create",
+            "Delete": "Delete",
+            "GetAll": "Get All",
+            "GetOne": "Get One",
+            "Title": "Actions",
+            "Update": "Update"
+          }
+        },
         "SystemLogger": {
           "Title": "System Logger"
         },
@@ -130,6 +139,7 @@
           "Title": "User Role Permissions"
         },
         "UserRoles": {
+          "Name": "Role Name",
           "Title": "User Roles",
           "UserRole": "User Role"
         },

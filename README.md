@@ -2,7 +2,6 @@
 
 ## To Do
 
-- Build Dynamic Access Roles (API Integration)
 - Centralize identity control (theme color, logo ,name)
 - Fix changelog generating script
 - Update documentation (read me, commit convention)

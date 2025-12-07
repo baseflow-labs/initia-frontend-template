@@ -117,7 +117,16 @@
         "Metadata": {
           "Title": "هوية النظام"
         },
-        "RolePermissions": "صلاحيات الأدوار",
+        "RolePermissions": {
+          "Actions": {
+            "Create": "إنشاء",
+            "Delete": "حذف",
+            "GetAll": "عرض الكل",
+            "GetOne": "العرض بالتفصيل",
+            "Title": "الإجراءات",
+            "Update": "تحديث"
+          }
+        },
         "SystemLogger": {
           "Title": "سجل النظام"
         },
@@ -130,6 +139,7 @@
           "Title": "صلاحيات أدوار المستخدمين"
         },
         "UserRoles": {
+          "Name": "اسم الدور",
           "Title": "أدوار المستخدمين",
           "UserRole": "دور مستخدم"
         },
@@ -138,7 +148,7 @@
           "User": "مستخدم"
         },
         "UsersView": {
-          "Title": "عرض المستخدمين"
+          "Title": "المستخدمين"
         }
       },
       "FontSize": "حجم الخط",
