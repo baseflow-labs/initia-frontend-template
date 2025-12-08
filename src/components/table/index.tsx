@@ -5,23 +5,26 @@ import {
   faAngleRight,
   faAnglesLeft,
   faAnglesRight,
+  faColumns,
   faDollar,
   faEdit,
   faEllipsisVertical,
   faEnvelope,
   faEye,
   faFile,
+  faFileDownload,
+  faGripVertical,
   faLocationPin,
   faPhone,
   faSort,
   faSortDown,
   faSortUp,
   faStar,
-  faTrash,
+  faTrash
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
@@ -32,8 +35,12 @@ import { addNotification } from "../../store/actions/notifications";
 import { viewDateFormat, viewTimeFormat } from "../../utils/consts";
 import { commaNumbers } from "../../utils/function";
 import DropdownComp from "../dropdown";
+import CustomItemsDropdownComp from "../dropdown/customItems";
+import { InputProps } from "../form";
 import InputComp from "../form/Input";
 import TooltipComp from "../tooltip";
+import Button from "../core/button";
+import ExportModal from "./exportModal";
 
 export interface actionProps {
   label: string;
@@ -45,13 +52,18 @@ export interface actionProps {
   onClick: (data: string) => void;
 }
 
-export interface TableColumn {
+export interface SelectOption {
+  value: string | number;
+  label?: string;
+}
+
+export interface TableColumn extends InputProps {
   label: string;
   name: string;
   render?: (row: any) => string | React.ReactNode;
   type?: string;
   timestampFormat?: string;
-  options?: { value: string | number; label?: string }[];
+  options?: SelectOption[];
   moneyUnit?: boolean;
   sortable?: boolean;
 }
@@ -109,13 +121,14 @@ export const dataRender = ({
 }: DataRenderProps) => {
   const wrap = (content: React.ReactNode) =>
     withoutWrap ? content : withMoneyUnit(content, money);
+  
 
   if (!data && money) {
     return wrap(0);
   }
 
   if (!data && !render && type !== "file") {
-    return "غير معبئة";
+    return "-";
   }
 
   if (hasFile) {
@@ -136,7 +149,7 @@ export const dataRender = ({
             {(row as any)[name]}
           </>
         )
-      : "غير معبئة";
+      : "-";
   }
 
   switch (type) {
@@ -201,7 +214,7 @@ export const dataRender = ({
                 onClick={() => triggerFilePreview(file)}
               />
             ))
-          : "غير معبئة"
+          : "-"
       );
     }
     case "location":
@@ -295,6 +308,37 @@ const DynamicTable: React.FC<Props> = ({
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
+  const [columnsToShow, setColumnsToShow] = useState<string[]>(columns.filter(c => !c.defaultHide).map(c => c.name));
+  const [orderedColumns, setOrderedColumns] = useState(columns);
+  const [dragIndex, setDragIndex] = useState<number | null>(null);
+
+  // keep in sync if `columns` prop changes from outside
+  useEffect(() => {
+    setOrderedColumns(columns.sort(a => a.defaultHide ? 1 : -1));
+  }, [columns]);
+
+  const handleDragStart = (index: number) => {
+    setDragIndex(index);
+  };
+
+  const handleDragEnter = (index: number) => {
+    if (dragIndex === null || dragIndex === index) return;
+
+    setOrderedColumns(prev => {
+      const newOrder = [...prev];
+      const [moved] = newOrder.splice(dragIndex, 1);
+      newOrder.splice(index, 0, moved);
+      return newOrder;
+    });
+
+    setDragIndex(index);
+  };
+
+  const handleDragEnd = () => {
+    setDragIndex(null);
+  };
+
+
   const defaultActionsIncluded = [
     includeView,
     includeUpdate,
@@ -373,9 +417,9 @@ const DynamicTable: React.FC<Props> = ({
       <div className="table-responsive">
         <table className="table mt-4 w-100">
           <thead className="table-light">
-            {searchProp ? (
-              <tr>
-                <th colSpan={columns.length + (haveDefaultActions ? 2 : 1)}>
+            <tr>
+              <th colSpan={columnsToShow.length}>
+                {searchProp ? (
                   <InputComp
                     name="search"
                     placeholder={
@@ -385,16 +429,78 @@ const DynamicTable: React.FC<Props> = ({
                     value={currentSearch || ""}
                     onChange={(e) => onSearchChange?.(e.target.value)}
                   />
-                </th>
-              </tr>
-            ) : null}
+                ) : ''}
+              </th>
+
+              <th colSpan={haveDefaultActions ? 2 : 1}>
+                <div className="d-flex justify-content-end align-items-center">
+                  <ExportModal data={data} columns={columns} />
+
+                  <CustomItemsDropdownComp
+                    start
+                    button={
+                      <FontAwesomeIcon
+                        icon={faColumns}
+                        className="ms-1 text-muted"
+                      />
+                    }
+                    list={
+                      orderedColumns.map((col, index) => {
+                        const draggable = columnsToShow.includes(col.name)
+
+                        return(
+                          <li
+                            key={col.name} // use stable key
+                            className="dropdown-item d-flex align-items-center"
+                            draggable={draggable}
+                            onDragStart={() => handleDragStart(index)}
+                            onDragEnter={() => handleDragEnter(index)}
+                            onDragOver={(e) => e.preventDefault()} // allow drop
+                            onDragEnd={handleDragEnd}
+                          >
+                            {draggable && (
+                              <FontAwesomeIcon
+                                icon={faGripVertical}
+                                role="button"
+                                className="me-1"
+                              />
+                            )}
+
+                            <div className="form-check">
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                checked={columnsToShow.includes(col.name)}
+                                id={`col-toggle-${col.name}`}
+                                onChange={(e) => {
+                                  if (e.target.checked) {
+                                    setColumnsToShow((prev) => [...prev, col.name]);
+                                  } else {
+                                    setColumnsToShow((prev) => prev.filter((c) => c !== col.name));
+                                  }
+                                }}
+                              />
+                              <label
+                                className="form-check-label"
+                                htmlFor={`col-toggle-${col.name}`}
+                              >
+                                {col.label}
+                              </label>
+                            </div>
+                          </li>
+                      )})
+                    }
+                  />
+                </div>
+              </th>
+            </tr>
 
             <tr>
               <th className="py-3" scope="col">
                 #
               </th>
 
-              {columns.map((col, i) => (
+              {orderedColumns.filter(c => columnsToShow.includes(c.name)).map((col, i) => (
                 <th
                   className={
                     "py-3 fw-bold" + (col.sortable ? " cursor-pointer" : "")
@@ -421,7 +527,7 @@ const DynamicTable: React.FC<Props> = ({
           <tbody>
             {data.length === 0 && (
               <tr>
-                <td colSpan={columns.length + 2} className="text-center py-4">
+                <td colSpan={columnsToShow.length + 2} className="text-center py-4">
                   {t("Global.Labels.NoData")}
                 </td>
               </tr>
@@ -433,7 +539,7 @@ const DynamicTable: React.FC<Props> = ({
                   {i + pageSize * (currentPage - 1) + 1}
                 </td>
 
-                {columns.map(
+                {orderedColumns.filter(c => columnsToShow.includes(c.name)).map(
                   (
                     { name, type, options, render, timestampFormat, moneyUnit },
                     y
@@ -556,7 +662,7 @@ const DynamicTable: React.FC<Props> = ({
           {data.length !== 0 && (
             <tfoot>
               <tr>
-                <th colSpan={columns.length + (haveDefaultActions ? 2 : 1)}>
+                <th colSpan={columnsToShow.length + (haveDefaultActions ? 2 : 1)}>
                   <div className="d-flex justify-content-between">
                     <div className="my-auto text-muted me-3">
                       <small>

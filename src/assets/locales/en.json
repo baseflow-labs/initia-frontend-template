@@ -19,6 +19,7 @@
     },
     "Examples": {
       "Form": {
+        "Checkbox": "Checkbox",
         "Date": "Date",
         "Email": "Email",
         "File": "File",
@@ -26,10 +27,10 @@
         "MultipleEntries": "Multiple Entries",
         "Number": "Number",
         "NumberText": "Number Text",
+        "OTP": "OTP",
         "Option1": "Option 1",
         "Option2": "Option 2",
         "Option3": "Option 3",
-        "OTP": "OTP",
         "Password": "Password",
         "PhoneNumber": "Phone Number",
         "Radio": "Radio",
@@ -111,29 +112,100 @@
     "Settings": {
       "Admin": {
         "BulkDataInsertion": {
+          "DataFileUpload": "Data Upload",
+          "DataProcessing": {
+            "Description": "To process the uploaded data file, please follow the steps below:",
+            "Step1": {
+              "Description": "Upload the file of data already stored in the system to be linked with.",
+              "Title": "Step 1"
+            },
+            "Step2": {
+              "Description": "Define the column name to be used as a unique identifier for matching existing records.",
+              "Title": "Step 2"
+            },
+            "Step3": {
+              "Description": "Upload the file of data to be inserted into the system.",
+              "Title": "Step 3"
+            },
+            "Step4": {
+              "Description": "Define the column name to be used as a unique identifier for matching new records.",
+              "Title": "Step 4"
+            },
+            "Step5": {
+              "Description": "Download the processed data which you may upload to the database of the system.",
+              "Title": "Step 5"
+            },
+            "Title": "Data Processing"
+          },
+          "DownloadAllData": "Download All Data",
+          "DownloadTemplate": "Download Template for Data Upload",
           "Title": "Bulk Data Insertion"
         },
-        "Log": "Log",
+        "Logger": {
+          "Context": "Context",
+          "Level": "Level",
+          "Message": "Message",
+          "Metadata": "Metadata",
+          "Stack": "Stack",
+          "Timestamp": "Timestamp",
+          "Title": "System Logger"
+        },
         "Metadata": {
+          "Logo": "Logo",
+          "Name": "Name",
+          "PhoneNumber": "Phone Number",
+          "Slogan": "Slogan",
           "Title": "Metadata"
         },
-        "RolePermissions": "Role Permissions",
+        "RolePermissions": {
+          "Actions": {
+            "Create": "Create",
+            "Delete": "Delete",
+            "GetAll": "Get All",
+            "GetOne": "Get One",
+            "Title": "Actions",
+            "Update": "Update"
+          }
+        },
         "SystemLogger": {
           "Title": "System Logger"
         },
         "Title": "Admin Settings",
         "UserActivity": {
+          "Action": "Action",
+          "After": "Data After",
+          "Before": "Data Before",
+          "DataId": "Data ID",
+          "DataType": "Data Type",
+          "Difference": "Data Difference",
+          "ErrorMessage": "Error Message",
+          "Ip": "IP",
+          "Method": "Method",
+          "Path": "Path",
+          "RequestId": "Request ID",
+          "SessionId": "Session ID",
+          "Source": "Source",
+          "StatusCode": "Status Code",
+          "Success": "Success",
+          "Timestamp": "Timestamp",
           "Title": "User Activity",
-          "UserActivity": "User Activity"
+          "UserActivity": "User Activity",
+          "UserAgent": "User Agent",
+          "UserId": "User ID",
+          "UserType": "User Type"
         },
         "UserRolePermissions": {
           "Title": "User Role Permissions"
         },
         "UserRoles": {
+          "Name": "Role Name",
           "Title": "User Roles",
           "UserRole": "User Role"
         },
         "Users": {
+          "Email": "Email",
+          "Name": "Name",
+          "Role": "Role",
           "Title": "Users",
           "User": "User"
         },
@@ -174,19 +246,19 @@
           "ContactUs": "Contact Us",
           "Current": "Current",
           "CurrentPlan": "Current Plan",
-          "Projects_zero": "Projects",
-          "Projects_one": "Projects",
-          "Projects_two": "Projects",
           "Projects_few": "Projects",
           "Projects_many": "Projects",
+          "Projects_one": "Projects",
           "Projects_other": "Projects",
+          "Projects_two": "Projects",
+          "Projects_zero": "Projects",
           "Renewal": "Renewal",
-          "Seats_zero": "Seats",
-          "Seats_one": "Seats",
-          "Seats_two": "Seats",
           "Seats_few": "Seats",
           "Seats_many": "Seats",
+          "Seats_one": "Seats",
           "Seats_other": "Seats",
+          "Seats_two": "Seats",
+          "Seats_zero": "Seats",
           "Select": "Select",
           "Title": "Billing"
         },
@@ -259,16 +331,16 @@
           "Title": "Visit Us"
         }
       },
-      "Faq": {
-        "Description": "Description",
-        "Title": "Faq"
-      },
       "FAQ": {
         "CheckFaq": "Check FAQ",
         "DidNotFindWhatYouAreLookingFor": "Did Not Find What You Are Looking For?",
         "NoFAQsFound": "No FAQs Found",
         "SearchPlaceholder": "Search...",
         "Title": "FAQ"
+      },
+      "Faq": {
+        "Description": "Description",
+        "Title": "Faq"
       },
       "KnowledgeBase": {
         "AccountPassword": {
@@ -369,6 +441,9 @@
         "Title": "Form Input Examples"
       }
     },
+    "UserSettings": {
+      "Title": "User Settings"
+    },
     "Users": {
       "Name": "Name",
       "Profile": {
@@ -377,9 +452,6 @@
       },
       "Role": "Role",
       "Title": "Users"
-    },
-    "UserSettings": {
-      "Title": "User Settings"
     }
   },
   "Common": {
@@ -475,6 +547,25 @@
     },
     "Placeholders": {
       "Search": "Search..."
+    },
+    "Table": {
+      "Export": {
+        "Export": "Export",
+        "Filters": {
+          "AddFilters": "Add Filters",
+          "Field": "Field",
+          "Operator": "Operator",
+          "Value": "Value"
+        },
+        "SelectFieldsToExport": "Select  Fields To Export...",
+        "Title": "Export",
+        "Type": {
+          "CSV": "CSV",
+          "Excel": "Excel",
+          "PDF": "PDF",
+          "Title": "Export Type"
+        }
+      }
     }
   },
   "Public": {

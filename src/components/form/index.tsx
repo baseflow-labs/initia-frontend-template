@@ -38,12 +38,13 @@ interface InputBasicProps {
     | "selectMany"
     | "phoneNumber"
     | "multipleEntries"
+    | "checkbox"
     | string;
   required?: boolean;
   disabled?: boolean;
   accept?: string;
   excludeInForm?: boolean;
-  defaultValue?: string | number;
+  defaultValue?: string | number | string[];
   placeholder?: string;
   fileSizeLimit?: number;
   maxFiles?: number;
@@ -71,6 +72,7 @@ export interface InputSingleProps extends InputBasicProps {
   postfixText?: string | number;
   aboveComp?: React.ReactNode;
   belowComp?: React.ReactNode;
+  defaultHide?: boolean;
 }
 
 export interface InputProps extends InputSingleProps {
@@ -149,6 +151,8 @@ const Form: React.FC<Props> = ({
 
       switch (input.type) {
         case "radio":
+        case "select":
+        case "checkbox":
           acc[input.name] = input.options?.[0]?.value ?? "";
           break;
         case "multipleEntries":

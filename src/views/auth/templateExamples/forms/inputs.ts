@@ -67,6 +67,12 @@ export const inputs = (t: Function) => [
     options: inputOptions(t)
   },
   {
+    type: "checkbox",
+    name: "checkbox",
+    label: t("Auth.Examples.Form.Checkbox"),
+    options: inputOptions(t)
+  },
+  {
     type: "select",
     name: "select",
     label: t("Auth.Examples.Form.Select"),

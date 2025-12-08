@@ -9,7 +9,7 @@ const SystemLoggerView = () => {
     <ApiDataTable
       dataApiEndpoint="/support/logger"
       inputs={inputs(t)}
-      singleItem={t("Auth.Settings.Admin.Log")}
+      singleItem={t("Auth.Settings.Admin.Logger.Title")}
       includeView
     />
   );

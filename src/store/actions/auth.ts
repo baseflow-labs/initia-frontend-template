@@ -9,19 +9,34 @@ export interface UserProps {
 }
 
 export interface AuthResponse {
-  token: string;
+  accessToken: string;
+  refreshToken: string;
   user: UserProps;
+}
+
+export interface RefreshTokenResponse {
+  accessToken: string;
+  refreshToken: string;
 }
 
 export const login = (resp: AuthResponse) => ({
   type: "login" as const,
   resp: {
-    jwt: resp.token,
+    accessToken: resp.accessToken,
+    refreshToken: resp.refreshToken,
     user: resp.user || {
       id: "1",
       name: "Suhaib Ahmad",
       email: "SuhaibAhmadAi@hotmail.com",
     },
+  },
+});
+
+export const refreshToken = (resp: RefreshTokenResponse) => ({
+  type: "refreshToken" as const,
+  resp: {
+    accessToken: resp.accessToken,
+    refreshToken: resp.refreshToken,
   },
 });
 

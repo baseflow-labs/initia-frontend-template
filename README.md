@@ -2,8 +2,6 @@
 
 ## To Do
 
-- Add Token Refresh to Auth API Setup
-- Build Dynamic Access Roles (API Integration)
 - Centralize identity control (theme color, logo ,name)
 - Fix changelog generating script
 - Update documentation (read me, commit convention)
@@ -21,12 +19,13 @@
   - searchable & clearable select
   - nested form
 - build form wizard
+- New apis
+  - return values of TablesNames
+  - export file by field & filters
 - build datatable with ...
   - server side filtering
   - server side search
   - scroll vs pagination
-  - column visibility control (show / hide + re-order)
-  - export with customization to csv, excel, pdf
   - row selection (bulk actions)
   - responsiveness to cards view
   - details panel option

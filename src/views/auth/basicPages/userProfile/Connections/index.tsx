@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-import TempCover from "../../../../../assets/images/public-bg.jpg";
 import TempProfilePhoto from "../../../../../assets/images/profile-image-placeholder.png";
 
 

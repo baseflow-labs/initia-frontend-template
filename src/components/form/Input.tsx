@@ -15,6 +15,7 @@ import SelectManyInput from "./inputs/selectMany";
 import MultipleEntriesInput from "./inputs/multipleEntries";
 import TextareaInput from "./inputs/textarea";
 import RangeInput from "./inputs/range";
+import CheckboxInput from "./inputs/checkbox";
 
 type FinalInput = InputProps &
   React.InputHTMLAttributes<HTMLInputElement> &
@@ -38,6 +39,7 @@ function renderByType(type: any, props: any) {
   if (type === "otp") return <OtpInput {...input} />;
   if (type === "textarea") return <TextareaInput {...input} />;
   if (type === "multipleEntries") return <MultipleEntriesInput {...input} />;
+  if (type === "checkbox") return <CheckboxInput {...input} />;
   if (type === "title")
     return <div className="h4 text-dark">{input.defaultValue}</div>;
   return <DefaultInput type={type} {...input} />;

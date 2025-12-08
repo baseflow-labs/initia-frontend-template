@@ -6,6 +6,7 @@ module.exports = {
       "always",
       [
         "users",
+        "auth",
         "profile",
         "dashboard",
         "settings",

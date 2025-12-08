@@ -1,17 +1,30 @@
 export const inputs = (t: Function) => () => [
   {
-    type: "custom",
     name: "name",
-    label: t("Auth.Users.Name"),
+    label: t("Auth.Settings.Admin.Metadata.Name"),
+    type: "text",
+    required: true,
+    double: true
   },
   {
-    type: "phoneNumber",
-    name: "username",
-    label: t("Global.Labels.PhoneNumber"),
+    name: "logo",
+    label: t("Auth.Settings.Admin.Metadata.Logo"),
+    type: "file",
+    required: true,
+    double: true
   },
   {
-    type: "email",
-    name: "email",
-    label: t("Global.Form.Labels.Email"),
+    name: "slogan",
+    label: t("Auth.Settings.Admin.Metadata.Slogan"),
+    type: "text",
+    required: false,
+    double: true
+  },
+  {
+    name: "phoneNumber",
+    label: t("Auth.Settings.Admin.Metadata.PhoneNumber"),
+    type: "numberText",
+    required: false,
+    double: true
   },
 ];
