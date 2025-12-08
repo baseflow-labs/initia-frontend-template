@@ -10,6 +10,8 @@ const SystemDataProcessingView = () => {
       name: "dataFile",
       label: t("Auth.Settings.Admin.BulkDataInsertion.DataFileUpload"),
       type: "file",
+      required: true,
+      fullWidth: true,
     },
   ];
 
@@ -18,7 +20,9 @@ const SystemDataProcessingView = () => {
       name: "column",
       label: t("Auth.Settings.Admin.BulkDataInsertion.DataFileUpload"),
       type: "select",
-      options: []
+      options: [],
+      required: true,
+      fullWidth: true,
     },
   ];
 
