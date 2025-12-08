@@ -7,6 +7,7 @@ import UserActivityView from "./userActivity";
 import UsersView from "./users";
 import SystemMetadataSettingsView from "./metadata";
 import SystemDataBulkInsertionView from "./bulkInseration";
+import BackupSettingsView from "./backup";
 
 const SystemSettingsView = () => {
   const { t } = useTranslation();
@@ -23,6 +24,10 @@ const SystemSettingsView = () => {
     {
       title: t("Auth.Settings.Admin.Users.Title"),
       body: <UsersView />
+    },
+    {
+      title: t("Auth.Settings.Admin.Backup.Title"),
+      body: <BackupSettingsView />
     },
     {
       title: t("Auth.Settings.Admin.Metadata.Title"),

@@ -111,6 +111,27 @@
     },
     "Settings": {
       "Admin": {
+        "Backup": {
+          "AutoSettings": {
+            "KeptBackups": "Kept Backups Count",
+            "Period": "Period",
+            "Title": "Auto Backup Settings",
+            "Unit": {
+              "Days": "Days",
+              "Months": "Months",
+              "Title": "Unit",
+              "Weeks": "Weeks"
+            }
+          },
+          "BackupsManagement": {
+            "CreateNewBackupNow": "Create New Backup Now",
+            "CurrentBackups": "Existing Backups",
+            "RemoveSelectedBackup": "Remove Selected Backup",
+            "RestoreSystemToSelectedBackup": "Restore System To Selected Backup",
+            "Title": "Backups Management"
+          },
+          "Title": "Backup Settings"
+        },
         "BulkDataInsertion": {
           "DataFileUpload": "Data Upload",
           "DataProcessing": {

@@ -111,6 +111,27 @@
     },
     "Settings": {
       "Admin": {
+        "Backup": {
+          "AutoSettings": {
+            "KeptBackups": "عدد النسخ الاحتياطية المحتفظ بها",
+            "Period": "الفاصل الزمني بين كل نسخ احتياطي آلي",
+            "Title": "إعدادات النسخ الاحتياطي الآلي",
+            "Unit": {
+              "Days": "يوم / أيام",
+              "Months": "شهر / أشهر",
+              "Title": "الوحدة الزمنية",
+              "Weeks": "أسبوع / أسابيع"
+            }
+          },
+          "BackupsManagement": {
+            "CreateNewBackupNow": "إنشاء نسخة احتياطية جديدة الآن",
+            "CurrentBackups": "النسخ الاحتياطية الموجودة",
+            "RemoveSelectedBackup": "حذف النسخة الاحتياطية المحددة",
+            "RestoreSystemToSelectedBackup": "استعادة البيانات إلى النسخة المحددة",
+            "Title": "إدارة النسخ الاحتياطية"
+          },
+          "Title": "إدارة النسخ الاحتياطي للبيانات"
+        },
         "BulkDataInsertion": {
           "DataFileUpload": "تحميل البيانات",
           "DataProcessing": {
