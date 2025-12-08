@@ -79,9 +79,9 @@ const SystemDataProcessingView = () => {
   return (
     <div className="row">
       <div className="col-md-12 my-4">
-        <h1>{t("Auth.Settings.Admin.BulkDataInsertion.DataProcessing.Title")}</h1>
+        <h2>{t("Auth.Settings.Admin.BulkDataInsertion.DataProcessing.Title")}</h2>
 
-        <h5>{t("Auth.Settings.Admin.BulkDataInsertion.DataProcessing.Description")}</h5>
+        <h6>{t("Auth.Settings.Admin.BulkDataInsertion.DataProcessing.Description")}</h6>
       </div>
       
       {steps.map((step, i) => (
