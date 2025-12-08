@@ -176,6 +176,7 @@
           "Name": "Name",
           "PhoneNumber": "Phone Number",
           "Slogan": "Slogan",
+          "ThemeColor": "Theme Color",
           "Title": "Metadata"
         },
         "RolePermissions": {

@@ -176,6 +176,7 @@
           "Name": "اسم النظام",
           "PhoneNumber": "رقم الهاتف",
           "Slogan": "الشعار اللفظي",
+          "ThemeColor": "لون النظام",
           "Title": "هوية النظام"
         },
         "RolePermissions": {

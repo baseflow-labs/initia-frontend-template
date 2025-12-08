@@ -2,13 +2,16 @@
 
 ## To Do
 
-- Centralize identity control (theme color, logo ,name)
 - Fix changelog generating script
 - Update documentation (read me, commit convention)
 - Split localization files into smaller chunks
 - wrap with vite / turbo-back
 - build analysis tools integration prep
 - build form various input types
+  - date, time, date time, month, year, weekday
+  - checkbox & radio layouts (inline, stacked, card-based, photo-based)
+  - button-based radio
+  - button-based switch
   - rich text editor
   - google maps picker
   - color picker
@@ -17,12 +20,20 @@
   - rating stars
   - card-based / photo-based radio & checkbox
   - searchable & clearable select
-  - nested form
+  - nested form layouts (with / without table, within / split form)
 - data view options
   - google maps view
   - calendar view
   - kanban view
   - gallery / photo grid view
+  - accordion
+  - carousel view
+  - modal
+  - toaster
+  - tabs
+  - table
+  - js maps
+  - charts & stat cards
 - build form wizard
 - New apis
   - return values of TablesNames
@@ -80,7 +91,7 @@
     - SIS
     - Encyclopedia
 - build dark / light mode, color themes switcher, horizontal / vertical layout switcher, boxed / full-width layout switcher
-- build onboarding proccess (spread in admin settings + first login trigger wizard)
+- build onboarding process (spread in admin settings + first login trigger wizard)
 - build admin advanced settings
   - system health monitoring
   - data import/export
@@ -96,7 +107,15 @@
     - localization values
     - initial dark mode
     - env vars
-- build announcments / notifications manual generation service
+    - per user role theme color
+    - services control (build services with integration)
+    - form of forms (with user-role based workflow)
+  - contents
+    - policy, terms & conditions with localization
+    - landing page contents management
+- build advanced user controls
+  - dashboard customization
+- build announcements / notifications manual generation service
 - Build technical & business documentation 
 
 ## 🚀 Getting Started
