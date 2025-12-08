@@ -554,16 +554,25 @@
         "Filters": {
           "AddFilters": "إضافة فلاتر",
           "Field": "الحقل",
-          "Operator": "العملية",
+          "Operators": {
+            "Equals": "يساوي",
+            "GreaterThan": "أكبر من",
+            "GreaterThanOrEqual": "أكبر من أو يساوي",
+            "LessThan": "أصغر من",
+            "LessThanOrEqual": "أصغر من أو يساوي",
+            "NotEquals": "لا يساوي",
+            "Title": "العملية المنطقية"
+          },
           "Value": "القيمة"
         },
         "SelectFieldsToExport": "اختيار الحقول للتصدير...",
         "Title": "تصدير",
         "Type": {
-          "CSV": "CSV",
-          "Excel": "Excel",
-          "PDF": "PDF",
-          "Title": "نوع الملف"
+          "CSV": "ملف CSV",
+          "Excel": "ملف Excel",
+          "PDF": "ملف PDF",
+          "Print": "طباعة",
+          "Title": "نوع التصدير"
         }
       }
     }

@@ -72,6 +72,7 @@ const ExportModal: React.FC<Props> = ({
                 { label: t('Global.Table.Export.Type.CSV'), value: 'csv' },
                 { label: t('Global.Table.Export.Type.Excel'), value: 'excel' },
                 { label: t('Global.Table.Export.Type.PDF'), value: 'pdf' },
+                { label: t('Global.Table.Export.Type.Print'), value: 'print' },
               ],
               defaultValue: 'csv',
             },
@@ -93,14 +94,14 @@ const ExportModal: React.FC<Props> = ({
                 {
                   type: 'select',
                   name: 'operator',
-                  label: t("Global.Table.Export.Filters.Operator"),
+                  label: t("Global.Table.Export.Filters.Operators.Title"),
                   options: [
-                    { value: '=' },
-                    { value: '!=' },
-                    { value: '<' },
-                    { value: '<=' },
-                    { value: '>' },
-                    { value: '>=' },
+                    { value: '=', label: t("Global.Table.Export.Filters.Operators.Equals") },
+                    { value: '!=', label: t("Global.Table.Export.Filters.Operators.NotEquals") },
+                    { value: '<', label: t("Global.Table.Export.Filters.Operators.LessThan") },
+                    { value: '<=', label: t("Global.Table.Export.Filters.Operators.LessThanOrEqual") },
+                    { value: '>', label: t("Global.Table.Export.Filters.Operators.GreaterThan") },
+                    { value: '>=', label: t("Global.Table.Export.Filters.Operators.GreaterThanOrEqual") },
                   ]
                 },
                 {

@@ -11,7 +11,6 @@ import SystemDataBulkInsertionView from "./bulkInseration";
 const SystemSettingsView = () => {
   const { t } = useTranslation();
 
-
   const tabs = [
     {
       title: t("Auth.Settings.Admin.UserActivity.Title"),

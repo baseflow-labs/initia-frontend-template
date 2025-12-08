@@ -24,16 +24,23 @@
   - export file by field & filters
 - build datatable with ...
   - server side filtering
+    - per type (text, number, date, boolean, select, multi-select)
+    - default filter values
+    - advanced filters (AND/OR conditions, operators)
+    - localstorage saved filters
+  - localstorage saved columns (visibility, order)
   - server side search
   - scroll vs pagination
-  - row selection (bulk actions)
+  - row selection (bulk standard & custom actions)
+  - preset column rendering (badges, progress, boolean, select, multi-select, avatar, image, type-based)
+  - custom column rendering
   - responsiveness to cards view
   - details panel option
-  - column custom cell rendering (badges, progress, boolean, select, avatar, type-based)
+  - record view options (card, image-oriented, table)
+  - role-based columns & actions
   - grouping option
-  - fixed header & footer
+  - fixed header, footer & columns (to choose)
   - record duplicates option
-  - export template & import
   - data localization support
   - width control
 - build initial next.js landing page templates

@@ -554,15 +554,24 @@
         "Filters": {
           "AddFilters": "Add Filters",
           "Field": "Field",
-          "Operator": "Operator",
+          "Operators": {
+            "Equals": "Equals",
+            "GreaterThan": "Greater Than",
+            "GreaterThanOrEqual": "Greater Than Or Equal",
+            "LessThan": "Less Than",
+            "LessThanOrEqual": "Less Than Or Equal",
+            "NotEquals": "Not Equals",
+            "Title": "Operator"
+          },
           "Value": "Value"
         },
         "SelectFieldsToExport": "Select  Fields To Export...",
         "Title": "Export",
         "Type": {
-          "CSV": "CSV",
-          "Excel": "Excel",
-          "PDF": "PDF",
+          "CSV": "CSV File",
+          "Excel": "Excel File",
+          "PDF": "PDF File",
+          "Print": "Print",
           "Title": "Export Type"
         }
       }
