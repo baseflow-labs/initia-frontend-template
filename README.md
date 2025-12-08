@@ -18,6 +18,11 @@
   - card-based / photo-based radio & checkbox
   - searchable & clearable select
   - nested form
+- data view options
+  - google maps view
+  - calendar view
+  - kanban view
+  - gallery / photo grid view
 - build form wizard
 - New apis
   - return values of TablesNames
@@ -75,6 +80,23 @@
     - SIS
     - Encyclopedia
 - build dark / light mode, color themes switcher, horizontal / vertical layout switcher, boxed / full-width layout switcher
+- build onboarding proccess (spread in admin settings + first login trigger wizard)
+- build admin advanced settings
+  - system health monitoring
+  - data import/export
+  - api keys management
+  - integrations management
+  - session management
+  - IP whitelisting / blacklisting
+  - files management
+  - configurations
+    - password policy
+    - files upload limits
+    - enabled languages
+    - localization values
+    - initial dark mode
+    - env vars
+- build announcments / notifications manual generation service
 - Build technical & business documentation 
 
 ## 🚀 Getting Started
