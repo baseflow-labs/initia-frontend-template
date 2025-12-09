@@ -18,7 +18,6 @@
   - calendar view
   - kanban view
   - gallery / photo grid view
-  - accordion
   - carousel view
   - modal
   - toaster

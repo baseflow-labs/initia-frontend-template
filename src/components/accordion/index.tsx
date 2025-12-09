@@ -1,25 +1,20 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useState } from "react";
 
-import Button from "../../components/core/button";
-
 interface Props {
-  key: string;
+  id: string;
   icon?: IconProp;
   data: { header: string; body: React.ReactNode }[];
-  onAdd: () => void;
   addText: string;
-  onRemove: (i: number) => void;
 }
 
-const Accordion = ({ key, data, icon, onAdd, addText, onRemove }: Props) => {
+const Accordion = ({ id, data, icon, addText }: Props) => {
   const [activeCollapse, setActiveCollapse] = useState(-1);
 
   return (
     <Fragment>
-      <div className="accordion accordion-flush mt-4" id={key}>
+      <div className="accordion accordion-flush mt-4" id={id}>
         {data?.map(({ header, body }, i) => (
           <div className="accordion-item mb-4" key={i}>
             <h2 className="accordion-header mb-3" id={"heading" + String(i)}>
@@ -36,17 +31,6 @@ const Accordion = ({ key, data, icon, onAdd, addText, onRemove }: Props) => {
                   {icon && <FontAwesomeIcon icon={icon} className="me-2" />}{" "}
                   {header}
                 </button>
-
-                <Button
-                  color="ghost"
-                  text="danger"
-                  size="sm"
-                  type="button"
-                  className="border border-1 rounded-4 py-3 ms-2 px-3"
-                  onClick={() => onRemove(i)}
-                >
-                  <FontAwesomeIcon icon={faTrash} />
-                </Button>
               </div>
             </h2>
 
@@ -62,19 +46,6 @@ const Accordion = ({ key, data, icon, onAdd, addText, onRemove }: Props) => {
           </div>
         ))}
       </div>
-
-      <Button
-        color="dark"
-        outline
-        type="button"
-        className="my-4"
-        onClick={() => {
-          setActiveCollapse(data.length);
-          onAdd();
-        }}
-      >
-        {icon && <FontAwesomeIcon icon={icon} />} {addText}
-      </Button>
     </Fragment>
   );
 };
