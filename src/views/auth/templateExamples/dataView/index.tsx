@@ -1,44 +1,42 @@
-import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
-import Accordion from "../../../../components/accordion";
-import { faAdd } from "@fortawesome/free-solid-svg-icons";
+import CollapseGroup from "../../../../components/collapse";
+import PageTemplate from "../../../../layouts/auth/pages/pageTemplate";
 
 const TemplateDataViewExamplesView = () => {
   const { t } = useTranslation();
 
   const dataViewExamples = [
     {
-      title: t("Auth.TemplateExamples.DataView.Example1.Title"),
+      title: t("Auth.Examples.DataView.CollapseGroup"),
       body: (
-        <Accordion
-          id="123"
-          data={[
+        <CollapseGroup
+          items={[
             {
-              header: t("Auth.TemplateExamples.DataView.Example1.Item1.Header"),
-              body: <>This is test 1</>,
+              title: t("Auth.Examples.DataView.Test1.Title"),
+              content: <>{t("Auth.Examples.DataView.Test1.Body")}</>,
             },
             {
-              header: t("Auth.TemplateExamples.DataView.Example1.Item2.Header"),
-              body: <>This is test 2</>,
+              title: t("Auth.Examples.DataView.Test2.Title"),
+              content: <>{t("Auth.Examples.DataView.Test2.Body")}</>,
             },
           ]}
-          icon={faAdd}
-          addText=""
         />
       ),
     },
   ];
 
   return (
-    <div className="row">
-      {dataViewExamples.map((example, idx) => (
-        <div className="col-12 col-md-6 mb-4" key={idx}>
-          <h3 className="mb-3">{example.title}</h3>
+    <PageTemplate title={t("Auth.Examples.DataView.Title")}>
+      <div className="row">
+        {dataViewExamples.map((example, idx) => (
+          <div className="col-12 col-md-6 mb-4" key={idx}>
+            <h3 className="mb-3">{example.title}</h3>
 
-          {example.body}
-        </div>
-      ))}
-    </div>
+            {example.body}
+          </div>
+        ))}
+      </div>
+    </PageTemplate>
   );
 };
 

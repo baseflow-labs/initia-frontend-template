@@ -18,6 +18,18 @@
       "Welcome": "مرحباً"
     },
     "Examples": {
+      "DataView": {
+        "CollapseGroup": "عرض",
+        "Test1": {
+          "Body": "محتوى ١",
+          "Title": "عنوان ١"
+        },
+        "Test2": {
+          "Body": "محتوى ٢",
+          "Title": "عنوان ٢"
+        },
+        "Title": "أمثلة عرض البيانات"
+      },
       "Form": {
         "BooleanButton": "تأكيد على شكل زر",
         "BooleanCheckbox": "تأكيد",
