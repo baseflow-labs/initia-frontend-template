@@ -3,6 +3,7 @@ import React from "react";
 import { InputProps } from "../../..";
 import CardBasedSelectionView from "../common/cardBased";
 import ImageBasedSelectionView from "../common/imageBased";
+import ButtonBasedSelectionView from "../common/buttonBased";
 
 type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 
@@ -26,6 +27,15 @@ const CheckboxesInput: React.FC<FinalInput> = ({
     case "image":
       return (
         <ImageBasedSelectionView
+          {...input}
+          stacked={stacked}
+          options={options}
+          type="checkbox"
+        />
+      );
+    case "button":
+      return (
+        <ButtonBasedSelectionView
           {...input}
           stacked={stacked}
           options={options}
