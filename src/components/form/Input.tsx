@@ -16,6 +16,7 @@ import CheckboxesInput from "./inputs/selection/checkbox";
 import RadioInput from "./inputs/selection/radio";
 import SelectManyInput from "./inputs/selectMany";
 import TextareaInput from "./inputs/textarea";
+import BooleanInput from "./inputs/boolean";
 
 type FinalInput = InputProps &
   React.InputHTMLAttributes<HTMLInputElement> &
@@ -40,6 +41,7 @@ function renderByType(type: any, props: any) {
   if (type === "textarea") return <TextareaInput {...input} />;
   if (type === "multipleEntries") return <MultipleEntriesInput {...input} />;
   if (type === "checkboxes") return <CheckboxesInput {...input} />;
+  if (type === "boolean") return <BooleanInput {...input} />;
   if (type === "title")
     return <div className="h4 text-dark">{input.defaultValue}</div>;
   return <DefaultInput type={type} {...input} />;

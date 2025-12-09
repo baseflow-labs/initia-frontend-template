@@ -19,11 +19,12 @@
     },
     "Examples": {
       "Form": {
-        "ButtonCheckboxes": "Button Checkboxes",
+        "BooleanCheckbox": "Boolean Checkbox",
+        "BooleanButton": "Button Checkbox",
+        "BooleanCheckboxes": "Button Checkboxes",
         "ButtonRadio": "Button Radio",
         "CardCheckboxes": "Card Checkboxes",
         "CardRadio": "Card Radio",
-        "Checkbox": "Checkbox",
         "Checkboxes": "Checkboxes",
         "Date": "Date",
         "Description": "This is example of a description text",
@@ -44,7 +45,7 @@
         "Radio": "Radio",
         "Select": "Select",
         "SelectMany": "Select Many",
-        "StackedButtonCheckboxes": "Stacked Button Checkboxes",
+        "StackedBooleanCheckboxes": "Stacked Button Checkboxes",
         "StackedButtonRadio": "Stacked Button Radio",
         "StackedCardCheckboxes": "Stacked Card Checkboxes",
         "StackedCardRadio": "Stacked Card Radio",

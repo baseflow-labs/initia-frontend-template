@@ -38,6 +38,7 @@ interface InputBasicProps {
     | "selectMany"
     | "phoneNumber"
     | "multipleEntries"
+    | "boolean"
     | "checkboxes"
     | string;
   required?: boolean;
@@ -71,7 +72,8 @@ export interface InputSingleProps extends InputBasicProps {
   fullWidth?: boolean;
   hasFile?: boolean;
   hideFile?: boolean;
-  layout?: "card" | "image" | string;
+  layout?: "card" | "image" | "button" | "checkbox" | "switch" | string;
+  booleanLabels?: { trueLabel: string; falseLabel: string };
   moneyUnit?: boolean;
   prefixText?: string | number;
   postfixText?: string | number;

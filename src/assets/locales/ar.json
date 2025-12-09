@@ -19,11 +19,12 @@
     },
     "Examples": {
       "Form": {
-        "ButtonCheckboxes": "اختيار متعدد على شكل أزرار",
+        "BooleanCheckbox": "تأكيد",
+        "BooleanButton": "تأكيد على شكل زر",
+        "BooleanCheckboxes": "اختيار متعدد على شكل أزرار",
         "ButtonRadio": "اختيار من متعدد على شكل أزرار",
         "CardCheckboxes": "اختيار متعدد على شكل بطاقات",
         "CardRadio": "اختيار من متعدد على شكل بطاقات",
-        "Checkbox": "تأكيد",
         "Checkboxes": "اختيار متعدد",
         "Date": "التاريخ",
         "Description": "وصف للعرض والتجربة",
@@ -44,7 +45,7 @@
         "Radio": "اختيار من متعدد",
         "Select": "اختيار",
         "SelectMany": "اختيار متعدد",
-        "StackedButtonCheckboxes": "اختيار متعدد على شكل أزرار عامودية",
+        "StackedBooleanCheckboxes": "اختيار متعدد على شكل أزرار عامودية",
         "StackedButtonRadio": "اختيار من متعدد على شكل أزرار عامودية",
         "StackedCardCheckboxes": "اختيار متعدد على شكل بطاقات عامودية",
         "StackedCardRadio": "اختيار من متعدد على شكل بطاقات عامودية",

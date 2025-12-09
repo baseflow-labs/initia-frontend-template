@@ -9,7 +9,6 @@
 - build analysis tools integration prep
 - build form various input types
   - date, time, date time, month, year, weekday
-  - button-based switch
   - rich text editor
   - google maps picker
   - color picker
