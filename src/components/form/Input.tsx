@@ -17,6 +17,7 @@ import RadioInput from "./inputs/selection/radio";
 import SelectManyInput from "./inputs/selectMany";
 import TextareaInput from "./inputs/textarea";
 import BooleanInput from "./inputs/boolean";
+import RatingInput from "./inputs/rating";
 
 type FinalInput = InputProps &
   React.InputHTMLAttributes<HTMLInputElement> &
@@ -44,6 +45,10 @@ const renderByType = (type: any, props: any) => {
   if (type === "boolean") return <BooleanInput {...input} />;
   if (type === "title")
     return <div className="h4 text-dark">{input.defaultValue}</div>;
+  if (type === "rating")
+    return (
+      <RatingInput type={type} className="form-control-color" {...input} />
+    );
   if (type === "color")
     return (
       <DefaultInput type={type} className="form-control-color" {...input} />

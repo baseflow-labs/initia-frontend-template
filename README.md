@@ -12,7 +12,6 @@
   - rich text editor
   - google maps picker
   - slider
-  - rating stars
   - card-based / photo-based radio & checkbox
   - searchable & clearable select
   - nested form layouts (with / without table, within / split form)

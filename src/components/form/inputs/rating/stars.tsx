@@ -2,16 +2,11 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Fragment } from "react";
 import { useTranslation } from "react-i18next";
+import { InputProps } from "../..";
 
-import { InputProps } from "..";
+type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 
-type FinalInput = InputProps &
-  React.InputHTMLAttributes<HTMLInputElement> & {
-    onChange: (i: number) => void;
-    value: number;
-  };
-
-const StarsInput: React.FC<FinalInput> = ({ type, options, ...input }) => {
+const StarsInput: React.FC<FinalInput> = ({ ...input }) => {
   const { i18n } = useTranslation();
 
   return (
@@ -22,13 +17,22 @@ const StarsInput: React.FC<FinalInput> = ({ type, options, ...input }) => {
           .map((_, i) => (
             <h2
               role="button"
-              onClick={() => input.onChange && input.onChange(i + 1)}
+              onClick={() =>
+                input.onChange &&
+                input.onChange({
+                  target: { name: input.name, value: i + 1 },
+                } as any)
+              }
               key={i}
             >
               <FontAwesomeIcon
                 icon={faStar}
                 className={`text-${
-                  input.value && input.value > i ? "warning" : "muted"
+                  input.value &&
+                  typeof input.value === "number" &&
+                  input.value > i
+                    ? "primary"
+                    : "muted"
                 }`}
               />
             </h2>

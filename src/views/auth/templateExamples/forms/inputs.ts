@@ -100,7 +100,12 @@ export const inputs = (t: Function) => [
     name: "booleanSwitch",
     label: t("Auth.Examples.Form.BooleanSwitch"),
     layout: "switch",
-    double: true,
+  },
+  {
+    type: "rating",
+    name: "starRating",
+    label: t("Auth.Examples.Form.StarRating"),
+    layout: "stars",
   },
   {
     type: "checkboxes",
