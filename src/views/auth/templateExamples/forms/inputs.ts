@@ -61,12 +61,6 @@ export const inputs = (t: Function) => [
     label: t("Auth.Examples.Form.Location"),
   },
   {
-    type: "radio",
-    name: "radio",
-    label: t("Auth.Examples.Form.Radio"),
-    options: inputOptions(t),
-  },
-  {
     type: "checkbox",
     name: "checkbox",
     label: t("Auth.Examples.Form.Checkbox"),
@@ -81,6 +75,19 @@ export const inputs = (t: Function) => [
     type: "checkboxes",
     name: "checkboxes",
     label: t("Auth.Examples.Form.StackedCheckboxes"),
+    stacked: true,
+    options: inputOptions(t),
+  },
+  {
+    type: "radio",
+    name: "radio",
+    label: t("Auth.Examples.Form.Radio"),
+    options: inputOptions(t),
+  },
+  {
+    type: "radio",
+    name: "radio",
+    label: t("Auth.Examples.Form.StackedRadio"),
     stacked: true,
     options: inputOptions(t),
   },

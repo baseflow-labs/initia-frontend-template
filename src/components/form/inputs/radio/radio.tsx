@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 
-import { InputProps } from "..";
+import { InputProps } from "../..";
 
 type FinalInput = InputProps &
   React.InputHTMLAttributes<HTMLInputElement> & { row?: boolean };
@@ -8,12 +8,12 @@ type FinalInput = InputProps &
 const RadioInput: React.FC<FinalInput> = ({
   type,
   options,
-  row = true,
+  stacked,
   ...input
 }) => {
   return (
     <Fragment>
-      <span className={row ? "d-flex" : undefined}>
+      <span className={stacked ? undefined : "d-flex"}>
         {options?.map((option, i) => (
           <div className="form-check my-2" key={i}>
             <input

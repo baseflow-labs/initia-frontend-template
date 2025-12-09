@@ -1,5 +1,4 @@
 import { useField } from "formik";
-// src/components/form/Input.tsx
 import React from "react";
 
 import { InputProps } from ".";
@@ -13,7 +12,7 @@ import MultipleEntriesInput from "./inputs/multipleEntries";
 import OtpInput from "./inputs/otp";
 import PasswordInput from "./inputs/password";
 import PhoneNoInput from "./inputs/phoneNo";
-import RadioInput from "./inputs/radio";
+import RadioInput from "./inputs/radio/radio";
 import RangeInput from "./inputs/range";
 import SelectInput from "./inputs/select";
 import SelectManyInput from "./inputs/selectMany";

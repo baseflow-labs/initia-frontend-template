@@ -20,6 +20,7 @@
     "Examples": {
       "Form": {
         "Checkbox": "Checkbox",
+        "Checkboxes": "Checkboxes",
         "Date": "Date",
         "Email": "Email",
         "File": "File",
@@ -36,6 +37,8 @@
         "Radio": "Radio",
         "Select": "Select",
         "SelectMany": "Select Many",
+        "StackedCheckboxes": "Stacked Checkboxes",
+        "StackedRadio": "Stacked Radio",
         "Text": "Text",
         "Textarea": "Textarea"
       }

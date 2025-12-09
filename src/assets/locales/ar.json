@@ -19,7 +19,8 @@
     },
     "Examples": {
       "Form": {
-        "Checkbox": "اختيار متعدد",
+        "Checkbox": "تأكيد",
+        "Checkboxes": "اختيار متعدد",
         "Date": "التاريخ",
         "Email": "البريد الإلكتروني",
         "File": "ملف",
@@ -33,9 +34,11 @@
         "Option3": "الخيار 3",
         "Password": "كلمة المرور",
         "PhoneNumber": "رقم الهاتف",
-        "Radio": "اختيار دائري",
+        "Radio": "اختيار من متعدد",
         "Select": "اختيار",
         "SelectMany": "اختيار متعدد",
+        "StackedCheckboxes": "اختيار متعدد عامودي",
+        "StackedRadio": "اختيار من متعدد عامودي",
         "Text": "نص",
         "Textarea": "منطقة نص"
       }
