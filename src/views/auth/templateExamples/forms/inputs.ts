@@ -246,6 +246,8 @@ export const inputs = (t: Function) => [
     type: "range",
     name: "range",
     label: t("Auth.Examples.Form.Range"),
+    min: 10,
+    max: 120,
   },
   {
     type: "multipleEntries",

@@ -37,6 +37,7 @@ export interface InputTypeProps {
     | "multipleEntries"
     | "boolean"
     | "checkboxes"
+    | "range"
     | string;
 }
 interface InputBasicProps extends InputTypeProps {
@@ -355,7 +356,13 @@ const Form: React.FC<Props> = ({
                         >
                           <InlineElement content={prefixTexts} flip />
 
-                          <InputComp id={input.name} type={type} {...input} />
+                          <InputComp
+                            id={input.name}
+                            type={type}
+                            min={min}
+                            max={max}
+                            {...input}
+                          />
 
                           <InlineElement
                             content={moneyUnit ? <MoneyUnit /> : postfixText}
@@ -394,7 +401,13 @@ const Form: React.FC<Props> = ({
                     >
                       <InlineElement content={prefixTexts} flip />
 
-                      <InputComp id={input.name} type={type} {...input} />
+                      <InputComp
+                        id={input.name}
+                        type={type}
+                        min={min}
+                        max={max}
+                        {...input}
+                      />
 
                       <InlineElement
                         content={moneyUnit ? <MoneyUnit /> : postfixText}
@@ -405,83 +418,55 @@ const Form: React.FC<Props> = ({
 
                     {belowComp}
 
-                    {type === "range" && (
-                      <Fragment>
-                        <div className={`input-group`}>
-                          <DefaultInput
-                            name={input.name}
-                            className="form-control-md"
-                            value={formik.values[input.name]}
-                          />
+                    {input.name === "fontSize" && (
+                      <div className="row mt-3">
+                        <h4 className="col-md-12 mb-3">
+                          {t("Auth.Settings.Samples.Title")}
+                        </h4>
 
-                          <InlineElement
-                            flip
-                            content={
-                              <FontAwesomeIcon
-                                icon={faFilter}
-                                role="button"
-                                onClick={() =>
-                                  formik.setFieldValue(
-                                    input.name,
-                                    input.defaultValue
-                                  )
-                                }
-                              />
-                            }
-                          />
+                        <h3
+                          className="col-md-6"
+                          style={{
+                            fontSize: 1.75 * formik.values.fontSize,
+                          }}
+                        >
+                          {t("Auth.Settings.Samples.H3Sample")}
+                        </h3>
+
+                        <h4
+                          className="col-md-6"
+                          style={{ fontSize: 1.5 * formik.values.fontSize }}
+                        >
+                          {t("Auth.Settings.Samples.H4Sample")}
+                        </h4>
+
+                        <h5
+                          className="col-md-6"
+                          style={{
+                            fontSize: 1.25 * formik.values.fontSize,
+                          }}
+                        >
+                          {t("Auth.Settings.Samples.H5Sample")}
+                        </h5>
+
+                        <label
+                          className="form-label col-md-6"
+                          style={{ fontSize: 1 * formik.values.fontSize }}
+                        >
+                          {t("Auth.Settings.Samples.LabelSample")}
+                        </label>
+
+                        <div
+                          className="col-md-6"
+                          style={{
+                            fontSize: 0.875 * formik.values.fontSize,
+                          }}
+                        >
+                          <small>
+                            {t("Auth.Settings.Samples.SmallSample")}
+                          </small>
                         </div>
-
-                        {input.name === "fontSize" && (
-                          <div className="row mt-3">
-                            <h4 className="col-md-12 mb-3">
-                              {t("Auth.Settings.Samples.Title")}
-                            </h4>
-
-                            <h3
-                              className="col-md-6"
-                              style={{
-                                fontSize: 1.75 * formik.values.fontSize,
-                              }}
-                            >
-                              {t("Auth.Settings.Samples.H3Sample")}
-                            </h3>
-
-                            <h4
-                              className="col-md-6"
-                              style={{ fontSize: 1.5 * formik.values.fontSize }}
-                            >
-                              {t("Auth.Settings.Samples.H4Sample")}
-                            </h4>
-
-                            <h5
-                              className="col-md-6"
-                              style={{
-                                fontSize: 1.25 * formik.values.fontSize,
-                              }}
-                            >
-                              {t("Auth.Settings.Samples.H5Sample")}
-                            </h5>
-
-                            <label
-                              className="form-label col-md-6"
-                              style={{ fontSize: 1 * formik.values.fontSize }}
-                            >
-                              {t("Auth.Settings.Samples.LabelSample")}
-                            </label>
-
-                            <div
-                              className="col-md-6"
-                              style={{
-                                fontSize: 0.875 * formik.values.fontSize,
-                              }}
-                            >
-                              <small>
-                                {t("Auth.Settings.Samples.SmallSample")}
-                              </small>
-                            </div>
-                          </div>
-                        )}
-                      </Fragment>
+                      </div>
                     )}
                   </div>
                 );

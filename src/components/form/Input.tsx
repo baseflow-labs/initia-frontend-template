@@ -10,7 +10,6 @@ import MultipleEntriesInput from "./inputs/multipleEntries";
 import OtpInput from "./inputs/otp";
 import PasswordInput from "./inputs/password";
 import PhoneNoInput from "./inputs/phoneNo";
-import RangeInput from "./inputs/range";
 import SelectInput from "./inputs/select";
 import CheckboxesInput from "./inputs/selection/checkbox";
 import RadioInput from "./inputs/selection/radio";
@@ -18,6 +17,7 @@ import SelectManyInput from "./inputs/selectMany";
 import TextareaInput from "./inputs/textarea";
 import BooleanInput from "./inputs/boolean";
 import RatingInput from "./inputs/rating";
+import RangeInput from "./inputs/number/range";
 
 type FinalInput = InputProps &
   React.InputHTMLAttributes<HTMLInputElement> &
@@ -27,7 +27,8 @@ type FinalInput = InputProps &
   };
 
 const renderByType = (type: any, props: any) => {
-  const input = props as any;
+  const { min, max, ...input } = props as any;
+
   if (type === "select" && input.options) return <SelectInput {...input} />;
   if (type === "selectMany" && input.options)
     return <SelectManyInput {...input} />;
@@ -53,6 +54,9 @@ const renderByType = (type: any, props: any) => {
     return (
       <DefaultInput type={type} className="form-control-color" {...input} />
     );
+  if (type === "range")
+    return <RangeInput type={type} min={min} max={max} {...input} />;
+
   return <DefaultInput type={type} {...input} />;
 };
 
