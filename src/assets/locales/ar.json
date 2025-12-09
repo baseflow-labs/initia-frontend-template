@@ -69,7 +69,7 @@
         "StackedImageCheckboxes": "اختيار متعدد على شكل صور عامودية",
         "StackedImageRadio": "اختيار من متعدد على شكل صور عامودية",
         "StackedRadio": "اختيار من متعدد عامودي",
-        "StarRating": "Auth.Examples.Form.StarRating",
+        "StarRating": "ادخال تقييم",
         "Text": "نص",
         "Textarea": "منطقة نص"
       }
