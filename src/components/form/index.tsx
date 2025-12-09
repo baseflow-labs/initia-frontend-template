@@ -1,3 +1,4 @@
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -9,7 +10,6 @@ import {
 } from "formik";
 import React, { Fragment } from "react";
 import { useTranslation } from "react-i18next";
-
 import { useAppSelector } from "../../store/hooks";
 import Button from "../core/button";
 import Spinner from "../core/spinner";
@@ -58,6 +58,8 @@ interface InputBasicProps {
   options?: {
     value: string | number;
     label?: string;
+    description?: string;
+    icon?: IconProp;
   }[];
 }
 
@@ -69,6 +71,7 @@ export interface InputSingleProps extends InputBasicProps {
   fullWidth?: boolean;
   hasFile?: boolean;
   hideFile?: boolean;
+  layout?: "card" | "image" | string;
   moneyUnit?: boolean;
   prefixText?: string | number;
   postfixText?: string | number;
