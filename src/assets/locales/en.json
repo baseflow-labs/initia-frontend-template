@@ -19,9 +19,12 @@
     },
     "Examples": {
       "Form": {
+        "CardCheckboxes": "Card Checkboxes",
+        "CardRadio": "Card Radio",
         "Checkbox": "Checkbox",
         "Checkboxes": "Checkboxes",
         "Date": "Date",
+        "Description": "This is example of a description text",
         "Email": "Email",
         "File": "File",
         "Location": "Location",
@@ -37,6 +40,8 @@
         "Radio": "Radio",
         "Select": "Select",
         "SelectMany": "Select Many",
+        "StackedCardCheckboxes": "Stacked Card Checkboxes",
+        "StackedCardRadio": "Stacked Card Radio",
         "StackedCheckboxes": "Stacked Checkboxes",
         "StackedRadio": "Stacked Radio",
         "Text": "Text",

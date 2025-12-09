@@ -1,7 +1,19 @@
 const inputOptions = (t: Function) => [
-  { label: t("Auth.Examples.Form.Option1"), value: "option1" },
-  { label: t("Auth.Examples.Form.Option2"), value: "option2" },
-  { label: t("Auth.Examples.Form.Option3"), value: "option3" },
+  {
+    label: t("Auth.Examples.Form.Option1"),
+    value: "option1",
+    description: t("Auth.Examples.Form.Description"),
+  },
+  {
+    label: t("Auth.Examples.Form.Option2"),
+    value: "option2",
+    description: t("Auth.Examples.Form.Description"),
+  },
+  {
+    label: t("Auth.Examples.Form.Option3"),
+    value: "option3",
+    description: t("Auth.Examples.Form.Description"),
+  },
 ];
 
 export const inputs = (t: Function) => [
@@ -73,10 +85,27 @@ export const inputs = (t: Function) => [
   },
   {
     type: "checkboxes",
-    name: "checkboxes",
+    name: "stackedCheckboxes",
     label: t("Auth.Examples.Form.StackedCheckboxes"),
     stacked: true,
     options: inputOptions(t),
+  },
+  {
+    type: "checkboxes",
+    name: "cardCheckboxes",
+    label: t("Auth.Examples.Form.CardCheckboxes"),
+    layout: "card",
+    options: inputOptions(t),
+    double: true,
+  },
+  {
+    type: "checkboxes",
+    name: "stackedCardCheckboxes",
+    label: t("Auth.Examples.Form.StackedCardCheckboxes"),
+    layout: "card",
+    stacked: true,
+    options: inputOptions(t),
+    double: true,
   },
   {
     type: "radio",
@@ -86,10 +115,27 @@ export const inputs = (t: Function) => [
   },
   {
     type: "radio",
-    name: "radio",
+    name: "stackedRadio",
     label: t("Auth.Examples.Form.StackedRadio"),
     stacked: true,
     options: inputOptions(t),
+  },
+  {
+    type: "radio",
+    name: "cardRadio",
+    label: t("Auth.Examples.Form.CardRadio"),
+    layout: "card",
+    options: inputOptions(t),
+    double: true,
+  },
+  {
+    type: "radio",
+    name: "stackedCardRadio",
+    label: t("Auth.Examples.Form.StackedCardRadio"),
+    layout: "card",
+    stacked: true,
+    options: inputOptions(t),
+    double: true,
   },
   {
     type: "select",

@@ -19,9 +19,12 @@
     },
     "Examples": {
       "Form": {
+        "CardCheckboxes": "اختيار متعدد على شكل بطاقات",
+        "CardRadio": "اختيار من متعدد على شكل بطاقات",
         "Checkbox": "تأكيد",
         "Checkboxes": "اختيار متعدد",
         "Date": "التاريخ",
+        "Description": "وصف للعرض والتجربة",
         "Email": "البريد الإلكتروني",
         "File": "ملف",
         "Location": "الموقع",
@@ -37,6 +40,8 @@
         "Radio": "اختيار من متعدد",
         "Select": "اختيار",
         "SelectMany": "اختيار متعدد",
+        "StackedCardCheckboxes": "اختيار متعدد على شكل بطاقات عامودية",
+        "StackedCardRadio": "اختيار من متعدد على شكل بطاقات عامودية",
         "StackedCheckboxes": "اختيار متعدد عامودي",
         "StackedRadio": "اختيار من متعدد عامودي",
         "Text": "نص",
