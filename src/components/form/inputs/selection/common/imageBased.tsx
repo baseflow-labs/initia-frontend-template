@@ -55,7 +55,6 @@ const ImageBasedSelectionView = ({
             src={option.image}
             alt={option.label}
             className="card-img-top w-100"
-            style={{ height: "50px" }}
           />
 
           {option.label || option.description ? (
