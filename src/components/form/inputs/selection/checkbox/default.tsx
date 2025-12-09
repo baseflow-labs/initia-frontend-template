@@ -1,9 +1,6 @@
 import React from "react";
 
 import { InputProps } from "../../..";
-import CardBasedSelectionView from "../common/cardBased";
-import ImageBasedSelectionView from "../common/imageBased";
-import ButtonBasedSelectionView from "../common/buttonBased";
 
 type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 

@@ -1,6 +1,4 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { faFilter } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   FormikErrors,
   Form as FormikForm,
@@ -15,7 +13,6 @@ import Button from "../core/button";
 import Spinner from "../core/spinner";
 import { MoneyUnit } from "../table";
 import InputComp from "./Input";
-import DefaultInput from "./inputs/default";
 
 export interface InputTypeProps {
   type?:
