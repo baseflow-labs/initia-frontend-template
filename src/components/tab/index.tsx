@@ -2,11 +2,11 @@ import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useState } from "react";
 
-export default function TabsComp({
+const TabsComp = ({
   tabs,
 }: {
-  tabs: { id: string; title: string; icon?:IconProp; body: React.ReactNode }[];
-}) {
+  tabs: { id: string; title: string; icon?: IconProp; body: React.ReactNode }[];
+}) => {
   const [activeTab, setActiveTab] = useState(tabs[0].id);
 
   return (
@@ -36,7 +36,7 @@ export default function TabsComp({
                 background: "none",
               }}
             >
-             {tab.icon && <FontAwesomeIcon icon={tab.icon} />} {tab.title}
+              {tab.icon && <FontAwesomeIcon icon={tab.icon} />} {tab.title}
             </button>
           ))}
         </div>
@@ -45,4 +45,6 @@ export default function TabsComp({
       {tabs?.find(({ id }) => id === activeTab)?.body}
     </Fragment>
   );
-}
+};
+
+export default TabsComp;

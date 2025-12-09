@@ -17,10 +17,7 @@ import { MoneyUnit } from "../table";
 import InputComp from "./Input";
 import DefaultInput from "./inputs/default";
 
-interface InputBasicProps {
-  name: string;
-  label?: string;
-  labelNote?: string;
+export interface InputTypeProps {
   type?:
     | "text"
     | "email"
@@ -41,6 +38,11 @@ interface InputBasicProps {
     | "boolean"
     | "checkboxes"
     | string;
+}
+interface InputBasicProps extends InputTypeProps {
+  name: string;
+  label?: string;
+  labelNote?: string;
   required?: boolean;
   disabled?: boolean;
   stacked?: boolean;

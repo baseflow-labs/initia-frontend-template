@@ -1,4 +1,4 @@
-export default function TabsHeader({
+const TabsHeader = ({
   tabs,
   activeTab,
   setActiveTab,
@@ -6,7 +6,7 @@ export default function TabsHeader({
   tabs: { id: string; name: string; title: string }[];
   activeTab: string;
   setActiveTab: (id: string) => void;
-}) {
+}) => {
   return (
     <div
       className="mt-1 mx-3 mx-xl-5 mx-xxl-auto overflow-x-auto"
@@ -39,4 +39,6 @@ export default function TabsHeader({
       </div>
     </div>
   );
-}
+};
+
+export default TabsHeader;
