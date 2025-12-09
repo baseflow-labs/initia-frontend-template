@@ -11,7 +11,6 @@
   - date, time, date time, month, year, weekday
   - rich text editor
   - google maps picker
-  - color picker
   - slider
   - rating stars
   - card-based / photo-based radio & checkbox

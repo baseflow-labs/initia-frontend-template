@@ -25,7 +25,7 @@ type FinalInput = InputProps &
     bypassFormik?: boolean;
   };
 
-function renderByType(type: any, props: any) {
+const renderByType = (type: any, props: any) => {
   const input = props as any;
   if (type === "select" && input.options) return <SelectInput {...input} />;
   if (type === "selectMany" && input.options)
@@ -44,8 +44,12 @@ function renderByType(type: any, props: any) {
   if (type === "boolean") return <BooleanInput {...input} />;
   if (type === "title")
     return <div className="h4 text-dark">{input.defaultValue}</div>;
+  if (type === "color")
+    return (
+      <DefaultInput type={type} className="form-control-color" {...input} />
+    );
   return <DefaultInput type={type} {...input} />;
-}
+};
 
 const FormikBoundInput: React.FC<FinalInput> = ({ name, type, ...rest }) => {
   const [field] = useField<string>(name);

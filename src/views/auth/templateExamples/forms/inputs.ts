@@ -79,6 +79,11 @@ export const inputs = (t: Function) => [
     label: t("Auth.Examples.Form.Location"),
   },
   {
+    type: "color",
+    name: "color",
+    label: t("Auth.Examples.Form.Color"),
+  },
+  {
     type: "boolean",
     name: "booleanButton",
     label: t("Auth.Examples.Form.BooleanButton"),
@@ -95,6 +100,7 @@ export const inputs = (t: Function) => [
     name: "booleanSwitch",
     label: t("Auth.Examples.Form.BooleanSwitch"),
     layout: "switch",
+    double: true,
   },
   {
     type: "checkboxes",
@@ -115,7 +121,6 @@ export const inputs = (t: Function) => [
     label: t("Auth.Examples.Form.BooleanCheckboxes"),
     layout: "button",
     options: inputOptions(t),
-    double: true,
   },
   {
     type: "checkboxes",
@@ -124,7 +129,6 @@ export const inputs = (t: Function) => [
     layout: "button",
     stacked: true,
     options: inputOptions(t),
-    double: true,
   },
   {
     type: "checkboxes",
@@ -178,8 +182,6 @@ export const inputs = (t: Function) => [
     name: "buttonRadio",
     label: t("Auth.Examples.Form.ButtonRadio"),
     layout: "button",
-    options: inputOptions(t),
-    double: true,
   },
   {
     type: "radio",
@@ -188,7 +190,6 @@ export const inputs = (t: Function) => [
     layout: "button",
     stacked: true,
     options: inputOptions(t),
-    double: true,
   },
   {
     type: "radio",
