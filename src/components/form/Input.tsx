@@ -1,21 +1,23 @@
+import { useField } from "formik";
 // src/components/form/Input.tsx
 import React from "react";
-import { useField } from "formik";
+
 import { InputProps } from ".";
+import CheckboxInput from "./inputs/checkbox/checkbox";
+import CheckboxesInput from "./inputs/checkbox/checkboxes";
 import DateInput from "./inputs/date";
 import DefaultInput from "./inputs/default";
 import FileInput from "./inputs/file";
 import LocationInput from "./inputs/location";
+import MultipleEntriesInput from "./inputs/multipleEntries";
 import OtpInput from "./inputs/otp";
 import PasswordInput from "./inputs/password";
 import PhoneNoInput from "./inputs/phoneNo";
 import RadioInput from "./inputs/radio";
+import RangeInput from "./inputs/range";
 import SelectInput from "./inputs/select";
 import SelectManyInput from "./inputs/selectMany";
-import MultipleEntriesInput from "./inputs/multipleEntries";
 import TextareaInput from "./inputs/textarea";
-import RangeInput from "./inputs/range";
-import CheckboxInput from "./inputs/checkbox";
 
 type FinalInput = InputProps &
   React.InputHTMLAttributes<HTMLInputElement> &
@@ -40,6 +42,7 @@ function renderByType(type: any, props: any) {
   if (type === "textarea") return <TextareaInput {...input} />;
   if (type === "multipleEntries") return <MultipleEntriesInput {...input} />;
   if (type === "checkbox") return <CheckboxInput {...input} />;
+  if (type === "checkboxes") return <CheckboxesInput {...input} />;
   if (type === "title")
     return <div className="h4 text-dark">{input.defaultValue}</div>;
   return <DefaultInput type={type} {...input} />;

@@ -2,7 +2,7 @@ const inputOptions = (t: Function) => [
   { label: t("Auth.Examples.Form.Option1"), value: "option1" },
   { label: t("Auth.Examples.Form.Option2"), value: "option2" },
   { label: t("Auth.Examples.Form.Option3"), value: "option3" },
-]
+];
 
 export const inputs = (t: Function) => [
   {
@@ -64,25 +64,37 @@ export const inputs = (t: Function) => [
     type: "radio",
     name: "radio",
     label: t("Auth.Examples.Form.Radio"),
-    options: inputOptions(t)
+    options: inputOptions(t),
   },
   {
     type: "checkbox",
     name: "checkbox",
     label: t("Auth.Examples.Form.Checkbox"),
-    options: inputOptions(t)
+  },
+  {
+    type: "checkboxes",
+    name: "checkboxes",
+    label: t("Auth.Examples.Form.Checkboxes"),
+    options: inputOptions(t),
+  },
+  {
+    type: "checkboxes",
+    name: "checkboxes",
+    label: t("Auth.Examples.Form.StackedCheckboxes"),
+    stacked: true,
+    options: inputOptions(t),
   },
   {
     type: "select",
     name: "select",
     label: t("Auth.Examples.Form.Select"),
-    options: inputOptions(t)
+    options: inputOptions(t),
   },
   {
     type: "selectMany",
     name: "selectMany",
     label: t("Auth.Examples.Form.SelectMany"),
-    options: inputOptions(t)
+    options: inputOptions(t),
   },
   {
     type: "multipleEntries",
@@ -91,7 +103,11 @@ export const inputs = (t: Function) => [
     fullWidth: true,
     inputs: [
       { type: "text", name: "entryTitle", label: t("Auth.Examples.Form.Text") },
-      { type: "number", name: "entryValue", label: t("Auth.Examples.Form.Number") },
-    ]
+      {
+        type: "number",
+        name: "entryValue",
+        label: t("Auth.Examples.Form.Number"),
+      },
+    ],
   },
 ];

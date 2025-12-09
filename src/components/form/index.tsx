@@ -39,9 +39,11 @@ interface InputBasicProps {
     | "phoneNumber"
     | "multipleEntries"
     | "checkbox"
+    | "checkboxes"
     | string;
   required?: boolean;
   disabled?: boolean;
+  stacked?: boolean;
   accept?: string;
   excludeInForm?: boolean;
   defaultValue?: string | number | string[];
@@ -152,7 +154,7 @@ const Form: React.FC<Props> = ({
       switch (input.type) {
         case "radio":
         case "select":
-        case "checkbox":
+        case "checkboxes":
           acc[input.name] = input.options?.[0]?.value ?? "";
           break;
         case "multipleEntries":
@@ -201,7 +203,7 @@ const Form: React.FC<Props> = ({
             if (
               !String(value).startsWith("77") &&
               !String(value).startsWith("78") &&
-              !String(value).startsWith("79") 
+              !String(value).startsWith("79")
             ) {
               errors[name] = t("Global.Form.Errors.InvalidPhoneNumber");
             }
@@ -363,7 +365,15 @@ const Form: React.FC<Props> = ({
 
                 return (
                   <div
-                    className={`mb-2 ${fullWidth ? "col-md-12" : double ? "col-md-6" : triple ? "col-md-9" : "col-md-3"}`}
+                    className={`mb-2 ${
+                      fullWidth
+                        ? "col-md-12"
+                        : double
+                        ? "col-md-6"
+                        : triple
+                        ? "col-md-9"
+                        : "col-md-3"
+                    }`}
                     key={i}
                   >
                     <LabelView required={required} {...input} />

@@ -1,25 +1,28 @@
-
 import React from "react";
 
-import { InputProps } from "..";
+import { InputProps } from "../..";
 
 type FinalInput = InputProps &
   React.InputHTMLAttributes<HTMLInputElement> & { row?: boolean };
 
-const CheckboxInput: React.FC<FinalInput> = ({
+const CheckboxesInput: React.FC<FinalInput> = ({
   type,
   options,
-  row = true,
+  stacked,
   ...input
 }) => {
   return (
-    <div className={row ? "d-flex flex-wrap" : ""}>
+    <div className={stacked ? "" : "d-flex flex-wrap"}>
       {options?.map((option, i) => (
         <div className="form-check my-2" key={i}>
           <input
             {...input}
             value={option.value}
-            checked={input.value === option.value}
+            checked={
+              input.value && Array.isArray(input.value)
+                ? input.value.includes(option.value)
+                : false
+            }
             type="checkbox"
             className="form-check-input"
             required={false}
@@ -34,4 +37,4 @@ const CheckboxInput: React.FC<FinalInput> = ({
   );
 };
 
-export default CheckboxInput;
+export default CheckboxesInput;
