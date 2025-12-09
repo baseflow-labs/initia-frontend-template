@@ -19,9 +19,10 @@
     },
     "Examples": {
       "Form": {
-        "BooleanCheckbox": "تأكيد",
         "BooleanButton": "تأكيد على شكل زر",
+        "BooleanCheckbox": "تأكيد",
         "BooleanCheckboxes": "اختيار متعدد على شكل أزرار",
+        "BooleanSwitch": "تأكيد على شكل مفتاح",
         "ButtonRadio": "اختيار من متعدد على شكل أزرار",
         "CardCheckboxes": "اختيار متعدد على شكل بطاقات",
         "CardRadio": "اختيار من متعدد على شكل بطاقات",

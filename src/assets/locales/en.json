@@ -19,9 +19,10 @@
     },
     "Examples": {
       "Form": {
-        "BooleanCheckbox": "Boolean Checkbox",
         "BooleanButton": "Button Checkbox",
+        "BooleanCheckbox": "Boolean Checkbox",
         "BooleanCheckboxes": "Button Checkboxes",
+        "BooleanSwitch": "Boolean Switch",
         "ButtonRadio": "Button Radio",
         "CardCheckboxes": "Card Checkboxes",
         "CardRadio": "Card Radio",

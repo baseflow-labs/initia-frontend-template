@@ -12,7 +12,6 @@
   - rich text editor
   - google maps picker
   - color picker
-  - toggle switch
   - slider
   - rating stars
   - card-based / photo-based radio & checkbox

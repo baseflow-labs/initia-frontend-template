@@ -91,6 +91,12 @@ export const inputs = (t: Function) => [
     layout: "checkbox",
   },
   {
+    type: "boolean",
+    name: "booleanSwitch",
+    label: t("Auth.Examples.Form.BooleanSwitch"),
+    layout: "switch",
+  },
+  {
     type: "checkboxes",
     name: "checkboxes",
     label: t("Auth.Examples.Form.Checkboxes"),
