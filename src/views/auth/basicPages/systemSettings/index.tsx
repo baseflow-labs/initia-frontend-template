@@ -19,42 +19,38 @@ const SystemSettingsView = () => {
     },
     {
       title: t("Auth.Settings.Admin.SystemLogger.Title"),
-      body: <SystemLoggerView />
+      body: <SystemLoggerView />,
     },
     {
       title: t("Auth.Settings.Admin.Users.Title"),
-      body: <UsersView />
+      body: <UsersView />,
     },
     {
       title: t("Auth.Settings.Admin.Backup.Title"),
-      body: <BackupSettingsView />
+      body: <BackupSettingsView />,
     },
     {
       title: t("Auth.Settings.Admin.Metadata.Title"),
-      body: <SystemMetadataSettingsView />
+      body: <SystemMetadataSettingsView />,
     },
     {
       title: t("Auth.Settings.Admin.BulkDataInsertion.Title"),
-      body: <SystemDataBulkInsertionView />
+      body: <SystemDataBulkInsertionView />,
     },
   ];
 
   return (
     <PageTemplate title={t("Auth.Settings.Admin.Title")}>
       <TabsComp
-        tabs={tabs.map((tab, idx) =>
-          ({
-            ...tab,
-            body: (
-              <div className="mt-5 card shadow-sm">
-                <div className="card-body p-5">
-                  {tab.body}
-                </div>
-              </div>
-            ),
-            id: String(idx)
-          })
-        )}
+        items={tabs.map((tab, idx) => ({
+          ...tab,
+          content: (
+            <div className="mt-5 card shadow-sm">
+              <div className="card-body p-5">{tab.body}</div>
+            </div>
+          ),
+          id: String(idx),
+        }))}
       />
     </PageTemplate>
   );

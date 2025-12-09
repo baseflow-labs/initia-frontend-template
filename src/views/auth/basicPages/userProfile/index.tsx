@@ -14,42 +14,39 @@ const UserProfileView = () => {
     {
       id: "profile",
       title: t("Auth.Profile.Title", "Profile"),
-      body: <UserProfileTabView />
+      content: <UserProfileTabView />,
     },
     {
       id: "teams",
       title: t("Auth.Profile.Teams.Title", "Teams"),
-      body: <UserProfileTeamsView />
+      content: <UserProfileTeamsView />,
     },
     {
       id: "projects",
       title: t("Auth.Profile.Projects.Title", "Projects"),
-      body: <UserProfileProjectsView />
+      content: <UserProfileProjectsView />,
     },
     {
       id: "connections",
       title: t("Auth.Profile.Connections", "Connections"),
-      body: <UserProfileConnectionsView />
+      content: <UserProfileConnectionsView />,
     },
-  ]
+  ];
 
   return (
     <Fragment>
-     <UserProfileHeaderView/>
+      <UserProfileHeaderView />
 
-     <TabsComp 
-      tabs={tabs.map(tab => 
-        ({
+      <TabsComp
+        items={tabs.map((tab) => ({
           ...tab,
-          body: (
+          content: (
             <div className="card mt-4">
-              <div className="card-body p-5">
-                {tab.body}
-              </div>
+              <div className="card-body p-5">{tab.content}</div>
             </div>
-          )
+          ),
         }))}
-    />
+      />
     </Fragment>
   );
 };

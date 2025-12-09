@@ -21,7 +21,6 @@
   - carousel view
   - modal
   - toaster
-  - tabs
   - table
   - js maps
   - charts & stat cards

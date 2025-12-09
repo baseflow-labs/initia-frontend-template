@@ -8,24 +8,33 @@ import UsersView from "./usersList";
 const AdminUserSettingsPage = () => {
   const { t } = useTranslation();
 
-
   const tabs = [
     {
       title: t("Auth.Settings.Admin.UsersView.Title"),
-      body: <UsersView />,
+      content: <UsersView />,
     },
     {
       title: t("Auth.Settings.Admin.UserRoles.Title"),
-      body: <UserRolesView />
+      content: <UserRolesView />,
     },
     {
       title: t("Auth.Settings.Admin.UserRolePermissions.Title"),
-      body: <UserRolePermissionsView />
+      content: <UserRolePermissionsView />,
     },
   ];
 
   return (
-      <TabsComp tabs={tabs.map((tab, idx) => ({ ...tab, body: <div className="mt-5 card shadow-sm"><div className="card-body p-5">{tab.body}</div></div>, id: String(idx) }))} />
+    <TabsComp
+      items={tabs.map((tab, idx) => ({
+        ...tab,
+        content: (
+          <div className="mt-5 card shadow-sm">
+            <div className="card-body p-5">{tab.content}</div>
+          </div>
+        ),
+        id: String(idx),
+      }))}
+    />
   );
 };
 

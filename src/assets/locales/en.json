@@ -20,6 +20,7 @@
     "Examples": {
       "DataView": {
         "CollapseGroup": "Collapse Group",
+        "TabsGroup": "Tabs Group",
         "Test1": {
           "Body": "This is Test 1 body",
           "Title": "Test 1 Title"
