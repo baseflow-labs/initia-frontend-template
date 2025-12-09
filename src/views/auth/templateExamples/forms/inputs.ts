@@ -1,21 +1,24 @@
+const imagePlaceholder =
+  "https://cdn-icons-png.flaticon.com/128/5676/5676033.png";
+
 const inputOptions = (t: Function) => [
   {
     label: t("Auth.Examples.Form.Option1"),
     value: "option1",
     description: t("Auth.Examples.Form.Description"),
-    image: "https://pic.pnnet.dev/256x256",
+    image: imagePlaceholder,
   },
   {
     label: t("Auth.Examples.Form.Option2"),
     value: "option2",
     description: t("Auth.Examples.Form.Description"),
-    image: "https://pic.pnnet.dev/256x256",
+    image: imagePlaceholder,
   },
   {
     label: t("Auth.Examples.Form.Option3"),
     value: "option3",
     description: t("Auth.Examples.Form.Description"),
-    image: "https://pic.pnnet.dev/256x256",
+    image: imagePlaceholder,
   },
 ];
 

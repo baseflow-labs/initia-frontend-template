@@ -1,9 +1,10 @@
-import React, { Fragment } from "react";
+import React from "react";
 
 import { InputProps } from "../../..";
+import ButtonBasedSelectionView from "../common/buttonBased";
 import CardBasedSelectionView from "../common/cardBased";
 import ImageBasedSelectionView from "../common/imageBased";
-import ButtonBasedSelectionView from "../common/buttonBased";
+import DefaultRadioInput from "./default";
 
 type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 
@@ -44,26 +45,12 @@ const RadioInput: React.FC<FinalInput> = ({
       );
     default:
       return (
-        <Fragment>
-          <span className={stacked ? undefined : "d-flex"}>
-            {options?.map((option, i) => (
-              <div className="form-check my-2" key={i}>
-                <input
-                  {...input}
-                  value={option.value}
-                  checked={input.value === option.value}
-                  type="radio"
-                  className="form-check-input"
-                  required={false}
-                />
-
-                <label className="form-check-label">
-                  {option.label || option.value}
-                </label>
-              </div>
-            ))}
-          </span>
-        </Fragment>
+        <DefaultRadioInput
+          {...input}
+          stacked={stacked}
+          options={options}
+          type="radio"
+        />
       );
   }
 };

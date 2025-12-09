@@ -2,8 +2,6 @@ import { useField } from "formik";
 import React from "react";
 
 import { InputProps } from ".";
-import CheckboxInput from "./inputs/selection/checkbox/checkbox";
-import CheckboxesInput from "./inputs/selection/checkbox/checkboxes";
 import DateInput from "./inputs/date";
 import DefaultInput from "./inputs/default";
 import FileInput from "./inputs/file";
@@ -12,9 +10,10 @@ import MultipleEntriesInput from "./inputs/multipleEntries";
 import OtpInput from "./inputs/otp";
 import PasswordInput from "./inputs/password";
 import PhoneNoInput from "./inputs/phoneNo";
-import RadioInput from "./inputs/selection/radio/radio";
 import RangeInput from "./inputs/range";
 import SelectInput from "./inputs/select";
+import CheckboxesInput from "./inputs/selection/checkbox";
+import RadioInput from "./inputs/selection/radio";
 import SelectManyInput from "./inputs/selectMany";
 import TextareaInput from "./inputs/textarea";
 
@@ -40,7 +39,6 @@ function renderByType(type: any, props: any) {
   if (type === "otp") return <OtpInput {...input} />;
   if (type === "textarea") return <TextareaInput {...input} />;
   if (type === "multipleEntries") return <MultipleEntriesInput {...input} />;
-  if (type === "checkbox") return <CheckboxInput {...input} />;
   if (type === "checkboxes") return <CheckboxesInput {...input} />;
   if (type === "title")
     return <div className="h4 text-dark">{input.defaultValue}</div>;

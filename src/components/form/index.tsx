@@ -38,7 +38,6 @@ interface InputBasicProps {
     | "selectMany"
     | "phoneNumber"
     | "multipleEntries"
-    | "checkbox"
     | "checkboxes"
     | string;
   required?: boolean;
