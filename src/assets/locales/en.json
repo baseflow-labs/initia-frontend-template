@@ -20,6 +20,7 @@
     "Examples": {
       "DataView": {
         "CollapseGroup": "Collapse Group",
+        "Dropdown": "Dropdown",
         "Modal": "Modal",
         "Table": "Data Table",
         "TabsGroup": "Tabs Group",

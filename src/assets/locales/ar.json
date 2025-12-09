@@ -20,6 +20,7 @@
     "Examples": {
       "DataView": {
         "CollapseGroup": "عرض مضغوط للتبويبات",
+        "Dropdown": "قائمة منسدلة",
         "Modal": "نافذة",
         "Table": "جدول إدارة البيانات",
         "TabsGroup": "عرض تبويبات",

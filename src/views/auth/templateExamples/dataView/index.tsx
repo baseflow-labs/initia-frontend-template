@@ -7,6 +7,9 @@ import TabsComp from "../../../../components/tab";
 import ApiDataTable from "../../../../components/table/apiDatatable";
 import PageTemplate from "../../../../layouts/auth/pages/pageTemplate";
 import { inputs } from "../datatablePage/inputs";
+import DropdownComp from "../../../../components/dropdown";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 
 const TemplateDataViewExamplesView = () => {
   const { t } = useTranslation();
@@ -70,6 +73,21 @@ const TemplateDataViewExamplesView = () => {
       ),
     },
     {
+      title: t("Auth.Examples.DataView.Dropdown"),
+      body: (
+        <DropdownComp
+          start
+          button={
+            <FontAwesomeIcon icon={faEllipsisVertical} className="ms-1" />
+          }
+          list={exampleData.map(({ title, body }) => ({
+            label: title,
+            onClick: () => alert(title),
+          }))}
+        />
+      ),
+    },
+    {
       title: t("Auth.Examples.DataView.Table"),
       body: (
         <ApiDataTable
@@ -90,7 +108,7 @@ const TemplateDataViewExamplesView = () => {
           <div
             className={`col-12 ${
               example.fullWidth ? "col-md-12" : "col-md-6"
-            } mb-4`}
+            } my-4`}
             key={idx}
           >
             <h4 className="mb-3">{example.title}</h4>
