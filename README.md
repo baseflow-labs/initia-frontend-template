@@ -19,7 +19,6 @@
   - kanban view
   - gallery / photo grid view
   - carousel view
-  - modal
   - toaster
   - table
   - js maps

@@ -1,10 +1,15 @@
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
+
 import CollapseGroup from "../../../../components/collapse";
-import PageTemplate from "../../../../layouts/auth/pages/pageTemplate";
+import Modal from "../../../../components/modal";
 import TabsComp from "../../../../components/tab";
+import PageTemplate from "../../../../layouts/auth/pages/pageTemplate";
 
 const TemplateDataViewExamplesView = () => {
   const { t } = useTranslation();
+
+  const [open, setOpen] = useState(false);
 
   const exampleData = [
     {
@@ -45,6 +50,21 @@ const TemplateDataViewExamplesView = () => {
             ),
           }))}
         />
+      ),
+    },
+    {
+      title: t("Auth.Examples.DataView.Modal"),
+      body: (
+        <Modal
+          name="modal"
+          withTrigger
+          triggerLabel="Open"
+          title={t("Auth.Examples.DataView.Modal")}
+          isOpen={open}
+          onClose={() => setOpen(false)}
+        >
+          {exampleData[0].body}
+        </Modal>
       ),
     },
   ];
