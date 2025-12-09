@@ -1,9 +1,8 @@
 import React from "react";
 
-import { InputProps } from "../..";
+import { InputProps } from "../../..";
 
-type FinalInput = InputProps &
-  React.InputHTMLAttributes<HTMLInputElement> & { row?: boolean };
+type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 
 const CheckboxInput: React.FC<FinalInput> = ({ type, ...input }) => {
   return (

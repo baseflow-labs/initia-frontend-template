@@ -9,7 +9,7 @@
 - build analysis tools integration prep
 - build form various input types
   - date, time, date time, month, year, weekday
-  - checkbox & radio layouts (inline, stacked, card-based, photo-based)
+  - checkbox & radio layouts (card-based, photo-based)
   - button-based radio
   - button-based switch
   - rich text editor
@@ -116,7 +116,7 @@
 - build advanced user controls
   - dashboard customization
 - build announcements / notifications manual generation service
-- Build technical & business documentation 
+- Build technical & business documentation
 
 ## 🚀 Getting Started
 
