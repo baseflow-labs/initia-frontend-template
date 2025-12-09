@@ -21,6 +21,7 @@
       "DataView": {
         "CollapseGroup": "Collapse Group",
         "Modal": "Modal",
+        "Table": "Data Table",
         "TabsGroup": "Tabs Group",
         "Test1": {
           "Body": "This is Test 1 body",

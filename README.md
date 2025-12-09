@@ -20,7 +20,6 @@
   - gallery / photo grid view
   - carousel view
   - toaster
-  - table
   - js maps
   - charts & stat cards
 - build form wizard

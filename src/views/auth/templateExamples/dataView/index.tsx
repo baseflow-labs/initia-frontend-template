@@ -4,7 +4,9 @@ import { useTranslation } from "react-i18next";
 import CollapseGroup from "../../../../components/collapse";
 import Modal from "../../../../components/modal";
 import TabsComp from "../../../../components/tab";
+import ApiDataTable from "../../../../components/table/apiDatatable";
 import PageTemplate from "../../../../layouts/auth/pages/pageTemplate";
+import { inputs } from "../datatablePage/inputs";
 
 const TemplateDataViewExamplesView = () => {
   const { t } = useTranslation();
@@ -67,13 +69,30 @@ const TemplateDataViewExamplesView = () => {
         </Modal>
       ),
     },
+    {
+      title: t("Auth.Examples.DataView.Table"),
+      body: (
+        <ApiDataTable
+          dataApiEndpoint="/support/logger"
+          inputs={inputs(t)}
+          singleItem={t("Auth.Settings.Admin.Logger.Title")}
+          includeView
+        />
+      ),
+      fullWidth: true,
+    },
   ];
 
   return (
     <PageTemplate title={t("Auth.Examples.DataView.Title")}>
       <div className="row">
         {dataViewExamples.map((example, idx) => (
-          <div className="col-12 col-md-6 mb-4" key={idx}>
+          <div
+            className={`col-12 ${
+              example.fullWidth ? "col-md-12" : "col-md-6"
+            } mb-4`}
+            key={idx}
+          >
             <h4 className="mb-3">{example.title}</h4>
 
             {example.body}
