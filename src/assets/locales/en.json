@@ -19,6 +19,8 @@
     },
     "Examples": {
       "Form": {
+        "ButtonCheckboxes": "Button Checkboxes",
+        "ButtonRadio": "Button Radio",
         "CardCheckboxes": "Card Checkboxes",
         "CardRadio": "Card Radio",
         "Checkbox": "Checkbox",
@@ -27,6 +29,8 @@
         "Description": "This is example of a description text",
         "Email": "Email",
         "File": "File",
+        "ImageCheckboxes": "Image Checkboxes",
+        "ImageRadio": "Image Radio",
         "Location": "Location",
         "MultipleEntries": "Multiple Entries",
         "Number": "Number",
@@ -40,9 +44,13 @@
         "Radio": "Radio",
         "Select": "Select",
         "SelectMany": "Select Many",
+        "StackedButtonCheckboxes": "Stacked Button Checkboxes",
+        "StackedButtonRadio": "Stacked Button Radio",
         "StackedCardCheckboxes": "Stacked Card Checkboxes",
         "StackedCardRadio": "Stacked Card Radio",
         "StackedCheckboxes": "Stacked Checkboxes",
+        "StackedImageCheckboxes": "Stacked Image Checkboxes",
+        "StackedImageRadio": "Stacked Image Radio",
         "StackedRadio": "Stacked Radio",
         "Text": "Text",
         "Textarea": "Textarea"
