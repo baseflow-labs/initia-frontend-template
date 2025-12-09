@@ -1,16 +1,13 @@
 import { useTranslation } from "react-i18next";
 import Button from "../../../../../../components/core/button";
 import Form from "../../../../../../components/form";
-import { inputs } from "./inputs";
+import { dependencyBasedOrder, inputs } from "./inputs";
+import { tableRelationsList, tablesList } from "../../../../../../api/demoData";
 
 const SystemDataBulkInsertionView = () => {
   const { t } = useTranslation();
 
-  const tables = [
-    { value: 'users' },
-    { value: 'products' },
-    { value: 'orders' },
-  ];
+  const tablesOrder = dependencyBasedOrder(tablesList, tableRelationsList);
 
   const PerTableView = () => {
     return (
@@ -38,9 +35,9 @@ const SystemDataBulkInsertionView = () => {
 
   return (
     <div className="row">
-      {tables.map((table) => (
-        <div key={table.value} className="col-md-6 mb-5">
-          <h3 className="my-3">{table.value}</h3>
+      {tablesList.sort((a, b) => tablesOrder.indexOf(a) - tablesOrder.indexOf(b)).map((table) => (
+        <div key={table} className="col-md-6 mb-5">
+          <h3 className="my-3">{table}</h3>
 
           <PerTableView />
         </div>

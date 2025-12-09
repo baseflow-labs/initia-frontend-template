@@ -1,21 +1,23 @@
-// src/components/form/Input.tsx
-import React from "react";
 import { useField } from "formik";
+import React from "react";
+
 import { InputProps } from ".";
 import DateInput from "./inputs/date";
 import DefaultInput from "./inputs/default";
 import FileInput from "./inputs/file";
 import LocationInput from "./inputs/location";
+import MultipleEntriesInput from "./inputs/multipleEntries";
 import OtpInput from "./inputs/otp";
 import PasswordInput from "./inputs/password";
 import PhoneNoInput from "./inputs/phoneNo";
-import RadioInput from "./inputs/radio";
 import SelectInput from "./inputs/select";
+import CheckboxesInput from "./inputs/selection/checkbox";
+import RadioInput from "./inputs/selection/radio";
 import SelectManyInput from "./inputs/selectMany";
-import MultipleEntriesInput from "./inputs/multipleEntries";
 import TextareaInput from "./inputs/textarea";
-import RangeInput from "./inputs/range";
-import CheckboxInput from "./inputs/checkbox";
+import BooleanInput from "./inputs/boolean";
+import RatingInput from "./inputs/rating";
+import RangeInput from "./inputs/number/range";
 
 type FinalInput = InputProps &
   React.InputHTMLAttributes<HTMLInputElement> &
@@ -24,8 +26,9 @@ type FinalInput = InputProps &
     bypassFormik?: boolean;
   };
 
-function renderByType(type: any, props: any) {
-  const input = props as any;
+const renderByType = (type: any, props: any) => {
+  const { min, max, ...input } = props as any;
+
   if (type === "select" && input.options) return <SelectInput {...input} />;
   if (type === "selectMany" && input.options)
     return <SelectManyInput {...input} />;
@@ -39,11 +42,23 @@ function renderByType(type: any, props: any) {
   if (type === "otp") return <OtpInput {...input} />;
   if (type === "textarea") return <TextareaInput {...input} />;
   if (type === "multipleEntries") return <MultipleEntriesInput {...input} />;
-  if (type === "checkbox") return <CheckboxInput {...input} />;
+  if (type === "checkboxes") return <CheckboxesInput {...input} />;
+  if (type === "boolean") return <BooleanInput {...input} />;
   if (type === "title")
     return <div className="h4 text-dark">{input.defaultValue}</div>;
+  if (type === "rating")
+    return (
+      <RatingInput type={type} className="form-control-color" {...input} />
+    );
+  if (type === "color")
+    return (
+      <DefaultInput type={type} className="form-control-color" {...input} />
+    );
+  if (type === "range")
+    return <RangeInput type={type} min={min} max={max} {...input} />;
+
   return <DefaultInput type={type} {...input} />;
-}
+};
 
 const FormikBoundInput: React.FC<FinalInput> = ({ name, type, ...rest }) => {
   const [field] = useField<string>(name);

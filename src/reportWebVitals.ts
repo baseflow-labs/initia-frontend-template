@@ -1,13 +1,15 @@
-import type { ReportCallback } from 'web-vitals';
+import type { ReportCallback } from "web-vitals";
 
-export default function reportWebVitals(onPerfEntry?: ReportCallback) {
+const reportWebVitals = (onPerfEntry?: ReportCallback) => {
   if (!onPerfEntry) return;
 
-  import('web-vitals').then(mod => {
+  import("web-vitals").then((mod) => {
     mod.onCLS(onPerfEntry);
     mod.onFCP(onPerfEntry);
     mod.onINP(onPerfEntry);
     mod.onLCP(onPerfEntry);
     mod.onTTFB(onPerfEntry);
   });
-}
+};
+
+export default reportWebVitals;

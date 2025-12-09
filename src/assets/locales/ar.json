@@ -18,24 +18,58 @@
       "Welcome": "مرحباً"
     },
     "Examples": {
+      "DataView": {
+        "CollapseGroup": "عرض مضغوط للتبويبات",
+        "TabsGroup": "عرض تبويبات",
+        "Test1": {
+          "Body": "محتوى ١",
+          "Title": "عنوان ١"
+        },
+        "Test2": {
+          "Body": "محتوى ٢",
+          "Title": "عنوان ٢"
+        },
+        "Title": "أمثلة عرض البيانات"
+      },
       "Form": {
-        "Checkbox": "اختيار متعدد",
+        "BooleanButton": "تأكيد على شكل زر",
+        "BooleanCheckbox": "تأكيد",
+        "BooleanCheckboxes": "اختيار متعدد على شكل أزرار",
+        "BooleanSwitch": "تأكيد على شكل مفتاح",
+        "ButtonRadio": "اختيار من متعدد على شكل أزرار",
+        "CardCheckboxes": "اختيار متعدد على شكل بطاقات",
+        "CardRadio": "اختيار من متعدد على شكل بطاقات",
+        "Checkboxes": "اختيار متعدد",
+        "Color": "اختيار لون",
         "Date": "التاريخ",
+        "Description": "وصف للعرض والتجربة",
         "Email": "البريد الإلكتروني",
         "File": "ملف",
+        "ImageCheckboxes": "اختيار متعدد على شكل صور",
+        "ImageRadio": "اختيار من متعدد على شكل صور",
         "Location": "الموقع",
         "MultipleEntries": "إدخالات متعددة",
         "Number": "رقم",
         "NumberText": "نص رقمي",
-        "OTP": "رمز التحقق",
         "Option1": "الخيار 1",
         "Option2": "الخيار 2",
         "Option3": "الخيار 3",
+        "OTP": "رمز التحقق",
         "Password": "كلمة المرور",
         "PhoneNumber": "رقم الهاتف",
-        "Radio": "اختيار دائري",
+        "Radio": "اختيار من متعدد",
+        "Range": "اختيار ضمن نطاق / مدى",
         "Select": "اختيار",
         "SelectMany": "اختيار متعدد",
+        "StackedBooleanCheckboxes": "اختيار متعدد على شكل أزرار عامودية",
+        "StackedButtonRadio": "اختيار من متعدد على شكل أزرار عامودية",
+        "StackedCardCheckboxes": "اختيار متعدد على شكل بطاقات عامودية",
+        "StackedCardRadio": "اختيار من متعدد على شكل بطاقات عامودية",
+        "StackedCheckboxes": "اختيار متعدد عامودي",
+        "StackedImageCheckboxes": "اختيار متعدد على شكل صور عامودية",
+        "StackedImageRadio": "اختيار من متعدد على شكل صور عامودية",
+        "StackedRadio": "اختيار من متعدد عامودي",
+        "StarRating": "ادخال تقييم",
         "Text": "نص",
         "Textarea": "منطقة نص"
       }
@@ -111,6 +145,27 @@
     },
     "Settings": {
       "Admin": {
+        "Backup": {
+          "AutoSettings": {
+            "KeptBackups": "عدد النسخ الاحتياطية المحتفظ بها",
+            "Period": "الفاصل الزمني بين كل نسخ احتياطي آلي",
+            "Title": "إعدادات النسخ الاحتياطي الآلي",
+            "Unit": {
+              "Days": "يوم / أيام",
+              "Months": "شهر / أشهر",
+              "Title": "الوحدة الزمنية",
+              "Weeks": "أسبوع / أسابيع"
+            }
+          },
+          "BackupsManagement": {
+            "CreateNewBackupNow": "إنشاء نسخة احتياطية جديدة الآن",
+            "CurrentBackups": "النسخ الاحتياطية الموجودة",
+            "RemoveSelectedBackup": "حذف النسخة الاحتياطية المحددة",
+            "RestoreSystemToSelectedBackup": "استعادة البيانات إلى النسخة المحددة",
+            "Title": "إدارة النسخ الاحتياطية"
+          },
+          "Title": "إدارة النسخ الاحتياطي للبيانات"
+        },
         "BulkDataInsertion": {
           "DataFileUpload": "تحميل البيانات",
           "DataProcessing": {
@@ -155,6 +210,7 @@
           "Name": "اسم النظام",
           "PhoneNumber": "رقم الهاتف",
           "Slogan": "الشعار اللفظي",
+          "ThemeColor": "لون النظام",
           "Title": "هوية النظام"
         },
         "RolePermissions": {
@@ -246,19 +302,19 @@
           "ContactUs": "تواصل معنا",
           "Current": "الحالية",
           "CurrentPlan": "الباقة الحالية",
+          "Projects_zero": "لا مشاريع",
+          "Projects_one": "مشروع",
+          "Projects_two": "مشروعان",
           "Projects_few": "مشاريع",
           "Projects_many": "مشاريع",
-          "Projects_one": "مشروع",
           "Projects_other": "مشاريع",
-          "Projects_two": "مشروعان",
-          "Projects_zero": "لا مشاريع",
           "Renewal": "تجديد الاشتراك",
+          "Seats_zero": "لا مقاعد",
+          "Seats_one": "مقعد",
+          "Seats_two": "مقعدان",
           "Seats_few": "مقاعد",
           "Seats_many": "مقاعد",
-          "Seats_one": "مقعد",
           "Seats_other": "مقاعد",
-          "Seats_two": "مقعدان",
-          "Seats_zero": "لا مقاعد",
           "Select": "اختر",
           "Title": "الفوترة"
         },
@@ -331,15 +387,15 @@
           "Title": "قم بزيارتنا"
         }
       },
+      "Faq": {
+        "Description": "وصف الأسئلة الشائعة",
+        "Title": "الأسئلة الشائعة"
+      },
       "FAQ": {
         "CheckFaq": "تصفّح الأسئلة الشائعة",
         "DidNotFindWhatYouAreLookingFor": "لم تجد ما تبحث عنه؟",
         "NoFAQsFound": "لا توجد أسئلة شائعة",
         "SearchPlaceholder": "بحث...",
-        "Title": "الأسئلة الشائعة"
-      },
-      "Faq": {
-        "Description": "وصف الأسئلة الشائعة",
         "Title": "الأسئلة الشائعة"
       },
       "KnowledgeBase": {
@@ -441,9 +497,6 @@
         "Title": "أمثلة الإدخالات في النماذج"
       }
     },
-    "UserSettings": {
-      "Title": "إعدادات المستخدم"
-    },
     "Users": {
       "Name": "الاسم",
       "Profile": {
@@ -452,6 +505,9 @@
       },
       "Role": "النوع",
       "Title": "المستخدمون"
+    },
+    "UserSettings": {
+      "Title": "إعدادات المستخدم"
     }
   },
   "Common": {
@@ -554,16 +610,25 @@
         "Filters": {
           "AddFilters": "إضافة فلاتر",
           "Field": "الحقل",
-          "Operator": "العملية",
+          "Operators": {
+            "Equals": "يساوي",
+            "GreaterThan": "أكبر من",
+            "GreaterThanOrEqual": "أكبر من أو يساوي",
+            "LessThan": "أصغر من",
+            "LessThanOrEqual": "أصغر من أو يساوي",
+            "NotEquals": "لا يساوي",
+            "Title": "العملية المنطقية"
+          },
           "Value": "القيمة"
         },
         "SelectFieldsToExport": "اختيار الحقول للتصدير...",
         "Title": "تصدير",
         "Type": {
-          "CSV": "CSV",
-          "Excel": "Excel",
-          "PDF": "PDF",
-          "Title": "نوع الملف"
+          "CSV": "ملف CSV",
+          "Excel": "ملف Excel",
+          "PDF": "ملف PDF",
+          "Print": "طباعة",
+          "Title": "نوع التصدير"
         }
       }
     }

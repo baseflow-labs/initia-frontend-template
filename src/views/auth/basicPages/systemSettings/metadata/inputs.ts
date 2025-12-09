@@ -27,4 +27,11 @@ export const inputs = (t: Function) => () => [
     required: false,
     double: true
   },
+  {
+    name: "themeColor",
+    label: t("Auth.Settings.Admin.Metadata.ThemeColor"),
+    type: "color",
+    required: false,
+    double: true
+  },
 ];

@@ -8,20 +8,18 @@ const SystemDataInsertionView = () => {
 
   const tabs = [
     {
-      id: 'dataInsertion',
+      id: "dataInsertion",
       title: t("Auth.Settings.Admin.BulkDataInsertion.Title"),
-      body: <SystemDataBulkInsertionView />
+      content: <SystemDataBulkInsertionView />,
     },
     {
-      id: 'dataProcessing',
+      id: "dataProcessing",
       title: t("Auth.Settings.Admin.BulkDataInsertion.DataProcessing.Title"),
-      body: <SystemDataProcessingView />
-    }
-  ]
+      content: <SystemDataProcessingView />,
+    },
+  ];
 
-  return (
-    <TabsComp tabs={tabs} />
-  );
+  return <TabsComp items={tabs} />;
 };
 
 export default SystemDataInsertionView;

@@ -10,16 +10,16 @@ const SupportTicketsView = () => {
 
   const tabs = [
     {
-      id: 'submit',
+      id: "submit",
       title: t("Auth.SupportCenter.Tickets.SubmitNewTicket.Title"),
-      body: <SupportTicketsSubmissionView />
+      content: <SupportTicketsSubmissionView />,
     },
     {
-      id: 'view',
+      id: "view",
       title: t("Auth.SupportCenter.Tickets.MyTickets.Title"),
-      body: <SupportTicketsListingView />
-    }
-  ]
+      content: <SupportTicketsListingView />,
+    },
+  ];
 
   return (
     <Fragment>
@@ -29,14 +29,16 @@ const SupportTicketsView = () => {
             <div className="col-12">
               <BackToSupportCenterButton />
 
-              <h1 className="mb-3 text-center text-white">{t("Auth.SupportCenter.Tickets.Title")}</h1>
+              <h1 className="mb-3 text-center text-white">
+                {t("Auth.SupportCenter.Tickets.Title")}
+              </h1>
             </div>
           </div>
         </div>
       </div>
 
       <div className="container mb-5">
-        <TabsComp tabs={tabs} />
+        <TabsComp items={tabs} />
       </div>
     </Fragment>
   );

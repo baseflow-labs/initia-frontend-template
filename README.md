@@ -2,38 +2,51 @@
 
 ## To Do
 
-- Centralize identity control (theme color, logo ,name)
 - Fix changelog generating script
 - Update documentation (read me, commit convention)
 - Split localization files into smaller chunks
 - wrap with vite / turbo-back
 - build analysis tools integration prep
 - build form various input types
+  - date, time, date time, month, year, weekday
   - rich text editor
   - google maps picker
-  - color picker
-  - toggle switch
-  - slider
-  - rating stars
-  - card-based / photo-based radio & checkbox
   - searchable & clearable select
-  - nested form
+  - nested form layouts (with / without table, within / split form)
+- data view options
+  - google maps view
+  - calendar view
+  - kanban view
+  - gallery / photo grid view
+  - carousel view
+  - modal
+  - toaster
+  - table
+  - js maps
+  - charts & stat cards
 - build form wizard
 - New apis
   - return values of TablesNames
   - export file by field & filters
 - build datatable with ...
   - server side filtering
+    - per type (text, number, date, boolean, select, multi-select)
+    - default filter values
+    - advanced filters (AND/OR conditions, operators)
+    - localstorage saved filters
+  - localstorage saved columns (visibility, order)
   - server side search
   - scroll vs pagination
-  - row selection (bulk actions)
+  - row selection (bulk standard & custom actions)
+  - preset column rendering (badges, progress, boolean, select, multi-select, avatar, image, type-based)
+  - custom column rendering
   - responsiveness to cards view
   - details panel option
-  - column custom cell rendering (badges, progress, boolean, select, avatar, type-based)
+  - record view options (card, image-oriented, table)
+  - role-based columns & actions
   - grouping option
-  - fixed header & footer
+  - fixed header, footer & columns (to choose)
   - record duplicates option
-  - export template & import
   - data localization support
   - width control
 - build initial next.js landing page templates
@@ -68,7 +81,32 @@
     - SIS
     - Encyclopedia
 - build dark / light mode, color themes switcher, horizontal / vertical layout switcher, boxed / full-width layout switcher
-- Build technical & business documentation 
+- build onboarding process (spread in admin settings + first login trigger wizard)
+- build admin advanced settings
+  - system health monitoring
+  - data import/export
+  - api keys management
+  - integrations management
+  - session management
+  - IP whitelisting / blacklisting
+  - files management
+  - configurations
+    - password policy
+    - files upload limits
+    - enabled languages
+    - localization values
+    - initial dark mode
+    - env vars
+    - per user role theme color
+    - services control (build services with integration)
+    - form of forms (with user-role based workflow)
+  - contents
+    - policy, terms & conditions with localization
+    - landing page contents management
+- build advanced user controls
+  - dashboard customization
+- build announcements / notifications manual generation service
+- Build technical & business documentation
 
 ## 🚀 Getting Started
 

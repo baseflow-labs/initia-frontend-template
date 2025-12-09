@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { tablesList } from "../../../../../../api/demoData";
 
 const UserRolePermissionsView = () => {
   const { t } = useTranslation();
@@ -8,15 +9,6 @@ const UserRolePermissionsView = () => {
     { label: t("Auth.Settings.Admin.RolePermissions.Actions.Create"), value: "create" },
     { label: t("Auth.Settings.Admin.RolePermissions.Actions.Update"), value: "update" },
     { label: t("Auth.Settings.Admin.RolePermissions.Actions.Delete"), value: "delete" },
-  ]
-
-  const tables = [
-    { value: "user" },
-    { value: "role" },
-    { value: "permission" },
-    { value: "metadata" },
-    { value: "file" },
-    { value: "auth" },
   ]
 
   const roles = [
@@ -44,8 +36,8 @@ const UserRolePermissionsView = () => {
       </thead>
 
       <tbody>
-        {tables.map((table,) => (<tr key={table.value}>
-          <td>{table.value}</td>
+        {tablesList.map((table) => (<tr key={table}>
+          <td>{table}</td>
           {roles.map((_) => actions.map((action) => (
             <td key={action.value}><input type="checkbox" /></td>
           )))}

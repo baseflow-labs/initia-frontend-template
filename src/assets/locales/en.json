@@ -18,24 +18,58 @@
       "Welcome": "Welcome"
     },
     "Examples": {
+      "DataView": {
+        "CollapseGroup": "Collapse Group",
+        "TabsGroup": "Tabs Group",
+        "Test1": {
+          "Body": "This is Test 1 body",
+          "Title": "Test 1 Title"
+        },
+        "Test2": {
+          "Body": "This is Test 2 body",
+          "Title": "Test 2 Title"
+        },
+        "Title": "Data View Examples"
+      },
       "Form": {
-        "Checkbox": "Checkbox",
+        "BooleanButton": "Button Checkbox",
+        "BooleanCheckbox": "Boolean Checkbox",
+        "BooleanCheckboxes": "Button Checkboxes",
+        "BooleanSwitch": "Boolean Switch",
+        "ButtonRadio": "Button Radio",
+        "CardCheckboxes": "Card Checkboxes",
+        "CardRadio": "Card Radio",
+        "Checkboxes": "Checkboxes",
+        "Color": "Color",
         "Date": "Date",
+        "Description": "This is example of a description text",
         "Email": "Email",
         "File": "File",
+        "ImageCheckboxes": "Image Checkboxes",
+        "ImageRadio": "Image Radio",
         "Location": "Location",
         "MultipleEntries": "Multiple Entries",
         "Number": "Number",
         "NumberText": "Number Text",
-        "OTP": "OTP",
         "Option1": "Option 1",
         "Option2": "Option 2",
         "Option3": "Option 3",
+        "OTP": "OTP",
         "Password": "Password",
         "PhoneNumber": "Phone Number",
         "Radio": "Radio",
+        "Range": "Range",
         "Select": "Select",
         "SelectMany": "Select Many",
+        "StackedBooleanCheckboxes": "Stacked Button Checkboxes",
+        "StackedButtonRadio": "Stacked Button Radio",
+        "StackedCardCheckboxes": "Stacked Card Checkboxes",
+        "StackedCardRadio": "Stacked Card Radio",
+        "StackedCheckboxes": "Stacked Checkboxes",
+        "StackedImageCheckboxes": "Stacked Image Checkboxes",
+        "StackedImageRadio": "Stacked Image Radio",
+        "StackedRadio": "Stacked Radio",
+        "StarRating": "Star Rating",
         "Text": "Text",
         "Textarea": "Textarea"
       }
@@ -111,6 +145,27 @@
     },
     "Settings": {
       "Admin": {
+        "Backup": {
+          "AutoSettings": {
+            "KeptBackups": "Kept Backups Count",
+            "Period": "Period",
+            "Title": "Auto Backup Settings",
+            "Unit": {
+              "Days": "Days",
+              "Months": "Months",
+              "Title": "Unit",
+              "Weeks": "Weeks"
+            }
+          },
+          "BackupsManagement": {
+            "CreateNewBackupNow": "Create New Backup Now",
+            "CurrentBackups": "Existing Backups",
+            "RemoveSelectedBackup": "Remove Selected Backup",
+            "RestoreSystemToSelectedBackup": "Restore System To Selected Backup",
+            "Title": "Backups Management"
+          },
+          "Title": "Backup Settings"
+        },
         "BulkDataInsertion": {
           "DataFileUpload": "Data Upload",
           "DataProcessing": {
@@ -155,6 +210,7 @@
           "Name": "Name",
           "PhoneNumber": "Phone Number",
           "Slogan": "Slogan",
+          "ThemeColor": "Theme Color",
           "Title": "Metadata"
         },
         "RolePermissions": {
@@ -246,19 +302,19 @@
           "ContactUs": "Contact Us",
           "Current": "Current",
           "CurrentPlan": "Current Plan",
+          "Projects_zero": "Projects",
+          "Projects_one": "Projects",
+          "Projects_two": "Projects",
           "Projects_few": "Projects",
           "Projects_many": "Projects",
-          "Projects_one": "Projects",
           "Projects_other": "Projects",
-          "Projects_two": "Projects",
-          "Projects_zero": "Projects",
           "Renewal": "Renewal",
+          "Seats_zero": "Seats",
+          "Seats_one": "Seats",
+          "Seats_two": "Seats",
           "Seats_few": "Seats",
           "Seats_many": "Seats",
-          "Seats_one": "Seats",
           "Seats_other": "Seats",
-          "Seats_two": "Seats",
-          "Seats_zero": "Seats",
           "Select": "Select",
           "Title": "Billing"
         },
@@ -331,16 +387,16 @@
           "Title": "Visit Us"
         }
       },
+      "Faq": {
+        "Description": "Description",
+        "Title": "Faq"
+      },
       "FAQ": {
         "CheckFaq": "Check FAQ",
         "DidNotFindWhatYouAreLookingFor": "Did Not Find What You Are Looking For?",
         "NoFAQsFound": "No FAQs Found",
         "SearchPlaceholder": "Search...",
         "Title": "FAQ"
-      },
-      "Faq": {
-        "Description": "Description",
-        "Title": "Faq"
       },
       "KnowledgeBase": {
         "AccountPassword": {
@@ -441,9 +497,6 @@
         "Title": "Form Input Examples"
       }
     },
-    "UserSettings": {
-      "Title": "User Settings"
-    },
     "Users": {
       "Name": "Name",
       "Profile": {
@@ -452,6 +505,9 @@
       },
       "Role": "Role",
       "Title": "Users"
+    },
+    "UserSettings": {
+      "Title": "User Settings"
     }
   },
   "Common": {
@@ -554,15 +610,24 @@
         "Filters": {
           "AddFilters": "Add Filters",
           "Field": "Field",
-          "Operator": "Operator",
+          "Operators": {
+            "Equals": "Equals",
+            "GreaterThan": "Greater Than",
+            "GreaterThanOrEqual": "Greater Than Or Equal",
+            "LessThan": "Less Than",
+            "LessThanOrEqual": "Less Than Or Equal",
+            "NotEquals": "Not Equals",
+            "Title": "Operator"
+          },
           "Value": "Value"
         },
         "SelectFieldsToExport": "Select  Fields To Export...",
         "Title": "Export",
         "Type": {
-          "CSV": "CSV",
-          "Excel": "Excel",
-          "PDF": "PDF",
+          "CSV": "CSV File",
+          "Excel": "Excel File",
+          "PDF": "PDF File",
+          "Print": "Print",
           "Title": "Export Type"
         }
       }

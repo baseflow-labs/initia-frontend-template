@@ -2,19 +2,21 @@ import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useState } from "react";
 
-export default function TabsComp({
-  tabs,
+const TabsComp = ({
+  items,
 }: {
-  tabs: { id: string; title: string; icon?:IconProp; body: React.ReactNode }[];
-}) {
-  const [activeTab, setActiveTab] = useState(tabs[0].id);
+  items: {
+    id: string;
+    title: string;
+    icon?: IconProp;
+    content: React.ReactNode;
+  }[];
+}) => {
+  const [activeTab, setActiveTab] = useState(items[0].id);
 
   return (
     <Fragment>
-      <div
-        className="mt-1 mx-3 mx-xl-5 mx-xxl-auto overflow-x-auto"
-        style={{ maxWidth: "80vw" }}
-      >
+      <div className="mt-1 mx-3 mx-xl-5 mx-xxl-auto overflow-x-auto">
         <div
           className="d-flex justify-content-start gap-1 bg-teal rounded-5 p-2"
           style={{
@@ -22,7 +24,7 @@ export default function TabsComp({
             backgroundColor: "rgba(0,0,0,0.025)",
           }}
         >
-          {tabs.map((tab, i) => (
+          {items.map((tab, i) => (
             <button
               key={i}
               className={`btn mx-2 px-4 py-3 rounded-5 w-fit  
@@ -36,13 +38,15 @@ export default function TabsComp({
                 background: "none",
               }}
             >
-             {tab.icon && <FontAwesomeIcon icon={tab.icon} />} {tab.title}
+              {tab.icon && <FontAwesomeIcon icon={tab.icon} />} {tab.title}
             </button>
           ))}
         </div>
       </div>
 
-      {tabs?.find(({ id }) => id === activeTab)?.body}
+      {items?.find(({ id }) => id === activeTab)?.content}
     </Fragment>
   );
-}
+};
+
+export default TabsComp;
