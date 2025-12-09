@@ -243,6 +243,11 @@ export const inputs = (t: Function) => [
     options: inputOptions(t),
   },
   {
+    type: "range",
+    name: "range",
+    label: t("Auth.Examples.Form.Range"),
+  },
+  {
     type: "multipleEntries",
     name: "multipleEntries",
     label: t("Auth.Examples.Form.MultipleEntries"),

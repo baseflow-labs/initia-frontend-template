@@ -45,6 +45,7 @@
         "Password": "كلمة المرور",
         "PhoneNumber": "رقم الهاتف",
         "Radio": "اختيار من متعدد",
+        "Range": "اختيار ضمن نطاق / مدى",
         "Select": "اختيار",
         "SelectMany": "اختيار متعدد",
         "StackedBooleanCheckboxes": "اختيار متعدد على شكل أزرار عامودية",
@@ -55,6 +56,7 @@
         "StackedImageCheckboxes": "اختيار متعدد على شكل صور عامودية",
         "StackedImageRadio": "اختيار من متعدد على شكل صور عامودية",
         "StackedRadio": "اختيار من متعدد عامودي",
+        "StarRating": "Auth.Examples.Form.StarRating",
         "Text": "نص",
         "Textarea": "منطقة نص"
       }

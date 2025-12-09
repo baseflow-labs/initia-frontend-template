@@ -45,6 +45,7 @@
         "Password": "Password",
         "PhoneNumber": "Phone Number",
         "Radio": "Radio",
+        "Range": "Range",
         "Select": "Select",
         "SelectMany": "Select Many",
         "StackedBooleanCheckboxes": "Stacked Button Checkboxes",
@@ -55,6 +56,7 @@
         "StackedImageCheckboxes": "Stacked Image Checkboxes",
         "StackedImageRadio": "Stacked Image Radio",
         "StackedRadio": "Stacked Radio",
+        "StarRating": "Auth.Examples.Form.StarRating",
         "Text": "Text",
         "Textarea": "Textarea"
       }

@@ -11,8 +11,6 @@
   - date, time, date time, month, year, weekday
   - rich text editor
   - google maps picker
-  - slider
-  - card-based / photo-based radio & checkbox
   - searchable & clearable select
   - nested form layouts (with / without table, within / split form)
 - data view options
