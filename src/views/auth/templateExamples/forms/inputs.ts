@@ -3,16 +3,22 @@ const inputOptions = (t: Function) => [
     label: t("Auth.Examples.Form.Option1"),
     value: "option1",
     description: t("Auth.Examples.Form.Description"),
+    image:
+      "https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=",
   },
   {
     label: t("Auth.Examples.Form.Option2"),
     value: "option2",
     description: t("Auth.Examples.Form.Description"),
+    image:
+      "https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=",
   },
   {
     label: t("Auth.Examples.Form.Option3"),
     value: "option3",
     description: t("Auth.Examples.Form.Description"),
+    image:
+      "https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=",
   },
 ];
 
@@ -108,6 +114,23 @@ export const inputs = (t: Function) => [
     double: true,
   },
   {
+    type: "checkboxes",
+    name: "imageCheckboxes",
+    label: t("Auth.Examples.Form.ImageCheckboxes"),
+    layout: "image",
+    options: inputOptions(t),
+    double: true,
+  },
+  {
+    type: "checkboxes",
+    name: "stackedImageCheckboxes",
+    label: t("Auth.Examples.Form.StackedImageCheckboxes"),
+    layout: "image",
+    stacked: true,
+    options: inputOptions(t),
+    double: true,
+  },
+  {
     type: "radio",
     name: "radio",
     label: t("Auth.Examples.Form.Radio"),
@@ -133,6 +156,23 @@ export const inputs = (t: Function) => [
     name: "stackedCardRadio",
     label: t("Auth.Examples.Form.StackedCardRadio"),
     layout: "card",
+    stacked: true,
+    options: inputOptions(t),
+    double: true,
+  },
+  {
+    type: "radio",
+    name: "imageRadio",
+    label: t("Auth.Examples.Form.ImageRadio"),
+    layout: "image",
+    options: inputOptions(t),
+    double: true,
+  },
+  {
+    type: "radio",
+    name: "stackedImageRadio",
+    label: t("Auth.Examples.Form.StackedImageRadio"),
+    layout: "image",
     stacked: true,
     options: inputOptions(t),
     double: true,

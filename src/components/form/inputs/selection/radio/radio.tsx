@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 
 import { InputProps } from "../../..";
 import CardBasedSelectionView from "../common/cardBased";
+import ImageBasedSelectionView from "../common/imageBased";
 
 type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 
@@ -16,6 +17,15 @@ const RadioInput: React.FC<FinalInput> = ({
     case "card":
       return (
         <CardBasedSelectionView
+          {...input}
+          stacked={stacked}
+          options={options}
+          type="radio"
+        />
+      );
+    case "image":
+      return (
+        <ImageBasedSelectionView
           {...input}
           stacked={stacked}
           options={options}

@@ -60,6 +60,7 @@ interface InputBasicProps {
     label?: string;
     description?: string;
     icon?: IconProp;
+    image?: string;
   }[];
 }
 
