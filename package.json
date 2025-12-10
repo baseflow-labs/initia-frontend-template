@@ -13,22 +13,17 @@
     "extract-translation": "i18next"
   },
   "dependencies": {
-    "@fontsource/cairo": "^5.2.7",
     "@fortawesome/fontawesome-svg-core": "^7.1.0",
     "@fortawesome/free-brands-svg-icons": "^7.1.0",
     "@fortawesome/free-solid-svg-icons": "^7.1.0",
     "@fortawesome/react-fontawesome": "^3.1.1",
     "@react-google-maps/api": "^2.20.7",
-    "ajv": "^8.17.1",
-    "ajv-keywords": "^5.1.0",
     "axios": "^1.13.2",
     "bootstrap": "^5.3.8",
-    "exceljs": "^4.4.0",
     "formik": "^2.4.9",
     "i18next": "^25.7.1",
     "i18next-browser-languagedetector": "^8.2.0",
     "moment": "^2.30.1",
-    "pdfkit": "^0.17.2",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
     "react-i18next": "^16.4.0",
@@ -38,8 +33,7 @@
     "react-scripts": "^5.0.1",
     "react-select": "^5.10.2",
     "redux": "^5.0.1",
-    "web-vitals": "^5.1.0",
-    "xlsx": "^0.18.5"
+    "web-vitals": "^5.1.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^20.2.0",
