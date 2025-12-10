@@ -1,15 +1,16 @@
+import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import CalendarComp from "../../../../components/calendar";
 import CollapseGroup from "../../../../components/collapse";
+import DropdownComp from "../../../../components/dropdown";
 import Modal from "../../../../components/modal";
 import TabsComp from "../../../../components/tab";
 import ApiDataTable from "../../../../components/table/apiDatatable";
 import PageTemplate from "../../../../layouts/auth/pages/pageTemplate";
 import { inputs } from "../datatablePage/inputs";
-import DropdownComp from "../../../../components/dropdown";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 
 const TemplateDataViewExamplesView = () => {
   const { t } = useTranslation();
@@ -95,6 +96,39 @@ const TemplateDataViewExamplesView = () => {
           inputs={inputs(t)}
           singleItem={t("Auth.Settings.Admin.Logger.Title")}
           includeView
+        />
+      ),
+      fullWidth: true,
+    },
+    {
+      title: t("Auth.Examples.DataView.Calendar"),
+      body: (
+        <CalendarComp
+          events={[
+            {
+              id: "string;",
+              title: "string;",
+              typeId: "1",
+              partyId: "1",
+              start: "2025-12-07",
+              end: "2025-12-08",
+              description: "string;",
+            },
+            {
+              id: "string;",
+              title: "string;",
+              typeId: "1",
+              partyId: "2",
+              start: "2025-12-08T10:00:00",
+              end: "2025-12-09T12:00:00",
+              description: "string;",
+            },
+          ]}
+          eventTypes={[{ id: "1", label: "Meeting", colorClass: "primary" }]}
+          parties={[
+            { id: "1", name: "Party 1", colorClass: "success" },
+            { id: "2", name: "Party 2", colorClass: "danger" },
+          ]}
         />
       ),
       fullWidth: true,

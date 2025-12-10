@@ -19,6 +19,7 @@
     },
     "Examples": {
       "DataView": {
+        "Calendar": "تقويم",
         "CollapseGroup": "عرض مضغوط للتبويبات",
         "Dropdown": "قائمة منسدلة",
         "Modal": "نافذة",
@@ -54,10 +55,10 @@
         "MultipleEntries": "إدخالات متعددة",
         "Number": "رقم",
         "NumberText": "نص رقمي",
+        "OTP": "رمز التحقق",
         "Option1": "الخيار 1",
         "Option2": "الخيار 2",
         "Option3": "الخيار 3",
-        "OTP": "رمز التحقق",
         "Password": "كلمة المرور",
         "PhoneNumber": "رقم الهاتف",
         "Radio": "اختيار من متعدد",
@@ -305,19 +306,19 @@
           "ContactUs": "تواصل معنا",
           "Current": "الحالية",
           "CurrentPlan": "الباقة الحالية",
-          "Projects_zero": "لا مشاريع",
-          "Projects_one": "مشروع",
-          "Projects_two": "مشروعان",
           "Projects_few": "مشاريع",
           "Projects_many": "مشاريع",
+          "Projects_one": "مشروع",
           "Projects_other": "مشاريع",
+          "Projects_two": "مشروعان",
+          "Projects_zero": "لا مشاريع",
           "Renewal": "تجديد الاشتراك",
-          "Seats_zero": "لا مقاعد",
-          "Seats_one": "مقعد",
-          "Seats_two": "مقعدان",
           "Seats_few": "مقاعد",
           "Seats_many": "مقاعد",
+          "Seats_one": "مقعد",
           "Seats_other": "مقاعد",
+          "Seats_two": "مقعدان",
+          "Seats_zero": "لا مقاعد",
           "Select": "اختر",
           "Title": "الفوترة"
         },
@@ -390,15 +391,15 @@
           "Title": "قم بزيارتنا"
         }
       },
-      "Faq": {
-        "Description": "وصف الأسئلة الشائعة",
-        "Title": "الأسئلة الشائعة"
-      },
       "FAQ": {
         "CheckFaq": "تصفّح الأسئلة الشائعة",
         "DidNotFindWhatYouAreLookingFor": "لم تجد ما تبحث عنه؟",
         "NoFAQsFound": "لا توجد أسئلة شائعة",
         "SearchPlaceholder": "بحث...",
+        "Title": "الأسئلة الشائعة"
+      },
+      "Faq": {
+        "Description": "وصف الأسئلة الشائعة",
         "Title": "الأسئلة الشائعة"
       },
       "KnowledgeBase": {
@@ -500,6 +501,9 @@
         "Title": "أمثلة الإدخالات في النماذج"
       }
     },
+    "UserSettings": {
+      "Title": "إعدادات المستخدم"
+    },
     "Users": {
       "Name": "الاسم",
       "Profile": {
@@ -508,9 +512,6 @@
       },
       "Role": "النوع",
       "Title": "المستخدمون"
-    },
-    "UserSettings": {
-      "Title": "إعدادات المستخدم"
     }
   },
   "Common": {
@@ -522,6 +523,12 @@
     "BuilderShort": "AlembicSoft"
   },
   "Global": {
+    "Calendar": {
+      "EventTypes": "نوع الحدث / المناسبة",
+      "Filters": "الفلاتر",
+      "Parties": "الجهات",
+      "Today": "اليوم"
+    },
     "Form": {
       "CantDoIt": "لا يمكن تنفيذ ذلك",
       "Errors": {

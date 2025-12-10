@@ -15,7 +15,6 @@
   - nested form layouts (with / without table, within / split form)
 - data view options
   - google maps view
-  - calendar view
   - kanban view
   - gallery / photo grid view
   - carousel view
@@ -197,7 +196,6 @@ Output will be in the build/ directory, ready for deployment.
 #### 🎨 Styling & UI
 
 - Bootstrap 5 for responsive UI
-- @fontsource/cairo for Arabic/Cairo font
 - Font Awesome (@fortawesome) for icons
 - React Select for enhanced dropdowns
 
@@ -210,17 +208,10 @@ Output will be in the build/ directory, ready for deployment.
 #### 📦 Forms & Validation
 
 - Formik for form state & validation
-- Ajv and ajv-keywords for advanced JSON schema validation
 
 #### 🗺 Maps Integration
 
 - @react-google-maps/api for embedding Google Maps
-
-#### 📊 Files & Export
-
-- xlsx for spreadsheet export
-- exceljs for advanced Excel generation
-- pdfkit for generating PDF documents
 
 #### 📆 Date & Time
 
