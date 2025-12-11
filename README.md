@@ -25,6 +25,7 @@
 - New apis
   - return values of TablesNames
   - export file by field & filters
+  - login integration with 3rd party services (google, facebook, twitter, linkedin, microsoft, github, apple, ...etc)
 - build datatable with ...
   - server side filtering
     - per type (text, number, date, boolean, select, multi-select)
@@ -71,24 +72,36 @@
     - Personal Financials
     - Project Management
     - CRM
+    - search engine
     - Recruiting platform
     - HRMS
     - News portal
     - Personal-portfolio
     - SIS
+    - Dynamic CMS (using form of forms + route-based content rendering)
     - Encyclopedia
 - build dark / light mode, color themes switcher, horizontal / vertical layout switcher, boxed / full-width layout switcher
 - build onboarding process (spread in admin settings + first login trigger wizard)
 - build admin advanced settings
   - system health monitoring
   - data import/export
-  - api keys management
-  - integrations management
   - session management
-  - IP whitelisting / blacklisting
-  - files management
   - configurations
+    - IP whitelisting / blacklisting
     - password policy
+    - integrations settings (API keys, webhooks, ...etc)
+    - chatbot content
+    - support center content
+    - default user settings
+      - notifications
+      - language
+      - timezone
+    - security settings
+      - 2FA methods
+      - session timeout
+      - login attempts limits
+    - user data to collect (checkbox of props to enable/disable) (sign up, profile)
+    - login method
     - files upload limits
     - enabled languages
     - localization values
@@ -100,10 +113,15 @@
   - contents
     - policy, terms & conditions with localization
     - landing page contents management
+    - landing page SEO settings
+    - landing page builder (next.js with preset options of page sections)
+    - files management
+    - collections data management (CMS-like)
 - build advanced user controls
   - dashboard customization
 - build announcements / notifications manual generation service
 - Build technical & business documentation
+- split admin panel into separate app
 
 ## 🚀 Getting Started
 
