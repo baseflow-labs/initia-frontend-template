@@ -19,7 +19,11 @@
     },
     "Examples": {
       "DataView": {
+        "Calendar": "Calendar",
         "CollapseGroup": "Collapse Group",
+        "Dropdown": "Dropdown",
+        "Modal": "Modal",
+        "Table": "Data Table",
         "TabsGroup": "Tabs Group",
         "Test1": {
           "Body": "This is Test 1 body",
@@ -519,6 +523,12 @@
     "BuilderShort": "AlembicSoft"
   },
   "Global": {
+    "Calendar": {
+      "EventTypes": "Event Types",
+      "Filters": "Filters",
+      "Parties": "Parties",
+      "Today": "Today"
+    },
     "Form": {
       "CantDoIt": "Can't Do It",
       "Errors": {

@@ -8,13 +8,11 @@ import i18n from "./i18next";
 import reportWebVitals from "./reportWebVitals";
 import store from "./store/store";
 
+import "./styles/index.css";
+import "./styles/stepper.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/css/bootstrap.rtl.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.js";
-import "./styles/index.css";
-import "./styles/stepper.css";
-
-import "@fontsource/cairo";
 import "moment/locale/ar";
 
 const root = ReactDOM.createRoot(

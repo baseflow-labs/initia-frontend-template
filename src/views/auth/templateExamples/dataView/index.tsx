@@ -1,10 +1,21 @@
+import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
+
+import CalendarComp from "../../../../components/calendar";
 import CollapseGroup from "../../../../components/collapse";
-import PageTemplate from "../../../../layouts/auth/pages/pageTemplate";
+import DropdownComp from "../../../../components/dropdown";
+import Modal from "../../../../components/modal";
 import TabsComp from "../../../../components/tab";
+import ApiDataTable from "../../../../components/table/apiDatatable";
+import PageTemplate from "../../../../layouts/auth/pages/pageTemplate";
+import { inputs } from "../datatablePage/inputs";
 
 const TemplateDataViewExamplesView = () => {
   const { t } = useTranslation();
+
+  const [open, setOpen] = useState(false);
 
   const exampleData = [
     {
@@ -47,13 +58,93 @@ const TemplateDataViewExamplesView = () => {
         />
       ),
     },
+    {
+      title: t("Auth.Examples.DataView.Modal"),
+      body: (
+        <Modal
+          name="modal"
+          withTrigger
+          triggerLabel="Open"
+          title={t("Auth.Examples.DataView.Modal")}
+          isOpen={open}
+          onClose={() => setOpen(false)}
+        >
+          {exampleData[0].body}
+        </Modal>
+      ),
+    },
+    {
+      title: t("Auth.Examples.DataView.Dropdown"),
+      body: (
+        <DropdownComp
+          start
+          button={
+            <FontAwesomeIcon icon={faEllipsisVertical} className="ms-1" />
+          }
+          list={exampleData.map(({ title, body }) => ({
+            label: title,
+            onClick: () => alert(title),
+          }))}
+        />
+      ),
+    },
+    {
+      title: t("Auth.Examples.DataView.Table"),
+      body: (
+        <ApiDataTable
+          dataApiEndpoint="/support/logger"
+          inputs={inputs(t)}
+          singleItem={t("Auth.Settings.Admin.Logger.Title")}
+          includeView
+        />
+      ),
+      fullWidth: true,
+    },
+    {
+      title: t("Auth.Examples.DataView.Calendar"),
+      body: (
+        <CalendarComp
+          events={[
+            {
+              id: "string;",
+              title: "string;",
+              typeId: "1",
+              partyId: "1",
+              start: "2025-12-07",
+              end: "2025-12-08",
+              description: "string;",
+            },
+            {
+              id: "string;",
+              title: "string;",
+              typeId: "1",
+              partyId: "2",
+              start: "2025-12-08T10:00:00",
+              end: "2025-12-09T12:00:00",
+              description: "string;",
+            },
+          ]}
+          eventTypes={[{ id: "1", label: "Meeting", colorClass: "primary" }]}
+          parties={[
+            { id: "1", name: "Party 1", colorClass: "success" },
+            { id: "2", name: "Party 2", colorClass: "danger" },
+          ]}
+        />
+      ),
+      fullWidth: true,
+    },
   ];
 
   return (
     <PageTemplate title={t("Auth.Examples.DataView.Title")}>
       <div className="row">
         {dataViewExamples.map((example, idx) => (
-          <div className="col-12 col-md-6 mb-4" key={idx}>
+          <div
+            className={`col-12 ${
+              example.fullWidth ? "col-md-12" : "col-md-6"
+            } my-4`}
+            key={idx}
+          >
             <h4 className="mb-3">{example.title}</h4>
 
             {example.body}
