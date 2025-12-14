@@ -254,6 +254,8 @@ Implement only the “must-have knobs” first:
   - [ ] Telemedicine
   - [ ] Real estate listing
   - [ ] Community / Social
+    - [ ] Public
+    - [ ] Private
   - [ ] Personal Financials
   - [ ] Project Management
   - [ ] CRM
@@ -265,6 +267,8 @@ Implement only the “must-have knobs” first:
   - [ ] SIS
   - [ ] Dynamic CMS (using form of forms + route-based content rendering)
   - [ ] Encyclopedia
+    - [ ] Community contributions
+    - [ ] Closed contributions
   - [ ] Task management tool
   - [ ] Collection management system
   - [ ] Event management system
@@ -278,6 +282,8 @@ Implement only the “must-have knobs” first:
   - [ ] reviewer side
   - [ ] Checker side
   - [ ] Admin side
+  - [ ] Video share platform
+  - [ ] Video streaming platform
 - [ ] Commit-based code generation
 - [ ] AI-assisted features planing
 - [ ] AI-assisted code generation (initial experiments + feasibility study)
