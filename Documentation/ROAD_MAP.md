@@ -1,10 +1,10 @@
-# Frontend Roadmap (derived from commit history)
+# Frontend Roadmap
 
-## Phase 1 – Auth, Membership & Core Tables (May 8 – Jul 2, 2025)
+## Phase 1 – Auth & Core Form and Tables (May 8 – Jul 2, 2025)
 
 ### Sprint 1 (8 – 21 May, 2025)
 
-- [x] Set up public layout, initial login/register views, and Formik-based dynamic form component.
+- [x] Set up public layout, initial public (login/register) views, and Formik-based dynamic form component.
 - [x] Start multi-step wizard experience .
 
 ### Sprint 2 (22 May – 4 Jun, 2025)
@@ -13,25 +13,25 @@
 
 ### Sprint 3 (5 – 18 Jun, 2025)
 
-- [x] Launch Notifications view, role-based authorization, global file preview, and Data Review archive view.
+- [x] Launch Notifications view, global file preview, and Data archive view.
 
 ### Sprint 4 (19 Jun– 2 Jul, 2025)
 
 - [x] Add reusable dropdown and collapse group components.
-- [x] Build star-based evaluation input and hook it into existing flows.
+- [x] Build star-based evaluation input.
 - [x] Set up initial CI build workflows and API-based file-return handler for demos.
 
-## Phase 2 – Dashboards, Research Workflows & File Management (Jul 3 – Aug 27, 2025)
+## Phase 2 – Dashboards & File Management (Jul 3 – Aug 27, 2025)
 
 ### Sprint 5 (3 – 16 Jul, 2025)
 
-- [x] Introduce release automation (auto-versioning, commit conventions, Husky) and UX features like read/unread notifications, application progress timeline, and clickable email/phone in tables.
+- [x] Introduce release automation (auto-versioning, commit conventions, Husky) and UX features like read/unread notifications, and clickable email/phone in tables.
 - [x] Enforce secure password change flow by requiring old password.
 
 ### Sprint 6 (17 – 30 Jul, 2025)
 
 - [x] Improve file handling: upload size limits, multi-file input, and increased per-file size.
-- [x] Centralize Excel export processor and set up PR title checks / auto releases in CI/CD.
+- [x] Set up PR title checks / auto releases in CI/CD.
 
 ### Sprint 7 (31 Jul – 13 Aug, 2025)
 
@@ -39,47 +39,39 @@
 - [x] Apply system identity/theming across the app.
 - [x] Launch independent file-upload service, form reset behavior.
 
-### Sprint 8 (14 – 27 Aug, 2025)
+## Phase 3 – Admin Settings & Bulk Ops (28 Aug – 22 Oct, 2025)
 
-- [x] Ship accountant-focused dashboard views.
-- [x] Surface category data in accountant overview and program stats (including suspended programs).
+### Sprint 8 ( 28 Aug – 10 Sep, 2025)
 
-## Phase 3 – Governance, Approvals, Debt & Bulk Ops (28 Aug – 22 Oct, 2025)
-
-### Sprint 9 ( 28 Aug – 10 Sep, 2025)
-
-- [x] Introduce CEO user type and show user type in logout dropdown.
 - [x] Add system admin login plus admin tools for bulk data insertion and initial user management view.
 
-### Sprint 10 (11 Sep – 24 Sep, 2025)
+### Sprint 9 (11 Sep – 24 Sep, 2025)
 
-- [x] Implement structured program approval model (flags, rejected status, approval flow).
-- [x] Add head-of-committee dummy login for UAT/demo scenarios.
 - [x] Provide admin “delete all users data” operations guarded with warning messages.
 
-### Sprint 11 (25 Sep – 8 Oct, 2025)
+### Sprint 10 (25 Sep – 8 Oct, 2025)
 
 - [x] Focus sprint on stabilization, refinement, and QA around approvals, and bulk-insert operations (no major net-new features).
 
-### Sprint 12 (9 – 22 Oct, 2025)
+### Sprint 11 (9 – 22 Oct, 2025)
 
 - [x] Override and standardize date input formats across forms.
 - [x] Add role/Type-based filters to admin user management to improve operability at scale.
 
 ## Phase 4 – Template Platform, Admin Tools & Advanced Components (Oct 23 – Dec 17, 2025)
 
-### Sprint 13 (23 Oct – 5 Nov, 2025)
+### Sprint 12 (23 Oct – 5 Nov, 2025)
 
 - [x] Build necessary template views and an initial to-do list for template work.
 - [x] Set up NVM controller, splitting public-view inputs and standardizing configuration.
 - [x] Implement a global table layout that centralizes common table functionality.
 - [x] Add an improved navbar on the authenticated layout for template-based apps.
 
-### Sprint 14 (6 – 19 Nov, 2025)
+### Sprint 13 (6 – 19 Nov, 2025)
 
 - [x] Dedicated stabilization sprint: polish template views, global table layout, and navigation behavior (primarily refactors and fixes).
 
-### Sprint 15 (20 Nov – 3 Dec, 2025)
+### Sprint 14 (20 Nov – 3 Dec, 2025)
 
 - [x] Create example view for the new DataTable page pattern.
 - [x] Add placeholder pages for optional backend-driven services and a support-center section.
@@ -87,7 +79,7 @@
 - [x] Add generic template example pages and basic page placeholders.
 - [x] Refresh documentation to-do lists to reflect template-focused backlog.
 
-### Sprint 16 (4 – 17 Dec, 2025)
+### Sprint 15 (4 – 17 Dec, 2025)
 
 - [x] Add live demo pages for the datatable and form examples.
 - [x] Implement refresh-token setup for auth and role-permissions UI under Settings.
@@ -99,3 +91,176 @@
   - [x] Button/switch-based boolean inputs, color & star inputs, and range slider.
   - [x] Accordion and tabs-based data view components, plus modal/table/dropdown UI examples.
 - [x] Finalize updated documentation to-do list for next iterations.
+
+## Phase 5 — Foundation & Shipping Readiness (Sprints 1–2)
+
+### Sprint 16 — Release hygiene + documentation baseline (18 - 31 Dec, 2025)
+
+- [ ] Fix changelog generating script (make it deterministic, supports conventional commits, handles merges)
+- [ ] Update documentation (README, commit convention, local dev, release flow)
+- [ ] Split localization files into smaller chunks (by module/feature; add loader rules)
+- [ ] “Definition of Done” checklist for PRs (release notes, docs, migrations, screenshots)
+
+### Sprint 17 — Repo structure: Vite + Turbo baseline (1 - 14 Jan, 2026)
+
+- [ ] Wrap frontend with Vite (replace CRA) OR keep CRA but create migration path (pick one and complete it)
+- [ ] Introduce Turborepo structure (apps/admin, apps/landing, packages/ui, packages/core, packages/i18n)
+- [ ] Set shared lint/format/build tasks + caching
+- [ ] Prep “analysis tools integration” skeleton (packages/analysis placeholder + interface contracts)
+
+## Phase 6 — Core UI Engine (Forms + DataTable) (Sprints 3–6)
+
+### Sprint 18 — Form engine: foundational input types (15 - 28 Jan, 2026)
+
+- [ ] Build date/time input suite:
+  - [ ] date, time, datetime, month, year, weekday
+- [ ] Searchable + clearable select (single)
+- [ ] Rich text editor (minimal, stable; don’t over-customize)
+- [ ] Nested form layouts (v1):
+  - [ ] sections + grids
+  - [ ] split form (two columns)
+  - [ ] within-table editing (basic)
+
+### Sprint 19 — Form engine: advanced inputs + wizard v1 (29 Jan - 11 Feb, 2026)
+
+- [ ] Google maps picker (location input) — minimal integration
+- [ ] Multi-select with search + clear
+- [ ] Build form wizard v1:
+  - [ ] steps, validation per step
+  - [ ] save draft locally
+  - [ ] resume draft
+- [ ] “Form-of-forms” base schema support (enough to render forms from config)
+
+### Sprint 20 — DataTable v1: server-side foundations (12 - 25 Feb, 2026)
+
+- [ ] Server-side pagination + sorting + search (single search box)
+- [ ] Server-side filtering (v1):
+  - [ ] text, number, date, boolean
+- [ ] Column presets (v1): badge, boolean, progress, avatar/image
+- [ ] Row selection + bulk actions (standard actions only)
+- [ ] LocalStorage persistence (v1): column visibility + order + pagination info + filters + sort + search
+
+### Sprint 21 — DataTable v2: advanced filters + layouts (26 Feb - 10 Mar, 2026)
+
+- [ ] Advanced filters builder (AND/OR + operators)
+- [ ] Default filter values
+- [ ] Details panel option (expand row)
+- [ ] Responsive cards view (auto switch / manual toggle)
+- [ ] Scroll vs pagination mode (choose one as default; keep both optional)
+
+## Phase 7 — Views, Dashboards, and UX Platform Layer (Sprints 7–9)
+
+### Sprint 22 — Themes + layout switchers (11 - 24 Mar, 2026)
+
+- [ ] Dark/light mode
+- [ ] Color theme switcher (primary/secondary + neutral surfaces)
+- [ ] Horizontal/vertical layout switcher
+- [ ] Boxed/full-width layout option
+- [ ] Persist UI preferences (per user in localStorage first; later server)
+
+### Sprint 23 — Initial dashboard contents (MVP set) (25 - 28 Mar, 2026)
+
+- [ ] Non-Admin dashboard v1:
+  - [ ] Account info card
+  - [ ] Notifications list
+  - [ ] Calendar basic block
+- [ ] Admin dashboard v1:
+  - [ ] Users stats + list
+  - [ ] System health basic widget (static placeholder + API hook)
+  - [ ] Subscriptions placeholder section
+
+### Sprint 24 — Data view options v1 (29 Mar - 11 Apr, 2026)
+
+- [ ] Kanban view (basic columns + drag optional later)
+- [ ] Gallery / photo grid view
+- [ ] Charts + stat cards (basic library + patterns)
+- [ ] Toaster/notifications system (app-wide)
+
+## Phase 8 — Backend APIs for Generator Features (Sprints 10–11)
+
+### Sprint 25 — Platform APIs v1 (12 - 25 Apr, 2026)
+
+- [ ] API: return values of `TablesNames` (and metadata needed for generator)
+- [ ] API: export file by field & filters (CSV/XLSX pipeline contract)
+- [ ] Data localization support contract (server returns locale-aware labels where needed)
+
+### Sprint 26 — Auth integrations v1 (26 Apr - 9 May, 2026)
+
+- [ ] OAuth login integration (Google + Microsoft) with clean provider abstraction
+- [ ] Provider selection config (enabled/disabled per env/settings)
+- [ ] UX: login method switching + fallback email/pass
+
+## Phase 9 — Admin Platform “Settings & Ops” (Sprints 12–14)
+
+### Sprint 27 — Onboarding + first-login wizard (10 - 23 May, 2026 )
+
+- [ ] Onboarding flow (admin settings + first login trigger)
+- [ ] Required setup checklist (org name/logo, default language/timezone, login methods)
+- [ ] Persist onboarding completion state
+
+### Sprint 28 — Admin advanced settings v1 (24 May - 6 Jun, 2026)
+
+Implement only the “must-have knobs” first:
+
+- [ ] Password policy (min length, complexity)
+- [ ] Session timeout + login attempts limit
+- [ ] Enabled languages + default language
+- [ ] File upload limits (max size, max count)
+- [ ] Basic integrations settings (API keys storage placeholder)
+
+### Sprint 29 — Content management v1 (7 - 20 Jun, 2026)
+
+- [ ] Policy / Terms with localization
+- [ ] Landing page content management (basic sections data model)
+- [ ] Files management (simple library + tagging)
+
+---
+
+## To Plan / Backlog (Post-Roadmap)
+
+- [ ] Split admin panel into separate app (if not already done in Turborepo)
+- [ ] Build analysis tools integration (actual implementation beyond prep)
+- [ ] Build technical & business documentation (full suite)
+- [ ] Advanced user controls (dashboard customization)
+- [ ] Announcements / manual notifications generation service
+- [ ] Full template dashboard catalog (e-commerce, SIS, CRM, etc.)
+  - [ ] e-Commerce
+  - [ ] Marketplace / 3rd party sellers
+  - [ ] Delivery
+  - [ ] Ride Hailing
+  - [ ] Booking system (venue, tickets, events, appointments)
+  - [ ] e-Learning
+  - [ ] Telemedicine
+  - [ ] Real estate listing
+  - [ ] Community / Social
+  - [ ] Personal Financials
+  - [ ] Project Management
+  - [ ] CRM
+  - [ ] search engine
+  - [ ] Recruiting platform
+  - [ ] HRMS
+  - [ ] News portal
+  - [ ] Personal-portfolio
+  - [ ] SIS
+  - [ ] Dynamic CMS (using form of forms + route-based content rendering)
+  - [ ] Encyclopedia
+- [ ] Build user-level permissions
+- [ ] Build record-level permissions
+- [ ] Advanced form features (conditional logic, calculated fields)
+- [ ] Advanced DataTable features (pivot tables, custom formulas)
+- [ ] Mobile app (React Native or Flutter)
+- [ ] PWA support
+- [ ] Offline support (caching, local storage sync)
+- [ ] Performance optimizations (lazy loading, code splitting)
+- [ ] Accessibility improvements (WCAG compliance)
+- [ ] Internationalization enhancements (Admin-panel controlled localization)
+- [ ] Third-party integrations (CRM, ERP, marketing tools)
+- [ ] Data export/import tools (beyond CSV/XLSX)
+- [ ] Advanced security features (2FA, SSO)
+- [ ] User feedback and support system (in-app chat)
+- [ ] Build usability testing and UX improvements
+- [ ] Commit-based code generation
+- [ ] AI-assisted features planing
+- [ ] AI-assisted code generation (initial experiments + feasibility study)
+- [ ] AI-assisted testing (unit/integration test generation)
+- [ ] AI-assisted documentation (auto-generate/update docs based on code changes)

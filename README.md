@@ -1,127 +1,4 @@
-# AppNest Frontend App
-
-## To Do
-
-- Fix changelog generating script
-- Update documentation (read me, commit convention)
-- Split localization files into smaller chunks
-- wrap with vite / turbo-back
-- build analysis tools integration prep
-- build form various input types
-  - date, time, date time, month, year, weekday
-  - rich text editor
-  - google maps picker
-  - searchable & clearable select
-  - nested form layouts (with / without table, within / split form)
-- data view options
-  - google maps view
-  - kanban view
-  - gallery / photo grid view
-  - carousel view
-  - toaster
-  - js maps
-  - charts & stat cards
-- build form wizard
-- New apis
-  - return values of TablesNames
-  - export file by field & filters
-  - login integration with 3rd party services (google, facebook, twitter, linkedin, microsoft, github, apple, ...etc)
-- build datatable with ...
-  - server side filtering
-    - per type (text, number, date, boolean, select, multi-select)
-    - default filter values
-    - advanced filters (AND/OR conditions, operators)
-    - localstorage saved filters
-  - localstorage saved columns (visibility, order)
-  - server side search
-  - scroll vs pagination
-  - row selection (bulk standard & custom actions)
-  - preset column rendering (badges, progress, boolean, select, multi-select, avatar, image, type-based)
-  - custom column rendering
-  - responsiveness to cards view
-  - details panel option
-  - record view options (card, image-oriented, table)
-  - role-based columns & actions
-  - grouping option
-  - fixed header, footer & columns (to choose)
-  - record duplicates option
-  - data localization support
-  - width control
-- build initial next.js landing page templates
-- build initial dashboard contents
-  - Non-Admin
-    - Account Info
-    - Calendar
-    - Chat
-    - Notifications
-  - Admin
-    - Users stats & list
-    - System health
-    - System reviews
-    - Subscriptions
-  - Template-based dashboards
-    - e-Commerce
-    - Marketplace / 3rd party sellers
-    - Delivery
-    - Ride Hailing
-    - Booking system (venue, tickets, events, appointments)
-    - e-Learning
-    - Telemedicine
-    - Real estate listing
-    - Community / Social
-    - Personal Financials
-    - Project Management
-    - CRM
-    - search engine
-    - Recruiting platform
-    - HRMS
-    - News portal
-    - Personal-portfolio
-    - SIS
-    - Dynamic CMS (using form of forms + route-based content rendering)
-    - Encyclopedia
-- build dark / light mode, color themes switcher, horizontal / vertical layout switcher, boxed / full-width layout switcher
-- build onboarding process (spread in admin settings + first login trigger wizard)
-- build admin advanced settings
-  - system health monitoring
-  - data import/export
-  - session management
-  - configurations
-    - IP whitelisting / blacklisting
-    - password policy
-    - integrations settings (API keys, webhooks, ...etc)
-    - chatbot content
-    - support center content
-    - default user settings
-      - notifications
-      - language
-      - timezone
-    - security settings
-      - 2FA methods
-      - session timeout
-      - login attempts limits
-    - user data to collect (checkbox of props to enable/disable) (sign up, profile)
-    - login method
-    - files upload limits
-    - enabled languages
-    - localization values
-    - initial dark mode
-    - env vars
-    - per user role theme color
-    - services control (build services with integration)
-    - form of forms (with user-role based workflow)
-  - contents
-    - policy, terms & conditions with localization
-    - landing page contents management
-    - landing page SEO settings
-    - landing page builder (next.js with preset options of page sections)
-    - files management
-    - collections data management (CMS-like)
-- build advanced user controls
-  - dashboard customization
-- build announcements / notifications manual generation service
-- Build technical & business documentation
-- split admin panel into separate app
+# AppNest Frontend App§
 
 ## 🚀 Getting Started
 
@@ -202,6 +79,10 @@ Output will be in the build/ directory, ready for deployment.
 
 - Built with create-react-app
 - To deploy: push to your main or prod branch or follow your CI/CD pipeline.
+
+### Documentation
+
+#### [Road Map](./Documentation/ROAD_MAP.md)
 
 ### 🧰 Tooling & Stack
 
