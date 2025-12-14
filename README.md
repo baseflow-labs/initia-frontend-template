@@ -136,3 +136,6 @@ Output will be in the build/ directory, ready for deployment.
 ### 🧠 Maintainers
 
 - [Makkahwi](https://github.com/makkahwi) — Product Owner & Lead Developer
+- [Mustafa Hasanat](https://github.com/MustafaHasanat) - Inspire
+- [ChatGPT](https://openai.com/chatgpt) — AI Assistant
+- [Copilot](https://github.com/features/copilot) — AI Pair Programmer

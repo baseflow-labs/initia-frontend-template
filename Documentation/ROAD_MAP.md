@@ -107,6 +107,7 @@
 - [ ] Introduce Turborepo structure (apps/admin, apps/landing, packages/ui, packages/core, packages/i18n)
 - [ ] Set shared lint/format/build tasks + caching
 - [ ] Prep “analysis tools integration” skeleton (packages/analysis placeholder + interface contracts)
+- [ ] Sign with generator details (every code file + footer)
 
 ## Phase 6 — Core UI Engine (Forms + DataTable) (15 Jan - 10 Mar, 2026)
 
