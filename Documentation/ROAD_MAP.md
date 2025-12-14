@@ -92,7 +92,7 @@
   - [x] Accordion and tabs-based data view components, plus modal/table/dropdown UI examples.
 - [x] Finalize updated documentation to-do list for next iterations.
 
-## Phase 5 — Foundation & Shipping Readiness (Sprints 1–2)
+## Phase 5 — Foundation & Shipping Readiness (18 Dec - 14 Jan, 2026)
 
 ### Sprint 16 — Release hygiene + documentation baseline (18 - 31 Dec, 2025)
 
@@ -108,7 +108,7 @@
 - [ ] Set shared lint/format/build tasks + caching
 - [ ] Prep “analysis tools integration” skeleton (packages/analysis placeholder + interface contracts)
 
-## Phase 6 — Core UI Engine (Forms + DataTable) (Sprints 3–6)
+## Phase 6 — Core UI Engine (Forms + DataTable) (15 Jan - 10 Mar, 2026)
 
 ### Sprint 18 — Form engine: foundational input types (15 - 28 Jan, 2026)
 
@@ -148,7 +148,7 @@
 - [ ] Responsive cards view (auto switch / manual toggle)
 - [ ] Scroll vs pagination mode (choose one as default; keep both optional)
 
-## Phase 7 — Views, Dashboards, and UX Platform Layer (Sprints 7–9)
+## Phase 7 — Views, Dashboards, and UX Platform Layer (11 Mar - 20 Apr, 2026)
 
 ### Sprint 22 — Themes + layout switchers (11 - 24 Mar, 2026)
 
@@ -158,7 +158,7 @@
 - [ ] Boxed/full-width layout option
 - [ ] Persist UI preferences (per user in localStorage first; later server)
 
-### Sprint 23 — Initial dashboard contents (MVP set) (25 - 28 Mar, 2026)
+### Sprint 23 — Initial dashboard contents (MVP set) (25 Mar - 7 Apr, 2026)
 
 - [ ] Non-Admin dashboard v1:
   - [ ] Account info card
@@ -169,36 +169,36 @@
   - [ ] System health basic widget (static placeholder + API hook)
   - [ ] Subscriptions placeholder section
 
-### Sprint 24 — Data view options v1 (29 Mar - 11 Apr, 2026)
+### Sprint 24 — Data view options v1 (7 - 20 Apr, 2026)
 
 - [ ] Kanban view (basic columns + drag optional later)
 - [ ] Gallery / photo grid view
 - [ ] Charts + stat cards (basic library + patterns)
 - [ ] Toaster/notifications system (app-wide)
 
-## Phase 8 — Backend APIs for Generator Features (Sprints 10–11)
+## Phase 8 — Backend APIs for Generator Features (21 Apr - 18 May, 2026)
 
-### Sprint 25 — Platform APIs v1 (12 - 25 Apr, 2026)
+### Sprint 25 — Platform APIs v1 (21 Apr - 4 May, 2026)
 
 - [ ] API: return values of `TablesNames` (and metadata needed for generator)
 - [ ] API: export file by field & filters (CSV/XLSX pipeline contract)
 - [ ] Data localization support contract (server returns locale-aware labels where needed)
 
-### Sprint 26 — Auth integrations v1 (26 Apr - 9 May, 2026)
+### Sprint 26 — Auth integrations v1 (5 - 18 May, 2026)
 
 - [ ] OAuth login integration (Google + Microsoft) with clean provider abstraction
 - [ ] Provider selection config (enabled/disabled per env/settings)
 - [ ] UX: login method switching + fallback email/pass
 
-## Phase 9 — Admin Platform “Settings & Ops” (Sprints 12–14)
+## Phase 9 — Admin Platform “Settings & Ops” (19 May - 29 Jun, 2026)
 
-### Sprint 27 — Onboarding + first-login wizard (10 - 23 May, 2026 )
+### Sprint 27 — Onboarding + first-login wizard (19 May - 2 Jun, 2026 )
 
 - [ ] Onboarding flow (admin settings + first login trigger)
 - [ ] Required setup checklist (org name/logo, default language/timezone, login methods)
 - [ ] Persist onboarding completion state
 
-### Sprint 28 — Admin advanced settings v1 (24 May - 6 Jun, 2026)
+### Sprint 28 — Admin advanced settings v1 (2 - 15 Jun, 2026)
 
 Implement only the “must-have knobs” first:
 
@@ -208,7 +208,7 @@ Implement only the “must-have knobs” first:
 - [ ] File upload limits (max size, max count)
 - [ ] Basic integrations settings (API keys storage placeholder)
 
-### Sprint 29 — Content management v1 (7 - 20 Jun, 2026)
+### Sprint 29 — Content management v1 (16 - 29 Jun, 2026)
 
 - [ ] Policy / Terms with localization
 - [ ] Landing page content management (basic sections data model)
@@ -218,11 +218,32 @@ Implement only the “must-have knobs” first:
 
 ## To Plan / Backlog (Post-Roadmap)
 
+- [ ] Multi-tenant support (orgs, subdomains, data isolation)
+- [ ] Generate automated tests (unit + integration) for core components
+- [ ] Build form analytics (submission stats, abandonment rates)
+- [ ] Build dashboard analytics (view stats, widget interactions)
+- [ ] Build A/B testing framework (for forms and dashboards)
 - [ ] Split admin panel into separate app (if not already done in Turborepo)
 - [ ] Build analysis tools integration (actual implementation beyond prep)
 - [ ] Build technical & business documentation (full suite)
 - [ ] Advanced user controls (dashboard customization)
 - [ ] Announcements / manual notifications generation service
+- [ ] Email integration & management service (templates, scheduling, logs)
+- [ ] Build user-level permissions
+- [ ] Build record-level permissions
+- [ ] Advanced form features (conditional logic, calculated fields)
+- [ ] Advanced DataTable features (pivot tables, custom formulas)
+- [ ] Mobile app (Flutter)
+- [ ] PWA support
+- [ ] Offline support (caching, local storage sync)
+- [ ] Performance optimizations (lazy loading, code splitting)
+- [ ] Accessibility improvements (WCAG compliance)
+- [ ] Internationalization enhancements (Admin-panel controlled localization)
+- [ ] Third-party integrations (CRM, ERP, marketing tools)
+- [ ] Data export/import tools (beyond CSV/XLSX)
+- [ ] Advanced security features (2FA, SSO)
+- [ ] User feedback and support system (in-app chat)
+- [ ] Build usability testing and UX improvements
 - [ ] Full template dashboard catalog (e-commerce, SIS, CRM, etc.)
   - [ ] e-Commerce
   - [ ] Marketplace / 3rd party sellers
@@ -244,23 +265,23 @@ Implement only the “must-have knobs” first:
   - [ ] SIS
   - [ ] Dynamic CMS (using form of forms + route-based content rendering)
   - [ ] Encyclopedia
-- [ ] Build user-level permissions
-- [ ] Build record-level permissions
-- [ ] Advanced form features (conditional logic, calculated fields)
-- [ ] Advanced DataTable features (pivot tables, custom formulas)
-- [ ] Mobile app (React Native or Flutter)
-- [ ] PWA support
-- [ ] Offline support (caching, local storage sync)
-- [ ] Performance optimizations (lazy loading, code splitting)
-- [ ] Accessibility improvements (WCAG compliance)
-- [ ] Internationalization enhancements (Admin-panel controlled localization)
-- [ ] Third-party integrations (CRM, ERP, marketing tools)
-- [ ] Data export/import tools (beyond CSV/XLSX)
-- [ ] Advanced security features (2FA, SSO)
-- [ ] User feedback and support system (in-app chat)
-- [ ] Build usability testing and UX improvements
+  - [ ] Task management tool
+  - [ ] Collection management system
+  - [ ] Event management system
+    - [ ] planning
+    - [ ] scheduling
+    - [ ] ticketing
+    - [ ] promotion
+    - [ ] community
 - [ ] Commit-based code generation
 - [ ] AI-assisted features planing
 - [ ] AI-assisted code generation (initial experiments + feasibility study)
 - [ ] AI-assisted testing (unit/integration test generation)
 - [ ] AI-assisted documentation (auto-generate/update docs based on code changes)
+- [ ] Real-time features (WebSockets, live updates)
+- [ ] GraphQL API support
+- [ ] Server-side rendering (SSR) support
+- [ ] Framework Variants (Frontend React alternatives, e.g., Vue, Angular + Backend variants, e.g., Express.js, GoLang, Java, Django)
+- [ ] Micro-frontend + micro-service architecture support
+- [ ] Database variants (MySQL + NoSQL options)
+- [ ] CI/CD pipeline templates (GitHub Actions, GitLab CI, Jenkins / service-based options e.g. aws amplify + beanstalk ...etc)
