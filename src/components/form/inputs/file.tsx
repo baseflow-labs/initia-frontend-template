@@ -158,10 +158,7 @@ const FileInput: React.FC<FinalInput> = ({
 
             <div className="d-flex mt-2 justify-content-center align-items-center">
               <div className="text-truncate" style={{ maxWidth: 80 }}>
-                <a
-                  href={process.env.REACT_APP_STORAGE_DIRECTORY_URL + file.path}
-                  target="_blank"
-                >
+                <a href={file.path} target="_blank">
                   {file.name}
                 </a>
               </div>
