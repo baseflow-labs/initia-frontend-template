@@ -7,7 +7,7 @@ concurrency:
 on:
   push:
     branches:
-      - prod
+      - main
     paths-ignore:
       - ".github/workflows/**"
 
@@ -34,7 +34,7 @@ jobs:
 
           PR_TITLE=$(gh pr list \
             --state merged \
-            --base prod \
+            --base main \
             --limit 10 \
             --json title,createdAt \
             | jq -r 'sort_by(.createdAt) | last.title')
@@ -118,7 +118,7 @@ jobs:
           git config user.email "SuhaibAhmadAi@hotmail.com"
           git add src/version.ts Documentation/CHANGELOG.md
           git commit -m "chore(code): bump version to ${{ steps.bump.outputs.new_version }} [ci skip]" || echo "Nothing to commit"
-          git push origin prod
+          git push origin main
 
       - name: Create GitHub Release
         if: steps.bump.outputs.new_version != ''
