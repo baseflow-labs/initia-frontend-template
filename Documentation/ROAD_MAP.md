@@ -273,6 +273,11 @@ Implement only the “must-have knobs” first:
     - [ ] ticketing
     - [ ] promotion
     - [ ] community
+  - [ ] Forms / requests management system
+  - [ ] Client side
+  - [ ] reviewer side
+  - [ ] Checker side
+  - [ ] Admin side
 - [ ] Commit-based code generation
 - [ ] AI-assisted features planing
 - [ ] AI-assisted code generation (initial experiments + feasibility study)
