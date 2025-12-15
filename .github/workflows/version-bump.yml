@@ -16,6 +16,9 @@ jobs:
     name: App Versioning Auto Bump
     runs-on: ubuntu-latest
     environment: production
+    permissions:
+      contents: write
+      pull-requests: read
 
     steps:
       - uses: actions/checkout@v3
