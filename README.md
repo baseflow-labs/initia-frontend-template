@@ -1,140 +1,84 @@
-# AppNest Frontend App
+# AppNest Frontend Dashboard Template
 
-## 🚀 Getting Started
+A production-ready, open-source frontend dashboard built with **React + TypeScript + Vite**, designed to work seamlessly with AppNest-generated backends.
 
-### 1. Clone & Install
+This template is suitable for:
 
-```bash
-  git clone <repo-url>
-  cd <repo-directory>
-  yarn   # or npm install
-```
+- 🚀 Startup MVPs
+- 🧑‍💼 Admin panels
+- 🧪 Rapid prototyping with real production code
 
-### 2. Run the App
+---
 
-```bash
-  yarn start
-```
+## ⭐ Support the Project (Important)
 
-## 🛠 Development Notes
+This project is **free and open-source**.  
+If it is saving you time, helping your project, or you plan to use it commercially:
 
-### 📦 Project Structure
+👉 **Please support us:**
 
-src/
-api/
-assets/
-components/
-documentation/
-layouts/
-store/
-styles/
-types/
-utils/
-views/
+1. ⭐ [Star this repository](https://github.com/your-repo-url)
+2. ⭐ [Star the GitHub organization](https://github.com/your-organization-url)
+3. 💖 [Donate](https://github.com/sponsors/your-repo-url) to sustain development and provide you with more
 
-### 💬 Commit Message Convention
+Your support directly funds:
 
-We follow the Conventional Commits format with enforced scope per service/module.
+- New templates
+- Better documentation
+- Faster fixes & features
+- Long-term maintenance
+- Community support
+- Execution of our [roadmap](./docs/ROAD_MAP.md)
 
-📘 See full guide here: [COMMIT_CONVENTION.md](./src/documentation/COMMIT_CONVENTION.md)
+> Open-source survives on users who give back.
 
-Example:
+---
 
-feat(auth): implement login via OTP
-fix(user): fix avatar cropping on mobile
+## 📚 Documentation – Choose Your Path
 
-### ✅ Git Hooks & Code Quality
+We provide **two separate guides**, depending on your background:
 
-- ✅ Commit messages are checked via Husky + Commitlint
-- ✅ Code formatting via Prettier (if enabled)
-- ✅ Linting rules (optional — add if using ESLint)
+### 👩‍💼 Non-Technical / Product-Focused Users
 
-### 💬 [ChangeLog](./src/documentation/CHANGELOG.md)
+➡️ **Start here**  
+📄 [`docs/START_NON_TECHNICAL.md`](./docs/START_NON_TECHNICAL.md)
 
-### 📦 Build for Production
+> For founders, students, PMs, and new or non developers who want to run, configure, and deploy the dashboard with minimal coding.
 
-```bash
-  yarn build
-```
+---
 
-Output will be in the build/ directory, ready for deployment.
+### 👨‍💻 Technical Users / Developers
 
-### 🧪 Optional Scripts
+➡️ **Start here**  
+📄 [`docs/START_TECHNICAL.md`](./docs/START_TECHNICAL.md)
 
-```bash
-  yarn start               # Start dev server
-  yarn build               # Build for production
-  yarn extract-translation # Extract i18n strings
-  yarn commit              # Use Commitizen to write formatted commits
-```
+> For developers who want to extend, customize, and maintain the codebase professionally.
 
-### 🔐 Environment Profiles
+---
 
-| Profile | Description               |
-| ------- | ------------------------- |
-| `.env`  | Default/local development |
+## 🧰 Tech Stack (Quick Overview)
 
-### 📤 Deployment
+- [AppNest](https://appnest.io/) (backend generator)
+- [React 19](https://reactjs.org/) + [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vitejs.dev/) (fast dev & build)
+- [Bootstrap 5](https://getbootstrap.com/) + [SCSS](https://sass-lang.com/)
+- [Redux Toolkit](https://redux-toolkit.js.org/)
+- [React Router v7](https://reactrouter.com/)
+- [i18next](https://www.i18next.com/) (multi-language, RTL-ready)
 
-- Built with create-react-app
-- To deploy: push to your main or prod branch or follow your CI/CD pipeline.
+---
 
-### Documentation
+## 📄 License
 
-#### [Road Map](./Documentation/ROAD_MAP.md)
+MIT License – free for personal and commercial use.  
+Attribution and support are appreciated.
 
-### 🧰 Tooling & Stack
+---
 
-#### 🖥 Frontend Framework
+## 🧠 Maintainers
 
-- React v19 with TypeScript
-- React Router v7 for routing
-- React Redux + Redux for state management
-
-#### 🎨 Styling & UI
-
-- Bootstrap 5 for responsive UI
-- Font Awesome (@fortawesome) for icons
-- React Select for enhanced dropdowns
-
-#### 🌐 Internationalization
-
-- i18next and react-i18next for localization
-- i18next-parser for automatic translation extraction
-- extract-translation script available
-
-#### 📦 Forms & Validation
-
-- Formik for form state & validation
-
-#### 🗺 Maps Integration
-
-- @react-google-maps/api for embedding Google Maps
-
-#### 📆 Date & Time
-
-- Moment.js for date formatting and manipulation
-
-#### 🔐 Environment & Configuration
-
-- dotenv-cli for loading environment variables
-
-#### 📡 HTTP & APIs
-
-- Axios for API calls
-
-#### 📦 Build Tools & Scripts
-
-- react-scripts (CRA) for dev/build/test
-- yarn start, yarn build, yarn test, yarn eject available
-
-#### 📏 Linting & Standards
-
-- ESLint config extends react-app and react-app/jest
-
-### 🧠 Maintainers
-
-- [Makkahwi](https://github.com/makkahwi) — Product Owner & Lead Developer
-- [Mustafa Hasanat](https://github.com/MustafaHasanat) - Inspire
-- [ChatGPT](https://openai.com/chatgpt) — AI Assistant
-- [Copilot](https://github.com/features/copilot) — AI Pair Programmer
+- [**Suhaib Ahmad**](https://github.com/makkahwi) — Product Owner & Lead Developer
+- [**Mustafa Hasanat**](https://github.com/MustafaHasanat) - Inspire
+- [**Copilot**](https://github.com/features/copilot) — AI Pair Programmer
+- [**ChatGPT**](https://openai.com/chatgpt) — Planning, Surveying & Documentation AI Assistant
+- **Community Contributors** — You 💙

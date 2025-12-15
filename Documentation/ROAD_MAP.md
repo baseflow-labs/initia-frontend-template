@@ -97,12 +97,12 @@
 ### Sprint 16 — Release hygiene + documentation baseline (18 - 31 Dec, 2025)
 
 - [ ] Fix changelog generating script (make it deterministic, supports conventional commits, handles merges)
-- [ ] Update documentation (README, commit convention, local dev, release flow)
+- [x] Update documentation (README, commit convention, local dev, release flow)
 - [ ] Split localization files into smaller chunks (by module/feature; add loader rules)
 - [ ] “Definition of Done” checklist for PRs (release notes, docs, migrations, screenshots)
 - [ ] Build workflows
   - [x] Auto-release on merge to main
-  - [ ] PR title checks (conventional commits)
+  - [x] PR title checks (conventional commits)
   - [ ] Lint + format + typecheck + test on PRs
   - [ ] CodeQL
 
