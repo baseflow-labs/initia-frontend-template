@@ -28,7 +28,7 @@ Your support directly funds:
 - Faster fixes & features
 - Long-term maintenance
 - Community support
-- Execution of our [roadmap](./docs/ROAD_MAP.md)
+- Execution of our [roadmap](./Documentation/plan/ROAD_MAP.md)
 
 > Open-source survives on users who give back.
 
@@ -41,7 +41,7 @@ We provide **two separate guides**, depending on your background:
 ### 👩‍💼 Non-Technical / Product-Focused Users
 
 ➡️ **Start here**  
-📄 [`docs/START_NON_TECHNICAL.md`](./docs/START_NON_TECHNICAL.md)
+📄 [`docs/START_NON_TECHNICAL.md`](./Documentation/start/START_NON_TECHNICAL.md)
 
 > For founders, students, PMs, and new or non developers who want to run, configure, and deploy the dashboard with minimal coding.
 
@@ -50,7 +50,7 @@ We provide **two separate guides**, depending on your background:
 ### 👨‍💻 Technical Users / Developers
 
 ➡️ **Start here**  
-📄 [`docs/START_TECHNICAL.md`](./docs/START_TECHNICAL.md)
+📄 [`docs/START_TECHNICAL.md`](./Documentation/start/START_TECHNICAL.md)
 
 > For developers who want to extend, customize, and maintain the codebase professionally.
 

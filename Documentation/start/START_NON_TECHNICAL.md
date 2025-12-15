@@ -36,7 +36,7 @@ Why this matters:
 - This template is maintained by real people
 - Donations keep it updated and secure
 - Stars help others discover it
-- It would help us to execute our [roadmap](./ROAD_MAP.md)
+- It would help us to execute our [roadmap](../plan/ROAD_MAP.md)
 
 ---
 
@@ -84,7 +84,7 @@ You should see the dashboard running.
 
 This dashboard is designed so you can customize the most important things **without writing real code**.
 
-Open the custom [configuration file](./src/config/appConfig.ts) in your code editor.
+Open the custom [configuration file](.../src/config/appConfig.ts) in your code editor.
 
 You can configure the following:
 
@@ -219,11 +219,11 @@ All options below connect directly to GitHub and redeploy automatically when you
 
 ---
 
-### ✅ [Option 1: Deploy to Vercel](./deployment/VERCEL.md) (Recommended)
+### ✅ [Option 1: Deploy to Vercel](../deployment/VERCEL.md) (Recommended)
 
-### ✅ [Option 2: Deploy to Netlify](./deployment/NETLIFY.md)
+### ✅ [Option 2: Deploy to Netlify](../deployment/NETLIFY.md)
 
-### ✅ [Option 3: Deploy to AWS Amplify](./deployment/AMPLIFY.md)
+### ✅ [Option 3: Deploy to AWS Amplify](../deployment/AMPLIFY.md)
 
 ---
 

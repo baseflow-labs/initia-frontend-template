@@ -215,9 +215,9 @@ This directory is ready for deployment to static hosting providers.
 
 This frontend can be deployed to:
 
-- [Vercel](./deployments/VERCEL.md) (recommended)
-- [Netlify](./deployments/NETLIFY.md)
-- [AWS Amplify](./deployments/AMPLIFY.md)
+- [Vercel](../deployments/VERCEL.md) (recommended)
+- [Netlify](../deployments/NETLIFY.md)
+- [AWS Amplify](../deployments/AMPLIFY.md)
 - Any static hosting provider
 
 No server-side rendering is required.

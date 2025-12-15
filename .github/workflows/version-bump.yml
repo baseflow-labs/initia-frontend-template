@@ -108,19 +108,19 @@ jobs:
           } > "$TEMP_FILE"
 
           # Append existing changelog if it exists
-          if [ -f Documentation/CHANGELOG.md ]; then
-            cat Documentation/CHANGELOG.md >> "$TEMP_FILE"
+          if [ -f Documentation/technical/CHANGELOG.md ]; then
+            cat Documentation/technical/CHANGELOG.md >> "$TEMP_FILE"
           fi
 
           # Replace the original file
-          mv "$TEMP_FILE" Documentation/CHANGELOG.md
+          mv "$TEMP_FILE" Documentation/technical/CHANGELOG.md
 
       - name: Commit and push version bump
         if: steps.bump.outputs.new_version != ''
         run: |
           git config user.name "Makkahwi Bot"
           git config user.email "SuhaibAhmadAi@hotmail.com"
-          git add src/version.ts Documentation/CHANGELOG.md
+          git add src/version.ts Documentation/technical/CHANGELOG.md
           git commit -m "chore(code): bump version to ${{ steps.bump.outputs.new_version }} [ci skip]" || echo "Nothing to commit"
           git push origin main
 
