@@ -100,6 +100,11 @@
 - [ ] Update documentation (README, commit convention, local dev, release flow)
 - [ ] Split localization files into smaller chunks (by module/feature; add loader rules)
 - [ ] “Definition of Done” checklist for PRs (release notes, docs, migrations, screenshots)
+- [ ] Build workflows
+  - [x] Auto-release on merge to main
+  - [ ] PR title checks (conventional commits)
+  - [ ] Lint + format + typecheck + test on PRs
+  - [ ] CodeQL
 
 ### Sprint 17 — Repo structure: Vite + Turbo baseline (1 - 14 Jan, 2026)
 
@@ -116,6 +121,7 @@
 - [ ] Build date/time input suite:
   - [ ] date, time, datetime, month, year, weekday
 - [ ] Searchable + clearable select (single)
+  - [ ] API vs static options
 - [ ] Rich text editor (minimal, stable; don’t over-customize)
 - [ ] Nested form layouts (v1):
   - [ ] sections + grids
@@ -184,6 +190,9 @@
 - [ ] API: return values of `TablesNames` (and metadata needed for generator)
 - [ ] API: export file by field & filters (CSV/XLSX pipeline contract)
 - [ ] Data localization support contract (server returns locale-aware labels where needed)
+- [ ] Advanced workflows
+  - [ ] Ci/Cd to main service providers (AWS, GCP, Azure)
+  - [ ] Unit test
 
 ### Sprint 26 — Auth integrations v1 (5 - 18 May, 2026)
 
