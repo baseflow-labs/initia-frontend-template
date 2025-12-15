@@ -187,6 +187,7 @@
 
 ### Sprint 25 — Platform APIs v1 (21 Apr - 4 May, 2026)
 
+- [ ] Prepare API key for integration with other systems BE / FE apps.
 - [ ] API: return values of `TablesNames` (and metadata needed for generator)
 - [ ] API: export file by field & filters (CSV/XLSX pipeline contract)
 - [ ] Data localization support contract (server returns locale-aware labels where needed)
