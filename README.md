@@ -1,4 +1,4 @@
-# AppNest Frontend App§
+# AppNest Frontend App
 
 ## 🚀 Getting Started
 

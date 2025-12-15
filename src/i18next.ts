@@ -6,7 +6,14 @@ import ar from "./assets/locales/ar.json";
 import en from "./assets/locales/en.json";
 
 const languageDetectorOptions = {
-  order: ["querystring", "cookie", "localStorage", "sessionStorage", "navigator", "htmlTag"],
+  order: [
+    "querystring",
+    "cookie",
+    "localStorage",
+    "sessionStorage",
+    "navigator",
+    "htmlTag",
+  ],
   lookupQuerystring: "lng",
   lookupCookie: "i18next",
   lookupLocalStorage: "i18nextLng",
@@ -23,7 +30,7 @@ i18n
       en: { translations: en },
       ar: { translations: ar },
     },
-    fallbackLng: "ar",
+    fallbackLng: "en",
     supportedLngs: ["en", "ar"],
 
     detection: languageDetectorOptions,
