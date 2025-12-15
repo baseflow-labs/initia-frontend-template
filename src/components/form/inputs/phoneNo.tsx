@@ -2,7 +2,7 @@ import { useField } from "formik";
 import React from "react";
 
 import { InputProps } from "..";
-import { commonInputClasses } from "../../../utils/consts";
+import { commonInputClasses } from "@/utils/consts";
 
 type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 

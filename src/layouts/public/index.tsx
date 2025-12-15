@@ -7,14 +7,14 @@ import {
   useNavigate,
 } from "react-router";
 
-import tempLogo from "../../assets/images/brand/logo.png";
-import Button from "../../components/core/button";
-import { useAppSelector } from "../../store/hooks";
-import ForgotPasswordView from "../../views/public/forgotPassword";
-import LoginView from "../../views/public/login";
-import RegisterView from "../../views/public/register";
-import ResetPasswordView from "../../views/public/ResetPassword";
-import TermsConditions from "../../views/public/termsConditions";
+import tempLogo from "@/assets/images/brand/logo.png";
+import Button from "@/components/core/button";
+import { useAppSelector } from "@/store/hooks";
+import ForgotPasswordView from "@/views/public/forgotPassword";
+import LoginView from "@/views/public/login";
+import RegisterView from "@/views/public/register";
+import ResetPasswordView from "@/views/public/ResetPassword";
+import TermsConditions from "@/views/public/termsConditions";
 import CopyRightView from "../common/copyright";
 
 const AuthLayout = () => {

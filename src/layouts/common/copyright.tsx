@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 
-import tempLogo from "../../assets/images/brand/logo.png";
-import { APP_VERSION } from "../../version";
-import { useAppSelector } from "../../store/hooks";
+import tempLogo from "@/assets/images/brand/logo.png";
+import { APP_VERSION } from "@/version";
+import { useAppSelector } from "@/store/hooks";
 
 const CopyRightView = ({
   oneLine,

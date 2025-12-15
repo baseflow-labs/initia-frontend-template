@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import ApiDataTable from "../../../../../components/table/apiDatatable";
+import ApiDataTable from "@/components/table/apiDatatable";
 import { ticketTableColumns } from "./consts";
 
 const SupportTicketsListingView = () => {

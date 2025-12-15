@@ -10,6 +10,7 @@ on:
       - main
     paths-ignore:
       - ".github/workflows/**"
+      - "**.md"
 
 jobs:
   bump-version:

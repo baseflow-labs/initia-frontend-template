@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
-import TempProfilePhoto from "../../../../../assets/images/profile-image-placeholder.png";
-
+import TempProfilePhoto from "@/assets/images/profile-image-placeholder.png";
 
 const UserProfileConnectionsView = () => {
   const { t } = useTranslation();
@@ -37,7 +36,7 @@ const UserProfileConnectionsView = () => {
                     <div className="small text-muted">{c.connections}</div>
                   </div>
                 </div>
-                
+
                 <button
                   type="button"
                   className="btn btn-outline-secondary btn-sm w-100 mt-2"

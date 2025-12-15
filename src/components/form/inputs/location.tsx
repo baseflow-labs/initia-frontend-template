@@ -5,7 +5,7 @@ import React, { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { InputProps } from "..";
-import { commonInputClasses } from "../../../utils/consts";
+import { commonInputClasses } from "@/utils/consts";
 
 type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 

@@ -1,5 +1,5 @@
 import api, { demoStatus, formatGetFilters, GetDataProps } from "..";
-import store, { RootState } from "../../store/store";
+import store, { RootState } from "@/store/store";
 
 const mainPath = "/user";
 
@@ -9,22 +9,21 @@ const getAll = async ({
   capacity,
   customFilters,
 }: GetDataProps) => {
-  if (demoStatus)
-  {
+  if (demoStatus) {
     return {
       payload: [
         {
           id: "1",
           fullName: "Demo Admin User",
-          email: "demo.admin@appnest.com"
+          email: "demo.admin@appnest.com",
         },
         {
           id: "2",
           fullName: "Demo User",
-          email: "demo.user@appnest.com"
+          email: "demo.user@appnest.com",
         },
-      ]
-    }
+      ],
+    };
   }
   const res = await api.get(mainPath, {
     params: { ...formatGetFilters(filters, customFilters), page, capacity },
@@ -43,14 +42,13 @@ const create = async (data: object) => {
 };
 
 const getByUserId = async (id?: string) => {
-  if (demoStatus)
-  {
+  if (demoStatus) {
     return {
       payload: {
         fullName: "Demo User",
-        email: "demo.user@appnest.com"
-      }
-    }
+        email: "demo.user@appnest.com",
+      },
+    };
   }
   const { user } = (store.getState() as RootState).auth;
 

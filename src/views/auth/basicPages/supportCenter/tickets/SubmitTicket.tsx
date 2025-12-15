@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import Form from "../../../../../components/form";
+import Form from "@/components/form";
 import { submitTicketInputs } from "./consts";
 
 const SupportTicketsSubmissionView = () => {
@@ -15,8 +15,8 @@ const SupportTicketsSubmissionView = () => {
     {
       label: t("Auth.SupportCenter.UserManual.ReviewUserManual"),
       route: "/support-center/user-manual",
-    }
-  ]
+    },
+  ];
 
   return (
     <Fragment>
@@ -24,7 +24,7 @@ const SupportTicketsSubmissionView = () => {
         <div className="card-body">
           <div className="mb-5">
             <strong>{t("Auth.SupportCenter.Tickets.BeforeSubmitting")}</strong>
-            
+
             <ul className="list-group mb-0 mt-2">
               {links.map((link, index) => (
                 <li className="list-group-item" key={index}>
@@ -34,10 +34,7 @@ const SupportTicketsSubmissionView = () => {
             </ul>
           </div>
 
-          <Form
-            inputs={() => submitTicketInputs(t)}
-            onFormSubmit={() => ''}
-          />
+          <Form inputs={() => submitTicketInputs(t)} onFormSubmit={() => ""} />
         </div>
       </div>
 
@@ -50,15 +47,24 @@ const SupportTicketsSubmissionView = () => {
           </p>
 
           <div className="d-flex gap-2 flex-wrap">
-            <Link to="/support-center/contact-us" className="btn btn-sm btn-outline-warning">
+            <Link
+              to="/support-center/contact-us"
+              className="btn btn-sm btn-outline-warning"
+            >
               Live Chat
             </Link>
 
-            <a href="tel:+15551234567" className="btn btn-sm btn-outline-warning">
+            <a
+              href="tel:+15551234567"
+              className="btn btn-sm btn-outline-warning"
+            >
               Call Support
             </a>
 
-            <Link to="/support-center/contact-us" className="btn btn-sm btn-outline-warning">
+            <Link
+              to="/support-center/contact-us"
+              className="btn btn-sm btn-outline-warning"
+            >
               Email Us
             </Link>
           </div>

@@ -1,4 +1,9 @@
-import axios, { AxiosError, AxiosRequestHeaders, AxiosResponse, InternalAxiosRequestConfig } from "axios";
+import axios, {
+  AxiosError,
+  AxiosRequestHeaders,
+  AxiosResponse,
+  InternalAxiosRequestConfig,
+} from "axios";
 
 import { refreshToken as doRefreshToken, logout } from "../store/actions/auth";
 import { endLoading, startLoading } from "../store/actions/loading";
@@ -12,9 +17,9 @@ declare module "axios" {
 }
 
 export const baseURL =
-  process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
+  import.meta.env.VITE_APP_BACKEND_URL || "http://localhost:8000";
 
-export const demoStatus = process.env.REACT_APP_ENVIRONMENT === "staging";
+export const demoStatus = import.meta.env.VITE_APP_ENVIRONMENT === "staging";
 
 export interface customFilterProps {
   field: string;
@@ -98,7 +103,8 @@ service.interceptors.response.use(
     store.dispatch(endLoading());
 
     const msg = (res.data as { message?: string })?.message || fallbackMessage;
-    const { accessToken, refreshToken } = (store.getState() as RootState).auth || {};
+    const { accessToken, refreshToken } =
+      (store.getState() as RootState).auth || {};
     const originalRequest = res.config;
 
     const status = parseInt(`${res.status}`);
@@ -119,7 +125,8 @@ service.interceptors.response.use(
 
         // adjust shape according to your API response
         const newAccessToken = data?.accessToken || data?.payload?.accessToken;
-        const newRefreshToken = data?.refreshToken || data?.payload?.refreshToken;
+        const newRefreshToken =
+          data?.refreshToken || data?.payload?.refreshToken;
 
         // 1) store tokens in redux
         store.dispatch(
@@ -143,7 +150,6 @@ service.interceptors.response.use(
         return Promise.reject(e);
       }
     }
-
 
     if (
       store.getState().auth.accessToken &&

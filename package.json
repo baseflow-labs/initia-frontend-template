@@ -4,10 +4,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "prepare": "husky install",
     "commit": "cz",
     "extract-translation": "i18next"
@@ -30,7 +29,6 @@
     "react-redux": "^9.2.0",
     "react-router": "^7.10.1",
     "react-router-dom": "^7.10.1",
-    "react-scripts": "^5.0.1",
     "react-select": "^5.10.2",
     "redux": "^5.0.1",
     "web-vitals": "^5.1.0"
@@ -47,11 +45,13 @@
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react-swc": "^4.2.2",
     "commitizen": "^4.3.1",
     "dotenv-cli": "^11.0.0",
     "husky": "^9.1.7",
     "i18next-parser": "^9.3.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vite": "^7.2.7"
   },
   "eslintConfig": {
     "extends": [

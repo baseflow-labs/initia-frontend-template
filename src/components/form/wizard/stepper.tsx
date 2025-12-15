@@ -1,7 +1,7 @@
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment } from "react/jsx-runtime";
-import BoxedPage from "../../../layouts/auth/pages/boxedPage";
+import BoxedPage from "@/layouts/auth/pages/boxedPage";
 
 interface Props {
   currentStep: number;

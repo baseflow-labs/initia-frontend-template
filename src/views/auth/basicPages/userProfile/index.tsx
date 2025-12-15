@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import UserProfileHeaderView from "./Header";
-import TabsComp from "../../../../components/tab";
+import TabsComp from "@/components/tab";
 import UserProfileTabView from "./Profile";
 import UserProfileTeamsView from "./Teams";
 import UserProfileProjectsView from "./Projects";

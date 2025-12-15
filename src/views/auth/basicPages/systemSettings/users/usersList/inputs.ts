@@ -1,4 +1,4 @@
-import { SelectOption } from "../../../../../../components/table";
+import { SelectOption } from "@/components/table";
 
 export const inputs = (t: Function, roles: SelectOption[]) => [
   {
@@ -10,7 +10,7 @@ export const inputs = (t: Function, roles: SelectOption[]) => [
     name: "role",
     label: t("Auth.Settings.Admin.Users.Role"),
     type: "select",
-    options: roles
+    options: roles,
   },
   {
     name: "email",

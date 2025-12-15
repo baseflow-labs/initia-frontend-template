@@ -37,6 +37,12 @@ const Modal = ({
   useEffect(() => {
     if (!modalRef.current) return;
 
+    // Wait for Bootstrap to be available
+    if (typeof window.bootstrap === "undefined") {
+      console.warn("Bootstrap JS not loaded yet");
+      return;
+    }
+
     instanceRef.current = window.bootstrap.Modal.getOrCreateInstance(
       modalRef.current,
       {
@@ -65,7 +71,7 @@ const Modal = ({
 
   useEffect(() => {
     const inst = instanceRef.current;
-    if (!inst) return;
+    if (!inst || typeof window.bootstrap === "undefined") return;
     if (isOpen) {
       inst.show();
     } else {

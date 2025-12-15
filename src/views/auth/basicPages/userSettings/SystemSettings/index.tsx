@@ -1,13 +1,11 @@
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
-import Form from "../../../../../components/form";
-import { addNotification } from "../../../../../store/actions/notifications";
-import { setFontSize } from "../../../../../store/actions/settings";
-import { useAppSelector } from "../../../../../store/hooks";
-import {
-  getCommonSettingInputs
-} from "./inputs";
+import Form from "@/components/form";
+import { addNotification } from "@/store/actions/notifications";
+import { setFontSize } from "@/store/actions/settings";
+import { useAppSelector } from "@/store/hooks";
+import { getCommonSettingInputs } from "./inputs";
 
 const SystemSettingsTab = () => {
   const { t } = useTranslation();

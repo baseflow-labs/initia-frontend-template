@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
-import TabsComp from "../../../../../components/tab";
+import TabsComp from "@/components/tab";
 import BackToSupportCenterButton from "../BackButton";
 import SupportTicketsSubmissionView from "./SubmitTicket";
 import SupportTicketsListingView from "./Tickets";

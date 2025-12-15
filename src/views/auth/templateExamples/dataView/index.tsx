@@ -3,13 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import CalendarComp from "../../../../components/calendar";
-import CollapseGroup from "../../../../components/collapse";
-import DropdownComp from "../../../../components/dropdown";
-import Modal from "../../../../components/modal";
-import TabsComp from "../../../../components/tab";
-import ApiDataTable from "../../../../components/table/apiDatatable";
-import PageTemplate from "../../../../layouts/auth/pages/pageTemplate";
+import CalendarComp from "@/components/calendar";
+import CollapseGroup from "@/components/collapse";
+import DropdownComp from "@/components/dropdown";
+import Modal from "@/components/modal";
+import TabsComp from "@/components/tab";
+import ApiDataTable from "@/components/table/apiDatatable";
+import PageTemplate from "@/layouts/auth/pages/pageTemplate";
 import { inputs } from "../datatablePage/inputs";
 
 const TemplateDataViewExamplesView = () => {
