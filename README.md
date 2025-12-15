@@ -66,7 +66,6 @@ Output will be in the build/ directory, ready for deployment.
   yarn build               # Build for production
   yarn extract-translation # Extract i18n strings
   yarn commit              # Use Commitizen to write formatted commits
-
 ```
 
 ### 🔐 Environment Profiles
