@@ -1,3 +1,5 @@
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment, { Moment } from "moment";
 import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -6,7 +8,7 @@ export interface CalendarEventType {
   id: string;
   label: string;
   /** e.g. "primary", "success", "warning", "danger", "info" */
-  colorClass?: string;
+  icon?: IconProp;
 }
 
 export interface CalendarEventParty {
@@ -144,9 +146,13 @@ const CalendarComp: React.FC<CalendarViewProps> = ({
     });
   };
 
-  const getEventBadgeClass = (event: CalendarEvent): string => {
+  const getEventBadgeClass = (
+    event: CalendarEvent,
+    party?: CalendarEventParty
+  ): string => {
     const type = eventTypes.find((t) => t.id === event.typeId);
-    const color = type?.colorClass || "primary";
+    const color =
+      party?.colorClass || (type ? type.label.toLowerCase() : "secondary");
     return `badge bg-${color} text-truncate d-block mb-1`;
   };
 
@@ -161,10 +167,10 @@ const CalendarComp: React.FC<CalendarViewProps> = ({
     if (!start.isSame(end, "day")) {
       if (isSameDayStart) {
         // first day
-        return `${start.format("HH:mm")} → …`;
+        return `${start.format("HH:mm")} - …`;
       } else if (isSameDayEnd) {
         // last day
-        return `… → ${end.format("HH:mm")}`;
+        return `… - ${end.format("HH:mm")}`;
       } else {
         // middle day
         return "All day";
@@ -212,13 +218,11 @@ const CalendarComp: React.FC<CalendarViewProps> = ({
                     </label>
                   </div>
 
-                  {type.colorClass && (
-                    <span
-                      className={`badge bg-${type.colorClass} ms-2`}
+                  {type.icon && (
+                    <FontAwesomeIcon
+                      icon={type.icon}
                       style={{ minWidth: 16 }}
-                    >
-                      &nbsp;
-                    </span>
+                    />
                   )}
                 </li>
               ))}
@@ -357,8 +361,8 @@ const CalendarComp: React.FC<CalendarViewProps> = ({
                                           <div
                                             key={event.id}
                                             className={
-                                              getEventBadgeClass(event) +
-                                              " w-100 text-start"
+                                              getEventBadgeClass(event, party) +
+                                              " w-100 d-flex py-3 text-start"
                                             }
                                             title={
                                               event.description ||
@@ -369,40 +373,46 @@ const CalendarComp: React.FC<CalendarViewProps> = ({
                                                 day
                                               )})`
                                             }
-                                            style={{
-                                              whiteSpace: "nowrap",
-                                              overflow: "hidden",
-                                              textOverflow: "ellipsis",
-                                              fontSize: "0.7rem",
-                                            }}
                                             onClick={() =>
                                               onEventClick &&
                                               onEventClick(event)
                                             }
                                           >
-                                            {/* Time */}
-                                            <h6 className="me-1">
-                                              {formatEventTime(event, day)}
-                                            </h6>
-
                                             {/* Party chip (color-coded) */}
                                             {party && (
-                                              <h6 className="mt-2">
-                                                <div
-                                                  className={`badge bg-${
-                                                    party.colorClass ||
-                                                    "secondary"
-                                                  } me-1`}
-                                                >
-                                                  {party.name}
-                                                </div>
-                                              </h6>
+                                              <p className="rotate-90 mt-2">
+                                                <div>{party.name}</div>
+                                              </p>
                                             )}
 
-                                            {/* Title */}
-                                            <h5 className="mt-2">
-                                              {event.title}
-                                            </h5>
+                                            <div
+                                              style={{
+                                                whiteSpace: "nowrap",
+                                                overflow: "hidden",
+                                                textOverflow: "ellipsis",
+                                                fontSize: "0.7rem",
+                                              }}
+                                            >
+                                              {/* Time */}
+                                              <p>
+                                                {formatEventTime(event, day)}
+                                              </p>
+
+                                              {/* Title */}
+                                              <h6>
+                                                {event.typeId && (
+                                                  <FontAwesomeIcon
+                                                    icon={
+                                                      eventTypes.find(
+                                                        (e) =>
+                                                          e.id === event.typeId
+                                                      )?.icon
+                                                    }
+                                                  />
+                                                )}
+                                                {event.title}
+                                              </h6>
+                                            </div>
                                           </div>
                                         );
                                       })}

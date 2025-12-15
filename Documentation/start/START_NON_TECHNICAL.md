@@ -113,6 +113,7 @@ You can customize:
 - Application name
 - Logo path
 - Fallback logo (used if the main logo fails to load)
+- Fonts (per lang)
 
 This helps brand the dashboard for your project or organization.
 

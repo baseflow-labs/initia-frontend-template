@@ -1,4 +1,8 @@
-import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCakeCandles,
+  faEllipsisVertical,
+  faPerson,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -107,24 +111,36 @@ const TemplateDataViewExamplesView = () => {
           events={[
             {
               id: "string;",
-              title: "string;",
+              title: "Meeting 1",
               typeId: "1",
               partyId: "1",
               start: "2025-12-07",
               end: "2025-12-08",
-              description: "string;",
+              description: "Meeting description",
             },
             {
               id: "string;",
-              title: "string;",
+              title: "Meeting 2",
               typeId: "1",
               partyId: "2",
               start: "2025-12-08T10:00:00",
               end: "2025-12-09T12:00:00",
-              description: "string;",
+              description: "Meeting description",
+            },
+            {
+              id: "string;",
+              title: "Party 1",
+              typeId: "2",
+              partyId: "2",
+              start: "2025-12-18T10:00:00",
+              end: "2025-12-19T12:00:00",
+              description: "Party description",
             },
           ]}
-          eventTypes={[{ id: "1", label: "Meeting", colorClass: "primary" }]}
+          eventTypes={[
+            { id: "1", label: "Meeting", icon: faPerson },
+            { id: "2", label: "Party", icon: faCakeCandles },
+          ]}
           parties={[
             { id: "1", name: "Party 1", colorClass: "success" },
             { id: "2", name: "Party 2", colorClass: "danger" },
