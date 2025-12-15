@@ -1,5 +1,5 @@
 import { Fragment } from "react/jsx-runtime";
-import CardComp from "../../../components/card/card";
+import CardComp from "@/components/card/card";
 import PageTemplate from "./pageTemplate";
 
 const BoxedPage = ({

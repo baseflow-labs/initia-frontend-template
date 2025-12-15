@@ -1,25 +1,29 @@
-import { faDashboard, faGear, faTable } from "@fortawesome/free-solid-svg-icons";
+import {
+  faDashboard,
+  faGear,
+  faTable,
+} from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes, useLocation } from "react-router";
 import { Fragment } from "react/jsx-runtime";
 
 import { faWpforms } from "@fortawesome/free-brands-svg-icons";
-import { useWindowWidth } from "../../utils/hooks";
-import MessagingView from "../../views/auth/basicPages/messaging";
-import NotificationsView from "../../views/auth/basicPages/notifications";
-import SupportCenterView from "../../views/auth/basicPages/supportCenter";
-import ContactUsView from "../../views/auth/basicPages/supportCenter/contact-us";
-import FaqView from "../../views/auth/basicPages/supportCenter/faq";
-import SupportTicketsView from "../../views/auth/basicPages/supportCenter/tickets";
-import UserManualView from "../../views/auth/basicPages/supportCenter/user-manual";
-import SystemSettingsView from "../../views/auth/basicPages/systemSettings";
-import UserProfileView from "../../views/auth/basicPages/userProfile";
-import UserSettingsView from "../../views/auth/basicPages/userSettings";
-import DashboardView from "../../views/auth/dashboard";
-import TemplateDataTableExampleView from "../../views/auth/templateExamples/datatablePage";
-import TemplateDataViewExamplesView from "../../views/auth/templateExamples/dataView";
-import TemplateFormExamplesView from "../../views/auth/templateExamples/forms";
+import { useWindowWidth } from "@/utils/hooks";
+import MessagingView from "@/views/auth/basicPages/messaging";
+import NotificationsView from "@/views/auth/basicPages/notifications";
+import SupportCenterView from "@/views/auth/basicPages/supportCenter";
+import ContactUsView from "@/views/auth/basicPages/supportCenter/contact-us";
+import FaqView from "@/views/auth/basicPages/supportCenter/faq";
+import SupportTicketsView from "@/views/auth/basicPages/supportCenter/tickets";
+import UserManualView from "@/views/auth/basicPages/supportCenter/user-manual";
+import SystemSettingsView from "@/views/auth/basicPages/systemSettings";
+import UserProfileView from "@/views/auth/basicPages/userProfile";
+import UserSettingsView from "@/views/auth/basicPages/userSettings";
+import DashboardView from "@/views/auth/dashboard";
+import TemplateDataTableExampleView from "@/views/auth/templateExamples/datatablePage";
+import TemplateDataViewExamplesView from "@/views/auth/templateExamples/dataView";
+import TemplateFormExamplesView from "@/views/auth/templateExamples/forms";
 import { FilePreviewModal } from "./globalModal";
 import DashboardNavbar from "./navs/navbar";
 import OffCanvasNav from "./navs/offcanvasNav";
@@ -144,7 +148,9 @@ const AuthLayout = () => {
   //   users.includes(user.role)
   // );
 
-  const filteredFixedRoutes = authRoutes.filter(({ fixed, showInNav }) => fixed && showInNav);
+  const filteredFixedRoutes = authRoutes.filter(
+    ({ fixed, showInNav }) => fixed && showInNav
+  );
 
   const toggleSidebar = () => setCollapsed((current) => !current);
 

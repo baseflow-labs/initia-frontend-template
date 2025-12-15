@@ -8,8 +8,8 @@ import {
   faUser,
   faWallet,
 } from "@fortawesome/free-solid-svg-icons";
-import TabsComp from "../../../../components/tab";
-import PageTemplate from "../../../../layouts/auth/pages/pageTemplate";
+import TabsComp from "@/components/tab";
+import PageTemplate from "@/layouts/auth/pages/pageTemplate";
 import AccountSettingsTab from "./AccountSettingsTab";
 import SystemSettingsTab from "./SystemSettings";
 import BillingSettingsTab from "./BillingSettingsTab";

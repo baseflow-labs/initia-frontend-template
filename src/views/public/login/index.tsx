@@ -1,13 +1,13 @@
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
-import * as authApi from "../../../api/auth";
-import BelowInputButton from "../../../components/button/belowInput";
-import Button from "../../../components/core/button";
-import Form from "../../../components/form";
-import { login } from "../../../store/actions/auth";
-import { addNotification } from "../../../store/actions/notifications";
-import { apiCatchGlobalHandler } from "../../../utils/function";
+import * as authApi from "@/api/auth";
+import BelowInputButton from "@/components/button/belowInput";
+import Button from "@/components/core/button";
+import Form from "@/components/form";
+import { login } from "@/store/actions/auth";
+import { addNotification } from "@/store/actions/notifications";
+import { apiCatchGlobalHandler } from "@/utils/function";
 
 const LoginView = () => {
   const { t } = useTranslation();
@@ -19,7 +19,7 @@ const LoginView = () => {
       name: "identifier",
       label: t("Public.Login.Labels.PhoneNo"),
       required: true,
-      fullWidth: true
+      fullWidth: true,
     },
     {
       type: "password",
@@ -33,7 +33,7 @@ const LoginView = () => {
         />
       ),
       required: true,
-      fullWidth: true
+      fullWidth: true,
     },
   ];
 
@@ -53,26 +53,28 @@ const LoginView = () => {
       .catch(apiCatchGlobalHandler);
   };
 
-  const onDummySubmit = () => {    
+  const onDummySubmit = () => {
     dispatch(
       addNotification({
         msg: t("Public.Login.Labels.Success", {
-          name: 'Dummy Admin User',
+          name: "Dummy Admin User",
         }),
       })
     );
-    dispatch(login({
-      accessToken: 'thisIsDummyToken',
-      refreshToken: 'thisIsDummyRefreshToken',
-      user: {
-        id: "1",
-        name: "Suhaib Ahmad",
-        email: "SuhaibAhmadAi@hotmail.com",
-        username: "admin",
-        status: "active",
-        role: "admin"
-      }
-    }));
+    dispatch(
+      login({
+        accessToken: "thisIsDummyToken",
+        refreshToken: "thisIsDummyRefreshToken",
+        user: {
+          id: "1",
+          name: "Suhaib Ahmad",
+          email: "SuhaibAhmadAi@hotmail.com",
+          username: "admin",
+          status: "active",
+          role: "admin",
+        },
+      })
+    );
   };
 
   return (
@@ -83,11 +85,8 @@ const LoginView = () => {
         onFormSubmit={onSubmit}
       />
 
-      {process.env.REACT_APP_ENVIRONMENT === "staging" ? (
-        <Button
-          className="w-100 mt-3"
-          onClick={() => onDummySubmit()}
-        >
+      {import.meta.env.VITE_APP_ENVIRONMENT === "staging" ? (
+        <Button className="w-100 mt-3" onClick={() => onDummySubmit()}>
           {t("Public.Login.Labels.DummyLogin", { type: "User" })}
         </Button>
       ) : (

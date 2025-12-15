@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 
-import TabsComp from "../../../../components/tab";
-import PageTemplate from "../../../../layouts/auth/pages/pageTemplate";
+import TabsComp from "@/components/tab";
+import PageTemplate from "@/layouts/auth/pages/pageTemplate";
 import SystemLoggerView from "./logger";
 import UserActivityView from "./userActivity";
 import UsersView from "./users";

@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import TabsComp from "../../../../../components/tab";
+import TabsComp from "@/components/tab";
 import SystemDataBulkInsertionView from "./dataInsertion";
 import SystemDataProcessingView from "./dataProccessing";
 

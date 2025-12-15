@@ -1,4 +1,13 @@
-import { faBars, faBell, faEnvelope, faGear, faInfoCircle, faMagnifyingGlass, faRightFromBracket, faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBars,
+  faBell,
+  faEnvelope,
+  faGear,
+  faInfoCircle,
+  faMagnifyingGlass,
+  faRightFromBracket,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
 import { FormEvent, useLayoutEffect, useState } from "react";
@@ -6,13 +15,13 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
-import * as NotificationApi from "../../../api/notifications";
-import profilePhotoPlaceholder from "../../../assets/images/profile-image-placeholder.png";
-import LangButton from "../../../components/button/lang";
-import DropdownComp from "../../../components/dropdown";
-import { logout } from "../../../store/actions/auth";
-import { useAppSelector } from "../../../store/hooks";
-import { apiCatchGlobalHandler } from "../../../utils/function";
+import * as NotificationApi from "@/api/notifications";
+import profilePhotoPlaceholder from "@/assets/images/profile-image-placeholder.png";
+import LangButton from "@/components/button/lang";
+import DropdownComp from "@/components/dropdown";
+import { logout } from "@/store/actions/auth";
+import { useAppSelector } from "@/store/hooks";
+import { apiCatchGlobalHandler } from "@/utils/function";
 
 export interface Notification {
   id: string;
@@ -159,10 +168,16 @@ const DashboardNavbar = ({
                     )
                   : [{ label: t("Auth.Notifications.NoNotifications") }]
               }
-              link={{text: t('Auth.Notifications.AllNotifications'), route: "/notifications"}}
+              link={{
+                text: t("Auth.Notifications.AllNotifications"),
+                route: "/notifications",
+              }}
             />
 
-            <button className="btn btn-link py-auto" onClick={() => navigate("/messaging")}>
+            <button
+              className="btn btn-link py-auto"
+              onClick={() => navigate("/messaging")}
+            >
               <FontAwesomeIcon icon={faEnvelope} className="text-primary" />
             </button>
 
@@ -175,7 +190,7 @@ const DashboardNavbar = ({
             <DropdownComp
               header={
                 <div className="text-center border-bottom pb-2">
-                  { user.name + " | " + t("Global.Labels.Roles." + user.role) }
+                  {user.name + " | " + t("Global.Labels.Roles." + user.role)}
                 </div>
               }
               button={
@@ -190,23 +205,23 @@ const DashboardNavbar = ({
               list={[
                 {
                   onClick: () => navigate("/profile"),
-                  label: t('Auth.Profile.Title'),
-                  icon: faUser
+                  label: t("Auth.Profile.Title"),
+                  icon: faUser,
                 },
                 {
                   onClick: () => navigate("/settings"),
-                  label: t('Auth.Settings.User.Title'),
-                  icon: faGear
+                  label: t("Auth.Settings.User.Title"),
+                  icon: faGear,
                 },
                 {
                   onClick: () => navigate("/support-center"),
-                  label: t('Auth.SupportCenter.Title'),
-                  icon: faInfoCircle
+                  label: t("Auth.SupportCenter.Title"),
+                  icon: faInfoCircle,
                 },
                 {
                   onClick: () => dispatch(logout()),
                   label: t("Global.Labels.Logout"),
-                  icon: faRightFromBracket
+                  icon: faRightFromBracket,
                 },
               ]}
             />

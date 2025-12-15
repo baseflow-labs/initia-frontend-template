@@ -1,7 +1,7 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { commaNumbers } from "../../utils/function";
+import { commaNumbers } from "@/utils/function";
 import DashboardCard from "./dashboardCard";
 
 interface Props {

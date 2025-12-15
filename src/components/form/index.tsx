@@ -8,7 +8,7 @@ import {
 } from "formik";
 import React, { Fragment } from "react";
 import { useTranslation } from "react-i18next";
-import { useAppSelector } from "../../store/hooks";
+import { useAppSelector } from "@/store/hooks";
 import Button from "../core/button";
 import Spinner from "../core/spinner";
 import { MoneyUnit } from "../table";

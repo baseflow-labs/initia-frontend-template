@@ -1,16 +1,12 @@
 import { useTranslation } from "react-i18next";
 
-import ApiDataTable from "../../../../../../components/table/apiDatatable";
+import ApiDataTable from "@/components/table/apiDatatable";
 import { inputs } from "./inputs";
 
 const UsersView = () => {
   const { t } = useTranslation();
 
-  const roles = [
-    { value: "admin" },
-    { value: "editor" },
-    { value: "viewer" },
-  ];
+  const roles = [{ value: "admin" }, { value: "editor" }, { value: "viewer" }];
 
   return (
     <ApiDataTable

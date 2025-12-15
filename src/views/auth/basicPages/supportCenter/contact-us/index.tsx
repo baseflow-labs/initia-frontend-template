@@ -1,9 +1,20 @@
-import { faFacebook, faInstagram, faLinkedin, faTwitter } from "@fortawesome/free-brands-svg-icons";
-import { faClock, faEnvelope, faMapMarkerAlt, faPaperPlane, faPhone } from "@fortawesome/free-solid-svg-icons";
+import {
+  faFacebook,
+  faInstagram,
+  faLinkedin,
+  faTwitter,
+} from "@fortawesome/free-brands-svg-icons";
+import {
+  faClock,
+  faEnvelope,
+  faMapMarkerAlt,
+  faPaperPlane,
+  faPhone,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
-import Form from "../../../../../components/form";
+import Form from "@/components/form";
 import BackToSupportCenterButton from "../BackButton";
 import { inputs } from "./consts";
 
@@ -79,7 +90,9 @@ const ContactUsView = () => {
 
                   <p className="card-text fw-semibold mb-1">{info.details}</p>
 
-                  <p className="card-text text-muted small">{info.subDetails}</p>
+                  <p className="card-text text-muted small">
+                    {info.subDetails}
+                  </p>
                 </div>
               </div>
             </div>
@@ -96,12 +109,9 @@ const ContactUsView = () => {
                   {t("Auth.SupportCenter.ContactUs.SendMessage.Title")}
                 </h4>
               </div>
-              
+
               <div className="card-body p-4">
-                <Form
-                  inputs={() => inputs(t)}
-                  onFormSubmit={() => ''}
-                />
+                <Form inputs={() => inputs(t)} onFormSubmit={() => ""} />
               </div>
             </div>
           </div>
@@ -112,11 +122,14 @@ const ContactUsView = () => {
             <div className="card shadow-sm mb-4">
               <div className="card-header bg-light">
                 <h5 className="mb-0">
-                  <FontAwesomeIcon icon={faClock} className="me-2 text-primary" />
+                  <FontAwesomeIcon
+                    icon={faClock}
+                    className="me-2 text-primary"
+                  />
                   {t("Auth.SupportCenter.ContactUs.OfficeHours.Title")}
                 </h5>
               </div>
-              
+
               <div className="card-body">
                 <div className="mb-3">
                   <div className="d-flex justify-content-between mb-2">
@@ -140,7 +153,9 @@ const ContactUsView = () => {
             {/* Social Media */}
             <div className="card shadow-sm mb-4">
               <div className="card-header bg-light">
-                <h5 className="mb-0">{t("Auth.SupportCenter.ContactUs.ConnectWithUs.Title")}</h5>
+                <h5 className="mb-0">
+                  {t("Auth.SupportCenter.ContactUs.ConnectWithUs.Title")}
+                </h5>
               </div>
 
               <div className="card-body">
@@ -156,7 +171,10 @@ const ContactUsView = () => {
                     <FontAwesomeIcon icon={faFacebook as any} />
                   </a>
 
-                  <a href="#" className="btn btn-outline-primary btn-sm flex-fill">
+                  <a
+                    href="#"
+                    className="btn btn-outline-primary btn-sm flex-fill"
+                  >
                     <FontAwesomeIcon icon={faTwitter as any} />
                   </a>
 
@@ -166,7 +184,7 @@ const ContactUsView = () => {
                   >
                     <FontAwesomeIcon icon={faLinkedin as any} />
                   </a>
-                  
+
                   <a
                     href="#"
                     className="btn btn-outline-danger btn-sm flex-fill"
@@ -185,7 +203,10 @@ const ContactUsView = () => {
             <div className="card shadow-sm">
               <div className="card-header bg-light">
                 <h5 className="mb-0">
-                  <FontAwesomeIcon icon={faMapMarkerAlt} className="me-2 text-primary" />
+                  <FontAwesomeIcon
+                    icon={faMapMarkerAlt}
+                    className="me-2 text-primary"
+                  />
                   {t("Auth.SupportCenter.ContactUs.OurLocation.Title")}
                 </h5>
               </div>

@@ -103,7 +103,7 @@
 
 ### Sprint 17 — Repo structure: Vite + Turbo baseline (1 - 14 Jan, 2026)
 
-- [ ] Wrap frontend with Vite (replace CRA) OR keep CRA but create migration path (pick one and complete it)
+- [x] Wrap frontend with Vite (replace CRA) OR keep CRA but create migration path (pick one and complete it)
 - [ ] Introduce Turborepo structure (apps/admin, apps/landing, packages/ui, packages/core, packages/i18n)
 - [ ] Set shared lint/format/build tasks + caching
 - [ ] Prep “analysis tools integration” skeleton (packages/analysis placeholder + interface contracts)

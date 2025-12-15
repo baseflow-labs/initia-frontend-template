@@ -8,12 +8,12 @@ import DynamicTable, { actionProps, TableColumn } from ".";
 import service, {
   demoStatus,
   formatGetFilters,
-  customFilterProps, // assuming this is exported from ../../api
-} from "../../api";
-import { apiCatchGlobalHandler } from "../../utils/function";
+  customFilterProps, // assuming this is exported from @/api
+} from "@/api";
+import { apiCatchGlobalHandler } from "@/utils/function";
 import Form from "../form";
 import Modal from "../modal";
-import { addNotification } from "../../store/actions/notifications";
+import { addNotification } from "@/store/actions/notifications";
 import Button from "../core/button";
 
 interface Props {
@@ -92,7 +92,7 @@ const ApiDataTable: React.FC<Props> = ({
     }
   };
 
-  const onSuccess = () => {    
+  const onSuccess = () => {
     dispatch(
       addNotification({
         msg: t("Global.Notifications.Successful", {
@@ -103,7 +103,7 @@ const ApiDataTable: React.FC<Props> = ({
     // refresh data
     fetchData();
     setModal({ action: "view", open: false, data: {} });
-  }
+  };
 
   const onFormSubmit = (formData: { id?: string }) => {
     const apiCall = async () => {
@@ -123,11 +123,11 @@ const ApiDataTable: React.FC<Props> = ({
     };
 
     if (demoStatus) {
-     onSuccess()
+      onSuccess();
     } else {
       apiCall()
         .then(() => {
-          onSuccess()
+          onSuccess();
         })
         .catch(apiCatchGlobalHandler);
     }
@@ -148,7 +148,7 @@ const ApiDataTable: React.FC<Props> = ({
           username: "788424973",
           email: "demo@example.com",
         },
-      ])
+      ]);
     } else {
       service
         .get(dataApiEndpoint, {
@@ -165,8 +165,7 @@ const ApiDataTable: React.FC<Props> = ({
           // Adjust depending on your API shape
           const payload = res.payload || res.data || {};
           const rows = payload.data || payload.rows || payload || [];
-          const meta =
-            payload.meta ||
+          const meta = payload.meta ||
             res.meta || {
               page: currentPage,
               capacity: pageSize,
@@ -192,7 +191,15 @@ const ApiDataTable: React.FC<Props> = ({
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage, pageSize, search, JSON.stringify(filters), sortField, sortDirection, dataApiEndpoint]);
+  }, [
+    currentPage,
+    pageSize,
+    search,
+    JSON.stringify(filters),
+    sortField,
+    sortDirection,
+    dataApiEndpoint,
+  ]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -288,14 +295,27 @@ const ApiDataTable: React.FC<Props> = ({
           inputs={() =>
             inputs.map((item) => ({
               ...item,
-              disabled: modal.action === "view" || modal.action === "delete" || item.name === "id",
+              disabled:
+                modal.action === "view" ||
+                modal.action === "delete" ||
+                item.name === "id",
               double: true,
             }))
           }
           initialValues={modal.data}
           onFormSubmit={modal.action === "view" ? undefined : onFormSubmit}
-          submitText={modal.action === "delete" ? t("Global.Labels.Delete", { item: singleItem }) : undefined}
-          submitColor={modal.action === "delete" ? "danger" : modal.action === "update" ? "warning" : "success" }
+          submitText={
+            modal.action === "delete"
+              ? t("Global.Labels.Delete", { item: singleItem })
+              : undefined
+          }
+          submitColor={
+            modal.action === "delete"
+              ? "danger"
+              : modal.action === "update"
+              ? "warning"
+              : "success"
+          }
         />
       </Modal>
     </div>

@@ -5,8 +5,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
-import * as FileApi from "../../../api/files";
-import { addNotification } from "../../../store/actions/notifications";
+import * as FileApi from "@/api/files";
+import { addNotification } from "@/store/actions/notifications";
 import Spinner from "../../core/spinner";
 
 interface FileUploadProps {

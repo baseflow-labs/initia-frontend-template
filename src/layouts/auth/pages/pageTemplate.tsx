@@ -2,7 +2,7 @@ import { Fragment } from "react/jsx-runtime";
 
 import ActionButtons, {
   ActionButtonProps,
-} from "../../../components/button/actionButtons";
+} from "@/components/button/actionButtons";
 
 interface Props {
   title?: string;

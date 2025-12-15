@@ -3,11 +3,11 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
-import * as authApi from "../../../api/auth";
-import BelowInputButton from "../../../components/button/belowInput";
-import Form from "../../../components/form";
-import { addNotification } from "../../../store/actions/notifications";
-import { apiCatchGlobalHandler } from "../../../utils/function";
+import * as authApi from "@/api/auth";
+import BelowInputButton from "@/components/button/belowInput";
+import Form from "@/components/form";
+import { addNotification } from "@/store/actions/notifications";
+import { apiCatchGlobalHandler } from "@/utils/function";
 import { forgotInputs, resetInputs } from "./inputs";
 
 const ForgotPassword = () => {

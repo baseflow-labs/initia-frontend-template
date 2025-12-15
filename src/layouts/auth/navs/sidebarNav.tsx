@@ -1,11 +1,13 @@
-import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import tempLogo from "@/assets/images/brand/logo.png";
+import { useAppSelector } from "@/store/hooks";
+import {
+  faChevronLeft,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
-
-import tempLogo from "../../../assets/images/brand/logo.png";
-import { useAppSelector } from "../../../store/hooks";
 import CopyRightView from "../../common/copyright";
 
 interface Props {
@@ -44,11 +46,7 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
         }}
       >
         <div className="p-4 text-center">
-          <img
-            src={logo || tempLogo}
-            style={{ height: "40px" }}
-            alt="Logo"
-          />
+          <img src={logo || tempLogo} style={{ height: "40px" }} alt="Logo" />
         </div>
 
         <div className="nav flex-column px-2">

@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 
-import TabsComp from "../../../../../components/tab";
+import TabsComp from "@/components/tab";
 import UserRolePermissionsView from "./rolePermissions";
 import UserRolesView from "./userRoles";
 import UsersView from "./usersList";

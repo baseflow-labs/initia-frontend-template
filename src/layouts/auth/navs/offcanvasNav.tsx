@@ -1,8 +1,7 @@
+import { useAppSelector } from "@/store/hooks";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useLocation, useNavigate } from "react-router";
 import { Fragment } from "react/jsx-runtime";
-
-import { useAppSelector } from "../../../store/hooks";
 import CopyRightView from "../../common/copyright";
 
 interface Props {

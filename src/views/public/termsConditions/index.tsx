@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 
-import Button from "../../../components/core/button";
+import Button from "@/components/core/button";
 
 const TermsConditions = () => {
   const { t } = useTranslation();

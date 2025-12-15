@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
-import TempCover from "../../../../../assets/images/public-bg.jpg";
-import TempProfilePhoto from "../../../../../assets/images/profile-image-placeholder.png";
+import TempCover from "@/assets/images/public-bg.jpg";
+import TempProfilePhoto from "@/assets/images/profile-image-placeholder.png";
 
 const UserProfileHeaderView = () => {
   const { t } = useTranslation();
@@ -44,8 +44,7 @@ const UserProfileHeaderView = () => {
           <div className="card border-0 shadow-sm mb-4">
             {/* Cover */}
             <div className="position-relative">
-              <div className="ratio" 
-                  style={{height: '25vh'}}>
+              <div className="ratio" style={{ height: "25vh" }}>
                 <img
                   src={user.coverUrl}
                   alt="cover"
@@ -86,7 +85,10 @@ const UserProfileHeaderView = () => {
                 </div>
                 <div className="col-md-4 col-sm-12 d-flex justify-content-md-end justify-content-start mt-3 mt-md-0">
                   <div className="d-flex flex-wrap gap-2">
-                    <button type="button" className="btn btn-outline-secondary btn-sm">
+                    <button
+                      type="button"
+                      className="btn btn-outline-secondary btn-sm"
+                    >
                       {t("Auth.Profile.ShareProfile", "Share")}
                     </button>
                     <button type="button" className="btn btn-primary btn-sm">

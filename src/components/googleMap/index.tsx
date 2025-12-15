@@ -34,7 +34,9 @@ const MapWithMarkers = ({ locations }: { locations: LocationProps[] }) => {
 
   return (
     <Fragment>
-      <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAP_API_KEY!}>
+      <LoadScript
+        googleMapsApiKey={import.meta.env.VITE_APP_GOOGLE_MAP_API_KEY!}
+      >
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={{

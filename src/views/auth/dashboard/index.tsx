@@ -5,19 +5,19 @@ import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
-import * as OverviewApi from "../../../api/dashboard";
-import * as UserApi from "../../../api/users";
-import tempLogo from "../../../assets/images/brand/logo.png";
-import DashboardCard from "../../../components/card/dashboardCard";
-import { Notification } from "../../../layouts/auth/navs/navbar";
-import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
-import { useAppSelector } from "../../../store/hooks";
-import { viewDayDateFormat, viewTimeFormat } from "../../../utils/consts";
+import * as OverviewApi from "@/api/dashboard";
+import * as UserApi from "@/api/users";
+import tempLogo from "@/assets/images/brand/logo.png";
+import DashboardCard from "@/components/card/dashboardCard";
+import { Notification } from "@/layouts/auth/navs/navbar";
+import PageTemplate from "@/layouts/auth/pages/pageTemplate";
+import { useAppSelector } from "@/store/hooks";
+import { viewDayDateFormat, viewTimeFormat } from "@/utils/consts";
 import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
   statusColorRender,
-} from "../../../utils/function";
+} from "@/utils/function";
 
 const DashboardView = () => {
   const { t } = useTranslation();
@@ -69,11 +69,7 @@ const DashboardView = () => {
             <div className="text-primary text-center py-5">
               <h1 className="mb-4">{t("Auth.Dashboard.Welcome")}</h1>
 
-              <img
-                src={logo || tempLogo}
-                alt="logo"
-                className="my-5 w-100"
-              />
+              <img src={logo || tempLogo} alt="logo" className="my-5 w-100" />
 
               <h4 className="display-4 mt-5 text-dark">{name}</h4>
             </div>

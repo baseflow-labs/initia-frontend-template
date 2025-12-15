@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
-import PageTemplate from "../../../../layouts/auth/pages/pageTemplate";
+import PageTemplate from "@/layouts/auth/pages/pageTemplate";
 import NotificationsHeaderView from "./Header";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelopeOpen, faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -51,15 +51,18 @@ const NotificationsView = () => {
 
   const actionButtons = [
     {
-      label: t("Auth.Notifications.MarkAllRead", "Mark all as read")
+      label: t("Auth.Notifications.MarkAllRead", "Mark all as read"),
     },
     {
-      label: t("Auth.Notifications.Refresh", "Refresh")
-    }
-  ]
+      label: t("Auth.Notifications.Refresh", "Refresh"),
+    },
+  ];
 
   return (
-    <PageTemplate title={t("Auth.Notifications.Title", "Notifications")} actionButtons={actionButtons}>
+    <PageTemplate
+      title={t("Auth.Notifications.Title", "Notifications")}
+      actionButtons={actionButtons}
+    >
       <div className="w-100 mb-3">
         <NotificationsHeaderView />
       </div>
@@ -108,9 +111,7 @@ const NotificationsView = () => {
               <div className="flex-grow-1">
                 <div className="d-flex justify-content-between align-items-start mb-1">
                   <h3 className="h6 mb-0">{n.title}</h3>
-                  <span className="text-muted small ms-3">
-                    {n.time}
-                  </span>
+                  <span className="text-muted small ms-3">{n.time}</span>
                 </div>
 
                 <p className="mb-1 small text-muted">{n.body}</p>
@@ -119,7 +120,7 @@ const NotificationsView = () => {
                   <span className={getTypeBadgeClass(n.type)}>
                     {n.type.charAt(0).toUpperCase() + n.type.slice(1)}
                   </span>
-                  
+
                   {!n.isRead && (
                     <span className="badge bg-primary text-white">
                       {t("Auth.Notifications.Unread", "New")}
@@ -148,15 +149,12 @@ const NotificationsView = () => {
         </ul>
       )}
 
-    {/* Optional footer */}
-    <div className="text-center mt-3">
-      <button
-        type="button"
-        className="btn btn-outline-secondary btn-sm"
-      >
-        {t("Auth.Notifications.LoadMore", "Load more")}
-      </button>
-    </div>
+      {/* Optional footer */}
+      <div className="text-center mt-3">
+        <button type="button" className="btn btn-outline-secondary btn-sm">
+          {t("Auth.Notifications.LoadMore", "Load more")}
+        </button>
+      </div>
     </PageTemplate>
   );
 };

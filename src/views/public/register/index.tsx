@@ -1,11 +1,11 @@
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
-import * as authApi from "../../../api/auth";
-import Form from "../../../components/form";
-import { login } from "../../../store/actions/auth";
-import { addNotification } from "../../../store/actions/notifications";
-import { apiCatchGlobalHandler } from "../../../utils/function";
+import * as authApi from "@/api/auth";
+import Form from "@/components/form";
+import { login } from "@/store/actions/auth";
+import { addNotification } from "@/store/actions/notifications";
+import { apiCatchGlobalHandler } from "@/utils/function";
 import { formInputs } from "./inputs";
 
 const RegisterView = () => {

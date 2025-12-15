@@ -1,9 +1,6 @@
-import { ActionButtonProps } from "../../../components/button/actionButtons";
-import {
-  actionProps,
-  TableProps,
-} from "../../../components/table";
-import ApiDataTable from "../../../components/table/apiDatatable";
+import { ActionButtonProps } from "@/components/button/actionButtons";
+import { actionProps, TableProps } from "@/components/table";
+import ApiDataTable from "@/components/table/apiDatatable";
 import PageTemplate from "./pageTemplate";
 
 interface Props extends TableProps {

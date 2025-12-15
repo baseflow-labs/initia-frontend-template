@@ -2,7 +2,7 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Fragment, useState } from "react";
 import { InputProps } from "..";
-import { commonInputClasses } from "../../../utils/consts";
+import { commonInputClasses } from "@/utils/consts";
 
 type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 

@@ -3,11 +3,11 @@ import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
-import * as AuthApi from "../../../../../api/auth";
-import Form from "../../../../../components/form";
-import { addNotification } from "../../../../../store/actions/notifications";
-import { useAppSelector } from "../../../../../store/hooks";
-import { apiCatchGlobalHandler } from "../../../../../utils/function";
+import * as AuthApi from "@/api/auth";
+import Form from "@/components/form";
+import { addNotification } from "@/store/actions/notifications";
+import { useAppSelector } from "@/store/hooks";
+import { apiCatchGlobalHandler } from "@/utils/function";
 import AccountDelete from "./AccountDelete";
 import { getPasswordResetSettingInputs } from "./inputs";
 
@@ -17,7 +17,7 @@ const SecuritySettingsTab = () => {
   const { user } = useAppSelector((state) => state.auth);
 
   const onPasswordResetSubmit = (values: Record<string, any> = {}) => {
-    process.env.REACT_APP_ENVIRONMENT === "staging"
+    import.meta.env.VITE_APP_ENVIRONMENT === "staging"
       ? dispatch(
           addNotification({
             type: "err",
@@ -55,9 +55,7 @@ const SecuritySettingsTab = () => {
         customValidate={validatePasswords}
       />
 
-      {user.role !== "admin" && (
-        <AccountDelete />
-      )}
+      {user.role !== "admin" && <AccountDelete />}
     </Fragment>
   );
 };

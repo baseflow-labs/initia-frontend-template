@@ -2,13 +2,13 @@ import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
-import * as UserApi from "../../../../../api/users";
-import Button from "../../../../../components/core/button";
-import Modal from "../../../../../components/modal";
-import { logout } from "../../../../../store/actions/auth";
-import { addNotification } from "../../../../../store/actions/notifications";
-import { useAppSelector } from "../../../../../store/hooks";
-import { apiCatchGlobalHandler } from "../../../../../utils/function";
+import * as UserApi from "@/api/users";
+import Button from "@/components/core/button";
+import Modal from "@/components/modal";
+import { logout } from "@/store/actions/auth";
+import { addNotification } from "@/store/actions/notifications";
+import { useAppSelector } from "@/store/hooks";
+import { apiCatchGlobalHandler } from "@/utils/function";
 
 const AccountDelete = () => {
   const { t } = useTranslation();
@@ -57,11 +57,11 @@ const AccountDelete = () => {
         <div className="btn-group w-100" role="group">
           <Button
             onClick={() => deleteUser()}
-            disabled={process.env.REACT_APP_ENVIRONMENT === "staging"}
+            disabled={import.meta.env.VITE_APP_ENVIRONMENT === "staging"}
             color="danger"
             className="my-3 me-1"
           >
-            {process.env.REACT_APP_ENVIRONMENT === "staging"
+            {import.meta.env.VITE_APP_ENVIRONMENT === "staging"
               ? t("Global.Form.Labels.UnAvailableForDemoMode")
               : t("Global.Form.Labels.Yes")}
           </Button>

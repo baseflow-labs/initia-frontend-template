@@ -2,11 +2,11 @@ import { ChangeEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
-import * as AuthApi from "../../../../../api/auth";
-import Form from "../../../../../components/form";
-import { addNotification } from "../../../../../store/actions/notifications";
-import { useAppSelector } from "../../../../../store/hooks";
-import { apiCatchGlobalHandler } from "../../../../../utils/function";
+import * as AuthApi from "@/api/auth";
+import Form from "@/components/form";
+import { addNotification } from "@/store/actions/notifications";
+import { useAppSelector } from "@/store/hooks";
+import { apiCatchGlobalHandler } from "@/utils/function";
 import { inputs } from "./consts";
 
 const AccountProfileTab = () => {
@@ -68,7 +68,10 @@ const AccountProfileTab = () => {
 
         <div className="d-flex flex-column gap-2">
           <div>
-            <label className="btn btn-sm btn-primary mb-0 w-100" htmlFor="avatar">
+            <label
+              className="btn btn-sm btn-primary mb-0 w-100"
+              htmlFor="avatar"
+            >
               {avatarUploading
                 ? t("Global.Loading", { defaultValue: "Uploading..." })
                 : t("Auth.Settings.User.Account.ChangeAvatar", {
