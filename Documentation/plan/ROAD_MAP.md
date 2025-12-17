@@ -299,6 +299,7 @@ Implement only the “must-have knobs” first:
   - [ ] Admin side
   - [ ] Video share platform
   - [ ] Video streaming platform
+  - [ ] Firebase CMS
 - [ ] Commit-based code generation
 - [ ] AI-assisted features planing
 - [ ] AI-assisted code generation (initial experiments + feasibility study)
@@ -309,5 +310,5 @@ Implement only the “must-have knobs” first:
 - [ ] Server-side rendering (SSR) support
 - [ ] Framework Variants (Frontend React alternatives, e.g., Vue, Angular + Backend variants, e.g., Express.js, GoLang, Java, Django)
 - [ ] Micro-frontend + micro-service architecture support
-- [ ] Database variants (MySQL + NoSQL options)
+- [ ] Database variants (Firebase, MySQL, MongoDB options)
 - [ ] CI/CD pipeline templates (GitHub Actions, GitLab CI, Jenkins / service-based options e.g. aws amplify + beanstalk ...etc)
