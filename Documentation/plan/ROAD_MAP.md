@@ -260,7 +260,11 @@ Implement only the “must-have knobs” first:
   - [ ] Marketplace / 3rd party sellers
   - [ ] Delivery
   - [ ] Ride Hailing
-  - [ ] Booking system (venue, tickets, events, appointments)
+  - [ ] Booking system
+    - [ ] Venue
+    - [ ] Tickets
+    - [ ] Events
+    - [ ] Appointments
   - [ ] e-Learning
   - [ ] Telemedicine
   - [ ] Real estate listing
@@ -287,7 +291,7 @@ Implement only the “must-have knobs” first:
     - [ ] scheduling
     - [ ] ticketing
     - [ ] promotion
-    - [ ] community
+    - [ ] community engagement
   - [ ] Forms / requests management system
   - [ ] Client side
   - [ ] reviewer side
