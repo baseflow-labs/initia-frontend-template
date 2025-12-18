@@ -1,7 +1,6 @@
+import tempLogo from "@/assets/images/brand/logo.png";
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
-import TempCover from "@/assets/images/public-bg.jpg";
-import TempProfilePhoto from "@/assets/images/profile-image-placeholder.png";
 
 const UserProfileHeaderView = () => {
   const { t } = useTranslation();
@@ -12,8 +11,7 @@ const UserProfileHeaderView = () => {
     location: "Vatican City",
     status: "Connected",
     joinedAt: "Joined April 2021",
-    avatarUrl: TempProfilePhoto,
-    coverUrl: TempCover,
+    avatarUrl: tempLogo,
     about: {
       fullName: "John Doe",
       status: "Active",
@@ -44,13 +42,7 @@ const UserProfileHeaderView = () => {
           <div className="card border-0 shadow-sm mb-4">
             {/* Cover */}
             <div className="position-relative">
-              <div className="ratio w-100 bg-primary" style={{ height: "25vh" }}>
-                <img
-                  src={user.coverUrl}
-                  alt="cover"
-                  className="img-fluid rounded-top object-fit-cover"
-                />
-              </div>
+              <div className="ratio w-100 bg-primary" style={{ height: "25vh" }} />
 
               {/* Avatar */}
               <div className="position-absolute start-0 bottom-0 translate-middle-y ms-4">

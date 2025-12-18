@@ -1,28 +1,29 @@
-const imagePlaceholder =
-  "https://cdn-icons-png.flaticon.com/128/5676/5676033.png";
+import { TFunction } from "i18next";
 
-const inputOptions = (t: Function) => [
+import tempLogo from "../../../../assets/images/brand/logo.png";
+
+const inputOptions = (t: TFunction) => [
   {
     label: t("Auth.Examples.Form.Option1"),
     value: "option1",
     description: t("Auth.Examples.Form.Description"),
-    image: imagePlaceholder,
+    image: tempLogo,
   },
   {
     label: t("Auth.Examples.Form.Option2"),
     value: "option2",
     description: t("Auth.Examples.Form.Description"),
-    image: imagePlaceholder,
+    image: tempLogo,
   },
   {
     label: t("Auth.Examples.Form.Option3"),
     value: "option3",
     description: t("Auth.Examples.Form.Description"),
-    image: imagePlaceholder,
+    image: tempLogo,
   },
 ];
 
-export const inputs = (t: Function) => [
+export const inputs = (t: TFunction) => [
   {
     type: "text",
     name: "text",

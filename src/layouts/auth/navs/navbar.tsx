@@ -1,3 +1,10 @@
+import * as NotificationApi from "@/api/notifications";
+import tempLogo from "@/assets/images/brand/logo.png";
+import LangButton from "@/components/button/lang";
+import DropdownComp from "@/components/dropdown";
+import { logout } from "@/store/actions/auth";
+import { useAppSelector } from "@/store/hooks";
+import { apiCatchGlobalHandler } from "@/utils/function";
 import {
   faBars,
   faBell,
@@ -14,14 +21,6 @@ import { FormEvent, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-
-import * as NotificationApi from "@/api/notifications";
-import profilePhotoPlaceholder from "@/assets/images/profile-image-placeholder.png";
-import LangButton from "@/components/button/lang";
-import DropdownComp from "@/components/dropdown";
-import { logout } from "@/store/actions/auth";
-import { useAppSelector } from "@/store/hooks";
-import { apiCatchGlobalHandler } from "@/utils/function";
 
 export interface Notification {
   id: string;
@@ -46,10 +45,11 @@ const DashboardNavbar = ({
 
   const [notifications, setNotification] = useState<Notification[]>([]);
   const { user } = useAppSelector((state) => state.auth);
+  const { logo } = useAppSelector((state) => state.settings);
 
   useLayoutEffect(() => {
     NotificationApi.get()
-      .then((res: any) =>
+      .then((res) =>
         setNotification(
           res.payload?.sort((a: Notification, b: Notification) =>
             a.createdAt > b.createdAt ? -1 : 1
@@ -65,16 +65,13 @@ const DashboardNavbar = ({
     const formData = new FormData(e.currentTarget);
     const search = formData.get("search");
 
-    onSearch && onSearch(String(search));
+    if (onSearch) onSearch(String(search));
   };
 
-  const toggleTheme = () => {
-    const current = document.documentElement.getAttribute("data-bs-theme");
-    document.documentElement.setAttribute(
-      "data-bs-theme",
-      current === "dark" ? "light" : "dark"
-    );
-  };
+  // const toggleTheme = () => {
+  //   const current = document.documentElement.getAttribute("data-bs-theme");
+  //   document.documentElement.setAttribute("data-bs-theme", current === "dark" ? "light" : "dark");
+  // };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white py-4 mt-2 me-4 ms-0 ps-0 mb-3">
@@ -119,9 +116,7 @@ const DashboardNavbar = ({
 
                   <div
                     className={`position-absolute top-0 translate-middle badge rounded-circle bg-${
-                      notifications.filter((n) => !n.isRead).length
-                        ? "danger"
-                        : "dark"
+                      notifications.filter((n) => !n.isRead).length ? "danger" : "dark"
                     } py-1`}
                     style={{ fontSize: "0.75rem" }}
                   >
@@ -131,41 +126,32 @@ const DashboardNavbar = ({
               }
               list={
                 notifications.length
-                  ? notifications.map(
-                      (
-                        { id, title, message, service, createdAt, isRead },
-                        i
-                      ) => ({
-                        onClick: () => {
-                          navigate("/" + service);
-                          NotificationApi.markAsRead(id).catch(
-                            apiCatchGlobalHandler
-                          );
-                        },
-                        label: (
-                          <div
-                            className="row py-3"
-                            style={{
-                              minWidth: "25vw",
-                              backgroundColor: isRead
-                                ? "white"
-                                : "rgba(0,0,0,0.15)",
-                            }}
-                          >
-                            <div className="d-none d-md-block col-md-2 col-lg-1 my-auto text-warning">
-                              <h3>
-                                <FontAwesomeIcon icon={faInfoCircle} />
-                              </h3>
-                            </div>
-
-                            <div className="col-md-10 col-lg-11 ps-4 text-break text-wrap">
-                              <h6 className="w-100">{message}</h6>
-                              <small>{moment(createdAt).fromNow()}</small>
-                            </div>
+                  ? notifications.map(({ id, message, service, createdAt, isRead }) => ({
+                      onClick: () => {
+                        navigate("/" + service);
+                        NotificationApi.markAsRead(id).catch(apiCatchGlobalHandler);
+                      },
+                      label: (
+                        <div
+                          className="row py-3"
+                          style={{
+                            minWidth: "25vw",
+                            backgroundColor: isRead ? "white" : "rgba(0,0,0,0.15)",
+                          }}
+                        >
+                          <div className="d-none d-md-block col-md-2 col-lg-1 my-auto text-warning">
+                            <h3>
+                              <FontAwesomeIcon icon={faInfoCircle} />
+                            </h3>
                           </div>
-                        ),
-                      })
-                    )
+
+                          <div className="col-md-10 col-lg-11 ps-4 text-break text-wrap">
+                            <h6 className="w-100">{message}</h6>
+                            <small>{moment(createdAt).fromNow()}</small>
+                          </div>
+                        </div>
+                      ),
+                    }))
                   : [{ label: t("Auth.Notifications.NoNotifications") }]
               }
               link={{
@@ -174,10 +160,7 @@ const DashboardNavbar = ({
               }}
             />
 
-            <button
-              className="btn btn-link py-auto"
-              onClick={() => navigate("/messaging")}
-            >
+            <button className="btn btn-link py-auto" onClick={() => navigate("/messaging")}>
               <FontAwesomeIcon icon={faEnvelope} className="text-primary" />
             </button>
 
@@ -195,7 +178,7 @@ const DashboardNavbar = ({
               }
               button={
                 <img
-                  src={profilePhotoPlaceholder}
+                  src={logo || tempLogo}
                   alt="avatar"
                   className="rounded-circle"
                   width="30"

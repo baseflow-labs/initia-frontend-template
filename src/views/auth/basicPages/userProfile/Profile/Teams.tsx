@@ -8,8 +8,8 @@ const UserProfileTeamsView = () => {
     location: "Vatican City",
     status: "Connected",
     joinedAt: "Joined April 2021",
-    avatarUrl: "https://via.placeholder.com/120x120.png?text=JD",
-    coverUrl: "https://via.placeholder.com/1200x260.png?text=Profile+Cover",
+    avatarUrl:
+      "https://avatars.githubusercontent.com/u/168961512?s=400&u=201ce6952acb24b8f56b8cdf746e7dba28d7fc95&v=4",
     about: {
       fullName: "John Doe",
       status: "Active",
@@ -36,9 +36,7 @@ const UserProfileTeamsView = () => {
   return (
     <div className="card shadow-sm border-0">
       <div className="card-header bg-white border-0">
-        <h5 className="card-title mb-0">
-          {t("Auth.Profile.TeamsShort", "Teams")}
-        </h5>
+        <h5 className="card-title mb-0">{t("Auth.Profile.TeamsShort", "Teams")}</h5>
       </div>
       <div className="card-body">
         <ul className="list-group list-group-flush">

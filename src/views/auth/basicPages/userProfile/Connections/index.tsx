@@ -1,8 +1,10 @@
 import { useTranslation } from "react-i18next";
-import TempProfilePhoto from "@/assets/images/profile-image-placeholder.png";
+import tempLogo from "@/assets/images/brand/logo.png";
+import { useAppSelector } from "@/store/hooks";
 
 const UserProfileConnectionsView = () => {
   const { t } = useTranslation();
+  const { logo } = useAppSelector((state) => state.settings);
 
   const connections = [
     { id: 1, name: "Cecilia Payne", connections: "45 Connections" },
@@ -25,7 +27,7 @@ const UserProfileConnectionsView = () => {
                     style={{ width: 40, height: 40 }}
                   >
                     <img
-                      src={TempProfilePhoto}
+                      src={logo || tempLogo}
                       alt={c.name}
                       className="rounded-circle w-100 h-100"
                     />
@@ -37,10 +39,7 @@ const UserProfileConnectionsView = () => {
                   </div>
                 </div>
 
-                <button
-                  type="button"
-                  className="btn btn-outline-secondary btn-sm w-100 mt-2"
-                >
+                <button type="button" className="btn btn-outline-secondary btn-sm w-100 mt-2">
                   {t("Auth.Profile.ViewProfile", "View profile")}
                 </button>
               </div>

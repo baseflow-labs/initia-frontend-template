@@ -7,7 +7,9 @@ const get = async () => {
     return {
       payload: {
         logo: [
-          { path: "https://www.fmt.se/wp-content/uploads/2023/02/logo-placeholder-image.png" },
+          {
+            path: "https://avatars.githubusercontent.com/u/168961512?s=400&u=201ce6952acb24b8f56b8cdf746e7dba28d7fc95&v=4",
+          },
         ],
         appName: "Initia Demo Application",
         version: "1.0.0-demo",
