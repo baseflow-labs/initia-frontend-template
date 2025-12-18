@@ -98,7 +98,6 @@
 
 - [ ] Fix changelog generating script (make it deterministic, supports conventional commits, handles merges)
 - [x] Update documentation (README, commit convention, local dev, release flow)
-- [ ] Split localization files into smaller chunks (by module/feature; add loader rules)
 - [ ] “Definition of Done” checklist for PRs (release notes, docs, migrations, screenshots)
 - [ ] Build workflows
   - [x] Auto-release on merge to main
@@ -123,29 +122,30 @@
 - [ ] Searchable + clearable select (single)
   - [ ] API vs static options
 - [ ] Rich text editor (minimal, stable; don’t over-customize)
-- [ ] Nested form layouts (v1):
+- [ ] Nested form layouts (v2):
   - [ ] sections + grids
   - [ ] split form (two columns)
   - [ ] within-table editing (basic)
 
-### Sprint 19 — Form engine: advanced inputs + wizard v1 (29 Jan - 11 Feb, 2026)
+### Sprint 19 — Form engine: advanced inputs + wizard v2 (29 Jan - 11 Feb, 2026)
 
 - [ ] Google maps picker (location input) — minimal integration
 - [ ] Multi-select with search + clear
-- [ ] Build form wizard v1:
+- [ ] Build form wizard v2:
   - [ ] steps, validation per step
   - [ ] save draft locally
   - [ ] resume draft
 - [ ] “Form-of-forms” base schema support (enough to render forms from config)
 
-### Sprint 20 — DataTable v1: server-side foundations (12 - 25 Feb, 2026)
+### Sprint 20 — DataTable v2: server-side foundations (12 - 25 Feb, 2026)
 
+- [ ] Replace modals with dedicated CRUD pages
 - [ ] Server-side pagination + sorting + search (single search box)
-- [ ] Server-side filtering (v1):
+- [ ] Server-side filtering (v2):
   - [ ] text, number, date, boolean
-- [ ] Column presets (v1): badge, boolean, progress, avatar/image
+- [ ] Column presets (v2): badge, boolean, progress, avatar/image
 - [ ] Row selection + bulk actions (standard actions only)
-- [ ] LocalStorage persistence (v1): column visibility + order + pagination info + filters + sort + search
+- [ ] LocalStorage persistence (v2): column visibility + order + pagination info + filters + sort + search
 
 ### Sprint 21 — DataTable v2: advanced filters + layouts (26 Feb - 10 Mar, 2026)
 
@@ -176,7 +176,7 @@
   - [ ] System health basic widget (static placeholder + API hook)
   - [ ] Subscriptions placeholder section
 
-### Sprint 24 — Data view options v1 (7 - 20 Apr, 2026)
+### Sprint 24 — Data view options v2 (7 - 20 Apr, 2026)
 
 - [ ] Kanban view (basic columns + drag optional later)
 - [ ] Gallery / photo grid view
@@ -185,7 +185,7 @@
 
 ## Phase 8 — Backend APIs for Generator Features (21 Apr - 18 May, 2026)
 
-### Sprint 25 — Platform APIs v1 (21 Apr - 4 May, 2026)
+### Sprint 25 — Platform APIs v2 (21 Apr - 4 May, 2026)
 
 - [ ] Prepare API key for integration with other systems BE / FE apps.
 - [ ] API: return values of `TablesNames` (and metadata needed for generator)
@@ -195,7 +195,7 @@
   - [ ] Ci/Cd to main service providers (AWS, GCP, Azure)
   - [ ] Unit test
 
-### Sprint 26 — Auth integrations v1 (5 - 18 May, 2026)
+### Sprint 26 — Auth integrations v2 (5 - 18 May, 2026)
 
 - [ ] OAuth login integration (Google + Microsoft) with clean provider abstraction
 - [ ] Provider selection config (enabled/disabled per env/settings)
@@ -209,7 +209,7 @@
 - [ ] Required setup checklist (org name/logo, default language/timezone, login methods)
 - [ ] Persist onboarding completion state
 
-### Sprint 28 — Admin advanced settings v1 (2 - 15 Jun, 2026)
+### Sprint 28 — Admin advanced settings v2 (2 - 15 Jun, 2026)
 
 Implement only the “must-have knobs” first:
 
@@ -219,7 +219,7 @@ Implement only the “must-have knobs” first:
 - [ ] File upload limits (max size, max count)
 - [ ] Basic integrations settings (API keys storage placeholder)
 
-### Sprint 29 — Content management v1 (16 - 29 Jun, 2026)
+### Sprint 29 — Content management v2 (16 - 29 Jun, 2026)
 
 - [ ] Policy / Terms with localization
 - [ ] Landing page content management (basic sections data model)
