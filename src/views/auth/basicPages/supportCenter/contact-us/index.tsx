@@ -1,9 +1,4 @@
-import {
-  faFacebook,
-  faInstagram,
-  faLinkedin,
-  faTwitter,
-} from "@fortawesome/free-brands-svg-icons";
+import { faFacebook, faInstagram, faLinkedin, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import {
   faClock,
   faEnvelope,
@@ -27,43 +22,37 @@ const ContactUsView = () => {
       title: t("Auth.SupportCenter.ContactUs.EmailUs.Title"),
       details: "support@example.com",
       subDetails: t("Auth.SupportCenter.ContactUs.EmailUs.Description"),
-      color: "primary",
     },
     {
       icon: faPhone,
       title: t("Auth.SupportCenter.ContactUs.CallUs.Title"),
       details: "+1 (555) 123-4567",
       subDetails: t("Auth.SupportCenter.ContactUs.CallUs.Description"),
-      color: "dark",
     },
     {
       icon: faMapMarkerAlt,
       title: t("Auth.SupportCenter.ContactUs.VisitUs.Title"),
       details: "123 Main Street, Suite 100",
       subDetails: t("Auth.SupportCenter.ContactUs.VisitUs.Description"),
-      color: "primary",
     },
     {
       icon: faClock,
       title: t("Auth.SupportCenter.ContactUs.BusinessHours.Title"),
       details: "Monday - Friday",
       subDetails: t("Auth.SupportCenter.ContactUs.BusinessHours.Description"),
-      color: "warning",
     },
   ];
 
   return (
     <Fragment>
       {/* Header */}
-      <div className="bg-primary text-white py-5 mb-5">
+      <div className="bg-warning text-white py-5 mb-5">
         <div className="container">
           <div className="row">
             <div className="col-12">
               <BackToSupportCenterButton />
 
-              <h1 className="mb-3 text-center">
-                {t("Auth.SupportCenter.ContactUs.Title")}
-              </h1>
+              <h1 className="mb-3 text-center">{t("Auth.SupportCenter.ContactUs.Title")}</h1>
             </div>
           </div>
         </div>
@@ -77,22 +66,17 @@ const ContactUsView = () => {
               <div className="card h-100 shadow-sm text-center">
                 <div className="card-body">
                   <div
-                    className={`bg-${info.color} bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3`}
+                    className="bg-warning bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
                     style={{ width: "70px", height: "70px" }}
                   >
-                    <FontAwesomeIcon
-                      icon={info.icon}
-                      className={`text-${info.color} fa-2x`}
-                    />
+                    <FontAwesomeIcon icon={info.icon} className="text-warning fa-2x" />
                   </div>
 
                   <h5 className="card-title">{info.title}</h5>
 
                   <p className="card-text fw-semibold mb-1">{info.details}</p>
 
-                  <p className="card-text text-muted small">
-                    {info.subDetails}
-                  </p>
+                  <p className="card-text text-muted small">{info.subDetails}</p>
                 </div>
               </div>
             </div>
@@ -111,7 +95,7 @@ const ContactUsView = () => {
               </div>
 
               <div className="card-body p-4">
-                <Form inputs={() => inputs(t)} onFormSubmit={() => ""} />
+                <Form inputs={() => inputs(t)} onFormSubmit={() => ""} submitColor="warning" />
               </div>
             </div>
           </div>
@@ -122,10 +106,7 @@ const ContactUsView = () => {
             <div className="card shadow-sm mb-4">
               <div className="card-header bg-light">
                 <h5 className="mb-0">
-                  <FontAwesomeIcon
-                    icon={faClock}
-                    className="me-2 text-primary"
-                  />
+                  <FontAwesomeIcon icon={faClock} className="me-2 text-warning" />
                   {t("Auth.SupportCenter.ContactUs.OfficeHours.Title")}
                 </h5>
               </div>
@@ -153,9 +134,7 @@ const ContactUsView = () => {
             {/* Social Media */}
             <div className="card shadow-sm mb-4">
               <div className="card-header bg-light">
-                <h5 className="mb-0">
-                  {t("Auth.SupportCenter.ContactUs.ConnectWithUs.Title")}
-                </h5>
+                <h5 className="mb-0">{t("Auth.SupportCenter.ContactUs.ConnectWithUs.Title")}</h5>
               </div>
 
               <div className="card-body">
@@ -164,32 +143,20 @@ const ContactUsView = () => {
                 </p>
 
                 <div className="d-flex gap-2">
-                  <a
-                    href="#"
-                    className="btn btn-outline-primary btn-sm flex-fill"
-                  >
-                    <FontAwesomeIcon icon={faFacebook as any} />
+                  <a href="#" className="btn btn-outline-primary btn-sm flex-fill">
+                    <FontAwesomeIcon icon={faFacebook} />
                   </a>
 
-                  <a
-                    href="#"
-                    className="btn btn-outline-primary btn-sm flex-fill"
-                  >
-                    <FontAwesomeIcon icon={faTwitter as any} />
+                  <a href="#" className="btn btn-outline-primary btn-sm flex-fill">
+                    <FontAwesomeIcon icon={faTwitter} />
                   </a>
 
-                  <a
-                    href="#"
-                    className="btn btn-outline-primary btn-sm flex-fill"
-                  >
-                    <FontAwesomeIcon icon={faLinkedin as any} />
+                  <a href="#" className="btn btn-outline-primary btn-sm flex-fill">
+                    <FontAwesomeIcon icon={faLinkedin} />
                   </a>
 
-                  <a
-                    href="#"
-                    className="btn btn-outline-danger btn-sm flex-fill"
-                  >
-                    <FontAwesomeIcon icon={faInstagram as any} />
+                  <a href="#" className="btn btn-outline-danger btn-sm flex-fill">
+                    <FontAwesomeIcon icon={faInstagram} />
                   </a>
                 </div>
               </div>
@@ -203,10 +170,7 @@ const ContactUsView = () => {
             <div className="card shadow-sm">
               <div className="card-header bg-light">
                 <h5 className="mb-0">
-                  <FontAwesomeIcon
-                    icon={faMapMarkerAlt}
-                    className="me-2 text-primary"
-                  />
+                  <FontAwesomeIcon icon={faMapMarkerAlt} className="me-2 text-warning" />
                   {t("Auth.SupportCenter.ContactUs.OurLocation.Title")}
                 </h5>
               </div>
@@ -217,10 +181,7 @@ const ContactUsView = () => {
                   style={{ height: "300px" }}
                 >
                   <div className="text-center text-muted">
-                    <FontAwesomeIcon
-                      icon={faMapMarkerAlt}
-                      className="fa-3x mb-3"
-                    />
+                    <FontAwesomeIcon icon={faMapMarkerAlt} className="fa-3x mb-3" />
                     <p>Coming Soon</p>
                   </div>
                 </div>

@@ -1,4 +1,4 @@
-import { faChevronDown, faChevronUp, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -133,7 +133,7 @@ const FaqView = () => {
   return (
     <Fragment>
       {/* Header */}
-      <div className="bg-primary text-white py-5 mb-5">
+      <div className="bg-info text-white py-5 mb-5">
         <div className="container">
           <div className="row">
             <div className="col-12">
@@ -191,9 +191,7 @@ const FaqView = () => {
                           activeIndex === currentIndex ? "show" : ""
                         }`}
                       >
-                        <div className="accordion-body text-muted">
-                          {item.answer}
-                        </div>
+                        <div className="accordion-body text-muted">{item.answer}</div>
                       </div>
                     </div>
                   );

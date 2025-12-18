@@ -1,4 +1,10 @@
-import { faArrowRight, faBook, faComments, faEnvelope, faLifeRing, faQuestionCircle, faSearch, faTicket } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowRight,
+  faBook,
+  faEnvelope,
+  faQuestionCircle,
+  faTicket,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
@@ -13,7 +19,7 @@ const SupportCenterView = () => {
       title: t("Auth.SupportCenter.Faq.Title"),
       description: t("Auth.SupportCenter.Faq.Description"),
       link: "/support-center/faq",
-      color: "primary",
+      color: "info",
     },
     {
       icon: faBook,
@@ -27,32 +33,14 @@ const SupportCenterView = () => {
       title: t("Auth.SupportCenter.ContactUs.Title"),
       description: t("Auth.SupportCenter.ContactUs.Description"),
       link: "/support-center/contact-us",
-      color: "info",
+      color: "warning",
     },
     {
       icon: faTicket,
       title: t("Auth.SupportCenter.Tickets.Title"),
       description: t("Auth.SupportCenter.Tickets.Description"),
       link: "/support-center/tickets",
-      color: "warning",
-    },
-  ];
-
-  const popularArticles = [
-    {
-      title: "Getting Started",
-      description: "Whether you're new or you're a power user, this article will help you...",
-      category: "Basics",
-    },
-    {
-      title: "First Steps",
-      description: "Are you a new customer wondering how to get started?",
-      category: "Onboarding",
-    },
-    {
-      title: "Account Management",
-      description: "Learn how to manage your account settings and preferences...",
-      category: "Account",
+      color: "danger",
     },
   ];
 
@@ -110,21 +98,21 @@ const SupportCenterView = () => {
           {quickLinks.map((item, index) => (
             <div key={index} className="col-lg-3 col-md-6 mb-4">
               <Link to={item.link} className="text-decoration-none">
-                <div className={`card h-100 border-${item.color} shadow-sm hover-shadow transition`}>
+                <div
+                  className={`card h-100 border-${item.color} shadow-sm hover-shadow transition`}
+                >
                   <div className="card-body text-center">
-                    <div className={`bg-${item.color} rounded-circle d-inline-flex align-items-center justify-content-center mb-3`} style={{ width: '80px', height: '80px' }}>
-                      <FontAwesomeIcon
-                        icon={item.icon}
-                        className={`text-white fa-2x`}
-                      />
+                    <div
+                      className={`bg-${item.color} rounded-circle d-inline-flex align-items-center justify-content-center mb-3`}
+                      style={{ width: "80px", height: "80px" }}
+                    >
+                      <FontAwesomeIcon icon={item.icon} className={`text-white fa-2x`} />
                     </div>
 
                     <h5 className="card-title text-dark">{item.title}</h5>
                     <p className="card-text text-muted">{item.description}</p>
 
-                    <span className={`text-${item.color} fw-bold`}>
-                      {t("Global.Labels.More")}
-                    </span>
+                    <span className={`text-${item.color} fw-bold`}>{t("Global.Labels.More")}</span>
                   </div>
                 </div>
               </Link>
@@ -149,7 +137,11 @@ const SupportCenterView = () => {
                     {category.articles.map((article, articleIndex) => (
                       <li key={articleIndex} className="mb-2">
                         <a href="#" className="text-decoration-none text-muted">
-                          <FontAwesomeIcon icon={faArrowRight} size="sm" className="me-2 text-primary" />
+                          <FontAwesomeIcon
+                            icon={faArrowRight}
+                            size="sm"
+                            className="me-2 text-primary"
+                          />
                           {article}
                         </a>
                       </li>

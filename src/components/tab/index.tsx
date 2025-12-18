@@ -4,6 +4,7 @@ import { Fragment, useState } from "react";
 
 const TabsComp = ({
   items,
+  color = "primary",
 }: {
   items: {
     id: string;
@@ -11,6 +12,7 @@ const TabsComp = ({
     icon?: IconProp;
     content: React.ReactNode;
   }[];
+  color?: string;
 }) => {
   const [activeTab, setActiveTab] = useState(items[0].id);
 
@@ -28,11 +30,7 @@ const TabsComp = ({
             <button
               key={i}
               className={`btn mx-2 px-4 py-3 rounded-5 w-fit  
-          ${
-            activeTab === tab.id
-              ? "bg-opacity-primary text-primary fw-bold fs-6"
-              : "text-dark"
-          }`}
+          ${activeTab === tab.id ? `bg-opacity-${color} text-${color} fw-bold fs-6` : "text-dark"}`}
               onClick={() => setActiveTab(tab.id)}
               style={{
                 background: "none",

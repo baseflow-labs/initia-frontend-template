@@ -1,4 +1,10 @@
-import { faBook, faChevronRight, faDownload, faFileAlt, faVideo } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBook,
+  faChevronRight,
+  faDownload,
+  faFileAlt,
+  faVideo,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -127,7 +133,7 @@ const UserManualView = () => {
   return (
     <Fragment>
       {/* Header */}
-      <div className="bg-dark text-white py-5 mb-5">
+      <div className="bg-success text-white py-5 mb-5">
         <div className="container">
           <div className="row">
             <div className="col-12">
@@ -156,7 +162,7 @@ const UserManualView = () => {
                   <div key={section.id}>
                     <button
                       className={`list-group-item list-group-item-action fw-semibold ${
-                        activeSection === section.id ? "active" : ""
+                        activeSection === section.id ? "bg-success text-white" : ""
                       }`}
                       onClick={() => setActiveSection(section.id)}
                     >
@@ -186,10 +192,7 @@ const UserManualView = () => {
               <div className="card-body">
                 <div className="d-flex align-items-center mb-3">
                   <FontAwesomeIcon
-                    icon={
-                      manualSections.find((s) => s.id === activeSection)?.icon ||
-                      faBook
-                    }
+                    icon={manualSections.find((s) => s.id === activeSection)?.icon || faBook}
                     className="text-dark fa-2x me-3"
                   />
 
@@ -216,9 +219,7 @@ const UserManualView = () => {
                           <h5 className="card-title mb-0">{subsection.title}</h5>
                           <span
                             className={`badge ${
-                              subsection.type === "video"
-                                ? "bg-danger"
-                                : "bg-primary"
+                              subsection.type === "video" ? "bg-danger" : "bg-primary"
                             }`}
                           >
                             {subsection.type === "video" ? (
@@ -239,16 +240,9 @@ const UserManualView = () => {
                             ? "Watch a step-by-step video tutorial"
                             : "Read detailed documentation and guides"}
                         </p>
-                        <a
-                          href="#"
-                          className="text-dark text-decoration-none fw-bold"
-                        >
+                        <a href="#" className="text-dark text-decoration-none fw-bold">
                           {subsection.type === "video" ? "Watch Now" : "Read More"}
-                          <FontAwesomeIcon
-                            icon={faChevronRight}
-                            className="ms-2"
-                            size="sm"
-                          />
+                          <FontAwesomeIcon icon={faChevronRight} className="ms-2" size="sm" />
                         </a>
                       </div>
                     </div>
@@ -259,9 +253,7 @@ const UserManualView = () => {
             {/* Sample Content */}
             <div className="card shadow-sm">
               <div className="card-body">
-                <div
-                  dangerouslySetInnerHTML={{ __html: sampleContent.content }}
-                />
+                <div dangerouslySetInnerHTML={{ __html: sampleContent.content }} />
               </div>
             </div>
 
@@ -279,10 +271,7 @@ const UserManualView = () => {
                   <div className="col-md-6 mb-3">
                     <div className="ratio ratio-16x9 bg-light rounded">
                       <div className="d-flex align-items-center justify-content-center">
-                        <FontAwesomeIcon
-                          icon={faVideo}
-                          className="text-muted fa-3x"
-                        />
+                        <FontAwesomeIcon icon={faVideo} className="text-muted fa-3x" />
                       </div>
                     </div>
 
@@ -293,10 +282,7 @@ const UserManualView = () => {
                   <div className="col-md-6 mb-3">
                     <div className="ratio ratio-16x9 bg-light rounded">
                       <div className="d-flex align-items-center justify-content-center">
-                        <FontAwesomeIcon
-                          icon={faVideo}
-                          className="text-muted fa-3x"
-                        />
+                        <FontAwesomeIcon icon={faVideo} className="text-muted fa-3x" />
                       </div>
                     </div>
 
@@ -311,9 +297,9 @@ const UserManualView = () => {
             <div className="card bg-light shadow-sm mt-4">
               <div className="card-body text-center py-4">
                 <h5 className="mb-3">Need More Help?</h5>
-                
+
                 <p className="text-muted mb-4">
-                  Can't find what you're looking for? Our support team is ready to assist you.
+                  Can not find what you are looking for? Our support team is ready to assist you.
                 </p>
 
                 <div className="d-flex justify-content-center gap-3 flex-wrap">

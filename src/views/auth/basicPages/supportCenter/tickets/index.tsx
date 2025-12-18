@@ -23,7 +23,7 @@ const SupportTicketsView = () => {
 
   return (
     <Fragment>
-      <div className="bg-primary py-5 mb-5">
+      <div className="bg-danger py-5 mb-5">
         <div className="container">
           <div className="row">
             <div className="col-12">
@@ -38,7 +38,7 @@ const SupportTicketsView = () => {
       </div>
 
       <div className="container mb-5">
-        <TabsComp items={tabs} />
+        <TabsComp items={tabs} color="danger" />
       </div>
     </Fragment>
   );
