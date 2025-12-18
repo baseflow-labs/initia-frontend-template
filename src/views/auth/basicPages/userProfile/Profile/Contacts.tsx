@@ -1,0 +1,80 @@
+import { useTranslation } from "react-i18next";
+
+const UserProfileContactsView = () => {
+  const { t } = useTranslation();
+  const user = {
+    name: "John Doe",
+    role: "UX Designer",
+    location: "Vatican City",
+    status: "Connected",
+    joinedAt: "Joined April 2021",
+    avatarUrl: "https://via.placeholder.com/120x120.png?text=JD",
+    coverUrl: "https://via.placeholder.com/1200x260.png?text=Profile+Cover",
+    about: {
+      fullName: "John Doe",
+      status: "Active",
+      role: "Developer",
+      country: "USA",
+      languages: "English",
+    },
+    contacts: {
+      phone: "(123) 456-7890",
+      skype: "john.doe",
+      email: "john.doe@example.com",
+    },
+    teamsShort: [
+      { name: "Backend Developer", members: 126 },
+      { name: "React Developer", members: 98 },
+    ],
+    overviewStats: {
+      tasks: "13.5k",
+      projects: 146,
+      connections: 897,
+    },
+  };
+
+  return (
+    <div className="card shadow-sm border-0 mb-3">
+      <div className="card-header bg-white border-0">
+        <h5 className="card-title mb-0">
+          {t("Auth.Profile.Contacts", "Contacts")}
+        </h5>
+      </div>
+
+      <div className="card-body">
+        <dl className="row mb-0">
+          <dt className="col-5 text-muted small">
+            {t("Auth.Profile.Contact", "Contact")}
+          </dt>
+
+          <dd className="col-7 small mb-2">
+            <a href={`tel:${user.contacts.phone}`} className="text-decoration-none">
+              {user.contacts.phone}
+            </a>
+          </dd>
+
+          <dt className="col-5 text-muted small">
+            {t("Auth.Profile.Skype", "Skype")}
+          </dt>
+
+          <dd className="col-7 small mb-2">{user.contacts.skype}</dd>
+
+          <dt className="col-5 text-muted small">
+            {t("Auth.Profile.Email", "Email")}
+          </dt>
+
+          <dd className="col-7 small mb-0">
+            <a
+              href={`mailto:${user.contacts.email}`}
+              className="text-decoration-none"
+            >
+              {user.contacts.email}
+            </a>
+          </dd>
+        </dl>
+      </div>
+    </div>
+  );
+};
+
+export default UserProfileContactsView;

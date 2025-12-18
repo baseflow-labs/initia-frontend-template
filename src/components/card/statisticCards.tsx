@@ -1,14 +1,14 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { commaNumbers } from "../../utils/function";
+import { commaNumbers } from "@/utils/function";
 import DashboardCard from "./dashboardCard";
 
 interface Props {
   statistics: {
     label: string;
     count: number;
-    color: string; // "primary" | "success" | "warning" | "danger" | "info";
+    color: string; // "primary" | "dark" | "warning" | "danger" | "info";
     icon: IconProp;
     unit?: React.ReactNode | string;
     details?: {

@@ -1,9 +1,35 @@
-import api from "..";
+import api, { demoStatus } from "..";
 
 const mainPath = "/overview";
 
-const forBeneficiary = async () => {
-  const res = await api.get(mainPath + "/beneficiary");
+const forUser = async () => {
+  if (demoStatus){
+    return {
+      payload: {
+        notifications: [
+          {
+            id: "1",
+            title: "Welcome to AppNest!",
+            message: "Thank you for using AppNest. We hope you have a great experience!",
+            service: "System",
+            important: false,
+            isRead: false,
+            createdAt: "2024-06-01T12:00:00Z",
+          },
+          {
+            id: "2",
+            title: "This is important!",
+            message: "This is to test the important notification feature.",
+            service: "System",
+            important: true,
+            isRead: false,
+            createdAt: "2024-06-01T12:00:00Z",
+          },
+        ]
+      }
+    }
+  }
+  const res = await api.get(mainPath + "/user");
   return res;
 };
 
@@ -22,4 +48,4 @@ const forAccountant = async () => {
   return res;
 };
 
-export { forBeneficiary, forResearcher, forSupervisor, forAccountant };
+export { forUser, forResearcher, forSupervisor, forAccountant };

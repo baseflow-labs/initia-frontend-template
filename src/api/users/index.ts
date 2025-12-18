@@ -1,5 +1,5 @@
-import api, { formatGetFilters, GetDataProps } from "..";
-import store, { RootState } from "../../store/store";
+import api, { demoStatus, formatGetFilters, GetDataProps } from "..";
+import store, { RootState } from "@/store/store";
 
 const mainPath = "/user";
 
@@ -9,6 +9,22 @@ const getAll = async ({
   capacity,
   customFilters,
 }: GetDataProps) => {
+  if (demoStatus) {
+    return {
+      payload: [
+        {
+          id: "1",
+          fullName: "Demo Admin User",
+          email: "demo.admin@appnest.com",
+        },
+        {
+          id: "2",
+          fullName: "Demo User",
+          email: "demo.user@appnest.com",
+        },
+      ],
+    };
+  }
   const res = await api.get(mainPath, {
     params: { ...formatGetFilters(filters, customFilters), page, capacity },
   });
@@ -26,6 +42,14 @@ const create = async (data: object) => {
 };
 
 const getByUserId = async (id?: string) => {
+  if (demoStatus) {
+    return {
+      payload: {
+        fullName: "Demo User",
+        email: "demo.user@appnest.com",
+      },
+    };
+  }
   const { user } = (store.getState() as RootState).auth;
 
   const res = await api.get(mainPath + "/by-user/" + (id || user.id));
@@ -36,8 +60,8 @@ const remove = async (id: string) => {
   return await api.delete(mainPath + "/" + id);
 };
 
-const removeAllBeneficiaries = async () => {
-  return await api.delete(mainPath + "/all-beneficiaries");
+const removeAllUsers = async () => {
+  return await api.delete(mainPath + "/all-users");
 };
 
-export { getAll, create, getById, getByUserId, remove, removeAllBeneficiaries };
+export { getAll, create, getById, getByUserId, remove, removeAllUsers };

@@ -1,24 +1,27 @@
+import {
+  faBars,
+  faBell,
+  faEnvelope,
+  faGear,
+  faInfoCircle,
+  faMagnifyingGlass,
+  faRightFromBracket,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
 import { FormEvent, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
-import * as NotificationApi from "../../../api/notifications";
-import {
-  helpIcon,
-  menuBarsIcon,
-  notificationsIcon,
-  searchIcon,
-} from "../../../assets/icons/icons";
-import IconWrapperComp from "../../../assets/icons/wrapper";
-import profilePhotoPlaceholder from "../../../assets/images/profile-image-placeholder.png";
-// import LangButton from "../../../components/button/lang";
-import Spinner from "../../../components/core/spinner";
-import DropdownComp from "../../../components/dropdown";
-import { logout } from "../../../store/actions/auth";
-import { useAppSelector } from "../../../store/hooks";
-import { apiCatchGlobalHandler } from "../../../utils/function";
+import * as NotificationApi from "@/api/notifications";
+import profilePhotoPlaceholder from "@/assets/images/profile-image-placeholder.png";
+import LangButton from "@/components/button/lang";
+import DropdownComp from "@/components/dropdown";
+import { logout } from "@/store/actions/auth";
+import { useAppSelector } from "@/store/hooks";
+import { apiCatchGlobalHandler } from "@/utils/function";
 
 export interface Notification {
   id: string;
@@ -33,19 +36,15 @@ export interface Notification {
 const DashboardNavbar = ({
   onSearch,
   searchPlaceholder,
-  showNav,
 }: {
   onSearch?: (e: string) => void;
   searchPlaceholder?: string;
-  showNav?: Boolean;
 }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const navigate = useNavigate();
 
   const [notifications, setNotification] = useState<Notification[]>([]);
-  const { loading } = useAppSelector((state) => state.loading);
-  const { logo } = useAppSelector((state) => state.settings);
   const { user } = useAppSelector((state) => state.auth);
 
   useLayoutEffect(() => {
@@ -69,19 +68,17 @@ const DashboardNavbar = ({
     onSearch && onSearch(String(search));
   };
 
+  const toggleTheme = () => {
+    const current = document.documentElement.getAttribute("data-bs-theme");
+    document.documentElement.setAttribute(
+      "data-bs-theme",
+      current === "dark" ? "light" : "dark"
+    );
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white py-4 mt-2 me-4 ms-0 ps-0 mb-3">
       <div className="row w-100 justify-content-between">
-        {showNav && (
-          <div className="col-6 col-lg-1 order-1">
-            <img
-              alt="logo"
-              src={process.env.REACT_APP_STORAGE_DIRECTORY_URL + logo}
-              height="40px"
-            />
-          </div>
-        )}
-
         <div className="col-6 col-lg-1 d-block d-lg-none order-1 order-lg-3">
           <button
             className="btn btn-ghost"
@@ -90,7 +87,7 @@ const DashboardNavbar = ({
             data-bs-target="#offcanvasNav"
             aria-controls="offcanvasNav"
           >
-            <IconWrapperComp icon={menuBarsIcon} />
+            <FontAwesomeIcon icon={faBars} />
           </button>
         </div>
 
@@ -105,65 +102,26 @@ const DashboardNavbar = ({
                   placeholder={searchPlaceholder || t("Global.Labels.Search")}
                 />
 
-                <button className="input-group-text bg-info" type="submit">
-                  <IconWrapperComp icon={searchIcon} />
+                <button className="input-group-text bg-primary" type="submit">
+                  <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </button>
               </div>
             </form>
-          )}
-
-          {showNav && (
-            <div className="collapse navbar-collapse justify-content-center">
-              <ul className="navbar-nav mb-2 mb-lg-0">
-                <li className="nav-item">
-                  <span
-                    className="nav-link active"
-                    role="button"
-                    onClick={() => navigate("/dashboard")}
-                  >
-                    {t("Auth.Dashboard.Main")}
-                  </span>
-                </li>
-
-                <li className="nav-item">
-                  <span
-                    className="nav-link"
-                    role="button"
-                    onClick={() => navigate("/contact-us")}
-                  >
-                    {t("Auth.ContactUs.Title")}
-                  </span>
-                </li>
-              </ul>
-            </div>
           )}
         </div>
 
         <div className="col-6 col-lg-2 pb-3 order-2 order-lg-2">
           <div className="d-flex align-items-end gap-3 pe-5 float-end">
-            {loading.length > 0 ? (
-              <small className="text-info">
-                <Spinner />
-              </small>
-            ) : (
-              ""
-            )}
-
-            {/* <LangButton /> */}
-
             <DropdownComp
               button={
                 <div className="position-relative">
-                  <IconWrapperComp
-                    icon={notificationsIcon}
-                    className="text-secondary"
-                  />
+                  <FontAwesomeIcon icon={faBell} className="text-primary" />
 
                   <div
                     className={`position-absolute top-0 translate-middle badge rounded-circle bg-${
                       notifications.filter((n) => !n.isRead).length
                         ? "danger"
-                        : "success"
+                        : "dark"
                     } py-1`}
                     style={{ fontSize: "0.75rem" }}
                   >
@@ -196,7 +154,7 @@ const DashboardNavbar = ({
                           >
                             <div className="d-none d-md-block col-md-2 col-lg-1 my-auto text-warning">
                               <h3>
-                                <IconWrapperComp icon={helpIcon} />
+                                <FontAwesomeIcon icon={faInfoCircle} />
                               </h3>
                             </div>
 
@@ -208,15 +166,33 @@ const DashboardNavbar = ({
                         ),
                       })
                     )
-                  : [{ label: t("Global.Labels.NoNotifications") }]
+                  : [{ label: t("Auth.Notifications.NoNotifications") }]
               }
+              link={{
+                text: t("Auth.Notifications.AllNotifications"),
+                route: "/notifications",
+              }}
             />
 
-            {/* <button className="btn btn-link position-relative">
-            <FontAwesomeIcon icon={faEnvelope} className="text-secondary" />
-          </button> */}
+            <button
+              className="btn btn-link py-auto"
+              onClick={() => navigate("/messaging")}
+            >
+              <FontAwesomeIcon icon={faEnvelope} className="text-primary" />
+            </button>
+
+            <LangButton />
+
+            {/* <button className="btn btn-link py-auto" onClick={() => toggleTheme()}>
+              <FontAwesomeIcon icon={document.documentElement.getAttribute("data-bs-theme") === "dark" ? faMoon : faSun} className="text-secondary" />
+            </button> */}
 
             <DropdownComp
+              header={
+                <div className="text-center border-bottom pb-2">
+                  {user.name + " | " + t("Global.Labels.Roles." + user.role)}
+                </div>
+              }
               button={
                 <img
                   src={profilePhotoPlaceholder}
@@ -228,14 +204,24 @@ const DashboardNavbar = ({
               }
               list={[
                 {
-                  disabled: true,
-                  onClick: () => "",
-                  label:
-                    user.name + " | " + t("Global.Labels.Roles." + user.role),
+                  onClick: () => navigate("/profile"),
+                  label: t("Auth.Profile.Title"),
+                  icon: faUser,
+                },
+                {
+                  onClick: () => navigate("/settings"),
+                  label: t("Auth.Settings.User.Title"),
+                  icon: faGear,
+                },
+                {
+                  onClick: () => navigate("/support-center"),
+                  label: t("Auth.SupportCenter.Title"),
+                  icon: faInfoCircle,
                 },
                 {
                   onClick: () => dispatch(logout()),
                   label: t("Global.Labels.Logout"),
+                  icon: faRightFromBracket,
                 },
               ]}
             />

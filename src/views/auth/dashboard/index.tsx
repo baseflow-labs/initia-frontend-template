@@ -1,26 +1,23 @@
-import { faCircle } from "@fortawesome/free-solid-svg-icons";
+import { faCircle, faInfo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
-import * as OverviewApi from "../../../api/dashboard";
-import * as UserApi from "../../../api/users/beneficiary";
-import { helpIcon } from "../../../assets/icons/icons";
-import IconWrapperComp from "../../../assets/icons/wrapper";
-import profilePhotoPlaceholder from "../../../assets/images/profile-image-placeholder.png";
-import DashboardCard from "../../../components/card/dashboardCard";
-import { Notification } from "../../../layouts/auth/navs/navbar";
-import PageTemplate from "../../../layouts/auth/pages/pageTemplate";
-import { useAppSelector } from "../../../store/hooks";
-import { viewDayDateFormat, viewTimeFormat } from "../../../utils/consts";
+import * as OverviewApi from "@/api/dashboard";
+import * as UserApi from "@/api/users";
+import tempLogo from "@/assets/images/brand/logo.png";
+import DashboardCard from "@/components/card/dashboardCard";
+import { Notification } from "@/layouts/auth/navs/navbar";
+import PageTemplate from "@/layouts/auth/pages/pageTemplate";
+import { useAppSelector } from "@/store/hooks";
+import { viewDayDateFormat, viewTimeFormat } from "@/utils/consts";
 import {
   apiCatchGlobalHandler,
   renderDataFromOptions,
   statusColorRender,
-} from "../../../utils/function";
-import { getBeneficiaryStatuses } from "../../../utils/optionDataLists/beneficiaries";
+} from "@/utils/function";
 
 const DashboardView = () => {
   const { t } = useTranslation();
@@ -32,14 +29,12 @@ const DashboardView = () => {
     statuses?: { status: string; createdAt: string }[];
     status?: string;
   }>({});
-  const [profile, setProfile] = useState<{ beneficiary: { fullName: string } }>(
-    {
-      beneficiary: { fullName: "" },
-    }
-  );
+  const [profile, setProfile] = useState<{ user: { fullName: string } }>({
+    user: { fullName: "" },
+  });
 
   useLayoutEffect(() => {
-    OverviewApi.forBeneficiary()
+    OverviewApi.forUser()
       .then((res: any) =>
         setData({
           ...res.payload,
@@ -60,30 +55,23 @@ const DashboardView = () => {
       .catch(apiCatchGlobalHandler);
   }, []);
 
-  const statuses = getBeneficiaryStatuses(t);
+  const statuses = [
+    { value: "Pending", label: t("Auth.Dashboard.Statuses.Pending") },
+  ];
 
-  const isUnacceptedBeneficiary =
-    user.role === "beneficiary" && user.status !== "Accepted";
+  const isUnacceptedUser = user.role === "user" && user.status !== "Accepted";
 
   return (
     <PageTemplate title={t("Auth.Dashboard.Title")}>
       <div className="row">
         <div className="col-lg-6">
           <DashboardCard>
-            <div className="text-info text-center py-5">
+            <div className="text-primary text-center py-5">
               <h1 className="mb-4">{t("Auth.Dashboard.Welcome")}</h1>
 
-              <img
-                src={
-                  logo
-                    ? process.env.REACT_APP_STORAGE_DIRECTORY_URL + logo
-                    : profilePhotoPlaceholder
-                }
-                alt="logo"
-                className="my-5 w-100"
-              />
+              <img src={logo || tempLogo} alt="logo" className="my-5 w-100" />
 
-              <h4 className="display-4 mt-5 text-success">{name}</h4>
+              <h4 className="display-4 mt-5 text-dark">{name}</h4>
             </div>
           </DashboardCard>
         </div>
@@ -93,14 +81,13 @@ const DashboardView = () => {
             <div className="row">
               <div className="col-12 mb-5">
                 <h4>
-                  {t("Auth.Dashboard.BeneficiaryInfo")}{" "}
-                  {profile?.beneficiary?.fullName}
+                  {t("Auth.Dashboard.UserInfo")} {profile?.user?.fullName}
                 </h4>
               </div>
 
               <div className="col-6">
                 <h6 className="my-auto">
-                  {t("Auth.Dashboard.BeneficiaryMembershipStatus")}
+                  {t("Auth.Dashboard.UserMembershipStatus")}
                 </h6>
               </div>
 
@@ -114,7 +101,7 @@ const DashboardView = () => {
                 </h3>
               </div>
 
-              {isUnacceptedBeneficiary && (
+              {isUnacceptedUser && (
                 <Fragment>
                   <div className="col-12 mt-5">
                     <h3 className="mb-4">
@@ -141,7 +128,7 @@ const DashboardView = () => {
                   </div>
 
                   <div className="col-12 mt-5">
-                    {t("Auth.Dashboard.UnacceptedBeneficiaryNote")}
+                    {t("Auth.Dashboard.UnacceptedUserNote")}
                   </div>
                 </Fragment>
               )}
@@ -168,7 +155,7 @@ const DashboardView = () => {
                           <div className="row">
                             <div className="col-1 col-lg-2 col-lg-1 my-auto text-warning">
                               <h3>
-                                <IconWrapperComp icon={helpIcon} />
+                                <FontAwesomeIcon icon={faInfo} />
                               </h3>
                             </div>
 

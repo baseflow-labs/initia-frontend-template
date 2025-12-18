@@ -6,7 +6,7 @@ interface Props {
   researchers: {
     name: string;
     photo: string;
-    beneficiariesCount: number;
+    usersCount: number;
     visitsCount: number;
     aidsCount: number;
     reportsCount: number;
@@ -38,14 +38,7 @@ const UsersCard = ({ label, researchers }: Props) => {
         <tbody>
           {researchers.map(
             (
-              {
-                name,
-                photo,
-                beneficiariesCount,
-                visitsCount,
-                aidsCount,
-                reportsCount,
-              },
+              { name, photo, usersCount, visitsCount, aidsCount, reportsCount },
               i
             ) => (
               <tr
@@ -67,8 +60,7 @@ const UsersCard = ({ label, researchers }: Props) => {
                       <h5>{name}</h5>
 
                       <div className="text-secondary">
-                        {beneficiariesCount}{" "}
-                        {t("Auth.Beneficiaries.Beneficiaries")}
+                        {usersCount} {t("Auth.Users.Title")}
                       </div>
                     </div>
                   </div>

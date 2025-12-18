@@ -5,8 +5,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
-import * as FileApi from "../../../api/files";
-import { addNotification } from "../../../store/actions/notifications";
+import * as FileApi from "@/api/files";
+import { addNotification } from "@/store/actions/notifications";
 import Spinner from "../../core/spinner";
 
 interface FileUploadProps {
@@ -131,7 +131,7 @@ const FileInput: React.FC<FinalInput> = ({
   };
 
   const generateFileIcon = (type: string) => {
-    return <FontAwesomeIcon icon={faFile} className="text-success" />;
+    return <FontAwesomeIcon icon={faFile} className="text-dark" />;
   };
 
   return (
@@ -158,10 +158,7 @@ const FileInput: React.FC<FinalInput> = ({
 
             <div className="d-flex mt-2 justify-content-center align-items-center">
               <div className="text-truncate" style={{ maxWidth: 80 }}>
-                <a
-                  href={process.env.REACT_APP_STORAGE_DIRECTORY_URL + file.path}
-                  target="_blank"
-                >
+                <a href={file.path} target="_blank">
                   {file.name}
                 </a>
               </div>
@@ -212,7 +209,7 @@ const FileInput: React.FC<FinalInput> = ({
         justify-content: center;
         width: 80px;
         height: 80px;
-        border: 1px solid var(--bs-success);
+        border: 1px solid var(--bs-dark);
         border-radius: 6px;
         box-sizing: border-box;
         background: #fafafa;
@@ -262,13 +259,13 @@ const FileInput: React.FC<FinalInput> = ({
         justify-content: center;
         width: 80px;
         height: 80px;
-        border: 2px dashed var(--bs-info);
+        border: 2px dashed var(--bs-primary);
         border-radius: 6px;
         text-align: center;
         cursor: pointer;
         user-select: none;
         font-size: 0.9rem;
-        color: var(--bs-info);
+        color: var(--bs-primary);
         padding: 0.5rem;
         box-sizing: border-box;
         min-width: 80px;

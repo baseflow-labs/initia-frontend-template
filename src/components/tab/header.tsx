@@ -1,4 +1,4 @@
-export default function TabsHeader({
+const TabsHeader = ({
   tabs,
   activeTab,
   setActiveTab,
@@ -6,7 +6,7 @@ export default function TabsHeader({
   tabs: { id: string; name: string; title: string }[];
   activeTab: string;
   setActiveTab: (id: string) => void;
-}) {
+}) => {
   return (
     <div
       className="mt-1 mx-3 mx-xl-5 mx-xxl-auto overflow-x-auto"
@@ -25,7 +25,7 @@ export default function TabsHeader({
             className={`btn mx-2 px-4 py-3 rounded-5 w-fit  
           ${
             activeTab === tab.id
-              ? "bg-opacity-info text-info fw-bold fs-6"
+              ? "bg-opacity-primary text-primary fw-bold fs-6"
               : "text-dark"
           }`}
             onClick={() => setActiveTab(tab.name)}
@@ -39,4 +39,6 @@ export default function TabsHeader({
       </div>
     </div>
   );
-}
+};
+
+export default TabsHeader;

@@ -1,26 +1,12 @@
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
-import Form from "../../../components/form";
+import Form from "@/components/form";
+import { formInputs } from "./inputs";
 
 const ResetPasswordView = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-
-  const formInputs = () => [
-    {
-      type: "password",
-      name: "password",
-      label: t("Public.ForgotPassword.ResetPassword.NewPassword"),
-      required: true,
-    },
-    {
-      type: "password",
-      name: "passwordConfirmation",
-      label: t("Public.ForgotPassword.ResetPassword.NewPasswordConfirmation"),
-      required: true,
-    },
-  ];
 
   const onSubmit = (values = {}) => {
     navigate("/");
@@ -29,7 +15,7 @@ const ResetPasswordView = () => {
   return (
     <div>
       <Form
-        inputs={formInputs}
+        inputs={() => formInputs(t)}
         submitText={t("Public.ForgotPassword.ResetPassword.ResetPassword")}
         onFormSubmit={onSubmit}
       />

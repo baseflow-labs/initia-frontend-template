@@ -1,16 +1,25 @@
 import axios, {
   AxiosError,
+  AxiosRequestHeaders,
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from "axios";
 
-import { logout } from "../store/actions/auth";
+import { refreshToken as doRefreshToken, logout } from "../store/actions/auth";
 import { endLoading, startLoading } from "../store/actions/loading";
 import { addNotification } from "../store/actions/notifications";
 import store, { RootState } from "../store/store";
 
+declare module "axios" {
+  export interface InternalAxiosRequestConfig {
+    _retry?: boolean;
+  }
+}
+
 export const baseURL =
-  process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
+  import.meta.env.VITE_APP_BACKEND_URL || "http://localhost:8000";
+
+export const demoStatus = import.meta.env.VITE_APP_ENVIRONMENT === "staging";
 
 export interface customFilterProps {
   field: string;
@@ -62,10 +71,10 @@ service.interceptors.request.use(
   (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
     store.dispatch(startLoading());
 
-    const { token } = (store.getState() as RootState).auth;
+    const { accessToken } = (store.getState() as RootState).auth;
 
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
     }
 
     if (config.method?.toLowerCase() === "get") {
@@ -90,17 +99,62 @@ service.interceptors.request.use(
 const fallbackMessage = "Something Went Wrong";
 
 service.interceptors.response.use(
-  (res: AxiosResponse) => {
+  async (res: AxiosResponse) => {
     store.dispatch(endLoading());
 
     const msg = (res.data as { message?: string })?.message || fallbackMessage;
+    const { accessToken, refreshToken } =
+      (store.getState() as RootState).auth || {};
+    const originalRequest = res.config;
 
     const status = parseInt(`${res.status}`);
 
     if (
-      store.getState().auth.token &&
-      store.getState().auth.token !== "null" &&
-      [403, 401].includes(status)
+      accessToken &&
+      accessToken !== "null" &&
+      refreshToken &&
+      refreshToken !== "null" &&
+      status === 401
+    ) {
+      originalRequest._retry = true;
+
+      try {
+        const { data } = await service.post("/auth/refresh-token", {
+          refreshToken,
+        });
+
+        // adjust shape according to your API response
+        const newAccessToken = data?.accessToken || data?.payload?.accessToken;
+        const newRefreshToken =
+          data?.refreshToken || data?.payload?.refreshToken;
+
+        // 1) store tokens in redux
+        store.dispatch(
+          doRefreshToken({
+            accessToken: newAccessToken,
+            refreshToken: newRefreshToken,
+          })
+        );
+
+        // 2) update Authorization header for the retried request
+        originalRequest.headers = {
+          ...originalRequest.headers,
+          Authorization: `Bearer ${newAccessToken}`,
+        } as AxiosRequestHeaders;
+
+        // 3) retry original request
+        return service(originalRequest);
+      } catch (e) {
+        // refresh failed -> logout and reject
+        store.dispatch(logout());
+        return Promise.reject(e);
+      }
+    }
+
+    if (
+      store.getState().auth.accessToken &&
+      store.getState().auth.accessToken !== "null" &&
+      status === 403
     ) {
       store.dispatch(logout());
       return Promise.reject(new Error(msg));
@@ -128,8 +182,8 @@ service.interceptors.response.use(
     const status = parseInt(`${err.status}`);
 
     if (
-      store.getState().auth.token &&
-      store.getState().auth.token !== "null" &&
+      store.getState().auth.accessToken &&
+      store.getState().auth.accessToken !== "null" &&
       [403, 401].includes(status)
     ) {
       store.dispatch(logout());

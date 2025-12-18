@@ -1,167 +1,84 @@
-# Mustaheq Frontend App
+# AppNest Frontend Dashboard Template
 
-## To Do
+A production-ready, open-source frontend dashboard built with **React + TypeScript + Vite**, designed to work seamlessly with AppNest-generated backends.
 
-- Build Fixed Example Page
-- Build Fixed Views of
-  - User Profile
-  - Settings & Support Page
-  - Dashboard
-- Add Token Refresh to Auth API Setup
-- Build Dynamic Access Roles (API Integration)
-- Centralize identity control (theme color, logo ,name)
-- Fix changelog generating script
-- Update documentation (read me, commit convention)
+This template is suitable for:
 
-## 🚀 Getting Started
+- 🚀 Startup MVPs
+- 🧑‍💼 Admin panels
+- 🧪 Rapid prototyping with real production code
 
-### 1. Clone & Install
+---
 
-```bash
-  git clone <repo-url>
-  cd <repo-directory>
-  yarn   # or npm install
-```
+## ⭐ Support the Project (Important)
 
-### 2. Environment Setup
+This project is **free and open-source**.  
+If it is saving you time, helping your project, or you plan to use it commercially:
 
-- Copy .env.example to .env
-- Update the following variables:
+👉 **Please support us:**
 
-| Key                               | Value (Dev)                                     | Value (Stg)                                     | Value (Prod)                      |
-| --------------------------------- | ----------------------------------------------- | ----------------------------------------------- | --------------------------------- |
-| `REACT_APP_BACKEND_URL`           | `http://127.0.0.1:8000`                         | `https://demo-api.mustaheq.org/`                | `https://zad-api.mustaheq.org/`   |
-| `REACT_APP_STORAGE_DIRECTORY_URL` | `http://mustaheq.oss-me-central-1.aliyuncs.com` | `http://mustaheq.oss-me-central-1.aliyuncs.com` | `https://assets.mustaheq.org/`    |
-| `REACT_APP_GOOGLE_MAP_API_KEY`    | `AIzaSyAgboGKtbUjn8v5EW1KG4ofubRCQkok3w4`       | `AIzaSyAgboGKtbUjn8v5EW1KG4ofubRCQkok3w4`       | `googleMapApiKeyProvidedByGoogle` |
-| `REACT_APP_ENVIRONMENT`           | `staging`                                       | `staging`                                       | `production`                      |
+1. ⭐ [Star this repository](https://github.com/your-repo-url)
+2. ⭐ [Star the GitHub organization](https://github.com/your-organization-url)
+3. 💖 [Donate](https://github.com/sponsors/your-repo-url) to sustain development and provide you with more
 
-### 3. Run the App
+Your support directly funds:
 
-```bash
-  yarn start
-```
+- New templates
+- Better documentation
+- Faster fixes & features
+- Long-term maintenance
+- Community support
+- Execution of our [roadmap](./Documentation/plan/ROAD_MAP.md)
 
-## 🛠 Development Notes
+> Open-source survives on users who give back.
 
-### 📦 Project Structure
+---
 
-src/
-api/
-assets/
-components/
-documentation/
-layouts/
-store/
-styles/
-types/
-utils/
-views/
+## 📚 Documentation – Choose Your Path
 
-### 💬 Commit Message Convention
+We provide **two separate guides**, depending on your background:
 
-We follow the Conventional Commits format with enforced scope per service/module.
+### 👩‍💼 Non-Technical / Product-Focused Users
 
-📘 See full guide here: [COMMIT_CONVENTION.md](./src/documentation/COMMIT_CONVENTION.md)
+➡️ **Start here**  
+📄 [`docs/START_NON_TECHNICAL.md`](./Documentation/start/START_NON_TECHNICAL.md)
 
-Example:
+> For founders, students, PMs, and new or non developers who want to run, configure, and deploy the dashboard with minimal coding.
 
-feat(auth): implement login via OTP
-fix(user): fix avatar cropping on mobile
+---
 
-### ✅ Git Hooks & Code Quality
+### 👨‍💻 Technical Users / Developers
 
-- ✅ Commit messages are checked via Husky + Commitlint
-- ✅ Code formatting via Prettier (if enabled)
-- ✅ Linting rules (optional — add if using ESLint)
+➡️ **Start here**  
+📄 [`docs/START_TECHNICAL.md`](./Documentation/start/START_TECHNICAL.md)
 
-### 💬 [ChangeLog](./src/documentation/CHANGELOG.md)
+> For developers who want to extend, customize, and maintain the codebase professionally.
 
-### 📦 Build for Production
+---
 
-```bash
-  yarn build
-```
+## 🧰 Tech Stack (Quick Overview)
 
-Output will be in the build/ directory, ready for deployment.
+- [AppNest](https://appnest.io/) (backend generator)
+- [React 19](https://reactjs.org/) + [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vitejs.dev/) (fast dev & build)
+- [Bootstrap 5](https://getbootstrap.com/) + [SCSS](https://sass-lang.com/)
+- [Redux Toolkit](https://redux-toolkit.js.org/)
+- [React Router v7](https://reactrouter.com/)
+- [i18next](https://www.i18next.com/) (multi-language, RTL-ready)
 
-### 🧪 Optional Scripts
+---
 
-```bash
-  yarn start               # Start dev server
-  yarn build               # Build for production
-  yarn extract-translation # Extract i18n strings
-  yarn commit              # Use Commitizen to write formatted commits
+## 📄 License
 
-```
+MIT License – free for personal and commercial use.  
+Attribution and support are appreciated.
 
-### 🔐 Environment Profiles
+---
 
-| Profile | Description               |
-| ------- | ------------------------- |
-| `.env`  | Default/local development |
+## 🧠 Maintainers
 
-### 📤 Deployment
-
-- Built with create-react-app
-- To deploy: push to your main or prod branch or follow your CI/CD pipeline.
-
-### 🧰 Tooling & Stack
-
-#### 🖥 Frontend Framework
-
-- React v19 with TypeScript
-- React Router v7 for routing
-- React Redux + Redux for state management
-
-#### 🎨 Styling & UI
-
-- Bootstrap 5 for responsive UI
-- @fontsource/cairo for Arabic/Cairo font
-- Font Awesome (@fortawesome) for icons
-- React Select for enhanced dropdowns
-
-#### 🌐 Internationalization
-
-- i18next and react-i18next for localization
-- i18next-parser for automatic translation extraction
-- extract-translation script available
-
-#### 📦 Forms & Validation
-
-- Formik for form state & validation
-- Ajv and ajv-keywords for advanced JSON schema validation
-
-#### 🗺 Maps Integration
-
-- @react-google-maps/api for embedding Google Maps
-
-#### 📊 Files & Export
-
-- xlsx for spreadsheet export
-- exceljs for advanced Excel generation
-- pdfkit for generating PDF documents
-
-#### 📆 Date & Time
-
-- Moment.js for date formatting and manipulation
-
-#### 🔐 Environment & Configuration
-
-- dotenv-cli for loading environment variables
-
-#### 📡 HTTP & APIs
-
-- Axios for API calls
-
-#### 📦 Build Tools & Scripts
-
-- react-scripts (CRA) for dev/build/test
-- yarn start, yarn build, yarn test, yarn eject available
-
-#### 📏 Linting & Standards
-
-- ESLint config extends react-app and react-app/jest
-
-### 🧠 Maintainers
-
-- [Makkahwi](https://github.com/makkahwi) — Product Owner & Lead Developer
+- [**Suhaib Ahmad**](https://github.com/makkahwi) — Product Owner & Lead Developer
+- [**Mustafa Hasanat**](https://github.com/MustafaHasanat) - Inspire
+- [**Copilot**](https://github.com/features/copilot) — AI Pair Programmer
+- [**ChatGPT**](https://openai.com/chatgpt) — Planning, Surveying & Documentation AI Assistant
+- **Community Contributors** — You 💙

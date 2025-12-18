@@ -1,11 +1,11 @@
+import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useField } from "formik";
 import React, { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { InputProps } from "..";
-import { locationIcon } from "../../../assets/icons/icons";
-import IconWrapperComp from "../../../assets/icons/wrapper";
-import { commonInputClasses } from "../../../utils/consts";
+import { commonInputClasses } from "@/utils/consts";
 
 type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 
@@ -65,7 +65,7 @@ const LocationInput: React.FC<FinalInput> = ({ name, ...input }) => {
         role="button"
         onClick={handleGetLocation}
       >
-        <IconWrapperComp icon={locationIcon} />
+        <FontAwesomeIcon icon={faLocationDot} />
       </span>
 
       {location?.lng && (
@@ -78,7 +78,7 @@ const LocationInput: React.FC<FinalInput> = ({ name, ...input }) => {
             href={location.link}
             target="_blank"
             rel="noreferrer"
-            className="d-block mt-2 text-success small"
+            className="d-block mt-2 text-dark small"
           >
             {t("Global.Form.Labels.ViewLocation")}
           </a>

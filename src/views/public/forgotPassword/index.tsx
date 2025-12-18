@@ -3,11 +3,12 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
-import * as authApi from "../../../api/auth";
-import BelowInputButton from "../../../components/button/belowInput";
-import Form from "../../../components/form";
-import { addNotification } from "../../../store/actions/notifications";
-import { apiCatchGlobalHandler } from "../../../utils/function";
+import * as authApi from "@/api/auth";
+import BelowInputButton from "@/components/button/belowInput";
+import Form from "@/components/form";
+import { addNotification } from "@/store/actions/notifications";
+import { apiCatchGlobalHandler } from "@/utils/function";
+import { forgotInputs, resetInputs } from "./inputs";
 
 const ForgotPassword = () => {
   const { t } = useTranslation();
@@ -36,20 +37,12 @@ const ForgotPassword = () => {
     setData((current) => ({ ...current, ...values }));
   };
 
-  const forgotInputs = () => [
-    {
-      type: "phoneNumber",
-      name: "identifier",
-      label: t("Public.Register.Labels.PhoneNo"),
-      required: true,
-    },
-  ];
-
   const otpInputs = () => [
     {
       type: "otp",
       name: "code",
       required: true,
+      fullWidth: true,
       belowComp: (
         <BelowInputButton
           introText={t("Public.Register.Labels.DidNotGetOtp")}
@@ -57,21 +50,6 @@ const ForgotPassword = () => {
           action={() => onForgotSubmit(data)}
         />
       ),
-    },
-  ];
-
-  const resetInputs = () => [
-    {
-      type: "password",
-      name: "password",
-      label: t("Public.ForgotPassword.ResetPassword.NewPassword"),
-      required: true,
-    },
-    {
-      type: "password",
-      name: "passwordConfirmation",
-      label: t("Public.ForgotPassword.ResetPassword.NewPasswordConfirmation"),
-      required: true,
     },
   ];
 
@@ -98,7 +76,7 @@ const ForgotPassword = () => {
     <div>
       {data.code ? (
         <Form
-          inputs={resetInputs}
+          inputs={() => resetInputs(t)}
           submitText={t("Public.ForgotPassword.ResetPassword.ResetPassword")}
           onFormSubmit={onResetSubmit}
         />
@@ -117,7 +95,7 @@ const ForgotPassword = () => {
           />
         </Fragment>
       ) : (
-        <Form inputs={forgotInputs} onFormSubmit={onForgotSubmit} />
+        <Form inputs={() => forgotInputs(t)} onFormSubmit={onForgotSubmit} />
       )}
     </div>
   );

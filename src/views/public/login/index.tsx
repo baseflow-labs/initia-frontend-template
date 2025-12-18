@@ -1,13 +1,13 @@
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
-import * as authApi from "../../../api/auth";
-import BelowInputButton from "../../../components/button/belowInput";
-import Button from "../../../components/core/button";
-import Form from "../../../components/form";
-import { login } from "../../../store/actions/auth";
-import { addNotification } from "../../../store/actions/notifications";
-import { apiCatchGlobalHandler } from "../../../utils/function";
+import * as authApi from "@/api/auth";
+import BelowInputButton from "@/components/button/belowInput";
+import Button from "@/components/core/button";
+import Form from "@/components/form";
+import { login } from "@/store/actions/auth";
+import { addNotification } from "@/store/actions/notifications";
+import { apiCatchGlobalHandler } from "@/utils/function";
 
 const LoginView = () => {
   const { t } = useTranslation();
@@ -19,6 +19,7 @@ const LoginView = () => {
       name: "identifier",
       label: t("Public.Login.Labels.PhoneNo"),
       required: true,
+      fullWidth: true,
     },
     {
       type: "password",
@@ -32,6 +33,7 @@ const LoginView = () => {
         />
       ),
       required: true,
+      fullWidth: true,
     },
   ];
 
@@ -51,56 +53,29 @@ const LoginView = () => {
       .catch(apiCatchGlobalHandler);
   };
 
-  const onDummySubmit = (values: { type: string }) => {
-    authApi
-      .dummyLogin(values)
-      .then((res: any) => {
-        dispatch(
-          addNotification({
-            msg: t("Public.Login.Labels.Success", {
-              name: res.payload.user.name,
-            }),
-          })
-        );
-        dispatch(login(res.payload));
+  const onDummySubmit = () => {
+    dispatch(
+      addNotification({
+        msg: t("Public.Login.Labels.Success", {
+          name: "Dummy Admin User",
+        }),
       })
-      .catch(apiCatchGlobalHandler);
+    );
+    dispatch(
+      login({
+        accessToken: "thisIsDummyToken",
+        refreshToken: "thisIsDummyRefreshToken",
+        user: {
+          id: "1",
+          name: "Suhaib Ahmad",
+          email: "SuhaibAhmadAi@hotmail.com",
+          username: "admin",
+          status: "active",
+          role: "admin",
+        },
+      })
+    );
   };
-
-  const demoLogin = [
-    {
-      label: t("Public.Login.Labels.LoginAsAdmin"),
-      type: "admin",
-    },
-    {
-      label: t("Public.Login.Labels.LoginAsCeo"),
-      type: "ceo",
-    },
-    {
-      label: t("Public.Login.Labels.LoginAsCommitteeHead"),
-      type: "ceo",
-    },
-    {
-      label: t("Public.Login.Labels.LoginAsAccountant"),
-      type: "accountant",
-    },
-    {
-      label: t("Public.Login.Labels.LoginAsHod"),
-      type: "hod",
-    },
-    {
-      label: t("Public.Login.Labels.LoginAsResearcher"),
-      type: "researcher",
-    },
-    {
-      label: t("Public.Login.Labels.LoginAsBeneficiary"),
-      type: "beneficiary",
-    },
-    {
-      label: t("Public.Login.Labels.LoginAsApplicant"),
-      type: "applicant",
-    },
-  ];
 
   return (
     <div>
@@ -110,19 +85,10 @@ const LoginView = () => {
         onFormSubmit={onSubmit}
       />
 
-      {process.env.REACT_APP_ENVIRONMENT === "staging" ? (
-        <div className="row g-2 mt-3">
-          {demoLogin.map(({ label, type }, i) => (
-            <div className={"col-6"} key={i}>
-              <Button
-                className="w-100 h-100"
-                onClick={() => onDummySubmit({ type })}
-              >
-                {label}
-              </Button>
-            </div>
-          ))}
-        </div>
+      {import.meta.env.VITE_APP_ENVIRONMENT === "staging" ? (
+        <Button className="w-100 mt-3" onClick={() => onDummySubmit()}>
+          {t("Public.Login.Labels.DummyLogin", { type: "User" })}
+        </Button>
       ) : (
         ""
       )}

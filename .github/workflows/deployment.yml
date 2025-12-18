@@ -11,7 +11,7 @@ on:
     types:
       - completed
     branches:
-      - prod
+      - main
 
 jobs:
   deployment:

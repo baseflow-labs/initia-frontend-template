@@ -14,7 +14,7 @@ import { apiCatchGlobalHandler } from "./utils/function";
 
 const App = () => {
   const dispatch = useDispatch();
-  const { token } = useAppSelector((state) => state.auth);
+  const { accessToken } = useAppSelector((state) => state.auth);
   const { fontSize } = useAppSelector((state) => state.settings);
   const { i18n } = useTranslation();
 
@@ -36,7 +36,7 @@ const App = () => {
             ...res.payload,
             logo:
               (res.payload.logo && res.payload.logo[0].path) ||
-              "/mustaheq/samples/logo.png",
+              null,
           })
         );
       })
@@ -49,7 +49,7 @@ const App = () => {
         <NotificationsToaster />
 
         <Routes>
-          {token !== "null" ? (
+          {accessToken !== "null" ? (
             <Route path="*" element={<AuthLayout />} />
           ) : (
             <Route path="*" element={<PublicLayout />} />

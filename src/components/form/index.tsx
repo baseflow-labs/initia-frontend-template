@@ -1,3 +1,4 @@
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import {
   FormikErrors,
   Form as FormikForm,
@@ -7,20 +8,13 @@ import {
 } from "formik";
 import React, { Fragment } from "react";
 import { useTranslation } from "react-i18next";
-
-import { resetFilterIcon } from "../../assets/icons/icons";
-import IconWrapperComp from "../../assets/icons/wrapper";
-import { useAppSelector } from "../../store/hooks";
+import { useAppSelector } from "@/store/hooks";
 import Button from "../core/button";
 import Spinner from "../core/spinner";
 import { MoneyUnit } from "../table";
 import InputComp from "./Input";
-import DefaultInput from "./inputs/default";
 
-interface InputBasicProps {
-  name: string;
-  label?: string;
-  labelNote?: string;
+export interface InputTypeProps {
   type?:
     | "text"
     | "email"
@@ -38,12 +32,21 @@ interface InputBasicProps {
     | "selectMany"
     | "phoneNumber"
     | "multipleEntries"
+    | "boolean"
+    | "checkboxes"
+    | "range"
     | string;
+}
+interface InputBasicProps extends InputTypeProps {
+  name: string;
+  label?: string;
+  labelNote?: string;
   required?: boolean;
   disabled?: boolean;
+  stacked?: boolean;
   accept?: string;
   excludeInForm?: boolean;
-  defaultValue?: string | number;
+  defaultValue?: string | number | string[];
   placeholder?: string;
   fileSizeLimit?: number;
   maxFiles?: number;
@@ -55,20 +58,28 @@ interface InputBasicProps {
   options?: {
     value: string | number;
     label?: string;
+    description?: string;
+    icon?: IconProp;
+    image?: string;
   }[];
 }
 
 export interface InputSingleProps extends InputBasicProps {
   logo?: string;
   sizing?: string;
-  halfCol?: boolean;
+  double?: boolean;
+  triple?: boolean;
+  fullWidth?: boolean;
   hasFile?: boolean;
   hideFile?: boolean;
+  layout?: "card" | "image" | "button" | "checkbox" | "switch" | string;
+  booleanLabels?: { trueLabel: string; falseLabel: string };
   moneyUnit?: boolean;
   prefixText?: string | number;
   postfixText?: string | number;
   aboveComp?: React.ReactNode;
   belowComp?: React.ReactNode;
+  defaultHide?: boolean;
 }
 
 export interface InputProps extends InputSingleProps {
@@ -77,7 +88,6 @@ export interface InputProps extends InputSingleProps {
   singleRecordLabel?: string;
   recordDynamicLabelKey?: string;
   logo?: string;
-  halfCol?: boolean;
   onRecordSubmit?: (formik?: any) => any;
   recordSubmitButtonText?: string;
   prefixText?: string | number;
@@ -90,6 +100,7 @@ interface Props extends React.FormHTMLAttributes<HTMLFormElement> {
   onFormSubmit?: (values: any, reset: any) => void;
   inputs: (formik: FormikProps<Record<string, any>>) => InputProps[];
   submitText?: string;
+  submitColor?: string;
   initialValues?: object;
   customButtons?: React.ReactNode;
   customValidate?: (
@@ -121,6 +132,7 @@ const Form: React.FC<Props> = ({
   onFormSubmit,
   inputs,
   submitText,
+  submitColor,
   customButtons,
   initialValues,
   customValidate,
@@ -146,6 +158,8 @@ const Form: React.FC<Props> = ({
 
       switch (input.type) {
         case "radio":
+        case "select":
+        case "checkboxes":
           acc[input.name] = input.options?.[0]?.value ?? "";
           break;
         case "multipleEntries":
@@ -192,14 +206,9 @@ const Form: React.FC<Props> = ({
             }
 
             if (
-              !String(value).startsWith("50") &&
-              !String(value).startsWith("53") &&
-              !String(value).startsWith("54") &&
-              !String(value).startsWith("55") &&
-              !String(value).startsWith("56") &&
-              !String(value).startsWith("57") &&
-              !String(value).startsWith("58") &&
-              !String(value).startsWith("59")
+              !String(value).startsWith("77") &&
+              !String(value).startsWith("78") &&
+              !String(value).startsWith("79")
             ) {
               errors[name] = t("Global.Form.Errors.InvalidPhoneNumber");
             }
@@ -287,7 +296,9 @@ const Form: React.FC<Props> = ({
                   aboveComp,
                   belowComp,
                   logo,
-                  halfCol,
+                  double,
+                  triple,
+                  fullWidth,
                   type,
                   required,
                   min,
@@ -315,14 +326,14 @@ const Form: React.FC<Props> = ({
                 if (logo) {
                   return (
                     <Fragment key={i}>
-                      <div className="col-12">
+                      <div className="col-md-6">
                         <LabelView required={required} {...input} />
                       </div>
 
                       <div className="col-md-6 mb-3">
                         <button
                           type="button"
-                          className="btn btn-outline-success p-2 w-100 rounded-3 no-interaction"
+                          className="btn btn-outline-dark p-2 w-100 rounded-3 no-interaction"
                         >
                           <img
                             alt={`${input.name}Logo`}
@@ -342,7 +353,13 @@ const Form: React.FC<Props> = ({
                         >
                           <InlineElement content={prefixTexts} flip />
 
-                          <InputComp id={input.name} type={type} {...input} />
+                          <InputComp
+                            id={input.name}
+                            type={type}
+                            min={min}
+                            max={max}
+                            {...input}
+                          />
 
                           <InlineElement
                             content={moneyUnit ? <MoneyUnit /> : postfixText}
@@ -360,7 +377,13 @@ const Form: React.FC<Props> = ({
                 return (
                   <div
                     className={`mb-2 ${
-                      halfCol ? "col-md-6" : logo ? "col-6" : "col-md-12"
+                      fullWidth
+                        ? "col-md-12"
+                        : double
+                        ? "col-md-6"
+                        : triple
+                        ? "col-md-9"
+                        : "col-md-3"
                     }`}
                     key={i}
                   >
@@ -375,7 +398,13 @@ const Form: React.FC<Props> = ({
                     >
                       <InlineElement content={prefixTexts} flip />
 
-                      <InputComp id={input.name} type={type} {...input} />
+                      <InputComp
+                        id={input.name}
+                        type={type}
+                        min={min}
+                        max={max}
+                        {...input}
+                      />
 
                       <InlineElement
                         content={moneyUnit ? <MoneyUnit /> : postfixText}
@@ -386,83 +415,55 @@ const Form: React.FC<Props> = ({
 
                     {belowComp}
 
-                    {type === "range" && (
-                      <Fragment>
-                        <div className={`input-group`}>
-                          <DefaultInput
-                            name={input.name}
-                            className="form-control-md"
-                            value={formik.values[input.name]}
-                          />
+                    {input.name === "fontSize" && (
+                      <div className="row mt-3">
+                        <h4 className="col-md-12 mb-3">
+                          {t("Auth.Settings.Samples.Title")}
+                        </h4>
 
-                          <InlineElement
-                            flip
-                            content={
-                              <IconWrapperComp
-                                icon={resetFilterIcon}
-                                role="button"
-                                onClick={() =>
-                                  formik.setFieldValue(
-                                    input.name,
-                                    input.defaultValue
-                                  )
-                                }
-                              />
-                            }
-                          />
+                        <h3
+                          className="col-md-6"
+                          style={{
+                            fontSize: 1.75 * formik.values.fontSize,
+                          }}
+                        >
+                          {t("Auth.Settings.Samples.H3Sample")}
+                        </h3>
+
+                        <h4
+                          className="col-md-6"
+                          style={{ fontSize: 1.5 * formik.values.fontSize }}
+                        >
+                          {t("Auth.Settings.Samples.H4Sample")}
+                        </h4>
+
+                        <h5
+                          className="col-md-6"
+                          style={{
+                            fontSize: 1.25 * formik.values.fontSize,
+                          }}
+                        >
+                          {t("Auth.Settings.Samples.H5Sample")}
+                        </h5>
+
+                        <label
+                          className="form-label col-md-6"
+                          style={{ fontSize: 1 * formik.values.fontSize }}
+                        >
+                          {t("Auth.Settings.Samples.LabelSample")}
+                        </label>
+
+                        <div
+                          className="col-md-6"
+                          style={{
+                            fontSize: 0.875 * formik.values.fontSize,
+                          }}
+                        >
+                          <small>
+                            {t("Auth.Settings.Samples.SmallSample")}
+                          </small>
                         </div>
-
-                        {input.name === "fontSize" && (
-                          <div className="row mt-3">
-                            <h4 className="col-md-12 mb-3">
-                              {t("Auth.Settings.Samples.Title")}
-                            </h4>
-
-                            <h3
-                              className="col-md-6"
-                              style={{
-                                fontSize: 1.75 * formik.values.fontSize,
-                              }}
-                            >
-                              {t("Auth.Settings.Samples.H3Sample")}
-                            </h3>
-
-                            <h4
-                              className="col-md-6"
-                              style={{ fontSize: 1.5 * formik.values.fontSize }}
-                            >
-                              {t("Auth.Settings.Samples.H4Sample")}
-                            </h4>
-
-                            <h5
-                              className="col-md-6"
-                              style={{
-                                fontSize: 1.25 * formik.values.fontSize,
-                              }}
-                            >
-                              {t("Auth.Settings.Samples.H5Sample")}
-                            </h5>
-
-                            <label
-                              className="form-label col-md-6"
-                              style={{ fontSize: 1 * formik.values.fontSize }}
-                            >
-                              {t("Auth.Settings.Samples.LabelSample")}
-                            </label>
-
-                            <div
-                              className="col-md-6"
-                              style={{
-                                fontSize: 0.875 * formik.values.fontSize,
-                              }}
-                            >
-                              <small>
-                                {t("Auth.Settings.Samples.SmallSample")}
-                              </small>
-                            </div>
-                          </div>
-                        )}
-                      </Fragment>
+                      </div>
                     )}
                   </div>
                 );
@@ -472,22 +473,24 @@ const Form: React.FC<Props> = ({
 
         {customButtons}
 
-        <Button
-          type="submit"
-          disabled={loading.length > 0}
-          color="info"
-          className={`w-${customButtons ? "50" : "100"} p-2`}
-        >
-          {loading.length > 0 ? (
-            <small>
-              <Spinner />
-            </small>
-          ) : (
-            <div className="my-auto">
-              {submitText || t("Global.Form.Labels.Submit")}
-            </div>
-          )}
-        </Button>
+        {onFormSubmit && (
+          <Button
+            type="submit"
+            disabled={loading.length > 0}
+            color={submitColor}
+            className={`w-${customButtons ? "50" : "100"} p-2`}
+          >
+            {loading.length > 0 ? (
+              <small>
+                <Spinner />
+              </small>
+            ) : (
+              <div className="my-auto">
+                {submitText || t("Global.Form.Labels.Submit")}
+              </div>
+            )}
+          </Button>
+        )}
       </FormikForm>
     </FormikProvider>
   );

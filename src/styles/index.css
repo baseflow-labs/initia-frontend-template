@@ -1,12 +1,12 @@
 :root {
-  --bs-primary: #007bff !important;
+  --bs-primary: #3a8dff !important;
   --bs-secondary: #6c757d !important;
-  --bs-success: #8ec156 !important;
+  --bs-success: #198754 !important;
   --bs-danger: #dc3545 !important;
-  --bs-warning: #ffc107 !important;
-  --bs-info: #18b4bf !important;
+  --bs-warning: #ffe53b !important;
+  --bs-info: #0dcaf0 !important;
   --bs-light: #f8f9fa !important;
-  --bs-dark: #343a40 !important;
+  --bs-dark: #0f192e !important;
   --base-font-size: 16px;
 }
 
@@ -193,9 +193,17 @@ ul.timeline > li:before {
   font-size: 1rem !important;
 }
 
+.rotate-90 {
+  /* Standard syntax */
+  transform: rotate(90deg);
+  /* Vendor prefixes for broader compatibility if needed (less common now) */
+  -ms-transform: rotate(90deg); /* IE 9 */
+  -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+}
+
 body {
   margin: 0;
-  font-family: Calibri, "Segoe UI", sans-serif;
+  font-family: "Segoe UI", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -210,7 +218,7 @@ input[type="radio"]:checked:focus {
 }
 
 :lang(ar) {
-  font-family: "Cairo", sans-serif;
+  font-family: "Tahoma", sans-serif;
   font-weight: 400;
 }
 

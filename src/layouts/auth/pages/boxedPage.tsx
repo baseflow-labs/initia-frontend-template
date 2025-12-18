@@ -1,5 +1,5 @@
 import { Fragment } from "react/jsx-runtime";
-import CardComp from "../../../components/card/card";
+import CardComp from "@/components/card/card";
 import PageTemplate from "./pageTemplate";
 
 const BoxedPage = ({
@@ -9,7 +9,7 @@ const BoxedPage = ({
   hideHeader = false,
 }) => {
   return (
-    <PageTemplate hideHeader={hideHeader}>
+    <PageTemplate>
       <CardComp className={className} style={{ maxWidth: "750px" }}>
         <Fragment>
           <h3>{title}</h3>

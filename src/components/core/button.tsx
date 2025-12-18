@@ -16,8 +16,8 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 const Button = ({
   children,
   className = "",
-  color = "info",
-  text = "info",
+  color = "primary",
+  text = "primary",
   rounded = 3,
   p = 2,
   route,

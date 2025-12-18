@@ -1,3 +1,5 @@
+import tempLogo from "@/assets/images/brand/logo.png";
+import { useAppSelector } from "@/store/hooks";
 import {
   faChevronLeft,
   faChevronRight,
@@ -6,10 +8,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router";
-
-import IconWrapperComp from "../../../assets/icons/wrapper";
-import LogoOnly from "../../../assets/images/brand/logo-only.png";
-import { useAppSelector } from "../../../store/hooks";
 import CopyRightView from "../../common/copyright";
 
 interface Props {
@@ -48,15 +46,7 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
         }}
       >
         <div className="p-4 text-center">
-          <img
-            src={
-              collapsed
-                ? LogoOnly
-                : process.env.REACT_APP_STORAGE_DIRECTORY_URL + logo
-            }
-            style={{ height: "70px" }}
-            alt="Logo"
-          />
+          <img src={logo || tempLogo} style={{ height: "40px" }} alt="Logo" />
         </div>
 
         <div className="nav flex-column px-2">
@@ -65,7 +55,7 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
               <h5
                 className={`sidebar-link text-decoration-none p-3 rounded-3 ${
                   location.pathname.includes(route)
-                    ? "bg-info text-white"
+                    ? "bg-primary text-white"
                     : "text-dark"
                 }`}
                 role="button"
@@ -73,7 +63,7 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
                   navigate(route);
                 }}
               >
-                <IconWrapperComp icon={icon} className="me-2" />
+                <FontAwesomeIcon icon={icon} className="me-2" />
                 {!collapsed && (
                   <span>
                     {name}
@@ -89,11 +79,11 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
 
               {i === 0 && (
                 <button
-                  className="btn toggle-btn float-end bg-white rounded-circle border-dark border-1 m-0 position-absolute"
+                  className="btn toggle-btn float-end bg-white rounded-circle border-dark border-1 px-2 m-0 position-absolute"
                   style={{
                     zIndex: 5,
-                    left: i18n.language === "ar" ? -20 : undefined,
-                    right: i18n.language === "en" ? -20 : undefined,
+                    left: i18n.language === "ar" ? -12.5 : undefined,
+                    right: i18n.language === "en" ? -12.5 : undefined,
                   }}
                   onClick={toggleSidebar}
                 >
@@ -114,7 +104,7 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
               key={i}
               className={`sidebar-link text-decoration-none p-3 rounded-3 ${
                 location.pathname.includes(route)
-                  ? "bg-info text-white"
+                  ? "bg-primary text-white"
                   : "text-dark"
               }`}
               role="button"
@@ -122,7 +112,7 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
                 navigate(route);
               }}
             >
-              <IconWrapperComp icon={icon} className="me-2" />
+              <FontAwesomeIcon icon={icon} className="me-2" />
               {!collapsed && <span>{name}</span>}
             </h5>
           ))}

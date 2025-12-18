@@ -1,885 +1,709 @@
 {
   "Auth": {
-    "AidCategories": {
-      "AddAidCategory": "إضافة تصنيف المعونات",
-      "AidCategory": "تصنيف البرنامج",
-      "AidCategoryName": "اسم التصنيف",
-      "AidCategoryType": "النوع",
-      "AidRejectReason": "سبب رفض تقديم المعونة",
-      "Cash": "نقدي",
-      "EditAidCategory": "تعديل تصنيف المعونات",
-      "In-Kind": "عيني",
-      "ReapplyPeriods": {
-        "EveryMonth": "كل شهر",
-        "EveryWeek": "كل أسبوع",
-        "EveryYear": "كل سنة",
-        "Multiple": "مفتوحة أكثر من مرة",
-        "Once": "مرة واحدة فقط",
-        "Title": "صلاحية التقديم للمستفيد"
-      },
-      "SearchBarPlaceholder": "بحث باسم التصنيف",
-      "Title": "تصنيف المعونات"
-    },
-    "AidPrograms": {
-      "AddAidProgram": "إضافة برنامج معونة",
-      "AidProgramName": "اسم البرنامج",
-      "EditAidProgram": "تعديل برنامج معونة",
-      "RemainingCredit": "المتبقي",
-      "SearchBarPlaceholder": "بحث باسم البرنامج",
-      "Sponsor": "الجهة المانحة",
-      "Statuses": {
-        "Closed": "مغلق",
-        "Opened": "مفتوح للتقديم والإرسال عبر الخطوات الاعتيادية",
-        "OpenedToGrantWithoutRegularProcess": "مفتوح للتقديم,ومن الممكن المنح بدون خطوات الموافقة الاعتيادية",
-        "Suspended": "متوقف مؤقتاً",
-        "Title": "حالة البرنامج"
-      },
-      "Title": "برامج المعونة",
-      "TotalCredit": "المخصصات",
-      "TotalQuantity": "الكمية"
-    },
-    "Aids": {
-      "StatusUpdated": "تحديث حالة طلب المعونة",
-      "AddAid": "منح معونة",
-      "AidDetails": "معلومات المعونة",
-      "AidName": "اسم المعونة",
-      "AidPiece_0": "قطعة",
-      "AidPiece_1": "قطعة",
-      "AidPiece_2": "قطعتان",
-      "AidPiece_few": "قطع",
-      "AidPiece_many": "قطعة",
-      "AidPiece_other": "قطعة / قطع",
-      "AidPurpose": "سبب طلب المعونة",
-      "AidQuantity": "كمية المعونة",
-      "AidType": "نوع المعونة",
-      "AidValue": "قيمة المعونة",
-      "ApproveAid": "الموافقة على المعونة",
-      "Beneficiary": {
-        "RequestAid": "طلب معونة",
-        "Title": "المعونات",
-        "Urgent?": "هل الحالة مستعجلة؟"
-      },
-      "CantApprove": "لا يمكنك قبول الطلبات {{message}}",
-      "CantGrantAlready": "تمت تسليم المعونة بالفعل",
-      "CantGrantNonApproved": "لا يمكن تسليم المعونات غير التي 'بانتظار التسليم'",
-      "CantReject": "لا يمكنك رفض الطلبات {{message}}",
-      "OldAids": "المعونات السابقة",
-      "RecaptionDate": "تاريخ الاستلام",
-      "RejectAid": "رفض تقديم المعونة",
-      "RequiredValue": "القيمة المطلوبة",
-      "SearchBarPlaceholder": "بحث باسم المستفيد",
-      "Statuses": {
-        "Allowed": "بانتظار مراجعة المدير المالي",
-        "Approve": "قبول طلب المعونة",
-        "Approved": "بانتظار التسليم",
-        "CantButIfStatus": "غير التي ما زالت '{{status}}'",
-        "Denied": "رفضت",
-        "Grant": "تسليم المعونة",
-        "Granted": "تم التسليم",
-        "Pending": "قيد المراجعة",
-        "Recommended": "بانتظار موافقة مدير الباحثين",
-        "Reject": "رفض طلب المعونة",
-        "Rejected": "رفضت المعونة",
-        "Seconded": "بانتظار موافقة رئيس اللجنة"
-      },
-      "Title": "طلبات المعونة",
-      "ViewAidDetails": "عرض تفاصيل طلب المعونة"
-    },
-    "Beneficiaries": {
-      "AddBeneficiary": "إضافة مستفيد",
-      "Applications": "طلبات التسجيل ",
-      "Beneficiaries": "مستفيدون",
-      "BeneficiariesData": "بيانات المستفيدين",
-      "Beneficiary": "المستفيد",
-      "BeneficiaryName": "اسم المستفيد",
-      "DeleteAll": "حذف بيانات كل المستفيدين والتابعين",
-      "DependentsCount": "عدد التابعين",
-      "DependentsIncomeTotal": "إجمالي الدخل الشهري للتابعين",
-      "DownloadByNationalCenterForm": "تنزيل البيانات",
-      "FamilyIncomeTotal": "إجمالي الدخل الشهري للأسرة",
-      "GuardianIncomeTotal": "إجمالي الدخل الشهري لرب(ة) الأسرة",
-      "HousesCount": "عدد المنازل",
-      "IncomeTotal": "إجمالي الدخل",
-      "Profile": {
-        "AcceptApplication": "قبول الطلب",
-        "AcceptApplicationDisabledMsg": "لا يمكن قبول الطلبات غير التي 'تم تدقيقها'",
-        "ApplicationRejectReason": "سبب رفض الطلب",
-        "archive": "ارشيف",
-        "Archive": "أرشيف {{property}}",
-        "AssignResearcher": "إحالة المستفيد",
-        "CancelMembership": "إلغاء العضوية",
-        "CancelMembershipNote": "سيتم نقل بيانات المستفيد إلى تبويب طلبات التسجيل  تدقيق ملفه مرة أخرى أو حذفه نهائياً",
-        "CancelMembershipReason": "سبب إلغاء العضوية",
-        "CategoriesList": "فئات التصنيف المعتمدة في النظام",
-        "CategorizationDetails": "تفاصيل آلية حساب التصنيف",
-        "CategoryXMaximum": "الحد الأقصى لدخل التصنيف {{index}}",
-        "CategoryXMinimum": "الحد الأدنى لدخل التصنيف {{index}}",
-        "CategoryXName": "اسم التصنيف {{index}}",
-        "ConfirmData": "تأكيد المعلومة",
-        "DebtsData": "بيانات الديون",
-        "DeleteApplication": "حذف الطلب",
-        "DeleteBeneficiary": "حذف المستفيد",
-        "DeleteData": "حذف بيانات الحساب",
-        "DependentsMonthlyIncomeContribution": "المحسوب من الدخل الشهري للتابعين في الدخل الشهري للمنزل",
-        "editRequest": "طلب تعديل",
-        "editStatus": "حالة التعديل",
-        "FamilyMemberShareOfGuardianTotalMonthlyIncomeMinusDebts": "حصة الفرد في الأسرة من صافي الدخل الشهري لرب(ة) الأسرة",
-        "FamilyTotalMembersCount": "إجمالي عدد أفراد الأسرة (عدد التابعين في كل المنازل ورب(ة) الأسرة)",
-        "field": "الخانة",
-        "GuardianDebtMonthlyPayment": "القسط الشهري لسداد ديون رب(ة) الأسرة",
-        "GuardianTotalMonthlyIncome": "إجمالي الدخل الشهري لرب(ة) الأسرة",
-        "GuardianTotalMonthlyIncomeMinusDebts": "إجمالي صافي الدخل الشهري لرب(ة) الأسرة (مخصوم منه قسط سداد الديون)",
-        "HouseDependentsCount": "إجمالي عدد التابعين للمنزل",
-        "HouseMonthlyIncomeShareOfFamily": "حصة المنزل من إجمالي صافي الدخل الشهري لرب(ة) الأسرة",
-        "info": "المعلومة",
-        "notes": "ملاحظات",
-        "PerIndividualFinalIncome": "حصة الفرد في المنزل من صافي الدخل الشهري",
-        "ProfileCompletion": "استكمال طلب المستفيد",
-        "ProfileCompletionDisabledMsg": "لا يمكن استكمال إلا الطلبات غير كاملة",
-        "ProfileDetails": "تفاصيل ملف المستفيد",
-        "ProfileReview": "تدقيق طلب التسجيل ",
-        "ProfileReviewDisabledMsg": "لا يمكن التدقيق إلا للطلبات الكاملة",
-        "RejectApplication": "رفض الطلب",
-        "RejectApplicationDisabledMsg": "لا يمكن رفض الطلبات المرفوضة أو في حالات إلغاء العضوية",
-        "RentalMonthlyCharge": "المعدل الشهري لإيجار المنزل",
-        "RequestDataUpdate": "طلب تعديل {{property}}",
-        "Statuses": {
-          "Confirmed": "تم التأكيد",
-          "NeedUpdate": "تم طلب التعديل"
-        },
-        "SureToDeleteData": "هل أنت متأكد؟",
-        "Title": "ملف المستفيد",
-        "TotalHouseIncomeMinusRent": "إجمالي صافي الدخل الشهري للمنزل (مخصوم منه الإيجار)",
-        "TotalHouseMonthlyIncome": "إجمالي الدخل الشهري للمنزل",
-        "UpdateNote": "سبب التعديل:"
-      },
-      "SearchBarPlaceholder": "بحث باسم المستفيد",
-      "Title": "المستفيدون",
-      "UnacceptedNote": "يرجى الانتظار لحين قبول طلبكم للعضوية في الجمعية لتتمكنوا من الاستفادة من الخدمة",
-      "WivesCount": "عدد الزوجات"
-    },
-    "Beneficiary": {
-      "ForDependent": "للتابع(ة) {{name}}",
-      "ForHouse": "للمنزل صاحب العنوان الوطني {{house}}",
-      "Profile": {
-        "NoDataUpdate": "لا يوجد طلبات لتعديل بياناتكم الشخصية",
-        "PleaseUpdateFollowingData": "يرجى تعبئة الحقول بالبيانات الصحيحة...",
-        "Title": "معلوماتي",
-        "YourProfile": "معلوماتك"
-      }
-    },
-    "BeneficiaryCategories": {
-      "AddBeneficiaryCategory": "إضافة تصنيف للمستفيدين",
-      "DeleteBeneficiaryCategory": "حذف تصنيف المستفيدين",
-      "EditBeneficiaryCategory": "تعديل تصنيف المستفيدين",
-      "SearchBarPlaceholder": "بحث بالاسم",
-      "Title": "تصنيف المستفيدين"
-    },
-    "ContactUs": {
-      "Contact": "إذا كنت بحاجة لمساعدة أو أي استفسار فلا تترد في الاتصال بنا",
-      "ContactNow": "اتصل الآن للمساعدة",
-      "ContactUsNow": "اتصل الآن",
-      "Title": "تواصل معنا"
-    },
     "Dashboard": {
-      "AcceptedBeneficiariesCount": "تم قبولهم",
-      "AidsCount": "عدد المعونات",
-      "AllCashProgramsCount": "برنامج نقدي",
-      "AllClosedProgramsCount": "عدد برامج المعونة المنتهية",
-      "AllInKindProgramsCount": "برنامج عيني",
-      "AllOpenedProgramsCount": "عدد برامج المعونة الجارية",
-      "AllProgramsCount": "عدد برامج المعونة الكلي",
-      "AllSuspendedProgramsCount": "عدد برامج المعونة المتوقفة",
-      "ApplicantsCount": "المتقدمين الجدد",
-      "ApplicantsToReview": "طلبات تسجيل للتدقيق",
-      "ApplicationTimeline": "تسلسل الطلب",
-      "BeneficiariesCount": "عدد المستفيدين",
-      "BeneficiaryInfo": "معلوماتك",
-      "BeneficiaryMembershipStatus": "حالة عضويتكم الآن في الجمعية",
-      "ClosedCashProgramsCount": "برنامج نقدي",
-      "ClosedInKindProgramsCount": "برنامج عيني",
-      "DoneVisitsCount": "زيارة تمت",
-      "GrantedAidsCount": "معونة مقدمة",
-      "ImportantNotifications": "الإشعارات الهامة",
-      "Main": "الرئيسية",
-      "NoVisits": "لا يوجد زيارات مجدولة",
-      "OpenedCashProgramsCount": "برنامج نقدي",
-      "OpenedInKindProgramsCount": "برنامج عيني",
-      "PendingAidsCount": "معونة قيد الانتظار",
+      "AidsCount": "عدد المساعدات",
+      "ApplicationTimeline": "الجدول الزمني للطلبات",
+      "ImportantNotifications": "الإشعارات المهمة",
+      "NoVisits": "لا توجد زيارات مجدولة",
       "ResearcherInfo": "معلومات الباحث",
-      "Researchers": "الباحثون",
-      "ScheduledVisitsCount": "زيارات مجدولة",
-      "SuspendedCashProgramsCount": "برنامج نقدي",
-      "SuspendedInKindProgramsCount": "برنامج عيني",
-      "Tasks": "المهام",
+      "Statuses": {
+        "Pending": "قيد الانتظار"
+      },
       "Title": "نظرة عامة",
-      "ToDoVisitsCount": "زيارة قادمة",
-      "ToReviewAidsCount": "طلبات معونة للتدقيق",
-      "UnacceptedBeneficiaryNote": "قد يكون مطلوب منكم تعديل بعض بياناتكم الشخصية في تبويب 'معلوماتي'",
+      "UnacceptedUserNote": "قد تكون هناك طلبات لتحديث بياناتك الشخصية في صفحة «الملف الشخصي»",
+      "UserInfo": "معلوماتك",
+      "UserMembershipStatus": "حالة عضويتك",
       "VisitsCount": "عدد الزيارات",
       "VisitsMap": "خريطة الزيارات",
-      "Welcome": "أهلاً بكم في نظام مستحق"
+      "Welcome": "مرحباً"
     },
-    "MembershipRegistration": {
-      "Address": "العنوان",
+    "Examples": {
+      "DataView": {
+        "Calendar": "تقويم",
+        "CollapseGroup": "عرض مضغوط للتبويبات",
+        "Dropdown": "قائمة منسدلة",
+        "Modal": "نافذة",
+        "Table": "جدول إدارة البيانات",
+        "TabsGroup": "عرض تبويبات",
+        "Test1": {
+          "Body": "محتوى ١",
+          "Title": "عنوان ١"
+        },
+        "Test2": {
+          "Body": "محتوى ٢",
+          "Title": "عنوان ٢"
+        },
+        "Title": "أمثلة عرض البيانات"
+      },
       "Form": {
-        "AbsherDocument": "لوحة المعلومات من موقع ابشر - المركبات - العمالة",
-        "AgeGroup": {
-          "AboveSixty": "60 سنة فأكثر",
-          "BelowFive": "أقل من 5 سنوات",
-          "EighteenToThirty": "من 18 إلى 29",
-          "FiveToTwelve": "من 5 إلى 11",
-          "FortyFiveToSixty": "من 45 إلى 59",
-          "ThirtyToFortyFive": "من 30 إلى 44",
-          "Title": "المرحلة العمرية",
-          "TwelveToEighteen": "من 12 إلى 17"
-        },
-        "AlreadyRequested": "تم طلب المساعدة بالفعل",
-        "ApartmentNo": "رقم الشقة",
-        "Attachments": "المرفقات",
-        "BackupMobile": "رقم الجوال الاحتياطي",
-        "BankAccountNumber": "رقم الآيبان للحساب البنكي",
-        "BankAccountNumberNote": "مكون من 12 رقم",
-        "BankName": {
-          "Ahli": "البنك الأهلي",
-          "Arabi": "البنك العربي الوطني",
-          "Bilad": "بنك البلاد",
-          "BNP": "بنك باريس الوطني",
-          "Emirates": "بنك الإمارات الدولي",
-          "Fransi": "البنك السعودي الفرنسي",
-          "Inma": "مصرف الإنماء",
-          "Istithmar": "البنك السعودي للاستثمار",
-          "Jazira": "بنك الجزيرة",
-          "JPChase": "بنك JP Morgan Chase",
-          "MUFG": "بنك MUFG",
-          "Muscat": "بنك مسقط",
-          "Rajhi": "بنك الراجحي",
-          "SAB": "البنك السعودي الأول (SAB)",
-          "Title": "اسم البنك"
-        },
-        "BasicData": "البيانات الأساسية",
-        "BeneficiaryMobile": "رقم جوال المستفيد",
-        "Category": {
-          "A": "فئة أ",
-          "AboveGrading": "معدل الدخل فوق مستويات التصنيف",
-          "B": "فئة ب",
-          "C": "فئة ج",
-          "D": "فئة د",
-          "Title": "تصنيف المنزل",
-          "Uncategorized": "غير مصنف"
-        },
-        "City": "المدينة",
-        "ClickForHelp": "اضغط هنا للمساعدة في تعبئة النموذج",
-        "ComprehensiveRehabilitation": "التأهيل الشامل",
-        "ContactData": "بيانات الاتصال والبيانات البنكية",
-        "CreditStatement": "التقرير الائتماني من موقع ملم",
-        "CreditStatementNote": "في حال وجود ديون رسمية",
-        "DebtLastPaymentDate": "تاريخ سداد آخر قسط من الدين {{index}}",
-        "DebtMonthlyInstallment": "قيمة القسط الشهري لسداد الدين {{index}}",
-        "Debts": {
-          "AddNew": "إضافة دين جديد",
-          "Debt": "الدين رقم",
-          "DebtsSaved": "حفظ بيانات الدين",
-          "SaveDebt": "حفظ بيانات الدين"
-        },
-        "DebtsData": "بيانات الديون",
-        "DependantData": "بيانات التابع {{name}}",
-        "DependentMobile": "رقم جوال التابع",
-        "DependentMobileNote": "إن وجد",
-        "Dependents": {
-          "AddNew": "إضافة تابع جديد",
-          "Dependant": "تابع",
-          "SaveDependent": "حفظ بيانات التابع"
-        },
-        "DependentsData": "بيانات التابعين",
-        "Diseases": {
-          "Cancerous": "أمراض سرطانية",
-          "ChestDiseases": "أمراض صدرية وتنفسية",
-          "ChronicDiseases": "أمراض مزمنة (سكر / ضغط / أمراض قلب)",
-          "Disability": "إعاقة حركية",
-          "GeneticDiseases": "أمراض جينية / وراثية",
-          "HearingImpairment": "إعاقة سمعية",
-          "LiverDiseases": "أمراض كبد وكلى",
-          "MentalDisability": "إعاقة ذهنية / تطورية",
-          "NeurologicalDiseases": "أمراض نفسية وعصبية",
-          "None": "لا يوجد",
-          "SkinDiseases": "أمراض جلدية",
-          "Title": "نوع المرض / الأمراض",
-          "VisualImpairment": "إعاقة بصرية"
-        },
-        "District": "الحي",
-        "Dob": "تاريخ الميلاد",
-        "EducationLevel": {
-          "Degree": "بكالوريوس",
-          "Diploma": "دبلوم",
-          "HigherDiploma": "دبلوم عالي",
-          "HighSchool": "ثانوية",
-          "Illiterate": "لا يقرأ ولا يتكب",
-          "IntermediateSchool": "متوسطة",
-          "Literate": "يقرأ ويكتب دون مؤهل",
-          "Master": "ماجستير",
-          "Phd": "دكتوراه",
-          "PrimarySchool": "ابتدائية",
-          "Title": "المستوى التعليمي"
-        },
+        "BooleanButton": "تأكيد على شكل زر",
+        "BooleanCheckbox": "تأكيد",
+        "BooleanCheckboxes": "اختيار متعدد على شكل أزرار",
+        "BooleanSwitch": "تأكيد على شكل مفتاح",
+        "ButtonRadio": "اختيار من متعدد على شكل أزرار",
+        "CardCheckboxes": "اختيار متعدد على شكل بطاقات",
+        "CardRadio": "اختيار من متعدد على شكل بطاقات",
+        "Checkboxes": "اختيار متعدد",
+        "Color": "اختيار لون",
+        "Date": "التاريخ",
+        "Description": "وصف للعرض والتجربة",
         "Email": "البريد الإلكتروني",
-        "FamilyRecordPhoto": "سجل الأسرة",
-        "FileNo": "رقم الملف",
-        "FullName": "الاسم الرباعي باللغة العربية",
-        "Gender": {
-          "Female": "أنثى",
-          "Male": "ذكر",
-          "Title": "الجنس"
-        },
-        "Governorate": "المحافظة",
-        "GuardianIdPhoto": "هوية رب(ة) الأسرة",
-        "HealthStatementPhoto": "الكشف الطبي للأمراض التي تعاني منها",
-        "HealthStatus": {
-          "Healthy": "سليم",
-          "Sick": "مريض",
-          "Title": "الحالة الصحية"
-        },
-        "HelpRequested": "طلب المساعدة",
-        "HomeLocation": "موقع المنزل",
-        "HomeOwnership": {
-          "Ownership": "ملك",
-          "Rental": "إيجار",
-          "Title": "ملكية المنزل"
-        },
-        "HomeType": {
-          "Apartment": "شقة",
-          "Caravan": "كرفان / خيمة",
-          "FolkHouse": "منزل شعبي",
-          "IncompleteBuilding": "بناء غير مكتمل",
-          "IndependentHome": "منزل مستقل",
-          "NoPermanentHome": "لا يوجد منزل دائم",
-          "Roof": "ملحق",
-          "SharedHouse": "غرفة / غرف ضمن منزل مشترك",
-          "Title": "نوع المنزل",
-          "Villa": "فيلا"
-        },
-        "HostelData": "بيانات السكن",
-        "Housing": {
-          "AddNew": "إضافة منزل جديد",
-          "House": "المنزل",
-          "Housing": "بيانات المنزل",
-          "HousingSaved": "حفظ بيانات المنزل",
-          "SaveHousing": "حفظ بيانات المنزل"
-        },
-        "IbanPhoto": "صورة رقم الآيبان",
-        "IdExpiryDate": "تاريخ انتهاء الهوية",
-        "IdNumber": "رقم الهوية",
-        "IdNumberNote": "مكون من 10 أرقام",
-        "IdPhoto": "صورة الهوية",
-        "Income": "إجمالي قيمة الدخل الشهري",
-        "IncurableDisease": "هل المرض مستعص؟",
-        "Insurances": "تأمينات",
-        "NationalAddressDocument": "إثبات العنوان الوطني",
-        "NationalAddressNumber": "العنوان الوطني المختصر",
-        "NationalAddressNumberNote": "4 أحرف إنجليزية تليها 4 أرقام",
-        "Nationality": {
-          "Afghanistan": "أفغانستان",
-          "Albania": "ألبانيا",
-          "Algeria": "الجزائر",
-          "America": "الولايات المتحدة",
-          "Argentina": "الأرجنتين",
-          "Australia": "أستراليا",
-          "Bahrain": "البحرين",
-          "Bangladesh": "بنغلاديش",
-          "Brazil": "البرازيل",
-          "Britain": "بريطانيا",
-          "Canada": "كندا",
-          "Chad": "تشاد",
-          "China": "الصين",
-          "Djibouti": "جيبوتي",
-          "Egypt": "مصر",
-          "Eritrea": "إريتريا",
-          "Ethiopia": "إثيوبيا",
-          "France": "فرنسا",
-          "Germany": "ألمانيا",
-          "India": "الهند",
-          "Indonesia": "إندونيسيا",
-          "Iraq": "العراق",
-          "Jordan": "الأردن",
-          "Kuwait": "الكويت",
-          "Lebanon": "لبنان",
-          "Libya": "ليبيا",
-          "Malaysia": "ماليزيا",
-          "Mauritania": "موريتانيا",
-          "Morocco": "المغرب",
-          "Nepal": "نيبال",
-          "Nigeria": "نيجيريا",
-          "Oman": "عُمان",
-          "Other": "دولة أخرى",
-          "Pakistan": "باكستان",
-          "Palestine": "فلسطين",
-          "Philippines": "الفلبين",
-          "Qatar": "قطر",
-          "Russia": "روسيا",
-          "Saudi": "السعودية",
-          "Somalia": "الصومال",
-          "Sudan": "السودان",
-          "Syria": "سوريا",
-          "Title": "الجنسية",
-          "Tunisia": "تونس",
-          "Turkey": "تركيا",
-          "Uganda": "أوغندا",
-          "Yemen": "اليمن"
-        },
-        "Occupation": {
-          "GovernmentEmployee": "موظف حكومي",
-          "Housewife": "ربة منزل",
-          "LookingForJob": "باحث عن عمل",
-          "NoFixed": "بدون عمل ثابت",
-          "NonStudent": "طفل وغير ملتحق بالتعليم",
-          "PerDayWorker": "عامل باليوم",
-          "PrivateSectorEmployee": "موظف قطاع خاص",
-          "Retiree": "متقاعد",
-          "Student": "طالب",
-          "Title": "الوظيفة",
-          "UnableToWork": "غير قادر على العمل",
-          "Unemployed": "عاطل عن العمل"
-        },
-        "Ownership": {
-          "Free": "هبة مؤقتة",
-          "Parent": "السكن مع الأب / الأم",
-          "Self": "ملك شخصي",
-          "Sibling": "السكن مع الأخ / الأخت",
-          "Title": "الملكية"
-        },
-        "OwnershipDocumentPhoto": "صك الملكية",
-        "Payee": {
-          "Free": "لا يتم دفع الإيجار (سكن مجاني)",
-          "Government": "تتحمله جهة حكومية",
-          "Installment": "يتم التقسيط مع المالك",
-          "Relative": "يدفعه أحد الأقارب",
-          "Self": "يدفعه المستفيد بنقسه",
-          "Society": "تتحمله جهة خيرية / جمعية"
-        },
-        "Province": {
-          "AlBahah": "الباحة",
-          "AlJawf": "الجوف",
-          "AlQassim": "القصيم",
-          "Asir": "عسير",
-          "Eastern Province": "المنطقة الشرقية",
-          "Hail": "حائل",
-          "Jazan": "جازن",
-          "Madinah": "المدينة المنورة",
-          "Makkah": "مكة المكرمة",
-          "Najran": "نجران",
-          "NorthernBorders": "المنطقة الشمالية",
-          "Riyadh": "الرياض",
-          "Tabuk": "تبوك",
-          "Title": "المنطقة"
-        },
-        "QualificationData": "بيانات المؤهل والوظيفة",
-        "Relation": {
-          "Child": "ابن(ة)",
-          "Grandchild": "حفيد(ة)",
-          "Grandparent": "جد(ة)",
-          "InLow": "قريب درجة أولى للزوج(ة)",
-          "MaternalUncleAunt": "خال(ة)",
-          "None": "لا يوجد صلة قرابة",
-          "Parent": "والد(ة)",
-          "PaternalUncleAunt": "عم(ة)",
-          "Sibling": "أخ(ت)",
-          "Spouse": "زوج(ة)",
-          "Title": "صلة القرابة"
-        },
-        "RentalCharge": "قيمة الإيجار السنوي للمنزل",
-        "RentalContractPhoto": "عقد إيجار",
-        "Retirement": "تقاعد",
-        "Salary": "راتب",
-        "SecondaryMobile": "رقم جوال آخر",
-        "SocialSecurity": "ضمان اجتماعي",
-        "SocialStatus": {
-          "Divorced": "مطلق(ة)",
-          "Married": "متزوج(ة)",
-          "Single": "أعزب / عزباء",
-          "Title": "الحالة الاجتماعية",
-          "Widower": "أرملة"
-        },
-        "StudentsDocument": "تعريف طالب",
-        "StudentsDocumentNote": "من موقع نور أو من موقع الجامعة",
-        "Success": {
-          "Next": "الدخول للوحة التحكم",
-          "Text": "سيتم التواصل معك في أقرب وقت على الوتساب وفي قسم الرسائل الخاص بك",
-          "Title": "تم تقديم الطلب بنجاح"
-        },
-        "TawakkalnaDocument": "صورة بطاقة الهوية وسجل الأسرة من تطبيق توكلنا"
-      },
-      "Statuses": {
-        "Accepted": "مقبول",
-        "Cancelled": "تم إلغاء العضوية",
-        "Incomplete": "طلب غير مكتمل",
-        "InPreview": "قيد المراجعة",
-        "NeedHelp": "بحاجة لمساعدة",
-        "NewMember": "مستفيد جديد",
-        "Rejected": "مرفوض",
-        "ResearcherAssigned": "تم تعيين الباحث",
-        "Reviewed": "تم التدقيق",
-        "Status": "حالة الطلب"
-      },
-      "Title": "طلب التسجيل في الجمعية"
+        "File": "ملف",
+        "ImageCheckboxes": "اختيار متعدد على شكل صور",
+        "ImageRadio": "اختيار من متعدد على شكل صور",
+        "Location": "الموقع",
+        "MultipleEntries": "إدخالات متعددة",
+        "Number": "رقم",
+        "NumberText": "نص رقمي",
+        "OTP": "رمز التحقق",
+        "Option1": "الخيار 1",
+        "Option2": "الخيار 2",
+        "Option3": "الخيار 3",
+        "Password": "كلمة المرور",
+        "PhoneNumber": "رقم الهاتف",
+        "Radio": "اختيار من متعدد",
+        "Range": "اختيار ضمن نطاق / مدى",
+        "Select": "اختيار",
+        "SelectMany": "اختيار متعدد",
+        "StackedBooleanCheckboxes": "اختيار متعدد على شكل أزرار عامودية",
+        "StackedButtonRadio": "اختيار من متعدد على شكل أزرار عامودية",
+        "StackedCardCheckboxes": "اختيار متعدد على شكل بطاقات عامودية",
+        "StackedCardRadio": "اختيار من متعدد على شكل بطاقات عامودية",
+        "StackedCheckboxes": "اختيار متعدد عامودي",
+        "StackedImageCheckboxes": "اختيار متعدد على شكل صور عامودية",
+        "StackedImageRadio": "اختيار من متعدد على شكل صور عامودية",
+        "StackedRadio": "اختيار من متعدد عامودي",
+        "StarRating": "ادخال تقييم",
+        "Text": "نص",
+        "Textarea": "منطقة نص"
+      }
     },
-    "Researchers": {
-      "AddResearcher": "إضافة باحث جديد",
-      "Assign": "إحالة",
-      "BeneficiariesCount": "عدد المستفيدين",
-      "EditResearcher": "تعديل باحث",
-      "ResearcherName": "اسم الباحث",
-      "SearchBarPlaceholder": "بحث باسم الباحث",
-      "Title": "إدارة الباحثين",
-      "VisitsCount": "عدد الزيارات"
+    "Messaging": {
+      "Chats": "المحادثات",
+      "SearchChatsOrMessages": "ابحث في المحادثات أو الرسائل",
+      "Send": "إرسال",
+      "Status": {
+        "Online": "متصل"
+      },
+      "Title": "الرسائل",
+      "TypeAMessage": "اكتب رسالة"
+    },
+    "Notifications": {
+      "AllNotifications": "جميع الإشعارات",
+      "Empty": {
+        "Badge": "الشارة",
+        "Body": "النص",
+        "Title": "فارغ"
+      },
+      "Filters": {
+        "All": "الكل",
+        "Important": "مهم",
+        "Unread": "غير مقروء"
+      },
+      "LoadMore": "تحميل المزيد",
+      "MarkAllRead": "اعتبار الكل مقروءاً",
+      "NoNotifications": "لا توجد إشعارات",
+      "Refresh": "تحديث",
+      "SearchPlaceholder": "بحث...",
+      "Title": "الإشعارات",
+      "Unread": "غير مقروءة"
+    },
+    "Profile": {
+      "About": "نبذة",
+      "Connect": "اتصال",
+      "Connections": "جهات الاتصال",
+      "Contact": "تواصل",
+      "Contacts": "جهات الاتصال",
+      "Country": "الدولة",
+      "Email": "البريد الإلكتروني",
+      "FullName": "الاسم الكامل",
+      "Languages": "اللغات",
+      "Overview": "نظرة عامة",
+      "Projects": {
+        "Leader": "القائد",
+        "Progress": "التقدم",
+        "Status": "الحالة",
+        "Team": "الفريق",
+        "Title": "المشاريع"
+      },
+      "Role": "النوع",
+      "ShareConnections": "مشاركة جهات الاتصال",
+      "ShareProfile": "مشاركة الملف الشخصي",
+      "ShareTimeline": "مشاركة المخطط الزمني",
+      "Skype": "سكايب",
+      "Stats": {
+        "Connections": "جهات الاتصال",
+        "Projects": "المشاريع",
+        "Tasks": "المهام"
+      },
+      "Status": "الحالة",
+      "SuggestEdits": "اقتراح تعديلات",
+      "Teams": {
+        "Title": "الفرق"
+      },
+      "TeamsShort": "الفرق",
+      "Timeline": "الجدول الزمني",
+      "Title": "الملف الشخصي",
+      "ViewAllConnections": "عرض جميع جهات الاتصال",
+      "ViewProfile": "عرض الملف الشخصي"
     },
     "Settings": {
-      "BulkDataInsertion": {
-        "AllowedFileTypes": "يمكن تحميل ملفات اكسل المصدرة من نظام 'رافد' حصراً",
-        "BeneficiariesData": "بيانات المستفيدين",
-        "BeneficiariesDataTemplate": "تحميل نموذج بيانات المستفيدين",
-        "DependentsData": "بيانات التابعين",
-        "DependentsDataTemplate": "تحميل نموذج بيانات التابعين",
-        "PleaseCheck": {
-          "Clarification": "وذلك نظرًا لوجود بعض المشاكل في الملفات المصدّرة من نظام 'رافد', مثل:",
-          "DataReviewWarningContent": "سيتم استيراد جميع الملفات للمستفيدين كطلبات تسجيل في حالة 'طلب غير مكتمل', لإتاحة الإمكانية للمستفيدين لتدقيق ملفاتهم والتأكد من صحة البيانات, قبل التدقيق والتأكد من قبل الباحثيين الاجتماعيين أيضاً.",
-          "Eg1": "عدم تطابق العناوين (رؤوس الأعمدة) مع البيانات الموجودة تحتها.",
-          "Eg2": "شكل البيانات غير صحيح, حيث يصدر نظام 'رافد' التواريخ الرقمية أحياناً كتاريخ الميلاد أو تاريخ انتهاء الهوية في صيغة خاطئة.",
-          "Eg3": "احتمالية وجود بيانات ناقصة أو غير صحيحة.",
-          "Eg4": "وجود تكرار في بيانات يجب أن تكون غير مكررة لدى المستفيدين أو تابعيهم. وتشمل البيانات: رقم الجوال للمستفيد, رقم الهوية للمستفيد أو التابع.",
-          "Highlight": "الرجاء التأكد بعناية من صحة ودقة البيانات المستوردة من نظام 'رافد' قبل إدخالها في نظامنا.",
-          "WarningContent": "أي بيانات يتم استيرادها بشكل غير صحيح قد تؤدي إلى أخطاء في النظام أو معلومات مضللة, أو قد لا يتم استيرادها إلى النظام. لذا يُرجى مراجعة الملف والتأكد من النقاط أعلاه قبل الاستيراد.",
-          "WarningTitle": "⚠️ تنبيه مهم"
+      "Admin": {
+        "Backup": {
+          "AutoSettings": {
+            "KeptBackups": "عدد النسخ الاحتياطية المحتفظ بها",
+            "Period": "الفاصل الزمني بين كل نسخ احتياطي آلي",
+            "Title": "إعدادات النسخ الاحتياطي الآلي",
+            "Unit": {
+              "Days": "يوم / أيام",
+              "Months": "شهر / أشهر",
+              "Title": "الوحدة الزمنية",
+              "Weeks": "أسبوع / أسابيع"
+            }
+          },
+          "BackupsManagement": {
+            "CreateNewBackupNow": "إنشاء نسخة احتياطية جديدة الآن",
+            "CurrentBackups": "النسخ الاحتياطية الموجودة",
+            "RemoveSelectedBackup": "حذف النسخة الاحتياطية المحددة",
+            "RestoreSystemToSelectedBackup": "استعادة البيانات إلى النسخة المحددة",
+            "Title": "إدارة النسخ الاحتياطية"
+          },
+          "Title": "إدارة النسخ الاحتياطي للبيانات"
         },
-        "Title": "إدخال البيانات القديمة للجمعية"
+        "BulkDataInsertion": {
+          "DataFileUpload": "تحميل البيانات",
+          "DataProcessing": {
+            "Description": "لتجهيز البيانات المترابطة قبل إدخالها في النظام، يرجى اتباع الخطوات التالية بعناية:",
+            "Step1": {
+              "Description": "تحميل البيانات الموجودة بالفعل في النظام والتي سيتم الربط معها",
+              "Title": "الخطوة الأولى"
+            },
+            "Step2": {
+              "Description": "تحديد مصدر بيانات الربط (المعرف)",
+              "Title": "الخطوة الثانية"
+            },
+            "Step3": {
+              "Description": "تحميل البيانات التي سيتم التعديل عليها وربطها ببيانات أخرى",
+              "Title": "الخطوة الثالثة"
+            },
+            "Step4": {
+              "Description": "تحديد البيانات التي سيتم الربط على أساسها مع البيانات الموجودة في النظام",
+              "Title": "الخطوة الرابعة"
+            },
+            "Step5": {
+              "Description": "تنزيل البيانات المعالجة والتي يمكنك تحميلها إلى قاعدة بيانات النظام",
+              "Title": "الخطوة الخامسة"
+            },
+            "Title": "معالجة البيانات"
+          },
+          "DownloadAllData": "تنزيل كل البيانات",
+          "DownloadTemplate": "تنزيل نموذج التحميل للبيانات",
+          "Title": "إدخال البيانات لأول مرة"
+        },
+        "Logger": {
+          "Context": "السياق",
+          "Level": "المستوى",
+          "Message": "الرسالة",
+          "Metadata": "البيانات",
+          "Stack": "سجل النظام",
+          "Timestamp": "الطابع الزمني",
+          "Title": "سجل النظام"
+        },
+        "Metadata": {
+          "Logo": "الشعار",
+          "Name": "اسم النظام",
+          "PhoneNumber": "رقم الهاتف",
+          "Slogan": "الشعار اللفظي",
+          "ThemeColor": "لون النظام",
+          "Title": "هوية النظام"
+        },
+        "RolePermissions": {
+          "Actions": {
+            "Create": "إنشاء",
+            "Delete": "حذف",
+            "GetAll": "عرض الكل",
+            "GetOne": "العرض بالتفصيل",
+            "Title": "الإجراءات",
+            "Update": "تحديث"
+          }
+        },
+        "SystemLogger": {
+          "Title": "سجل النظام"
+        },
+        "Title": "إعدادات مدير النظام",
+        "UserActivity": {
+          "Action": "الإجراء",
+          "After": "البيانات بعد الإجراء",
+          "Before": "البيانات قبل الإجراء",
+          "DataId": "رقم البيانات",
+          "DataType": "نوع البيانات",
+          "Difference": "الفرق في البيانات",
+          "ErrorMessage": "رسالة الخطأ",
+          "Ip": "عنوان IP",
+          "Method": "الأداة",
+          "Path": "العنوان",
+          "RequestId": "رقم الطلب",
+          "SessionId": "رقم الجلسة",
+          "Source": "المصدر",
+          "StatusCode": "الحالة",
+          "Success": "تم بنجاح",
+          "Timestamp": "الطابع الزمني",
+          "Title": "نشاط المستخدم",
+          "UserActivity": "نشاط مستخدم",
+          "UserAgent": "المستخدم",
+          "UserId": "رقم المستخدم",
+          "UserType": "نوع المستخدم"
+        },
+        "UserRolePermissions": {
+          "Title": "صلاحيات أنواع المستخدمين"
+        },
+        "UserRoles": {
+          "Name": "اسم النوع",
+          "Title": "أنواع المستخدمين",
+          "UserRole": "نوع مستخدم"
+        },
+        "Users": {
+          "Email": "البريد الإلكتروني",
+          "Name": "الاسم",
+          "Role": "النوع",
+          "Title": "المستخدمون",
+          "User": "مستخدم"
+        },
+        "UsersView": {
+          "Title": "المستخدمون"
+        }
       },
-      "FontSize": "حجم الخط للتطبيق",
-      "Metadata": {
-        "Title": "إعدادات هوية الجمعية"
-      },
-      "PasswordReset": {
-        "Title": "إعادة ضبط كلمة السر"
-      },
+      "FontSize": "حجم الخط",
       "Samples": {
-        "H3Sample": "عينة عنوان رئيسيي",
-        "H4Sample": "عينة عنوان فرعي",
-        "H5Sample": "عينة روابط الصفحات",
-        "LabelSample": "عينة عنوان لحقل ادخال",
-        "SmallSample": " عينة ملاحظات",
-        "Title": "عينات"
+        "H3Sample": "عينة عنوان H3",
+        "H4Sample": "عينة عنوان H4",
+        "H5Sample": "عينة عنوان H5",
+        "LabelSample": "عينة تسمية",
+        "SmallSample": "عينة نص صغير",
+        "Title": "عينات النصوص"
       },
-      "SocietyLogo": "شعار الجمعية",
-      "SocietyName": "اسم الجمعية",
-      "SocietyPhoneNumber": "رقم الهاتف للجمعية",
-      "SocietyPhoneNumberNote": "هذا الرقم سيظهر في صفحة 'تواصل معنا' للمستفيدين",
-      "System": {
-        "Title": "إعدادات النظام"
+      "User": {
+        "Account": {
+          "Avatar": "الصورة الشخصية",
+          "AvatarHint": "تلميح الصورة الشخصية",
+          "ChangeAvatar": "تغيير الصورة الشخصية",
+          "Company": "الشركة",
+          "Country": "الدولة",
+          "Email": "البريد الإلكتروني",
+          "FullName": "الاسم الكامل",
+          "JobTitle": "المسمى الوظيفي",
+          "Language": "اللغة",
+          "Phone": "رقم الهاتف",
+          "ResetAvatar": "إرجاع الصورة الافتراضية",
+          "Title": "الحساب",
+          "Username": "اسم المستخدم"
+        },
+        "Billing": {
+          "AvailablePlans": "الباقات المتاحة",
+          "AvailablePlansDescription": "وصف الباقات المتاحة",
+          "CancelSubscription": "إلغاء الاشتراك",
+          "ChangePlan": "تغيير الباقة",
+          "ContactUs": "تواصل معنا",
+          "Current": "الحالية",
+          "CurrentPlan": "الباقة الحالية",
+          "Projects_few": "مشاريع",
+          "Projects_many": "مشاريع",
+          "Projects_one": "مشروع",
+          "Projects_other": "مشاريع",
+          "Projects_two": "مشروعان",
+          "Projects_zero": "لا مشاريع",
+          "Renewal": "تجديد الاشتراك",
+          "Seats_few": "مقاعد",
+          "Seats_many": "مقاعد",
+          "Seats_one": "مقعد",
+          "Seats_other": "مقاعد",
+          "Seats_two": "مقعدان",
+          "Seats_zero": "لا مقاعد",
+          "Select": "اختر",
+          "Title": "الفوترة"
+        },
+        "Connections": {
+          "Connect": "ربط",
+          "Description": "الوصف",
+          "Disconnect": "إلغاء الربط",
+          "GitHub": {
+            "Description": "الوصف",
+            "Title": "GitHub"
+          },
+          "Google": {
+            "Description": "الوصف",
+            "Title": "Google"
+          },
+          "LastSync": "آخر مزامنة",
+          "Slack": {
+            "Description": "الوصف",
+            "Title": "Slack"
+          },
+          "StatusConnected": "مرتبط",
+          "StatusNotConnected": "غير مرتبط",
+          "Title": "الاتصالات"
+        },
+        "Notifications": {
+          "Description": "الوصف",
+          "Title": "الإشعارات",
+          "TypeHeader": "نوع الإشعار"
+        },
+        "Security": {
+          "Title": "الأمان"
+        },
+        "System": {
+          "Title": "النظام"
+        },
+        "Title": "إعدادات المستخدم"
+      }
+    },
+    "SupportCenter": {
+      "ContactUs": {
+        "BusinessHours": {
+          "Description": "وصف ساعات العمل",
+          "Title": "ساعات العمل"
+        },
+        "CallUs": {
+          "Description": "وصف الاتصال بنا",
+          "Title": "اتصل بنا"
+        },
+        "ConnectWithUs": {
+          "Description": "وصف طرق التواصل",
+          "Title": "تواصل معنا"
+        },
+        "Description": "وصف صفحة التواصل",
+        "EmailUs": {
+          "Description": "وصف البريد الإلكتروني",
+          "Title": "راسلنا بالبريد الإلكتروني"
+        },
+        "OfficeHours": {
+          "Title": "ساعات الدوام"
+        },
+        "OurLocation": {
+          "Title": "موقعنا"
+        },
+        "SendMessage": {
+          "Title": "إرسال رسالة"
+        },
+        "Title": "تواصل معنا",
+        "VisitUs": {
+          "Description": "وصف الزيارة",
+          "Title": "قم بزيارتنا"
+        }
       },
-      "Title": "الإعدادات"
+      "FAQ": {
+        "CheckFaq": "تصفّح الأسئلة الشائعة",
+        "DidNotFindWhatYouAreLookingFor": "لم تجد ما تبحث عنه؟",
+        "NoFAQsFound": "لا توجد أسئلة شائعة",
+        "SearchPlaceholder": "بحث...",
+        "Title": "الأسئلة الشائعة"
+      },
+      "Faq": {
+        "Description": "وصف الأسئلة الشائعة",
+        "Title": "الأسئلة الشائعة"
+      },
+      "KnowledgeBase": {
+        "AccountPassword": {
+          "Title": "حساب وكلمة المرور"
+        },
+        "AccountSettings": {
+          "Title": "إعدادات الحساب"
+        },
+        "GettingStarted": {
+          "Title": "البدء"
+        },
+        "Title": "قاعدة المعرفة"
+      },
+      "QuickAccess": {
+        "Title": "وصول سريع"
+      },
+      "StillNeedHelp": {
+        "Description": "وصف الحاجة للمساعدة",
+        "Title": "ما زلت تحتاج مساعدة؟"
+      },
+      "SubmitTicket": {
+        "Title": "إرسال تذكرة"
+      },
+      "Tickets": {
+        "BeforeSubmitting": "قبل إرسال التذكرة",
+        "Description": "وصف التذاكر",
+        "MyTickets": {
+          "Table": {
+            "Column1": "العمود 1",
+            "Column2": "العمود 2",
+            "Column3": "العمود 3",
+            "Column4": "العمود 4"
+          },
+          "Title": "تذاكري"
+        },
+        "SubmitNewTicket": {
+          "Title": "إرسال تذكرة جديدة"
+        },
+        "SubmitTicket": {
+          "Form": {
+            "Attachment": {
+              "Label": "مرفق",
+              "Placeholder": "اختر ملفاً"
+            },
+            "Category": {
+              "Label": "الفئة",
+              "Option1": "خيار 1",
+              "Option2": "خيار 2",
+              "Option3": "خيار 3",
+              "Placeholder": "اختر الفئة"
+            },
+            "Description": {
+              "Label": "الوصف",
+              "Placeholder": "اكتب وصف المشكلة أو الطلب"
+            },
+            "Priority": {
+              "Label": "الأولوية",
+              "OptionHigh": "عالية",
+              "OptionLow": "منخفضة",
+              "OptionMedium": "متوسطة",
+              "Placeholder": "اختر أولوية"
+            },
+            "Subject": {
+              "Label": "الموضوع",
+              "Placeholder": "اكتب عنواناً مناسباً"
+            }
+          }
+        },
+        "Ticket": "تذكرة",
+        "Title": "التذاكر"
+      },
+      "Title": "مركز الدعم",
+      "UserManual": {
+        "Contents": "المحتويات",
+        "Description": "وصف دليل المستخدم",
+        "DownloadManual": "تحميل الدليل",
+        "ReviewUserManual": "استعراض دليل المستخدم",
+        "Title": "دليل المستخدم"
+      }
+    },
+    "TABLE_PLURAL_UPPER_NAME": {
+      "Labels": {
+        "Email": "البريد الإلكتروني"
+      },
+      "Name": "الاسم",
+      "PhoneNumber": "رقم الهاتف",
+      "SINGLE_ITEM_NAME": "SINGLE_ITEM_NAME",
+      "Title": "TABLE_PLURAL_UPPER_NAME"
+    },
+    "TemplateExamples": {
+      "DataTable": {
+        "Title": "مثال صفحة إدارة البيانات"
+      },
+      "DataView": {
+        "Title": "أمثلة عرض البيانات"
+      },
+      "Forms": {
+        "Title": "أمثلة الإدخالات في النماذج"
+      }
+    },
+    "UserSettings": {
+      "Title": "إعدادات المستخدم"
     },
     "Users": {
-      "AddUser": "إضافة مستخدم",
-      "AsPassword": "ككلمة سر",
-      "EditUser": "تعديل المستخدم",
-      "Id": "الرقم المميز",
       "Name": "الاسم",
-      "Role": "الدور",
-      "SearchBarPlaceholder": "بحث بالاسم",
-      "Title": "إدارة المستخدمين"
-    },
-    "Visits": {
-      "AcceptedAlready": "تم قبول موعد الزيارة بالفعل",
-      "AcceptVisit": "قبول موعد الزيارة",
-      "AddVisit": "جدولة زيارة",
-      "CancelVisit": "إلغاء الزيارة",
-      "DelayedAlready": "تم طلب تأجيل الزيارة بالفعل",
-      "DelayVisit": "تأجيل الزيارة",
-      "Detail": {
-        "devicesNumber": "عدد الاجهزة الكلي",
-        "evaluation": "التقييم",
-        "furnitureNumber": "عدد الاثاث الكلي",
-        "needRepair": "هل يحتاج للصيانة",
-        "roomsNumber": "عدد الغرف",
-        "title": "تفاصيل الزيارة"
+      "Profile": {
+        "DeleteData": "حذف البيانات",
+        "SureToDeleteData": "هل أنت متأكد من حذف البيانات؟"
       },
-      "EditVisit": "تعديل زيارة",
-      "Report": {
-        "AddContent": "إضافة محتوى",
-        "AddReport": "إجراء تقييم",
-        "AddRoom": "إضافة غرفة جديدة",
-        "AirConditioner": "مكيف هواء",
-        "Balcony": "شرفة",
-        "Bathroom": "حمام",
-        "Bed": "سرير",
-        "Bedroom": "غرفة نوم",
-        "Contents": "المحتويات",
-        "ContentsCount": "العدد",
-        "ContentType": "نوع {{type}}",
-        "ContentX": "المحتوى رقم {{number}}: {{name}}",
-        "ContentXType": "نوع المحتوى {{number}}",
-        "Desk": "مكتب",
-        "Device": "جهاز",
-        "DiningRoom": "غرفة طعام",
-        "DiningTable": "طاولة طعام",
-        "Dishwasher": "غسالة صحون",
-        "DressingTable": "طاولة تزيين",
-        "Entry": "مدخل",
-        "Freezer": "فريزر",
-        "Fridge": "ثلاجة",
-        "Furniture": "قطعة أثاث",
-        "GuestRoom": "غرفة ضيوف",
-        "Hallway": "ممر",
-        "Kitchen": "مطبخ",
-        "Laundry": "غرفة غسيل",
-        "LivingRoom": "غرفة معيشة",
-        "MaidRoom": "غرفة خادمة",
-        "Microwave": "ميكروويف",
-        "NeedsMaintenance": "يحتاج لصيانة",
-        "Nightstand": "طاولة جانبية",
-        "NoReportToView": "لم يتم إضافة تقرير لعرضه",
-        "NotWorking": "لا يعمل",
-        "OnlyResearchersCouldAdd": "إضافة تقرير متاحة للباحثين فقط",
-        "Oven": "فرن",
-        "PleaseAddReportFirst": "نرجو إضافة التقرير أولاً",
-        "PrayerMat": "سجادة صلاة",
-        "PrayerRoom": "غرفة صلاة",
-        "ReportAddedAlready": "تم إضافة تقرير بالفعل",
-        "RoomContentEvaluation": "تقييم {{type}}",
-        "RoomContentPhoto": "صورة {{type}}",
-        "RoomContentStatus": "حالة {{type}}",
-        "RoomRecommendations": "توصيات الغرفة",
-        "RoomsCount": "العدد",
-        "RoomXDetails": "تفاصيل الغرفة {{number}}",
-        "RoomXType": "نوع الغرفة رقم {{number}}",
-        "Router": "جهاز توجيه",
-        "Shelf": "رف",
-        "ShoeRack": "رف أحذية",
-        "Sofa": "كنبة",
-        "Storage": "مخزن",
-        "TheDevice": "الجهاز",
-        "TheFurniture": "قطعة الأثاث",
-        "Title": "تقرير الزيارة",
-        "TV": "تلفاز",
-        "ViewReport": "عرض التقرير",
-        "Wardrobe": "خزانة ملابس",
-        "WashingMachine": "غسالة",
-        "WaterHeater": "سخان مياه",
-        "Working": "يعمل"
-      },
-      "SearchBarPlaceholder": "بحث باسم المستفيد",
-      "Statuses": {
-        "Approved": "وافق المستفيد",
-        "Cancelled": "ألغيت الزيارة",
-        "Delayed": "تم طلب التأجيل",
-        "Done": "تمت الزيارة",
-        "Pending": "بانتظار الزيارة",
-        "Status": "حالة الزيارة"
-      },
-      "Surprise": {
-        "No": "منسقة مع المستفيد",
-        "Title": "زيارة مفاجئة؟",
-        "Yes": "مفاجئة"
-      },
-      "Title": "الزيارات الميدانية",
-      "VisitCancelledAlready": "تم إلغاء الزيارة بالفعل",
-      "VisitDate": "تاريخ الزيارة",
-      "VisitPurpose": "سبب الزيارة",
-      "Visits": "الزيارات",
-      "VisitTime": "وقت الزيارة"
+      "Role": "النوع",
+      "Title": "المستخدمون"
     }
+  },
+  "Common": {
+    "Edit": "تعديل"
   },
   "CopyRight": {
     "AllRightsReserved": "جميع الحقوق محفوظة © {{year}}",
-    "AppName": "نظام مستحق",
-    "ShaiShort": "Shai"
+    "AppName": "AppNest",
+    "BuilderShort": "AlembicSoft"
   },
   "Global": {
+    "Calendar": {
+      "EventTypes": "نوع الحدث / المناسبة",
+      "Filters": "الفلاتر",
+      "Parties": "الجهات",
+      "Today": "اليوم"
+    },
     "Form": {
-      "CantDoIt": "لا يمكن القيام بهذا الإجراء",
+      "CantDoIt": "لا يمكن تنفيذ ذلك",
       "Errors": {
-        "FileTooLarge": "حجم الملف أكبر من المسموح به: {{max}} ميجا بيكسل",
-        "IbanContents": "رقم الآيبان يجب أن يحتوي على أرقام وحروف فقط بدون مسافات أو رموز خاصة",
-        "IbanLength": "رقم الآيبان يجب أن يتكون من 24 خانة بالضبط",
-        "IbanStart": "يجب أن يبدأ رقم الآيبان بـ SA",
-        "IbanWrong": "رقم الآيبان لا يتبع أي بنك سعودي",
-        "InvalidEmail": "بريد إلكتروني غير صالح",
-        "InvalidNationalAddressNumber": "رقم العنوان الوطني يجب أن يتكون من 4 أحرف إنجليزية تليها 4 أرقام بدون رموز أو فراغات",
+        "FileTooLarge": "بعض الملفات تتجاوز الحد المسموح ({{max}} م.ب).",
+        "InvalidEmail": "صيغة البريد الإلكتروني غير صحيحة",
         "InvalidNumber": "رقم غير صالح",
-        "InvalidPhoneNumber": "رقم جوال غير صحيح, يجب أن يكون الرقم على النحو التالي: 539886868",
-        "Max": "القيمة القصوى المسموحة هي",
+        "InvalidPhoneNumber": "صيغة رقم الهاتف غير صحيحة",
+        "Max": "أقصى قيمة مسموحة هي",
         "MaxLength": "أقصى طول مسموح هو",
-        "Min": "القيمة الدنيا المسموحة هي",
+        "Min": "أقل قيمة مسموحة هي",
         "MinLength": "أقل طول مسموح هو",
-        "PasswordMatch": "كلمة السر غير متطابقة",
-        "PhoneNumberLength": "طول رقم الجوال غير صحيح",
-        "Required": "إلزامي",
-        "UploadFailed": "فشل التحميل, نرجو إعادة المحاولة"
-      },
-      "Label": {
-        "Email": "البريد الإلكتروني",
-        "PhoneNumber": "رقم الجوال"
+        "PasswordMatch": "كلمة المرور والتأكيد غير متطابقين",
+        "PhoneNumberLength": "طول رقم الهاتف غير صحيح",
+        "Required": "حقل مطلوب",
+        "UploadFailed": "فشل في رفع الملفات، يرجى المحاولة مرة أخرى"
       },
       "Labels": {
         "Add": "إضافة",
-        "AddFiles": "إضافة مرفقات",
-        "Approve": "موافقة",
-        "BrowserDontSupportLocation": "المتصفح لا يدعم تحديد الموقع, نرجو إدخاله بشكل يدوي",
-        "Confirm": "تأكيد",
+        "AddFiles": "إضافة ملفات",
+        "BrowserDontSupportLocation": "المتصفح لا يدعم تحديد الموقع",
         "Delete": "حذف",
         "Edit": "تعديل",
-        "FilesMaxReached": "بلغت الحد الأقصى",
-        "Filter": "فلترة",
-        "Location": "Google Map رابط",
+        "Email": "البريد الإلكتروني",
+        "FilesMaxReached": "تم الوصول للحد الأقصى للملفات",
+        "Location": "الموقع",
         "No": "لا",
-        "NoOptions": "لا يوجد خيارات",
-        "Notes": "ملاحظات",
+        "NoOptions": "لا توجد خيارات",
         "PickDate": "اختر التاريخ",
-        "PleaseAllowLocation": "لم نتمكن من تحديد موقعك. الرجاء السماح بالوصول",
-        "PleaseSelect": "نرجو الاختيار...",
-        "Previous": "السابق",
-        "Reject": "الرفض",
-        "ResetFilter": "إعادة ضبط",
+        "PleaseAllowLocation": "يرجى السماح بالوصول للموقع",
+        "PleaseSelect": "يرجى الاختيار",
         "Save": "حفظ",
-        "SaveContinue": "حفظ ومتابعة",
-        "SaveData": "حفظ البيانات",
         "Submit": "إرسال",
-        "SubmitApplication": "تقديم الطلب",
-        "SupportingDocument": "وثائق مدعمة",
-        "UnAvailableForDemoMode": "غير متاح في نسخة العرض",
-        "Update": "التحديث",
-        "Upload": "التحميل",
-        "ViewLocation": "استعرض الموقع",
+        "UnAvailableForDemoMode": "غير متاح في وضع التجربة",
+        "Update": "تحديث",
+        "View": "عرض",
+        "ViewLocation": "عرض الموقع",
         "Yes": "نعم"
       },
-      "SuccessMsg": "تم {{action}} لـ {{data}} بنجاح"
+      "SuccessMsg": "تم {{action}} بيانات {{data}} بنجاح"
     },
     "Labels": {
       "Action": "إجراء",
       "All": "الكل",
-      "ApplicationDate": "تاريخ التقديم",
-      "Back": "عودة",
-      "DemoLoginNote": "بإمكانك تسجيل الدخول بأي من أرقام الهاتف الجوال أدناه وكلمة السر 12345678",
-      "DemoWarning": "نرجو الانتباه أن هذه النسخة الخاصة بالعرض متاح الوصول إليها للجميع, لذا ننصح بعدم مشاركة أي بيانات حقيقية مثل الاسم أو رقم البطاقة أو ما سواها. كما نرجو أخذ العلم بأن البيانات سيتم إعادة ضبطها آلياً كل يوم",
+      "Back": "رجوع",
+      "CreateNew": "إنشاء {{item}} جديد",
+      "Delete": "حذف {{item}}",
+      "DemoLoginNote": "يمكنك تسجيل الدخول باستخدام أي من أرقام الجوال أدناه وكلمة المرور 12345678",
+      "DemoWarning": "يرجى الانتباه إلى أن هذا إصدار تجريبي متاح للجميع، لذلك نوصي بعدم مشاركة أي بيانات حقيقية مثل الاسم أو رقم الهوية وما شابه. سيتم إعادة تعيين البيانات تلقائياً كل يوم.",
       "Details": "التفاصيل",
-      "Download": "تحميل الملف",
-      "DownloadAsExcel": "تنزيل البيانات في ملف Excel",
-      "FileCantBeReviewed": "لا يمكن عرض الملف",
-      "Logout": "خروج",
-      "NoData": "عذراً, لا يوجد بيانات للعرض",
-      "NoNotifications": "لا يوجد إشعارات",
+      "Download": "تحميل",
+      "FileCantBeReviewed": "لا يمكن معاينة الملف",
+      "Logout": "تسجيل الخروج",
+      "More": "المزيد",
+      "NoData": "لا توجد بيانات",
+      "NoNotifications": "لا توجد إشعارات",
       "Of": "من",
-      "Order": {
-        "01": "الأول",
-        "02": "الثاني",
-        "03": "الثالث",
-        "04": "الرابع",
-        "05": "الخامس",
-        "06": "السادس",
-        "07": "السابع",
-        "08": "الثامن",
-        "09": "التاسع",
-        "1": "الأولى",
-        "2": "الثانية",
-        "3": "الثالثة",
-        "4": "الرابعة",
-        "5": "الخامسة",
-        "6": "السادسة",
-        "7": "السابعة",
-        "8": "الثامنة",
-        "9": "التاسعة"
-      },
       "PageNo": "رقم الصفحة",
       "PageSize": "حجم الصفحة",
-      "PhoneNumber": "رقم الجوال",
-      "Results": "نتائج",
+      "PhoneNumber": "رقم الهاتف",
+      "Results": "النتائج",
       "Roles": {
-        "accountant": "مدير مالي",
+        "accountant": "محاسب",
         "admin": "مدير النظام",
-        "applicant": "متقدم بطلب تسجيل",
-        "beneficiary": "مستفيد",
-        "ceo": "مدير / رئيس",
-        "hod": "مدير الباحثين",
-        "researcher": "باحث اجتماعي"
+        "applicant": "مُتقدِّم",
+        "ceo": "المدير التنفيذي",
+        "hod": "رئيس القسم",
+        "researcher": "باحث",
+        "user": "مستخدم"
       },
       "Search": "بحث",
       "Showing": "عرض",
       "ThisWeek": "هذا الأسبوع",
-      "Today": "هذا اليوم",
-      "WrongUrl": "عذراً, العنوان المطلوب خاطئ",
-      "YourOwn": "الخاص بكم"
+      "Today": "اليوم",
+      "Update": "تعديل {{item}}",
+      "View": "عرض {{item}}",
+      "WrongUrl": "رابط غير صحيح",
+      "YourOwn": "الخاصة بك"
+    },
+    "Loading": "جاري التحميل",
+    "Notifications": {
+      "Successful": "تم بنجاح {{action}}"
+    },
+    "Placeholders": {
+      "Search": "بحث..."
+    },
+    "Table": {
+      "Export": {
+        "Export": "تصدير",
+        "Filters": {
+          "AddFilters": "إضافة فلاتر",
+          "Field": "الحقل",
+          "Operators": {
+            "Equals": "يساوي",
+            "GreaterThan": "أكبر من",
+            "GreaterThanOrEqual": "أكبر من أو يساوي",
+            "LessThan": "أصغر من",
+            "LessThanOrEqual": "أصغر من أو يساوي",
+            "NotEquals": "لا يساوي",
+            "Title": "العملية المنطقية"
+          },
+          "Value": "القيمة"
+        },
+        "SelectFieldsToExport": "اختيار الحقول للتصدير...",
+        "Title": "تصدير",
+        "Type": {
+          "CSV": "ملف CSV",
+          "Excel": "ملف Excel",
+          "PDF": "ملف PDF",
+          "Print": "طباعة",
+          "Title": "نوع التصدير"
+        }
+      }
     }
   },
   "Public": {
     "ForgotPassword": {
       "GotOtp": {
-        "Title": "استلام رمز التحقق OTP"
+        "Title": "هل وصلك رمز التحقق؟"
       },
       "ResetPassword": {
-        "NewPassword": "كلمة السر الجديدة",
-        "NewPasswordConfirmation": "تأكيد كلمة السر الجديدة",
-        "OldPassword": "كلمة السر الحالية",
-        "ResetPassword": "إعادة تعيين كلمة السر",
-        "Title": "إعادة تعيين كلمة السر"
+        "NewPassword": "كلمة المرور الجديدة",
+        "NewPasswordConfirmation": "تأكيد كلمة المرور الجديدة",
+        "OldPassword": "كلمة المرور الحالية",
+        "ResetPassword": "إعادة تعيين كلمة المرور",
+        "Title": "إعادة تعيين كلمة المرور"
       },
       "SendOtp": {
-        "ConfirmOTP": "تأكيد رمز التحقق OTP",
+        "ConfirmOTP": "تأكيد رمز التحقق",
         "SendOtp": "إرسال رمز التحقق"
       },
-      "Title": "نسيت كلمة السر"
+      "Title": "نسيت كلمة المرور"
     },
     "Login": {
       "Labels": {
-        "DidUForgotPassword": "هل نسيت كلمة السر؟",
+        "DidUForgotPassword": "هل نسيت كلمة المرور؟",
+        "DummyLogin": "تسجيل دخول تجريبي",
         "Login": "تسجيل الدخول",
-        "LoginAsAccountant": "تسجيل الدخول كمدير مالي",
-        "LoginAsAdmin": "تسجيل الدخول كمدير النظام",
-        "LoginAsApplicant": "تسجيل الدخول كمتقدم بطلب تسجيل ",
-        "LoginAsBeneficiary": "تسجيل الدخول كمستفيد مسجل بالجمعية",
-        "LoginAsCeo": "تسجيل الدخول كمدير تنفيذي",
-        "LoginAsCommitteeHead": "تسجيل الدخول كرئيس لجنة",
-        "LoginAsHod": "تسجيل الدخول كمدير للباحثين",
-        "LoginAsResearcher": "تسجيل الدخول كباحث اجتماعي",
-        "Password": "كلمة السر",
+        "Password": "كلمة المرور",
         "PhoneNo": "رقم الجوال",
-        "Success": "أهلاً بكم مجدداً {{name}}"
+        "Success": "تم تسجيل الدخول بنجاح"
       },
       "Title": "تسجيل الدخول"
     },
     "Otp": {
-      "CheckSms": "تحقق من رسائل هاتفك وادخل رقم التحقق (OTP)",
-      "Title": "رمز التحقق OTP"
+      "CheckSms": "تحقق من الرسائل القصيرة",
+      "Title": "رمز التحقق (OTP)"
     },
     "PrivacyPolicy": {
-      "Acknowledgment": "الأقرار بما يلي:",
-      "Point1": "أقر وأوافق على قيام الجهة القائمة على نظام 'مستحق' بجمع ومعالجة بياناتي الشخصية, بما يشمل – على سبيل المثال لا الحصر – البيانات العامة, الاقتصادية, الصحية, السكنية, وأي بيانات ضرورية لتقييم الاستحقاق.",
-      "Point2": "تم إبلاغي بأغراض جمع البيانات وكيفية استخدامها, وهي محصورة في تقييم الأهلية للحصول على الدعم.",
-      "Point3": "أفهم أن بياناتي ستُستخدم فقط للأغراض المذكورة ولن يتم مشاركتها مع أي جهة دون إذن مسبق أو وفقًا لما ينص عليه النظام.",
-      "Point4": "أقر بأن لي الحق في طلب الوصول إلى بياناتي, وتصحيحها أو حذفها عند الحاجة, حسب ما ورد في النظام.",
-      "Point5": "أوافق طوعًا دون ضغط على جمع ومعالجة بياناتي لأغراض تقديم الخدمة أو المساعدة الاجتماعية.",
-      "Point6": "أدرك أن سحب الموافقة لاحقًا لا يؤثر على مشروعية المعالجة التي تمت قبل السحب.",
-      "Title": "سياسية الخصوصية"
+      "Acknowledgment": "إقرار",
+      "Point1": "البند 1",
+      "Point2": "البند 2",
+      "Point3": "البند 3",
+      "Point4": "البند 4",
+      "Point5": "البند 5",
+      "Point6": "البند 6",
+      "Title": "سياسة الخصوصية"
     },
     "Register": {
       "Labels": {
-        "ByClickYouAccept": "بالضغط على \"إنشاء حساب\", فإنك توافق على",
-        "DidNotGetOtp": "لم تصلك الرسالة؟",
-        "Name": "الاسم",
-        "Password": "كلمة السر",
-        "PasswordConfirmation": "تأكيد كلمة السر",
+        "DidNotGetOtp": "لم يصلك رمز التحقق؟",
+        "Password": "كلمة المرور",
+        "PasswordConfirmation": "تأكيد كلمة المرور",
         "PhoneNo": "رقم الجوال",
-        "PrivacyPolicyTermsConditions": "سياسة الخصوصية وشروط الاستخدام",
-        "Register": "إنشاء حساب",
-        "ResendOtp": "إعادة الإرسال",
-        "Success": "تم التسجيل بنجاح. يمكنك الآن تسجيل الدخول"
+        "Register": "تسجيل",
+        "ResendOtp": "إعادة إرسال رمز التحقق",
+        "Success": "تم التسجيل بنجاح"
       },
-      "Title": "إنشاء حساب"
+      "Title": "تسجيل حساب جديد"
     },
     "TermsConditions": {
-      "Point1": "يقر المستخدم بأن البيانات المقدمة صحيحة وكاملة وحديثة.",
-      "Point2": "يلتزم المستخدم باستخدام المنصة فقط للأغراض المخصصة لها, وعدم إساءة استخدامها.",
-      "Point3": "تحتفظ الجهة القائمة على النظام بالحق في تعديل شروط الاستخدام وسياسة الخصوصية في أي وقت.",
-      "Point4": "يعتبر إنشاء الحساب أو استخدام المنصة موافقة صريحة على هذه الشروط والسياسات.",
-      "Title": "شروط الاستخدام"
+      "Point1": "البند 1",
+      "Point2": "البند 2",
+      "Point3": "البند 3",
+      "Point4": "البند 4",
+      "Title": "الشروط والأحكام"
     }
-  },
-  "SelectProgram": "اختر البرنامج"
+  }
 }

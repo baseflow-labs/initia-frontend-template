@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { InputProps } from "..";
-import { commonInputClasses } from "../../../utils/consts";
+import { commonInputClasses } from "@/utils/consts";
 
 type Option = { value: string; label?: string };
 
@@ -92,7 +92,7 @@ const SelectAddInput: React.FC<FinalInput> = ({
           ) : searchTerm.trim() ? (
             <li>
               <button
-                className="dropdown-item text-success"
+                className="dropdown-item text-dark"
                 type="button"
                 onClick={handleCreate}
               >
