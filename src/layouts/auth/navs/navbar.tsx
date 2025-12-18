@@ -49,13 +49,12 @@ const DashboardNavbar = ({
 
   useLayoutEffect(() => {
     NotificationApi.get()
-      .then((res) =>
+      .then((res) => {
+        const payload = "data" in res ? res.data.payload : res.payload;
         setNotification(
-          res.data.payload?.sort((a: Notification, b: Notification) =>
-            a.createdAt > b.createdAt ? -1 : 1
-          )
-        )
-      )
+          payload?.sort((a: Notification, b: Notification) => (a.createdAt > b.createdAt ? -1 : 1))
+        );
+      })
       .catch(apiCatchGlobalHandler);
   }, []);
 
