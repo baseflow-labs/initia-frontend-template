@@ -1,6 +1,6 @@
 {
   "name": "app-nest-fe",
-  "description": "AppNest React.js TypeScript Frontend App",
+  "description": "Initia React.js TypeScript Frontend App",
   "version": "0.1.0",
   "private": true,
   "scripts": {

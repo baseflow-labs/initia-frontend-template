@@ -1,6 +1,6 @@
-# AppNest Frontend Dashboard Template
+# Initia Frontend Dashboard Template
 
-A production-ready, open-source frontend dashboard built with **React + TypeScript + Vite**, designed to work seamlessly with AppNest-generated backends.
+A production-ready, open-source frontend dashboard built with **React + TypeScript + Vite**, designed to work seamlessly with Initia-generated backends.
 
 This template is suitable for:
 
@@ -58,7 +58,7 @@ We provide **two separate guides**, depending on your background:
 
 ## 🧰 Tech Stack (Quick Overview)
 
-- [AppNest](https://appnest.io/) (backend generator)
+- [Initia](https://initia.io/) (backend generator)
 - [React 19](https://reactjs.org/) + [TypeScript](https://www.typescriptlang.org/)
 - [Vite](https://vitejs.dev/) (fast dev & build)
 - [Bootstrap 5](https://getbootstrap.com/) + [SCSS](https://sass-lang.com/)

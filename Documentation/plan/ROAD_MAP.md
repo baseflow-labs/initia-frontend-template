@@ -231,6 +231,8 @@ Implement only the “must-have knobs” first:
 
 ## To Plan / Backlog (Post-Roadmap)
 
+- [ ] Open-search integration (ElasticSearch / MeiliSearch)
+- [ ] Blockchain integration (basic support for data storage/verification)
 - [ ] Multi-tenant support (orgs, subdomains, data isolation)
 - [ ] Generate automated tests (unit + integration) for core components
 - [ ] Build form analytics (submission stats, abandonment rates)

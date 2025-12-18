@@ -18,7 +18,7 @@ export type Action =
 
 const initialState: State = {
   fontSize: parseInt(localStorage.getItem("fontSize") || "") || 15,
-  name: localStorage.getItem("name") || "AppNest",
+  name: localStorage.getItem("name") || "Initia",
   logo: localStorage.getItem("logo") || null,
   phoneNumber: localStorage.getItem("phoneNumber") || "",
 };
@@ -32,17 +32,18 @@ const settings = (state: State = initialState, action: Action): State => {
         fontSize: action.size,
       };
 
-    case "setMetadata":
+    case "setMetadata": {
       const { name, logo, phoneNumber } = action.data;
 
-      name && localStorage.setItem("name", String(name));
-      logo && localStorage.setItem("logo", String(logo));
-      phoneNumber && localStorage.setItem("phoneNumber", String(phoneNumber));
+      if (name) localStorage.setItem("name", String(name));
+      if (logo) localStorage.setItem("logo", String(logo));
+      if (phoneNumber) localStorage.setItem("phoneNumber", String(phoneNumber));
 
       return {
         ...action.data,
         ...state,
       };
+    }
 
     default:
       return state;

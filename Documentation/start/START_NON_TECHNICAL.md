@@ -46,7 +46,7 @@ Forking creates **your own copy** of the project.
 
 1. Click the **Fork** button (top-right)
 2. Choose your GitHub account
-3. Name it `appnest-frontend` (or any name you like)
+3. Name it `initia-frontend` (or any name you like)
 4. Wait for GitHub to finish
 
 You now have your own version of the app, which later you could customize however you see fit.
@@ -70,7 +70,7 @@ and run the following commands:
 
 ```bash
 git clone <your-fork-url>
-cd appnest-frontend
+cd initia-frontend
 npm install
 npm run dev
 ```

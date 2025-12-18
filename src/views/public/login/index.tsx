@@ -40,7 +40,7 @@ const LoginView = () => {
   const onSubmit = (values: authApi.loginCredentials) => {
     authApi
       .login(values)
-      .then((res: any) => {
+      .then((res) => {
         dispatch(
           addNotification({
             msg: t("Public.Login.Labels.Success", {
@@ -56,9 +56,7 @@ const LoginView = () => {
   const onDummySubmit = () => {
     dispatch(
       addNotification({
-        msg: t("Public.Login.Labels.Success", {
-          name: "Dummy Admin User",
-        }),
+        msg: "Welcome Initia Dummy Admin User",
       })
     );
     dispatch(

@@ -2,15 +2,14 @@ import api, { demoStatus } from "..";
 
 const mainPath = "/notification";
 
-const get = async () => {  
-  if (demoStatus)
-  {
+const get = async () => {
+  if (demoStatus) {
     return {
       payload: [
         {
           id: "1",
-          title: "Welcome to AppNest!",
-          message: "Thank you for using AppNest. We hope you have a great experience!",
+          title: "Welcome to Initia!",
+          message: "Thank you for using Initia. We hope you have a great experience!",
           service: "System",
           important: false,
           isRead: false,
@@ -25,8 +24,8 @@ const get = async () => {
           isRead: false,
           createdAt: "2024-06-01T12:00:00Z",
         },
-      ]
-    }
+      ],
+    };
   }
   return await api.get(mainPath);
 };

@@ -3,24 +3,19 @@ import store, { RootState } from "@/store/store";
 
 const mainPath = "/user";
 
-const getAll = async ({
-  filters,
-  page,
-  capacity,
-  customFilters,
-}: GetDataProps) => {
+const getAll = async ({ filters, page, capacity, customFilters }: GetDataProps) => {
   if (demoStatus) {
     return {
       payload: [
         {
           id: "1",
           fullName: "Demo Admin User",
-          email: "demo.admin@appnest.com",
+          email: "demo.admin@initia.com",
         },
         {
           id: "2",
           fullName: "Demo User",
-          email: "demo.user@appnest.com",
+          email: "demo.user@initia.com",
         },
       ],
     };
@@ -46,7 +41,7 @@ const getByUserId = async (id?: string) => {
     return {
       payload: {
         fullName: "Demo User",
-        email: "demo.user@appnest.com",
+        email: "demo.user@initia.com",
       },
     };
   }
