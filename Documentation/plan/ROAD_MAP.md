@@ -99,10 +99,11 @@
 - [ ] Fix changelog generating script (make it deterministic, supports conventional commits, handles merges)
 - [x] Update documentation (README, commit convention, local dev, release flow)
 - [ ] “Definition of Done” checklist for PRs (release notes, docs, migrations, screenshots)
+- [ ] Build how to start customization guide (brand, services build)
 - [ ] Build workflows
   - [x] Auto-release on merge to main
   - [x] PR title checks (conventional commits)
-  - [ ] Lint + format + typecheck + test on PRs
+  - [x] Lint + format + typecheck + test on PRs
   - [ ] CodeQL
 
 ### Sprint 17 — Repo structure: Vite + Turbo baseline (1 - 14 Jan, 2026)
@@ -112,6 +113,7 @@
 - [ ] Set shared lint/format/build tasks + caching
 - [ ] Prep “analysis tools integration” skeleton (packages/analysis placeholder + interface contracts)
 - [ ] Sign with generator details (every code file + footer)
+- [ ] Brand the app with identity (logo, colors, fonts)
 
 ## Phase 6 — Core UI Engine (Forms + DataTable) (15 Jan - 10 Mar, 2026)
 
