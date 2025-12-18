@@ -51,7 +51,7 @@ const DashboardNavbar = ({
     NotificationApi.get()
       .then((res) =>
         setNotification(
-          res.payload?.sort((a: Notification, b: Notification) =>
+          res.data.payload?.sort((a: Notification, b: Notification) =>
             a.createdAt > b.createdAt ? -1 : 1
           )
         )
