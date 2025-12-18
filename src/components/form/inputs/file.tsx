@@ -1,4 +1,4 @@
-import { faFile, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faFile, faFilePdf, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useField } from "formik";
 import React, { useEffect, useRef, useState } from "react";
@@ -20,12 +20,17 @@ type FinalInput = React.InputHTMLAttributes<HTMLInputElement> &
     name: string;
   };
 
+interface UploadedFile {
+  path: string;
+  id: string;
+}
+
 const FileInput: React.FC<FinalInput> = ({
   name,
   accept,
   fileSizeLimit = 2,
   maxFiles = 3,
-  ...rest
+  // ...rest
 }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -33,9 +38,9 @@ const FileInput: React.FC<FinalInput> = ({
     useField<{ name: string; type: string; id: string; path: string }[]>(name);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [uploading, setUploading] = useState(false);
-  const [files, setFiles] = useState<
-    { name: string; type: string; id: string; path: string }[]
-  >([]);
+  const [files, setFiles] = useState<{ name: string; type: string; id: string; path: string }[]>(
+    []
+  );
 
   const handleClick = () => {
     inputRef.current?.click();
@@ -43,7 +48,7 @@ const FileInput: React.FC<FinalInput> = ({
 
   useEffect(() => {
     if (field.value && field.value.length) {
-      const restoredFiles = field.value.map((pathOrObj: any) => {
+      const restoredFiles = field.value.map((pathOrObj: UploadedFile) => {
         const path = typeof pathOrObj === "string" ? pathOrObj : pathOrObj.path;
 
         const name = path.split("/").pop() || "file";
@@ -69,9 +74,7 @@ const FileInput: React.FC<FinalInput> = ({
     const remainingSlots = maxFiles - files.length;
     const filesToUpload = selectedFiles.slice(0, remainingSlots);
 
-    const oversizedFiles = filesToUpload.filter(
-      (f) => f.size / (1024 * 1024) > fileSizeLimit
-    );
+    const oversizedFiles = filesToUpload.filter((f) => f.size / (1024 * 1024) > fileSizeLimit);
     if (oversizedFiles.length) {
       dispatch(
         addNotification({
@@ -96,20 +99,20 @@ const FileInput: React.FC<FinalInput> = ({
         const formData = new FormData();
         formData.append("file", file);
 
-        const res: any = await FileApi.create(formData);
-        const fileId = res.id;
+        const res = await FileApi.create(formData);
+        const uploadedFile: UploadedFile = res.data;
         newFilesMeta.push({
           name: file.name,
           type: file.type,
-          id: fileId,
-          path: res.path,
+          id: uploadedFile.id,
+          path: uploadedFile.path,
         });
       }
 
       // Update React state and Formik field once
       setFiles((prev) => [...prev, ...newFilesMeta]);
       helpers.setValue([...(field.value || []), ...newFilesMeta]);
-    } catch (error) {
+    } catch {
       dispatch(
         addNotification({
           type: "err",
@@ -131,7 +134,7 @@ const FileInput: React.FC<FinalInput> = ({
   };
 
   const generateFileIcon = (type: string) => {
-    return <FontAwesomeIcon icon={faFile} className="text-dark" />;
+    return <FontAwesomeIcon icon={type === "pdf" ? faFilePdf : faFile} className="text-dark" />;
   };
 
   return (
@@ -149,16 +152,14 @@ const FileInput: React.FC<FinalInput> = ({
         {files.map((file, index) => (
           <div key={file.id} className="file-wrapper">
             <div className="file-row">
-              <div className="icon-container">
-                {generateFileIcon(file.type)}
-              </div>
+              <div className="icon-container">{generateFileIcon(file.type)}</div>
 
               <div className="file-count-badge">{index + 1}</div>
             </div>
 
             <div className="d-flex mt-2 justify-content-center align-items-center">
               <div className="text-truncate" style={{ maxWidth: 80 }}>
-                <a href={file.path} target="_blank">
+                <a href={file.path} target="_blank" rel="noreferrer">
                   {file.name}
                 </a>
               </div>
@@ -176,9 +177,7 @@ const FileInput: React.FC<FinalInput> = ({
         ))}
 
         <div
-          className={`upload-dropzone ${
-            files.length >= maxFiles ? "disabled" : ""
-          }`}
+          className={`upload-dropzone ${files.length >= maxFiles ? "disabled" : ""}`}
           onClick={files.length < maxFiles ? handleClick : undefined}
         >
           {uploading ? (
