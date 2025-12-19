@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 
 import * as authApi from "@/api/auth";
 import Form from "@/components/form";
-import { login } from "@/store/actions/auth";
+import { AuthResponse, login } from "@/store/actions/auth";
 import { addNotification } from "@/store/actions/notifications";
 import { apiCatchGlobalHandler } from "@/utils/function";
 import { formInputs } from "./inputs";
@@ -12,18 +12,20 @@ const RegisterView = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
-  const onSubmit = (values: authApi.registerProps) => {
+  const onSubmit = (values?: Record<string, unknown>) => {
     authApi
-      .register(values)
-      .then((res: any) => {
+      .register(values as unknown as authApi.registerProps)
+      .then((res) => {
+        const apiData = (res?.data || {}) as Record<string, unknown>;
+        const payload = (apiData?.payload || apiData) as AuthResponse;
         dispatch(
           addNotification({
             msg: t("Public.Register.Labels.Success", {
-              name: res.payload.user.name,
+              name: payload?.user?.name,
             }),
           })
         );
-        dispatch(login(res.payload));
+        dispatch(login(payload));
       })
       .catch(apiCatchGlobalHandler);
   };

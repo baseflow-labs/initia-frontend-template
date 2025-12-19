@@ -90,14 +90,16 @@ export interface InputProps extends InputSingleProps {
   belowComp?: React.ReactNode;
 }
 
-interface Props extends React.FormHTMLAttributes<HTMLFormElement> {
-  onFormSubmit?: (values?: unknown, reset?: () => void) => void;
-  inputs: (formik: FormikProps<Record<string, unknown>>) => InputProps[];
+interface Props<
+  T extends Record<string, unknown> = Record<string, unknown>,
+> extends React.FormHTMLAttributes<HTMLFormElement> {
+  onFormSubmit?: (values?: T, reset?: () => void) => void;
+  inputs: (formik: FormikProps<T>) => InputProps[];
   submitText?: string;
   submitColor?: string;
   initialValues?: object;
   customButtons?: React.ReactNode;
-  customValidate?: (values: Record<string, unknown>) => FormikErrors<Record<string, unknown>>;
+  customValidate?: (values: T) => FormikErrors<T>;
 }
 
 export const LabelView = ({ labelNote, label, required }: Partial<InputSingleProps>) => (

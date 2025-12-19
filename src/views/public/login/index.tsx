@@ -37,9 +37,13 @@ const LoginView = () => {
     },
   ];
 
-  const onSubmit = (values: authApi.loginCredentials) => {
+  const onSubmit = (values?: Record<string, unknown>) => {
+    const credentials = {
+      identifier: (values?.identifier as string) || "",
+      password: (values?.password as string) || "",
+    };
     authApi
-      .login(values)
+      .login(credentials)
       .then((res) => {
         dispatch(
           addNotification({

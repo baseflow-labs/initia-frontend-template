@@ -16,30 +16,32 @@ const SecuritySettingsTab = () => {
   const dispatch = useDispatch();
   const { user } = useAppSelector((state) => state.auth);
 
-  const onPasswordResetSubmit = (values: Record<string, any> = {}) => {
-    import.meta.env.VITE_APP_ENVIRONMENT === "staging"
-      ? dispatch(
-          addNotification({
-            type: "err",
-            msg: t("Global.Form.Labels.UnAvailableForDemoMode"),
-          })
-        )
-      : AuthApi.resetMyPassword(values)
-          .then(() => {
-            dispatch(
-              addNotification({
-                msg: t("Global.Form.SuccessMsg", {
-                  action: t("Global.Form.Labels.Update"),
-                  data: t("Auth.Settings.User.Security.Title"),
-                }),
-              })
-            );
-          })
-          .catch(apiCatchGlobalHandler);
+  const onPasswordResetSubmit = (values?: Record<string, unknown>) => {
+    if (import.meta.env.VITE_APP_ENVIRONMENT === "staging") {
+      dispatch(
+        addNotification({
+          type: "err",
+          msg: t("Global.Form.Labels.UnAvailableForDemoMode"),
+        })
+      );
+    } else {
+      AuthApi.resetMyPassword(values || {})
+        .then(() => {
+          dispatch(
+            addNotification({
+              msg: t("Global.Form.SuccessMsg", {
+                action: t("Global.Form.Labels.Update"),
+                data: t("Auth.Settings.User.Security.Title"),
+              }),
+            })
+          );
+        })
+        .catch(apiCatchGlobalHandler);
+    }
   };
 
-  const validatePasswords = (values: Record<string, any>) => {
-    const errors: FormikErrors<Record<string, any>> = {};
+  const validatePasswords = (values: Record<string, unknown>) => {
+    const errors: FormikErrors<Record<string, unknown>> = {};
     if (values.password !== values.passwordConfirmation) {
       errors.passwordConfirmation = t("Global.Form.Errors.PasswordMatch");
     }
