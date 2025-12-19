@@ -19,7 +19,7 @@ const SystemSettingsTab = () => {
       initialValues={{ fontSize }}
       submitText={t("Global.Form.Labels.Save")}
       onFormSubmit={(values) => {
-        dispatch(setFontSize(values.fontSize));
+        dispatch(setFontSize(values?.fontSize as number));
         dispatch(
           addNotification({
             msg: t("Global.Form.SuccessMsg", {

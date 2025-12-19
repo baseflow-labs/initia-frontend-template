@@ -91,7 +91,7 @@ export interface InputProps extends InputSingleProps {
 }
 
 interface Props extends React.FormHTMLAttributes<HTMLFormElement> {
-  onFormSubmit?: (values: Record<string, unknown>, reset: () => void) => void;
+  onFormSubmit?: (values?: unknown, reset?: () => void) => void;
   inputs: (formik: FormikProps<Record<string, unknown>>) => InputProps[];
   submitText?: string;
   submitColor?: string;
