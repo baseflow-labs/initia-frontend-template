@@ -1,8 +1,4 @@
-import {
-  faDashboard,
-  faGear,
-  faTable,
-} from "@fortawesome/free-solid-svg-icons";
+import { faDashboard, faGear, faTable } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes, useLocation } from "react-router";
@@ -28,6 +24,17 @@ import { FilePreviewModal } from "./globalModal";
 import DashboardNavbar from "./navs/navbar";
 import OffCanvasNav from "./navs/offcanvasNav";
 import Sidebar from "./navs/sidebarNav";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
+
+interface AuthRoute {
+  name: string;
+  route: string;
+  view: React.ReactNode;
+  showInNav?: boolean;
+  icon: IconProp;
+  fixed?: boolean;
+  subRoute?: AuthRoute[];
+}
 
 const AuthLayout = () => {
   const { t, i18n } = useTranslation();
@@ -37,7 +44,7 @@ const AuthLayout = () => {
 
   const [collapsed, setCollapsed] = useState(true);
 
-  const authRoutes = [
+  const authRoutes: AuthRoute[] = [
     {
       name: t("Auth.Dashboard.Title"),
       route: "/dashboard",
@@ -148,22 +155,16 @@ const AuthLayout = () => {
   //   users.includes(user.role)
   // );
 
-  const filteredFixedRoutes = authRoutes.filter(
-    ({ fixed, showInNav }) => fixed && showInNav
-  );
+  const filteredFixedRoutes = authRoutes.filter(({ fixed, showInNav }) => fixed && showInNav);
 
   const toggleSidebar = () => setCollapsed((current) => !current);
 
   return (
     <Fragment>
       {/* <DemoWarning /> */}
-      <DashboardNavbar />
-
       <OffCanvasNav
         fixedRoutes={filteredFixedRoutes}
-        routes={authRoutes
-          .filter(({ showInNav, fixed }) => showInNav && !fixed)
-          .map(({ view, ...rest }) => ({ ...rest }))}
+        routes={authRoutes.filter(({ showInNav, fixed }) => showInNav && !fixed)}
       />
 
       <main className="d-flex pb-5">
@@ -180,9 +181,7 @@ const AuthLayout = () => {
               collapsed={collapsed}
               toggleSidebar={toggleSidebar}
               fixedRoutes={filteredFixedRoutes}
-              routes={authRoutes
-                .filter(({ showInNav, fixed }) => showInNav && !fixed)
-                .map(({ view, ...rest }) => ({ ...rest }))}
+              routes={authRoutes.filter(({ showInNav, fixed }) => showInNav && !fixed)}
             />
           </div>
         )}
@@ -210,8 +209,10 @@ const AuthLayout = () => {
           }}
         >
           <div className="p-0 px-2 px-lg-5 w-100">
+            <DashboardNavbar />
+
             <Routes>
-              {authRoutes.map(({ name, route, view }, i) => (
+              {authRoutes.map(({ route, view }, i) => (
                 <Route path={route} element={view} key={i} />
               ))}
 

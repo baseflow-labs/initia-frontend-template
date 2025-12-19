@@ -73,8 +73,8 @@ const DashboardNavbar = ({
   // };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-white py-4 mt-2 me-4 ms-0 ps-0 mb-3">
-      <div className="row w-100 justify-content-between">
+    <nav className="navbar navbar-expand-lg navbar-light py-4 mt-2 mx-2 ms-0 ps-0 mb-3">
+      <div className="row w-100 justify-content-between bg-white rounded-2">
         <div className="col-6 col-lg-1 d-block d-lg-none order-1 order-lg-3">
           <button
             className="btn btn-ghost"
@@ -106,8 +106,8 @@ const DashboardNavbar = ({
           )}
         </div>
 
-        <div className="col-6 col-lg-2 pb-3 order-2 order-lg-2">
-          <div className="d-flex align-items-end gap-3 pe-5 float-end">
+        <div className="col-6 col-lg-2 py-2 order-2 order-lg-2">
+          <div className="d-flex justify-content-end align-items-center gap-3 px-2">
             <DropdownComp
               button={
                 <div className="position-relative">
