@@ -52,7 +52,7 @@ const AuthLayout = () => {
 
   return (
     <main className="overflow-x-hidden">
-      <div className="min-vh-100 vw-100 d-flex justify-content-center align-items-center public-bg-image px-3 px-lg-4 py-3">
+      <div className="min-vh-100 vw-100 d-flex justify-content-center align-items-center px-3 px-lg-4 py-3">
         <div
           className="card pt-4 px-2 px-lg-4 rounded-5"
           style={

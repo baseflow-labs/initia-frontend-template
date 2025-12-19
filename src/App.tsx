@@ -40,19 +40,21 @@ const App = () => {
   }, []);
 
   return (
-    <BrowserRouter>
-      <Suspense fallback={<Spinner />}>
-        <NotificationsToaster />
+    <div className="bg-secondary">
+      <BrowserRouter>
+        <Suspense fallback={<Spinner />}>
+          <NotificationsToaster />
 
-        <Routes>
-          {accessToken !== "null" ? (
-            <Route path="*" element={<AuthLayout />} />
-          ) : (
-            <Route path="*" element={<PublicLayout />} />
-          )}
-        </Routes>
-      </Suspense>
-    </BrowserRouter>
+          <Routes>
+            {accessToken !== "null" ? (
+              <Route path="*" element={<AuthLayout />} />
+            ) : (
+              <Route path="*" element={<PublicLayout />} />
+            )}
+          </Routes>
+        </Suspense>
+      </BrowserRouter>
+    </div>
   );
 };
 
