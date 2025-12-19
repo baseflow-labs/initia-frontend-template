@@ -41,7 +41,7 @@ const UserProfileOverviewView = () => {
       <div className="card-body">
         <div className="row gy-3">
           <div className="col-md-4 col-6">
-            <div className="border rounded-3 p-3 bg-light">
+            <div className="border rounded-2 p-3 bg-light">
               <div className="text-muted small mb-1">
                 {t("Auth.Profile.Stats.Tasks", "Task Compiled")}
               </div>
@@ -49,7 +49,7 @@ const UserProfileOverviewView = () => {
             </div>
           </div>
           <div className="col-md-4 col-6">
-            <div className="border rounded-3 p-3 bg-light">
+            <div className="border rounded-2 p-3 bg-light">
               <div className="text-muted small mb-1">
                 {t("Auth.Profile.Stats.Projects", "Projects Compiled")}
               </div>
@@ -57,7 +57,7 @@ const UserProfileOverviewView = () => {
             </div>
           </div>
           <div className="col-md-4 col-6">
-            <div className="border rounded-3 p-3 bg-light">
+            <div className="border rounded-2 p-3 bg-light">
               <div className="text-muted small mb-1">
                 {t("Auth.Profile.Stats.Connections", "Connections")}
               </div>

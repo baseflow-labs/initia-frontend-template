@@ -9,6 +9,8 @@
 - [x] Fix calendar contents UI
 - [ ] Fix Layouts responsiveness
 - [ ] Apply React Activity Wrapper
-- [ ] Unify rounded corners across the app
+- [x] Unify rounded corners across the app
 - [ ] Fix on route change scroll to top
 - [ ] Build page breadcrumbs component
+- [ ] Fix Public Pages of password recovery / reset
+- [ ] Build Missing Privacy Policy and Terms of Service page links

@@ -99,7 +99,12 @@
 - [ ] Fix changelog generating script (make it deterministic, supports conventional commits, handles merges)
 - [x] Update documentation (README, commit convention, local dev, release flow)
 - [ ] “Definition of Done” checklist for PRs (release notes, docs, migrations, screenshots)
-- [ ] Build how to start customization guide (brand, services build)
+- [ ] Build config file
+  - [ ] Rounded corners value
+- [ ] Build how to start customization guide
+  - [x] App rebranding
+  - [ ] Config File
+  - [ ] Services build
 - [ ] Build workflows
   - [x] Auto-release on merge to main
   - [x] PR title checks (conventional commits)

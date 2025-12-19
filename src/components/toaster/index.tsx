@@ -37,12 +37,8 @@ const NotificationsToaster = () => {
         <div
           key={i}
           id={`toast-${id}`}
-          className={`toast text-white rounded-4 bg-${
-            type === "err"
-              ? "danger"
-              : type === "warning"
-              ? "warning"
-              : "success"
+          className={`toast text-white rounded-2 bg-${
+            type === "err" ? "danger" : type === "warning" ? "warning" : "success"
           }`}
           role="alert"
           aria-live="assertive"
@@ -52,7 +48,7 @@ const NotificationsToaster = () => {
             <div
               role="button"
               onClick={() => dispatch(removeNotification(id))}
-              className="me-2 rounded-3 p-1 text-white text-center"
+              className="me-2 rounded-2 p-1 text-white text-center"
               style={{
                 backgroundColor: "rgba(0, 0, 0, 0.35)",
                 fontSize: 10,
@@ -61,13 +57,7 @@ const NotificationsToaster = () => {
               }}
             >
               <FontAwesomeIcon
-                icon={
-                  type === "err"
-                    ? faXmark
-                    : type === "warning"
-                    ? faInfo
-                    : faCheck
-                }
+                icon={type === "err" ? faXmark : type === "warning" ? faInfo : faCheck}
                 className="text-white"
                 data-bs-dismiss="toast"
                 aria-label="Close"

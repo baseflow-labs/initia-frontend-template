@@ -20,7 +20,7 @@ const UserProfileConnectionsView = () => {
         <div className="row g-3">
           {connections.map((c) => (
             <div key={c.id} className="col-md-6 col-lg-4">
-              <div className="border rounded-3 p-3 h-100 d-flex flex-column justify-content-between">
+              <div className="border rounded-2 p-3 h-100 d-flex flex-column justify-content-between">
                 <div className="d-flex align-items-center mb-2">
                   <div
                     className="rounded-circle bg-secondary-subtle me-3"

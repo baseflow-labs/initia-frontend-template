@@ -47,7 +47,7 @@ export const MenuItemRenderer = ({
     }
   };
 
-  const itemClasses = `sidebar-link text-decoration-none p-2 rounded-3 mx-2 mb-1 transition-all cursor-pointer ${
+  const itemClasses = `sidebar-link text-decoration-none p-2 rounded-2 mx-2 mb-1 transition-all cursor-pointer ${
     isActive && !hasChildren ? "bg-primary text-white" : "text-dark"
   } ${collapsed && depth === 0 ? "text-center" : ""}`;
 

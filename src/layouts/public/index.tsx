@@ -54,7 +54,7 @@ const AuthLayout = () => {
     <main className="overflow-x-hidden">
       <div className="min-vh-100 vw-100 d-flex justify-content-center align-items-center px-3 px-lg-4 py-3">
         <div
-          className="card pt-4 px-2 px-lg-4 rounded-5"
+          className="card pt-4 px-2 px-lg-4 rounded-2"
           style={
             location.pathname === "/terms-conditions"
               ? { height: "100vh", width: "100%" }
@@ -73,7 +73,7 @@ const AuthLayout = () => {
 
             <div className="d-flex">
               {(location.pathname === "/" || location.pathname === "/register") && (
-                <div className="my-4 p-2 bg-light w-fit mx-auto rounded-5">
+                <div className="my-4 p-2 bg-light w-fit mx-auto rounded-2">
                   {publicRoutes
                     .filter(({ show }) => show)
                     .map(({ name, route }, i) => {
