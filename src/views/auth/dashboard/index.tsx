@@ -13,16 +13,12 @@ import { Notification } from "@/layouts/auth/navs/navbar";
 import PageTemplate from "@/layouts/auth/pages/pageTemplate";
 import { useAppSelector } from "@/store/hooks";
 import { viewDayDateFormat, viewTimeFormat } from "@/utils/consts";
-import {
-  apiCatchGlobalHandler,
-  renderDataFromOptions,
-  statusColorRender,
-} from "@/utils/function";
+import { apiCatchGlobalHandler, renderDataFromOptions, statusColorRender } from "@/utils/function";
 
 const DashboardView = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { name, logo } = useAppSelector((state) => state.settings);
+  const { name, logoFull } = useAppSelector((state) => state.settings);
   const { user } = useAppSelector((state) => state.auth);
   const [data, setData] = useState<{
     notifications?: Notification[];
@@ -35,19 +31,18 @@ const DashboardView = () => {
 
   useLayoutEffect(() => {
     OverviewApi.forUser()
-      .then((res: any) =>
+      .then((res) =>
         setData({
           ...res.payload,
-          notifications: res.payload.notifications?.sort(
-            (a: Notification, b: Notification) =>
-              a.createdAt > b.createdAt ? -1 : 1
+          notifications: res.payload.notifications?.sort((a: Notification, b: Notification) =>
+            a.createdAt > b.createdAt ? -1 : 1
           ),
         })
       )
       .catch(apiCatchGlobalHandler);
 
     UserApi.getByUserId()
-      .then((res: any) =>
+      .then((res) =>
         setProfile({
           ...res.payload,
         })
@@ -55,9 +50,7 @@ const DashboardView = () => {
       .catch(apiCatchGlobalHandler);
   }, []);
 
-  const statuses = [
-    { value: "Pending", label: t("Auth.Dashboard.Statuses.Pending") },
-  ];
+  const statuses = [{ value: "Pending", label: t("Auth.Dashboard.Statuses.Pending") }];
 
   const isUnacceptedUser = user.role === "user" && user.status !== "Accepted";
 
@@ -69,7 +62,7 @@ const DashboardView = () => {
             <div className="text-primary text-center py-5">
               <h1 className="mb-4">{t("Auth.Dashboard.Welcome")}</h1>
 
-              <img src={logo || tempLogo} alt="logo" className="my-5 w-100" />
+              <img src={logoFull || tempLogo} alt="logo" className="my-5 w-100" />
 
               <h4 className="display-4 mt-5 text-dark">{name}</h4>
             </div>
@@ -86,9 +79,7 @@ const DashboardView = () => {
               </div>
 
               <div className="col-6">
-                <h6 className="my-auto">
-                  {t("Auth.Dashboard.UserMembershipStatus")}
-                </h6>
+                <h6 className="my-auto">{t("Auth.Dashboard.UserMembershipStatus")}</h6>
               </div>
 
               <div className="col-6">
@@ -104,9 +95,7 @@ const DashboardView = () => {
               {isUnacceptedUser && (
                 <Fragment>
                   <div className="col-12 mt-5">
-                    <h3 className="mb-4">
-                      {t("Auth.Dashboard.ApplicationTimeline")}
-                    </h3>
+                    <h3 className="mb-4">{t("Auth.Dashboard.ApplicationTimeline")}</h3>
 
                     <ul className="timeline">
                       {data.statuses
@@ -114,9 +103,7 @@ const DashboardView = () => {
                         .map(({ status, createdAt }, i) => (
                           <li key={i}>
                             <div>
-                              {moment(createdAt).format(
-                                viewDayDateFormat + " @ " + viewTimeFormat
-                              )}
+                              {moment(createdAt).format(viewDayDateFormat + " @ " + viewTimeFormat)}
                             </div>
 
                             <div className="mt-3">
@@ -127,46 +114,37 @@ const DashboardView = () => {
                     </ul>
                   </div>
 
-                  <div className="col-12 mt-5">
-                    {t("Auth.Dashboard.UnacceptedUserNote")}
-                  </div>
+                  <div className="col-12 mt-5">{t("Auth.Dashboard.UnacceptedUserNote")}</div>
                 </Fragment>
               )}
 
               <div className="col-12">
-                <h3 className="my-5">
-                  {t("Auth.Dashboard.ImportantNotifications")}
-                </h3>
+                <h3 className="my-5">{t("Auth.Dashboard.ImportantNotifications")}</h3>
               </div>
 
-              <div
-                className="col-12"
-                style={{ maxHeight: "40vh", overflowY: "auto" }}
-              >
+              <div className="col-12" style={{ maxHeight: "40vh", overflowY: "auto" }}>
                 {data.notifications?.length
-                  ? data.notifications.map(
-                      ({ title, message, service, createdAt }, i) => (
-                        <div
-                          className="card mb-3 p-3 w-100"
-                          role="button"
-                          onClick={() => navigate("/" + service)}
-                          key={i}
-                        >
-                          <div className="row">
-                            <div className="col-1 col-lg-2 col-lg-1 my-auto text-warning">
-                              <h3>
-                                <FontAwesomeIcon icon={faInfo} />
-                              </h3>
-                            </div>
+                  ? data.notifications.map(({ message, service, createdAt }, i) => (
+                      <div
+                        className="card mb-3 p-3 w-100"
+                        role="button"
+                        onClick={() => navigate("/" + service)}
+                        key={i}
+                      >
+                        <div className="row">
+                          <div className="col-1 col-lg-2 col-lg-1 my-auto text-warning">
+                            <h3>
+                              <FontAwesomeIcon icon={faInfo} />
+                            </h3>
+                          </div>
 
-                            <div className="col-11 col-lg-10 col-lg-11 ps-4 text-break text-wrap">
-                              <h6 className="w-100">{message}</h6>
-                              <small>{moment(createdAt).fromNow()}</small>
-                            </div>
+                          <div className="col-11 col-lg-10 col-lg-11 ps-4 text-break text-wrap">
+                            <h6 className="w-100">{message}</h6>
+                            <small>{moment(createdAt).fromNow()}</small>
                           </div>
                         </div>
-                      )
-                    )
+                      </div>
+                    ))
                   : t("Global.Labels.NoNotifications")}
               </div>
             </div>

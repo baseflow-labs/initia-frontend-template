@@ -92,17 +92,23 @@
   - [x] Accordion and tabs-based data view components, plus modal/table/dropdown UI examples.
 - [x] Finalize updated documentation to-do list for next iterations.
 
-## Phase 5 — Foundation & Shipping Readiness (18 Dec - 14 Jan, 2026)
+## Phase 5 — Foundation & Shipping Readiness (18 Dec - 28 Jan, 2026)
 
 ### Sprint 16 — Release hygiene + documentation baseline (18 - 31 Dec, 2025)
 
 - [ ] Fix changelog generating script (make it deterministic, supports conventional commits, handles merges)
 - [x] Update documentation (README, commit convention, local dev, release flow)
 - [ ] “Definition of Done” checklist for PRs (release notes, docs, migrations, screenshots)
+- [ ] Build config file
+  - [ ] Rounded corners value
+- [ ] Build how to start customization guide
+  - [x] App rebranding
+  - [ ] Config File
+  - [ ] Services build
 - [ ] Build workflows
   - [x] Auto-release on merge to main
   - [x] PR title checks (conventional commits)
-  - [ ] Lint + format + typecheck + test on PRs
+  - [x] Lint + format + typecheck + test on PRs
   - [ ] CodeQL
 
 ### Sprint 17 — Repo structure: Vite + Turbo baseline (1 - 14 Jan, 2026)
@@ -112,10 +118,22 @@
 - [ ] Set shared lint/format/build tasks + caching
 - [ ] Prep “analysis tools integration” skeleton (packages/analysis placeholder + interface contracts)
 - [ ] Sign with generator details (every code file + footer)
+- [ ] Brand the app with identity (logo, colors, fonts)
 
-## Phase 6 — Core UI Engine (Forms + DataTable) (15 Jan - 10 Mar, 2026)
+### Sprint 18 — Initial dashboard contents (MVP set) (15 - 28 Jan, 2026)
 
-### Sprint 18 — Form engine: foundational input types (15 - 28 Jan, 2026)
+- [ ] Non-Admin dashboard v1:
+  - [ ] Account info card
+  - [ ] Notifications list
+  - [ ] Calendar basic block
+- [ ] Admin dashboard v1:
+  - [ ] Users stats + list
+  - [ ] System health basic widget (static placeholder + API hook)
+  - [ ] Subscriptions placeholder section
+
+## Phase 6 — Core UI Engine (Forms + DataTable) (29 Jan - 25 Mar, 2026)
+
+### Sprint 19 — Form engine: foundational input types (29 Jan - 11 Feb, 2026)
 
 - [ ] Build date/time input suite:
   - [ ] date, time, datetime, month, year, weekday
@@ -127,7 +145,7 @@
   - [ ] split form (two columns)
   - [ ] within-table editing (basic)
 
-### Sprint 19 — Form engine: advanced inputs + wizard v2 (29 Jan - 11 Feb, 2026)
+### Sprint 20 — Form engine: advanced inputs + wizard v2 (12 - 25 Feb, 2026)
 
 - [ ] Google maps picker (location input) — minimal integration
 - [ ] Multi-select with search + clear
@@ -137,7 +155,7 @@
   - [ ] resume draft
 - [ ] “Form-of-forms” base schema support (enough to render forms from config)
 
-### Sprint 20 — DataTable v2: server-side foundations (12 - 25 Feb, 2026)
+### Sprint 21 — DataTable v2: server-side foundations (26 Feb - 11 Mar, 2026)
 
 - [ ] Replace modals with dedicated CRUD pages
 - [ ] Server-side pagination + sorting + search (single search box)
@@ -147,7 +165,7 @@
 - [ ] Row selection + bulk actions (standard actions only)
 - [ ] LocalStorage persistence (v2): column visibility + order + pagination info + filters + sort + search
 
-### Sprint 21 — DataTable v2: advanced filters + layouts (26 Feb - 10 Mar, 2026)
+### Sprint 22 — DataTable v2: advanced filters + layouts (12 - 25 Mar, 2026)
 
 - [ ] Advanced filters builder (AND/OR + operators)
 - [ ] Default filter values
@@ -155,9 +173,9 @@
 - [ ] Responsive cards view (auto switch / manual toggle)
 - [ ] Scroll vs pagination mode (choose one as default; keep both optional)
 
-## Phase 7 — Views, Dashboards, and UX Platform Layer (11 Mar - 20 Apr, 2026)
+## Phase 7 — Views and UX Platform Layer (26 Mar - 22 Apr, 2026)
 
-### Sprint 22 — Themes + layout switchers (11 - 24 Mar, 2026)
+### Sprint 23 — Themes + layout switchers (26 Mar - 8 Apr, 2026)
 
 - [ ] Dark/light mode
 - [ ] Color theme switcher (primary/secondary + neutral surfaces)
@@ -165,27 +183,16 @@
 - [ ] Boxed/full-width layout option
 - [ ] Persist UI preferences (per user in localStorage first; later server)
 
-### Sprint 23 — Initial dashboard contents (MVP set) (25 Mar - 7 Apr, 2026)
-
-- [ ] Non-Admin dashboard v1:
-  - [ ] Account info card
-  - [ ] Notifications list
-  - [ ] Calendar basic block
-- [ ] Admin dashboard v1:
-  - [ ] Users stats + list
-  - [ ] System health basic widget (static placeholder + API hook)
-  - [ ] Subscriptions placeholder section
-
-### Sprint 24 — Data view options v2 (7 - 20 Apr, 2026)
+### Sprint 24 — Data view options v2 (9 - 22 Apr, 2026)
 
 - [ ] Kanban view (basic columns + drag optional later)
 - [ ] Gallery / photo grid view
 - [ ] Charts + stat cards (basic library + patterns)
 - [ ] Toaster/notifications system (app-wide)
 
-## Phase 8 — Backend APIs for Generator Features (21 Apr - 18 May, 2026)
+## Phase 8 — Backend APIs for Generator Features (23 Apr - 18 May, 2026)
 
-### Sprint 25 — Platform APIs v2 (21 Apr - 4 May, 2026)
+### Sprint 25 — Platform APIs v2 (23 Apr - 4 May, 2026)
 
 - [ ] Prepare API key for integration with other systems BE / FE apps.
 - [ ] API: return values of `TablesNames` (and metadata needed for generator)
@@ -229,6 +236,8 @@ Implement only the “must-have knobs” first:
 
 ## To Plan / Backlog (Post-Roadmap)
 
+- [ ] Open-search integration (ElasticSearch / MeiliSearch)
+- [ ] Blockchain integration (basic support for data storage/verification)
 - [ ] Multi-tenant support (orgs, subdomains, data isolation)
 - [ ] Generate automated tests (unit + integration) for core components
 - [ ] Build form analytics (submission stats, abandonment rates)

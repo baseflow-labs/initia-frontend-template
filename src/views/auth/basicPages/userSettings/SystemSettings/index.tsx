@@ -18,8 +18,8 @@ const SystemSettingsTab = () => {
       inputs={() => getCommonSettingInputs(t)}
       initialValues={{ fontSize }}
       submitText={t("Global.Form.Labels.Save")}
-      onFormSubmit={(values) => {
-        dispatch(setFontSize(values.fontSize));
+      onFormSubmit={(values?: Record<string, unknown>) => {
+        dispatch(setFontSize((values?.fontSize as unknown as number) || 0));
         dispatch(
           addNotification({
             msg: t("Global.Form.SuccessMsg", {

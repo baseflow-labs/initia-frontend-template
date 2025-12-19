@@ -61,7 +61,7 @@ const StatisticCards = ({ statistics }: Props) => {
                 </div>
 
                 <div className="col-lg-3 h3 text-end">
-                  <span className={`bg-opacity-${color} rounded-4 px-3 py-0`}>
+                  <span className={`bg-opacity-${color} rounded-2 px-3 py-0`}>
                     <FontAwesomeIcon icon={icon} className={`text-${color}`} />
                   </span>
                 </div>

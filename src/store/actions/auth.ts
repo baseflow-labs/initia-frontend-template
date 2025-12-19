@@ -5,6 +5,8 @@ export interface UserProps {
   username?: string;
   status?: string;
   role: string;
+  avatar?: string;
+  image?: string;
   // [key: string]: any;
 }
 

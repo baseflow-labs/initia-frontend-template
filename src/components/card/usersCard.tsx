@@ -36,44 +36,31 @@ const UsersCard = ({ label, researchers }: Props) => {
         </thead>
 
         <tbody>
-          {researchers.map(
-            (
-              { name, photo, usersCount, visitsCount, aidsCount, reportsCount },
-              i
-            ) => (
-              <tr
-                className={i === researchers.length - 1 ? "border-white" : ""}
-                key={i}
-              >
-                <td>
-                  <div className="d-flex py-2">
-                    <div>
-                      <img
-                        src={photo}
-                        height={60}
-                        className="me-3 rounded-4"
-                        alt="userPhoto"
-                      />
-                    </div>
+          {researchers.map(({ name, photo, usersCount, visitsCount, aidsCount }, i) => (
+            <tr className={i === researchers.length - 1 ? "border-white" : ""} key={i}>
+              <td>
+                <div className="d-flex py-2">
+                  <div>
+                    <img src={photo} height={60} className="me-3 rounded-2" alt="userPhoto" />
+                  </div>
 
-                    <div>
-                      <h5>{name}</h5>
+                  <div>
+                    <h5>{name}</h5>
 
-                      <div className="text-secondary">
-                        {usersCount} {t("Auth.Users.Title")}
-                      </div>
+                    <div className="text-secondary">
+                      {usersCount} {t("Auth.Users.Title")}
                     </div>
                   </div>
-                </td>
+                </div>
+              </td>
 
-                <td>{visitsCount}</td>
+              <td>{visitsCount}</td>
 
-                <td>{aidsCount}</td>
+              <td>{aidsCount}</td>
 
-                {/* <td>{reportsCount}</td> */}
-              </tr>
-            )
-          )}
+              {/* <td>{reportsCount}</td> */}
+            </tr>
+          ))}
         </tbody>
       </table>
     </DashboardCard>

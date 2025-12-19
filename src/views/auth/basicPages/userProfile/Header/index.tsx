@@ -1,7 +1,6 @@
+import tempLogo from "@/assets/images/brand/logo.png";
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
-import TempCover from "@/assets/images/public-bg.jpg";
-import TempProfilePhoto from "@/assets/images/profile-image-placeholder.png";
 
 const UserProfileHeaderView = () => {
   const { t } = useTranslation();
@@ -12,8 +11,7 @@ const UserProfileHeaderView = () => {
     location: "Vatican City",
     status: "Connected",
     joinedAt: "Joined April 2021",
-    avatarUrl: TempProfilePhoto,
-    coverUrl: TempCover,
+    avatarUrl: tempLogo,
     about: {
       fullName: "John Doe",
       status: "Active",
@@ -41,16 +39,10 @@ const UserProfileHeaderView = () => {
     <Fragment>
       <div className="row">
         <div className="col-12">
-          <div className="card border-0 shadow-sm mb-4">
+          <div className="card rounded-2 border-0 shadow-sm mb-4">
             {/* Cover */}
             <div className="position-relative">
-              <div className="ratio" style={{ height: "25vh" }}>
-                <img
-                  src={user.coverUrl}
-                  alt="cover"
-                  className="img-fluid rounded-top object-fit-cover"
-                />
-              </div>
+              <div className="ratio w-100 bg-primary" style={{ height: "25vh" }} />
 
               {/* Avatar */}
               <div className="position-absolute start-0 bottom-0 translate-middle-y ms-4">
@@ -61,7 +53,7 @@ const UserProfileHeaderView = () => {
                   <img
                     src={user.avatarUrl}
                     alt={user.name}
-                    className="img-fluid w-100 h-100 object-fit-cover"
+                    className="img-fluid w-100 h-100 object-fit-cover bg-white"
                   />
                 </div>
               </div>
@@ -78,17 +70,12 @@ const UserProfileHeaderView = () => {
                       <span className="me-3">{user.location}</span>
                       <span>{user.joinedAt}</span>
                     </p>
-                    <span className="badge bg-success-subtle text-success">
-                      {user.status}
-                    </span>
+                    <span className="badge bg-success-subtle text-success">{user.status}</span>
                   </div>
                 </div>
                 <div className="col-md-4 col-sm-12 d-flex justify-content-md-end justify-content-start mt-3 mt-md-0">
                   <div className="d-flex flex-wrap gap-2">
-                    <button
-                      type="button"
-                      className="btn btn-outline-secondary btn-sm"
-                    >
+                    <button type="button" className="btn btn-outline-secondary btn-sm">
                       {t("Auth.Profile.ShareProfile", "Share")}
                     </button>
                     <button type="button" className="btn btn-primary btn-sm">

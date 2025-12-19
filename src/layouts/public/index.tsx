@@ -1,11 +1,5 @@
 import { useTranslation } from "react-i18next";
-import {
-  Navigate,
-  Route,
-  Routes,
-  useLocation,
-  useNavigate,
-} from "react-router";
+import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router";
 
 import tempLogo from "@/assets/images/brand/logo.png";
 import Button from "@/components/core/button";
@@ -16,12 +10,14 @@ import RegisterView from "@/views/public/register";
 import ResetPasswordView from "@/views/public/ResetPassword";
 import TermsConditions from "@/views/public/termsConditions";
 import CopyRightView from "../common/copyright";
+import { useEffect } from "react";
+import { applyRouteChanges } from "@/utils/function";
 
 const AuthLayout = () => {
   const { t } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
-  const { logo } = useAppSelector((state) => state.settings);
+  const { logoFull } = useAppSelector((state) => state.settings);
 
   const publicRoutes = [
     {
@@ -56,11 +52,15 @@ const AuthLayout = () => {
     },
   ];
 
+  useEffect(() => {
+    applyRouteChanges(t, publicRoutes, location.pathname);
+  }, [location.pathname]);
+
   return (
     <main className="overflow-x-hidden">
-      <div className="min-vh-100 vw-100 d-flex justify-content-center align-items-center public-bg-image px-3 px-lg-4 py-3">
+      <div className="min-vh-100 vw-100 d-flex justify-content-center align-items-center px-3 px-lg-4 py-3">
         <div
-          className="card pt-4 px-2 px-lg-4 rounded-5"
+          className="card pt-4 px-2 px-lg-4 rounded-2"
           style={
             location.pathname === "/terms-conditions"
               ? { height: "100vh", width: "100%" }
@@ -70,7 +70,7 @@ const AuthLayout = () => {
           <div className="card-body text-center">
             <img
               alt="bg-image"
-              src={logo || tempLogo}
+              src={logoFull || tempLogo}
               className="w-50 px-1 mb-4"
               style={{ maxWidth: "350px" }}
               role="button"
@@ -78,12 +78,11 @@ const AuthLayout = () => {
             />
 
             <div className="d-flex">
-              {(location.pathname === "/" ||
-                location.pathname === "/register") && (
-                <div className="my-4 p-2 bg-light w-fit mx-auto rounded-5">
+              {(location.pathname === "/" || location.pathname === "/register") && (
+                <div className="my-4 p-2 bg-light w-fit mx-auto rounded-2">
                   {publicRoutes
                     .filter(({ show }) => show)
-                    .map(({ name, route, view }, i) => {
+                    .map(({ name, route }, i) => {
                       const isSelected = location.pathname === route;
 
                       const settings = isSelected
@@ -121,7 +120,7 @@ const AuthLayout = () => {
 
             <div className="card-text">
               <Routes>
-                {publicRoutes.map(({ name, route, view }, i) => (
+                {publicRoutes.map(({ route, view }, i) => (
                   <Route path={route} element={view} key={i} />
                 ))}
 

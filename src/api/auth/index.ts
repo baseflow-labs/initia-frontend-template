@@ -48,7 +48,7 @@ const resetPassword = async (resetPasswordData: resetPasswordProps) => {
   return await api.post(mainPath + "/passwordReset", resetPasswordData);
 };
 
-const resetMyPassword = async (resetPasswordData: Object) => {
+const resetMyPassword = async (resetPasswordData: object) => {
   return await api.post(mainPath + "/myPasswordReset", resetPasswordData);
 };
 

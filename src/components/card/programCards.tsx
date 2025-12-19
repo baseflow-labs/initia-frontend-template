@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 
 import { pluralLabelResolve } from "@/utils/function";
 import DashboardCard from "./dashboardCard";
+import { TFunction } from "i18next";
 
 interface Props {
   programs: {
@@ -21,7 +22,7 @@ export const AidUnit = ({
   amount,
   big,
 }: {
-  t: Function;
+  t: TFunction;
   type: string;
   amount: number;
   big?: boolean;

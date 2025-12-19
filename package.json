@@ -1,6 +1,6 @@
 {
   "name": "app-nest-fe",
-  "description": "AppNest React.js TypeScript Frontend App",
+  "description": "Initia React.js TypeScript Frontend App",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,11 +9,18 @@
     "preview": "vite preview",
     "prepare": "husky install",
     "commit": "cz",
-    "extract-translation": "i18next"
+    "extract-translation": "i18next",
+    "lint": "eslint src --ext .ts,.tsx --max-warnings 0",
+    "lint:fix": "eslint src --ext .ts,.tsx --fix",
+    "format": "prettier --write \"src/**/*.{ts,tsx,json,css,scss,md}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,json,css,scss,md}\"",
+    "typecheck": "tsc --noEmit",
+    "validate": "yarn lint && yarn format:check && yarn typecheck"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^7.1.0",
     "@fortawesome/free-brands-svg-icons": "^7.1.0",
+    "@fortawesome/free-regular-svg-icons": "^7.1.0",
     "@fortawesome/free-solid-svg-icons": "^7.1.0",
     "@fortawesome/react-fontawesome": "^3.1.1",
     "@react-google-maps/api": "^2.20.7",
@@ -45,11 +52,20 @@
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
+    "@typescript-eslint/eslint-plugin": "^8.19.1",
+    "@typescript-eslint/parser": "^8.19.1",
     "@vitejs/plugin-react-swc": "^4.2.2",
     "commitizen": "^4.3.1",
     "dotenv-cli": "^11.0.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react": "^7.37.3",
+    "eslint-plugin-react-hooks": "^5.1.0",
     "husky": "^9.1.7",
     "i18next-parser": "^9.3.0",
+    "lint-staged": "^15.2.10",
+    "prettier": "^3.4.2",
+    "sass": "^1.97.0",
     "typescript": "^5.9.3",
     "vite": "^7.2.7"
   },
@@ -69,6 +85,15 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
+    ]
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix --max-warnings 0",
+      "prettier --write"
+    ],
+    "*.{json,css,scss,md}": [
+      "prettier --write"
     ]
   }
 }

@@ -1,6 +1,8 @@
 import { AxiosError } from "axios";
 
-export const apiCatchGlobalHandler = (err: AxiosError) => console.log({ err });
+import { TFunction } from "i18next";
+
+export const apiCatchGlobalHandler = (err: AxiosError | unknown) => console.error({ err });
 
 export const statusColorRender = (status = "") => {
   switch (status) {
@@ -71,14 +73,9 @@ export const columnsWidth = (count: number) => {
   }
 };
 
-export const commaNumbers = (number: string) =>
-  parseFloat(number).toLocaleString("en-US");
+export const commaNumbers = (number: string) => parseFloat(number).toLocaleString("en-US");
 
-export const pluralLabelResolve = (
-  t: Function,
-  count: number,
-  standardLabel: string
-) => {
+export const pluralLabelResolve = (t: TFunction, count: number, standardLabel: string) => {
   switch (count % 100) {
     case -1:
       return t(`${standardLabel}_other`);
@@ -100,4 +97,18 @@ export const pluralLabelResolve = (
     default:
       return t(`${standardLabel}_many`);
   }
+};
+
+export const applyRouteChanges = (
+  t: TFunction,
+  authRoutes: { route: string; name: string }[],
+  pathname: string
+) => {
+  // Change document title based on route
+  const base = t("CopyRight.AppName");
+  const page = authRoutes.find(({ route }) => route === pathname)?.name;
+  document.title = page ? `${base} – ${page}` : base;
+
+  // Scroll to top on route change
+  window.scrollTo(0, 0);
 };

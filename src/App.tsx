@@ -22,21 +22,17 @@ const App = () => {
   document.documentElement.lang = i18n.language;
 
   useEffect(() => {
-    document.documentElement.style.setProperty(
-      "--base-font-size",
-      fontSize + "px"
-    );
+    document.documentElement.style.setProperty("--base-font-size", fontSize + "px");
   }, [fontSize]);
 
   useEffect(() => {
     MetadataApi.get()
-      .then((res: any) => {
+      .then((res) => {
         dispatch(
           setMetadata({
             ...res.payload,
-            logo:
-              (res.payload.logo && res.payload.logo[0].path) ||
-              null,
+            logo: (res.payload.logo && res.payload.logo[0].path) || null,
+            logoFull: (res.payload.logoFull && res.payload.logoFull[0].path) || null,
           })
         );
       })
@@ -44,19 +40,21 @@ const App = () => {
   }, []);
 
   return (
-    <BrowserRouter>
-      <Suspense fallback={<Spinner />}>
-        <NotificationsToaster />
+    <div className="bg-secondary">
+      <BrowserRouter>
+        <Suspense fallback={<Spinner />}>
+          <NotificationsToaster />
 
-        <Routes>
-          {accessToken !== "null" ? (
-            <Route path="*" element={<AuthLayout />} />
-          ) : (
-            <Route path="*" element={<PublicLayout />} />
-          )}
-        </Routes>
-      </Suspense>
-    </BrowserRouter>
+          <Routes>
+            {accessToken !== "null" ? (
+              <Route path="*" element={<AuthLayout />} />
+            ) : (
+              <Route path="*" element={<PublicLayout />} />
+            )}
+          </Routes>
+        </Suspense>
+      </BrowserRouter>
+    </div>
   );
 };
 

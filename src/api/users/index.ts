@@ -3,24 +3,19 @@ import store, { RootState } from "@/store/store";
 
 const mainPath = "/user";
 
-const getAll = async ({
-  filters,
-  page,
-  capacity,
-  customFilters,
-}: GetDataProps) => {
+const getAll = async ({ filters, page, capacity, customFilters }: GetDataProps) => {
   if (demoStatus) {
     return {
       payload: [
         {
           id: "1",
           fullName: "Demo Admin User",
-          email: "demo.admin@appnest.com",
+          email: "demo.admin@initia.io",
         },
         {
           id: "2",
           fullName: "Demo User",
-          email: "demo.user@appnest.com",
+          email: "demo.user@initia.io",
         },
       ],
     };
@@ -46,14 +41,14 @@ const getByUserId = async (id?: string) => {
     return {
       payload: {
         fullName: "Demo User",
-        email: "demo.user@appnest.com",
+        email: "demo.user@initia.io",
       },
     };
   }
   const { user } = (store.getState() as RootState).auth;
 
   const res = await api.get(mainPath + "/by-user/" + (id || user.id));
-  return res;
+  return { payload: res.data };
 };
 
 const remove = async (id: string) => {

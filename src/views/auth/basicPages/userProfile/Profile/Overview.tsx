@@ -8,8 +8,8 @@ const UserProfileOverviewView = () => {
     location: "Vatican City",
     status: "Connected",
     joinedAt: "Joined April 2021",
-    avatarUrl: "https://via.placeholder.com/120x120.png?text=JD",
-    coverUrl: "https://via.placeholder.com/1200x260.png?text=Profile+Cover",
+    avatarUrl:
+      "https://firebasestorage.googleapis.com/v0/b/initia-platform.firebasestorage.app/o/logo-full.png?alt=media&token=de1da191-53c3-4bb1-bad7-e0f1c9ec54fc",
     about: {
       fullName: "John Doe",
       status: "Active",
@@ -36,14 +36,12 @@ const UserProfileOverviewView = () => {
   return (
     <div className="card shadow-sm border-0 mb-3">
       <div className="card-header bg-white border-0">
-        <h5 className="card-title mb-0">
-          {t("Auth.Profile.Overview", "Overview")}
-        </h5>
+        <h5 className="card-title mb-0">{t("Auth.Profile.Overview", "Overview")}</h5>
       </div>
       <div className="card-body">
         <div className="row gy-3">
           <div className="col-md-4 col-6">
-            <div className="border rounded-3 p-3 bg-light">
+            <div className="border rounded-2 p-3 bg-light">
               <div className="text-muted small mb-1">
                 {t("Auth.Profile.Stats.Tasks", "Task Compiled")}
               </div>
@@ -51,7 +49,7 @@ const UserProfileOverviewView = () => {
             </div>
           </div>
           <div className="col-md-4 col-6">
-            <div className="border rounded-3 p-3 bg-light">
+            <div className="border rounded-2 p-3 bg-light">
               <div className="text-muted small mb-1">
                 {t("Auth.Profile.Stats.Projects", "Projects Compiled")}
               </div>
@@ -59,13 +57,11 @@ const UserProfileOverviewView = () => {
             </div>
           </div>
           <div className="col-md-4 col-6">
-            <div className="border rounded-3 p-3 bg-light">
+            <div className="border rounded-2 p-3 bg-light">
               <div className="text-muted small mb-1">
                 {t("Auth.Profile.Stats.Connections", "Connections")}
               </div>
-              <div className="fw-semibold fs-5">
-                {user.overviewStats.connections}
-              </div>
+              <div className="fw-semibold fs-5">{user.overviewStats.connections}</div>
             </div>
           </div>
         </div>

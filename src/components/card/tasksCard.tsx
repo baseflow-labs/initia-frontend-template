@@ -26,15 +26,10 @@ const TasksCard = ({ label, tasks }: Props) => {
       <table className="table table-responsive align-middle">
         <tbody>
           {tasks.map(({ icon, color, label, count, route }, i) => (
-            <tr
-              className={i === tasks.length - 1 ? "border-white" : ""}
-              key={i}
-            >
+            <tr className={i === tasks.length - 1 ? "border-white" : ""} key={i}>
               <td>
                 <div className="d-flex py-2">
-                  <div
-                    className={`bg-${color} text-white p-3 me-4 rounded-4 h4`}
-                  >
+                  <div className={`bg-${color} text-white p-3 me-4 rounded-2 h4`}>
                     <FontAwesomeIcon icon={icon} className="m-0 p-0" />
                   </div>
 

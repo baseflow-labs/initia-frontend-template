@@ -1,7 +1,6 @@
-import { Fragment } from "react";
-import { useTranslation } from "react-i18next";
 import TabsComp from "@/components/tab";
-import BackToSupportCenterButton from "../BackButton";
+import PageTemplate from "@/layouts/auth/pages/pageTemplate";
+import { useTranslation } from "react-i18next";
 import SupportTicketsSubmissionView from "./SubmitTicket";
 import SupportTicketsListingView from "./Tickets";
 
@@ -22,25 +21,17 @@ const SupportTicketsView = () => {
   ];
 
   return (
-    <Fragment>
-      <div className="bg-primary py-5 mb-5">
-        <div className="container">
-          <div className="row">
-            <div className="col-12">
-              <BackToSupportCenterButton />
-
-              <h1 className="mb-3 text-center text-white">
-                {t("Auth.SupportCenter.Tickets.Title")}
-              </h1>
-            </div>
-          </div>
-        </div>
-      </div>
-
+    <PageTemplate title={t("Auth.SupportCenter.Tickets.Title")}>
       <div className="container mb-5">
-        <TabsComp items={tabs} />
+        <TabsComp
+          items={tabs.map((tab) => ({
+            ...tab,
+            content: <div className="mt-4">{tab.content}</div>,
+          }))}
+          color="danger"
+        />
       </div>
-    </Fragment>
+    </PageTemplate>
   );
 };
 

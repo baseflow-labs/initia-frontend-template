@@ -6,6 +6,7 @@ export const setFontSize = (size: number) => ({
 export const setMetadata = (data: {
   name: string;
   logo: string;
+  logoFull: string;
   phoneNumber: string;
 }) => {
   return {

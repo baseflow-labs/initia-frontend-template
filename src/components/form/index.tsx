@@ -1,11 +1,5 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import {
-  FormikErrors,
-  Form as FormikForm,
-  FormikProps,
-  FormikProvider,
-  useFormik,
-} from "formik";
+import { FormikErrors, Form as FormikForm, FormikProps, FormikProvider, useFormik } from "formik";
 import React, { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import { useAppSelector } from "@/store/hooks";
@@ -88,7 +82,7 @@ export interface InputProps extends InputSingleProps {
   singleRecordLabel?: string;
   recordDynamicLabelKey?: string;
   logo?: string;
-  onRecordSubmit?: (formik?: any) => any;
+  onRecordSubmit?: (formik?: FormikProps<Record<string, unknown>>) => void;
   recordSubmitButtonText?: string;
   prefixText?: string | number;
   postfixText?: string | number;
@@ -96,23 +90,19 @@ export interface InputProps extends InputSingleProps {
   belowComp?: React.ReactNode;
 }
 
-interface Props extends React.FormHTMLAttributes<HTMLFormElement> {
-  onFormSubmit?: (values: any, reset: any) => void;
-  inputs: (formik: FormikProps<Record<string, any>>) => InputProps[];
+interface Props<
+  T extends Record<string, unknown> = Record<string, unknown>,
+> extends React.FormHTMLAttributes<HTMLFormElement> {
+  onFormSubmit?: (values?: T, reset?: () => void) => void;
+  inputs: (formik: FormikProps<T>) => InputProps[];
   submitText?: string;
   submitColor?: string;
   initialValues?: object;
   customButtons?: React.ReactNode;
-  customValidate?: (
-    values: Record<string, any>
-  ) => FormikErrors<Record<string, any>>;
+  customValidate?: (values: T) => FormikErrors<T>;
 }
 
-export const LabelView = ({
-  labelNote,
-  label,
-  required,
-}: Partial<InputSingleProps>) => (
+export const LabelView = ({ labelNote, label, required }: Partial<InputSingleProps>) => (
   <label className={`form-label ${label ? "" : "text-white"}`}>
     <small>
       {label ? label : "."}{" "}
@@ -141,7 +131,7 @@ const Form: React.FC<Props> = ({
   const { t } = useTranslation();
   const { loading } = useAppSelector((state) => state.loading);
 
-  const dummyFormik = useFormik<Record<string, any>>({
+  const dummyFormik = useFormik<Record<string, unknown>>({
     initialValues: {},
     enableReinitialize: true,
     onSubmit: async () => {},
@@ -149,37 +139,34 @@ const Form: React.FC<Props> = ({
 
   const dynamicInputs = inputs(dummyFormik).filter((i) => !i.excludeInForm);
 
-  const generatedInitialValues = dynamicInputs.reduce<Record<string, any>>(
-    (acc, input) => {
-      if (input.defaultValue) {
-        acc[input.name] = input.defaultValue;
-        return acc;
-      }
-
-      switch (input.type) {
-        case "radio":
-        case "select":
-        case "checkboxes":
-          acc[input.name] = input.options?.[0]?.value ?? "";
-          break;
-        case "multipleEntries":
-          acc[input.name] = [];
-          break;
-        default:
-          acc[input.name] = "";
-          break;
-      }
-
+  const generatedInitialValues = dynamicInputs.reduce<Record<string, unknown>>((acc, input) => {
+    if (input.defaultValue) {
+      acc[input.name] = input.defaultValue;
       return acc;
-    },
-    {}
-  );
+    }
 
-  const formik = useFormik<Record<string, any>>({
+    switch (input.type) {
+      case "radio":
+      case "select":
+      case "checkboxes":
+        acc[input.name] = input.options?.[0]?.value ?? "";
+        break;
+      case "multipleEntries":
+        acc[input.name] = [];
+        break;
+      default:
+        acc[input.name] = "";
+        break;
+    }
+
+    return acc;
+  }, {});
+
+  const formik = useFormik<Record<string, unknown>>({
     initialValues: { ...generatedInitialValues, ...initialValues },
     enableReinitialize: true,
-    validate: (values: Record<string, any>) => {
-      const errors: FormikErrors<Record<string, any>> = {};
+    validate: (values: Record<string, unknown>) => {
+      const errors: FormikErrors<Record<string, unknown>> = {};
       const dynamicInputs = inputs(formik).filter((i) => !i.excludeInForm);
 
       dynamicInputs.forEach((input) => {
@@ -191,9 +178,7 @@ const Form: React.FC<Props> = ({
           (value === undefined ||
             value === null ||
             value === "" ||
-            (type === "multipleEntries" &&
-              Array.isArray(value) &&
-              value.length === 0))
+            (type === "multipleEntries" && Array.isArray(value) && value.length === 0))
         ) {
           errors[name] = t("Global.Form.Errors.Required");
           return;
@@ -216,7 +201,7 @@ const Form: React.FC<Props> = ({
 
           if (type === "email") {
             const validEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-            if (!validEmail.test(value)) {
+            if (!validEmail.test(String(value))) {
               errors[name] = t("Global.Form.Errors.InvalidEmail");
             }
           }
@@ -252,10 +237,13 @@ const Form: React.FC<Props> = ({
       const errors = await formikHelpers.validateForm();
 
       if (Object.keys(errors).length > 0) {
-        const touchedFields = Object.keys(errors).reduce((acc, key) => {
-          acc[key] = true;
-          return acc;
-        }, {} as Record<string, boolean>);
+        const touchedFields = Object.keys(errors).reduce(
+          (acc, key) => {
+            acc[key] = true;
+            return acc;
+          },
+          {} as Record<string, boolean>
+        );
 
         formikHelpers.setTouched(touchedFields, true);
         return;
@@ -303,23 +291,20 @@ const Form: React.FC<Props> = ({
                   required,
                   min,
                   max,
-                  minLength,
+                  // minLength,
+                  // maxLength,
                   moneyUnit,
                   ...input
                 },
                 i
               ) => {
-                const triggerError =
-                  formik.errors[input.name] && formik.touched[input.name];
+                const triggerError = formik.errors[input.name] && formik.touched[input.name];
 
-                const prefixTexts =
-                  prefixText || (type === "phoneNumber" ? "+966" : undefined);
+                const prefixTexts = prefixText || (type === "phoneNumber" ? "+966" : undefined);
 
                 const ErrorView = () => (
-                  <small
-                    className={triggerError ? "text-danger" : "text-white"}
-                  >
-                    {triggerError ? (formik.errors[input.name] as any) : "."}
+                  <small className={triggerError ? "text-danger" : "text-white"}>
+                    {triggerError ? (formik.errors[input.name] as unknown as string) : "."}
                   </small>
                 );
 
@@ -333,13 +318,9 @@ const Form: React.FC<Props> = ({
                       <div className="col-md-6 mb-3">
                         <button
                           type="button"
-                          className="btn btn-outline-dark p-2 w-100 rounded-3 no-interaction"
+                          className="btn btn-outline-dark p-2 w-100 rounded-2 no-interaction"
                         >
-                          <img
-                            alt={`${input.name}Logo`}
-                            src={logo}
-                            height="40px"
-                          />
+                          <img alt={`${input.name}Logo`} src={logo} height="40px" />
                         </button>
                       </div>
 
@@ -353,17 +334,9 @@ const Form: React.FC<Props> = ({
                         >
                           <InlineElement content={prefixTexts} flip />
 
-                          <InputComp
-                            id={input.name}
-                            type={type}
-                            min={min}
-                            max={max}
-                            {...input}
-                          />
+                          <InputComp id={input.name} type={type} min={min} max={max} {...input} />
 
-                          <InlineElement
-                            content={moneyUnit ? <MoneyUnit /> : postfixText}
-                          />
+                          <InlineElement content={moneyUnit ? <MoneyUnit /> : postfixText} />
                         </div>
 
                         {belowComp}
@@ -380,10 +353,10 @@ const Form: React.FC<Props> = ({
                       fullWidth
                         ? "col-md-12"
                         : double
-                        ? "col-md-6"
-                        : triple
-                        ? "col-md-9"
-                        : "col-md-3"
+                          ? "col-md-6"
+                          : triple
+                            ? "col-md-9"
+                            : "col-md-3"
                     }`}
                     key={i}
                   >
@@ -398,17 +371,9 @@ const Form: React.FC<Props> = ({
                     >
                       <InlineElement content={prefixTexts} flip />
 
-                      <InputComp
-                        id={input.name}
-                        type={type}
-                        min={min}
-                        max={max}
-                        {...input}
-                      />
+                      <InputComp id={input.name} type={type} min={min} max={max} {...input} />
 
-                      <InlineElement
-                        content={moneyUnit ? <MoneyUnit /> : postfixText}
-                      />
+                      <InlineElement content={moneyUnit ? <MoneyUnit /> : postfixText} />
                     </div>
 
                     <ErrorView />
@@ -417,14 +382,12 @@ const Form: React.FC<Props> = ({
 
                     {input.name === "fontSize" && (
                       <div className="row mt-3">
-                        <h4 className="col-md-12 mb-3">
-                          {t("Auth.Settings.Samples.Title")}
-                        </h4>
+                        <h4 className="col-md-12 mb-3">{t("Auth.Settings.Samples.Title")}</h4>
 
                         <h3
                           className="col-md-6"
                           style={{
-                            fontSize: 1.75 * formik.values.fontSize,
+                            fontSize: 1.75 * Number(formik.values.fontSize),
                           }}
                         >
                           {t("Auth.Settings.Samples.H3Sample")}
@@ -432,7 +395,7 @@ const Form: React.FC<Props> = ({
 
                         <h4
                           className="col-md-6"
-                          style={{ fontSize: 1.5 * formik.values.fontSize }}
+                          style={{ fontSize: 1.5 * Number(formik.values.fontSize) }}
                         >
                           {t("Auth.Settings.Samples.H4Sample")}
                         </h4>
@@ -440,7 +403,7 @@ const Form: React.FC<Props> = ({
                         <h5
                           className="col-md-6"
                           style={{
-                            fontSize: 1.25 * formik.values.fontSize,
+                            fontSize: 1.25 * Number(formik.values.fontSize),
                           }}
                         >
                           {t("Auth.Settings.Samples.H5Sample")}
@@ -448,7 +411,7 @@ const Form: React.FC<Props> = ({
 
                         <label
                           className="form-label col-md-6"
-                          style={{ fontSize: 1 * formik.values.fontSize }}
+                          style={{ fontSize: 1 * Number(formik.values.fontSize) }}
                         >
                           {t("Auth.Settings.Samples.LabelSample")}
                         </label>
@@ -456,12 +419,10 @@ const Form: React.FC<Props> = ({
                         <div
                           className="col-md-6"
                           style={{
-                            fontSize: 0.875 * formik.values.fontSize,
+                            fontSize: 0.875 * Number(formik.values.fontSize),
                           }}
                         >
-                          <small>
-                            {t("Auth.Settings.Samples.SmallSample")}
-                          </small>
+                          <small>{t("Auth.Settings.Samples.SmallSample")}</small>
                         </div>
                       </div>
                     )}
@@ -485,9 +446,7 @@ const Form: React.FC<Props> = ({
                 <Spinner />
               </small>
             ) : (
-              <div className="my-auto">
-                {submitText || t("Global.Form.Labels.Submit")}
-              </div>
+              <div className="my-auto">{submitText || t("Global.Form.Labels.Submit")}</div>
             )}
           </Button>
         )}

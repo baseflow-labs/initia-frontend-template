@@ -6,7 +6,7 @@ const FourZeroFourError = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="border border-3 border-dark rounded-5 mx-auto w-50 py-5">
+    <div className="border border-3 border-dark rounded-2 mx-auto w-50 py-5">
       <div className="text-danger text-center">
         <h1 className="display-1">404</h1>
 

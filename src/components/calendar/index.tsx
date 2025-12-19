@@ -1,4 +1,5 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment, { Moment } from "moment";
 import React, { useMemo, useState } from "react";
@@ -69,14 +70,8 @@ const CalendarComp: React.FC<CalendarViewProps> = ({
     () => parties.map((p) => p.id) // all parties selected by default
   );
 
-  const startOfMonth = useMemo(
-    () => currentMonth.clone().startOf("month"),
-    [currentMonth]
-  );
-  const endOfMonth = useMemo(
-    () => currentMonth.clone().endOf("month"),
-    [currentMonth]
-  );
+  const startOfMonth = useMemo(() => currentMonth.clone().startOf("month"), [currentMonth]);
+  const endOfMonth = useMemo(() => currentMonth.clone().endOf("month"), [currentMonth]);
 
   /**
    * We build the grid from the same startOfGrid/endOfGrid used
@@ -86,10 +81,7 @@ const CalendarComp: React.FC<CalendarViewProps> = ({
     () => startOfMonth.clone().startOf("week"), // uses locale week start
     [startOfMonth]
   );
-  const endOfGrid = useMemo(
-    () => endOfMonth.clone().endOf("week"),
-    [endOfMonth]
-  );
+  const endOfGrid = useMemo(() => endOfMonth.clone().endOf("week"), [endOfMonth]);
 
   const calendarGrid = useMemo(() => {
     const day = startOfGrid.clone();
@@ -116,17 +108,13 @@ const CalendarComp: React.FC<CalendarViewProps> = ({
 
   const toggleTypeSelection = (typeId: string) => {
     setSelectedTypeIds((prev) =>
-      prev.includes(typeId)
-        ? prev.filter((id) => id !== typeId)
-        : [...prev, typeId]
+      prev.includes(typeId) ? prev.filter((id) => id !== typeId) : [...prev, typeId]
     );
   };
 
   const togglePartySelection = (partyId: string) => {
     setSelectedPartyIds((prev) =>
-      prev.includes(partyId)
-        ? prev.filter((id) => id !== partyId)
-        : [...prev, partyId]
+      prev.includes(partyId) ? prev.filter((id) => id !== partyId) : [...prev, partyId]
     );
   };
 
@@ -146,13 +134,9 @@ const CalendarComp: React.FC<CalendarViewProps> = ({
     });
   };
 
-  const getEventBadgeClass = (
-    event: CalendarEvent,
-    party?: CalendarEventParty
-  ): string => {
+  const getEventBadgeClass = (event: CalendarEvent, party?: CalendarEventParty): string => {
     const type = eventTypes.find((t) => t.id === event.typeId);
-    const color =
-      party?.colorClass || (type ? type.label.toLowerCase() : "secondary");
+    const color = party?.colorClass || (type ? type.label.toLowerCase() : "secondary");
     return `badge bg-${color} text-truncate d-block mb-1`;
   };
 
@@ -210,20 +194,12 @@ const CalendarComp: React.FC<CalendarViewProps> = ({
                       onChange={() => toggleTypeSelection(type.id)}
                     />
 
-                    <label
-                      className="form-check-label ms-1"
-                      htmlFor={`type-switch-${type.id}`}
-                    >
+                    <label className="form-check-label ms-1" htmlFor={`type-switch-${type.id}`}>
                       {type.label}
                     </label>
                   </div>
 
-                  {type.icon && (
-                    <FontAwesomeIcon
-                      icon={type.icon}
-                      style={{ minWidth: 16 }}
-                    />
-                  )}
+                  {type.icon && <FontAwesomeIcon icon={type.icon} style={{ minWidth: 16 }} />}
                 </li>
               ))}
             </ul>
@@ -240,20 +216,14 @@ const CalendarComp: React.FC<CalendarViewProps> = ({
                       checked={selectedPartyIds.includes(party.id)}
                       onChange={() => togglePartySelection(party.id)}
                     />
-                    <label
-                      className="form-check-label ms-1"
-                      htmlFor={`party-switch-${party.id}`}
-                    >
+                    <label className="form-check-label ms-1" htmlFor={`party-switch-${party.id}`}>
                       {party.name}
                       {party.department ? ` | ${party.department}` : ""}
                     </label>
                   </div>
 
                   {party.colorClass && (
-                    <span
-                      className={`badge bg-${party.colorClass} ms-2`}
-                      style={{ minWidth: 16 }}
-                    >
+                    <span className={`badge bg-${party.colorClass} ms-2`} style={{ minWidth: 16 }}>
                       &nbsp;
                     </span>
                   )}
@@ -286,9 +256,7 @@ const CalendarComp: React.FC<CalendarViewProps> = ({
               </button>
             </div>
 
-            <h5 className="card-title mb-0">
-              {currentMonth.format("MMMM YYYY")}
-            </h5>
+            <h5 className="card-title mb-0">{currentMonth.format("MMMM YYYY")}</h5>
 
             <button
               type="button"
@@ -306,10 +274,7 @@ const CalendarComp: React.FC<CalendarViewProps> = ({
                 <thead className="table-light">
                   <tr>
                     {headerDays.map((day) => (
-                      <th
-                        key={day.format("YYYY-MM-DD")}
-                        className="text-center py-2"
-                      >
+                      <th key={day.format("YYYY-MM-DD")} className="text-center py-2">
                         {/* Weekday (e.g. Mon) */}
                         {day.format("ddd")}
                       </th>
@@ -318,111 +283,90 @@ const CalendarComp: React.FC<CalendarViewProps> = ({
                 </thead>
 
                 <tbody>
-                  {Array.from({ length: calendarGrid.length / 7 }).map(
-                    (_, weekIndex) => (
-                      <tr key={weekIndex} style={{ height: "120px" }}>
-                        {calendarGrid
-                          .slice(weekIndex * 7, weekIndex * 7 + 7)
-                          .map((day) => {
-                            const inCurrentMonth = day.isSame(
-                              currentMonth,
-                              "month"
-                            );
-                            const dayEvents = getEventsForDate(day);
+                  {Array.from({ length: calendarGrid.length / 7 }).map((_, weekIndex) => (
+                    <tr key={weekIndex} style={{ height: "120px" }}>
+                      {calendarGrid.slice(weekIndex * 7, weekIndex * 7 + 7).map((day) => {
+                        const inCurrentMonth = day.isSame(currentMonth, "month");
+                        const dayEvents = getEventsForDate(day);
 
-                            return (
-                              <td
-                                key={day.format("YYYY-MM-DD")}
-                                className={
-                                  "align-top p-1 position-relative " +
-                                  (inCurrentMonth ? "" : "bg-light text-muted")
-                                }
-                                style={{ verticalAlign: "top" }}
-                              >
-                                {/* Date number + weekday for debugging / clarity */}
-                                <div className="d-flex justify-content-between">
-                                  <span className="fw-bold small">
-                                    {day.date()}
-                                  </span>
-                                  {/* Optional: show day name inside cell too */}
-                                  {/* <span className="small text-muted">
+                        return (
+                          <td
+                            key={day.format("YYYY-MM-DD")}
+                            className={
+                              "align-top p-1 position-relative " +
+                              (inCurrentMonth ? "" : "bg-light text-muted")
+                            }
+                            style={{ verticalAlign: "top" }}
+                          >
+                            {/* Date number + weekday for debugging / clarity */}
+                            <div className="d-flex justify-content-between">
+                              <span className="fw-bold small">{day.date()}</span>
+                              {/* Optional: show day name inside cell too */}
+                              {/* <span className="small text-muted">
                                     {day.format("ddd")}
                                   </span> */}
-                                </div>
+                            </div>
 
-                                {/* Events */}
-                                <div className="mt-1">
-                                  {dayEvents.length === 0
-                                    ? null
-                                    : dayEvents.map((event) => {
-                                        const party = findParty(event.partyId);
+                            {/* Events */}
+                            <div className="mt-1">
+                              {dayEvents.length === 0
+                                ? null
+                                : dayEvents.map((event) => {
+                                    const party = findParty(event.partyId);
 
-                                        return (
-                                          <div
-                                            key={event.id}
-                                            className={
-                                              getEventBadgeClass(event, party) +
-                                              " w-100 d-flex py-3 text-start"
-                                            }
-                                            title={
-                                              event.description ||
-                                              `${
-                                                event.title
-                                              } (${formatEventTime(
-                                                event,
-                                                day
-                                              )})`
-                                            }
-                                            onClick={() =>
-                                              onEventClick &&
-                                              onEventClick(event)
-                                            }
-                                          >
-                                            {/* Party chip (color-coded) */}
-                                            {party && (
-                                              <p className="rotate-90 mt-2">
-                                                <div>{party.name}</div>
-                                              </p>
+                                    return (
+                                      <div
+                                        key={event.id}
+                                        className={
+                                          getEventBadgeClass(event, party) +
+                                          " w-100 d-flex py-3 text-start"
+                                        }
+                                        title={
+                                          event.description ||
+                                          `${event.title} (${formatEventTime(event, day)})`
+                                        }
+                                        onClick={() => onEventClick && onEventClick(event)}
+                                      >
+                                        {/* Party chip (color-coded) */}
+                                        {party && (
+                                          <p className="rotate-90 mt-2">
+                                            <div>{party.name}</div>
+                                          </p>
+                                        )}
+
+                                        <div
+                                          style={{
+                                            whiteSpace: "nowrap",
+                                            overflow: "hidden",
+                                            textOverflow: "ellipsis",
+                                            fontSize: "0.7rem",
+                                          }}
+                                        >
+                                          {/* Time */}
+                                          <p>{formatEventTime(event, day)}</p>
+
+                                          {/* Title */}
+                                          <h6>
+                                            {event.typeId && (
+                                              <FontAwesomeIcon
+                                                icon={
+                                                  eventTypes.find((e) => e.id === event.typeId)
+                                                    ?.icon || faCircle
+                                                }
+                                              />
                                             )}
-
-                                            <div
-                                              style={{
-                                                whiteSpace: "nowrap",
-                                                overflow: "hidden",
-                                                textOverflow: "ellipsis",
-                                                fontSize: "0.7rem",
-                                              }}
-                                            >
-                                              {/* Time */}
-                                              <p>
-                                                {formatEventTime(event, day)}
-                                              </p>
-
-                                              {/* Title */}
-                                              <h6>
-                                                {event.typeId && (
-                                                  <FontAwesomeIcon
-                                                    icon={
-                                                      eventTypes.find(
-                                                        (e) =>
-                                                          e.id === event.typeId
-                                                      )?.icon
-                                                    }
-                                                  />
-                                                )}
-                                                {event.title}
-                                              </h6>
-                                            </div>
-                                          </div>
-                                        );
-                                      })}
-                                </div>
-                              </td>
-                            );
-                          })}
-                      </tr>
-                    )
-                  )}
+                                            {event.title}
+                                          </h6>
+                                        </div>
+                                      </div>
+                                    );
+                                  })}
+                            </div>
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>

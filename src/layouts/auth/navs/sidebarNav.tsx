@@ -1,37 +1,32 @@
 import tempLogo from "@/assets/images/brand/logo.png";
 import { useAppSelector } from "@/store/hooks";
-import {
-  faChevronLeft,
-  faChevronRight,
-} from "@fortawesome/free-solid-svg-icons";
+import { faSquare as faSquareOutline } from "@fortawesome/free-regular-svg-icons";
+import { faSquare as faSquareSolid } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useLocation, useNavigate } from "react-router";
-import CopyRightView from "../../common/copyright";
+
+import { MenuList, MenuItem } from "./menuItemRenderer";
 
 interface Props {
-  routes: {
-    name: string;
-    labelNote?: string;
-    route: string;
-    icon: any;
-  }[];
-  fixedRoutes: {
-    name: string;
-    route: string;
-    icon: any;
-  }[];
+  routes: MenuItem[];
+  fixedRoutes: MenuItem[];
   collapsed: boolean;
   toggleSidebar: () => void;
 }
 
 const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
   const { i18n } = useTranslation();
-  const navigate = useNavigate();
-  const location = useLocation();
   const { user } = useAppSelector((state) => state.auth);
-  const { logo } = useAppSelector((state) => state.settings);
+  const { logo, logoFull } = useAppSelector((state) => state.settings);
+  const [expandedMenus, setExpandedMenus] = useState<{ [key: string]: boolean }>({});
+
+  const toggleMenu = (menuName: string) => {
+    setExpandedMenus((prev) => ({
+      ...prev,
+      [menuName]: !prev[menuName],
+    }));
+  };
 
   return (
     <Fragment>
@@ -45,81 +40,57 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
           zIndex: 4,
         }}
       >
-        <div className="p-4 text-center">
-          <img src={logo || tempLogo} style={{ height: "40px" }} alt="Logo" />
+        <div className={`p-4 pb-0 ${collapsed ? "text-center" : ""} flex-shrink-0`}>
+          <img
+            src={(collapsed ? logo : logoFull) || tempLogo}
+            style={{ height: "40px" }}
+            alt="Logo"
+          />
         </div>
 
-        <div className="nav flex-column px-2">
-          {routes.map(({ name, route, icon, labelNote }, i) => (
-            <Fragment key={i}>
-              <h5
-                className={`sidebar-link text-decoration-none p-3 rounded-3 ${
-                  location.pathname.includes(route)
-                    ? "bg-primary text-white"
-                    : "text-dark"
-                }`}
-                role="button"
-                onClick={() => {
-                  navigate(route);
-                }}
-              >
-                <FontAwesomeIcon icon={icon} className="me-2" />
-                {!collapsed && (
-                  <span>
-                    {name}
-
-                    {user.role === "admin" && (
-                      <div className="text-end w-100">
-                        <small>{labelNote}</small>
-                      </div>
-                    )}
-                  </span>
-                )}
-              </h5>
-
-              {i === 0 && (
-                <button
-                  className="btn toggle-btn float-end bg-white rounded-circle border-dark border-1 px-2 m-0 position-absolute"
-                  style={{
-                    zIndex: 5,
-                    left: i18n.language === "ar" ? -12.5 : undefined,
-                    right: i18n.language === "en" ? -12.5 : undefined,
-                  }}
-                  onClick={toggleSidebar}
-                >
-                  <FontAwesomeIcon
-                    icon={collapsed ? faChevronLeft : faChevronRight}
-                  />
-                </button>
-              )}
-            </Fragment>
-          ))}
+        <div
+          className="text-primary bg-white p-1 rounded-circle border-1 m-0 mt-4 position-absolute"
+          style={{
+            zIndex: 5,
+            left: i18n.language === "ar" ? -13 : undefined,
+            right: i18n.language === "en" ? -13 : undefined,
+            cursor: "pointer",
+          }}
+          onClick={toggleSidebar}
+        >
+          <FontAwesomeIcon icon={collapsed ? faSquareOutline : faSquareSolid} />
         </div>
 
-        <hr className="mx-3" />
+        <hr className="mx-3 flex-shrink-0" />
 
-        <div className="nav flex-column px-2">
-          {fixedRoutes.map(({ name, route, icon }, i) => (
-            <h5
-              key={i}
-              className={`sidebar-link text-decoration-none p-3 rounded-3 ${
-                location.pathname.includes(route)
-                  ? "bg-primary text-white"
-                  : "text-dark"
-              }`}
-              role="button"
-              onClick={() => {
-                navigate(route);
-              }}
-            >
-              <FontAwesomeIcon icon={icon} className="me-2" />
-              {!collapsed && <span>{name}</span>}
-            </h5>
-          ))}
+        <div
+          style={{
+            overflowY: "auto",
+            overflowX: "hidden",
+            flex: 1,
+            minHeight: 0,
+            maxHeight: "60vh",
+          }}
+        >
+          <MenuList
+            items={routes}
+            collapsed={collapsed}
+            userRole={user.role}
+            expandedMenus={expandedMenus}
+            onToggleMenu={toggleMenu}
+          />
         </div>
 
-        <div className="mt-auto mb-3 text-center">
-          <CopyRightView short={collapsed} />
+        <hr className="mx-3 flex-shrink-0" />
+
+        <div className="flex-shrink-0">
+          <MenuList
+            items={fixedRoutes}
+            collapsed={collapsed}
+            userRole={user.role}
+            expandedMenus={expandedMenus}
+            onToggleMenu={toggleMenu}
+          />
         </div>
       </nav>
     </Fragment>

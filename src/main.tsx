@@ -7,21 +7,12 @@ import App from "./App";
 import i18n from "./i18next";
 import store from "./store/store";
 
-import "./styles/index.css";
-import "./styles/stepper.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/css/bootstrap.rtl.min.css";
-import * as bootstrap from "bootstrap";
+import "./styles/index.scss";
 import "moment/locale/ar";
 
-// Make bootstrap available globally
-if (typeof window !== "undefined") {
-  (window as any).bootstrap = bootstrap;
-}
-
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
-);
+const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
 root.render(
   <React.StrictMode>

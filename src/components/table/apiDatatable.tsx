@@ -35,7 +35,7 @@ type ModalAction = "view" | "create" | "update" | "delete";
 interface ModalState {
   action: ModalAction;
   open: boolean;
-  data: any;
+  data: object;
 }
 
 const ApiDataTable: React.FC<Props> = ({
@@ -75,9 +75,7 @@ const ApiDataTable: React.FC<Props> = ({
   const [search, setSearch] = useState("");
   const [filters, setFilters] = useState<customFilterProps[]>([]);
   const [sortField, setSortField] = useState<string | undefined>();
-  const [sortDirection, setSortDirection] = useState<"asc" | "desc" | null>(
-    null
-  );
+  const [sortDirection, setSortDirection] = useState<"asc" | "desc" | null>(null);
 
   const renderActionLabel = (action: ModalAction) => {
     switch (action) {
@@ -111,10 +109,7 @@ const ApiDataTable: React.FC<Props> = ({
         case "create":
           return await service.post(dataApiEndpoint, formData);
         case "update":
-          return await service.put(
-            dataApiEndpoint + `/${formData.id}`,
-            formData
-          );
+          return await service.put(dataApiEndpoint + `/${formData.id}`, formData);
         case "delete":
           return await service.delete(dataApiEndpoint + `/${formData.id}`);
         default:
@@ -161,18 +156,17 @@ const ApiDataTable: React.FC<Props> = ({
             sortDirection,
           },
         })
-        .then((res: any) => {
+        .then((res) => {
           // Adjust depending on your API shape
-          const payload = res.payload || res.data || {};
-          const rows = payload.data || payload.rows || payload || [];
-          const meta = payload.meta ||
-            res.meta || {
+          const apiData = res?.data as Record<string, unknown>;
+          const payload = (apiData?.payload || apiData) as Record<string, unknown>;
+          const rows = (payload?.data || payload?.rows || payload || []) as object[];
+          const meta = payload?.meta ||
+            res?.data?.meta || {
               page: currentPage,
               capacity: pageSize,
               count: Array.isArray(rows) ? rows.length : 0,
-              pagesCount: Array.isArray(rows)
-                ? Math.max(1, Math.ceil(rows.length / pageSize))
-                : 1,
+              pagesCount: Array.isArray(rows) ? Math.max(1, Math.ceil(rows.length / pageSize)) : 1,
             };
 
           setData(rows);
@@ -231,12 +225,12 @@ const ApiDataTable: React.FC<Props> = ({
     modal.action === "create"
       ? t("Global.Labels.CreateNew", { item: singleItem })
       : modal.action === "update"
-      ? t("Global.Labels.Update", { item: singleItem })
-      : modal.action === "delete"
-      ? t("Global.Labels.Delete", { item: singleItem })
-      : modal.action === "view"
-      ? t("Global.Labels.View", { item: singleItem })
-      : "";
+        ? t("Global.Labels.Update", { item: singleItem })
+        : modal.action === "delete"
+          ? t("Global.Labels.Delete", { item: singleItem })
+          : modal.action === "view"
+            ? t("Global.Labels.View", { item: singleItem })
+            : "";
 
   return (
     <div>
@@ -253,7 +247,7 @@ const ApiDataTable: React.FC<Props> = ({
       )}
 
       <DynamicTable
-        data={data as any}
+        data={(data || []) as { id: string }[]}
         columns={inputs}
         onRowClick={(rowData = {}, action = "") =>
           setModal({
@@ -295,26 +289,21 @@ const ApiDataTable: React.FC<Props> = ({
           inputs={() =>
             inputs.map((item) => ({
               ...item,
-              disabled:
-                modal.action === "view" ||
-                modal.action === "delete" ||
-                item.name === "id",
+              disabled: modal.action === "view" || modal.action === "delete" || item.name === "id",
               double: true,
             }))
           }
           initialValues={modal.data}
-          onFormSubmit={modal.action === "view" ? undefined : onFormSubmit}
+          onFormSubmit={
+            modal.action === "view"
+              ? undefined
+              : (onFormSubmit as (values?: Record<string, unknown>, reset?: () => void) => void)
+          }
           submitText={
-            modal.action === "delete"
-              ? t("Global.Labels.Delete", { item: singleItem })
-              : undefined
+            modal.action === "delete" ? t("Global.Labels.Delete", { item: singleItem }) : undefined
           }
           submitColor={
-            modal.action === "delete"
-              ? "danger"
-              : modal.action === "update"
-              ? "warning"
-              : "success"
+            modal.action === "delete" ? "danger" : modal.action === "update" ? "warning" : "success"
           }
         />
       </Modal>

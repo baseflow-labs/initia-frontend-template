@@ -1,6 +1,6 @@
 # Getting Started – Technical Guide
 
-This guide is intended for **frontend developers** who want to customize, extend, and maintain the AppNest frontend dashboard professionally.
+This guide is intended for **frontend developers** who want to customize, extend, and maintain the Initia frontend dashboard professionally.
 
 You are expected to be familiar with:
 
@@ -52,7 +52,7 @@ Fork the repository to your GitHub account, then clone it locally:
 
 ```bash
 git clone <your-fork-url>
-cd appnest-frontend
+cd initia-frontend
 npm install
 ```
 

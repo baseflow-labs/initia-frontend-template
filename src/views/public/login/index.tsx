@@ -37,18 +37,22 @@ const LoginView = () => {
     },
   ];
 
-  const onSubmit = (values: authApi.loginCredentials) => {
+  const onSubmit = (values?: Record<string, unknown>) => {
+    const credentials = {
+      identifier: (values?.identifier as string) || "",
+      password: (values?.password as string) || "",
+    };
     authApi
-      .login(values)
-      .then((res: any) => {
+      .login(credentials)
+      .then((res) => {
         dispatch(
           addNotification({
             msg: t("Public.Login.Labels.Success", {
-              name: res.payload.user.name,
+              name: res.data.payload.user.name,
             }),
           })
         );
-        dispatch(login(res.payload));
+        dispatch(login(res.data.payload));
       })
       .catch(apiCatchGlobalHandler);
   };
@@ -56,9 +60,7 @@ const LoginView = () => {
   const onDummySubmit = () => {
     dispatch(
       addNotification({
-        msg: t("Public.Login.Labels.Success", {
-          name: "Dummy Admin User",
-        }),
+        msg: "Welcome Initia Dummy Admin User",
       })
     );
     dispatch(

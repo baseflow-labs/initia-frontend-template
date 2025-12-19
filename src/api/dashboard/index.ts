@@ -3,14 +3,14 @@ import api, { demoStatus } from "..";
 const mainPath = "/overview";
 
 const forUser = async () => {
-  if (demoStatus){
+  if (demoStatus) {
     return {
       payload: {
         notifications: [
           {
             id: "1",
-            title: "Welcome to AppNest!",
-            message: "Thank you for using AppNest. We hope you have a great experience!",
+            title: "Welcome to Initia!",
+            message: "Thank you for using Initia. We hope you have a great experience!",
             service: "System",
             important: false,
             isRead: false,
@@ -25,12 +25,12 @@ const forUser = async () => {
             isRead: false,
             createdAt: "2024-06-01T12:00:00Z",
           },
-        ]
-      }
-    }
+        ],
+      },
+    };
   }
   const res = await api.get(mainPath + "/user");
-  return res;
+  return { payload: res.data };
 };
 
 const forResearcher = async () => {

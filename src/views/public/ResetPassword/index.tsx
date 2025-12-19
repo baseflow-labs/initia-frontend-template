@@ -8,7 +8,7 @@ const ResetPasswordView = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const onSubmit = (values = {}) => {
+  const onSubmit = (_values?: Record<string, unknown>) => {
     navigate("/");
   };
 

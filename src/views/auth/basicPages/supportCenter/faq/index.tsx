@@ -1,9 +1,9 @@
-import { faChevronDown, faChevronUp, faSearch } from "@fortawesome/free-solid-svg-icons";
+import PageTemplate from "@/layouts/auth/pages/pageTemplate";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import BackToSupportCenterButton from "../BackButton";
 
 const FaqView = () => {
   const { t } = useTranslation();
@@ -131,20 +131,7 @@ const FaqView = () => {
   let questionCounter = 0;
 
   return (
-    <Fragment>
-      {/* Header */}
-      <div className="bg-primary text-white py-5 mb-5">
-        <div className="container">
-          <div className="row">
-            <div className="col-12">
-              <BackToSupportCenterButton />
-
-              <h1 className="mb-3 text-center">{t("Auth.SupportCenter.FAQ.Title")}</h1>
-            </div>
-          </div>
-        </div>
-      </div>
-
+    <PageTemplate title={t("Auth.SupportCenter.FAQ.Title")}>
       <div className="container mb-5">
         {/* Search Bar */}
         <div className="row mb-5">
@@ -191,9 +178,7 @@ const FaqView = () => {
                           activeIndex === currentIndex ? "show" : ""
                         }`}
                       >
-                        <div className="accordion-body text-muted">
-                          {item.answer}
-                        </div>
+                        <div className="accordion-body text-muted">{item.answer}</div>
                       </div>
                     </div>
                   );
@@ -214,7 +199,7 @@ const FaqView = () => {
           </h2>
         </div>
       </div>
-    </Fragment>
+    </PageTemplate>
   );
 };
 

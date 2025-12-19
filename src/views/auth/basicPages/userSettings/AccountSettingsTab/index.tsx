@@ -1,12 +1,11 @@
-import { ChangeEvent, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
-
-import * as AuthApi from "@/api/auth";
 import Form from "@/components/form";
 import { addNotification } from "@/store/actions/notifications";
 import { useAppSelector } from "@/store/hooks";
 import { apiCatchGlobalHandler } from "@/utils/function";
+import { ChangeEvent, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+
 import { inputs } from "./consts";
 
 const AccountProfileTab = () => {
@@ -25,7 +24,6 @@ const AccountProfileTab = () => {
       setAvatarUploading(true);
       // TODO: Replace with your actual avatar upload endpoint
       // e.g., AuthApi.updateMyAvatar(file)
-      await AuthApi.login(file as any); // if not existing, implement later
 
       dispatch(
         addNotification({
@@ -40,8 +38,8 @@ const AccountProfileTab = () => {
 
       // You might want to refetch user or update Redux user here
       // e.g., dispatch(fetchMe())
-    } catch (err) {
-      apiCatchGlobalHandler(err as any);
+    } catch (err: unknown) {
+      apiCatchGlobalHandler(err);
     } finally {
       setAvatarUploading(false);
       e.target.value = ""; // reset file input
@@ -49,10 +47,9 @@ const AccountProfileTab = () => {
   };
 
   const avatarUrl =
-    (user as any)?.avatar ||
-    (user as any)?.image ||
-    "https://ui-avatars.com/api/?name=" +
-      encodeURIComponent(user?.name || user?.email || "User");
+    user?.avatar ||
+    user?.image ||
+    "https://firebasestorage.googleapis.com/v0/b/initia-platform.firebasestorage.app/o/logo.png?alt=media&token=88589714-a0a4-434f-b357-a6a317dffa3e";
 
   return (
     <div className="row">
@@ -68,10 +65,7 @@ const AccountProfileTab = () => {
 
         <div className="d-flex flex-column gap-2">
           <div>
-            <label
-              className="btn btn-sm btn-primary mb-0 w-100"
-              htmlFor="avatar"
-            >
+            <label className="btn btn-sm btn-primary mb-0 w-100" htmlFor="avatar">
               {avatarUploading
                 ? t("Global.Loading", { defaultValue: "Uploading..." })
                 : t("Auth.Settings.User.Account.ChangeAvatar", {

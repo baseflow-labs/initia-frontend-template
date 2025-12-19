@@ -34,7 +34,7 @@ const SupportTicketsSubmissionView = () => {
             </ul>
           </div>
 
-          <Form inputs={() => submitTicketInputs(t)} onFormSubmit={() => ""} />
+          <Form inputs={() => submitTicketInputs(t)} onFormSubmit={() => ""} submitColor="danger" />
         </div>
       </div>
 
@@ -42,29 +42,18 @@ const SupportTicketsSubmissionView = () => {
         <div className="card-body">
           <h5 className="card-title">Need Immediate Help?</h5>
 
-          <p className="text-muted mb-3">
-            For urgent issues, you can also reach us through:
-          </p>
+          <p className="text-muted mb-3">For urgent issues, you can also reach us through:</p>
 
           <div className="d-flex gap-2 flex-wrap">
-            <Link
-              to="/support-center/contact-us"
-              className="btn btn-sm btn-outline-warning"
-            >
+            <Link to="/support-center/contact-us" className="btn btn-sm btn-outline-danger">
               Live Chat
             </Link>
 
-            <a
-              href="tel:+15551234567"
-              className="btn btn-sm btn-outline-warning"
-            >
+            <a href="tel:+15551234567" className="btn btn-sm btn-outline-danger">
               Call Support
             </a>
 
-            <Link
-              to="/support-center/contact-us"
-              className="btn btn-sm btn-outline-warning"
-            >
+            <Link to="/support-center/contact-us" className="btn btn-sm btn-outline-danger">
               Email Us
             </Link>
           </div>
