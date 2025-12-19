@@ -1,10 +1,9 @@
 import { faDashboard, faGear, faTable } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes, useLocation } from "react-router";
 import { Fragment } from "react/jsx-runtime";
 
-import { faWpforms } from "@fortawesome/free-brands-svg-icons";
 import { useWindowWidth } from "@/utils/hooks";
 import MessagingView from "@/views/auth/basicPages/messaging";
 import NotificationsView from "@/views/auth/basicPages/notifications";
@@ -20,11 +19,13 @@ import DashboardView from "@/views/auth/dashboard";
 import TemplateDataTableExampleView from "@/views/auth/templateExamples/datatablePage";
 import TemplateDataViewExamplesView from "@/views/auth/templateExamples/dataView";
 import TemplateFormExamplesView from "@/views/auth/templateExamples/forms";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { faWpforms } from "@fortawesome/free-brands-svg-icons";
 import { FilePreviewModal } from "./globalModal";
 import DashboardNavbar from "./navs/navbar";
 import OffCanvasNav from "./navs/offcanvasNav";
 import Sidebar from "./navs/sidebarNav";
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { applyRouteChanges } from "@/utils/function";
 
 interface AuthRoute {
   name: string;
@@ -158,6 +159,10 @@ const AuthLayout = () => {
   const filteredFixedRoutes = authRoutes.filter(({ fixed, showInNav }) => fixed && showInNav);
 
   const toggleSidebar = () => setCollapsed((current) => !current);
+
+  useEffect(() => {
+    applyRouteChanges(t, authRoutes, location.pathname);
+  }, [location.pathname]);
 
   return (
     <Fragment>

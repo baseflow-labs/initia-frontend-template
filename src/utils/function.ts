@@ -98,3 +98,17 @@ export const pluralLabelResolve = (t: TFunction, count: number, standardLabel: s
       return t(`${standardLabel}_many`);
   }
 };
+
+export const applyRouteChanges = (
+  t: TFunction,
+  authRoutes: { route: string; name: string }[],
+  pathname: string
+) => {
+  // Change document title based on route
+  const base = t("CopyRight.AppName");
+  const page = authRoutes.find(({ route }) => route === pathname)?.name;
+  document.title = page ? `${base} – ${page}` : base;
+
+  // Scroll to top on route change
+  window.scrollTo(0, 0);
+};

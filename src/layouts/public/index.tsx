@@ -10,6 +10,8 @@ import RegisterView from "@/views/public/register";
 import ResetPasswordView from "@/views/public/ResetPassword";
 import TermsConditions from "@/views/public/termsConditions";
 import CopyRightView from "../common/copyright";
+import { useEffect } from "react";
+import { applyRouteChanges } from "@/utils/function";
 
 const AuthLayout = () => {
   const { t } = useTranslation();
@@ -49,6 +51,10 @@ const AuthLayout = () => {
       show: false,
     },
   ];
+
+  useEffect(() => {
+    applyRouteChanges(t, publicRoutes, location.pathname);
+  }, [location.pathname]);
 
   return (
     <main className="overflow-x-hidden">
