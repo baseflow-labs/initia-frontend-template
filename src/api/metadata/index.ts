@@ -8,7 +8,7 @@ const get = async () => {
       payload: {
         logo: [
           {
-            path: "https://avatars.githubusercontent.com/u/168961512?s=400&u=201ce6952acb24b8f56b8cdf746e7dba28d7fc95&v=4",
+            path: "https://avatars.githubusercontent.com/u/168961512?s=400&u=4438fc74e073e1c13b9ef90fe68979667007e70d&v=4",
           },
         ],
         appName: "Initia Demo Application",

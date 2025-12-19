@@ -7,3 +7,4 @@
   - [ ] Input labels
   - [ ] Sidebar collapse caret
 - [x] Fix calendar contents UI
+- [ ] Fix Layouts responsiveness
