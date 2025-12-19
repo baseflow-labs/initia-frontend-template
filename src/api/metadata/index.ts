@@ -6,9 +6,14 @@ const get = async () => {
   if (demoStatus) {
     return {
       payload: {
+        logoFull: [
+          {
+            path: "https://firebasestorage.googleapis.com/v0/b/initia-platform.firebasestorage.app/o/logo-full.png?alt=media&token=de1da191-53c3-4bb1-bad7-e0f1c9ec54fc",
+          },
+        ],
         logo: [
           {
-            path: "https://avatars.githubusercontent.com/u/168961512?s=400&u=4438fc74e073e1c13b9ef90fe68979667007e70d&v=4",
+            path: "https://firebasestorage.googleapis.com/v0/b/initia-platform.firebasestorage.app/o/logo.png?alt=media&token=88589714-a0a4-434f-b357-a6a317dffa3e",
           },
         ],
         appName: "Initia Demo Application",

@@ -49,7 +49,7 @@ const AccountProfileTab = () => {
   const avatarUrl =
     user?.avatar ||
     user?.image ||
-    "https://avatars.githubusercontent.com/u/168961512?s=400&u=4438fc74e073e1c13b9ef90fe68979667007e70d&v=4";
+    "https://firebasestorage.googleapis.com/v0/b/initia-platform.firebasestorage.app/o/logo-full.png?alt=media&token=de1da191-53c3-4bb1-bad7-e0f1c9ec54fc";
 
   return (
     <div className="row">

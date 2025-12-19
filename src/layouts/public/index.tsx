@@ -1,11 +1,5 @@
 import { useTranslation } from "react-i18next";
-import {
-  Navigate,
-  Route,
-  Routes,
-  useLocation,
-  useNavigate,
-} from "react-router";
+import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router";
 
 import tempLogo from "@/assets/images/brand/logo.png";
 import Button from "@/components/core/button";
@@ -21,7 +15,7 @@ const AuthLayout = () => {
   const { t } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
-  const { logo } = useAppSelector((state) => state.settings);
+  const { logoFull } = useAppSelector((state) => state.settings);
 
   const publicRoutes = [
     {
@@ -70,7 +64,7 @@ const AuthLayout = () => {
           <div className="card-body text-center">
             <img
               alt="bg-image"
-              src={logo || tempLogo}
+              src={logoFull || tempLogo}
               className="w-50 px-1 mb-4"
               style={{ maxWidth: "350px" }}
               role="button"
@@ -78,12 +72,11 @@ const AuthLayout = () => {
             />
 
             <div className="d-flex">
-              {(location.pathname === "/" ||
-                location.pathname === "/register") && (
+              {(location.pathname === "/" || location.pathname === "/register") && (
                 <div className="my-4 p-2 bg-light w-fit mx-auto rounded-5">
                   {publicRoutes
                     .filter(({ show }) => show)
-                    .map(({ name, route, view }, i) => {
+                    .map(({ name, route }, i) => {
                       const isSelected = location.pathname === route;
 
                       const settings = isSelected
@@ -121,7 +114,7 @@ const AuthLayout = () => {
 
             <div className="card-text">
               <Routes>
-                {publicRoutes.map(({ name, route, view }, i) => (
+                {publicRoutes.map(({ route, view }, i) => (
                   <Route path={route} element={view} key={i} />
                 ))}
 

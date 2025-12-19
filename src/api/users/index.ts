@@ -10,12 +10,12 @@ const getAll = async ({ filters, page, capacity, customFilters }: GetDataProps) 
         {
           id: "1",
           fullName: "Demo Admin User",
-          email: "demo.admin@initia.com",
+          email: "demo.admin@initia.io",
         },
         {
           id: "2",
           fullName: "Demo User",
-          email: "demo.user@initia.com",
+          email: "demo.user@initia.io",
         },
       ],
     };
@@ -41,7 +41,7 @@ const getByUserId = async (id?: string) => {
     return {
       payload: {
         fullName: "Demo User",
-        email: "demo.user@initia.com",
+        email: "demo.user@initia.io",
       },
     };
   }

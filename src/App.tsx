@@ -22,21 +22,17 @@ const App = () => {
   document.documentElement.lang = i18n.language;
 
   useEffect(() => {
-    document.documentElement.style.setProperty(
-      "--base-font-size",
-      fontSize + "px"
-    );
+    document.documentElement.style.setProperty("--base-font-size", fontSize + "px");
   }, [fontSize]);
 
   useEffect(() => {
     MetadataApi.get()
-      .then((res: any) => {
+      .then((res) => {
         dispatch(
           setMetadata({
             ...res.payload,
-            logo:
-              (res.payload.logo && res.payload.logo[0].path) ||
-              null,
+            logo: (res.payload.logo && res.payload.logo[0].path) || null,
+            logoFull: (res.payload.logoFull && res.payload.logoFull[0].path) || null,
           })
         );
       })
