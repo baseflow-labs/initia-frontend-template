@@ -21,7 +21,8 @@ const get = async () => {
       },
     };
   }
-  return await api.get(mainPath);
+  const res = await api.get(mainPath);
+  return { payload: res.data };
 };
 
 const update = async (data: object) => {

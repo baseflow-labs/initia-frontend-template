@@ -48,7 +48,7 @@ const getByUserId = async (id?: string) => {
   const { user } = (store.getState() as RootState).auth;
 
   const res = await api.get(mainPath + "/by-user/" + (id || user.id));
-  return res;
+  return { payload: res.data };
 };
 
 const remove = async (id: string) => {

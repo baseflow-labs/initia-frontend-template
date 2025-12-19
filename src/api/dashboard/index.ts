@@ -30,7 +30,7 @@ const forUser = async () => {
     };
   }
   const res = await api.get(mainPath + "/user");
-  return res;
+  return { payload: res.data };
 };
 
 const forResearcher = async () => {
