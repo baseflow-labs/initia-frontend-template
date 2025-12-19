@@ -8,9 +8,13 @@
   - [ ] Sidebar collapse caret
 - [x] Fix calendar contents UI
 - [ ] Fix Layouts responsiveness
+  - [ ] Fixate navbar
+  - [ ] build footer
+  - [ ] Build offCanvas comp & optional sidebar
+  - [ ] Build chatbot placeholder
 - [ ] Apply React Activity Wrapper
 - [x] Unify rounded corners across the app
 - [x] Fix on route change scroll to top
-- [ ] Build page breadcrumbs component
+- [x] Build page breadcrumbs component
 - [ ] Fix Public Pages of password recovery / reset
 - [ ] Build Missing Privacy Policy and Terms of Service page links

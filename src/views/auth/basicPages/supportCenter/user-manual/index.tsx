@@ -130,8 +130,10 @@ const UserManualView = () => {
     `,
   };
 
+  const pageBreadcrumbs = [{ label: t("Auth.SupportCenter.Title"), path: "/support-center" }];
+
   return (
-    <PageTemplate title={t("Auth.SupportCenter.UserManual.Title")}>
+    <PageTemplate title={t("Auth.SupportCenter.UserManual.Title")} breadcrumbs={pageBreadcrumbs}>
       <div className="container mb-5">
         <div className="row">
           {/* Sidebar Navigation */}

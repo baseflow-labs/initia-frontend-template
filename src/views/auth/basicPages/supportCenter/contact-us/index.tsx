@@ -10,6 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslation } from "react-i18next";
+
 import { inputs } from "./consts";
 
 const ContactUsView = () => {
@@ -42,8 +43,10 @@ const ContactUsView = () => {
     },
   ];
 
+  const pageBreadcrumbs = [{ label: t("Auth.SupportCenter.Title"), path: "/support-center" }];
+
   return (
-    <PageTemplate title={t("Auth.SupportCenter.ContactUs.Title")}>
+    <PageTemplate title={t("Auth.SupportCenter.ContactUs.Title")} breadcrumbs={pageBreadcrumbs}>
       <div className="container mb-5">
         {/* Contact Info Cards */}
         <div className="row mb-5">

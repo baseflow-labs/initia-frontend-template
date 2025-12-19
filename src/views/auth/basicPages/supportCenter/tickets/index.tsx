@@ -1,6 +1,7 @@
 import TabsComp from "@/components/tab";
 import PageTemplate from "@/layouts/auth/pages/pageTemplate";
 import { useTranslation } from "react-i18next";
+
 import SupportTicketsSubmissionView from "./SubmitTicket";
 import SupportTicketsListingView from "./Tickets";
 
@@ -20,8 +21,10 @@ const SupportTicketsView = () => {
     },
   ];
 
+  const pageBreadcrumbs = [{ label: t("Auth.SupportCenter.Title"), path: "/support-center" }];
+
   return (
-    <PageTemplate title={t("Auth.SupportCenter.Tickets.Title")}>
+    <PageTemplate title={t("Auth.SupportCenter.Tickets.Title")} breadcrumbs={pageBreadcrumbs}>
       <div className="container mb-5">
         <TabsComp
           items={tabs.map((tab) => ({

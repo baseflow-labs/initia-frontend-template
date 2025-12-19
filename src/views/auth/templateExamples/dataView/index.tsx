@@ -1,12 +1,3 @@
-import {
-  faCakeCandles,
-  faEllipsisVertical,
-  faPerson,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
-
 import CalendarComp from "@/components/calendar";
 import CollapseGroup from "@/components/collapse";
 import DropdownComp from "@/components/dropdown";
@@ -14,6 +5,11 @@ import Modal from "@/components/modal";
 import TabsComp from "@/components/tab";
 import ApiDataTable from "@/components/table/apiDatatable";
 import PageTemplate from "@/layouts/auth/pages/pageTemplate";
+import { faCakeCandles, faEllipsisVertical, faPerson } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+
 import { inputs } from "../datatablePage/inputs";
 
 const TemplateDataViewExamplesView = () => {
@@ -82,10 +78,8 @@ const TemplateDataViewExamplesView = () => {
       body: (
         <DropdownComp
           start
-          button={
-            <FontAwesomeIcon icon={faEllipsisVertical} className="ms-1" />
-          }
-          list={exampleData.map(({ title, body }) => ({
+          button={<FontAwesomeIcon icon={faEllipsisVertical} className="ms-1" />}
+          list={exampleData.map(({ title }) => ({
             label: title,
             onClick: () => alert(title),
           }))}
@@ -151,16 +145,13 @@ const TemplateDataViewExamplesView = () => {
     },
   ];
 
+  const pageBreadcrumbs = [{ label: t("Auth.Dashboard.Title"), path: "/dashboard" }];
+
   return (
-    <PageTemplate title={t("Auth.Examples.DataView.Title")}>
+    <PageTemplate title={t("Auth.Examples.DataView.Title")} breadcrumbs={pageBreadcrumbs}>
       <div className="row">
         {dataViewExamples.map((example, idx) => (
-          <div
-            className={`col-12 ${
-              example.fullWidth ? "col-md-12" : "col-md-6"
-            } my-4`}
-            key={idx}
-          >
+          <div className={`col-12 ${example.fullWidth ? "col-md-12" : "col-md-6"} my-4`} key={idx}>
             <h4 className="mb-3">{example.title}</h4>
 
             {example.body}

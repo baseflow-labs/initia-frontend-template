@@ -1,13 +1,13 @@
-import { useTranslation } from "react-i18next";
-
 import TabsComp from "@/components/tab";
 import PageTemplate from "@/layouts/auth/pages/pageTemplate";
+import { useTranslation } from "react-i18next";
+
+import BackupSettingsView from "./backup";
+import SystemDataBulkInsertionView from "./bulkInseration";
 import SystemLoggerView from "./logger";
+import SystemMetadataSettingsView from "./metadata";
 import UserActivityView from "./userActivity";
 import UsersView from "./users";
-import SystemMetadataSettingsView from "./metadata";
-import SystemDataBulkInsertionView from "./bulkInseration";
-import BackupSettingsView from "./backup";
 
 const SystemSettingsView = () => {
   const { t } = useTranslation();
@@ -39,8 +39,10 @@ const SystemSettingsView = () => {
     },
   ];
 
+  const pageBreadcrumbs = [{ label: t("Auth.Dashboard.Title"), path: "/dashboard" }];
+
   return (
-    <PageTemplate title={t("Auth.Settings.Admin.Title")}>
+    <PageTemplate title={t("Auth.Settings.Admin.Title")} breadcrumbs={pageBreadcrumbs}>
       <TabsComp
         items={tabs.map((tab, idx) => ({
           ...tab,
