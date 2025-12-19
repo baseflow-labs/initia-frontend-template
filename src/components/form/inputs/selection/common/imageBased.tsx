@@ -3,12 +3,7 @@ import { InputProps } from "../../..";
 
 type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 
-const ImageBasedSelectionView = ({
-  type,
-  options,
-  stacked,
-  ...input
-}: FinalInput) => {
+const ImageBasedSelectionView = ({ type, options, stacked, ...input }: FinalInput) => {
   return (
     <div className={`w-100 ${stacked ? "" : "d-flex flex-wrap gap-2"}`}>
       {options?.map((option, i) => (
@@ -27,15 +22,16 @@ const ImageBasedSelectionView = ({
             if (type === "radio") {
               if (input.value === option.value) return;
 
-              input.onChange &&
+              if (input.onChange) {
                 input.onChange({
-                  target: { name: input.name, value: option.value },
-                } as any);
+                  target: { name: input.name, value: String(option.value) },
+                } as unknown as React.ChangeEvent<HTMLInputElement>);
+              }
             } else if (type === "checkbox") {
-              let newValue: any[] = [];
+              let newValue: unknown[] = [];
               if (input.value && Array.isArray(input.value)) {
                 if (input.value.includes(option.value)) {
-                  newValue = input.value.filter((v) => v !== option.value);
+                  newValue = input.value.filter((v: unknown) => v !== option.value);
                 } else {
                   newValue = [...input.value, option.value];
                 }
@@ -43,10 +39,11 @@ const ImageBasedSelectionView = ({
                 newValue = [option.value];
               }
 
-              input.onChange &&
+              if (input.onChange) {
                 input.onChange({
                   target: { name: input.name, value: newValue },
-                } as any);
+                } as unknown as React.ChangeEvent<HTMLInputElement>);
+              }
             }
           }}
           key={i}
@@ -54,21 +51,18 @@ const ImageBasedSelectionView = ({
           <img
             src={option.image}
             alt={option.label}
-            className="card-img-top w-100"
+            style={{ maxWidth: "100px" }}
+            className="card-img-top mx-auto"
           />
 
           {option.label || option.description ? (
             <div className="card-body">
               {option.label && (
-                <label className="form-check-label d-block h5">
-                  {option.label}
-                </label>
+                <label className="form-check-label d-block h5">{option.label}</label>
               )}
 
               {option.description && (
-                <label className="form-check-label d-block">
-                  {option.description}
-                </label>
+                <label className="form-check-label d-block">{option.description}</label>
               )}
             </div>
           ) : (

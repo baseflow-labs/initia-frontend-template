@@ -11,7 +11,7 @@ const UserProfileTabView = () => {
       <div className="col-xl-4 col-lg-5 mb-4">
         <UserProfileAboutView />
 
-       <UserProfileContactsView />
+        <UserProfileContactsView />
 
         <UserProfileTeamsView />
       </div>

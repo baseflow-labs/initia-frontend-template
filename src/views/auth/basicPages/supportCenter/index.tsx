@@ -1,3 +1,4 @@
+import PageTemplate from "@/layouts/auth/pages/pageTemplate";
 import {
   faArrowRight,
   faBook,
@@ -6,7 +7,6 @@ import {
   faTicket,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
@@ -78,21 +78,11 @@ const SupportCenterView = () => {
   ];
 
   return (
-    <Fragment>
-      <div className="bg-primary text-white py-5 mb-5">
-        <div className="container">
-          <div className="row justify-content-center text-center">
-            <div className="col-lg-8">
-              <h1 className="mb-3">{t("Auth.SupportCenter.Title")}</h1>
-            </div>
-          </div>
-        </div>
-      </div>
-
+    <PageTemplate title={t("Auth.SupportCenter.Title")}>
       <div className="container mb-5">
         <div className="row mb-5">
           <div className="col-12 mb-4">
-            <h2 className="mb-4">{t("Auth.SupportCenter.QuickAccess.Title")}</h2>
+            <h4 className="mb-4">{t("Auth.SupportCenter.QuickAccess.Title")}</h4>
           </div>
 
           {quickLinks.map((item, index) => (
@@ -123,7 +113,7 @@ const SupportCenterView = () => {
         {/* Knowledge Base */}
         <div className="row mb-5">
           <div className="col-12 mb-4">
-            <h2 className="mb-4">{t("Auth.SupportCenter.KnowledgeBase.Title")}</h2>
+            <h4 className="mb-4">{t("Auth.SupportCenter.KnowledgeBase.Title")}</h4>
           </div>
 
           {knowledgeBaseCategories.map((category, index) => (
@@ -183,7 +173,7 @@ const SupportCenterView = () => {
           </div>
         </div>
       </div>
-    </Fragment>
+    </PageTemplate>
   );
 };
 

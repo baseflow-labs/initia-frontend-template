@@ -1,6 +1,6 @@
 import { TFunction } from "i18next";
 
-import tempLogo from "../../../../assets/images/brand/logo.png";
+import tempLogo from "../../../../../public/android-chrome-192x192.png";
 
 const inputOptions = (t: TFunction) => [
   {

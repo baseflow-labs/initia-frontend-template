@@ -1,3 +1,5 @@
+import Form from "@/components/form";
+import PageTemplate from "@/layouts/auth/pages/pageTemplate";
 import { faFacebook, faInstagram, faLinkedin, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import {
   faClock,
@@ -7,10 +9,7 @@ import {
   faPhone,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
-import Form from "@/components/form";
-import BackToSupportCenterButton from "../BackButton";
 import { inputs } from "./consts";
 
 const ContactUsView = () => {
@@ -44,20 +43,7 @@ const ContactUsView = () => {
   ];
 
   return (
-    <Fragment>
-      {/* Header */}
-      <div className="bg-warning text-white py-5 mb-5">
-        <div className="container">
-          <div className="row">
-            <div className="col-12">
-              <BackToSupportCenterButton />
-
-              <h1 className="mb-3 text-center">{t("Auth.SupportCenter.ContactUs.Title")}</h1>
-            </div>
-          </div>
-        </div>
-      </div>
-
+    <PageTemplate title={t("Auth.SupportCenter.ContactUs.Title")}>
       <div className="container mb-5">
         {/* Contact Info Cards */}
         <div className="row mb-5">
@@ -190,7 +176,7 @@ const ContactUsView = () => {
           </div>
         </div>
       </div>
-    </Fragment>
+    </PageTemplate>
   );
 };
 

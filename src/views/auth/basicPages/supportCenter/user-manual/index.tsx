@@ -1,3 +1,4 @@
+import PageTemplate from "@/layouts/auth/pages/pageTemplate";
 import {
   faBook,
   faChevronRight,
@@ -6,10 +7,9 @@ import {
   faVideo,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import BackToSupportCenterButton from "../BackButton";
 
 const UserManualView = () => {
   const { t } = useTranslation();
@@ -131,20 +131,7 @@ const UserManualView = () => {
   };
 
   return (
-    <Fragment>
-      {/* Header */}
-      <div className="bg-success text-white py-5 mb-5">
-        <div className="container">
-          <div className="row">
-            <div className="col-12">
-              <BackToSupportCenterButton />
-
-              <h1 className="mb-3 text-center">{t("Auth.SupportCenter.UserManual.Title")}</h1>
-            </div>
-          </div>
-        </div>
-      </div>
-
+    <PageTemplate title={t("Auth.SupportCenter.UserManual.Title")}>
       <div className="container mb-5">
         <div className="row">
           {/* Sidebar Navigation */}
@@ -316,7 +303,7 @@ const UserManualView = () => {
           </div>
         </div>
       </div>
-    </Fragment>
+    </PageTemplate>
   );
 };
 

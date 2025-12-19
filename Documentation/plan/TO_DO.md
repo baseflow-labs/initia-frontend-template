@@ -10,3 +10,5 @@
 - [ ] Fix Layouts responsiveness
 - [ ] Apply React Activity Wrapper
 - [ ] Unify rounded corners across the app
+- [ ] Fix on route change scroll to top
+- [ ] Build page breadcrumbs component

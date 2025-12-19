@@ -39,7 +39,7 @@ const UserProfileHeaderView = () => {
     <Fragment>
       <div className="row">
         <div className="col-12">
-          <div className="card border-0 shadow-sm mb-4">
+          <div className="card rounded-2 border-0 shadow-sm mb-4">
             {/* Cover */}
             <div className="position-relative">
               <div className="ratio w-100 bg-primary" style={{ height: "25vh" }} />
@@ -53,7 +53,7 @@ const UserProfileHeaderView = () => {
                   <img
                     src={user.avatarUrl}
                     alt={user.name}
-                    className="img-fluid w-100 h-100 object-fit-cover"
+                    className="img-fluid w-100 h-100 object-fit-cover bg-white"
                   />
                 </div>
               </div>
