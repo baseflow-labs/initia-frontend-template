@@ -1,4 +1,5 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment } from "react";
 import { useLocation, useNavigate } from "react-router";
@@ -8,7 +9,7 @@ export interface MenuItem {
   route?: string;
   icon: IconProp;
   badge?: { text: string; color: string };
-  subMenu?: MenuItem[];
+  subRoute?: MenuItem[];
 }
 
 interface MenuItemRendererProps {
@@ -34,7 +35,7 @@ export const MenuItemRenderer = ({
 }: MenuItemRendererProps) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const hasChildren = item.subMenu && item.subMenu.length > 0;
+  const hasChildren = item.subRoute && item.subRoute.length > 0;
   const isActive = item.route ? location.pathname.includes(item.route) : false;
   const isExpanded = expandedMenus[item.name];
 
@@ -69,12 +70,18 @@ export const MenuItemRenderer = ({
           {(!collapsed || depth > 0 || isOffcanvas) && (
             <span className={depth > 0 ? "text-truncate" : ""}>{item.name}</span>
           )}
+          {hasChildren && (
+            <FontAwesomeIcon
+              icon={isExpanded ? faChevronUp : faChevronDown}
+              className="ms-auto me-0"
+            />
+          )}
         </div>
       </div>
 
       {hasChildren && isExpanded && (!collapsed || isOffcanvas) && (
         <div className="submenu ms-1 border-start border-light ps-2 my-1">
-          {item.subMenu?.map((child) => (
+          {item.subRoute?.map((child) => (
             <MenuItemRenderer
               key={child.name}
               item={child}
