@@ -163,8 +163,16 @@ const AuthLayout = () => {
     <Fragment>
       {/* <DemoWarning /> */}
       <OffCanvasNav
-        fixedRoutes={filteredFixedRoutes}
-        routes={authRoutes.filter(({ showInNav, fixed }) => showInNav && !fixed)}
+        fixedRoutes={filteredFixedRoutes.map(({ subRoute, ...rest }) => ({
+          ...rest,
+          children: subRoute,
+        }))}
+        routes={authRoutes
+          .filter(({ showInNav, fixed }) => showInNav && !fixed)
+          .map(({ subRoute, ...rest }) => ({
+            ...rest,
+            children: subRoute,
+          }))}
       />
 
       <main className="d-flex pb-5">
@@ -180,8 +188,16 @@ const AuthLayout = () => {
             <Sidebar
               collapsed={collapsed}
               toggleSidebar={toggleSidebar}
-              fixedRoutes={filteredFixedRoutes}
-              routes={authRoutes.filter(({ showInNav, fixed }) => showInNav && !fixed)}
+              fixedRoutes={filteredFixedRoutes.map(({ subRoute, ...rest }) => ({
+                ...rest,
+                children: subRoute,
+              }))}
+              routes={authRoutes
+                .filter(({ showInNav, fixed }) => showInNav && !fixed)
+                .map(({ subRoute, ...rest }) => ({
+                  ...rest,
+                  children: subRoute,
+                }))}
             />
           </div>
         )}

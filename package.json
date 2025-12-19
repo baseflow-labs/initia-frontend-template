@@ -20,6 +20,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^7.1.0",
     "@fortawesome/free-brands-svg-icons": "^7.1.0",
+    "@fortawesome/free-regular-svg-icons": "^7.1.0",
     "@fortawesome/free-solid-svg-icons": "^7.1.0",
     "@fortawesome/react-fontawesome": "^3.1.1",
     "@react-google-maps/api": "^2.20.7",
@@ -64,6 +65,7 @@
     "i18next-parser": "^9.3.0",
     "lint-staged": "^15.2.10",
     "prettier": "^3.4.2",
+    "sass": "^1.97.0",
     "typescript": "^5.9.3",
     "vite": "^7.2.7"
   },
