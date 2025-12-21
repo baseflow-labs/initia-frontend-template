@@ -1,7 +1,8 @@
+import { commaNumbers } from "@/utils/function";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { commaNumbers } from "@/utils/function";
+import Activity from "../activity";
 import DashboardCard from "./dashboardCard";
 
 interface Props {
@@ -53,27 +54,29 @@ const StatisticCards = ({ statistics }: Props) => {
           )} col-xl-${columnsLgWidth(statistics.length)} d-flex`}
           key={i}
         >
-          <DashboardCard>
+          <DashboardCard className="bg-white">
             <div className="card-body w-100">
               <div className="row">
                 <div className="col-lg-9">
-                  <h6 className="card-title">{label}</h6>
+                  <h5 className="card-title">{label}</h5>
                 </div>
 
-                <div className="col-lg-3 h3 text-end">
-                  <span className={`bg-opacity-${color} rounded-2 px-3 py-0`}>
-                    <FontAwesomeIcon icon={icon} className={`text-${color}`} />
+                <div className="col-lg-3 text-end">
+                  <span className={`bg-${color} rounded-2 px-3 py-2`}>
+                    <FontAwesomeIcon icon={icon} className="text-white" />
                   </span>
                 </div>
               </div>
 
-              <h1 className="card-title mt-2 mb-4 fw-bold">
-                {commaNumbers(String(count))} {unit}
-              </h1>
+              <h2 className="card-title my-3 fw-bold">{commaNumbers(String(count))}</h2>
 
-              {details && (
+              <Activity condition={!!unit}>
+                <p className="mb-2">{unit}</p>
+              </Activity>
+
+              <Activity condition={(details && details?.length > 0) || false}>
                 <p className="card-text d-flex">
-                  {details.map(({ label, count, unit }, y) => (
+                  {details?.map(({ label, count, unit }, y) => (
                     <div className="me-1" key={y}>
                       <span className={`text-${color} fw-bold`}>
                         {count} {unit}
@@ -82,7 +85,7 @@ const StatisticCards = ({ statistics }: Props) => {
                     </div>
                   ))}
                 </p>
-              )}
+              </Activity>
             </div>
           </DashboardCard>
         </div>

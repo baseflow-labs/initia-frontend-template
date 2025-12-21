@@ -5,13 +5,15 @@ import CardComp from "./card";
 const DashboardCard = ({
   children,
   max,
+  className,
 }: {
   children: React.ReactNode;
   max?: string;
+  className?: string;
 }) => {
   return (
     <CardComp
-      className="my-3 w-100"
+      className={`my-3 w-100 ${className}`}
       style={max ? { maxHeight: max, overflowY: "auto" } : {}}
     >
       <Fragment>{children}</Fragment>

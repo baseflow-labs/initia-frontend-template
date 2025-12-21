@@ -127,7 +127,7 @@
   - [ ] Notifications list
   - [ ] Calendar basic block
 - [ ] Admin dashboard v1:
-  - [ ] Users stats + list
+  - [x] Users stats + list
   - [ ] System health basic widget (static placeholder + API hook)
   - [ ] Subscriptions placeholder section
 

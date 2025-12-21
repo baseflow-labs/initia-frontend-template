@@ -1,6 +1,16 @@
 {
   "Auth": {
     "Dashboard": {
+      "Admin": {
+        "Stats": {
+          "ActiveUsers": "Active Users",
+          "PendingUsers": "Pending Users",
+          "Sessions": "Sessions",
+          "SessionsUnit": "Sessions Unit",
+          "TotalUsers": "Total Users",
+          "UsersUnit": "Users Unit"
+        }
+      },
       "AidsCount": "Aids Count",
       "ApplicationTimeline": "Application Timeline",
       "ImportantNotifications": "Important Notifications",
