@@ -128,7 +128,7 @@
   - [ ] Calendar basic block
 - [ ] Admin dashboard v1:
   - [x] Users stats + list
-  - [ ] System health basic widget (static placeholder + API hook)
+  - [x] System health basic widget (static placeholder + API hook)
   - [ ] Subscriptions placeholder section
 
 ## Phase 6 — Core UI Engine (Forms + DataTable) (29 Jan - 25 Mar, 2026)

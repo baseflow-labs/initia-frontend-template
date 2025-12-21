@@ -9,6 +9,15 @@
           "SessionsUnit": "وحدة الجلسات",
           "TotalUsers": "إجمالي المستخدمين",
           "UsersUnit": "وحدة المستخدمين"
+        },
+        "SystemHealth": {
+          "Api": "API (Backend Integration)",
+          "Cpu": "CPU",
+          "Database": "Database",
+          "Disk": "Disk",
+          "Memory": "Memory",
+          "Overall": "Overall",
+          "Title": "System Heath"
         }
       },
       "AidsCount": "عدد المساعدات",

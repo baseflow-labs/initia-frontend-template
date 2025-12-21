@@ -1,7 +1,7 @@
 const CardComp = ({ children = <></>, className = "", ...rest }) => {
   return (
-    <div className={`border border-1 rounded-2 mx-auto p-4 ${className}`} {...rest}>
-      {children}
+    <div className={`card rounded-2 mx-auto ${className}`} {...rest}>
+      <div className="card-body p-4">{children}</div>
     </div>
   );
 };

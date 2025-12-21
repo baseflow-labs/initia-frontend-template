@@ -9,6 +9,15 @@
           "SessionsUnit": "Sessions Unit",
           "TotalUsers": "Total Users",
           "UsersUnit": "Users Unit"
+        },
+        "SystemHealth": {
+          "Api": "API (Backend Integration)",
+          "Cpu": "CPU",
+          "Database": "Database",
+          "Disk": "Disk",
+          "Memory": "Memory",
+          "Overall": "Overall",
+          "Title": "System Heath"
         }
       },
       "AidsCount": "Aids Count",
