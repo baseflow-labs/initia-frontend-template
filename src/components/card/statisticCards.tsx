@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Activity from "../activity";
 import DashboardCard from "./dashboardCard";
+import { Fragment } from "react/jsx-runtime";
 
 interface Props {
   statistics: {
@@ -55,7 +56,7 @@ const StatisticCards = ({ statistics }: Props) => {
           key={i}
         >
           <DashboardCard className="bg-white">
-            <div className="card-body w-100">
+            <Fragment>
               <div className="row">
                 <div className="col-lg-9">
                   <h5 className="card-title">{label}</h5>
@@ -86,7 +87,7 @@ const StatisticCards = ({ statistics }: Props) => {
                   ))}
                 </p>
               </Activity>
-            </div>
+            </Fragment>
           </DashboardCard>
         </div>
       ))}

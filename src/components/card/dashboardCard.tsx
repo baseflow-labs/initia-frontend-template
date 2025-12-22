@@ -19,7 +19,7 @@ const DashboardCard = ({
       style={max ? { maxHeight: max, overflowY: "auto" } : {}}
     >
       <Fragment>
-        {title && <h4 className="mb-3">{title}</h4>}
+        {title && <h4 className="mb-4">{title}</h4>}
 
         {children}
       </Fragment>

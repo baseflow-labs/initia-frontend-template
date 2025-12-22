@@ -2,6 +2,7 @@ import * as OverviewApi from "@/api/dashboard";
 import DashboardCard from "@/components/card/dashboardCard";
 import StatisticCards from "@/components/card/statisticCards";
 import { Notification } from "@/layouts/auth/navs/navbar";
+import { useAppSelector } from "@/store/hooks";
 import { apiCatchGlobalHandler } from "@/utils/function";
 import {
   faArrowRightToBracket,
@@ -27,6 +28,7 @@ import { useNavigate } from "react-router";
 const AdminDashboardView = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { logoFull } = useAppSelector((state) => state.settings);
   const [data, setData] = useState<{
     notifications?: Notification[];
     statuses?: { status: string; createdAt: string }[];
@@ -138,21 +140,31 @@ const AdminDashboardView = () => {
       <StatisticCards statistics={statsData} />
 
       <div className="row">
-        <div className="col-lg-5 mb-4"></div>
+        <div className="col-lg-5 mb-4">
+          <DashboardCard title={t("Auth.Dashboard.Welcome.Title")} className="h-100">
+            {t("Auth.Dashboard.Welcome.Message", { name: t("CopyRight.AppName") })}
+
+            <img
+              src={logoFull || "../../../assets/images/brand/logo-full.png"}
+              alt="Welcome"
+              className="img-fluid mt-5"
+            />
+          </DashboardCard>
+        </div>
 
         <div className="col-lg-3 mb-4">
-          <DashboardCard title={t("Auth.Dashboard.Admin.SystemHealth.Title")}>
+          <DashboardCard title={t("Auth.Dashboard.Admin.SystemHealth.Title")} className="h-100">
             {healthData.map((row, index) => (
               <div key={index} className="d-flex align-items-center mb-4">
-                <h4>
+                <h6>
                   <FontAwesomeIcon
                     icon={row.status === 200 ? faCheckCircle : faTimesCircle}
                     className={`fa-2x mb-0 text-${row.status === 200 ? "success" : "danger"}`}
                   />
-                </h4>
+                </h6>
 
                 <div>
-                  <h6 className="mb-1">{row.label}</h6>
+                  <h6 className="mb-0">{row.label}</h6>
 
                   <small>{row.status === 200 ? row.status : row.details}</small>
                 </div>
@@ -162,7 +174,7 @@ const AdminDashboardView = () => {
         </div>
 
         <div className="col-lg-4 mb-4">
-          <DashboardCard title={t("Auth.Dashboard.ImportantNotifications")}>
+          <DashboardCard title={t("Auth.Dashboard.ImportantNotifications")} className="h-100">
             <div style={{ maxHeight: "40vh", overflowY: "auto" }}>
               {data.notifications?.length
                 ? data.notifications.map(({ message, service, createdAt }, i) => (

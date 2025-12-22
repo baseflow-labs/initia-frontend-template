@@ -126,10 +126,9 @@
   - [ ] Account info card
   - [ ] Notifications list
   - [ ] Calendar basic block
-- [ ] Admin dashboard v1:
+- [x] Admin dashboard v1:
   - [x] Users stats + list
   - [x] System health basic widget (static placeholder + API hook)
-  - [ ] Subscriptions placeholder section
 
 ## Phase 6 — Core UI Engine (Forms + DataTable) (29 Jan - 25 Mar, 2026)
 
@@ -236,6 +235,9 @@ Implement only the “must-have knobs” first:
 
 ## To Plan / Backlog (Post-Roadmap)
 
+- [ ] Engage tRPC (for type-safe APIs between frontend and backend)
+- [ ] Real-time collaboration features (multiple users editing same form/dashboard)
+- [ ] Advanced workflow engine (custom triggers, multi-step processes)
 - [ ] Open-search integration (ElasticSearch / MeiliSearch)
 - [ ] Blockchain integration (basic support for data storage/verification)
 - [ ] Multi-tenant support (orgs, subdomains, data isolation)
@@ -309,6 +311,7 @@ Implement only the “must-have knobs” first:
   - [ ] Video share platform
   - [ ] Video streaming platform
   - [ ] Firebase CMS
+  - [ ] ChatGPT-like platform
 - [ ] Commit-based code generation
 - [ ] AI-assisted features planing
 - [ ] AI-assisted code generation (initial experiments + feasibility study)

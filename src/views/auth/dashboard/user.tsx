@@ -59,7 +59,7 @@ const UserDashboardView = () => {
         <div className="col-lg-6">
           <DashboardCard>
             <div className="text-primary text-center py-5">
-              <h1 className="mb-4">{t("Auth.Dashboard.Welcome")}</h1>
+              <h1 className="mb-4">{t("Auth.Dashboard.Welcome.Title")}</h1>
 
               <img src={logoFull || tempLogo} alt="logo" className="my-5 w-100" />
 
