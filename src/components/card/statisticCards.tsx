@@ -2,9 +2,8 @@ import { commaNumbers } from "@/utils/function";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import Activity from "../activity";
-import DashboardCard from "./dashboardCard";
 import { Fragment } from "react/jsx-runtime";
+import DashboardCard from "./dashboardCard";
 
 interface Props {
   statistics: {
@@ -71,11 +70,9 @@ const StatisticCards = ({ statistics }: Props) => {
 
               <h2 className="card-title my-3 fw-bold">{commaNumbers(String(count))}</h2>
 
-              <Activity condition={!!unit}>
-                <p className="mb-2">{unit}</p>
-              </Activity>
+              {unit && <p className="mb-2">{unit}</p>}
 
-              <Activity condition={(details && details?.length > 0) || false}>
+              {details && details?.length > 0 && (
                 <p className="card-text d-flex">
                   {details?.map(({ label, count, unit }, y) => (
                     <div className="me-1" key={y}>
@@ -86,7 +83,7 @@ const StatisticCards = ({ statistics }: Props) => {
                     </div>
                   ))}
                 </p>
-              </Activity>
+              )}
             </Fragment>
           </DashboardCard>
         </div>

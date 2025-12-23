@@ -1,4 +1,3 @@
-import Activity from "@/components/activity";
 import { applyRouteChanges } from "@/utils/function";
 import { useWindowWidth } from "@/utils/hooks";
 import MessagingView from "@/views/auth/basicPages/messaging";
@@ -175,7 +174,7 @@ const AuthLayout = () => {
       />
 
       <main className="d-flex pb-3">
-        <Activity condition={showSidebar && isPc}>
+        {showSidebar && isPc && (
           <div
             className="position-fixed top-0 start-0 min-vh-100"
             style={{
@@ -191,7 +190,7 @@ const AuthLayout = () => {
               routes={authRoutes.filter(({ showInNav, fixed }) => showInNav && !fixed)}
             />
           </div>
-        </Activity>
+        )}
 
         <div
           className="flex-grow-1"

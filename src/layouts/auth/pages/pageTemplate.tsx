@@ -1,4 +1,3 @@
-import Activity from "@/components/activity";
 import ActionButtons, { ActionButtonProps } from "@/components/button/actionButtons";
 import { Link } from "react-router";
 
@@ -17,7 +16,7 @@ const PageTemplate = ({ title, actionButtons, breadcrumbs, children }: Props) =>
           <div className="col-6 col-lg-3 order-2 order-lg-1">
             <h3 className="mt-4 mt-lg-0">{title}</h3>
 
-            <Activity condition={!!(breadcrumbs && breadcrumbs?.length > 0)}>
+            {breadcrumbs && breadcrumbs?.length > 0 && (
               <nav
                 className="w-100"
                 // style={{ "--bs-breadcrumb-divider": "'>'" }}
@@ -37,7 +36,7 @@ const PageTemplate = ({ title, actionButtons, breadcrumbs, children }: Props) =>
                   </li>
                 </ol>
               </nav>
-            </Activity>
+            )}
           </div>
 
           <div className="col-6 col-lg-2 order-3 order-lg-3">
