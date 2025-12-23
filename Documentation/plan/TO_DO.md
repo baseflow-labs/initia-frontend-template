@@ -15,7 +15,7 @@
 - [x] Unify rounded corners across the app
 - [x] Fix on route change scroll to top
 - [x] Build page breadcrumbs component
-- [ ] Fix Public Pages of password recovery / reset
+- [x] Fix Public Pages of password recovery / reset
 - [ ] Build Missing Privacy Policy and Terms of Service page links
 - [ ] Connect APIs to backend services
   - [ ] Notification

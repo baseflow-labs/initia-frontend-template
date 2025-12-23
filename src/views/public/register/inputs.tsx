@@ -2,9 +2,9 @@ import { TFunction } from "i18next";
 
 export const formInputs = (t: TFunction) => [
   {
-    type: "phoneNumber",
+    type: "email",
     name: "identifier",
-    label: t("Public.Register.Labels.PhoneNo"),
+    label: t("Public.Register.Labels.Email"),
     required: true,
     fullWidth: true,
   },

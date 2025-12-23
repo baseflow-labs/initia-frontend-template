@@ -690,9 +690,9 @@
       "Labels": {
         "DidUForgotPassword": "Did You Forgot Password?",
         "DummyLogin": "Dummy Login",
+        "Email": "Email",
         "Login": "Login",
         "Password": "Password",
-        "PhoneNo": "Phone No",
         "Success": "Success"
       },
       "Title": "Login"
@@ -708,9 +708,9 @@
       "Labels": {
         "Concent": "I agree to the Terms & Conditions",
         "DidNotGetOtp": "Did Not Get OTP?",
+        "Email": "Email",
         "Password": "Password",
         "PasswordConfirmation": "Password Confirmation",
-        "PhoneNo": "Phone No",
         "Register": "Register",
         "ResendOtp": "Resend OTP",
         "Success": "Success"
