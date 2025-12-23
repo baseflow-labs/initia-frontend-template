@@ -8,7 +8,7 @@
   - [ ] Sidebar collapse caret
 - [x] Fix calendar contents UI
 - [ ] Fix Layouts responsiveness
-  - [ ] Fixate navbar
+  - [x] Fixate navbar
   - [x] build footer
   - [ ] Build offCanvas comp & optional sidebar
   - [ ] Build chatbot placeholder
