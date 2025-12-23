@@ -7,12 +7,11 @@
   - [ ] Input labels
   - [x] Sidebar collapse caret
 - [x] Fix calendar contents UI
-- [ ] Fix Layouts responsiveness
+- [x] Fix Layouts responsiveness
   - [x] Fixate navbar
   - [x] build footer
   - [x] Build offCanvas comp & optional sidebar
-  - [ ] Build chatbot placeholder
-- [ ] Apply React Activity Wrapper
+  - [x] Build chatbot placeholder
 - [x] Unify rounded corners across the app
 - [x] Fix on route change scroll to top
 - [x] Build page breadcrumbs component

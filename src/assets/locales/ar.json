@@ -6,9 +6,9 @@
           "ActiveUsers": "مستخدمون نشطون",
           "PendingUsers": "مستخدمون في الانتظار",
           "Sessions": "جلسات",
-          "SessionsUnit": "وحدة الجلسات",
+          "SessionsUnit": "الجلسات",
           "TotalUsers": "إجمالي المستخدمين",
-          "UsersUnit": "وحدة المستخدمين"
+          "UsersUnit": "مستخدمين"
         },
         "SystemHealth": {
           "Api": "API (Backend Integration)",
@@ -673,9 +673,6 @@
   },
   "Public": {
     "ForgotPassword": {
-      "GotOtp": {
-        "Title": "هل وصلك رمز التحقق؟"
-      },
       "ResetPassword": {
         "NewPassword": "كلمة المرور الجديدة",
         "NewPasswordConfirmation": "تأكيد كلمة المرور الجديدة",
@@ -705,17 +702,11 @@
       "Title": "رمز التحقق (OTP)"
     },
     "PrivacyPolicy": {
-      "Acknowledgment": "إقرار",
-      "Point1": "البند 1",
-      "Point2": "البند 2",
-      "Point3": "البند 3",
-      "Point4": "البند 4",
-      "Point5": "البند 5",
-      "Point6": "البند 6",
       "Title": "سياسة الخصوصية"
     },
     "Register": {
       "Labels": {
+        "Concent": "أوافق على الشروط والأحكام",
         "DidNotGetOtp": "لم يصلك رمز التحقق؟",
         "Password": "كلمة المرور",
         "PasswordConfirmation": "تأكيد كلمة المرور",
@@ -727,10 +718,6 @@
       "Title": "تسجيل حساب جديد"
     },
     "TermsConditions": {
-      "Point1": "البند 1",
-      "Point2": "البند 2",
-      "Point3": "البند 3",
-      "Point4": "البند 4",
       "Title": "الشروط والأحكام"
     }
   }

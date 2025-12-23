@@ -8,7 +8,6 @@ import ForgotPasswordView from "@/views/public/forgotPassword";
 import LoginView from "@/views/public/login";
 import RegisterView from "@/views/public/register";
 import ResetPasswordView from "@/views/public/ResetPassword";
-import TermsConditions from "@/views/public/termsConditions";
 import CopyRightView from "../common/copyright";
 import { useEffect } from "react";
 import { applyRouteChanges } from "@/utils/function";
@@ -36,12 +35,6 @@ const AuthLayout = () => {
       name: t("Public.ForgotPassword.Title"),
       route: "/forgot-password",
       view: <ForgotPasswordView />,
-      show: false,
-    },
-    {
-      name: t("Public.ForgotPassword.GotOtp.Title"),
-      route: "/terms-conditions",
-      view: <TermsConditions />,
       show: false,
     },
     {

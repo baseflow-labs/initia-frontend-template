@@ -6,9 +6,9 @@
           "ActiveUsers": "Active Users",
           "PendingUsers": "Pending Users",
           "Sessions": "Sessions",
-          "SessionsUnit": "Sessions Unit",
+          "SessionsUnit": "Session(s)",
           "TotalUsers": "Total Users",
-          "UsersUnit": "Users Unit"
+          "UsersUnit": "User(s)"
         },
         "SystemHealth": {
           "Api": "API (Backend Integration)",
@@ -673,9 +673,6 @@
   },
   "Public": {
     "ForgotPassword": {
-      "GotOtp": {
-        "Title": "Got OTP?"
-      },
       "ResetPassword": {
         "NewPassword": "New Password",
         "NewPasswordConfirmation": "New Password Confirmation",
@@ -705,17 +702,11 @@
       "Title": "OTP Code"
     },
     "PrivacyPolicy": {
-      "Acknowledgment": "Acknowledgment",
-      "Point1": "Point1",
-      "Point2": "Point2",
-      "Point3": "Point3",
-      "Point4": "Point4",
-      "Point5": "Point5",
-      "Point6": "Point6",
       "Title": "Privacy Policy"
     },
     "Register": {
       "Labels": {
+        "Concent": "I agree to the Terms & Conditions",
         "DidNotGetOtp": "Did Not Get OTP?",
         "Password": "Password",
         "PasswordConfirmation": "Password Confirmation",
@@ -727,10 +718,6 @@
       "Title": "Register"
     },
     "TermsConditions": {
-      "Point1": "Point1",
-      "Point2": "Point2",
-      "Point3": "Point3",
-      "Point4": "Point4",
       "Title": "Terms & Conditions"
     }
   }
