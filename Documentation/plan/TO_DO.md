@@ -9,7 +9,7 @@
 - [x] Fix calendar contents UI
 - [ ] Fix Layouts responsiveness
   - [ ] Fixate navbar
-  - [ ] build footer
+  - [x] build footer
   - [ ] Build offCanvas comp & optional sidebar
   - [ ] Build chatbot placeholder
 - [ ] Apply React Activity Wrapper

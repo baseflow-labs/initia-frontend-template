@@ -101,6 +101,7 @@
 - [ ] “Definition of Done” checklist for PRs (release notes, docs, migrations, screenshots)
 - [ ] Build config file
   - [ ] Rounded corners value
+  - [ ] External links (Privacy Policy, Terms of Service, Landing Page, ...etc)
 - [ ] Build how to start customization guide
   - [x] App rebranding
   - [ ] Config File
@@ -114,7 +115,17 @@
 ### Sprint 17 — Repo structure: Vite + Turbo baseline (1 - 14 Jan, 2026)
 
 - [x] Wrap frontend with Vite (replace CRA) OR keep CRA but create migration path (pick one and complete it)
-- [ ] Introduce Turborepo structure (apps/admin, apps/landing, packages/ui, packages/core, packages/i18n)
+- [ ] Introduce Turborepo structure
+  - [ ] apps/app (live demo site)
+  - [ ] apps/admin-panel
+  - [ ] apps/landing
+  - [ ] apps/documentation (Docs, API, release notes, Community docusaurus)
+  - [ ] apps/manual (user guide, docusaurus)
+  - [ ] apps/support-center
+  - [ ] apps/system-status
+  - [ ] packages/ui
+  - [ ] packages/core
+  - [ ] packages/i18n
 - [ ] Set shared lint/format/build tasks + caching
 - [ ] Prep “analysis tools integration” skeleton (packages/analysis placeholder + interface contracts)
 - [ ] Sign with generator details (every code file + footer)
