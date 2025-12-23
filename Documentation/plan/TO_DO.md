@@ -2,10 +2,10 @@
 
 ## Fixes
 
-- [ ] Fix RTL issues
+- [x] Fix RTL issues
   - [ ] Dropdown menus
   - [ ] Input labels
-  - [ ] Sidebar collapse caret
+  - [x] Sidebar collapse caret
 - [x] Fix calendar contents UI
 - [ ] Fix Layouts responsiveness
   - [x] Fixate navbar
