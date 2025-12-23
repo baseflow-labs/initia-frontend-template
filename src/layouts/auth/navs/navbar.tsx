@@ -78,7 +78,7 @@ const DashboardNavbar = ({
         <div className="row justify-content-between">
           <div className="col-6 col-lg-1 d-block d-lg-none order-1 order-lg-3">
             <button
-              className="btn btn-ghost"
+              className="btn btn-ghost my-auto"
               type="button"
               data-bs-toggle="offcanvas"
               data-bs-target="#offcanvasNav"

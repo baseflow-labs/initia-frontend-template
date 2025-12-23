@@ -10,7 +10,7 @@
 - [ ] Fix Layouts responsiveness
   - [x] Fixate navbar
   - [x] build footer
-  - [ ] Build offCanvas comp & optional sidebar
+  - [x] Build offCanvas comp & optional sidebar
   - [ ] Build chatbot placeholder
 - [ ] Apply React Activity Wrapper
 - [x] Unify rounded corners across the app

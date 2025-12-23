@@ -26,7 +26,11 @@ const OffcanvasComp = ({ id, position = "start", content }: Props) => {
       className={`offcanvas offcanvas-${position} border-0`}
       id={id}
       aria-labelledby={`${id}Label`}
-      style={{ maxWidth: "70vw", maxHeight: "100vh", overflowY: "hidden" }}
+      style={{
+        maxWidth: ["start", "end"].includes(position) ? "70vw" : "100vw",
+        maxHeight: "100vh",
+        overflowY: "hidden",
+      }}
     >
       <div className="offcanvas-header d-flex justify-content-around align-items-center mb-0 pb-0">
         <div>

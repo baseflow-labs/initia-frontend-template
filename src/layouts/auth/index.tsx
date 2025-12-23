@@ -22,12 +22,12 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes, useLocation } from "react-router";
 import { Fragment } from "react/jsx-runtime";
-
 import { FilePreviewModal } from "./globalModal";
+import AuthFooter from "./navs/footer";
 import DashboardNavbar from "./navs/navbar";
 import OffCanvasNav from "./navs/offcanvasNav";
+import OffCanvasTools from "./navs/offcanvasTools";
 import Sidebar from "./navs/sidebarNav";
-import AuthFooter from "./navs/footer";
 
 interface AuthRoute {
   name: string;
@@ -230,6 +230,8 @@ const AuthLayout = () => {
           <FilePreviewModal />
 
           <AuthFooter />
+
+          <OffCanvasTools />
         </div>
       </main>
     </Fragment>

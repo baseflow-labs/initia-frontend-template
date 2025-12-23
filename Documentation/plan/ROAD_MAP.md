@@ -192,6 +192,11 @@
 - [ ] Horizontal/vertical layout switcher
 - [ ] Boxed/full-width layout option
 - [ ] Persist UI preferences (per user in localStorage first; later server)
+- [ ] User settings of layout
+  - [ ] timezone
+  - [ ] date & time format
+  - [ ] language
+  - [ ] delete account
 
 ### Sprint 24 — Data view options v2 (9 - 22 Apr, 2026)
 

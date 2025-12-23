@@ -380,6 +380,9 @@
       }
     },
     "SupportCenter": {
+      "Chatbot": {
+        "Title": "Chatbot"
+      },
       "ContactUs": {
         "BusinessHours": {
           "Description": "Description",
@@ -435,6 +438,9 @@
           "Title": "Getting Started"
         },
         "Title": "Knowledge Base"
+      },
+      "LiveSupport": {
+        "Title": "Live Support"
       },
       "QuickAccess": {
         "Title": "Quick Access"
