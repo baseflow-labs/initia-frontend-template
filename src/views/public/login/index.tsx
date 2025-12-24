@@ -15,9 +15,9 @@ const LoginView = () => {
 
   const formInputs = () => [
     {
-      type: "phoneNumber",
+      type: "email",
       name: "identifier",
-      label: t("Public.Login.Labels.PhoneNo"),
+      label: t("Public.Login.Labels.Email"),
       required: true,
       fullWidth: true,
     },

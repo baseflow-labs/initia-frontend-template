@@ -1,10 +1,11 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Fragment, useState } from "react";
+import { Fragment, useLayoutEffect, useState } from "react";
 
 const TabsComp = ({
   items,
   color = "primary",
+  activeTabId,
 }: {
   items: {
     id: string;
@@ -12,9 +13,17 @@ const TabsComp = ({
     icon?: IconProp;
     content: React.ReactNode;
   }[];
+  vertical?: boolean;
   color?: string;
+  activeTabId?: string;
 }) => {
-  const [activeTab, setActiveTab] = useState(items[0].id);
+  const [activeTab, setActiveTab] = useState(activeTabId || items[0].id);
+
+  useLayoutEffect(() => {
+    if (activeTabId) {
+      setActiveTab(activeTabId);
+    }
+  }, [activeTabId]);
 
   return (
     <Fragment>

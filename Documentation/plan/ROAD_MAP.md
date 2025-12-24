@@ -101,6 +101,7 @@
 - [ ] “Definition of Done” checklist for PRs (release notes, docs, migrations, screenshots)
 - [ ] Build config file
   - [ ] Rounded corners value
+  - [ ] External links (Privacy Policy, Terms of Service, Landing Page, ...etc)
 - [ ] Build how to start customization guide
   - [x] App rebranding
   - [ ] Config File
@@ -114,7 +115,17 @@
 ### Sprint 17 — Repo structure: Vite + Turbo baseline (1 - 14 Jan, 2026)
 
 - [x] Wrap frontend with Vite (replace CRA) OR keep CRA but create migration path (pick one and complete it)
-- [ ] Introduce Turborepo structure (apps/admin, apps/landing, packages/ui, packages/core, packages/i18n)
+- [ ] Introduce Turborepo structure
+  - [ ] apps/app (live demo site)
+  - [ ] apps/admin-panel
+  - [ ] apps/landing
+  - [ ] apps/documentation (Docs, API, release notes, Community docusaurus)
+  - [ ] apps/manual (user guide, docusaurus)
+  - [ ] apps/support-center
+  - [ ] apps/system-status
+  - [ ] packages/ui
+  - [ ] packages/core
+  - [ ] packages/i18n
 - [ ] Set shared lint/format/build tasks + caching
 - [ ] Prep “analysis tools integration” skeleton (packages/analysis placeholder + interface contracts)
 - [ ] Sign with generator details (every code file + footer)
@@ -126,10 +137,9 @@
   - [ ] Account info card
   - [ ] Notifications list
   - [ ] Calendar basic block
-- [ ] Admin dashboard v1:
-  - [ ] Users stats + list
-  - [ ] System health basic widget (static placeholder + API hook)
-  - [ ] Subscriptions placeholder section
+- [x] Admin dashboard v1:
+  - [x] Users stats + list
+  - [x] System health basic widget (static placeholder + API hook)
 
 ## Phase 6 — Core UI Engine (Forms + DataTable) (29 Jan - 25 Mar, 2026)
 
@@ -182,6 +192,11 @@
 - [ ] Horizontal/vertical layout switcher
 - [ ] Boxed/full-width layout option
 - [ ] Persist UI preferences (per user in localStorage first; later server)
+- [ ] User settings of layout
+  - [ ] timezone
+  - [ ] date & time format
+  - [ ] language
+  - [ ] delete account
 
 ### Sprint 24 — Data view options v2 (9 - 22 Apr, 2026)
 
@@ -236,6 +251,9 @@ Implement only the “must-have knobs” first:
 
 ## To Plan / Backlog (Post-Roadmap)
 
+- [ ] Engage tRPC (for type-safe APIs between frontend and backend)
+- [ ] Real-time collaboration features (multiple users editing same form/dashboard)
+- [ ] Advanced workflow engine (custom triggers, multi-step processes)
 - [ ] Open-search integration (ElasticSearch / MeiliSearch)
 - [ ] Blockchain integration (basic support for data storage/verification)
 - [ ] Multi-tenant support (orgs, subdomains, data isolation)
@@ -309,6 +327,7 @@ Implement only the “must-have knobs” first:
   - [ ] Video share platform
   - [ ] Video streaming platform
   - [ ] Firebase CMS
+  - [ ] ChatGPT-like platform
 - [ ] Commit-based code generation
 - [ ] AI-assisted features planing
 - [ ] AI-assisted code generation (initial experiments + feasibility study)

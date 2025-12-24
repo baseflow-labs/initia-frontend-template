@@ -18,4 +18,4 @@
 
 - Initial release
 
-[📦 Release Notes](https://github.com/makkahwi/appnest-fe-template/releases/tag/v1.17.0)
+[📦 Release Notes](https://github.com/baseflow-labs/initia-frontend-template/releases/tag/v1.17.0)

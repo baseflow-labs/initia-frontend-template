@@ -106,7 +106,7 @@ The app will automatically pick it up once enabled in the config.
 
 ---
 
-### 🏷 App Identity
+### 🏷 [App Identity](./REBRAND_GUIDE.md)
 
 You can customize:
 

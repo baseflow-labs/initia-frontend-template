@@ -130,8 +130,10 @@ const FaqView = () => {
 
   let questionCounter = 0;
 
+  const pageBreadcrumbs = [{ label: t("Auth.SupportCenter.Title"), path: "/support-center" }];
+
   return (
-    <PageTemplate title={t("Auth.SupportCenter.FAQ.Title")}>
+    <PageTemplate title={t("Auth.SupportCenter.FAQ.Title")} breadcrumbs={pageBreadcrumbs}>
       <div className="container mb-5">
         {/* Search Bar */}
         <div className="row mb-5">

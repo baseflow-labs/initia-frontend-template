@@ -1,6 +1,25 @@
 {
   "Auth": {
     "Dashboard": {
+      "Admin": {
+        "Stats": {
+          "ActiveUsers": "مستخدمون نشطون",
+          "PendingUsers": "مستخدمون في الانتظار",
+          "Sessions": "جلسات",
+          "SessionsUnit": "الجلسات",
+          "TotalUsers": "إجمالي المستخدمين",
+          "UsersUnit": "مستخدمين"
+        },
+        "SystemHealth": {
+          "Api": "API (Backend Integration)",
+          "Cpu": "CPU",
+          "Database": "Database",
+          "Disk": "Disk",
+          "Memory": "Memory",
+          "Overall": "Overall",
+          "Title": "System Heath"
+        }
+      },
       "AidsCount": "عدد المساعدات",
       "ApplicationTimeline": "الجدول الزمني للطلبات",
       "ImportantNotifications": "الإشعارات المهمة",
@@ -15,7 +34,10 @@
       "UserMembershipStatus": "حالة عضويتك",
       "VisitsCount": "عدد الزيارات",
       "VisitsMap": "خريطة الزيارات",
-      "Welcome": "مرحباً"
+      "Welcome": {
+        "Message": "مرحباً بك في لوحة التحكم الخاصة بـ {{name}}",
+        "Title": "مرحباً"
+      }
     },
     "Examples": {
       "DataView": {
@@ -358,6 +380,9 @@
       }
     },
     "SupportCenter": {
+      "Chatbot": {
+        "Title": "المحادثة الآلية"
+      },
       "ContactUs": {
         "BusinessHours": {
           "Description": "وصف ساعات العمل",
@@ -413,6 +438,9 @@
           "Title": "البدء"
         },
         "Title": "قاعدة المعرفة"
+      },
+      "LiveSupport": {
+        "Title": "الدعم المباشر"
       },
       "QuickAccess": {
         "Title": "وصول سريع"
@@ -645,9 +673,6 @@
   },
   "Public": {
     "ForgotPassword": {
-      "GotOtp": {
-        "Title": "هل وصلك رمز التحقق؟"
-      },
       "ResetPassword": {
         "NewPassword": "كلمة المرور الجديدة",
         "NewPasswordConfirmation": "تأكيد كلمة المرور الجديدة",
@@ -665,9 +690,9 @@
       "Labels": {
         "DidUForgotPassword": "هل نسيت كلمة المرور؟",
         "DummyLogin": "تسجيل دخول تجريبي",
+        "Email": "البريد الإلكتروني",
         "Login": "تسجيل الدخول",
         "Password": "كلمة المرور",
-        "PhoneNo": "رقم الجوال",
         "Success": "تم تسجيل الدخول بنجاح"
       },
       "Title": "تسجيل الدخول"
@@ -677,21 +702,15 @@
       "Title": "رمز التحقق (OTP)"
     },
     "PrivacyPolicy": {
-      "Acknowledgment": "إقرار",
-      "Point1": "البند 1",
-      "Point2": "البند 2",
-      "Point3": "البند 3",
-      "Point4": "البند 4",
-      "Point5": "البند 5",
-      "Point6": "البند 6",
       "Title": "سياسة الخصوصية"
     },
     "Register": {
       "Labels": {
+        "Concent": "أوافق على الشروط والأحكام",
         "DidNotGetOtp": "لم يصلك رمز التحقق؟",
+        "Email": "البريد الإلكتروني",
         "Password": "كلمة المرور",
         "PasswordConfirmation": "تأكيد كلمة المرور",
-        "PhoneNo": "رقم الجوال",
         "Register": "تسجيل",
         "ResendOtp": "إعادة إرسال رمز التحقق",
         "Success": "تم التسجيل بنجاح"
@@ -699,10 +718,6 @@
       "Title": "تسجيل حساب جديد"
     },
     "TermsConditions": {
-      "Point1": "البند 1",
-      "Point2": "البند 2",
-      "Point3": "البند 3",
-      "Point4": "البند 4",
       "Title": "الشروط والأحكام"
     }
   }

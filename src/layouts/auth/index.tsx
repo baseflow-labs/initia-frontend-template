@@ -1,9 +1,4 @@
-import { faDashboard, faGear, faTable } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { Navigate, Route, Routes, useLocation } from "react-router";
-import { Fragment } from "react/jsx-runtime";
-
+import { applyRouteChanges } from "@/utils/function";
 import { useWindowWidth } from "@/utils/hooks";
 import MessagingView from "@/views/auth/basicPages/messaging";
 import NotificationsView from "@/views/auth/basicPages/notifications";
@@ -21,11 +16,17 @@ import TemplateDataViewExamplesView from "@/views/auth/templateExamples/dataView
 import TemplateFormExamplesView from "@/views/auth/templateExamples/forms";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faWpforms } from "@fortawesome/free-brands-svg-icons";
+import { faDashboard, faGear, faTable } from "@fortawesome/free-solid-svg-icons";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Navigate, Route, Routes, useLocation } from "react-router";
+import { Fragment } from "react/jsx-runtime";
 import { FilePreviewModal } from "./globalModal";
+import AuthFooter from "./navs/footer";
 import DashboardNavbar from "./navs/navbar";
 import OffCanvasNav from "./navs/offcanvasNav";
+import OffCanvasTools from "./navs/offcanvasTools";
 import Sidebar from "./navs/sidebarNav";
-import { applyRouteChanges } from "@/utils/function";
 
 interface AuthRoute {
   name: string;
@@ -172,7 +173,7 @@ const AuthLayout = () => {
         routes={authRoutes.filter(({ showInNav, fixed }) => showInNav && !fixed)}
       />
 
-      <main className="d-flex pb-5">
+      <main className="d-flex pb-3">
         {showSidebar && isPc && (
           <div
             className="position-fixed top-0 start-0 min-vh-100"
@@ -226,6 +227,10 @@ const AuthLayout = () => {
           </div>
 
           <FilePreviewModal />
+
+          <AuthFooter />
+
+          <OffCanvasTools />
         </div>
       </main>
     </Fragment>

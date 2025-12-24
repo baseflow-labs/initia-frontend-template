@@ -17,9 +17,9 @@ If it is saving you time, helping your project, or you plan to use it commercial
 
 👉 **Please support us:**
 
-1. ⭐ [Star this repository](https://github.com/your-repo-url)
-2. ⭐ [Star the GitHub organization](https://github.com/your-organization-url)
-3. 💖 [Donate](https://github.com/sponsors/your-repo-url) to sustain development and provide you with more
+1. ⭐ [Star this repository](https://github.com/baseflow-labs/initia-frontend-template)
+2. ⭐ [Star the GitHub organization](https://github.com/baseflow-labs)
+3. 💖 [Donate](https://github.com/sponsors/baseflow-labs) to sustain development and provide you with more
 
 Your support directly funds:
 

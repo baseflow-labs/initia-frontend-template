@@ -73,12 +73,12 @@ const DashboardNavbar = ({
   // };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light py-4 mt-2 ps-0">
+    <nav className="navbar navbar-expand-lg navbar-light navbar-sticky sticky-top py-4 mt-2 ps-0">
       <div className="w-100 bg-white rounded-2 px-3">
         <div className="row justify-content-between">
           <div className="col-6 col-lg-1 d-block d-lg-none order-1 order-lg-3">
             <button
-              className="btn btn-ghost"
+              className="btn btn-ghost my-auto"
               type="button"
               data-bs-toggle="offcanvas"
               data-bs-target="#offcanvasNav"

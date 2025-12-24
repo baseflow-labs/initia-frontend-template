@@ -1,6 +1,25 @@
 {
   "Auth": {
     "Dashboard": {
+      "Admin": {
+        "Stats": {
+          "ActiveUsers": "Active Users",
+          "PendingUsers": "Pending Users",
+          "Sessions": "Sessions",
+          "SessionsUnit": "Session(s)",
+          "TotalUsers": "Total Users",
+          "UsersUnit": "User(s)"
+        },
+        "SystemHealth": {
+          "Api": "API (Backend Integration)",
+          "Cpu": "CPU",
+          "Database": "Database",
+          "Disk": "Disk",
+          "Memory": "Memory",
+          "Overall": "Overall",
+          "Title": "System Heath"
+        }
+      },
       "AidsCount": "Aids Count",
       "ApplicationTimeline": "Application Timeline",
       "ImportantNotifications": "Important Notifications",
@@ -15,7 +34,10 @@
       "UserMembershipStatus": "Your Membership Status",
       "VisitsCount": "Visits Count",
       "VisitsMap": "Visits Map",
-      "Welcome": "Welcome"
+      "Welcome": {
+        "Message": "Welcome to the Dashboard of {{name}}",
+        "Title": "Welcome"
+      }
     },
     "Examples": {
       "DataView": {
@@ -55,10 +77,10 @@
         "MultipleEntries": "Multiple Entries",
         "Number": "Number",
         "NumberText": "Number Text",
+        "OTP": "OTP",
         "Option1": "Option 1",
         "Option2": "Option 2",
         "Option3": "Option 3",
-        "OTP": "OTP",
         "Password": "Password",
         "PhoneNumber": "Phone Number",
         "Radio": "Radio",
@@ -306,19 +328,19 @@
           "ContactUs": "Contact Us",
           "Current": "Current",
           "CurrentPlan": "Current Plan",
-          "Projects_zero": "Projects",
-          "Projects_one": "Projects",
-          "Projects_two": "Projects",
           "Projects_few": "Projects",
           "Projects_many": "Projects",
+          "Projects_one": "Projects",
           "Projects_other": "Projects",
+          "Projects_two": "Projects",
+          "Projects_zero": "Projects",
           "Renewal": "Renewal",
-          "Seats_zero": "Seats",
-          "Seats_one": "Seats",
-          "Seats_two": "Seats",
           "Seats_few": "Seats",
           "Seats_many": "Seats",
+          "Seats_one": "Seats",
           "Seats_other": "Seats",
+          "Seats_two": "Seats",
+          "Seats_zero": "Seats",
           "Select": "Select",
           "Title": "Billing"
         },
@@ -358,6 +380,9 @@
       }
     },
     "SupportCenter": {
+      "Chatbot": {
+        "Title": "Chatbot"
+      },
       "ContactUs": {
         "BusinessHours": {
           "Description": "Description",
@@ -391,16 +416,16 @@
           "Title": "Visit Us"
         }
       },
-      "Faq": {
-        "Description": "Description",
-        "Title": "Faq"
-      },
       "FAQ": {
         "CheckFaq": "Check FAQ",
         "DidNotFindWhatYouAreLookingFor": "Did Not Find What You Are Looking For?",
         "NoFAQsFound": "No FAQs Found",
         "SearchPlaceholder": "Search...",
         "Title": "FAQ"
+      },
+      "Faq": {
+        "Description": "Description",
+        "Title": "Faq"
       },
       "KnowledgeBase": {
         "AccountPassword": {
@@ -413,6 +438,9 @@
           "Title": "Getting Started"
         },
         "Title": "Knowledge Base"
+      },
+      "LiveSupport": {
+        "Title": "Live Support"
       },
       "QuickAccess": {
         "Title": "Quick Access"
@@ -501,6 +529,9 @@
         "Title": "Form Input Examples"
       }
     },
+    "UserSettings": {
+      "Title": "User Settings"
+    },
     "Users": {
       "Name": "Name",
       "Profile": {
@@ -509,9 +540,6 @@
       },
       "Role": "Role",
       "Title": "Users"
-    },
-    "UserSettings": {
-      "Title": "User Settings"
     }
   },
   "Common": {
@@ -645,9 +673,6 @@
   },
   "Public": {
     "ForgotPassword": {
-      "GotOtp": {
-        "Title": "Got OTP?"
-      },
       "ResetPassword": {
         "NewPassword": "New Password",
         "NewPasswordConfirmation": "New Password Confirmation",
@@ -665,9 +690,9 @@
       "Labels": {
         "DidUForgotPassword": "Did You Forgot Password?",
         "DummyLogin": "Dummy Login",
+        "Email": "Email",
         "Login": "Login",
         "Password": "Password",
-        "PhoneNo": "Phone No",
         "Success": "Success"
       },
       "Title": "Login"
@@ -677,21 +702,15 @@
       "Title": "OTP Code"
     },
     "PrivacyPolicy": {
-      "Acknowledgment": "Acknowledgment",
-      "Point1": "Point1",
-      "Point2": "Point2",
-      "Point3": "Point3",
-      "Point4": "Point4",
-      "Point5": "Point5",
-      "Point6": "Point6",
       "Title": "Privacy Policy"
     },
     "Register": {
       "Labels": {
+        "Concent": "I agree to the Terms & Conditions",
         "DidNotGetOtp": "Did Not Get OTP?",
+        "Email": "Email",
         "Password": "Password",
         "PasswordConfirmation": "Password Confirmation",
-        "PhoneNo": "Phone No",
         "Register": "Register",
         "ResendOtp": "Resend OTP",
         "Success": "Success"
@@ -699,10 +718,6 @@
       "Title": "Register"
     },
     "TermsConditions": {
-      "Point1": "Point1",
-      "Point2": "Point2",
-      "Point3": "Point3",
-      "Point4": "Point4",
       "Title": "Terms & Conditions"
     }
   }
