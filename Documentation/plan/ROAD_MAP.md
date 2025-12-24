@@ -245,6 +245,18 @@ Implement only the “must-have knobs” first:
 
 - [ ] Policy / Terms with localization
 - [ ] Landing page content management (basic sections data model)
+  - [ ] Pricing
+  - [ ] About
+  - [ ] How it Works
+  - [ ] Features
+  - [ ] Blog
+  - [ ] FAQ
+  - [ ] Support Center
+  - [ ] Demo request
+  - [ ] Careers
+  - [ ] Testimonials
+  - [ ] Prominent Clients
+  - [ ] Contact
 - [ ] Files management (simple library + tagging)
 
 ---
