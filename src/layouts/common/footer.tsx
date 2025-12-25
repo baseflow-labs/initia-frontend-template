@@ -6,6 +6,10 @@ const CommonFooter = () => {
 
   const links = [
     {
+      label: t("Public.LandingPage.Title"),
+      url: "http://www.google.com",
+    },
+    {
       label: t("Public.TermsConditions.Title"),
       url: "http://www.google.com/terms-of-service",
     },

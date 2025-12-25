@@ -686,6 +686,9 @@
       },
       "Title": "Forgot Password"
     },
+    "LandingPage": {
+      "Title": "About"
+    },
     "Login": {
       "Labels": {
         "DidUForgotPassword": "Did You Forgot Password?",

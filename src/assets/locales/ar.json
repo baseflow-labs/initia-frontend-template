@@ -686,6 +686,9 @@
       },
       "Title": "نسيت كلمة المرور"
     },
+    "LandingPage": {
+      "Title": "عن الخدمة"
+    },
     "Login": {
       "Labels": {
         "DidUForgotPassword": "هل نسيت كلمة المرور؟",
