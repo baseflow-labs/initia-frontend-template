@@ -328,11 +328,7 @@ const CalendarComp: React.FC<CalendarViewProps> = ({
                                         onClick={() => onEventClick && onEventClick(event)}
                                       >
                                         {/* Party chip (color-coded) */}
-                                        {party && (
-                                          <p className="rotate-90 mt-2">
-                                            <div>{party.name}</div>
-                                          </p>
-                                        )}
+                                        {party && <p className="rotate-90 m-2 p-0">{party.name}</p>}
 
                                         <div
                                           style={{
