@@ -172,8 +172,9 @@ const DashboardNavbar = ({
 
               <DropdownComp
                 header={
-                  <div className="text-center border-bottom pb-2">
-                    {user.name + " | " + t("Global.Labels.Roles." + user.role)}
+                  <div className="border-bottom pb-2 px-3 justify-content-between d-flex align-items-end">
+                    {user.name?.split(" ")[0]}
+                    <small>{t("Global.Labels.Roles." + user.role)}</small>
                   </div>
                 }
                 button={
