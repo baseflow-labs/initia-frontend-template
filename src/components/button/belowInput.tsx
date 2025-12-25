@@ -9,12 +9,12 @@ const BelowInputButton = ({
   introText?: string;
   buttonText: string;
   route?: string;
-  action?: (data?: any) => void;
+  action?: () => void;
 }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="pb-0 mb-0 mt-3">
+    <div className="pb-0 mb-0 mt-1">
       <small className="pt-2">
         {introText}{" "}
         <span

@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
+import CopyRightView from "./copyright";
 
-const AuthFooter = () => {
+const CommonFooter = () => {
   const { t } = useTranslation();
 
   const links = [
@@ -19,16 +20,20 @@ const AuthFooter = () => {
   ];
 
   return (
-    <footer className="footer mt-5 w-100 px-5">
+    <footer className="footer mt-2 bottom-0 w-100 px-5 mx-0">
       <hr className="mt-2" />
 
-      <div className="d-flex justify-content-between">
-        <div className="text-start pt-1">
+      <div className="row">
+        <div className="col-12 col-md-4 text-center text-md-start pt-1">
           {t("CopyRight.AllRightsReserved", { year: new Date().getFullYear() })}{" "}
           {t("CopyRight.AppName")}
         </div>
 
-        <div className="text-end pt-1">
+        <div className="col-12 col-md-4 text-center text-md-start pt-1">
+          <CopyRightView />
+        </div>
+
+        <div className="col-12 col-md-4 text-center text-md-end pt-1">
           <ul className="list-inline mb-0">
             {links.map(({ label, url }, i) => (
               <li className="list-inline-item mx-2" key={i}>
@@ -49,4 +54,4 @@ const AuthFooter = () => {
   );
 };
 
-export default AuthFooter;
+export default CommonFooter;

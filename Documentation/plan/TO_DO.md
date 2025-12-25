@@ -16,8 +16,8 @@
 - [x] Fix on route change scroll to top
 - [x] Build page breadcrumbs component
 - [x] Fix Public Pages of password recovery / reset
-- [ ] Build Missing Privacy Policy and Terms of Service page links
-- [ ] Fix layout issues
+- [x] Build Missing Privacy Policy and Terms of Service page links
+- [x] Fix layout issues
   - [x] Fix collapsed sidebar nav UI
   - [x] Fix offCanvas tools
 - [ ] Connect APIs to backend services

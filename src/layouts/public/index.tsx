@@ -4,13 +4,13 @@ import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router"
 import tempLogo from "@/assets/images/brand/logo.png";
 import Button from "@/components/core/button";
 import { useAppSelector } from "@/store/hooks";
+import { applyRouteChanges } from "@/utils/function";
 import ForgotPasswordView from "@/views/public/forgotPassword";
 import LoginView from "@/views/public/login";
 import RegisterView from "@/views/public/register";
 import ResetPasswordView from "@/views/public/ResetPassword";
-import CopyRightView from "../common/copyright";
 import { useEffect } from "react";
-import { applyRouteChanges } from "@/utils/function";
+import CommonFooter from "../common/footer";
 
 const AuthLayout = () => {
   const { t } = useTranslation();
@@ -50,8 +50,8 @@ const AuthLayout = () => {
   }, [location.pathname]);
 
   return (
-    <main className="overflow-x-hidden">
-      <div className="min-vh-100 vw-100 d-flex justify-content-center align-items-center px-3 px-lg-4 py-3">
+    <main className="d-flex flex-column overflow-x-hidden min-vh-100 vw-100">
+      <div className="d-flex justify-content-center align-items-center flex-grow-1 px-3 px-lg-4 py-3">
         <div
           className="card pt-4 px-2 px-lg-4 rounded-2"
           style={
@@ -120,13 +120,13 @@ const AuthLayout = () => {
                 <Route path="*" element={<Navigate to="/" replace />} />
                 {/* <Route path="*" element={<FourZeroFourError />} /> */}
               </Routes>
-
-              <div className="mt-4">
-                <CopyRightView oneLine />
-              </div>
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="d-flex justify-content-center align-items-center flex-shrink-0 pb-3">
+        <CommonFooter />
       </div>
     </main>
   );

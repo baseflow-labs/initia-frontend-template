@@ -339,9 +339,9 @@ const Form: React.FC<Props> = ({
                           <InlineElement content={moneyUnit ? <MoneyUnit /> : postfixText} />
                         </div>
 
-                        {belowComp}
-
                         <ErrorView />
+
+                        {belowComp}
                       </div>
                     </Fragment>
                   );
