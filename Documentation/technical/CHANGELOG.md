@@ -1,3 +1,11 @@
+## v1.18.1 - 2025-12-25
+
+- Initial release
+
+[📦 Release Notes](https://github.com/baseflow-labs/initia-frontend-template/releases/tag/v1.18.1)
+
+---
+
 ## v1.18.0 - 2025-12-19
 
 - Initial release
