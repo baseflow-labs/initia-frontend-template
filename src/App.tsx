@@ -40,7 +40,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="bg-secondary">
+    <div className="bg-secondary max-vw-100 overflow-x-hidden">
       <BrowserRouter>
         <Suspense fallback={<Spinner />}>
           <NotificationsToaster />

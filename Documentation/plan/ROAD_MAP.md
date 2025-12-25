@@ -99,12 +99,11 @@
 - [ ] Fix changelog generating script (make it deterministic, supports conventional commits, handles merges)
 - [x] Update documentation (README, commit convention, local dev, release flow)
 - [ ] “Definition of Done” checklist for PRs (release notes, docs, migrations, screenshots)
-- [ ] Build config file
-  - [ ] Rounded corners value
-  - [ ] External links (Privacy Policy, Terms of Service, Landing Page, ...etc)
+- [x] Build config file
+  - [x] External links (Privacy Policy, Terms of Service, Landing Page, ...etc)
 - [ ] Build how to start customization guide
   - [x] App rebranding
-  - [ ] Config File
+  - [x] Config File
   - [ ] Services build
 - [ ] Build workflows
   - [x] Auto-release on merge to main
@@ -245,6 +244,18 @@ Implement only the “must-have knobs” first:
 
 - [ ] Policy / Terms with localization
 - [ ] Landing page content management (basic sections data model)
+  - [ ] Pricing
+  - [ ] About
+  - [ ] How it Works
+  - [ ] Features
+  - [ ] Blog
+  - [ ] FAQ
+  - [ ] Support Center
+  - [ ] Demo request
+  - [ ] Careers
+  - [ ] Testimonials
+  - [ ] Prominent Clients
+  - [ ] Contact
 - [ ] Files management (simple library + tagging)
 
 ---

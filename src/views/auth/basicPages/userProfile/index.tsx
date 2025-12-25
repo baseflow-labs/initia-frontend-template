@@ -1,11 +1,12 @@
+import TabsComp from "@/components/tab";
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
-import UserProfileHeaderView from "./Header";
-import TabsComp from "@/components/tab";
-import UserProfileTabView from "./Profile";
-import UserProfileTeamsView from "./Teams";
-import UserProfileProjectsView from "./Projects";
+
 import UserProfileConnectionsView from "./Connections";
+import UserProfileHeaderView from "./Header";
+import UserProfileTabView from "./Profile";
+import UserProfileProjectsView from "./Projects";
+import UserProfileTeamsView from "./Teams";
 
 const UserProfileView = () => {
   const { t } = useTranslation();
@@ -46,6 +47,7 @@ const UserProfileView = () => {
             </div>
           ),
         }))}
+        color="white"
       />
     </Fragment>
   );

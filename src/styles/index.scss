@@ -24,6 +24,10 @@ $theme-colors: (
   "black": $black,
 );
 
+.rotate-90 {
+  transform: rotate(90deg);
+}
+
 .text-justify {
   text-align: justify;
 }

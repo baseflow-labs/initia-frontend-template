@@ -74,11 +74,11 @@ const DashboardNavbar = ({
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light navbar-sticky sticky-top py-4 mt-2 ps-0">
-      <div className="w-100 bg-white rounded-2 px-3">
+      <div className="w-100 border border-1 bg-white rounded-2 px-3">
         <div className="row justify-content-between">
           <div className="col-6 col-lg-1 d-block d-lg-none order-1 order-lg-3">
             <button
-              className="btn btn-ghost my-auto"
+              className="btn btn-ghost my-2"
               type="button"
               data-bs-toggle="offcanvas"
               data-bs-target="#offcanvasNav"
@@ -172,8 +172,9 @@ const DashboardNavbar = ({
 
               <DropdownComp
                 header={
-                  <div className="text-center border-bottom pb-2">
-                    {user.name + " | " + t("Global.Labels.Roles." + user.role)}
+                  <div className="border-bottom pb-2 px-3 justify-content-between d-flex align-items-end">
+                    {user.name?.split(" ")[0]}
+                    <small>{t("Global.Labels.Roles." + user.role)}</small>
                   </div>
                 }
                 button={

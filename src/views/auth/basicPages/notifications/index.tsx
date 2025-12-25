@@ -1,9 +1,9 @@
-import { Fragment } from "react";
-import { useTranslation } from "react-i18next";
 import PageTemplate from "@/layouts/auth/pages/pageTemplate";
-import NotificationsHeaderView from "./Header";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelopeOpen, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslation } from "react-i18next";
+
+import NotificationsHeaderView from "./Header";
 
 const NotificationsView = () => {
   const { t } = useTranslation();
@@ -51,10 +51,10 @@ const NotificationsView = () => {
 
   const actionButtons = [
     {
-      label: t("Auth.Notifications.MarkAllRead", "Mark all as read"),
+      label: t("Auth.Notifications.MarkAllRead"),
     },
     {
-      label: t("Auth.Notifications.Refresh", "Refresh"),
+      label: t("Auth.Notifications.Refresh"),
     },
   ];
 
@@ -78,10 +78,7 @@ const NotificationsView = () => {
             {t("Auth.Notifications.Empty.Title", "You're all caught up!")}
           </h2>
           <p className="text-muted mb-0">
-            {t(
-              "Auth.Notifications.Empty.Body",
-              "We’ll let you know when there’s something new."
-            )}
+            {t("Auth.Notifications.Empty.Body", "We’ll let you know when there’s something new.")}
           </p>
         </div>
       )}
@@ -130,10 +127,7 @@ const NotificationsView = () => {
               </div>
 
               <div className="d-flex flex-column align-items-end gap-1">
-                <button
-                  type="button"
-                  className="btn btn-link btn-sm text-decoration-none px-0"
-                >
+                <button type="button" className="btn btn-link btn-sm text-decoration-none px-0">
                   <FontAwesomeIcon icon={faEnvelopeOpen} />
                 </button>
 

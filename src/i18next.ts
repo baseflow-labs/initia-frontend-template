@@ -4,16 +4,10 @@ import { initReactI18next } from "react-i18next";
 
 import ar from "./assets/locales/ar.json";
 import en from "./assets/locales/en.json";
+import configs from "./configs";
 
 const languageDetectorOptions = {
-  order: [
-    "querystring",
-    "cookie",
-    "localStorage",
-    "sessionStorage",
-    "navigator",
-    "htmlTag",
-  ],
+  order: ["querystring", "cookie", "localStorage", "sessionStorage", "navigator", "htmlTag"],
   lookupQuerystring: "lng",
   lookupCookie: "i18next",
   lookupLocalStorage: "i18nextLng",
@@ -30,8 +24,8 @@ i18n
       en: { translations: en },
       ar: { translations: ar },
     },
-    fallbackLng: "en",
-    supportedLngs: ["en", "ar"],
+    fallbackLng: configs.localization.defaultLanguage,
+    supportedLngs: configs.localization.supportedLanguages,
 
     detection: languageDetectorOptions,
 

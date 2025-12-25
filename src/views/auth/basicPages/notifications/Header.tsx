@@ -8,25 +8,16 @@ const NotificationsHeaderView = () => {
   return (
     <div className="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
       <div className="btn-group">
-        <button
-          type="button"
-          className="btn btn-sm btn-outline-secondary active"
-        >
-          {t("Auth.Notifications.Filters.All", "All")}
+        <button type="button" className="btn btn-sm btn-outline-secondary active">
+          {t("Auth.Notifications.Filters.All")}
         </button>
 
-        <button
-          type="button"
-          className="btn btn-sm btn-outline-secondary"
-        >
-          {t("Auth.Notifications.Filters.Unread", "Unread")}
+        <button type="button" className="btn btn-sm btn-outline-secondary">
+          {t("Auth.Notifications.Filters.Unread")}
         </button>
-        
-        <button
-          type="button"
-          className="btn btn-sm btn-outline-secondary"
-        >
-          {t("Auth.Notifications.Filters.Important", "Important")}
+
+        <button type="button" className="btn btn-sm btn-outline-secondary">
+          {t("Auth.Notifications.Filters.Important")}
         </button>
       </div>
 
@@ -38,10 +29,7 @@ const NotificationsHeaderView = () => {
         <input
           type="text"
           className="form-control border-start-0"
-          placeholder={t(
-            "Auth.Notifications.SearchPlaceholder",
-            "Search notifications…"
-          )}
+          placeholder={t("Auth.Notifications.SearchPlaceholder")}
         />
       </div>
     </div>

@@ -8,8 +8,10 @@ import i18n from "./i18next";
 import store from "./store/store";
 
 import "moment/locale/ar";
+
 // Import Bootstrap CSS based on language direction
 const isRTL = i18n.dir() === "rtl";
+
 if (isRTL) {
   import("bootstrap/dist/css/bootstrap.rtl.min.css");
   import("./styles/index.scss");

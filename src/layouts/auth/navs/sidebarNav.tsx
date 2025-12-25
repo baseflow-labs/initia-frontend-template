@@ -1,12 +1,11 @@
 import tempLogo from "@/assets/images/brand/logo.png";
 import { useAppSelector } from "@/store/hooks";
-import { faSquare as faSquareOutline } from "@fortawesome/free-regular-svg-icons";
-import { faSquare as faSquareSolid } from "@fortawesome/free-solid-svg-icons";
+import { faCircle, faCircleDot } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { MenuList, MenuItem } from "./menuItemRenderer";
+import { MenuItem, MenuList } from "./menuItemRenderer";
 
 interface Props {
   routes: MenuItem[];
@@ -58,7 +57,7 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
           }}
           onClick={toggleSidebar}
         >
-          <FontAwesomeIcon icon={collapsed ? faSquareOutline : faSquareSolid} />
+          <FontAwesomeIcon icon={collapsed ? faCircle : faCircleDot} />
         </div>
 
         <hr className="mx-3 flex-shrink-0" />

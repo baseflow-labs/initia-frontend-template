@@ -22,7 +22,7 @@ import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes, useLocation } from "react-router";
 import { Fragment } from "react/jsx-runtime";
 import { FilePreviewModal } from "./globalModal";
-import AuthFooter from "./navs/footer";
+import AuthFooter from "../common/footer";
 import DashboardNavbar from "./navs/navbar";
 import OffCanvasNav from "./navs/offcanvasNav";
 import OffCanvasTools from "./navs/offcanvasTools";

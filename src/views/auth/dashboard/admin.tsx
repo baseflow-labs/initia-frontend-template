@@ -152,30 +152,9 @@ const AdminDashboardView = () => {
           </DashboardCard>
         </div>
 
-        <div className="col-lg-3 mb-4">
-          <DashboardCard title={t("Auth.Dashboard.Admin.SystemHealth.Title")} className="h-100">
-            {healthData.map((row, index) => (
-              <div key={index} className="d-flex align-items-center mb-4">
-                <h6>
-                  <FontAwesomeIcon
-                    icon={row.status === 200 ? faCheckCircle : faTimesCircle}
-                    className={`fa-2x mb-0 text-${row.status === 200 ? "success" : "danger"}`}
-                  />
-                </h6>
-
-                <div>
-                  <h6 className="mb-0">{row.label}</h6>
-
-                  <small>{row.status === 200 ? row.status : row.details}</small>
-                </div>
-              </div>
-            ))}
-          </DashboardCard>
-        </div>
-
         <div className="col-lg-4 mb-4">
           <DashboardCard title={t("Auth.Dashboard.ImportantNotifications")} className="h-100">
-            <div style={{ maxHeight: "40vh", overflowY: "auto" }}>
+            <div style={{ maxHeight: "50vh", overflowY: "auto" }}>
               {data.notifications?.length
                 ? data.notifications.map(({ message, service, createdAt }, i) => (
                     <div
@@ -200,6 +179,27 @@ const AdminDashboardView = () => {
                   ))
                 : t("Global.Labels.NoNotifications")}
             </div>
+          </DashboardCard>
+        </div>
+
+        <div className="col-lg-3 mb-4">
+          <DashboardCard title={t("Auth.Dashboard.Admin.SystemHealth.Title")} className="h-100">
+            {healthData.map((row, index) => (
+              <div key={index} className="d-flex align-items-center mb-3">
+                <h6>
+                  <FontAwesomeIcon
+                    icon={row.status === 200 ? faCheckCircle : faTimesCircle}
+                    className={`fa-2x mb-0 text-${row.status === 200 ? "success" : "danger"}`}
+                  />
+                </h6>
+
+                <div>
+                  <h6 className="mb-0">{row.label}</h6>
+
+                  <small>{row.status === 200 ? row.status : row.details}</small>
+                </div>
+              </div>
+            ))}
           </DashboardCard>
         </div>
       </div>

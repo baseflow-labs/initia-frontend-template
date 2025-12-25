@@ -68,9 +68,11 @@ const StatisticCards = ({ statistics }: Props) => {
                 </div>
               </div>
 
-              <h2 className="card-title my-3 fw-bold">{commaNumbers(String(count))}</h2>
+              <div className="d-flex align-items-end gap-2 card-title my-3 fw-bold">
+                <h2>{commaNumbers(String(count))}</h2>
 
-              {unit && <p className="mb-2">{unit}</p>}
+                {unit && <small className="mb-2 text-xs">{unit}</small>}
+              </div>
 
               {details && details?.length > 0 && (
                 <p className="card-text d-flex">
