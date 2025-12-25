@@ -45,9 +45,9 @@ const UserProfileHeaderView = () => {
               <div className="ratio w-100 bg-primary" style={{ height: "25vh" }} />
 
               {/* Avatar */}
-              <div className="position-absolute start-0 bottom-0 translate-middle-y ms-4">
+              <div className="position-absolute translate-middle-y ms-5">
                 <div
-                  className="border border-3 border-white rounded-circle overflow-hidden"
+                  className="border border-1 rounded-circle overflow-hidden"
                   style={{ width: 120, height: 120 }}
                 >
                   <img
@@ -60,8 +60,8 @@ const UserProfileHeaderView = () => {
             </div>
 
             {/* User header */}
-            <div className="card-body pt-4 pb-3">
-              <div className="row align-items-end">
+            <div className="card-body pt-5 pb-3">
+              <div className="row align-items-end pt-4">
                 <div className="col-md-8 col-sm-12">
                   <div className="ps-md-5 ps-sm-0 ps-0 mt-4 mt-md-0">
                     <h2 className="h4 mb-1">{user.name}</h2>
