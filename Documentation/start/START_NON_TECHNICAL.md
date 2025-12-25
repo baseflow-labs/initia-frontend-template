@@ -84,25 +84,8 @@ You should see the dashboard running.
 
 This dashboard is designed so you can customize the most important things **without writing real code**.
 
-Open the custom [configuration file](.../src/config/appConfig.ts) in your code editor.
-
-You can configure the following:
-
-### 🌍 Language & Localization
-
-- Choose from the languages already provided (for example: English, Arabic)
-- Set the **default language** of the app
-- Enable or disable languages from the available list
-
-#### Add a New Language (Optional)
-
-1. Go to `src/assets/locales/`
-2. Copy an existing language file (for example `en.json`)
-3. Rename it using the language code you want (for example `fr.json`)
-4. Translate the values (do not change the keys)
-5. Go to file `appConfig.ts` and add the new language to the list
-
-The app will automatically pick it up once enabled in the config.
+- Open the custom [configuration file](../../src/configs.ts) in your code editor.
+- Edit the configs listed and explained there
 
 ---
 

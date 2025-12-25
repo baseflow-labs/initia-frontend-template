@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import CopyRightView from "./copyright";
+import configs from "@/configs";
 
 const CommonFooter = () => {
   const { t } = useTranslation();
@@ -7,19 +8,15 @@ const CommonFooter = () => {
   const links = [
     {
       label: t("Public.LandingPage.Title"),
-      url: "http://www.google.com",
+      url: configs.externalLinks.landingPage,
     },
     {
       label: t("Public.TermsConditions.Title"),
-      url: "http://www.google.com/terms-of-service",
+      url: configs.externalLinks.termsOfService,
     },
     {
       label: t("Public.PrivacyPolicy.Title"),
-      url: "http://www.google.com/privacy-policy",
-    },
-    {
-      label: t("Auth.SupportCenter.ContactUs.Title"),
-      url: "http://www.google.com/contact-us",
+      url: configs.externalLinks.privacyPolicy,
     },
   ];
 
