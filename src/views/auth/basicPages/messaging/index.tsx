@@ -1,9 +1,7 @@
-import { faEllipsisVertical, faPaperclip, faPaperPlane, faPhone, faSearch, faSmile, faVideo } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Fragment, useMemo, useState } from "react";
-import { useTranslation } from "react-i18next";
-import Sidebar from "./Sidebar";
+import { useMemo, useState } from "react";
+
 import Chat from "./Chat";
+import Sidebar from "./Sidebar";
 
 export type Message = {
   id: string;
@@ -59,24 +57,21 @@ const sampleConversations: Conversation[] = [
   },
 ];
 
-const MessagingView = () => {
-  const { t } = useTranslation();
+const MessagingView = ({ singleChat }: { singleChat?: boolean }) => {
   const [query, setQuery] = useState("");
   const [activeId, setActiveId] = useState<string>(sampleConversations[0].id);
   const [composer, setComposer] = useState("");
 
   const conversations = useMemo(() => {
     if (!query) return sampleConversations;
-    return sampleConversations.filter((c) =>
-      c.name.toLowerCase().includes(query.toLowerCase()) ||
-      c.lastMessage.toLowerCase().includes(query.toLowerCase())
+    return sampleConversations.filter(
+      (c) =>
+        c.name.toLowerCase().includes(query.toLowerCase()) ||
+        c.lastMessage.toLowerCase().includes(query.toLowerCase())
     );
   }, [query]);
 
-  const active = useMemo(
-    () => sampleConversations.find((c) => c.id === activeId)!,
-    [activeId]
-  );
+  const active = useMemo(() => sampleConversations.find((c) => c.id === activeId)!, [activeId]);
 
   const sendMessage = () => {
     const text = composer.trim();
@@ -90,24 +85,33 @@ const MessagingView = () => {
     setComposer("");
   };
 
-  return (
+  return singleChat ? (
+    <Chat
+      active={active}
+      composer={composer}
+      setComposer={setComposer}
+      sendMessage={sendMessage}
+      singleChat={singleChat}
+    />
+  ) : (
     <div className="row g-3">
       <div className="col-lg-4 col-xl-3">
-        <Sidebar 
-            query={query}
-            setQuery={setQuery}
-            conversations={conversations}
-            activeId={activeId}
-            setActiveId={setActiveId}
+        <Sidebar
+          query={query}
+          setQuery={setQuery}
+          conversations={conversations}
+          activeId={activeId}
+          setActiveId={setActiveId}
         />
-      </div>  
+      </div>
 
       <div className="col-lg-8 col-xl-9">
-        <Chat            
+        <Chat
           active={active}
           composer={composer}
           setComposer={setComposer}
           sendMessage={sendMessage}
+          singleChat={singleChat}
         />
       </div>
     </div>

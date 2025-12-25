@@ -1,9 +1,8 @@
-import { Fragment, useState } from "react";
-
 import OffcanvasComp from "@/components/offcanvas";
-import TabsComp from "@/components/tab";
+import MessagingView from "@/views/auth/basicPages/messaging";
 import { faHeadset, faRobot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 const OffCanvasTools = () => {
@@ -15,13 +14,13 @@ const OffCanvasTools = () => {
       id: "chatbot",
       title: t("Auth.SupportCenter.Chatbot.Title"),
       icon: faRobot,
-      content: <>Chatbot placeholder</>,
+      content: <MessagingView singleChat />,
     },
     {
       id: "live-support",
       title: t("Auth.SupportCenter.LiveSupport.Title"),
       icon: faHeadset,
-      content: <>Live support</>,
+      content: <MessagingView singleChat />,
     },
   ];
 
@@ -47,14 +46,10 @@ const OffCanvasTools = () => {
         position="end"
         content={() => (
           <Fragment>
-            <TabsComp
-              items={tabs.map((tab) => ({
-                ...tab,
-                content: <div className="p-4">{tab.content}</div>,
-              }))}
-              activeTabId={activeTab}
-              vertical
-            />
+            <h6 className="text-primary fw-bold m-3">
+              {tabs.find((tab) => tab.id === activeTab)?.title}
+            </h6>
+            {tabs.find((tab) => tab.id === activeTab)?.content}
           </Fragment>
         )}
       />

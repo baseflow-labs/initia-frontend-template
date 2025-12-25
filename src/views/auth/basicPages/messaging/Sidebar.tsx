@@ -1,6 +1,7 @@
-import { faEllipsisVertical, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslation } from "react-i18next";
+
 import { Conversation } from ".";
 
 interface Props {
@@ -11,9 +12,9 @@ interface Props {
   setQuery: (q: string) => void;
 }
 
-const MessagingView = ({conversations, setActiveId, activeId, query, setQuery}: Props) => {
+const MessagingView = ({ conversations, setActiveId, activeId, query, setQuery }: Props) => {
   const { t } = useTranslation();
-  
+
   return (
     <div className="card shadow-sm h-100">
       <div className="card-body">
@@ -21,7 +22,7 @@ const MessagingView = ({conversations, setActiveId, activeId, query, setQuery}: 
           <span className="input-group-text bg-white">
             <FontAwesomeIcon icon={faSearch} className="text-muted" />
           </span>
-          
+
           <input
             className="form-control"
             placeholder={t("Auth.Messaging.SearchChatsOrMessages")}
@@ -48,9 +49,15 @@ const MessagingView = ({conversations, setActiveId, activeId, query, setQuery}: 
               onClick={() => setActiveId(c.id)}
             >
               <div className="flex-shrink-0 me-3">
-                <div className="rounded-circle bg-primary bg-opacity-10 d-flex align-items-center justify-content-center" style={{ width: 40, height: 40 }}>
+                <div
+                  className="rounded-circle bg-primary bg-opacity-10 d-flex align-items-center justify-content-center"
+                  style={{ width: 40, height: 40 }}
+                >
                   <span className="text-primary fw-bold">
-                    {c.name.split(" ").map((n) => n[0]).join("")}
+                    {c.name
+                      .split(" ")
+                      .map((n) => n[0])
+                      .join("")}
                   </span>
                 </div>
               </div>

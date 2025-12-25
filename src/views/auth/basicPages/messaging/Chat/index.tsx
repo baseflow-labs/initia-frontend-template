@@ -1,4 +1,3 @@
-import { useTranslation } from "react-i18next";
 import MessagingChatBodyView from "./Body";
 import MessagingChatHeaderView from "./Header";
 import MessagingChatSenderView from "./Sender";
@@ -18,25 +17,33 @@ interface Props {
   composer: string;
   setComposer: (value: string) => void;
   sendMessage: () => void;
+  singleChat?: boolean;
 }
 
-const MessagingChatView = ({active, composer, setComposer, sendMessage} : Props) => {
-  const { t } = useTranslation();
-
+const MessagingChatView = ({ active, composer, setComposer, sendMessage, singleChat }: Props) => {
   return (
     <div className="card shadow-sm h-100">
       {/* Chat Header */}
-      <div className="card-header bg-light">
-        <MessagingChatHeaderView active={active} />
-      </div>
+      {singleChat ? null : (
+        <div className="card-header bg-light">
+          <MessagingChatHeaderView active={active} />
+        </div>
+      )}
 
       {/* Chat Body */}
-      <div className="card-body" style={{ height: "55vh", overflowY: "auto" }}>
+      <div
+        className="card-body"
+        style={{ height: singleChat ? "70vh" : "55vh", overflowY: "auto" }}
+      >
         <MessagingChatBodyView active={active} />
       </div>
 
       <div className="card-footer bg-white">
-        <MessagingChatSenderView composer={composer} setComposer={setComposer} sendMessage={sendMessage} />
+        <MessagingChatSenderView
+          composer={composer}
+          setComposer={setComposer}
+          sendMessage={sendMessage}
+        />
       </div>
     </div>
   );
