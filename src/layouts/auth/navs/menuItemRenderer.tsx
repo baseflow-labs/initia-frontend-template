@@ -66,7 +66,11 @@ export const MenuItemRenderer = ({
           className={collapsed ? "text-center" : "d-flex align-items-center"}
           style={{ minWidth: 0 }}
         >
-          <FontAwesomeIcon icon={item.icon} className="me-2" style={{ minWidth: "16px" }} />
+          <FontAwesomeIcon
+            icon={item.icon}
+            className={collapsed ? "" : "me-2"}
+            style={{ minWidth: "16px" }}
+          />
           {(!collapsed || depth > 0 || isOffcanvas) && (
             <span className={depth > 0 ? "text-truncate" : ""}>{item.name}</span>
           )}
@@ -120,7 +124,7 @@ export const MenuList = ({
   isOffcanvas = false,
 }: MenuListProps) => {
   return (
-    <div className="nav flex-column px-2">
+    <div className="nav flex-column px-2 text-center">
       {items.map((item) => (
         <MenuItemRenderer
           key={item.name}

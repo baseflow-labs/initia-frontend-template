@@ -1,3 +1,6 @@
+import service, { customFilterProps, demoStatus, formatGetFilters } from "@/api";
+import { addNotification } from "@/store/actions/notifications";
+import { apiCatchGlobalHandler } from "@/utils/function";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
@@ -5,16 +8,9 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
 import DynamicTable, { actionProps, TableColumn } from ".";
-import service, {
-  demoStatus,
-  formatGetFilters,
-  customFilterProps, // assuming this is exported from @/api
-} from "@/api";
-import { apiCatchGlobalHandler } from "@/utils/function";
+import Button from "../core/button";
 import Form from "../form";
 import Modal from "../modal";
-import { addNotification } from "@/store/actions/notifications";
-import Button from "../core/button";
 
 interface Props {
   dataApiEndpoint: string;
@@ -140,6 +136,54 @@ const ApiDataTable: React.FC<Props> = ({
         {
           id: "2",
           name: "Demo Item 2",
+          username: "788424973",
+          email: "demo@example.com",
+        },
+        {
+          id: "3",
+          name: "Demo Item 3",
+          username: "788424973",
+          email: "demo@example.com",
+        },
+        {
+          id: "4",
+          name: "Demo Item 4",
+          username: "788424973",
+          email: "demo@example.com",
+        },
+        {
+          id: "5",
+          name: "Demo Item 5",
+          username: "788424973",
+          email: "demo@example.com",
+        },
+        {
+          id: "6",
+          name: "Demo Item 6",
+          username: "788424973",
+          email: "demo@example.com",
+        },
+        {
+          id: "7",
+          name: "Demo Item 7",
+          username: "788424973",
+          email: "demo@example.com",
+        },
+        {
+          id: "8",
+          name: "Demo Item 8",
+          username: "788424973",
+          email: "demo@example.com",
+        },
+        {
+          id: "9",
+          name: "Demo Item 9",
+          username: "788424973",
+          email: "demo@example.com",
+        },
+        {
+          id: "10",
+          name: "Demo Item 10",
           username: "788424973",
           email: "demo@example.com",
         },
