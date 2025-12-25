@@ -13,7 +13,7 @@ const PageTemplate = ({ title, actionButtons, breadcrumbs, children }: Props) =>
     <div className="card border-0">
       <div className="card-body p-5">
         <div className="row w-100">
-          <div className="col-6 col-lg-3 order-2 order-lg-1">
+          <div className="col-12 col-md-6 order-2 order-md-1">
             <h3 className="mt-4 mt-lg-0">{title}</h3>
 
             {breadcrumbs && breadcrumbs?.length > 0 && (
@@ -39,9 +39,9 @@ const PageTemplate = ({ title, actionButtons, breadcrumbs, children }: Props) =>
             )}
           </div>
 
-          <div className="col-6 col-lg-2 order-3 order-lg-3">
+          <div className="col-12 col-md-6 order-3 order-md-3 text-end">
             {actionButtons && (
-              <div className="float-end mt-3 mt-lg-0">
+              <div className="mt-3 mt-lg-0">
                 <ActionButtons buttons={actionButtons} />
               </div>
             )}
