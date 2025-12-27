@@ -1,4 +1,4 @@
-import * as OverviewApi from "@/api/dashboard";
+import * as SystemHealthApi from "@/api/dashboard/systemHealth";
 import DashboardCard from "@/components/card/dashboardCard";
 import StatisticCards from "@/components/card/statisticCards";
 import { Notification } from "@/layouts/auth/navs/navbar";
@@ -7,7 +7,6 @@ import { apiCatchGlobalHandler } from "@/utils/function";
 import {
   faArrowRightToBracket,
   faCheckCircle,
-  faCode,
   faDatabase,
   faFloppyDisk,
   faHeart,
@@ -25,26 +24,48 @@ import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
+interface HealthInfo {
+  status: string;
+  load?: number;
+  cores?: number;
+  threshold?: number;
+}
+
+interface HealthData {
+  cpu: HealthInfo;
+  disk: HealthInfo;
+  database: HealthInfo;
+  google: HealthInfo;
+  memory_Heap: HealthInfo;
+  memory_rss: HealthInfo;
+}
+
 const AdminDashboardView = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { logoFull } = useAppSelector((state) => state.settings);
   const [data, setData] = useState<{
     notifications?: Notification[];
-    statuses?: { status: string; createdAt: string }[];
-    status?: string;
-  }>({});
+    health: HealthData;
+  }>({
+    health: {
+      cpu: { status: "unknown" },
+      disk: { status: "unknown" },
+      database: { status: "unknown" },
+      google: { status: "unknown" },
+      memory_Heap: { status: "unknown" },
+      memory_rss: { status: "unknown" },
+    },
+  });
 
   useLayoutEffect(() => {
-    OverviewApi.forUser()
-      .then((res) =>
-        setData({
-          ...res.payload,
-          notifications: res.payload.notifications?.sort((a: Notification, b: Notification) =>
-            a.createdAt > b.createdAt ? -1 : 1
-          ),
-        })
-      )
+    SystemHealthApi.get()
+      .then((res) => {
+        setData((current) => ({
+          ...current,
+          health: res.data.info as HealthData,
+        }));
+      })
       .catch(apiCatchGlobalHandler);
   }, []);
 
@@ -90,46 +111,31 @@ const AdminDashboardView = () => {
     },
   ];
 
-  const dummyHealthData = {
-    health: 200,
-    db: 200,
-    http: 500,
-    memory: 200,
-    disk: 200,
-    cpu: 200,
-  };
-
   const healthData = [
     {
       label: t("Auth.Dashboard.Admin.SystemHealth.Overall"),
-      status: dummyHealthData.health,
+      status: data.health.google?.status,
       icon: faHeart,
     },
     {
       label: t("Auth.Dashboard.Admin.SystemHealth.Database"),
-      status: dummyHealthData.db,
+      status: data.health.database?.status,
       icon: faDatabase,
     },
     {
       label: t("Auth.Dashboard.Admin.SystemHealth.Memory"),
-      status: dummyHealthData.memory,
+      status: data.health.memory_Heap?.status,
       icon: faMemory,
     },
     {
       label: t("Auth.Dashboard.Admin.SystemHealth.Disk"),
-      status: dummyHealthData.disk,
+      status: data.health.disk?.status,
       icon: faFloppyDisk,
     },
     {
       label: t("Auth.Dashboard.Admin.SystemHealth.Cpu"),
-      status: dummyHealthData.cpu,
+      status: data.health.cpu?.status,
       icon: faShip,
-    },
-    {
-      label: t("Auth.Dashboard.Admin.SystemHealth.Api"),
-      status: dummyHealthData.http,
-      icon: faCode,
-      details: "See logs for more info",
     },
   ];
 
@@ -188,15 +194,15 @@ const AdminDashboardView = () => {
               <div key={index} className="d-flex align-items-center mb-3">
                 <h6>
                   <FontAwesomeIcon
-                    icon={row.status === 200 ? faCheckCircle : faTimesCircle}
-                    className={`fa-2x mb-0 text-${row.status === 200 ? "success" : "danger"}`}
+                    icon={row.status === "up" ? faCheckCircle : faTimesCircle}
+                    className={`fa-2x me-2 mb-0 text-${row.status === "up" ? "success" : "danger"}`}
                   />
                 </h6>
 
                 <div>
                   <h6 className="mb-0">{row.label}</h6>
 
-                  <small>{row.status === 200 ? row.status : row.details}</small>
+                  <small>{row.status}</small>
                 </div>
               </div>
             ))}
