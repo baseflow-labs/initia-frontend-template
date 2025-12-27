@@ -8,6 +8,7 @@ export const setMetadata = (data: {
   logo: string;
   logoFull: string;
   phoneNumber: string;
+  slogan: string;
 }) => {
   return {
     type: "setMetadata" as const,

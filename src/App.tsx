@@ -30,9 +30,9 @@ const App = () => {
       .then((res) => {
         dispatch(
           setMetadata({
-            ...res.payload,
-            logo: (res.payload.logo && res.payload.logo[0].path) || null,
-            logoFull: (res.payload.logoFull && res.payload.logoFull[0].path) || null,
+            ...res.data,
+            logo: res.data.logo,
+            logoFull: res.data.logoFull || res.data.logo,
           })
         );
       })
