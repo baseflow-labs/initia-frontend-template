@@ -1,4 +1,5 @@
 import * as SystemHealthApi from "@/api/dashboard/systemHealth";
+import * as NotificationApi from "@/api/notifications";
 import DashboardCard from "@/components/card/dashboardCard";
 import StatisticCards from "@/components/card/statisticCards";
 import { Notification } from "@/layouts/auth/navs/navbar";
@@ -64,6 +65,19 @@ const AdminDashboardView = () => {
         setData((current) => ({
           ...current,
           health: res.data.info as HealthData,
+        }));
+      })
+      .catch(apiCatchGlobalHandler);
+
+    NotificationApi.get()
+      .then((res) => {
+        setData((current) => ({
+          ...current,
+          notifications:
+            res.data
+              ?.filter((a: Notification) => !a.isRead && a.important)
+              .sort((a: Notification, b: Notification) => (a.createdAt > b.createdAt ? -1 : 1)) ||
+            [],
         }));
       })
       .catch(apiCatchGlobalHandler);

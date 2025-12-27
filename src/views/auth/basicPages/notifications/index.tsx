@@ -1,40 +1,36 @@
+import * as NotificationApi from "@/api/notifications";
+import { Notification } from "@/layouts/auth/navs/navbar";
 import PageTemplate from "@/layouts/auth/pages/pageTemplate";
-import { faEnvelopeOpen, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { viewDayDateFormat, viewTimeFormat } from "@/utils/consts";
+import { apiCatchGlobalHandler } from "@/utils/function";
+import { faCircle, faEnvelope, faEnvelopeOpen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import moment from "moment";
+import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-
 import NotificationsHeaderView from "./Header";
 
 const NotificationsView = () => {
   const { t } = useTranslation();
 
-  // Dummy data just to show layout – replace with real data / props / API.
-  const notifications = [
-    {
-      id: 1,
-      title: "Your order has been shipped",
-      body: "Order #12345 has been shipped and is on its way to you.",
-      type: "primary", // primary | dark | warning | danger
-      isRead: false,
-      time: "5 min ago",
-    },
-    {
-      id: 2,
-      title: "Payment received",
-      body: "We’ve darkfully received your last payment.",
-      type: "dark",
-      isRead: true,
-      time: "2 hours ago",
-    },
-    {
-      id: 3,
-      title: "Password changed",
-      body: "Your account password was changed recently.",
-      type: "warning",
-      isRead: false,
-      time: "Yesterday",
-    },
-  ];
+  const [notifications, setNotification] = useState<Notification[]>([]);
+  const [filter, setFiler] = useState<string>("all");
+
+  const getData = (params?: object) => {
+    NotificationApi.get(params)
+      .then((res) => {
+        setNotification(
+          res.data.sort((a: Notification, b: Notification) =>
+            a.createdAt > b.createdAt ? -1 : 1
+          ) || []
+        );
+      })
+      .catch(apiCatchGlobalHandler);
+  };
+
+  useLayoutEffect(() => {
+    getData();
+  }, [filter]);
 
   const getTypeBadgeClass = (type: string) => {
     switch (type) {
@@ -52,11 +48,32 @@ const NotificationsView = () => {
   const actionButtons = [
     {
       label: t("Auth.Notifications.MarkAllRead"),
+      onClick: () => {
+        NotificationApi.markAllAsRead(notifications);
+      },
     },
     {
       label: t("Auth.Notifications.Refresh"),
+      onClick: () => getData(),
     },
   ];
+
+  const markAsRead = (notification: Notification) => {
+    NotificationApi.markAsRead(notification)
+      .then(() => {
+        setNotification((current) =>
+          current.map((n) =>
+            n.id === notification.id
+              ? {
+                  ...n,
+                  isRead: true,
+                }
+              : n
+          )
+        );
+      })
+      .catch(apiCatchGlobalHandler);
+  };
 
   return (
     <PageTemplate
@@ -64,7 +81,7 @@ const NotificationsView = () => {
       actionButtons={actionButtons}
     >
       <div className="w-100 mb-3">
-        <NotificationsHeaderView />
+        <NotificationsHeaderView filter={filter} setFilter={setFiler} />
       </div>
 
       {notifications.length === 0 && (
@@ -91,52 +108,45 @@ const NotificationsView = () => {
               key={n.id}
               className={
                 "list-group-item px-0 d-flex gap-3 align-items-start border-0 border-bottom" +
-                (n.isRead ? " bg-white" : " bg-light-subtle")
+                (n.isRead ? " bg-white" : " bg-light")
               }
             >
               {/* Status dot */}
               <div className="pt-1">
-                <span
-                  className={
-                    "d-inline-block rounded-circle me-1 " +
-                    (n.isRead ? "bg-secondary-subtle" : "bg-primary")
-                  }
-                  style={{ width: 10, height: 10 }}
+                <FontAwesomeIcon
+                  icon={faCircle}
+                  className={"ms-2 " + (n.isRead ? "text-white" : "text-primary")}
                 />
               </div>
 
               <div className="flex-grow-1">
                 <div className="d-flex justify-content-between align-items-start mb-1">
                   <h3 className="h6 mb-0">{n.title}</h3>
-                  <span className="text-muted small ms-3">{n.time}</span>
+                  <span className="text-muted small ms-3">
+                    {moment(n.createdAt).format(viewTimeFormat + " @ " + viewDayDateFormat)}
+                  </span>
                 </div>
 
-                <p className="mb-1 small text-muted">{n.body}</p>
+                <p className="mb-1 small text-muted">{n.message}</p>
 
                 <div className="d-flex flex-wrap gap-2 align-items-center mt-1">
-                  <span className={getTypeBadgeClass(n.type)}>
-                    {n.type.charAt(0).toUpperCase() + n.type.slice(1)}
-                  </span>
+                  {n.important && <span className={getTypeBadgeClass("danger")}>Important</span>}
 
-                  {!n.isRead && (
-                    <span className="badge bg-primary text-white">
-                      {t("Auth.Notifications.Unread", "New")}
-                    </span>
-                  )}
+                  <span className={getTypeBadgeClass(n.service)}>
+                    {n.service.charAt(0).toUpperCase() + n.service.slice(1)}
+                  </span>
                 </div>
               </div>
 
               <div className="d-flex flex-column align-items-end gap-1">
-                <button type="button" className="btn btn-link btn-sm text-decoration-none px-0">
-                  <FontAwesomeIcon icon={faEnvelopeOpen} />
-                </button>
-
-                <button
-                  type="button"
-                  className="btn btn-link btn-sm text-danger text-decoration-none px-0"
-                >
-                  <FontAwesomeIcon icon={faTrash} />
-                </button>
+                <div className="pe-2 my-auto">
+                  <FontAwesomeIcon
+                    icon={n.isRead ? faEnvelopeOpen : faEnvelope}
+                    onClick={() => (!n.isRead ? markAsRead(n) : null)}
+                    className={!n.isRead ? "text-primary" : ""}
+                    role={!n.isRead ? "button" : undefined}
+                  />
+                </div>
               </div>
             </li>
           ))}

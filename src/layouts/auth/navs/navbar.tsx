@@ -30,6 +30,7 @@ export interface Notification {
   important?: boolean;
   isRead?: boolean;
   createdAt: string;
+  updatedAt: string;
 }
 
 const DashboardNavbar = ({
@@ -51,9 +52,9 @@ const DashboardNavbar = ({
     NotificationApi.get()
       .then((res) => {
         setNotification(
-          res.data?.sort((a: Notification, b: Notification) =>
-            a.createdAt > b.createdAt ? -1 : 1
-          ) || []
+          res.data
+            ?.filter((a: Notification) => !a.isRead)
+            .sort((a: Notification, b: Notification) => (a.createdAt > b.createdAt ? -1 : 1)) || []
         );
       })
       .catch(apiCatchGlobalHandler);
@@ -127,32 +128,36 @@ const DashboardNavbar = ({
                 }
                 list={
                   notifications.length
-                    ? notifications.map(({ id, message, service, createdAt, isRead }) => ({
-                        onClick: () => {
-                          navigate("/" + service);
-                          NotificationApi.markAsRead(id).catch(apiCatchGlobalHandler);
-                        },
-                        label: (
-                          <div
-                            className="row py-3"
-                            style={{
-                              minWidth: "25vw",
-                              backgroundColor: isRead ? "white" : "rgba(0,0,0,0.15)",
-                            }}
-                          >
-                            <div className="d-none d-md-block col-md-2 col-lg-1 my-auto text-warning">
-                              <h3>
-                                <FontAwesomeIcon icon={faInfoCircle} />
-                              </h3>
-                            </div>
+                    ? notifications.map((n) => {
+                        const { message, service, createdAt, isRead } = n;
 
-                            <div className="col-md-10 col-lg-11 ps-4 text-break text-wrap">
-                              <h6 className="w-100">{message}</h6>
-                              <small>{moment(createdAt).fromNow()}</small>
+                        return {
+                          onClick: () => {
+                            navigate("/" + service);
+                            NotificationApi.markAsRead(n).catch(apiCatchGlobalHandler);
+                          },
+                          label: (
+                            <div
+                              className="row py-3"
+                              style={{
+                                minWidth: "25vw",
+                                backgroundColor: isRead ? "white" : "rgba(0,0,0,0.15)",
+                              }}
+                            >
+                              <div className="d-none d-md-block col-md-2 col-lg-1 my-auto text-warning">
+                                <h3>
+                                  <FontAwesomeIcon icon={faInfoCircle} />
+                                </h3>
+                              </div>
+
+                              <div className="col-md-10 col-lg-11 ps-4 text-break text-wrap">
+                                <h6 className="w-100">{message}</h6>
+                                <small>{moment(createdAt).fromNow()}</small>
+                              </div>
                             </div>
-                          </div>
-                        ),
-                      }))
+                          ),
+                        };
+                      })
                     : [{ label: t("Auth.Notifications.NoNotifications") }]
                 }
                 link={{

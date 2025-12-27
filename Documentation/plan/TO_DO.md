@@ -20,8 +20,10 @@
 - [x] Fix layout issues
   - [x] Fix collapsed sidebar nav UI
   - [x] Fix offCanvas tools
+- [ ] Build loading indictor
+- [ ] Building pagination & filter API integration
 - [ ] Connect APIs to backend services
-  - [ ] Notification
+  - [x] Notification
   - [ ] Form of Forms
   - [ ] Support Center
   - [ ] Messaging
@@ -30,6 +32,10 @@
   - [ ] Health Check
   - [ ] Mailing Service
   - [ ] Auth
+    - [x] Login
+    - [ ] Register
+    - [ ] Password Recovery
+    - [ ] Password Reset
   - [ ] User Profile
   - [ ] Chatbot
   - [ ] Example Service
