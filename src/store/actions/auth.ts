@@ -11,7 +11,7 @@ export interface UserProps {
 }
 
 export interface AuthResponse {
-  accessToken: string;
+  token: string;
   refreshToken: string;
   user: UserProps;
 }
@@ -24,7 +24,7 @@ export interface RefreshTokenResponse {
 export const login = (resp: AuthResponse) => ({
   type: "login" as const,
   resp: {
-    accessToken: resp.accessToken,
+    accessToken: resp.token,
     refreshToken: resp.refreshToken,
     user: resp.user || {
       id: "1",

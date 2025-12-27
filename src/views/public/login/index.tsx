@@ -1,6 +1,3 @@
-import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
-
 import * as authApi from "@/api/auth";
 import BelowInputButton from "@/components/button/belowInput";
 import Button from "@/components/core/button";
@@ -8,6 +5,8 @@ import Form from "@/components/form";
 import { login } from "@/store/actions/auth";
 import { addNotification } from "@/store/actions/notifications";
 import { apiCatchGlobalHandler } from "@/utils/function";
+import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 
 const LoginView = () => {
   const { t } = useTranslation();
@@ -48,35 +47,16 @@ const LoginView = () => {
         dispatch(
           addNotification({
             msg: t("Public.Login.Labels.Success", {
-              name: res.data.payload.user.name,
+              name: res.data?.user?.name || res.data?.user?.role || "",
             }),
           })
         );
-        dispatch(login(res.data.payload));
+
+        if (res.data) {
+          dispatch(login(res.data));
+        }
       })
       .catch(apiCatchGlobalHandler);
-  };
-
-  const onDummySubmit = () => {
-    dispatch(
-      addNotification({
-        msg: "Welcome Initia Dummy Admin User",
-      })
-    );
-    dispatch(
-      login({
-        accessToken: "thisIsDummyToken",
-        refreshToken: "thisIsDummyRefreshToken",
-        user: {
-          id: "1",
-          name: "Suhaib Ahmad",
-          email: "SuhaibAhmadAi@hotmail.com",
-          username: "admin",
-          status: "active",
-          role: "admin",
-        },
-      })
-    );
   };
 
   return (
@@ -88,8 +68,16 @@ const LoginView = () => {
       />
 
       {import.meta.env.VITE_APP_ENVIRONMENT === "staging" ? (
-        <Button className="w-100 mt-3" onClick={() => onDummySubmit()}>
-          {t("Public.Login.Labels.DummyLogin", { type: "User" })}
+        <Button
+          className="w-100 mt-3"
+          onClick={() =>
+            onSubmit({
+              identifier: "example@example.com",
+              password: "s5Rsa2?#sd1154",
+            })
+          }
+        >
+          {t("Public.Login.Labels.DummyLogin")}
         </Button>
       ) : (
         ""
