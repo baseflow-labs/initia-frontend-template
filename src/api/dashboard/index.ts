@@ -1,69 +1,21 @@
-import api, { demoStatus } from "..";
+import api from "..";
 
 const mainPath = "/overview";
 
 const forUser = async () => {
-  if (demoStatus) {
-    return {
-      payload: {
-        notifications: [
-          {
-            id: "1",
-            title: "Welcome to Initia!",
-            message: "Thank you for using Initia. We hope you have a great experience!",
-            service: "notifications",
-            important: false,
-            isRead: false,
-            createdAt: "2024-06-01T12:00:00Z",
-          },
-          {
-            id: "2",
-            title: "This is important!",
-            message: "This is to test the important notification feature.",
-            service: "notifications",
-            important: true,
-            isRead: false,
-            createdAt: "2024-06-01T12:00:00Z",
-          },
-          {
-            id: "3",
-            title: "This is important!",
-            message: "This is to test the important notification feature.",
-            service: "notifications",
-            important: true,
-            isRead: false,
-            createdAt: "2024-06-01T12:00:00Z",
-          },
-          {
-            id: "4",
-            title: "This is important!",
-            message: "This is to test the important notification feature.",
-            service: "notifications",
-            important: true,
-            isRead: false,
-            createdAt: "2024-06-01T12:00:00Z",
-          },
-        ],
-      },
-    };
-  }
-  const res = await api.get(mainPath + "/user");
-  return { payload: res.data };
+  return await api.get(mainPath + "/user");
 };
 
 const forResearcher = async () => {
-  const res = await api.get(mainPath + "/researcher");
-  return res;
+  return await api.get(mainPath + "/researcher");
 };
 
 const forSupervisor = async () => {
-  const res = await api.get(mainPath + "/supervisor");
-  return res;
+  return await api.get(mainPath + "/supervisor");
 };
 
 const forAccountant = async () => {
-  const res = await api.get(mainPath + "/accountant");
-  return res;
+  return await api.get(mainPath + "/accountant");
 };
 
-export { forUser, forResearcher, forSupervisor, forAccountant };
+export { forAccountant, forResearcher, forSupervisor, forUser };

@@ -2,6 +2,7 @@ import axios, {
   AxiosError,
   AxiosRequestHeaders,
   AxiosResponse,
+  AxiosRequestConfig,
   InternalAxiosRequestConfig,
 } from "axios";
 
@@ -16,10 +17,30 @@ declare module "axios" {
   }
 }
 
-export const baseURL =
-  import.meta.env.VITE_APP_BACKEND_URL || "http://localhost:8000";
+export const baseURL = import.meta.env.VITE_APP_BACKEND_URL || "http://localhost:8000";
 
-export const demoStatus = import.meta.env.VITE_APP_ENVIRONMENT === "staging";
+export interface ApiEnvelope<TPayload = Record<string, unknown>> {
+  message?: string;
+  payload?: TPayload;
+  status?: number;
+  extra?: Record<string, unknown>;
+}
+
+interface RefreshPayload {
+  accessToken?: string;
+  refreshToken?: string;
+}
+
+export type EnvelopeResponse<TPayload = Record<string, unknown>> = Omit<
+  AxiosResponse<TPayload>,
+  "data"
+> & {
+  data: TPayload;
+  payload?: TPayload;
+  message?: string;
+  status?: number;
+  extra?: Record<string, unknown>;
+};
 
 export interface customFilterProps {
   field: string;
@@ -31,24 +52,24 @@ export interface customFilterProps {
 }
 
 export interface GetDataProps {
-  filters?: object;
+  filters?: Record<string, string>;
   page?: number;
   capacity?: number;
   customFilters?: customFilterProps[];
 }
 
 export const formatGetFilters = (
-  filters = {},
+  filters: Record<string, string> = {},
   customFilters?: customFilterProps[]
 ) => {
   const conditions = Object.keys(filters)
-    .filter((key) => (filters as any)[key])
+    .filter((key) => filters[key])
     .map((key) => {
       return {
         field: key.replaceAll("=>", "."),
         filteredTerm: {
           dataType: "string",
-          value: (filters as any)[key],
+          value: filters[key],
         },
         filterOperator: "stringEquals",
       };
@@ -73,20 +94,10 @@ service.interceptors.request.use(
 
     const { accessToken } = (store.getState() as RootState).auth;
 
-    if (accessToken) {
+    if (accessToken && accessToken !== "null") {
       config.headers.Authorization = `Bearer ${accessToken}`;
-    }
-
-    if (config.method?.toLowerCase() === "get") {
-      const defaultParams = {
-        page: 1,
-        capacity: 999,
-      };
-
-      config.params = {
-        ...defaultParams,
-        ...(config.params || {}),
-      };
+    } else if (config.headers && (config.headers as AxiosRequestHeaders).Authorization) {
+      delete (config.headers as AxiosRequestHeaders).Authorization;
     }
 
     return config;
@@ -99,36 +110,41 @@ service.interceptors.request.use(
 const fallbackMessage = "Something Went Wrong";
 
 service.interceptors.response.use(
-  async (res: AxiosResponse) => {
+  async (res: AxiosResponse): Promise<AxiosResponse> => {
     store.dispatch(endLoading());
 
-    const msg = (res.data as { message?: string })?.message || fallbackMessage;
-    const { accessToken, refreshToken } =
-      (store.getState() as RootState).auth || {};
+    const httpStatus = res.status;
+    const apiStatus = res.data?.status;
+    const effectiveStatus = typeof apiStatus === "number" ? apiStatus : httpStatus;
+
+    const msg = res.data?.message || fallbackMessage;
+
+    const { accessToken, refreshToken } = (store.getState() as RootState).auth || {};
     const originalRequest = res.config;
 
-    const status = parseInt(`${res.status}`);
-
+    // Handle nested 401 from API envelope (non-standard but possible)
     if (
       accessToken &&
       accessToken !== "null" &&
       refreshToken &&
       refreshToken !== "null" &&
-      status === 401
+      effectiveStatus === 401
     ) {
       originalRequest._retry = true;
 
       try {
-        const { data } = await service.post("/auth/refresh-token", {
+        const { data } = await service.post<ApiEnvelope<RefreshPayload>>("/auth/refresh-token", {
           refreshToken,
         });
 
-        // adjust shape according to your API response
-        const newAccessToken = data?.accessToken || data?.payload?.accessToken;
-        const newRefreshToken =
-          data?.refreshToken || data?.payload?.refreshToken;
+        const newAccessToken = data.payload?.accessToken;
+        const newRefreshToken = data.payload?.refreshToken;
 
-        // 1) store tokens in redux
+        if (!newAccessToken || !newRefreshToken) {
+          store.dispatch(logout());
+          return Promise.reject(new Error("Token refresh failed"));
+        }
+
         store.dispatch(
           doRefreshToken({
             accessToken: newAccessToken,
@@ -136,32 +152,44 @@ service.interceptors.response.use(
           })
         );
 
-        // 2) update Authorization header for the retried request
         originalRequest.headers = {
           ...originalRequest.headers,
           Authorization: `Bearer ${newAccessToken}`,
         } as AxiosRequestHeaders;
 
-        // 3) retry original request
-        return service(originalRequest);
+        return service.request(originalRequest).then((r) => {
+          const env = r.data as ApiEnvelope<unknown>;
+          const payload = env && typeof env === "object" && "payload" in env ? env.payload : r.data;
+          const augmented: EnvelopeResponse<unknown> = {
+            ...r,
+            data: payload,
+            payload: env?.payload,
+            message: env?.message,
+            status: typeof env?.status === "number" ? env.status : r.status,
+            extra: env?.extra || {},
+          };
+          return augmented;
+        });
       } catch (e) {
-        // refresh failed -> logout and reject
         store.dispatch(logout());
         return Promise.reject(e);
       }
     }
 
     if (
-      store.getState().auth.accessToken &&
-      store.getState().auth.accessToken !== "null" &&
-      status === 403
+      (store.getState() as RootState).auth.accessToken &&
+      (store.getState() as RootState).auth.accessToken !== "null" &&
+      effectiveStatus === 403
     ) {
       store.dispatch(logout());
       return Promise.reject(new Error(msg));
     }
 
-    if ([200, 201, 202, 204].includes(status)) {
-      return res.data;
+    if ([200, 201, 202, 204].includes(effectiveStatus)) {
+      const env = res.data as ApiEnvelope<unknown>;
+      const payload = env && typeof env === "object" && "payload" in env ? env.payload : res.data;
+      (res as AxiosResponse).data = payload as unknown as typeof res.data;
+      return res as AxiosResponse;
     }
 
     store.dispatch(
@@ -173,17 +201,25 @@ service.interceptors.response.use(
 
     return Promise.reject(new Error(msg));
   },
-  (err: AxiosError) => {
+  (err: AxiosError<ApiEnvelope<unknown>>) => {
     store.dispatch(endLoading());
 
-    const errMsg =
-      (err?.response?.data as any)?.message || err.message || fallbackMessage;
+    let errMsg: string = fallbackMessage;
+    const data = err.response?.data;
+    if (data && typeof data === "object" && "message" in data) {
+      const maybe = (data as { message?: string }).message;
+      if (typeof maybe === "string") {
+        errMsg = maybe;
+      }
+    } else if (typeof err.message === "string") {
+      errMsg = err.message;
+    }
 
-    const status = parseInt(`${err.status}`);
+    const status = err.response?.status || 0;
 
     if (
-      store.getState().auth.accessToken &&
-      store.getState().auth.accessToken !== "null" &&
+      (store.getState() as RootState).auth.accessToken &&
+      (store.getState() as RootState).auth.accessToken !== "null" &&
       [403, 401].includes(status)
     ) {
       store.dispatch(logout());
@@ -201,4 +237,43 @@ service.interceptors.response.use(
   }
 );
 
-export default service;
+// Centralized typed API wrapper returning EnvelopeResponse<T>
+const api = {
+  get<TPayload = Record<string, unknown>>(
+    url: string,
+    config?: AxiosRequestConfig
+  ): Promise<EnvelopeResponse<TPayload>> {
+    return service.get(url, config) as Promise<EnvelopeResponse<TPayload>>;
+  },
+  delete<TPayload = Record<string, unknown>>(
+    url: string,
+    config?: AxiosRequestConfig
+  ): Promise<EnvelopeResponse<TPayload>> {
+    return service.delete(url, config) as Promise<EnvelopeResponse<TPayload>>;
+  },
+  post<TPayload = Record<string, unknown>>(
+    url: string,
+    data?: unknown,
+    config?: AxiosRequestConfig
+  ): Promise<EnvelopeResponse<TPayload>> {
+    return service.post(url, data, config) as Promise<EnvelopeResponse<TPayload>>;
+  },
+  put<TPayload = Record<string, unknown>>(
+    url: string,
+    data?: unknown,
+    config?: AxiosRequestConfig
+  ): Promise<EnvelopeResponse<TPayload>> {
+    return service.put(url, data, config) as Promise<EnvelopeResponse<TPayload>>;
+  },
+  patch<TPayload = Record<string, unknown>>(
+    url: string,
+    data?: unknown,
+    config?: AxiosRequestConfig
+  ): Promise<EnvelopeResponse<TPayload>> {
+    return service.patch(url, data, config) as Promise<EnvelopeResponse<TPayload>>;
+  },
+  // expose the underlying axios instance for advanced use
+  axios: service,
+};
+
+export default api;

@@ -1,4 +1,4 @@
-import service, { customFilterProps, demoStatus, formatGetFilters } from "@/api";
+import service, { customFilterProps, formatGetFilters } from "@/api";
 import { addNotification } from "@/store/actions/notifications";
 import { apiCatchGlobalHandler } from "@/utils/function";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
@@ -113,82 +113,15 @@ const ApiDataTable: React.FC<Props> = ({
       }
     };
 
-    if (demoStatus) {
-      onSuccess();
-    } else {
-      apiCall()
-        .then(() => {
-          onSuccess();
-        })
-        .catch(apiCatchGlobalHandler);
-    }
+    apiCall()
+      .then(() => {
+        onSuccess();
+      })
+      .catch(apiCatchGlobalHandler);
   };
 
   const fetchData = () => {
-    if (demoStatus) {
-      setData([
-        {
-          id: "1",
-          name: "Demo Item 1",
-          username: "790035342",
-          email: "demo@example.com",
-        },
-        {
-          id: "2",
-          name: "Demo Item 2",
-          username: "788424973",
-          email: "demo@example.com",
-        },
-        {
-          id: "3",
-          name: "Demo Item 3",
-          username: "788424973",
-          email: "demo@example.com",
-        },
-        {
-          id: "4",
-          name: "Demo Item 4",
-          username: "788424973",
-          email: "demo@example.com",
-        },
-        {
-          id: "5",
-          name: "Demo Item 5",
-          username: "788424973",
-          email: "demo@example.com",
-        },
-        {
-          id: "6",
-          name: "Demo Item 6",
-          username: "788424973",
-          email: "demo@example.com",
-        },
-        {
-          id: "7",
-          name: "Demo Item 7",
-          username: "788424973",
-          email: "demo@example.com",
-        },
-        {
-          id: "8",
-          name: "Demo Item 8",
-          username: "788424973",
-          email: "demo@example.com",
-        },
-        {
-          id: "9",
-          name: "Demo Item 9",
-          username: "788424973",
-          email: "demo@example.com",
-        },
-        {
-          id: "10",
-          name: "Demo Item 10",
-          username: "788424973",
-          email: "demo@example.com",
-        },
-      ]);
-    } else {
+    {
       service
         .get(dataApiEndpoint, {
           params: {
