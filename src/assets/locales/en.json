@@ -58,9 +58,9 @@
         "Title": "Data View Examples"
       },
       "Form": {
-        "BooleanButton": "Button Checkbox",
+        "BooleanButton": "Boolean Button",
         "BooleanCheckbox": "Boolean Checkbox",
-        "BooleanCheckboxes": "Button Checkboxes",
+        "BooleanCheckboxes": "Boolean Buttons",
         "BooleanSwitch": "Boolean Switch",
         "ButtonRadio": "Button Radio",
         "CardCheckboxes": "Card Checkboxes",
@@ -87,7 +87,7 @@
         "Range": "Range",
         "Select": "Select",
         "SelectMany": "Select Many",
-        "StackedBooleanCheckboxes": "Stacked Button Checkboxes",
+        "StackedBooleanCheckboxes": "Stacked Boolean Buttons",
         "StackedButtonRadio": "Stacked Button Radio",
         "StackedCardCheckboxes": "Stacked Card Checkboxes",
         "StackedCardRadio": "Stacked Card Radio",
