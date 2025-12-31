@@ -1,5 +1,5 @@
 import store, { RootState } from "@/store/store";
-import api, { formatGetFilters, GetDataProps } from "..";
+import api, { formatGetFilters, GetDataProps, EnvelopeResponse } from "..";
 
 const mainPath = "/user";
 
@@ -17,10 +17,14 @@ const create = async (data: object) => {
   return await api.post(mainPath, data);
 };
 
-const getByUserId = async (id?: string) => {
+export interface UserProfileResp {
+  user: { fullName: string };
+}
+
+const getByUserId = async (id?: string): Promise<EnvelopeResponse<UserProfileResp>> => {
   const { user } = (store.getState() as RootState).auth;
 
-  return await api.get(mainPath + "/by-user/" + (id || user.id));
+  return await api.get<UserProfileResp>(mainPath + "/by-user/" + (id || user.id));
 };
 
 const remove = async (id: string) => {

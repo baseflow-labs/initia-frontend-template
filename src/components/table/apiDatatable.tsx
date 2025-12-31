@@ -125,7 +125,7 @@ const ApiDataTable: React.FC<Props> = ({
       service
         .get(dataApiEndpoint, {
           params: {
-            ...formatGetFilters(inputs, filters),
+            ...formatGetFilters({}, filters),
             page: currentPage,
             capacity: pageSize,
             search: search || undefined,
@@ -138,20 +138,32 @@ const ApiDataTable: React.FC<Props> = ({
           const apiData = res?.data as Record<string, unknown>;
           const payload = (apiData?.payload || apiData) as Record<string, unknown>;
           const rows = (payload?.data || payload?.rows || payload || []) as object[];
-          const meta = payload?.meta ||
-            res?.data?.meta || {
-              page: currentPage,
-              capacity: pageSize,
-              count: Array.isArray(rows) ? rows.length : 0,
-              pagesCount: Array.isArray(rows) ? Math.max(1, Math.ceil(rows.length / pageSize)) : 1,
-            };
+          const meta: { page?: number; capacity?: number; count?: number; pagesCount?: number } =
+            (payload?.meta as {
+              page?: number;
+              capacity?: number;
+              count?: number;
+              pagesCount?: number;
+            }) ||
+              (
+                res?.data as {
+                  meta?: { page?: number; capacity?: number; count?: number; pagesCount?: number };
+                }
+              )?.meta || {
+                page: currentPage,
+                capacity: pageSize,
+                count: Array.isArray(rows) ? rows.length : 0,
+                pagesCount: Array.isArray(rows)
+                  ? Math.max(1, Math.ceil(rows.length / pageSize))
+                  : 1,
+              };
 
           setData(rows);
           setPaginationMeta({
-            page: meta.page || currentPage,
-            capacity: meta.capacity || pageSize,
-            count: meta.count || 0,
-            pagesCount: meta.pagesCount || 1,
+            page: meta.page ?? currentPage,
+            capacity: meta.capacity ?? pageSize,
+            count: meta.count ?? 0,
+            pagesCount: meta.pagesCount ?? 1,
           });
         })
         .catch(apiCatchGlobalHandler);

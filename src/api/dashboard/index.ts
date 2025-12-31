@@ -1,9 +1,16 @@
-import api from "..";
+import api, { EnvelopeResponse } from "..";
+import type { Notification } from "@/layouts/auth/navs/navbar";
 
 const mainPath = "/overview";
 
-const forUser = async () => {
-  return await api.get(mainPath + "/user");
+export interface UserOverviewPayload {
+  notifications?: Notification[];
+  statuses?: { status: string; createdAt: string }[];
+  status?: string;
+}
+
+const forUser = async (): Promise<EnvelopeResponse<UserOverviewPayload>> => {
+  return await api.get<UserOverviewPayload>(mainPath + "/user");
 };
 
 const forResearcher = async () => {

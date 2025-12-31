@@ -32,8 +32,8 @@ const UserDashboardView = () => {
     OverviewApi.forUser()
       .then((res) =>
         setData({
-          ...res.payload,
-          notifications: res.payload.notifications?.sort((a: Notification, b: Notification) =>
+          ...res.data,
+          notifications: res.data.notifications?.sort((a: Notification, b: Notification) =>
             a.createdAt > b.createdAt ? -1 : 1
           ),
         })
@@ -43,7 +43,7 @@ const UserDashboardView = () => {
     UserApi.getByUserId()
       .then((res) =>
         setProfile({
-          ...res.payload,
+          ...res.data,
         })
       )
       .catch(apiCatchGlobalHandler);

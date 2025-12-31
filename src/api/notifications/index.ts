@@ -1,10 +1,10 @@
-import { Notification } from "@/layouts/auth/navs/navbar";
-import api from "..";
+import type { Notification } from "@/layouts/auth/navs/navbar";
+import api, { EnvelopeResponse } from "..";
 
 const mainPath = "/notification";
 
-const get = async (params: object) => {
-  return await api.get(mainPath, params);
+const get = async (params?: object): Promise<EnvelopeResponse<Notification[]>> => {
+  return await api.get<Notification[]>(mainPath, params);
 };
 
 const markAsRead = async (notification: Notification) => {

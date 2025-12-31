@@ -1,9 +1,17 @@
-import api from "..";
+import api, { EnvelopeResponse } from "..";
 
 const mainPath = "/metadata";
 
-const get = async () => {
-  return await api.get(mainPath);
+export interface Metadata {
+  name: string;
+  logo: string;
+  logoFull: string;
+  phoneNumber: string;
+  slogan: string;
+}
+
+const get = async (): Promise<EnvelopeResponse<Metadata>> => {
+  return await api.get<Metadata>(mainPath);
 };
 
 const update = async (data: object) => {

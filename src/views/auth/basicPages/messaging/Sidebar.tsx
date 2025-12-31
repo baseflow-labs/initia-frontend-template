@@ -38,7 +38,7 @@ const MessagingView = ({ conversations, setActiveId, activeId }: Props) => {
         </div>
 
         <div className="list-group">
-          {conversations.items?.map((c) => {
+          {conversations?.map((c: ConversationSummary) => {
             const isActive = c.id === activeId;
             return (
               <button
@@ -56,7 +56,7 @@ const MessagingView = ({ conversations, setActiveId, activeId }: Props) => {
                     <span className="fw-bold">
                       {c.name
                         .split(" ")
-                        .map((n) => n[0])
+                        .map((n: string) => n[0])
                         .join("")}
                     </span>
                   </div>

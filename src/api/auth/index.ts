@@ -1,4 +1,5 @@
-import api from "../";
+import api, { EnvelopeResponse } from "../";
+import type { AuthResponse } from "@/store/actions/auth";
 
 export interface loginCredentials {
   identifier: string;
@@ -22,8 +23,8 @@ interface resetPasswordProps {
 
 const mainPath = "/auth";
 
-const login = async (credentials: loginCredentials) => {
-  return await api.post(mainPath + "/login", credentials);
+const login = async (credentials: loginCredentials): Promise<EnvelopeResponse<AuthResponse>> => {
+  return await api.post<AuthResponse>(mainPath + "/login", credentials);
 };
 
 // const logout = async () => {
