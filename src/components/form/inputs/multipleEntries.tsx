@@ -75,7 +75,7 @@ const MultipleEntriesInput: React.FC<FinalInput> = (input) => {
     <FieldArray name={input.name}>
       {({ remove, push }) => (
         <Fragment>
-          <div className="table-responsive">
+          <div className="table-responsive w-100">
             <table className="table align-middle">
               <thead>
                 <tr>
