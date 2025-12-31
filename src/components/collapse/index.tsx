@@ -1,8 +1,14 @@
-import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown, faChevronUp, faGripVertical } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 
-const CollapseGroup = ({ items }: { items: { title: string; content: React.ReactNode }[] }) => {
+const CollapseGroup = ({
+  items,
+  draggable,
+}: {
+  items: { title: string; content: React.ReactNode }[];
+  draggable?: boolean;
+}) => {
   const [activeId, setActiveId] = useState<number | null>(null);
 
   const toggle = (id: number) => {
@@ -18,7 +24,11 @@ const CollapseGroup = ({ items }: { items: { title: string; content: React.React
             onClick={() => toggle(i)}
             aria-expanded={activeId === i}
           >
-            <span>{title}</span>
+            <span>
+              {draggable && <FontAwesomeIcon icon={faGripVertical} className="ms-0 px-0 me-1" />}
+              {title}
+            </span>
+
             <FontAwesomeIcon icon={activeId === i ? faChevronUp : faChevronDown} />
           </button>
 

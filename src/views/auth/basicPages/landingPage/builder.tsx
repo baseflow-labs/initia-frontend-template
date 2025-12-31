@@ -311,6 +311,24 @@ const LandingPageManagementBuilder = () => {
     );
   };
 
+  const PageContentManagement = () => {
+    return (
+      <Fragment>
+        <div className="text-end mb-3">
+          <Button>Add New Section</Button>
+        </div>
+
+        <CollapseGroup draggable items={contentSectionsCollapseItems} />
+
+        <div className="text-end mt-3">
+          <Button outline color="danger" className="w-100">
+            Delete Page
+          </Button>
+        </div>
+      </Fragment>
+    );
+  };
+
   const contentSectionsCollapseItems = [
     {
       title: "Section 1",
@@ -333,39 +351,11 @@ const LandingPageManagementBuilder = () => {
   const contentPagesCollapseItems = [
     {
       title: "Page 1",
-      content: (
-        <Fragment>
-          <div className="text-end mb-3">
-            <Button>Add New Section</Button>
-          </div>
-
-          <CollapseGroup items={contentSectionsCollapseItems} />
-
-          <div className="text-end mt-3">
-            <Button outline color="danger" className="w-100">
-              Delete Page
-            </Button>
-          </div>
-        </Fragment>
-      ),
+      content: <PageContentManagement />,
     },
     {
       title: "Page 2",
-      content: (
-        <Fragment>
-          <div className="text-end mb-3">
-            <Button>Add New Section</Button>
-          </div>
-
-          <CollapseGroup items={contentSectionsCollapseItems} />
-
-          <div className="text-end mt-3">
-            <Button outline color="danger" className="w-100">
-              Delete Page
-            </Button>
-          </div>
-        </Fragment>
-      ),
+      content: <PageContentManagement />,
     },
   ];
 
