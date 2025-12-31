@@ -1,24 +1,22 @@
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslation } from "react-i18next";
 
-import { Conversation } from ".";
+import { ConversationSummary } from ".";
 
 interface Props {
-  conversations: Conversation[];
+  conversations: ConversationSummary[];
   setActiveId: (id: string) => void;
   activeId: string;
   query: string;
   setQuery: (q: string) => void;
 }
 
-const MessagingView = ({ conversations, setActiveId, activeId, query, setQuery }: Props) => {
+const MessagingView = ({ conversations, setActiveId, activeId }: Props) => {
   const { t } = useTranslation();
 
   return (
     <div className="card shadow-sm h-100">
       <div className="card-body">
-        <div className="input-group mb-3">
+        {/* <div className="input-group mb-3">
           <span className="input-group-text bg-white">
             <FontAwesomeIcon icon={faSearch} className="text-muted" />
           </span>
@@ -29,7 +27,7 @@ const MessagingView = ({ conversations, setActiveId, activeId, query, setQuery }
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
-        </div>
+        </div> */}
 
         <div className="d-flex justify-content-between align-items-center mb-2">
           <h6 className="mb-0">{t("Auth.Messaging.Chats")}</h6>
@@ -40,7 +38,7 @@ const MessagingView = ({ conversations, setActiveId, activeId, query, setQuery }
         </div>
 
         <div className="list-group">
-          {conversations.map((c) => {
+          {conversations.items?.map((c) => {
             const isActive = c.id === activeId;
             return (
               <button

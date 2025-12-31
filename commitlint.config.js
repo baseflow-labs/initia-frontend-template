@@ -11,6 +11,7 @@ module.exports = {
         "dashboard",
         "settings",
         "notifications",
+        "messaging",
         "common",
         "code",
         "layout",
