@@ -58,9 +58,9 @@
         "Title": "Data View Examples"
       },
       "Form": {
-        "BooleanButton": "Button Checkbox",
+        "BooleanButton": "Boolean Button",
         "BooleanCheckbox": "Boolean Checkbox",
-        "BooleanCheckboxes": "Button Checkboxes",
+        "BooleanCheckboxes": "Boolean Buttons",
         "BooleanSwitch": "Boolean Switch",
         "ButtonRadio": "Button Radio",
         "CardCheckboxes": "Card Checkboxes",
@@ -87,7 +87,7 @@
         "Range": "Range",
         "Select": "Select",
         "SelectMany": "Select Many",
-        "StackedBooleanCheckboxes": "Stacked Button Checkboxes",
+        "StackedBooleanCheckboxes": "Stacked Boolean Buttons",
         "StackedButtonRadio": "Stacked Button Radio",
         "StackedCardCheckboxes": "Stacked Card Checkboxes",
         "StackedCardRadio": "Stacked Card Radio",
@@ -99,6 +99,30 @@
         "Text": "Text",
         "Textarea": "Textarea"
       }
+    },
+    "LandingPage": {
+      "Builder": {
+        "Section": {
+          "Title": "Section Title",
+          "Types": {
+            "About": "About Section",
+            "Blog": "Blog Section",
+            "Careers": "Careers Section",
+            "ClientsPartners": "Clients / Partners Section",
+            "Contact": "Contact Section",
+            "DemoRequest": "Demo Request Section",
+            "FAQ": "FAQ Section",
+            "Features": "Features Section",
+            "Hero": "Hero Section",
+            "HowItWorks": "How It Works Section",
+            "Pricing": "Pricing Section",
+            "Team": "Team Section",
+            "Testimonials": "Testimonials Section",
+            "Title": "Section Type"
+          }
+        }
+      },
+      "Title": "Landing Page / Website Content Management"
     },
     "Messaging": {
       "Chats": "Chats",
@@ -547,8 +571,7 @@
   },
   "CopyRight": {
     "AllRightsReserved": "All Rights Reserved © {{year}}",
-    "AppName": "Initia",
-    "BuilderShort": "Baseflow Labs"
+    "AppName": "Initia"
   },
   "Global": {
     "Calendar": {
