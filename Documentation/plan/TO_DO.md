@@ -22,6 +22,12 @@
   - [x] Fix offCanvas tools
 - [ ] Build loading indictor
 - [ ] Building pagination & filter API integration
+- [ ] Fix landing page Wizard steps
+  - [ ] Login after prompt
+  - [ ] Build analytical integration
+  - [ ] Build consent popup
+  - [ ] Build saved projects dashboard
+  - [ ] Allow download of project schema
 - [ ] Connect APIs to backend services
   - [x] Notification
   - [ ] Form of Forms
