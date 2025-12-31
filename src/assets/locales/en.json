@@ -100,6 +100,30 @@
         "Textarea": "Textarea"
       }
     },
+    "LandingPage": {
+      "Builder": {
+        "Section": {
+          "Title": "Section Title",
+          "Types": {
+            "About": "About Section",
+            "Blog": "Blog Section",
+            "Careers": "Careers Section",
+            "ClientsPartners": "Clients / Partners Section",
+            "Contact": "Contact Section",
+            "DemoRequest": "DemoRequest Section",
+            "FAQ": "FAQ Section",
+            "Features": "Features Section",
+            "Hero": "Hero Section",
+            "HowItWorks": "HowItWorks Section",
+            "Pricing": "Pricing Section",
+            "Team": "Team Section",
+            "Testimonials": "Testimonials Section",
+            "Title": "Section Type"
+          }
+        }
+      },
+      "Title": "Landing Page / Website Content Management"
+    },
     "Messaging": {
       "Chats": "Chats",
       "SearchChatsOrMessages": "Search Chats Or Messages",
@@ -547,8 +571,7 @@
   },
   "CopyRight": {
     "AllRightsReserved": "All Rights Reserved © {{year}}",
-    "AppName": "Initia",
-    "BuilderShort": "Baseflow Labs"
+    "AppName": "Initia"
   },
   "Global": {
     "Calendar": {

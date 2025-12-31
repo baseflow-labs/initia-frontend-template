@@ -243,19 +243,19 @@ Implement only the “must-have knobs” first:
 ### Sprint 29 — Content management v2 (16 - 29 Jun, 2026)
 
 - [ ] Policy / Terms with localization
-- [ ] Landing page content management (basic sections data model)
-  - [ ] Pricing
-  - [ ] About
-  - [ ] How it Works
-  - [ ] Features
-  - [ ] Blog
-  - [ ] FAQ
-  - [ ] Support Center
-  - [ ] Demo request
-  - [ ] Careers
-  - [ ] Testimonials
-  - [ ] Prominent Clients
-  - [ ] Contact
+- [x] Landing page content management (basic sections data model)
+  - [x] Pricing
+  - [x] About
+  - [x] How it Works
+  - [x] Features
+  - [x] Blog
+  - [x] FAQ
+  - [x] Support Center
+  - [x] Demo request
+  - [x] Careers
+  - [x] Testimonials
+  - [x] Prominent Clients
+  - [x] Contact
 - [ ] Files management (simple library + tagging)
 
 ---
