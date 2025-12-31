@@ -183,7 +183,7 @@ const AuthLayout = () => {
         routes={authRoutes.filter(({ showInNav, fixed }) => showInNav && !fixed)}
       />
 
-      <main className="d-flex pb-3">
+      <main className="d-flex pb-3 min-vh-100">
         {showSidebar && isPc && (
           <div
             className="position-fixed top-0 start-0 min-vh-100"
