@@ -5,6 +5,8 @@ import moment, { Moment } from "moment";
 import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import Button from "../core/button";
+
 export interface CalendarEventType {
   id: string;
   label: string;
@@ -240,31 +242,26 @@ const CalendarComp: React.FC<CalendarViewProps> = ({
           {/* Header: month navigation */}
           <div className="card-header d-flex justify-content-between align-items-center">
             <div>
-              <button
-                type="button"
-                className="btn btn-sm btn-outline-secondary me-2"
+              <Button
+                outline
+                color="secondary"
+                size="sm"
+                className="me-2"
                 onClick={handlePrevMonth}
               >
                 &lt;
-              </button>
-              <button
-                type="button"
-                className="btn btn-sm btn-outline-secondary"
-                onClick={handleNextMonth}
-              >
+              </Button>
+
+              <Button outline color="secondary" size="sm" onClick={handleNextMonth}>
                 &gt;
-              </button>
+              </Button>
             </div>
 
             <h5 className="card-title mb-0">{currentMonth.format("MMMM YYYY")}</h5>
 
-            <button
-              type="button"
-              className="btn btn-sm btn-outline-primary"
-              onClick={() => setCurrentMonth(moment())}
-            >
+            <Button outline size="sm" onClick={() => setCurrentMonth(moment())}>
               {t("Global.Calendar.Today")}
-            </button>
+            </Button>
           </div>
 
           {/* Calendar grid */}

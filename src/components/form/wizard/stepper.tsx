@@ -62,7 +62,7 @@ const WizardFormStepper = ({ steps, currentStep, setCurrentStep }: Props) => {
         {steps[currentStep]?.label}
       </span>
 
-      <BoxedPage hideHeader>
+      <BoxedPage _hideHeader>
         <Fragment>{steps[currentStep]?.contents}</Fragment>
       </BoxedPage>
     </div>

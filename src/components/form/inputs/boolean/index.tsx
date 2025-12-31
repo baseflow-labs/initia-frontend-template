@@ -6,13 +6,7 @@ import SwitchBasedBooleanInputView from "./switch";
 
 type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 
-const BooleanInput: React.FC<FinalInput> = ({
-  type,
-  options,
-  stacked,
-  layout = "default",
-  ...input
-}) => {
+const BooleanInput: React.FC<FinalInput> = ({ layout = "default", ...input }) => {
   switch (layout) {
     case "button":
       return <ButtonBasedBooleanInputView {...input} />;

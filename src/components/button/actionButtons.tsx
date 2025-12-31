@@ -19,8 +19,8 @@ const ActionButtons = ({ buttons }: Props) => {
     <div className="btn-group">
       {buttons.map(({ label, className, tooltip, ...rest }, i) =>
         tooltip ? (
-          <TooltipComp label={tooltip}>
-            <Button className={`me-2 ${className}`} {...rest} key={i}>
+          <TooltipComp label={tooltip} key={i}>
+            <Button className={`me-2 ${className}`} {...rest}>
               {label}
             </Button>
           </TooltipComp>

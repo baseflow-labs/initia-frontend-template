@@ -1,8 +1,9 @@
+import { useAppSelector } from "@/store/hooks";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FormikErrors, Form as FormikForm, FormikProps, FormikProvider, useFormik } from "formik";
 import React, { Fragment } from "react";
 import { useTranslation } from "react-i18next";
-import { useAppSelector } from "@/store/hooks";
+
 import Button from "../core/button";
 import Spinner from "../core/spinner";
 import { MoneyUnit } from "../table";
@@ -316,12 +317,9 @@ const Form: React.FC<Props> = ({
                       </div>
 
                       <div className="col-md-6 mb-3">
-                        <button
-                          type="button"
-                          className="btn btn-outline-dark p-2 w-100 rounded-2 no-interaction"
-                        >
+                        <Button outline color="dark" className="p-2 w-100 rounded-2 no-interaction">
                           <img alt={`${input.name}Logo`} src={logo} height="40px" />
-                        </button>
+                        </Button>
                       </div>
 
                       <div className="col-md-6 mb-2">

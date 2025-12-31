@@ -37,17 +37,17 @@ const MessagingChatHeaderView = ({ active }: Props) => {
       </div>
 
       {/* <div className="d-flex align-items-center gap-2">
-        <button className="btn btn-sm btn-outline-secondary">
+        <Button className="btn btn-sm btn-outline-secondary">
           <FontAwesomeIcon icon={faPhone} />
-        </button>
+        </Button>
 
-        <button className="btn btn-sm btn-outline-secondary">
+        <Button className="btn btn-sm btn-outline-secondary">
           <FontAwesomeIcon icon={faVideo} />
-        </button>
+        </Button>
 
-        <button className="btn btn-sm btn-outline-secondary">
+        <Button className="btn btn-sm btn-outline-secondary">
           <FontAwesomeIcon icon={faEllipsisVertical} />
-        </button>
+        </Button>
       </div> */}
     </div>
   );

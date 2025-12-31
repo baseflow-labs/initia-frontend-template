@@ -1,73 +1,93 @@
-export const submitTicketInputs = (t: Function) => [
+import type { TFunction } from "i18next";
+
+export const submitTicketInputs = (t: TFunction) => [
   {
-    name: 'subject',
+    name: "subject",
     label: t("Auth.SupportCenter.Tickets.SubmitTicket.Form.Subject.Label"),
-    type: 'text',
+    type: "text",
     placeholder: t("Auth.SupportCenter.Tickets.SubmitTicket.Form.Subject.Placeholder"),
     required: true,
-    double: true
+    double: true,
   },
   {
-    name: 'category',
+    name: "category",
     label: t("Auth.SupportCenter.Tickets.SubmitTicket.Form.Category.Label"),
-    type: 'select',
+    type: "select",
     options: [
-      t("Auth.SupportCenter.Tickets.SubmitTicket.Form.Category.Option1"),
-      t("Auth.SupportCenter.Tickets.SubmitTicket.Form.Category.Option2"),
-      t("Auth.SupportCenter.Tickets.SubmitTicket.Form.Category.Option3"),
+      {
+        value: "option1",
+        label: t("Auth.SupportCenter.Tickets.SubmitTicket.Form.Category.Option1"),
+      },
+      {
+        value: "option2",
+        label: t("Auth.SupportCenter.Tickets.SubmitTicket.Form.Category.Option2"),
+      },
+      {
+        value: "option3",
+        label: t("Auth.SupportCenter.Tickets.SubmitTicket.Form.Category.Option3"),
+      },
     ],
     placeholder: t("Auth.SupportCenter.Tickets.SubmitTicket.Form.Category.Placeholder"),
     required: true,
   },
   {
-    name: 'priority',
+    name: "priority",
     label: t("Auth.SupportCenter.Tickets.SubmitTicket.Form.Priority.Label"),
-    type: 'select',
+    type: "select",
     options: [
-      { value: 'low ', label: t("Auth.SupportCenter.Tickets.SubmitTicket.Form.Priority.OptionLow") },
-      { value: 'medium', label: t("Auth.SupportCenter.Tickets.SubmitTicket.Form.Priority.OptionMedium") },
-      { value: 'high', label: t("Auth.SupportCenter.Tickets.SubmitTicket.Form.Priority.OptionHigh") },
+      {
+        value: "low ",
+        label: t("Auth.SupportCenter.Tickets.SubmitTicket.Form.Priority.OptionLow"),
+      },
+      {
+        value: "medium",
+        label: t("Auth.SupportCenter.Tickets.SubmitTicket.Form.Priority.OptionMedium"),
+      },
+      {
+        value: "high",
+        label: t("Auth.SupportCenter.Tickets.SubmitTicket.Form.Priority.OptionHigh"),
+      },
     ],
     placeholder: t("Auth.SupportCenter.Tickets.SubmitTicket.Form.Priority.Placeholder"),
     required: true,
   },
   {
-    name: 'description',
+    name: "description",
     label: t("Auth.SupportCenter.Tickets.SubmitTicket.Form.Description.Label"),
-    type: 'textarea',
+    type: "textarea",
     placeholder: t("Auth.SupportCenter.Tickets.SubmitTicket.Form.Description.Placeholder"),
     required: true,
-    fullWidth: true
+    fullWidth: true,
   },
   {
-    name: 'attachment',
+    name: "attachment",
     label: t("Auth.SupportCenter.Tickets.SubmitTicket.Form.Attachment.Label"),
-    type: 'file',
+    type: "file",
     placeholder: t("Auth.SupportCenter.Tickets.SubmitTicket.Form.Attachment.Placeholder"),
     required: false,
-    double: true
-  }
-]
+    double: true,
+  },
+];
 
-export const ticketTableColumns = (t: Function) => [
+export const ticketTableColumns = (t: TFunction) => [
   {
-    name: 'id',
+    name: "id",
     label: t("Auth.SupportCenter.Tickets.MyTickets.Table.Column1"),
     sortable: true,
   },
   {
-    name: 'name',
+    name: "name",
     label: t("Auth.SupportCenter.Tickets.MyTickets.Table.Column2"),
     sortable: true,
   },
   {
-    name: 'email',
+    name: "email",
     label: t("Auth.SupportCenter.Tickets.MyTickets.Table.Column4"),
     sortable: true,
   },
   {
-    name: 'username',
+    name: "username",
     label: t("Auth.SupportCenter.Tickets.MyTickets.Table.Column3"),
     sortable: true,
   },
-]
+];

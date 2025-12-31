@@ -1,3 +1,4 @@
+import Button from "@/components/core/button";
 import OffcanvasComp from "@/components/offcanvas";
 import MessagingView from "@/views/auth/basicPages/messaging";
 import { faHeadset, faRobot } from "@fortawesome/free-solid-svg-icons";
@@ -28,8 +29,7 @@ const OffCanvasTools = () => {
     <div>
       <div className="position-fixed vstack gap-2 bottom-50 end-0 me-3">
         {tabs.map(({ id, icon }, i) => (
-          <button
-            className="btn btn-primary"
+          <Button
             data-bs-toggle="offcanvas"
             data-bs-target="#offcanvasTools"
             aria-controls="offcanvasTools"
@@ -37,7 +37,7 @@ const OffCanvasTools = () => {
             key={i}
           >
             <FontAwesomeIcon icon={icon} />
-          </button>
+          </Button>
         ))}
       </div>
 

@@ -4,12 +4,7 @@ import { InputProps } from "../../..";
 
 type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 
-const DefaultRadioInput: React.FC<FinalInput> = ({
-  type,
-  options,
-  stacked,
-  ...input
-}) => (
+const DefaultRadioInput: React.FC<FinalInput> = ({ options, stacked, ...input }) => (
   <span className={stacked ? undefined : "d-flex"}>
     {options?.map((option, i) => (
       <div className="form-check my-2" key={i}>
@@ -22,9 +17,7 @@ const DefaultRadioInput: React.FC<FinalInput> = ({
           required={false}
         />
 
-        <label className="form-check-label">
-          {option.label || option.value}
-        </label>
+        <label className="form-check-label">{option.label || option.value}</label>
       </div>
     ))}
   </span>

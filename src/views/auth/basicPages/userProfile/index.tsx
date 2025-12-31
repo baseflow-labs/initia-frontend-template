@@ -47,7 +47,6 @@ const UserProfileView = () => {
             </div>
           ),
         }))}
-        color="white"
       />
     </Fragment>
   );

@@ -5,7 +5,7 @@ import Button from "../../../core/button";
 
 type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 
-const ButtonBasedBooleanInputView = ({ type, ...input }: FinalInput) => {
+const ButtonBasedBooleanInputView = ({ ...input }: FinalInput) => {
   const { t } = useTranslation();
 
   return (
@@ -14,10 +14,12 @@ const ButtonBasedBooleanInputView = ({ type, ...input }: FinalInput) => {
         color="primary"
         outline={!!input.value}
         onClick={() => {
-          input.onChange &&
-            input.onChange({
+          if (input.onChange) {
+            const synthetic = {
               target: { name: input.name, value: !input.value },
-            } as any);
+            } as unknown as React.ChangeEvent<HTMLInputElement>;
+            input.onChange(synthetic);
+          }
         }}
       >
         {input.value

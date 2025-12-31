@@ -1,3 +1,4 @@
+import Button from "@/components/core/button";
 import { useTranslation } from "react-i18next";
 
 const UserProfileConnectionsView = () => {
@@ -13,16 +14,15 @@ const UserProfileConnectionsView = () => {
   return (
     <div className="card shadow-sm border-0 h-100 mb-3">
       <div className="card-header bg-white border-0 d-flex justify-content-between align-items-center">
-        <h5 className="card-title mb-0">
-          {t("Auth.Profile.Connections", "Connections")}
-        </h5>
+        <h5 className="card-title mb-0">{t("Auth.Profile.Connections", "Connections")}</h5>
         <div className="btn-group btn-group-sm">
-          <button type="button" className="btn btn-outline-secondary">
+          <Button outline color="secondary">
             {t("Auth.Profile.ShareConnections", "Share")}
-          </button>
-          <button type="button" className="btn btn-outline-secondary">
+          </Button>
+
+          <Button outline color="secondary">
             {t("Auth.Profile.SuggestEdits", "Suggest edits")}
-          </button>
+          </Button>
         </div>
       </div>
       <div className="card-body">
@@ -43,9 +43,9 @@ const UserProfileConnectionsView = () => {
             </li>
           ))}
         </ul>
-        <button type="button" className="btn btn-outline-secondary btn-sm w-100">
+        <Button outline color="secondary" size="sm" className="w-100">
           {t("Auth.Profile.ViewAllConnections", "View all connections")}
-        </button>
+        </Button>
       </div>
     </div>
   );

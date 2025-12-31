@@ -9,7 +9,6 @@ import DefaultCheckboxesInput from "./default";
 type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 
 const CheckboxesInput: React.FC<FinalInput> = ({
-  type,
   options,
   stacked,
   layout = "default",
@@ -18,39 +17,19 @@ const CheckboxesInput: React.FC<FinalInput> = ({
   switch (layout) {
     case "card":
       return (
-        <CardBasedSelectionView
-          {...input}
-          stacked={stacked}
-          options={options}
-          type="checkbox"
-        />
+        <CardBasedSelectionView {...input} stacked={stacked} options={options} type="checkbox" />
       );
     case "image":
       return (
-        <ImageBasedSelectionView
-          {...input}
-          stacked={stacked}
-          options={options}
-          type="checkbox"
-        />
+        <ImageBasedSelectionView {...input} stacked={stacked} options={options} type="checkbox" />
       );
     case "button":
       return (
-        <ButtonBasedSelectionView
-          {...input}
-          stacked={stacked}
-          options={options}
-          type="checkbox"
-        />
+        <ButtonBasedSelectionView {...input} stacked={stacked} options={options} type="checkbox" />
       );
     default:
       return (
-        <DefaultCheckboxesInput
-          {...input}
-          stacked={stacked}
-          options={options}
-          type="checkbox"
-        />
+        <DefaultCheckboxesInput {...input} stacked={stacked} options={options} type="checkbox" />
       );
   }
 };

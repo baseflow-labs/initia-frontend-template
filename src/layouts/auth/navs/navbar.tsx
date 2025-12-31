@@ -1,6 +1,7 @@
 import * as NotificationApi from "@/api/notifications";
 import tempLogo from "@/assets/images/brand/logo.png";
 import LangButton from "@/components/button/lang";
+import Button from "@/components/core/button";
 import DropdownComp from "@/components/dropdown";
 import { logout } from "@/store/actions/auth";
 import { useAppSelector } from "@/store/hooks";
@@ -79,15 +80,15 @@ const DashboardNavbar = ({
       <div className="w-100 border border-1 bg-white rounded-2 px-3">
         <div className="row justify-content-between">
           <div className="col-6 col-lg-1 d-block d-lg-none order-1 order-lg-3">
-            <button
-              className="btn btn-ghost my-2"
-              type="button"
+            <Button
+              color="ghost"
+              className="my-2"
               data-bs-toggle="offcanvas"
               data-bs-target="#offcanvasNav"
               aria-controls="offcanvasNav"
             >
               <FontAwesomeIcon icon={faBars} />
-            </button>
+            </Button>
           </div>
 
           <div className="col-12 col-lg-5 order-3 order-lg-1">
@@ -166,15 +167,15 @@ const DashboardNavbar = ({
                 }}
               />
 
-              <button className="btn btn-link py-auto" onClick={() => navigate("/messaging")}>
+              <Button color="link" className="py-auto" onClick={() => navigate("/messaging")}>
                 <FontAwesomeIcon icon={faEnvelope} className="text-primary" />
-              </button>
+              </Button>
 
               <LangButton />
 
-              {/* <button className="btn btn-link py-auto" onClick={() => toggleTheme()}>
+              {/* <Button className="btn btn-link py-auto" onClick={() => toggleTheme()}>
               <FontAwesomeIcon icon={document.documentElement.getAttribute("data-bs-theme") === "dark" ? faMoon : faSun} className="text-secondary" />
-            </button> */}
+            </Button> */}
 
               <DropdownComp
                 header={

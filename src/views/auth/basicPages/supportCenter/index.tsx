@@ -1,3 +1,4 @@
+import Button from "@/components/core/button";
 import PageTemplate from "@/layouts/auth/pages/pageTemplate";
 import {
   faArrowRight,
@@ -158,14 +159,18 @@ const SupportCenterView = () => {
                 </p>
 
                 <div className="d-flex justify-content-center gap-3">
-                  <Link to="/support-center/contact-us" className="btn btn-primary btn-lg">
-                    <FontAwesomeIcon icon={faEnvelope} className="me-2" />
-                    {t("Auth.SupportCenter.ContactUs.Title")}
+                  <Link to="/support-center/contact-us">
+                    <Button size="lg">
+                      <FontAwesomeIcon icon={faEnvelope} className="me-2" />
+                      {t("Auth.SupportCenter.ContactUs.Title")}
+                    </Button>
                   </Link>
 
-                  <Link to="/support-center/tickets" className="btn btn-outline-primary btn-lg">
-                    <FontAwesomeIcon icon={faTicket} className="me-2" />
-                    {t("Auth.SupportCenter.SubmitTicket.Title")}
+                  <Link to="/support-center/tickets">
+                    <Button outline size="lg">
+                      <FontAwesomeIcon icon={faTicket} className="me-2" />
+                      {t("Auth.SupportCenter.SubmitTicket.Title")}
+                    </Button>
                   </Link>
                 </div>
               </div>

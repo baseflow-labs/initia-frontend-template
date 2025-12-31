@@ -226,7 +226,7 @@ const ApiDataTable: React.FC<Props> = ({
       {includeCreate && (
         <div className="text-end mb-3">
           <Button
-            className="btn btn-success"
+            color="success"
             onClick={() => setModal({ action: "create", open: true, data: {} })}
           >
             <FontAwesomeIcon icon={faPlus} className="me-2" />

@@ -1,7 +1,9 @@
+import Button from "@/components/core/button";
+import Form from "@/components/form";
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import Form from "@/components/form";
+
 import { submitTicketInputs } from "./consts";
 
 const SupportTicketsSubmissionView = () => {
@@ -45,16 +47,22 @@ const SupportTicketsSubmissionView = () => {
           <p className="text-muted mb-3">For urgent issues, you can also reach us through:</p>
 
           <div className="d-flex gap-2 flex-wrap">
-            <Link to="/support-center/contact-us" className="btn btn-sm btn-outline-danger">
-              Live Chat
+            <Link to="/support-center/contact-us">
+              <Button outline color="danger" size="sm">
+                Live Chat
+              </Button>
             </Link>
 
-            <a href="tel:+15551234567" className="btn btn-sm btn-outline-danger">
-              Call Support
+            <a href="tel:+15551234567">
+              <Button outline color="danger" size="sm">
+                Call Support
+              </Button>
             </a>
 
-            <Link to="/support-center/contact-us" className="btn btn-sm btn-outline-danger">
-              Email Us
+            <Link to="/support-center/contact-us">
+              <Button outline color="danger" size="sm">
+                Email Us
+              </Button>
             </Link>
           </div>
         </div>

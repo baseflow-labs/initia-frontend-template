@@ -4,10 +4,7 @@ import { useTranslation } from "react-i18next";
 
 type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 
-const SwitchBasedBooleanInputView: React.FC<FinalInput> = ({
-  type,
-  ...input
-}) => {
+const SwitchBasedBooleanInputView: React.FC<FinalInput> = ({ ...input }) => {
   const { t } = useTranslation();
 
   return (

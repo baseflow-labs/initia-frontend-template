@@ -1,3 +1,4 @@
+import Button from "@/components/core/button";
 import { useTranslation } from "react-i18next";
 
 const NotificationsHeaderView = ({
@@ -19,16 +20,16 @@ const NotificationsHeaderView = ({
     <div className="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
       <div className="btn-group">
         {actions.map((action, i) => (
-          <button
-            type="button"
-            className={
-              "btn btn-sm btn-outline-secondary" + (filter === action.key ? " active" : "")
-            }
+          <Button
+            size="sm"
+            outline
+            color="secondary"
+            className={filter === action.key ? " active" : ""}
             onClick={() => setFilter(action.key)}
             key={i}
           >
             {action.label}
-          </button>
+          </Button>
         ))}
       </div>
     </div>

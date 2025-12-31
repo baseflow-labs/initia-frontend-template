@@ -1,7 +1,7 @@
 import { useField } from "formik";
 import React from "react";
 
-import { InputProps } from ".";
+import { InputProps, InputTypeProps } from ".";
 import DateInput from "./inputs/date";
 import DefaultInput from "./inputs/default";
 import FileInput from "./inputs/file";
@@ -26,14 +26,13 @@ type FinalInput = InputProps &
     bypassFormik?: boolean;
   };
 
-const renderByType = (type: any, props: any) => {
-  const { min, max, ...input } = props as any;
+const renderByType = (type: InputTypeProps["type"], props: FinalInput) => {
+  const { min, max, ...input } = props;
 
   if (type === "select" && input.options) return <SelectInput {...input} />;
-  if (type === "selectMany" && input.options)
-    return <SelectManyInput {...input} />;
+  if (type === "selectMany" && input.options) return <SelectManyInput {...input} />;
   if (type === "radio" && input.options) return <RadioInput {...input} />;
-  if (type === "range") return <RangeInput {...input} />;
+  if (type === "range") return <RangeInput type={type} min={min} max={max} {...input} />;
   if (type === "phoneNumber") return <PhoneNoInput {...input} />;
   if (type === "date") return <DateInput {...input} />;
   if (type === "password") return <PasswordInput {...input} />;
@@ -44,18 +43,12 @@ const renderByType = (type: any, props: any) => {
   if (type === "multipleEntries") return <MultipleEntriesInput {...input} />;
   if (type === "checkboxes") return <CheckboxesInput {...input} />;
   if (type === "boolean") return <BooleanInput {...input} />;
-  if (type === "title")
-    return <div className="h4 text-dark">{input.defaultValue}</div>;
+  if (type === "title") return <div className="h4 text-dark">{input.defaultValue}</div>;
   if (type === "rating")
-    return (
-      <RatingInput type={type} className="form-control-color" {...input} />
-    );
+    return <RatingInput type={type} className="form-control-color" {...input} />;
   if (type === "color")
-    return (
-      <DefaultInput type={type} className="form-control-color" {...input} />
-    );
-  if (type === "range")
-    return <RangeInput type={type} min={min} max={max} {...input} />;
+    return <DefaultInput type={type} className="form-control-color" {...input} />;
+  // handled above
 
   return <DefaultInput type={type} {...input} />;
 };

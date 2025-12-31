@@ -3,7 +3,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useField } from "formik";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import Select, { components, MultiValue, StylesConfig } from "react-select";
+import Select, {
+  components,
+  MultiValue,
+  StylesConfig,
+  DropdownIndicatorProps,
+  MultiValueRemoveProps,
+  GroupBase,
+} from "react-select";
 
 import { InputProps } from "..";
 
@@ -33,16 +40,16 @@ const SelectManyInput: React.FC<SelectManyInputProps> = ({
     })) || [];
 
   const valueAsArray = field.value
-    ? reactSelectOptions.filter((opt) =>
-        (field.value as string[]).includes(opt.value)
-      )
+    ? reactSelectOptions.filter((opt) => (field.value as string[]).includes(opt.value))
     : [];
 
   const handleChange = (selected: MultiValue<OptionType>) => {
     helpers.setValue(selected.map((opt) => opt.value));
   };
 
-  const DropdownIndicator = (props: any) => (
+  const DropdownIndicator = (
+    props: DropdownIndicatorProps<OptionType, true, GroupBase<OptionType>>
+  ) => (
     <components.DropdownIndicator {...props}>
       <div
         style={{
@@ -61,7 +68,9 @@ const SelectManyInput: React.FC<SelectManyInputProps> = ({
     </components.DropdownIndicator>
   );
 
-  const MultiValueRemove = (props: any) => (
+  const MultiValueRemove = (
+    props: MultiValueRemoveProps<OptionType, true, GroupBase<OptionType>>
+  ) => (
     <components.MultiValueRemove {...props}>
       <div
         style={{

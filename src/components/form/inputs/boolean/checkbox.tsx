@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 
 type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 
-const CheckboxInput: React.FC<FinalInput> = ({ type, ...input }) => {
+const CheckboxInput: React.FC<FinalInput> = ({ ...input }) => {
   const { t } = useTranslation();
 
   return (

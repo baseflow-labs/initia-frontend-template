@@ -1,9 +1,11 @@
+type DownloadResponse = { payload: string; fileName?: string };
+
 export const downloadFile = ({
   response,
   type,
   fileName,
 }: {
-  response: any;
+  response: DownloadResponse;
   type: string;
   fileName?: string;
 }) => {
@@ -31,7 +33,7 @@ export const downloadFile = ({
   const url = window.URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;
-  link.download = fileName || response.fileName;
+  link.download = fileName || response.fileName || "download";
   document.body.appendChild(link);
   link.click();
   link.remove();

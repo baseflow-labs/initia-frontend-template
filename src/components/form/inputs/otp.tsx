@@ -7,7 +7,7 @@ type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 
 const OTP_LENGTH = 4;
 
-const OtpInput: React.FC<FinalInput> = ({ name, value, type, ...input }) => {
+const OtpInput: React.FC<FinalInput> = ({ name, ...input }) => {
   const [otp, setOtp] = useState<string[]>(Array(OTP_LENGTH).fill(""));
   const inputsRef = useRef<Array<HTMLInputElement | null>>([]);
   const [, , helpers] = useField(name);
@@ -31,10 +31,7 @@ const OtpInput: React.FC<FinalInput> = ({ name, value, type, ...input }) => {
     }
   };
 
-  const handleKeyDown = (
-    e: React.KeyboardEvent<HTMLInputElement>,
-    index: number
-  ) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, index: number) => {
     if (e.key === "Backspace") {
       if (otp[index]) {
         const newOtp = [...otp];
@@ -54,10 +51,7 @@ const OtpInput: React.FC<FinalInput> = ({ name, value, type, ...input }) => {
     const paste = e.clipboardData.getData("Text").slice(0, OTP_LENGTH);
     if (!/^\d+$/.test(paste)) return;
 
-    const nextOtp = paste
-      .split("")
-      .concat(Array(OTP_LENGTH).fill(""))
-      .slice(0, OTP_LENGTH);
+    const nextOtp = paste.split("").concat(Array(OTP_LENGTH).fill("")).slice(0, OTP_LENGTH);
     setOtp(nextOtp);
     focusInput(nextOtp.length - 1);
   };

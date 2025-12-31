@@ -2,12 +2,7 @@ import { Fragment } from "react/jsx-runtime";
 import CardComp from "@/components/card/card";
 import PageTemplate from "./pageTemplate";
 
-const BoxedPage = ({
-  title = "",
-  className = "",
-  children = <></>,
-  hideHeader = false,
-}) => {
+const BoxedPage = ({ title = "", className = "", children = <></>, _hideHeader = false }) => {
   return (
     <PageTemplate>
       <CardComp className={className} style={{ maxWidth: "750px" }}>

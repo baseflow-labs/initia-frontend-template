@@ -9,17 +9,18 @@ import Button from "../../core/button";
 import InputComp from "../Input";
 
 type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
-type RowType = Record<string, any> & { _locked?: boolean };
+
+type CellValue = string | number | boolean | string[] | null | undefined;
+type RowType = Record<string, CellValue> & { _locked?: boolean };
 
 const MultipleEntriesInput: React.FC<FinalInput> = (input) => {
   const { t } = useTranslation();
-  const { values, setFieldValue } = useFormikContext<Record<string, any>>();
+  const { values, setFieldValue } = useFormikContext<Record<string, unknown>>();
 
-  const rows: RowType[] = values[input.name] || [];
-  const columns = useMemo(
-    () => (input.inputs || []) as InputProps[],
-    [input.inputs]
-  );
+  const rows: RowType[] = (
+    Array.isArray(values[input.name]) ? (values[input.name] as RowType[]) : []
+  ) as RowType[];
+  const columns = useMemo(() => (input.inputs || []) as InputProps[], [input.inputs]);
 
   // Ensure FieldArray base exists (only once)
   useEffect(() => {
@@ -30,6 +31,14 @@ const MultipleEntriesInput: React.FC<FinalInput> = (input) => {
   }, []);
 
   const [draft, setDraft] = useState<RowType>({});
+
+  const extractValue = (evtOrValue: unknown): CellValue => {
+    if (typeof evtOrValue === "object" && evtOrValue !== null && "target" in evtOrValue) {
+      const target = (evtOrValue as { target?: { value?: unknown } }).target;
+      return (target?.value as CellValue) ?? "";
+    }
+    return evtOrValue as CellValue;
+  };
 
   const isRowValid = (row: RowType) => {
     return columns.every((col) => {
@@ -45,10 +54,7 @@ const MultipleEntriesInput: React.FC<FinalInput> = (input) => {
     remove(index);
   };
 
-  const handleSaveDraftAndAdd = (
-    push: (obj: RowType) => void,
-    e?: React.MouseEvent
-  ) => {
+  const handleSaveDraftAndAdd = (push: (obj: RowType) => void, e?: React.MouseEvent) => {
     e?.preventDefault(); // in case button ends up in a <form>
     if (!isRowValid(draft)) {
       // (Optional) surface a UI hint; draft is not Formik-bound, so no touched
@@ -58,10 +64,9 @@ const MultipleEntriesInput: React.FC<FinalInput> = (input) => {
     setDraft({});
   };
 
-  const normalizeDraftValue = (col: InputProps) => {
+  const normalizeDraftValue = (col: InputProps): string | number | string[] | undefined => {
     const v = draft[col.name as string];
-    if (v !== undefined && v !== null) return v;
-    // ensure controlled
+    if (v !== undefined && v !== null) return v as string | number | string[] | undefined;
     if (col.type === "selectMany") return [];
     return "";
   };
@@ -77,9 +82,7 @@ const MultipleEntriesInput: React.FC<FinalInput> = (input) => {
                   {columns.map((col) => (
                     <th key={col.name} className="text-nowrap">
                       {col.label ?? col.name}
-                      {col.required ? (
-                        <span className="text-danger"> *</span>
-                      ) : null}
+                      {col.required ? <span className="text-danger"> *</span> : null}
                     </th>
                   ))}
                   <th className="text-nowrap">{t("Global.Labels.Action")}</th>
@@ -89,10 +92,7 @@ const MultipleEntriesInput: React.FC<FinalInput> = (input) => {
               <tbody>
                 {rows.length === 0 ? (
                   <tr>
-                    <td
-                      colSpan={columns.length + 1}
-                      className="text-muted text-center"
-                    >
+                    <td colSpan={columns.length + 1} className="text-muted text-center">
                       {t("Global.Labels.NoData")}
                     </td>
                   </tr>
@@ -113,7 +113,6 @@ const MultipleEntriesInput: React.FC<FinalInput> = (input) => {
                         ))}
                         <td>
                           <Button
-                            type="button"
                             color="ghost"
                             text="danger"
                             size="sm"
@@ -138,8 +137,8 @@ const MultipleEntriesInput: React.FC<FinalInput> = (input) => {
                         name={`__draft__${input.name}.${col.name}`}
                         type={col.type}
                         value={normalizeDraftValue(col)}
-                        onChange={(e: any) => {
-                          const v = e?.target?.value ?? e;
+                        onChange={(e) => {
+                          const v = extractValue(e);
                           setDraft((d) => ({ ...d, [col.name as string]: v }));
                         }}
                         required={false}
@@ -149,11 +148,7 @@ const MultipleEntriesInput: React.FC<FinalInput> = (input) => {
                   ))}
 
                   <td className="pt-5">
-                    <Button
-                      type="button"
-                      color="success"
-                      onClick={(e) => handleSaveDraftAndAdd(push, e)}
-                    >
+                    <Button color="success" onClick={(e) => handleSaveDraftAndAdd(push, e)}>
                       <FontAwesomeIcon icon={faAdd} />
                     </Button>
                   </td>

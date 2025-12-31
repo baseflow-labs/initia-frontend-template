@@ -1,4 +1,6 @@
-export const inputs = (t: Function) => [
+import type { TFunction } from "i18next";
+
+export const inputs = (t: TFunction) => [
   {
     name: "actorId",
     label: t("Auth.Settings.Admin.UserActivity.UserId"),
@@ -24,7 +26,7 @@ export const inputs = (t: Function) => [
   {
     name: "success",
     label: t("Auth.Settings.Admin.UserActivity.Success"),
-    type: "boolean"
+    type: "boolean",
   },
   {
     name: "statusCode",

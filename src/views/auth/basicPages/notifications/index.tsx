@@ -1,4 +1,5 @@
 import * as NotificationApi from "@/api/notifications";
+import Button from "@/components/core/button";
 import { Notification } from "@/layouts/auth/navs/navbar";
 import PageTemplate from "@/layouts/auth/pages/pageTemplate";
 import { viewDayDateFormat, viewTimeFormat } from "@/utils/consts";
@@ -8,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
 import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+
 import NotificationsHeaderView from "./Header";
 
 const NotificationsView = () => {
@@ -155,9 +157,9 @@ const NotificationsView = () => {
 
       {/* Optional footer */}
       <div className="text-center mt-3">
-        <button type="button" className="btn btn-outline-secondary btn-sm">
+        <Button outline color="secondary" size="sm">
           {t("Auth.Notifications.LoadMore", "Load more")}
-        </button>
+        </Button>
       </div>
     </PageTemplate>
   );

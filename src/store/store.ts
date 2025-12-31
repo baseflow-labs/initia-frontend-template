@@ -12,10 +12,16 @@ const rootReducer = combineReducers({
   auth,
 });
 
-const store = createStore(
-  rootReducer,
-  (window as any).__REDUX_DEVTOOLS_EXTENSION__?.()
-);
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION__?: () => unknown;
+  }
+}
+
+const enhancer =
+  typeof window !== "undefined" ? window.__REDUX_DEVTOOLS_EXTENSION__?.() : undefined;
+
+const store = createStore(rootReducer, enhancer as unknown as never);
 
 export type RootState = ReturnType<typeof rootReducer>;
 

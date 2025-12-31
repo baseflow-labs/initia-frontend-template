@@ -37,11 +37,7 @@ const AccountDelete = () => {
 
   return (
     <Fragment>
-      <Button
-        onClick={() => setOpenModal(true)}
-        color="danger"
-        className="my-3 w-100"
-      >
+      <Button onClick={() => setOpenModal(true)} color="danger" className="my-3 w-100">
         {t("Auth.Users.Profile.DeleteData")}
       </Button>
 
@@ -50,9 +46,7 @@ const AccountDelete = () => {
         onClose={() => setOpenModal(false)}
         isOpen={openModal}
       >
-        <h3 className="text-center mb-3">
-          {t("Auth.Users.Profile.SureToDeleteData")}
-        </h3>
+        <h3 className="text-center mb-3">{t("Auth.Users.Profile.SureToDeleteData")}</h3>
 
         <div className="btn-group w-100" role="group">
           <Button
@@ -66,12 +60,7 @@ const AccountDelete = () => {
               : t("Global.Form.Labels.Yes")}
           </Button>
 
-          <Button
-            outline
-            onClick={() => setOpenModal(false)}
-            color="primary"
-            className="my-3 ms-1"
-          >
+          <Button outline onClick={() => setOpenModal(false)} className="my-3 ms-1">
             {t("Global.Form.Labels.No")}
           </Button>
         </div>

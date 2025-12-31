@@ -31,7 +31,6 @@ const SupportTicketsView = () => {
             ...tab,
             content: <div className="mt-4">{tab.content}</div>,
           }))}
-          color="danger"
         />
       </div>
     </PageTemplate>

@@ -1,6 +1,7 @@
 import { SelectOption } from "@/components/table";
+import type { TFunction } from "i18next";
 
-export const inputs = (t: Function, roles: SelectOption[]) => [
+export const inputs = (t: TFunction, roles: SelectOption[]) => [
   {
     name: "name",
     label: t("Auth.Settings.Admin.Users.Name"),

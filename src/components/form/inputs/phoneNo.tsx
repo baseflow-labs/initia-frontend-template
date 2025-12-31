@@ -6,7 +6,7 @@ import { commonInputClasses } from "@/utils/consts";
 
 type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 
-const PhoneNoInput: React.FC<FinalInput> = ({ name, type, ...input }) => {
+const PhoneNoInput: React.FC<FinalInput> = ({ name, ...input }) => {
   const [, , helpers] = useField(name);
 
   return (

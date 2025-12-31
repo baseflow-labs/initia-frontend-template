@@ -17,20 +17,20 @@ const StarsInput: React.FC<FinalInput> = ({ ...input }) => {
           .map((_, i) => (
             <h2
               role="button"
-              onClick={() =>
-                input.onChange &&
-                input.onChange({
-                  target: { name: input.name, value: i + 1 },
-                } as any)
-              }
+              onClick={() => {
+                if (input.onChange) {
+                  const synthetic = {
+                    target: { name: input.name, value: i + 1 },
+                  } as unknown as React.ChangeEvent<HTMLInputElement>;
+                  input.onChange(synthetic);
+                }
+              }}
               key={i}
             >
               <FontAwesomeIcon
                 icon={faStar}
                 className={`text-${
-                  input.value &&
-                  typeof input.value === "number" &&
-                  input.value > i
+                  input.value && typeof input.value === "number" && input.value > i
                     ? "primary"
                     : "muted"
                 }`}

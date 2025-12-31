@@ -32,9 +32,9 @@ const Button = ({
   const textColor = () => {
     switch (color) {
       case "primary":
-      case "info":
+      case "success":
       case "danger":
-        return "white";
+        return text === "primary" ? "white" : text;
       case "ghost":
         return text;
       default:

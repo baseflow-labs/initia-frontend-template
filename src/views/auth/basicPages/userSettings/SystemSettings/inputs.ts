@@ -1,4 +1,6 @@
-export const getCommonSettingInputs = (t: Function) => [
+import type { TFunction } from "i18next";
+
+export const getCommonSettingInputs = (t: TFunction) => [
   {
     type: "range",
     name: "fontSize",
@@ -6,6 +8,6 @@ export const getCommonSettingInputs = (t: Function) => [
     max: 25,
     label: t("Auth.Settings.FontSize"),
     defaultValue: 15,
-    fullWidth: true
+    fullWidth: true,
   },
 ];

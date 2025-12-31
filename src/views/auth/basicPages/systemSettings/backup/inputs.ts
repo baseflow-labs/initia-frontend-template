@@ -1,11 +1,13 @@
-export const inputs = (t: Function) => [
+import type { TFunction } from "i18next";
+
+export const inputs = (t: TFunction) => [
   {
     name: "period",
     label: t("Auth.Settings.Admin.Backup.AutoSettings.Period"),
     type: "number",
     min: 1,
     required: true,
-    double: true
+    double: true,
   },
   {
     name: "unit",
@@ -18,7 +20,7 @@ export const inputs = (t: Function) => [
     ],
     defaultValue: "days",
     required: true,
-    double: true
+    double: true,
   },
   {
     name: "keptBackups",
@@ -27,11 +29,11 @@ export const inputs = (t: Function) => [
     min: 1,
     max: 30,
     required: true,
-    fullWidth: true
+    fullWidth: true,
   },
 ];
 
 export const renderBackupTimestamp = (label: string) => {
-  const date = new Date(label.replace('backup_', '').replace(/_/g, ' ').replace('.zip', ''));
+  const date = new Date(label.replace("backup_", "").replace(/_/g, " ").replace(".zip", ""));
   return date.toLocaleString();
-}
+};

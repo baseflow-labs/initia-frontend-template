@@ -1,4 +1,6 @@
-export const inputs = (t: Function) => [
+import type { TFunction } from "i18next";
+
+export const inputs = (t: TFunction) => [
   {
     name: "level",
     label: t("Auth.Settings.Admin.Logger.Level"),
@@ -22,6 +24,6 @@ export const inputs = (t: Function) => [
   {
     name: "createdAt",
     label: t("Auth.Settings.Admin.Logger.Timestamp"),
-    type: "date"
+    type: "date",
   },
 ];

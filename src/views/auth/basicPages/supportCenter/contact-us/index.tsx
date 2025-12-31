@@ -1,3 +1,4 @@
+import Button from "@/components/core/button";
 import Form from "@/components/form";
 import PageTemplate from "@/layouts/auth/pages/pageTemplate";
 import { faFacebook, faInstagram, faLinkedin, faTwitter } from "@fortawesome/free-brands-svg-icons";
@@ -132,21 +133,21 @@ const ContactUsView = () => {
                 </p>
 
                 <div className="d-flex gap-2">
-                  <a href="#" className="btn btn-outline-primary btn-sm flex-fill">
+                  <Button outline size="sm" className="flex-fill">
                     <FontAwesomeIcon icon={faFacebook} />
-                  </a>
+                  </Button>
 
-                  <a href="#" className="btn btn-outline-primary btn-sm flex-fill">
+                  <Button outline size="sm" className="flex-fill">
                     <FontAwesomeIcon icon={faTwitter} />
-                  </a>
+                  </Button>
 
-                  <a href="#" className="btn btn-outline-primary btn-sm flex-fill">
+                  <Button outline size="sm" className="flex-fill">
                     <FontAwesomeIcon icon={faLinkedin} />
-                  </a>
+                  </Button>
 
-                  <a href="#" className="btn btn-outline-danger btn-sm flex-fill">
+                  <Button outline color="danger" size="sm" className="flex-fill">
                     <FontAwesomeIcon icon={faInstagram} />
-                  </a>
+                  </Button>
                 </div>
               </div>
             </div>
