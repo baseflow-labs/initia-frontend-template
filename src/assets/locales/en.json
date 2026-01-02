@@ -248,7 +248,16 @@
         },
         "Logger": {
           "Context": "Context",
-          "Level": "Level",
+          "Level": {
+            "Debug": "Debug",
+            "Error": "Error",
+            "Http": "Http",
+            "Info": "Info",
+            "Silly": "Silly",
+            "Title": "Level",
+            "Verbose": "Verbose",
+            "Warn": "Warn"
+          },
           "Message": "Message",
           "Metadata": "Metadata",
           "Stack": "Stack",

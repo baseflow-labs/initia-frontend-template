@@ -248,7 +248,16 @@
         },
         "Logger": {
           "Context": "السياق",
-          "Level": "المستوى",
+          "Level": {
+            "Title": "المستوى",
+            "Error": "خطأ",
+            "Warn": "تحذير",
+            "Info": "معلومات",
+            "Debug": "تصحيح",
+            "Verbose": "مفصل",
+            "Silly": "سخيف",
+            "Http": "Http"
+          },
           "Message": "الرسالة",
           "Metadata": "البيانات",
           "Stack": "سجل النظام",
