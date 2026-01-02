@@ -1,8 +1,8 @@
 import axios, {
   AxiosError,
+  AxiosRequestConfig,
   AxiosRequestHeaders,
   AxiosResponse,
-  AxiosRequestConfig,
   InternalAxiosRequestConfig,
 } from "axios";
 
@@ -186,10 +186,7 @@ service.interceptors.response.use(
     }
 
     if ([200, 201, 202, 204].includes(effectiveStatus)) {
-      const env = res.data as ApiEnvelope<unknown>;
-      const payload = env && typeof env === "object" && "payload" in env ? env.payload : res.data;
-      (res as AxiosResponse).data = payload as unknown as typeof res.data;
-      return res as AxiosResponse;
+      return res.data as AxiosResponse;
     }
 
     store.dispatch(

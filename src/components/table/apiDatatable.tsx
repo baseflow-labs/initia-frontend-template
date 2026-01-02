@@ -55,7 +55,7 @@ const ApiDataTable: React.FC<Props> = ({
     data: {},
   });
 
-  const [data, setData] = useState<object[]>([]);
+  const [data, setData] = useState<Record<string, unknown>[]>([]);
 
   // pagination & meta
   const [currentPage, setCurrentPage] = useState(1);
@@ -133,37 +133,25 @@ const ApiDataTable: React.FC<Props> = ({
             sortDirection,
           },
         })
-        .then((res) => {
+        .then((res: Record<string, unknown>) => {
           // Adjust depending on your API shape
-          const apiData = res?.data as Record<string, unknown>;
-          const payload = (apiData?.payload || apiData) as Record<string, unknown>;
-          const rows = (payload?.data || payload?.rows || payload || []) as object[];
-          const meta: { page?: number; capacity?: number; count?: number; pagesCount?: number } =
-            (payload?.meta as {
-              page?: number;
-              capacity?: number;
-              count?: number;
-              pagesCount?: number;
-            }) ||
-              (
-                res?.data as {
-                  meta?: { page?: number; capacity?: number; count?: number; pagesCount?: number };
-                }
-              )?.meta || {
-                page: currentPage,
-                capacity: pageSize,
-                count: Array.isArray(rows) ? rows.length : 0,
-                pagesCount: Array.isArray(rows)
-                  ? Math.max(1, Math.ceil(rows.length / pageSize))
-                  : 1,
-              };
+          const payload = res?.payload as Record<string, unknown>[];
 
-          setData(rows);
+          const meta: { page: number; capacity: number; count: number; pagesCount: number } =
+            res?.extra as {
+              page: number;
+              capacity: number;
+              count: number;
+              pagesCount: number;
+            };
+
+          setData(payload);
+
           setPaginationMeta({
-            page: meta.page ?? currentPage,
-            capacity: meta.capacity ?? pageSize,
-            count: meta.count ?? 0,
-            pagesCount: meta.pagesCount ?? 1,
+            page: meta.page,
+            capacity: meta.capacity,
+            count: meta.count,
+            pagesCount: meta.pagesCount,
           });
         })
         .catch(apiCatchGlobalHandler);
