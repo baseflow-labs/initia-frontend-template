@@ -100,7 +100,8 @@ const FileInput: React.FC<FinalInput> = ({
         formData.append("file", file);
 
         const res = await FileApi.create(formData);
-        const uploadedFile: UploadedFile = res.data;
+        const uploadedFile: UploadedFile = res.payload;
+
         newFilesMeta.push({
           name: file.name,
           type: file.type,

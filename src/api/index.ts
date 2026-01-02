@@ -36,7 +36,7 @@ export type EnvelopeResponse<TPayload = Record<string, unknown>> = Omit<
   "data"
 > & {
   data: TPayload;
-  payload?: TPayload;
+  payload: TPayload;
   message?: string;
   status?: number;
   extra?: Record<string, unknown>;
