@@ -22,7 +22,7 @@ const NotificationsView = () => {
     NotificationApi.get(params)
       .then((res) => {
         setNotification(
-          res.data.sort((a: Notification, b: Notification) =>
+          res.payload.sort((a: Notification, b: Notification) =>
             a.createdAt > b.createdAt ? -1 : 1
           ) || []
         );

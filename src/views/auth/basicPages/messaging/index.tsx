@@ -37,14 +37,14 @@ const MessagingView = ({ singleChat }: { singleChat?: boolean }) => {
 
   useLayoutEffect(() => {
     MessagingApi.getConversations<ConversationSummary[]>({}).then((res) => {
-      setConversations(res.data);
+      setConversations(res.payload);
     });
   }, []);
 
   useLayoutEffect(() => {
     if (!activeId) return;
     MessagingApi.getMessages<ActiveConversation>(activeId).then((res) => {
-      setActiveConversation(res.data);
+      setActiveConversation(res.payload);
     });
   }, [activeId]);
 
@@ -57,7 +57,7 @@ const MessagingView = ({ singleChat }: { singleChat?: boolean }) => {
         if (!current) return undefined;
         return {
           ...current,
-          messages: [...(current.messages || []), res.data],
+          messages: [...(current.messages || []), res.payload],
         };
       });
     });

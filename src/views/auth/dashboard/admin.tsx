@@ -64,7 +64,7 @@ const AdminDashboardView = () => {
       .then((res) => {
         setData((current) => ({
           ...current,
-          health: res.data.info as HealthData,
+          health: res.payload.info as HealthData,
         }));
       })
       .catch(apiCatchGlobalHandler);
@@ -74,7 +74,7 @@ const AdminDashboardView = () => {
         setData((current) => ({
           ...current,
           notifications:
-            res.data
+            res.payload
               ?.filter((a: Notification) => !a.isRead && a.important)
               .sort((a: Notification, b: Notification) => (a.createdAt > b.createdAt ? -1 : 1)) ||
             [],

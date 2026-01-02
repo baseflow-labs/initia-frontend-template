@@ -16,7 +16,7 @@ const RegisterView = () => {
     authApi
       .register(values as unknown as authApi.registerProps)
       .then((res) => {
-        const apiData = (res?.data || {}) as Record<string, unknown>;
+        const apiData = res?.payload;
         const payload = (apiData?.payload || apiData) as AuthResponse;
         dispatch(
           addNotification({

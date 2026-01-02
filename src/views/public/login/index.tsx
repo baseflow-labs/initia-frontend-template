@@ -47,13 +47,13 @@ const LoginView = () => {
         dispatch(
           addNotification({
             msg: t("Public.Login.Labels.Success", {
-              name: res.data?.user?.name || res.data?.user?.role || "",
+              name: res.payload?.user?.name || res.payload?.user?.role || "",
             }),
           })
         );
 
-        if (res.data) {
-          dispatch(login(res.data));
+        if (res.payload) {
+          dispatch(login(res.payload));
         }
       })
       .catch(apiCatchGlobalHandler);

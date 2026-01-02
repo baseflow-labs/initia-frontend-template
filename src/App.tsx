@@ -28,13 +28,7 @@ const App = () => {
   useEffect(() => {
     MetadataApi.get()
       .then((res) => {
-        dispatch(
-          setMetadata({
-            ...res.data,
-            logo: res.data.logo,
-            logoFull: res.data.logoFull || res.data.logo,
-          })
-        );
+        dispatch(setMetadata(res.payload));
       })
       .catch(apiCatchGlobalHandler);
   }, []);
