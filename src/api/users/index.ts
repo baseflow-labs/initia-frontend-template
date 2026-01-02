@@ -1,13 +1,7 @@
 import store, { RootState } from "@/store/store";
-import api, { formatGetFilters, GetDataProps, EnvelopeResponse } from "..";
+import api, { EnvelopeResponse } from "..";
 
 const mainPath = "/user";
-
-const getAll = async ({ filters, page, capacity, customFilters }: GetDataProps) => {
-  return await api.get(mainPath, {
-    params: { ...formatGetFilters(filters, customFilters), page, capacity },
-  });
-};
 
 const getById = async (id: string) => {
   return await api.get(mainPath + "/" + id);
@@ -35,4 +29,4 @@ const removeAllUsers = async () => {
   return await api.delete(mainPath + "/all-users");
 };
 
-export { create, getAll, getById, getByUserId, remove, removeAllUsers };
+export { create, getById, getByUserId, remove, removeAllUsers };

@@ -112,3 +112,16 @@ export const applyRouteChanges = (
   // Scroll to top on route change
   window.scrollTo(0, 0);
 };
+
+export const covertCamelCaseToSentence = (text: string) => {
+  const result = text.replace(/([A-Z])/g, " $1");
+  return result.charAt(0).toUpperCase() + result.slice(1);
+};
+
+export const capitalizeSentence = (sentence: string) => {
+  return sentence
+    .toLowerCase()
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+};
