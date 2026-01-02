@@ -7,7 +7,7 @@ const UserRolesView = () => {
 
   return (
     <ApiDataTable
-      dataApiEndpoint="/support/userRoles"
+      dataApiEndpoint="/role"
       inputs={inputs(t)}
       singleItem={t("Auth.Settings.Admin.UserRoles.UserRole")}
       includeCreate

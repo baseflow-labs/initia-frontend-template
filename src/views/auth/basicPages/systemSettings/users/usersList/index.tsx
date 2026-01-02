@@ -10,7 +10,7 @@ const UsersView = () => {
 
   return (
     <ApiDataTable
-      dataApiEndpoint="/support/users"
+      dataApiEndpoint="/user"
       inputs={inputs(t, roles)}
       singleItem={t("Auth.Settings.Admin.Users.User")}
       includeCreate
