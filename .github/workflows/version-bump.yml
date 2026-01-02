@@ -58,7 +58,7 @@ jobs:
             exit 0
           fi
 
-          echo "export const APP_VERSION = \"$NEW_VERSION\";" > $VERSION_FILE
+          jq ".version = \"$NEW_VERSION\"" package.json > package.json.tmp && mv package.json.tmp package.json
           echo "🔢 Bumped version to $NEW_VERSION"
           echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
         env:
@@ -120,7 +120,7 @@ jobs:
         run: |
           git config user.name "Makkahwi Bot"
           git config user.email "SuhaibAhmadAi@hotmail.com"
-          git add src/version.ts Documentation/technical/CHANGELOG.md
+          git add package.json Documentation/technical/CHANGELOG.md
           git commit -m "chore(code): bump version to ${{ steps.bump.outputs.new_version }} [ci skip]" || echo "Nothing to commit"
           git push origin main
 
