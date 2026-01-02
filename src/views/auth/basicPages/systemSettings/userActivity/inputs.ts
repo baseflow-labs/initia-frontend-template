@@ -1,3 +1,5 @@
+import { Row } from "@/components/table";
+
 import type { TFunction } from "i18next";
 
 export const inputs = (t: TFunction) => [
@@ -17,6 +19,8 @@ export const inputs = (t: TFunction) => [
   {
     name: "resourceType",
     label: t("Auth.Settings.Admin.UserActivity.DataType"),
+    type: "custom",
+    render: (values: Row) => String(values.resourceType).replace(/([a-z])([A-Z])/g, "$1 $2"),
   },
   {
     name: "resourceId",
