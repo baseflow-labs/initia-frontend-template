@@ -64,15 +64,22 @@ jobs:
         id: changelog
         if: steps.bump.outputs.new_version != ''
         run: |
-          # Get the latest tag (previous version)
-          LAST_TAG=$(git tag --sort=-creatordate | head -n 1 || echo "")
+          # Find the last version bump commit
+          LAST_BUMP_COMMIT=$(git log --grep="chore(code): bump version to" --format="%H" -n 1 || echo "")
 
-          if [ -z "$LAST_TAG" ]; then
-            echo "No previous tag found. Showing last 50 commits."
-            LOG=$(git log -n 50 --pretty=format:"- %s" --no-merges | grep -Eiv "minor|ci skip|bump version|merge pull request" || echo "- Initial release")
+          if [ -z "$LAST_BUMP_COMMIT" ]; then
+            echo "No previous version bump found. Showing last 50 commits."
+            # Get commits excluding those with specific keywords
+            LOG=$(git log -n 50 --pretty=format:"- %s" --no-merges | grep -Eiv "ci skip|bump version|merge pull request|merge branch" || echo "- Initial release")
           else
-            echo "Previous tag: $LAST_TAG"
-            LOG=$(git log "$LAST_TAG"..HEAD --pretty=format:"- %s" --no-merges | grep -Eiv "minor|ci skip|bump version|merge pull request" || echo "- Minor updates")
+            echo "Last version bump commit: $LAST_BUMP_COMMIT"
+            # Get commits since last version bump, excluding those with specific keywords
+            LOG=$(git log "$LAST_BUMP_COMMIT"..HEAD --pretty=format:"- %s" --no-merges | grep -Eiv "ci skip|bump version|merge pull request|merge branch" || echo "- Minor updates")
+          fi
+
+          # If LOG is empty or only whitespace, set default message
+          if [ -z "$(echo "$LOG" | tr -d '[:space:]')" ]; then
+            LOG="- Minor updates and improvements"
           fi
 
           echo "log<<EOF" >> $GITHUB_OUTPUT

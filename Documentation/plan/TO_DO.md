@@ -29,7 +29,7 @@
   - [ ] Build saved projects dashboard
   - [ ] Allow download of project schema
 - [ ] Connect APIs to backend services
-  - [x] Notification
+  - [ ] Notification
   - [ ] Form of Forms
   - [ ] Support Center
   - [ ] Messaging
