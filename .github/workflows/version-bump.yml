@@ -1,9 +1,5 @@
 name: 🏷️ Version Bump and Tag Creation
 
-concurrency:
-  group: version-bump-${{ github.ref }}
-  cancel-in-progress: true
-
 on:
   push:
     branches:
@@ -11,6 +7,7 @@ on:
     paths-ignore:
       - ".github/workflows/**"
       - "**.md"
+      - "Documentation/**"
 
 jobs:
   bump-version:
