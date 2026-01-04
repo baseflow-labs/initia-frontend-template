@@ -1,7 +1,7 @@
 export const tablesList = [
-  'users',
-  'products',
-  'orders',
+  "users",
+  "products",
+  "orders",
   "roles",
   "permissions",
   "metadata",
@@ -10,8 +10,8 @@ export const tablesList = [
 ];
 
 export const tableRelationsList = [
-  'products>orders',
-  'users>orders',
-  'users>roles',
-  'roles>permissions',
-]
+  "products>orders",
+  "users>orders",
+  "users>roles",
+  "roles>permissions",
+];

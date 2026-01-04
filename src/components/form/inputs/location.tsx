@@ -69,11 +69,7 @@ const LocationInput: React.FC<FinalInput> = ({ name, ...input }) => {
       </span>
 
       {location?.lng && (
-        <div
-          className={`d-block w-100 mt-1 small ${
-            location ? "text-muted" : "text-white"
-          }`}
-        >
+        <div className={`d-block w-100 mt-1 small ${location ? "text-muted" : "text-white"}`}>
           <a
             href={location.link}
             target="_blank"

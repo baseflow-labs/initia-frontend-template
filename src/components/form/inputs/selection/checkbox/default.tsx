@@ -4,11 +4,7 @@ import { InputProps } from "../../..";
 
 type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 
-const DefaultCheckboxesInput: React.FC<FinalInput> = ({
-  options,
-  stacked,
-  ...input
-}) => (
+const DefaultCheckboxesInput: React.FC<FinalInput> = ({ options, stacked, ...input }) => (
   <div className={stacked ? "" : "d-flex flex-wrap"}>
     {options?.map((option, i) => (
       <div className="form-check my-2" key={i}>
@@ -16,18 +12,14 @@ const DefaultCheckboxesInput: React.FC<FinalInput> = ({
           {...input}
           value={option.value}
           checked={
-            input.value && Array.isArray(input.value)
-              ? input.value.includes(option.value)
-              : false
+            input.value && Array.isArray(input.value) ? input.value.includes(option.value) : false
           }
           type="checkbox"
           className="form-check-input"
           required={false}
         />
 
-        <label className="form-check-label">
-          {option.label || option.value}
-        </label>
+        <label className="form-check-label">{option.label || option.value}</label>
       </div>
     ))}
   </div>

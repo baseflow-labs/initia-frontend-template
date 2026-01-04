@@ -4,11 +4,7 @@ import { commonInputClasses } from "@/utils/consts";
 
 type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 
-const DefaultInput: React.FC<FinalInput> = ({
-  className,
-  sizing = "sm",
-  ...input
-}) => {
+const DefaultInput: React.FC<FinalInput> = ({ className, sizing = "sm", ...input }) => {
   return (
     <input
       {...input}

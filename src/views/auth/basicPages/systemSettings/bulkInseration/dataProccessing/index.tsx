@@ -28,54 +28,30 @@ const SystemDataProcessingView = () => {
 
   const steps = [
     {
-      title: t(
-        "Auth.Settings.Admin.BulkDataInsertion.DataProcessing.Step1.Title"
-      ),
-      description: t(
-        "Auth.Settings.Admin.BulkDataInsertion.DataProcessing.Step1.Description"
-      ),
+      title: t("Auth.Settings.Admin.BulkDataInsertion.DataProcessing.Step1.Title"),
+      description: t("Auth.Settings.Admin.BulkDataInsertion.DataProcessing.Step1.Description"),
       body: <Form inputs={fileInput} onFormSubmit={() => ""} />,
     },
     {
-      title: t(
-        "Auth.Settings.Admin.BulkDataInsertion.DataProcessing.Step2.Title"
-      ),
-      description: t(
-        "Auth.Settings.Admin.BulkDataInsertion.DataProcessing.Step2.Description"
-      ),
+      title: t("Auth.Settings.Admin.BulkDataInsertion.DataProcessing.Step2.Title"),
+      description: t("Auth.Settings.Admin.BulkDataInsertion.DataProcessing.Step2.Description"),
       body: <Form inputs={selectInput} onFormSubmit={() => ""} />,
     },
     {
-      title: t(
-        "Auth.Settings.Admin.BulkDataInsertion.DataProcessing.Step3.Title"
-      ),
-      description: t(
-        "Auth.Settings.Admin.BulkDataInsertion.DataProcessing.Step3.Description"
-      ),
+      title: t("Auth.Settings.Admin.BulkDataInsertion.DataProcessing.Step3.Title"),
+      description: t("Auth.Settings.Admin.BulkDataInsertion.DataProcessing.Step3.Description"),
       body: <Form inputs={fileInput} onFormSubmit={() => ""} />,
     },
     {
-      title: t(
-        "Auth.Settings.Admin.BulkDataInsertion.DataProcessing.Step4.Title"
-      ),
-      description: t(
-        "Auth.Settings.Admin.BulkDataInsertion.DataProcessing.Step4.Description"
-      ),
+      title: t("Auth.Settings.Admin.BulkDataInsertion.DataProcessing.Step4.Title"),
+      description: t("Auth.Settings.Admin.BulkDataInsertion.DataProcessing.Step4.Description"),
       body: <Form inputs={selectInput} onFormSubmit={() => ""} />,
     },
     {
-      title: t(
-        "Auth.Settings.Admin.BulkDataInsertion.DataProcessing.Step5.Title"
-      ),
-      description: t(
-        "Auth.Settings.Admin.BulkDataInsertion.DataProcessing.Step5.Description"
-      ),
+      title: t("Auth.Settings.Admin.BulkDataInsertion.DataProcessing.Step5.Title"),
+      description: t("Auth.Settings.Admin.BulkDataInsertion.DataProcessing.Step5.Description"),
       body: (
-        <Button>
-          {t(
-            "Auth.Settings.Admin.BulkDataInsertion.DataProcessing.Step5.Title"
-          )}
-        </Button>
+        <Button>{t("Auth.Settings.Admin.BulkDataInsertion.DataProcessing.Step5.Title")}</Button>
       ),
     },
   ];
@@ -83,15 +59,9 @@ const SystemDataProcessingView = () => {
   return (
     <div className="row">
       <div className="col-md-12 my-4">
-        <h2>
-          {t("Auth.Settings.Admin.BulkDataInsertion.DataProcessing.Title")}
-        </h2>
+        <h2>{t("Auth.Settings.Admin.BulkDataInsertion.DataProcessing.Title")}</h2>
 
-        <h6>
-          {t(
-            "Auth.Settings.Admin.BulkDataInsertion.DataProcessing.Description"
-          )}
-        </h6>
+        <h6>{t("Auth.Settings.Admin.BulkDataInsertion.DataProcessing.Description")}</h6>
       </div>
 
       {steps.map((step, i) => (
