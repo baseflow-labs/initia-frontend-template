@@ -1,8 +1,9 @@
-import { useAppSelector } from "@/store/hooks";
-
 import tempLogo from "@/assets/images/brand/logo.png";
+import { useAppSelector } from "@/store/hooks";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import Button from "../core/button";
 
 interface Props {
   id: string;
@@ -37,14 +38,14 @@ const OffcanvasComp = ({ id, position = "start", content }: Props) => {
           <img src={logoFull || tempLogo} style={{ height: "40px" }} alt="Logo" />
         </div>
 
-        <button
-          type="button"
-          className="btn btn-ghost p-0 text-reset"
+        <Button
+          color="ghost"
+          className="p-0 text-reset"
           data-bs-dismiss="offcanvas"
           aria-label="Close"
         >
           <FontAwesomeIcon icon={faX} />
-        </button>
+        </Button>
       </div>
 
       <div className="offcanvas-body px-0 mt-0 d-flex flex-column" style={{ minHeight: 0 }}>

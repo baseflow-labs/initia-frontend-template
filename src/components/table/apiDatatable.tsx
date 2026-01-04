@@ -1,4 +1,4 @@
-import service, { customFilterProps, demoStatus, formatGetFilters } from "@/api";
+import service, { customFilterProps, formatGetFilters } from "@/api";
 import { addNotification } from "@/store/actions/notifications";
 import { apiCatchGlobalHandler } from "@/utils/function";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
@@ -55,7 +55,7 @@ const ApiDataTable: React.FC<Props> = ({
     data: {},
   });
 
-  const [data, setData] = useState<object[]>([]);
+  const [data, setData] = useState<Record<string, unknown>[]>([]);
 
   // pagination & meta
   const [currentPage, setCurrentPage] = useState(1);
@@ -113,86 +113,19 @@ const ApiDataTable: React.FC<Props> = ({
       }
     };
 
-    if (demoStatus) {
-      onSuccess();
-    } else {
-      apiCall()
-        .then(() => {
-          onSuccess();
-        })
-        .catch(apiCatchGlobalHandler);
-    }
+    apiCall()
+      .then(() => {
+        onSuccess();
+      })
+      .catch(apiCatchGlobalHandler);
   };
 
   const fetchData = () => {
-    if (demoStatus) {
-      setData([
-        {
-          id: "1",
-          name: "Demo Item 1",
-          username: "790035342",
-          email: "demo@example.com",
-        },
-        {
-          id: "2",
-          name: "Demo Item 2",
-          username: "788424973",
-          email: "demo@example.com",
-        },
-        {
-          id: "3",
-          name: "Demo Item 3",
-          username: "788424973",
-          email: "demo@example.com",
-        },
-        {
-          id: "4",
-          name: "Demo Item 4",
-          username: "788424973",
-          email: "demo@example.com",
-        },
-        {
-          id: "5",
-          name: "Demo Item 5",
-          username: "788424973",
-          email: "demo@example.com",
-        },
-        {
-          id: "6",
-          name: "Demo Item 6",
-          username: "788424973",
-          email: "demo@example.com",
-        },
-        {
-          id: "7",
-          name: "Demo Item 7",
-          username: "788424973",
-          email: "demo@example.com",
-        },
-        {
-          id: "8",
-          name: "Demo Item 8",
-          username: "788424973",
-          email: "demo@example.com",
-        },
-        {
-          id: "9",
-          name: "Demo Item 9",
-          username: "788424973",
-          email: "demo@example.com",
-        },
-        {
-          id: "10",
-          name: "Demo Item 10",
-          username: "788424973",
-          email: "demo@example.com",
-        },
-      ]);
-    } else {
+    {
       service
         .get(dataApiEndpoint, {
           params: {
-            ...formatGetFilters(inputs, filters),
+            ...formatGetFilters({}, filters),
             page: currentPage,
             capacity: pageSize,
             search: search || undefined,
@@ -200,25 +133,25 @@ const ApiDataTable: React.FC<Props> = ({
             sortDirection,
           },
         })
-        .then((res) => {
+        .then((res: Record<string, unknown>) => {
           // Adjust depending on your API shape
-          const apiData = res?.data as Record<string, unknown>;
-          const payload = (apiData?.payload || apiData) as Record<string, unknown>;
-          const rows = (payload?.data || payload?.rows || payload || []) as object[];
-          const meta = payload?.meta ||
-            res?.data?.meta || {
-              page: currentPage,
-              capacity: pageSize,
-              count: Array.isArray(rows) ? rows.length : 0,
-              pagesCount: Array.isArray(rows) ? Math.max(1, Math.ceil(rows.length / pageSize)) : 1,
+          const payload = res?.payload as Record<string, unknown>[];
+
+          const meta: { page: number; capacity: number; count: number; pagesCount: number } =
+            res?.extra as {
+              page: number;
+              capacity: number;
+              count: number;
+              pagesCount: number;
             };
 
-          setData(rows);
+          setData(payload);
+
           setPaginationMeta({
-            page: meta.page || currentPage,
-            capacity: meta.capacity || pageSize,
-            count: meta.count || 0,
-            pagesCount: meta.pagesCount || 1,
+            page: meta.page,
+            capacity: meta.capacity,
+            count: meta.count,
+            pagesCount: meta.pagesCount,
           });
         })
         .catch(apiCatchGlobalHandler);
@@ -281,7 +214,7 @@ const ApiDataTable: React.FC<Props> = ({
       {includeCreate && (
         <div className="text-end mb-3">
           <Button
-            className="btn btn-success"
+            color="success"
             onClick={() => setModal({ action: "create", open: true, data: {} })}
           >
             <FontAwesomeIcon icon={faPlus} className="me-2" />

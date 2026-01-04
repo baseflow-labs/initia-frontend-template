@@ -1,4 +1,6 @@
-export const inputs = (t: Function) => [
+import type { TFunction } from "i18next";
+
+export const inputs = (t: TFunction) => [
   {
     type: "custom",
     name: "name",

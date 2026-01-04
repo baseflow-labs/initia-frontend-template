@@ -1,10 +1,10 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useLayoutEffect, useState } from "react";
+
+import TabsHeader from "./header";
 
 const TabsComp = ({
   items,
-  color = "teal",
   activeTabId,
 }: {
   items: {
@@ -13,8 +13,6 @@ const TabsComp = ({
     icon?: IconProp;
     content: React.ReactNode;
   }[];
-  vertical?: boolean;
-  color?: string;
   activeTabId?: string;
 }) => {
   const [activeTab, setActiveTab] = useState(activeTabId || items[0].id);
@@ -28,27 +26,7 @@ const TabsComp = ({
   return (
     <Fragment>
       <div className="mt-1 mx-3 mx-xl-5 mx-xxl-auto overflow-x-auto">
-        <div
-          className={`d-flex justify-content-start gap-1 bg-${color} rounded-2 p-2`}
-          style={{
-            width: "max-content",
-            backgroundColor: "rgba(0,0,0,0.025)",
-          }}
-        >
-          {items.map((tab, i) => (
-            <button
-              key={i}
-              className={`btn mx-2 px-4 py-3 rounded-2 w-fit  
-          ${activeTab === tab.id ? `bg-opacity-${color} text-${["white", "teal"].includes(color) ? "primary" : "white"} fw-bold fs-6` : "text-dark"}`}
-              onClick={() => setActiveTab(tab.id)}
-              style={{
-                background: "none",
-              }}
-            >
-              {tab.icon && <FontAwesomeIcon icon={tab.icon} />} {tab.title}
-            </button>
-          ))}
-        </div>
+        <TabsHeader tabs={items} activeTab={activeTab} setActiveTab={setActiveTab} />
       </div>
 
       {items?.find(({ id }) => id === activeTab)?.content}

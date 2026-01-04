@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
 import { Fragment } from "react/jsx-runtime";
 
+import Button from "../core/button";
+
 interface Props {
   name?: string;
   title?: string;
@@ -15,8 +17,21 @@ interface Props {
 
 declare global {
   interface Window {
-    bootstrap: any;
+    bootstrap: {
+      Modal: {
+        getOrCreateInstance: (
+          el: Element,
+          options?: { backdrop?: boolean; keyboard?: boolean; focus?: boolean }
+        ) => BootstrapModal;
+      };
+    };
   }
+}
+
+interface BootstrapModal {
+  show: () => void;
+  hide: () => void;
+  dispose?: () => void;
 }
 
 const Modal = ({
@@ -32,7 +47,7 @@ const Modal = ({
   ...rest
 }: Props) => {
   const modalRef = useRef<HTMLDivElement | null>(null);
-  const instanceRef = useRef<any>(null);
+  const instanceRef = useRef<BootstrapModal | null>(null);
 
   useEffect(() => {
     if (!modalRef.current) return;
@@ -43,14 +58,11 @@ const Modal = ({
       return;
     }
 
-    instanceRef.current = window.bootstrap.Modal.getOrCreateInstance(
-      modalRef.current,
-      {
-        backdrop: true,
-        keyboard: true,
-        focus: true,
-      }
-    );
+    instanceRef.current = window.bootstrap.Modal.getOrCreateInstance(modalRef.current, {
+      backdrop: true,
+      keyboard: true,
+      focus: true,
+    });
 
     const handleHidden = () => {
       onClose();
@@ -60,7 +72,7 @@ const Modal = ({
 
     return () => {
       modalRef.current?.removeEventListener("hidden.bs.modal", handleHidden);
-      instanceRef.current?.hide();
+      instanceRef.current?.hide?.();
       instanceRef.current?.dispose?.();
       instanceRef.current = null;
 
@@ -82,15 +94,13 @@ const Modal = ({
   return (
     <Fragment>
       {withTrigger && (
-        <button
-          type="button"
-          className="btn btn-primary"
+        <Button
           onClick={() => {
             instanceRef.current?.show();
           }}
         >
           {triggerLabel}
-        </button>
+        </Button>
       )}
 
       <div

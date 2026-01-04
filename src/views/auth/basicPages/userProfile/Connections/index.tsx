@@ -1,6 +1,7 @@
-import { useTranslation } from "react-i18next";
 import tempLogo from "@/assets/images/brand/logo.png";
+import Button from "@/components/core/button";
 import { useAppSelector } from "@/store/hooks";
+import { useTranslation } from "react-i18next";
 
 const UserProfileConnectionsView = () => {
   const { t } = useTranslation();
@@ -39,9 +40,9 @@ const UserProfileConnectionsView = () => {
                   </div>
                 </div>
 
-                <button type="button" className="btn btn-outline-secondary btn-sm w-100 mt-2">
+                <Button outline color="secondary" size="sm" className="w-100 mt-2">
                   {t("Auth.Profile.ViewProfile", "View profile")}
-                </button>
+                </Button>
               </div>
             </div>
           ))}

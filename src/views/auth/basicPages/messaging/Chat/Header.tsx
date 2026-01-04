@@ -14,14 +14,20 @@ interface Props {
   };
 }
 
-const MessagingChatHeaderView = ({active} : Props) => {
+const MessagingChatHeaderView = ({ active }: Props) => {
   const { t } = useTranslation();
 
   return (
     <div className="d-flex align-items-center">
-      <div className="rounded-circle bg-primary bg-opacity-10 d-flex align-items-center justify-content-center me-3" style={{ width: 40, height: 40 }}>
+      <div
+        className="rounded-circle bg-primary bg-opacity-10 d-flex align-items-center justify-content-center me-3"
+        style={{ width: 40, height: 40 }}
+      >
         <span className="text-primary fw-bold">
-          {active.name.split(" ").map((n) => n[0]).join("")}
+          {active.name
+            .split(" ")
+            .map((n) => n[0])
+            .join("")}
         </span>
       </div>
 
@@ -31,17 +37,17 @@ const MessagingChatHeaderView = ({active} : Props) => {
       </div>
 
       {/* <div className="d-flex align-items-center gap-2">
-        <button className="btn btn-sm btn-outline-secondary">
+        <Button className="btn btn-sm btn-outline-secondary">
           <FontAwesomeIcon icon={faPhone} />
-        </button>
+        </Button>
 
-        <button className="btn btn-sm btn-outline-secondary">
+        <Button className="btn btn-sm btn-outline-secondary">
           <FontAwesomeIcon icon={faVideo} />
-        </button>
+        </Button>
 
-        <button className="btn btn-sm btn-outline-secondary">
+        <Button className="btn btn-sm btn-outline-secondary">
           <FontAwesomeIcon icon={faEllipsisVertical} />
-        </button>
+        </Button>
       </div> */}
     </div>
   );

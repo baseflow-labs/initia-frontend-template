@@ -1,4 +1,6 @@
-export const inputs = (t: Function) => () => [
+import type { TFunction } from "i18next";
+
+export const inputs = (t: TFunction) => () => [
   {
     name: "dataFile",
     label: t("Auth.Settings.Admin.BulkDataInsertion.DataFileUpload"),
@@ -10,19 +12,19 @@ export const dependencyBasedOrder = (items: string[], relations: string[]) => {
   const graph: Record<string, string[]> = {};
   const inDegree: Record<string, number> = {};
 
-  items.forEach(item => {
+  items.forEach((item) => {
     graph[item] = [];
     inDegree[item] = 0;
   });
 
-  relations.forEach(relation => {
-    const [from, to] = relation.split('>');
+  relations.forEach((relation) => {
+    const [from, to] = relation.split(">");
     graph[from].push(to);
     inDegree[to]++;
   });
 
   const queue: string[] = [];
-  items.forEach(item => {
+  items.forEach((item) => {
     if (inDegree[item] === 0) {
       queue.push(item);
     }
@@ -33,7 +35,7 @@ export const dependencyBasedOrder = (items: string[], relations: string[]) => {
     const current = queue.shift()!;
     ordered.push(current);
 
-    graph[current].forEach(neighbor => {
+    graph[current].forEach((neighbor) => {
       inDegree[neighbor]--;
       if (inDegree[neighbor] === 0) {
         queue.push(neighbor);
@@ -46,4 +48,4 @@ export const dependencyBasedOrder = (items: string[], relations: string[]) => {
   }
 
   return ordered;
-}
+};

@@ -1,5 +1,6 @@
 import { applyRouteChanges } from "@/utils/function";
 import { useWindowWidth } from "@/utils/hooks";
+import LandingPageManagement from "@/views/auth/basicPages/landingPage";
 import MessagingView from "@/views/auth/basicPages/messaging";
 import NotificationsView from "@/views/auth/basicPages/notifications";
 import SupportCenterView from "@/views/auth/basicPages/supportCenter";
@@ -16,13 +17,14 @@ import TemplateDataViewExamplesView from "@/views/auth/templateExamples/dataView
 import TemplateFormExamplesView from "@/views/auth/templateExamples/forms";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faWpforms } from "@fortawesome/free-brands-svg-icons";
-import { faDashboard, faGear, faTable } from "@fortawesome/free-solid-svg-icons";
+import { faDashboard, faGear, faGlobe, faTable } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes, useLocation } from "react-router";
 import { Fragment } from "react/jsx-runtime";
-import { FilePreviewModal } from "./globalModal";
+
 import AuthFooter from "../common/footer";
+import { FilePreviewModal } from "./globalModal";
 import DashboardNavbar from "./navs/navbar";
 import OffCanvasNav from "./navs/offcanvasNav";
 import OffCanvasTools from "./navs/offcanvasTools";
@@ -126,6 +128,14 @@ const AuthLayout = () => {
       fixed: true,
     },
     {
+      name: t("Auth.LandingPage.Title"),
+      route: "/landing-page-management",
+      view: <LandingPageManagement />,
+      icon: faGlobe,
+      showInNav: true,
+      fixed: true,
+    },
+    {
       name: t("Auth.TemplateExamples.DataView.Title"),
       route: "/template-examples/data-view",
       view: <TemplateDataViewExamplesView />,
@@ -173,7 +183,7 @@ const AuthLayout = () => {
         routes={authRoutes.filter(({ showInNav, fixed }) => showInNav && !fixed)}
       />
 
-      <main className="d-flex pb-3">
+      <main className="d-flex pb-3 min-vh-100">
         {showSidebar && isPc && (
           <div
             className="position-fixed top-0 start-0 min-vh-100"

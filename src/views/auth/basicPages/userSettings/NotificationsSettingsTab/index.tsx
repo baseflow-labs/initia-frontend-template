@@ -1,7 +1,8 @@
+import Button from "@/components/core/button";
+import { addNotification } from "@/store/actions/notifications";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { addNotification } from "@/store/actions/notifications";
 
 type ChannelKey = "email" | "inApp";
 
@@ -126,8 +127,7 @@ const NotificationsSettingsTab = () => {
     <div>
       <p className="text-muted mb-4">
         {t("Auth.Settings.User.Notifications.Description", {
-          defaultValue:
-            "Choose which types of notifications you want to receive.",
+          defaultValue: "Choose which types of notifications you want to receive.",
         })}
       </p>
 
@@ -183,9 +183,7 @@ const NotificationsSettingsTab = () => {
         </table>
       </div>
 
-      <button type="button" className="btn btn-primary" onClick={onSave}>
-        {t("Global.Form.Labels.Save")}
-      </button>
+      <Button onClick={onSave}>{t("Global.Form.Labels.Save")}</Button>
     </div>
   );
 };

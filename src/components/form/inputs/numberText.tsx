@@ -4,7 +4,7 @@ import { commonInputClasses } from "@/utils/consts";
 
 type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 
-const NumberTextInput: React.FC<FinalInput> = ({ type, ...input }) => {
+const NumberTextInput: React.FC<FinalInput> = ({ ...input }) => {
   return (
     <input
       {...input}

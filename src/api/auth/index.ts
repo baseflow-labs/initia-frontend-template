@@ -1,4 +1,5 @@
-import api from "../";
+import api, { EnvelopeResponse } from "../";
+import type { AuthResponse } from "@/store/actions/auth";
 
 export interface loginCredentials {
   identifier: string;
@@ -22,12 +23,8 @@ interface resetPasswordProps {
 
 const mainPath = "/auth";
 
-const login = async (credentials: loginCredentials) => {
-  return await api.post(mainPath + "/login", credentials);
-};
-
-const dummyLogin = async (data: { type: string }) => {
-  return await api.post(mainPath + "/dummy-login", data);
+const login = async (credentials: loginCredentials): Promise<EnvelopeResponse<AuthResponse>> => {
+  return await api.post<AuthResponse>(mainPath + "/login", credentials);
 };
 
 // const logout = async () => {
@@ -61,13 +58,12 @@ const register = async (userData: registerProps) => {
 };
 
 export {
+  isAuthorized,
   login,
-  dummyLogin,
   otpSend,
+  register,
   requestPasswordReset,
-  resetPassword,
   //  logout,
   resetMyPassword,
-  isAuthorized,
-  register,
+  resetPassword,
 };

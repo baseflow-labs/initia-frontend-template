@@ -1,3 +1,4 @@
+import Button from "@/components/core/button";
 import Form from "@/components/form";
 import { addNotification } from "@/store/actions/notifications";
 import { useAppSelector } from "@/store/hooks";
@@ -65,13 +66,13 @@ const AccountProfileTab = () => {
 
         <div className="d-flex flex-column gap-2">
           <div>
-            <label className="btn btn-sm btn-primary mb-0 w-100" htmlFor="avatar">
+            <Button size="sm" className="mb-0 w-100">
               {avatarUploading
                 ? t("Global.Loading", { defaultValue: "Uploading..." })
                 : t("Auth.Settings.User.Account.ChangeAvatar", {
                     defaultValue: "Upload new photo",
                   })}
-            </label>
+            </Button>
 
             <input
               id="avatar"
@@ -83,9 +84,10 @@ const AccountProfileTab = () => {
             />
           </div>
 
-          <button
-            type="button"
-            className="btn btn-outline-secondary btn-sm"
+          <Button
+            outline
+            color="secondary"
+            size="sm"
             onClick={() => {
               // Optional: implement reset avatar to default
             }}
@@ -93,7 +95,7 @@ const AccountProfileTab = () => {
             {t("Auth.Settings.User.Account.ResetAvatar", {
               defaultValue: "Reset to default",
             })}
-          </button>
+          </Button>
 
           <p className="text-muted small mb-0">
             {t("Auth.Settings.User.Account.AvatarHint", {

@@ -1,55 +1,24 @@
-import api, { demoStatus } from "..";
+import type { Notification } from "@/layouts/auth/navs/navbar";
+import api, { EnvelopeResponse } from "..";
 
 const mainPath = "/notification";
 
-const get = async () => {
-  if (demoStatus) {
-    return {
-      payload: [
-        {
-          id: "1",
-          title: "Welcome to Initia!",
-          message: "Thank you for using Initia. We hope you have a great experience!",
-          service: "notifications",
-          important: false,
-          isRead: false,
-          createdAt: "2024-06-01T12:00:00Z",
-        },
-        {
-          id: "2",
-          title: "This is important!",
-          message: "This is to test the important notification feature.",
-          service: "notifications",
-          important: true,
-          isRead: false,
-          createdAt: "2024-06-01T12:00:00Z",
-        },
-        {
-          id: "3",
-          title: "This is important!",
-          message: "This is to test the important notification feature.",
-          service: "notifications",
-          important: true,
-          isRead: false,
-          createdAt: "2024-06-01T12:00:00Z",
-        },
-        {
-          id: "4",
-          title: "This is important!",
-          message: "This is to test the important notification feature.",
-          service: "notifications",
-          important: true,
-          isRead: false,
-          createdAt: "2024-06-01T12:00:00Z",
-        },
-      ],
-    };
-  }
-  return await api.get(mainPath);
+const get = async (params?: object): Promise<EnvelopeResponse<Notification[]>> => {
+  return await api.get<Notification[]>(mainPath, params);
 };
 
-const markAsRead = async (id: string) => {
-  return await api.get(mainPath + "/" + id + "/read");
+const markAsRead = async (notification: Notification) => {
+  const { id, createdAt: _, updatedAt: __, ...rest } = notification;
+  return await api.patch(mainPath + "/" + id, { ...rest, isRead: true });
 };
 
-export { get, markAsRead };
+const markAllAsRead = async (notifications: Notification[]) => {
+  return await api.patch(mainPath + "/bulk", {
+    data: notifications.map((n) => {
+      const { createdAt: _, updatedAt: __, ...rest } = n;
+      return { ...rest, isRead: true };
+    }),
+  });
+};
+
+export { get, markAsRead, markAllAsRead };

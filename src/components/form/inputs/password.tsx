@@ -6,7 +6,7 @@ import { commonInputClasses } from "@/utils/consts";
 
 type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 
-const PasswordInput: React.FC<FinalInput> = ({ placeholder, ...rest }) => {
+const PasswordInput: React.FC<FinalInput> = ({ ...rest }) => {
   const [show, setShow] = useState(false);
 
   return (

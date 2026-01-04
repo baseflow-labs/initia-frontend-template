@@ -1,3 +1,4 @@
+import Button from "@/components/core/button";
 import { useTranslation } from "react-i18next";
 
 const BillingSettingsTab = () => {
@@ -30,8 +31,8 @@ const BillingSettingsTab = () => {
         defaultValue: "Contact us",
       }),
       description: "Custom limits, SSO, audit logs and dedicated support.",
-    }
-  ]
+    },
+  ];
 
   return (
     <div className="row">
@@ -41,7 +42,7 @@ const BillingSettingsTab = () => {
             defaultValue: "Current Plan",
           })}
         </h5>
-            
+
         <div className="">
           <h3 className="mb-1">
             {currentPlan.name}{" "}
@@ -75,27 +76,27 @@ const BillingSettingsTab = () => {
             </li>
           </ul>
 
-          <button type="button" className="btn btn-primary btn-sm me-2">
+          <Button size="sm" className="me-2">
             {t("Auth.Settings.User.Billing.ChangePlan", {
               defaultValue: "Change Plan",
             })}
-          </button>
+          </Button>
 
-          <button type="button" className="btn btn-outline-danger btn-sm">
+          <Button outline color="danger" size="sm">
             {t("Auth.Settings.User.Billing.CancelSubscription", {
               defaultValue: "Cancel Subscription",
             })}
-          </button>
+          </Button>
         </div>
       </div>
-      
+
       <div className="col-lg-6 col-12 mb-4">
         <h5 className="mb-0">
           {t("Auth.Settings.User.Billing.AvailablePlans", {
             defaultValue: "Available Plans",
           })}
         </h5>
-            
+
         <div>
           <p className="text-muted mb-3">
             {t("Auth.Settings.User.Billing.AvailablePlansDescription", {
@@ -105,24 +106,25 @@ const BillingSettingsTab = () => {
           </p>
 
           <div className="d-flex flex-column gap-3">
-            {plans.map(({label, price, description}, i) => (
+            {plans.map(({ label, price, description }, i) => (
               <div className="border rounded p-3" key={i}>
                 <div className="d-flex justify-content-between align-items-center mb-1">
                   <h6 className="mb-0">{label}</h6>
                   <span className="fw-bold">{price}</span>
                 </div>
 
-                <p className="text-muted small mb-2">
-                  {description}
-                </p>
+                <p className="text-muted small mb-2">{description}</p>
 
-                <button
-                  type="button"
-                  className={`btn btn-${currentPlan.name === label ? "outline-secondary" : "primary"} btn-sm`}
+                <Button
+                  outline={currentPlan.name === label}
+                  color={currentPlan.name === label ? "secondary" : "primary"}
+                  size="sm"
                   disabled={currentPlan.name === label}
                 >
-                  {currentPlan.name === label ? t("Auth.Settings.User.Billing.Current") : t("Auth.Settings.User.Billing.Select")}
-                </button>
+                  {currentPlan.name === label
+                    ? t("Auth.Settings.User.Billing.Current")
+                    : t("Auth.Settings.User.Billing.Select")}
+                </Button>
               </div>
             ))}
           </div>

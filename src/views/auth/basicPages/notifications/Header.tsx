@@ -1,36 +1,36 @@
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Button from "@/components/core/button";
 import { useTranslation } from "react-i18next";
 
-const NotificationsHeaderView = () => {
+const NotificationsHeaderView = ({
+  filter,
+  setFilter,
+}: {
+  filter: string;
+  setFilter: (filter: string) => void;
+}) => {
   const { t } = useTranslation();
+
+  const actions = [
+    { key: "all", label: t("Auth.Notifications.Filters.All") },
+    { key: "unread", label: t("Auth.Notifications.Filters.Unread") },
+    { key: "important", label: t("Auth.Notifications.Filters.Important") },
+  ];
 
   return (
     <div className="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
       <div className="btn-group">
-        <button type="button" className="btn btn-sm btn-outline-secondary active">
-          {t("Auth.Notifications.Filters.All")}
-        </button>
-
-        <button type="button" className="btn btn-sm btn-outline-secondary">
-          {t("Auth.Notifications.Filters.Unread")}
-        </button>
-
-        <button type="button" className="btn btn-sm btn-outline-secondary">
-          {t("Auth.Notifications.Filters.Important")}
-        </button>
-      </div>
-
-      <div className="input-group input-group-sm" style={{ maxWidth: 260 }}>
-        <span className="input-group-text bg-light border-end-0">
-          <FontAwesomeIcon icon={faSearch} />
-        </span>
-
-        <input
-          type="text"
-          className="form-control border-start-0"
-          placeholder={t("Auth.Notifications.SearchPlaceholder")}
-        />
+        {actions.map((action, i) => (
+          <Button
+            size="sm"
+            outline
+            color="secondary"
+            className={filter === action.key ? " active" : ""}
+            onClick={() => setFilter(action.key)}
+            key={i}
+          >
+            {action.label}
+          </Button>
+        ))}
       </div>
     </div>
   );

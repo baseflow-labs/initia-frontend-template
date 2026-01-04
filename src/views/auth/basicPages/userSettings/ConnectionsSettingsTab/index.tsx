@@ -1,3 +1,4 @@
+import Button from "@/components/core/button";
 import { useTranslation } from "react-i18next";
 
 const ConnectionsSettingsTab = () => {
@@ -37,8 +38,7 @@ const ConnectionsSettingsTab = () => {
     <div>
       <p className="text-muted mb-4">
         {t("Auth.Settings.User.Connections.Description", {
-          defaultValue:
-            "Connect third-party services to sign in faster and sync data.",
+          defaultValue: "Connect third-party services to sign in faster and sync data.",
         })}
       </p>
 
@@ -48,11 +48,7 @@ const ConnectionsSettingsTab = () => {
             <div className="border rounded p-3 h-100 d-flex flex-column">
               <div className="d-flex justify-content-between align-items-start mb-2">
                 <h6 className="mb-0">{conn.name}</h6>
-                <span
-                  className={`badge ${
-                    conn.connected ? "bg-success" : "bg-secondary"
-                  }`}
-                >
+                <span className={`badge ${conn.connected ? "bg-success" : "bg-secondary"}`}>
                   {conn.connected
                     ? t("Auth.Settings.User.Connections.StatusConnected", {
                         defaultValue: "Connected",
@@ -62,7 +58,7 @@ const ConnectionsSettingsTab = () => {
                       })}
                 </span>
               </div>
-              
+
               <p className="text-muted small mb-2">{conn.description}</p>
               {conn.lastSync && (
                 <p className="text-muted small mb-3">
@@ -75,20 +71,17 @@ const ConnectionsSettingsTab = () => {
 
               <div className="mt-auto">
                 {conn.connected ? (
-                  <button
-                    type="button"
-                    className="btn btn-outline-danger btn-sm"
-                  >
+                  <Button outline color="danger" size="sm">
                     {t("Auth.Settings.User.Connections.Disconnect", {
                       defaultValue: "Disconnect",
                     })}
-                  </button>
+                  </Button>
                 ) : (
-                  <button type="button" className="btn btn-primary btn-sm">
+                  <Button size="sm">
                     {t("Auth.Settings.User.Connections.Connect", {
                       defaultValue: "Connect",
                     })}
-                  </button>
+                  </Button>
                 )}
               </div>
             </div>

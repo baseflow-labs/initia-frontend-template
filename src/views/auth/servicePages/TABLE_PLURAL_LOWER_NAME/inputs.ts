@@ -1,6 +1,9 @@
 import { renderDataFromOptions } from "@/utils/function";
+import type { Row } from "@/components/table";
 
-export const getUserRoles = (t: Function) => [
+import type { TFunction } from "i18next";
+
+export const getUserRoles = (t: TFunction) => [
   {
     value: "admin",
     label: t("Global.Labels.Roles.admin"),
@@ -31,7 +34,7 @@ export const getUserRoles = (t: Function) => [
   },
 ];
 
-export const inputs = (t: Function) => [
+export const inputs = (t: TFunction) => [
   {
     type: "custom",
     name: "name",
@@ -51,6 +54,6 @@ export const inputs = (t: Function) => [
     type: "custom",
     name: "role",
     label: t("Auth.Users.Role"),
-    render: (row: any) => renderDataFromOptions(row.role, getUserRoles(t)),
+    render: (row: Row) => renderDataFromOptions(String(row.role ?? ""), getUserRoles(t)),
   },
 ];

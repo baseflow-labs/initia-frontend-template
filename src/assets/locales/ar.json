@@ -100,6 +100,30 @@
         "Textarea": "منطقة نص"
       }
     },
+    "LandingPage": {
+      "Builder": {
+        "Section": {
+          "Title": "عنوان القسم",
+          "Types": {
+            "About": "عن الشركة / المنتج",
+            "Blog": "المدونة",
+            "Careers": "الوظائف",
+            "ClientsPartners": "العملاء / الشركاء",
+            "Contact": "اتصل بنا",
+            "DemoRequest": "طلب عرض تجريبي",
+            "FAQ": "الأسئلة الشائعة",
+            "Features": "الميزات",
+            "Hero": "القسم الرئيسي",
+            "HowItWorks": "كيف يعمل",
+            "Pricing": "التسعير",
+            "Team": "الفريق",
+            "Testimonials": "الشهادات",
+            "Title": "نوع المحتوى"
+          }
+        }
+      },
+      "Title": "إدارة محتوى الموقع الإلكتروني"
+    },
     "Messaging": {
       "Chats": "المحادثات",
       "SearchChatsOrMessages": "ابحث في المحادثات أو الرسائل",
@@ -224,7 +248,16 @@
         },
         "Logger": {
           "Context": "السياق",
-          "Level": "المستوى",
+          "Level": {
+            "Title": "المستوى",
+            "Error": "خطأ",
+            "Warn": "تحذير",
+            "Info": "معلومات",
+            "Debug": "تصحيح",
+            "Verbose": "مفصل",
+            "Silly": "سخيف",
+            "Http": "Http"
+          },
           "Message": "الرسالة",
           "Metadata": "البيانات",
           "Stack": "سجل النظام",
@@ -232,6 +265,7 @@
           "Title": "سجل النظام"
         },
         "Metadata": {
+          "FullLogo": "الشعار الكامل",
           "Logo": "الشعار",
           "Name": "اسم النظام",
           "PhoneNumber": "رقم الهاتف",
@@ -547,8 +581,7 @@
   },
   "CopyRight": {
     "AllRightsReserved": "جميع الحقوق محفوظة © {{year}}",
-    "AppName": "Initia",
-    "BuilderShort": "Baseflow Labs"
+    "AppName": "Initia"
   },
   "Global": {
     "Calendar": {

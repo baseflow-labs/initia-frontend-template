@@ -3,7 +3,7 @@ import MessagingChatHeaderView from "./Header";
 import MessagingChatSenderView from "./Sender";
 
 interface Props {
-  active: {
+  active?: {
     id: string;
     name: string;
     avatar?: string;
@@ -24,7 +24,7 @@ const MessagingChatView = ({ active, composer, setComposer, sendMessage, singleC
   return (
     <div className="card shadow-sm h-100">
       {/* Chat Header */}
-      {singleChat ? null : (
+      {singleChat || !active ? null : (
         <div className="card-header bg-light">
           <MessagingChatHeaderView active={active} />
         </div>
@@ -35,7 +35,7 @@ const MessagingChatView = ({ active, composer, setComposer, sendMessage, singleC
         className="card-body"
         style={{ height: singleChat ? "70vh" : "55vh", overflowY: "auto" }}
       >
-        <MessagingChatBodyView active={active} />
+        {active ? <MessagingChatBodyView active={active} /> : null}
       </div>
 
       <div className="card-footer bg-white">

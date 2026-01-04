@@ -1,4 +1,6 @@
-export const inputs = (t: Function) => [
+import type { TFunction } from "i18next";
+
+export const inputs = (t: TFunction) => [
   {
     name: "fullName",
     label: t("Auth.Settings.User.Account.FullName"),
@@ -43,6 +45,6 @@ export const inputs = (t: Function) => [
       { value: "es", label: "Spanish" },
       { value: "fr", label: "French" },
       { value: "de", label: "German" },
-    ]
-  }
-]
+    ],
+  },
+];

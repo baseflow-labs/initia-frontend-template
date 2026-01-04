@@ -1,4 +1,6 @@
-export const getPasswordResetSettingInputs = (t: Function) => [
+import type { TFunction } from "i18next";
+
+export const getPasswordResetSettingInputs = (t: TFunction) => [
   {
     type: "password",
     name: "oldPassword",
@@ -13,13 +15,13 @@ export const getPasswordResetSettingInputs = (t: Function) => [
     minLength: 8,
     label: t("Public.ForgotPassword.ResetPassword.NewPassword"),
     required: true,
-    double: true
+    double: true,
   },
   {
     type: "password",
     name: "passwordConfirmation",
     label: t("Public.ForgotPassword.ResetPassword.NewPasswordConfirmation"),
     required: true,
-    double: true
+    double: true,
   },
 ];

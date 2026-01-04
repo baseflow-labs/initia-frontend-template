@@ -1,21 +1,19 @@
 import React from "react";
+
 import { InputProps } from "../../..";
 import Button from "../../../../core/button";
 
 type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 
-const ButtonBasedSelectionView = ({
-  type,
-  options,
-  stacked,
-  ...input
-}: FinalInput) => {
+type OptionValue = string | number;
+type Option = { value: OptionValue; label?: string };
+
+const ButtonBasedSelectionView = ({ type, options, stacked, ...input }: FinalInput) => {
   return (
     <div className={`w-100 ${stacked ? "" : "d-flex flex-wrap gap-2"}`}>
-      {options?.map((option, i) => (
+      {(options as Option[] | undefined)?.map((option, i) => (
         <Button
           className={`${stacked ? "d-block" : ""}`}
-          color="primary"
           outline={
             (input.value && type === "radio" && input.value === option.value) ||
             (input.value &&
@@ -28,27 +26,25 @@ const ButtonBasedSelectionView = ({
           onClick={() => {
             if (type === "radio") {
               if (input.value === option.value) return;
-
-              input.onChange &&
-                input.onChange({
+              if (input.onChange) {
+                const synthetic = {
                   target: { name: input.name, value: option.value },
-                } as any);
-            } else if (type === "checkbox") {
-              let newValue: any[] = [];
-              if (input.value && Array.isArray(input.value)) {
-                if (input.value.includes(option.value)) {
-                  newValue = input.value.filter((v) => v !== option.value);
-                } else {
-                  newValue = [...input.value, option.value];
-                }
-              } else {
-                newValue = [option.value];
+                } as unknown as React.ChangeEvent<HTMLInputElement>;
+                input.onChange(synthetic);
               }
-
-              input.onChange &&
-                input.onChange({
+            } else if (type === "checkbox") {
+              const current: OptionValue[] = Array.isArray(input.value)
+                ? (input.value as OptionValue[])
+                : [];
+              const newValue: OptionValue[] = current.includes(option.value)
+                ? current.filter((v: OptionValue) => v !== option.value)
+                : [...current, option.value];
+              if (input.onChange) {
+                const synthetic = {
                   target: { name: input.name, value: newValue },
-                } as any);
+                } as unknown as React.ChangeEvent<HTMLInputElement>;
+                input.onChange(synthetic);
+              }
             }
           }}
           key={i}

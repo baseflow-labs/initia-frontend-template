@@ -1,3 +1,4 @@
+import Button from "@/components/core/button";
 import PageTemplate from "@/layouts/auth/pages/pageTemplate";
 import {
   faBook,
@@ -166,10 +167,10 @@ const UserManualView = () => {
             {/* Download Options */}
             <div className="card shadow-sm mt-3">
               <div className="card-body">
-                <button className="btn btn-outline-dark btn-sm w-100 mb-2">
+                <Button outline color="dark" size="sm" className="w-100 mb-2">
                   <FontAwesomeIcon icon={faDownload} className="me-2" />
                   {t("Auth.SupportCenter.UserManual.DownloadManual")}
-                </button>
+                </Button>
               </div>
             </div>
           </div>
@@ -292,12 +293,14 @@ const UserManualView = () => {
                 </p>
 
                 <div className="d-flex justify-content-center gap-3 flex-wrap">
-                  <Link to="/support-center/faq" className="btn btn-dark">
-                    View FAQ
+                  <Link to="/support-center/faq">
+                    <Button color="dark">View FAQ</Button>
                   </Link>
 
-                  <Link to="/support-center/contact-us" className="btn btn-outline-dark">
-                    Contact Support
+                  <Link to="/support-center/contact-us">
+                    <Button outline color="dark">
+                      Contact Support
+                    </Button>
                   </Link>
                 </div>
               </div>

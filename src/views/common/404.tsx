@@ -12,9 +12,7 @@ const FourZeroFourError = () => {
 
         <h4 className="mt-3 mb-5">{t("Global.Labels.WrongUrl")}</h4>
 
-        <Button color="primary" route="back">
-          {t("Global.Labels.Back")}
-        </Button>
+        <Button route="back">{t("Global.Labels.Back")}</Button>
       </div>
     </div>
   );

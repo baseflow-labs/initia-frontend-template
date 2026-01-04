@@ -8,50 +8,20 @@ import DefaultRadioInput from "./default";
 
 type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 
-const RadioInput: React.FC<FinalInput> = ({
-  type,
-  options,
-  stacked,
-  layout = "default",
-  ...input
-}) => {
+const RadioInput: React.FC<FinalInput> = ({ options, stacked, layout = "default", ...input }) => {
   switch (layout) {
     case "card":
-      return (
-        <CardBasedSelectionView
-          {...input}
-          stacked={stacked}
-          options={options}
-          type="radio"
-        />
-      );
+      return <CardBasedSelectionView {...input} stacked={stacked} options={options} type="radio" />;
     case "image":
       return (
-        <ImageBasedSelectionView
-          {...input}
-          stacked={stacked}
-          options={options}
-          type="radio"
-        />
+        <ImageBasedSelectionView {...input} stacked={stacked} options={options} type="radio" />
       );
     case "button":
       return (
-        <ButtonBasedSelectionView
-          {...input}
-          stacked={stacked}
-          options={options}
-          type="radio"
-        />
+        <ButtonBasedSelectionView {...input} stacked={stacked} options={options} type="radio" />
       );
     default:
-      return (
-        <DefaultRadioInput
-          {...input}
-          stacked={stacked}
-          options={options}
-          type="radio"
-        />
-      );
+      return <DefaultRadioInput {...input} stacked={stacked} options={options} type="radio" />;
   }
 };
 

@@ -1,12 +1,16 @@
-import api from "..";
+import api, { EnvelopeResponse } from "..";
 
 const mainPath = "/file";
 
-const create = async (data: any) => {
-  const res = await api.post(mainPath + "/upload/" + "file", data, {
+export interface UploadedFileResp {
+  id: string;
+  path: string;
+}
+
+const create = async (data: object): Promise<EnvelopeResponse<UploadedFileResp>> => {
+  return await api.post<UploadedFileResp>(mainPath + "/upload/" + "file", data, {
     headers: { "Content-Type": "multipart/form-data" },
   });
-  return res;
 };
 
 const remove = async (id: string) => {

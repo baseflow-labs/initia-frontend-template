@@ -1,5 +1,6 @@
-import { useTranslation } from "react-i18next";
 import ApiDataTable from "@/components/table/apiDatatable";
+import { useTranslation } from "react-i18next";
+
 import { inputs } from "./inputs";
 
 const SystemLoggerView = () => {
@@ -7,7 +8,7 @@ const SystemLoggerView = () => {
 
   return (
     <ApiDataTable
-      dataApiEndpoint="/support/logger"
+      dataApiEndpoint="/logging"
       inputs={inputs(t)}
       singleItem={t("Auth.Settings.Admin.Logger.Title")}
       includeView

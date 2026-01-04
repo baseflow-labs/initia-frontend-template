@@ -1,3 +1,9 @@
+import { customFilterProps } from "@/api";
+import i18n from "@/i18next";
+import { triggerFilePreview } from "@/layouts/auth/globalModal";
+import { addNotification } from "@/store/actions/notifications";
+import { viewDateFormat, viewTimeFormat } from "@/utils/consts";
+import { commaNumbers } from "@/utils/function";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import {
@@ -12,7 +18,6 @@ import {
   faEnvelope,
   faEye,
   faFile,
-  faFileDownload,
   faGripVertical,
   faLocationPin,
   faPhone,
@@ -28,18 +33,12 @@ import React, { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
-import { customFilterProps } from "@/api";
-import i18n from "@/i18next";
-import { triggerFilePreview } from "@/layouts/auth/globalModal";
-import { addNotification } from "@/store/actions/notifications";
-import { viewDateFormat, viewTimeFormat } from "@/utils/consts";
-import { commaNumbers } from "@/utils/function";
 import DropdownComp from "../dropdown";
 import CustomItemsDropdownComp from "../dropdown/customItems";
 import { InputProps } from "../form";
 import InputComp from "../form/Input";
 import TooltipComp from "../tooltip";
-import Button from "../core/button";
+// import Button from "../core/button";
 import ExportModal from "./exportModal";
 
 export interface actionProps {
@@ -60,7 +59,7 @@ export interface SelectOption {
 export interface TableColumn extends InputProps {
   label: string;
   name: string;
-  render?: (row: any) => string | React.ReactNode;
+  render?: (row: Row) => string | React.ReactNode;
   type?: string;
   timestampFormat?: string;
   options?: SelectOption[];
@@ -80,10 +79,12 @@ export interface TableProps {
   searchPlaceholder?: string;
 }
 
+export type Row = Record<string, string | number | boolean> & { id?: string };
+
 interface DataRenderProps {
-  row?: object;
+  row?: Row;
   data: string;
-  render?: (row: {}) => string | React.ReactNode;
+  render?: (row: Row) => string | React.ReactNode;
   type?: string;
   timestampFormat?: string;
   options?: { value: string | number; label?: string }[];
@@ -131,12 +132,15 @@ export const dataRender = ({
   }
 
   if (hasFile) {
-    const files = (row as any)[`${name}File`]?.map(({ path = "" }) => path);
+    const fileField = row ? row[`${name}File`] : undefined;
+    const files = Array.isArray(fileField)
+      ? (fileField as Array<{ path?: string }>).map(({ path = "" }) => path)
+      : undefined;
 
     return files
       ? wrap(
           <>
-            {files?.map((file = "", idx: number) => (
+            {files.map((file = "", idx: number) => (
               <FontAwesomeIcon
                 key={file + idx}
                 icon={faFile}
@@ -145,7 +149,7 @@ export const dataRender = ({
                 onClick={() => triggerFilePreview(file)}
               />
             ))}{" "}
-            {(row as any)[name]}
+            {String(row?.[name] ?? "")}
           </>
         )
       : "-";
@@ -176,10 +180,7 @@ export const dataRender = ({
             rel="noreferrer"
             className="h4 align-middle"
           >
-            <FontAwesomeIcon
-              className="text-dark"
-              icon={faWhatsapp as IconProp}
-            />
+            <FontAwesomeIcon className="text-dark" icon={faWhatsapp as IconProp} />
           </a>{" "}
           <a href={"tel:966" + data} target="_blank" rel="noreferrer">
             <FontAwesomeIcon className="text-dark" icon={faPhone} />
@@ -201,10 +202,13 @@ export const dataRender = ({
       return wrap(option?.label || option?.value || data);
     }
     case "file": {
-      const files = (row as any)[name]?.map(({ path = "" }) => path);
+      const fileField = row ? row[name] : undefined;
+      const files = Array.isArray(fileField)
+        ? (fileField as Array<{ path?: string }>).map(({ path = "" }) => path)
+        : undefined;
       return wrap(
         files
-          ? files?.map((file = "", idx: number) => (
+          ? files.map((file = "", idx: number) => (
               <FontAwesomeIcon
                 key={file + idx}
                 icon={faFile}
@@ -224,11 +228,7 @@ export const dataRender = ({
       );
     case "image":
       return wrap(
-        <FontAwesomeIcon
-          icon={faEye}
-          role="button"
-          onClick={() => triggerFilePreview(data)}
-        />
+        <FontAwesomeIcon icon={faEye} role="button" onClick={() => triggerFilePreview(data)} />
       );
     case "stars": {
       const starsToDisplay = [1, 2, 3, 4, 5];
@@ -238,9 +238,7 @@ export const dataRender = ({
             <FontAwesomeIcon
               key={i}
               icon={faStar}
-              className={
-                i <= parseInt(data) ? "text-warning" : "text-secondary"
-              }
+              className={i <= parseInt(data) ? "text-warning" : "text-secondary"}
             />
           ))}
         </div>
@@ -254,8 +252,8 @@ export const dataRender = ({
 };
 
 interface Props extends TableProps {
-  data: { id: string }[];
-  onRowClick: (rowData?: object, action?: string) => void;
+  data: Row[];
+  onRowClick: (rowData?: Row, action?: string) => void;
 
   // pagination state from parent
   paginationMeta: {
@@ -339,12 +337,18 @@ const DynamicTable: React.FC<Props> = ({
     setDragIndex(null);
   };
 
-  const defaultActionsIncluded = [
-    includeView,
-    includeUpdate,
-    includeDelete,
-  ].filter(Boolean);
+  const defaultActionsIncluded = [includeView, includeUpdate, includeDelete].filter(Boolean);
   const haveDefaultActions = defaultActionsIncluded.length > 0;
+
+  interface SpreadActionViewProps {
+    onClick: (id: string) => void;
+    label: string;
+    icon: IconProp;
+    disabled?: boolean;
+    disabledMsg?: string;
+    color?: string;
+    row?: Row;
+  }
 
   const SpreadActionView = ({
     onClick,
@@ -354,16 +358,13 @@ const DynamicTable: React.FC<Props> = ({
     disabledMsg,
     color,
     row,
-  }: any) => (
+  }: SpreadActionViewProps) => (
     <h4>
       <TooltipComp label={label}>
         <FontAwesomeIcon
           icon={icon}
           role="button"
-          className={
-            "me-1" +
-            (" text-" + (disabled ? "secondary" : color || "secondary"))
-          }
+          className={"me-1" + (" text-" + (disabled ? "secondary" : color || "secondary"))}
           onClick={
             disabled
               ? () => {
@@ -385,8 +386,7 @@ const DynamicTable: React.FC<Props> = ({
     if (!col.sortable || !onSortChange) return;
 
     const isSameField = sortField === col.name;
-    const nextDirection: "asc" | "desc" =
-      !isSameField || sortDirection === "desc" ? "asc" : "desc";
+    const nextDirection: "asc" | "desc" = !isSameField || sortDirection === "desc" ? "asc" : "desc";
 
     onSortChange(col.name, nextDirection);
   };
@@ -423,8 +423,7 @@ const DynamicTable: React.FC<Props> = ({
                   <InputComp
                     name="search"
                     placeholder={
-                      searchPlaceholder ??
-                      t("Global.Placeholders.Search", { prop: searchProp })
+                      searchPlaceholder ?? t("Global.Placeholders.Search", { prop: searchProp })
                     }
                     value={currentSearch || ""}
                     onChange={(e) => onSearchChange?.(e.target.value)}
@@ -440,12 +439,7 @@ const DynamicTable: React.FC<Props> = ({
 
                   <CustomItemsDropdownComp
                     start
-                    button={
-                      <FontAwesomeIcon
-                        icon={faColumns}
-                        className="ms-1 text-muted"
-                      />
-                    }
+                    button={<FontAwesomeIcon icon={faColumns} className="ms-1 text-muted" />}
                     list={orderedColumns.map((col, index) => {
                       const draggable = columnsToShow.includes(col.name);
 
@@ -460,11 +454,7 @@ const DynamicTable: React.FC<Props> = ({
                           onDragEnd={handleDragEnd}
                         >
                           {draggable && (
-                            <FontAwesomeIcon
-                              icon={faGripVertical}
-                              role="button"
-                              className="me-1"
-                            />
+                            <FontAwesomeIcon icon={faGripVertical} role="button" className="me-1" />
                           )}
 
                           <div className="form-check">
@@ -475,21 +465,13 @@ const DynamicTable: React.FC<Props> = ({
                               id={`col-toggle-${col.name}`}
                               onChange={(e) => {
                                 if (e.target.checked) {
-                                  setColumnsToShow((prev) => [
-                                    ...prev,
-                                    col.name,
-                                  ]);
+                                  setColumnsToShow((prev) => [...prev, col.name]);
                                 } else {
-                                  setColumnsToShow((prev) =>
-                                    prev.filter((c) => c !== col.name)
-                                  );
+                                  setColumnsToShow((prev) => prev.filter((c) => c !== col.name));
                                 }
                               }}
                             />
-                            <label
-                              className="form-check-label"
-                              htmlFor={`col-toggle-${col.name}`}
-                            >
+                            <label className="form-check-label" htmlFor={`col-toggle-${col.name}`}>
                               {col.label}
                             </label>
                           </div>
@@ -510,9 +492,7 @@ const DynamicTable: React.FC<Props> = ({
                 .filter((c) => columnsToShow.includes(c.name))
                 .map((col, i) => (
                   <th
-                    className={
-                      "py-3 fw-bold" + (col.sortable ? " cursor-pointer" : "")
-                    }
+                    className={"py-3 fw-bold" + (col.sortable ? " cursor-pointer" : "")}
                     scope="col"
                     key={i}
                     onClick={() => handleSortClick(col)}
@@ -524,8 +504,7 @@ const DynamicTable: React.FC<Props> = ({
                   </th>
                 ))}
 
-              {(extraActions && extraActions()?.length) ||
-              haveDefaultActions ? (
+              {(extraActions && extraActions()?.length) || haveDefaultActions ? (
                 <th className="py-3" scope="col">
                   {t("Global.Labels.Action")}
                 </th>
@@ -536,79 +515,51 @@ const DynamicTable: React.FC<Props> = ({
           <tbody>
             {data.length === 0 && (
               <tr>
-                <td
-                  colSpan={columnsToShow.length + 2}
-                  className="text-center py-4"
-                >
+                <td colSpan={columnsToShow.length + 2} className="text-center py-4">
                   {t("Global.Labels.NoData")}
                 </td>
               </tr>
             )}
 
             {data.map((row, i) => (
-              <tr className="align-middle" key={(row as any).id || i}>
+              <tr className="align-middle" key={row.id ?? i}>
                 <td className="py-3">{i + pageSize * (currentPage - 1) + 1}</td>
 
                 {orderedColumns
                   .filter((c) => columnsToShow.includes(c.name))
-                  .map(
-                    (
-                      {
-                        name,
+                  .map(({ name, type, options, render, timestampFormat, moneyUnit }, y) => (
+                    <td className="py-3" key={y}>
+                      {dataRender({
+                        row,
+                        data: String(row[name] ?? ""),
                         type,
-                        options,
                         render,
+                        options,
                         timestampFormat,
-                        moneyUnit,
-                      },
-                      y
-                    ) => (
-                      <td className="py-3" key={y}>
-                        {dataRender({
-                          row,
-                          data: String((row as any)[name] ?? ""),
-                          type,
-                          render,
-                          options,
-                          timestampFormat,
-                          name,
-                          money: moneyUnit,
-                        })}
-                      </td>
-                    )
-                  )}
+                        name,
+                        money: moneyUnit,
+                      })}
+                    </td>
+                  ))}
 
-                {(extraActions && extraActions()?.length) ||
-                haveDefaultActions ? (
+                {(extraActions && extraActions()?.length) || haveDefaultActions ? (
                   <td className="py-3">
                     <div className="d-flex">
                       {extraActions &&
-                        extraActions((row as any).id)
+                        extraActions(row.id)
                           .filter(({ spread }) => spread)
-                          .map(
-                            (
-                              {
-                                icon,
-                                label,
-                                onClick,
-                                color,
-                                disabled,
-                                disabledMsg,
-                              },
-                              y
-                            ) => (
-                              <SpreadActionView
-                                key={y}
-                                onClick={onClick}
-                                label={label}
-                                icon={icon}
-                                color={color}
-                                disabled={disabled}
-                                disabledMsg={disabledMsg}
-                                row={row}
-                              />
-                            )
-                          )}
+                          .map(({ icon, label, onClick, color, disabled, disabledMsg }, y) => (
+                            <SpreadActionView
+                              key={y}
+                              onClick={onClick}
+                              label={label}
+                              icon={icon}
+                              color={color}
+                              disabled={disabled}
+                              disabledMsg={disabledMsg}
+                              row={row}
+                            />
+                          ))}
 
                       {defaultActionsIncluded.includes(true) && (
                         <Fragment>
@@ -645,28 +596,17 @@ const DynamicTable: React.FC<Props> = ({
                       )}
 
                       {extraActions &&
-                      extraActions((row as any).id).filter(
-                        ({ spread }) => !spread
-                      ).length ? (
+                      extraActions(row.id).filter(({ spread }) => !spread).length ? (
                         <DropdownComp
                           start
-                          button={
-                            <FontAwesomeIcon
-                              icon={faEllipsisVertical}
-                              className="ms-1"
-                            />
-                          }
-                          list={extraActions((row as any).id)
+                          button={<FontAwesomeIcon icon={faEllipsisVertical} className="ms-1" />}
+                          list={extraActions(row.id)
                             .filter(({ spread }) => !spread)
                             .map(({ icon, label, onClick }) => ({
-                              onClick: () => onClick((row as any).id || ""),
+                              onClick: () => onClick(row.id || ""),
                               label: (
                                 <Fragment>
-                                  <FontAwesomeIcon
-                                    icon={icon}
-                                    className="text-primary"
-                                  />{" "}
-                                  {label}
+                                  <FontAwesomeIcon icon={icon} className="text-primary" /> {label}
                                 </Fragment>
                               ),
                             }))}
@@ -682,14 +622,11 @@ const DynamicTable: React.FC<Props> = ({
           {data.length !== 0 && (
             <tfoot>
               <tr>
-                <th
-                  colSpan={columnsToShow.length + (haveDefaultActions ? 2 : 1)}
-                >
+                <th colSpan={columnsToShow.length + (haveDefaultActions ? 2 : 1)}>
                   <div className="d-flex justify-content-between">
                     <div className="my-auto text-muted me-3">
                       <small>
-                        {t("Global.Labels.Showing")} {from} – {to}{" "}
-                        {t("Global.Labels.Of")} {count}{" "}
+                        {t("Global.Labels.Showing")} {from} – {to} {t("Global.Labels.Of")} {count}{" "}
                         {t("Global.Labels.Results")}
                       </small>
                     </div>
@@ -726,10 +663,7 @@ const DynamicTable: React.FC<Props> = ({
                               length: Math.min(5, pagesCount || 0),
                             },
                             (_, i) => {
-                              const offset = Math.max(
-                                0,
-                                Math.min(currentPage - 3, pagesCount - 5)
-                              );
+                              const offset = Math.max(0, Math.min(currentPage - 3, pagesCount - 5));
                               const page = i + 1 + offset;
 
                               return (
@@ -752,9 +686,7 @@ const DynamicTable: React.FC<Props> = ({
                           <li className="page-item my-auto">
                             <button
                               className={`page-link text-${
-                                currentPage === pagesCount
-                                  ? "secondary"
-                                  : "primary"
+                                currentPage === pagesCount ? "secondary" : "primary"
                               } border-0 px-3`}
                               onClick={() => onPageChange(currentPage + 1)}
                               disabled={currentPage === pagesCount}
@@ -766,9 +698,7 @@ const DynamicTable: React.FC<Props> = ({
                           <li className="page-item my-auto">
                             <button
                               className={`page-link text-${
-                                currentPage === pagesCount
-                                  ? "secondary"
-                                  : "primary"
+                                currentPage === pagesCount ? "secondary" : "primary"
                               } border-0 px-3`}
                               onClick={() => onPageChange(pagesCount)}
                               disabled={currentPage === pagesCount}
@@ -796,10 +726,7 @@ const DynamicTable: React.FC<Props> = ({
                                 max={pagesCount}
                                 onChange={(e) =>
                                   onPageChange(
-                                    Math.min(
-                                      pagesCount,
-                                      Math.max(1, parseInt(e.target.value) || 1)
-                                    )
+                                    Math.min(pagesCount, Math.max(1, parseInt(e.target.value) || 1))
                                   )
                                 }
                               />
@@ -816,9 +743,7 @@ const DynamicTable: React.FC<Props> = ({
                                 value={pageSize}
                                 className="form-control ms-1"
                                 style={{ width: "55px" }}
-                                onChange={(e) =>
-                                  onPageSizeChange(parseInt(e.target.value))
-                                }
+                                onChange={(e) => onPageSizeChange(parseInt(e.target.value))}
                               >
                                 <option value={10}>10</option>
                                 <option value={20}>20</option>

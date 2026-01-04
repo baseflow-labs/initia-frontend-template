@@ -17,7 +17,7 @@ const NotificationsToaster = () => {
           const toast = new Toast(toastEl, { delay: 5000 });
           toast.show();
 
-          const handler = () => dispatch(removeNotification(id));
+          const handler = () => dispatch(removeNotification(id as number));
           toastEl.addEventListener("hidden.bs.toast", handler);
 
           return () => {
@@ -47,7 +47,7 @@ const NotificationsToaster = () => {
           <div className="toast-body d-flex align-middle">
             <div
               role="button"
-              onClick={() => dispatch(removeNotification(id))}
+              onClick={() => dispatch(removeNotification(id as number))}
               className="me-2 rounded-2 p-1 text-white text-center"
               style={{
                 backgroundColor: "rgba(0, 0, 0, 0.35)",

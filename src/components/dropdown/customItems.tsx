@@ -1,17 +1,17 @@
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
+
+import Button from "../core/button";
 
 interface Props {
   header?: React.ReactNode;
   button: React.ReactNode;
   start?: boolean;
-  link?: {text: string; route: string};
+  link?: { text: string; route: string };
   list: React.ReactNode[];
 }
 
-const CustomItemsDropdownComp = ({header,  button, list, start, link }: Props) => {
+const CustomItemsDropdownComp = ({ header, button, list, start, link }: Props) => {
   const navigate = useNavigate();
 
   const [open, setOpen] = useState(false);
@@ -19,10 +19,7 @@ const CustomItemsDropdownComp = ({header,  button, list, start, link }: Props) =
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(e.target as Node)
-      ) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
         setOpen(false);
       }
     };
@@ -32,33 +29,29 @@ const CustomItemsDropdownComp = ({header,  button, list, start, link }: Props) =
 
   return (
     <div className="dropdown" ref={dropdownRef}>
-      <button
-        className="btn btn-link text-secondary p-0"
+      <Button
+        color="link"
+        className="text-secondary p-0"
         id="dropdown"
         data-bs-toggle="dropdown"
         aria-expanded="false"
         onClick={() => setOpen((o) => !o)}
       >
         {button}
-      </button>
+      </Button>
 
       <ul
-        className={`dropdown-menu dropdown-menu-${start ? "start" : "end"} ${
-          open ? "show" : ""
-        }`}
+        className={`dropdown-menu dropdown-menu-${start ? "start" : "end"} ${open ? "show" : ""}`}
         aria-labelledby="dropdown"
       >
         {header}
-        
+
         {list}
 
-       {link?.route && (
-          <button
-            className="btn btn-primary w-100 rounded-0"
-            onClick={() => navigate(link.route)}
-          >
+        {link?.route && (
+          <Button className="w-100 rounded-0" onClick={() => navigate(link.route)}>
             {link.text}
-          </button>
+          </Button>
         )}
       </ul>
     </div>

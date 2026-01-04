@@ -1,4 +1,5 @@
 import tempLogo from "@/assets/images/brand/logo.png";
+import Button from "@/components/core/button";
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -75,12 +76,13 @@ const UserProfileHeaderView = () => {
                 </div>
                 <div className="col-md-4 col-sm-12 d-flex justify-content-md-end justify-content-start mt-3 mt-md-0">
                   <div className="d-flex flex-wrap gap-2">
-                    <button type="button" className="btn btn-outline-secondary btn-sm">
+                    <Button outline color="secondary" size="sm">
                       {t("Auth.Profile.ShareProfile", "Share")}
-                    </button>
-                    <button type="button" className="btn btn-primary btn-sm">
+                    </Button>
+
+                    <Button outline size="sm">
                       {t("Auth.Profile.Connect", "Connect")}
-                    </button>
+                    </Button>
                   </div>
                 </div>
               </div>

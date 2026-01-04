@@ -1,6 +1,7 @@
 import * as NotificationApi from "@/api/notifications";
 import tempLogo from "@/assets/images/brand/logo.png";
 import LangButton from "@/components/button/lang";
+import Button from "@/components/core/button";
 import DropdownComp from "@/components/dropdown";
 import { logout } from "@/store/actions/auth";
 import { useAppSelector } from "@/store/hooks";
@@ -30,6 +31,7 @@ export interface Notification {
   important?: boolean;
   isRead?: boolean;
   createdAt: string;
+  updatedAt: string;
 }
 
 const DashboardNavbar = ({
@@ -50,9 +52,10 @@ const DashboardNavbar = ({
   useLayoutEffect(() => {
     NotificationApi.get()
       .then((res) => {
-        const payload = "data" in res ? res.data.payload : res.payload;
         setNotification(
-          payload?.sort((a: Notification, b: Notification) => (a.createdAt > b.createdAt ? -1 : 1))
+          res.payload
+            ?.filter((a: Notification) => !a.isRead)
+            .sort((a: Notification, b: Notification) => (a.createdAt > b.createdAt ? -1 : 1)) || []
         );
       })
       .catch(apiCatchGlobalHandler);
@@ -77,15 +80,15 @@ const DashboardNavbar = ({
       <div className="w-100 border border-1 bg-white rounded-2 px-3">
         <div className="row justify-content-between">
           <div className="col-6 col-lg-1 d-block d-lg-none order-1 order-lg-3">
-            <button
-              className="btn btn-ghost my-2"
-              type="button"
+            <Button
+              color="ghost"
+              className="my-2"
               data-bs-toggle="offcanvas"
               data-bs-target="#offcanvasNav"
               aria-controls="offcanvasNav"
             >
               <FontAwesomeIcon icon={faBars} />
-            </button>
+            </Button>
           </div>
 
           <div className="col-12 col-lg-5 order-3 order-lg-1">
@@ -126,32 +129,36 @@ const DashboardNavbar = ({
                 }
                 list={
                   notifications.length
-                    ? notifications.map(({ id, message, service, createdAt, isRead }) => ({
-                        onClick: () => {
-                          navigate("/" + service);
-                          NotificationApi.markAsRead(id).catch(apiCatchGlobalHandler);
-                        },
-                        label: (
-                          <div
-                            className="row py-3"
-                            style={{
-                              minWidth: "25vw",
-                              backgroundColor: isRead ? "white" : "rgba(0,0,0,0.15)",
-                            }}
-                          >
-                            <div className="d-none d-md-block col-md-2 col-lg-1 my-auto text-warning">
-                              <h3>
-                                <FontAwesomeIcon icon={faInfoCircle} />
-                              </h3>
-                            </div>
+                    ? notifications.map((n) => {
+                        const { message, service, createdAt, isRead } = n;
 
-                            <div className="col-md-10 col-lg-11 ps-4 text-break text-wrap">
-                              <h6 className="w-100">{message}</h6>
-                              <small>{moment(createdAt).fromNow()}</small>
+                        return {
+                          onClick: () => {
+                            navigate("/" + service);
+                            NotificationApi.markAsRead(n).catch(apiCatchGlobalHandler);
+                          },
+                          label: (
+                            <div
+                              className="row py-3"
+                              style={{
+                                minWidth: "25vw",
+                                backgroundColor: isRead ? "white" : "rgba(0,0,0,0.15)",
+                              }}
+                            >
+                              <div className="d-none d-md-block col-md-2 col-lg-1 my-auto text-warning">
+                                <h3>
+                                  <FontAwesomeIcon icon={faInfoCircle} />
+                                </h3>
+                              </div>
+
+                              <div className="col-md-10 col-lg-11 ps-4 text-break text-wrap">
+                                <h6 className="w-100">{message}</h6>
+                                <small>{moment(createdAt).fromNow()}</small>
+                              </div>
                             </div>
-                          </div>
-                        ),
-                      }))
+                          ),
+                        };
+                      })
                     : [{ label: t("Auth.Notifications.NoNotifications") }]
                 }
                 link={{
@@ -160,15 +167,15 @@ const DashboardNavbar = ({
                 }}
               />
 
-              <button className="btn btn-link py-auto" onClick={() => navigate("/messaging")}>
+              <Button color="link" className="py-auto" onClick={() => navigate("/messaging")}>
                 <FontAwesomeIcon icon={faEnvelope} className="text-primary" />
-              </button>
+              </Button>
 
               <LangButton />
 
-              {/* <button className="btn btn-link py-auto" onClick={() => toggleTheme()}>
+              {/* <Button className="btn btn-link py-auto" onClick={() => toggleTheme()}>
               <FontAwesomeIcon icon={document.documentElement.getAttribute("data-bs-theme") === "dark" ? faMoon : faSun} className="text-secondary" />
-            </button> */}
+            </Button> */}
 
               <DropdownComp
                 header={

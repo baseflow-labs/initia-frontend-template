@@ -32,9 +32,9 @@ const Button = ({
   const textColor = () => {
     switch (color) {
       case "primary":
-      case "info":
+      case "success":
       case "danger":
-        return "white";
+        return text === "primary" ? "white" : text;
       case "ghost":
         return text;
       default:
@@ -42,14 +42,12 @@ const Button = ({
     }
   };
 
-  const paddingY = size === "sm" ? "py-0" : `py-${p}`;
-  const paddingX = size === "sm" ? "px-0" : `px-${p + 1}`;
   const textClass = !outline ? `text-${textColor()}` : "";
   const sizeClass = size ? `btn-${size}` : "";
 
   const finalClass = `${outline ? "" : "border-0"} btn btn-${
     outline ? "outline-" : ""
-  }${color} ${textClass} ${sizeClass} ${paddingY} ${paddingX} rounded-${rounded} ${className}`;
+  }${color} ${textClass} ${sizeClass} py-${p} $px-${p + 1} rounded-${rounded} ${className}`;
 
   return (
     <button

@@ -13,7 +13,7 @@ export type AuthAction =
     }
   | {
       type: "refreshToken";
-      resp: { accessToken: string; refreshToken: string; };
+      resp: { accessToken: string; refreshToken: string };
     }
   | { type: "logout"; resp?: string }
   | { type: "updateUserStatus"; resp?: string };
@@ -21,15 +21,10 @@ export type AuthAction =
 const initialState: AuthState = {
   accessToken: localStorage.getItem("accessToken") || "null",
   refreshToken: localStorage.getItem("refreshToken") || "null",
-  user: localStorage.getItem("user")?.length
-    ? JSON.parse(localStorage.getItem("user")!)
-    : {},
+  user: localStorage.getItem("user")?.length ? JSON.parse(localStorage.getItem("user")!) : {},
 };
 
-const auth = (
-  state: AuthState = initialState,
-  action: AuthAction
-): AuthState => {
+const auth = (state: AuthState = initialState, action: AuthAction): AuthState => {
   switch (action.type) {
     case "login": {
       localStorage.setItem("accessToken", action.resp.accessToken);

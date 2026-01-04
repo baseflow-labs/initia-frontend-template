@@ -1,4 +1,4 @@
-
+import Button from "@/components/core/button";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslation } from "react-i18next";
@@ -9,18 +9,18 @@ interface Props {
   sendMessage: () => void;
 }
 
-const MessagingChatSenderView = ({composer, setComposer, sendMessage} : Props) => {
+const MessagingChatSenderView = ({ composer, setComposer, sendMessage }: Props) => {
   const { t } = useTranslation();
 
   return (
     <div className="input-group">
-      {/* <button className="btn btn-outline-secondary" type="button">
+      {/* <Button className="btn btn-outline-secondary" >
         <FontAwesomeIcon icon={faSmile} />
-      </button>
+      </Button>
 
-      <button className="btn btn-outline-secondary" type="button">
+      <Button className="btn btn-outline-secondary" >
         <FontAwesomeIcon icon={faPaperclip} />
-      </button> */}
+      </Button> */}
 
       <input
         className="form-control"
@@ -35,9 +35,9 @@ const MessagingChatSenderView = ({composer, setComposer, sendMessage} : Props) =
         }}
       />
 
-      <button className="btn btn-primary" type="button" onClick={sendMessage}>
+      <Button onClick={sendMessage}>
         <FontAwesomeIcon icon={faPaperPlane} className="me-1" /> {t("Auth.Messaging.Send")}
-      </button>
+      </Button>
     </div>
   );
 };

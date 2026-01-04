@@ -115,13 +115,13 @@
 
 - [x] Wrap frontend with Vite (replace CRA) OR keep CRA but create migration path (pick one and complete it)
 - [ ] Introduce Turborepo structure
-  - [ ] apps/app (live demo site)
-  - [ ] apps/admin-panel
+  - [ ] apps/app
   - [ ] apps/landing
+  - [ ] apps/admin-panel
+  - [ ] apps/system-status
+  - [ ] apps/support-center
   - [ ] apps/documentation (Docs, API, release notes, Community docusaurus)
   - [ ] apps/manual (user guide, docusaurus)
-  - [ ] apps/support-center
-  - [ ] apps/system-status
   - [ ] packages/ui
   - [ ] packages/core
   - [ ] packages/i18n
@@ -244,18 +244,24 @@ Implement only the “must-have knobs” first:
 
 - [ ] Policy / Terms with localization
 - [ ] Landing page content management (basic sections data model)
-  - [ ] Pricing
-  - [ ] About
-  - [ ] How it Works
-  - [ ] Features
-  - [ ] Blog
-  - [ ] FAQ
-  - [ ] Support Center
-  - [ ] Demo request
-  - [ ] Careers
-  - [ ] Testimonials
-  - [ ] Prominent Clients
-  - [ ] Contact
+  - [ ] CTA
+  - [ ] Privacy Policy
+  - [ ] Terms of Service
+  - [ ] Footer Contents
+  - [ ] Prompt Input
+  - [x] Hero
+  - [x] Pricing
+  - [x] About
+  - [x] How it Works
+  - [x] Features
+  - [x] Blog
+  - [x] FAQ
+  - [x] Support Center
+  - [x] Demo request
+  - [x] Careers
+  - [x] Testimonials
+  - [x] Prominent Clients
+  - [x] Contact
 - [ ] Files management (simple library + tagging)
 
 ---
@@ -347,6 +353,7 @@ Implement only the “must-have knobs” first:
 - [ ] Real-time features (WebSockets, live updates)
 - [ ] GraphQL API support
 - [ ] Server-side rendering (SSR) support
+- [ ] Only Frontend / Backend Selector
 - [ ] Framework Variants (Frontend React alternatives, e.g., Vue, Angular + Backend variants, e.g., Express.js, GoLang, Java, Django)
 - [ ] Micro-frontend + micro-service architecture support
 - [ ] Database variants (Firebase, MySQL, MongoDB options)

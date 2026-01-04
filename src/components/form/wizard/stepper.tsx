@@ -1,11 +1,11 @@
+import BoxedPage from "@/layouts/auth/pages/boxedPage";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment } from "react/jsx-runtime";
-import BoxedPage from "@/layouts/auth/pages/boxedPage";
 
 interface Props {
   currentStep: number;
-  setCurrentStep: (current: any) => any;
+  setCurrentStep: (current: number) => void;
   steps: {
     label: string;
     name: string;
@@ -15,7 +15,9 @@ interface Props {
 
 const WizardFormStepper = ({ steps, currentStep, setCurrentStep }: Props) => {
   const onStepJump = (i = 0) => {
-    i < currentStep ? setCurrentStep(i) : console.log("Can't Jump Forward");
+    if (i < currentStep) {
+      setCurrentStep(i);
+    }
   };
 
   return (
@@ -26,17 +28,13 @@ const WizardFormStepper = ({ steps, currentStep, setCurrentStep }: Props) => {
         <div className="bs-stepper-header w-100 overflow-x-auto" role="tablist">
           {steps
             .filter((_, i) => i !== steps.length - 1)
-            .map(({ label, name }, i) => (
+            .map(({ label }, i) => (
               <Fragment key={i}>
                 <div className="step" data-target={`#step-${i + 1}`}>
                   <button
                     type="button"
                     className={`step-trigger ${
-                      currentStep === i
-                        ? "active"
-                        : currentStep > i
-                        ? "done"
-                        : ""
+                      currentStep === i ? "active" : currentStep > i ? "done" : ""
                     }`}
                     role="tab"
                     disabled={i > currentStep}
@@ -45,25 +43,15 @@ const WizardFormStepper = ({ steps, currentStep, setCurrentStep }: Props) => {
                     onClick={() => onStepJump(i)}
                   >
                     <span className={`bs-stepper-circle`}>
-                      {currentStep > i ? (
-                        <FontAwesomeIcon icon={faCheck} />
-                      ) : (
-                        i + 1
-                      )}
+                      {currentStep > i ? <FontAwesomeIcon icon={faCheck} /> : i + 1}
                     </span>
 
-                    <span className={`bs-stepper-label d-none d-lg-block`}>
-                      {label}
-                    </span>
+                    <span className={`bs-stepper-label d-none d-lg-block`}>{label}</span>
                   </button>
                 </div>
 
                 {i !== steps.length - 2 && (
-                  <div
-                    className={`bs-stepper-line ${
-                      currentStep >= i ? "active" : ""
-                    }`}
-                  />
+                  <div className={`bs-stepper-line ${currentStep >= i ? "active" : ""}`} />
                 )}
               </Fragment>
             ))}
@@ -74,7 +62,7 @@ const WizardFormStepper = ({ steps, currentStep, setCurrentStep }: Props) => {
         {steps[currentStep]?.label}
       </span>
 
-      <BoxedPage hideHeader>
+      <BoxedPage _hideHeader>
         <Fragment>{steps[currentStep]?.contents}</Fragment>
       </BoxedPage>
     </div>

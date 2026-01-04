@@ -1,54 +1,24 @@
-import api, { demoStatus, formatGetFilters, GetDataProps } from "..";
 import store, { RootState } from "@/store/store";
+import api, { EnvelopeResponse } from "..";
 
 const mainPath = "/user";
 
-const getAll = async ({ filters, page, capacity, customFilters }: GetDataProps) => {
-  if (demoStatus) {
-    return {
-      payload: [
-        {
-          id: "1",
-          fullName: "Demo Admin User",
-          email: "demo.admin@initia.io",
-        },
-        {
-          id: "2",
-          fullName: "Demo User",
-          email: "demo.user@initia.io",
-        },
-      ],
-    };
-  }
-  const res = await api.get(mainPath, {
-    params: { ...formatGetFilters(filters, customFilters), page, capacity },
-  });
-  return res;
-};
-
 const getById = async (id: string) => {
-  const res = await api.get(mainPath + "/" + id);
-  return res;
+  return await api.get(mainPath + "/" + id);
 };
 
 const create = async (data: object) => {
-  const res = await api.post(mainPath, data);
-  return res;
+  return await api.post(mainPath, data);
 };
 
-const getByUserId = async (id?: string) => {
-  if (demoStatus) {
-    return {
-      payload: {
-        fullName: "Demo User",
-        email: "demo.user@initia.io",
-      },
-    };
-  }
+export interface UserProfileResp {
+  user: { fullName: string };
+}
+
+const getByUserId = async (id?: string): Promise<EnvelopeResponse<UserProfileResp>> => {
   const { user } = (store.getState() as RootState).auth;
 
-  const res = await api.get(mainPath + "/by-user/" + (id || user.id));
-  return { payload: res.data };
+  return await api.get<UserProfileResp>(mainPath + "/by-user/" + (id || user.id));
 };
 
 const remove = async (id: string) => {
@@ -59,4 +29,4 @@ const removeAllUsers = async () => {
   return await api.delete(mainPath + "/all-users");
 };
 
-export { getAll, create, getById, getByUserId, remove, removeAllUsers };
+export { create, getById, getByUserId, remove, removeAllUsers };
