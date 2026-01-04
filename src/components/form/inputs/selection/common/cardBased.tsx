@@ -4,12 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 
-const CardBasedSelectionView = ({
-  type,
-  options,
-  stacked,
-  ...input
-}: FinalInput) => {
+const CardBasedSelectionView = ({ type, options, stacked, ...input }: FinalInput) => {
   return (
     <div className={`w-100 ${stacked ? "" : "d-flex flex-wrap gap-2"}`}>
       {options?.map((option, i) => (
@@ -33,9 +28,7 @@ const CardBasedSelectionView = ({
             </label>
 
             {option.description && (
-              <label className="form-check-label d-block">
-                {option.description}
-              </label>
+              <label className="form-check-label d-block">{option.description}</label>
             )}
 
             <input
@@ -45,8 +38,8 @@ const CardBasedSelectionView = ({
                 type === "radio"
                   ? input.value === option.value
                   : input.value && Array.isArray(input.value)
-                  ? input.value.includes(option.value)
-                  : false
+                    ? input.value.includes(option.value)
+                    : false
               }
               type={type}
               className="form-check-input d-block mx-auto mt-3"

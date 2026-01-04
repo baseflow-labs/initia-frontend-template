@@ -17,30 +17,20 @@ const BackupSettingsView = () => {
     },
   ];
 
-  const [selectedBackup, setSelectedBackup] = useState<string | undefined>(
-    undefined
-  );
+  const [selectedBackup, setSelectedBackup] = useState<string | undefined>(undefined);
 
   return (
     <div className="row">
       <div className="col-md-6">
-        <h4 className="mb-3">
-          {t("Auth.Settings.Admin.Backup.AutoSettings.Title")}
-        </h4>
+        <h4 className="mb-3">{t("Auth.Settings.Admin.Backup.AutoSettings.Title")}</h4>
 
         <Form inputs={() => inputs(t)} onFormSubmit={() => ""} />
       </div>
 
       <div className="col-md-6">
-        <h4 className="mb-3">
-          {t("Auth.Settings.Admin.Backup.BackupsManagement.Title")}
-        </h4>
+        <h4 className="mb-3">{t("Auth.Settings.Admin.Backup.BackupsManagement.Title")}</h4>
 
-        <LabelView
-          label={t(
-            "Auth.Settings.Admin.Backup.BackupsManagement.CurrentBackups"
-          )}
-        />
+        <LabelView label={t("Auth.Settings.Admin.Backup.BackupsManagement.CurrentBackups")} />
 
         <SelectInput
           name="currentBackups"
@@ -53,31 +43,21 @@ const BackupSettingsView = () => {
           <div className="col-12 mb-3">
             <Button color="success" className="w-100">
               <FontAwesomeIcon icon={faPlus} className="me-1" />
-              {t(
-                "Auth.Settings.Admin.Backup.BackupsManagement.CreateNewBackupNow"
-              )}
+              {t("Auth.Settings.Admin.Backup.BackupsManagement.CreateNewBackupNow")}
             </Button>
           </div>
 
           <div className="col-md-6">
-            <Button
-              className="w-100"
-              disabled={!selectedBackup}
-              color="warning"
-            >
+            <Button className="w-100" disabled={!selectedBackup} color="warning">
               <FontAwesomeIcon icon={faHistory} className="me-1" />
-              {t(
-                "Auth.Settings.Admin.Backup.BackupsManagement.RestoreSystemToSelectedBackup"
-              )}
+              {t("Auth.Settings.Admin.Backup.BackupsManagement.RestoreSystemToSelectedBackup")}
             </Button>
           </div>
 
           <div className="col-md-6">
             <Button disabled={!selectedBackup} className="w-100" color="danger">
               <FontAwesomeIcon icon={faTrash} className="me-1" />
-              {t(
-                "Auth.Settings.Admin.Backup.BackupsManagement.RemoveSelectedBackup"
-              )}
+              {t("Auth.Settings.Admin.Backup.BackupsManagement.RemoveSelectedBackup")}
             </Button>
           </div>
         </div>

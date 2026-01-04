@@ -21,9 +21,7 @@ const SelectInput: React.FC<FinalInput> = ({
       {...input}
       className={`form-select form-select-${sizing} ${commonInputClasses} ${className}`}
     >
-      <option value="">
-        {placeholder || t("Global.Form.Labels.PleaseSelect")}
-      </option>
+      <option value="">{placeholder || t("Global.Form.Labels.PleaseSelect")}</option>
 
       {options?.map((option, i) => (
         <option key={i} value={option.value}>

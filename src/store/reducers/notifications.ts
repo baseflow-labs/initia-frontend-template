@@ -19,17 +19,12 @@ const notifications = (
   switch (action.type) {
     case "addNotification":
       return {
-        notifications: [
-          ...state.notifications,
-          { ...action.notification, id: new Date() },
-        ],
+        notifications: [...state.notifications, { ...action.notification, id: new Date() }],
       };
 
     case "removeNotification":
       return {
-        notifications: state.notifications.filter(
-          (notification) => notification.id !== action.id
-        ),
+        notifications: state.notifications.filter((notification) => notification.id !== action.id),
       };
 
     default:

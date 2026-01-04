@@ -8,7 +8,7 @@ const UserProfileTeamsView = () => {
   ];
 
   return (
-     <div className="card shadow-sm border-0">
+    <div className="card shadow-sm border-0">
       <div className="card-body">
         <ul className="list-group list-group-flush">
           {teams.map((team) => (
@@ -27,7 +27,7 @@ const UserProfileTeamsView = () => {
                   <div className="small text-muted">{team.members}</div>
                 </div>
               </div>
-              
+
               <span className="badge bg-light text-muted border">{team.role}</span>
             </li>
           ))}

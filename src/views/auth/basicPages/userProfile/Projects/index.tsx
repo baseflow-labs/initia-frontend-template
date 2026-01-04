@@ -22,7 +22,7 @@ const UserProfileProjectsView = () => {
                 <th>{t("Auth.Profile.Projects.Status", "Status")}</th>
               </tr>
             </thead>
-            
+
             <tbody>
               {projects.map((p) => (
                 <tr key={p.id}>
@@ -50,8 +50,8 @@ const UserProfileProjectsView = () => {
                         (p.status === "Completed"
                           ? "bg-success-subtle text-success"
                           : p.status === "Pending"
-                          ? "bg-warning-subtle text-dark"
-                          : "bg-primary-subtle text-primary")
+                            ? "bg-warning-subtle text-dark"
+                            : "bg-primary-subtle text-primary")
                       }
                     >
                       {p.status}

@@ -20,12 +20,7 @@ const TooltipComp = ({ label, children }: Props) => {
   }, []);
 
   return (
-    <span
-      ref={iconRef}
-      data-bs-toggle="tooltip"
-      data-bs-placement="top"
-      title={label}
-    >
+    <span ref={iconRef} data-bs-toggle="tooltip" data-bs-placement="top" title={label}>
       {children}
     </span>
   );

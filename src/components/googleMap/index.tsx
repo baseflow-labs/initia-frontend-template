@@ -1,9 +1,4 @@
-import {
-  GoogleMap,
-  InfoWindow,
-  LoadScript,
-  Marker,
-} from "@react-google-maps/api";
+import { GoogleMap, InfoWindow, LoadScript, Marker } from "@react-google-maps/api";
 import { Fragment, useRef, useState } from "react";
 
 import { LocationProps } from "../card/mapCard";
@@ -34,9 +29,7 @@ const MapWithMarkers = ({ locations }: { locations: LocationProps[] }) => {
 
   return (
     <Fragment>
-      <LoadScript
-        googleMapsApiKey={import.meta.env.VITE_APP_GOOGLE_MAP_API_KEY!}
-      >
+      <LoadScript googleMapsApiKey={import.meta.env.VITE_APP_GOOGLE_MAP_API_KEY!}>
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={{
@@ -79,11 +72,7 @@ const MapWithMarkers = ({ locations }: { locations: LocationProps[] }) => {
                         <strong>{loc.name}</strong>
                       </div>
 
-                      <a
-                        href={`tel:966${loc.phoneNumber}`}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
+                      <a href={`tel:966${loc.phoneNumber}`} target="_blank" rel="noreferrer">
                         966{loc.phoneNumber}
                       </a>
                     </Fragment>

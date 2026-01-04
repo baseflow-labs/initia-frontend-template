@@ -8,10 +8,7 @@ const initialState: LoadingState = {
   loading: [],
 };
 
-const loading = (
-  state: LoadingState = initialState,
-  action: LoadingAction
-): LoadingState => {
+const loading = (state: LoadingState = initialState, action: LoadingAction): LoadingState => {
   switch (action.type) {
     case "startLoading":
       return {
