@@ -1,6 +1,6 @@
 import Button from "@/components/core/button";
 import OffcanvasComp from "@/components/offcanvas";
-import MessagingView from "@/views/auth/basicPages/messaging";
+import MessagingView from "@/views/auth/user/messaging";
 import { faHeadset, faRobot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useState } from "react";
