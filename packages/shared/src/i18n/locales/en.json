@@ -1,0 +1,760 @@
+{
+  "Auth": {
+    "Dashboard": {
+      "Admin": {
+        "Stats": {
+          "ActiveUsers": "Active Users",
+          "PendingUsers": "Pending Users",
+          "Sessions": "Sessions",
+          "SessionsUnit": "Session(s)",
+          "TotalUsers": "Total Users",
+          "UsersUnit": "User(s)"
+        },
+        "SystemHealth": {
+          "Api": "API (Backend Integration)",
+          "Cpu": "CPU",
+          "Database": "Database",
+          "Disk": "Disk",
+          "Memory": "Memory",
+          "Overall": "Overall",
+          "Title": "System Heath"
+        }
+      },
+      "AidsCount": "Aids Count",
+      "ApplicationTimeline": "Application Timeline",
+      "ImportantNotifications": "Important Notifications",
+      "NoVisits": "No Visits Scheduled",
+      "ResearcherInfo": "Researcher Info",
+      "Statuses": {
+        "Pending": "Pending"
+      },
+      "Title": "Overview",
+      "UnacceptedUserNote": "There might be requests to update your personal data at 'Profile' Page",
+      "UserInfo": "Your Info",
+      "UserMembershipStatus": "Your Membership Status",
+      "VisitsCount": "Visits Count",
+      "VisitsMap": "Visits Map",
+      "Welcome": {
+        "Message": "Welcome to the Dashboard of {{name}}",
+        "Title": "Welcome"
+      }
+    },
+    "Examples": {
+      "DataView": {
+        "Calendar": "Calendar",
+        "CollapseGroup": "Collapse Group",
+        "Dropdown": "Dropdown",
+        "Modal": "Modal",
+        "Table": "Data Table",
+        "TabsGroup": "Tabs Group",
+        "Test1": {
+          "Body": "This is Test 1 body",
+          "Title": "Test 1 Title"
+        },
+        "Test2": {
+          "Body": "This is Test 2 body",
+          "Title": "Test 2 Title"
+        },
+        "Title": "Data View Examples"
+      },
+      "Form": {
+        "BooleanButton": "Boolean Button",
+        "BooleanCheckbox": "Boolean Checkbox",
+        "BooleanCheckboxes": "Boolean Buttons",
+        "BooleanSwitch": "Boolean Switch",
+        "ButtonRadio": "Button Radio",
+        "CardCheckboxes": "Card Checkboxes",
+        "CardRadio": "Card Radio",
+        "Checkboxes": "Checkboxes",
+        "Color": "Color",
+        "Date": "Date",
+        "Description": "This is example of a description text",
+        "Email": "Email",
+        "File": "File",
+        "ImageCheckboxes": "Image Checkboxes",
+        "ImageRadio": "Image Radio",
+        "Location": "Location",
+        "MultipleEntries": "Multiple Entries",
+        "Number": "Number",
+        "NumberText": "Number Text",
+        "OTP": "OTP",
+        "Option1": "Option 1",
+        "Option2": "Option 2",
+        "Option3": "Option 3",
+        "Password": "Password",
+        "PhoneNumber": "Phone Number",
+        "Radio": "Radio",
+        "Range": "Range",
+        "Select": "Select",
+        "SelectMany": "Select Many",
+        "StackedBooleanCheckboxes": "Stacked Boolean Buttons",
+        "StackedButtonRadio": "Stacked Button Radio",
+        "StackedCardCheckboxes": "Stacked Card Checkboxes",
+        "StackedCardRadio": "Stacked Card Radio",
+        "StackedCheckboxes": "Stacked Checkboxes",
+        "StackedImageCheckboxes": "Stacked Image Checkboxes",
+        "StackedImageRadio": "Stacked Image Radio",
+        "StackedRadio": "Stacked Radio",
+        "StarRating": "Star Rating",
+        "Text": "Text",
+        "Textarea": "Textarea"
+      }
+    },
+    "LandingPage": {
+      "Builder": {
+        "Section": {
+          "Title": "Section Title",
+          "Types": {
+            "About": "About Section",
+            "Blog": "Blog Section",
+            "Careers": "Careers Section",
+            "ClientsPartners": "Clients / Partners Section",
+            "Contact": "Contact Section",
+            "DemoRequest": "Demo Request Section",
+            "FAQ": "FAQ Section",
+            "Features": "Features Section",
+            "Hero": "Hero Section",
+            "HowItWorks": "How It Works Section",
+            "Pricing": "Pricing Section",
+            "Team": "Team Section",
+            "Testimonials": "Testimonials Section",
+            "Title": "Section Type"
+          }
+        }
+      },
+      "Title": "Website Management"
+    },
+    "Messaging": {
+      "Chats": "Chats",
+      "SearchChatsOrMessages": "Search Chats Or Messages",
+      "Send": "Send",
+      "Status": {
+        "Online": "Online"
+      },
+      "Title": "Messaging",
+      "TypeAMessage": "Type A Message"
+    },
+    "Notifications": {
+      "AllNotifications": "All Notifications",
+      "Empty": {
+        "Badge": "Badge",
+        "Body": "Body",
+        "Title": "Empty"
+      },
+      "Filters": {
+        "All": "All",
+        "Important": "Important",
+        "Unread": "Unread"
+      },
+      "LoadMore": "Load More",
+      "MarkAllRead": "Mark All Read",
+      "NoNotifications": "No Notifications",
+      "Refresh": "Refresh",
+      "SearchPlaceholder": "Search...",
+      "Title": "Notifications",
+      "Unread": "Unread"
+    },
+    "Profile": {
+      "About": "About",
+      "Connect": "Connect",
+      "Connections": "Connections",
+      "Contact": "Contact",
+      "Contacts": "Contacts",
+      "Country": "Country",
+      "Email": "Email",
+      "FullName": "Full Name",
+      "Languages": "Languages",
+      "Overview": "Overview",
+      "Projects": {
+        "Leader": "Leader",
+        "Progress": "Progress",
+        "Status": "Status",
+        "Team": "Team",
+        "Title": "Projects"
+      },
+      "Role": "Role",
+      "ShareConnections": "Share Connections",
+      "ShareProfile": "Share Profile",
+      "ShareTimeline": "Share Timeline",
+      "Skype": "Skype",
+      "Stats": {
+        "Connections": "Connections",
+        "Projects": "Projects",
+        "Tasks": "Tasks"
+      },
+      "Status": "Status",
+      "SuggestEdits": "Suggest Edits",
+      "Teams": {
+        "Title": "Teams"
+      },
+      "TeamsShort": "Teams Short",
+      "Timeline": "Timeline",
+      "Title": "Profile",
+      "ViewAllConnections": "View All Connections",
+      "ViewProfile": "View Profile"
+    },
+    "Settings": {
+      "Admin": {
+        "Backup": {
+          "AutoSettings": {
+            "KeptBackups": "Kept Backups Count",
+            "Period": "Period",
+            "Title": "Auto Backup Settings",
+            "Unit": {
+              "Days": "Days",
+              "Months": "Months",
+              "Title": "Unit",
+              "Weeks": "Weeks"
+            }
+          },
+          "BackupsManagement": {
+            "CreateNewBackupNow": "Create New Backup Now",
+            "CurrentBackups": "Existing Backups",
+            "RemoveSelectedBackup": "Remove Selected Backup",
+            "RestoreSystemToSelectedBackup": "Restore System To Selected Backup",
+            "Title": "Backups Management"
+          },
+          "Title": "Backup Settings"
+        },
+        "BulkDataInsertion": {
+          "DataFileUpload": "Data Upload",
+          "DataProcessing": {
+            "Description": "To process the uploaded data file, please follow the steps below:",
+            "Step1": {
+              "Description": "Upload the file of data already stored in the system to be linked with.",
+              "Title": "Step 1"
+            },
+            "Step2": {
+              "Description": "Define the column name to be used as a unique identifier for matching existing records.",
+              "Title": "Step 2"
+            },
+            "Step3": {
+              "Description": "Upload the file of data to be inserted into the system.",
+              "Title": "Step 3"
+            },
+            "Step4": {
+              "Description": "Define the column name to be used as a unique identifier for matching new records.",
+              "Title": "Step 4"
+            },
+            "Step5": {
+              "Description": "Download the processed data which you may upload to the database of the system.",
+              "Title": "Step 5"
+            },
+            "Title": "Data Processing"
+          },
+          "DownloadAllData": "Download All Data",
+          "DownloadTemplate": "Download Template for Data Upload",
+          "Title": "Bulk Data Insertion"
+        },
+        "Logger": {
+          "Context": "Context",
+          "Level": {
+            "Debug": "Debug",
+            "Error": "Error",
+            "Http": "Http",
+            "Info": "Info",
+            "Silly": "Silly",
+            "Title": "Level",
+            "Verbose": "Verbose",
+            "Warn": "Warn"
+          },
+          "Message": "Message",
+          "Metadata": "Metadata",
+          "Stack": "Stack",
+          "Timestamp": "Timestamp",
+          "Title": "System Logger"
+        },
+        "Metadata": {
+          "FullLogo": "Full Logo",
+          "Logo": "Logo",
+          "Name": "Name",
+          "PhoneNumber": "Phone Number",
+          "Slogan": "Slogan",
+          "ThemeColor": "Theme Color",
+          "Title": "Metadata"
+        },
+        "RolePermissions": {
+          "Actions": {
+            "Create": "Create",
+            "Delete": "Delete",
+            "GetAll": "Get All",
+            "GetOne": "Get One",
+            "Title": "Actions",
+            "Update": "Update"
+          }
+        },
+        "SystemLogger": {
+          "Title": "System Logger"
+        },
+        "Title": "Admin Settings",
+        "UserActivity": {
+          "Action": "Action",
+          "After": "Data After",
+          "Before": "Data Before",
+          "DataId": "Data ID",
+          "DataType": "Data Type",
+          "Difference": "Data Difference",
+          "ErrorMessage": "Error Message",
+          "Ip": "IP",
+          "Method": "Method",
+          "Path": "Path",
+          "RequestId": "Request ID",
+          "SessionId": "Session ID",
+          "Source": "Source",
+          "StatusCode": "Status Code",
+          "Success": "Success",
+          "Timestamp": "Timestamp",
+          "Title": "User Activity",
+          "UserActivity": "User Activity",
+          "UserAgent": "User Agent",
+          "UserId": "User ID",
+          "UserType": "User Type"
+        },
+        "UserRolePermissions": {
+          "Title": "User Role Permissions"
+        },
+        "UserRoles": {
+          "Name": "Role Name",
+          "Title": "User Roles",
+          "UserRole": "User Role"
+        },
+        "Users": {
+          "Email": "Email",
+          "Name": "Name",
+          "Role": "Role",
+          "Title": "Users",
+          "User": "User"
+        },
+        "UsersView": {
+          "Title": "Users View"
+        }
+      },
+      "FontSize": "Font Size",
+      "Samples": {
+        "H3Sample": "H3 Sample",
+        "H4Sample": "H4 Sample",
+        "H5Sample": "H5 Sample",
+        "LabelSample": "Label Sample",
+        "SmallSample": "Small Sample",
+        "Title": "Text Samples"
+      },
+      "User": {
+        "Account": {
+          "Avatar": "Avatar",
+          "AvatarHint": "Avatar Hint",
+          "ChangeAvatar": "Change Avatar",
+          "Company": "Company",
+          "Country": "Country",
+          "Email": "Email",
+          "FullName": "Full Name",
+          "JobTitle": "Job Title",
+          "Language": "Language",
+          "Phone": "Phone",
+          "ResetAvatar": "Reset Avatar",
+          "Title": "Account",
+          "Username": "Username"
+        },
+        "Billing": {
+          "AvailablePlans": "Available Plans",
+          "AvailablePlansDescription": "Available Plans Description",
+          "CancelSubscription": "Cancel Subscription",
+          "ChangePlan": "Change Plan",
+          "ContactUs": "Contact Us",
+          "Current": "Current",
+          "CurrentPlan": "Current Plan",
+          "Projects_few": "Projects",
+          "Projects_many": "Projects",
+          "Projects_one": "Projects",
+          "Projects_other": "Projects",
+          "Projects_two": "Projects",
+          "Projects_zero": "Projects",
+          "Renewal": "Renewal",
+          "Seats_few": "Seats",
+          "Seats_many": "Seats",
+          "Seats_one": "Seats",
+          "Seats_other": "Seats",
+          "Seats_two": "Seats",
+          "Seats_zero": "Seats",
+          "Select": "Select",
+          "Title": "Billing"
+        },
+        "Connections": {
+          "Connect": "Connect",
+          "Description": "Description",
+          "Disconnect": "Disconnect",
+          "GitHub": {
+            "Description": "Description",
+            "Title": "GitHub"
+          },
+          "Google": {
+            "Description": "Description",
+            "Title": "Google"
+          },
+          "LastSync": "LastSync",
+          "Slack": {
+            "Description": "Description",
+            "Title": "Slack"
+          },
+          "StatusConnected": "Status Connected",
+          "StatusNotConnected": "Status Not Connected",
+          "Title": "Connections"
+        },
+        "Notifications": {
+          "Description": "Description",
+          "Title": "Notifications",
+          "TypeHeader": "TypeHeader"
+        },
+        "Security": {
+          "Title": "Security"
+        },
+        "System": {
+          "Title": "System"
+        },
+        "Title": "User Settings"
+      }
+    },
+    "SupportCenter": {
+      "Chatbot": {
+        "Title": "Chatbot"
+      },
+      "ContactUs": {
+        "BusinessHours": {
+          "Description": "Description",
+          "Title": "Business Hours"
+        },
+        "CallUs": {
+          "Description": "Description",
+          "Title": "Call Us"
+        },
+        "ConnectWithUs": {
+          "Description": "Description",
+          "Title": "Connect With Us"
+        },
+        "Description": "Description",
+        "EmailUs": {
+          "Description": "Description",
+          "Title": "Email Us"
+        },
+        "OfficeHours": {
+          "Title": "Office Hours"
+        },
+        "OurLocation": {
+          "Title": "Our Location"
+        },
+        "SendMessage": {
+          "Title": "Send Message"
+        },
+        "Title": "Contact Us",
+        "VisitUs": {
+          "Description": "Description",
+          "Title": "Visit Us"
+        }
+      },
+      "FAQ": {
+        "CheckFaq": "Check FAQ",
+        "DidNotFindWhatYouAreLookingFor": "Did Not Find What You Are Looking For?",
+        "NoFAQsFound": "No FAQs Found",
+        "SearchPlaceholder": "Search...",
+        "Title": "FAQ"
+      },
+      "Faq": {
+        "Description": "Description",
+        "Title": "Faq"
+      },
+      "KnowledgeBase": {
+        "AccountPassword": {
+          "Title": "Account Password"
+        },
+        "AccountSettings": {
+          "Title": "Account Settings"
+        },
+        "GettingStarted": {
+          "Title": "Getting Started"
+        },
+        "Title": "Knowledge Base"
+      },
+      "LiveSupport": {
+        "Title": "Live Support"
+      },
+      "QuickAccess": {
+        "Title": "Quick Access"
+      },
+      "StillNeedHelp": {
+        "Description": "Description",
+        "Title": "Still Need Help?"
+      },
+      "SubmitTicket": {
+        "Title": "Submit Ticket"
+      },
+      "Tickets": {
+        "BeforeSubmitting": "Before Submitting",
+        "Description": "Description",
+        "MyTickets": {
+          "Table": {
+            "Column1": "Column1",
+            "Column2": "Column2",
+            "Column3": "Column3",
+            "Column4": "Column4"
+          },
+          "Title": "My Tickets"
+        },
+        "SubmitNewTicket": {
+          "Title": "Submit New Ticket"
+        },
+        "SubmitTicket": {
+          "Form": {
+            "Attachment": {
+              "Label": "Attachment",
+              "Placeholder": "Placeholder"
+            },
+            "Category": {
+              "Label": "Category",
+              "Option1": "Option1",
+              "Option2": "Option2",
+              "Option3": "Option3",
+              "Placeholder": "Placeholder"
+            },
+            "Description": {
+              "Label": "Description",
+              "Placeholder": "Placeholder"
+            },
+            "Priority": {
+              "Label": "Priority",
+              "OptionHigh": "Option High",
+              "OptionLow": "Option Low",
+              "OptionMedium": "Option Medium",
+              "Placeholder": "Placeholder"
+            },
+            "Subject": {
+              "Label": "Subject",
+              "Placeholder": "Placeholder"
+            }
+          }
+        },
+        "Ticket": "Ticket",
+        "Title": "Tickets"
+      },
+      "Title": "Support Center",
+      "UserManual": {
+        "Contents": "Contents",
+        "Description": "Description",
+        "DownloadManual": "Download Manual",
+        "ReviewUserManual": "Review User Manual",
+        "Title": "User Manual"
+      }
+    },
+    "TABLE_PLURAL_UPPER_NAME": {
+      "Labels": {
+        "Email": "Email"
+      },
+      "Name": "Name",
+      "PhoneNumber": "Phone Number",
+      "SINGLE_ITEM_NAME": "SINGLE_ITEM_NAME",
+      "Title": "TABLE_PLURAL_UPPER_NAME"
+    },
+    "TemplateExamples": {
+      "DataTable": {
+        "Title": "DataTable Example"
+      },
+      "DataView": {
+        "Title": "Data View Examples"
+      },
+      "Forms": {
+        "Title": "Form Input Examples"
+      }
+    },
+    "UserSettings": {
+      "Title": "User Settings"
+    },
+    "Users": {
+      "Name": "Name",
+      "Profile": {
+        "DeleteData": "Delete Data",
+        "SureToDeleteData": "Sure To Delete Data"
+      },
+      "Role": "Role",
+      "Title": "Users"
+    }
+  },
+  "Common": {
+    "Edit": "Edit"
+  },
+  "CopyRight": {
+    "AllRightsReserved": "All Rights Reserved © {{year}}",
+    "AppName": "Initia"
+  },
+  "Global": {
+    "Calendar": {
+      "EventTypes": "Event Types",
+      "Filters": "Filters",
+      "Parties": "Parties",
+      "Today": "Today"
+    },
+    "Form": {
+      "CantDoIt": "Can't Do It",
+      "Errors": {
+        "FileTooLarge": "Some files exceed the size limit ({{max}} MB).",
+        "InvalidEmail": "Invalid email format",
+        "InvalidNumber": "Invalid number",
+        "InvalidPhoneNumber": "Invalid phone number format",
+        "Max": "Maximum possible value is",
+        "MaxLength": "Maximum possible length is",
+        "Min": "Minimum possible value is",
+        "MinLength": "Minimum possible length is",
+        "PasswordMatch": "Password & confirmation aren't a match",
+        "PhoneNumberLength": "Phone number length is incorrect",
+        "Required": "Required",
+        "UploadFailed": "Upload Failed, Please Try Again"
+      },
+      "Labels": {
+        "Add": "Add",
+        "AddFiles": "Add Files",
+        "BrowserDontSupportLocation": "Browser Don't Support Location",
+        "Delete": "Delete",
+        "Edit": "Edit",
+        "Email": "Email",
+        "FilesMaxReached": "Files Max Reached",
+        "Location": "Location",
+        "No": "No",
+        "NoOptions": "No Options",
+        "PickDate": "Pick Date",
+        "PleaseAllowLocation": "Please Allow Location",
+        "PleaseSelect": "Please Select",
+        "Save": "Save",
+        "Submit": "Submit",
+        "UnAvailableForDemoMode": "Unavailable For Demo Mode",
+        "Update": "Update",
+        "View": "View",
+        "ViewLocation": "View Location",
+        "Yes": "Yes"
+      },
+      "SuccessMsg": "Data {{action}} for {{data}} has been done successfully"
+    },
+    "Labels": {
+      "Action": "Action",
+      "All": "All",
+      "Back": "Back",
+      "CreateNew": "Create New {{item}}",
+      "Delete": "Delete {{item",
+      "DemoLoginNote": "You may login using any of mobile numbers below and password of 12345678",
+      "DemoWarning": "Please be aware that this is a demo version, accessible by the public. So we advise against sharing any real data like name, ID number and the like. Please note that the data will be automatically reset everyday",
+      "Details": "Details",
+      "Download": "Download",
+      "FileCantBeReviewed": "File Can't Be Reviewed",
+      "Logout": "Logout",
+      "More": "More",
+      "NoData": "No Data",
+      "NoNotifications": "No Notifications",
+      "Of": "Of",
+      "PageNo": "Page No",
+      "PageSize": "Page Size",
+      "PhoneNumber": "Phone Number",
+      "Results": "Results",
+      "Roles": {
+        "accountant": "Accountant",
+        "admin": "Admin",
+        "applicant": "Applicant",
+        "ceo": "CEO",
+        "hod": "HOD",
+        "researcher": "Researcher",
+        "user": "User"
+      },
+      "Search": "Search",
+      "Showing": "Showing",
+      "ThisWeek": "This Week",
+      "Today": "Today",
+      "Update": "Update {{item}}",
+      "View": "View {{item}}",
+      "WrongUrl": "Wrong Url",
+      "YourOwn": "Your Own"
+    },
+    "Loading": "Loading",
+    "Notifications": {
+      "Successful": "Successful {{action}}"
+    },
+    "Placeholders": {
+      "Search": "Search..."
+    },
+    "Table": {
+      "Export": {
+        "Export": "Export",
+        "Filters": {
+          "AddFilters": "Add Filters",
+          "Field": "Field",
+          "Operators": {
+            "Equals": "Equals",
+            "GreaterThan": "Greater Than",
+            "GreaterThanOrEqual": "Greater Than Or Equal",
+            "LessThan": "Less Than",
+            "LessThanOrEqual": "Less Than Or Equal",
+            "NotEquals": "Not Equals",
+            "Title": "Operator"
+          },
+          "Value": "Value"
+        },
+        "SelectFieldsToExport": "Select  Fields To Export...",
+        "Title": "Export",
+        "Type": {
+          "CSV": "CSV File",
+          "Excel": "Excel File",
+          "PDF": "PDF File",
+          "Print": "Print",
+          "Title": "Export Type"
+        }
+      }
+    }
+  },
+  "Public": {
+    "ForgotPassword": {
+      "ResetPassword": {
+        "NewPassword": "New Password",
+        "NewPasswordConfirmation": "New Password Confirmation",
+        "OldPassword": "Current Password",
+        "ResetPassword": "Reset Password",
+        "Title": "Reset Password"
+      },
+      "SendOtp": {
+        "ConfirmOTP": "Confirm OTP",
+        "SendOtp": "Send OTP"
+      },
+      "Title": "Forgot Password"
+    },
+    "LandingPage": {
+      "Title": "About"
+    },
+    "Login": {
+      "Labels": {
+        "DidUForgotPassword": "Did You Forgot Password?",
+        "DummyLogin": "Dummy Login",
+        "Email": "Email",
+        "Login": "Login",
+        "Password": "Password",
+        "Success": "Success"
+      },
+      "Title": "Login"
+    },
+    "Otp": {
+      "CheckSms": "Check SMS",
+      "Title": "OTP Code"
+    },
+    "PrivacyPolicy": {
+      "Title": "Privacy Policy"
+    },
+    "Register": {
+      "Labels": {
+        "Concent": "I agree to the Terms & Conditions",
+        "DidNotGetOtp": "Did Not Get OTP?",
+        "Email": "Email",
+        "Password": "Password",
+        "PasswordConfirmation": "Password Confirmation",
+        "Register": "Register",
+        "ResendOtp": "Resend OTP",
+        "Success": "Success"
+      },
+      "Title": "Register"
+    },
+    "TermsConditions": {
+      "Title": "Terms & Conditions"
+    }
+  }
+}

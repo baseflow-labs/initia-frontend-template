@@ -1,0 +1,43 @@
+import { actionProps, TableProps } from "../../../components/table";
+import ApiDataTable from "../../../components/table/apiDatatable";
+import PageTemplate from "./pageTemplate";
+import { ActionButtonProps } from "../../../components/button/actionButtons";
+
+interface Props extends TableProps {
+  title: string;
+  actionButtons?: ActionButtonProps[];
+  dataApiEndpoint: string;
+  includeCreate?: boolean;
+  tableExtraActions?: (id?: string) => actionProps[];
+  singleItem: string;
+}
+
+const TablePage = ({
+  title,
+  actionButtons,
+  columns,
+  dataApiEndpoint,
+  tableExtraActions,
+  includeCreate,
+  includeView,
+  includeUpdate,
+  includeDelete,
+  singleItem,
+}: Props) => {
+  return (
+    <PageTemplate title={title} actionButtons={actionButtons}>
+      <ApiDataTable
+        dataApiEndpoint={dataApiEndpoint}
+        inputs={columns}
+        singleItem={singleItem}
+        extraActions={tableExtraActions}
+        includeCreate={includeCreate}
+        includeDelete={includeDelete}
+        includeUpdate={includeUpdate}
+        includeView={includeView}
+      />
+    </PageTemplate>
+  );
+};
+
+export default TablePage;

@@ -1,0 +1,250 @@
+import { applyRouteChanges } from "../../../utils/function";
+import { useWindowWidth } from "@/utils/hooks";
+import LandingPageManagement from "@/views/auth/core/landingPage";
+import MessagingView from "@/views/auth/user/messaging";
+import NotificationsView from "@/views/auth/user/notifications";
+import SupportCenterView from "@/views/auth/supportCenter";
+import ContactUsView from "@/views/auth/supportCenter/contact-us";
+import FaqView from "@/views/auth/supportCenter/faq";
+import SupportTicketsView from "@/views/auth/supportCenter/tickets";
+import UserManualView from "@/views/auth/supportCenter/user-manual";
+import SystemSettingsView from "@/views/auth/core/systemSettings";
+import UserProfileView from "@/views/auth/user/profile";
+import UserSettingsView from "@/views/auth/user/settings";
+import DashboardView from "@/views/auth/dashboard";
+import TemplateDataTableExampleView from "@/views/auth/templateExamples/datatablePage";
+import TemplateDataViewExamplesView from "@/views/auth/templateExamples/dataView";
+import TemplateFormExamplesView from "@/views/auth/templateExamples/forms";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { faWpforms } from "@fortawesome/free-brands-svg-icons";
+import { faDashboard, faGear, faGlobe, faTable } from "@fortawesome/free-solid-svg-icons";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Navigate, Route, Routes, useLocation } from "react-router";
+import { Fragment } from "react/jsx-runtime";
+
+import AuthFooter from "../common/footer";
+import { FilePreviewModal } from "./globalModal";
+import DashboardNavbar from "./navs/navbar";
+import OffCanvasNav from "./navs/offcanvasNav";
+import OffCanvasTools from "./navs/offcanvasTools";
+import Sidebar from "./navs/sidebarNav";
+
+interface AuthRoute {
+  name: string;
+  route: string;
+  view: React.ReactNode;
+  showInNav?: boolean;
+  icon: IconProp;
+  fixed?: boolean;
+  subRoute?: AuthRoute[];
+}
+
+const AuthLayout = () => {
+  const { t, i18n } = useTranslation();
+  const location = useLocation();
+  const width = useWindowWidth();
+  const isPc = width > 992;
+
+  const [collapsed, setCollapsed] = useState(true);
+
+  const authRoutes: AuthRoute[] = [
+    {
+      name: t("Auth.Dashboard.Title"),
+      route: "/dashboard",
+      view: <DashboardView />,
+      showInNav: true,
+      icon: faDashboard,
+    },
+    {
+      name: t("Auth.Profile.Title"),
+      route: "/profile",
+      view: <UserProfileView />,
+      icon: faGear,
+      fixed: true,
+    },
+    {
+      name: t("Auth.Messaging.Title"),
+      route: "/messaging",
+      view: <MessagingView />,
+      icon: faGear,
+      fixed: true,
+    },
+    {
+      name: t("Auth.Notifications.Title"),
+      route: "/notifications",
+      view: <NotificationsView />,
+      icon: faGear,
+      fixed: true,
+    },
+    {
+      name: t("Auth.UserSettings.Title"),
+      route: "/settings",
+      view: <UserSettingsView />,
+      icon: faGear,
+      fixed: true,
+    },
+    {
+      name: t("Auth.Settings.Admin.Title"),
+      route: "/system-settings",
+      view: <SystemSettingsView />,
+      showInNav: true,
+      icon: faGear,
+      fixed: true,
+    },
+    {
+      name: t("Auth.SupportCenter.Title"),
+      route: "/support-center",
+      view: <SupportCenterView />,
+      icon: faGear,
+      fixed: true,
+    },
+    {
+      name: t("Auth.SupportCenter.Faq.Title"),
+      route: "/support-center/faq",
+      view: <FaqView />,
+      icon: faGear,
+      fixed: true,
+    },
+    {
+      name: t("Auth.SupportCenter.ContactUs.Title"),
+      route: "/support-center/contact-us",
+      view: <ContactUsView />,
+      icon: faGear,
+      fixed: true,
+    },
+    {
+      name: t("Auth.SupportCenter.Tickets.Title"),
+      route: "/support-center/tickets",
+      view: <SupportTicketsView />,
+      icon: faGear,
+      fixed: true,
+    },
+    {
+      name: t("Auth.SupportCenter.UserManual.Title"),
+      route: "/support-center/user-manual",
+      view: <UserManualView />,
+      icon: faGear,
+      fixed: true,
+    },
+    {
+      name: t("Auth.LandingPage.Title"),
+      route: "/landing-page-management",
+      view: <LandingPageManagement />,
+      icon: faGlobe,
+      showInNav: true,
+      fixed: true,
+    },
+    {
+      name: t("Auth.TemplateExamples.DataView.Title"),
+      route: "/template-examples/data-view",
+      view: <TemplateDataViewExamplesView />,
+      icon: faDashboard,
+      showInNav: true,
+      fixed: true,
+    },
+    {
+      name: t("Auth.TemplateExamples.DataTable.Title"),
+      route: "/template-examples/data-table",
+      view: <TemplateDataTableExampleView />,
+      icon: faTable,
+      showInNav: true,
+      fixed: true,
+    },
+    {
+      name: t("Auth.TemplateExamples.Forms.Title"),
+      route: "/template-examples/forms",
+      view: <TemplateFormExamplesView />,
+      icon: faWpforms,
+      showInNav: true,
+      fixed: true,
+    },
+  ];
+
+  const showSidebar = !location.pathname.includes("apply");
+
+  // const filteredRoutes = authRoutes.filter(({ users }) =>
+  //   users.includes(user.role)
+  // );
+
+  const filteredFixedRoutes = authRoutes.filter(({ fixed, showInNav }) => fixed && showInNav);
+
+  const toggleSidebar = () => setCollapsed((current) => !current);
+
+  useEffect(() => {
+    applyRouteChanges(t, authRoutes, location.pathname);
+  }, [location.pathname]);
+
+  return (
+    <Fragment>
+      {/* <DemoWarning /> */}
+      <OffCanvasNav
+        fixedRoutes={filteredFixedRoutes}
+        routes={authRoutes.filter(({ showInNav, fixed }) => showInNav && !fixed)}
+      />
+
+      <main className="d-flex pb-3 min-vh-100">
+        {showSidebar && isPc && (
+          <div
+            className="position-fixed top-0 start-0 min-vh-100"
+            style={{
+              width: collapsed ? "80px" : "250px",
+              transition: "width 0.3s",
+              zIndex: 4,
+            }}
+          >
+            <Sidebar
+              collapsed={collapsed}
+              toggleSidebar={toggleSidebar}
+              fixedRoutes={filteredFixedRoutes}
+              routes={authRoutes.filter(({ showInNav, fixed }) => showInNav && !fixed)}
+            />
+          </div>
+        )}
+
+        <div
+          className="flex-grow-1"
+          style={{
+            marginRight:
+              i18n.language === "ar"
+                ? showSidebar && isPc
+                  ? collapsed
+                    ? "80px"
+                    : "250px"
+                  : "0px"
+                : undefined,
+            marginLeft:
+              i18n.language === "en"
+                ? showSidebar && isPc
+                  ? collapsed
+                    ? "80px"
+                    : "250px"
+                  : "0px"
+                : undefined,
+            transition: "margin-right 0.3s",
+          }}
+        >
+          <div className="p-0 px-2 px-lg-5 w-100">
+            <DashboardNavbar />
+
+            <Routes>
+              {authRoutes.map(({ route, view }, i) => (
+                <Route path={route} element={view} key={i} />
+              ))}
+
+              <Route path="*" element={<Navigate to="/dashboard" replace />} />
+            </Routes>
+          </div>
+
+          <FilePreviewModal />
+
+          <AuthFooter />
+
+          <OffCanvasTools />
+        </div>
+      </main>
+    </Fragment>
+  );
+};
+
+export default AuthLayout;

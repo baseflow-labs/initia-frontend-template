@@ -278,7 +278,6 @@ Implement only the “must-have knobs” first:
 - [ ] Build form analytics (submission stats, abandonment rates)
 - [ ] Build dashboard analytics (view stats, widget interactions)
 - [ ] Build A/B testing framework (for forms and dashboards)
-- [ ] Split admin panel into separate app (if not already done in Turborepo)
 - [ ] Build analysis tools integration (actual implementation beyond prep)
 - [ ] Build technical & business documentation (full suite)
 - [ ] Advanced user controls (dashboard customization)
