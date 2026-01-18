@@ -1,19 +1,19 @@
+// import { addNotification } from "../../user-app/src/store/actions/notifications";
 import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
-import * as authApi from "@initia/shared/api/auth";
-import BelowInputButton from "@initia/shared/ui/components/button/belowInput";
-import Form from "@initia/shared/ui/components/form";
-import { addNotification } from "../../../../user-app/src/store/actions/notifications";
-import { apiCatchGlobalHandler } from "@initia/shared/utils/function";
+import * as authApi from "../../api/auth";
+import BelowInputButton from "../../ui/components/button/belowInput";
+import Form from "../../ui/components/form";
+import { apiCatchGlobalHandler } from "../../utils/function";
 import { forgotInputs, resetInputs } from "./inputs";
 
 const ForgotPassword = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [data, setData] = useState({ identifier: "", code: "" });
 
   const onForgotSubmit = (values?: Record<string, unknown>) => {
@@ -21,14 +21,14 @@ const ForgotPassword = () => {
     authApi
       .requestPasswordReset(identifier)
       .then(() => {
-        dispatch(
-          addNotification({
-            msg: t("Global.Form.SuccessMsg", {
-              action: t("Public.ForgotPassword.SendOtp.SendOtp"),
-              data: "966" + identifier,
-            }),
-          })
-        );
+        // dispatch(
+        //   addNotification({
+        //     msg: t("Global.Form.SuccessMsg", {
+        //       action: t("Public.ForgotPassword.SendOtp.SendOtp"),
+        //       data: "966" + identifier,
+        //     }),
+        //   })
+        // );
         setData({ identifier, code: "" });
       })
       .catch(apiCatchGlobalHandler);
@@ -60,14 +60,14 @@ const ForgotPassword = () => {
     authApi
       .resetPassword({ password, passwordConfirmation, ...data })
       .then(() => {
-        dispatch(
-          addNotification({
-            msg: t("Global.Form.SuccessMsg", {
-              action: t("Public.ForgotPassword.ResetPassword.ResetPassword"),
-              data: "+966" + data.identifier,
-            }),
-          })
-        );
+        // dispatch(
+        //   addNotification({
+        //     msg: t("Global.Form.SuccessMsg", {
+        //       action: t("Public.ForgotPassword.ResetPassword.ResetPassword"),
+        //       data: "+966" + data.identifier,
+        //     }),
+        //   })
+        // );
         navigate("/");
       })
       .catch(apiCatchGlobalHandler);

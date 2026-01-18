@@ -1,4 +1,5 @@
-import type { Notification } from "@/layouts/auth/navs/navbar";
+// import type { Notification } from "src/ui/layouts/auth/navs/navbar";
+import type { Notification } from "../../types/notifications";
 import api, { EnvelopeResponse } from "..";
 
 const mainPath = "/notification";

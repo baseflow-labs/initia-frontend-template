@@ -1,16 +1,17 @@
-import * as authApi from "@initia/shared/api/auth";
-import BelowInputButton from "@initia/shared/ui/components/button/belowInput";
-import Button from "@initia/shared/ui/components/core/button";
-import Form from "@initia/shared/ui/components/form";
-import { login } from "../../../../user-app/src/store/actions/auth";
-import { addNotification } from "../../../../user-app/src/store/actions/notifications";
-import { apiCatchGlobalHandler } from "@initia/shared/utils/function";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
+
+// import { login } from "../../../../user-app/src/store/actions/auth";
+// import { addNotification } from "../../../../user-app/src/store/actions/notifications";
+import * as authApi from "../../api/auth";
+import BelowInputButton from "../../ui/components/button/belowInput";
+import Button from "../../ui/components/core/button";
+import Form from "../../ui/components/form";
+import { apiCatchGlobalHandler } from "../../utils/function";
 
 const LoginView = () => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const formInputs = () => [
     {
@@ -44,16 +45,16 @@ const LoginView = () => {
     authApi
       .login(credentials)
       .then((res) => {
-        dispatch(
-          addNotification({
-            msg: t("Public.Login.Labels.Success", {
-              name: res.payload?.user?.name || res.payload?.user?.role || "",
-            }),
-          })
-        );
+        // dispatch(
+        //   addNotification({
+        //     msg: t("Public.Login.Labels.Success", {
+        //       name: res.payload?.user?.name || res.payload?.user?.role || "",
+        //     }),
+        //   })
+        // );
 
         if (res.payload) {
-          dispatch(login(res.payload));
+          // dispatch(login(res.payload));
         }
       })
       .catch(apiCatchGlobalHandler);

@@ -1,5 +1,6 @@
+import type { AuthResponse } from "../../types/auth";
+
 import api, { EnvelopeResponse } from "../";
-import type { AuthResponse } from "@/store/actions/auth";
 
 export interface loginCredentials {
   identifier: string;

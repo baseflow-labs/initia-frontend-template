@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
-import Form from "@initia/shared/ui/components/form";
+import Form from "../../ui/components/form";
 import { formInputs } from "./inputs";
 
 const ResetPasswordView = () => {

@@ -13,3 +13,14 @@ export const removeNotification = (id: number) => ({
   type: "removeNotification" as const,
   id,
 });
+
+export interface Notification {
+  id: string;
+  title: string;
+  message: string;
+  service: string;
+  important?: boolean;
+  isRead?: boolean;
+  createdAt: string;
+  updatedAt: string;
+}

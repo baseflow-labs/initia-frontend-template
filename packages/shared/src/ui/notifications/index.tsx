@@ -1,16 +1,16 @@
-import * as NotificationApi from "@initia/shared/api/notifications";
-import Button from "@initia/shared/ui/components/core/button";
-import { Notification } from "@initia/shared/ui/layouts/auth/navs/navbar";
-import PageTemplate from "@initia/shared/ui/layouts/auth/pages/pageTemplate";
-import { viewDayDateFormat, viewTimeFormat } from "@initia/shared/utils/consts";
-import { apiCatchGlobalHandler } from "@initia/shared/utils/function";
 import { faCircle, faEnvelope, faEnvelopeOpen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
 import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import * as NotificationApi from "../../api/notifications";
+import Button from "../../ui/components/core/button";
+import PageTemplate from "../../ui/layouts/auth/pages/pageTemplate";
+import { viewDayDateFormat, viewTimeFormat } from "../../utils/consts";
+import { apiCatchGlobalHandler } from "../../utils/function";
 import NotificationsHeaderView from "./Header";
+import type { Notification } from "../../types/notifications";
 
 const NotificationsView = () => {
   const { t } = useTranslation();

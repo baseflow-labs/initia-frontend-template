@@ -1,5 +1,6 @@
-import Button from "@initia/shared/ui/components/core/button";
 import { useTranslation } from "react-i18next";
+
+import Button from "../../ui/components/core/button";
 
 const NotificationsHeaderView = ({
   filter,

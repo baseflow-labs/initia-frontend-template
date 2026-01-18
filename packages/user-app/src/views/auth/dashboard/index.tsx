@@ -4,7 +4,6 @@ import * as OverviewApi from "@initia/shared/api/dashboard";
 import * as UserApi from "@initia/shared/api/users";
 import tempLogo from "@initia/shared/assets/images/brand/logo.png";
 import DashboardCard from "@initia/shared/ui/components/card/dashboardCard";
-import { Notification } from "@initia/shared/ui/layouts/auth/navs/navbar";
 import PageTemplate from "@initia/shared/ui/layouts/auth/pages/pageTemplate";
 import { viewDayDateFormat, viewTimeFormat } from "@initia/shared/utils/consts";
 import {
@@ -18,6 +17,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
 import { useAppSelector } from "../../../store/hooks";
+import type { Notification } from "@initia/shared/types/notifications";
 
 const DashboardView = () => {
   const { t } = useTranslation();

@@ -1,4 +1,4 @@
-import type { Notification } from "@initia/shared/ui/layouts/auth/navs/navbar";
+import type { Notification } from "@initia/shared/types/notifications";
 import api, { EnvelopeResponse } from "..";
 
 const mainPath = "/notification";
