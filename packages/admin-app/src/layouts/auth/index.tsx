@@ -1,26 +1,43 @@
+import DashboardView from "@/views/auth/dashboard";
+import LandingPageManagement from "@/views/auth/landingPage";
+import NotificationsView from "@/views/auth/notifications";
+import BackupSettingsView from "@/views/auth/systemSettings/backup";
+import SystemDataBulkInsertionView from "@/views/auth/systemSettings/bulkInseration/dataInsertion";
+import SystemLoggerView from "@/views/auth/systemSettings/logger";
+import SystemMetadataSettingsView from "@/views/auth/systemSettings/metadata";
+import UserActivityView from "@/views/auth/systemSettings/userActivity";
+import UsersView from "@/views/auth/systemSettings/users/usersList";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { faGear, faGlobe } from "@fortawesome/free-solid-svg-icons";
+import {
+  faClockRotateLeft,
+  faDashboard,
+  faDatabase,
+  faFileShield,
+  faFileSignature,
+  faGlobe,
+  faPaintBrush,
+  faUsers,
+} from "@fortawesome/free-solid-svg-icons";
 import { applyRouteChanges } from "@initia/shared/utils/function";
 import { useWindowWidth } from "@initia/shared/utils/hooks";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes, useLocation } from "react-router";
 import { Fragment } from "react/jsx-runtime";
+
 import AuthFooter from "../common/footer";
 import { FilePreviewModal } from "./globalModal";
 import DashboardNavbar from "./navs/navbar";
 import OffCanvasNav from "./navs/offcanvasNav";
 import OffCanvasTools from "./navs/offcanvasTools";
 import Sidebar from "./navs/sidebarNav";
-import SystemSettingsView from "@/views/common/systemSettings";
-import LandingPageManagement from "@/views/common/landingPage";
 
 interface AuthRoute {
   name: string;
   route: string;
   view: React.ReactNode;
   showInNav?: boolean;
-  icon: IconProp;
+  icon?: IconProp;
   fixed?: boolean;
   subRoute?: AuthRoute[];
 }
@@ -35,12 +52,53 @@ const AuthLayout = () => {
 
   const authRoutes: AuthRoute[] = [
     {
-      name: t("Auth.Settings.Admin.Title"),
-      route: "/system-settings",
-      view: <SystemSettingsView />,
+      name: t("Auth.Dashboard.Admin.Title"),
+      route: "/dashboard",
+      view: <DashboardView />,
       showInNav: true,
-      icon: faGear,
-      fixed: true,
+      icon: faDashboard,
+    },
+    {
+      name: t("Auth.Settings.Admin.UserActivity.Title"),
+      route: "/user-activity",
+      view: <UserActivityView />,
+      showInNav: true,
+      icon: faFileSignature,
+    },
+    {
+      name: t("Auth.Settings.Admin.SystemLogger.Title"),
+      route: "/system-logger",
+      view: <SystemLoggerView />,
+      showInNav: true,
+      icon: faFileShield,
+    },
+    {
+      name: t("Auth.Settings.Admin.Users.Title"),
+      route: "/users",
+      view: <UsersView />,
+      showInNav: true,
+      icon: faUsers,
+    },
+    {
+      name: t("Auth.Settings.Admin.Backup.Title"),
+      route: "/backups",
+      view: <BackupSettingsView />,
+      showInNav: true,
+      icon: faClockRotateLeft,
+    },
+    {
+      name: t("Auth.Settings.Admin.Metadata.Title"),
+      route: "/metadata",
+      view: <SystemMetadataSettingsView />,
+      showInNav: true,
+      icon: faPaintBrush,
+    },
+    {
+      name: t("Auth.Settings.Admin.BulkDataInsertion.Title"),
+      route: "/bulk-data-insertion",
+      view: <SystemDataBulkInsertionView />,
+      showInNav: true,
+      icon: faDatabase,
     },
     {
       name: t("Auth.LandingPage.Title"),
@@ -48,7 +106,11 @@ const AuthLayout = () => {
       view: <LandingPageManagement />,
       icon: faGlobe,
       showInNav: true,
-      fixed: true,
+    },
+    {
+      name: t("Auth.Notifications.Title"),
+      route: "/notifications",
+      view: <NotificationsView />,
     },
   ];
 

@@ -7,7 +7,7 @@ import { useLocation, useNavigate } from "react-router";
 export interface MenuItem {
   name: string;
   route?: string;
-  icon: IconProp;
+  icon?: IconProp;
   badge?: { text: string; color: string };
   subRoute?: MenuItem[];
 }
@@ -66,11 +66,13 @@ export const MenuItemRenderer = ({
           className={collapsed ? "text-center" : "d-flex align-items-center"}
           style={{ minWidth: 0 }}
         >
-          <FontAwesomeIcon
-            icon={item.icon}
-            className={collapsed ? "" : "me-2"}
-            style={{ minWidth: "16px" }}
-          />
+          {item.icon && (
+            <FontAwesomeIcon
+              icon={item.icon}
+              className={collapsed ? "" : "me-2"}
+              style={{ minWidth: "16px" }}
+            />
+          )}
           {(!collapsed || depth > 0 || isOffcanvas) && (
             <span className={depth > 0 ? "text-truncate" : ""}>{item.name}</span>
           )}

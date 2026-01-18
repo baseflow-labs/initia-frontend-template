@@ -1,10 +1,3 @@
-import * as SystemHealthApi from "@initia/shared/api/dashboard/systemHealth";
-import * as NotificationApi from "@initia/shared/api/notifications";
-import DashboardCard from "@initia/shared/ui/components/card/dashboardCard";
-import StatisticCards from "@initia/shared/ui/components/card/statisticCards";
-import { Notification } from "@initia/shared/ui/layouts/auth/navs/navbar";
-import { useAppSelector } from "../../../store/hooks";
-import { apiCatchGlobalHandler } from "@initia/shared/utils/function";
 import {
   faArrowRightToBracket,
   faCheckCircle,
@@ -20,10 +13,18 @@ import {
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import * as SystemHealthApi from "@initia/shared/api/dashboard/systemHealth";
+import * as NotificationApi from "@initia/shared/api/notifications";
+import DashboardCard from "@initia/shared/ui/components/card/dashboardCard";
+import StatisticCards from "@initia/shared/ui/components/card/statisticCards";
+import { Notification } from "@initia/shared/ui/layouts/auth/navs/navbar";
+import { apiCatchGlobalHandler } from "@initia/shared/utils/function";
 import moment from "moment";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
+
+import { useAppSelector } from "../../../store/hooks";
 
 interface HealthInfo {
   status: string;
@@ -41,7 +42,7 @@ interface HealthData {
   memory_rss: HealthInfo;
 }
 
-const AdminDashboardView = () => {
+const DashboardView = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { logoFull } = useAppSelector((state) => state.settings);
@@ -227,4 +228,4 @@ const AdminDashboardView = () => {
   );
 };
 
-export default AdminDashboardView;
+export default DashboardView;
