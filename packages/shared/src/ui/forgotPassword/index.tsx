@@ -6,7 +6,7 @@ import { useNavigate } from "react-router";
 import * as authApi from "@initia/shared/api/auth";
 import BelowInputButton from "@initia/shared/ui/components/button/belowInput";
 import Form from "@initia/shared/ui/components/form";
-import { addNotification } from "../../../store/actions/notifications";
+import { addNotification } from "../../../../user-app/src/store/actions/notifications";
 import { apiCatchGlobalHandler } from "@initia/shared/utils/function";
 import { forgotInputs, resetInputs } from "./inputs";
 

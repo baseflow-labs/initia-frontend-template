@@ -1,15 +1,15 @@
+import tempLogo from "@initia/shared/assets/images/brand/logo.png";
+import Button from "@initia/shared/ui/components/core/button";
+import ForgotPasswordView from "@initia/shared/ui/forgotPassword";
+import LoginView from "@initia/shared/ui/login";
+import RegisterView from "@initia/shared/ui/register";
+import ResetPasswordView from "@initia/shared/ui/ResetPassword";
+import { applyRouteChanges } from "@initia/shared/utils/function";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router";
 
-import tempLogo from "@initia/shared/assets/images/brand/logo.png";
-import Button from "@initia/shared/ui/components/core/button";
 import { useAppSelector } from "../../store/hooks";
-import { applyRouteChanges } from "@initia/shared/utils/function";
-import ForgotPasswordView from "../../views/public/forgotPassword";
-import LoginView from "../../views/public/login";
-import RegisterView from "../../views/public/register";
-import ResetPasswordView from "../../views/public/ResetPassword";
-import { useEffect } from "react";
 import CommonFooter from "../common/footer";
 
 const AuthLayout = () => {

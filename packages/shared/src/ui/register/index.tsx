@@ -3,10 +3,10 @@ import { useDispatch } from "react-redux";
 
 import * as authApi from "@initia/shared/api/auth";
 import Form from "@initia/shared/ui/components/form";
+import { AuthResponse, login } from "../../../../user-app/src/store/actions/auth";
+import { addNotification } from "../../../../user-app/src/store/actions/notifications";
 import { apiCatchGlobalHandler } from "@initia/shared/utils/function";
 import { formInputs } from "./inputs";
-import { AuthResponse, login } from "@/store/actions/auth";
-import { addNotification } from "@initia/shared/types/notifications";
 
 const RegisterView = () => {
   const { t } = useTranslation();
