@@ -1,6 +1,5 @@
 import DashboardView from "@/views/auth/dashboard";
 import LandingPageManagement from "@/views/auth/landingPage";
-import NotificationsView from "@/views/auth/notifications";
 import BackupSettingsView from "@/views/auth/systemSettings/backup";
 import SystemDataBulkInsertionView from "@/views/auth/systemSettings/bulkInseration";
 import SystemLoggerView from "@/views/auth/systemSettings/logger";
@@ -18,6 +17,8 @@ import {
   faPaintBrush,
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
+import MessagingView from "@initia/shared/ui/messaging";
+import NotificationsView from "@initia/shared/ui/notifications";
 import { applyRouteChanges } from "@initia/shared/utils/function";
 import { useWindowWidth } from "@initia/shared/utils/hooks";
 import { useEffect, useState } from "react";
@@ -112,6 +113,11 @@ const AuthLayout = () => {
       name: t("Auth.Notifications.Title"),
       route: "/notifications",
       view: <NotificationsView />,
+    },
+    {
+      name: t("Auth.Messaging.Title"),
+      route: "/messaging",
+      view: <MessagingView />,
     },
   ];
 

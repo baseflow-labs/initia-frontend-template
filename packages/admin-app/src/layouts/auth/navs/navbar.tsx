@@ -1,27 +1,26 @@
+import {
+  faBars,
+  faBell,
+  faEnvelope,
+  faInfoCircle,
+  faMagnifyingGlass,
+  faRightFromBracket,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as NotificationApi from "@initia/shared/api/notifications";
 import tempLogo from "@initia/shared/assets/images/brand/logo.png";
 import LangButton from "@initia/shared/ui/components/button/lang";
 import Button from "@initia/shared/ui/components/core/button";
 import DropdownComp from "@initia/shared/ui/components/dropdown";
-import { logout } from "../../../store/actions/auth";
-import { useAppSelector } from "../../../store/hooks";
 import { apiCatchGlobalHandler } from "@initia/shared/utils/function";
-import {
-  faBars,
-  faBell,
-  faEnvelope,
-  faGear,
-  faInfoCircle,
-  faMagnifyingGlass,
-  faRightFromBracket,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
 import { FormEvent, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
+
+import { logout } from "../../../store/actions/auth";
+import { useAppSelector } from "../../../store/hooks";
 
 export interface Notification {
   id: string;
@@ -194,21 +193,6 @@ const DashboardNavbar = ({
                   />
                 }
                 list={[
-                  {
-                    onClick: () => navigate("/profile"),
-                    label: t("Auth.Profile.Title"),
-                    icon: faUser,
-                  },
-                  {
-                    onClick: () => navigate("/settings"),
-                    label: t("Auth.Settings.User.Title"),
-                    icon: faGear,
-                  },
-                  {
-                    onClick: () => navigate("/support-center"),
-                    label: t("Auth.SupportCenter.Title"),
-                    icon: faInfoCircle,
-                  },
                   {
                     onClick: () => dispatch(logout()),
                     label: t("Global.Labels.Logout"),
