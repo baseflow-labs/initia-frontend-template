@@ -52,7 +52,7 @@ const AuthLayout = () => {
 
   const authRoutes: AuthRoute[] = [
     {
-      name: t("Auth.Dashboard.Admin.Title"),
+      name: t("Auth.Dashboard.Title"),
       route: "/dashboard",
       view: <DashboardView />,
       showInNav: true,
@@ -106,6 +106,7 @@ const AuthLayout = () => {
       view: <LandingPageManagement />,
       icon: faGlobe,
       showInNav: true,
+      fixed: true,
     },
     {
       name: t("Auth.Notifications.Title"),
