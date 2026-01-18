@@ -2,11 +2,11 @@ import DashboardView from "@/views/auth/dashboard";
 import LandingPageManagement from "@/views/auth/landingPage";
 import NotificationsView from "@/views/auth/notifications";
 import BackupSettingsView from "@/views/auth/systemSettings/backup";
-import SystemDataBulkInsertionView from "@/views/auth/systemSettings/bulkInseration/dataInsertion";
+import SystemDataBulkInsertionView from "@/views/auth/systemSettings/bulkInseration";
 import SystemLoggerView from "@/views/auth/systemSettings/logger";
 import SystemMetadataSettingsView from "@/views/auth/systemSettings/metadata";
 import UserActivityView from "@/views/auth/systemSettings/userActivity";
-import UsersView from "@/views/auth/systemSettings/users/usersList";
+import UsersView from "@/views/auth/systemSettings/users";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import {
   faClockRotateLeft,

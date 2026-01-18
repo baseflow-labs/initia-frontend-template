@@ -1,5 +1,7 @@
-import { useTranslation } from "react-i18next";
 import TabsComp from "@initia/shared/ui/components/tab";
+import PageTemplate from "@initia/shared/ui/layouts/auth/pages/pageTemplate";
+import { useTranslation } from "react-i18next";
+
 import SystemDataBulkInsertionView from "./dataInsertion";
 import SystemDataProcessingView from "./dataProccessing";
 
@@ -19,7 +21,11 @@ const SystemDataInsertionView = () => {
     },
   ];
 
-  return <TabsComp items={tabs} />;
+  return (
+    <PageTemplate title={t("Auth.Settings.Admin.BulkDataInsertion.Title")}>
+      <TabsComp items={tabs} />
+    </PageTemplate>
+  );
 };
 
 export default SystemDataInsertionView;
