@@ -117,14 +117,14 @@
 - [ ] Introduce Turborepo structure
   - [ ] apps/app
   - [ ] apps/landing
-  - [ ] apps/admin-panel
+  - [x] apps/admin-panel
   - [ ] apps/system-status
   - [ ] apps/support-center
   - [ ] apps/documentation (Docs, API, release notes, Community docusaurus)
   - [ ] apps/manual (user guide, docusaurus)
-  - [ ] packages/ui
+  - [x] packages/ui
   - [ ] packages/core
-  - [ ] packages/i18n
+  - [x] packages/i18n
 - [ ] Set shared lint/format/build tasks + caching
 - [ ] Prep “analysis tools integration” skeleton (packages/analysis placeholder + interface contracts)
 - [ ] Sign with generator details (every code file + footer)
@@ -268,6 +268,7 @@ Implement only the “must-have knobs” first:
 
 ## To Plan / Backlog (Post-Roadmap)
 
+- [ ] Turn into SaaS solution (Backend-controlled frontend, including navigation menu, localization, theming, dashboard contents, user-level authorization)
 - [ ] Engage tRPC (for type-safe APIs between frontend and backend)
 - [ ] Real-time collaboration features (multiple users editing same form/dashboard)
 - [ ] Advanced workflow engine (custom triggers, multi-step processes)
