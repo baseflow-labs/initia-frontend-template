@@ -115,8 +115,8 @@
 
 - [x] Wrap frontend with Vite (replace CRA) OR keep CRA but create migration path (pick one and complete it)
 - [ ] Introduce Turborepo structure
-  - [ ] apps/app
-  - [ ] apps/landing
+  - [x] apps/app
+  - [x] apps/landing
   - [x] apps/admin-panel
   - [ ] apps/system-status
   - [ ] apps/support-center
@@ -280,6 +280,7 @@ Implement only the “must-have knobs” first:
 - [ ] Build dashboard analytics (view stats, widget interactions)
 - [ ] Build A/B testing framework (for forms and dashboards)
 - [ ] Build analysis tools integration (actual implementation beyond prep)
+  - [ ] Integrate Google Analytics data viewer (https://www.npmjs.com/package/googleapis?activeTab=readme)
 - [ ] Build technical & business documentation (full suite)
 - [ ] Advanced user controls (dashboard customization)
 - [ ] Announcements / manual notifications generation service

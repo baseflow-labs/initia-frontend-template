@@ -1,0 +1,13 @@
+{
+  "name": "landing-page-mock-api",
+  "version": "1.0.0",
+  "description": "Mock API server for landing page development",
+  "main": "mock-api-server.js",
+  "scripts": {
+    "start": "node mock-api-server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5"
+  }
+}

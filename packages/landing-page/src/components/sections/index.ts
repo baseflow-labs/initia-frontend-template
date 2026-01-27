@@ -1,0 +1,14 @@
+export { default as HeroSection } from "./HeroSection";
+export { default as FeaturesSection } from "./FeaturesSection";
+export { default as PricingSection } from "./PricingSection";
+export { default as FAQSection } from "./FAQSection";
+export { default as TestimonialsSection } from "./TestimonialsSection";
+export { default as BlogSection } from "./BlogSection";
+export { default as ContactSection } from "./ContactSection";
+export { default as ClientsSection } from "./ClientsSection";
+export { default as TeamSection } from "./TeamSection";
+export { default as AboutSection } from "./AboutSection";
+export { default as HowItWorksSection } from "./HowItWorksSection";
+export { default as DemoRequestSection } from "./DemoRequestSection";
+export { default as CareersSection } from "./CareersSection";
+export { default as SectionRenderer } from "./SectionRenderer";

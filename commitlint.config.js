@@ -16,6 +16,7 @@ module.exports = {
         "code",
         "layout",
         "docs",
+        "landing",
       ],
     ],
     "scope-empty": [2, "never"],
