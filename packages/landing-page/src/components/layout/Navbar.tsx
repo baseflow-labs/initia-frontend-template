@@ -23,7 +23,7 @@ export default function Navbar({ pages = [], systemMetadata }: NavbarProps) {
   return (
     <nav
       className={`navbar navbar-expand-lg fixed-top transition ${
-        isScrolled ? "navbar-light bg-white shadow-sm" : "navbar-dark"
+        isScrolled ? "bg-white shadow-sm" : ""
       }`}
       style={{ transition: "all 0.3s ease" }}
     >
@@ -85,18 +85,10 @@ export default function Navbar({ pages = [], systemMetadata }: NavbarProps) {
           padding: 0.5rem 1rem;
           font-weight: 500;
           transition: color 0.3s ease;
+          color: rgba(0, 0, 0, 0.7) !important;
         }
-        .navbar-dark .nav-link {
-          color: rgba(255, 255, 255, 0.9);
-        }
-        .navbar-dark .nav-link:hover {
-          color: #fff;
-        }
-        .navbar-light .nav-link {
-          color: rgba(0, 0, 0, 0.7);
-        }
-        .navbar-light .nav-link:hover {
-          color: #000;
+        .nav-link:hover {
+          color: #000 !important;
         }
         @media (max-width: 991.98px) {
           .navbar-collapse {
@@ -105,12 +97,6 @@ export default function Navbar({ pages = [], systemMetadata }: NavbarProps) {
             margin-top: 1rem;
             border-radius: 0.5rem;
             box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-          }
-          .navbar-dark .navbar-collapse {
-            background: rgba(255, 255, 255, 0.95);
-          }
-          .navbar-dark .navbar-collapse .nav-link {
-            color: rgba(0, 0, 0, 0.7);
           }
           .nav-item {
             margin: 0.25rem 0;
