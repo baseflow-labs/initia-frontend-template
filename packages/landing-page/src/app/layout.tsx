@@ -1,15 +1,30 @@
 import type { Metadata } from "next";
 import "@initia/shared/styles/index.scss";
+import { Navbar, Footer } from "@/components/layout";
+import { landingApi } from "@/lib/api";
 
 export const metadata: Metadata = {
-  title: "Landing Page",
-  description: "Dynamic landing page builder",
+  title: "InnovateHub - AI-Powered Business Platform",
+  description: "Transform your business with AI-powered automation and seamless collaboration",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  // Fetch pages for navigation
+  const pages = await landingApi.getPages();
+
   return (
     <html lang="en">
-      <body>{children}</body>
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+        />
+      </head>
+      <body>
+        <Navbar pages={pages} />
+        <main style={{ paddingTop: "80px" }}>{children}</main>
+        <Footer pages={pages} />
+      </body>
     </html>
   );
 }
