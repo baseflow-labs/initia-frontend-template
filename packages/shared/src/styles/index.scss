@@ -72,7 +72,7 @@ body {
 }
 
 .bs-stepper .step-trigger:focus {
-  color: var($info);
+  color: var(--bs-info);
   outline: none;
 }
 
@@ -102,7 +102,7 @@ body {
   min-width: 1px;
   min-height: 1px;
   margin: auto;
-  background-color: var($dark);
+  background-color: var(--bs-dark);
 }
 
 .bs-stepper-circle {
@@ -114,9 +114,9 @@ body {
   padding: 0.5em 0;
   margin: 0.25rem;
   line-height: 1em;
-  color: var($dark);
-  border: 1px solid var($dark);
-  background-color: var($white);
+  color: var(--bs-dark);
+  border: 1px solid var(--bs-dark);
+  background-color: var(--bs-white);
   border-radius: 1em;
 }
 
@@ -124,17 +124,17 @@ body {
 .active .bs-stepper-label,
 .done .bs-stepper-label,
 .bs-stepper-line.active {
-  color: var($info);
+  color: var(--bs-info);
 }
 
 .active .bs-stepper-circle,
 .bs-stepper-line.active {
-  border: 1px solid var($info);
+  border: 1px solid var(--bs-info);
 }
 .done .bs-stepper-circle {
-  color: var($white);
-  border: 1px solid var($info);
-  background-color: var($info);
+  color: var(--bs-white);
+  border: 1px solid var(--bs-info);
+  background-color: var(--bs-info);
 }
 
 .bs-stepper-content {
@@ -264,17 +264,17 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var($secondary) !important; /* Bootstrap gray-200 */
+  background: var(--bs-secondary) !important; /* Bootstrap gray-200 */
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var($secondary) !important; /* Bootstrap gray-500 */
+  background-color: var(--bs-secondary) !important; /* Bootstrap gray-500 */
   border-radius: 8px;
-  border: 2px solid var($secondary) !important;
+  border: 2px solid var(--bs-secondary) !important;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: var($secondary) !important; /* Bootstrap gray-600 */
+  background-color: var(--bs-secondary) !important; /* Bootstrap gray-600 */
 }
 
 /* Hide scrollbar arrows */
@@ -287,7 +287,7 @@ body {
 /* ===== Firefox ===== */
 * {
   scrollbar-width: thin;
-  scrollbar-color: var($secondary) !important;
+  scrollbar-color: var(--bs-secondary) !important;
 }
 
 // Import Bootstrap and its default variables (using the ~ alias for node_modules)

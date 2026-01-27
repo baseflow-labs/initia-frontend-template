@@ -3,8 +3,11 @@ const nextConfig = {
   reactStrictMode: true,
   transpilePackages: ["@initia/shared"],
   images: {
-    domains: ["localhost"],
     remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "localhost",
+      },
       {
         protocol: "https",
         hostname: "**",

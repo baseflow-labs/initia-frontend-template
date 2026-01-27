@@ -4,9 +4,9 @@ import "@initia/shared/styles/index.scss";
 import type { Metadata } from "next";
 
 interface PageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 // Generate static params for all pages at build time
@@ -17,7 +17,8 @@ export async function generateStaticParams() {
 
 // Generate metadata for each page
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const page = await landingApi.getPageBySlug(params.slug);
+  const { slug } = await params;
+  const page = await landingApi.getPageBySlug(slug);
 
   if (!page) {
     return {
@@ -38,7 +39,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function LandingPage({ params }: PageProps) {
-  const page = await landingApi.getPageBySlug(params.slug);
+  const { slug } = await params;
+  const page = await landingApi.getPageBySlug(slug);
 
   if (!page) {
     return (
