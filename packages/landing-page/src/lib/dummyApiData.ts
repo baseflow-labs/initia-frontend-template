@@ -1,4 +1,21 @@
-import { Page } from "@/types/landing";
+import { Page, SystemMetadata } from "@/types/landing";
+
+export const getMockSystemMetadata = (): SystemMetadata => ({
+  name: "InnovateHub",
+  logo: "https://www.trafongroup.com/wp-content/uploads/2019/04/logo-placeholder.png",
+  slogan: "Transform Your Business with AI",
+  favicon: "/favicon.ico",
+  primaryColor: "#667eea",
+  contactEmail: "hello@innovatehub.com",
+  contactPhone: "+1 (888) 555-0100",
+  socialLinks: {
+    twitter: "https://twitter.com/innovatehub",
+    linkedin: "https://linkedin.com/company/innovatehub",
+    github: "https://github.com/innovatehub",
+    facebook: "https://facebook.com/innovatehub",
+    instagram: "https://instagram.com/innovatehub",
+  },
+});
 
 export const getMockPages = (): Page[] => [
   // ============================================

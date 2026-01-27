@@ -1,13 +1,14 @@
 "use client";
 
-import { Page } from "@/types/landing";
+import { Page, SystemMetadata } from "@/types/landing";
 import { useEffect, useState } from "react";
 
 interface NavbarProps {
   pages?: Page[];
+  systemMetadata?: SystemMetadata;
 }
 
-export default function Navbar({ pages = [] }: NavbarProps) {
+export default function Navbar({ pages = [], systemMetadata }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -28,7 +29,16 @@ export default function Navbar({ pages = [] }: NavbarProps) {
     >
       <div className="container">
         <a href="/" className="navbar-brand fw-bold fs-4">
-          <span className="text-primary">Innovate</span>Hub
+          {systemMetadata?.logo ? (
+            <img src={systemMetadata.logo} alt={systemMetadata.name} style={{ height: "40px" }} />
+          ) : (
+            <>
+              <span className="text-primary">
+                {systemMetadata?.name.slice(0, -3) || "Innovate"}
+              </span>
+              {systemMetadata?.name.slice(-3) || "Hub"}
+            </>
+          )}
         </a>
 
         <button

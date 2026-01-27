@@ -1,10 +1,11 @@
-import { Page } from "@/types/landing";
+import { Page, SystemMetadata } from "@/types/landing";
 
 interface FooterProps {
   pages?: Page[];
+  systemMetadata?: SystemMetadata;
 }
 
-export default function Footer({ pages = [] }: FooterProps) {
+export default function Footer({ pages = [], systemMetadata }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -14,49 +15,81 @@ export default function Footer({ pages = [] }: FooterProps) {
           {/* Company Info */}
           <div className="col-lg-5 col-md-6">
             <h4 className="fw-bold mb-3">
-              <span className="text-primary">Innovate</span>Hub
+              {systemMetadata?.logo ? (
+                <img
+                  src={systemMetadata.logo}
+                  alt={systemMetadata.name}
+                  style={{ height: "35px" }}
+                />
+              ) : (
+                <>
+                  <span className="text-primary">
+                    {systemMetadata?.name.slice(0, -3) || "Innovate"}
+                  </span>
+                  {systemMetadata?.name.slice(-3) || "Hub"}
+                </>
+              )}
             </h4>
             <p className="text-white-50 mb-4" style={{ lineHeight: "1.7" }}>
-              Transform your business with AI-powered automation and seamless collaboration. Join
-              50,000+ companies building the future.
+              {systemMetadata?.slogan ||
+                "Transform your business with AI-powered automation and seamless collaboration."}
             </p>
             <div className="d-flex gap-3">
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="social-icon"
-                aria-label="Twitter"
-              >
-                <i className="bi bi-twitter"></i>
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="social-icon"
-                aria-label="LinkedIn"
-              >
-                <i className="bi bi-linkedin"></i>
-              </a>
-              <a
-                href="https://github.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="social-icon"
-                aria-label="GitHub"
-              >
-                <i className="bi bi-github"></i>
-              </a>
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="social-icon"
-                aria-label="Facebook"
-              >
-                <i className="bi bi-facebook"></i>
-              </a>
+              {systemMetadata?.socialLinks?.twitter && (
+                <a
+                  href={systemMetadata.socialLinks.twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-icon"
+                  aria-label="Twitter"
+                >
+                  <i className="bi bi-twitter"></i>
+                </a>
+              )}
+              {systemMetadata?.socialLinks?.linkedin && (
+                <a
+                  href={systemMetadata.socialLinks.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-icon"
+                  aria-label="LinkedIn"
+                >
+                  <i className="bi bi-linkedin"></i>
+                </a>
+              )}
+              {systemMetadata?.socialLinks?.github && (
+                <a
+                  href={systemMetadata.socialLinks.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-icon"
+                  aria-label="GitHub"
+                >
+                  <i className="bi bi-github"></i>
+                </a>
+              )}
+              {systemMetadata?.socialLinks?.facebook && (
+                <a
+                  href={systemMetadata.socialLinks.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-icon"
+                  aria-label="Facebook"
+                >
+                  <i className="bi bi-facebook"></i>
+                </a>
+              )}
+              {systemMetadata?.socialLinks?.instagram && (
+                <a
+                  href={systemMetadata.socialLinks.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-icon"
+                  aria-label="Instagram"
+                >
+                  <i className="bi bi-instagram"></i>
+                </a>
+              )}
             </div>
           </div>
 
@@ -73,7 +106,7 @@ export default function Footer({ pages = [] }: FooterProps) {
                 {pages.map((page) => (
                   <li key={page.id} className="mb-2">
                     <a href={`/${page.slug}`} className="footer-link text-white">
-                      {page.title.replace(" - InnovateHub", "")}
+                      {page.title.replace(` - ${systemMetadata?.name || "InnovateHub"}`, "")}
                     </a>
                   </li>
                 ))}
@@ -88,7 +121,7 @@ export default function Footer({ pages = [] }: FooterProps) {
         <div className="row align-items-center pt-3">
           <div className="col-md-6 text-center text-md-start mb-3 mb-md-0">
             <p className="text-white-50 mb-0 small">
-              &copy; {currentYear} InnovateHub. All rights reserved.
+              &copy; {currentYear} {systemMetadata?.name || "InnovateHub"}. All rights reserved.
             </p>
           </div>
           <div className="col-md-6 text-center text-md-end">

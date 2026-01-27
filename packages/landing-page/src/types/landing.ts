@@ -7,6 +7,23 @@ export interface PageMetadata {
   ogDescription?: string;
 }
 
+export interface SystemMetadata {
+  name: string;
+  logo?: string;
+  slogan?: string;
+  favicon?: string;
+  primaryColor?: string;
+  contactEmail?: string;
+  contactPhone?: string;
+  socialLinks?: {
+    twitter?: string;
+    linkedin?: string;
+    github?: string;
+    facebook?: string;
+    instagram?: string;
+  };
+}
+
 export interface Page {
   id: string;
   slug: string;

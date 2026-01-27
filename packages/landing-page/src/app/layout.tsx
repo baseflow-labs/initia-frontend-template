@@ -9,8 +9,11 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  // Fetch pages for navigation
-  const pages = await landingApi.getPages();
+  // Fetch pages and system metadata for navigation
+  const [pages, systemMetadata] = await Promise.all([
+    landingApi.getPages(),
+    landingApi.getSystemMetadata(),
+  ]);
 
   return (
     <html lang="en">
@@ -21,9 +24,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         />
       </head>
       <body>
-        <Navbar pages={pages} />
+        <Navbar pages={pages} systemMetadata={systemMetadata} />
         <main style={{ paddingTop: "80px" }}>{children}</main>
-        <Footer pages={pages} />
+        <Footer pages={pages} systemMetadata={systemMetadata} />
       </body>
     </html>
   );

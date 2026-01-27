@@ -1,10 +1,24 @@
 import axios from "axios";
-import { LandingPagesResponse, Page } from "@/types/landing";
-import { getMockPages } from "./dummyApiData";
+import { LandingPagesResponse, Page, SystemMetadata } from "@/types/landing";
+import { getMockPages, getMockSystemMetadata } from "./dummyApiData";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api";
 
 export const landingApi = {
+  /**
+   * Fetch system metadata (name, logo, slogan, etc.)
+   */
+  async getSystemMetadata(): Promise<SystemMetadata> {
+    try {
+      const response = await axios.get<SystemMetadata>(`${API_URL}/system/metadata`);
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching system metadata:", error);
+      // Return mock data for development
+      return getMockSystemMetadata();
+    }
+  },
+
   /**
    * Fetch all landing pages with their sections
    */
