@@ -119,7 +119,7 @@
   - [x] apps/landing
   - [x] apps/admin-panel
   - [ ] apps/documentation (Docs, API, release notes, Community docusaurus)
-  - [ ] apps/manual (user guide, docusaurus)
+  - [x] apps/manual (user guide)
   - [x] packages/ui
   - [ ] packages/core
   - [x] packages/i18n
