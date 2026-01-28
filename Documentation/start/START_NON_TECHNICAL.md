@@ -76,7 +76,7 @@ npm run dev
 ```
 
 Open your browser at:
-👉 http://localhost:3000
+👉 http://localhost:5173
 
 You should see the dashboard running.
 
@@ -189,7 +189,7 @@ npm run dev
 Open your web browser at:
 
 ```bash
-http://localhost:3000
+http://localhost:5173
 ```
 
 ---

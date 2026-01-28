@@ -1,0 +1,294 @@
+// Define your new primary color
+$primary: #1e4c9d;
+$secondary: #dfe5ea;
+$success: #2ead75;
+$danger: #d64545;
+$warning: #f5b301;
+$info: #3a7dff;
+$light: #f8f9fa;
+$dark: #0f192e;
+$white: #ffffff;
+$black: #000000;
+
+// Optional: Add new colors to the theme map
+$theme-colors: (
+  "primary": $primary,
+  "secondary": $secondary,
+  "danger": $danger,
+  "success": $success,
+  "warning": $warning,
+  "info": $info,
+  "light": $light,
+  "dark": $dark,
+  "white": $white,
+  "black": $black,
+);
+
+.rotate-90 {
+  transform: rotate(-90deg);
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.bs-stepper .step-trigger {
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  font-size: clamp(10px, 0.9vw, 13px);
+  font-weight: 700;
+  line-height: 1.5;
+  color: #6c757d;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  background-color: transparent;
+  border: none;
+  border-radius: 0.25rem;
+  transition:
+    background-color 0.15s ease-out,
+    color 0.15s ease-out;
+}
+
+.bs-stepper .step-trigger:not(:disabled):not(.disabled) {
+  cursor: pointer;
+}
+
+.bs-stepper .step-trigger:disabled,
+.bs-stepper .step-trigger.disabled {
+  pointer-events: none;
+  opacity: 0.65;
+}
+
+.bs-stepper .step-trigger:focus {
+  color: var(--bs-info);
+  outline: none;
+}
+
+.bs-stepper .step-trigger:hover {
+  text-decoration: none;
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+.bs-stepper-label {
+  display: block;
+  margin: 0.25rem;
+  width: min-content;
+}
+
+.bs-stepper-header {
+  display: flex;
+  min-width: 500px;
+  overflow-x: auto;
+  align-items: center;
+  flex-wrap: nowrap;
+  scrollbar-width: thin;
+}
+
+.bs-stepper-line,
+.bs-stepper .line {
+  flex: 1 0 32px;
+  min-width: 1px;
+  min-height: 1px;
+  margin: auto;
+  background-color: var(--bs-dark);
+}
+
+.bs-stepper-circle {
+  display: inline-flex;
+  align-content: center;
+  justify-content: center;
+  width: 2em;
+  height: 2em;
+  padding: 0.5em 0;
+  margin: 0.25rem;
+  line-height: 1em;
+  color: var(--bs-dark);
+  border: 1px solid var(--bs-dark);
+  background-color: var(--bs-white);
+  border-radius: 1em;
+}
+
+.active .bs-stepper-circle,
+.active .bs-stepper-label,
+.done .bs-stepper-label,
+.bs-stepper-line.active {
+  color: var(--bs-info);
+}
+
+.active .bs-stepper-circle,
+.bs-stepper-line.active {
+  border: 1px solid var(--bs-info);
+}
+.done .bs-stepper-circle {
+  color: var(--bs-white);
+  border: 1px solid var(--bs-info);
+  background-color: var(--bs-info);
+}
+
+.bs-stepper-content {
+  margin: 0 20vw;
+}
+
+@media (max-width: 1200px) {
+  .bs-stepper-content {
+    margin: 0 15vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .bs-stepper-content {
+    margin: 0 7.5vw;
+  }
+}
+
+@media (max-width: 576px) {
+  .bs-stepper {
+    width: 100%;
+  }
+
+  .bs-stepper-content {
+    margin: 0 1vw;
+  }
+
+  .bs-stepper .step-trigger {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .bs-stepper-header {
+    min-width: unset;
+    width: 100vw;
+    padding: 0 10px;
+    overflow-x: auto;
+    justify-content: flex-start;
+  }
+
+  .bs-stepper-label {
+    display: none !important;
+  }
+
+  .bs-stepper .step-trigger {
+    flex-direction: column;
+    padding: 0px;
+    font-size: 12px;
+    min-width: 48px;
+  }
+
+  .bs-stepper .step {
+    flex: 0 0 auto;
+    text-align: center;
+  }
+
+  .bs-stepper-line,
+  .bs-stepper .line {
+    flex-basis: 5px;
+  }
+}
+
+.bs-stepper.vertical {
+  display: flex;
+}
+
+.bs-stepper.vertical .bs-stepper-header {
+  flex-direction: column;
+  align-items: stretch;
+  margin: 0;
+}
+
+.bs-stepper.vertical .bs-stepper-pane,
+.bs-stepper.vertical .content {
+  display: block;
+}
+
+.bs-stepper.vertical .bs-stepper-pane:not(.fade),
+.bs-stepper.vertical .content:not(.fade) {
+  display: block;
+  visibility: hidden;
+}
+
+.bs-stepper-pane:not(.fade),
+.bs-stepper .content:not(.fade) {
+  display: none;
+}
+
+.bs-stepper .content.fade,
+.bs-stepper-pane.fade {
+  visibility: hidden;
+  transition-duration: 0.3s;
+  transition-property: opacity;
+}
+
+.bs-stepper-pane.fade.active,
+.bs-stepper .content.fade.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.bs-stepper-pane.active:not(.fade),
+.bs-stepper .content.active:not(.fade) {
+  display: block;
+  visibility: visible;
+}
+
+.bs-stepper-pane.dstepper-block,
+.bs-stepper .content.dstepper-block {
+  display: block;
+}
+
+.bs-stepper:not(.vertical) .bs-stepper-pane.dstepper-none,
+.bs-stepper:not(.vertical) .content.dstepper-none {
+  display: none;
+}
+
+.vertical .bs-stepper-pane.fade.dstepper-none,
+.vertical .content.fade.dstepper-none {
+  visibility: hidden;
+}
+
+/* ===== WebKit (Chrome, Edge, Safari) ===== */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bs-secondary) !important; /* Bootstrap gray-200 */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--bs-secondary) !important; /* Bootstrap gray-500 */
+  border-radius: 8px;
+  border: 2px solid var(--bs-secondary) !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--bs-secondary) !important; /* Bootstrap gray-600 */
+}
+
+/* Hide scrollbar arrows */
+::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* ===== Firefox ===== */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--bs-secondary) !important;
+}
+
+// Import Bootstrap and its default variables (using the ~ alias for node_modules)
+@import "bootstrap/scss/bootstrap";

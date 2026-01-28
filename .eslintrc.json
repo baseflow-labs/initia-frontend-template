@@ -43,6 +43,5 @@
     "react": {
       "version": "detect"
     }
-  },
-  "ignorePatterns": ["dist", "build", "node_modules", "vite.config.ts"]
+  }
 }

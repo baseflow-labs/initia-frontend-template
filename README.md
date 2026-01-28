@@ -1,12 +1,50 @@
-# Initia Frontend Dashboard Template
+# Initia Frontend Dashboard Template (Monorepo)
 
-A production-ready, open-source frontend dashboard built with **React + TypeScript + Vite**, designed to work seamlessly with Initia-generated backends.
+A production-ready, open-source frontend dashboard **monorepo** built with **React + TypeScript + Vite**, designed to work seamlessly with Initia-generated backends.
 
-This template is suitable for:
+This monorepo contains:
 
-- 🚀 Startup MVPs
-- 🧑‍💼 Admin panels
-- 🧪 Rapid prototyping with real production code
+- 🧑‍💻 **User App**: User-facing dashboard and features
+- 👨‍💼 **Admin App**: System administration and management
+- 📦 **Shared Package**: Reusable components, utilities, and types
+
+Perfect for:
+
+- 🚀 Startup MVPs with separate user and admin portals
+- 🧑‍💼 Multi-tenant applications
+- 🧪 Scalable projects requiring code reusability
+
+---
+
+## 🏗️ Monorepo Structure
+
+```
+packages/
+├── user-app/          # User-facing application (port 5173)
+├── admin-app/         # Admin panel (port 5174)
+└── shared/            # Shared code (components, utils, types, API)
+```
+
+---
+
+## ⚡ Quick Start
+
+```bash
+# Install pnpm if not already installed
+npm install -g pnpm
+
+# Install dependencies
+pnpm install
+
+# Run user app
+pnpm dev:user
+
+# Run admin app (in another terminal)
+pnpm dev:admin
+
+# Build both apps
+pnpm build
+```
 
 ---
 

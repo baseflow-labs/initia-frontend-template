@@ -1,0 +1,20 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "rootDir": "./src",
+    "outDir": "./dist"
+  },
+  "include": ["src", "vite-env.d.ts"],
+  "exclude": [
+    "node_modules",
+    "src/api/auth",
+    "src/api/dashboard",
+    "src/api/notifications",
+    "src/api/users",
+    "src/ui/layouts/**",
+    "src/ui/components/toaster",
+    "src/ui/components/offcanvas",
+    "src/ui/components/form/wizard"
+  ]
+}

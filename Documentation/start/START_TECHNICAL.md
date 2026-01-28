@@ -68,7 +68,7 @@ npm run dev
 Vite will start a fast dev server with hot module replacement (HMR).
 
 Default URL:
-http://localhost:3000
+http://localhost:5173
 
 ## 5. Project Structure Overview
 

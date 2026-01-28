@@ -1,0 +1,24 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "skipLibCheck": true,
+    "paths": {
+      "@/*": ["./src/*"],
+      "@initia/shared": ["../shared/src"],
+      "@initia/shared/*": ["../shared/src/*"]
+    }
+  },
+  "include": ["src", "../shared/src/types/notifications.ts"],
+  "exclude": [
+    "node_modules",
+    "../shared/src/ui/layouts",
+    "../shared/src/ui/components/offcanvas",
+    "../shared/src/ui/components/toaster",
+    "../shared/src/ui/components/form/wizard",
+    "../shared/src/api/auth",
+    "../shared/src/api/users",
+    "../shared/src/api/dashboard",
+    "../shared/src/api/notifications"
+  ]
+}

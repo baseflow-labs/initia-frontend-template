@@ -115,16 +115,14 @@
 
 - [x] Wrap frontend with Vite (replace CRA) OR keep CRA but create migration path (pick one and complete it)
 - [ ] Introduce Turborepo structure
-  - [ ] apps/app
-  - [ ] apps/landing
-  - [ ] apps/admin-panel
-  - [ ] apps/system-status
-  - [ ] apps/support-center
+  - [x] apps/app
+  - [x] apps/landing
+  - [x] apps/admin-panel
   - [ ] apps/documentation (Docs, API, release notes, Community docusaurus)
-  - [ ] apps/manual (user guide, docusaurus)
-  - [ ] packages/ui
+  - [x] apps/manual (user guide)
+  - [x] packages/ui
   - [ ] packages/core
-  - [ ] packages/i18n
+  - [x] packages/i18n
 - [ ] Set shared lint/format/build tasks + caching
 - [ ] Prep “analysis tools integration” skeleton (packages/analysis placeholder + interface contracts)
 - [ ] Sign with generator details (every code file + footer)
@@ -268,6 +266,7 @@ Implement only the “must-have knobs” first:
 
 ## To Plan / Backlog (Post-Roadmap)
 
+- [ ] Turn into SaaS solution (Backend-controlled frontend, including navigation menu, localization, theming, dashboard contents, user-level authorization)
 - [ ] Engage tRPC (for type-safe APIs between frontend and backend)
 - [ ] Real-time collaboration features (multiple users editing same form/dashboard)
 - [ ] Advanced workflow engine (custom triggers, multi-step processes)
@@ -278,8 +277,8 @@ Implement only the “must-have knobs” first:
 - [ ] Build form analytics (submission stats, abandonment rates)
 - [ ] Build dashboard analytics (view stats, widget interactions)
 - [ ] Build A/B testing framework (for forms and dashboards)
-- [ ] Split admin panel into separate app (if not already done in Turborepo)
 - [ ] Build analysis tools integration (actual implementation beyond prep)
+  - [ ] Integrate Google Analytics data viewer (https://www.npmjs.com/package/googleapis?activeTab=readme)
 - [ ] Build technical & business documentation (full suite)
 - [ ] Advanced user controls (dashboard customization)
 - [ ] Announcements / manual notifications generation service
