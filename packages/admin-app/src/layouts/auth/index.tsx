@@ -1,5 +1,6 @@
 import DashboardView from "@/views/auth/dashboard";
 import LandingPageManagement from "@/views/auth/landingPage";
+import SupportCenterManagementView from "@/views/auth/supportCenter";
 import BackupSettingsView from "@/views/auth/systemSettings/backup";
 import SystemDataBulkInsertionView from "@/views/auth/systemSettings/bulkInseration";
 import SystemLoggerView from "@/views/auth/systemSettings/logger";
@@ -14,6 +15,7 @@ import {
   faFileShield,
   faFileSignature,
   faGlobe,
+  faHeadset,
   faPaintBrush,
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
@@ -100,6 +102,13 @@ const AuthLayout = () => {
       view: <SystemDataBulkInsertionView />,
       showInNav: true,
       icon: faDatabase,
+    },
+    {
+      name: t("Auth.SupportCenter.Admin.Title", "Support Center"),
+      route: "/support-center-management",
+      view: <SupportCenterManagementView />,
+      showInNav: true,
+      icon: faHeadset,
     },
     {
       name: t("Auth.LandingPage.Title"),

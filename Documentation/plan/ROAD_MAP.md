@@ -118,8 +118,6 @@
   - [x] apps/app
   - [x] apps/landing
   - [x] apps/admin-panel
-  - [ ] apps/system-status
-  - [ ] apps/support-center
   - [ ] apps/documentation (Docs, API, release notes, Community docusaurus)
   - [ ] apps/manual (user guide, docusaurus)
   - [x] packages/ui
