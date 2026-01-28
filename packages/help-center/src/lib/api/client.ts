@@ -8,9 +8,9 @@ interface FetchOptions extends RequestInit {
 export async function fetchAPI<T>(endpoint: string, options: FetchOptions = {}): Promise<T> {
   const { useAuth = false, ...fetchOptions } = options;
 
-  const headers: HeadersInit = {
+  const headers: Record<string, string> = {
     "Content-Type": "application/json",
-    ...fetchOptions.headers,
+    ...(fetchOptions.headers as Record<string, string>),
   };
 
   if (useAuth && API_SECRET_KEY) {
