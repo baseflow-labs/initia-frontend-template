@@ -8,6 +8,21 @@ interface FooterProps {
 export default function Footer({ pages = [], systemMetadata }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
+  const apps = [
+    {
+      name: "User App",
+      url: "https://initia-frontend-template-user-app.vercel.app",
+    },
+    {
+      name: "Admin App",
+      url: "https://initia-frontend-template-admin-app.vercel.app",
+    },
+    {
+      name: "Help Center",
+      url: "https://initia-frontend-template-help-center.vercel.app",
+    },
+  ];
+
   return (
     <footer className="bg-dark text-white pt-5 pb-4">
       <div className="container">
@@ -98,9 +113,9 @@ export default function Footer({ pages = [], systemMetadata }: FooterProps) {
 
           {/* Dynamic Pages */}
           {pages.length > 0 && (
-            <div className="col-lg-4 col-md-6">
+            <div className="col-lg-4 col-md-3">
               <h6 className="fw-bold mb-3 text-uppercase" style={{ letterSpacing: "0.5px" }}>
-                Quick Links
+                Content
               </h6>
               <ul className="list-unstyled">
                 {pages.map((page) => (
@@ -113,6 +128,23 @@ export default function Footer({ pages = [], systemMetadata }: FooterProps) {
               </ul>
             </div>
           )}
+
+          {/* System App Links */}
+          <div className="col-lg-4 col-md-3">
+            <h6 className="fw-bold mb-3 text-uppercase" style={{ letterSpacing: "0.5px" }}>
+              Quick Links
+            </h6>
+
+            <ul className="list-unstyled">
+              {apps.map((page, i) => (
+                <li key={i} className="mb-2">
+                  <a href={page.url} className="footer-link text-white">
+                    {page.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
         <hr className="border-secondary opacity-25" />
