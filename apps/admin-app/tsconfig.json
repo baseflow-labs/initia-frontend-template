@@ -4,8 +4,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@initia/shared": ["../shared/src"],
-      "@initia/shared/*": ["../shared/src/*"]
+      "@initia/shared": ["../../packages/shared/src"],
+      "@initia/shared/*": ["../../packages/shared/src/*"]
     }
   },
   "include": ["src"]

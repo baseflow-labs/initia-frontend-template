@@ -5,20 +5,20 @@
     "skipLibCheck": true,
     "paths": {
       "@/*": ["./src/*"],
-      "@initia/shared": ["../shared/src"],
-      "@initia/shared/*": ["../shared/src/*"]
+      "@initia/shared": ["../../packages/shared/src"],
+      "@initia/shared/*": ["../../packages/shared/src/*"]
     }
   },
-  "include": ["src", "../shared/src/types/notifications.ts"],
+  "include": ["src", "../../packages/shared/src/types/notifications.ts"],
   "exclude": [
     "node_modules",
-    "../shared/src/ui/layouts",
-    "../shared/src/ui/components/offcanvas",
-    "../shared/src/ui/components/toaster",
-    "../shared/src/ui/components/form/wizard",
-    "../shared/src/api/auth",
-    "../shared/src/api/users",
-    "../shared/src/api/dashboard",
-    "../shared/src/api/notifications"
+    "../../packages/shared/src/ui/layouts",
+    "../../packages/shared/src/ui/components/offcanvas",
+    "../../packages/shared/src/ui/components/toaster",
+    "../../packages/shared/src/ui/components/form/wizard",
+    "../../packages/shared/src/api/auth",
+    "../../packages/shared/src/api/users",
+    "../../packages/shared/src/api/dashboard",
+    "../../packages/shared/src/api/notifications"
   ]
 }
