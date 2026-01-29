@@ -2,6 +2,7 @@
   "name": "@initia/help-center",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "description": "Public user guide and help center",
   "scripts": {
     "dev": "next dev -p 3003",
