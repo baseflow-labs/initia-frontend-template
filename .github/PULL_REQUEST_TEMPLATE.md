@@ -23,9 +23,9 @@ Closes #
 ### Code Quality
 
 - [ ] Code follows project conventions and style guide
-- [ ] ESLint passes (`yarn lint`)
-- [ ] Code is properly formatted (`yarn format`)
-- [ ] TypeScript type check passes (`yarn typecheck`)
+- [ ] ESLint passes (`pnpm lint`)
+- [ ] Code is properly formatted (`pnpm format`)
+- [ ] TypeScript type check passes (`pnpm typecheck`)
 - [ ] No console errors or warnings
 
 ### Testing
@@ -45,7 +45,7 @@ Closes #
 
 - [ ] All user-facing text uses i18next
 - [ ] New translation keys added to locale files
-- [ ] Locale files parsed and updated (`yarn parse-locales`)
+- [ ] Locale files parsed and updated (`pnpm parse-locales`)
 
 ### Review
 

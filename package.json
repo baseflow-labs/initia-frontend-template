@@ -3,6 +3,11 @@
   "description": "Initia React.js TypeScript Frontend Monorepo",
   "version": "0.1.1",
   "private": true,
+  "packageManager": "pnpm@9.15.1",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
   "workspaces": [
     "apps/*",
     "packages/*"

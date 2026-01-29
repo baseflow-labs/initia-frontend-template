@@ -79,7 +79,7 @@ chore(code): update docker image name
 
 - Keep the summary short (under 72 characters).
 - Use **imperative tone** (e.g., “add” not “added”).
-- Use `yarn commit` (Commitizen) to follow the format easily.
+- Use `pnpm commit` (Commitizen) to follow the format easily.
 
 ---
 

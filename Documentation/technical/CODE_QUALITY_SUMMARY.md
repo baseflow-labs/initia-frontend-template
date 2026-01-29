@@ -20,7 +20,7 @@
   "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,scss,md}\"",
   "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,json,css,scss,md}\"",
   "typecheck": "tsc --noEmit",
-  "validate": "yarn lint && yarn format:check && yarn typecheck"
+  "validate": "pnpm lint && pnpm format:check && pnpm typecheck"
 }
 ```
 
@@ -85,19 +85,19 @@
 
 ```bash
 # Check for linting issues
-yarn lint
+pnpm lint
 
 # Auto-fix linting issues
-yarn lint --fix
+pnpm lint --fix
 
 # Format all code
-yarn format
+pnpm format
 
 # Check types
-yarn typecheck
+pnpm typecheck
 
 # Run all checks
-yarn validate
+pnpm validate
 ```
 
 ### Git Workflow

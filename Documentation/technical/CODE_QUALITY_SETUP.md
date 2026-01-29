@@ -43,10 +43,10 @@ The project uses a **3-layer validation system** to ensure code quality:
 
 ```bash
 # Install dependencies
-yarn install
+pnpm install
 
 # Initialize Husky (one-time setup)
-yarn husky install
+pnpm husky install
 
 # Make hooks executable (if needed on Unix-based systems)
 chmod +x .husky/pre-commit
@@ -129,18 +129,18 @@ ls -la .husky/
 
 ```bash
 # Lint code
-yarn lint              # Check for linting issues
-yarn lint --fix        # Auto-fix linting issues
+pnpm lint              # Check for linting issues
+pnpm lint --fix        # Auto-fix linting issues
 
 # Format code
-yarn format            # Format all files with Prettier
-yarn format:check      # Check if files are formatted (CI)
+pnpm format            # Format all files with Prettier
+pnpm format:check      # Check if files are formatted (CI)
 
 # Type checking
-yarn typecheck         # Run TypeScript compiler checks
+pnpm typecheck         # Run TypeScript compiler checks
 
 # Run all checks
-yarn validate          # Run lint + format:check + typecheck
+pnpm validate          # Run lint + format:check + typecheck
 ```
 
 ## 🚨 Common Issues & Solutions
@@ -151,7 +151,7 @@ yarn validate          # Run lint + format:check + typecheck
 
 ```bash
 # Reinitialize Husky
-yarn husky install
+pnpm husky install
 
 # Make hooks executable
 chmod +x .husky/pre-commit
@@ -164,7 +164,7 @@ chmod +x .husky/pre-push
 
 ```bash
 # Run lint with auto-fix
-yarn lint --fix
+pnpm lint --fix
 
 # If issues remain, fix manually and commit
 ```
@@ -175,7 +175,7 @@ yarn lint --fix
 
 ```bash
 # Format all files
-yarn format
+pnpm format
 
 # Add formatted files
 git add .
@@ -190,7 +190,7 @@ git commit -m "your message"
 
 ```bash
 # Run typecheck to see all errors
-yarn typecheck
+pnpm typecheck
 
 # Fix errors in your editor
 # Common fixes:
@@ -221,7 +221,7 @@ git push --no-verify
 ### 1. Fix Issues Early
 
 - Don't wait for hooks to fail
-- Run `yarn lint` and `yarn typecheck` during development
+- Run `pnpm lint` and `pnpm typecheck` during development
 - Use editor extensions (ESLint, Prettier) for real-time feedback
 
 ### 2. Commit Often
@@ -233,7 +233,7 @@ git push --no-verify
 
 ```bash
 # Update ESLint, Prettier, TypeScript regularly
-yarn upgrade-interactive --latest
+pnpm upgrade-interactive --latest
 ```
 
 ### 4. Configure Your Editor
@@ -295,13 +295,13 @@ Edit `package.json`:
 
 ```bash
 # See ESLint report
-yarn lint
+pnpm lint
 
 # See formatting issues
-yarn format:check
+pnpm format:check
 
 # See TypeScript errors
-yarn typecheck
+pnpm typecheck
 ```
 
 ### GitHub Actions Results
@@ -331,8 +331,8 @@ yarn typecheck
 
 ```bash
 # Reinstall and reinitialize
-yarn install
-yarn husky install
+pnpm install
+pnpm husky install
 
 # Test the setup
 git add .
