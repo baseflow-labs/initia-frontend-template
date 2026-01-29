@@ -28,7 +28,7 @@ export default function Footer({ pages = [], systemMetadata }: FooterProps) {
       <div className="container">
         <div className="row g-4 pb-4">
           {/* Company Info */}
-          <div className="col-lg-5 col-md-6">
+          <div className="col-lg-3 col-md-6">
             <h4 className="fw-bold mb-3">
               {systemMetadata?.logo ? (
                 <img
@@ -113,7 +113,7 @@ export default function Footer({ pages = [], systemMetadata }: FooterProps) {
 
           {/* Dynamic Pages */}
           {pages.length > 0 && (
-            <div className="col-lg-4 col-md-3">
+            <div className="col-md-3">
               <h6 className="fw-bold mb-3 text-uppercase" style={{ letterSpacing: "0.5px" }}>
                 Content
               </h6>
@@ -130,7 +130,7 @@ export default function Footer({ pages = [], systemMetadata }: FooterProps) {
           )}
 
           {/* System App Links */}
-          <div className="col-lg-4 col-md-3">
+          <div className="col-md-3">
             <h6 className="fw-bold mb-3 text-uppercase" style={{ letterSpacing: "0.5px" }}>
               Quick Links
             </h6>
@@ -138,7 +138,12 @@ export default function Footer({ pages = [], systemMetadata }: FooterProps) {
             <ul className="list-unstyled">
               {apps.map((page, i) => (
                 <li key={i} className="mb-2">
-                  <a href={page.url} className="footer-link text-white">
+                  <a
+                    href={page.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="footer-link text-white"
+                  >
                     {page.name}
                   </a>
                 </li>
