@@ -16,7 +16,7 @@ COPY apps/${APP_NAME}/package.json ./apps/${APP_NAME}/
 COPY packages/shared/package.json ./packages/shared/
 
 # Install pnpm and dependencies
-RUN corepack enable && corepack prepare pnpm@9.15.1 --activate
+RUN corepack enable && corepack prepare pnpm@9.12.3 --activate
 RUN pnpm install --frozen-lockfile --filter=${APP_NAME} --filter=@initia/shared
 
 # Copy source code for the app and shared package
