@@ -27,20 +27,20 @@ jobs:
           cache: "yarn"
 
       - name: 📦 Install dependencies
-        run: yarn install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: 🔍 Run ESLint
-        run: yarn lint
+        run: pnpm lint
         continue-on-error: true
         id: lint
 
       - name: 🎨 Check code formatting
-        run: yarn format:check
+        run: pnpm format:check
         continue-on-error: true
         id: format
 
       - name: 🔬 Run TypeScript type check
-        run: yarn typecheck
+        run: pnpm typecheck
         continue-on-error: true
         id: typecheck
 

@@ -20,10 +20,10 @@
     "build": "pnpm --filter @initia/user-app --filter @initia/admin-app --filter @initia/landing-page --filter @initia/help-center --parallel build",
     "prepare": "husky install",
     "commit": "cz",
-    "lint": "pnpm --filter \"@initia/*\" --parallel lint",
-    "lint:fix": "pnpm --filter \"@initia/*\" --parallel lint:fix",
-    "format": "prettier --write \"packages/**/src/**/*.{ts,tsx,json,css,scss,md}\"",
-    "format:check": "prettier --check \"packages/**/src/**/*.{ts,tsx,json,css,scss,md}\"",
+    "lint": "pnpm --filter @initia/shared lint",
+    "lint:fix": "pnpm --filter @initia/shared lint:fix",
+    "format": "prettier --write \"packages/**/src/**/*.{ts,tsx,json,css,scss,md}\" \"apps/**/src/**/*.{ts,tsx,json,css,scss,md}\"",
+    "format:check": "prettier --check \"packages/**/src/**/*.{ts,tsx,json,css,scss,md}\" \"apps/**/src/**/*.{ts,tsx,json,css,scss,md}\"",
     "typecheck": "pnpm --filter \"@initia/*\" --parallel typecheck",
     "validate": "pnpm lint && pnpm format:check && pnpm typecheck"
   },
@@ -100,6 +100,9 @@
   "lint-staged": {
     "packages/**/src/**/*.{ts,tsx}": [
       "eslint --fix --max-warnings 0",
+      "prettier --write"
+    ],
+    "apps/**/src/**/*.{ts,tsx}": [
       "prettier --write"
     ],
     "*.{json,css,scss,md}": [
