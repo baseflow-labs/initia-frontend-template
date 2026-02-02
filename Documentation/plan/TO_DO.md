@@ -28,6 +28,7 @@
   - [ ] Build consent popup
   - [ ] Build saved projects dashboard
   - [ ] Allow download of project schema
+- [ ] Add show cases to landing page
 - [ ] Connect APIs to backend services
   - [ ] Notification
   - [ ] Form of Forms
