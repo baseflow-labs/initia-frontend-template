@@ -1,7 +1,7 @@
 {
   "name": "initia-monorepo",
   "description": "Initia React.js TypeScript Frontend Monorepo",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "private": true,
   "packageManager": "pnpm@9.12.3",
   "engines": {
