@@ -1,0 +1,210 @@
+# Deployment
+
+## Overview
+
+The Initia platform is deployed across multiple platforms, each optimized for its specific application type.
+
+## Deployment Options
+
+### Vercel (Recommended)
+
+Vercel is the recommended platform for all Next.js and Vite apps due to:
+
+- Built-in support for Next.js
+- Automatic deployments from git
+- Edge functions for APIs
+- Global CDN
+- Environment variable management
+
+#### Setup Vercel
+
+1. **Connect Repository**
+
+   ```bash
+   # Install Vercel CLI
+   npm i -g vercel
+
+   # Link project
+   vercel link
+   ```
+
+2. **Configure Environment Variables**
+
+   ```bash
+   # In Vercel dashboard or via CLI
+   vercel env add REACT_APP_API_URL
+   ```
+
+3. **Deploy**
+   ```bash
+   # Production deployment
+   vercel --prod
+   ```
+
+### Netlify
+
+Alternative deployment platform with similar features.
+
+#### Setup Netlify
+
+1. **Connect Repository**
+
+   ```bash
+   # Install Netlify CLI
+   npm i -g netlify-cli
+
+   # Link project
+   netlify link
+   ```
+
+2. **Deploy**
+   ```bash
+   netlify deploy --prod
+   ```
+
+### AWS Amplify
+
+For more complex infrastructure needs.
+
+#### Setup AWS Amplify
+
+See [AWS Amplify Guide](./AMPLIFY.md)
+
+## Application-Specific Deployment
+
+### User App (Vite)
+
+```bash
+# Build
+pnpm --filter @initia/user-app build
+
+# Output: apps/user-app/dist/
+
+# Deploy to Vercel
+vercel --prod --scope=user-app
+```
+
+### Admin App (Vite)
+
+```bash
+# Build
+pnpm --filter @initia/admin-app build
+
+# Deploy to Vercel
+vercel --prod --scope=admin-app
+```
+
+### Landing Page (Next.js)
+
+```bash
+# Build with SSG
+pnpm --filter @initia/landing-page build
+
+# Deploy to Vercel
+vercel --prod --scope=landing-page
+```
+
+### Help Center (Next.js)
+
+```bash
+# Build
+pnpm --filter @initia/help-center build
+
+# Deploy to Vercel
+vercel --prod --scope=help-center
+```
+
+### Documentation (Next.js + Nextra)
+
+```bash
+# Build with SSG
+pnpm --filter @initia/documentation build
+
+# Deploy to Vercel
+vercel --prod --scope=documentation
+```
+
+## Environment Configuration
+
+### Production Environment Variables
+
+```bash
+# .env.production
+REACT_APP_API_URL=https://api.yourdomain.com
+REACT_APP_API_TIMEOUT=10000
+NEXT_PUBLIC_ANALYTICS_ID=...
+```
+
+### Staging Environment Variables
+
+```bash
+# .env.staging
+REACT_APP_API_URL=https://staging-api.yourdomain.com
+REACT_APP_API_TIMEOUT=10000
+```
+
+## CI/CD Pipeline
+
+The repository includes GitHub Actions workflows for:
+
+- **Lint & Format Check**: `pnpm lint && pnpm format:check`
+- **Type Checking**: `pnpm typecheck`
+- **Build**: `pnpm build`
+- **Tests**: `pnpm test`
+
+### Auto-Release
+
+Commits following conventional commits are automatically released:
+
+```bash
+git commit -m "feat: new feature"  # Triggers patch release
+git commit -m "feat!: breaking change"  # Triggers major release
+```
+
+## Monitoring & Logging
+
+### Error Tracking
+
+Set up error tracking service:
+
+- [Sentry](https://sentry.io)
+- [LogRocket](https://logrocket.com)
+- [Rollbar](https://rollbar.com)
+
+### Performance Monitoring
+
+- Web Vitals tracking via `web-vitals` package
+- Vercel Analytics
+- Google Analytics integration
+
+## Rollback
+
+### Vercel Rollback
+
+```bash
+# View deployment history
+vercel list
+
+# Rollback to previous deployment
+vercel rollback [deployment-url]
+```
+
+### Git Rollback
+
+```bash
+# Revert specific commit
+git revert [commit-hash]
+
+# Force push (use with caution)
+git push --force-with-lease
+```
+
+## Post-Deployment Checklist
+
+- [ ] Verify all endpoints are accessible
+- [ ] Check environment variables are set correctly
+- [ ] Monitor error logs for 24 hours
+- [ ] Run smoke tests on all features
+- [ ] Verify database backups are taken
+- [ ] Update DNS records if needed
+- [ ] Notify team of deployment

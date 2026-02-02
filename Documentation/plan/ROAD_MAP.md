@@ -118,7 +118,7 @@
   - [x] apps/app
   - [x] apps/landing
   - [x] apps/admin-panel
-  - [ ] apps/documentation (Docs, API, release notes, Community docusaurus)
+  - [x] apps/documentation (Docs, API, release notes, Community docusaurus)
   - [x] apps/manual (user guide)
   - [x] packages/ui
   - [ ] packages/core
