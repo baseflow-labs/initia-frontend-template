@@ -27,7 +27,8 @@
     "commit": "cz",
     "lint": "pnpm --filter @initia/shared lint",
     "lint:fix": "pnpm --filter @initia/shared lint:fix",
-    "format": "prettier --write \"packages/**/src/**/*.{ts,tsx,json,css,scss,md}\" \"apps/**/src/**/*.{ts,tsx,json,css,scss,md}\"",
+    "format:imports": "eslint --fix \"packages/**/src/**/*.{ts,tsx}\" \"apps/**/src/**/*.{ts,tsx}\" --rule \"import/order: error\"",
+    "format": "pnpm format:imports && prettier --write \"packages/**/src/**/*.{ts,tsx,json,css,scss,md}\" \"apps/**/src/**/*.{ts,tsx,json,css,scss,md}\"",
     "format:check": "prettier --check \"packages/**/src/**/*.{ts,tsx,json,css,scss,md}\" \"apps/**/src/**/*.{ts,tsx,json,css,scss,md}\"",
     "typecheck": "pnpm --filter \"@initia/*\" --parallel typecheck",
     "validate": "pnpm lint && pnpm format:check && pnpm typecheck"
@@ -56,6 +57,7 @@
     "web-vitals": "^5.1.0"
   },
   "devDependencies": {
+    "eslint-plugin-import": "^2.29.1",
     "@commitlint/cli": "^20.2.0",
     "@commitlint/config-conventional": "^20.2.0",
     "@testing-library/dom": "^10.4.1",
