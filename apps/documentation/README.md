@@ -41,7 +41,7 @@ cd apps/documentation
 pnpm dev
 ```
 
-The documentation will be available at `http://localhost:3003`
+The documentation will be available at `http://localhost:3004`
 
 ### Building
 
@@ -232,7 +232,7 @@ NEXT_PUBLIC_API_URL=https://api.yourdomain.com
 
 ```bash
 # Development
-pnpm dev           # Start dev server (port 3003)
+pnpm dev           # Start dev server (port 3004)
 
 # Building
 pnpm build         # Build for production

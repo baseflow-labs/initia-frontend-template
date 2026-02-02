@@ -1,0 +1,205 @@
+/* RTL/LTR specific styles */
+
+/* Form labels alignment */
+body.rtl label {
+  text-align: right;
+}
+
+body.ltr label {
+  text-align: left;
+}
+
+/* Dropdown positioning and containment */
+.dropdown {
+  position: relative;
+}
+
+/* Dropdown menu base styles */
+.dropdown-menu {
+  position: absolute;
+  z-index: 1000;
+  min-width: 10rem;
+  max-width: 100vw;
+  max-width: min(100vw - 1rem, 500px);
+  margin: 0;
+  padding: 0.5rem 0;
+  display: none;
+  background-color: var(--bs-body-bg);
+  border: 1px solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+  box-shadow: var(--bs-box-shadow-sm);
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+/* RTL dropdown menu alignment */
+body.rtl .dropdown-menu-end {
+  left: 0 !important;
+  right: auto !important;
+  text-align: right;
+}
+
+body.rtl .dropdown-menu-start {
+  right: 0 !important;
+  left: auto !important;
+  text-align: right;
+}
+
+/* LTR dropdown menu alignment */
+body.ltr .dropdown-menu-end {
+  right: 0 !important;
+  left: auto !important;
+  text-align: left;
+}
+
+body.ltr .dropdown-menu-start {
+  left: 0 !important;
+  right: auto !important;
+  text-align: left;
+}
+
+/* Fix popper positioning */
+body.rtl .dropdown-menu[data-bs-popper] {
+  top: 100% !important;
+}
+
+body.ltr .dropdown-menu[data-bs-popper] {
+  top: 100% !important;
+}
+
+/* Input group adjustments for RTL */
+body.rtl .input-group > :not(:first-child) {
+  margin-right: -1px;
+  margin-left: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+body.rtl .input-group > :not(:last-child) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+/* Offcanvas positioning */
+body.rtl .offcanvas-start {
+  right: 0;
+  left: auto;
+  border-right: 0;
+  border-left: var(--bs-offcanvas-border-width) solid var(--bs-offcanvas-border-color);
+  transform: translateX(100%);
+}
+
+body.rtl .offcanvas-start.show {
+  transform: translateX(0);
+}
+
+body.rtl .offcanvas-end {
+  left: 0;
+  right: auto;
+  border-left: 0;
+  border-right: var(--bs-offcanvas-border-width) solid var(--bs-offcanvas-border-color);
+  transform: translateX(-100%);
+}
+
+body.rtl .offcanvas-end.show {
+  transform: translateX(0);
+}
+
+/* Navbar toggler icon flip for RTL */
+body.rtl .navbar-toggler-icon {
+  transform: scaleX(-1);
+}
+
+/* Breadcrumb separator */
+body.rtl .breadcrumb-item + .breadcrumb-item::before {
+  float: right;
+  padding-left: 0.5rem;
+  padding-right: 0;
+  content: var(--bs-breadcrumb-divider, "/");
+}
+
+/* Pagination */
+body.rtl .pagination {
+  direction: rtl;
+}
+
+/* Modal close button */
+body.rtl .btn-close {
+  margin: -0.5rem auto -0.5rem -0.5rem;
+}
+
+body.ltr .btn-close {
+  margin: -0.5rem -0.5rem -0.5rem auto;
+}
+
+/* Text alignment utilities override */
+body.rtl .text-start {
+  text-align: right !important;
+}
+
+body.rtl .text-end {
+  text-align: left !important;
+}
+
+body.ltr .text-start {
+  text-align: left !important;
+}
+
+body.ltr .text-end {
+  text-align: right !important;
+}
+
+/* Float utilities override */
+body.rtl .float-start {
+  float: right !important;
+}
+
+body.rtl .float-end {
+  float: left !important;
+}
+
+body.ltr .float-start {
+  float: left !important;
+}
+
+body.ltr .float-end {
+  float: right !important;
+}
+
+/* Fix floating buttons positioning */
+body.rtl .position-fixed.end-0 {
+  left: 0 !important;
+  right: auto !important;
+}
+
+body.ltr .position-fixed.end-0 {
+  right: 0 !important;
+  left: auto !important;
+}
+
+body.rtl .position-fixed.start-0 {
+  right: 0 !important;
+  left: auto !important;
+}
+
+body.ltr .position-fixed.start-0 {
+  left: 0 !important;
+  right: auto !important;
+}
+
+/* Fix button groups to not stretch */
+body.rtl .vstack {
+  align-items: flex-start;
+}
+
+body.ltr .vstack {
+  align-items: flex-start;
+}
+
+/* Ensure buttons in vstack don't take full width */
+body.rtl .vstack > .btn,
+body.ltr .vstack > .btn {
+  width: auto !important;
+}

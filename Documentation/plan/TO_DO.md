@@ -3,8 +3,8 @@
 ## Fixes
 
 - [x] Fix RTL issues
-  - [ ] Dropdown menus
-  - [ ] Input labels
+  - [x] Dropdown menus
+  - [x] Input labels
   - [x] Sidebar collapse caret
 - [x] Fix calendar contents UI
 - [x] Fix Layouts responsiveness
