@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
-import CopyRightView from "./copyright";
 import configs from "@initia/shared/config/configs";
+
+import CopyRightView from "./copyright";
 
 const CommonFooter = () => {
   const { t } = useTranslation();

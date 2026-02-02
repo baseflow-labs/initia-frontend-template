@@ -1,6 +1,7 @@
 import { useLayoutEffect, useState } from "react";
 
 import * as MessagingApi from "../../api/messaging";
+
 import Chat from "./Chat";
 import Sidebar from "./Sidebar";
 

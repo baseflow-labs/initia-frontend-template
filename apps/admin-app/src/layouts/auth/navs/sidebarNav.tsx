@@ -1,9 +1,10 @@
-import tempLogo from "@initia/shared/assets/images/brand/logo.png";
-import { useAppSelector } from "../../../store/hooks";
 import { faCircle, faCircleDot } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import tempLogo from "@initia/shared/assets/images/brand/logo.png";
 import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
+
+import { useAppSelector } from "../../../store/hooks";
 
 import { MenuItem, MenuList } from "./menuItemRenderer";
 
@@ -18,6 +19,7 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
   const { i18n } = useTranslation();
   const { user } = useAppSelector((state) => state.auth);
   const { logo, logoFull } = useAppSelector((state) => state.settings);
+  const { loading } = useAppSelector((state) => state.loading);
   const [expandedMenus, setExpandedMenus] = useState<{ [key: string]: boolean }>({});
 
   const toggleMenu = (menuName: string) => {
@@ -44,6 +46,7 @@ const Sidebar = ({ routes, collapsed, toggleSidebar, fixedRoutes }: Props) => {
             src={(collapsed ? logo : logoFull) || tempLogo}
             style={{ height: "40px" }}
             alt="Logo"
+            className={loading.length ? "spin" : ""}
           />
         </div>
 

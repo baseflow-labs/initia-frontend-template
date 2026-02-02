@@ -1,5 +1,4 @@
 import { AxiosError } from "axios";
-
 import { TFunction } from "i18next";
 
 export const apiCatchGlobalHandler = (err: AxiosError | unknown) => console.error({ err });

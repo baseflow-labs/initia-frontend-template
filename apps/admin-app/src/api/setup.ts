@@ -1,7 +1,8 @@
 import { initializeApiClient } from "@initia/shared/api";
+import { addNotification, NotificationProps } from "@initia/shared/types/notifications.js";
+
 import { logout, refreshToken as doRefreshToken } from "../store/actions/auth";
 import { endLoading, startLoading } from "../store/actions/loading";
-import { addNotification, NotificationProps } from "@initia/shared/types/notifications.js";
 import store, { RootState } from "../store/store";
 
 // Initialize the shared API client with user-app's store

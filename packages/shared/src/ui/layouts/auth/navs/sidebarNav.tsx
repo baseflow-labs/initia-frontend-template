@@ -1,11 +1,13 @@
-import tempLogo from "@/assets/images/brand/logo.png";
-import { useAppSelector } from "../../../store/hooks";
 import { faCircle, faCircleDot } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import { useAppSelector } from "../../../store/hooks";
+
 import { MenuItem, MenuList } from "./menuItemRenderer";
+
+import tempLogo from "@/assets/images/brand/logo.png";
 
 interface Props {
   routes: MenuItem[];

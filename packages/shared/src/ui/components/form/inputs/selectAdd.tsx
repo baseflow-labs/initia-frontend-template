@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { InputProps } from "..";
 import { commonInputClasses } from "src/utils/consts";
+
+import { InputProps } from "..";
 
 type Option = { value: string; label?: string };
 

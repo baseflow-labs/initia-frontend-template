@@ -6,6 +6,7 @@ import axios, {
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from "axios";
+
 import { NotificationProps } from "../types/notifications";
 
 declare module "axios" {

@@ -15,7 +15,6 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as SystemHealthApi from "@initia/shared/api/dashboard/systemHealth";
 import * as NotificationApi from "@initia/shared/api/notifications";
-
 import type { Notification } from "@initia/shared/types/notifications";
 import DashboardCard from "@initia/shared/ui/components/card/dashboardCard";
 import StatisticCards from "@initia/shared/ui/components/card/statisticCards";
@@ -24,6 +23,7 @@ import moment from "moment";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
+
 import { useAppSelector } from "../../../store/hooks";
 
 interface HealthInfo {

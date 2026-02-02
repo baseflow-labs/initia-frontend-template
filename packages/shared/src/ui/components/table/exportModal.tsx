@@ -1,11 +1,12 @@
 import React, { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
-
-import { TableColumn } from ".";
-import Form from "../form";
-import Modal from "../modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileDownload } from "@fortawesome/free-solid-svg-icons";
+
+import Form from "../form";
+import Modal from "../modal";
+
+import { TableColumn } from ".";
 
 interface Props {
   data: object[];

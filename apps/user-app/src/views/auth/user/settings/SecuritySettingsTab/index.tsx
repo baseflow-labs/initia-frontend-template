@@ -2,12 +2,13 @@ import { FormikErrors } from "formik";
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-
 import * as AuthApi from "@initia/shared/api/auth";
 import Form from "@initia/shared/ui/components/form";
+import { apiCatchGlobalHandler } from "@initia/shared/utils/function";
+
 import { addNotification } from "../../../../../store/actions/notifications";
 import { useAppSelector } from "../../../../../store/hooks";
-import { apiCatchGlobalHandler } from "@initia/shared/utils/function";
+
 import AccountDelete from "./AccountDelete";
 import { getPasswordResetSettingInputs } from "./inputs";
 

@@ -1,6 +1,8 @@
 import axios from "axios";
-import { LandingPagesResponse, Page, SystemMetadata } from "@/types/landing";
+
 import { getMockPages, getMockSystemMetadata } from "./dummyApiData";
+
+import { LandingPagesResponse, Page, SystemMetadata } from "@/types/landing";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api";
 

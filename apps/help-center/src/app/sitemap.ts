@@ -1,4 +1,5 @@
 import { MetadataRoute } from "next";
+
 import { getSections } from "@/lib/api/sections";
 import { getSubsections } from "@/lib/api/subsections";
 import { getArticlesBySubsection } from "@/lib/api/articles";

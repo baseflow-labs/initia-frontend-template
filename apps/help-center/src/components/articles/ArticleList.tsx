@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { Article } from "@/types/documentation";
 import { Clock, Eye } from "lucide-react";
+
+import { Article } from "@/types/documentation";
 
 interface ArticleListProps {
   articles: Article[];

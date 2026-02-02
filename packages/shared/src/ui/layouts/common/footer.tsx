@@ -1,5 +1,7 @@
 import { useTranslation } from "react-i18next";
+
 import CopyRightView from "./copyright";
+
 import configs from "@/configs";
 
 const CommonFooter = () => {

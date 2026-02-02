@@ -1,10 +1,11 @@
 import { faDollar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslation } from "react-i18next";
+import { TFunction } from "i18next";
 
 import { pluralLabelResolve } from "../../../utils/function";
+
 import DashboardCard from "./dashboardCard";
-import { TFunction } from "i18next";
 
 interface Props {
   programs: {

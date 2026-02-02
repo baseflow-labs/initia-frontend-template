@@ -20,7 +20,7 @@
 - [x] Fix layout issues
   - [x] Fix collapsed sidebar nav UI
   - [x] Fix offCanvas tools
-- [ ] Build loading indictor
+- [x] Build loading indictor
 - [ ] Building pagination & filter API integration
 - [ ] Fix landing page Wizard steps
   - [ ] Login after prompt

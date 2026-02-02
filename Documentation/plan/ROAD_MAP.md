@@ -118,7 +118,7 @@
   - [x] apps/app
   - [x] apps/landing
   - [x] apps/admin-panel
-  - [ ] apps/documentation (Docs, API, release notes, Community docusaurus)
+  - [x] apps/documentation (Docs, API, release notes, Community docusaurus)
   - [x] apps/manual (user guide)
   - [x] packages/ui
   - [ ] packages/core
@@ -216,7 +216,7 @@
 
 ### Sprint 26 — Auth integrations v2 (5 - 18 May, 2026)
 
-- [ ] OAuth login integration (Google + Microsoft) with clean provider abstraction
+- [ ] OAuth login integration (Google / Apple / Microsoft) with clean provider abstraction
 - [ ] Provider selection config (enabled/disabled per env/settings)
 - [ ] UX: login method switching + fallback email/pass
 
@@ -253,6 +253,9 @@ Implement only the “must-have knobs” first:
   - [x] How it Works
   - [x] Features
   - [x] Blog
+    - [ ] Single post view
+    - [ ] List view
+    - [ ] Carousel
   - [x] FAQ
   - [x] Support Center
   - [x] Demo request
@@ -260,6 +263,29 @@ Implement only the “must-have knobs” first:
   - [x] Testimonials
   - [x] Prominent Clients
   - [x] Contact
+  - [ ] Partners
+  - [ ] Text Blocks
+  - [ ] Carousel
+  - [ ] Image Blocks (gallery / single)
+  - [ ] Video Blocks (youtube / own with player)
+  - [ ] Team members
+  - [ ] Social links
+  - [ ] Accordion
+  - [ ] Chat / Command prompt box
+  - [ ] Google map
+- [ ] Build advanced landing page content edit
+  - [ ] Core component based (reflect all shared components)
+  - [ ] Design-based not user-based naming
+  - [ ] History / undo
+  - [ ] Custom styling for component
+    - [ ] BG
+    - [ ] Font
+    - [ ] Size
+    - [ ] Spacing
+    - [ ] Alignment
+    - [ ] Borders
+  - [ ] Section based components grouping
+  - [ ] Build variants of sections
 - [ ] Files management (simple library + tagging)
 
 ---

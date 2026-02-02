@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { Subsection } from "@/types/documentation";
 import { ChevronRight, FileText } from "lucide-react";
+
+import { Subsection } from "@/types/documentation";
 
 interface SubsectionCardProps {
   subsection: Subsection;

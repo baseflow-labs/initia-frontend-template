@@ -1,7 +1,8 @@
 import tempLogo from "@initia/shared/assets/images/brand/logo.png";
 import Button from "@initia/shared/ui/components/core/button";
-import { useAppSelector } from "../../../../../store/hooks";
 import { useTranslation } from "react-i18next";
+
+import { useAppSelector } from "../../../../../store/hooks";
 
 const UserProfileConnectionsView = () => {
   const { t } = useTranslation();

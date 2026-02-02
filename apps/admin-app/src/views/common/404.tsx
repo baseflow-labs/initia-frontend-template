@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-
 import Button from "@initia/shared/ui/components/core/button";
 
 const FourZeroFourError = () => {

@@ -1,7 +1,8 @@
 "use client";
 
-import { FAQContent } from "@/types/landing";
 import { useState } from "react";
+
+import { FAQContent } from "@/types/landing";
 
 interface FAQSectionProps {
   title: string;

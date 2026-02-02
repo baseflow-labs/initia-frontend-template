@@ -1,4 +1,20 @@
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { faWpforms } from "@fortawesome/free-brands-svg-icons";
+import { faDashboard, faGear, faGlobe, faTable } from "@fortawesome/free-solid-svg-icons";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Navigate, Route, Routes, useLocation } from "react-router";
+import { Fragment } from "react/jsx-runtime";
+
 import { applyRouteChanges } from "../../../utils/function";
+import AuthFooter from "../common/footer";
+
+import { FilePreviewModal } from "./globalModal";
+import DashboardNavbar from "./navs/navbar";
+import OffCanvasNav from "./navs/offcanvasNav";
+import OffCanvasTools from "./navs/offcanvasTools";
+import Sidebar from "./navs/sidebarNav";
+
 import { useWindowWidth } from "@/utils/hooks";
 import LandingPageManagement from "@/views/auth/core/landingPage";
 import MessagingView from "@/views/auth/user/messaging";
@@ -15,20 +31,6 @@ import DashboardView from "@/views/auth/dashboard";
 import TemplateDataTableExampleView from "@/views/auth/templateExamples/datatablePage";
 import TemplateDataViewExamplesView from "@/views/auth/templateExamples/dataView";
 import TemplateFormExamplesView from "@/views/auth/templateExamples/forms";
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { faWpforms } from "@fortawesome/free-brands-svg-icons";
-import { faDashboard, faGear, faGlobe, faTable } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { Navigate, Route, Routes, useLocation } from "react-router";
-import { Fragment } from "react/jsx-runtime";
-
-import AuthFooter from "../common/footer";
-import { FilePreviewModal } from "./globalModal";
-import DashboardNavbar from "./navs/navbar";
-import OffCanvasNav from "./navs/offcanvasNav";
-import OffCanvasTools from "./navs/offcanvasTools";
-import Sidebar from "./navs/sidebarNav";
 
 interface AuthRoute {
   name: string;

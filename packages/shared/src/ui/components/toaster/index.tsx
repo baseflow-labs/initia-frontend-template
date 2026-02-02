@@ -1,9 +1,10 @@
-import { removeNotification } from "@/store/actions/notifications";
-import { useAppSelector } from "@/store/hooks";
 import { faCheck, faInfo, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+
+import { useAppSelector } from "@/store/hooks";
+import { removeNotification } from "@/store/actions/notifications";
 
 const NotificationsToaster = () => {
   const { notifications } = useAppSelector((_) => _.notifications);

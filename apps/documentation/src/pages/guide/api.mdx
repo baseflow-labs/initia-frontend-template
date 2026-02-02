@@ -1,0 +1,195 @@
+# API Integration
+
+## Overview
+
+The Initia platform uses a centralized API client built with Axios for all backend communication.
+
+## API Client Setup
+
+The API client is configured in `@initia/shared`:
+
+```typescript
+// packages/shared/src/api/client.ts
+import axios from 'axios';
+
+const apiClient = axios.create({
+  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:3000/api',
+  timeout: 10000,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+// Request interceptor - add auth token
+apiClient.interceptors.request.use((config) => {
+  const token = localStorage.getItem('authToken');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+// Response interceptor - handle errors
+apiClient.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      // Handle unauthorized - redirect to login
+    }
+    return Promise.reject(error);
+  }
+);
+
+export default apiClient;
+```
+
+## Usage in Components
+
+### Redux Thunk
+
+```typescript
+// Redux action
+export const fetchUsers = createAsyncThunk('users/fetchUsers', async (params: FetchParams) => {
+  const response = await apiClient.get('/users', { params });
+  return response.data;
+});
+```
+
+### React Hooks
+
+```typescript
+// Custom hook
+export function useUsers() {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const response = await apiClient.get('/users');
+        setData(response.data);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  return { data, loading, error };
+}
+```
+
+## Authentication
+
+### Token Management
+
+Tokens are stored in localStorage and automatically included in all requests:
+
+```typescript
+// Login
+const login = async (email: string, password: string) => {
+  const response = await apiClient.post('/auth/login', { email, password });
+  localStorage.setItem('authToken', response.data.token);
+  return response.data;
+};
+
+// Logout
+const logout = () => {
+  localStorage.removeItem('authToken');
+};
+```
+
+### Refresh Token Flow
+
+The API client automatically handles token refresh:
+
+```typescript
+// Response interceptor handles 401
+// Calls refresh endpoint and retries original request
+```
+
+## Error Handling
+
+### Error Types
+
+```typescript
+interface ApiError {
+  message: string;
+  code: string;
+  status: number;
+  details?: Record<string, any>;
+}
+```
+
+### Error Handling Pattern
+
+```typescript
+try {
+  const response = await apiClient.get('/endpoint');
+  // Handle success
+} catch (error) {
+  if (axios.isAxiosError(error)) {
+    const apiError: ApiError = {
+      message: error.response?.data?.message || 'Unknown error',
+      code: error.response?.data?.code,
+      status: error.response?.status || 0,
+    };
+    // Handle API error
+  } else {
+    // Handle other errors
+  }
+}
+```
+
+## API Endpoints
+
+### Users
+
+```
+GET    /api/users              - List users
+GET    /api/users/:id          - Get user
+POST   /api/users              - Create user
+PUT    /api/users/:id          - Update user
+DELETE /api/users/:id          - Delete user
+```
+
+### Authentication
+
+```
+POST   /api/auth/login         - Login
+POST   /api/auth/register      - Register
+POST   /api/auth/logout        - Logout
+POST   /api/auth/refresh       - Refresh token
+```
+
+### Files
+
+```
+GET    /api/files              - List files
+POST   /api/files              - Upload file
+GET    /api/files/:id          - Download file
+DELETE /api/files/:id          - Delete file
+```
+
+## Configuration
+
+### Environment Variables
+
+```bash
+# .env
+REACT_APP_API_URL=http://localhost:3000/api
+REACT_APP_API_TIMEOUT=10000
+```
+
+### Axios Configuration
+
+| Option            | Default                     | Description                 |
+| ----------------- | --------------------------- | --------------------------- |
+| `baseURL`         | `http://localhost:3000/api` | API base URL                |
+| `timeout`         | `10000`                     | Request timeout in ms       |
+| `withCredentials` | `false`                     | Include cookies in requests |

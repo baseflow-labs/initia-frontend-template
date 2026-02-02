@@ -1,8 +1,9 @@
 import Button from "@initia/shared/ui/components/core/button";
-import { addNotification } from "../../../../../store/actions/notifications";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
+
+import { addNotification } from "../../../../../store/actions/notifications";
 
 type ChannelKey = "email" | "inApp";
 

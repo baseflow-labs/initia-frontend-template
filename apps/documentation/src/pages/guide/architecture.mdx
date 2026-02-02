@@ -1,0 +1,153 @@
+# Architecture
+
+## Overview
+
+The Initia platform is built as a monorepo using **Turbo** and **pnpm workspaces**. This allows us to:
+
+- Share code and components across multiple applications
+- Maintain consistent tooling and dependencies
+- Enable incremental builds and caching
+- Simplify dependency management
+
+## Monorepo Structure
+
+### Applications (`apps/`)
+
+#### User App (`apps/user-app/`)
+
+- Vite + React + TypeScript
+- User dashboard and core features
+- Role-based access control
+- Form handling with Formik
+
+#### Admin App (`apps/admin-app/`)
+
+- Vite + React + TypeScript
+- Administrative dashboard
+- User management
+- System health monitoring
+
+#### Landing Page (`apps/landing-page/`)
+
+- Next.js + React + TypeScript
+- Public-facing marketing site
+- SEO optimized
+- Content management ready
+
+#### Help Center (`apps/help-center/`)
+
+- Next.js + React + TypeScript + Tailwind
+- User support documentation
+- Knowledge base
+- FAQ management
+
+#### Documentation (`apps/documentation/`)
+
+- Next.js + Nextra
+- Technical documentation (this site)
+- API documentation
+- Development guides
+
+### Packages (`packages/`)
+
+#### Shared UI (`packages/shared/`)
+
+- Reusable React components
+- Bootstrap integration
+- Icons (FontAwesome)
+- Utility functions
+- API client setup
+
+#### i18n (`packages/i18n/`)
+
+- Internationalization configuration
+- Translation strings
+- Language detection
+- i18next setup
+
+## Technology Stack
+
+### Core Technologies
+
+- **React**: UI library (v19.2.4)
+- **TypeScript**: Type safety and better DX
+- **Next.js**: Framework for landing page and help center
+- **Vite**: Build tool for user and admin apps
+- **Turbo**: Monorepo build system
+
+### UI & Styling
+
+- **Bootstrap**: Component library (v5.3.8)
+- **Tailwind CSS**: Utility-first CSS (help-center, docs)
+- **FontAwesome**: Icon library (v7.1.0)
+
+### State Management & Forms
+
+- **Redux**: Global state management
+- **Formik**: Form handling and validation
+
+### Internationalization
+
+- **i18next**: Multi-language support
+- **react-i18next**: React integration
+
+### Development Tools
+
+- **ESLint**: Linting
+- **Prettier**: Code formatting
+- **Husky**: Git hooks
+- **Commitizen**: Conventional commits
+- **Testing Library**: Component testing
+
+## Build System
+
+### Turbo Configuration
+
+The monorepo uses Turbo for:
+
+- **Caching**: Speeds up builds by caching task outputs
+- **Parallel execution**: Runs independent tasks concurrently
+- **Incremental builds**: Only rebuilds changed packages
+
+### Task Configuration
+
+Key tasks defined in `turbo.json`:
+
+- `dev`: Development servers
+- `build`: Production builds
+- `lint`: Code linting
+- `typecheck`: TypeScript checking
+- `test`: Unit tests
+
+## Data Flow
+
+### API Integration
+
+All apps use a centralized axios instance configured in `@initia/shared`:
+
+```
+App Components
+    ↓
+Redux Store
+    ↓
+API Service (@initia/shared)
+    ↓
+Backend API
+```
+
+### State Management
+
+- **Local State**: React hooks for component state
+- **Global State**: Redux for app-wide state
+- **Async State**: API calls via Redux Thunk
+
+## Deployment
+
+Each app has its own deployment configuration:
+
+- **User/Admin Apps**: Vercel (Vite builds, static hosting)
+- **Landing Page**: Vercel (Next.js, SSG)
+- **Help Center**: Vercel (Next.js, SSR)
+- **Documentation**: Vercel (Next.js, SSG)
+
+See [Deployment Guides](/deployment) for detailed instructions.

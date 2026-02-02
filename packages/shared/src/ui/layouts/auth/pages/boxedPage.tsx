@@ -1,6 +1,8 @@
 import { Fragment } from "react/jsx-runtime";
-import CardComp from "@/components/card/card";
+
 import PageTemplate from "./pageTemplate";
+
+import CardComp from "@/components/card/card";
 
 const BoxedPage = ({ title = "", className = "", children = <></> }) => {
   return (

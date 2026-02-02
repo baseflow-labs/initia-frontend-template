@@ -1,8 +1,10 @@
-import { useAppSelector } from "../../../store/hooks";
 import { Fragment, useState } from "react";
 
-import OffcanvasComp from "@/components/offcanvas";
+import { useAppSelector } from "../../../store/hooks";
+
 import { MenuItem, MenuList } from "./menuItemRenderer";
+
+import OffcanvasComp from "@/components/offcanvas";
 
 interface Props {
   routes: MenuItem[];

@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+
 import { getSection, getSections } from "@/lib/api/sections";
 import { getSubsections } from "@/lib/api/subsections";
 import { SubsectionCard } from "@/components/sections/SubsectionCard";

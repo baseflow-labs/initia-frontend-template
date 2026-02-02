@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import ApiDataTable from "@initia/shared/ui/components/table/apiDatatable";
+
 import { sectionTableColumns } from "./inputs";
 
 const ManualSectionsView = () => {

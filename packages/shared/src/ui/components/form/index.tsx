@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import Button from "../core/button";
 import Spinner from "../core/spinner";
 import { MoneyUnit } from "../table";
+
 import InputComp from "./Input";
 
 export interface InputTypeProps {

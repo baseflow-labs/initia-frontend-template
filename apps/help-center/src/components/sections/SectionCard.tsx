@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { Section } from "@/types/documentation";
 import { ChevronRight, FileText } from "lucide-react";
+
+import { Section } from "@/types/documentation";
 
 interface SectionCardProps {
   section: Section;

@@ -1,5 +1,7 @@
 import React from "react";
+
 import { InputProps } from "../..";
+
 import CheckboxInput from "./checkbox";
 import ButtonBasedBooleanInputView from "./button";
 import SwitchBasedBooleanInputView from "./switch";

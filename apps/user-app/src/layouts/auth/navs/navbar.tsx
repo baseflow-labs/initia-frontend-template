@@ -3,8 +3,6 @@ import tempLogo from "@initia/shared/assets/images/brand/logo.png";
 import LangButton from "@initia/shared/ui/components/button/lang";
 import Button from "@initia/shared/ui/components/core/button";
 import DropdownComp from "@initia/shared/ui/components/dropdown";
-import { logout } from "../../../store/actions/auth";
-import { useAppSelector } from "../../../store/hooks";
 import { apiCatchGlobalHandler } from "@initia/shared/utils/function";
 import {
   faBars,
@@ -22,6 +20,9 @@ import { FormEvent, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
+
+import { useAppSelector } from "../../../store/hooks";
+import { logout } from "../../../store/actions/auth";
 
 export interface Notification {
   id: string;

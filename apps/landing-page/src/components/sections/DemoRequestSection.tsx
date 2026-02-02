@@ -1,6 +1,7 @@
 "use client";
-import { DemoRequestContent } from "@/types/landing";
 import { useState } from "react";
+
+import { DemoRequestContent } from "@/types/landing";
 
 interface DemoRequestSectionProps {
   title: string;

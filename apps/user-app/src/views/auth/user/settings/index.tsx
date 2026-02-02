@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-
 import {
   faBell,
   faDashboard,
@@ -10,6 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import TabsComp from "@initia/shared/ui/components/tab";
 import PageTemplate from "@initia/shared/ui/layouts/auth/pages/pageTemplate";
+
 import AccountSettingsTab from "./AccountSettingsTab";
 import SystemSettingsTab from "./SystemSettings";
 import BillingSettingsTab from "./BillingSettingsTab";

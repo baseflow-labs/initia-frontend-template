@@ -5,10 +5,10 @@ import axios, {
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from "axios";
+import { addNotification } from "@initia/shared/types/notifications.js";
 
 import { refreshToken as doRefreshToken, logout } from "../store/actions/auth";
 import { endLoading, startLoading } from "../store/actions/loading";
-import { addNotification } from "@initia/shared/types/notifications.js";
 import store, { RootState } from "../store/store";
 
 declare module "axios" {

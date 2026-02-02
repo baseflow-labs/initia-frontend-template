@@ -1,0 +1,8 @@
+{
+  "extends": "../../.eslintrc.json",
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/no-explicit-any": "warn"
+  },
+  "ignorePatterns": [".next", "out", "dist", "node_modules", "*.config.js", "*.config.ts"]
+}

@@ -1,7 +1,8 @@
 "use client";
 
-import { BlogContent } from "@/types/landing";
 import { useState } from "react";
+
+import { BlogContent } from "@/types/landing";
 
 interface BlogSectionProps {
   title: string;

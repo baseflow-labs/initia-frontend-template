@@ -1,6 +1,7 @@
 import React from "react";
-import { InputProps } from "../..";
 import { useTranslation } from "react-i18next";
+
+import { InputProps } from "../..";
 
 type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 

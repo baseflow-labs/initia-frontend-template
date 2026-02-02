@@ -1,7 +1,8 @@
 import { actionProps, TableProps } from "../../../components/table";
 import ApiDataTable from "../../../components/table/apiDatatable";
-import PageTemplate from "./pageTemplate";
 import { ActionButtonProps } from "../../../components/button/actionButtons";
+
+import PageTemplate from "./pageTemplate";
 
 interface Props extends TableProps {
   title: string;

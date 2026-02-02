@@ -3,12 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import DynamicTable, { actionProps, TableColumn } from ".";
 import service, { customFilterProps, formatGetFilters } from "../../../api";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import Button from "../core/button";
 import Form from "../form";
 import Modal from "../modal";
+
+import DynamicTable, { actionProps, TableColumn } from ".";
 
 interface Props {
   dataApiEndpoint: string;

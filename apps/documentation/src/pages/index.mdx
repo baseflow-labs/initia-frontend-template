@@ -1,0 +1,101 @@
+# Getting Started
+
+Welcome to the Initia Documentation. This guide will help you get started with the platform.
+
+## Quick Start
+
+### Prerequisites
+
+- Node.js 20+
+- pnpm 9.12.3+
+- Basic knowledge of React and TypeScript
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/your-org/initia-fe.git
+cd initia-fe
+
+# Install dependencies
+pnpm install
+
+# Start the development server
+pnpm dev
+```
+
+## Project Structure
+
+```
+initia-fe/
+├── apps/
+│   ├── user-app/          # User dashboard application
+│   ├── admin-app/         # Admin panel application
+│   ├── landing-page/      # Landing page (Next.js)
+│   ├── help-center/       # Help center (Next.js)
+│   └── documentation/     # Technical documentation (This app)
+├── packages/
+│   ├── shared/           # Shared UI components and utilities
+│   └── i18n/             # Internationalization configuration
+├── scripts/              # Automation and maintenance scripts
+└── Documentation/        # Guides and documentation files
+```
+
+## Key Features
+
+- **Monorepo Setup**: Managed with Turbo and pnpm workspaces
+- **Shared Component Library**: Reusable UI components via `@initia/shared`
+- **Type-Safe**: Full TypeScript support across all packages
+- **Internationalization**: Multi-language support with i18next
+- **Documentation**: This technical documentation powered by Nextra
+
+## Development Workflow
+
+### Running Development Server
+
+```bash
+# Run all apps in parallel
+pnpm dev
+
+# Run specific app
+pnpm dev:user
+pnpm dev:admin
+pnpm dev:landing
+pnpm dev:help
+```
+
+### Building for Production
+
+```bash
+# Build all apps
+pnpm build
+
+# Build specific app
+pnpm build:user
+```
+
+### Code Quality
+
+```bash
+# Run linting
+pnpm lint
+
+# Fix linting issues
+pnpm lint:fix
+
+# Format code
+pnpm format
+
+# Type checking
+pnpm typecheck
+
+# Validate everything
+pnpm validate
+```
+
+## Next Steps
+
+- [Architecture Guide](/architecture)
+- [Deployment](/deployment)
+- [API Integration](/api)
+- [Components Library](/components)

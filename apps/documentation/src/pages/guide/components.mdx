@@ -1,0 +1,293 @@
+# Shared Components
+
+## Overview
+
+The `@initia/shared` package provides reusable UI components and utilities used across all applications.
+
+## Component Categories
+
+### Layout Components
+
+#### Container
+
+A responsive container component with max-width constraints.
+
+```tsx
+import { Container } from '@initia/shared';
+
+export function MyPage() {
+  return (
+    <Container>
+      <h1>Page Title</h1>
+    </Container>
+  );
+}
+```
+
+#### Grid System
+
+Bootstrap-based grid system for responsive layouts.
+
+```tsx
+import { Container, Row, Col } from '@initia/shared';
+
+export function GridLayout() {
+  return (
+    <Container>
+      <Row>
+        <Col md={6}>Half width on medium screens</Col>
+        <Col md={6}>Half width on medium screens</Col>
+      </Row>
+    </Container>
+  );
+}
+```
+
+### Form Components
+
+#### Input
+
+Text input component with validation support.
+
+```tsx
+import { Input } from '@initia/shared';
+
+export function MyForm() {
+  const [value, setValue] = useState('');
+
+  return (
+    <Input
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+      placeholder="Enter text"
+      error="Email is invalid"
+    />
+  );
+}
+```
+
+#### Select
+
+Dropdown select component.
+
+```tsx
+import { Select } from '@initia/shared';
+
+export function SelectExample() {
+  const [selected, setSelected] = useState('');
+
+  return (
+    <Select value={selected} onChange={setSelected}>
+      <option value="">Choose option</option>
+      <option value="1">Option 1</option>
+      <option value="2">Option 2</option>
+    </Select>
+  );
+}
+```
+
+#### Button
+
+Customizable button component.
+
+```tsx
+import { Button } from '@initia/shared';
+
+export function ButtonExample() {
+  return (
+    <>
+      <Button variant="primary">Primary</Button>
+      <Button variant="secondary">Secondary</Button>
+      <Button variant="outline">Outline</Button>
+      <Button disabled>Disabled</Button>
+    </>
+  );
+}
+```
+
+### Feedback Components
+
+#### Alert
+
+Alert/notification component.
+
+```tsx
+import { Alert } from '@initia/shared';
+
+export function AlertExample() {
+  return (
+    <>
+      <Alert variant="success">Success message</Alert>
+      <Alert variant="error">Error message</Alert>
+      <Alert variant="warning">Warning message</Alert>
+      <Alert variant="info">Info message</Alert>
+    </>
+  );
+}
+```
+
+#### Toast
+
+Toast notification component.
+
+```tsx
+import { useToast } from '@initia/shared';
+
+export function ToastExample() {
+  const { show } = useToast();
+
+  return <Button onClick={() => show('Success!', 'success')}>Show Toast</Button>;
+}
+```
+
+#### LoadingIndicator
+
+Loading spinner component.
+
+```tsx
+import { LoadingIndicator } from '@initia/shared';
+
+export function LoadingExample() {
+  return <LoadingIndicator />;
+}
+```
+
+### Data Display Components
+
+#### Table
+
+Responsive table component with pagination.
+
+```tsx
+import { Table } from '@initia/shared';
+
+const columns = [
+  { key: 'name', label: 'Name' },
+  { key: 'email', label: 'Email' },
+];
+
+const data = [
+  { id: 1, name: 'John', email: 'john@example.com' },
+  { id: 2, name: 'Jane', email: 'jane@example.com' },
+];
+
+export function TableExample() {
+  return <Table columns={columns} data={data} />;
+}
+```
+
+#### Card
+
+Card component for grouping content.
+
+```tsx
+import { Card } from '@initia/shared';
+
+export function CardExample() {
+  return (
+    <Card title="Card Title">
+      <p>Card content goes here</p>
+    </Card>
+  );
+}
+```
+
+### Navigation Components
+
+#### Navbar
+
+Top navigation bar.
+
+```tsx
+import { Navbar, Nav } from '@initia/shared';
+
+export function NavbarExample() {
+  return (
+    <Navbar>
+      <Nav>
+        <Nav.Link href="/">Home</Nav.Link>
+        <Nav.Link href="/about">About</Nav.Link>
+      </Nav>
+    </Navbar>
+  );
+}
+```
+
+## Utilities
+
+### API Client
+
+Configured Axios instance for API calls.
+
+```tsx
+import { apiClient } from '@initia/shared';
+
+const response = await apiClient.get('/users');
+```
+
+### Hooks
+
+Common React hooks for application logic.
+
+```tsx
+import { useAuth, useFetch } from '@initia/shared';
+
+export function MyComponent() {
+  const { user, logout } = useAuth();
+  const { data, loading } = useFetch('/api/data');
+
+  return <div>User: {user?.name}</div>;
+}
+```
+
+### Utilities
+
+Helper functions for common tasks.
+
+```tsx
+import { formatDate, formatCurrency } from '@initia/shared';
+
+const date = formatDate(new Date()); // "Feb 2, 2026"
+const price = formatCurrency(99.99); // "$99.99"
+```
+
+## Styling
+
+All components are styled with Bootstrap classes and can be customized using CSS classes.
+
+### Theme Variables
+
+```css
+:root {
+  --primary: #3b82f6;
+  --secondary: #8b5cf6;
+  --success: #10b981;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --info: #0ea5e9;
+}
+```
+
+### Custom Styling
+
+```tsx
+import { Button } from '@initia/shared';
+
+export function CustomButton() {
+  return <Button className="custom-btn">Custom Styled Button</Button>;
+}
+```
+
+## Contributing
+
+To add new components to `@initia/shared`:
+
+1. Create component in `packages/shared/src/ui/components/`
+2. Export from `packages/shared/src/index.ts`
+3. Add stories to Storybook (if configured)
+4. Add tests in `__tests__/` folder
+5. Update this documentation
+
+---
+
+For more details, see the [Shared Package README](../../packages/shared/README.md)
