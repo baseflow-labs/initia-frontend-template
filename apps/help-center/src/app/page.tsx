@@ -1,7 +1,8 @@
+import { BookOpen, MessageSquare, Settings, Zap } from "lucide-react";
+
 import { SearchBar } from "@/components/search/SearchBar";
 import { SectionCard } from "@/components/sections/SectionCard";
 import { getSections } from "@/lib/api/sections";
-import { BookOpen, MessageSquare, Settings, Zap } from "lucide-react";
 
 export const revalidate = 3600; // Revalidate every hour
 

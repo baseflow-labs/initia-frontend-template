@@ -8,6 +8,7 @@ import * as authApi from "../../api/auth";
 import BelowInputButton from "../../ui/components/button/belowInput";
 import Form from "../../ui/components/form";
 import { apiCatchGlobalHandler } from "../../utils/function";
+
 import { forgotInputs, resetInputs } from "./inputs";
 
 const ForgotPassword = () => {

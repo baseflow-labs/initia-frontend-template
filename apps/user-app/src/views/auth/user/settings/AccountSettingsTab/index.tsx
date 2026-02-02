@@ -1,11 +1,12 @@
 import Button from "@initia/shared/ui/components/core/button";
 import Form from "@initia/shared/ui/components/form";
-import { addNotification } from "../../../../../store/actions/notifications";
-import { useAppSelector } from "../../../../../store/hooks";
 import { apiCatchGlobalHandler } from "@initia/shared/utils/function";
 import { ChangeEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
+
+import { useAppSelector } from "../../../../../store/hooks";
+import { addNotification } from "../../../../../store/actions/notifications";
 
 import { inputs } from "./consts";
 

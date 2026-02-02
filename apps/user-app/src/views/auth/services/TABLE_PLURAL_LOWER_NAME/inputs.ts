@@ -1,6 +1,5 @@
 import { renderDataFromOptions } from "@initia/shared/utils/function";
 import type { Row } from "@initia/shared/ui/components/table";
-
 import type { TFunction } from "i18next";
 
 export const getUserRoles = (t: TFunction) => [

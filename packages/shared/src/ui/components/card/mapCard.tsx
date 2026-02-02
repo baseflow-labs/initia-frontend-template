@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 
 import Button from "../core/button";
 import MapWithMarkers from "../googleMap";
+
 import DashboardCard from "./dashboardCard";
 
 export interface LocationProps {

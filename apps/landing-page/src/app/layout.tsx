@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+
 import "@initia/shared/styles/index.scss";
 import { Navbar, Footer } from "@/components/layout";
 import { landingApi } from "@/lib/api";

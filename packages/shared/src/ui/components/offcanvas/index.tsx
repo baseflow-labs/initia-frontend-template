@@ -1,6 +1,7 @@
-import tempLogo from "../../../assets/images/brand/logo.png";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import tempLogo from "../../../assets/images/brand/logo.png";
 import Button from "../core/button";
 
 interface Props {

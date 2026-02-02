@@ -9,8 +9,9 @@ import Button from "../../ui/components/core/button";
 import PageTemplate from "../../ui/layouts/auth/pages/pageTemplate";
 import { viewDayDateFormat, viewTimeFormat } from "../../utils/consts";
 import { apiCatchGlobalHandler } from "../../utils/function";
-import NotificationsHeaderView from "./Header";
 import type { Notification } from "../../types/notifications";
+
+import NotificationsHeaderView from "./Header";
 
 const NotificationsView = () => {
   const { t } = useTranslation();

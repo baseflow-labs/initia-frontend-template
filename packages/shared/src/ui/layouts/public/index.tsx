@@ -1,16 +1,17 @@
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router";
+import { useEffect } from "react";
+
+import { useAppSelector } from "../../../store/hooks";
+import { applyRouteChanges } from "../../../utils/function";
+import CommonFooter from "../common/footer";
 
 import tempLogo from "@/assets/images/brand/logo.png";
 import Button from "@/components/core/button";
-import { useAppSelector } from "../../../store/hooks";
-import { applyRouteChanges } from "../../../utils/function";
 import ForgotPasswordView from "@/views/public/forgotPassword";
 import LoginView from "@/views/public/login";
 import RegisterView from "@/views/public/register";
 import ResetPasswordView from "@/views/public/ResetPassword";
-import { useEffect } from "react";
-import CommonFooter from "../common/footer";
 
 const AuthLayout = () => {
   const { t } = useTranslation();

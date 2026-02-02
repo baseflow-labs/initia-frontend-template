@@ -1,8 +1,9 @@
 import { useTranslation } from "react-i18next";
 import Button from "@initia/shared/ui/components/core/button";
 import Form from "@initia/shared/ui/components/form";
-import { dependencyBasedOrder, inputs } from "./inputs";
 import { tableRelationsList, tablesList } from "@initia/shared/api/demoData";
+
+import { dependencyBasedOrder, inputs } from "./inputs";
 
 const SystemDataBulkInsertionView = () => {
   const { t } = useTranslation();

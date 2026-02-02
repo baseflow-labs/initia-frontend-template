@@ -7,6 +7,7 @@ import { applyRouteChanges } from "@initia/shared/utils/function";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router";
+
 import { useAppSelector } from "../../store/hooks";
 import CommonFooter from "../common/footer";
 

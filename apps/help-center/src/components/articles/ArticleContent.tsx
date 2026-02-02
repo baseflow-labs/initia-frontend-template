@@ -1,8 +1,9 @@
 "use client";
 
-import { Article } from "@/types/documentation";
 import { Clock, User, ThumbsUp, ThumbsDown } from "lucide-react";
 import { useState } from "react";
+
+import { Article } from "@/types/documentation";
 
 interface ArticleContentProps {
   article: Article;

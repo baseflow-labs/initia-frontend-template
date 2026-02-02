@@ -1,7 +1,8 @@
+import type { Metadata } from "next";
+
 import SectionRenderer from "@/components/sections/SectionRenderer";
 import { landingApi } from "@/lib/api";
 import "@initia/shared/styles/index.scss";
-import type { Metadata } from "next";
 
 interface PageProps {
   params: Promise<{

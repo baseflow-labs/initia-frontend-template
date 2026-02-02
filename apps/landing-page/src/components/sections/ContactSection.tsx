@@ -1,6 +1,7 @@
 "use client";
-import { ContactContent } from "@/types/landing";
 import { useState } from "react";
+
+import { ContactContent } from "@/types/landing";
 
 interface ContactSectionProps {
   title: string;

@@ -1,6 +1,7 @@
 import React from "react";
-import { InputProps } from "..";
 import { commonInputClasses } from "src/utils/consts";
+
+import { InputProps } from "..";
 
 type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 

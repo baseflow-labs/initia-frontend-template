@@ -1,6 +1,7 @@
 "use client";
-import { TestimonialsContent } from "@/types/landing";
 import { useState } from "react";
+
+import { TestimonialsContent } from "@/types/landing";
 
 interface TestimonialsSectionProps {
   title: string;

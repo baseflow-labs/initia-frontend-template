@@ -1,7 +1,6 @@
 import { useField } from "formik";
 import React from "react";
 
-import { InputProps, InputTypeProps } from ".";
 import DateInput from "./inputs/date";
 import DefaultInput from "./inputs/default";
 import FileInput from "./inputs/file";
@@ -18,6 +17,8 @@ import TextareaInput from "./inputs/textarea";
 import BooleanInput from "./inputs/boolean";
 import RatingInput from "./inputs/rating";
 import RangeInput from "./inputs/number/range";
+
+import { InputProps, InputTypeProps } from ".";
 
 type FinalInput = InputProps &
   React.InputHTMLAttributes<HTMLInputElement> &

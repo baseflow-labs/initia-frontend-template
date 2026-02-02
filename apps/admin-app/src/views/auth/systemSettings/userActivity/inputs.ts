@@ -1,5 +1,4 @@
 import { Row } from "@initia/shared/ui/components/table";
-
 import type { TFunction } from "i18next";
 
 export const inputs = (t: TFunction) => [

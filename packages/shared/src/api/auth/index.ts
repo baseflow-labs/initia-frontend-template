@@ -1,5 +1,4 @@
 import type { AuthResponse } from "../../types/auth";
-
 import api, { EnvelopeResponse } from "../";
 
 export interface loginCredentials {

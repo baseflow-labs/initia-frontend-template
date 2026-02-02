@@ -4,12 +4,13 @@ import { Suspense, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router";
+import { apiCatchGlobalHandler } from "@initia/shared/utils/function";
+
 import * as MetadataApi from "./api/metadata";
 import AuthLayout from "./layouts/auth";
 import PublicLayout from "./layouts/public";
 import { setMetadata } from "./store/actions/settings";
 import { useAppSelector } from "./store/hooks";
-import { apiCatchGlobalHandler } from "@initia/shared/utils/function";
 
 const App = () => {
   const dispatch = useDispatch();

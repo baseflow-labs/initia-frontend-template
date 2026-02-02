@@ -1,3 +1,17 @@
+import HeroSection from "./HeroSection";
+import FeaturesSection from "./FeaturesSection";
+import PricingSection from "./PricingSection";
+import FAQSection from "./FAQSection";
+import TestimonialsSection from "./TestimonialsSection";
+import BlogSection from "./BlogSection";
+import ContactSection from "./ContactSection";
+import ClientsSection from "./ClientsSection";
+import TeamSection from "./TeamSection";
+import AboutSection from "./AboutSection";
+import HowItWorksSection from "./HowItWorksSection";
+import DemoRequestSection from "./DemoRequestSection";
+import CareersSection from "./CareersSection";
+
 import {
   Section,
   HeroContent,
@@ -14,19 +28,6 @@ import {
   DemoRequestContent,
   CareersContent,
 } from "@/types/landing";
-import HeroSection from "./HeroSection";
-import FeaturesSection from "./FeaturesSection";
-import PricingSection from "./PricingSection";
-import FAQSection from "./FAQSection";
-import TestimonialsSection from "./TestimonialsSection";
-import BlogSection from "./BlogSection";
-import ContactSection from "./ContactSection";
-import ClientsSection from "./ClientsSection";
-import TeamSection from "./TeamSection";
-import AboutSection from "./AboutSection";
-import HowItWorksSection from "./HowItWorksSection";
-import DemoRequestSection from "./DemoRequestSection";
-import CareersSection from "./CareersSection";
 
 interface SectionRendererProps {
   section: Section;

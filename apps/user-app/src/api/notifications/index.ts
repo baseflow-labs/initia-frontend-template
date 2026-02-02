@@ -1,4 +1,5 @@
 import type { Notification } from "@initia/shared/types/notifications";
+
 import api, { EnvelopeResponse } from "..";
 
 const mainPath = "/notification";

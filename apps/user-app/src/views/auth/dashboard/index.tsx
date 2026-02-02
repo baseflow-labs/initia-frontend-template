@@ -15,9 +15,9 @@ import moment from "moment";
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
+import type { Notification } from "@initia/shared/types/notifications";
 
 import { useAppSelector } from "../../../store/hooks";
-import type { Notification } from "@initia/shared/types/notifications";
 
 const DashboardView = () => {
   const { t } = useTranslation();

@@ -1,7 +1,8 @@
 "use client";
 
-import { Page, SystemMetadata } from "@/types/landing";
 import { useEffect, useState } from "react";
+
+import { Page, SystemMetadata } from "@/types/landing";
 
 interface NavbarProps {
   pages?: Page[];

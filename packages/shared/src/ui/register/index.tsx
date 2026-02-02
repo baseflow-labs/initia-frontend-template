@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import * as authApi from "../..//api/auth";
 import Form from "../..//ui/components/form";
 import { apiCatchGlobalHandler } from "../..//utils/function";
+
 import { formInputs } from "./inputs";
 
 const RegisterView = () => {

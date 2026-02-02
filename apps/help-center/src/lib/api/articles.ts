@@ -1,4 +1,5 @@
 import { fetchAPI as _fetchAPI } from "./client";
+
 import { Article } from "@/types/documentation";
 
 // Mock data for development

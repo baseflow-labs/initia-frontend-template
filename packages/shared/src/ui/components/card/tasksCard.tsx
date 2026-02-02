@@ -1,9 +1,10 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslation } from "react-i18next";
 
 import Button from "../core/button";
+
 import DashboardCard from "./dashboardCard";
-import { useTranslation } from "react-i18next";
 
 interface Props {
   label: string;

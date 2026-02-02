@@ -1,5 +1,7 @@
 import React from "react";
+
 import { InputProps } from "../..";
+
 import StarsInput from "./stars";
 
 type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;

@@ -4,6 +4,7 @@ import { Suspense, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router";
+
 import * as MetadataApi from "./api/metadata";
 import AuthLayout from "./layouts/auth";
 import PublicLayout from "./layouts/public";

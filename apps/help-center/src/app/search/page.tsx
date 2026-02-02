@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+
 import { searchArticles } from "@/lib/api/articles";
 import { ArticleList } from "@/components/articles/ArticleList";
 import { SearchBar } from "@/components/search/SearchBar";

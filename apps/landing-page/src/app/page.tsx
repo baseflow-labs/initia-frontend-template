@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+
 import { landingApi } from "@/lib/api";
 
 export default async function HomePage() {

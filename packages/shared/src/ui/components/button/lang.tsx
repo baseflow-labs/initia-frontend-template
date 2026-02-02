@@ -1,7 +1,8 @@
 import { useTranslation } from "react-i18next";
-import DropdownComp from "../dropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLanguage } from "@fortawesome/free-solid-svg-icons";
+
+import DropdownComp from "../dropdown";
 
 const LangButton = () => {
   const { i18n } = useTranslation();

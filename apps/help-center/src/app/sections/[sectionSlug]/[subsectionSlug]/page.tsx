@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+
 import { getSection, getSections } from "@/lib/api/sections";
 import { getSubsection, getSubsections } from "@/lib/api/subsections";
 import { getArticlesBySubsection } from "@/lib/api/articles";

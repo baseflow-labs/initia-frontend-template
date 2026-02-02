@@ -22,6 +22,7 @@ import TemplateFormExamplesView from "../../views/auth/templateExamples/forms";
 import UserProfileView from "../../views/auth/user/profile";
 import UserSettingsView from "../../views/auth/user/settings";
 import AuthFooter from "../common/footer";
+
 import { FilePreviewModal } from "./globalModal";
 import DashboardNavbar from "./navs/navbar";
 import OffCanvasNav from "./navs/offcanvasNav";

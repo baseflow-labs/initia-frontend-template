@@ -1,12 +1,3 @@
-import DashboardView from "@/views/auth/dashboard";
-import LandingPageManagement from "@/views/auth/landingPage";
-import SupportCenterManagementView from "@/views/auth/supportCenter";
-import BackupSettingsView from "@/views/auth/systemSettings/backup";
-import SystemDataBulkInsertionView from "@/views/auth/systemSettings/bulkInseration";
-import SystemLoggerView from "@/views/auth/systemSettings/logger";
-import SystemMetadataSettingsView from "@/views/auth/systemSettings/metadata";
-import UserActivityView from "@/views/auth/systemSettings/userActivity";
-import UsersView from "@/views/auth/systemSettings/users";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import {
   faClockRotateLeft,
@@ -29,11 +20,22 @@ import { Navigate, Route, Routes, useLocation } from "react-router";
 import { Fragment } from "react/jsx-runtime";
 
 import AuthFooter from "../common/footer";
+
 import { FilePreviewModal } from "./globalModal";
 import DashboardNavbar from "./navs/navbar";
 import OffCanvasNav from "./navs/offcanvasNav";
 import OffCanvasTools from "./navs/offcanvasTools";
 import Sidebar from "./navs/sidebarNav";
+
+import UsersView from "@/views/auth/systemSettings/users";
+import UserActivityView from "@/views/auth/systemSettings/userActivity";
+import SystemMetadataSettingsView from "@/views/auth/systemSettings/metadata";
+import SystemLoggerView from "@/views/auth/systemSettings/logger";
+import SystemDataBulkInsertionView from "@/views/auth/systemSettings/bulkInseration";
+import BackupSettingsView from "@/views/auth/systemSettings/backup";
+import SupportCenterManagementView from "@/views/auth/supportCenter";
+import LandingPageManagement from "@/views/auth/landingPage";
+import DashboardView from "@/views/auth/dashboard";
 
 interface AuthRoute {
   name: string;

@@ -1,7 +1,8 @@
-import { useAppSelector } from "../../../store/hooks";
 import { Fragment, useState } from "react";
-
 import OffcanvasComp from "@initia/shared/ui/components/offcanvas";
+
+import { useAppSelector } from "../../../store/hooks";
+
 import { MenuItem, MenuList } from "./menuItemRenderer";
 
 interface Props {

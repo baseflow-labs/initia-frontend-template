@@ -1,6 +1,7 @@
 import React from "react";
-import { InputProps } from "../../..";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { InputProps } from "../../..";
 
 type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 
