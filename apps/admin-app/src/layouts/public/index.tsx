@@ -7,7 +7,6 @@ import { applyRouteChanges } from "@initia/shared/utils/function";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router";
-
 import { useAppSelector } from "../../store/hooks";
 import CommonFooter from "../common/footer";
 
@@ -16,6 +15,7 @@ const AuthLayout = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { logoFull } = useAppSelector((state) => state.settings);
+  const { loading } = useAppSelector((state) => state.loading);
 
   const publicRoutes = [
     {
@@ -57,7 +57,7 @@ const AuthLayout = () => {
             <img
               alt="bg-image"
               src={logoFull || tempLogo}
-              className="w-50 px-1 mb-4"
+              className={`${loading.length ? "spin" : ""} w-50 px-1 mb-4`}
               style={{ maxWidth: "350px" }}
               role="button"
               onClick={() => navigate("/")}
