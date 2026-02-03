@@ -6,20 +6,34 @@ import "@initia/shared/styles/index.scss";
 
 interface PageProps {
   params: Promise<{
+    locale: string;
     slug: string;
   }>;
 }
 
 // Generate static params for all pages at build time
 export async function generateStaticParams() {
-  const slugs = await landingApi.getPageSlugs();
-  return slugs.map((slug) => ({ slug }));
+  // Fetch available locales from backend (or use defaults)
+  const locales = await landingApi.getAvailableLocales();
+
+  // Generate params for each locale/slug combination
+  const allParams = await Promise.all(
+    locales.map(async (locale) => {
+      const slugs = await landingApi.getPageSlugs(locale);
+      return slugs.map((slug) => ({
+        locale,
+        slug,
+      }));
+    })
+  );
+
+  return allParams.flat();
 }
 
 // Generate metadata for each page
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const page = await landingApi.getPageBySlug(slug);
+  const { slug, locale } = await params;
+  const page = await landingApi.getPageBySlug(slug, locale);
 
   if (!page) {
     return {
@@ -40,8 +54,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function LandingPage({ params }: PageProps) {
-  const { slug } = await params;
-  const page = await landingApi.getPageBySlug(slug);
+  const { slug, locale } = await params;
+  const page = await landingApi.getPageBySlug(slug, locale);
 
   if (!page) {
     return (

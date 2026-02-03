@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useLocale } from "next-intl";
 
 import { Page, SystemMetadata } from "@/types/landing";
+import { LandingLanguageSwitcher } from "@/components/LandingLanguageSwitcher";
 
 interface NavbarProps {
   pages?: Page[];
@@ -12,21 +14,27 @@ interface NavbarProps {
 export default function Navbar({ pages = [], systemMetadata }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const locale = useLocale();
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const isRtl = locale === "ar";
+
   return (
     <nav
-      className={`navbar navbar-expand-lg fixed-top transition ${
+      className={`navbar navbar-expand-lg fixed-top transition w-100 ${
         isScrolled ? "bg-white shadow-sm" : ""
       }`}
       style={{ transition: "all 0.3s ease" }}
+      dir={isRtl ? "rtl" : "ltr"}
+      suppressHydrationWarning
     >
       <div className="container">
         <a href="/" className="navbar-brand fw-bold fs-4">
@@ -69,6 +77,9 @@ export default function Navbar({ pages = [], systemMetadata }: NavbarProps) {
                 </a>
               </li>
             ))}
+            <li className="nav-item ms-lg-3">
+              <LandingLanguageSwitcher />
+            </li>
           </ul>
         </div>
       </div>
