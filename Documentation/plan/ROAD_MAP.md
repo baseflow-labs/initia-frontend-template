@@ -117,7 +117,11 @@
 - [ ] Introduce Turborepo structure
   - [x] apps/app
   - [x] apps/landing
+    - [ ] CTA Hero section options (request demo, check us now, prompt input, ...etc)
   - [x] apps/admin-panel
+    - [ ] branding manual
+    - [ ] marketing generator
+    - [ ] launch checklist
   - [x] apps/documentation (Docs, API, release notes, Community docusaurus)
   - [x] apps/manual (user guide)
   - [x] packages/ui
