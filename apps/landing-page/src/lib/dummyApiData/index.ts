@@ -1,6 +1,7 @@
-import { Page, SystemMetadata } from "@/types/landing";
 import { getMockSystemMetadataEN, getMockPagesEN } from "./en";
 import { getMockSystemMetadataAR, getMockPagesAR } from "./ar";
+
+import { Page, SystemMetadata } from "@/types/landing";
 
 export const getMockSystemMetadata = (locale: string = "en"): SystemMetadata => {
   switch (locale) {
