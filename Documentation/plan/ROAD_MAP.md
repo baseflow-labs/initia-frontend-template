@@ -117,7 +117,11 @@
 - [ ] Introduce Turborepo structure
   - [x] apps/app
   - [x] apps/landing
+    - [ ] CTA Hero section options (request demo, check us now, prompt input, ...etc)
   - [x] apps/admin-panel
+    - [ ] branding manual
+    - [ ] marketing generator
+    - [ ] launch checklist
   - [x] apps/documentation (Docs, API, release notes, Community docusaurus)
   - [x] apps/manual (user guide)
   - [x] packages/ui
@@ -127,6 +131,8 @@
 - [ ] Prep “analysis tools integration” skeleton (packages/analysis placeholder + interface contracts)
 - [ ] Sign with generator details (every code file + footer)
 - [ ] Brand the app with identity (logo, colors, fonts)
+- [ ] Setup basic operation Scripts
+  - [ ] Build new resource
 
 ### Sprint 18 — Initial dashboard contents (MVP set) (15 - 28 Jan, 2026)
 

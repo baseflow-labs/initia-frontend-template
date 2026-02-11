@@ -331,7 +331,7 @@ pnpm add library-name
 Change port in `package.json`:
 
 ```json
-"dev": "next dev -p 3003"
+"dev": "next dev -p 3002"
 ```
 
 ### API Connection Failed

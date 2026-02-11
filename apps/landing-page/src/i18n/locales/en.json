@@ -1,0 +1,37 @@
+{
+  "Common": {
+    "Welcome": "Welcome to Initia",
+    "Tagline": "Your complete platform for success",
+    "GetStarted": "Get Started",
+    "LearnMore": "Learn More",
+    "Language": "Language",
+    "English": "English",
+    "Arabic": "العربية"
+  },
+  "Navigation": {
+    "Home": "Home",
+    "Features": "Features",
+    "Pricing": "Pricing",
+    "About": "About",
+    "Contact": "Contact",
+    "SignIn": "Sign In",
+    "SignUp": "Sign Up"
+  },
+  "Hero": {
+    "Title": "Welcome to Initia",
+    "Description": "The complete platform designed for your success",
+    "CTA": "Start Your Journey Today"
+  },
+  "Features": {
+    "Title": "Why Choose Initia?",
+    "Feature1": "Powerful Tools",
+    "Feature2": "Easy Integration",
+    "Feature3": "24/7 Support",
+    "Feature4": "Secure & Reliable"
+  },
+  "NotFound": {
+    "title": "Page Not Found",
+    "description": "The page you are looking for does not exist.",
+    "goHome": "Go Home"
+  }
+}

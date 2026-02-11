@@ -1,6 +1,6 @@
 import { Page, SystemMetadata } from "@/types/landing";
 
-export const getMockSystemMetadata = (): SystemMetadata => ({
+export const getMockSystemMetadataEN = (): SystemMetadata => ({
   name: "InnovateHub",
   logo: "https://www.trafongroup.com/wp-content/uploads/2019/04/logo-placeholder.png",
   slogan: "Transform Your Business with AI",
@@ -17,7 +17,7 @@ export const getMockSystemMetadata = (): SystemMetadata => ({
   },
 });
 
-export const getMockPages = (): Page[] => [
+export const getMockPagesEN = (): Page[] => [
   // ============================================
   // HOME PAGE
   // ============================================

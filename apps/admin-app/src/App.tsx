@@ -1,7 +1,6 @@
 import Spinner from "@initia/shared/ui/components/core/spinner";
 import NotificationsToaster from "@initia/shared/ui/components/toaster";
 import { Suspense, useEffect } from "react";
-import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router";
 import { apiCatchGlobalHandler } from "@initia/shared/utils/function";
@@ -11,15 +10,15 @@ import AuthLayout from "./layouts/auth";
 import PublicLayout from "./layouts/public";
 import { setMetadata } from "./store/actions/settings";
 import { useAppSelector } from "./store/hooks";
+import { useDirectionHandler } from "./utils/useDirectionHandler";
 
 const App = () => {
   const dispatch = useDispatch();
   const { accessToken } = useAppSelector((state) => state.auth);
   const { fontSize } = useAppSelector((state) => state.settings);
-  const { i18n } = useTranslation();
 
-  document.documentElement.dir = i18n.dir();
-  document.documentElement.lang = i18n.language;
+  // Handle RTL/LTR direction switching
+  useDirectionHandler();
 
   useEffect(() => {
     document.documentElement.style.setProperty("--base-font-size", fontSize + "px");

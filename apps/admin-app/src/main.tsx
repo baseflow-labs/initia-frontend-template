@@ -13,16 +13,12 @@ import "moment/locale/ar";
 // Initialize API client
 initializeApi();
 
-// Import Bootstrap CSS based on language direction
-const isRTL = i18n.dir() === "rtl";
-
-if (isRTL) {
-  import("bootstrap/dist/css/bootstrap.rtl.min.css");
-  import("./styles/index.scss");
-} else {
-  import("bootstrap/dist/css/bootstrap.min.css");
-  import("./styles/index.scss");
-}
+// Import both Bootstrap CSS files (LTR and RTL)
+// The useDirectionHandler hook will toggle them based on language
+import("bootstrap/dist/css/bootstrap.min.css");
+import("bootstrap/dist/css/bootstrap.rtl.min.css");
+import("./styles/index.scss");
+import("./styles/direction.css");
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 

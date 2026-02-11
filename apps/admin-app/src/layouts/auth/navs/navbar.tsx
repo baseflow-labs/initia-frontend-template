@@ -140,7 +140,8 @@ const DashboardNavbar = ({
                             <div
                               className="row py-3"
                               style={{
-                                minWidth: "25vw",
+                                minWidth: "auto",
+                                width: "clamp(250px, 80vw, 450px)",
                                 backgroundColor: isRead ? "white" : "rgba(0,0,0,0.15)",
                               }}
                             >

@@ -1,0 +1,175 @@
+/* RTL/LTR Direction Support */
+
+/* Global RTL/LTR handling */
+html[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+}
+
+html[dir="ltr"] {
+  direction: ltr;
+  text-align: left;
+}
+
+body[dir="rtl"] {
+  direction: rtl;
+}
+
+body[dir="ltr"] {
+  direction: ltr;
+}
+
+/* Header/Navigation RTL adjustments */
+html[dir="rtl"] .navbar-brand {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+html[dir="ltr"] .navbar-brand {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+html[dir="rtl"] nav {
+  flex-direction: row-reverse;
+}
+
+/* Container padding adjustments for RTL */
+html[dir="rtl"] .container {
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
+html[dir="ltr"] .container {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Link and button spacing */
+html[dir="rtl"] a,
+html[dir="rtl"] button {
+  text-align: right;
+}
+
+html[dir="ltr"] a,
+html[dir="ltr"] button {
+  text-align: left;
+}
+
+/* Lucide React Icon adjustments for RTL */
+html[dir="rtl"] svg[class*="lucide"],
+html[dir="rtl"] [class*="icon"] svg {
+  transform: scaleX(-1);
+}
+
+html[dir="ltr"] svg[class*="lucide"],
+html[dir="ltr"] [class*="icon"] svg {
+  transform: scaleX(1);
+}
+
+/* Icon alignment */
+html[dir="rtl"] .bi,
+html[dir="rtl"] i[class*="bi-"] {
+  margin-left: 0.5rem;
+  margin-right: 0;
+  display: inline-block;
+  transform: scaleX(-1);
+}
+
+html[dir="ltr"] .bi,
+html[dir="ltr"] i[class*="bi-"] {
+  margin-left: 0;
+  margin-right: 0.5rem;
+  display: inline-block;
+  transform: scaleX(1);
+}
+
+/* Chevron icon flipping for RTL */
+html[dir="rtl"] [class*="chevron"],
+html[dir="rtl"] [class*="arrow"],
+html[dir="rtl"] [class*="angle"] {
+  transform: scaleX(-1);
+}
+
+html[dir="ltr"] [class*="chevron"],
+html[dir="ltr"] [class*="arrow"],
+html[dir="ltr"] [class*="angle"] {
+  transform: scaleX(1);
+}
+
+/* Mobile menu adjustments */
+html[dir="rtl"] .navbar-collapse {
+  text-align: right;
+}
+
+html[dir="ltr"] .navbar-collapse {
+  text-align: left;
+}
+
+/* Flexbox RTL support */
+html[dir="rtl"] .flex-row-reverse {
+  flex-direction: row;
+}
+
+html[dir="ltr"] .flex-row-reverse {
+  flex-direction: row-reverse;
+}
+
+/* Margin and padding mirror for RTL */
+html[dir="rtl"] {
+  --space-x: var(--space-x-rtl, 0);
+}
+
+html[dir="ltr"] {
+  --space-x: var(--space-x-ltr, 0);
+}
+
+/* Z-index and positioning */
+html[dir="rtl"] [class*="sticky"],
+html[dir="rtl"] [class*="fixed"] {
+  left: auto;
+  right: 0;
+}
+
+html[dir="ltr"] [class*="sticky"],
+html[dir="ltr"] [class*="fixed"] {
+  left: 0;
+  right: auto;
+}
+
+/* RTL Language class styling */
+html.lang-ar {
+  --tw-direction: rtl;
+}
+
+html.lang-en {
+  --tw-direction: ltr;
+}
+
+/* Better margin/padding flipping for RTL */
+html[dir="rtl"] *[class*="pl-"],
+html[dir="rtl"] *[class*="pr-"],
+html[dir="rtl"] *[class*="ml-"],
+html[dir="rtl"] *[class*="mr-"] {
+  /* These are handled by CSS direction property */
+}
+
+/* Ensure text alignment respects direction */
+html[dir="rtl"] [class*="text-left"] {
+  text-align: right !important;
+}
+
+html[dir="ltr"] [class*="text-right"] {
+  text-align: left !important;
+}
+
+/* Space between elements in RTL */
+html[dir="rtl"] [class*="space-x-"] > * + * {
+  margin-left: 0;
+  margin-right: var(--space-multiply, 1) * var(--space-x);
+}
+
+html[dir="ltr"] [class*="space-x-"] > * + * {
+  margin-left: var(--space-multiply, 1) * var(--space-x);
+  margin-right: 0;
+}

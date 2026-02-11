@@ -1,0 +1,24 @@
+{
+  "Common": {
+    "HelpCenter": "Help Center",
+    "SearchPlaceholder": "Search help articles...",
+    "NoResults": "No results found",
+    "Language": "Language",
+    "English": "English",
+    "Arabic": "العربية"
+  },
+  "Navigation": {
+    "Home": "Home",
+    "GettingStarted": "Getting Started",
+    "FAQ": "FAQ",
+    "Contact": "Contact Us",
+    "Back": "Back"
+  },
+  "Topics": {
+    "Account": "Account Management",
+    "Billing": "Billing & Payments",
+    "Technical": "Technical Support",
+    "Security": "Security",
+    "Features": "Features Guide"
+  }
+}

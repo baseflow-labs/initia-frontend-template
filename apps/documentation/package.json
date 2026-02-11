@@ -4,9 +4,9 @@
   "description": "Technical documentation for Initia platform",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 3003",
+    "dev": "next dev -p 3004",
     "build": "next build",
-    "start": "next start -p 3003",
+    "start": "next start -p 3004",
     "export": "next export",
     "lint": "eslint . --ext .ts,.tsx,.mdx",
     "lint:fix": "eslint . --ext .ts,.tsx,.mdx --fix",

@@ -1,0 +1,24 @@
+{
+  "Common": {
+    "HelpCenter": "مركز المساعدة",
+    "SearchPlaceholder": "ابحث عن مقالات المساعدة...",
+    "NoResults": "لم يتم العثور على نتائج",
+    "Language": "اللغة",
+    "English": "English",
+    "Arabic": "العربية"
+  },
+  "Navigation": {
+    "Home": "الرئيسية",
+    "GettingStarted": "ابدأ هنا",
+    "FAQ": "الأسئلة الشائعة",
+    "Contact": "اتصل بنا",
+    "Back": "رجوع"
+  },
+  "Topics": {
+    "Account": "إدارة الحساب",
+    "Billing": "الفواتير والدفع",
+    "Technical": "الدعم الفني",
+    "Security": "الأمان",
+    "Features": "دليل الميزات"
+  }
+}
