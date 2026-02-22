@@ -2,6 +2,7 @@ import i18n from "i18next";
 import I18nextBrowserLanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
 import { sharedResources, mergeResources } from "@initia/shared/i18n";
+import { userServicesResources } from "@initia/user-services/i18n";
 import configs from "@initia/shared/config/configs";
 
 import enAdmin from "./locales/en.json";
@@ -12,7 +13,10 @@ const adminResources = {
   ar: { translation: arAdmin },
 };
 
-const resources = mergeResources(sharedResources, adminResources);
+const resources = mergeResources(
+  mergeResources(sharedResources, userServicesResources),
+  adminResources
+);
 
 const languageDetectorOptions = {
   order: ["querystring", "cookie", "localStorage", "sessionStorage", "navigator", "htmlTag"],

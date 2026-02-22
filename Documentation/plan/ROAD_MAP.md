@@ -105,11 +105,10 @@
   - [x] App rebranding
   - [x] Config File
   - [ ] Services build
-- [ ] Build workflows
+- [x] Build workflows
   - [x] Auto-release on merge to main
   - [x] PR title checks (conventional commits)
   - [x] Lint + format + typecheck + test on PRs
-  - [ ] CodeQL
 
 ### Sprint 17 — Repo structure: Vite + Turbo baseline (1 - 14 Jan, 2026)
 

@@ -5,7 +5,9 @@
     "paths": {
       "@/*": ["./src/*"],
       "@initia/shared": ["../../packages/shared/src"],
-      "@initia/shared/*": ["../../packages/shared/src/*"]
+      "@initia/shared/*": ["../../packages/shared/src/*"],
+      "@initia/user-services": ["../../packages/user-services/src"],
+      "@initia/user-services/*": ["../../packages/user-services/src/*"]
     }
   },
   "include": ["src"]

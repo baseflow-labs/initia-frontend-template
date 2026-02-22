@@ -1,9 +1,9 @@
-import { Fragment } from "react";
-import { useTranslation } from "react-i18next";
 import DemoLoginNote from "@initia/shared/ui/layouts/auth/demoLoginNote";
 import TablePage from "@initia/shared/ui/layouts/auth/pages/tablePage";
+import { Fragment } from "react";
+import { useTranslation } from "react-i18next";
 
-import { inputs } from "./inputs";
+import { getInputs } from "./inputs";
 
 const TABLE_PLURAL_UPPER_NAMEView = () => {
   const { t } = useTranslation();
@@ -15,7 +15,7 @@ const TABLE_PLURAL_UPPER_NAMEView = () => {
       <TablePage
         title={t("Auth.TABLE_PLURAL_UPPER_NAME.Title")}
         // actionButtons={actionButtons}
-        columns={inputs(t)}
+        columns={getInputs(t)}
         // searchProp="name"
         // searchPlaceholder={t("Auth.TABLE_PLURAL_UPPER_NAME.SearchBarPlaceholder")}
         // tableExtraActions={(id?: string) => [

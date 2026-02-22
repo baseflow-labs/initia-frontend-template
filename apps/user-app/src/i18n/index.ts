@@ -2,6 +2,7 @@ import i18n from "i18next";
 import I18nextBrowserLanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
 import { sharedResources, mergeResources } from "@initia/shared/i18n";
+import { userServicesResources } from "@initia/user-services/i18n";
 import configs from "@initia/shared/config/configs";
 
 import enUser from "./locales/en.json";
@@ -12,7 +13,10 @@ const userResources = {
   ar: { translation: arUser },
 };
 
-const resources = mergeResources(sharedResources, userResources);
+const resources = mergeResources(
+  mergeResources(sharedResources, userServicesResources),
+  userResources
+);
 
 const languageDetectorOptions = {
   order: ["querystring", "cookie", "localStorage", "sessionStorage", "navigator", "htmlTag"],
