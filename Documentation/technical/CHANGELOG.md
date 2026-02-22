@@ -1,3 +1,11 @@
+## v0.2.2 - 2026-02-22
+
+- build(docs): missing roadmap features
+
+[📦 Release Notes](https://github.com/baseflow-labs/initia-frontend-template/releases/tag/v0.2.2)
+
+---
+
 ## v0.2.1 - 2026-02-11
 
 - Initial release
