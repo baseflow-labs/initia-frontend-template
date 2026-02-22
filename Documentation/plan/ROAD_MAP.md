@@ -118,6 +118,7 @@
   - [x] apps/app
   - [x] apps/landing
     - [ ] CTA Hero section options (request demo, check us now, prompt input, ...etc)
+    - [ ] Google Analytics, Microsoft Clarity, Cloudflare analytics integration
   - [x] apps/admin-panel
     - [ ] branding manual
     - [ ] marketing generator
@@ -131,7 +132,7 @@
 - [ ] Prep “analysis tools integration” skeleton (packages/analysis placeholder + interface contracts)
 - [ ] Sign with generator details (every code file + footer)
 - [ ] Brand the app with identity (logo, colors, fonts)
-- [ ] Setup basic operation Scripts
+- [ ] Setup basic operation Scripts & manual
   - [ ] Build new resource
 
 ### Sprint 18 — Initial dashboard contents (MVP set) (15 - 28 Jan, 2026)
