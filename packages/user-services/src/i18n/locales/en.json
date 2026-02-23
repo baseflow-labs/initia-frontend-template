@@ -1,20 +1,24 @@
 {
   "UserServices": {
     "TABLE_PLURAL_UPPER_NAME": {
+      "Title": "Users",
+      "SingleItem": "User",
       "Fields": {
         "Name": "Name",
         "PhoneNumber": "Phone Number",
         "Email": "Email",
         "Role": "Role"
       },
-      "Roles": {
-        "admin": "Admin",
-        "ceo": "CEO",
-        "accountant": "Accountant",
-        "hod": "HOD",
-        "researcher": "Researcher",
-        "user": "User",
-        "applicant": "Applicant"
+      "Options": {
+        "Roles": {
+          "admin": "Admin",
+          "ceo": "CEO",
+          "accountant": "Accountant",
+          "hod": "HOD",
+          "researcher": "Researcher",
+          "user": "User",
+          "applicant": "Applicant"
+        }
       }
     }
   }

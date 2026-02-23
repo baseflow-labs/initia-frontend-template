@@ -1,0 +1,103 @@
+{
+  "serviceCode": "tablePluralLowerName",
+  "serviceKey": "TABLE_PLURAL_UPPER_NAME",
+  "appFolderName": "TABLE_PLURAL_LOWER_NAME",
+  "apiEndpoint": "TABLE_PLURAL_UPPER_NAME",
+  "title": {
+    "en": "Users",
+    "ar": "المستخدمون"
+  },
+  "singleItem": {
+    "en": "User",
+    "ar": "مستخدم"
+  },
+  "fields": [
+    {
+      "name": "name",
+      "type": "custom",
+      "label": {
+        "en": "Name",
+        "ar": "الاسم"
+      }
+    },
+    {
+      "name": "username",
+      "type": "phoneNumber",
+      "key": "PhoneNumber",
+      "label": {
+        "en": "Phone Number",
+        "ar": "رقم الهاتف"
+      }
+    },
+    {
+      "name": "email",
+      "type": "email",
+      "label": {
+        "en": "Email",
+        "ar": "البريد الإلكتروني"
+      }
+    },
+    {
+      "name": "role",
+      "type": "custom",
+      "label": {
+        "en": "Role",
+        "ar": "الدور"
+      },
+      "optionsKey": "roles"
+    }
+  ],
+  "options": {
+    "roles": [
+      {
+        "value": "admin",
+        "label": {
+          "en": "Admin",
+          "ar": "مدير"
+        }
+      },
+      {
+        "value": "ceo",
+        "label": {
+          "en": "CEO",
+          "ar": "الرئيس التنفيذي"
+        }
+      },
+      {
+        "value": "accountant",
+        "label": {
+          "en": "Accountant",
+          "ar": "محاسب"
+        }
+      },
+      {
+        "value": "hod",
+        "label": {
+          "en": "HOD",
+          "ar": "رئيس القسم"
+        }
+      },
+      {
+        "value": "researcher",
+        "label": {
+          "en": "Researcher",
+          "ar": "باحث"
+        }
+      },
+      {
+        "value": "user",
+        "label": {
+          "en": "User",
+          "ar": "مستخدم"
+        }
+      },
+      {
+        "value": "applicant",
+        "label": {
+          "en": "Applicant",
+          "ar": "متقدم"
+        }
+      }
+    ]
+  }
+}

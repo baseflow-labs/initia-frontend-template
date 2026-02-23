@@ -1,0 +1,338 @@
+#!/usr/bin/env node
+
+const fs = require("fs");
+const path = require("path");
+
+const ROOT = process.cwd();
+
+const USER_SERVICES_DIR = path.join(ROOT, "packages/user-services/src/services");
+const USER_SERVICES_LOCALE_EN = path.join(ROOT, "packages/user-services/src/i18n/locales/en.json");
+const USER_SERVICES_LOCALE_AR = path.join(ROOT, "packages/user-services/src/i18n/locales/ar.json");
+const USER_SERVICES_INDEX = path.join(ROOT, "packages/user-services/src/index.ts");
+const USER_SERVICES_SERVICES_INDEX = path.join(ROOT, "packages/user-services/src/services/index.ts");
+
+const USER_APP_SERVICE_VIEWS = path.join(ROOT, "apps/user-app/src/views/auth/services");
+const ADMIN_APP_SERVICE_VIEWS = path.join(ROOT, "apps/admin-app/src/views/auth/services");
+
+function parseArgs(argv) {
+  const args = { spec: "", dryRun: false };
+
+  for (let i = 0; i < argv.length; i += 1) {
+    const token = argv[i];
+
+    if ((token === "--spec" || token === "-s") && argv[i + 1]) {
+      args.spec = argv[i + 1];
+      i += 1;
+      continue;
+    }
+
+    if (token === "--dry-run") {
+      args.dryRun = true;
+    }
+  }
+
+  return args;
+}
+
+function toPascalCase(value) {
+  return value
+    .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
+    .replace(/[\s_-]+/g, " ")
+    .trim()
+    .split(" ")
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join("");
+}
+
+function ensureDirSync(dirPath) {
+  fs.mkdirSync(dirPath, { recursive: true });
+}
+
+function readJson(filePath) {
+  return JSON.parse(fs.readFileSync(filePath, "utf8"));
+}
+
+function writeText(filePath, content, dryRun) {
+  if (dryRun) {
+    console.log(`[dry-run] write ${path.relative(ROOT, filePath)}`);
+    return;
+  }
+
+  ensureDirSync(path.dirname(filePath));
+  fs.writeFileSync(filePath, content, "utf8");
+  console.log(`write ${path.relative(ROOT, filePath)}`);
+}
+
+function readTextIfExists(filePath) {
+  if (!fs.existsSync(filePath)) {
+    return "";
+  }
+
+  return fs.readFileSync(filePath, "utf8");
+}
+
+function upsertExportLine(filePath, exportLine, dryRun) {
+  const current = readTextIfExists(filePath);
+  const lines = current
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean);
+
+  if (!lines.includes(exportLine)) {
+    lines.push(exportLine);
+  }
+
+  lines.sort((a, b) => a.localeCompare(b));
+  const next = `${lines.join("\n")}\n`;
+  writeText(filePath, next, dryRun);
+}
+
+function writeUserServicesRootIndex(dryRun) {
+  const source = 'export * from "./i18n";\nexport * from "./services";\n';
+  writeText(USER_SERVICES_INDEX, source, dryRun);
+}
+
+function validateSpec(spec) {
+  const requiredTopLevel = [
+    "serviceCode",
+    "serviceKey",
+    "appFolderName",
+    "apiEndpoint",
+    "title",
+    "singleItem",
+    "fields",
+  ];
+
+  requiredTopLevel.forEach((key) => {
+    if (spec[key] === undefined) {
+      throw new Error(`Missing required field: ${key}`);
+    }
+  });
+
+  if (!spec.title.en || !spec.title.ar) {
+    throw new Error("title must include en and ar");
+  }
+
+  if (!spec.singleItem.en || !spec.singleItem.ar) {
+    throw new Error("singleItem must include en and ar");
+  }
+
+  if (!Array.isArray(spec.fields) || spec.fields.length === 0) {
+    throw new Error("fields must be a non-empty array");
+  }
+
+  spec.fields.forEach((field, index) => {
+    if (!field.name || !field.type || !field.label || !field.label.en || !field.label.ar) {
+      throw new Error(`Invalid field at index ${index}`);
+    }
+  });
+
+  if (spec.options && typeof spec.options !== "object") {
+    throw new Error("options must be an object if provided");
+  }
+}
+
+function makeInputsSource(spec) {
+  const servicePascal = toPascalCase(spec.serviceCode);
+
+  const optionGroups = Object.entries(spec.options || {});
+
+  const optionFns = optionGroups
+    .map(([optionKey, values]) => {
+      const optionFnName = `get${servicePascal}${toPascalCase(optionKey)}Options`;
+
+      const rows = values
+        .map((option) => {
+          const optionLabelKey = option.key || option.value;
+          return `  {
+    value: ${JSON.stringify(option.value)},
+    label: t("UserServices.${spec.serviceKey}.Options.${toPascalCase(optionKey)}.${optionLabelKey}"),
+  },`;
+        })
+        .join("\n");
+
+      return `export const ${optionFnName} = (t: TFunction) => [\n${rows}\n];`;
+    })
+    .join("\n\n");
+
+  const fieldsBody = spec.fields
+    .map((field) => {
+      const fieldKey = field.key || toPascalCase(field.name);
+      const labelLine = `label: t("UserServices.${spec.serviceKey}.Fields.${fieldKey}"),`;
+
+      if (!field.optionsKey) {
+        return `  {
+    type: ${JSON.stringify(field.type)},
+    name: ${JSON.stringify(field.name)},
+    ${labelLine}
+  },`;
+      }
+
+      const optionFnName = `get${servicePascal}${toPascalCase(field.optionsKey)}Options`;
+
+      return `  {
+    type: ${JSON.stringify(field.type)},
+    name: ${JSON.stringify(field.name)},
+    ${labelLine}
+    render: (row: Row) => renderDataFromOptions(String(row.${field.name} ?? ""), ${optionFnName}(t)),
+  },`;
+    })
+    .join("\n");
+
+  return `import type { TFunction } from "i18next";
+
+type Row = Record<string, unknown>;
+
+const renderDataFromOptions = (data: string, options: { label?: string; value: string }[]) => {
+  const option = options.find(({ value }) => value === data);
+  return option?.label || option?.value || "";
+};
+
+${optionFns ? `${optionFns}\n\n` : ""}export const get${servicePascal}Inputs = (t: TFunction) => [
+${fieldsBody}
+];
+`;
+}
+
+function makeViewIndexSource(spec) {
+  return `import { Fragment } from "react";
+import { useTranslation } from "react-i18next";
+import DemoLoginNote from "@initia/shared/ui/layouts/auth/demoLoginNote";
+import TablePage from "@initia/shared/ui/layouts/auth/pages/tablePage";
+
+import { getInputs } from "./inputs";
+
+const ${toPascalCase(spec.serviceCode)}View = () => {
+  const { t } = useTranslation();
+
+  return (
+    <Fragment>
+      <DemoLoginNote />
+
+      <TablePage
+        title={t("UserServices.${spec.serviceKey}.Title")}
+        columns={getInputs(t)}
+        dataApiEndpoint=${JSON.stringify(spec.apiEndpoint)}
+        singleItem={t("UserServices.${spec.serviceKey}.SingleItem")}
+      />
+    </Fragment>
+  );
+};
+
+export default ${toPascalCase(spec.serviceCode)}View;
+`;
+}
+
+function makeViewInputsSource(spec) {
+  return `import { get${toPascalCase(spec.serviceCode)}Inputs as getInputs } from "@initia/user-services/services/${spec.serviceCode}";
+
+export { getInputs };
+`;
+}
+
+function ensureLocaleShape(localeObj) {
+  if (!localeObj.UserServices) {
+    localeObj.UserServices = {};
+  }
+}
+
+function syncLocale(spec, enLocale, arLocale) {
+  ensureLocaleShape(enLocale);
+  ensureLocaleShape(arLocale);
+
+  const enService = {
+    Title: spec.title.en,
+    SingleItem: spec.singleItem.en,
+    Fields: {},
+    Options: {},
+  };
+
+  const arService = {
+    Title: spec.title.ar,
+    SingleItem: spec.singleItem.ar,
+    Fields: {},
+    Options: {},
+  };
+
+  spec.fields.forEach((field) => {
+    const fieldKey = field.key || toPascalCase(field.name);
+    enService.Fields[fieldKey] = field.label.en;
+    arService.Fields[fieldKey] = field.label.ar;
+  });
+
+  Object.entries(spec.options || {}).forEach(([optionGroup, values]) => {
+    const optionGroupKey = toPascalCase(optionGroup);
+    enService.Options[optionGroupKey] = {};
+    arService.Options[optionGroupKey] = {};
+
+    values.forEach((value) => {
+      const valueKey = value.key || value.value;
+      enService.Options[optionGroupKey][valueKey] = value.label.en;
+      arService.Options[optionGroupKey][valueKey] = value.label.ar;
+    });
+  });
+
+  if (Object.keys(enService.Options).length === 0) {
+    delete enService.Options;
+  }
+
+  if (Object.keys(arService.Options).length === 0) {
+    delete arService.Options;
+  }
+
+  enLocale.UserServices[spec.serviceKey] = enService;
+  arLocale.UserServices[spec.serviceKey] = arService;
+}
+
+function main() {
+  const args = parseArgs(process.argv.slice(2));
+
+  if (!args.spec) {
+    throw new Error("Missing --spec path/to/spec.json");
+  }
+
+  const specPath = path.isAbsolute(args.spec) ? args.spec : path.join(ROOT, args.spec);
+
+  if (!fs.existsSync(specPath)) {
+    throw new Error(`Spec file does not exist: ${specPath}`);
+  }
+
+  const spec = readJson(specPath);
+  validateSpec(spec);
+
+  const serviceDir = path.join(USER_SERVICES_DIR, spec.serviceCode);
+  const serviceInputsPath = path.join(serviceDir, "inputs.ts");
+  const serviceIndexPath = path.join(serviceDir, "index.ts");
+
+  writeText(serviceInputsPath, makeInputsSource(spec), args.dryRun);
+  writeText(serviceIndexPath, 'export * from "./inputs";\n', args.dryRun);
+
+  upsertExportLine(USER_SERVICES_SERVICES_INDEX, `export * from "./${spec.serviceCode}";`, args.dryRun);
+  writeUserServicesRootIndex(args.dryRun);
+
+  const enLocale = readJson(USER_SERVICES_LOCALE_EN);
+  const arLocale = readJson(USER_SERVICES_LOCALE_AR);
+
+  syncLocale(spec, enLocale, arLocale);
+
+  writeText(USER_SERVICES_LOCALE_EN, `${JSON.stringify(enLocale, null, 2)}\n`, args.dryRun);
+  writeText(USER_SERVICES_LOCALE_AR, `${JSON.stringify(arLocale, null, 2)}\n`, args.dryRun);
+
+  const userServiceViewDir = path.join(USER_APP_SERVICE_VIEWS, spec.appFolderName);
+  const adminServiceViewDir = path.join(ADMIN_APP_SERVICE_VIEWS, spec.appFolderName);
+
+  writeText(path.join(userServiceViewDir, "inputs.ts"), makeViewInputsSource(spec), args.dryRun);
+  writeText(path.join(userServiceViewDir, "index.tsx"), makeViewIndexSource(spec), args.dryRun);
+  writeText(path.join(adminServiceViewDir, "inputs.ts"), makeViewInputsSource(spec), args.dryRun);
+  writeText(path.join(adminServiceViewDir, "index.tsx"), makeViewIndexSource(spec), args.dryRun);
+
+  console.log("User service generation completed.");
+}
+
+try {
+  main();
+} catch (err) {
+  console.error(err instanceof Error ? err.message : err);
+  process.exit(1);
+}

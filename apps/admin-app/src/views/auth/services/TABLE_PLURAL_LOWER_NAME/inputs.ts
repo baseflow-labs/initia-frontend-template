@@ -1,6 +1,3 @@
-import {
-  getTablePluralLowerNameInputs as getInputs,
-  getUserRoles,
-} from "@initia/user-services/services/tablePluralLowerName";
+import { getTablePluralLowerNameInputs as getInputs } from "@initia/user-services/services/tablePluralLowerName";
 
-export { getInputs, getUserRoles };
+export { getInputs };

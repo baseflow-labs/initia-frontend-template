@@ -18,6 +18,8 @@
     "dev:landing": "pnpm --filter @initia/landing-page dev",
     "dev:help": "pnpm --filter @initia/help-center dev",
     "dev:documentation": "pnpm --filter @initia/documentation dev",
+    "generate:user-service": "node scripts/generators/generate-user-service.js",
+    "generate:user-service:example": "node scripts/generators/generate-user-service.js --spec scripts/specs/user-service.example.json",
     "dev": "pnpm --filter @initia/user-app --filter @initia/admin-app --filter @initia/landing-page --filter @initia/help-center --filter @initia/documentation --parallel dev",
     "build:user": "pnpm --filter @initia/user-app build",
     "build:admin": "pnpm --filter @initia/admin-app build",

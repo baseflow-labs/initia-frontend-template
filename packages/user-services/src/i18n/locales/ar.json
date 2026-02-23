@@ -1,20 +1,24 @@
 {
   "UserServices": {
     "TABLE_PLURAL_UPPER_NAME": {
+      "Title": "المستخدمون",
+      "SingleItem": "مستخدم",
       "Fields": {
         "Name": "الاسم",
         "PhoneNumber": "رقم الهاتف",
         "Email": "البريد الإلكتروني",
         "Role": "الدور"
       },
-      "Roles": {
-        "admin": "مدير",
-        "ceo": "الرئيس التنفيذي",
-        "accountant": "محاسب",
-        "hod": "رئيس القسم",
-        "researcher": "باحث",
-        "user": "مستخدم",
-        "applicant": "متقدم"
+      "Options": {
+        "Roles": {
+          "admin": "مدير",
+          "ceo": "الرئيس التنفيذي",
+          "accountant": "محاسب",
+          "hod": "رئيس القسم",
+          "researcher": "باحث",
+          "user": "مستخدم",
+          "applicant": "متقدم"
+        }
       }
     }
   }

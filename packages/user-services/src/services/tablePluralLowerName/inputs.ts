@@ -7,34 +7,34 @@ const renderDataFromOptions = (data: string, options: { label?: string; value: s
   return option?.label || option?.value || "";
 };
 
-export const getUserRoles = (t: TFunction) => [
+export const getTablePluralLowerNameRolesOptions = (t: TFunction) => [
   {
     value: "admin",
-    label: t("UserServices.TABLE_PLURAL_UPPER_NAME.Roles.admin"),
+    label: t("UserServices.TABLE_PLURAL_UPPER_NAME.Options.Roles.admin"),
   },
   {
     value: "ceo",
-    label: t("UserServices.TABLE_PLURAL_UPPER_NAME.Roles.ceo"),
+    label: t("UserServices.TABLE_PLURAL_UPPER_NAME.Options.Roles.ceo"),
   },
   {
     value: "accountant",
-    label: t("UserServices.TABLE_PLURAL_UPPER_NAME.Roles.accountant"),
+    label: t("UserServices.TABLE_PLURAL_UPPER_NAME.Options.Roles.accountant"),
   },
   {
     value: "hod",
-    label: t("UserServices.TABLE_PLURAL_UPPER_NAME.Roles.hod"),
+    label: t("UserServices.TABLE_PLURAL_UPPER_NAME.Options.Roles.hod"),
   },
   {
     value: "researcher",
-    label: t("UserServices.TABLE_PLURAL_UPPER_NAME.Roles.researcher"),
+    label: t("UserServices.TABLE_PLURAL_UPPER_NAME.Options.Roles.researcher"),
   },
   {
     value: "user",
-    label: t("UserServices.TABLE_PLURAL_UPPER_NAME.Roles.user"),
+    label: t("UserServices.TABLE_PLURAL_UPPER_NAME.Options.Roles.user"),
   },
   {
     value: "applicant",
-    label: t("UserServices.TABLE_PLURAL_UPPER_NAME.Roles.applicant"),
+    label: t("UserServices.TABLE_PLURAL_UPPER_NAME.Options.Roles.applicant"),
   },
 ];
 
@@ -58,6 +58,7 @@ export const getTablePluralLowerNameInputs = (t: TFunction) => [
     type: "custom",
     name: "role",
     label: t("UserServices.TABLE_PLURAL_UPPER_NAME.Fields.Role"),
-    render: (row: Row) => renderDataFromOptions(String(row.role ?? ""), getUserRoles(t)),
+    render: (row: Row) =>
+      renderDataFromOptions(String(row.role ?? ""), getTablePluralLowerNameRolesOptions(t)),
   },
 ];
