@@ -1,3 +1,4 @@
+import { addNotification } from "@initia/shared/types/notifications.js";
 import axios, {
   AxiosError,
   AxiosRequestConfig,
@@ -5,7 +6,6 @@ import axios, {
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from "axios";
-import { addNotification } from "@initia/shared/types/notifications.js";
 
 import { refreshToken as doRefreshToken, logout } from "../store/actions/auth";
 import { endLoading, startLoading } from "../store/actions/loading";
@@ -17,7 +17,7 @@ declare module "axios" {
   }
 }
 
-export const baseURL = import.meta.env.VITE_APP_BACKEND_URL || "http://localhost:8000";
+export const baseURL = import.meta.env.VITE_APP_BACKEND_URL || "http://localhost:8000/api";
 
 export interface ApiEnvelope<TPayload = Record<string, unknown>> {
   message?: string;

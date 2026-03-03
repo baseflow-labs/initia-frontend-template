@@ -32,7 +32,7 @@ export function initializeApiClient(callbacks: StoreCallbacks) {
   storeCallbacks = callbacks;
 }
 
-export const baseURL = import.meta.env.VITE_APP_BACKEND_URL || "http://localhost:8000";
+export const baseURL = import.meta.env.VITE_APP_BACKEND_URL || "http://localhost:8000/api";
 
 export interface ApiEnvelope<TPayload = Record<string, unknown>> {
   message?: string;

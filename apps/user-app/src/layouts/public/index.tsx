@@ -6,14 +6,18 @@ import RegisterView from "@initia/shared/ui/register";
 import ResetPasswordView from "@initia/shared/ui/ResetPassword";
 import { applyRouteChanges } from "@initia/shared/utils/function";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router";
 
+import { login } from "../../store/actions/auth";
+import { addNotification } from "../../store/actions/notifications";
 import { useAppSelector } from "../../store/hooks";
 import CommonFooter from "../common/footer";
 
 const AuthLayout = () => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
   const { logoFull } = useAppSelector((state) => state.settings);
@@ -23,7 +27,20 @@ const AuthLayout = () => {
     {
       name: t("Public.Login.Title"),
       route: "/",
-      view: <LoginView />,
+      view: (
+        <LoginView
+          onLoginSuccess={(payload) => {
+            dispatch(
+              addNotification({
+                msg: t("Public.Login.Labels.Success", {
+                  name: payload?.user?.name || payload?.user?.role || "",
+                }),
+              })
+            );
+            dispatch(login(payload));
+          }}
+        />
+      ),
       show: true,
     },
     {

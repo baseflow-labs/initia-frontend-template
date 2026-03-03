@@ -16,6 +16,7 @@ const App = () => {
   const dispatch = useDispatch();
   const { accessToken } = useAppSelector((state) => state.auth);
   const { fontSize } = useAppSelector((state) => state.settings);
+  const isAuthenticated = Boolean(accessToken && accessToken !== "null");
 
   // Handle RTL/LTR direction switching
   useDirectionHandler();
@@ -39,7 +40,7 @@ const App = () => {
           <NotificationsToaster />
 
           <Routes>
-            {accessToken !== "null" ? (
+            {isAuthenticated ? (
               <Route path="*" element={<AuthLayout />} />
             ) : (
               <Route path="*" element={<PublicLayout />} />

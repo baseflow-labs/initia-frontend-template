@@ -1,8 +1,7 @@
+import { LandingPagesResponse, Page, SystemMetadata } from "@/types/landing";
 import axios from "axios";
 
 import { getMockPages, getMockSystemMetadata } from "./dummyApiData";
-
-import { LandingPagesResponse, Page, SystemMetadata } from "@/types/landing";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const DEFAULT_LOCALES = ["en", "ar"];
@@ -15,6 +14,13 @@ function hasRemoteApi(): boolean {
 }
 
 export const landingApi = {
+  unwrapPayload<TPayload>(data: unknown): TPayload {
+    if (data && typeof data === "object" && "payload" in (data as Record<string, unknown>)) {
+      return (data as { payload: TPayload }).payload;
+    }
+    return data as TPayload;
+  },
+
   /**
    * Fetch available locales from backend
    */
@@ -24,9 +30,12 @@ export const landingApi = {
     }
 
     try {
-      const response = await apiClient.get<{ locales: string[] }>(`${API_URL}/locales`);
-      return response.data.locales || DEFAULT_LOCALES;
-    } catch (error) {
+      const response = await apiClient.get<
+        { locales: string[] } | { payload: { locales: string[] } }
+      >(`${API_URL}/landing-content/locales`);
+      const payload = this.unwrapPayload<{ locales: string[] }>(response.data);
+      return payload.locales || DEFAULT_LOCALES;
+    } catch {
       // Fallback to default locales if API fails
       return DEFAULT_LOCALES;
     }
@@ -41,11 +50,14 @@ export const landingApi = {
     }
 
     try {
-      const response = await apiClient.get<SystemMetadata>(`${API_URL}/system/metadata`, {
-        params: { locale },
-      });
-      return response.data;
-    } catch (error) {
+      const response = await apiClient.get<SystemMetadata | { payload: SystemMetadata }>(
+        `${API_URL}/landing-content/system-metadata`,
+        {
+          params: { locale },
+        }
+      );
+      return this.unwrapPayload<SystemMetadata>(response.data);
+    } catch {
       // Return mock data for development
       return getMockSystemMetadata(locale);
     }
@@ -60,11 +72,14 @@ export const landingApi = {
     }
 
     try {
-      const response = await apiClient.get<LandingPagesResponse>(`${API_URL}/landing-pages`, {
+      const response = await apiClient.get<
+        LandingPagesResponse | { payload: LandingPagesResponse }
+      >(`${API_URL}/landing-content/pages`, {
         params: { locale },
       });
-      return response.data.pages;
-    } catch (error) {
+      const payload = this.unwrapPayload<LandingPagesResponse>(response.data);
+      return payload.pages;
+    } catch {
       // Return mock data for development
       return getMockPages(locale);
     }
@@ -77,7 +92,7 @@ export const landingApi = {
     try {
       const pages = await this.getPages(locale);
       return pages.find((page) => page.slug === slug) || null;
-    } catch (error) {
+    } catch {
       // Fallback: try to get from mock data
       const pages = getMockPages(locale);
       return pages.find((page) => page.slug === slug) || null;
@@ -91,7 +106,7 @@ export const landingApi = {
     try {
       const pages = await this.getPages(locale);
       return pages.map((page) => page.slug);
-    } catch (error) {
+    } catch {
       // Fallback: try to get from mock data
       const pages = getMockPages(locale);
       return pages.map((page) => page.slug);

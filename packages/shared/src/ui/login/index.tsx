@@ -1,17 +1,18 @@
 import { useTranslation } from "react-i18next";
-// import { useDispatch } from "react-redux";
 
-// import { login } from "../../../../user-app/src/store/actions/auth";
-// import { addNotification } from "../../../../user-app/src/store/actions/notifications";
 import * as authApi from "../../api/auth";
+import type { AuthResponse } from "../../types/auth";
 import BelowInputButton from "../../ui/components/button/belowInput";
 import Button from "../../ui/components/core/button";
 import Form from "../../ui/components/form";
 import { apiCatchGlobalHandler } from "../../utils/function";
 
-const LoginView = () => {
+interface LoginViewProps {
+  onLoginSuccess?: (auth: AuthResponse) => void;
+}
+
+const LoginView = ({ onLoginSuccess }: LoginViewProps) => {
   const { t } = useTranslation();
-  // const dispatch = useDispatch();
 
   const formInputs = () => [
     {
@@ -45,16 +46,8 @@ const LoginView = () => {
     authApi
       .login(credentials)
       .then((res) => {
-        // dispatch(
-        //   addNotification({
-        //     msg: t("Public.Login.Labels.Success", {
-        //       name: res.payload?.user?.name || res.payload?.user?.role || "",
-        //     }),
-        //   })
-        // );
-
         if (res.payload) {
-          // dispatch(login(res.payload));
+          onLoginSuccess?.(res.payload);
         }
       })
       .catch(apiCatchGlobalHandler);

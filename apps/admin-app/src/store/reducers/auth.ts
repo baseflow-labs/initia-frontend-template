@@ -19,8 +19,12 @@ export type AuthAction =
   | { type: "updateUserStatus"; resp?: string };
 
 const initialState: AuthState = {
-  accessToken: localStorage.getItem("accessToken") || null,
-  refreshToken: localStorage.getItem("refreshToken") || null,
+  accessToken: ["null", "undefined", ""].includes(localStorage.getItem("accessToken") || "")
+    ? null
+    : localStorage.getItem("accessToken"),
+  refreshToken: ["null", "undefined", ""].includes(localStorage.getItem("refreshToken") || "")
+    ? null
+    : localStorage.getItem("refreshToken"),
   user: localStorage.getItem("user")?.length ? JSON.parse(localStorage.getItem("user")!) : {},
 };
 
@@ -28,6 +32,7 @@ const auth = (state: AuthState = initialState, action: AuthAction): AuthState =>
   switch (action.type) {
     case "login": {
       localStorage.setItem("accessToken", action.resp.accessToken);
+      localStorage.setItem("refreshToken", action.resp.refreshToken);
       localStorage.setItem("user", JSON.stringify(action.resp.user));
 
       // window.location.assign("/dashboard");
@@ -54,6 +59,7 @@ const auth = (state: AuthState = initialState, action: AuthAction): AuthState =>
 
     case "logout": {
       localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
       localStorage.removeItem("user");
 
       window.location.assign(action.resp || "/");

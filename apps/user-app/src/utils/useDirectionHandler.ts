@@ -29,7 +29,7 @@ export const useDirectionHandler = () => {
         } else if (href.includes("bootstrap.min.css") && !href.includes(".rtl")) {
           (sheet as CSSStyleSheet).disabled = isRTL;
         }
-      } catch (e) {
+      } catch {
         // Cross-origin stylesheet, ignore
       }
     });
