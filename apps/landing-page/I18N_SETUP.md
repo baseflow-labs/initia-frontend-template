@@ -135,7 +135,7 @@ const dir = locale === 'ar' ? 'rtl' : 'ltr';
 
 Visit:
 
-- English: `http://localhost:3002/en`
-- Arabic: `http://localhost:3002/ar`
+- English: `http://localhost:3000/en`
+- Arabic: `http://localhost:3000/ar`
 
 The middleware will redirect `/` to `/en` (default locale).

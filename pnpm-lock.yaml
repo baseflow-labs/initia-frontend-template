@@ -162,6 +162,9 @@ importers:
       '@initia/shared':
         specifier: workspace:*
         version: link:../../packages/shared
+      '@initia/user-services':
+        specifier: workspace:*
+        version: link:../../packages/user-services
     devDependencies:
       '@types/node':
         specifier: ^24.10.1
@@ -349,6 +352,9 @@ importers:
       '@initia/shared':
         specifier: workspace:*
         version: link:../../packages/shared
+      '@initia/user-services':
+        specifier: workspace:*
+        version: link:../../packages/user-services
     devDependencies:
       '@types/node':
         specifier: ^24.10.1
@@ -371,6 +377,10 @@ importers:
       vite:
         specifier: ^7.2.7
         version: 7.3.1(@types/node@24.10.9)(jiti@2.6.1)(sass@1.97.3)(yaml@2.8.2)
+
+  packages/analysis: {}
+
+  packages/core: {}
 
   packages/shared:
     dependencies:
@@ -405,6 +415,15 @@ importers:
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
+
+  packages/user-services:
+    dependencies:
+      '@initia/shared':
+        specifier: workspace:*
+        version: link:../shared
+      i18next:
+        specifier: ^25.7.1
+        version: 25.8.0(typescript@5.9.3)
 
 packages:
 

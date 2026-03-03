@@ -2,7 +2,7 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 echo "🔬 Running TypeScript type check before push..."
-pnpm typecheck
+corepack pnpm typecheck
 
 if [ $? -ne 0 ]; then
   echo "❌ TypeScript errors found. Push aborted."

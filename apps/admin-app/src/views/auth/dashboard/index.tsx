@@ -15,6 +15,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as SystemHealthApi from "@initia/shared/api/dashboard/systemHealth";
 import * as NotificationApi from "@initia/shared/api/notifications";
+import * as UserApi from "@initia/shared/api/users";
 import type { Notification } from "@initia/shared/types/notifications";
 import DashboardCard from "@initia/shared/ui/components/card/dashboardCard";
 import StatisticCards from "@initia/shared/ui/components/card/statisticCards";
@@ -48,6 +49,8 @@ const DashboardView = () => {
   const { logoFull } = useAppSelector((state) => state.settings);
   const [data, setData] = useState<{
     notifications?: Notification[];
+    users?: Array<{ id: string; email?: string; role?: string; createdAt?: string }>;
+    usersMeta?: { count?: number };
     health: HealthData;
   }>({
     health: {
@@ -82,44 +85,55 @@ const DashboardView = () => {
         }));
       })
       .catch(apiCatchGlobalHandler);
+
+    UserApi.get({ page: 1, capacity: 6, sortField: "createdAt", sortDirection: "desc" })
+      .then((res) => {
+        const users = Array.isArray(res.payload)
+          ? (res.payload as Array<{
+              id: string;
+              email?: string;
+              role?: string;
+              createdAt?: string;
+            }>)
+          : [];
+        setData((current) => ({
+          ...current,
+          users,
+          usersMeta: (res.extra || {}) as { count?: number },
+        }));
+      })
+      .catch(apiCatchGlobalHandler);
   }, []);
 
-  const dummyData = {
-    sessions: {
-      total: 100031,
-    },
-    users: {
-      active: 5032,
-      pending: 512,
-      total: 12034,
-    },
-  };
+  const totalUsers = data.usersMeta?.count || data.users?.length || 0;
+  const adminsCount = data.users?.filter((user) => user.role === "admin").length || 0;
+  const nonAdminsCount = Math.max(0, totalUsers - adminsCount);
 
   const statsData = [
     {
       label: t("Auth.Dashboard.Admin.Stats.Sessions"),
-      count: dummyData.sessions.total,
+      count: totalUsers,
       color: "info",
       icon: faArrowRightToBracket,
-      unit: t("Auth.Dashboard.Admin.Stats.SessionsUnit"),
+      unit: "users tracked",
     },
     {
       label: t("Auth.Dashboard.Admin.Stats.TotalUsers"),
-      count: dummyData.users.total,
+      count: totalUsers,
       color: "primary",
       icon: faUsers,
       unit: t("Auth.Dashboard.Admin.Stats.UsersUnit"),
     },
     {
-      label: t("Auth.Dashboard.Admin.Stats.ActiveUsers"),
-      count: dummyData.users.active,
+      label: "Admin Users",
+      count: adminsCount,
       color: "success",
       icon: faUserCheck,
       unit: t("Auth.Dashboard.Admin.Stats.UsersUnit"),
     },
     {
-      label: t("Auth.Dashboard.Admin.Stats.PendingUsers"),
-      count: dummyData.users.pending,
+      label: "Non-Admin Users",
+      count: nonAdminsCount,
       color: "warning",
       icon: faUserMinus,
       unit: t("Auth.Dashboard.Admin.Stats.UsersUnit"),
@@ -221,6 +235,38 @@ const DashboardView = () => {
                 </div>
               </div>
             ))}
+          </DashboardCard>
+        </div>
+
+        <div className="col-lg-12 mb-4">
+          <DashboardCard title="Latest Users" className="h-100">
+            <div className="table-responsive">
+              <table className="table table-sm">
+                <thead>
+                  <tr>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Created</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {(data.users || []).map((user) => (
+                    <tr key={user.id}>
+                      <td>{user.email || "-"}</td>
+                      <td>{user.role || "-"}</td>
+                      <td>{user.createdAt ? moment(user.createdAt).fromNow() : "-"}</td>
+                    </tr>
+                  ))}
+                  {!(data.users || []).length && (
+                    <tr>
+                      <td colSpan={3} className="text-center text-muted">
+                        {t("Global.Labels.NoData")}
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
           </DashboardCard>
         </div>
       </div>

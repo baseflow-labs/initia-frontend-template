@@ -61,7 +61,7 @@ export interface customFilterProps {
   field: string;
   filteredTerm: {
     dataType: string;
-    value: string;
+    value: string | number | boolean;
   };
   filterOperator: string;
 }

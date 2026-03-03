@@ -64,22 +64,11 @@ jobs:
         id: changelog
         if: steps.bump.outputs.new_version != ''
         run: |
-          # Find the last version bump commit
           LAST_BUMP_COMMIT=$(git log --grep="chore(code): bump version to" --format="%H" -n 1 || echo "")
-
           if [ -z "$LAST_BUMP_COMMIT" ]; then
-            echo "No previous version bump found. Showing last 50 commits."
-            # Get commits excluding those with specific keywords
-            LOG=$(git log -n 50 --pretty=format:"- %s" --no-merges | grep -Eiv "ci skip|bump version|merge pull request|merge branch" || echo "- Initial release")
+            LOG=$(node scripts/release/generate-changelog.js --to=HEAD)
           else
-            echo "Last version bump commit: $LAST_BUMP_COMMIT"
-            # Get commits since last version bump, excluding those with specific keywords
-            LOG=$(git log "$LAST_BUMP_COMMIT"..HEAD --pretty=format:"- %s" --no-merges | grep -Eiv "ci skip|bump version|merge pull request|merge branch" || echo "- Minor updates")
-          fi
-
-          # If LOG is empty or only whitespace, set default message
-          if [ -z "$(echo "$LOG" | tr -d '[:space:]')" ]; then
-            LOG="- Minor updates and improvements"
+            LOG=$(node scripts/release/generate-changelog.js --from="$LAST_BUMP_COMMIT" --to=HEAD)
           fi
 
           echo "log<<EOF" >> $GITHUB_OUTPUT

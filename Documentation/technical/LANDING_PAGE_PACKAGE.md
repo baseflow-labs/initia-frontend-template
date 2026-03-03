@@ -24,7 +24,7 @@ A complete Next.js 14 landing page package with dynamic content generation based
 # Install dependencies
 pnpm install
 
-# Run development server (port 3002)
+# Run development server (port 3000)
 pnpm dev:landing
 
 # Build for production

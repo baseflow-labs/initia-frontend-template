@@ -8,6 +8,10 @@ const getById = async (id: string) => {
   return await api.get(mainPath + "/" + id);
 };
 
+const get = async (params?: Record<string, string | number | boolean | undefined>) => {
+  return await api.get(mainPath, { params });
+};
+
 const create = async (data: object) => {
   return await api.post(mainPath, data);
 };
@@ -30,4 +34,4 @@ const removeAllUsers = async () => {
   return await api.delete(mainPath + "/all-users");
 };
 
-export { create, getById, getByUserId, remove, removeAllUsers };
+export { create, get, getById, getByUserId, remove, removeAllUsers };

@@ -16,7 +16,7 @@ import { applyRouteChanges } from "@initia/shared/utils/function";
 import { useWindowWidth } from "@initia/shared/utils/hooks";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Navigate, Route, Routes, useLocation } from "react-router";
+import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router";
 import { Fragment } from "react/jsx-runtime";
 
 import AuthFooter from "../common/footer";
@@ -50,6 +50,7 @@ interface AuthRoute {
 const AuthLayout = () => {
   const { t, i18n } = useTranslation();
   const location = useLocation();
+  const navigate = useNavigate();
   const width = useWindowWidth();
   const isPc = width > 992;
 
@@ -146,6 +147,19 @@ const AuthLayout = () => {
     applyRouteChanges(t, authRoutes, location.pathname);
   }, [location.pathname]);
 
+  const onGlobalSearch = (term: string) => {
+    const query = `${term || ""}`.trim().toLowerCase();
+    if (!query) return;
+
+    const matched = authRoutes.find(
+      ({ name, route }) => name.toLowerCase().includes(query) || route.toLowerCase().includes(query)
+    );
+
+    if (matched?.route) {
+      navigate(matched.route);
+    }
+  };
+
   return (
     <Fragment>
       {/* <DemoWarning /> */}
@@ -196,7 +210,10 @@ const AuthLayout = () => {
           }}
         >
           <div className="p-0 px-2 px-lg-5 w-100">
-            <DashboardNavbar />
+            <DashboardNavbar
+              onSearch={onGlobalSearch}
+              searchPlaceholder="Search services or pages"
+            />
 
             <Routes>
               {authRoutes.map(({ route, view }, i) => (

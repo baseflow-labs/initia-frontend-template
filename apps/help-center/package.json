@@ -5,7 +5,8 @@
   "type": "module",
   "description": "Public user guide and help center",
   "scripts": {
-    "dev": "next dev -p 3003",
+    "predev": "node ../../scripts/dev/free-port.cjs 3001",
+    "dev": "next dev -p 3001",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

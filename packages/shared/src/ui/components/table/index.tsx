@@ -12,6 +12,7 @@ import {
   faEnvelope,
   faEye,
   faFile,
+  faFilter,
   faGripVertical,
   faLocationPin,
   faPhone,
@@ -229,6 +230,31 @@ export const DataRender = ({
       return wrap(
         <FontAwesomeIcon icon={faEye} role="button" onClick={() => triggerFilePreview(data)} />
       );
+    case "avatar":
+      return wrap(
+        <img
+          src={data}
+          alt={name}
+          style={{ width: "32px", height: "32px", borderRadius: "50%", objectFit: "cover" }}
+        />
+      );
+    case "badge":
+      return wrap(<span className="badge bg-primary">{data}</span>);
+    case "progress": {
+      const value = Math.max(0, Math.min(100, Number(data) || 0));
+      return wrap(
+        <div className="progress" style={{ height: "8px", minWidth: "120px" }}>
+          <div
+            className="progress-bar"
+            role="progressbar"
+            style={{ width: `${value}%` }}
+            aria-valuenow={value}
+            aria-valuemin={0}
+            aria-valuemax={100}
+          />
+        </div>
+      );
+    }
     case "stars": {
       const starsToDisplay = [1, 2, 3, 4, 5];
       return wrap(
@@ -269,6 +295,8 @@ interface Props extends TableProps {
   // search
   currentSearch?: string;
   onSearchChange?: (value: string) => void;
+  searchField?: string;
+  onSearchFieldChange?: (value: string) => void;
 
   // sorting
   sortField?: string;
@@ -276,7 +304,19 @@ interface Props extends TableProps {
   onSortChange?: (field: string, direction: "asc" | "desc") => void;
 
   // filters
+  currentFilters?: customFilterProps[];
   onFiltersChange?: (filters: customFilterProps[]) => void;
+  selectedRowIds?: string[];
+  onSelectedRowIdsChange?: (ids: string[]) => void;
+  tableStorageKey?: string;
+  exportOptions?: {
+    endpoint: string;
+    search?: string;
+    searchField?: string;
+    filters?: customFilterProps[];
+    sortField?: string;
+    sortDirection?: "asc" | "desc" | null;
+  };
 }
 
 const DynamicTable: React.FC<Props> = ({
@@ -297,9 +337,17 @@ const DynamicTable: React.FC<Props> = ({
   onPageSizeChange,
   currentSearch,
   onSearchChange,
+  searchField,
+  onSearchFieldChange,
   sortField,
   sortDirection,
   onSortChange,
+  currentFilters,
+  onFiltersChange,
+  selectedRowIds = [],
+  onSelectedRowIdsChange,
+  tableStorageKey,
+  exportOptions,
 }: Props) => {
   const { t } = useTranslation();
 
@@ -307,12 +355,53 @@ const DynamicTable: React.FC<Props> = ({
     columns.filter((c) => !c.defaultHide).map((c) => c.name)
   );
   const [orderedColumns, setOrderedColumns] = useState(columns);
+  const [showFilters, setShowFilters] = useState(false);
+  const [draftFilters, setDraftFilters] = useState<customFilterProps[]>(currentFilters || []);
   const [dragIndex, setDragIndex] = useState<number | null>(null);
 
   // keep in sync if `columns` prop changes from outside
   useEffect(() => {
     setOrderedColumns(columns.sort((a) => (a.defaultHide ? 1 : -1)));
   }, [columns]);
+
+  useEffect(() => {
+    setDraftFilters(currentFilters || []);
+  }, [JSON.stringify(currentFilters)]);
+
+  useEffect(() => {
+    if (!tableStorageKey) return;
+    try {
+      const raw = localStorage.getItem(`${tableStorageKey}:columns`);
+      if (!raw) return;
+      const parsed = JSON.parse(raw) as { visible?: string[]; order?: string[] };
+      const allNames = columns.map((col) => col.name);
+
+      if (Array.isArray(parsed.visible) && parsed.visible.length > 0) {
+        setColumnsToShow(parsed.visible.filter((name) => allNames.includes(name)));
+      }
+      if (Array.isArray(parsed.order) && parsed.order.length > 0) {
+        const byName = new Map(columns.map((col) => [col.name, col]));
+        const reordered = parsed.order
+          .map((name) => byName.get(name))
+          .filter((item): item is TableColumn => !!item);
+        const remaining = columns.filter((col) => !parsed.order?.includes(col.name));
+        setOrderedColumns([...reordered, ...remaining]);
+      }
+    } catch {
+      // ignore malformed localStorage payload
+    }
+  }, [columns, tableStorageKey]);
+
+  useEffect(() => {
+    if (!tableStorageKey) return;
+    localStorage.setItem(
+      `${tableStorageKey}:columns`,
+      JSON.stringify({
+        visible: columnsToShow,
+        order: orderedColumns.map((col) => col.name),
+      })
+    );
+  }, [columnsToShow, orderedColumns, tableStorageKey]);
 
   const handleDragStart = (index: number) => {
     setDragIndex(index);
@@ -385,6 +474,97 @@ const DynamicTable: React.FC<Props> = ({
     onSortChange(col.name, nextDirection);
   };
 
+  const getDataType = (name: string): string => {
+    const column = columns.find((item) => item.name === name);
+    if (!column?.type) return "string";
+    if (["number", "range", "stars"].includes(column.type)) return "number";
+    if (["date", "time", "month", "year", "datetime"].includes(column.type)) return "date";
+    if (["boolean", "switch", "checkbox"].includes(column.type)) return "boolean";
+    return "string";
+  };
+
+  const getFilterOperators = (dataType: string) => {
+    if (dataType === "number" || dataType === "date") {
+      return [
+        {
+          label: t("Global.Labels.Equals"),
+          value: dataType === "date" ? "dateEquals" : "numberEquals",
+        },
+        { label: t("Global.Labels.GreaterThan"), value: "moreThan" },
+        { label: t("Global.Labels.GreaterThanOrEqual"), value: "moreThanOrEqual" },
+        { label: t("Global.Labels.LessThan"), value: "lessThan" },
+        { label: t("Global.Labels.LessThanOrEqual"), value: "lessThanOrEqual" },
+        { label: t("Global.Labels.NotEquals"), value: "notEquals" },
+      ];
+    }
+
+    if (dataType === "boolean") {
+      return [{ label: t("Global.Labels.Equals"), value: "booleanEquals" }];
+    }
+
+    return [
+      { label: t("Global.Labels.Contains"), value: "contains" },
+      { label: t("Global.Labels.Equals"), value: "stringEquals" },
+      { label: t("Global.Labels.StartsWith"), value: "startsWith" },
+      { label: t("Global.Labels.EndsWith"), value: "endsWith" },
+      { label: t("Global.Labels.NotEquals"), value: "notEquals" },
+    ];
+  };
+
+  const addFilterRow = () => {
+    const defaultField = columns[0]?.name || "";
+    const defaultDataType = getDataType(defaultField);
+    const defaultOperator = getFilterOperators(defaultDataType)[0]?.value || "contains";
+    setDraftFilters((prev) => [
+      ...prev,
+      {
+        field: defaultField,
+        filterOperator: defaultOperator,
+        filteredTerm: { dataType: defaultDataType, value: "" },
+      },
+    ]);
+  };
+
+  const updateFilterRow = (index: number, next: customFilterProps) => {
+    setDraftFilters((prev) => prev.map((item, i) => (i === index ? next : item)));
+  };
+
+  const removeFilterRow = (index: number) => {
+    setDraftFilters((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const applyFilters = () => {
+    const sanitized = draftFilters.filter(
+      (item) =>
+        !!item.field &&
+        !!item.filterOperator &&
+        item.filteredTerm &&
+        item.filteredTerm.value !== undefined &&
+        item.filteredTerm.value !== null &&
+        `${item.filteredTerm.value}`.trim().length > 0
+    );
+    onFiltersChange?.(sanitized);
+  };
+
+  const toggleSelectAllCurrentPage = (checked: boolean) => {
+    const pageIds = data.map((row) => `${row.id || ""}`).filter(Boolean);
+    if (!onSelectedRowIdsChange) return;
+    if (!checked) {
+      onSelectedRowIdsChange(selectedRowIds.filter((id) => !pageIds.includes(id)));
+      return;
+    }
+    onSelectedRowIdsChange(Array.from(new Set([...selectedRowIds, ...pageIds])));
+  };
+
+  const toggleSelectOne = (rowId: string, checked: boolean) => {
+    if (!onSelectedRowIdsChange) return;
+    if (checked) {
+      onSelectedRowIdsChange(Array.from(new Set([...selectedRowIds, rowId])));
+      return;
+    }
+    onSelectedRowIdsChange(selectedRowIds.filter((item) => item !== rowId));
+  };
+
   const renderSortIcon = (col: TableColumn) => {
     if (!col.sortable) return null;
     if (sortField !== col.name || !sortDirection) {
@@ -402,6 +582,8 @@ const DynamicTable: React.FC<Props> = ({
   const pagesCount = paginationMeta?.pagesCount || 1;
   const from = count > 0 ? (currentPage - 1) * pageSize + 1 : 0;
   const to = Math.min(currentPage * pageSize, count);
+  const pageIds = data.map((row) => `${row.id || ""}`).filter(Boolean);
+  const allPageSelected = pageIds.length > 0 && pageIds.every((id) => selectedRowIds.includes(id));
 
   return (
     <div
@@ -412,24 +594,48 @@ const DynamicTable: React.FC<Props> = ({
         <table className="table mt-4 w-100">
           <thead className="table-light">
             <tr>
-              <th colSpan={columnsToShow.length}>
-                {searchProp ? (
-                  <InputComp
-                    name="search"
-                    placeholder={
-                      searchPlaceholder ?? t("Global.Placeholders.Search", { prop: searchProp })
-                    }
-                    value={currentSearch || ""}
-                    onChange={(e) => onSearchChange?.(e.target.value)}
-                  />
-                ) : (
-                  ""
-                )}
+              <th colSpan={columnsToShow.length + 1}>
+                <div className="d-flex gap-2 align-items-center">
+                  {(searchProp || columns.length > 0) && (
+                    <InputComp
+                      name="search"
+                      placeholder={
+                        searchPlaceholder ??
+                        t("Global.Placeholders.Search", {
+                          prop: searchProp || t("Global.Labels.All"),
+                        })
+                      }
+                      value={currentSearch || ""}
+                      onChange={(e) => onSearchChange?.(e.target.value)}
+                    />
+                  )}
+                  <select
+                    className="form-select"
+                    style={{ maxWidth: "180px" }}
+                    value={searchField || ""}
+                    onChange={(e) => onSearchFieldChange?.(e.target.value)}
+                  >
+                    <option value="">{t("Global.Labels.All")}</option>
+                    {columns.map((col) => (
+                      <option key={col.name} value={col.name}>
+                        {col.label}
+                      </option>
+                    ))}
+                  </select>
+                  <button
+                    type="button"
+                    className="btn btn-outline-secondary"
+                    onClick={() => setShowFilters((current) => !current)}
+                  >
+                    <FontAwesomeIcon icon={faFilter} className="me-1" />
+                    {t("Global.Labels.Filter")}
+                  </button>
+                </div>
               </th>
 
               <th colSpan={haveDefaultActions ? 2 : 1}>
                 <div className="d-flex justify-content-end align-items-center">
-                  <ExportModal data={data} columns={columns} />
+                  <ExportModal data={data} columns={columns} exportOptions={exportOptions} />
 
                   <CustomItemsDropdownComp
                     start
@@ -479,6 +685,13 @@ const DynamicTable: React.FC<Props> = ({
 
             <tr>
               <th className="py-3" scope="col">
+                <input
+                  type="checkbox"
+                  checked={allPageSelected}
+                  onChange={(e) => toggleSelectAllCurrentPage(e.target.checked)}
+                />
+              </th>
+              <th className="py-3" scope="col">
                 #
               </th>
 
@@ -506,10 +719,128 @@ const DynamicTable: React.FC<Props> = ({
             </tr>
           </thead>
 
+          {showFilters && (
+            <tbody>
+              <tr>
+                <td colSpan={columnsToShow.length + (haveDefaultActions ? 4 : 3)}>
+                  <div className="border rounded p-3 bg-light">
+                    <div className="d-flex justify-content-between align-items-center mb-2">
+                      <strong>{t("Global.Labels.AdvancedFilters")}</strong>
+                      <button
+                        type="button"
+                        className="btn btn-sm btn-primary"
+                        onClick={addFilterRow}
+                      >
+                        {t("Global.Labels.Add")}
+                      </button>
+                    </div>
+
+                    {draftFilters.map((filter, index) => {
+                      const dataType = filter.filteredTerm?.dataType || getDataType(filter.field);
+                      const operators = getFilterOperators(dataType);
+                      return (
+                        <div className="row g-2 mb-2" key={`${filter.field}-${index}`}>
+                          <div className="col-12 col-md-3">
+                            <select
+                              className="form-select"
+                              value={filter.field}
+                              onChange={(e) => {
+                                const nextField = e.target.value;
+                                const nextDataType = getDataType(nextField);
+                                const nextOperator =
+                                  getFilterOperators(nextDataType)[0]?.value || "contains";
+                                updateFilterRow(index, {
+                                  field: nextField,
+                                  filterOperator: nextOperator,
+                                  filteredTerm: { dataType: nextDataType, value: "" },
+                                });
+                              }}
+                            >
+                              {columns.map((col) => (
+                                <option key={col.name} value={col.name}>
+                                  {col.label}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                          <div className="col-12 col-md-3">
+                            <select
+                              className="form-select"
+                              value={filter.filterOperator}
+                              onChange={(e) =>
+                                updateFilterRow(index, {
+                                  ...filter,
+                                  filterOperator: e.target.value,
+                                })
+                              }
+                            >
+                              {operators.map((operator) => (
+                                <option key={operator.value} value={operator.value}>
+                                  {operator.label}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                          <div className="col-12 col-md-5">
+                            <input
+                              className="form-control"
+                              type={
+                                dataType === "date"
+                                  ? "date"
+                                  : dataType === "number"
+                                    ? "number"
+                                    : "text"
+                              }
+                              value={String(filter.filteredTerm?.value ?? "")}
+                              onChange={(e) =>
+                                updateFilterRow(index, {
+                                  ...filter,
+                                  filteredTerm: {
+                                    dataType,
+                                    value: e.target.value,
+                                  },
+                                })
+                              }
+                            />
+                          </div>
+                          <div className="col-12 col-md-1 text-end">
+                            <button
+                              type="button"
+                              className="btn btn-outline-danger"
+                              onClick={() => removeFilterRow(index)}
+                            >
+                              <FontAwesomeIcon icon={faTrash} />
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    })}
+
+                    <div className="d-flex justify-content-end gap-2 mt-3">
+                      <button
+                        type="button"
+                        className="btn btn-outline-secondary"
+                        onClick={() => {
+                          setDraftFilters([]);
+                          onFiltersChange?.([]);
+                        }}
+                      >
+                        {t("Global.Labels.Clear")}
+                      </button>
+                      <button type="button" className="btn btn-primary" onClick={applyFilters}>
+                        {t("Global.Labels.Apply")}
+                      </button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          )}
+
           <tbody>
             {data.length === 0 && (
               <tr>
-                <td colSpan={columnsToShow.length + 2} className="text-center py-4">
+                <td colSpan={columnsToShow.length + 3} className="text-center py-4">
                   {t("Global.Labels.NoData")}
                 </td>
               </tr>
@@ -517,6 +848,13 @@ const DynamicTable: React.FC<Props> = ({
 
             {data.map((row, i) => (
               <tr className="align-middle" key={row.id ?? i}>
+                <td className="py-3">
+                  <input
+                    type="checkbox"
+                    checked={row.id ? selectedRowIds.includes(`${row.id}`) : false}
+                    onChange={(e) => toggleSelectOne(`${row.id || ""}`, e.target.checked)}
+                  />
+                </td>
                 <td className="py-3">{i + pageSize * (currentPage - 1) + 1}</td>
 
                 {orderedColumns
@@ -616,7 +954,7 @@ const DynamicTable: React.FC<Props> = ({
           {data.length !== 0 && (
             <tfoot>
               <tr>
-                <th colSpan={columnsToShow.length + (haveDefaultActions ? 2 : 1)}>
+                <th colSpan={columnsToShow.length + (haveDefaultActions ? 3 : 2)}>
                   <div className="d-flex justify-content-between">
                     <div className="my-auto text-muted me-3">
                       <small>

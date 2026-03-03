@@ -29,7 +29,7 @@ Run the development server:
 pnpm dev
 ```
 
-The app will be available at `http://localhost:3002`
+The app will be available at `http://localhost:3000`
 
 ## Production Build
 

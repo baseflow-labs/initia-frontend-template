@@ -1,5 +1,3 @@
-
-echo "🔍 Running pre-commit checks..."
-npx lint-staged
-
-pnpm format
+echo "Running pre-commit checks..."
+corepack pnpm exec lint-staged
+corepack pnpm format

@@ -1,6 +1,5 @@
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useField } from "formik";
 import React, { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -11,7 +10,14 @@ type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 
 const LocationInput: React.FC<FinalInput> = ({ name, ...input }) => {
   const { t, i18n } = useTranslation();
-  const [, , helpers] = useField(name);
+
+  const updateValue = (value: string) => {
+    if (typeof input.onChange === "function") {
+      input.onChange({
+        target: { name, value },
+      } as React.ChangeEvent<HTMLInputElement>);
+    }
+  };
 
   const [location, setLocation] = useState<{
     lat: number;
@@ -19,6 +25,10 @@ const LocationInput: React.FC<FinalInput> = ({ name, ...input }) => {
     link: string;
   } | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [query, setQuery] = useState("");
+
+  const buildGoogleMapLink = (q: string) =>
+    `https://www.google.com/maps?q=${encodeURIComponent(q.trim())}`;
 
   const handleGetLocation = () => {
     if (!navigator.geolocation) {
@@ -41,7 +51,7 @@ const LocationInput: React.FC<FinalInput> = ({ name, ...input }) => {
           ...coords,
           link,
         });
-        helpers.setValue(link);
+        updateValue(link);
 
         setError(null);
       },
@@ -49,6 +59,19 @@ const LocationInput: React.FC<FinalInput> = ({ name, ...input }) => {
         setError(t("Global.Form.Labels.PleaseAllowLocation"));
       }
     );
+  };
+
+  const handleSearchPlace = () => {
+    const trimmed = query.trim();
+    if (!trimmed) return;
+    const link = buildGoogleMapLink(trimmed);
+    setLocation({
+      lat: 0,
+      lng: 0,
+      link,
+    });
+    updateValue(link);
+    setError(null);
   };
 
   return (
@@ -68,7 +91,7 @@ const LocationInput: React.FC<FinalInput> = ({ name, ...input }) => {
         <FontAwesomeIcon icon={faLocationDot} />
       </span>
 
-      {location?.lng && (
+      {location?.link && (
         <div className={`d-block w-100 mt-1 small ${location ? "text-muted" : "text-white"}`}>
           <a
             href={location.link}
@@ -78,6 +101,35 @@ const LocationInput: React.FC<FinalInput> = ({ name, ...input }) => {
           >
             {t("Global.Form.Labels.ViewLocation")}
           </a>
+        </div>
+      )}
+
+      <div className="d-flex gap-2 mt-2">
+        <input
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+          className={`form-control form-control-sm ${commonInputClasses}`}
+          placeholder="Search place or address"
+        />
+        <button
+          type="button"
+          className="btn btn-outline-primary btn-sm"
+          onClick={handleSearchPlace}
+        >
+          Search
+        </button>
+      </div>
+
+      {location?.link && (
+        <div className="mt-2">
+          <iframe
+            title="map-preview"
+            src={`https://maps.google.com/maps?q=${encodeURIComponent(
+              location.link.includes("q=") ? location.link.split("q=")[1] : location.link
+            )}&output=embed`}
+            style={{ width: "100%", height: "220px", border: 0, borderRadius: "8px" }}
+            loading="lazy"
+          />
         </div>
       )}
 

@@ -70,6 +70,31 @@ export const inputs = (t: TFunction) => [
     label: t("Auth.Examples.Form.Date"),
   },
   {
+    type: "time",
+    name: "time",
+    label: "Time",
+  },
+  {
+    type: "datetime",
+    name: "datetime",
+    label: "DateTime",
+  },
+  {
+    type: "month",
+    name: "month",
+    label: "Month",
+  },
+  {
+    type: "year",
+    name: "year",
+    label: "Year",
+  },
+  {
+    type: "weekday",
+    name: "weekday",
+    label: "Weekday",
+  },
+  {
     type: "file",
     name: "file",
     label: t("Auth.Examples.Form.File"),
@@ -236,6 +261,16 @@ export const inputs = (t: TFunction) => [
     name: "select",
     label: t("Auth.Examples.Form.Select"),
     options: inputOptions(t),
+    searchable: true,
+    clearable: true,
+  },
+  {
+    type: "select",
+    name: "usersApiSelect",
+    label: "Users (API)",
+    apiPath: "/user?page=1&capacity=20",
+    searchable: true,
+    clearable: true,
   },
   {
     type: "selectMany",
@@ -264,4 +299,67 @@ export const inputs = (t: TFunction) => [
       },
     ],
   },
+  {
+    type: "richText",
+    name: "richText",
+    label: "Rich Text",
+    fullWidth: true,
+  },
 ];
+
+export const schemaInputs = (t: TFunction) => ({
+  draftKey: "template-form-schema-v2",
+  sections: [
+    {
+      title: "Profile",
+      fields: [
+        {
+          type: "text",
+          name: "fullName",
+          label: t("Auth.Examples.Form.Text"),
+          gridCols: 2 as const,
+        },
+        {
+          type: "email",
+          name: "workEmail",
+          label: t("Auth.Examples.Form.Email"),
+          gridCols: 2 as const,
+        },
+      ],
+    },
+    {
+      title: "Scheduling",
+      fields: [
+        {
+          type: "date",
+          name: "startDate",
+          label: "Start Date",
+          gridCols: 3 as const,
+        },
+        {
+          type: "time",
+          name: "startTime",
+          label: "Start Time",
+          gridCols: 3 as const,
+        },
+        {
+          type: "weekday",
+          name: "weekDay",
+          label: "Weekday",
+          gridCols: 3 as const,
+        },
+      ],
+    },
+    {
+      title: "Content",
+      fields: [
+        {
+          type: "richText",
+          name: "notes",
+          label: "Notes",
+          fullWidth: true,
+        },
+      ],
+    },
+  ],
+});

@@ -292,5 +292,5 @@ body {
   scrollbar-color: var($secondary) !important;
 }
 
-// Import Bootstrap and its default variables (using the ~ alias for node_modules)
+// Import Bootstrap and its default variables.
 @import "bootstrap/scss/bootstrap";

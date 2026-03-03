@@ -57,11 +57,43 @@ const DashboardView = () => {
   const statuses = [{ value: "Pending", label: t("Auth.Dashboard.Statuses.Pending") }];
 
   const isUnacceptedUser = user.role === "user" && user.status !== "Accepted";
+  const currentMonthDays = Array.from({ length: 30 }, (_, i) => i + 1);
 
   return (
     <PageTemplate title={t("Auth.Dashboard.Title")}>
       <div className="row">
-        <div className="col-lg-6">
+        <div className="col-lg-4">
+          <DashboardCard>
+            <h5 className="mb-3">Account Info</h5>
+            <div className="mb-2">
+              <small className="text-muted d-block">Email</small>
+              <div>{user.email || "-"}</div>
+            </div>
+            <div className="mb-2">
+              <small className="text-muted d-block">Role</small>
+              <div>{user.role || "-"}</div>
+            </div>
+            <div>
+              <small className="text-muted d-block">Status</small>
+              <div>{user.status || "-"}</div>
+            </div>
+          </DashboardCard>
+        </div>
+
+        <div className="col-lg-4">
+          <DashboardCard>
+            <h5 className="mb-3">Calendar</h5>
+            <div className="row g-1 text-center">
+              {currentMonthDays.map((day) => (
+                <div className="col-2" key={day}>
+                  <small className="d-inline-block rounded border px-2 py-1">{day}</small>
+                </div>
+              ))}
+            </div>
+          </DashboardCard>
+        </div>
+
+        <div className="col-lg-4">
           <DashboardCard>
             <div className="text-primary text-center py-5">
               <h1 className="mb-4">{t("Auth.Dashboard.Welcome.Title")}</h1>
@@ -73,7 +105,7 @@ const DashboardView = () => {
           </DashboardCard>
         </div>
 
-        <div className="col-lg-6">
+        <div className="col-lg-12 mt-4">
           <DashboardCard>
             <div className="row">
               <div className="col-12 mb-5">

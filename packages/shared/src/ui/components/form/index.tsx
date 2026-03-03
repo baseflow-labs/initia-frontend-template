@@ -1,6 +1,6 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FormikErrors, Form as FormikForm, FormikProps, FormikProvider, useFormik } from "formik";
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import Button from "../core/button";
@@ -30,10 +30,18 @@ export interface InputTypeProps {
     | "boolean"
     | "checkboxes"
     | "range"
+    | "time"
+    | "datetime"
+    | "month"
+    | "year"
+    | "weekday"
+    | "richText"
     | string;
 }
 interface InputBasicProps extends InputTypeProps {
   name: string;
+  section?: string;
+  gridCols?: 1 | 2 | 3 | 4 | 6 | 12;
   label?: string;
   labelNote?: string;
   required?: boolean;
@@ -43,6 +51,9 @@ interface InputBasicProps extends InputTypeProps {
   excludeInForm?: boolean;
   defaultValue?: string | number | string[];
   placeholder?: string;
+  searchable?: boolean;
+  clearable?: boolean;
+  apiPath?: string;
   fileSizeLimit?: number;
   maxFiles?: number;
   min?: string | number;
@@ -102,6 +113,8 @@ interface Props<
   loading?: boolean;
   customButtons?: React.ReactNode;
   customValidate?: (values: T) => FormikErrors<T>;
+  draftKey?: string;
+  enableDraft?: boolean;
 }
 
 export const LabelView = ({ labelNote, label, required }: Partial<InputSingleProps>) => (
@@ -128,6 +141,8 @@ const Form: React.FC<Props> = ({
   customButtons,
   initialValues,
   customValidate,
+  draftKey,
+  enableDraft,
   loading: loadingProp,
   ...rest
 }) => {
@@ -256,6 +271,29 @@ const Form: React.FC<Props> = ({
     },
   });
 
+  const finalDraftKey = draftKey ? `formDraft:${draftKey}` : undefined;
+
+  useEffect(() => {
+    if (!enableDraft || !finalDraftKey) return;
+    try {
+      const draftRaw = localStorage.getItem(finalDraftKey);
+      if (!draftRaw) return;
+      const draftValues = JSON.parse(draftRaw) as Record<string, unknown>;
+      formik.setValues({
+        ...formik.values,
+        ...draftValues,
+      });
+    } catch {
+      // ignore malformed draft payload
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [enableDraft, finalDraftKey]);
+
+  useEffect(() => {
+    if (!enableDraft || !finalDraftKey) return;
+    localStorage.setItem(finalDraftKey, JSON.stringify(formik.values));
+  }, [enableDraft, finalDraftKey, formik.values]);
+
   const InlineElement = ({
     flip,
     content,
@@ -352,14 +390,25 @@ const Form: React.FC<Props> = ({
                     className={`mb-2 ${
                       fullWidth
                         ? "col-md-12"
-                        : double
-                          ? "col-md-6"
-                          : triple
-                            ? "col-md-9"
-                            : "col-md-3"
+                        : input.gridCols
+                          ? `col-md-${Math.max(1, Math.floor(12 / Number(input.gridCols)))}`
+                          : double
+                            ? "col-md-6"
+                            : triple
+                              ? "col-md-9"
+                              : "col-md-3"
                     }`}
                     key={i}
                   >
+                    {input.section &&
+                      (i === 0 ||
+                        inputs(formik).filter((x) => !x.excludeInForm)[i - 1]?.section !==
+                          input.section) && (
+                        <div className="col-12 mt-3 mb-2">
+                          <h5 className="text-primary">{input.section}</h5>
+                          <hr className="mt-1" />
+                        </div>
+                      )}
                     <LabelView required={required} {...input} />
 
                     {aboveComp}
@@ -433,6 +482,42 @@ const Form: React.FC<Props> = ({
         </div>
 
         {customButtons}
+
+        {enableDraft && finalDraftKey && (
+          <div className="d-flex gap-2 mb-3">
+            <Button
+              type="button"
+              color="secondary"
+              onClick={() => localStorage.setItem(finalDraftKey, JSON.stringify(formik.values))}
+            >
+              Save Draft
+            </Button>
+            <Button
+              type="button"
+              color="info"
+              onClick={() => {
+                const draftRaw = localStorage.getItem(finalDraftKey);
+                if (!draftRaw) return;
+                try {
+                  formik.setValues(JSON.parse(draftRaw));
+                } catch {
+                  // ignore malformed draft payload
+                }
+              }}
+            >
+              Resume Draft
+            </Button>
+            <Button
+              type="button"
+              color="danger"
+              onClick={() => {
+                localStorage.removeItem(finalDraftKey);
+              }}
+            >
+              Clear Draft
+            </Button>
+          </div>
+        )}
 
         {onFormSubmit && (
           <Button

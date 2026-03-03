@@ -1,5 +1,6 @@
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useEffect, useState } from "react";
 import { Fragment } from "react/jsx-runtime";
 
 import BoxedPage from "../../../layouts/auth/pages/boxedPage";
@@ -7,6 +8,8 @@ import BoxedPage from "../../../layouts/auth/pages/boxedPage";
 interface Props {
   currentStep: number;
   setCurrentStep: (current: number) => void;
+  draftKey?: string;
+  enableDraft?: boolean;
   steps: {
     label: string;
     name: string;
@@ -14,7 +17,33 @@ interface Props {
   }[];
 }
 
-const WizardFormStepper = ({ steps, currentStep, setCurrentStep }: Props) => {
+const WizardFormStepper = ({
+  steps,
+  currentStep,
+  setCurrentStep,
+  draftKey,
+  enableDraft,
+}: Props) => {
+  const [hasDraft, setHasDraft] = useState(false);
+  const finalDraftKey = draftKey ? `wizardDraft:${draftKey}` : undefined;
+
+  useEffect(() => {
+    if (!enableDraft || !finalDraftKey) return;
+    const saved = localStorage.getItem(finalDraftKey);
+    if (!saved) return;
+    const parsed = Number(saved);
+    if (!Number.isNaN(parsed) && parsed >= 0 && parsed < steps.length) {
+      setCurrentStep(parsed);
+      setHasDraft(true);
+    }
+  }, [enableDraft, finalDraftKey, setCurrentStep, steps.length]);
+
+  useEffect(() => {
+    if (!enableDraft || !finalDraftKey) return;
+    localStorage.setItem(finalDraftKey, `${currentStep}`);
+    setHasDraft(true);
+  }, [enableDraft, finalDraftKey, currentStep]);
+
   const onStepJump = (i = 0) => {
     if (i < currentStep) {
       setCurrentStep(i);
@@ -62,6 +91,37 @@ const WizardFormStepper = ({ steps, currentStep, setCurrentStep }: Props) => {
       <span className="d-block d-lg-none text-primary text-center mt-4">
         {steps[currentStep]?.label}
       </span>
+
+      {enableDraft && finalDraftKey && (
+        <div className="d-flex justify-content-end gap-2 mb-3">
+          {hasDraft && (
+            <button
+              type="button"
+              className="btn btn-sm btn-outline-info"
+              onClick={() => {
+                const saved = localStorage.getItem(finalDraftKey);
+                const parsed = Number(saved);
+                if (!Number.isNaN(parsed) && parsed >= 0 && parsed < steps.length) {
+                  setCurrentStep(parsed);
+                }
+              }}
+            >
+              Resume Draft
+            </button>
+          )}
+          <button
+            type="button"
+            className="btn btn-sm btn-outline-danger"
+            onClick={() => {
+              localStorage.removeItem(finalDraftKey);
+              setHasDraft(false);
+              setCurrentStep(0);
+            }}
+          >
+            Clear Draft
+          </button>
+        </div>
+      )}
 
       <BoxedPage _hideHeader>
         <Fragment>{steps[currentStep]?.contents}</Fragment>

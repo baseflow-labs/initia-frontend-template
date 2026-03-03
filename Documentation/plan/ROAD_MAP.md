@@ -96,7 +96,7 @@
 
 ### Sprint 16 — Release hygiene + documentation baseline (18 - 31 Dec, 2025)
 
-- [ ] Fix changelog generating script (make it deterministic, supports conventional commits, handles merges)
+- [x] Fix changelog generating script (make it deterministic, supports conventional commits, handles merges)
 - [x] Update documentation (README, commit convention, local dev, release flow)
 - [ ] “Definition of Done” checklist for PRs (release notes, docs, migrations, screenshots)
 - [x] Build config file
@@ -113,7 +113,7 @@
 ### Sprint 17 — Repo structure: Vite + Turbo baseline (1 - 14 Jan, 2026)
 
 - [x] Wrap frontend with Vite (replace CRA) OR keep CRA but create migration path (pick one and complete it)
-- [ ] Introduce Turborepo structure
+- [x] Introduce Turborepo structure
   - [x] apps/app
   - [x] apps/landing
     - [ ] CTA Hero section options (request demo, check us now, prompt input, ...etc)
@@ -125,21 +125,21 @@
   - [x] apps/documentation (Docs, API, release notes, Community docusaurus)
   - [x] apps/manual (user guide)
   - [x] packages/ui
-  - [ ] packages/core
+  - [x] packages/core
   - [x] packages/i18n
-- [ ] Set shared lint/format/build tasks + caching
-- [ ] Prep “analysis tools integration” skeleton (packages/analysis placeholder + interface contracts)
-- [ ] Sign with generator details (every code file + footer)
+- [x] Set shared lint/format/build tasks + caching
+- [x] Prep “analysis tools integration” skeleton (packages/analysis placeholder + interface contracts)
+- [x] Sign with generator details (every code file + footer)
 - [ ] Brand the app with identity (logo, colors, fonts)
-- [ ] Setup basic operation Scripts & manual
-  - [ ] Build new resource
+- [x] Setup basic operation Scripts & manual
+  - [x] Build new resource
 
 ### Sprint 18 — Initial dashboard contents (MVP set) (15 - 28 Jan, 2026)
 
-- [ ] Non-Admin dashboard v1:
-  - [ ] Account info card
-  - [ ] Notifications list
-  - [ ] Calendar basic block
+- [x] Non-Admin dashboard v1:
+  - [x] Account info card
+  - [x] Notifications list
+  - [x] Calendar basic block
 - [x] Admin dashboard v1:
   - [x] Users stats + list
   - [x] System health basic widget (static placeholder + API hook)
@@ -148,11 +148,11 @@
 
 ### Sprint 19 — Form engine: foundational input types (29 Jan - 11 Feb, 2026)
 
-- [ ] Build date/time input suite:
-  - [ ] date, time, datetime, month, year, weekday
-- [ ] Searchable + clearable select (single)
-  - [ ] API vs static options
-- [ ] Rich text editor (minimal, stable; don’t over-customize)
+- [x] Build date/time input suite:
+  - [x] date, time, datetime, month, year, weekday
+- [x] Searchable + clearable select (single)
+  - [x] API vs static options
+- [x] Rich text editor (minimal, stable; don’t over-customize)
 - [ ] Nested form layouts (v2):
   - [ ] sections + grids
   - [ ] split form (two columns)
@@ -160,23 +160,26 @@
 
 ### Sprint 20 — Form engine: advanced inputs + wizard v2 (12 - 25 Feb, 2026)
 
-- [ ] Google maps picker (location input) — minimal integration
-- [ ] Multi-select with search + clear
-- [ ] Build form wizard v2:
-  - [ ] steps, validation per step
-  - [ ] save draft locally
-  - [ ] resume draft
-- [ ] “Form-of-forms” base schema support (enough to render forms from config)
+- [x] Google maps picker (location input) — minimal integration
+- [x] Multi-select with search + clear
+- [x] Build form wizard v2:
+  - [x] steps, validation per step
+  - [x] save draft locally
+  - [x] resume draft
+- [x] “Form-of-forms” base schema support (enough to render forms from config)
 
 ### Sprint 21 — DataTable v2: server-side foundations (26 Feb - 11 Mar, 2026)
 
-- [ ] Replace modals with dedicated CRUD pages
-- [ ] Server-side pagination + sorting + search (single search box)
-- [ ] Server-side filtering (v2):
-  - [ ] text, number, date, boolean
-- [ ] Column presets (v2): badge, boolean, progress, avatar/image
-- [ ] Row selection + bulk actions (standard actions only)
-- [ ] LocalStorage persistence (v2): column visibility + order + pagination info + filters + sort + search
+- [x] Replace modals with dedicated CRUD pages
+- [x] Server-side pagination + sorting + search (single search box)
+- [x] Server-side filtering (v2):
+  - [x] text, number, date, boolean
+- [x] Column presets (v2): badge, boolean, progress, avatar/image
+- [x] Row selection + bulk actions (standard actions only)
+- [x] LocalStorage persistence (v2): column visibility + order + pagination info + filters + sort + search
+- [x] Global app search bar added (service/page routing in authenticated apps)
+- [x] Per-service API search by property + advanced multi-filter integration
+- [x] Backend report export pipeline wired to FE export modal (complex conditions + selected columns + output type)
 
 ### Sprint 22 — DataTable v2: advanced filters + layouts (12 - 25 Mar, 2026)
 

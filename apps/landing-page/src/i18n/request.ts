@@ -4,8 +4,10 @@ import { notFound } from "next/navigation";
 // Can be imported from a shared config
 const locales = ["en", "ar"];
 
-export default getRequestConfig(async ({ locale }) => {
-  // Validate that the incoming `locale` parameter is valid
+export default getRequestConfig(async ({ requestLocale }) => {
+  const locale = await requestLocale;
+
+  // Validate that the incoming locale parameter is valid
   if (!locale || !locales.includes(locale as any)) notFound();
 
   return {

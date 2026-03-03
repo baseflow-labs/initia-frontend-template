@@ -1,13 +1,12 @@
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import service, { customFilterProps, formatGetFilters } from "../../../api";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import Button from "../core/button";
 import Form from "../form";
-import Modal from "../modal";
 
 import DynamicTable, { actionProps, TableColumn } from ".";
 
@@ -23,6 +22,7 @@ interface Props {
   /** optional: which field is searchable (for label only) */
   searchProp?: string;
   searchPlaceholder?: string;
+  useDedicatedCrudPages?: boolean;
 }
 
 type ModalAction = "view" | "create" | "update" | "delete";
@@ -31,6 +31,16 @@ interface ModalState {
   action: ModalAction;
   open: boolean;
   data: object;
+}
+
+interface PersistedState {
+  currentPage?: number;
+  pageSize?: number;
+  search?: string;
+  searchField?: string;
+  filters?: customFilterProps[];
+  sortField?: string;
+  sortDirection?: "asc" | "desc" | null;
 }
 
 const ApiDataTable: React.FC<Props> = ({
@@ -44,6 +54,7 @@ const ApiDataTable: React.FC<Props> = ({
   extraActions,
   searchProp,
   searchPlaceholder,
+  useDedicatedCrudPages = true,
 }) => {
   const { t } = useTranslation();
 
@@ -67,9 +78,17 @@ const ApiDataTable: React.FC<Props> = ({
 
   // search / filters / sorting
   const [search, setSearch] = useState("");
+  const [searchField, setSearchField] = useState("");
   const [filters, setFilters] = useState<customFilterProps[]>([]);
   const [sortField, setSortField] = useState<string | undefined>();
   const [sortDirection, setSortDirection] = useState<"asc" | "desc" | null>(null);
+  const [selectedRowIds, setSelectedRowIds] = useState<string[]>([]);
+
+  const stateInitializedRef = useRef(false);
+  const storageKey = useMemo(
+    () => `apiTable:${(dataApiEndpoint || "").replace(/[^\w/-]/g, "_")}`,
+    [dataApiEndpoint]
+  );
 
   // const renderActionLabel = (action: ModalAction) => {
   //   switch (action) {
@@ -94,6 +113,7 @@ const ApiDataTable: React.FC<Props> = ({
     // refresh data
     fetchData();
     setModal({ action: "view", open: false, data: {} });
+    setSelectedRowIds([]);
   };
 
   const onFormSubmit = (formData: { id?: string }) => {
@@ -126,6 +146,7 @@ const ApiDataTable: React.FC<Props> = ({
             page: currentPage,
             capacity: pageSize,
             search: search || undefined,
+            searchField: searchField || undefined,
             sortField,
             sortDirection,
           },
@@ -167,7 +188,52 @@ const ApiDataTable: React.FC<Props> = ({
     sortField,
     sortDirection,
     dataApiEndpoint,
+    searchField,
   ]);
+
+  useEffect(() => {
+    if (stateInitializedRef.current) return;
+    stateInitializedRef.current = true;
+
+    try {
+      const raw = localStorage.getItem(storageKey);
+      if (!raw) return;
+      const parsed = JSON.parse(raw) as PersistedState;
+
+      if (typeof parsed.currentPage === "number" && parsed.currentPage > 0) {
+        setCurrentPage(parsed.currentPage);
+      }
+      if (typeof parsed.pageSize === "number" && parsed.pageSize > 0) {
+        setPageSize(parsed.pageSize);
+      }
+      if (typeof parsed.search === "string") setSearch(parsed.search);
+      if (typeof parsed.searchField === "string") setSearchField(parsed.searchField);
+      if (Array.isArray(parsed.filters)) setFilters(parsed.filters);
+      if (typeof parsed.sortField === "string") setSortField(parsed.sortField);
+      if (
+        parsed.sortDirection === "asc" ||
+        parsed.sortDirection === "desc" ||
+        parsed.sortDirection === null
+      ) {
+        setSortDirection(parsed.sortDirection);
+      }
+    } catch {
+      // ignore malformed localStorage payload
+    }
+  }, [storageKey]);
+
+  useEffect(() => {
+    const payload: PersistedState = {
+      currentPage,
+      pageSize,
+      search,
+      searchField,
+      filters,
+      sortField,
+      sortDirection,
+    };
+    localStorage.setItem(storageKey, JSON.stringify(payload));
+  }, [currentPage, pageSize, search, searchField, filters, sortField, sortDirection, storageKey]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -189,10 +255,39 @@ const ApiDataTable: React.FC<Props> = ({
     setCurrentPage(1);
   };
 
+  const handleSearchFieldChange = (value: string) => {
+    setSearchField(value);
+    setCurrentPage(1);
+  };
+
   // If you add filter UI later, call setFilters from there:
   const handleFiltersChange = (nextFilters: customFilterProps[]) => {
     setFilters(nextFilters);
     setCurrentPage(1);
+  };
+
+  const handleBulkDelete = () => {
+    if (!selectedRowIds.length) return;
+
+    const tryBulkDelete = async () => {
+      try {
+        await service.delete(`${dataApiEndpoint}/bulk`, {
+          params: {
+            ids: JSON.stringify(selectedRowIds),
+            wipe: false,
+          },
+        });
+      } catch {
+        await Promise.all(selectedRowIds.map((id) => service.delete(`${dataApiEndpoint}/${id}`)));
+      }
+    };
+
+    tryBulkDelete()
+      .then(() => {
+        setSelectedRowIds([]);
+        fetchData();
+      })
+      .catch(apiCatchGlobalHandler);
   };
 
   const modalTitle =
@@ -206,16 +301,60 @@ const ApiDataTable: React.FC<Props> = ({
             ? t("Global.Labels.View", { item: singleItem })
             : "";
 
+  const formSection = (
+    <div className="card border-0 shadow-sm mt-4">
+      <div className="card-body">
+        <h5 className="mb-3">{modalTitle}</h5>
+        <Form
+          inputs={() =>
+            inputs.map((item) => ({
+              ...item,
+              disabled: modal.action === "view" || modal.action === "delete" || item.name === "id",
+              double: true,
+            }))
+          }
+          initialValues={modal.data}
+          onFormSubmit={
+            modal.action === "view"
+              ? undefined
+              : (onFormSubmit as (values?: Record<string, unknown>, reset?: () => void) => void)
+          }
+          submitText={
+            modal.action === "delete" ? t("Global.Labels.Delete", { item: singleItem }) : undefined
+          }
+          submitColor={
+            modal.action === "delete" ? "danger" : modal.action === "update" ? "warning" : "success"
+          }
+        />
+        <div className="text-end mt-3">
+          <Button
+            color="secondary"
+            onClick={() => setModal({ open: false, data: {}, action: "view" })}
+          >
+            Close
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <div>
       {includeCreate && (
-        <div className="text-end mb-3">
+        <div className="d-flex justify-content-end mb-3">
           <Button
             color="success"
             onClick={() => setModal({ action: "create", open: true, data: {} })}
           >
             <FontAwesomeIcon icon={faPlus} className="me-2" />
             {t("Global.Labels.CreateNew", { item: singleItem })}
+          </Button>
+        </div>
+      )}
+      {includeDelete && selectedRowIds.length > 0 && (
+        <div className="d-flex justify-content-end mb-3">
+          <Button color="danger" onClick={handleBulkDelete}>
+            Delete Selected ({selectedRowIds.length})
           </Button>
         </div>
       )}
@@ -245,42 +384,29 @@ const ApiDataTable: React.FC<Props> = ({
         searchPlaceholder={searchPlaceholder}
         currentSearch={search}
         onSearchChange={handleSearchChange}
+        searchField={searchField}
+        onSearchFieldChange={handleSearchFieldChange}
         // sort
         sortField={sortField}
         sortDirection={sortDirection}
         onSortChange={handleSortChange}
         // filters hook (UI to be added later if you want)
         onFiltersChange={handleFiltersChange}
+        currentFilters={filters}
+        selectedRowIds={selectedRowIds}
+        onSelectedRowIdsChange={setSelectedRowIds}
+        tableStorageKey={storageKey}
+        exportOptions={{
+          endpoint: dataApiEndpoint,
+          search,
+          searchField,
+          filters,
+          sortField,
+          sortDirection,
+        }}
       />
 
-      <Modal
-        title={modalTitle}
-        className="modal-lg"
-        isOpen={modal.open}
-        onClose={() => setModal({ open: false, data: {}, action: "view" })}
-      >
-        <Form
-          inputs={() =>
-            inputs.map((item) => ({
-              ...item,
-              disabled: modal.action === "view" || modal.action === "delete" || item.name === "id",
-              double: true,
-            }))
-          }
-          initialValues={modal.data}
-          onFormSubmit={
-            modal.action === "view"
-              ? undefined
-              : (onFormSubmit as (values?: Record<string, unknown>, reset?: () => void) => void)
-          }
-          submitText={
-            modal.action === "delete" ? t("Global.Labels.Delete", { item: singleItem }) : undefined
-          }
-          submitColor={
-            modal.action === "delete" ? "danger" : modal.action === "update" ? "warning" : "success"
-          }
-        />
-      </Modal>
+      {modal.open && useDedicatedCrudPages ? formSection : null}
     </div>
   );
 };

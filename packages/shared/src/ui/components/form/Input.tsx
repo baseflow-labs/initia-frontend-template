@@ -1,4 +1,4 @@
-import { useField } from "formik";
+import { FormikContext, useField } from "formik";
 import React from "react";
 
 import DateInput from "./inputs/date";
@@ -17,6 +17,7 @@ import TextareaInput from "./inputs/textarea";
 import BooleanInput from "./inputs/boolean";
 import RatingInput from "./inputs/rating";
 import RangeInput from "./inputs/number/range";
+import RichTextInput from "./inputs/richText";
 
 import { InputProps, InputTypeProps } from ".";
 
@@ -35,12 +36,17 @@ const renderByType = (type: InputTypeProps["type"], props: FinalInput) => {
   if (type === "radio" && input.options) return <RadioInput {...input} />;
   if (type === "range") return <RangeInput type={type} min={min} max={max} {...input} />;
   if (type === "phoneNumber") return <PhoneNoInput {...input} />;
-  if (type === "date") return <DateInput {...input} />;
+  if (["date", "time", "month", "weekday"].includes(`${type}`))
+    return <DateInput type={type} {...input} />;
+  if (type === "datetime") return <DateInput type="datetime-local" {...input} />;
+  if (type === "year")
+    return <DefaultInput type="number" min={1900} max={2100} step={1} {...input} />;
   if (type === "password") return <PasswordInput {...input} />;
   if (type === "file") return <FileInput {...input} />;
   if (type === "location") return <LocationInput {...input} />;
   if (type === "otp") return <OtpInput {...input} />;
   if (type === "textarea") return <TextareaInput {...input} />;
+  if (type === "richText") return <RichTextInput {...input} />;
   if (type === "multipleEntries") return <MultipleEntriesInput {...input} />;
   if (type === "checkboxes") return <CheckboxesInput {...input} />;
   if (type === "boolean") return <BooleanInput {...input} />;
@@ -65,7 +71,9 @@ const RawInput: React.FC<FinalInput> = ({ type, ...rest }) => {
 };
 
 const InputComp: React.FC<FinalInput> = ({ bypassFormik, ...props }) => {
-  if (bypassFormik) {
+  const formikContext = React.useContext(FormikContext);
+
+  if (bypassFormik || !formikContext) {
     return <RawInput {...props} />;
   }
   return <FormikBoundInput {...props} />;

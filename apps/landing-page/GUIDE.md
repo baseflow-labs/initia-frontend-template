@@ -30,7 +30,7 @@ cd packages/landing-page
 pnpm dev
 ```
 
-The app will run on `http://localhost:3002`
+The app will run on `http://localhost:3000`
 
 ### 3. (Optional) Start Mock API Server
 
@@ -69,7 +69,7 @@ pnpm build:landing    # Build for production
 From the package directory:
 
 ```bash
-pnpm dev             # Development server (port 3002)
+pnpm dev             # Development server (port 3000)
 pnpm build           # Production build
 pnpm start           # Start production server
 pnpm lint            # Lint code
@@ -331,7 +331,7 @@ pnpm add library-name
 Change port in `package.json`:
 
 ```json
-"dev": "next dev -p 3002"
+"dev": "next dev -p 3000"
 ```
 
 ### API Connection Failed
@@ -364,7 +364,7 @@ pnpm install --force
 ### Manual Testing
 
 1. Start dev server: `pnpm dev`
-2. Visit: `http://localhost:3002`
+2. Visit: `http://localhost:3000`
 3. Check each section type renders correctly
 
 ### With Different Data

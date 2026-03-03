@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "predev": "node ../../scripts/dev/free-port.cjs 5174",
     "dev": "vite --port 5174",
     "build": "vite build",
     "preview": "vite preview",

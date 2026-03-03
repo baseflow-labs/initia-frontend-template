@@ -1,12 +1,17 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": ["**/.env.*local"],
+  "globalDependencies": ["**/.env.*local", "package.json", "pnpm-lock.yaml"],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
       "outputs": ["dist/**"]
     },
     "lint": {
+      "dependsOn": ["^lint"],
+      "outputs": [".eslintcache"]
+    },
+    "format": {
+      "dependsOn": ["^format"],
       "outputs": []
     },
     "dev": {
@@ -14,7 +19,12 @@
       "persistent": true
     },
     "typecheck": {
+      "dependsOn": ["^typecheck"],
       "outputs": []
+    },
+    "generate": {
+      "cache": false,
+      "outputs": ["apps/**/src/views/auth/services/**", "packages/user-services/src/services/**"]
     }
   }
 }

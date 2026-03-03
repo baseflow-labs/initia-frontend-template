@@ -19,7 +19,7 @@ cd packages/help-center
 pnpm dev
 ```
 
-The help center will be available at `http://localhost:3003`
+The help center will be available at `http://localhost:3001`
 
 ## Using Mock Data
 

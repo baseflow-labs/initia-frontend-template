@@ -29,6 +29,8 @@ const SelectManyInput: React.FC<SelectManyInputProps> = ({
   options,
   placeholder,
   className,
+  searchable,
+  clearable,
 }) => {
   const { t } = useTranslation();
   const [field, , helpers] = useField<string[]>(name);
@@ -129,6 +131,8 @@ const SelectManyInput: React.FC<SelectManyInputProps> = ({
     <Select
       name={name}
       isMulti
+      isSearchable={searchable !== false}
+      isClearable={clearable !== false}
       value={valueAsArray}
       onChange={handleChange}
       styles={customStyles}

@@ -303,5 +303,5 @@ body {
   scrollbar-color: var(--bs-secondary) !important;
 }
 
-// Import Bootstrap and its default variables (using the ~ alias for node_modules)
-@import "bootstrap/scss/bootstrap";
+// Import Bootstrap from workspace root for Turbopack-compatible Sass resolution.
+@import "../../../../node_modules/bootstrap/scss/bootstrap";

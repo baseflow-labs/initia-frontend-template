@@ -1,4 +1,3 @@
-import { useField } from "formik";
 import React, { useRef, useState } from "react";
 
 import { InputProps } from "..";
@@ -10,7 +9,14 @@ const OTP_LENGTH = 4;
 const OtpInput: React.FC<FinalInput> = ({ name, ...input }) => {
   const [otp, setOtp] = useState<string[]>(Array(OTP_LENGTH).fill(""));
   const inputsRef = useRef<Array<HTMLInputElement | null>>([]);
-  const [, , helpers] = useField(name);
+
+  const updateValue = (value: string) => {
+    if (typeof input.onChange === "function") {
+      input.onChange({
+        target: { name, value },
+      } as React.ChangeEvent<HTMLInputElement>);
+    }
+  };
 
   const focusInput = (index: number) => {
     const input = inputsRef.current[index];
@@ -27,7 +33,7 @@ const OtpInput: React.FC<FinalInput> = ({ name, ...input }) => {
     if (value && index < OTP_LENGTH - 1) {
       focusInput(index + 1);
     } else {
-      helpers.setValue(newOtp.join(""));
+      updateValue(newOtp.join(""));
     }
   };
 
