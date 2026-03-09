@@ -188,6 +188,7 @@
 - [ ] Details panel option (expand row)
 - [ ] Responsive cards view (auto switch / manual toggle)
 - [ ] Scroll vs pagination mode (choose one as default; keep both optional)
+- [ ] Build AI development instructions for most common tools, agents & AI code editors (Codex, Copilot, Codeium, Antigravity ...etc)
 
 ## Phase 7 — Views and UX Platform Layer (26 Mar - 22 Apr, 2026)
 
