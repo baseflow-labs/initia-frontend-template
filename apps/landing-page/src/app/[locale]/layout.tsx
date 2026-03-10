@@ -54,7 +54,7 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
       <body>
         <NextIntlClientProvider messages={messages}>
           <Navbar pages={pages} systemMetadata={systemMetadata} />
-          <main style={{ paddingTop: "80px" }}>{children}</main>
+          <main>{children}</main>
           <Footer pages={pages} systemMetadata={systemMetadata} />
         </NextIntlClientProvider>
       </body>

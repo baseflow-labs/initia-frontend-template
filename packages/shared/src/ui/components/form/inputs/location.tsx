@@ -109,14 +109,14 @@ const LocationInput: React.FC<FinalInput> = ({ name, ...input }) => {
           value={query}
           onChange={(event) => setQuery(event.target.value)}
           className={`form-control form-control-sm ${commonInputClasses}`}
-          placeholder="Search place or address"
+          placeholder={t("Global.Form.Labels.SearchPlaceOrAddress")}
         />
         <button
           type="button"
           className="btn btn-outline-primary btn-sm"
           onClick={handleSearchPlace}
         >
-          Search
+          {t("Global.Form.Labels.SearchLocation")}
         </button>
       </div>
 

@@ -3,8 +3,8 @@ import { useTranslation } from "react-i18next";
 import Select from "react-select";
 
 import { InputProps } from "..";
-import { commonInputClasses } from "../../../../utils/consts";
 import service from "../../../../api";
+import { commonInputClasses } from "../../../../utils/consts";
 
 type FinalInput = InputProps &
   React.InputHTMLAttributes<HTMLInputElement> &
@@ -57,7 +57,7 @@ const SelectInput: React.FC<FinalInput> = ({
     return (
       <Select
         name={name}
-        className={className}
+        className={`${className} w-100`}
         options={reactSelectOptions}
         value={selected}
         isSearchable={searchable !== false}

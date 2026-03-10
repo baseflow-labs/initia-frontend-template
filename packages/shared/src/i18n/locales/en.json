@@ -67,14 +67,18 @@
         "CardRadio": "Card Radio",
         "Checkboxes": "Checkboxes",
         "Color": "Color",
+        "ContentSection": "Content",
         "Date": "Date",
+        "DateTime": "Date & Time",
         "Description": "This is example of a description text",
         "Email": "Email",
         "File": "File",
         "ImageCheckboxes": "Image Checkboxes",
         "ImageRadio": "Image Radio",
         "Location": "Location",
+        "Month": "Month",
         "MultipleEntries": "Multiple Entries",
+        "Notes": "Notes",
         "Number": "Number",
         "NumberText": "Number Text",
         "OTP": "OTP",
@@ -83,10 +87,15 @@
         "Option3": "Option 3",
         "Password": "Password",
         "PhoneNumber": "Phone Number",
+        "ProfileSection": "Profile",
         "Radio": "Radio",
         "Range": "Range",
+        "RichText": "Rich Text",
+        "SchedulingSection": "Scheduling",
         "Select": "Select",
         "SelectMany": "Select Many",
+        "StartDate": "Start Date",
+        "StartTime": "Start Time",
         "StackedBooleanCheckboxes": "Stacked Boolean Buttons",
         "StackedButtonRadio": "Stacked Button Radio",
         "StackedCardCheckboxes": "Stacked Card Checkboxes",
@@ -97,7 +106,11 @@
         "StackedRadio": "Stacked Radio",
         "StarRating": "Star Rating",
         "Text": "Text",
-        "Textarea": "Textarea"
+        "Textarea": "Textarea",
+        "Time": "Time",
+        "UsersApiSelect": "Users (API)",
+        "Weekday": "Weekday",
+        "Year": "Year"
       }
     },
     "LandingPage": {
@@ -554,12 +567,16 @@
     },
     "TemplateExamples": {
       "DataTable": {
+        "DeletePrompt": "This action will permanently delete this record.",
         "Title": "DataTable Example"
       },
       "DataView": {
         "Title": "Data View Examples"
       },
       "Forms": {
+        "LibraryTitle": "Input Library",
+        "SchemaDescription": "Schema-driven form renderer used for the form-of-forms UI.",
+        "SchemaTitle": "Schema-Driven Form",
         "Title": "Form Input Examples"
       }
     },
@@ -610,6 +627,7 @@
         "Add": "Add",
         "AddFiles": "Add Files",
         "BrowserDontSupportLocation": "Browser Don't Support Location",
+        "ClearDraft": "Clear Draft",
         "Delete": "Delete",
         "Edit": "Edit",
         "Email": "Email",
@@ -620,7 +638,11 @@
         "PickDate": "Pick Date",
         "PleaseAllowLocation": "Please Allow Location",
         "PleaseSelect": "Please Select",
+        "ResumeDraft": "Resume Draft",
         "Save": "Save",
+        "SaveDraft": "Save Draft",
+        "SearchLocation": "Search",
+        "SearchPlaceOrAddress": "Search place or address",
         "Submit": "Submit",
         "UnAvailableForDemoMode": "Unavailable For Demo Mode",
         "Update": "Update",
@@ -632,19 +654,32 @@
     },
     "Labels": {
       "Action": "Action",
+      "AdvancedFilters": "Advanced Filters",
       "All": "All",
+      "Apply": "Apply",
       "Back": "Back",
+      "Clear": "Clear",
+      "Close": "Close",
+      "Contains": "Contains",
       "CreateNew": "Create New {{item}}",
-      "Delete": "Delete {{item",
+      "Delete": "Delete {{item}}",
+      "DeleteSelected": "Delete Selected ({{count}})",
       "DemoLoginNote": "You may login using any of mobile numbers below and password of 12345678",
       "DemoWarning": "Please be aware that this is a demo version, accessible by the public. So we advise against sharing any real data like name, ID number and the like. Please note that the data will be automatically reset everyday",
       "Details": "Details",
       "Download": "Download",
+      "EndsWith": "Ends With",
       "FileCantBeReviewed": "File Can't Be Reviewed",
+      "Filter": "Filter",
+      "GreaterThan": "Greater Than",
+      "GreaterThanOrEqual": "Greater Than Or Equal",
+      "LessThan": "Less Than",
+      "LessThanOrEqual": "Less Than Or Equal",
       "Logout": "Logout",
       "More": "More",
       "NoData": "No Data",
       "NoNotifications": "No Notifications",
+      "NotEquals": "Not Equals",
       "Of": "Of",
       "PageNo": "Page No",
       "PageSize": "Page Size",
@@ -661,6 +696,7 @@
       },
       "Search": "Search",
       "Showing": "Showing",
+      "StartsWith": "Starts With",
       "ThisWeek": "This Week",
       "Today": "Today",
       "Update": "Update {{item}}",
@@ -671,6 +707,14 @@
     "Loading": "Loading",
     "Notifications": {
       "Successful": "Successful {{action}}"
+    },
+    "TopbarSearch": {
+      "NoResultsDescription": "Try a different name, route, or keyword.",
+      "NoResultsTitle": "No matches found",
+      "Placeholder": "Search pages, services, settings...",
+      "RecentAndSuggested": "Recent and suggested",
+      "Results": "Matching destinations",
+      "Shortcut": "Ctrl K"
     },
     "Placeholders": {
       "Search": "Search..."

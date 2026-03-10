@@ -490,7 +490,7 @@ const Form: React.FC<Props> = ({
               color="secondary"
               onClick={() => localStorage.setItem(finalDraftKey, JSON.stringify(formik.values))}
             >
-              Save Draft
+              {t("Global.Form.Labels.SaveDraft")}
             </Button>
             <Button
               type="button"
@@ -505,7 +505,7 @@ const Form: React.FC<Props> = ({
                 }
               }}
             >
-              Resume Draft
+              {t("Global.Form.Labels.ResumeDraft")}
             </Button>
             <Button
               type="button"
@@ -514,7 +514,7 @@ const Form: React.FC<Props> = ({
                 localStorage.removeItem(finalDraftKey);
               }}
             >
-              Clear Draft
+              {t("Global.Form.Labels.ClearDraft")}
             </Button>
           </div>
         )}

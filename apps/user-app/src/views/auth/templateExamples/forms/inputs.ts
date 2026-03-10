@@ -72,27 +72,27 @@ export const inputs = (t: TFunction) => [
   {
     type: "time",
     name: "time",
-    label: "Time",
+    label: t("Auth.Examples.Form.Time"),
   },
   {
     type: "datetime",
     name: "datetime",
-    label: "DateTime",
+    label: t("Auth.Examples.Form.DateTime"),
   },
   {
     type: "month",
     name: "month",
-    label: "Month",
+    label: t("Auth.Examples.Form.Month"),
   },
   {
     type: "year",
     name: "year",
-    label: "Year",
+    label: t("Auth.Examples.Form.Year"),
   },
   {
     type: "weekday",
     name: "weekday",
-    label: "Weekday",
+    label: t("Auth.Examples.Form.Weekday"),
   },
   {
     type: "file",
@@ -267,7 +267,7 @@ export const inputs = (t: TFunction) => [
   {
     type: "select",
     name: "usersApiSelect",
-    label: "Users (API)",
+    label: t("Auth.Examples.Form.UsersApiSelect"),
     apiPath: "/user?page=1&capacity=20",
     searchable: true,
     clearable: true,
@@ -302,7 +302,7 @@ export const inputs = (t: TFunction) => [
   {
     type: "richText",
     name: "richText",
-    label: "Rich Text",
+    label: t("Auth.Examples.Form.RichText"),
     fullWidth: true,
   },
 ];
@@ -311,7 +311,7 @@ export const schemaInputs = (t: TFunction) => ({
   draftKey: "template-form-schema-v2",
   sections: [
     {
-      title: "Profile",
+      title: t("Auth.Examples.Form.ProfileSection"),
       fields: [
         {
           type: "text",
@@ -328,35 +328,35 @@ export const schemaInputs = (t: TFunction) => ({
       ],
     },
     {
-      title: "Scheduling",
+      title: t("Auth.Examples.Form.SchedulingSection"),
       fields: [
         {
           type: "date",
           name: "startDate",
-          label: "Start Date",
+          label: t("Auth.Examples.Form.StartDate"),
           gridCols: 3 as const,
         },
         {
           type: "time",
           name: "startTime",
-          label: "Start Time",
+          label: t("Auth.Examples.Form.StartTime"),
           gridCols: 3 as const,
         },
         {
           type: "weekday",
           name: "weekDay",
-          label: "Weekday",
+          label: t("Auth.Examples.Form.Weekday"),
           gridCols: 3 as const,
         },
       ],
     },
     {
-      title: "Content",
+      title: t("Auth.Examples.Form.ContentSection"),
       fields: [
         {
           type: "richText",
           name: "notes",
-          label: "Notes",
+          label: t("Auth.Examples.Form.Notes"),
           fullWidth: true,
         },
       ],

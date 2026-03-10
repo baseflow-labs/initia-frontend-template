@@ -1,7 +1,8 @@
-import { LandingPagesResponse, Page, SystemMetadata } from "@/types/landing";
 import axios from "axios";
 
 import { getMockPages, getMockSystemMetadata } from "./dummyApiData";
+
+import { LandingPagesResponse, Page, SystemMetadata } from "@/types/landing";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const DEFAULT_LOCALES = ["en", "ar"];
