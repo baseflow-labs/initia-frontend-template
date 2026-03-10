@@ -3,6 +3,7 @@ import tempLogo from "@initia/shared/assets/images/brand/logo.png";
 import LangButton from "@initia/shared/ui/components/button/lang";
 import Button from "@initia/shared/ui/components/core/button";
 import DropdownComp from "@initia/shared/ui/components/dropdown";
+import TopbarSearch, { TopbarSearchOption } from "@initia/shared/ui/components/search/topbarSearch";
 import { apiCatchGlobalHandler } from "@initia/shared/utils/function";
 import {
   faBars,
@@ -10,13 +11,12 @@ import {
   faEnvelope,
   faGear,
   faInfoCircle,
-  faMagnifyingGlass,
   faRightFromBracket,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
-import { FormEvent, useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
@@ -36,10 +36,12 @@ export interface Notification {
 }
 
 const DashboardNavbar = ({
-  onSearch,
+  searchOptions,
+  onSearchSelect,
   searchPlaceholder,
 }: {
-  onSearch?: (e: string) => void;
+  searchOptions?: TopbarSearchOption[];
+  onSearchSelect?: (option: TopbarSearchOption) => void;
   searchPlaceholder?: string;
 }) => {
   const dispatch = useDispatch();
@@ -62,15 +64,6 @@ const DashboardNavbar = ({
       .catch(apiCatchGlobalHandler);
   }, []);
 
-  const onSearchSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.currentTarget);
-    const search = formData.get("search");
-
-    if (onSearch) onSearch(String(search));
-  };
-
   // const toggleTheme = () => {
   //   const current = document.documentElement.getAttribute("data-bs-theme");
   //   document.documentElement.setAttribute("data-bs-theme", current === "dark" ? "light" : "dark");
@@ -92,22 +85,15 @@ const DashboardNavbar = ({
             </Button>
           </div>
 
-          <div className="col-12 col-lg-5 order-3 order-lg-1">
-            {onSearch && (
-              <form onSubmit={onSearchSubmit}>
-                <div className="input-group w-100 ms-3">
-                  <input
-                    name="search"
-                    className="form-control"
-                    type="text"
-                    placeholder={searchPlaceholder || t("Global.Labels.Search")}
-                  />
-
-                  <button className="input-group-text bg-primary" type="submit">
-                    <FontAwesomeIcon icon={faMagnifyingGlass} />
-                  </button>
-                </div>
-              </form>
+          <div className="col-12 col-lg-6 order-3 order-lg-1">
+            {searchOptions?.length && onSearchSelect && (
+              <div className="py-2 pe-lg-3">
+                <TopbarSearch
+                  options={searchOptions}
+                  onSelect={onSearchSelect}
+                  placeholder={searchPlaceholder}
+                />
+              </div>
             )}
           </div>
 

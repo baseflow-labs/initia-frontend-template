@@ -10,6 +10,7 @@ import {
   faPaintBrush,
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
+import { TopbarSearchOption } from "@initia/shared/ui/components/search/topbarSearch";
 import MessagingView from "@initia/shared/ui/messaging";
 import NotificationsView from "@initia/shared/ui/notifications";
 import { applyRouteChanges } from "@initia/shared/utils/function";
@@ -147,18 +148,15 @@ const AuthLayout = () => {
     applyRouteChanges(t, authRoutes, location.pathname);
   }, [location.pathname]);
 
-  const onGlobalSearch = (term: string) => {
-    const query = `${term || ""}`.trim().toLowerCase();
-    if (!query) return;
-
-    const matched = authRoutes.find(
-      ({ name, route }) => name.toLowerCase().includes(query) || route.toLowerCase().includes(query)
-    );
-
-    if (matched?.route) {
-      navigate(matched.route);
-    }
-  };
+  const searchOptions: TopbarSearchOption[] = authRoutes
+    .filter(({ route }) => !route.includes(":"))
+    .map(({ name, route }) => ({
+      label: name,
+      route,
+      description: route,
+      section: route.split("/")[1]?.replaceAll("-", " ") || t("Global.Labels.All"),
+      keywords: route.split("/").filter(Boolean),
+    }));
 
   return (
     <Fragment>
@@ -211,8 +209,9 @@ const AuthLayout = () => {
         >
           <div className="p-0 px-2 px-lg-5 w-100">
             <DashboardNavbar
-              onSearch={onGlobalSearch}
-              searchPlaceholder="Search services or pages"
+              searchOptions={searchOptions}
+              onSearchSelect={(option) => navigate(option.route)}
+              searchPlaceholder={t("Global.TopbarSearch.Placeholder")}
             />
 
             <Routes>
