@@ -2,6 +2,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useLocation, useNavigate } from "react-router";
 
 import service, { customFilterProps, formatGetFilters } from "../../../api";
 import { apiCatchGlobalHandler } from "../../../utils/function";
@@ -23,6 +24,7 @@ interface Props {
   searchProp?: string;
   searchPlaceholder?: string;
   useDedicatedCrudPages?: boolean;
+  crudMode?: "inline" | "routes";
 }
 
 type ModalAction = "view" | "create" | "update" | "delete";
@@ -54,9 +56,12 @@ const ApiDataTable: React.FC<Props> = ({
   extraActions,
   searchProp,
   searchPlaceholder,
-  useDedicatedCrudPages = true,
+  crudMode = "inline",
 }) => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isRouteCrud = crudMode === "routes";
 
   const [modal, setModal] = useState<ModalState>({
     action: "view",
@@ -331,7 +336,7 @@ const ApiDataTable: React.FC<Props> = ({
             color="secondary"
             onClick={() => setModal({ open: false, data: {}, action: "view" })}
           >
-            Close
+            {t("Global.Labels.Close")}
           </Button>
         </div>
       </div>
@@ -344,7 +349,11 @@ const ApiDataTable: React.FC<Props> = ({
         <div className="d-flex justify-content-end mb-3">
           <Button
             color="success"
-            onClick={() => setModal({ action: "create", open: true, data: {} })}
+            onClick={() =>
+              isRouteCrud
+                ? navigate(`${location.pathname.replace(/\/$/, "")}/new`)
+                : setModal({ action: "create", open: true, data: {} })
+            }
           >
             <FontAwesomeIcon icon={faPlus} className="me-2" />
             {t("Global.Labels.CreateNew", { item: singleItem })}
@@ -354,7 +363,7 @@ const ApiDataTable: React.FC<Props> = ({
       {includeDelete && selectedRowIds.length > 0 && (
         <div className="d-flex justify-content-end mb-3">
           <Button color="danger" onClick={handleBulkDelete}>
-            Delete Selected ({selectedRowIds.length})
+            {t("Global.Labels.DeleteSelected", { count: selectedRowIds.length })}
           </Button>
         </div>
       )}
@@ -362,13 +371,23 @@ const ApiDataTable: React.FC<Props> = ({
       <DynamicTable
         data={(data || []) as { id: string }[]}
         columns={inputs}
-        onRowClick={(rowData = {}, action = "") =>
+        onRowClick={(rowData = {}, action = "") => {
+          if (isRouteCrud && rowData.id) {
+            const mode = action === "update" ? "edit" : action || "view";
+            navigate(
+              `${location.pathname.replace(/\/$/, "")}/${rowData.id}${
+                mode === "view" ? "?mode=view" : mode === "delete" ? "?mode=delete" : ""
+              }`
+            );
+            return;
+          }
+
           setModal({
             action: (action || "view") as ModalAction,
             open: true,
             data: rowData,
-          })
-        }
+          });
+        }}
         includeView={includeView}
         includeUpdate={includeUpdate}
         includeDelete={includeDelete}
@@ -406,7 +425,7 @@ const ApiDataTable: React.FC<Props> = ({
         }}
       />
 
-      {modal.open && useDedicatedCrudPages ? formSection : null}
+      {modal.open && !isRouteCrud ? formSection : null}
     </div>
   );
 };
