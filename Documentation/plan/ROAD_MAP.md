@@ -189,6 +189,7 @@
 - [ ] Responsive cards view (auto switch / manual toggle)
 - [ ] Scroll vs pagination mode (choose one as default; keep both optional)
 - [ ] Build AI development instructions for most common tools, agents & AI code editors (Codex, Copilot, Codeium, Antigravity ...etc)
+- [ ] Duplicate record action
 
 ## Phase 7 — Views and UX Platform Layer (26 Mar - 22 Apr, 2026)
 
@@ -204,6 +205,10 @@
   - [ ] date & time format
   - [ ] language
   - [ ] delete account
+- [ ] Floating Speed-dial action button (configurable per page/service)
+- [ ] Command palette (global shortcut to open + quick navigation + actions)
+- [ ] Per-page query presets save (search inputs, filters, column visibility)
+- [ ] Form draft auto-save (localStorage) + resume
 
 ### Sprint 24 — Data view options v2 (9 - 22 Apr, 2026)
 
