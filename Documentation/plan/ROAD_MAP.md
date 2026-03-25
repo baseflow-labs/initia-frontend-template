@@ -195,20 +195,21 @@
 
 ### Sprint 23 — Themes + layout switchers (26 Mar - 8 Apr, 2026)
 
-- [ ] Dark/light mode
-- [ ] Color theme switcher (primary/secondary + neutral surfaces)
-- [ ] Horizontal/vertical layout switcher
-- [ ] Boxed/full-width layout option
-- [ ] Persist UI preferences (per user in localStorage first; later server)
-- [ ] User settings of layout
+- [ ] Dark/light modes with switcher
+- [ ] Build App UI Customizer in settings (view exist @ settings => system but to add new features) with options...
+  - [ ] Color theme switcher (primary/secondary + neutral surfaces)
+  - [ ] Horizontal/vertical layout switcher
+  - [ ] Boxed/full-width layout option
+  - [ ] Persist UI preferences (per user in localStorage)
+- [ ] Add User settings of layout (also in system settings)
   - [ ] timezone
   - [ ] date & time format
-  - [ ] language
+  - [ ] default language
   - [ ] delete account
-- [ ] Floating Speed-dial action button (configurable per page/service)
+- [ ] Floating Speed-dial action button (configurable per page/service + global options)
 - [ ] Command palette (global shortcut to open + quick navigation + actions)
 - [ ] Per-page query presets save (search inputs, filters, column visibility)
-- [ ] Form draft auto-save (localStorage) + resume
+- [ ] Form draft auto-save (localStorage) + resume form filling + reset upon success submission
 
 ### Sprint 24 — Data view options v2 (9 - 22 Apr, 2026)
 
