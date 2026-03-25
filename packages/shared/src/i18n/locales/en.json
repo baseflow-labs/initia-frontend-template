@@ -94,8 +94,6 @@
         "SchedulingSection": "Scheduling",
         "Select": "Select",
         "SelectMany": "Select Many",
-        "StartDate": "Start Date",
-        "StartTime": "Start Time",
         "StackedBooleanCheckboxes": "Stacked Boolean Buttons",
         "StackedButtonRadio": "Stacked Button Radio",
         "StackedCardCheckboxes": "Stacked Card Checkboxes",
@@ -105,6 +103,8 @@
         "StackedImageRadio": "Stacked Image Radio",
         "StackedRadio": "Stacked Radio",
         "StarRating": "Star Rating",
+        "StartDate": "Start Date",
+        "StartTime": "Start Time",
         "Text": "Text",
         "Textarea": "Textarea",
         "Time": "Time",
@@ -654,10 +654,14 @@
     },
     "Labels": {
       "Action": "Action",
+      "Add": "Add",
       "AdvancedFilters": "Advanced Filters",
       "All": "All",
+      "And": "AND",
       "Apply": "Apply",
+      "Auto": "Auto",
       "Back": "Back",
+      "Cards": "Cards",
       "Clear": "Clear",
       "Close": "Close",
       "Contains": "Contains",
@@ -668,21 +672,26 @@
       "DemoWarning": "Please be aware that this is a demo version, accessible by the public. So we advise against sharing any real data like name, ID number and the like. Please note that the data will be automatically reset everyday",
       "Details": "Details",
       "Download": "Download",
+      "Duplicate": "Duplicate",
       "EndsWith": "Ends With",
+      "Equals": "Equals",
       "FileCantBeReviewed": "File Can't Be Reviewed",
       "Filter": "Filter",
       "GreaterThan": "Greater Than",
       "GreaterThanOrEqual": "Greater Than Or Equal",
       "LessThan": "Less Than",
       "LessThanOrEqual": "Less Than Or Equal",
+      "LoadMore": "Load More",
       "Logout": "Logout",
       "More": "More",
       "NoData": "No Data",
       "NoNotifications": "No Notifications",
       "NotEquals": "Not Equals",
       "Of": "Of",
+      "Or": "OR",
       "PageNo": "Page No",
       "PageSize": "Page Size",
+      "Pagination": "Pagination",
       "PhoneNumber": "Phone Number",
       "Results": "Results",
       "Roles": {
@@ -694,9 +703,11 @@
         "researcher": "Researcher",
         "user": "User"
       },
+      "Scroll": "Scroll",
       "Search": "Search",
       "Showing": "Showing",
       "StartsWith": "Starts With",
+      "Table": "Table",
       "ThisWeek": "This Week",
       "Today": "Today",
       "Update": "Update {{item}}",
@@ -707,14 +718,6 @@
     "Loading": "Loading",
     "Notifications": {
       "Successful": "Successful {{action}}"
-    },
-    "TopbarSearch": {
-      "NoResultsDescription": "Try a different name, route, or keyword.",
-      "NoResultsTitle": "No matches found",
-      "Placeholder": "Search pages, services, settings...",
-      "RecentAndSuggested": "Recent and suggested",
-      "Results": "Matching destinations",
-      "Shortcut": "Ctrl K"
     },
     "Placeholders": {
       "Search": "Search..."
@@ -746,6 +749,14 @@
           "Title": "Export Type"
         }
       }
+    },
+    "TopbarSearch": {
+      "NoResultsDescription": "Try a different name, route, or keyword.",
+      "NoResultsTitle": "No matches found",
+      "Placeholder": "Search pages, services, settings...",
+      "RecentAndSuggested": "Recent and suggested",
+      "Results": "Matching destinations",
+      "Shortcut": "Ctrl K"
     }
   },
   "Public": {

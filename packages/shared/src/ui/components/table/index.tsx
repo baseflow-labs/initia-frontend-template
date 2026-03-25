@@ -13,13 +13,17 @@ import {
   faEye,
   faFile,
   faFilter,
+  faList,
   faGripVertical,
+  faChevronDown,
+  faChevronUp,
   faLocationPin,
   faPhone,
   faSort,
   faSortDown,
   faSortUp,
   faStar,
+  faTable,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -64,6 +68,9 @@ export interface TableColumn extends InputProps {
   options?: SelectOption[];
   moneyUnit?: boolean;
   sortable?: boolean;
+  defaultFilterValue?: string | number | boolean;
+  defaultFilterOperator?: string;
+  defaultFilterDataType?: string;
 }
 
 export interface TableProps {
@@ -317,6 +324,12 @@ interface Props extends TableProps {
     sortField?: string;
     sortDirection?: "asc" | "desc" | null;
   };
+  detailsPanelRender?: (row: Row) => React.ReactNode;
+  defaultPaginationMode?: "pagination" | "scroll";
+  paginationMode?: "pagination" | "scroll";
+  onPaginationModeChange?: (mode: "pagination" | "scroll") => void;
+  onLoadMore?: () => void;
+  canLoadMore?: boolean;
 }
 
 const DynamicTable: React.FC<Props> = ({
@@ -348,6 +361,12 @@ const DynamicTable: React.FC<Props> = ({
   onSelectedRowIdsChange,
   tableStorageKey,
   exportOptions,
+  detailsPanelRender,
+  defaultPaginationMode = "pagination",
+  paginationMode,
+  onPaginationModeChange,
+  onLoadMore,
+  canLoadMore = false,
 }: Props) => {
   const { t } = useTranslation();
 
@@ -358,6 +377,12 @@ const DynamicTable: React.FC<Props> = ({
   const [showFilters, setShowFilters] = useState(false);
   const [draftFilters, setDraftFilters] = useState<customFilterProps[]>(currentFilters || []);
   const [dragIndex, setDragIndex] = useState<number | null>(null);
+  const [expandedRowIds, setExpandedRowIds] = useState<string[]>([]);
+  const [manualViewMode, setManualViewMode] = useState<"table" | "cards" | "auto">("auto");
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [localPaginationMode, setLocalPaginationMode] = useState<"pagination" | "scroll">(
+    paginationMode || defaultPaginationMode
+  );
 
   // keep in sync if `columns` prop changes from outside
   useEffect(() => {
@@ -373,7 +398,12 @@ const DynamicTable: React.FC<Props> = ({
     try {
       const raw = localStorage.getItem(`${tableStorageKey}:columns`);
       if (!raw) return;
-      const parsed = JSON.parse(raw) as { visible?: string[]; order?: string[] };
+      const parsed = JSON.parse(raw) as {
+        visible?: string[];
+        order?: string[];
+        viewMode?: "table" | "cards" | "auto";
+        paginationMode?: "pagination" | "scroll";
+      };
       const allNames = columns.map((col) => col.name);
 
       if (Array.isArray(parsed.visible) && parsed.visible.length > 0) {
@@ -387,6 +417,8 @@ const DynamicTable: React.FC<Props> = ({
         const remaining = columns.filter((col) => !parsed.order?.includes(col.name));
         setOrderedColumns([...reordered, ...remaining]);
       }
+      if (parsed.viewMode) setManualViewMode(parsed.viewMode);
+      if (parsed.paginationMode) setLocalPaginationMode(parsed.paginationMode);
     } catch {
       // ignore malformed localStorage payload
     }
@@ -399,9 +431,24 @@ const DynamicTable: React.FC<Props> = ({
       JSON.stringify({
         visible: columnsToShow,
         order: orderedColumns.map((col) => col.name),
+        viewMode: manualViewMode,
+        paginationMode: localPaginationMode,
       })
     );
-  }, [columnsToShow, orderedColumns, tableStorageKey]);
+  }, [columnsToShow, orderedColumns, tableStorageKey, manualViewMode, localPaginationMode]);
+
+  useEffect(() => {
+    if (!paginationMode) return;
+    setLocalPaginationMode(paginationMode);
+  }, [paginationMode]);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 991px)");
+    const onChange = () => setIsSmallScreen(mq.matches);
+    onChange();
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
 
   const handleDragStart = (index: number) => {
     setDragIndex(index);
@@ -520,6 +567,7 @@ const DynamicTable: React.FC<Props> = ({
       {
         field: defaultField,
         filterOperator: defaultOperator,
+        conditionJoin: prev.length === 0 ? "AND" : "AND",
         filteredTerm: { dataType: defaultDataType, value: "" },
       },
     ]);
@@ -544,6 +592,7 @@ const DynamicTable: React.FC<Props> = ({
         `${item.filteredTerm.value}`.trim().length > 0
     );
     onFiltersChange?.(sanitized);
+    setShowFilters(false);
   };
 
   const toggleSelectAllCurrentPage = (checked: boolean) => {
@@ -584,120 +633,211 @@ const DynamicTable: React.FC<Props> = ({
   const to = Math.min(currentPage * pageSize, count);
   const pageIds = data.map((row) => `${row.id || ""}`).filter(Boolean);
   const allPageSelected = pageIds.length > 0 && pageIds.every((id) => selectedRowIds.includes(id));
+  const effectiveViewMode =
+    manualViewMode === "auto" ? (isSmallScreen ? "cards" : "table") : manualViewMode;
+  const visibleColumns = orderedColumns.filter((c) => columnsToShow.includes(c.name));
+
+  const toggleExpandedRow = (rowId: string) => {
+    setExpandedRowIds((prev) =>
+      prev.includes(rowId) ? prev.filter((id) => id !== rowId) : [...prev, rowId]
+    );
+  };
 
   return (
     <div
       className="overflow-x-auto mx-auto"
       style={{ maxWidth: "90vw", minHeight: fitHeight ? undefined : "60vh" }}
     >
-      <div className="table-responsive">
-        <table className="table mt-4 w-100">
-          <thead className="table-light">
-            <tr>
-              <th colSpan={columnsToShow.length + 1}>
-                <div className="d-flex gap-2 align-items-center">
-                  {(searchProp || columns.length > 0) && (
-                    <InputComp
-                      name="search"
-                      placeholder={
-                        searchPlaceholder ??
-                        t("Global.Placeholders.Search", {
-                          prop: searchProp || t("Global.Labels.All"),
-                        })
-                      }
-                      value={currentSearch || ""}
-                      onChange={(e) => onSearchChange?.(e.target.value)}
+      <div className="d-flex justify-content-end gap-2 mb-2">
+        <div className="btn-group btn-group-sm" role="group" aria-label="view-mode">
+          <button
+            type="button"
+            className={`btn ${manualViewMode === "auto" ? "btn-primary" : "btn-outline-primary"}`}
+            onClick={() => setManualViewMode("auto")}
+          >
+            {t("Global.Labels.Auto")}
+          </button>
+          <button
+            type="button"
+            className={`btn ${manualViewMode === "table" ? "btn-primary" : "btn-outline-primary"}`}
+            onClick={() => setManualViewMode("table")}
+          >
+            <FontAwesomeIcon icon={faTable} className="me-1" />
+            {t("Global.Labels.Table")}
+          </button>
+          <button
+            type="button"
+            className={`btn ${manualViewMode === "cards" ? "btn-primary" : "btn-outline-primary"}`}
+            onClick={() => setManualViewMode("cards")}
+          >
+            <FontAwesomeIcon icon={faList} className="me-1" />
+            {t("Global.Labels.Cards")}
+          </button>
+        </div>
+
+        <div className="btn-group btn-group-sm" role="group" aria-label="pagination-mode">
+          <button
+            type="button"
+            className={`btn ${
+              localPaginationMode === "pagination" ? "btn-secondary" : "btn-outline-secondary"
+            }`}
+            onClick={() => {
+              setLocalPaginationMode("pagination");
+              onPaginationModeChange?.("pagination");
+            }}
+          >
+            {t("Global.Labels.Pagination")}
+          </button>
+          <button
+            type="button"
+            className={`btn ${
+              localPaginationMode === "scroll" ? "btn-secondary" : "btn-outline-secondary"
+            }`}
+            onClick={() => {
+              setLocalPaginationMode("scroll");
+              onPaginationModeChange?.("scroll");
+            }}
+          >
+            {t("Global.Labels.Scroll")}
+          </button>
+        </div>
+      </div>
+
+      {effectiveViewMode === "table" ? (
+        <div className="table-responsive">
+          <table className="table mt-2 w-100">
+            <thead className="table-light">
+              <tr>
+                <th colSpan={columnsToShow.length + 2}>
+                  <div className="d-flex gap-2 align-items-center">
+                    {(searchProp || columns.length > 0) && (
+                      <InputComp
+                        name="search"
+                        placeholder={
+                          searchPlaceholder ??
+                          t("Global.Placeholders.Search", {
+                            prop: searchProp || t("Global.Labels.All"),
+                          })
+                        }
+                        value={currentSearch || ""}
+                        onChange={(e) => onSearchChange?.(e.target.value)}
+                      />
+                    )}
+                    <select
+                      className="form-select"
+                      style={{ maxWidth: "180px" }}
+                      value={searchField || ""}
+                      onChange={(e) => onSearchFieldChange?.(e.target.value)}
+                    >
+                      <option value="">{t("Global.Labels.All")}</option>
+                      {columns.map((col) => (
+                        <option key={col.name} value={col.name}>
+                          {col.label}
+                        </option>
+                      ))}
+                    </select>
+                    <button
+                      type="button"
+                      className="btn btn-outline-secondary"
+                      onClick={() => setShowFilters(true)}
+                    >
+                      <FontAwesomeIcon icon={faFilter} className="me-1" />
+                      {t("Global.Labels.Filter")}
+                    </button>
+                    {(currentFilters || []).length > 0 ? (
+                      <div className="d-flex flex-wrap gap-1">
+                        {(currentFilters || []).map((filter, idx) => {
+                          const column = columns.find((col) => col.name === filter.field);
+                          const operators = getFilterOperators(
+                            filter.filteredTerm?.dataType || getDataType(filter.field)
+                          );
+                          const operatorLabel =
+                            operators.find((op) => op.value === filter.filterOperator)?.label ||
+                            filter.filterOperator;
+                          return (
+                            <span key={`${filter.field}-${idx}`} className="badge bg-secondary">
+                              {idx > 0 ? `${filter.conditionJoin || "AND"} ` : ""}
+                              {column?.label || filter.field} {operatorLabel}:{" "}
+                              {String(filter.filteredTerm?.value ?? "")}
+                            </span>
+                          );
+                        })}
+                      </div>
+                    ) : null}
+                  </div>
+                </th>
+
+                <th colSpan={haveDefaultActions ? 2 : 1}>
+                  <div className="d-flex justify-content-end align-items-center">
+                    <ExportModal data={data} columns={columns} exportOptions={exportOptions} />
+
+                    <CustomItemsDropdownComp
+                      start
+                      button={<FontAwesomeIcon icon={faColumns} className="ms-1 text-muted" />}
+                      list={orderedColumns.map((col, index) => {
+                        const draggable = columnsToShow.includes(col.name);
+
+                        return (
+                          <li
+                            key={col.name} // use stable key
+                            className="dropdown-item d-flex align-items-center"
+                            draggable={draggable}
+                            onDragStart={() => handleDragStart(index)}
+                            onDragEnter={() => handleDragEnter(index)}
+                            onDragOver={(e) => e.preventDefault()} // allow drop
+                            onDragEnd={handleDragEnd}
+                          >
+                            {draggable && (
+                              <FontAwesomeIcon
+                                icon={faGripVertical}
+                                role="button"
+                                className="me-1"
+                              />
+                            )}
+
+                            <div className="form-check">
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                checked={columnsToShow.includes(col.name)}
+                                id={`col-toggle-${col.name}`}
+                                onChange={(e) => {
+                                  if (e.target.checked) {
+                                    setColumnsToShow((prev) => [...prev, col.name]);
+                                  } else {
+                                    setColumnsToShow((prev) => prev.filter((c) => c !== col.name));
+                                  }
+                                }}
+                              />
+                              <label
+                                className="form-check-label"
+                                htmlFor={`col-toggle-${col.name}`}
+                              >
+                                {col.label}
+                              </label>
+                            </div>
+                          </li>
+                        );
+                      })}
                     />
-                  )}
-                  <select
-                    className="form-select"
-                    style={{ maxWidth: "180px" }}
-                    value={searchField || ""}
-                    onChange={(e) => onSearchFieldChange?.(e.target.value)}
-                  >
-                    <option value="">{t("Global.Labels.All")}</option>
-                    {columns.map((col) => (
-                      <option key={col.name} value={col.name}>
-                        {col.label}
-                      </option>
-                    ))}
-                  </select>
-                  <button
-                    type="button"
-                    className="btn btn-outline-secondary"
-                    onClick={() => setShowFilters((current) => !current)}
-                  >
-                    <FontAwesomeIcon icon={faFilter} className="me-1" />
-                    {t("Global.Labels.Filter")}
-                  </button>
-                </div>
-              </th>
+                  </div>
+                </th>
+              </tr>
 
-              <th colSpan={haveDefaultActions ? 2 : 1}>
-                <div className="d-flex justify-content-end align-items-center">
-                  <ExportModal data={data} columns={columns} exportOptions={exportOptions} />
-
-                  <CustomItemsDropdownComp
-                    start
-                    button={<FontAwesomeIcon icon={faColumns} className="ms-1 text-muted" />}
-                    list={orderedColumns.map((col, index) => {
-                      const draggable = columnsToShow.includes(col.name);
-
-                      return (
-                        <li
-                          key={col.name} // use stable key
-                          className="dropdown-item d-flex align-items-center"
-                          draggable={draggable}
-                          onDragStart={() => handleDragStart(index)}
-                          onDragEnter={() => handleDragEnter(index)}
-                          onDragOver={(e) => e.preventDefault()} // allow drop
-                          onDragEnd={handleDragEnd}
-                        >
-                          {draggable && (
-                            <FontAwesomeIcon icon={faGripVertical} role="button" className="me-1" />
-                          )}
-
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              checked={columnsToShow.includes(col.name)}
-                              id={`col-toggle-${col.name}`}
-                              onChange={(e) => {
-                                if (e.target.checked) {
-                                  setColumnsToShow((prev) => [...prev, col.name]);
-                                } else {
-                                  setColumnsToShow((prev) => prev.filter((c) => c !== col.name));
-                                }
-                              }}
-                            />
-                            <label className="form-check-label" htmlFor={`col-toggle-${col.name}`}>
-                              {col.label}
-                            </label>
-                          </div>
-                        </li>
-                      );
-                    })}
+              <tr>
+                {detailsPanelRender ? <th className="py-3" scope="col"></th> : null}
+                <th className="py-3" scope="col">
+                  <input
+                    type="checkbox"
+                    checked={allPageSelected}
+                    onChange={(e) => toggleSelectAllCurrentPage(e.target.checked)}
                   />
-                </div>
-              </th>
-            </tr>
+                </th>
+                <th className="py-3" scope="col">
+                  #
+                </th>
 
-            <tr>
-              <th className="py-3" scope="col">
-                <input
-                  type="checkbox"
-                  checked={allPageSelected}
-                  onChange={(e) => toggleSelectAllCurrentPage(e.target.checked)}
-                />
-              </th>
-              <th className="py-3" scope="col">
-                #
-              </th>
-
-              {orderedColumns
-                .filter((c) => columnsToShow.includes(c.name))
-                .map((col, i) => (
+                {visibleColumns.map((col, i) => (
                   <th
                     className={"py-3 fw-bold" + (col.sortable ? " cursor-pointer" : "")}
                     scope="col"
@@ -711,389 +851,545 @@ const DynamicTable: React.FC<Props> = ({
                   </th>
                 ))}
 
-              {(extraActions && extraActions()?.length) || haveDefaultActions ? (
-                <th className="py-3" scope="col">
-                  {t("Global.Labels.Action")}
-                </th>
-              ) : null}
-            </tr>
-          </thead>
-
-          {showFilters && (
-            <tbody>
-              <tr>
-                <td colSpan={columnsToShow.length + (haveDefaultActions ? 4 : 3)}>
-                  <div className="border rounded p-3 bg-light">
-                    <div className="d-flex justify-content-between align-items-center mb-2">
-                      <strong>{t("Global.Labels.AdvancedFilters")}</strong>
-                      <button
-                        type="button"
-                        className="btn btn-sm btn-primary"
-                        onClick={addFilterRow}
-                      >
-                        {t("Global.Labels.Add")}
-                      </button>
-                    </div>
-
-                    {draftFilters.map((filter, index) => {
-                      const dataType = filter.filteredTerm?.dataType || getDataType(filter.field);
-                      const operators = getFilterOperators(dataType);
-                      return (
-                        <div className="row g-2 mb-2" key={`${filter.field}-${index}`}>
-                          <div className="col-12 col-md-3">
-                            <select
-                              className="form-select"
-                              value={filter.field}
-                              onChange={(e) => {
-                                const nextField = e.target.value;
-                                const nextDataType = getDataType(nextField);
-                                const nextOperator =
-                                  getFilterOperators(nextDataType)[0]?.value || "contains";
-                                updateFilterRow(index, {
-                                  field: nextField,
-                                  filterOperator: nextOperator,
-                                  filteredTerm: { dataType: nextDataType, value: "" },
-                                });
-                              }}
-                            >
-                              {columns.map((col) => (
-                                <option key={col.name} value={col.name}>
-                                  {col.label}
-                                </option>
-                              ))}
-                            </select>
-                          </div>
-                          <div className="col-12 col-md-3">
-                            <select
-                              className="form-select"
-                              value={filter.filterOperator}
-                              onChange={(e) =>
-                                updateFilterRow(index, {
-                                  ...filter,
-                                  filterOperator: e.target.value,
-                                })
-                              }
-                            >
-                              {operators.map((operator) => (
-                                <option key={operator.value} value={operator.value}>
-                                  {operator.label}
-                                </option>
-                              ))}
-                            </select>
-                          </div>
-                          <div className="col-12 col-md-5">
-                            <input
-                              className="form-control"
-                              type={
-                                dataType === "date"
-                                  ? "date"
-                                  : dataType === "number"
-                                    ? "number"
-                                    : "text"
-                              }
-                              value={String(filter.filteredTerm?.value ?? "")}
-                              onChange={(e) =>
-                                updateFilterRow(index, {
-                                  ...filter,
-                                  filteredTerm: {
-                                    dataType,
-                                    value: e.target.value,
-                                  },
-                                })
-                              }
-                            />
-                          </div>
-                          <div className="col-12 col-md-1 text-end">
-                            <button
-                              type="button"
-                              className="btn btn-outline-danger"
-                              onClick={() => removeFilterRow(index)}
-                            >
-                              <FontAwesomeIcon icon={faTrash} />
-                            </button>
-                          </div>
-                        </div>
-                      );
-                    })}
-
-                    <div className="d-flex justify-content-end gap-2 mt-3">
-                      <button
-                        type="button"
-                        className="btn btn-outline-secondary"
-                        onClick={() => {
-                          setDraftFilters([]);
-                          onFiltersChange?.([]);
-                        }}
-                      >
-                        {t("Global.Labels.Clear")}
-                      </button>
-                      <button type="button" className="btn btn-primary" onClick={applyFilters}>
-                        {t("Global.Labels.Apply")}
-                      </button>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          )}
-
-          <tbody>
-            {data.length === 0 && (
-              <tr>
-                <td colSpan={columnsToShow.length + 3} className="text-center py-4">
-                  {t("Global.Labels.NoData")}
-                </td>
-              </tr>
-            )}
-
-            {data.map((row, i) => (
-              <tr className="align-middle" key={row.id ?? i}>
-                <td className="py-3">
-                  <input
-                    type="checkbox"
-                    checked={row.id ? selectedRowIds.includes(`${row.id}`) : false}
-                    onChange={(e) => toggleSelectOne(`${row.id || ""}`, e.target.checked)}
-                  />
-                </td>
-                <td className="py-3">{i + pageSize * (currentPage - 1) + 1}</td>
-
-                {orderedColumns
-                  .filter((c) => columnsToShow.includes(c.name))
-                  .map(({ name, type, options, render, timestampFormat, moneyUnit }, y) => (
-                    <td className="py-3" key={y}>
-                      <DataRender
-                        row={row}
-                        data={String(row[name] ?? "")}
-                        type={type}
-                        render={render}
-                        options={options}
-                        timestampFormat={timestampFormat}
-                        name={name}
-                        money={moneyUnit}
-                      />
-                    </td>
-                  ))}
-
                 {(extraActions && extraActions()?.length) || haveDefaultActions ? (
-                  <td className="py-3">
-                    <div className="d-flex">
-                      {extraActions &&
-                        extraActions(row.id)
-                          .filter(({ spread }) => spread)
-                          .map(({ icon, label, onClick, color, disabled, disabledMsg }, y) => (
-                            <SpreadActionView
-                              key={y}
-                              onClick={onClick}
-                              label={label}
-                              icon={icon}
-                              color={color}
-                              disabled={disabled}
-                              disabledMsg={disabledMsg}
-                              row={row}
-                            />
-                          ))}
-
-                      {defaultActionsIncluded.includes(true) && (
-                        <Fragment>
-                          {includeView && (
-                            <SpreadActionView
-                              onClick={() => onRowClick(row, "view")}
-                              label={t("Global.Form.Labels.View")}
-                              icon={faEye}
-                              color="primary"
-                              row={row}
-                            />
-                          )}
-
-                          {includeUpdate && (
-                            <SpreadActionView
-                              onClick={() => onRowClick(row, "update")}
-                              label={t("Global.Form.Labels.Edit")}
-                              icon={faEdit}
-                              color="warning"
-                              row={row}
-                            />
-                          )}
-
-                          {includeDelete && (
-                            <SpreadActionView
-                              onClick={() => onRowClick(row, "delete")}
-                              label={t("Global.Form.Labels.Delete")}
-                              icon={faTrash}
-                              color="danger"
-                              row={row}
-                            />
-                          )}
-                        </Fragment>
-                      )}
-
-                      {extraActions &&
-                      extraActions(row.id).filter(({ spread }) => !spread).length ? (
-                        <DropdownComp
-                          start
-                          button={<FontAwesomeIcon icon={faEllipsisVertical} className="ms-1" />}
-                          list={extraActions(row.id)
-                            .filter(({ spread }) => !spread)
-                            .map(({ icon, label, onClick }) => ({
-                              onClick: () => onClick(row.id || ""),
-                              label: (
-                                <Fragment>
-                                  <FontAwesomeIcon icon={icon} className="text-primary" /> {label}
-                                </Fragment>
-                              ),
-                            }))}
-                        />
-                      ) : null}
-                    </div>
-                  </td>
+                  <th className="py-3" scope="col">
+                    {t("Global.Labels.Action")}
+                  </th>
                 ) : null}
               </tr>
-            ))}
-          </tbody>
+            </thead>
 
-          {data.length !== 0 && (
-            <tfoot>
-              <tr>
-                <th colSpan={columnsToShow.length + (haveDefaultActions ? 3 : 2)}>
-                  <div className="d-flex justify-content-between">
-                    <div className="my-auto text-muted me-3">
-                      <small>
-                        {t("Global.Labels.Showing")} {from} – {to} {t("Global.Labels.Of")} {count}{" "}
-                        {t("Global.Labels.Results")}
-                      </small>
-                    </div>
+            <tbody>
+              {data.length === 0 && (
+                <tr>
+                  <td
+                    colSpan={columnsToShow.length + 3 + (detailsPanelRender ? 1 : 0)}
+                    className="text-center py-4"
+                  >
+                    {t("Global.Labels.NoData")}
+                  </td>
+                </tr>
+              )}
 
-                    <div className="d-flex my-auto">
-                      <nav className="my-auto me-2">
-                        <ul className="pagination">
-                          <li className="page-item my-auto">
-                            <button
-                              className={`page-link text-${
-                                currentPage === 1 ? "secondary" : "primary"
-                              } border-0 px-3`}
-                              onClick={() => onPageChange(1)}
-                              disabled={currentPage === 1}
-                            >
-                              <FontAwesomeIcon icon={faAnglesRight} />
-                            </button>
-                          </li>
+              {data.map((row, i) => {
+                const rowId = `${row.id || i}`;
+                const expanded = expandedRowIds.includes(rowId);
+                return (
+                  <Fragment key={rowId}>
+                    <tr className="align-middle">
+                      {detailsPanelRender ? (
+                        <td className="py-3">
+                          <button
+                            className="btn btn-sm btn-link text-decoration-none"
+                            onClick={() => toggleExpandedRow(rowId)}
+                            type="button"
+                          >
+                            <FontAwesomeIcon icon={expanded ? faChevronUp : faChevronDown} />
+                          </button>
+                        </td>
+                      ) : null}
+                      <td className="py-3">
+                        <input
+                          type="checkbox"
+                          checked={row.id ? selectedRowIds.includes(`${row.id}`) : false}
+                          onChange={(e) => toggleSelectOne(`${row.id || ""}`, e.target.checked)}
+                        />
+                      </td>
+                      <td className="py-3">{i + pageSize * (currentPage - 1) + 1}</td>
 
-                          <li className="page-item my-auto">
-                            <button
-                              className={`page-link text-${
-                                currentPage === 1 ? "secondary" : "primary"
-                              } border-0 px-3`}
-                              onClick={() => onPageChange(currentPage - 1)}
-                              disabled={currentPage === 1}
-                            >
-                              <FontAwesomeIcon icon={faAngleRight} />
-                            </button>
-                          </li>
+                      {visibleColumns.map(
+                        ({ name, type, options, render, timestampFormat, moneyUnit }, y) => (
+                          <td className="py-3" key={y}>
+                            <DataRender
+                              row={row}
+                              data={String(row[name] ?? "")}
+                              type={type}
+                              render={render}
+                              options={options}
+                              timestampFormat={timestampFormat}
+                              name={name}
+                              money={moneyUnit}
+                            />
+                          </td>
+                        )
+                      )}
 
-                          {Array.from(
-                            {
-                              length: Math.min(5, pagesCount || 0),
-                            },
-                            (_, i) => {
-                              const offset = Math.max(0, Math.min(currentPage - 3, pagesCount - 5));
-                              const page = i + 1 + offset;
-
-                              return (
-                                <li className="page-item my-auto" key={i}>
-                                  <button
-                                    className={`page-link border-0 rounded-2 me-1 ${
-                                      currentPage === page
-                                        ? "bg-primary text-white"
-                                        : "border-primary text-primary"
-                                    }`}
-                                    onClick={() => onPageChange(page)}
-                                  >
-                                    {page}
-                                  </button>
-                                </li>
-                              );
-                            }
-                          )}
-
-                          <li className="page-item my-auto">
-                            <button
-                              className={`page-link text-${
-                                currentPage === pagesCount ? "secondary" : "primary"
-                              } border-0 px-3`}
-                              onClick={() => onPageChange(currentPage + 1)}
-                              disabled={currentPage === pagesCount}
-                            >
-                              <FontAwesomeIcon icon={faAngleLeft} />
-                            </button>
-                          </li>
-
-                          <li className="page-item my-auto">
-                            <button
-                              className={`page-link text-${
-                                currentPage === pagesCount ? "secondary" : "primary"
-                              } border-0 px-3`}
-                              onClick={() => onPageChange(pagesCount)}
-                              disabled={currentPage === pagesCount}
-                            >
-                              <FontAwesomeIcon icon={faAnglesLeft} />
-                            </button>
-                          </li>
-                        </ul>
-                      </nav>
-
-                      <nav className="my-auto">
-                        <ul className="pagination">
-                          <li className="page-item my-auto">
-                            <span className="page-link border-0 d-flex">
-                              <small className="my-auto text-primary">
-                                {t("Global.Labels.PageNo")}
-                              </small>
-
-                              <input
-                                value={currentPage}
-                                className="form-control ms-1"
-                                style={{ width: "55px" }}
-                                type="number"
-                                min={1}
-                                max={pagesCount}
-                                onChange={(e) =>
-                                  onPageChange(
-                                    Math.min(pagesCount, Math.max(1, parseInt(e.target.value) || 1))
+                      {(extraActions && extraActions()?.length) || haveDefaultActions ? (
+                        <td className="py-3">
+                          <div className="d-flex">
+                            {extraActions &&
+                              extraActions(row.id)
+                                .filter(({ spread }) => spread)
+                                .map(
+                                  ({ icon, label, onClick, color, disabled, disabledMsg }, y) => (
+                                    <SpreadActionView
+                                      key={y}
+                                      onClick={onClick}
+                                      label={label}
+                                      icon={icon}
+                                      color={color}
+                                      disabled={disabled}
+                                      disabledMsg={disabledMsg}
+                                      row={row}
+                                    />
                                   )
+                                )}
+
+                            {defaultActionsIncluded.includes(true) && (
+                              <Fragment>
+                                {includeView && (
+                                  <SpreadActionView
+                                    onClick={() => onRowClick(row, "view")}
+                                    label={t("Global.Form.Labels.View")}
+                                    icon={faEye}
+                                    color="primary"
+                                    row={row}
+                                  />
+                                )}
+
+                                {includeUpdate && (
+                                  <SpreadActionView
+                                    onClick={() => onRowClick(row, "update")}
+                                    label={t("Global.Form.Labels.Edit")}
+                                    icon={faEdit}
+                                    color="warning"
+                                    row={row}
+                                  />
+                                )}
+
+                                {includeDelete && (
+                                  <SpreadActionView
+                                    onClick={() => onRowClick(row, "delete")}
+                                    label={t("Global.Form.Labels.Delete")}
+                                    icon={faTrash}
+                                    color="danger"
+                                    row={row}
+                                  />
+                                )}
+                              </Fragment>
+                            )}
+
+                            {extraActions &&
+                            extraActions(row.id).filter(({ spread }) => !spread).length ? (
+                              <DropdownComp
+                                start
+                                button={
+                                  <FontAwesomeIcon icon={faEllipsisVertical} className="ms-1" />
                                 }
+                                list={extraActions(row.id)
+                                  .filter(({ spread }) => !spread)
+                                  .map(({ icon, label, onClick }) => ({
+                                    onClick: () => onClick(row.id || ""),
+                                    label: (
+                                      <Fragment>
+                                        <FontAwesomeIcon icon={icon} className="text-primary" />{" "}
+                                        {label}
+                                      </Fragment>
+                                    ),
+                                  }))}
                               />
-                            </span>
-                          </li>
+                            ) : null}
+                          </div>
+                        </td>
+                      ) : null}
+                    </tr>
+                    {detailsPanelRender && expanded ? (
+                      <tr>
+                        <td
+                          colSpan={visibleColumns.length + (haveDefaultActions ? 4 : 3)}
+                          className="bg-light"
+                        >
+                          <div className="p-3">{detailsPanelRender(row)}</div>
+                        </td>
+                      </tr>
+                    ) : null}
+                  </Fragment>
+                );
+              })}
+            </tbody>
 
-                          <li className="page-item my-auto">
-                            <span className="page-link border-0 d-flex">
-                              <small className="my-auto text-primary">
-                                {t("Global.Labels.PageSize")}
-                              </small>
+            {data.length !== 0 && localPaginationMode === "pagination" && (
+              <tfoot>
+                <tr>
+                  <th
+                    colSpan={
+                      columnsToShow.length +
+                      (haveDefaultActions ? 3 : 2) +
+                      (detailsPanelRender ? 1 : 0)
+                    }
+                  >
+                    <div className="d-flex justify-content-between">
+                      <div className="my-auto text-muted me-3">
+                        <small>
+                          {t("Global.Labels.Showing")} {from} – {to} {t("Global.Labels.Of")} {count}{" "}
+                          {t("Global.Labels.Results")}
+                        </small>
+                      </div>
 
-                              <select
-                                value={pageSize}
-                                className="form-control ms-1"
-                                style={{ width: "55px" }}
-                                onChange={(e) => onPageSizeChange(parseInt(e.target.value))}
+                      <div className="d-flex my-auto">
+                        <nav className="my-auto me-2">
+                          <ul className="pagination">
+                            <li className="page-item my-auto">
+                              <button
+                                className={`page-link text-${
+                                  currentPage === 1 ? "secondary" : "primary"
+                                } border-0 px-3`}
+                                onClick={() => onPageChange(1)}
+                                disabled={currentPage === 1}
                               >
-                                <option value={10}>10</option>
-                                <option value={20}>20</option>
-                                <option value={50}>50</option>
-                                <option value={100}>100</option>
-                              </select>
-                            </span>
-                          </li>
-                        </ul>
-                      </nav>
+                                <FontAwesomeIcon icon={faAnglesRight} />
+                              </button>
+                            </li>
+
+                            <li className="page-item my-auto">
+                              <button
+                                className={`page-link text-${
+                                  currentPage === 1 ? "secondary" : "primary"
+                                } border-0 px-3`}
+                                onClick={() => onPageChange(currentPage - 1)}
+                                disabled={currentPage === 1}
+                              >
+                                <FontAwesomeIcon icon={faAngleRight} />
+                              </button>
+                            </li>
+
+                            {Array.from(
+                              {
+                                length: Math.min(5, pagesCount || 0),
+                              },
+                              (_, i) => {
+                                const offset = Math.max(
+                                  0,
+                                  Math.min(currentPage - 3, pagesCount - 5)
+                                );
+                                const page = i + 1 + offset;
+
+                                return (
+                                  <li className="page-item my-auto" key={i}>
+                                    <button
+                                      className={`page-link border-0 rounded-2 me-1 ${
+                                        currentPage === page
+                                          ? "bg-primary text-white"
+                                          : "border-primary text-primary"
+                                      }`}
+                                      onClick={() => onPageChange(page)}
+                                    >
+                                      {page}
+                                    </button>
+                                  </li>
+                                );
+                              }
+                            )}
+
+                            <li className="page-item my-auto">
+                              <button
+                                className={`page-link text-${
+                                  currentPage === pagesCount ? "secondary" : "primary"
+                                } border-0 px-3`}
+                                onClick={() => onPageChange(currentPage + 1)}
+                                disabled={currentPage === pagesCount}
+                              >
+                                <FontAwesomeIcon icon={faAngleLeft} />
+                              </button>
+                            </li>
+
+                            <li className="page-item my-auto">
+                              <button
+                                className={`page-link text-${
+                                  currentPage === pagesCount ? "secondary" : "primary"
+                                } border-0 px-3`}
+                                onClick={() => onPageChange(pagesCount)}
+                                disabled={currentPage === pagesCount}
+                              >
+                                <FontAwesomeIcon icon={faAnglesLeft} />
+                              </button>
+                            </li>
+                          </ul>
+                        </nav>
+
+                        <nav className="my-auto">
+                          <ul className="pagination">
+                            <li className="page-item my-auto">
+                              <span className="page-link border-0 d-flex">
+                                <small className="my-auto text-primary">
+                                  {t("Global.Labels.PageNo")}
+                                </small>
+
+                                <input
+                                  value={currentPage}
+                                  className="form-control ms-1"
+                                  style={{ width: "55px" }}
+                                  type="number"
+                                  min={1}
+                                  max={pagesCount}
+                                  onChange={(e) =>
+                                    onPageChange(
+                                      Math.min(
+                                        pagesCount,
+                                        Math.max(1, parseInt(e.target.value) || 1)
+                                      )
+                                    )
+                                  }
+                                />
+                              </span>
+                            </li>
+
+                            <li className="page-item my-auto">
+                              <span className="page-link border-0 d-flex">
+                                <small className="my-auto text-primary">
+                                  {t("Global.Labels.PageSize")}
+                                </small>
+
+                                <select
+                                  value={pageSize}
+                                  className="form-control ms-1"
+                                  style={{ width: "55px" }}
+                                  onChange={(e) => onPageSizeChange(parseInt(e.target.value))}
+                                >
+                                  <option value={10}>10</option>
+                                  <option value={20}>20</option>
+                                  <option value={50}>50</option>
+                                  <option value={100}>100</option>
+                                </select>
+                              </span>
+                            </li>
+                          </ul>
+                        </nav>
+                      </div>
                     </div>
+                  </th>
+                </tr>
+              </tfoot>
+            )}
+          </table>
+        </div>
+      ) : (
+        <div className="row g-3 mt-2">
+          {data.length === 0 ? (
+            <div className="col-12 text-center py-4">{t("Global.Labels.NoData")}</div>
+          ) : (
+            data.map((row, i) => (
+              <div className="col-12 col-md-6 col-xl-4" key={`${row.id || i}`}>
+                <div className="card h-100 border-0 shadow-sm">
+                  <div className="card-body">
+                    <div className="d-flex justify-content-between align-items-center mb-2">
+                      <h6 className="mb-0">#{i + pageSize * (currentPage - 1) + 1}</h6>
+                      {(extraActions && extraActions(row.id)?.length) || haveDefaultActions ? (
+                        <div className="d-flex">
+                          {includeView && (
+                            <button
+                              type="button"
+                              className="btn btn-sm btn-outline-primary me-1"
+                              onClick={() => onRowClick(row, "view")}
+                            >
+                              {t("Global.Form.Labels.View")}
+                            </button>
+                          )}
+                          {includeUpdate && (
+                            <button
+                              type="button"
+                              className="btn btn-sm btn-outline-warning me-1"
+                              onClick={() => onRowClick(row, "update")}
+                            >
+                              {t("Global.Form.Labels.Edit")}
+                            </button>
+                          )}
+                          {includeDelete && (
+                            <button
+                              type="button"
+                              className="btn btn-sm btn-outline-danger"
+                              onClick={() => onRowClick(row, "delete")}
+                            >
+                              {t("Global.Form.Labels.Delete")}
+                            </button>
+                          )}
+                        </div>
+                      ) : null}
+                    </div>
+                    {visibleColumns.map(
+                      ({ name, label, type, options, render, timestampFormat, moneyUnit }) => (
+                        <div className="mb-2" key={name}>
+                          <small className="text-muted d-block">{label}</small>
+                          <div>
+                            <DataRender
+                              row={row}
+                              data={String(row[name] ?? "")}
+                              type={type}
+                              render={render}
+                              options={options}
+                              timestampFormat={timestampFormat}
+                              name={name}
+                              money={moneyUnit}
+                              withoutWrap
+                            />
+                          </div>
+                        </div>
+                      )
+                    )}
+                    {detailsPanelRender ? (
+                      <div className="pt-2 border-top">{detailsPanelRender(row)}</div>
+                    ) : null}
                   </div>
-                </th>
-              </tr>
-            </tfoot>
+                </div>
+              </div>
+            ))
           )}
-        </table>
-      </div>
+        </div>
+      )}
+      {localPaginationMode === "scroll" && canLoadMore ? (
+        <div className="d-flex justify-content-center mt-3">
+          <button type="button" className="btn btn-outline-primary" onClick={onLoadMore}>
+            {t("Global.Labels.LoadMore")}
+          </button>
+        </div>
+      ) : null}
+
+      {showFilters ? (
+        <>
+          <div
+            className="position-fixed top-0 start-0 w-100 h-100"
+            style={{ backgroundColor: "rgba(0,0,0,0.5)", zIndex: 1040 }}
+            onClick={() => setShowFilters(false)}
+          />
+          <div
+            className="position-fixed top-50 start-50 translate-middle bg-white rounded shadow p-3"
+            style={{
+              width: "min(900px, 95vw)",
+              maxHeight: "85vh",
+              overflowY: "auto",
+              zIndex: 1050,
+            }}
+            role="dialog"
+            aria-modal="true"
+          >
+            <div className="d-flex justify-content-between align-items-center mb-2">
+              <strong>{t("Global.Labels.AdvancedFilters")}</strong>
+              <div className="d-flex gap-2">
+                <button type="button" className="btn btn-sm btn-primary" onClick={addFilterRow}>
+                  {t("Global.Labels.Add")}
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-sm btn-outline-secondary"
+                  onClick={() => setShowFilters(false)}
+                >
+                  {t("Global.Labels.Close")}
+                </button>
+              </div>
+            </div>
+
+            {draftFilters.map((filter, index) => {
+              const dataType = filter.filteredTerm?.dataType || getDataType(filter.field);
+              const operators = getFilterOperators(dataType);
+              return (
+                <div className="row g-2 mb-2" key={`${filter.field}-${index}`}>
+                  {index > 0 && (
+                    <div className="col-12 col-md-2">
+                      <select
+                        className="form-select"
+                        value={filter.conditionJoin || "AND"}
+                        onChange={(e) =>
+                          updateFilterRow(index, {
+                            ...filter,
+                            conditionJoin: e.target.value as "AND" | "OR",
+                          })
+                        }
+                      >
+                        <option value="AND">{t("Global.Labels.And")}</option>
+                        <option value="OR">{t("Global.Labels.Or")}</option>
+                      </select>
+                    </div>
+                  )}
+                  <div className={`col-12 ${index > 0 ? "col-md-3" : "col-md-4"}`}>
+                    <select
+                      className="form-select"
+                      value={filter.field}
+                      onChange={(e) => {
+                        const nextField = e.target.value;
+                        const nextDataType = getDataType(nextField);
+                        const nextOperator =
+                          getFilterOperators(nextDataType)[0]?.value || "contains";
+                        updateFilterRow(index, {
+                          field: nextField,
+                          filterOperator: nextOperator,
+                          filteredTerm: { dataType: nextDataType, value: "" },
+                        });
+                      }}
+                    >
+                      {columns.map((col) => (
+                        <option key={col.name} value={col.name}>
+                          {col.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className={`col-12 ${index > 0 ? "col-md-3" : "col-md-3"}`}>
+                    <select
+                      className="form-select"
+                      value={filter.filterOperator}
+                      onChange={(e) =>
+                        updateFilterRow(index, {
+                          ...filter,
+                          filterOperator: e.target.value,
+                        })
+                      }
+                    >
+                      {operators.map((operator) => (
+                        <option key={operator.value} value={operator.value}>
+                          {operator.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className={`col-12 ${index > 0 ? "col-md-3" : "col-md-4"}`}>
+                    <input
+                      className="form-control"
+                      type={
+                        dataType === "date" ? "date" : dataType === "number" ? "number" : "text"
+                      }
+                      value={String(filter.filteredTerm?.value ?? "")}
+                      onChange={(e) =>
+                        updateFilterRow(index, {
+                          ...filter,
+                          filteredTerm: {
+                            dataType,
+                            value: e.target.value,
+                          },
+                        })
+                      }
+                    />
+                  </div>
+                  <div className="col-12 col-md-1 text-end">
+                    <button
+                      type="button"
+                      className="btn btn-outline-danger"
+                      onClick={() => removeFilterRow(index)}
+                    >
+                      <FontAwesomeIcon icon={faTrash} />
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+
+            <div className="d-flex justify-content-end gap-2 mt-3">
+              <button
+                type="button"
+                className="btn btn-outline-secondary"
+                onClick={() => {
+                  setDraftFilters([]);
+                  onFiltersChange?.([]);
+                }}
+              >
+                {t("Global.Labels.Clear")}
+              </button>
+              <button type="button" className="btn btn-primary" onClick={applyFilters}>
+                {t("Global.Labels.Apply")}
+              </button>
+            </div>
+          </div>
+        </>
+      ) : null}
     </div>
   );
 };

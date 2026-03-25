@@ -64,6 +64,7 @@ export interface customFilterProps {
     value: string | number | boolean;
   };
   filterOperator: string;
+  conditionJoin?: "AND" | "OR";
 }
 
 export interface GetDataProps {

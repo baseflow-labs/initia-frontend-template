@@ -48,14 +48,13 @@ const Modal = ({
 }: Props) => {
   const modalRef = useRef<HTMLDivElement | null>(null);
   const instanceRef = useRef<BootstrapModal | null>(null);
+  const hiddenHandlerRef = useRef<(() => void) | null>(null);
 
-  useEffect(() => {
-    if (!modalRef.current) return;
-
-    // Wait for Bootstrap to be available
-    if (typeof window.bootstrap === "undefined") {
-      console.warn("Bootstrap JS not loaded yet");
-      return;
+  const ensureInstance = () => {
+    if (!modalRef.current) return false;
+    if (instanceRef.current) return true;
+    if (typeof window === "undefined" || typeof window.bootstrap === "undefined") {
+      return false;
     }
 
     instanceRef.current = window.bootstrap.Modal.getOrCreateInstance(modalRef.current, {
@@ -67,23 +66,37 @@ const Modal = ({
     const handleHidden = () => {
       onClose();
     };
-
+    hiddenHandlerRef.current = handleHidden;
     modalRef.current.addEventListener("hidden.bs.modal", handleHidden);
+    return true;
+  };
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      if (ensureInstance()) {
+        window.clearInterval(timer);
+      }
+    }, 120);
 
     return () => {
-      modalRef.current?.removeEventListener("hidden.bs.modal", handleHidden);
+      window.clearInterval(timer);
+      if (modalRef.current && hiddenHandlerRef.current) {
+        modalRef.current.removeEventListener("hidden.bs.modal", hiddenHandlerRef.current);
+      }
       instanceRef.current?.hide?.();
       instanceRef.current?.dispose?.();
       instanceRef.current = null;
+      hiddenHandlerRef.current = null;
 
       document.body.classList.remove("modal-open");
       document.querySelectorAll(".modal-backdrop").forEach((el) => el.remove());
     };
-  }, []);
+  }, [onClose]);
 
   useEffect(() => {
+    if (!ensureInstance()) return;
     const inst = instanceRef.current;
-    if (!inst || typeof window.bootstrap === "undefined") return;
+    if (!inst) return;
     if (isOpen) {
       inst.show();
     } else {

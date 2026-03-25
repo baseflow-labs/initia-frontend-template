@@ -1,4 +1,4 @@
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faCopy, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -43,6 +43,7 @@ interface PersistedState {
   filters?: customFilterProps[];
   sortField?: string;
   sortDirection?: "asc" | "desc" | null;
+  paginationMode?: "pagination" | "scroll";
 }
 
 const ApiDataTable: React.FC<Props> = ({
@@ -88,6 +89,7 @@ const ApiDataTable: React.FC<Props> = ({
   const [sortField, setSortField] = useState<string | undefined>();
   const [sortDirection, setSortDirection] = useState<"asc" | "desc" | null>(null);
   const [selectedRowIds, setSelectedRowIds] = useState<string[]>([]);
+  const [paginationMode, setPaginationMode] = useState<"pagination" | "scroll">("pagination");
 
   const stateInitializedRef = useRef(false);
   const storageKey = useMemo(
@@ -168,7 +170,17 @@ const ApiDataTable: React.FC<Props> = ({
               pagesCount: number;
             };
 
-          setData(payload);
+          setData((prev) => {
+            if (paginationMode === "scroll" && currentPage > 1) {
+              const merged = [...prev, ...payload];
+              return merged.filter(
+                (item, index, arr) =>
+                  index ===
+                  arr.findIndex((entry) => `${entry.id || index}` === `${item.id || index}`)
+              );
+            }
+            return payload;
+          });
 
           setPaginationMeta({
             page: meta.page,
@@ -194,6 +206,7 @@ const ApiDataTable: React.FC<Props> = ({
     sortDirection,
     dataApiEndpoint,
     searchField,
+    paginationMode,
   ]);
 
   useEffect(() => {
@@ -222,10 +235,37 @@ const ApiDataTable: React.FC<Props> = ({
       ) {
         setSortDirection(parsed.sortDirection);
       }
+      if (parsed.paginationMode === "pagination" || parsed.paginationMode === "scroll") {
+        setPaginationMode(parsed.paginationMode);
+      }
+
+      const hasPersistedFilters = Array.isArray(parsed.filters) && parsed.filters.length > 0;
+      if (!hasPersistedFilters) {
+        const defaultFilters = inputs
+          .filter(
+            (item) => item.defaultFilterValue !== undefined && item.defaultFilterValue !== null
+          )
+          .map((item) => ({
+            field: item.name,
+            filterOperator:
+              item.defaultFilterOperator ||
+              (item.type === "date" || item.type === "datetime" ? "dateEquals" : "stringEquals"),
+            filteredTerm: {
+              dataType:
+                item.defaultFilterDataType ||
+                (item.type === "number" ? "number" : item.type === "date" ? "date" : "string"),
+              value: item.defaultFilterValue as string | number | boolean,
+            },
+            conditionJoin: "AND" as const,
+          }));
+        if (defaultFilters.length > 0) {
+          setFilters(defaultFilters);
+        }
+      }
     } catch {
       // ignore malformed localStorage payload
     }
-  }, [storageKey]);
+  }, [storageKey, inputs]);
 
   useEffect(() => {
     const payload: PersistedState = {
@@ -236,9 +276,20 @@ const ApiDataTable: React.FC<Props> = ({
       filters,
       sortField,
       sortDirection,
+      paginationMode,
     };
     localStorage.setItem(storageKey, JSON.stringify(payload));
-  }, [currentPage, pageSize, search, searchField, filters, sortField, sortDirection, storageKey]);
+  }, [
+    currentPage,
+    pageSize,
+    search,
+    searchField,
+    filters,
+    sortField,
+    sortDirection,
+    paginationMode,
+    storageKey,
+  ]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -293,6 +344,37 @@ const ApiDataTable: React.FC<Props> = ({
         fetchData();
       })
       .catch(apiCatchGlobalHandler);
+  };
+
+  const handleDuplicate = (id: string) => {
+    if (!id) return;
+    const tryDuplicate = async () => {
+      try {
+        await service.post(`${dataApiEndpoint}/${id}/duplicate`);
+      } catch {
+        const item = await service.get<Record<string, unknown>>(`${dataApiEndpoint}/${id}`);
+        const payload = { ...(item.payload || item.data || {}) } as Record<string, unknown>;
+        delete payload.id;
+        await service.post(dataApiEndpoint, payload);
+      }
+    };
+    tryDuplicate()
+      .then(() => fetchData())
+      .catch(apiCatchGlobalHandler);
+  };
+
+  const mergedExtraActions = (id?: string) => {
+    const base: actionProps[] = [
+      {
+        label: t("Global.Labels.Duplicate"),
+        icon: faCopy,
+        spread: true,
+        color: "secondary",
+        onClick: (targetId: string) => handleDuplicate(targetId || id || ""),
+      },
+    ];
+    const userActions = extraActions ? extraActions(id) : [];
+    return [...base, ...userActions];
   };
 
   const modalTitle =
@@ -391,7 +473,7 @@ const ApiDataTable: React.FC<Props> = ({
         includeView={includeView}
         includeUpdate={includeUpdate}
         includeDelete={includeDelete}
-        extraActions={extraActions}
+        extraActions={mergedExtraActions}
         // pagination / meta
         paginationMeta={paginationMeta}
         currentPage={currentPage}
@@ -423,6 +505,24 @@ const ApiDataTable: React.FC<Props> = ({
           sortField,
           sortDirection,
         }}
+        defaultPaginationMode="pagination"
+        paginationMode={paginationMode}
+        onPaginationModeChange={(mode) => {
+          setPaginationMode(mode);
+          setCurrentPage(1);
+        }}
+        onLoadMore={() => setCurrentPage((prev) => prev + 1)}
+        canLoadMore={paginationMeta.page < paginationMeta.pagesCount}
+        detailsPanelRender={(row) => (
+          <div className="row g-2">
+            {inputs.map((input) => (
+              <div className="col-12 col-md-6" key={input.name}>
+                <small className="text-muted d-block">{input.label}</small>
+                <span>{String(row[input.name] ?? "-")}</span>
+              </div>
+            ))}
+          </div>
+        )}
       />
 
       {modal.open && !isRouteCrud ? formSection : null}

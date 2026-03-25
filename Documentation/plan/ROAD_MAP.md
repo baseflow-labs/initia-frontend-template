@@ -183,13 +183,13 @@
 
 ### Sprint 22 — DataTable v2: advanced filters + layouts (12 - 25 Mar, 2026)
 
-- [ ] Advanced filters builder (AND/OR + operators)
-- [ ] Default filter values
-- [ ] Details panel option (expand row)
-- [ ] Responsive cards view (auto switch / manual toggle)
-- [ ] Scroll vs pagination mode (choose one as default; keep both optional)
+- [x] Advanced filters builder (AND/OR + operators)
+- [x] Default filter values
+- [x] Details panel option (expand row)
+- [x] Responsive cards view (auto switch / manual toggle)
+- [x] Scroll vs pagination mode (choose one as default; keep both optional)
 - [ ] Build AI development instructions for most common tools, agents & AI code editors (Codex, Copilot, Codeium, Antigravity ...etc)
-- [ ] Duplicate record action
+- [x] Duplicate record action
 
 ## Phase 7 — Views and UX Platform Layer (26 Mar - 22 Apr, 2026)
 

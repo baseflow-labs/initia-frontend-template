@@ -94,8 +94,6 @@
         "SchedulingSection": "الجدولة",
         "Select": "اختيار",
         "SelectMany": "اختيار متعدد",
-        "StartDate": "تاريخ البدء",
-        "StartTime": "وقت البدء",
         "StackedBooleanCheckboxes": "اختيار متعدد على شكل أزرار عامودية",
         "StackedButtonRadio": "اختيار من متعدد على شكل أزرار عامودية",
         "StackedCardCheckboxes": "اختيار متعدد على شكل بطاقات عامودية",
@@ -105,6 +103,8 @@
         "StackedImageRadio": "اختيار من متعدد على شكل صور عامودية",
         "StackedRadio": "اختيار من متعدد عامودي",
         "StarRating": "ادخال تقييم",
+        "StartDate": "تاريخ البدء",
+        "StartTime": "وقت البدء",
         "Text": "نص",
         "Textarea": "منطقة نص",
         "Time": "الوقت",
@@ -262,14 +262,14 @@
         "Logger": {
           "Context": "السياق",
           "Level": {
-            "Title": "المستوى",
-            "Error": "خطأ",
-            "Warn": "تحذير",
-            "Info": "معلومات",
             "Debug": "تصحيح",
-            "Verbose": "مفصل",
+            "Error": "خطأ",
+            "Http": "Http",
+            "Info": "معلومات",
             "Silly": "سخيف",
-            "Http": "Http"
+            "Title": "المستوى",
+            "Verbose": "مفصل",
+            "Warn": "تحذير"
           },
           "Message": "الرسالة",
           "Metadata": "البيانات",
@@ -654,10 +654,14 @@
     },
     "Labels": {
       "Action": "إجراء",
+      "Add": "إضافة",
       "AdvancedFilters": "فلاتر متقدمة",
       "All": "الكل",
+      "And": "و",
       "Apply": "تطبيق",
+      "Auto": "تلقائي",
       "Back": "رجوع",
+      "Cards": "بطاقات",
       "Clear": "مسح",
       "Close": "إغلاق",
       "Contains": "يحتوي على",
@@ -668,21 +672,26 @@
       "DemoWarning": "يرجى الانتباه إلى أن هذا إصدار تجريبي متاح للجميع، لذلك نوصي بعدم مشاركة أي بيانات حقيقية مثل الاسم أو رقم الهوية وما شابه. سيتم إعادة تعيين البيانات تلقائياً كل يوم.",
       "Details": "التفاصيل",
       "Download": "تحميل",
+      "Duplicate": "نسخ السجل",
       "EndsWith": "ينتهي بـ",
+      "Equals": "يساوي",
       "FileCantBeReviewed": "لا يمكن معاينة الملف",
       "Filter": "فلترة",
       "GreaterThan": "أكبر من",
       "GreaterThanOrEqual": "أكبر من أو يساوي",
       "LessThan": "أصغر من",
       "LessThanOrEqual": "أصغر من أو يساوي",
+      "LoadMore": "تحميل المزيد",
       "Logout": "تسجيل الخروج",
       "More": "المزيد",
       "NoData": "لا توجد بيانات",
       "NoNotifications": "لا توجد إشعارات",
       "NotEquals": "لا يساوي",
       "Of": "من",
+      "Or": "أو",
       "PageNo": "رقم الصفحة",
       "PageSize": "حجم الصفحة",
+      "Pagination": "ترقيم صفحات",
       "PhoneNumber": "رقم الهاتف",
       "Results": "النتائج",
       "Roles": {
@@ -694,9 +703,11 @@
         "researcher": "باحث",
         "user": "مستخدم"
       },
+      "Scroll": "تمرير",
       "Search": "بحث",
       "Showing": "عرض",
       "StartsWith": "يبدأ بـ",
+      "Table": "جدول",
       "ThisWeek": "هذا الأسبوع",
       "Today": "اليوم",
       "Update": "تعديل {{item}}",
@@ -707,14 +718,6 @@
     "Loading": "جاري التحميل",
     "Notifications": {
       "Successful": "تم بنجاح {{action}}"
-    },
-    "TopbarSearch": {
-      "NoResultsDescription": "جرّب اسماً آخر أو مساراً أو كلمة مفتاحية مختلفة.",
-      "NoResultsTitle": "لا توجد نتائج مطابقة",
-      "Placeholder": "ابحث في الصفحات والخدمات والإعدادات...",
-      "RecentAndSuggested": "الأخيرة والمقترحة",
-      "Results": "الوجهات المطابقة",
-      "Shortcut": "Ctrl K"
     },
     "Placeholders": {
       "Search": "بحث..."
@@ -746,6 +749,14 @@
           "Title": "نوع التصدير"
         }
       }
+    },
+    "TopbarSearch": {
+      "NoResultsDescription": "جرّب اسماً آخر أو مساراً أو كلمة مفتاحية مختلفة.",
+      "NoResultsTitle": "لا توجد نتائج مطابقة",
+      "Placeholder": "ابحث في الصفحات والخدمات والإعدادات...",
+      "RecentAndSuggested": "الأخيرة والمقترحة",
+      "Results": "الوجهات المطابقة",
+      "Shortcut": "Ctrl K"
     }
   },
   "Public": {
