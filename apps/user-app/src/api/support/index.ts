@@ -63,24 +63,65 @@ const getPublishedFaqs = async (): Promise<EnvelopeResponse<FaqItem[]>> => {
 // User Manual - User side (read-only)
 export interface UserManualSection {
   id: string;
-  section: string;
+  title: string;
+  description?: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface UserManualSubsection {
+  id: string;
+  sectionId: string;
+  title: string;
+  description?: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface UserManualContent {
+  id: string;
   subsectionId: string;
   title: string;
-  content: string;
-  contentType: string;
-  order?: number;
-  icon?: string;
-  videoUrl?: string;
+  description?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 const getPublishedUserManual = async (): Promise<EnvelopeResponse<UserManualSection[]>> => {
-  return await api.get<UserManualSection[]>(mainPath + "/user-manual/published");
+  return await api.get<UserManualSection[]>(mainPath + "/manual/sections");
 };
 
 const getUserManualSection = async (
   sectionId: string
 ): Promise<EnvelopeResponse<UserManualSection>> => {
-  return await api.get<UserManualSection>(mainPath + "/user-manual/section/" + sectionId);
+  const sectionsRes = await api.get<UserManualSection[]>(mainPath + "/manual/sections");
+  const matched = (sectionsRes.payload || []).find((section) => section.id === sectionId);
+
+  return {
+    ...sectionsRes,
+    data: matched as UserManualSection,
+    payload: matched as UserManualSection,
+  };
+};
+
+const getUserManualSubsections = async (
+  sectionId?: string
+): Promise<EnvelopeResponse<UserManualSubsection[]>> => {
+  const endpoint = sectionId
+    ? `${mainPath}/manual/sections/${sectionId}/subsections`
+    : `${mainPath}/manual/subsections`;
+
+  return await api.get<UserManualSubsection[]>(endpoint);
+};
+
+const getUserManualContents = async (
+  subsectionId?: string
+): Promise<EnvelopeResponse<UserManualContent[]>> => {
+  const endpoint = subsectionId
+    ? `${mainPath}/manual/subsections/${subsectionId}/contents`
+    : `${mainPath}/manual/contents`;
+
+  return await api.get<UserManualContent[]>(endpoint);
 };
 
 export {
@@ -98,4 +139,6 @@ export {
   // User Manual
   getPublishedUserManual,
   getUserManualSection,
+  getUserManualSubsections,
+  getUserManualContents,
 };

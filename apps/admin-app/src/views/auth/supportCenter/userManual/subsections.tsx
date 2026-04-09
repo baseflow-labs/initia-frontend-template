@@ -8,7 +8,7 @@ const ManualSubsectionsView = () => {
 
   return (
     <ApiDataTable
-      dataApiEndpoint="/support/user-manual/subsections"
+      dataApiEndpoint="/support/manual/subsections"
       inputs={subsectionTableColumns(t)}
       singleItem={t("Auth.SupportCenter.Admin.UserManual.Subsection", "Subsection")}
       includeCreate

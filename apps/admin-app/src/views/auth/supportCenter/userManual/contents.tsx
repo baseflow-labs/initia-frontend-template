@@ -8,7 +8,7 @@ const ManualContentsView = () => {
 
   return (
     <ApiDataTable
-      dataApiEndpoint="/support/user-manual/contents"
+      dataApiEndpoint="/support/manual/contents"
       inputs={contentTableColumns(t)}
       singleItem={t("Auth.SupportCenter.Admin.UserManual.Content", "Content")}
       includeCreate
