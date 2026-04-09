@@ -38,7 +38,7 @@ export function Header() {
             {t("Navigation.GettingStarted")}
           </Link>
           <Link
-            href="/popular"
+            href="/faq"
             className="text-sm font-medium text-gray-700 hover:text-primary-600 dark:text-gray-300"
           >
             FAQ
@@ -88,7 +88,7 @@ export function Header() {
               {t("Navigation.GettingStarted")}
             </Link>
             <Link
-              href="/popular"
+              href="/faq"
               className="text-sm font-medium text-gray-700 hover:text-primary-600 dark:text-gray-300"
               onClick={() => setMobileMenuOpen(false)}
             >

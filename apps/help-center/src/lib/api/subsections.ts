@@ -1,6 +1,6 @@
-import { Subsection } from "@/types/documentation";
-
 import { getManualTree } from "./userManual";
+
+import { Subsection } from "@/types/documentation";
 
 export async function getSubsections(sectionId: string): Promise<Subsection[]> {
   try {

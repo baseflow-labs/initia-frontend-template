@@ -50,14 +50,15 @@ const submitContactForm = async (data: ContactFormData): Promise<EnvelopeRespons
 // FAQ - User side (read-only)
 export interface FaqItem {
   id: string;
-  category: string;
-  question: string;
-  answer: string;
-  order?: number;
+  title: string;
+  content: string;
+  link?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 const getPublishedFaqs = async (): Promise<EnvelopeResponse<FaqItem[]>> => {
-  return await api.get<FaqItem[]>(mainPath + "/faq/published");
+  return await api.get<FaqItem[]>(mainPath + "/faqs");
 };
 
 // User Manual - User side (read-only)

@@ -1,5 +1,6 @@
-import { Article } from "@/types/documentation";
 import { getManualTree, searchManualArticles } from "./userManual";
+
+import { Article } from "@/types/documentation";
 
 export async function getArticlesBySubsection(subsectionId: string): Promise<Article[]> {
   try {

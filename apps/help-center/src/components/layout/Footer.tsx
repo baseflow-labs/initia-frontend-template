@@ -34,10 +34,10 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/popular"
+                  href="/faq"
                   className="text-gray-600 hover:text-primary-600 dark:text-gray-400"
                 >
-                  Popular Articles
+                  FAQ
                 </Link>
               </li>
             </ul>

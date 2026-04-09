@@ -8,7 +8,7 @@ const FaqManagementView = () => {
 
   return (
     <ApiDataTable
-      dataApiEndpoint="/support/faq"
+      dataApiEndpoint="/support/faqs"
       inputs={faqTableColumns(t)}
       singleItem={t("Auth.SupportCenter.Admin.Faq.Item", "FAQ Item")}
       includeCreate
