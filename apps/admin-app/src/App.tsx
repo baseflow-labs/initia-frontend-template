@@ -11,6 +11,7 @@ import PublicLayout from "./layouts/public";
 import { setMetadata } from "./store/actions/settings";
 import { useAppSelector } from "./store/hooks";
 import { useDirectionHandler } from "./utils/useDirectionHandler";
+import { logActivity } from "./utils/activityLogger";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -40,6 +41,36 @@ const App = () => {
         dispatch(setMetadata(res.payload));
       })
       .catch(apiCatchGlobalHandler);
+  }, []);
+
+  useEffect(() => {
+    const onError = (event: ErrorEvent) => {
+      logActivity({
+        level: "error",
+        message: event.message || "Unhandled window error",
+        context: "window.onerror",
+        stack: event.error?.stack,
+      });
+    };
+
+    const onUnhandledRejection = (event: PromiseRejectionEvent) => {
+      const reason = event.reason as Error | string | undefined;
+      logActivity({
+        level: "error",
+        message:
+          typeof reason === "string" ? reason : reason?.message || "Unhandled promise rejection",
+        context: "window.onunhandledrejection",
+        stack: typeof reason === "string" ? undefined : reason?.stack,
+      });
+    };
+
+    window.addEventListener("error", onError);
+    window.addEventListener("unhandledrejection", onUnhandledRejection);
+
+    return () => {
+      window.removeEventListener("error", onError);
+      window.removeEventListener("unhandledrejection", onUnhandledRejection);
+    };
   }, []);
 
   return (

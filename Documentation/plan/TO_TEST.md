@@ -25,3 +25,5 @@
 - [ ] Metadata
   - [ ] Store @ Admin
   - [ ] Reflect across the system apps
+- [ ] System logger
+- [ ] User Activity

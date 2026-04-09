@@ -1,7 +1,39 @@
 import '../globals.css';
 import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+
+const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
+
+function logSystemError(message: string, stack?: string) {
+  const body = JSON.stringify({
+    level: 'error',
+    message,
+    context: 'documentation',
+    stack,
+    meta: { app: 'documentation' },
+  });
+
+  try {
+    if (typeof navigator !== 'undefined' && navigator.sendBeacon) {
+      const blob = new Blob([body], { type: 'application/json' });
+      navigator.sendBeacon(`${apiBase}/logging`, blob);
+      return;
+    }
+
+    void fetch(`${apiBase}/logging`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body,
+      keepalive: true,
+    });
+  } catch {
+    // logging must not impact docs UX
+  }
+}
 
 export default function App({ Component, pageProps }: { Component: any; pageProps: any }) {
+  const router = useRouter();
+
   useEffect(() => {
     const fetchIdentity = async () => {
       try {
@@ -39,6 +71,21 @@ export default function App({ Component, pageProps }: { Component: any; pageProp
 
     fetchIdentity();
   }, []);
+
+  useEffect(() => {
+    const onError = (event: ErrorEvent) => {
+      logSystemError(
+        event.message || 'Unhandled window error',
+        event.error?.stack as string | undefined
+      );
+    };
+
+    window.addEventListener('error', onError);
+
+    return () => {
+      window.removeEventListener('error', onError);
+    };
+  }, [router.events]);
 
   return <Component {...pageProps} />;
 }

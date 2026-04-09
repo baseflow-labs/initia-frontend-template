@@ -24,6 +24,8 @@ interface StoreCallbacks {
   onStartLoading: () => void;
   onEndLoading: () => void;
   onAddNotification: (notification: NotificationProps) => void;
+  /** Called for HTTP 5xx responses so each app can forward errors to the system logger. */
+  onApiError?: (status: number, url: string, message: string) => void;
 }
 
 let storeCallbacks: StoreCallbacks | null = null;
@@ -232,6 +234,11 @@ service.interceptors.response.use(
     }
 
     const status = err.response?.status || 0;
+
+    // Forward server errors (5xx) to the app's system logger
+    if (status >= 500 && storeCallbacks?.onApiError) {
+      storeCallbacks.onApiError(status, err.config?.url || "unknown", errMsg);
+    }
 
     const accessToken = storeCallbacks?.getAccessToken();
     if (accessToken && accessToken !== "null" && [403, 401].includes(status)) {

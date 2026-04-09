@@ -4,8 +4,9 @@ import { addNotification, NotificationProps } from "@initia/shared/types/notific
 import { logout, refreshToken as doRefreshToken } from "../store/actions/auth";
 import { endLoading, startLoading } from "../store/actions/loading";
 import store, { RootState } from "../store/store";
+import { logActivity } from "../utils/activityLogger";
 
-// Initialize the shared API client with user-app's store
+// Initialize the shared API client with admin-app's store
 export function initializeApi() {
   initializeApiClient({
     getAccessToken: () => {
@@ -30,6 +31,14 @@ export function initializeApi() {
     },
     onAddNotification: (notification: NotificationProps) => {
       store.dispatch(addNotification(notification));
+    },
+    onApiError: (status: number, url: string, message: string) => {
+      logActivity({
+        level: "error",
+        message: `API error ${status}: ${message}`,
+        context: "api",
+        meta: { url, status },
+      });
     },
   });
 }
