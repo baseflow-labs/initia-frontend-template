@@ -1,24 +1,22 @@
 import api, { EnvelopeResponse } from "..";
-import type { AuthResponse } from "../../store/actions/auth";
+import type { AuthResponse } from "@initia/shared/types/auth";
 
 export interface loginCredentials {
-  identifier: string;
+  email: string;
   password: string;
 }
 
 export interface registerProps {
-  identifier: string;
+  email: string;
   username?: string;
   password: string;
   passwordConfirmation: string;
-  code: string;
 }
 
 interface resetPasswordProps {
-  identifier: string;
-  password: string;
-  passwordConfirmation: string;
-  code: string;
+  email: string;
+  newPassword: string;
+  token: string;
 }
 
 const mainPath = "/auth";
@@ -27,17 +25,13 @@ const login = async (credentials: loginCredentials): Promise<EnvelopeResponse<Au
   return await api.post<AuthResponse>(mainPath + "/login", credentials);
 };
 
-// const logout = async () => {
-//   return await api.post(mainPath + "/logout");
-// };
-
-const otpSend = async (identifier: string) => {
-  return await api.post(mainPath + "/otp", { identifier });
+const logout = async (email: string) => {
+  return await api.post(mainPath + "/logout", { email });
 };
 
-const requestPasswordReset = async (identifier: string) => {
+const requestPasswordReset = async (email: string) => {
   return await api.get(mainPath + "/passwordRequest", {
-    params: { identifier },
+    params: { identifier: email },
   });
 };
 
@@ -60,10 +54,9 @@ const register = async (userData: registerProps) => {
 export {
   isAuthorized,
   login,
-  otpSend,
+  logout,
   register,
   requestPasswordReset,
-  //  logout,
   resetMyPassword,
   resetPassword,
 };

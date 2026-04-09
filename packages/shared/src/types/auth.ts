@@ -1,3 +1,4 @@
+// ===== USER TYPES =====
 export interface UserProps {
   id?: string;
   name?: string;
@@ -7,16 +8,54 @@ export interface UserProps {
   role: string;
   avatar?: string;
   image?: string;
-  // [key: string]: any;
 }
 
+// ===== AUTH RESPONSE TYPES =====
 export interface AuthResponse {
   token: string;
-  refreshToken: string;
   user: UserProps;
+  refreshToken?: string; // Optional for backward compatibility
+}
+
+export interface LoginResponse {
+  status: number;
+  message: string;
+  payload: {
+    token: string;
+    user: UserProps;
+  };
 }
 
 export interface RefreshTokenResponse {
   accessToken: string;
   refreshToken: string;
+}
+
+export interface LogoutResponse {
+  status: number;
+  message: string;
+  payload: Record<string, unknown>;
+}
+
+// ===== AUTH REQUEST TYPES =====
+export interface LoginCredentials {
+  email: string;
+  password: string;
+}
+
+export interface RegisterCredentials {
+  email: string;
+  username: string;
+  password: string;
+  passwordConfirmation: string;
+}
+
+export interface PasswordResetRequest {
+  email: string;
+}
+
+export interface PasswordReset {
+  email: string;
+  newPassword: string;
+  token: string;
 }

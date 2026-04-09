@@ -3,8 +3,15 @@ import { TFunction } from "i18next";
 export const formInputs = (t: TFunction) => [
   {
     type: "email",
-    name: "identifier",
+    name: "email",
     label: t("Public.Register.Labels.Email"),
+    required: true,
+    fullWidth: true,
+  },
+  {
+    type: "text",
+    name: "username",
+    label: t("Public.Register.Labels.Username"),
     required: true,
     fullWidth: true,
   },

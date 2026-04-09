@@ -17,7 +17,7 @@ const LoginView = ({ onLoginSuccess }: LoginViewProps) => {
   const formInputs = () => [
     {
       type: "email",
-      name: "identifier",
+      name: "email",
       label: t("Public.Login.Labels.Email"),
       required: true,
       fullWidth: true,
@@ -40,7 +40,7 @@ const LoginView = ({ onLoginSuccess }: LoginViewProps) => {
 
   const onSubmit = (values?: Record<string, unknown>) => {
     const credentials = {
-      identifier: (values?.identifier as string) || "",
+      email: (values?.email as string) || "",
       password: (values?.password as string) || "",
     };
     authApi
@@ -66,7 +66,7 @@ const LoginView = ({ onLoginSuccess }: LoginViewProps) => {
           className="w-100 mt-3"
           onClick={() =>
             onSubmit({
-              identifier: "example@example.com",
+              email: "example@example.com",
               password: "s5Rsa2?#sd1154",
             })
           }
