@@ -38,8 +38,12 @@ export default function Navbar({ pages = [], systemMetadata }: NavbarProps) {
     >
       <div className="container">
         <a href="/" className="navbar-brand fw-bold fs-4">
-          {systemMetadata?.logo ? (
-            <img src={systemMetadata.logo} alt={systemMetadata.name} style={{ height: "40px" }} />
+          {systemMetadata?.logoFull || systemMetadata?.logo ? (
+            <img
+              src={systemMetadata.logoFull || systemMetadata.logo}
+              alt={systemMetadata.name}
+              style={{ height: "40px" }}
+            />
           ) : (
             <>
               <span className="text-primary">

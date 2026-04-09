@@ -12,11 +12,7 @@ const SystemMetadataSettingsView = () => {
 
   useLayoutEffect(() => {
     MetadataApi.get().then((res) => {
-      setData({
-        ...res.payload,
-        logo: [{ id: "x", path: res.payload.logo }],
-        logoFull: [{ id: "x", path: res.payload.logoFull }],
-      });
+      setData(res.payload || {});
     });
   }, []);
 

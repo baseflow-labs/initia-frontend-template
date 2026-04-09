@@ -30,9 +30,9 @@ export default function Footer({ pages = [], systemMetadata }: FooterProps) {
           {/* Company Info */}
           <div className="col-lg-3 col-md-6">
             <h4 className="fw-bold mb-3">
-              {systemMetadata?.logo ? (
+              {systemMetadata?.logoFull || systemMetadata?.logo ? (
                 <img
-                  src={systemMetadata.logo}
+                  src={systemMetadata.logoFull || systemMetadata.logo}
                   alt={systemMetadata.name}
                   style={{ height: "35px" }}
                 />
@@ -50,9 +50,9 @@ export default function Footer({ pages = [], systemMetadata }: FooterProps) {
                 "Transform your business with AI-powered automation and seamless collaboration."}
             </p>
             <div className="d-flex gap-3">
-              {systemMetadata?.socialLinks?.twitter && (
+              {(systemMetadata?.socialTwitter || systemMetadata?.socialLinks?.twitter) && (
                 <a
-                  href={systemMetadata.socialLinks.twitter}
+                  href={systemMetadata.socialTwitter || systemMetadata?.socialLinks?.twitter}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="social-icon"
@@ -61,9 +61,9 @@ export default function Footer({ pages = [], systemMetadata }: FooterProps) {
                   <i className="bi bi-twitter"></i>
                 </a>
               )}
-              {systemMetadata?.socialLinks?.linkedin && (
+              {(systemMetadata?.socialLinkedin || systemMetadata?.socialLinks?.linkedin) && (
                 <a
-                  href={systemMetadata.socialLinks.linkedin}
+                  href={systemMetadata.socialLinkedin || systemMetadata?.socialLinks?.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="social-icon"
@@ -83,9 +83,9 @@ export default function Footer({ pages = [], systemMetadata }: FooterProps) {
                   <i className="bi bi-github"></i>
                 </a>
               )}
-              {systemMetadata?.socialLinks?.facebook && (
+              {(systemMetadata?.socialFacebook || systemMetadata?.socialLinks?.facebook) && (
                 <a
-                  href={systemMetadata.socialLinks.facebook}
+                  href={systemMetadata.socialFacebook || systemMetadata?.socialLinks?.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="social-icon"
@@ -94,9 +94,9 @@ export default function Footer({ pages = [], systemMetadata }: FooterProps) {
                   <i className="bi bi-facebook"></i>
                 </a>
               )}
-              {systemMetadata?.socialLinks?.instagram && (
+              {(systemMetadata?.socialInstagram || systemMetadata?.socialLinks?.instagram) && (
                 <a
-                  href={systemMetadata.socialLinks.instagram}
+                  href={systemMetadata.socialInstagram || systemMetadata?.socialLinks?.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="social-icon"

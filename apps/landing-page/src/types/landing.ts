@@ -9,12 +9,20 @@ export interface PageMetadata {
 
 export interface SystemMetadata {
   name: string;
-  logo?: string;
-  slogan?: string;
-  favicon?: string;
-  primaryColor?: string;
+  logo: string;
+  logoFull: string;
+  slogan: string;
+  defaultThemeColor: string;
+  phoneNumber?: string;
+  websiteUrl?: string;
   contactEmail?: string;
-  contactPhone?: string;
+  socialFacebook?: string;
+  socialInstagram?: string;
+  socialLinkedin?: string;
+  socialTwitter?: string;
+  socialYoutube?: string;
+  socialTiktok?: string;
+  favicon?: string;
   socialLinks?: {
     twitter?: string;
     linkedin?: string;

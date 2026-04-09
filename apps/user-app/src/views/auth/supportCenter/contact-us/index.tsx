@@ -14,26 +14,37 @@ import { useTranslation } from "react-i18next";
 
 import { inputs } from "./consts";
 
+import { useAppSelector } from "@/store/hooks";
+
 const ContactUsView = () => {
   const { t } = useTranslation();
+  const {
+    contactEmail,
+    phoneNumber,
+    socialFacebook,
+    socialTwitter,
+    socialLinkedin,
+    socialInstagram,
+    websiteUrl,
+  } = useAppSelector((state) => state.settings);
 
   const contactInfo = [
     {
       icon: faEnvelope,
       title: t("Auth.SupportCenter.ContactUs.EmailUs.Title"),
-      details: "support@example.com",
+      details: contactEmail || "support@example.com",
       subDetails: t("Auth.SupportCenter.ContactUs.EmailUs.Description"),
     },
     {
       icon: faPhone,
       title: t("Auth.SupportCenter.ContactUs.CallUs.Title"),
-      details: "+1 (555) 123-4567",
+      details: phoneNumber || "+1 (555) 123-4567",
       subDetails: t("Auth.SupportCenter.ContactUs.CallUs.Description"),
     },
     {
       icon: faMapMarkerAlt,
       title: t("Auth.SupportCenter.ContactUs.VisitUs.Title"),
-      details: "123 Main Street, Suite 100",
+      details: websiteUrl || "123 Main Street, Suite 100",
       subDetails: t("Auth.SupportCenter.ContactUs.VisitUs.Description"),
     },
     {
@@ -133,21 +144,49 @@ const ContactUsView = () => {
                 </p>
 
                 <div className="d-flex gap-2">
-                  <Button outline size="sm" className="flex-fill">
-                    <FontAwesomeIcon icon={faFacebook} />
-                  </Button>
+                  <a
+                    href={socialFacebook || "#"}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex-fill"
+                  >
+                    <Button outline size="sm" className="w-100">
+                      <FontAwesomeIcon icon={faFacebook} />
+                    </Button>
+                  </a>
 
-                  <Button outline size="sm" className="flex-fill">
-                    <FontAwesomeIcon icon={faTwitter} />
-                  </Button>
+                  <a
+                    href={socialTwitter || "#"}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex-fill"
+                  >
+                    <Button outline size="sm" className="w-100">
+                      <FontAwesomeIcon icon={faTwitter} />
+                    </Button>
+                  </a>
 
-                  <Button outline size="sm" className="flex-fill">
-                    <FontAwesomeIcon icon={faLinkedin} />
-                  </Button>
+                  <a
+                    href={socialLinkedin || "#"}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex-fill"
+                  >
+                    <Button outline size="sm" className="w-100">
+                      <FontAwesomeIcon icon={faLinkedin} />
+                    </Button>
+                  </a>
 
-                  <Button outline color="danger" size="sm" className="flex-fill">
-                    <FontAwesomeIcon icon={faInstagram} />
-                  </Button>
+                  <a
+                    href={socialInstagram || "#"}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex-fill"
+                  >
+                    <Button outline color="danger" size="sm" className="w-100">
+                      <FontAwesomeIcon icon={faInstagram} />
+                    </Button>
+                  </a>
                 </div>
               </div>
             </div>

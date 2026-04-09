@@ -1,6 +1,8 @@
 import Link from "next/link";
 
-export function Footer() {
+import type { SystemIdentity } from "@/lib/api/identity";
+
+export function Footer({ identity }: { identity: SystemIdentity }) {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -9,9 +11,9 @@ export function Footer() {
         <div className="grid gap-8 md:grid-cols-4">
           {/* Company Info */}
           <div>
-            <h3 className="mb-4 text-lg font-semibold">Help Center</h3>
+            <h3 className="mb-4 text-lg font-semibold">{identity.name} Help Center</h3>
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              Find answers and support for all your questions.
+              {identity.slogan || "Find answers and support for all your questions."}
             </p>
           </div>
 
@@ -57,12 +59,34 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="mailto:support@example.com"
+                  href={`mailto:${identity.contactEmail || "support@example.com"}`}
                   className="text-gray-600 hover:text-primary-600 dark:text-gray-400"
                 >
                   Email Support
                 </a>
               </li>
+              {identity.phoneNumber && (
+                <li>
+                  <a
+                    href={`tel:${identity.phoneNumber}`}
+                    className="text-gray-600 hover:text-primary-600 dark:text-gray-400"
+                  >
+                    {identity.phoneNumber}
+                  </a>
+                </li>
+              )}
+              {identity.websiteUrl && (
+                <li>
+                  <a
+                    href={identity.websiteUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-gray-600 hover:text-primary-600 dark:text-gray-400"
+                  >
+                    Official Website
+                  </a>
+                </li>
+              )}
               <li>
                 <Link
                   href="/status"
@@ -94,12 +118,50 @@ export function Footer() {
                   Terms of Service
                 </Link>
               </li>
+              {identity.socialFacebook && (
+                <li>
+                  <a
+                    href={identity.socialFacebook}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-gray-600 hover:text-primary-600 dark:text-gray-400"
+                  >
+                    Facebook
+                  </a>
+                </li>
+              )}
+              {identity.socialInstagram && (
+                <li>
+                  <a
+                    href={identity.socialInstagram}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-gray-600 hover:text-primary-600 dark:text-gray-400"
+                  >
+                    Instagram
+                  </a>
+                </li>
+              )}
+              {identity.socialLinkedin && (
+                <li>
+                  <a
+                    href={identity.socialLinkedin}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-gray-600 hover:text-primary-600 dark:text-gray-400"
+                  >
+                    LinkedIn
+                  </a>
+                </li>
+              )}
             </ul>
           </div>
         </div>
 
         <div className="mt-8 border-t border-gray-200 pt-8 text-center text-sm text-gray-600 dark:border-gray-700 dark:text-gray-400">
-          <p>&copy; {currentYear} Your Company. All rights reserved.</p>
+          <p>
+            &copy; {currentYear} {identity.name || "Your Company"}. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

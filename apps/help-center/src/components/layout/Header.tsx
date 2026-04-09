@@ -6,7 +6,9 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { LanguageSwitcher } from "@initia/shared/ui/components/button/language-switcher";
 
-export function Header() {
+import type { SystemIdentity } from "@/lib/api/identity";
+
+export function Header({ identity }: { identity: SystemIdentity }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { t, i18n } = useTranslation();
   const isRtl = i18n.language === "ar";
@@ -20,7 +22,13 @@ export function Header() {
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         {/* Logo */}
         <Link href="/" className={`flex items-center space-x-2 ${isRtl ? "order-last" : ""}`}>
-          <div className="text-2xl font-bold text-primary-600">{t("Common.HelpCenter")}</div>
+          {identity.logoFull ? (
+            <img src={identity.logoFull} alt={identity.name} style={{ maxHeight: "40px" }} />
+          ) : (
+            <div className="text-2xl font-bold text-primary-600">
+              {identity.name || t("Common.HelpCenter")}
+            </div>
+          )}
         </Link>
 
         {/* Desktop Navigation */}

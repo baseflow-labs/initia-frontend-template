@@ -22,3 +22,6 @@
   - [ ] Tickets
     - [ ] Form Submission
     - [ ] Review submitted data
+- [ ] Metadata
+  - [ ] Store @ Admin
+  - [ ] Reflect across the system apps

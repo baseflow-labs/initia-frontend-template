@@ -9,10 +9,22 @@ import { locales } from "@/i18n/config";
 import "@initia/shared/styles/index.scss";
 import "@/styles/rtl.css";
 
-export const metadata: Metadata = {
-  title: "InnovateHub - AI-Powered Business Platform",
-  description: "Transform your business with AI-powered automation and seamless collaboration",
-};
+export async function generateMetadata({ params }: RootLayoutProps): Promise<Metadata> {
+  const { locale } = await params;
+  const identity = await landingApi.getSystemMetadata(locale);
+
+  return {
+    title: identity.name,
+    description: identity.slogan,
+    openGraph: {
+      title: identity.name,
+      description: identity.slogan,
+      siteName: identity.name,
+      url: identity.websiteUrl,
+      images: identity.logoFull ? [identity.logoFull] : identity.logo ? [identity.logo] : undefined,
+    },
+  };
+}
 
 interface RootLayoutProps {
   children: React.ReactNode;
@@ -53,9 +65,16 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
       </head>
       <body>
         <NextIntlClientProvider messages={messages}>
-          <Navbar pages={pages} systemMetadata={systemMetadata} />
-          <main>{children}</main>
-          <Footer pages={pages} systemMetadata={systemMetadata} />
+          <div
+            style={{
+              ["--theme-primary" as string]: systemMetadata.defaultThemeColor,
+              ["--bs-primary" as string]: systemMetadata.defaultThemeColor,
+            }}
+          >
+            <Navbar pages={pages} systemMetadata={systemMetadata} />
+            <main>{children}</main>
+            <Footer pages={pages} systemMetadata={systemMetadata} />
+          </div>
         </NextIntlClientProvider>
       </body>
     </html>

@@ -52,12 +52,21 @@ export const landingApi = {
 
     try {
       const response = await apiClient.get<SystemMetadata | { payload: SystemMetadata }>(
-        `${API_URL}/landing-content/system-metadata`,
-        {
-          params: { locale },
-        }
+        `${API_URL}/metadata`
       );
-      return this.unwrapPayload<SystemMetadata>(response.data);
+
+      const payload = this.unwrapPayload<SystemMetadata>(response.data);
+
+      return {
+        ...payload,
+        socialLinks: {
+          twitter: payload.socialTwitter,
+          linkedin: payload.socialLinkedin,
+          facebook: payload.socialFacebook,
+          instagram: payload.socialInstagram,
+          github: payload.socialLinks?.github,
+        },
+      };
     } catch {
       // Return mock data for development
       return getMockSystemMetadata(locale);

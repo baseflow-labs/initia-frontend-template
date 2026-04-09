@@ -6,8 +6,17 @@ export interface Metadata {
   name: string;
   logo: string;
   logoFull: string;
-  phoneNumber: string;
   slogan: string;
+  defaultThemeColor: string;
+  phoneNumber?: string;
+  websiteUrl?: string;
+  contactEmail?: string;
+  socialFacebook?: string;
+  socialInstagram?: string;
+  socialLinkedin?: string;
+  socialTwitter?: string;
+  socialYoutube?: string;
+  socialTiktok?: string;
 }
 
 const get = async (): Promise<EnvelopeResponse<Metadata>> => {

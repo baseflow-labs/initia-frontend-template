@@ -3,8 +3,17 @@ export interface State {
   name: string;
   logo: string | null;
   logoFull: string | null;
-  phoneNumber: string;
   slogan: string;
+  defaultThemeColor: string;
+  phoneNumber: string;
+  websiteUrl: string;
+  contactEmail: string;
+  socialFacebook: string;
+  socialInstagram: string;
+  socialLinkedin: string;
+  socialTwitter: string;
+  socialYoutube: string;
+  socialTiktok: string;
   theme: "light" | "dark";
   primaryColor: string;
   secondaryColor: string;
@@ -30,8 +39,17 @@ export type Action =
         name: string;
         logo: string;
         logoFull: string;
-        phoneNumber: string;
         slogan: string;
+        defaultThemeColor: string;
+        phoneNumber?: string;
+        websiteUrl?: string;
+        contactEmail?: string;
+        socialFacebook?: string;
+        socialInstagram?: string;
+        socialLinkedin?: string;
+        socialTwitter?: string;
+        socialYoutube?: string;
+        socialTiktok?: string;
       };
     };
 
@@ -40,8 +58,17 @@ const initialState: State = {
   name: localStorage.getItem("name") || "Initia",
   logo: localStorage.getItem("logo") || null,
   logoFull: localStorage.getItem("logoFull") || null,
-  phoneNumber: localStorage.getItem("phoneNumber") || "",
   slogan: localStorage.getItem("slogan") || "",
+  defaultThemeColor: localStorage.getItem("defaultThemeColor") || "#1e4c9d",
+  phoneNumber: localStorage.getItem("phoneNumber") || "",
+  websiteUrl: localStorage.getItem("websiteUrl") || "",
+  contactEmail: localStorage.getItem("contactEmail") || "",
+  socialFacebook: localStorage.getItem("socialFacebook") || "",
+  socialInstagram: localStorage.getItem("socialInstagram") || "",
+  socialLinkedin: localStorage.getItem("socialLinkedin") || "",
+  socialTwitter: localStorage.getItem("socialTwitter") || "",
+  socialYoutube: localStorage.getItem("socialYoutube") || "",
+  socialTiktok: localStorage.getItem("socialTiktok") || "",
   theme: (localStorage.getItem("theme") as "light" | "dark") || "light",
   primaryColor: localStorage.getItem("primaryColor") || "#1e4c9d",
   secondaryColor: localStorage.getItem("secondaryColor") || "#dfe5ea",
@@ -113,17 +140,41 @@ const settings = (state: State = initialState, action: Action): State => {
       };
 
     case "setMetadata": {
-      const { name, logo, logoFull, phoneNumber, slogan } = action.data;
+      const {
+        name,
+        logo,
+        logoFull,
+        slogan,
+        defaultThemeColor,
+        phoneNumber,
+        websiteUrl,
+        contactEmail,
+        socialFacebook,
+        socialInstagram,
+        socialLinkedin,
+        socialTwitter,
+        socialYoutube,
+        socialTiktok,
+      } = action.data;
 
       if (name) localStorage.setItem("name", String(name));
       if (logo) localStorage.setItem("logo", String(logo));
       if (logoFull) localStorage.setItem("logoFull", String(logoFull));
+      if (defaultThemeColor) localStorage.setItem("defaultThemeColor", String(defaultThemeColor));
       if (phoneNumber) localStorage.setItem("phoneNumber", String(phoneNumber));
       if (slogan) localStorage.setItem("slogan", String(slogan));
+      if (websiteUrl) localStorage.setItem("websiteUrl", String(websiteUrl));
+      if (contactEmail) localStorage.setItem("contactEmail", String(contactEmail));
+      if (socialFacebook) localStorage.setItem("socialFacebook", String(socialFacebook));
+      if (socialInstagram) localStorage.setItem("socialInstagram", String(socialInstagram));
+      if (socialLinkedin) localStorage.setItem("socialLinkedin", String(socialLinkedin));
+      if (socialTwitter) localStorage.setItem("socialTwitter", String(socialTwitter));
+      if (socialYoutube) localStorage.setItem("socialYoutube", String(socialYoutube));
+      if (socialTiktok) localStorage.setItem("socialTiktok", String(socialTiktok));
 
       return {
-        ...action.data,
         ...state,
+        ...action.data,
       };
     }
 

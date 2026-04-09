@@ -29,7 +29,8 @@ const App = () => {
     document.documentElement.setAttribute("data-theme", theme);
     document.documentElement.setAttribute("data-layout", layoutWidth);
     document.documentElement.setAttribute("data-layout-mode", layoutMode);
-    document.documentElement.style.setProperty("--theme-primary", primaryColor);
+    const metadataColor = localStorage.getItem("defaultThemeColor");
+    document.documentElement.style.setProperty("--theme-primary", metadataColor || primaryColor);
     document.documentElement.style.setProperty("--theme-secondary", secondaryColor);
   }, [fontSize, theme, layoutWidth, layoutMode, primaryColor, secondaryColor]);
 
