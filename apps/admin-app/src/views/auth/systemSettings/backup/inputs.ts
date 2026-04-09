@@ -34,6 +34,13 @@ export const inputs = (t: TFunction) => [
 ];
 
 export const renderBackupTimestamp = (label: string) => {
-  const date = new Date(label.replace("backup_", "").replace(/_/g, " ").replace(".zip", ""));
-  return date.toLocaleString();
+  const fromFilename = label.replace("backup_", "").replace(".sql", "").replace(".zip", "");
+
+  const matched = fromFilename.match(/^(\d{4}-\d{2}-\d{2}T\d{2})-(\d{2})-(\d{2})$/);
+  const normalized = matched
+    ? `${matched[1]}:${matched[2]}:${matched[3]}`
+    : fromFilename.replace(/_/g, " ");
+
+  const date = new Date(normalized);
+  return Number.isNaN(date.getTime()) ? label : date.toLocaleString();
 };

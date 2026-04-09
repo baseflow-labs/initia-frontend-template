@@ -1,4 +1,4 @@
-import { UserProps } from "../actions/auth";
+import type { UserProps } from "@initia/shared/types/auth";
 
 export interface AuthState {
   accessToken: string | null;

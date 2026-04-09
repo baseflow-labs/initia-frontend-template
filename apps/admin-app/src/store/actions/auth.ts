@@ -1,20 +1,4 @@
-export interface UserProps {
-  id?: string;
-  name?: string;
-  email?: string;
-  username?: string;
-  status?: string;
-  role: string;
-  avatar?: string;
-  image?: string;
-  // [key: string]: any;
-}
-
-export interface AuthResponse {
-  token: string;
-  refreshToken: string;
-  user: UserProps;
-}
+import type { AuthResponse } from "@initia/shared/types/auth";
 
 export interface RefreshTokenResponse {
   accessToken: string;
@@ -25,7 +9,7 @@ export const login = (resp: AuthResponse) => ({
   type: "login" as const,
   resp: {
     accessToken: resp.token,
-    refreshToken: resp.refreshToken,
+    refreshToken: resp.refreshToken || "",
     user: resp.user || {
       id: "1",
       name: "Suhaib Ahmad",
