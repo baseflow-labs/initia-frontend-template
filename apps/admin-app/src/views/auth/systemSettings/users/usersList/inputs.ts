@@ -3,9 +3,14 @@ import type { TFunction } from "i18next";
 
 export const inputs = (t: TFunction, roles: SelectOption[]) => [
   {
-    name: "name",
-    label: t("Auth.Settings.Admin.Users.Name"),
+    name: "username",
+    label: t("Auth.Settings.Admin.Users.Username"),
     type: "text",
+  },
+  {
+    name: "email",
+    label: t("Auth.Settings.Admin.Users.Email"),
+    type: "email",
   },
   {
     name: "role",
@@ -14,8 +19,12 @@ export const inputs = (t: TFunction, roles: SelectOption[]) => [
     options: roles,
   },
   {
-    name: "email",
-    label: t("Auth.Settings.Admin.Users.Email"),
-    type: "email",
+    name: "isActive",
+    label: t("Auth.Settings.Admin.Users.IsActive"),
+    type: "boolean",
+    booleanLabels: {
+      trueLabel: t("Auth.Settings.Admin.Users.Active"),
+      falseLabel: t("Auth.Settings.Admin.Users.Inactive"),
+    },
   },
 ];

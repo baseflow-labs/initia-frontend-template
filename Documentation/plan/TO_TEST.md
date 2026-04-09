@@ -28,3 +28,7 @@
 - [ ] System logger
 - [ ] User Activity
 - [ ] Backup service
+- [ ] Users mgmt
+  - [ ] Users
+  - [ ] Roles
+  - [ ] Permissions

@@ -346,11 +346,15 @@
           "UserRole": "User Role"
         },
         "Users": {
+          "Active": "Active",
           "Email": "Email",
+          "Inactive": "Inactive",
+          "IsActive": "User Status",
           "Name": "Name",
           "Role": "Role",
           "Title": "Users",
-          "User": "User"
+          "User": "User",
+          "Username": "Username"
         },
         "UsersView": {
           "Title": "Users View"
