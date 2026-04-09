@@ -1,6 +1,7 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import {
   faClockRotateLeft,
+  faFileContract,
   faDashboard,
   faDatabase,
   faFileShield,
@@ -36,6 +37,7 @@ import UsersView from "@/views/auth/systemSettings/users";
 import UserActivityView from "@/views/auth/systemSettings/userActivity";
 import SystemMetadataSettingsView from "@/views/auth/systemSettings/metadata";
 import SystemLoggerView from "@/views/auth/systemSettings/logger";
+import LegalDocumentsView from "@/views/auth/systemSettings/legalDocuments";
 import SystemDataBulkInsertionView from "@/views/auth/systemSettings/bulkInseration";
 import BackupSettingsView from "@/views/auth/systemSettings/backup";
 import SupportCenterManagementView from "@/views/auth/supportCenter";
@@ -83,6 +85,13 @@ const AuthLayout = () => {
       view: <SystemLoggerView />,
       showInNav: true,
       icon: faFileShield,
+    },
+    {
+      name: t("Auth.Settings.Admin.LegalDocuments.Title"),
+      route: "/legal-documents",
+      view: <LegalDocumentsView />,
+      showInNav: true,
+      icon: faFileContract,
     },
     {
       name: t("Auth.Settings.Admin.Users.Title"),

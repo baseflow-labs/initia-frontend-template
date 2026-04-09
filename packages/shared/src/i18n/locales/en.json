@@ -259,6 +259,20 @@
           "DownloadTemplate": "Download Template for Data Upload",
           "Title": "Bulk Data Insertion"
         },
+        "LegalDocuments": {
+          "Content": "Content",
+          "CreatedAt": "Created At",
+          "DocumentType": "Document Type",
+          "IsPublished": "Published",
+          "Item": "Legal Document",
+          "Locale": "Locale",
+          "PrivacyPolicy": "Privacy Policy",
+          "Summary": "Summary",
+          "TermsAndConditions": "Terms & Conditions",
+          "Title": "Legal Documents",
+          "TitleField": "Title",
+          "Version": "Version"
+        },
         "Logger": {
           "Context": "Context",
           "Level": {

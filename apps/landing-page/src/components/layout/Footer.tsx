@@ -3,9 +3,10 @@ import { Page, SystemMetadata } from "@/types/landing";
 interface FooterProps {
   pages?: Page[];
   systemMetadata?: SystemMetadata;
+  locale?: string;
 }
 
-export default function Footer({ pages = [], systemMetadata }: FooterProps) {
+export default function Footer({ pages = [], systemMetadata, locale = "en" }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   const apps = [
@@ -164,18 +165,13 @@ export default function Footer({ pages = [], systemMetadata }: FooterProps) {
           <div className="col-md-6 text-center text-md-end">
             <ul className="list-inline mb-0">
               <li className="list-inline-item">
-                <a href="/privacy" className="legal-link">
+                <a href={`/${locale}/privacy-policy`} className="legal-link">
                   Privacy Policy
                 </a>
               </li>
               <li className="list-inline-item ms-3">
-                <a href="/terms" className="legal-link">
+                <a href={`/${locale}/terms-and-conditions`} className="legal-link">
                   Terms of Service
-                </a>
-              </li>
-              <li className="list-inline-item ms-3">
-                <a href="/cookies" className="legal-link">
-                  Cookie Policy
                 </a>
               </li>
             </ul>

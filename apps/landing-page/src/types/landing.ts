@@ -32,6 +32,21 @@ export interface SystemMetadata {
   };
 }
 
+export type LegalDocumentType = "terms-and-conditions" | "privacy-policy";
+
+export interface LegalDocument {
+  id: string;
+  documentType: LegalDocumentType;
+  locale: string;
+  title: string;
+  summary?: string;
+  content: string;
+  version: number;
+  isPublished: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface Page {
   id: string;
   slug: string;

@@ -2,7 +2,13 @@ import axios from "axios";
 
 import { getMockPages, getMockSystemMetadata } from "./dummyApiData";
 
-import { LandingPagesResponse, Page, SystemMetadata } from "@/types/landing";
+import {
+  LandingPagesResponse,
+  LegalDocument,
+  LegalDocumentType,
+  Page,
+  SystemMetadata,
+} from "@/types/landing";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const DEFAULT_LOCALES = ["en", "ar"];
@@ -120,6 +126,26 @@ export const landingApi = {
       // Fallback: try to get from mock data
       const pages = getMockPages(locale);
       return pages.map((page) => page.slug);
+    }
+  },
+
+  async getLatestLegalDocument(
+    documentType: LegalDocumentType,
+    locale: string = "en"
+  ): Promise<LegalDocument | null> {
+    if (!hasRemoteApi()) {
+      return null;
+    }
+
+    try {
+      const response = await apiClient.get<LegalDocument | { payload: LegalDocument }>(
+        `${API_URL}/legalDocument/latest/${documentType}`,
+        { params: { locale } }
+      );
+
+      return this.unwrapPayload<LegalDocument>(response.data);
+    } catch {
+      return null;
     }
   },
 };

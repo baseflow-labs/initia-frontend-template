@@ -73,7 +73,7 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
           >
             <Navbar pages={pages} systemMetadata={systemMetadata} />
             <main>{children}</main>
-            <Footer pages={pages} systemMetadata={systemMetadata} />
+            <Footer pages={pages} systemMetadata={systemMetadata} locale={locale} />
           </div>
         </NextIntlClientProvider>
       </body>

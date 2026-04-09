@@ -259,6 +259,20 @@
           "DownloadTemplate": "تنزيل نموذج التحميل للبيانات",
           "Title": "إدخال البيانات لأول مرة"
         },
+        "LegalDocuments": {
+          "Content": "المحتوى",
+          "CreatedAt": "تاريخ الإنشاء",
+          "DocumentType": "نوع المستند",
+          "IsPublished": "منشور",
+          "Item": "مستند قانوني",
+          "Locale": "اللغة",
+          "PrivacyPolicy": "سياسة الخصوصية",
+          "Summary": "الملخص",
+          "TermsAndConditions": "الشروط والأحكام",
+          "Title": "المستندات القانونية",
+          "TitleField": "العنوان",
+          "Version": "الإصدار"
+        },
         "Logger": {
           "Context": "السياق",
           "Level": {
