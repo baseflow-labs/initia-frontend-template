@@ -4,20 +4,21 @@ const mainPath = "/support";
 
 // Support Tickets - User side
 export interface SubmitTicketData {
-  subject: string;
-  category: string;
-  priority: string;
-  description: string;
-  attachment?: File;
+  type: string;
+  title: string;
+  urgent?: boolean;
+  content: string;
+  userId: string; // Current user's ID from auth context
 }
 
 export interface UserTicket {
   id: string;
-  subject: string;
-  category: string;
-  priority: string;
+  type: string;
+  title: string;
+  urgent: boolean;
+  content: string;
   status: string;
-  description: string;
+  adminNotes?: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -27,7 +28,7 @@ const submitTicket = async (data: SubmitTicketData): Promise<EnvelopeResponse<Us
 };
 
 const getUserTickets = async (): Promise<EnvelopeResponse<UserTicket[]>> => {
-  return await api.get<UserTicket[]>(mainPath + "/tickets/my-tickets");
+  return await api.get<UserTicket[]>(mainPath + "/tickets");
 };
 
 const getUserTicketById = async (id: string): Promise<EnvelopeResponse<UserTicket>> => {
@@ -43,8 +44,22 @@ export interface ContactFormData {
   message: string;
 }
 
-const submitContactForm = async (data: ContactFormData): Promise<EnvelopeResponse<void>> => {
-  return await api.post(mainPath + "/contact", data);
+export interface ContactSubmission {
+  id: string;
+  name: string;
+  email: string;
+  phone?: string;
+  subject: string;
+  message: string;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+const submitContactForm = async (
+  data: ContactFormData
+): Promise<EnvelopeResponse<ContactSubmission>> => {
+  return await api.post<ContactSubmission>(mainPath + "/contact-submissions", data);
 };
 
 // FAQ - User side (read-only)

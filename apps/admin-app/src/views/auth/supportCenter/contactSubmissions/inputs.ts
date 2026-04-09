@@ -5,32 +5,38 @@ export const contactSubmissionColumns = (t: TFunction) => [
     name: "id",
     label: t("Auth.SupportCenter.Admin.ContactSubmissions.Columns.Id", "ID"),
     sortable: true,
+    excludeInForm: true,
   },
   {
     name: "name",
     label: t("Auth.SupportCenter.Admin.ContactSubmissions.Columns.Name", "Name"),
     sortable: true,
+    excludeInForm: true, // submitted by user, don't edit
   },
   {
     name: "email",
     label: t("Auth.SupportCenter.Admin.ContactSubmissions.Columns.Email", "Email"),
     sortable: true,
+    excludeInForm: true, // submitted by user, don't edit
   },
   {
     name: "phone",
     label: t("Auth.SupportCenter.Admin.ContactSubmissions.Columns.Phone", "Phone"),
     sortable: true,
+    excludeInForm: true, // submitted by user, don't edit
   },
   {
     name: "subject",
     label: t("Auth.SupportCenter.Admin.ContactSubmissions.Columns.Subject", "Subject"),
     sortable: true,
+    excludeInForm: true, // submitted by user, don't edit
   },
   {
     name: "message",
     label: t("Auth.SupportCenter.Admin.ContactSubmissions.Columns.Message", "Message"),
     type: "textarea",
     fullWidth: true,
+    excludeInForm: true, // submitted by user, don't edit
   },
   {
     name: "status",
@@ -61,5 +67,6 @@ export const contactSubmissionColumns = (t: TFunction) => [
     label: t("Auth.SupportCenter.Admin.ContactSubmissions.Columns.CreatedAt", "Submitted At"),
     sortable: true,
     type: "date",
+    excludeInForm: true,
   },
 ];

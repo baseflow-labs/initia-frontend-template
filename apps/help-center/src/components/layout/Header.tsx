@@ -44,6 +44,12 @@ export function Header() {
             FAQ
           </Link>
           <Link
+            href="/tickets"
+            className="text-sm font-medium text-gray-700 hover:text-primary-600 dark:text-gray-300"
+          >
+            {t("Navigation.Tickets", "Support Tickets")}
+          </Link>
+          <Link
             href="/contact"
             className="text-sm font-medium text-gray-700 hover:text-primary-600 dark:text-gray-300"
           >
@@ -93,6 +99,13 @@ export function Header() {
               onClick={() => setMobileMenuOpen(false)}
             >
               FAQ
+            </Link>
+            <Link
+              href="/tickets"
+              className="text-sm font-medium text-gray-700 hover:text-primary-600 dark:text-gray-300"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              {t("Navigation.Tickets", "Support Tickets")}
             </Link>
             <Link
               href="/contact"

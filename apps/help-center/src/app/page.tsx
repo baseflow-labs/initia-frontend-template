@@ -1,7 +1,8 @@
+import { AlertCircle, BookOpen, MessageSquare, Zap } from "lucide-react";
+
 import { SearchBar } from "@/components/search/SearchBar";
 import { SectionCard } from "@/components/sections/SectionCard";
 import { getSections } from "@/lib/api/sections";
-import { BookOpen, MessageSquare, Settings, Zap } from "lucide-react";
 
 export const revalidate = 3600; // Revalidate every hour
 
@@ -35,10 +36,10 @@ export default async function HomePage() {
           href="/faq"
         />
         <QuickLink
-          icon={<Settings className="h-6 w-6" />}
-          title="Account & Settings"
-          description="Manage your account"
-          href="/account"
+          icon={<AlertCircle className="h-6 w-6" />}
+          title="Support Tickets"
+          description="Check ticket status"
+          href="/tickets"
         />
         <QuickLink
           icon={<MessageSquare className="h-6 w-6" />}

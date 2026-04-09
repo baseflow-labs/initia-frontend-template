@@ -12,6 +12,7 @@ const ContactSubmissionsView = () => {
       inputs={contactSubmissionColumns(t)}
       singleItem={t("Auth.SupportCenter.Admin.ContactSubmissions.Submission", "Submission")}
       includeView
+      includeUpdate
       includeDelete
     />
   );

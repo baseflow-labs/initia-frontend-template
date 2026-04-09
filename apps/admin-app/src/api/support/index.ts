@@ -5,15 +5,12 @@ const mainPath = "/support";
 // Support Tickets
 export interface SupportTicket {
   id: string;
-  subject: string;
-  category: string;
-  priority: string;
+  type: string;
+  title: string;
+  urgent: boolean;
+  content: string;
   status: string;
-  userName: string;
-  userEmail: string;
-  description: string;
   adminNotes?: string;
-  assignedTo?: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -30,7 +27,7 @@ const updateTicket = async (
   id: string,
   data: Partial<SupportTicket>
 ): Promise<EnvelopeResponse<SupportTicket>> => {
-  return await api.put<SupportTicket>(mainPath + "/tickets/" + id, data);
+  return await api.patch<SupportTicket>(mainPath + "/tickets/" + id, data);
 };
 
 const deleteTicket = async (id: string): Promise<EnvelopeResponse<void>> => {
@@ -47,6 +44,7 @@ export interface ContactSubmission {
   message: string;
   status: string;
   createdAt: string;
+  updatedAt: string;
 }
 
 const getContactSubmissions = async (): Promise<EnvelopeResponse<ContactSubmission[]>> => {
@@ -57,6 +55,13 @@ const getContactSubmissionById = async (
   id: string
 ): Promise<EnvelopeResponse<ContactSubmission>> => {
   return await api.get<ContactSubmission>(mainPath + "/contact-submissions/" + id);
+};
+
+const updateContactSubmission = async (
+  id: string,
+  data: Partial<ContactSubmission>
+): Promise<EnvelopeResponse<ContactSubmission>> => {
+  return await api.patch<ContactSubmission>(mainPath + "/contact-submissions/" + id, data);
 };
 
 const deleteContactSubmission = async (id: string): Promise<EnvelopeResponse<void>> => {
@@ -221,6 +226,7 @@ export {
   // Contact Submissions
   getContactSubmissions,
   getContactSubmissionById,
+  updateContactSubmission,
   deleteContactSubmission,
 
   // FAQ

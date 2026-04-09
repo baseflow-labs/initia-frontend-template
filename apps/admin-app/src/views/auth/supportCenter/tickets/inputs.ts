@@ -5,59 +5,38 @@ export const ticketTableColumns = (t: TFunction) => [
     name: "id",
     label: t("Auth.SupportCenter.Admin.Tickets.Columns.Id", "Ticket ID"),
     sortable: true,
+    excludeInForm: true,
   },
   {
-    name: "subject",
-    label: t("Auth.SupportCenter.Admin.Tickets.Columns.Subject", "Subject"),
-    sortable: true,
-  },
-  {
-    name: "category",
-    label: t("Auth.SupportCenter.Admin.Tickets.Columns.Category", "Category"),
+    name: "type",
+    label: t("Auth.SupportCenter.Admin.Tickets.Columns.Type", "Type"),
     sortable: true,
     type: "select",
     options: [
       {
-        value: "technical",
-        label: t("Auth.SupportCenter.Admin.Tickets.Category.Technical", "Technical Issue"),
-      },
-      {
-        value: "billing",
-        label: t("Auth.SupportCenter.Admin.Tickets.Category.Billing", "Billing"),
+        value: "bug",
+        label: t("Auth.SupportCenter.Admin.Tickets.Type.Bug", "Bug Report"),
       },
       {
         value: "feature",
-        label: t("Auth.SupportCenter.Admin.Tickets.Category.Feature", "Feature Request"),
+        label: t("Auth.SupportCenter.Admin.Tickets.Type.Feature", "Feature Request"),
       },
       {
-        value: "other",
-        label: t("Auth.SupportCenter.Admin.Tickets.Category.Other", "Other"),
+        value: "general",
+        label: t("Auth.SupportCenter.Admin.Tickets.Type.General", "General Inquiry"),
       },
     ],
   },
   {
-    name: "priority",
-    label: t("Auth.SupportCenter.Admin.Tickets.Columns.Priority", "Priority"),
+    name: "title",
+    label: t("Auth.SupportCenter.Admin.Tickets.Columns.Title", "Title"),
     sortable: true,
-    type: "select",
-    options: [
-      {
-        value: "low",
-        label: t("Auth.SupportCenter.Admin.Tickets.Priority.Low", "Low"),
-      },
-      {
-        value: "medium",
-        label: t("Auth.SupportCenter.Admin.Tickets.Priority.Medium", "Medium"),
-      },
-      {
-        value: "high",
-        label: t("Auth.SupportCenter.Admin.Tickets.Priority.High", "High"),
-      },
-      {
-        value: "urgent",
-        label: t("Auth.SupportCenter.Admin.Tickets.Priority.Urgent", "Urgent"),
-      },
-    ],
+  },
+  {
+    name: "urgent",
+    label: t("Auth.SupportCenter.Admin.Tickets.Columns.Urgent", "Urgent"),
+    sortable: true,
+    type: "checkbox",
   },
   {
     name: "status",
@@ -84,18 +63,8 @@ export const ticketTableColumns = (t: TFunction) => [
     ],
   },
   {
-    name: "userName",
-    label: t("Auth.SupportCenter.Admin.Tickets.Columns.UserName", "User Name"),
-    sortable: true,
-  },
-  {
-    name: "userEmail",
-    label: t("Auth.SupportCenter.Admin.Tickets.Columns.UserEmail", "User Email"),
-    sortable: true,
-  },
-  {
-    name: "description",
-    label: t("Auth.SupportCenter.Admin.Tickets.Columns.Description", "Description"),
+    name: "content",
+    label: t("Auth.SupportCenter.Admin.Tickets.Columns.Content", "Description"),
     type: "textarea",
     fullWidth: true,
   },
@@ -106,20 +75,17 @@ export const ticketTableColumns = (t: TFunction) => [
     fullWidth: true,
   },
   {
-    name: "assignedTo",
-    label: t("Auth.SupportCenter.Admin.Tickets.Columns.AssignedTo", "Assigned To"),
-    type: "text",
-  },
-  {
     name: "createdAt",
     label: t("Auth.SupportCenter.Admin.Tickets.Columns.CreatedAt", "Created At"),
     sortable: true,
     type: "date",
+    excludeInForm: true,
   },
   {
     name: "updatedAt",
     label: t("Auth.SupportCenter.Admin.Tickets.Columns.UpdatedAt", "Updated At"),
     sortable: true,
     type: "date",
+    excludeInForm: true,
   },
 ];
