@@ -421,7 +421,22 @@
           "Title": "Security"
         },
         "System": {
-          "Title": "System"
+          "BoxedWidth": "Boxed Width",
+          "DarkMode": "Dark Mode",
+          "DateFormat": "Date Format",
+          "DefaultLanguage": "Default Language",
+          "DeleteAccount": "Delete Account",
+          "FullWidth": "Full Width",
+          "HorizontalLayout": "Horizontal Layout",
+          "LayoutMode": "Layout Mode",
+          "LayoutWidth": "Layout Width",
+          "LightMode": "Light Mode",
+          "PrimaryColor": "Primary Color",
+          "SecondaryColor": "Secondary Color",
+          "Theme": "Theme",
+          "Timezone": "Timezone",
+          "Title": "System",
+          "VerticalLayout": "Vertical Layout"
         },
         "Title": "User Settings"
       }

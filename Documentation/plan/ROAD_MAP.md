@@ -195,18 +195,18 @@
 
 ### Sprint 23 — Themes + layout switchers (26 Mar - 8 Apr, 2026)
 
-- [ ] Dark/light modes with switcher
-- [ ] Build App UI Customizer in settings (view exist @ settings => system but to add new features) with options...
-  - [ ] Color theme switcher (primary/secondary + neutral surfaces)
-  - [ ] Horizontal/vertical layout switcher
-  - [ ] Boxed/full-width layout option
-  - [ ] Persist UI preferences (per user in localStorage)
-- [ ] Add User settings of layout (also in system settings)
-  - [ ] timezone
-  - [ ] date & time format
-  - [ ] default language
-  - [ ] delete account
-- [ ] Floating Speed-dial action button (configurable per page/service + global options)
+- [x] Dark/light modes with switcher
+- [x] Build App UI Customizer in settings (view exist @ settings => system but to add new features) with options...
+  - [x] Color theme switcher (primary/secondary + neutral surfaces)
+  - [x] Horizontal/vertical layout switcher
+  - [x] Boxed/full-width layout option
+  - [x] Persist UI preferences (per user in localStorage)
+- [x] Add User settings of layout (also in system settings)
+  - [x] timezone
+  - [x] date & time format
+  - [x] default language
+  - [x] delete account
+- [x] Floating Speed-dial action button (configurable per page/service + global options)
 - [ ] Command palette (global shortcut to open + quick navigation + actions)
 - [ ] Per-page query presets save (search inputs, filters, column visibility)
 - [ ] Form draft auto-save (localStorage) + resume form filling + reset upon success submission

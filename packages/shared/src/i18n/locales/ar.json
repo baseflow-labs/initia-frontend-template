@@ -421,7 +421,22 @@
           "Title": "الأمان"
         },
         "System": {
-          "Title": "النظام"
+          "BoxedWidth": "عرض محصور",
+          "DarkMode": "الوضع الداكن",
+          "DateFormat": "صيغة التاريخ",
+          "DefaultLanguage": "اللغة الافتراضية",
+          "DeleteAccount": "حذف الحساب",
+          "FullWidth": "عرض كامل",
+          "HorizontalLayout": "تخطيط أفقي",
+          "LayoutMode": "نمط التخطيط",
+          "LayoutWidth": "عرض التخطيط",
+          "LightMode": "الوضع الفاتح",
+          "PrimaryColor": "اللون الأساسي",
+          "SecondaryColor": "اللون الثانوي",
+          "Theme": "المظهر",
+          "Timezone": "المنطقة الزمنية",
+          "Title": "النظام",
+          "VerticalLayout": "تخطيط عمودي"
         },
         "Title": "إعدادات المستخدم"
       }

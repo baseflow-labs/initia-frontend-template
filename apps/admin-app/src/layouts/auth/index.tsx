@@ -10,6 +10,10 @@ import {
   faPaintBrush,
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
+import CommandPalette, { type Command } from "@initia/shared/ui/components/command-palette";
+import FloatingSpeedDial, {
+  type SpeedDialAction,
+} from "@initia/shared/ui/components/floating-speed-dial";
 import { TopbarSearchOption } from "@initia/shared/ui/components/search/topbarSearch";
 import MessagingView from "@initia/shared/ui/messaging";
 import NotificationsView from "@initia/shared/ui/notifications";
@@ -56,6 +60,7 @@ const AuthLayout = () => {
   const isPc = width > 992;
 
   const [collapsed, setCollapsed] = useState(true);
+  const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
 
   const authRoutes: AuthRoute[] = [
     {
@@ -144,6 +149,47 @@ const AuthLayout = () => {
 
   const toggleSidebar = () => setCollapsed((current) => !current);
 
+  // Setup command palette commands
+  const commands: Command[] = authRoutes
+    .filter((route) => route.showInNav || route.fixed)
+    .map((route) => ({
+      id: route.route,
+      name: route.name,
+      action: () => {
+        navigate(route.route);
+        setIsCommandPaletteOpen(false);
+      },
+      icon: route.icon ? "fas fa-arrow-right" : undefined,
+    }));
+
+  // Setup floating speed dial actions
+  const speedDialActions: SpeedDialAction[] = [
+    {
+      id: "dashboard",
+      label: "Dashboard",
+      icon: "fas fa-home",
+      onClick: () => navigate("/dashboard"),
+    },
+    {
+      id: "users",
+      label: "Users",
+      icon: "fas fa-users",
+      onClick: () => navigate("/users"),
+    },
+    {
+      id: "settings",
+      label: "Settings",
+      icon: "fas fa-cog",
+      onClick: () => navigate("/metadata"),
+    },
+    {
+      id: "messages",
+      label: "Messages",
+      icon: "fas fa-envelope",
+      onClick: () => navigate("/messaging"),
+    },
+  ];
+
   useEffect(() => {
     applyRouteChanges(t, authRoutes, location.pathname);
   }, [location.pathname]);
@@ -224,6 +270,20 @@ const AuthLayout = () => {
           </div>
 
           <FilePreviewModal />
+
+          <CommandPalette
+            commands={commands}
+            isOpen={isCommandPaletteOpen}
+            onClose={() => setIsCommandPaletteOpen(false)}
+            openShortcut="Ctrl+K"
+          />
+
+          <FloatingSpeedDial
+            actions={speedDialActions}
+            position="bottom-right"
+            direction="up"
+            mainIcon="fas fa-plus"
+          />
 
           <AuthFooter />
 

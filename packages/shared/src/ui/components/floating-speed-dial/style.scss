@@ -1,0 +1,214 @@
+.floating-speed-dial {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  z-index: 999;
+
+  &--bottom-right {
+    bottom: 2rem;
+    right: 2rem;
+  }
+
+  &--bottom-left {
+    bottom: 2rem;
+    left: 2rem;
+  }
+
+  &--top-right {
+    top: 2rem;
+    right: 2rem;
+  }
+
+  &--top-left {
+    top: 2rem;
+    left: 2rem;
+  }
+
+  &--up .floating-speed-dial__actions {
+    flex-direction: column-reverse;
+  }
+
+  &--down .floating-speed-dial__actions {
+    flex-direction: column;
+  }
+
+  &--left .floating-speed-dial__actions {
+    flex-direction: row-reverse;
+  }
+
+  &--right .floating-speed-dial__actions {
+    flex-direction: row;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 0.5rem;
+    transition:
+      opacity 0.3s ease,
+      visibility 0.3s ease;
+    flex-direction: column-reverse; // Default to up direction
+  }
+
+  &__action {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--theme-primary, #1e4c9d);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1000;
+    padding: 0;
+
+    &:hover {
+      background-color: var(--theme-secondary, #dfe5ea);
+      transform: scale(1.1);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1001;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    line-height: 1;
+    font-size: 1.2rem;
+  }
+
+  &__tooltip {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    bottom: 100%;
+    margin-bottom: 0.5rem;
+    z-index: 10002;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &__action:hover &__tooltip {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  &__main {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--theme-primary, #1e4c9d);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    font-weight: bold;
+    z-index: 1002;
+    padding: 0;
+    position: relative;
+
+    &:hover {
+      background-color: var(--theme-secondary, #dfe5ea);
+      transform: scale(1.1) rotate(45deg);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      z-index: 1003;
+    }
+
+    &:active {
+      transform: scale(0.95) rotate(45deg);
+    }
+  }
+}
+
+// Dark theme support
+:root[data-theme="dark"] {
+  .floating-speed-dial {
+    &__action {
+      background-color: var(--theme-primary, #4a90e2);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+
+      &:hover {
+        background-color: var(--theme-secondary, #424242);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
+      }
+    }
+
+    &__main {
+      background-color: var(--theme-primary, #4a90e2);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+
+      &:hover {
+        background-color: var(--theme-secondary, #424242);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+      }
+    }
+
+    &__tooltip {
+      background-color: rgba(255, 255, 255, 0.9);
+      color: #000;
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .floating-speed-dial {
+    &--bottom-right,
+    &--top-right {
+      right: 1rem;
+    }
+
+    &--bottom-left,
+    &--top-left {
+      left: 1rem;
+    }
+
+    &--bottom-right,
+    &--bottom-left {
+      bottom: 1rem;
+    }
+
+    &--top-right,
+    &--top-left {
+      top: 1rem;
+    }
+
+    &__main {
+      width: 48px;
+      height: 48px;
+      font-size: 1.25rem;
+    }
+
+    &__action {
+      width: 40px;
+      height: 40px;
+      font-size: 1rem;
+    }
+  }
+}
