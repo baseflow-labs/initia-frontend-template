@@ -12,4 +12,21 @@ const getFactors = async () => {
   return await api.get(mainPath + `/factors`);
 };
 
-export { getAll, getFactors };
+const getMyRolePermissions = async () => {
+  return await api.get(mainPath + "/my-role-permissions");
+};
+
+const create = async (data: {
+  action: string;
+  table: string;
+  role: string;
+  description?: string;
+}) => {
+  return await api.post(mainPath, data);
+};
+
+const remove = async (id: string) => {
+  return await api.delete(mainPath, { params: { id } });
+};
+
+export { getAll, getFactors, getMyRolePermissions, create, remove };

@@ -1,9 +1,15 @@
 import type { UserProps } from "@initia/shared/types/auth";
 
+export interface PermissionEntry {
+  action: string;
+  table: string;
+}
+
 export interface AuthState {
   accessToken: string | null;
   refreshToken: string | null;
   user: UserProps;
+  permissions: PermissionEntry[];
 }
 
 export type AuthAction =
@@ -16,7 +22,8 @@ export type AuthAction =
       resp: { accessToken: string; refreshToken: string };
     }
   | { type: "logout"; resp?: string }
-  | { type: "updateUserStatus"; resp?: string };
+  | { type: "updateUserStatus"; resp?: string }
+  | { type: "setPermissions"; resp: PermissionEntry[] };
 
 const initialState: AuthState = {
   accessToken: ["null", "undefined", ""].includes(localStorage.getItem("accessToken") || "")
@@ -26,6 +33,7 @@ const initialState: AuthState = {
     ? null
     : localStorage.getItem("refreshToken"),
   user: localStorage.getItem("user")?.length ? JSON.parse(localStorage.getItem("user")!) : {},
+  permissions: [],
 };
 
 const auth = (state: AuthState = initialState, action: AuthAction): AuthState => {
@@ -41,6 +49,7 @@ const auth = (state: AuthState = initialState, action: AuthAction): AuthState =>
         accessToken: action.resp.accessToken,
         refreshToken: action.resp.refreshToken,
         user: action.resp.user,
+        permissions: [],
       };
     }
 
@@ -54,6 +63,7 @@ const auth = (state: AuthState = initialState, action: AuthAction): AuthState =>
         accessToken: action.resp.accessToken,
         refreshToken: action.resp.refreshToken,
         user: state.user,
+        permissions: state.permissions,
       };
     }
 
@@ -68,6 +78,7 @@ const auth = (state: AuthState = initialState, action: AuthAction): AuthState =>
         accessToken: null,
         refreshToken: null,
         user: { role: "" },
+        permissions: [],
       };
     }
 
@@ -81,6 +92,13 @@ const auth = (state: AuthState = initialState, action: AuthAction): AuthState =>
       return {
         ...state,
         user: newUser,
+      };
+    }
+
+    case "setPermissions": {
+      return {
+        ...state,
+        permissions: action.resp,
       };
     }
 

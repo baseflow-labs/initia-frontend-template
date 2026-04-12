@@ -5,9 +5,11 @@ import { useDispatch } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router";
 
 import * as MetadataApi from "./api/metadata";
+import * as PermissionsApi from "./api/users/permissions";
 import AuthLayout from "./layouts/auth";
 import PublicLayout from "./layouts/public";
 import { setMetadata } from "./store/actions/settings";
+import { setPermissions } from "./store/actions/auth";
 import { useAppSelector } from "./store/hooks";
 import { apiCatchGlobalHandler } from "./utils/function";
 import { useDirectionHandler } from "./utils/useDirectionHandler";
@@ -42,6 +44,17 @@ const App = () => {
       })
       .catch(apiCatchGlobalHandler);
   }, []);
+
+  // Fetch and store the current user's role permissions whenever they log in
+  useEffect(() => {
+    if (!isAuthenticated) return;
+    PermissionsApi.getMyRolePermissions()
+      .then((res: Record<string, unknown>) => {
+        const perms = (res?.payload as { action: string; table: string }[]) ?? [];
+        dispatch(setPermissions(perms.map(({ action, table }) => ({ action, table }))));
+      })
+      .catch(apiCatchGlobalHandler);
+  }, [isAuthenticated]);
 
   useEffect(() => {
     const onError = (event: ErrorEvent) => {

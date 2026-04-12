@@ -34,6 +34,7 @@ import DashboardNavbar from "./navs/navbar";
 import OffCanvasNav from "./navs/offcanvasNav";
 import OffCanvasTools from "./navs/offcanvasTools";
 import Sidebar from "./navs/sidebarNav";
+import { useAppSelector } from "../../store/hooks";
 
 interface AuthRoute {
   name: string;
@@ -43,6 +44,12 @@ interface AuthRoute {
   icon: IconProp;
   fixed?: boolean;
   subRoute?: AuthRoute[];
+  /**
+   * Optional permission gate. When set, the route is only rendered (and shown in
+   * navigation) when the logged-in user's role has the matching permission.
+   * Admins always pass through regardless of this field.
+   */
+  permission?: { table: string; action: string };
 }
 
 const AuthLayout = () => {
@@ -54,6 +61,18 @@ const AuthLayout = () => {
 
   const [collapsed, setCollapsed] = useState(true);
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
+
+  const { user, permissions } = useAppSelector((state) => state.auth);
+  const isAdmin = user?.role === "admin";
+
+  /** Returns true when the route is accessible by the current user */
+  const canAccess = (route: AuthRoute) => {
+    if (!route.permission) return true;
+    if (isAdmin) return true;
+    return permissions.some(
+      (p) => p.table === route.permission!.table && p.action === route.permission!.action
+    );
+  };
 
   const authRoutes: AuthRoute[] = [
     {
@@ -166,18 +185,17 @@ const AuthLayout = () => {
     },
   ];
 
+  // Filter routes the current user can access
+  const accessibleRoutes = authRoutes.filter(canAccess);
+
   const showSidebar = !location.pathname.includes("apply");
 
-  // const filteredRoutes = authRoutes.filter(({ users }) =>
-  //   users.includes(user.role)
-  // );
-
-  const filteredFixedRoutes = authRoutes.filter(({ fixed, showInNav }) => fixed && showInNav);
+  const filteredFixedRoutes = accessibleRoutes.filter(({ fixed, showInNav }) => fixed && showInNav);
 
   const toggleSidebar = () => setCollapsed((current) => !current);
 
   // Setup command palette commands
-  const commands: Command[] = authRoutes
+  const commands: Command[] = accessibleRoutes
     .filter((route) => route.showInNav || route.fixed)
     .map((route) => ({
       id: route.route,
@@ -218,10 +236,10 @@ const AuthLayout = () => {
   ];
 
   useEffect(() => {
-    applyRouteChanges(t, authRoutes, location.pathname);
+    applyRouteChanges(t, accessibleRoutes, location.pathname);
   }, [location.pathname]);
 
-  const searchOptions: TopbarSearchOption[] = authRoutes
+  const searchOptions: TopbarSearchOption[] = accessibleRoutes
     .filter(({ route }) => !route.includes(":"))
     .map(({ name, route }) => ({
       label: name,
@@ -236,7 +254,7 @@ const AuthLayout = () => {
       {/* <DemoWarning /> */}
       <OffCanvasNav
         fixedRoutes={filteredFixedRoutes}
-        routes={authRoutes.filter(({ showInNav, fixed }) => showInNav && !fixed)}
+        routes={accessibleRoutes.filter(({ showInNav, fixed }) => showInNav && !fixed)}
       />
 
       <main className="d-flex pb-3 min-vh-100">
@@ -253,7 +271,7 @@ const AuthLayout = () => {
               collapsed={collapsed}
               toggleSidebar={toggleSidebar}
               fixedRoutes={filteredFixedRoutes}
-              routes={authRoutes.filter(({ showInNav, fixed }) => showInNav && !fixed)}
+              routes={accessibleRoutes.filter(({ showInNav, fixed }) => showInNav && !fixed)}
             />
           </div>
         )}
@@ -288,7 +306,7 @@ const AuthLayout = () => {
             />
 
             <Routes>
-              {authRoutes.map(({ route, view }, i) => (
+              {accessibleRoutes.map(({ route, view }, i) => (
                 <Route path={route} element={view} key={i} />
               ))}
 

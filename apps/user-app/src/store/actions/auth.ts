@@ -1,4 +1,5 @@
 import type { AuthResponse, RefreshTokenResponse } from "@initia/shared/types/auth";
+import type { PermissionEntry } from "../reducers/auth";
 
 export const login = (resp: AuthResponse) => ({
   type: "login" as const,
@@ -28,4 +29,9 @@ export const logout = (resp?: string) => ({
 
 export const updateUserStatus = () => ({
   type: "updateUserStatus" as const,
+});
+
+export const setPermissions = (resp: PermissionEntry[]) => ({
+  type: "setPermissions" as const,
+  resp,
 });

@@ -12,4 +12,8 @@ const getFactors = async () => {
   return await api.get(mainPath + `/factors`);
 };
 
-export { getAll, getFactors };
+const getMyRolePermissions = async () => {
+  return await api.get(mainPath + "/my-role-permissions");
+};
+
+export { getAll, getFactors, getMyRolePermissions };
