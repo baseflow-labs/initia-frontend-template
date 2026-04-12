@@ -9,9 +9,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useRef, useState } from "react";
 
-const LANDING_PAGE_URL =
-  ((import.meta as Record<string, unknown>).env?.VITE_APP_LANDING_URL as string | undefined) ||
-  "http://localhost:3001";
+const LANDING_PAGE_URL = import.meta.env.VITE_APP_LANDING_URL || "http://localhost:3001";
 
 type ViewportMode = "desktop" | "tablet" | "mobile";
 
