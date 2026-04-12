@@ -4,13 +4,19 @@ import { capitalizeSentence, covertCamelCaseToSentence } from "@initia/shared/ut
 import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+interface Role {
+  id: string;
+  name: string;
+}
+
 interface Factors {
   actions: string[];
-  roles: { name: string }[];
+  roles: Role[];
   tables: string[];
 }
 
 interface Permission {
+  id?: string;
   action: string;
   role: { name: string };
   table: string;
@@ -21,16 +27,55 @@ const UserRolePermissionsView = () => {
   const { t } = useTranslation();
   const [factors, setFactors] = useState<Factors>({ actions: [], roles: [], tables: [] });
   const [permissions, setPermissions] = useState<Permission[]>([]);
+  const [originalPermissions, setOriginalPermissions] = useState<Permission[]>([]);
+  const [isSaving, setIsSaving] = useState(false);
 
   useLayoutEffect(() => {
-    PermissionsApi.getAll().then((res: Record<string, unknown>) =>
-      setPermissions(res?.payload as Permission[])
-    );
+    PermissionsApi.getAll().then((res: Record<string, unknown>) => {
+      const fetched = (res?.payload as Permission[]) ?? [];
+      setPermissions(fetched);
+      setOriginalPermissions(fetched);
+    });
 
     PermissionsApi.getFactors().then((res: Record<string, unknown>) =>
       setFactors(res?.payload as Factors)
     );
   }, []);
+
+  const onSave = async () => {
+    setIsSaving(true);
+    try {
+      const added = permissions.filter(
+        (p) =>
+          !originalPermissions.some(
+            (op) => op.action === p.action && op.table === p.table && op.role.name === p.role.name
+          )
+      );
+
+      const removed = originalPermissions.filter(
+        (op) =>
+          !permissions.some(
+            (p) => p.action === op.action && p.table === op.table && p.role.name === op.role.name
+          )
+      );
+
+      await Promise.all([
+        ...added.map((p) => {
+          const role = factors.roles.find((r) => r.name === p.role.name);
+          return PermissionsApi.create({ action: p.action, table: p.table, role: role!.id });
+        }),
+        ...removed.map((p) => p.id && PermissionsApi.remove(p.id)),
+      ]);
+
+      // re-fetch fresh permissions after saving so IDs are up to date
+      const res = await PermissionsApi.getAll();
+      const fresh = ((res as Record<string, unknown>)?.payload as Permission[]) ?? [];
+      setPermissions(fresh);
+      setOriginalPermissions(fresh);
+    } finally {
+      setIsSaving(false);
+    }
+  };
 
   return (
     <Fragment>
@@ -105,13 +150,8 @@ const UserRolePermissionsView = () => {
       </table>
 
       <div className="text-end mt-4">
-        <Button
-        // onClick={async () => {
-        //   await PermissionsApi.updateAll({ permissions });
-        //   alert(t("Auth.Settings.Admin.RolePermissions.Updated"));
-        // }}
-        >
-          {t("Global.Form.Labels.Save")}
+        <Button onClick={onSave} disabled={isSaving}>
+          {isSaving ? t("Global.Labels.Saving", "Saving…") : t("Global.Form.Labels.Save")}
         </Button>
       </div>
     </Fragment>

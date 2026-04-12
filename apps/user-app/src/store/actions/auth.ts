@@ -1,4 +1,5 @@
 import type { AuthResponse, RefreshTokenResponse } from "@initia/shared/types/auth";
+
 import type { PermissionEntry } from "../reducers/auth";
 
 export const login = (resp: AuthResponse) => ({
