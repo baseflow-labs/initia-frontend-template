@@ -19,8 +19,20 @@ export interface Notification {
   title: string;
   message: string;
   service: string;
+  channel?: string;
   important?: boolean;
   isRead?: boolean;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface SendNotificationPayload {
+  title: string;
+  message: string;
+  service: string;
+  channel: string;
+  important?: boolean;
+  targetType?: "user" | "role" | "all";
+  targetUserId?: string;
+  targetRole?: string;
 }

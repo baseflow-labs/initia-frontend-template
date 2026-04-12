@@ -43,6 +43,7 @@ import BackupSettingsView from "@/views/auth/systemSettings/backup";
 import SupportCenterManagementView from "@/views/auth/supportCenter";
 import LandingPageManagement from "@/views/auth/landingPage";
 import DashboardView from "@/views/auth/dashboard";
+import SendNotificationsView from "@/views/auth/notifications/send";
 
 interface AuthRoute {
   name: string;
@@ -140,6 +141,11 @@ const AuthLayout = () => {
       name: t("Auth.Notifications.Title"),
       route: "/notifications",
       view: <NotificationsView />,
+    },
+    {
+      name: t("Auth.Notifications.SendTitle", "Send Notification"),
+      route: "/notifications/send",
+      view: <SendNotificationsView />,
     },
     {
       name: t("Auth.Messaging.Title"),
