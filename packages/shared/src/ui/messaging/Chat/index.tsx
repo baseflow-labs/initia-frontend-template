@@ -18,9 +18,17 @@ interface Props {
   setComposer: (value: string) => void;
   sendMessage: () => void;
   singleChat?: boolean;
+  myId?: string;
 }
 
-const MessagingChatView = ({ active, composer, setComposer, sendMessage, singleChat }: Props) => {
+const MessagingChatView = ({
+  active,
+  composer,
+  setComposer,
+  sendMessage,
+  singleChat,
+  myId,
+}: Props) => {
   return (
     <div className="card shadow-sm h-100">
       {/* Chat Header */}
@@ -35,7 +43,7 @@ const MessagingChatView = ({ active, composer, setComposer, sendMessage, singleC
         className="card-body"
         style={{ height: singleChat ? "70vh" : "55vh", overflowY: "auto" }}
       >
-        {active ? <MessagingChatBodyView active={active} /> : null}
+        {active ? <MessagingChatBodyView active={active} myId={myId ?? ""} /> : null}
       </div>
 
       <div className="card-footer bg-white">

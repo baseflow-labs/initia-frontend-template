@@ -1,28 +1,56 @@
+import type { Conversation, ConversationMessage } from "../../types/messaging";
 import api, { EnvelopeResponse } from "..";
 
 const mainPath = "/userMessaging";
 
-const getConversations = async <TPayload>(params: object): Promise<EnvelopeResponse<TPayload>> => {
-  return await api.get<TPayload>(mainPath, params);
+const getConversations = async (
+  userId: string,
+  cursor?: string
+): Promise<EnvelopeResponse<{ items: Conversation[]; nextCursor?: string }>> => {
+  return await api.get<{ items: Conversation[]; nextCursor?: string }>(mainPath, {
+    params: { userId, ...(cursor ? { cursor } : {}) },
+  });
 };
 
-const createChannel = async <TPayload>(
-  participantIds: string[]
-): Promise<EnvelopeResponse<TPayload>> => {
-  return await api.post<TPayload>(mainPath + "/direct", { participantIds });
+const createDirect = async (participantIds: string[]): Promise<EnvelopeResponse<Conversation>> => {
+  return await api.post<Conversation>(mainPath + "/direct", { participantIds });
 };
 
-const getMessages = async <TPayload>(
-  conversationId: string
-): Promise<EnvelopeResponse<TPayload>> => {
-  return await api.get<TPayload>(`${mainPath}/${conversationId}/messages`);
+const getMessages = async (
+  conversationId: string,
+  cursor?: string
+): Promise<EnvelopeResponse<{ items: ConversationMessage[]; nextCursor?: string }>> => {
+  return await api.get<{ items: ConversationMessage[]; nextCursor?: string }>(
+    `${mainPath}/${conversationId}/messages`,
+    cursor ? { params: { cursor } } : undefined
+  );
 };
 
-const sendMessage = async <TPayload>(
-  id: string,
-  messageData: object
-): Promise<EnvelopeResponse<TPayload>> => {
-  return await api.post<TPayload>(`${mainPath}/${id}/message`, messageData);
+const sendMessage = async (
+  conversationId: string,
+  messageData: { senderId: string; text: string; parentMessageId?: string }
+): Promise<EnvelopeResponse<ConversationMessage>> => {
+  return await api.post<ConversationMessage>(`${mainPath}/${conversationId}/messages`, messageData);
 };
 
-export { createChannel, getConversations, getMessages, sendMessage };
+const markRead = async (
+  conversationId: string,
+  userId: string,
+  upToMessageId: string
+): Promise<EnvelopeResponse<null>> => {
+  return await api.post<null>(`${mainPath}/${conversationId}/read`, {
+    userId,
+    upToMessageId,
+  });
+};
+
+const getUnreadCount = async (
+  conversationId: string,
+  userId: string
+): Promise<EnvelopeResponse<{ count: number }>> => {
+  return await api.get<{ count: number }>(`${mainPath}/${conversationId}/unread-count`, {
+    params: { userId },
+  });
+};
+
+export { getConversations, createDirect, getMessages, sendMessage, markRead, getUnreadCount };
