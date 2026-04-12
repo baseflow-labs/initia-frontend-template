@@ -1,5 +1,12 @@
 import * as NotificationApi from "@initia/shared/api/notifications";
+import type { Notification as AppNotification } from "@initia/shared/types/notifications";
 import tempLogo from "@initia/shared/assets/images/brand/logo.png";
+import {
+  connectNotificationsSocket,
+  onNotificationReceived,
+  onNotificationReconnect,
+} from "@initia/shared/socket/notifications";
+
 import LangButton from "@initia/shared/ui/components/button/lang";
 import Button from "@initia/shared/ui/components/core/button";
 import DropdownComp from "@initia/shared/ui/components/dropdown";
@@ -16,24 +23,13 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
 import { useAppSelector } from "../../../store/hooks";
 import { logout } from "../../../store/actions/auth";
-
-export interface Notification {
-  id: string;
-  title: string;
-  message: string;
-  service: string;
-  important?: boolean;
-  isRead?: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
 
 const DashboardNavbar = ({
   searchOptions,
@@ -48,21 +44,50 @@ const DashboardNavbar = ({
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const [notifications, setNotification] = useState<Notification[]>([]);
+  const [notifications, setNotification] = useState<AppNotification[]>([]);
   const { user } = useAppSelector((state) => state.auth);
   const { logo } = useAppSelector((state) => state.settings);
 
-  useLayoutEffect(() => {
-    NotificationApi.get()
+  useEffect(() => {
+    NotificationApi.getUnreadTop(3)
       .then((res) => {
-        setNotification(
-          res.payload
-            ?.filter((a: Notification) => !a.isRead)
-            .sort((a: Notification, b: Notification) => (a.createdAt > b.createdAt ? -1 : 1)) || []
-        );
+        setNotification(res.payload || []);
       })
       .catch(apiCatchGlobalHandler);
   }, []);
+
+  useEffect(() => {
+    if (!user?.id) return;
+
+    const accessToken = localStorage.getItem("accessToken");
+    if (!accessToken || ["null", "undefined", ""].includes(accessToken)) return;
+
+    connectNotificationsSocket(accessToken);
+
+    const offNew = onNotificationReceived((notification) => {
+      setNotification((prev) => {
+        if (notification.isRead) return prev;
+        if (prev.some((n) => n.id === notification.id)) return prev;
+
+        return [notification, ...prev]
+          .sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1))
+          .slice(0, 3);
+      });
+    });
+
+    const offReconnect = onNotificationReconnect(() => {
+      NotificationApi.getUnreadTop(3)
+        .then((res) => setNotification(res.payload || []))
+        .catch(apiCatchGlobalHandler);
+    });
+
+    return () => {
+      offNew();
+      offReconnect();
+    };
+  }, [user?.id]);
+
+  const unreadCount = useMemo(() => notifications.filter((n) => !n.isRead).length, [notifications]);
 
   // const toggleTheme = () => {
   //   const current = document.documentElement.getAttribute("data-bs-theme");
@@ -106,11 +131,11 @@ const DashboardNavbar = ({
 
                     <div
                       className={`position-absolute top-0 translate-middle badge rounded-circle bg-${
-                        notifications.filter((n) => !n.isRead).length ? "danger" : "dark"
+                        unreadCount ? "danger" : "dark"
                       } py-1`}
                       style={{ fontSize: "0.75rem" }}
                     >
-                      {notifications.filter((n) => !n.isRead).length}
+                      {unreadCount}
                     </div>
                   </div>
                 }
@@ -123,6 +148,7 @@ const DashboardNavbar = ({
                           onClick: () => {
                             navigate("/" + service);
                             NotificationApi.markAsRead(n).catch(apiCatchGlobalHandler);
+                            setNotification((prev) => prev.filter((i) => i.id !== n.id));
                           },
                           label: (
                             <div

@@ -32,3 +32,8 @@
   - [ ] Users
   - [ ] Roles
   - [ ] Permissions
+- [ ] Landing page contents
+- [ ] Notifications
+  - [ ] Send
+  - [ ] List
+  - [ ] Push

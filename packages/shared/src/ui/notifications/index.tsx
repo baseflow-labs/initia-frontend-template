@@ -1,7 +1,7 @@
 import { faCircle, faEnvelope, faEnvelopeOpen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import * as NotificationApi from "../../api/notifications";
@@ -10,6 +10,11 @@ import PageTemplate from "../../ui/layouts/auth/pages/pageTemplate";
 import { viewDayDateFormat, viewTimeFormat } from "../../utils/consts";
 import { apiCatchGlobalHandler } from "../../utils/function";
 import type { Notification } from "../../types/notifications";
+import {
+  connectNotificationsSocket,
+  onNotificationReceived,
+  onNotificationReconnect,
+} from "../../socket/notifications";
 
 import NotificationsHeaderView from "./Header";
 
@@ -19,8 +24,10 @@ const NotificationsView = () => {
   const [notifications, setNotification] = useState<Notification[]>([]);
   const [filter, setFiler] = useState<string>("all");
 
-  const getData = (params?: object) => {
-    NotificationApi.get(params)
+  const accessToken = localStorage.getItem("accessToken");
+
+  const getData = () => {
+    NotificationApi.getMy()
       .then((res) => {
         setNotification(
           res.payload.sort((a: Notification, b: Notification) =>
@@ -31,9 +38,37 @@ const NotificationsView = () => {
       .catch(apiCatchGlobalHandler);
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     getData();
-  }, [filter]);
+  }, []);
+
+  useEffect(() => {
+    if (!accessToken || ["null", "undefined", ""].includes(accessToken)) return;
+
+    connectNotificationsSocket(accessToken);
+
+    const offNew = onNotificationReceived((notification) => {
+      setNotification((prev) => {
+        if (prev.some((n) => n.id === notification.id)) return prev;
+        return [notification, ...prev].sort((a, b) => (a.createdAt > b.createdAt ? -1 : 1));
+      });
+    });
+
+    const offReconnect = onNotificationReconnect(() => {
+      getData();
+    });
+
+    return () => {
+      offNew();
+      offReconnect();
+    };
+  }, [accessToken]);
+
+  const visibleNotifications = useMemo(() => {
+    if (filter === "unread") return notifications.filter((n) => !n.isRead);
+    if (filter === "important") return notifications.filter((n) => n.important);
+    return notifications;
+  }, [filter, notifications]);
 
   const getTypeBadgeClass = (type: string) => {
     switch (type) {
@@ -52,7 +87,11 @@ const NotificationsView = () => {
     {
       label: t("Auth.Notifications.MarkAllRead"),
       onClick: () => {
-        NotificationApi.markAllAsRead(notifications);
+        NotificationApi.markAllAsRead(notifications)
+          .then(() => {
+            setNotification((current) => current.map((n) => ({ ...n, isRead: true })));
+          })
+          .catch(apiCatchGlobalHandler);
       },
     },
     {
@@ -87,7 +126,7 @@ const NotificationsView = () => {
         <NotificationsHeaderView filter={filter} setFilter={setFiler} />
       </div>
 
-      {notifications.length === 0 && (
+      {visibleNotifications.length === 0 && (
         <div className="text-center py-5">
           <div className="mb-2">
             <span className="badge bg-light text-muted rounded-pill px-3 py-2">
@@ -104,9 +143,9 @@ const NotificationsView = () => {
       )}
 
       {/* List of notifications */}
-      {notifications.length > 0 && (
+      {visibleNotifications.length > 0 && (
         <ul className="list-group list-group-flush">
-          {notifications.map((n) => (
+          {visibleNotifications.map((n) => (
             <li
               key={n.id}
               className={

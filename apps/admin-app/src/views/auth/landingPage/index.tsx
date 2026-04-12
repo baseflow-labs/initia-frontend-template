@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 
 import LandingPageManagementBuilder from "./builder";
 import LandingPageManagementPreview from "./preview";
+
 import type { LandingPage } from "@/api/landingContent";
 
 const LandingPageManagement = () => {

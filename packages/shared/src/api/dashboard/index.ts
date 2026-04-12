@@ -1,6 +1,5 @@
 import api, { EnvelopeResponse } from "..";
-
-import type { Notification } from "@/layouts/auth/navs/navbar";
+import type { Notification } from "../../types/notifications";
 
 const mainPath = "/overview";
 
