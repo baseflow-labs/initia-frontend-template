@@ -9,6 +9,10 @@ import { locales } from "@/i18n/config";
 import "@initia/shared/styles/index.scss";
 import "@/styles/rtl.css";
 
+// Always SSR — content driven by the backend
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export async function generateMetadata({ params }: RootLayoutProps): Promise<Metadata> {
   const { locale } = await params;
   const identity = await landingApi.getSystemMetadata(locale);

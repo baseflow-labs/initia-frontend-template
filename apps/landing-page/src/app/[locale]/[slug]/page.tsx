@@ -4,30 +4,15 @@ import SectionRenderer from "@/components/sections/SectionRenderer";
 import { landingApi } from "@/lib/api";
 import "@initia/shared/styles/index.scss";
 
+// Always fetch fresh from the API — no static caching so admin edits reflect immediately.
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 interface PageProps {
   params: Promise<{
     locale: string;
     slug: string;
   }>;
-}
-
-// Generate static params for all pages at build time
-export async function generateStaticParams() {
-  // Fetch available locales from backend (or use defaults)
-  const locales = await landingApi.getAvailableLocales();
-
-  // Generate params for each locale/slug combination
-  const allParams = await Promise.all(
-    locales.map(async (locale) => {
-      const slugs = await landingApi.getPageSlugs(locale);
-      return slugs.map((slug) => ({
-        locale,
-        slug,
-      }));
-    })
-  );
-
-  return allParams.flat();
 }
 
 // Generate metadata for each page
@@ -66,7 +51,7 @@ export default async function LandingPage({ params }: PageProps) {
     );
   }
 
-  // Sort sections by order if provided
+  // Sort sections by order
   const sortedSections = [...page.sections].sort((a, b) => {
     const orderA = a.order ?? 999;
     const orderB = b.order ?? 999;
