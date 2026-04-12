@@ -1,9 +1,13 @@
 import Button from "@initia/shared/ui/components/core/button";
-import { useState } from "react";
+import * as UsersApi from "@initia/shared/api/users";
+import { apiCatchGlobalHandler } from "@initia/shared/utils/function";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
 import { addNotification } from "../../../../../store/actions/notifications";
+import { updateUserProfile } from "../../../../../store/actions/auth";
+import { useAppSelector } from "../../../../../store/hooks";
 
 type ChannelKey = "email" | "inApp";
 
@@ -15,12 +19,7 @@ type NotificationTypeKey =
   | "mentions"
   | "system";
 
-// horizontal axis
-const NOTIFICATION_CHANNELS: {
-  key: ChannelKey;
-  labelKey: string;
-  defaultLabel: string;
-}[] = [
+const NOTIFICATION_CHANNELS: { key: ChannelKey; labelKey: string; defaultLabel: string }[] = [
   {
     key: "email",
     labelKey: "Auth.Settings.User.Notifications.Channels.Email",
@@ -33,7 +32,6 @@ const NOTIFICATION_CHANNELS: {
   },
 ];
 
-// vertical axis
 const NOTIFICATION_TYPES: {
   key: NotificationTypeKey;
   labelKey: string;
@@ -41,7 +39,6 @@ const NOTIFICATION_TYPES: {
 }[] = [
   {
     key: "announcements",
-    // reuse text for announcements
     labelKey: "Auth.Settings.User.Notifications.EmailAnnouncements",
     defaultLabel: "Announcements & tips",
   },
@@ -72,31 +69,57 @@ const NOTIFICATION_TYPES: {
   },
 ];
 
-// nested state: prefs[channel][type] = boolean
 type PrefsState = Record<ChannelKey, Record<NotificationTypeKey, boolean>>;
+
+const DEFAULT_PREFS: PrefsState = {
+  email: {
+    announcements: true,
+    security: true,
+    productUpdates: false,
+    reminders: false,
+    mentions: false,
+    system: false,
+  },
+  inApp: {
+    announcements: false,
+    security: false,
+    productUpdates: false,
+    reminders: true,
+    mentions: true,
+    system: true,
+  },
+};
 
 const NotificationsSettingsTab = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const { user } = useAppSelector((state) => state.auth);
+  const [saving, setSaving] = useState(false);
 
-  const [prefs, setPrefs] = useState<PrefsState>({
-    email: {
-      announcements: true,
-      security: true,
-      productUpdates: false,
-      reminders: false, // not in original email prefs
-      mentions: false,
-      system: false,
-    },
-    inApp: {
-      announcements: false,
-      security: false,
-      productUpdates: false,
-      reminders: true,
-      mentions: true,
-      system: true,
-    },
+  const [prefs, setPrefs] = useState<PrefsState>(() => {
+    if (user?.notificationPrefs) {
+      return {
+        email: { ...DEFAULT_PREFS.email, ...(user.notificationPrefs.email ?? {}) },
+        inApp: { ...DEFAULT_PREFS.inApp, ...(user.notificationPrefs.inApp ?? {}) },
+      } as PrefsState;
+    }
+    return DEFAULT_PREFS;
   });
+
+  // Reload from server on mount
+  useEffect(() => {
+    UsersApi.getMe()
+      .then((res) => {
+        const serverPrefs = res.payload?.notificationPrefs;
+        if (serverPrefs) {
+          setPrefs({
+            email: { ...DEFAULT_PREFS.email, ...(serverPrefs.email ?? {}) },
+            inApp: { ...DEFAULT_PREFS.inApp, ...(serverPrefs.inApp ?? {}) },
+          } as PrefsState);
+        }
+      })
+      .catch(apiCatchGlobalHandler);
+  }, []);
 
   const toggle = (channel: ChannelKey, type: NotificationTypeKey) => {
     setPrefs((prev) => ({
@@ -109,19 +132,21 @@ const NotificationsSettingsTab = () => {
   };
 
   const onSave = () => {
-    // later: send `prefs` to API
-    // e.g. NotificationsApi.updateUserPrefs(prefs)
-
-    dispatch(
-      addNotification({
-        msg: t("Global.Form.SuccessMsg", {
-          action: t("Global.Form.Labels.Update"),
-          data: t("Auth.Settings.User.Notifications.Title", {
-            defaultValue: "Notifications",
-          }),
-        }),
+    setSaving(true);
+    UsersApi.updateMe({ notificationPrefs: prefs as Record<string, Record<string, boolean>> })
+      .then((res) => {
+        dispatch(updateUserProfile(res.payload));
+        dispatch(
+          addNotification({
+            msg: t("Global.Form.SuccessMsg", {
+              action: t("Global.Form.Labels.Update"),
+              data: t("Auth.Settings.User.Notifications.Title", { defaultValue: "Notifications" }),
+            }),
+          })
+        );
       })
-    );
+      .catch(apiCatchGlobalHandler)
+      .finally(() => setSaving(false));
   };
 
   return (
@@ -184,7 +209,9 @@ const NotificationsSettingsTab = () => {
         </table>
       </div>
 
-      <Button onClick={onSave}>{t("Global.Form.Labels.Save")}</Button>
+      <Button onClick={onSave} disabled={saving}>
+        {saving ? t("Global.Loading", { defaultValue: "Saving..." }) : t("Global.Form.Labels.Save")}
+      </Button>
     </div>
   );
 };

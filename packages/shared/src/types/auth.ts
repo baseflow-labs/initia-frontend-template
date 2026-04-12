@@ -8,6 +8,14 @@ export interface UserProps {
   role: string;
   avatar?: string;
   image?: string;
+  fullName?: string;
+  phone?: string;
+  company?: string;
+  jobTitle?: string;
+  country?: string;
+  language?: string;
+  notificationPrefs?: Record<string, Record<string, boolean>>;
+  connections?: Record<string, { connected: boolean; lastSync?: string }>;
 }
 
 // ===== AUTH RESPONSE TYPES =====

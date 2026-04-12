@@ -1,4 +1,4 @@
-import type { AuthResponse, RefreshTokenResponse } from "@initia/shared/types/auth";
+import type { AuthResponse, RefreshTokenResponse, UserProps } from "@initia/shared/types/auth";
 
 import type { PermissionEntry } from "../reducers/auth";
 
@@ -35,4 +35,9 @@ export const updateUserStatus = () => ({
 export const setPermissions = (resp: PermissionEntry[]) => ({
   type: "setPermissions" as const,
   resp,
+});
+
+export const updateUserProfile = (user: Partial<UserProps>) => ({
+  type: "updateUserProfile" as const,
+  user,
 });

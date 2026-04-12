@@ -23,7 +23,8 @@ export type AuthAction =
     }
   | { type: "logout"; resp?: string }
   | { type: "updateUserStatus"; resp?: string }
-  | { type: "setPermissions"; resp: PermissionEntry[] };
+  | { type: "setPermissions"; resp: PermissionEntry[] }
+  | { type: "updateUserProfile"; user: Partial<UserProps> };
 
 const initialState: AuthState = {
   accessToken: ["null", "undefined", ""].includes(localStorage.getItem("accessToken") || "")
@@ -100,6 +101,12 @@ const auth = (state: AuthState = initialState, action: AuthAction): AuthState =>
         ...state,
         permissions: action.resp,
       };
+    }
+
+    case "updateUserProfile": {
+      const updatedUser = { ...state.user, ...action.user };
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+      return { ...state, user: updatedUser };
     }
 
     default:

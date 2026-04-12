@@ -38,3 +38,8 @@
   - [ ] List
   - [ ] Push
 - [ ] System messaging
+- [ ] User settings
+  - [ ] Profile
+  - [ ] Security
+  - [ ] Notifications
+  - [ ] System
