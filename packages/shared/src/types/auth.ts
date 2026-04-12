@@ -13,7 +13,9 @@ export interface UserProps {
   company?: string;
   jobTitle?: string;
   country?: string;
+  location?: string;
   language?: string;
+  createdAt?: string;
   notificationPrefs?: Record<string, Record<string, boolean>>;
   connections?: Record<string, { connected: boolean; lastSync?: string }>;
 }

@@ -41,6 +41,11 @@ const getMe = async (): Promise<EnvelopeResponse<UserProps>> => {
   return await api.get<UserProps>(authPath + "/me");
 };
 
+/** GET /user/:id — returns the user profile for a specific user (public endpoint) */
+const getProfile = async (userId: string): Promise<EnvelopeResponse<UserProps>> => {
+  return await api.get<UserProps>(mainPath + "/" + userId);
+};
+
 /** PATCH /auth/me — update profile fields for the authenticated user */
 const updateMe = async (
   data: Partial<
@@ -53,6 +58,9 @@ const updateMe = async (
       | "company"
       | "jobTitle"
       | "country"
+      | "location"
+      | "avatar"
+      | "status"
       | "language"
       | "notificationPrefs"
       | "connections"
@@ -62,4 +70,4 @@ const updateMe = async (
   return await api.patch<UserProps>(authPath + "/me", data);
 };
 
-export { create, get, getById, getByUserId, getMe, remove, removeAllUsers, updateMe };
+export { create, get, getById, getByUserId, getMe, getProfile, remove, removeAllUsers, updateMe };

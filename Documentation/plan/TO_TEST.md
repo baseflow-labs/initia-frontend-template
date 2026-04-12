@@ -43,3 +43,4 @@
   - [ ] Security
   - [ ] Notifications
   - [ ] System
+- [ ] User profile

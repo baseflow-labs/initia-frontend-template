@@ -1,37 +1,12 @@
 import { useTranslation } from "react-i18next";
+import type { UserProps } from "@initia/shared/types/auth";
 
-const UserProfileContactsView = () => {
+interface UserProfileContactsViewProps {
+  user: UserProps;
+}
+
+const UserProfileContactsView = ({ user }: UserProfileContactsViewProps) => {
   const { t } = useTranslation();
-  const user = {
-    name: "John Doe",
-    role: "UX Designer",
-    location: "Vatican City",
-    status: "Connected",
-    joinedAt: "Joined April 2021",
-    avatarUrl:
-      "https://firebasestorage.googleapis.com/v0/b/initia-platform.firebasestorage.app/o/logo-full.png?alt=media&token=de1da191-53c3-4bb1-bad7-e0f1c9ec54fc",
-    about: {
-      fullName: "John Doe",
-      status: "Active",
-      role: "Developer",
-      country: "USA",
-      languages: "English",
-    },
-    contacts: {
-      phone: "(123) 456-7890",
-      skype: "john.doe",
-      email: "john.doe@example.com",
-    },
-    teamsShort: [
-      { name: "Backend Developer", members: 126 },
-      { name: "React Developer", members: 98 },
-    ],
-    overviewStats: {
-      tasks: "13.5k",
-      projects: 146,
-      connections: 897,
-    },
-  };
 
   return (
     <div className="card shadow-sm border-0 mb-3">
@@ -44,21 +19,25 @@ const UserProfileContactsView = () => {
           <dt className="col-5 text-muted small">{t("Auth.Profile.Contact", "Contact")}</dt>
 
           <dd className="col-7 small mb-2">
-            <a href={`tel:${user.contacts.phone}`} className="text-decoration-none">
-              {user.contacts.phone}
-            </a>
+            {user.phone ? (
+              <a href={`tel:${user.phone}`} className="text-decoration-none">
+                {user.phone}
+              </a>
+            ) : (
+              "N/A"
+            )}
           </dd>
-
-          <dt className="col-5 text-muted small">{t("Auth.Profile.Skype", "Skype")}</dt>
-
-          <dd className="col-7 small mb-2">{user.contacts.skype}</dd>
 
           <dt className="col-5 text-muted small">{t("Auth.Profile.Email", "Email")}</dt>
 
           <dd className="col-7 small mb-0">
-            <a href={`mailto:${user.contacts.email}`} className="text-decoration-none">
-              {user.contacts.email}
-            </a>
+            {user.email ? (
+              <a href={`mailto:${user.email}`} className="text-decoration-none">
+                {user.email}
+              </a>
+            ) : (
+              "N/A"
+            )}
           </dd>
         </dl>
       </div>
