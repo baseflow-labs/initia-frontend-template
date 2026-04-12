@@ -1,7 +1,7 @@
 import Button from "@initia/shared/ui/components/core/button";
 import * as UsersApi from "@initia/shared/api/users";
 import { apiCatchGlobalHandler } from "@initia/shared/utils/function";
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import type { UserProps } from "@initia/shared/types/auth";

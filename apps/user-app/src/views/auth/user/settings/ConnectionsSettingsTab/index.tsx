@@ -7,7 +7,6 @@ import { useDispatch } from "react-redux";
 
 import { addNotification } from "../../../../../store/actions/notifications";
 import { updateUserProfile } from "../../../../../store/actions/auth";
-import { useAppSelector } from "../../../../../store/hooks";
 
 const CONNECTION_SPECS: Array<{
   key: string;
@@ -48,7 +47,6 @@ const DEFAULT_CONNECTIONS: Record<string, { connected: boolean; lastSync?: strin
 const ConnectionsSettingsTab = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { user } = useAppSelector((state) => state.auth);
   const [loading, setLoading] = useState(true);
   const [connectionStates, setConnectionStates] = useState(DEFAULT_CONNECTIONS);
 
