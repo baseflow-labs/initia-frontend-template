@@ -47,7 +47,18 @@ export default function ContactPage() {
       });
 
       if (!response.ok) {
-        throw new Error(`Failed to submit contact form: ${response.statusText}`);
+        const responseContentType = response.headers.get("content-type") || "";
+        let details = response.statusText;
+
+        if (responseContentType.includes("application/json")) {
+          const errorPayload = (await response.json()) as { message?: string };
+          if (errorPayload?.message) details = errorPayload.message;
+        } else {
+          const text = await response.text();
+          if (text) details = text;
+        }
+
+        throw new Error(`Failed to submit contact form (${response.status}): ${details}`);
       }
 
       setSubmitStatus("success");
