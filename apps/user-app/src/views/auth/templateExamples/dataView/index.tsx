@@ -9,18 +9,24 @@ import { faCakeCandles, faEllipsisVertical, faPerson } from "@fortawesome/free-s
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 
 import * as DataViewOptionsApi from "../../../../api/dataViewOptions";
+import { addNotification } from "../../../../store/actions/notifications";
 import { inputs } from "../datatablePage/inputs";
 
 const TemplateDataViewExamplesView = () => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
 
   const [open, setOpen] = useState(false);
   const [kanbanColumns, setKanbanColumns] = useState<DataViewOptionsApi.KanbanColumn[]>([]);
   const [galleryItems, setGalleryItems] = useState<DataViewOptionsApi.GalleryItem[]>([]);
   const [stats, setStats] = useState<DataViewOptionsApi.StatCard[]>([]);
   const [visitorsSeries, setVisitorsSeries] = useState<DataViewOptionsApi.ChartPoint[]>([]);
+  const [toasterTemplates, setToasterTemplates] = useState<DataViewOptionsApi.ToasterTemplate[]>(
+    []
+  );
 
   useEffect(() => {
     DataViewOptionsApi.getKanban()
@@ -44,6 +50,12 @@ const TemplateDataViewExamplesView = () => {
         setStats([]);
         setVisitorsSeries([]);
       });
+
+    DataViewOptionsApi.getToasterTemplates()
+      .then((res) => {
+        setToasterTemplates(res.payload?.notifications ?? []);
+      })
+      .catch(() => setToasterTemplates([]));
   }, []);
 
   const exampleData = [
@@ -170,6 +182,38 @@ const TemplateDataViewExamplesView = () => {
                   </div>
                 ))}
               </div>
+            </div>
+          </div>
+        </div>
+      ),
+      fullWidth: true,
+    },
+    {
+      title: "Toaster / Notifications System",
+      body: (
+        <div className="card border-0 shadow-sm">
+          <div className="card-body">
+            <div className="text-muted mb-2">Trigger app-wide toaster notifications</div>
+            <div className="d-flex flex-wrap gap-2">
+              {toasterTemplates.map((template) => (
+                <button
+                  key={template.id}
+                  type="button"
+                  className="btn btn-sm btn-outline-primary"
+                  onClick={() =>
+                    dispatch(
+                      addNotification({
+                        title: template.title,
+                        msg: template.msg,
+                        type: template.type,
+                        durationMs: template.durationMs,
+                      })
+                    )
+                  }
+                >
+                  {template.title}
+                </button>
+              ))}
             </div>
           </div>
         </div>

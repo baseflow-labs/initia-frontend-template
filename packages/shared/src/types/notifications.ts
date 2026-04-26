@@ -1,6 +1,8 @@
 export interface NotificationProps {
   msg: string;
-  type?: "err" | "warning";
+  title?: string;
+  type?: "err" | "warning" | "success" | "info";
+  durationMs?: number;
   [key: string]: unknown;
 }
 

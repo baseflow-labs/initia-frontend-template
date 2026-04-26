@@ -59,3 +59,19 @@ export interface AnalyticsPayload {
 export const getAnalytics = async () => {
   return api.get<AnalyticsPayload>("/data-view-options/analytics");
 };
+
+export interface ToasterTemplate {
+  id: string;
+  title: string;
+  msg: string;
+  type: "err" | "warning" | "success" | "info";
+  durationMs?: number;
+}
+
+export interface ToasterTemplatesPayload {
+  notifications: ToasterTemplate[];
+}
+
+export const getToasterTemplates = async () => {
+  return api.get<ToasterTemplatesPayload>("/data-view-options/toaster-templates");
+};

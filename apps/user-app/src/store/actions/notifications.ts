@@ -1,7 +1,7 @@
 import { NotificationProps } from "@initia/shared/types/notifications.js";
 
 export const addNotification = (
-  notificationOrType: NotificationProps | "err" | "warning",
+  notificationOrType: NotificationProps | "err" | "warning" | "success" | "info",
   msg?: string
 ): { type: "addNotification"; notification: NotificationProps } => {
   let notification: NotificationProps;
