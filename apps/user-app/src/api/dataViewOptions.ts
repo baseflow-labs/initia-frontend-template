@@ -21,3 +21,18 @@ export interface KanbanPayload {
 export const getKanban = async () => {
   return api.get<KanbanPayload>("/data-view-options/kanban");
 };
+
+export interface GalleryItem {
+  id: string;
+  title: string;
+  imageUrl: string;
+  category: string;
+}
+
+export interface GalleryPayload {
+  items: GalleryItem[];
+}
+
+export const getGallery = async () => {
+  return api.get<GalleryPayload>("/data-view-options/gallery");
+};

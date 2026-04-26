@@ -18,6 +18,7 @@ const TemplateDataViewExamplesView = () => {
 
   const [open, setOpen] = useState(false);
   const [kanbanColumns, setKanbanColumns] = useState<DataViewOptionsApi.KanbanColumn[]>([]);
+  const [galleryItems, setGalleryItems] = useState<DataViewOptionsApi.GalleryItem[]>([]);
 
   useEffect(() => {
     DataViewOptionsApi.getKanban()
@@ -25,6 +26,12 @@ const TemplateDataViewExamplesView = () => {
         setKanbanColumns(res.payload?.columns ?? []);
       })
       .catch(() => setKanbanColumns([]));
+
+    DataViewOptionsApi.getGallery()
+      .then((res) => {
+        setGalleryItems(res.payload?.items ?? []);
+      })
+      .catch(() => setGalleryItems([]));
   }, []);
 
   const exampleData = [
@@ -76,6 +83,30 @@ const TemplateDataViewExamplesView = () => {
                       </div>
                     </div>
                   ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      ),
+      fullWidth: true,
+    },
+    {
+      title: "Gallery / Photo Grid",
+      body: (
+        <div className="row g-3">
+          {galleryItems.map((item) => (
+            <div key={item.id} className="col-6 col-md-4 col-xl-3">
+              <div className="card h-100 border-0 shadow-sm overflow-hidden">
+                <img
+                  src={item.imageUrl}
+                  alt={item.title}
+                  className="w-100"
+                  style={{ height: 180, objectFit: "cover" }}
+                />
+                <div className="card-body p-3">
+                  <div className="fw-semibold">{item.title}</div>
+                  <div className="small text-muted">{item.category}</div>
                 </div>
               </div>
             </div>
