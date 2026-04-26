@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileDownload } from "@fortawesome/free-solid-svg-icons";
 
-import service from "../../../api";
+import { getExportContract, exportReport, type ExportFileType } from "../../../api/reports";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import Form from "../form";
 import Modal from "../modal";
@@ -34,6 +34,7 @@ interface ModalState {
 
 const ExportModal: React.FC<Props> = ({ columns, exportOptions }) => {
   const { t } = useTranslation();
+  const [supportedTypes, setSupportedTypes] = useState<ExportFileType[]>(["csv", "xlsx"]);
 
   const [modal, setModal] = useState<ModalState>({
     action: "view",
@@ -56,7 +57,7 @@ const ExportModal: React.FC<Props> = ({ columns, exportOptions }) => {
     const endpoint = exportOptions?.endpoint;
     if (!endpoint) return;
 
-    const fileType = values?.type === "excel" ? "csv" : (values?.type as string) || "csv";
+    const fileType = ((values?.type as ExportFileType) || "csv") as ExportFileType;
     const payload = {
       endpoint,
       fields: ((values?.fields as string[]) || []).filter(Boolean),
@@ -68,16 +69,26 @@ const ExportModal: React.FC<Props> = ({ columns, exportOptions }) => {
       reverse: exportOptions?.sortDirection === "desc",
     };
 
-    service.axios
-      .post("/reports/export", payload, { responseType: "blob" })
+    exportReport(payload)
       .then((res) => {
-        const extension = fileType === "json" ? "json" : "csv";
+        const extension = fileType === "xlsx" ? "xlsx" : "csv";
         const filename = `${endpoint.replace(/[^\w-]+/g, "_")}.${extension}`;
         downloadFile(res.data as Blob, filename);
         setModal({ open: false, data: {}, action: "view" });
       })
       .catch(apiCatchGlobalHandler);
   };
+
+  React.useEffect(() => {
+    getExportContract()
+      .then((res) => {
+        const fileTypes = res.payload?.supportedFileTypes || [];
+        if (fileTypes.length) {
+          setSupportedTypes(fileTypes);
+        }
+      })
+      .catch(() => setSupportedTypes(["csv", "xlsx"]));
+  }, []);
 
   return (
     <Fragment>
@@ -115,9 +126,12 @@ const ExportModal: React.FC<Props> = ({ columns, exportOptions }) => {
               fullWidth: true,
               label: t("Global.Table.Export.Type.Title"),
               options: [
-                { label: t("Global.Table.Export.Type.CSV"), value: "csv" },
-                { label: t("Global.Table.Export.Type.Excel"), value: "excel" },
-                { label: "JSON", value: "json" },
+                ...(supportedTypes.includes("csv")
+                  ? [{ label: t("Global.Table.Export.Type.CSV"), value: "csv" }]
+                  : []),
+                ...(supportedTypes.includes("xlsx")
+                  ? [{ label: t("Global.Table.Export.Type.Excel"), value: "xlsx" }]
+                  : []),
               ],
               defaultValue: "csv",
             },
