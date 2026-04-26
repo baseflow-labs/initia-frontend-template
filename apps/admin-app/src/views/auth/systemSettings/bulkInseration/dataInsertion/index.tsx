@@ -1,14 +1,54 @@
 import { useTranslation } from "react-i18next";
 import Button from "@initia/shared/ui/components/core/button";
 import Form from "@initia/shared/ui/components/form";
-import { tableRelationsList, tablesList } from "@initia/shared/api/demoData";
+import {
+  getGeneratorTablesMetadata,
+  tableRelationsList,
+  tablesList,
+  type GeneratorTableMetadata,
+} from "@initia/shared/api/demoData";
+import { useEffect, useState } from "react";
 
 import { dependencyBasedOrder, inputs } from "./inputs";
 
 const SystemDataBulkInsertionView = () => {
   const { t } = useTranslation();
+  const [tableNames, setTableNames] = useState<string[]>(tablesList);
+  const [relations, setRelations] = useState<string[]>(tableRelationsList);
+  const [tableMetaByName, setTableMetaByName] = useState<Record<string, GeneratorTableMetadata>>(
+    {}
+  );
 
-  const tablesOrder = dependencyBasedOrder(tablesList, tableRelationsList);
+  useEffect(() => {
+    getGeneratorTablesMetadata()
+      .then((res) => {
+        const nextTableNames = res.payload?.tableNames || [];
+        const nextRelations = res.payload?.relations || [];
+        const nextTables = res.payload?.tables || [];
+
+        if (nextTableNames.length) {
+          setTableNames(nextTableNames);
+        }
+
+        if (nextRelations.length) {
+          setRelations(nextRelations);
+        }
+
+        setTableMetaByName(
+          nextTables.reduce<Record<string, GeneratorTableMetadata>>((acc, table) => {
+            acc[table.tableName] = table;
+            return acc;
+          }, {})
+        );
+      })
+      .catch(() => {
+        setTableNames(tablesList);
+        setRelations(tableRelationsList);
+        setTableMetaByName({});
+      });
+  }, []);
+
+  const tablesOrder = dependencyBasedOrder(tableNames, relations);
 
   const PerTableView = () => {
     return (
@@ -36,11 +76,12 @@ const SystemDataBulkInsertionView = () => {
 
   return (
     <div className="row">
-      {tablesList
+      {tableNames
         .sort((a, b) => tablesOrder.indexOf(a) - tablesOrder.indexOf(b))
         .map((table) => (
           <div key={table} className="col-md-6 mb-5">
             <h3 className="my-3">{table}</h3>
+            <p className="text-muted small mb-2">{tableMetaByName[table]?.endpoint || table}</p>
 
             <PerTableView />
           </div>

@@ -1,3 +1,19 @@
+import api from "./index";
+
+export interface GeneratorTableMetadata {
+  tableName: string;
+  endpoint: string;
+  fields: string[];
+  sortableFields: string[];
+  searchableFields: string[];
+}
+
+export interface GeneratorTablesPayload {
+  tableNames: string[];
+  relations: string[];
+  tables: GeneratorTableMetadata[];
+}
+
 export const tablesList = [
   "users",
   "products",
@@ -15,3 +31,7 @@ export const tableRelationsList = [
   "users>roles",
   "roles>permissions",
 ];
+
+export const getGeneratorTablesMetadata = async () => {
+  return api.get<GeneratorTablesPayload>("/generator/tables");
+};
