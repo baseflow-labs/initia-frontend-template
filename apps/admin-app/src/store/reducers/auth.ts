@@ -1,5 +1,5 @@
 import type { UserProps } from "@initia/shared/types/auth";
-import { getCookie, removeCookie, setCookie } from "@initia/shared/utils/cookieStorage";
+import { getCookie, setCookie } from "@initia/shared/utils/cookieStorage";
 
 export interface AuthState {
   accessToken: string | null;
