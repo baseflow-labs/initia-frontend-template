@@ -19,6 +19,8 @@ const TemplateDataViewExamplesView = () => {
   const [open, setOpen] = useState(false);
   const [kanbanColumns, setKanbanColumns] = useState<DataViewOptionsApi.KanbanColumn[]>([]);
   const [galleryItems, setGalleryItems] = useState<DataViewOptionsApi.GalleryItem[]>([]);
+  const [stats, setStats] = useState<DataViewOptionsApi.StatCard[]>([]);
+  const [visitorsSeries, setVisitorsSeries] = useState<DataViewOptionsApi.ChartPoint[]>([]);
 
   useEffect(() => {
     DataViewOptionsApi.getKanban()
@@ -32,6 +34,16 @@ const TemplateDataViewExamplesView = () => {
         setGalleryItems(res.payload?.items ?? []);
       })
       .catch(() => setGalleryItems([]));
+
+    DataViewOptionsApi.getAnalytics()
+      .then((res) => {
+        setStats(res.payload?.stats ?? []);
+        setVisitorsSeries(res.payload?.chart?.visitors ?? []);
+      })
+      .catch(() => {
+        setStats([]);
+        setVisitorsSeries([]);
+      });
   }, []);
 
   const exampleData = [
@@ -111,6 +123,55 @@ const TemplateDataViewExamplesView = () => {
               </div>
             </div>
           ))}
+        </div>
+      ),
+      fullWidth: true,
+    },
+    {
+      title: "Charts + Stat Cards",
+      body: (
+        <div className="d-flex flex-column gap-3">
+          <div className="row g-3">
+            {stats.map((stat) => (
+              <div key={stat.id} className="col-12 col-md-6 col-xl-3">
+                <div className="card h-100 border-0 shadow-sm">
+                  <div className="card-body">
+                    <div className="text-muted small">{stat.label}</div>
+                    <div className="fs-4 fw-bold mt-1">{stat.value.toLocaleString()}</div>
+                    <div
+                      className={`small mt-1 ${stat.changePercent >= 0 ? "text-success" : "text-danger"}`}
+                    >
+                      {stat.changePercent >= 0 ? "+" : ""}
+                      {stat.changePercent}%
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="card border-0 shadow-sm">
+            <div className="card-body">
+              <div className="fw-semibold mb-3">Visitors (Bar Pattern)</div>
+              <div className="d-flex align-items-end gap-2" style={{ minHeight: 170 }}>
+                {visitorsSeries.map((point) => (
+                  <div
+                    key={point.label}
+                    className="d-flex flex-column align-items-center flex-fill"
+                  >
+                    <div
+                      className="w-100 rounded-2"
+                      style={{
+                        backgroundColor: "var(--theme-primary)",
+                        opacity: 0.85,
+                        height: `${Math.max(12, Math.round((point.value / 1600) * 140))}px`,
+                      }}
+                    />
+                    <div className="small text-muted mt-2">{point.label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       ),
       fullWidth: true,

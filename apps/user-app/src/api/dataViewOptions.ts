@@ -36,3 +36,26 @@ export interface GalleryPayload {
 export const getGallery = async () => {
   return api.get<GalleryPayload>("/data-view-options/gallery");
 };
+
+export interface StatCard {
+  id: string;
+  label: string;
+  value: number;
+  changePercent: number;
+}
+
+export interface ChartPoint {
+  label: string;
+  value: number;
+}
+
+export interface AnalyticsPayload {
+  stats: StatCard[];
+  chart: {
+    visitors: ChartPoint[];
+  };
+}
+
+export const getAnalytics = async () => {
+  return api.get<AnalyticsPayload>("/data-view-options/analytics");
+};
