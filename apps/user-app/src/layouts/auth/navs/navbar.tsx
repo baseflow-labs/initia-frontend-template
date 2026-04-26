@@ -10,6 +10,7 @@ import LangButton from "@initia/shared/ui/components/button/lang";
 import Button from "@initia/shared/ui/components/core/button";
 import DropdownComp from "@initia/shared/ui/components/dropdown";
 import TopbarSearch, { TopbarSearchOption } from "@initia/shared/ui/components/search/topbarSearch";
+import { getCookie } from "@initia/shared/utils/cookieStorage";
 import { apiCatchGlobalHandler } from "@initia/shared/utils/function";
 import {
   faBars,
@@ -58,7 +59,7 @@ const DashboardNavbar = ({
   useEffect(() => {
     if (!user?.id) return;
 
-    const accessToken = localStorage.getItem("accessToken");
+    const accessToken = getCookie("accessToken");
     if (!accessToken || ["null", "undefined", ""].includes(accessToken)) return;
 
     connectNotificationsSocket(accessToken);

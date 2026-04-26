@@ -1,4 +1,5 @@
 import type { UserProps } from "@initia/shared/types/auth";
+import { getCookie, removeCookie, setCookie } from "@initia/shared/utils/cookieStorage";
 
 export interface PermissionEntry {
   action: string;
@@ -26,23 +27,40 @@ export type AuthAction =
   | { type: "setPermissions"; resp: PermissionEntry[] }
   | { type: "updateUserProfile"; user: Partial<UserProps> };
 
+const getStoredValue = (key: "accessToken" | "refreshToken" | "user") => {
+  const cookieValue = getCookie(key);
+  if (cookieValue && !["null", "undefined", ""].includes(cookieValue)) return cookieValue;
+
+  const localValue = localStorage.getItem(key);
+  if (localValue && !["null", "undefined", ""].includes(localValue)) {
+    setCookie(key, localValue);
+    localStorage.removeItem(key);
+    return localValue;
+  }
+
+  return null;
+};
+
+const storedAccessToken = getStoredValue("accessToken");
+const storedRefreshToken = getStoredValue("refreshToken");
+const storedUser = getStoredValue("user");
+
 const initialState: AuthState = {
-  accessToken: ["null", "undefined", ""].includes(localStorage.getItem("accessToken") || "")
-    ? null
-    : localStorage.getItem("accessToken"),
-  refreshToken: ["null", "undefined", ""].includes(localStorage.getItem("refreshToken") || "")
-    ? null
-    : localStorage.getItem("refreshToken"),
-  user: localStorage.getItem("user")?.length ? JSON.parse(localStorage.getItem("user")!) : {},
+  accessToken: storedAccessToken,
+  refreshToken: storedRefreshToken,
+  user: storedUser?.length ? JSON.parse(storedUser) : {},
   permissions: [],
 };
 
 const auth = (state: AuthState = initialState, action: AuthAction): AuthState => {
   switch (action.type) {
     case "login": {
-      localStorage.setItem("accessToken", action.resp.accessToken);
-      localStorage.setItem("refreshToken", action.resp.refreshToken);
-      localStorage.setItem("user", JSON.stringify(action.resp.user));
+      setCookie("accessToken", action.resp.accessToken);
+      setCookie("refreshToken", action.resp.refreshToken);
+      setCookie("user", JSON.stringify(action.resp.user));
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      localStorage.removeItem("user");
 
       // window.location.assign("/dashboard");
 
@@ -55,8 +73,10 @@ const auth = (state: AuthState = initialState, action: AuthAction): AuthState =>
     }
 
     case "refreshToken": {
-      localStorage.setItem("accessToken", action.resp.accessToken);
-      localStorage.setItem("refreshToken", action.resp.refreshToken);
+      setCookie("accessToken", action.resp.accessToken);
+      setCookie("refreshToken", action.resp.refreshToken);
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
 
       // window.location.assign("/dashboard");
 
@@ -69,6 +89,9 @@ const auth = (state: AuthState = initialState, action: AuthAction): AuthState =>
     }
 
     case "logout": {
+      removeCookie("accessToken");
+      removeCookie("refreshToken");
+      removeCookie("user");
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
       localStorage.removeItem("user");
@@ -84,11 +107,12 @@ const auth = (state: AuthState = initialState, action: AuthAction): AuthState =>
     }
 
     case "updateUserStatus": {
-      const currentUser = JSON.parse(localStorage.getItem("user") || "{}");
+      const currentUser = JSON.parse(getCookie("user") || "{}");
 
       const newUser = { ...currentUser, status: "In Preview" };
 
-      localStorage.setItem("user", JSON.stringify(newUser));
+      setCookie("user", JSON.stringify(newUser));
+      localStorage.removeItem("user");
 
       return {
         ...state,
@@ -105,7 +129,8 @@ const auth = (state: AuthState = initialState, action: AuthAction): AuthState =>
 
     case "updateUserProfile": {
       const updatedUser = { ...state.user, ...action.user };
-      localStorage.setItem("user", JSON.stringify(updatedUser));
+      setCookie("user", JSON.stringify(updatedUser));
+      localStorage.removeItem("user");
       return { ...state, user: updatedUser };
     }
 

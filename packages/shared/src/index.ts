@@ -6,6 +6,7 @@ export * from "./utils/consts";
 export * from "./utils/function";
 export * from "./utils/hooks";
 export * from "./utils/downloadFiles";
+export * from "./utils/cookieStorage";
 
 // API
 export * from "./api";
