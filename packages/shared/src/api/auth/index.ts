@@ -6,6 +6,17 @@ export interface loginCredentials {
   password: string;
 }
 
+export type OAuthProvider = "google" | "apple" | "microsoft";
+
+export interface OAuthLoginPayload {
+  provider: OAuthProvider;
+  idToken?: string;
+  accessToken?: string;
+  emailHint?: string;
+  nameHint?: string;
+  avatarHint?: string;
+}
+
 export interface registerProps {
   email: string;
   username?: string;
@@ -23,6 +34,10 @@ const mainPath = "/auth";
 
 const login = async (credentials: loginCredentials): Promise<EnvelopeResponse<AuthResponse>> => {
   return await api.post<AuthResponse>(mainPath + "/login", credentials);
+};
+
+const oauthLogin = async (payload: OAuthLoginPayload): Promise<EnvelopeResponse<AuthResponse>> => {
+  return await api.post<AuthResponse>(mainPath + "/oauth/login", payload);
 };
 
 const logout = async (email: string) => {
@@ -54,6 +69,7 @@ const register = async (userData: registerProps) => {
 export {
   isAuthorized,
   login,
+  oauthLogin,
   logout,
   register,
   requestPasswordReset,

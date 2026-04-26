@@ -1,4 +1,6 @@
 import { useTranslation } from "react-i18next";
+import { faApple, faGoogle, faMicrosoft } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import * as authApi from "../../api/auth";
 import type { AuthResponse } from "../../types/auth";
@@ -53,6 +55,25 @@ const LoginView = ({ onLoginSuccess }: LoginViewProps) => {
       .catch(apiCatchGlobalHandler);
   };
 
+  const onOAuthLogin = (provider: authApi.OAuthProvider) => {
+    const email =
+      window.prompt(`${provider.toUpperCase()} login email (for mock OAuth flow):`)?.trim() || "";
+    if (!email) return;
+
+    authApi
+      .oauthLogin({
+        provider,
+        idToken: `mock:${email}`,
+        emailHint: email,
+      })
+      .then((res) => {
+        if (res.payload) {
+          onLoginSuccess?.(res.payload);
+        }
+      })
+      .catch(apiCatchGlobalHandler);
+  };
+
   return (
     <div>
       <Form
@@ -76,6 +97,21 @@ const LoginView = ({ onLoginSuccess }: LoginViewProps) => {
       ) : (
         ""
       )}
+
+      <div className="d-flex flex-column gap-2 mt-3">
+        <Button className="w-100" outline color="dark" onClick={() => onOAuthLogin("google")}>
+          <FontAwesomeIcon icon={faGoogle} className="me-2" />
+          Continue with Google
+        </Button>
+        <Button className="w-100" outline color="dark" onClick={() => onOAuthLogin("apple")}>
+          <FontAwesomeIcon icon={faApple} className="me-2" />
+          Continue with Apple
+        </Button>
+        <Button className="w-100" outline color="dark" onClick={() => onOAuthLogin("microsoft")}>
+          <FontAwesomeIcon icon={faMicrosoft} className="me-2" />
+          Continue with Microsoft
+        </Button>
+      </div>
     </div>
   );
 };

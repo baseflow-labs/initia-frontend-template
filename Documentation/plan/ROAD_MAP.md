@@ -233,7 +233,7 @@
 ### Sprint 26 — Auth integrations v2 (5 - 18 May, 2026)
 
 - [ ] OAuth login integration (Google / Apple / Microsoft) with clean provider abstraction
-- [ ] Provider selection config (enabled/disabled per env/settings)
+- [ ] Provider selection config (enabled/disabled per system admin settings)
 - [ ] UX: login method switching + fallback email/pass
 
 ## Phase 9 — Admin Platform “Settings & Ops” (19 May - 29 Jun, 2026)
