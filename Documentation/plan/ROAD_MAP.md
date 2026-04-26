@@ -213,18 +213,18 @@
 
 ### Sprint 24 — Data view options v2 (9 - 22 Apr, 2026)
 
-- [ ] Kanban view (basic columns + drag optional later)
-- [ ] Gallery / photo grid view
-- [ ] Charts + stat cards (basic library + patterns)
-- [ ] Toaster/notifications system (app-wide)
+- [x] Kanban view (basic columns + drag optional later)
+- [x] Gallery / photo grid view
+- [x] Charts + stat cards (basic library + patterns)
+- [x] Toaster/notifications system (app-wide)
 
 ## Phase 8 — Backend APIs for Generator Features (23 Apr - 18 May, 2026)
 
 ### Sprint 25 — Platform APIs v2 (23 Apr - 4 May, 2026)
 
 - [ ] Prepare API key for integration with other systems BE / FE apps.
-- [ ] API: return values of `TablesNames` (and metadata needed for generator)
-- [ ] API: export file by field & filters (CSV/XLSX pipeline contract)
+- [x] API: return values of `TablesNames` (and metadata needed for generator)
+- [x] API: export file by field & filters (CSV/XLSX pipeline contract)
 - [ ] Data localization support contract (server returns locale-aware labels where needed)
 - [ ] Advanced workflows
   - [ ] Ci/Cd to main service providers (AWS, GCP, Azure)
