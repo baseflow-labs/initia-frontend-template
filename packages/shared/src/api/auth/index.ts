@@ -1,4 +1,4 @@
-import api, { EnvelopeResponse } from "../";
+import api, { EnvelopeResponse, baseURL } from "../";
 import type { AuthResponse } from "../../types/auth";
 
 export interface loginCredentials {
@@ -15,6 +15,24 @@ export interface OAuthLoginPayload {
   emailHint?: string;
   nameHint?: string;
   avatarHint?: string;
+}
+
+export interface OAuthProviderState {
+  provider: OAuthProvider;
+  enabled: boolean;
+}
+
+export interface OAuthProvidersConfigPayload {
+  providers: OAuthProviderState[];
+  enabledProviders: OAuthProvider[];
+}
+
+export interface OAuthPopupMessage {
+  source: "initia-oauth";
+  success: boolean;
+  provider: OAuthProvider;
+  payload?: AuthResponse;
+  message?: string;
 }
 
 export interface registerProps {
@@ -38,6 +56,27 @@ const login = async (credentials: loginCredentials): Promise<EnvelopeResponse<Au
 
 const oauthLogin = async (payload: OAuthLoginPayload): Promise<EnvelopeResponse<AuthResponse>> => {
   return await api.post<AuthResponse>(mainPath + "/oauth/login", payload);
+};
+
+const getOAuthProvidersConfig = async (): Promise<
+  EnvelopeResponse<OAuthProvidersConfigPayload>
+> => {
+  return await api.get<OAuthProvidersConfigPayload>(mainPath + "/oauth/providers");
+};
+
+const getOAuthAdminProvidersConfig = async (): Promise<EnvelopeResponse<OAuthProviderState[]>> => {
+  return await api.get<OAuthProviderState[]>(mainPath + "/oauth/admin/providers");
+};
+
+const updateOAuthAdminProvidersConfig = async (
+  providers: OAuthProviderState[]
+): Promise<EnvelopeResponse<OAuthProviderState[]>> => {
+  return await api.put<OAuthProviderState[]>(mainPath + "/oauth/admin/providers", { providers });
+};
+
+const getOAuthPopupStartUrl = (provider: OAuthProvider, origin: string) => {
+  const params = new URLSearchParams({ origin });
+  return `${baseURL}${mainPath}/oauth/${provider}/start?${params.toString()}`;
 };
 
 const logout = async (email: string) => {
@@ -69,6 +108,10 @@ const register = async (userData: registerProps) => {
 export {
   isAuthorized,
   login,
+  getOAuthProvidersConfig,
+  getOAuthAdminProvidersConfig,
+  updateOAuthAdminProvidersConfig,
+  getOAuthPopupStartUrl,
   oauthLogin,
   logout,
   register,

@@ -232,8 +232,8 @@
 
 ### Sprint 26 — Auth integrations v2 (5 - 18 May, 2026)
 
-- [ ] OAuth login integration (Google / Apple / Microsoft) with clean provider abstraction
-- [ ] Provider selection config (enabled/disabled per system admin settings)
+- [x] OAuth login integration (Google / Apple / Microsoft) with clean provider abstraction
+- [x] Provider selection config (enabled/disabled per system admin settings)
 - [ ] UX: login method switching + fallback email/pass
 
 ## Phase 9 — Admin Platform “Settings & Ops” (19 May - 29 Jun, 2026)
@@ -303,6 +303,29 @@ Implement only the “must-have knobs” first:
   - [ ] Section based components grouping
   - [ ] Build variants of sections
 - [ ] Files management (simple library + tagging)
+
+### Sprint 30 — Build the Builder Script (30 Jun - 31 Jul, 2026)
+
+- [ ] Build app generator
+- [ ] Build AI-based contents generator
+  - [ ] Metadata (App Name, Logos, Slogan, theme color)
+  - [ ] Initial users, user roles & permissions content
+  - [ ] Services / modules with...
+    - [ ] Props
+    - [ ] Labels
+    - [ ] Needed API contracts
+    - [ ] Related notifications
+    - [ ] Related dummy data seeders structure
+    - [ ] Related landing page contents
+    - [ ] Related permissions
+  - [ ] Help center contents
+  - [ ] Technical documentation contents
+  - [ ] Legal documents content
+  - [ ] Available languages
+  - [ ] Features inclusion...
+    - [ ] Messaging
+    - [ ] Live support
+    - [ ] oAuth providers
 
 ---
 

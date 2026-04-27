@@ -2,6 +2,7 @@ import TabsComp from "@initia/shared/ui/components/tab";
 import PageTemplate from "@initia/shared/ui/layouts/auth/pages/pageTemplate";
 import { useTranslation } from "react-i18next";
 
+import { OAuthProvidersSettingsContent } from "./oauthProviders";
 import UserRolePermissionsView from "./rolePermissions";
 import UserRolesView from "./userRoles";
 import UsersView from "./usersList";
@@ -21,6 +22,10 @@ const AdminUserSettingsPage = () => {
     {
       title: t("Auth.Settings.Admin.UserRolePermissions.Title"),
       content: <UserRolePermissionsView />,
+    },
+    {
+      title: t("Auth.Settings.Admin.OAuthProviders.Title", "OAuth Providers"),
+      content: <OAuthProvidersSettingsContent />,
     },
   ];
 

@@ -1,6 +1,7 @@
-import { useTranslation } from "react-i18next";
 import { faApple, faGoogle, faMicrosoft } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import * as authApi from "../../api/auth";
 import type { AuthResponse } from "../../types/auth";
@@ -15,6 +16,11 @@ interface LoginViewProps {
 
 const LoginView = ({ onLoginSuccess }: LoginViewProps) => {
   const { t } = useTranslation();
+  const [enabledOAuthProviders, setEnabledOAuthProviders] = useState<authApi.OAuthProvider[]>([
+    "google",
+    "apple",
+    "microsoft",
+  ]);
 
   const formInputs = () => [
     {
@@ -56,26 +62,87 @@ const LoginView = ({ onLoginSuccess }: LoginViewProps) => {
   };
 
   const onOAuthLogin = (provider: authApi.OAuthProvider) => {
-    const email =
-      window.prompt(`${provider.toUpperCase()} login email (for mock OAuth flow):`)?.trim() || "";
-    if (!email) return;
+    const popupUrl = authApi.getOAuthPopupStartUrl(provider, window.location.origin);
+    const popup = window.open(
+      popupUrl,
+      `oauth_${provider}`,
+      "width=520,height=720,left=100,top=100,resizable=yes,scrollbars=yes"
+    );
 
+    if (!popup) {
+      apiCatchGlobalHandler(new Error("Popup blocked by browser"));
+      return;
+    }
+
+    const closeInterval = window.setInterval(() => {
+      if (popup.closed) {
+        window.clearInterval(closeInterval);
+        window.removeEventListener("message", onMessage);
+      }
+    }, 400);
+
+    const onMessage = (event: MessageEvent<authApi.OAuthPopupMessage>) => {
+      if (event.source !== popup || !event.data || event.data.source !== "initia-oauth") {
+        return;
+      }
+
+      window.clearInterval(closeInterval);
+      window.removeEventListener("message", onMessage);
+      popup.close();
+
+      if (event.data.success && event.data.payload) {
+        onLoginSuccess?.(event.data.payload);
+        return;
+      }
+
+      apiCatchGlobalHandler(new Error(event.data.message || "OAuth login failed"));
+    };
+
+    window.addEventListener("message", onMessage);
+  };
+
+  useEffect(() => {
     authApi
-      .oauthLogin({
-        provider,
-        idToken: `mock:${email}`,
-        emailHint: email,
-      })
+      .getOAuthProvidersConfig()
       .then((res) => {
-        if (res.payload) {
-          onLoginSuccess?.(res.payload);
+        const enabled = res.payload?.enabledProviders || [];
+        if (enabled.length || (res.payload?.providers || []).length) {
+          setEnabledOAuthProviders(enabled);
         }
       })
-      .catch(apiCatchGlobalHandler);
+      .catch(() => {
+        setEnabledOAuthProviders(["google", "apple", "microsoft"]);
+      });
+  }, []);
+
+  const providerMeta: Record<
+    authApi.OAuthProvider,
+    { label: string; icon: typeof faGoogle | typeof faApple | typeof faMicrosoft }
+  > = {
+    google: { label: "Continue with Google", icon: faGoogle },
+    apple: { label: "Continue with Apple", icon: faApple },
+    microsoft: { label: "Continue with Microsoft", icon: faMicrosoft },
   };
 
   return (
     <div>
+      {enabledOAuthProviders.length ? (
+        <div className="d-flex flex-column gap-2 mb-3">
+          {enabledOAuthProviders.map((provider) => (
+            <Button
+              key={provider}
+              className="w-100"
+              outline
+              color="dark"
+              onClick={() => onOAuthLogin(provider)}
+            >
+              <FontAwesomeIcon icon={providerMeta[provider].icon} className="me-2" />
+              {providerMeta[provider].label}
+            </Button>
+          ))}
+        </div>
+      ) : null}
+
       <Form
         inputs={formInputs}
         submitText={t("Public.Login.Labels.Login")}
@@ -97,21 +164,6 @@ const LoginView = ({ onLoginSuccess }: LoginViewProps) => {
       ) : (
         ""
       )}
-
-      <div className="d-flex flex-column gap-2 mt-3">
-        <Button className="w-100" outline color="dark" onClick={() => onOAuthLogin("google")}>
-          <FontAwesomeIcon icon={faGoogle} className="me-2" />
-          Continue with Google
-        </Button>
-        <Button className="w-100" outline color="dark" onClick={() => onOAuthLogin("apple")}>
-          <FontAwesomeIcon icon={faApple} className="me-2" />
-          Continue with Apple
-        </Button>
-        <Button className="w-100" outline color="dark" onClick={() => onOAuthLogin("microsoft")}>
-          <FontAwesomeIcon icon={faMicrosoft} className="me-2" />
-          Continue with Microsoft
-        </Button>
-      </div>
     </div>
   );
 };

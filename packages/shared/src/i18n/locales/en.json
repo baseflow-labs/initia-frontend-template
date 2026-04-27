@@ -300,6 +300,10 @@
           "ThemeColor": "Theme Color",
           "Title": "Metadata"
         },
+        "OAuthProviders": {
+          "Description": "Enable or disable each provider for login. Email/password login remains available as fallback.",
+          "Title": "OAuth Providers"
+        },
         "RolePermissions": {
           "Actions": {
             "Create": "Create",

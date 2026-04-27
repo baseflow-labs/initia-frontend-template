@@ -300,6 +300,10 @@
           "ThemeColor": "لون النظام",
           "Title": "هوية النظام"
         },
+        "OAuthProviders": {
+          "Description": "تفعيل أو تعطيل كل مزود تسجيل دخول. يظل تسجيل الدخول بالبريد وكلمة المرور متاحاً كخيار بديل.",
+          "Title": "مزودات OAuth"
+        },
         "RolePermissions": {
           "Actions": {
             "Create": "إنشاء",
