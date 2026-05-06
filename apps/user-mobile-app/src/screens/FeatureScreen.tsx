@@ -3,12 +3,17 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { colors } from "../theme/colors";
 
+import { FEATURE_VIEW_BY_KEY } from "./features/FeatureRegistry";
+
 type Props = {
   title: string;
   routeKey: string;
 };
 
 export default function FeatureScreen({ title, routeKey }: Props) {
+  const featureView = FEATURE_VIEW_BY_KEY[routeKey];
+  if (featureView) return <>{featureView}</>;
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.wrap}>

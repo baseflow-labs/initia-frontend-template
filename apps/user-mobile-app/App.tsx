@@ -5,11 +5,13 @@ import { I18nextProvider } from "react-i18next";
 import { Provider } from "react-redux";
 
 import AppNavigator from "./src/navigation/AppNavigator";
+import { initializeApi } from "./src/api/setup";
 import i18n from "./src/i18n";
 import store from "./src/store/store";
 
 export default function App() {
   useEffect(() => {
+    initializeApi();
     setAnalysisProvider({
       name: "mobile-debug",
       initialize: () => undefined,
