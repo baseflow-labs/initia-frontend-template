@@ -15,6 +15,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@initia/core": "workspace:*",
     "@initia/shared": "workspace:*",
     "@initia/user-services": "workspace:*"
   },

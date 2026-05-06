@@ -1,6 +1,7 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faWpforms } from "@fortawesome/free-brands-svg-icons";
 import { faDashboard, faGear, faTable } from "@fortawesome/free-solid-svg-icons";
+import { USER_FEATURES, canAccessUserFeature } from "@initia/core";
 import CommandPalette, { type Command } from "@initia/shared/ui/components/command-palette";
 import FloatingSpeedDial, {
   type SpeedDialAction,
@@ -66,127 +67,54 @@ const AuthLayout = () => {
   const isAdmin = user?.role === "admin";
 
   /** Returns true when the route is accessible by the current user */
-  const canAccess = (route: AuthRoute) => {
-    if (!route.permission) return true;
-    if (isAdmin) return true;
-    return permissions.some(
-      (p) => p.table === route.permission!.table && p.action === route.permission!.action
-    );
+  const viewMap: Record<string, React.ReactNode> = {
+    dashboard: <DashboardView />,
+    profile: <UserProfileView />,
+    messaging: <MessagingView />,
+    notifications: <NotificationsView />,
+    settings: <UserSettingsView />,
+    "support-center": <SupportCenterView />,
+    "support-center-faq": <FaqView />,
+    "support-center-contact-us": <ContactUsView />,
+    "support-center-tickets": <SupportTicketsView />,
+    "support-center-user-manual": <UserManualView />,
+    "template-examples-data-view": <TemplateDataViewExamplesView />,
+    "template-examples-data-table": <TemplateDataTableExampleView />,
+    "template-examples-data-table-new": <TemplateDataTableRecordView />,
+    "template-examples-data-table-id": <TemplateDataTableRecordView />,
+    "template-examples-forms": <TemplateFormExamplesView />,
   };
-
-  const authRoutes: AuthRoute[] = [
-    {
-      name: t("Auth.Dashboard.Title"),
-      route: "/dashboard",
-      view: <DashboardView />,
-      showInNav: true,
-      icon: faDashboard,
-    },
-    {
-      name: t("Auth.Profile.Title"),
-      route: "/profile",
-      view: <UserProfileView />,
-      icon: faGear,
-      fixed: true,
-    },
-    {
-      name: t("Auth.Messaging.Title"),
-      route: "/messaging",
-      view: <MessagingView />,
-      icon: faGear,
-      fixed: true,
-    },
-    {
-      name: t("Auth.Notifications.Title"),
-      route: "/notifications",
-      view: <NotificationsView />,
-      icon: faGear,
-      fixed: true,
-    },
-    {
-      name: t("Auth.UserSettings.Title"),
-      route: "/settings",
-      view: <UserSettingsView />,
-      icon: faGear,
-      fixed: true,
-    },
-    {
-      name: t("Auth.SupportCenter.Title"),
-      route: "/support-center",
-      view: <SupportCenterView />,
-      icon: faGear,
-      fixed: true,
-    },
-    {
-      name: t("Auth.SupportCenter.Faq.Title"),
-      route: "/support-center/faq",
-      view: <FaqView />,
-      icon: faGear,
-      fixed: true,
-    },
-    {
-      name: t("Auth.SupportCenter.ContactUs.Title"),
-      route: "/support-center/contact-us",
-      view: <ContactUsView />,
-      icon: faGear,
-      fixed: true,
-    },
-    {
-      name: t("Auth.SupportCenter.Tickets.Title"),
-      route: "/support-center/tickets",
-      view: <SupportTicketsView />,
-      icon: faGear,
-      fixed: true,
-    },
-    {
-      name: t("Auth.SupportCenter.UserManual.Title"),
-      route: "/support-center/user-manual",
-      view: <UserManualView />,
-      icon: faGear,
-      fixed: true,
-    },
-    {
-      name: t("Auth.TemplateExamples.DataView.Title"),
-      route: "/template-examples/data-view",
-      view: <TemplateDataViewExamplesView />,
-      icon: faDashboard,
-      showInNav: true,
-      fixed: true,
-    },
-    {
-      name: t("Auth.TemplateExamples.DataTable.Title"),
-      route: "/template-examples/data-table",
-      view: <TemplateDataTableExampleView />,
-      icon: faTable,
-      showInNav: true,
-      fixed: true,
-    },
-    {
-      name: t("Auth.TemplateExamples.DataTable.Title"),
-      route: "/template-examples/data-table/new",
-      view: <TemplateDataTableRecordView />,
-      icon: faTable,
-      fixed: true,
-    },
-    {
-      name: t("Auth.TemplateExamples.DataTable.Title"),
-      route: "/template-examples/data-table/:id",
-      view: <TemplateDataTableRecordView />,
-      icon: faTable,
-      fixed: true,
-    },
-    {
-      name: t("Auth.TemplateExamples.Forms.Title"),
-      route: "/template-examples/forms",
-      view: <TemplateFormExamplesView />,
-      icon: faWpforms,
-      showInNav: true,
-      fixed: true,
-    },
-  ];
+  const iconMap: Record<string, IconProp> = {
+    dashboard: faDashboard,
+    profile: faGear,
+    messaging: faGear,
+    notifications: faGear,
+    settings: faGear,
+    "support-center": faGear,
+    "support-center-faq": faGear,
+    "support-center-contact-us": faGear,
+    "support-center-tickets": faGear,
+    "support-center-user-manual": faGear,
+    "template-examples-data-view": faDashboard,
+    "template-examples-data-table": faTable,
+    "template-examples-data-table-new": faTable,
+    "template-examples-data-table-id": faTable,
+    "template-examples-forms": faWpforms,
+  };
+  const authRoutes: AuthRoute[] = USER_FEATURES.map((feature) => ({
+    name: t(feature.titleKey),
+    route: feature.path,
+    view: viewMap[feature.key],
+    showInNav: feature.showInNav,
+    fixed: feature.fixed,
+    permission: feature.permission,
+    icon: iconMap[feature.key] ?? faGear,
+  })).filter((route) => Boolean(route.view));
 
   // Filter routes the current user can access
-  const accessibleRoutes = authRoutes.filter(canAccess);
+  const accessibleRoutes = authRoutes.filter((route) =>
+    canAccessUserFeature(route, permissions, isAdmin)
+  );
 
   const showSidebar = !location.pathname.includes("apply");
 

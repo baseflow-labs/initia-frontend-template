@@ -37,7 +37,9 @@
     "format:check": "prettier --check \"packages/**/src/**/*.{ts,tsx,json,css,scss,md}\" \"apps/**/src/**/*.{ts,tsx,json,css,scss,md}\"",
     "typecheck": "corepack pnpm --filter \"@initia/*\" --parallel typecheck",
     "changelog:generate": "node scripts/release/generate-changelog.js",
-    "validate": "corepack pnpm lint && corepack pnpm format:check && corepack pnpm typecheck"
+    "validate": "corepack pnpm lint && corepack pnpm format:check && corepack pnpm typecheck",
+    "dev:user-mobile": "corepack pnpm --filter @initia/user-mobile-app dev",
+    "build:user-mobile": "corepack pnpm --filter @initia/user-mobile-app build"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^7.1.0",

@@ -5,3 +5,4 @@ export type ModuleConfig = {
 };
 
 export const buildModuleConfig = (config: ModuleConfig) => config;
+export * from "./userApp";

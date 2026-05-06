@@ -304,9 +304,14 @@ Implement only the “must-have knobs” first:
   - [ ] Build variants of sections
 - [ ] Files management (simple library + tagging)
 
-### Sprint 30 — Build the Builder Script (30 Jun - 31 Jul, 2026)
+## Phase 10 — Admin Platform “Settings & Ops” (30 Jun - 26 Jul, 2026)
+
+### Sprint 30 — Build the App Builder Script (30 Jun - 12 Jul, 2026)
 
 - [ ] Build app generator
+
+### Sprint 31 — Build the App Contents Generator (13 - 26 Jul, 2026)
+
 - [ ] Build AI-based contents generator
   - [ ] Metadata (App Name, Logos, Slogan, theme color)
   - [ ] Initial users, user roles & permissions content
