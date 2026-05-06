@@ -355,6 +355,9 @@ importers:
       '@initia/shared':
         specifier: workspace:*
         version: link:../../packages/shared
+      '@initia/state':
+        specifier: workspace:*
+        version: link:../../packages/state
       '@initia/user-services':
         specifier: workspace:*
         version: link:../../packages/user-services
@@ -389,6 +392,9 @@ importers:
       '@initia/core':
         specifier: workspace:*
         version: link:../../packages/core
+      '@initia/state':
+        specifier: workspace:*
+        version: link:../../packages/state
       '@initia/user-services':
         specifier: workspace:*
         version: link:../../packages/user-services
@@ -476,6 +482,15 @@ importers:
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
+
+  packages/state:
+    dependencies:
+      '@initia/shared':
+        specifier: workspace:*
+        version: link:../shared
+      redux:
+        specifier: ^5.0.1
+        version: 5.0.1
 
   packages/user-services:
     dependencies:

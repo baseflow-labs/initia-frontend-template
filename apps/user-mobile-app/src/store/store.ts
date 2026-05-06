@@ -1,18 +1,26 @@
 import { combineReducers, createStore } from "redux";
-
-import auth from "./reducers/auth";
-import loading from "./reducers/loading";
-import notifications from "./reducers/notifications";
-import settings from "./reducers/settings";
+import {
+  authReducer,
+  createAuthInitialState,
+  loadingReducer,
+  notificationsReducer,
+  settingsReducer,
+  createSettingsInitialState,
+} from "@initia/state";
 
 const rootReducer = combineReducers({
-  notifications,
-  settings,
-  loading,
-  auth,
+  notifications: notificationsReducer,
+  settings: settingsReducer,
+  loading: loadingReducer,
+  auth: authReducer,
 });
 
-const store = createStore(rootReducer);
+const preloadedState = {
+  auth: createAuthInitialState(),
+  settings: createSettingsInitialState(),
+};
+
+const store = createStore(rootReducer, preloadedState as never);
 
 export type RootState = ReturnType<typeof rootReducer>;
 

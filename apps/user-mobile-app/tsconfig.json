@@ -5,6 +5,7 @@
     "moduleResolution": "bundler",
     "baseUrl": ".",
     "paths": {
+      "@initia/state": ["../../packages/state/src/index.ts"],
       "@initia/shared/*": ["../../packages/shared/src/*"],
       "@initia/user-services/*": ["../../packages/user-services/src/*"],
       "@initia/core": ["../../packages/core/src/index.ts"]
