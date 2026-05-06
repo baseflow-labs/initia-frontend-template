@@ -3,7 +3,12 @@
   "compilerOptions": {
     "strict": true,
     "moduleResolution": "bundler",
-    "baseUrl": "."
+    "baseUrl": ".",
+    "paths": {
+      "@initia/shared/*": ["../../packages/shared/src/*"],
+      "@initia/user-services/*": ["../../packages/user-services/src/*"],
+      "@initia/core": ["../../packages/core/src/index.ts"]
+    }
   },
   "include": ["src", "App.tsx"]
 }

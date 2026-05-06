@@ -1,5 +1,6 @@
 import { trackAnalysisEvent } from "@initia/analysis";
 import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -11,13 +12,14 @@ type Props = {
 };
 
 export default function HomeScreen({ navigateTo }: Props) {
+  const { t } = useTranslation();
   const items = useMemo(() => MOBILE_FEATURE_ROUTES, []);
 
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.headerWrap}>
-        <Text style={styles.title}>Initia User Mobile</Text>
-        <Text style={styles.subtitle}>Feature parity map with shared packages</Text>
+        <Text style={styles.title}>{t("Global.Mobile.Title")}</Text>
+        <Text style={styles.subtitle}>{t("Global.Mobile.Subtitle")}</Text>
       </View>
 
       <FlatList

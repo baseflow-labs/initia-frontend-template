@@ -1,4 +1,4 @@
-import { USER_FEATURES } from "@initia/core";
+import { USER_FEATURES, type UserFeatureDefinition } from "@initia/core";
 
 export type MobileFeatureRoute = {
   key: string;
@@ -22,8 +22,10 @@ const FRIENDLY_NAMES: Record<string, string> = {
   "Auth.TemplateExamples.Forms.Title": "Template Forms",
 };
 
-export const MOBILE_FEATURE_ROUTES: MobileFeatureRoute[] = USER_FEATURES.map((feature) => ({
-  key: feature.key,
-  name: FRIENDLY_NAMES[feature.titleKey] || feature.key,
-  description: `Feature route: ${feature.path}`,
-}));
+export const MOBILE_FEATURE_ROUTES: MobileFeatureRoute[] = USER_FEATURES.map(
+  (feature: UserFeatureDefinition) => ({
+    key: feature.key,
+    name: FRIENDLY_NAMES[feature.titleKey] || feature.key,
+    description: `Feature route: ${feature.path}`,
+  })
+);
