@@ -1,6 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useMemo } from "react";
+import { canAccessUserFeature, type UserPermission } from "@initia/core";
 
 import { MOBILE_FEATURE_ROUTES } from "../features/routes";
 import { useAppSelector } from "../store/hooks";
@@ -16,11 +17,23 @@ type RootStackParamList = {
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function AppNavigator() {
-  const { accessToken } = useAppSelector((state) => state.auth);
+  const { accessToken, permissions, user } = useAppSelector((state) => state.auth);
   const isAuthenticated = Boolean(accessToken && accessToken !== "null");
+  const isAdmin = user?.role === "admin";
+  const accessibleRoutes = useMemo(
+    () =>
+      MOBILE_FEATURE_ROUTES.filter((item) =>
+        canAccessUserFeature(
+          { permission: item.permission },
+          permissions as UserPermission[],
+          isAdmin
+        )
+      ),
+    [permissions, isAdmin]
+  );
   const routeDictionary = useMemo(() => {
-    return Object.fromEntries(MOBILE_FEATURE_ROUTES.map((item) => [item.key, item]));
-  }, []);
+    return Object.fromEntries(accessibleRoutes.map((item) => [item.key, item]));
+  }, [accessibleRoutes]);
 
   return (
     <NavigationContainer>
@@ -30,6 +43,7 @@ export default function AppNavigator() {
             <Stack.Screen name="Home" options={{ title: "User App" }}>
               {({ navigation }) => (
                 <HomeScreen
+                  routes={accessibleRoutes}
                   navigateTo={(routeKey) => {
                     const target = routeDictionary[routeKey];
                     if (!target) return;

@@ -4,16 +4,17 @@ import { useTranslation } from "react-i18next";
 import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { MOBILE_FEATURE_ROUTES } from "../features/routes";
+import type { MobileFeatureRoute } from "../features/routes";
 import { colors } from "../theme/colors";
 
 type Props = {
+  routes: MobileFeatureRoute[];
   navigateTo: (routeKey: string) => void;
 };
 
-export default function HomeScreen({ navigateTo }: Props) {
+export default function HomeScreen({ routes, navigateTo }: Props) {
   const { t } = useTranslation();
-  const items = useMemo(() => MOBILE_FEATURE_ROUTES, []);
+  const items = useMemo(() => routes, [routes]);
 
   return (
     <SafeAreaView style={styles.safeArea}>

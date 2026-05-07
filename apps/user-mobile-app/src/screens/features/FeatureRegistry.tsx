@@ -1,8 +1,13 @@
 import { ReactNode } from "react";
 
-import DashboardMobileView from "./DashboardMobileView";
+import {
+  DashboardConnectedView,
+  MessagingConnectedView,
+  NotificationsConnectedView,
+  ProfileConnectedView,
+  SettingsConnectedView,
+} from "./ConnectedFeatureViews";
 import ListLikeView from "./ListLikeView";
-import ProfileMobileView from "./ProfileMobileView";
 import {
   SupportContactView,
   SupportFaqView,
@@ -11,13 +16,11 @@ import {
 } from "./SupportCenterViews";
 
 export const FEATURE_VIEW_BY_KEY: Record<string, ReactNode> = {
-  dashboard: <DashboardMobileView />,
-  profile: <ProfileMobileView />,
-  messaging: <ListLikeView title="Messaging" lines={["Inbox", "Threads", "Unread"]} />,
-  notifications: <ListLikeView title="Notifications" lines={["All", "Unread", "Mentions"]} />,
-  settings: (
-    <ListLikeView title="Settings" lines={["Account", "Security", "System", "Connections"]} />
-  ),
+  dashboard: <DashboardConnectedView />,
+  profile: <ProfileConnectedView />,
+  messaging: <MessagingConnectedView />,
+  notifications: <NotificationsConnectedView />,
+  settings: <SettingsConnectedView />,
   "support-center": (
     <ListLikeView title="Support Center" lines={["FAQ", "Contact Us", "Tickets", "User Manual"]} />
   ),

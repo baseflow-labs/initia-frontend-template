@@ -1,9 +1,11 @@
 import { USER_FEATURES, type UserFeatureDefinition } from "@initia/core";
+import type { UserPermission } from "@initia/core";
 
 export type MobileFeatureRoute = {
   key: string;
   name: string;
   description: string;
+  permission?: UserPermission;
 };
 
 const FRIENDLY_NAMES: Record<string, string> = {
@@ -27,5 +29,6 @@ export const MOBILE_FEATURE_ROUTES: MobileFeatureRoute[] = USER_FEATURES.map(
     key: feature.key,
     name: FRIENDLY_NAMES[feature.titleKey] || feature.key,
     description: `Feature route: ${feature.path}`,
+    permission: feature.permission,
   })
 );
