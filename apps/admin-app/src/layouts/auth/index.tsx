@@ -7,6 +7,7 @@ import {
   faFileShield,
   faFileSignature,
   faGlobe,
+  faChartLine,
   faHeadset,
   faPaintBrush,
   faUsers,
@@ -40,6 +41,7 @@ import SystemLoggerView from "@/views/auth/systemSettings/logger";
 import LegalDocumentsView from "@/views/auth/systemSettings/legalDocuments";
 import SystemDataBulkInsertionView from "@/views/auth/systemSettings/bulkInseration";
 import BackupSettingsView from "@/views/auth/systemSettings/backup";
+import AnalyticsIntegrationsView from "@/views/auth/systemSettings/analyticsIntegrations";
 import SupportCenterManagementView from "@/views/auth/supportCenter";
 import LandingPageManagement from "@/views/auth/landingPage";
 import DashboardView from "@/views/auth/dashboard";
@@ -121,6 +123,13 @@ const AuthLayout = () => {
       view: <SystemDataBulkInsertionView />,
       showInNav: true,
       icon: faDatabase,
+    },
+    {
+      name: t("Auth.Settings.Admin.AnalyticsIntegrations.Title", "Analytics Integrations"),
+      route: "/analytics-integrations",
+      view: <AnalyticsIntegrationsView />,
+      showInNav: true,
+      icon: faChartLine,
     },
     {
       name: t("Auth.SupportCenter.Admin.Title", "Support Center"),

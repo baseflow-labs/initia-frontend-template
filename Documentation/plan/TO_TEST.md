@@ -44,3 +44,4 @@
   - [ ] Notifications
   - [ ] System
 - [ ] User profile
+- [ ] CRUD & bulk actions @ module

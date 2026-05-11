@@ -17,6 +17,10 @@ export interface Metadata {
   socialTwitter?: string;
   socialYoutube?: string;
   socialTiktok?: string;
+  googleAnalyticsMeasurementId?: string;
+  googleAnalyticsDashboardUrl?: string;
+  microsoftClarityProjectId?: string;
+  microsoftClarityDashboardUrl?: string;
 }
 
 const get = async (): Promise<EnvelopeResponse<Metadata>> => {
