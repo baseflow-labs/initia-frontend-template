@@ -13,7 +13,6 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@initia/shared": "workspace:*",
-    "redux": "^5.0.1"
+    "@initia/shared": "workspace:*"
   }
 }
