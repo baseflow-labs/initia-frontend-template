@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 
 import { addNotification } from "../../../../store/actions/notifications";
+
 import { inputs } from "./inputs";
 
 const InsightsEmbeds = ({ data }: { data: Partial<MetadataApi.Metadata> }) => (

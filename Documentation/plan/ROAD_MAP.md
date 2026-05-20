@@ -354,7 +354,10 @@ Implement only the “must-have knobs” first:
 - [ ] Announcements / manual notifications generation service
 - [ ] Email integration & management service (templates, scheduling, logs)
 - [ ] Build user-level permissions
-- [ ] Build record-level permissions
+- [ ] Build record-level / condition-based permissions
+- [ ] Build logout API
+- [ ] Build temporary permission for all levels
+- [ ] Build many-to-many user-role relationship
 - [ ] Advanced form features (conditional logic, calculated fields)
 - [ ] Advanced DataTable features (pivot tables, custom formulas)
 - [ ] Mobile app (Flutter)
