@@ -45,3 +45,11 @@
   - [ ] System
 - [ ] User profile
 - [ ] CRUD & bulk actions @ module
+
+- Apps
+  - [ ] Generator App
+  - [ ] HEAL
+  - [ ] AIS
+  - [ ] PN
+  - [ ] Family Finances
+  - [ ] PRICE
