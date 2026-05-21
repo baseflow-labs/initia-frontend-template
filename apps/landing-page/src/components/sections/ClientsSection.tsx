@@ -7,7 +7,20 @@ interface ClientsSectionProps {
 }
 
 export default function ClientsSection({ title, subtitle, content }: ClientsSectionProps) {
-  const { logos } = content;
+  const logos = Array.isArray(content?.logos) ? content.logos : [];
+
+  const safeLogos = logos.filter(
+    (client) =>
+      client &&
+      typeof client.id === "string" &&
+      client.id.trim() &&
+      typeof client.logo === "string" &&
+      client.logo.trim()
+  );
+
+  if (!safeLogos.length) {
+    return null;
+  }
 
   return (
     <>
@@ -31,7 +44,7 @@ export default function ClientsSection({ title, subtitle, content }: ClientsSect
           </div>
 
           <div className="row g-4 align-items-center justify-content-center">
-            {logos.map((client) => (
+            {safeLogos.map((client) => (
               <div key={client.id} className="col-6 col-md-4 col-lg-3 text-center">
                 {client.url ? (
                   <a

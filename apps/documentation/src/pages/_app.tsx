@@ -1,6 +1,7 @@
 import '../globals.css';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import type { AppProps } from 'next/app';
 
 const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
 
@@ -31,7 +32,7 @@ function logSystemError(message: string, stack?: string) {
   }
 }
 
-export default function App({ Component, pageProps }: { Component: any; pageProps: any }) {
+export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
   useEffect(() => {

@@ -9,8 +9,8 @@
     "build": "next build",
     "start": "next start -p 3002",
     "export": "next export",
-    "lint": "eslint . --ext .ts,.tsx,.mdx",
-    "lint:fix": "eslint . --ext .ts,.tsx,.mdx --fix",
+    "lint": "eslint . --ext .ts,.tsx",
+    "lint:fix": "eslint . --ext .ts,.tsx --fix",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

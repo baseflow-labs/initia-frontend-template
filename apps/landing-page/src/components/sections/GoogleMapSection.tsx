@@ -1,11 +1,25 @@
-export default function GoogleMapSection({ title, subtitle, content }: any) {
+interface GoogleMapSectionProps {
+  title?: string;
+  subtitle?: string;
+  content?: {
+    embedUrl?: string;
+  };
+}
+
+export default function GoogleMapSection({ title, subtitle, content }: GoogleMapSectionProps) {
+  const embedUrl = typeof content?.embedUrl === "string" ? content.embedUrl.trim() : "";
+
+  if (!embedUrl) {
+    return null;
+  }
+
   return (
     <section className="py-5">
       <div className="container">
-        <h2>{title}</h2>
+        {title ? <h2>{title}</h2> : null}
         {subtitle ? <p>{subtitle}</p> : null}
         <div className="ratio ratio-16x9">
-          <iframe src={content.embedUrl} title="map" loading="lazy" />
+          <iframe src={embedUrl} title="map" loading="lazy" />
         </div>
       </div>
     </section>
