@@ -11,6 +11,23 @@ import AboutSection from "./AboutSection";
 import HowItWorksSection from "./HowItWorksSection";
 import DemoRequestSection from "./DemoRequestSection";
 import CareersSection from "./CareersSection";
+import AccordionSection from "./AccordionSection";
+import BlogCarouselSection from "./BlogCarouselSection";
+import BlogListSection from "./BlogListSection";
+import BlogSingleSection from "./BlogSingleSection";
+import CarouselSection from "./CarouselSection";
+import ChatPromptSection from "./ChatPromptSection";
+import CtaSection from "./CtaSection";
+import FooterContentSection from "./FooterContentSection";
+import GoogleMapSection from "./GoogleMapSection";
+import ImageBlocksSection from "./ImageBlocksSection";
+import PartnersSection from "./PartnersSection";
+import PrivacyPolicySection from "./PrivacyPolicySection";
+import PromptInputSection from "./PromptInputSection";
+import SocialLinksSection from "./SocialLinksSection";
+import TermsOfServiceSection from "./TermsOfServiceSection";
+import TextBlocksSection from "./TextBlocksSection";
+import VideoBlocksSection from "./VideoBlocksSection";
 
 import {
   Section,
@@ -90,6 +107,138 @@ export default function SectionRenderer({ section }: SectionRendererProps) {
     case "careers":
       return (
         <CareersSection title={title} subtitle={subtitle} content={content as CareersContent} />
+      );
+    case "cta":
+      return (
+        <CtaSection title={title} subtitle={subtitle} content={content as Record<string, any>} />
+      );
+    case "privacy_policy":
+      return (
+        <PrivacyPolicySection
+          title={title}
+          subtitle={subtitle}
+          content={content as Record<string, any>}
+        />
+      );
+    case "terms_of_service":
+      return (
+        <TermsOfServiceSection
+          title={title}
+          subtitle={subtitle}
+          content={content as Record<string, any>}
+        />
+      );
+    case "footer":
+      return (
+        <FooterContentSection
+          title={title}
+          subtitle={subtitle}
+          content={content as Record<string, any>}
+        />
+      );
+    case "prompt_input":
+      return (
+        <PromptInputSection
+          title={title}
+          subtitle={subtitle}
+          content={content as Record<string, any>}
+        />
+      );
+    case "chat_prompt":
+      return (
+        <ChatPromptSection
+          title={title}
+          subtitle={subtitle}
+          content={content as Record<string, any>}
+        />
+      );
+    case "partners":
+      return (
+        <PartnersSection
+          title={title}
+          subtitle={subtitle}
+          content={content as Record<string, any>}
+        />
+      );
+    case "text_blocks":
+      return (
+        <TextBlocksSection
+          title={title}
+          subtitle={subtitle}
+          content={content as Record<string, any>}
+        />
+      );
+    case "carousel":
+      return (
+        <CarouselSection
+          title={title}
+          subtitle={subtitle}
+          content={content as Record<string, any>}
+        />
+      );
+    case "image_blocks":
+      return (
+        <ImageBlocksSection
+          title={title}
+          subtitle={subtitle}
+          content={content as Record<string, any>}
+        />
+      );
+    case "video_blocks":
+      return (
+        <VideoBlocksSection
+          title={title}
+          subtitle={subtitle}
+          content={content as Record<string, any>}
+        />
+      );
+    case "social_links":
+      return (
+        <SocialLinksSection
+          title={title}
+          subtitle={subtitle}
+          content={content as Record<string, any>}
+        />
+      );
+    case "accordion":
+      return (
+        <AccordionSection
+          title={title}
+          subtitle={subtitle}
+          content={content as Record<string, any>}
+        />
+      );
+    case "google_map":
+      return (
+        <GoogleMapSection
+          title={title}
+          subtitle={subtitle}
+          content={content as Record<string, any>}
+        />
+      );
+    case "blog_single":
+      return (
+        <BlogSingleSection
+          title={title}
+          subtitle={subtitle}
+          content={content as Record<string, any>}
+        />
+      );
+    case "blog_list":
+      return (
+        <BlogListSection
+          title={title}
+          subtitle={subtitle}
+          content={content as Record<string, any>}
+        />
+      );
+    case "blog_carousel":
+      return (
+        <BlogCarouselSection
+          title={title}
+          subtitle={subtitle}
+          content={content as Record<string, any>}
+        />
       );
     default:
       // Unknown section type - silently skip rendering

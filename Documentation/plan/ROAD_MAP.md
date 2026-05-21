@@ -256,22 +256,21 @@ Implement only the “must-have knobs” first:
 
 ### Sprint 29 — Content management v2 (16 - 29 Jun, 2026)
 
-- [ ] Policy / Terms with localization
-- [ ] Landing page content management (basic sections data model)
-  - [ ] CTA
-  - [ ] Privacy Policy
-  - [ ] Terms of Service
-  - [ ] Footer Contents
-  - [ ] Prompt Input
+- [x] Landing page content management (basic sections data model)
+  - [x] CTA
+  - [x] Privacy Policy
+  - [x] Terms of Service
+  - [x] Footer Contents
+  - [x] Prompt Input
   - [x] Hero
   - [x] Pricing
   - [x] About
   - [x] How it Works
   - [x] Features
   - [x] Blog
-    - [ ] Single post view
-    - [ ] List view
-    - [ ] Carousel
+    - [x] Single post view
+    - [x] List view
+    - [x] Carousel
   - [x] FAQ
   - [x] Support Center
   - [x] Demo request
@@ -279,16 +278,16 @@ Implement only the “must-have knobs” first:
   - [x] Testimonials
   - [x] Prominent Clients
   - [x] Contact
-  - [ ] Partners
-  - [ ] Text Blocks
-  - [ ] Carousel
-  - [ ] Image Blocks (gallery / single)
-  - [ ] Video Blocks (youtube / own with player)
-  - [ ] Team members
-  - [ ] Social links
-  - [ ] Accordion
-  - [ ] Chat / Command prompt box
-  - [ ] Google map
+  - [x] Partners
+  - [x] Text Blocks
+  - [x] Carousel
+  - [x] Image Blocks (gallery / single)
+  - [x] Video Blocks (youtube / own with player)
+  - [x] Team members
+  - [x] Social links
+  - [x] Accordion
+  - [x] Chat / Command prompt box
+  - [x] Google map
 - [ ] Build advanced landing page content edit
   - [ ] Core component based (reflect all shared components)
   - [ ] Design-based not user-based naming

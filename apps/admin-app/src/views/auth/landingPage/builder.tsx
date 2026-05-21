@@ -28,6 +28,23 @@ const SECTION_TYPES: { label: string; value: SectionType }[] = [
   { label: "How It Works", value: "how_it_works" },
   { label: "Demo Request", value: "demo_request" },
   { label: "Careers", value: "careers" },
+  { label: "CTA", value: "cta" },
+  { label: "Privacy Policy", value: "privacy_policy" },
+  { label: "Terms of Service", value: "terms_of_service" },
+  { label: "Footer", value: "footer" },
+  { label: "Prompt Input", value: "prompt_input" },
+  { label: "Partners", value: "partners" },
+  { label: "Text Blocks", value: "text_blocks" },
+  { label: "Carousel", value: "carousel" },
+  { label: "Image Blocks", value: "image_blocks" },
+  { label: "Video Blocks", value: "video_blocks" },
+  { label: "Social Links", value: "social_links" },
+  { label: "Accordion", value: "accordion" },
+  { label: "Chat / Command Prompt", value: "chat_prompt" },
+  { label: "Google Map", value: "google_map" },
+  { label: "Blog Single", value: "blog_single" },
+  { label: "Blog List", value: "blog_list" },
+  { label: "Blog Carousel", value: "blog_carousel" },
 ];
 
 function getSectionContentSchema(type?: SectionType): InputProps[] {
@@ -224,6 +241,142 @@ function getSectionContentSchema(type?: SectionType): InputProps[] {
           required: true,
           placeholder:
             '[{"id":"1","title":"Frontend Engineer","department":"Engineering","location":"Remote"}]',
+        },
+      ];
+    case "cta":
+      return [
+        { name: "heading", label: "Heading", type: "text", fullWidth: true, required: true },
+        { name: "description", label: "Description", type: "textarea", fullWidth: true },
+        { name: "buttonText", label: "Button Text", type: "text", fullWidth: true },
+        { name: "buttonLink", label: "Button Link", type: "text", fullWidth: true },
+      ];
+    case "privacy_policy":
+    case "terms_of_service":
+      return [
+        { name: "content", label: "Content", type: "textarea", fullWidth: true, required: true },
+      ];
+    case "footer":
+      return [
+        { name: "copyright", label: "Copyright", type: "text", fullWidth: true },
+        {
+          name: "links",
+          label: "Links (JSON array)",
+          type: "textarea",
+          fullWidth: true,
+          placeholder: '[{"label":"Privacy","url":"/privacy-policy"}]',
+        },
+      ];
+    case "prompt_input":
+    case "chat_prompt":
+      return [
+        {
+          name: "placeholder",
+          label: "Placeholder",
+          type: "text",
+          fullWidth: true,
+          required: true,
+        },
+        { name: "submitText", label: "Submit Text", type: "text", fullWidth: true },
+      ];
+    case "partners":
+    case "image_blocks":
+      return [
+        {
+          name: "items",
+          label: "Items (JSON array)",
+          type: "textarea",
+          fullWidth: true,
+          required: true,
+          placeholder: '[{"title":"Item","image":"https://...","link":"https://..."}]',
+        },
+      ];
+    case "text_blocks":
+      return [
+        {
+          name: "blocks",
+          label: "Blocks (JSON array)",
+          type: "textarea",
+          fullWidth: true,
+          required: true,
+          placeholder: '[{"title":"Block","text":"Body text"}]',
+        },
+      ];
+    case "carousel":
+      return [
+        {
+          name: "slides",
+          label: "Slides (JSON array)",
+          type: "textarea",
+          fullWidth: true,
+          required: true,
+          placeholder: '[{"title":"Slide","description":"...","image":"https://..."}]',
+        },
+      ];
+    case "video_blocks":
+      return [
+        {
+          name: "videos",
+          label: "Videos (JSON array)",
+          type: "textarea",
+          fullWidth: true,
+          required: true,
+          placeholder: '[{"title":"Video","url":"https://youtube.com/..."}]',
+        },
+      ];
+    case "social_links":
+      return [
+        {
+          name: "links",
+          label: "Social Links (JSON array)",
+          type: "textarea",
+          fullWidth: true,
+          required: true,
+          placeholder: '[{"platform":"x","url":"https://x.com/..."}]',
+        },
+      ];
+    case "accordion":
+      return [
+        {
+          name: "items",
+          label: "Accordion Items (JSON array)",
+          type: "textarea",
+          fullWidth: true,
+          required: true,
+          placeholder: '[{"title":"Q","content":"A"}]',
+        },
+      ];
+    case "google_map":
+      return [
+        { name: "embedUrl", label: "Embed URL", type: "text", fullWidth: true, required: true },
+        { name: "address", label: "Address", type: "text", fullWidth: true },
+      ];
+    case "blog_single":
+      return [
+        { name: "title", label: "Post Title", type: "text", fullWidth: true, required: true },
+        { name: "excerpt", label: "Excerpt", type: "textarea", fullWidth: true },
+        { name: "content", label: "Content", type: "textarea", fullWidth: true, required: true },
+        { name: "image", label: "Image URL", type: "text", fullWidth: true },
+      ];
+    case "blog_list":
+      return [
+        {
+          name: "posts",
+          label: "Posts (JSON array)",
+          type: "textarea",
+          fullWidth: true,
+          required: true,
+          placeholder: '[{"id":"1","title":"Post","excerpt":"...","slug":"post"}]',
+        },
+      ];
+    case "blog_carousel":
+      return [
+        {
+          name: "posts",
+          label: "Posts (JSON array)",
+          type: "textarea",
+          fullWidth: true,
+          required: true,
+          placeholder: '[{"id":"1","title":"Post","excerpt":"...","slug":"post"}]',
         },
       ];
     default:

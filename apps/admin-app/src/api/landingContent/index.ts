@@ -17,7 +17,24 @@ export type SectionType =
   | "about"
   | "how_it_works"
   | "demo_request"
-  | "careers";
+  | "careers"
+  | "cta"
+  | "privacy_policy"
+  | "terms_of_service"
+  | "footer"
+  | "prompt_input"
+  | "partners"
+  | "text_blocks"
+  | "carousel"
+  | "image_blocks"
+  | "video_blocks"
+  | "social_links"
+  | "accordion"
+  | "chat_prompt"
+  | "google_map"
+  | "blog_single"
+  | "blog_list"
+  | "blog_carousel";
 
 export interface LandingPageMetadata {
   title?: string;

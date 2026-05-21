@@ -1,0 +1,16 @@
+export default function AccordionSection({ title, subtitle, content }: any) {
+  return (
+    <section className="py-5">
+      <div className="container">
+        <h2>{title}</h2>
+        {subtitle ? <p>{subtitle}</p> : null}
+        {(content.items || []).map((it: any, i: number) => (
+          <details key={i} className="mb-2">
+            <summary>{it.title}</summary>
+            <p>{it.content}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+  );
+}
