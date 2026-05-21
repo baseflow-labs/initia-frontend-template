@@ -21,6 +21,15 @@ export interface Metadata {
   googleAnalyticsDashboardUrl?: string;
   microsoftClarityProjectId?: string;
   microsoftClarityDashboardUrl?: string;
+  passwordMinLength?: number;
+  passwordRequireUppercase?: boolean;
+  passwordRequireLowercase?: boolean;
+  passwordRequireNumber?: boolean;
+  passwordRequireSpecialChar?: boolean;
+  sessionTimeoutMinutes?: number;
+  loginAttemptsLimit?: number;
+  fileUploadMaxSizeMb?: number;
+  fileUploadMaxCount?: number;
 }
 
 const get = async (): Promise<EnvelopeResponse<Metadata>> => {

@@ -248,10 +248,10 @@
 
 Implement only the “must-have knobs” first:
 
-- [ ] Password policy (min length, complexity)
-- [ ] Session timeout + login attempts limit
+- [x] Password policy (min length, complexity)
+- [x] Session timeout + login attempts limit
 - [ ] Enabled languages + default language
-- [ ] File upload limits (max size, max count)
+- [x] File upload limits (max size, max count)
 - [ ] Basic integrations settings (API keys storage placeholder)
 
 ### Sprint 29 — Content management v2 (16 - 29 Jun, 2026)

@@ -22,6 +22,13 @@ export interface State {
   timezone: string;
   dateFormat: string;
   defaultLanguage: string;
+  passwordMinLength: number;
+  passwordRequireUppercase: boolean;
+  passwordRequireLowercase: boolean;
+  passwordRequireNumber: boolean;
+  passwordRequireSpecialChar: boolean;
+  fileUploadMaxSizeMb: number;
+  fileUploadMaxCount: number;
 }
 
 export type Action =
@@ -50,6 +57,13 @@ export type Action =
         socialTwitter?: string;
         socialYoutube?: string;
         socialTiktok?: string;
+        passwordMinLength?: number;
+        passwordRequireUppercase?: boolean;
+        passwordRequireLowercase?: boolean;
+        passwordRequireNumber?: boolean;
+        passwordRequireSpecialChar?: boolean;
+        fileUploadMaxSizeMb?: number;
+        fileUploadMaxCount?: number;
       };
     };
 
@@ -77,6 +91,13 @@ const initialState: State = {
   timezone: localStorage.getItem("timezone") || "UTC",
   dateFormat: localStorage.getItem("dateFormat") || "MM/DD/YYYY",
   defaultLanguage: localStorage.getItem("defaultLanguage") || "en",
+  passwordMinLength: parseInt(localStorage.getItem("passwordMinLength") || "8", 10),
+  passwordRequireUppercase: localStorage.getItem("passwordRequireUppercase") !== "false",
+  passwordRequireLowercase: localStorage.getItem("passwordRequireLowercase") !== "false",
+  passwordRequireNumber: localStorage.getItem("passwordRequireNumber") !== "false",
+  passwordRequireSpecialChar: localStorage.getItem("passwordRequireSpecialChar") === "true",
+  fileUploadMaxSizeMb: parseInt(localStorage.getItem("fileUploadMaxSizeMb") || "2", 10),
+  fileUploadMaxCount: parseInt(localStorage.getItem("fileUploadMaxCount") || "3", 10),
 };
 
 const settings = (state: State = initialState, action: Action): State => {
@@ -155,6 +176,13 @@ const settings = (state: State = initialState, action: Action): State => {
         socialTwitter,
         socialYoutube,
         socialTiktok,
+        passwordMinLength,
+        passwordRequireUppercase,
+        passwordRequireLowercase,
+        passwordRequireNumber,
+        passwordRequireSpecialChar,
+        fileUploadMaxSizeMb,
+        fileUploadMaxCount,
       } = action.data;
 
       if (name) localStorage.setItem("name", String(name));
@@ -171,6 +199,19 @@ const settings = (state: State = initialState, action: Action): State => {
       if (socialTwitter) localStorage.setItem("socialTwitter", String(socialTwitter));
       if (socialYoutube) localStorage.setItem("socialYoutube", String(socialYoutube));
       if (socialTiktok) localStorage.setItem("socialTiktok", String(socialTiktok));
+      if (passwordMinLength) localStorage.setItem("passwordMinLength", String(passwordMinLength));
+      if (typeof passwordRequireUppercase === "boolean")
+        localStorage.setItem("passwordRequireUppercase", String(passwordRequireUppercase));
+      if (typeof passwordRequireLowercase === "boolean")
+        localStorage.setItem("passwordRequireLowercase", String(passwordRequireLowercase));
+      if (typeof passwordRequireNumber === "boolean")
+        localStorage.setItem("passwordRequireNumber", String(passwordRequireNumber));
+      if (typeof passwordRequireSpecialChar === "boolean")
+        localStorage.setItem("passwordRequireSpecialChar", String(passwordRequireSpecialChar));
+      if (fileUploadMaxSizeMb)
+        localStorage.setItem("fileUploadMaxSizeMb", String(fileUploadMaxSizeMb));
+      if (fileUploadMaxCount)
+        localStorage.setItem("fileUploadMaxCount", String(fileUploadMaxCount));
 
       return {
         ...state,

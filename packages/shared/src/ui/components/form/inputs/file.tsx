@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useField } from "formik";
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
 import * as FileApi from "../../../../api/files";
 import Spinner from "../../core/spinner";
@@ -31,6 +32,12 @@ const FileInput: React.FC<FinalInput> = ({
   // ...rest
 }) => {
   const { t } = useTranslation();
+  const settings = useSelector(
+    (state: { settings: { fileUploadMaxSizeMb?: number; fileUploadMaxCount?: number } }) =>
+      state?.settings || {}
+  );
+  const resolvedFileSizeLimit = Number(settings.fileUploadMaxSizeMb || fileSizeLimit);
+  const resolvedMaxFiles = Number(settings.fileUploadMaxCount || maxFiles);
   const [field, , helpers] =
     useField<{ name: string; type: string; id: string; path: string }[]>(name);
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -68,13 +75,15 @@ const FileInput: React.FC<FinalInput> = ({
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = Array.from(e.currentTarget.files || []);
-    const remainingSlots = maxFiles - files.length;
+    const remainingSlots = resolvedMaxFiles - files.length;
     const filesToUpload = selectedFiles.slice(0, remainingSlots);
 
-    const oversizedFiles = filesToUpload.filter((f) => f.size / (1024 * 1024) > fileSizeLimit);
+    const oversizedFiles = filesToUpload.filter(
+      (f) => f.size / (1024 * 1024) > resolvedFileSizeLimit
+    );
     if (oversizedFiles.length) {
       // TODO: Add notification callback prop
-      console.error(t("Global.Form.Errors.FileTooLarge", { max: fileSizeLimit }));
+      console.error(t("Global.Form.Errors.FileTooLarge", { max: resolvedFileSizeLimit }));
       return;
     }
 
@@ -167,12 +176,12 @@ const FileInput: React.FC<FinalInput> = ({
         ))}
 
         <div
-          className={`upload-dropzone ${files.length >= maxFiles ? "disabled" : ""}`}
-          onClick={files.length < maxFiles ? handleClick : undefined}
+          className={`upload-dropzone ${files.length >= resolvedMaxFiles ? "disabled" : ""}`}
+          onClick={files.length < resolvedMaxFiles ? handleClick : undefined}
         >
           {uploading ? (
             <Spinner />
-          ) : files.length < maxFiles ? (
+          ) : files.length < resolvedMaxFiles ? (
             t("Global.Form.Labels.AddFiles")
           ) : (
             t("Global.Form.Labels.FilesMaxReached")
