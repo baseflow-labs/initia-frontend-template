@@ -456,7 +456,7 @@ export const getMockPagesEN = (): Page[] => [
 
       // 7. BLOG SECTION
       {
-        id: "s7",
+        id: "s9",
         title: "Latest from Our Blog",
         subtitle: "Insights, tips, and stories from the InnovateHub team",
         type: "blog",
@@ -565,7 +565,7 @@ export const getMockPagesEN = (): Page[] => [
 
       // 11. DEMO REQUEST SECTION
       {
-        id: "s8",
+        id: "s11",
         title: "See InnovateHub in Action",
         subtitle: "Schedule a personalized demo with our team",
         type: "demo_request",

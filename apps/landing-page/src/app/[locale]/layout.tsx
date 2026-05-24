@@ -12,7 +12,7 @@ import "@/styles/rtl.css";
 
 // Always SSR — content driven by the backend
 export const dynamic = "force-dynamic";
-export const revalidate = 0;
+export const revalidate = 3600;
 
 export async function generateMetadata({ params }: RootLayoutProps): Promise<Metadata> {
   const { locale } = await params;

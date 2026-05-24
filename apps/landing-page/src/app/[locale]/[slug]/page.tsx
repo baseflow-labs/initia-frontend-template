@@ -6,7 +6,7 @@ import "@initia/shared/styles/index.scss";
 
 // Always fetch fresh from the API — no static caching so admin edits reflect immediately.
 export const dynamic = "force-dynamic";
-export const revalidate = 0;
+export const revalidate = 3600;
 
 interface PageProps {
   params: Promise<{

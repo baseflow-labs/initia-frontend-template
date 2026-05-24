@@ -454,7 +454,7 @@ export const getMockPagesAR = (): Page[] => [
 
       // 7. قسم المدونة
       {
-        id: "s7",
+        id: "s9",
         title: "أحدث ما في مدونتنا",
         subtitle: "رؤى ونصائح وقصص من فريق إنوفيت هاب",
         type: "blog",
@@ -563,7 +563,7 @@ export const getMockPagesAR = (): Page[] => [
 
       // 11. قسم طلب العرض التوضيحي
       {
-        id: "s8",
+        id: "s11",
         title: "شاهد إنوفيت هاب أثناء العمل",
         subtitle: "حدد موعدًا لعرض توضيحي مخصص مع فريقنا",
         type: "demo_request",

@@ -1,12 +1,14 @@
 # To Test Parts
 
 - [ ] Auth
-  - [ ] Login
+  - [x] Login
   - [ ] Logout
-  - [ ] Register
+  - [x] Register
   - [ ] Password Email
   - [ ] Password Reset
   - [ ] Password Change
+  - [ ] oAuth
+  - [ ] 2FA
 - [ ] Support Center
   - [ ] FAQ
     - [ ] Admin

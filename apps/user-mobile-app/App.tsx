@@ -41,7 +41,7 @@ export default function App() {
       initialize: () => undefined,
       trackEvent: (eventName, payload) => {
         console.log("[analysis]", eventName, payload || {});
-      }
+      },
     });
   }, []);
 

@@ -9,7 +9,10 @@ const USER_SERVICES_DIR = path.join(ROOT, "packages/user-services/src/services")
 const USER_SERVICES_LOCALE_EN = path.join(ROOT, "packages/user-services/src/i18n/locales/en.json");
 const USER_SERVICES_LOCALE_AR = path.join(ROOT, "packages/user-services/src/i18n/locales/ar.json");
 const USER_SERVICES_INDEX = path.join(ROOT, "packages/user-services/src/index.ts");
-const USER_SERVICES_SERVICES_INDEX = path.join(ROOT, "packages/user-services/src/services/index.ts");
+const USER_SERVICES_SERVICES_INDEX = path.join(
+  ROOT,
+  "packages/user-services/src/services/index.ts"
+);
 
 const USER_APP_SERVICE_VIEWS = path.join(ROOT, "apps/user-app/src/views/auth/services");
 const ADMIN_APP_SERVICE_VIEWS = path.join(ROOT, "apps/admin-app/src/views/auth/services");
@@ -335,7 +338,11 @@ function main() {
     args.dryRun
   );
 
-  upsertExportLine(USER_SERVICES_SERVICES_INDEX, `export * from "./${spec.serviceCode}";`, args.dryRun);
+  upsertExportLine(
+    USER_SERVICES_SERVICES_INDEX,
+    `export * from "./${spec.serviceCode}";`,
+    args.dryRun
+  );
   writeUserServicesRootIndex(args.dryRun);
 
   const enLocale = readJson(USER_SERVICES_LOCALE_EN);
