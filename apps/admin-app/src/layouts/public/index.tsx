@@ -2,6 +2,7 @@ import tempLogo from "@initia/shared/assets/images/brand/logo.png";
 import Button from "@initia/shared/ui/components/core/button";
 import ForgotPasswordView from "@initia/shared/ui/forgotPassword";
 import LoginView from "@initia/shared/ui/login";
+import RegisterView from "@initia/shared/ui/register";
 import ResetPasswordView from "@initia/shared/ui/ResetPassword";
 import { applyRouteChanges } from "@initia/shared/utils/function";
 import { useEffect } from "react";
@@ -40,6 +41,12 @@ const AuthLayout = () => {
           }}
         />
       ),
+      show: true,
+    },
+    {
+      name: t("Public.Register.Title"),
+      route: "/register",
+      view: <RegisterView />,
       show: true,
     },
     {

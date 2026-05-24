@@ -209,6 +209,19 @@ const ApiDataTable: React.FC<Props> = ({
     paginationMode,
   ]);
 
+  // Query-shape changes should restart pagination from first page.
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [
+    search,
+    searchField,
+    JSON.stringify(filters),
+    sortField,
+    sortDirection,
+    pageSize,
+    dataApiEndpoint,
+  ]);
+
   useEffect(() => {
     if (stateInitializedRef.current) return;
     stateInitializedRef.current = true;
