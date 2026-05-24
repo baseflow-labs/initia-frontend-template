@@ -4,6 +4,7 @@ import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 import { Footer, Navbar } from "@/components/layout";
+import ConsentPopup from "@/components/layout/ConsentPopup";
 import { landingApi } from "@/lib/api";
 import { locales } from "@/i18n/config";
 import "@initia/shared/styles/index.scss";
@@ -77,6 +78,7 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
           >
             <Navbar pages={pages} systemMetadata={systemMetadata} />
             <main>{children}</main>
+            <ConsentPopup />
             <Footer pages={pages} systemMetadata={systemMetadata} locale={locale} />
           </div>
         </NextIntlClientProvider>

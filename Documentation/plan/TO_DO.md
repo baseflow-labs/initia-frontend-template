@@ -25,28 +25,24 @@
 - [ ] Fix landing page Wizard steps
   - [ ] Login after prompt
   - [ ] Build analytical integration
-  - [ ] Build consent popup
+  - [x] Build consent popup
   - [ ] Build saved projects dashboard
   - [ ] Allow download of project schema
 - [ ] Add show cases to landing page
 - [ ] Connect APIs to backend services
-  - [ ] Notification
+  - [x] Notification
   - [ ] Form of Forms
-  - [ ] Support Center
-  - [ ] Messaging
-  - [ ] Activity Tracker
-  - [ ] Logging
-  - [ ] Health Check
+  - [x] Support Center
+  - [x] Messaging
+  - [x] Activity Tracker
+  - [x] Logging
+  - [x] Health Check
   - [ ] Mailing Service
   - [ ] Auth
     - [x] Login
-    - [ ] Register
-    - [ ] Password Recovery
-    - [ ] Password Reset
-  - [ ] User Profile
+    - [x] Register
+    - [x] Password Recovery
+    - [x] Password Reset
+  - [x] User Profile
   - [ ] Chatbot
   - [ ] Example Service
-- [ ] Centralize across package APIs
-  - [ ] Auth
-  - [ ] Notification
-  - [ ] Support Center Get
