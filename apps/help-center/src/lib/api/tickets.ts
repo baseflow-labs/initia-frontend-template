@@ -15,7 +15,7 @@ interface HelpCenterTicket {
 /**
  * Unwrap the API response envelope to get the payload
  */
-function unwrapPayload<T>(response: any): T[] {
+function unwrapPayload<T>(response: unknown): T[] {
   if (!response.payload) {
     if (Array.isArray(response.data)) return response.data;
     if (Array.isArray(response.message)) return response.message;

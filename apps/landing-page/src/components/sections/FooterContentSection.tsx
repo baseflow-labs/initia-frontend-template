@@ -1,4 +1,12 @@
-export default function FooterContentSection({ title, subtitle, content }: any) {
+export default function FooterContentSection({
+  title,
+  subtitle,
+  content,
+}: {
+  title?: string;
+  subtitle?: string;
+  content?: Record<string, unknown>;
+}) {
   return (
     <section className="py-5 bg-light">
       <div className="container">
@@ -6,7 +14,7 @@ export default function FooterContentSection({ title, subtitle, content }: any) 
         {subtitle ? <p>{subtitle}</p> : null}
         <p>{content.copyright}</p>
         <div className="d-flex gap-3 flex-wrap">
-          {(content.links || []).map((l: any, i: number) => (
+          {(content.links || []).map((l: Record<string, unknown>, i: number) => (
             <a key={i} href={l.url}>
               {l.label}
             </a>

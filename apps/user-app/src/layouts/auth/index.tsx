@@ -27,6 +27,7 @@ import TemplateDataTableRecordView from "../../views/auth/templateExamples/datat
 import TemplateDataViewExamplesView from "../../views/auth/templateExamples/dataView";
 import TemplateFormExamplesView from "../../views/auth/templateExamples/forms";
 import FormOfFormsView from "../../views/auth/templateExamples/formOfForms";
+import ChatbotView from "../../views/auth/chatbot";
 import UserProfileView from "../../views/auth/user/profile";
 import UserSettingsView from "../../views/auth/user/settings";
 import AuthFooter from "../common/footer";
@@ -79,6 +80,7 @@ const AuthLayout = () => {
     "support-center-contact-us": <ContactUsView />,
     "support-center-tickets": <SupportTicketsView />,
     "support-center-user-manual": <UserManualView />,
+    chatbot: <ChatbotView />,
     "template-examples-data-view": <TemplateDataViewExamplesView />,
     "template-examples-data-table": <TemplateDataTableExampleView />,
     "template-examples-data-table-new": <TemplateDataTableRecordView />,
@@ -102,6 +104,7 @@ const AuthLayout = () => {
     "template-examples-data-table-new": faTable,
     "template-examples-data-table-id": faTable,
     "template-examples-forms": faWpforms,
+    chatbot: faGear,
   };
   const authRoutes: AuthRoute[] = USER_FEATURES.map((feature) => ({
     name: t(feature.titleKey),

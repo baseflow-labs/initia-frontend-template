@@ -54,6 +54,12 @@ export const USER_FEATURES: UserFeatureDefinition[] = [
     fixed: true,
   },
   {
+    key: "chatbot",
+    path: "/chatbot",
+    titleKey: "Auth.Chatbot.Title",
+    fixed: true,
+  },
+  {
     key: "template-examples-data-view",
     path: "/template-examples/data-view",
     titleKey: "Auth.TemplateExamples.DataView.Title",

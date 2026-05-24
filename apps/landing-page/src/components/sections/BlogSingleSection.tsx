@@ -1,4 +1,12 @@
-export default function BlogSingleSection({ title, subtitle, content }: any) {
+export default function BlogSingleSection({
+  title,
+  subtitle,
+  content,
+}: {
+  title?: string;
+  subtitle?: string;
+  content?: Record<string, unknown>;
+}) {
   return (
     <section className="py-5">
       <div className="container">

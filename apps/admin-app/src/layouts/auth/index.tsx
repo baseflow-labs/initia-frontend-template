@@ -1,17 +1,18 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import {
+  faChartLine,
   faClockRotateLeft,
-  faFileContract,
   faDashboard,
   faDatabase,
+  faEnvelope,
+  faFileContract,
   faFileShield,
   faFileSignature,
   faGlobe,
-  faChartLine,
   faHeadset,
   faPaintBrush,
+  faRobot,
   faUsers,
-  faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
 import CommandPalette, { type Command } from "@initia/shared/ui/components/command-palette";
 import FloatingSpeedDial, {
@@ -35,20 +36,21 @@ import OffCanvasNav from "./navs/offcanvasNav";
 import OffCanvasTools from "./navs/offcanvasTools";
 import Sidebar from "./navs/sidebarNav";
 
-import UsersView from "@/views/auth/systemSettings/users";
-import UserActivityView from "@/views/auth/systemSettings/userActivity";
-import SystemMetadataSettingsView from "@/views/auth/systemSettings/metadata";
-import SystemLoggerView from "@/views/auth/systemSettings/logger";
-import LegalDocumentsView from "@/views/auth/systemSettings/legalDocuments";
-import SystemDataBulkInsertionView from "@/views/auth/systemSettings/bulkInseration";
-import BackupSettingsView from "@/views/auth/systemSettings/backup";
-import AnalyticsIntegrationsView from "@/views/auth/systemSettings/analyticsIntegrations";
-import AdminFormOfFormsView from "@/views/auth/systemSettings/formOfForms";
-import MailingSettingsView from "@/views/auth/systemSettings/mailing";
-import SupportCenterManagementView from "@/views/auth/supportCenter";
-import LandingPageManagement from "@/views/auth/landingPage";
 import DashboardView from "@/views/auth/dashboard";
+import LandingPageManagement from "@/views/auth/landingPage";
 import SendNotificationsView from "@/views/auth/notifications/send";
+import SupportCenterManagementView from "@/views/auth/supportCenter";
+import AnalyticsIntegrationsView from "@/views/auth/systemSettings/analyticsIntegrations";
+import BackupSettingsView from "@/views/auth/systemSettings/backup";
+import SystemDataBulkInsertionView from "@/views/auth/systemSettings/bulkInseration";
+import ChatbotBuilderView from "@/views/auth/systemSettings/chatbot";
+import AdminFormOfFormsView from "@/views/auth/systemSettings/formOfForms";
+import LegalDocumentsView from "@/views/auth/systemSettings/legalDocuments";
+import SystemLoggerView from "@/views/auth/systemSettings/logger";
+import MailingSettingsView from "@/views/auth/systemSettings/mailing";
+import SystemMetadataSettingsView from "@/views/auth/systemSettings/metadata";
+import UserActivityView from "@/views/auth/systemSettings/userActivity";
+import UsersView from "@/views/auth/systemSettings/users";
 
 interface AuthRoute {
   name: string;
@@ -147,6 +149,13 @@ const AuthLayout = () => {
       view: <MailingSettingsView />,
       showInNav: true,
       icon: faEnvelope,
+    },
+    {
+      name: t("Auth.Chatbot.Builder.Title", "Chatbot Builder"),
+      route: "/chatbot-builder",
+      view: <ChatbotBuilderView />,
+      showInNav: true,
+      icon: faRobot,
     },
     {
       name: t("Auth.SupportCenter.Admin.Title", "Support Center"),

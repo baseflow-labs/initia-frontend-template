@@ -110,14 +110,18 @@ export default function SectionRenderer({ section }: SectionRendererProps) {
       );
     case "cta":
       return (
-        <CtaSection title={title} subtitle={subtitle} content={content as Record<string, any>} />
+        <CtaSection
+          title={title}
+          subtitle={subtitle}
+          content={content as Record<string, unknown>}
+        />
       );
     case "privacy_policy":
       return (
         <PrivacyPolicySection
           title={title}
           subtitle={subtitle}
-          content={content as Record<string, any>}
+          content={content as Record<string, unknown>}
         />
       );
     case "terms_of_service":
@@ -125,7 +129,7 @@ export default function SectionRenderer({ section }: SectionRendererProps) {
         <TermsOfServiceSection
           title={title}
           subtitle={subtitle}
-          content={content as Record<string, any>}
+          content={content as Record<string, unknown>}
         />
       );
     case "footer":
@@ -133,7 +137,7 @@ export default function SectionRenderer({ section }: SectionRendererProps) {
         <FooterContentSection
           title={title}
           subtitle={subtitle}
-          content={content as Record<string, any>}
+          content={content as Record<string, unknown>}
         />
       );
     case "prompt_input":
@@ -141,7 +145,7 @@ export default function SectionRenderer({ section }: SectionRendererProps) {
         <PromptInputSection
           title={title}
           subtitle={subtitle}
-          content={content as Record<string, any>}
+          content={content as Record<string, unknown>}
         />
       );
     case "chat_prompt":
@@ -149,7 +153,7 @@ export default function SectionRenderer({ section }: SectionRendererProps) {
         <ChatPromptSection
           title={title}
           subtitle={subtitle}
-          content={content as Record<string, any>}
+          content={content as Record<string, unknown>}
         />
       );
     case "partners":
@@ -157,7 +161,7 @@ export default function SectionRenderer({ section }: SectionRendererProps) {
         <PartnersSection
           title={title}
           subtitle={subtitle}
-          content={content as Record<string, any>}
+          content={content as Record<string, unknown>}
         />
       );
     case "text_blocks":
@@ -165,7 +169,7 @@ export default function SectionRenderer({ section }: SectionRendererProps) {
         <TextBlocksSection
           title={title}
           subtitle={subtitle}
-          content={content as Record<string, any>}
+          content={content as Record<string, unknown>}
         />
       );
     case "carousel":
@@ -173,7 +177,7 @@ export default function SectionRenderer({ section }: SectionRendererProps) {
         <CarouselSection
           title={title}
           subtitle={subtitle}
-          content={content as Record<string, any>}
+          content={content as Record<string, unknown>}
         />
       );
     case "image_blocks":
@@ -181,7 +185,7 @@ export default function SectionRenderer({ section }: SectionRendererProps) {
         <ImageBlocksSection
           title={title}
           subtitle={subtitle}
-          content={content as Record<string, any>}
+          content={content as Record<string, unknown>}
         />
       );
     case "video_blocks":
@@ -189,7 +193,7 @@ export default function SectionRenderer({ section }: SectionRendererProps) {
         <VideoBlocksSection
           title={title}
           subtitle={subtitle}
-          content={content as Record<string, any>}
+          content={content as Record<string, unknown>}
         />
       );
     case "social_links":
@@ -197,7 +201,7 @@ export default function SectionRenderer({ section }: SectionRendererProps) {
         <SocialLinksSection
           title={title}
           subtitle={subtitle}
-          content={content as Record<string, any>}
+          content={content as Record<string, unknown>}
         />
       );
     case "accordion":
@@ -205,7 +209,7 @@ export default function SectionRenderer({ section }: SectionRendererProps) {
         <AccordionSection
           title={title}
           subtitle={subtitle}
-          content={content as Record<string, any>}
+          content={content as Record<string, unknown>}
         />
       );
     case "google_map":
@@ -213,7 +217,7 @@ export default function SectionRenderer({ section }: SectionRendererProps) {
         <GoogleMapSection
           title={title}
           subtitle={subtitle}
-          content={content as Record<string, any>}
+          content={content as Record<string, unknown>}
         />
       );
     case "blog_single":
@@ -221,7 +225,7 @@ export default function SectionRenderer({ section }: SectionRendererProps) {
         <BlogSingleSection
           title={title}
           subtitle={subtitle}
-          content={content as Record<string, any>}
+          content={content as Record<string, unknown>}
         />
       );
     case "blog_list":
@@ -229,7 +233,7 @@ export default function SectionRenderer({ section }: SectionRendererProps) {
         <BlogListSection
           title={title}
           subtitle={subtitle}
-          content={content as Record<string, any>}
+          content={content as Record<string, unknown>}
         />
       );
     case "blog_carousel":
@@ -237,7 +241,7 @@ export default function SectionRenderer({ section }: SectionRendererProps) {
         <BlogCarouselSection
           title={title}
           subtitle={subtitle}
-          content={content as Record<string, any>}
+          content={content as Record<string, unknown>}
         />
       );
     default:
