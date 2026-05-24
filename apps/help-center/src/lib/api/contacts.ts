@@ -16,12 +16,19 @@ interface HelpCenterContact {
  * Unwrap the API response envelope to get the payload
  */
 function unwrapPayload<T>(response: unknown): T[] {
-  if (!response.payload) {
-    if (Array.isArray(response.data)) return response.data;
-    if (Array.isArray(response.message)) return response.message;
-    return [];
-  }
-  return response.payload;
+  if (typeof response !== "object" || response === null) return [];
+
+  const envelope = response as {
+    payload?: unknown;
+    data?: unknown;
+    message?: unknown;
+  };
+
+  if (Array.isArray(envelope.payload)) return envelope.payload as T[];
+  if (Array.isArray(envelope.data)) return envelope.data as T[];
+  if (Array.isArray(envelope.message)) return envelope.message as T[];
+
+  return [];
 }
 
 /**
