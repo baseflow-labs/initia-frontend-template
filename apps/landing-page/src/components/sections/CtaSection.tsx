@@ -1,20 +1,19 @@
-export default function CtaSection({
-  title,
-  subtitle,
-  content,
-}: {
-  title?: string;
-  subtitle?: string;
-  content?: Record<string, unknown>;
-}) {
+type Props = { title?: string; subtitle?: string; content?: Record<string, unknown> };
+
+export default function CtaSection({ title, subtitle, content }: Props) {
+  const heading = String(content?.heading || title || "");
+  const description = String(content?.description || "");
+  const buttonLink = String(content?.buttonLink || "#");
+  const buttonText = String(content?.buttonText || "Get Started");
+
   return (
     <section className="py-5">
       <div className="container text-center">
-        <h2>{content.heading || title}</h2>
+        <h2>{heading}</h2>
         {subtitle ? <p>{subtitle}</p> : null}
-        <p>{content.description}</p>
-        <a className="btn btn-primary" href={content.buttonLink || "#"}>
-          {content.buttonText || "Get Started"}
+        <p>{description}</p>
+        <a className="btn btn-primary" href={buttonLink}>
+          {buttonText}
         </a>
       </div>
     </section>
