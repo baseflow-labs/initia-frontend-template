@@ -86,6 +86,13 @@ export const USER_FEATURES: UserFeatureDefinition[] = [
     showInNav: true,
     fixed: true,
   },
+  {
+    key: "template-examples-form-of-forms",
+    path: "/template-examples/form-of-forms",
+    titleKey: "Auth.TemplateExamples.FormsOfForms.Title",
+    showInNav: true,
+    fixed: true,
+  },
 ];
 
 export const canAccessUserFeature = (

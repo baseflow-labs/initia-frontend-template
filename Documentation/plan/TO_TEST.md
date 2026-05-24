@@ -45,6 +45,7 @@
   - [ ] System
 - [ ] User profile
 - [ ] CRUD & bulk actions @ module
+- [ ] Form of Forms
 
 - Apps
   - [ ] Generator App

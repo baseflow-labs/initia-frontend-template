@@ -26,6 +26,7 @@ import TemplateDataTableExampleView from "../../views/auth/templateExamples/data
 import TemplateDataTableRecordView from "../../views/auth/templateExamples/datatablePage/record";
 import TemplateDataViewExamplesView from "../../views/auth/templateExamples/dataView";
 import TemplateFormExamplesView from "../../views/auth/templateExamples/forms";
+import FormOfFormsView from "../../views/auth/templateExamples/formOfForms";
 import UserProfileView from "../../views/auth/user/profile";
 import UserSettingsView from "../../views/auth/user/settings";
 import AuthFooter from "../common/footer";
@@ -83,6 +84,7 @@ const AuthLayout = () => {
     "template-examples-data-table-new": <TemplateDataTableRecordView />,
     "template-examples-data-table-id": <TemplateDataTableRecordView />,
     "template-examples-forms": <TemplateFormExamplesView />,
+    "template-examples-form-of-forms": <FormOfFormsView />,
   };
   const iconMap: Record<string, IconProp> = {
     dashboard: faDashboard,
