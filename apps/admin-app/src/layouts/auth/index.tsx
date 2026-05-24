@@ -11,6 +11,7 @@ import {
   faHeadset,
   faPaintBrush,
   faUsers,
+  faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
 import CommandPalette, { type Command } from "@initia/shared/ui/components/command-palette";
 import FloatingSpeedDial, {
@@ -42,6 +43,8 @@ import LegalDocumentsView from "@/views/auth/systemSettings/legalDocuments";
 import SystemDataBulkInsertionView from "@/views/auth/systemSettings/bulkInseration";
 import BackupSettingsView from "@/views/auth/systemSettings/backup";
 import AnalyticsIntegrationsView from "@/views/auth/systemSettings/analyticsIntegrations";
+import AdminFormOfFormsView from "@/views/auth/systemSettings/formOfForms";
+import MailingSettingsView from "@/views/auth/systemSettings/mailing";
 import SupportCenterManagementView from "@/views/auth/supportCenter";
 import LandingPageManagement from "@/views/auth/landingPage";
 import DashboardView from "@/views/auth/dashboard";
@@ -130,6 +133,20 @@ const AuthLayout = () => {
       view: <AnalyticsIntegrationsView />,
       showInNav: true,
       icon: faChartLine,
+    },
+    {
+      name: t("Auth.Settings.Admin.FormsOfForms.Title", "Form of Forms"),
+      route: "/forms-of-forms",
+      view: <AdminFormOfFormsView />,
+      showInNav: true,
+      icon: faDatabase,
+    },
+    {
+      name: t("Auth.Settings.Admin.Mailing.Title", "Mailing Service"),
+      route: "/mailing",
+      view: <MailingSettingsView />,
+      showInNav: true,
+      icon: faEnvelope,
     },
     {
       name: t("Auth.SupportCenter.Admin.Title", "Support Center"),

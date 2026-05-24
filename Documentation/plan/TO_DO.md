@@ -31,18 +31,18 @@
 - [ ] Add show cases to landing page
 - [ ] Connect APIs to backend services
   - [x] Notification
-  - [ ] Form of Forms
+  - [x] Form of Forms
   - [x] Support Center
   - [x] Messaging
   - [x] Activity Tracker
   - [x] Logging
   - [x] Health Check
-  - [ ] Mailing Service
+  - [x] Mailing Service
   - [ ] Auth
     - [x] Login
     - [x] Register
     - [x] Password Recovery
     - [x] Password Reset
   - [x] User Profile
-  - [ ] Chatbot
-  - [ ] Example Service
+  - [x] Chatbot
+  - [x] Example Service
