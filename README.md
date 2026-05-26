@@ -36,11 +36,8 @@ npm install -g pnpm
 # Install dependencies
 pnpm install
 
-# Run user app
-pnpm dev:user
-
-# Run admin app (in another terminal)
-pnpm dev:admin
+# Run all apps dev
+pnpm dev
 
 # Build both apps
 pnpm build
