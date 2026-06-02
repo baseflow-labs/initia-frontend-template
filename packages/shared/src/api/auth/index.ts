@@ -7,6 +7,7 @@ export interface loginCredentials {
 }
 
 export type OAuthProvider = "google" | "apple" | "microsoft";
+export type AuthProvider = "email" | OAuthProvider;
 
 export interface OAuthLoginPayload {
   provider: OAuthProvider;
@@ -18,13 +19,15 @@ export interface OAuthLoginPayload {
 }
 
 export interface OAuthProviderState {
-  provider: OAuthProvider;
+  provider: AuthProvider;
   enabled: boolean;
 }
 
 export interface OAuthProvidersConfigPayload {
   providers: OAuthProviderState[];
   enabledProviders: OAuthProvider[];
+  emailLoginEnabled: boolean;
+  registrationEnabled: boolean;
 }
 
 export interface OAuthPopupMessage {
@@ -69,9 +72,13 @@ const getOAuthAdminProvidersConfig = async (): Promise<EnvelopeResponse<OAuthPro
 };
 
 const updateOAuthAdminProvidersConfig = async (
-  providers: OAuthProviderState[]
+  providers: OAuthProviderState[],
+  registrationEnabled?: boolean
 ): Promise<EnvelopeResponse<OAuthProviderState[]>> => {
-  return await api.put<OAuthProviderState[]>(mainPath + "/oauth/admin/providers", { providers });
+  return await api.put<OAuthProviderState[]>(mainPath + "/oauth/admin/providers", {
+    providers,
+    registrationEnabled,
+  });
 };
 
 const getOAuthPopupStartUrl = (provider: OAuthProvider, origin: string) => {

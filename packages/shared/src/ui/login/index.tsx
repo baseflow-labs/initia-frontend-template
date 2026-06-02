@@ -21,6 +21,7 @@ const LoginView = ({ onLoginSuccess }: LoginViewProps) => {
     "apple",
     "microsoft",
   ]);
+  const [emailLoginEnabled, setEmailLoginEnabled] = useState(true);
 
   const formInputs = () => [
     {
@@ -106,11 +107,13 @@ const LoginView = ({ onLoginSuccess }: LoginViewProps) => {
       .getOAuthProvidersConfig()
       .then((res) => {
         const enabled = res.payload?.enabledProviders || [];
+        setEmailLoginEnabled(res.payload?.emailLoginEnabled ?? true);
         if (enabled.length || (res.payload?.providers || []).length) {
           setEnabledOAuthProviders(enabled);
         }
       })
       .catch(() => {
+        setEmailLoginEnabled(true);
         setEnabledOAuthProviders(["google", "apple", "microsoft"]);
       });
   }, []);
@@ -143,13 +146,15 @@ const LoginView = ({ onLoginSuccess }: LoginViewProps) => {
         </div>
       ) : null}
 
-      <Form
-        inputs={formInputs}
-        submitText={t("Public.Login.Labels.Login")}
-        onFormSubmit={onSubmit}
-      />
+      {emailLoginEnabled ? (
+        <Form
+          inputs={formInputs}
+          submitText={t("Public.Login.Labels.Login")}
+          onFormSubmit={onSubmit}
+        />
+      ) : null}
 
-      {import.meta.env.VITE_APP_ENVIRONMENT === "staging" ? (
+      {emailLoginEnabled && import.meta.env.VITE_APP_ENVIRONMENT === "staging" ? (
         <Button
           className="w-100 mt-3"
           onClick={() =>

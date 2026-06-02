@@ -14,20 +14,29 @@ export const OAuthProvidersSettingsContent = () => {
   const [providers, setProviders] = useState<
     Array<AuthApi.OAuthProviderState & { initialEnabled: boolean }>
   >([]);
+  const [registrationEnabled, setRegistrationEnabled] = useState(true);
+  const [initialRegistrationEnabled, setInitialRegistrationEnabled] = useState(true);
   const [saving, setSaving] = useState(false);
 
   const hasChanges = useMemo(
-    () => providers.some((provider) => provider.enabled !== provider.initialEnabled),
-    [providers]
+    () =>
+      providers.some((provider) => provider.enabled !== provider.initialEnabled) ||
+      registrationEnabled !== initialRegistrationEnabled,
+    [initialRegistrationEnabled, providers, registrationEnabled]
   );
 
   const loadData = async () => {
-    const res = await AuthApi.getOAuthAdminProvidersConfig();
-    const mapped = (res.payload || []).map((provider) => ({
+    const [adminRes, publicRes] = await Promise.all([
+      AuthApi.getOAuthAdminProvidersConfig(),
+      AuthApi.getOAuthProvidersConfig(),
+    ]);
+    const mapped = (adminRes.payload || []).map((provider) => ({
       ...provider,
       initialEnabled: provider.enabled,
     }));
     setProviders(mapped);
+    setRegistrationEnabled(publicRes.payload?.registrationEnabled ?? true);
+    setInitialRegistrationEnabled(publicRes.payload?.registrationEnabled ?? true);
   };
 
   useEffect(() => {
@@ -36,7 +45,7 @@ export const OAuthProvidersSettingsContent = () => {
     });
   }, []);
 
-  const toggleProvider = (providerName: AuthApi.OAuthProvider) => {
+  const toggleProvider = (providerName: AuthApi.AuthProvider) => {
     setProviders((current) =>
       current.map((provider) =>
         provider.provider === providerName ? { ...provider, enabled: !provider.enabled } : provider
@@ -48,7 +57,8 @@ export const OAuthProvidersSettingsContent = () => {
     try {
       setSaving(true);
       const res = await AuthApi.updateOAuthAdminProvidersConfig(
-        providers.map(({ provider, enabled }) => ({ provider, enabled }))
+        providers.map(({ provider, enabled }) => ({ provider, enabled })),
+        registrationEnabled
       );
 
       const updated = (res.payload || []).map((provider) => ({
@@ -56,6 +66,7 @@ export const OAuthProvidersSettingsContent = () => {
         initialEnabled: provider.enabled,
       }));
       setProviders(updated);
+      setInitialRegistrationEnabled(registrationEnabled);
     } catch {
       dispatch(addNotification("err", "Failed to update OAuth providers settings"));
     } finally {
@@ -63,7 +74,8 @@ export const OAuthProvidersSettingsContent = () => {
     }
   };
 
-  const labelByProvider: Record<AuthApi.OAuthProvider, string> = {
+  const labelByProvider: Record<AuthApi.AuthProvider, string> = {
+    email: "Email / Password",
     google: "Google",
     apple: "Apple",
     microsoft: "Microsoft",
@@ -74,11 +86,28 @@ export const OAuthProvidersSettingsContent = () => {
       <p className="text-muted mb-4">
         {t(
           "Auth.Settings.Admin.OAuthProviders.Description",
-          "Enable or disable each provider for login. Email/password login remains available as fallback."
+          "Enable or disable login methods and control whether public registration is available."
         )}
       </p>
 
       <div className="d-flex flex-column gap-3">
+        <div className="d-flex justify-content-between align-items-center border rounded-3 p-3">
+          <div>
+            <div className="fw-semibold">Registration</div>
+            <small className="text-muted">Allow public account creation</small>
+          </div>
+
+          <div className="form-check form-switch m-0">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              checked={registrationEnabled}
+              onChange={() => setRegistrationEnabled((enabled) => !enabled)}
+              id="auth-registration-enabled"
+            />
+          </div>
+        </div>
+
         {providers.map((provider) => (
           <div
             key={provider.provider}

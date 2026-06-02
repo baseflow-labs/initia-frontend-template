@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react";
 // import { useDispatch } from "react-redux";
 
 // import { AuthResponse, login } from "../../../../user-app/src/store/actions/auth";
@@ -11,7 +12,19 @@ import { formInputs } from "./inputs";
 
 const RegisterView = () => {
   const { t } = useTranslation();
+  const [registrationEnabled, setRegistrationEnabled] = useState(true);
   // const dispatch = useDispatch();
+
+  useEffect(() => {
+    authApi
+      .getOAuthProvidersConfig()
+      .then((res) => {
+        setRegistrationEnabled(res.payload?.registrationEnabled ?? true);
+      })
+      .catch(() => {
+        setRegistrationEnabled(true);
+      });
+  }, []);
 
   const onSubmit = (values?: Record<string, unknown>) => {
     authApi
@@ -36,11 +49,17 @@ const RegisterView = () => {
 
   return (
     <div>
-      <Form
-        inputs={() => formInputs(t)}
-        submitText={t("Public.Register.Labels.Register")}
-        onFormSubmit={onSubmit}
-      />
+      {registrationEnabled ? (
+        <Form
+          inputs={() => formInputs(t)}
+          submitText={t("Public.Register.Labels.Register")}
+          onFormSubmit={onSubmit}
+        />
+      ) : (
+        <p className="text-muted mb-0">
+          {t("Public.Register.Labels.Disabled", "Registration is currently disabled.")}
+        </p>
+      )}
     </div>
   );
 };

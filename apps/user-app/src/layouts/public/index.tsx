@@ -1,11 +1,12 @@
 import tempLogo from "@initia/shared/assets/images/brand/logo.png";
+import * as AuthApi from "@initia/shared/api/auth";
 import Button from "@initia/shared/ui/components/core/button";
 import ForgotPasswordView from "@initia/shared/ui/forgotPassword";
 import LoginView from "@initia/shared/ui/login";
 import RegisterView from "@initia/shared/ui/register";
 import ResetPasswordView from "@initia/shared/ui/ResetPassword";
 import { applyRouteChanges } from "@initia/shared/utils/function";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router";
@@ -22,6 +23,7 @@ const AuthLayout = () => {
   const navigate = useNavigate();
   const { logoFull } = useAppSelector((state) => state.settings);
   const { loading } = useAppSelector((state) => state.loading);
+  const [registrationEnabled, setRegistrationEnabled] = useState(true);
 
   const publicRoutes = [
     {
@@ -47,7 +49,7 @@ const AuthLayout = () => {
       name: t("Public.Register.Title"),
       route: "/register",
       view: <RegisterView />,
-      show: true,
+      show: registrationEnabled,
     },
     {
       name: t("Public.ForgotPassword.Title"),
@@ -65,7 +67,17 @@ const AuthLayout = () => {
 
   useEffect(() => {
     applyRouteChanges(t, publicRoutes, location.pathname);
-  }, [location.pathname]);
+  }, [location.pathname, registrationEnabled]);
+
+  useEffect(() => {
+    AuthApi.getOAuthProvidersConfig()
+      .then((res) => {
+        setRegistrationEnabled(res.payload?.registrationEnabled ?? true);
+      })
+      .catch(() => {
+        setRegistrationEnabled(true);
+      });
+  }, []);
 
   return (
     <main className="d-flex flex-column overflow-x-hidden min-vh-100 vw-100">
