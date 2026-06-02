@@ -41,8 +41,8 @@ interface PersistedState {
   search?: string;
   searchField?: string;
   filters?: customFilterProps[];
-  sortField?: string;
-  sortDirection?: "asc" | "desc" | null;
+  sortBy?: string;
+  reverse?: boolean;
   paginationMode?: "pagination" | "scroll";
 }
 
@@ -86,8 +86,8 @@ const ApiDataTable: React.FC<Props> = ({
   const [search, setSearch] = useState("");
   const [searchField, setSearchField] = useState("");
   const [filters, setFilters] = useState<customFilterProps[]>([]);
-  const [sortField, setSortField] = useState<string | undefined>();
-  const [sortDirection, setSortDirection] = useState<"asc" | "desc" | null>(null);
+  const [sortBy, setSortBy] = useState<string | undefined>();
+  const [reverse, setReverse] = useState(false);
   const [selectedRowIds, setSelectedRowIds] = useState<string[]>([]);
   const [paginationMode, setPaginationMode] = useState<"pagination" | "scroll">("pagination");
 
@@ -154,8 +154,8 @@ const ApiDataTable: React.FC<Props> = ({
             capacity: pageSize,
             search: search || undefined,
             searchField: searchField || undefined,
-            sortField,
-            sortDirection,
+            sortBy,
+            reverse,
           },
         })
         .then((res: Record<string, unknown>) => {
@@ -202,8 +202,8 @@ const ApiDataTable: React.FC<Props> = ({
     pageSize,
     search,
     JSON.stringify(filters),
-    sortField,
-    sortDirection,
+    sortBy,
+    reverse,
     dataApiEndpoint,
     searchField,
     paginationMode,
@@ -212,15 +212,7 @@ const ApiDataTable: React.FC<Props> = ({
   // Query-shape changes should restart pagination from first page.
   useEffect(() => {
     setCurrentPage(1);
-  }, [
-    search,
-    searchField,
-    JSON.stringify(filters),
-    sortField,
-    sortDirection,
-    pageSize,
-    dataApiEndpoint,
-  ]);
+  }, [search, searchField, JSON.stringify(filters), sortBy, reverse, pageSize, dataApiEndpoint]);
 
   useEffect(() => {
     if (stateInitializedRef.current) return;
@@ -240,14 +232,8 @@ const ApiDataTable: React.FC<Props> = ({
       if (typeof parsed.search === "string") setSearch(parsed.search);
       if (typeof parsed.searchField === "string") setSearchField(parsed.searchField);
       if (Array.isArray(parsed.filters)) setFilters(parsed.filters);
-      if (typeof parsed.sortField === "string") setSortField(parsed.sortField);
-      if (
-        parsed.sortDirection === "asc" ||
-        parsed.sortDirection === "desc" ||
-        parsed.sortDirection === null
-      ) {
-        setSortDirection(parsed.sortDirection);
-      }
+      if (typeof parsed.sortBy === "string") setSortBy(parsed.sortBy);
+      if (typeof parsed.reverse === "boolean") setReverse(parsed.reverse);
       if (parsed.paginationMode === "pagination" || parsed.paginationMode === "scroll") {
         setPaginationMode(parsed.paginationMode);
       }
@@ -287,8 +273,8 @@ const ApiDataTable: React.FC<Props> = ({
       search,
       searchField,
       filters,
-      sortField,
-      sortDirection,
+      sortBy,
+      reverse,
       paginationMode,
     };
     localStorage.setItem(storageKey, JSON.stringify(payload));
@@ -298,8 +284,8 @@ const ApiDataTable: React.FC<Props> = ({
     search,
     searchField,
     filters,
-    sortField,
-    sortDirection,
+    sortBy,
+    reverse,
     paginationMode,
     storageKey,
   ]);
@@ -313,9 +299,9 @@ const ApiDataTable: React.FC<Props> = ({
     setCurrentPage(1);
   };
 
-  const handleSortChange = (field: string, direction: "asc" | "desc") => {
-    setSortField(field);
-    setSortDirection(direction);
+  const handleSortChange = (field: string, nextReverse: boolean) => {
+    setSortBy(field);
+    setReverse(nextReverse);
     setCurrentPage(1);
   };
 
@@ -501,8 +487,8 @@ const ApiDataTable: React.FC<Props> = ({
         searchField={searchField}
         onSearchFieldChange={handleSearchFieldChange}
         // sort
-        sortField={sortField}
-        sortDirection={sortDirection}
+        sortBy={sortBy}
+        reverse={reverse}
         onSortChange={handleSortChange}
         // filters hook (UI to be added later if you want)
         onFiltersChange={handleFiltersChange}
@@ -515,8 +501,8 @@ const ApiDataTable: React.FC<Props> = ({
           search,
           searchField,
           filters,
-          sortField,
-          sortDirection,
+          sortBy,
+          reverse,
         }}
         defaultPaginationMode="pagination"
         paginationMode={paginationMode}

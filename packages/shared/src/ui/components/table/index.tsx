@@ -306,9 +306,9 @@ interface Props extends TableProps {
   onSearchFieldChange?: (value: string) => void;
 
   // sorting
-  sortField?: string;
-  sortDirection?: "asc" | "desc" | null;
-  onSortChange?: (field: string, direction: "asc" | "desc") => void;
+  sortBy?: string;
+  reverse?: boolean;
+  onSortChange?: (field: string, reverse: boolean) => void;
 
   // filters
   currentFilters?: customFilterProps[];
@@ -321,8 +321,8 @@ interface Props extends TableProps {
     search?: string;
     searchField?: string;
     filters?: customFilterProps[];
-    sortField?: string;
-    sortDirection?: "asc" | "desc" | null;
+    sortBy?: string;
+    reverse?: boolean;
   };
   detailsPanelRender?: (row: Row) => React.ReactNode;
   defaultPaginationMode?: "pagination" | "scroll";
@@ -352,8 +352,8 @@ const DynamicTable: React.FC<Props> = ({
   onSearchChange,
   searchField,
   onSearchFieldChange,
-  sortField,
-  sortDirection,
+  sortBy,
+  reverse,
   onSortChange,
   currentFilters,
   onFiltersChange,
@@ -515,10 +515,10 @@ const DynamicTable: React.FC<Props> = ({
   const handleSortClick = (col: TableColumn) => {
     if (!col.sortable || !onSortChange) return;
 
-    const isSameField = sortField === col.name;
-    const nextDirection: "asc" | "desc" = !isSameField || sortDirection === "desc" ? "asc" : "desc";
+    const isSameField = sortBy === col.name;
+    const nextReverse = isSameField ? !reverse : false;
 
-    onSortChange(col.name, nextDirection);
+    onSortChange(col.name, nextReverse);
   };
 
   const getDataType = (name: string): string => {
@@ -616,15 +616,10 @@ const DynamicTable: React.FC<Props> = ({
 
   const renderSortIcon = (col: TableColumn) => {
     if (!col.sortable) return null;
-    if (sortField !== col.name || !sortDirection) {
+    if (sortBy !== col.name) {
       return <FontAwesomeIcon icon={faSort} className="ms-1 text-muted" />;
     }
-    return (
-      <FontAwesomeIcon
-        icon={sortDirection === "asc" ? faSortUp : faSortDown}
-        className="ms-1 text-primary"
-      />
-    );
+    return <FontAwesomeIcon icon={reverse ? faSortDown : faSortUp} className="ms-1 text-primary" />;
   };
 
   const count = paginationMeta?.count || data.length;

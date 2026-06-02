@@ -38,9 +38,13 @@ interface HealthData {
   cpu: HealthInfo;
   disk: HealthInfo;
   database: HealthInfo;
-  google: HealthInfo;
-  memory_Heap: HealthInfo;
+  memory_heap: HealthInfo;
   memory_rss: HealthInfo;
+}
+
+interface HealthCheckResponse {
+  status: "ok" | "error" | "shutting_down" | string;
+  info: HealthData;
 }
 
 const DashboardView = () => {
@@ -51,14 +55,15 @@ const DashboardView = () => {
     notifications?: Notification[];
     users?: Array<{ id: string; email?: string; role?: string; createdAt?: string }>;
     usersMeta?: { count?: number };
+    healthStatus: HealthCheckResponse["status"];
     health: HealthData;
   }>({
+    healthStatus: "unknown",
     health: {
       cpu: { status: "unknown" },
       disk: { status: "unknown" },
       database: { status: "unknown" },
-      google: { status: "unknown" },
-      memory_Heap: { status: "unknown" },
+      memory_heap: { status: "unknown" },
       memory_rss: { status: "unknown" },
     },
   });
@@ -66,9 +71,12 @@ const DashboardView = () => {
   useLayoutEffect(() => {
     SystemHealthApi.get()
       .then((res) => {
+        const healthResponse = res as unknown as HealthCheckResponse;
+
         setData((current) => ({
           ...current,
-          health: res.payload.info as HealthData,
+          healthStatus: healthResponse.status,
+          health: healthResponse.info,
         }));
       })
       .catch(apiCatchGlobalHandler);
@@ -86,7 +94,7 @@ const DashboardView = () => {
       })
       .catch(apiCatchGlobalHandler);
 
-    UserApi.get({ page: 1, capacity: 6, sortField: "createdAt", sortDirection: "desc" })
+    UserApi.get({ page: 1, capacity: 6, sortBy: "createdAt", reverse: true })
       .then((res) => {
         const users = Array.isArray(res.payload)
           ? (res.payload as Array<{
@@ -143,7 +151,7 @@ const DashboardView = () => {
   const healthData = [
     {
       label: t("Auth.Dashboard.Admin.SystemHealth.Overall"),
-      status: data.health.google?.status,
+      status: data.healthStatus === "ok" ? "up" : data.healthStatus,
       icon: faHeart,
     },
     {
@@ -153,7 +161,7 @@ const DashboardView = () => {
     },
     {
       label: t("Auth.Dashboard.Admin.SystemHealth.Memory"),
-      status: data.health.memory_Heap?.status,
+      status: data.health.memory_heap?.status,
       icon: faMemory,
     },
     {

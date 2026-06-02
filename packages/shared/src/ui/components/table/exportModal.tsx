@@ -19,8 +19,8 @@ interface Props {
     search?: string;
     searchField?: string;
     filters?: customFilterProps[];
-    sortField?: string;
-    sortDirection?: "asc" | "desc" | null;
+    sortBy?: string;
+    reverse?: boolean;
   };
 }
 
@@ -65,8 +65,8 @@ const ExportModal: React.FC<Props> = ({ columns, exportOptions }) => {
       conditions: exportOptions?.filters || [],
       search: exportOptions?.search || "",
       searchField: exportOptions?.searchField || "",
-      sortBy: exportOptions?.sortField,
-      reverse: exportOptions?.sortDirection === "desc",
+      sortBy: exportOptions?.sortBy,
+      reverse: exportOptions?.reverse,
     };
 
     exportReport(payload)

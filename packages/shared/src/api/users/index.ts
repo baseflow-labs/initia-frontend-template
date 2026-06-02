@@ -25,7 +25,7 @@ export interface UserProfileResp {
 const getByUserId = async (id?: string): Promise<EnvelopeResponse<UserProfileResp>> => {
   const { user } = (store.getState() as RootState).auth;
 
-  return await api.get<UserProfileResp>(mainPath + "/by-user/" + (id || user.id));
+  return await api.get<UserProfileResp>(mainPath + "/" + (id || user.id));
 };
 
 const remove = async (id: string) => {
