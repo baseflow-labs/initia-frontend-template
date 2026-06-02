@@ -301,8 +301,8 @@
           "Title": "Metadata"
         },
         "OAuthProviders": {
-          "Description": "Enable or disable each provider for login. Email/password login remains available as fallback.",
-          "Title": "OAuth Providers"
+          "Description": "Enable or disable login methods and control whether public registration is available.",
+          "Title": "Login Providers"
         },
         "RolePermissions": {
           "Actions": {
