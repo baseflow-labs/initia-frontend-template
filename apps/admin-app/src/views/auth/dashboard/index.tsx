@@ -43,8 +43,10 @@ interface HealthData {
 }
 
 interface HealthCheckResponse {
-  status: "ok" | "error" | "shutting_down" | string;
-  info: HealthData;
+  payload: {
+    status: "ok" | "error" | "shutting_down" | string;
+    info: HealthData;
+  };
 }
 
 const DashboardView = () => {
@@ -55,8 +57,8 @@ const DashboardView = () => {
     notifications?: Notification[];
     users?: Array<{ id: string; email?: string; role?: string; createdAt?: string }>;
     usersMeta?: { count?: number };
-    healthStatus: HealthCheckResponse["status"];
-    health: HealthData;
+    healthStatus: HealthCheckResponse["payload"]["status"];
+    health: HealthCheckResponse["payload"]["info"];
   }>({
     healthStatus: "unknown",
     health: {
@@ -72,11 +74,10 @@ const DashboardView = () => {
     SystemHealthApi.get()
       .then((res) => {
         const healthResponse = res as unknown as HealthCheckResponse;
-
         setData((current) => ({
           ...current,
-          healthStatus: healthResponse.status,
-          health: healthResponse.info,
+          healthStatus: healthResponse.payload.status,
+          health: healthResponse.payload.info,
         }));
       })
       .catch(apiCatchGlobalHandler);
@@ -156,22 +157,22 @@ const DashboardView = () => {
     },
     {
       label: t("Auth.Dashboard.Admin.SystemHealth.Database"),
-      status: data.health.database?.status,
+      status: data.health?.database?.status,
       icon: faDatabase,
     },
     {
       label: t("Auth.Dashboard.Admin.SystemHealth.Memory"),
-      status: data.health.memory_heap?.status,
+      status: data.health?.memory_heap?.status,
       icon: faMemory,
     },
     {
       label: t("Auth.Dashboard.Admin.SystemHealth.Disk"),
-      status: data.health.disk?.status,
+      status: data.health?.disk?.status,
       icon: faFloppyDisk,
     },
     {
       label: t("Auth.Dashboard.Admin.SystemHealth.Cpu"),
-      status: data.health.cpu?.status,
+      status: data.health?.cpu?.status,
       icon: faShip,
     },
   ];
