@@ -5,7 +5,7 @@ import ButtonBasedSelectionView from "../common/buttonBased";
 import CardBasedSelectionView from "../common/cardBased";
 import ImageBasedSelectionView from "../common/imageBased";
 
-import DefaultCheckboxesInput from "./default";
+import { DefaultCheckboxesInput } from "./default";
 
 type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
 
