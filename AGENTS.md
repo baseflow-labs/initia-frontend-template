@@ -98,3 +98,15 @@ Run from frontend directory.
 - Architecture details: ./ARCHITECTURE.md
 - Engineering decisions: ./DECISIONS.md
 - Execution skills: ./SKILLS.md
+
+## Canonical Rules Source (Shared With Copilot)
+
+The coding rules in this file are mirrored in `.github/instructions/` as scoped instruction files that Copilot auto-loads. Both tools enforce the same rules from the same source.
+
+- `.github/copilot-instructions.md` — always-on project context for Copilot
+- `.github/instructions/react-view-architecture.instructions.md` — TSX view-first, API dirs, reuse-first
+- `.github/instructions/typescript-standards.instructions.md` — no `any`, centralized types
+- `.github/instructions/api-layer.instructions.md` — centralized HTTP, no inline calls
+- `.github/instructions/i18n.instructions.md` — localization keys and locale JSON
+
+When updating a rule here, update the matching instruction file too, and vice versa.
