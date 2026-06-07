@@ -1,4 +1,5 @@
-import axios from "axios";
+import { getAppBackendTarget } from "@initia/shared/api/backendTarget";
+import { createPublicApiBridge } from "@initia/shared/api/publicBridge";
 
 import { getMockPages, getMockSystemMetadata } from "./dummyApiData";
 
@@ -12,12 +13,21 @@ import {
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const DEFAULT_LOCALES = ["en", "ar"];
-const apiClient = axios.create({
-  timeout: 5000,
+const apiBridge = createPublicApiBridge({
+  appId: "landing-page",
+  appBaseUrl: API_URL || "http://localhost:8000/api",
+  firebase: {
+    realtimeDbUrl: process.env.NEXT_PUBLIC_FIREBASE_RTDB_URL || "",
+    databaseSecret: process.env.FIREBASE_DATABASE_SECRET,
+    permissionsCollection: process.env.NEXT_PUBLIC_FIREBASE_PERMISSIONS_COLLECTION || "permissions",
+    dataRootPath: process.env.NEXT_PUBLIC_FIREBASE_DATA_ROOT || "api",
+    storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+    storageAuthToken: process.env.FIREBASE_STORAGE_AUTH_TOKEN,
+  },
 });
 
 function hasRemoteApi(): boolean {
-  return Boolean(API_URL);
+  return Boolean(API_URL) || getAppBackendTarget("landing-page") === "firebase";
 }
 
 export const landingApi = {
@@ -37,10 +47,12 @@ export const landingApi = {
     }
 
     try {
-      const response = await apiClient.get<
+      const response = await apiBridge.request<
         { locales: string[] } | { payload: { locales: string[] } }
-      >(`${API_URL}/landing-content/locales`);
-      const payload = this.unwrapPayload<{ locales: string[] }>(response.data);
+      >({
+        endpoint: "/landing-content/locales",
+      });
+      const payload = this.unwrapPayload<{ locales: string[] }>(response);
       return payload.locales || DEFAULT_LOCALES;
     } catch {
       // Fallback to default locales if API fails
@@ -57,11 +69,11 @@ export const landingApi = {
     }
 
     try {
-      const response = await apiClient.get<SystemMetadata | { payload: SystemMetadata }>(
-        `${API_URL}/metadata`
-      );
+      const response = await apiBridge.request<SystemMetadata | { payload: SystemMetadata }>({
+        endpoint: "/metadata",
+      });
 
-      const payload = this.unwrapPayload<SystemMetadata>(response.data);
+      const payload = this.unwrapPayload<SystemMetadata>(response);
 
       return {
         ...payload,
@@ -88,12 +100,13 @@ export const landingApi = {
     }
 
     try {
-      const response = await apiClient.get<
+      const response = await apiBridge.request<
         LandingPagesResponse | { payload: LandingPagesResponse }
-      >(`${API_URL}/landing-content/pages`, {
+      >({
+        endpoint: "/landing-content/pages",
         params: { locale },
       });
-      const payload = this.unwrapPayload<LandingPagesResponse>(response.data);
+      const payload = this.unwrapPayload<LandingPagesResponse>(response);
       return payload.pages;
     } catch {
       // Return mock data for development
@@ -138,12 +151,12 @@ export const landingApi = {
     }
 
     try {
-      const response = await apiClient.get<LegalDocument | { payload: LegalDocument }>(
-        `${API_URL}/legalDocument/latest/${documentType}`,
-        { params: { locale } }
-      );
+      const response = await apiBridge.request<LegalDocument | { payload: LegalDocument }>({
+        endpoint: `/legalDocument/latest/${documentType}`,
+        params: { locale },
+      });
 
-      return this.unwrapPayload<LegalDocument>(response.data);
+      return this.unwrapPayload<LegalDocument>(response);
     } catch {
       return null;
     }

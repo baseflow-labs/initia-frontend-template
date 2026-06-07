@@ -9,6 +9,15 @@ import { logActivity } from "../utils/activityLogger";
 // Initialize the shared API client with admin-app's store
 export function initializeApi() {
   initializeApiClient({
+    appId: "admin-app",
+    firebase: {
+      realtimeDbUrl: import.meta.env.VITE_FIREBASE_RTDB_URL || "",
+      databaseSecret: import.meta.env.VITE_FIREBASE_DATABASE_SECRET,
+      permissionsCollection: import.meta.env.VITE_FIREBASE_PERMISSIONS_COLLECTION || "permissions",
+      dataRootPath: import.meta.env.VITE_FIREBASE_DATA_ROOT || "api",
+      storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+      storageAuthToken: import.meta.env.VITE_FIREBASE_STORAGE_AUTH_TOKEN,
+    },
     getAccessToken: () => {
       const state = store.getState() as RootState;
       return state.auth.accessToken || null;

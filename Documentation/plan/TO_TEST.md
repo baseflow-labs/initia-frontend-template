@@ -56,3 +56,4 @@
   - [ ] PN
   - [ ] Family Finances
   - [ ] PRICE
+- [ ] Firebase

@@ -2,8 +2,19 @@ import '../globals.css';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import type { AppProps } from 'next/app';
+import { createPublicApiBridge } from '@initia/shared/api/publicBridge';
 
 const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
+const apiBridge = createPublicApiBridge({
+  appId: 'documentation',
+  appBaseUrl: apiBase,
+  firebase: {
+    realtimeDbUrl: process.env.NEXT_PUBLIC_FIREBASE_RTDB_URL || '',
+    permissionsCollection: process.env.NEXT_PUBLIC_FIREBASE_PERMISSIONS_COLLECTION || 'permissions',
+    dataRootPath: process.env.NEXT_PUBLIC_FIREBASE_DATA_ROOT || 'api',
+    storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  },
+});
 
 function logSystemError(message: string, stack?: string) {
   const body = JSON.stringify({
@@ -21,16 +32,21 @@ function logSystemError(message: string, stack?: string) {
       return;
     }
 
-    void fetch(`${apiBase}/logging`, {
+    void apiBridge.request({
+      endpoint: '/logging',
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body,
-      keepalive: true,
+      body: JSON.parse(body),
     });
   } catch {
     // logging must not impact docs UX
   }
 }
+
+type MetadataPayload = {
+  name?: string;
+  defaultThemeColor?: string;
+  logo?: string;
+};
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -38,12 +54,13 @@ export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     const fetchIdentity = async () => {
       try {
-        const apiBase = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
-        const response = await fetch(`${apiBase}/metadata`);
-        if (!response.ok) return;
-
-        const json = await response.json();
-        const payload = json?.payload || json;
+        const json = await apiBridge.request<{ payload?: MetadataPayload } | MetadataPayload>({
+          endpoint: '/metadata',
+        });
+        const payload: MetadataPayload =
+          json && typeof json === 'object' && 'payload' in json
+            ? json.payload || {}
+            : (json as MetadataPayload);
 
         if (payload?.name) {
           document.title = `${payload.name} Documentation`;

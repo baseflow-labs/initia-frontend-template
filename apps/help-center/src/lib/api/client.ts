@@ -1,6 +1,21 @@
+import { createPublicApiBridge } from "@initia/shared/api/publicBridge";
+
 const API_BASE_URL =
   process.env.API_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
 const API_SECRET_KEY = process.env.API_SECRET_KEY || "";
+
+const apiBridge = createPublicApiBridge({
+  appId: "help-center",
+  appBaseUrl: API_BASE_URL,
+  firebase: {
+    realtimeDbUrl: process.env.NEXT_PUBLIC_FIREBASE_RTDB_URL || "",
+    databaseSecret: process.env.FIREBASE_DATABASE_SECRET,
+    permissionsCollection: process.env.NEXT_PUBLIC_FIREBASE_PERMISSIONS_COLLECTION || "permissions",
+    dataRootPath: process.env.NEXT_PUBLIC_FIREBASE_DATA_ROOT || "api",
+    storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+    storageAuthToken: process.env.FIREBASE_STORAGE_AUTH_TOKEN,
+  },
+});
 
 interface FetchOptions extends RequestInit {
   useAuth?: boolean;
@@ -18,19 +33,10 @@ export async function fetchAPI<T>(endpoint: string, options: FetchOptions = {}):
     headers["Authorization"] = `Bearer ${API_SECRET_KEY}`;
   }
 
-  const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-    ...fetchOptions,
+  return apiBridge.request<T>({
+    endpoint,
+    method: (fetchOptions.method || "GET") as "GET" | "POST" | "PUT" | "PATCH" | "DELETE",
     headers,
-    // Next.js 15+ cache configuration
-    next: {
-      revalidate: 3600, // Cache for 1 hour
-      tags: [endpoint.split("/")[1]], // Tag for revalidation
-    },
+    body: fetchOptions.body ? JSON.parse(fetchOptions.body as string) : undefined,
   });
-
-  if (!response.ok) {
-    throw new Error(`API Error: ${response.status} ${response.statusText}`);
-  }
-
-  return response.json();
 }

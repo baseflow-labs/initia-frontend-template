@@ -15,7 +15,8 @@
     "isolatedModules": true,
     "paths": {
       "@/*": ["./src/*"],
-      "@initia/shared": ["../../packages/shared/src"]
+      "@initia/shared": ["../../packages/shared/src"],
+      "@initia/shared/*": ["../../packages/shared/src/*"]
     },
     "allowJs": true,
     "incremental": true

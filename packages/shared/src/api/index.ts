@@ -9,6 +9,9 @@ import axios, {
 
 import { NotificationProps } from "../types/notifications";
 
+import { BackendTarget, FrontendAppId, getAppBackendTarget } from "./backendTarget";
+import { FirebaseMiddlewareConfig, toFirebaseAxiosResponse } from "./firebaseMiddleware";
+
 declare module "axios" {
   export interface InternalAxiosRequestConfig {
     _retry?: boolean;
@@ -17,6 +20,9 @@ declare module "axios" {
 
 // Store callbacks that apps will provide
 interface StoreCallbacks {
+  appId?: FrontendAppId;
+  backendTarget?: BackendTarget;
+  firebase?: FirebaseMiddlewareConfig;
   getAccessToken: () => string | null;
   getRefreshToken: () => string | null;
   onRefreshToken: (accessToken: string, refreshToken: string) => void;
@@ -32,6 +38,18 @@ let storeCallbacks: StoreCallbacks | null = null;
 
 export function initializeApiClient(callbacks: StoreCallbacks) {
   storeCallbacks = callbacks;
+}
+
+function getRuntimeBackendTarget(): BackendTarget {
+  if (storeCallbacks?.backendTarget) {
+    return storeCallbacks.backendTarget;
+  }
+
+  return getAppBackendTarget(storeCallbacks?.appId);
+}
+
+function getFirebaseConfig(): FirebaseMiddlewareConfig | undefined {
+  return storeCallbacks?.firebase;
 }
 
 export const baseURL = import.meta.env.VITE_APP_BACKEND_URL || "http://localhost:8000/api";
@@ -84,7 +102,7 @@ export const formatGetFilters = (
     .filter((key) => filters[key])
     .map((key) => {
       return {
-        field: key.replaceAll("=>", "."),
+        field: key.split("=>").join("."),
         filteredTerm: {
           dataType: "string",
           value: filters[key],
@@ -110,6 +128,28 @@ service.interceptors.request.use(
   (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
     if (storeCallbacks) {
       storeCallbacks.onStartLoading();
+    }
+
+    if (getRuntimeBackendTarget() === "firebase") {
+      config.adapter = async (axiosConfig) => {
+        const firebaseConfig = getFirebaseConfig();
+
+        if (!firebaseConfig) {
+          throw new AxiosError(
+            "Firebase backend is selected, but no firebase configuration was provided."
+          );
+        }
+
+        return toFirebaseAxiosResponse(axiosConfig, {
+          appId: storeCallbacks?.appId,
+          method: (axiosConfig.method || "GET").toUpperCase(),
+          url: axiosConfig.url || "",
+          params: (axiosConfig.params || {}) as Record<string, unknown>,
+          data: axiosConfig.data,
+          headers: axiosConfig.headers,
+          firebase: firebaseConfig,
+        });
+      };
     }
 
     const accessToken = storeCallbacks?.getAccessToken();
@@ -144,9 +184,11 @@ service.interceptors.response.use(
     const accessToken = storeCallbacks?.getAccessToken();
     const refreshToken = storeCallbacks?.getRefreshToken();
     const originalRequest = res.config;
+    const backendTarget = getRuntimeBackendTarget();
 
     // Handle nested 401 from API envelope (non-standard but possible)
     if (
+      backendTarget === "app" &&
       accessToken &&
       accessToken !== "null" &&
       refreshToken &&

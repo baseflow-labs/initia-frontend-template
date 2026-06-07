@@ -14,6 +14,8 @@ export * from "./api/files";
 export * from "./api/messaging";
 export * from "./api/metadata";
 export { initializeApiClient } from "./api";
+export * from "./api/backendTarget";
+export * from "./api/publicBridge";
 
 // Config
 export { default as configs } from "./config/configs";

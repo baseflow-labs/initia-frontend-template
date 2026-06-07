@@ -7,6 +7,15 @@ import store, { RootState } from "../store/store";
 
 export function initializeApi() {
   initializeApiClient({
+    appId: "user-mobile-app",
+    firebase: {
+      realtimeDbUrl: import.meta.env.VITE_FIREBASE_RTDB_URL || "",
+      databaseSecret: import.meta.env.VITE_FIREBASE_DATABASE_SECRET,
+      permissionsCollection: import.meta.env.VITE_FIREBASE_PERMISSIONS_COLLECTION || "permissions",
+      dataRootPath: import.meta.env.VITE_FIREBASE_DATA_ROOT || "api",
+      storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+      storageAuthToken: import.meta.env.VITE_FIREBASE_STORAGE_AUTH_TOKEN,
+    },
     getAccessToken: () => (store.getState() as RootState).auth.accessToken || null,
     getRefreshToken: () => (store.getState() as RootState).auth.refreshToken || null,
     onRefreshToken: (accessToken: string, refreshToken: string) => {
