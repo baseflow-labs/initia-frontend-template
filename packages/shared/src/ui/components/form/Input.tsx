@@ -31,6 +31,7 @@ type FinalInput = InputProps &
 const renderByType = (type: InputTypeProps["type"], props: FinalInput) => {
   const { min, max, ...input } = props;
 
+  if (type === "label") return <h5>{input.label}</h5>;
   if (type === "select" && input.options) return <SelectInput {...input} />;
   if (type === "selectMany" && input.options) return <SelectManyInput {...input} />;
   if (type === "radio" && input.options) return <RadioInput {...input} />;

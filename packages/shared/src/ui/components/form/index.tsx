@@ -157,28 +157,30 @@ const Form: React.FC<Props> = ({
 
   const dynamicInputs = inputs(dummyFormik).filter((i) => !i.excludeInForm);
 
-  const generatedInitialValues = dynamicInputs.reduce<Record<string, unknown>>((acc, input) => {
-    if (input.defaultValue) {
-      acc[input.name] = input.defaultValue;
+  const generatedInitialValues = dynamicInputs
+    .filter((i) => i.type !== "label")
+    .reduce<Record<string, unknown>>((acc, input) => {
+      if (input.defaultValue) {
+        acc[input.name] = input.defaultValue;
+        return acc;
+      }
+
+      switch (input.type) {
+        case "radio":
+        case "select":
+        case "checkboxes":
+          acc[input.name] = input.options?.[0]?.value ?? "";
+          break;
+        case "multipleEntries":
+          acc[input.name] = [];
+          break;
+        default:
+          acc[input.name] = "";
+          break;
+      }
+
       return acc;
-    }
-
-    switch (input.type) {
-      case "radio":
-      case "select":
-      case "checkboxes":
-        acc[input.name] = input.options?.[0]?.value ?? "";
-        break;
-      case "multipleEntries":
-        acc[input.name] = [];
-        break;
-      default:
-        acc[input.name] = "";
-        break;
-    }
-
-    return acc;
-  }, {});
+    }, {});
 
   const formik = useFormik<Record<string, unknown>>({
     initialValues: { ...generatedInitialValues, ...initialValues },
@@ -187,66 +189,68 @@ const Form: React.FC<Props> = ({
       const errors: FormikErrors<Record<string, unknown>> = {};
       const dynamicInputs = inputs(formik).filter((i) => !i.excludeInForm);
 
-      dynamicInputs.forEach((input) => {
-        const { name, required, type, min, max, minLength, maxLength } = input;
-        const value = values[name];
+      dynamicInputs
+        .filter((i) => i.type !== "label")
+        .forEach((input) => {
+          const { name, required, type, min, max, minLength, maxLength } = input;
+          const value = values[name];
 
-        if (
-          required &&
-          (value === undefined ||
-            value === null ||
-            value === "" ||
-            (type === "multipleEntries" && Array.isArray(value) && value.length === 0))
-        ) {
-          errors[name] = t("Global.Form.Errors.Required");
-          return;
-        }
-
-        if (value && value !== null && value !== "") {
-          if (type === "phoneNumber") {
-            if (String(value).length !== 9) {
-              errors[name] = t("Global.Form.Errors.PhoneNumberLength");
-            }
-
-            if (
-              !String(value).startsWith("77") &&
-              !String(value).startsWith("78") &&
-              !String(value).startsWith("79")
-            ) {
-              errors[name] = t("Global.Form.Errors.InvalidPhoneNumber");
-            }
+          if (
+            required &&
+            (value === undefined ||
+              value === null ||
+              value === "" ||
+              (type === "multipleEntries" && Array.isArray(value) && value.length === 0))
+          ) {
+            errors[name] = t("Global.Form.Errors.Required");
+            return;
           }
 
-          if (type === "email") {
-            const validEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-            if (!validEmail.test(String(value))) {
-              errors[name] = t("Global.Form.Errors.InvalidEmail");
-            }
-          }
-
-          if (type === "number" || type === "range") {
-            const numeric = Number(value);
-            if (isNaN(numeric)) {
-              errors[name] = t("Global.Form.Errors.InvalidNumber");
-            } else {
-              if (min && numeric < Number(min)) {
-                errors[name] = `${t("Global.Form.Errors.Min")}: ${min}`;
+          if (value && value !== null && value !== "") {
+            if (type === "phoneNumber") {
+              if (String(value).length !== 9) {
+                errors[name] = t("Global.Form.Errors.PhoneNumberLength");
               }
-              if (max && numeric > Number(max)) {
-                errors[name] = `${t("Global.Form.Errors.Max")}: ${max}`;
+
+              if (
+                !String(value).startsWith("77") &&
+                !String(value).startsWith("78") &&
+                !String(value).startsWith("79")
+              ) {
+                errors[name] = t("Global.Form.Errors.InvalidPhoneNumber");
               }
             }
-          }
 
-          if (minLength && String(value).length < minLength) {
-            errors[name] = `${t("Global.Form.Errors.MinLength")}: ${minLength}`;
-          }
+            if (type === "email") {
+              const validEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+              if (!validEmail.test(String(value))) {
+                errors[name] = t("Global.Form.Errors.InvalidEmail");
+              }
+            }
 
-          if (maxLength && String(value).length > maxLength) {
-            errors[name] = `${t("Global.Form.Errors.MaxLength")}: ${maxLength}`;
+            if (type === "number" || type === "range") {
+              const numeric = Number(value);
+              if (isNaN(numeric)) {
+                errors[name] = t("Global.Form.Errors.InvalidNumber");
+              } else {
+                if (min && numeric < Number(min)) {
+                  errors[name] = `${t("Global.Form.Errors.Min")}: ${min}`;
+                }
+                if (max && numeric > Number(max)) {
+                  errors[name] = `${t("Global.Form.Errors.Max")}: ${max}`;
+                }
+              }
+            }
+
+            if (minLength && String(value).length < minLength) {
+              errors[name] = `${t("Global.Form.Errors.MinLength")}: ${minLength}`;
+            }
+
+            if (maxLength && String(value).length > maxLength) {
+              errors[name] = `${t("Global.Form.Errors.MaxLength")}: ${maxLength}`;
+            }
           }
-        }
-      });
+        });
 
       const customErrors = customValidate?.(values) ?? {};
       return { ...errors, ...customErrors };
@@ -352,9 +356,11 @@ const Form: React.FC<Props> = ({
                 if (logo) {
                   return (
                     <Fragment key={i}>
-                      <div className="col-md-6">
-                        <LabelView required={required} {...input} />
-                      </div>
+                      {type !== "label" && (
+                        <div className="col-md-6">
+                          <LabelView required={required} {...input} />
+                        </div>
+                      )}
 
                       <div className="col-md-6 mb-3">
                         <Button outline color="dark" className="p-2 w-100 rounded-2 no-interaction">
@@ -388,7 +394,7 @@ const Form: React.FC<Props> = ({
                 return (
                   <div
                     className={`mb-2 ${
-                      fullWidth
+                      fullWidth || type === "label"
                         ? "col-md-12"
                         : input.gridCols
                           ? `col-md-${Math.max(1, Math.floor(12 / Number(input.gridCols)))}`
@@ -409,7 +415,8 @@ const Form: React.FC<Props> = ({
                           <hr className="mt-1" />
                         </div>
                       )}
-                    <LabelView required={required} {...input} />
+
+                    {type !== "label" && <LabelView required={required} {...input} />}
 
                     {aboveComp}
 
