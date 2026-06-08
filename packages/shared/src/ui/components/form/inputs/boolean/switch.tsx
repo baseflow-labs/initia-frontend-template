@@ -3,17 +3,19 @@ import { useTranslation } from "react-i18next";
 
 import { InputProps } from "../..";
 
-type FinalInput = InputProps & React.InputHTMLAttributes<HTMLInputElement>;
+type FinalInput = Omit<React.InputHTMLAttributes<HTMLInputElement>, "value"> & {
+  value?: React.InputHTMLAttributes<HTMLInputElement>["value"] | boolean;
+} & InputProps;
 
 const SwitchBasedBooleanInputView: React.FC<FinalInput> = ({ ...input }) => {
   const { t } = useTranslation();
+  const isChecked = typeof input.value === "string" ? input.value === "true" : Boolean(input.value);
 
   return (
     <div className="form-check form-switch my-1">
       <input
         {...input}
-        value={input.value}
-        checked={input.checked}
+        checked={input.checked ?? isChecked}
         type="checkbox"
         role="switch"
         className="form-check-input"
@@ -21,7 +23,7 @@ const SwitchBasedBooleanInputView: React.FC<FinalInput> = ({ ...input }) => {
       />
 
       <label className="form-check-label">
-        {input.value
+        {(input.checked ?? isChecked)
           ? input.booleanLabels?.trueLabel || t("Global.Form.Labels.Yes")
           : input.booleanLabels?.falseLabel || t("Global.Form.Labels.No")}
       </label>
