@@ -292,9 +292,14 @@
           "Title": "System Logger"
         },
         "Metadata": {
+          "AuthSettingsLabel": "Authentication Settings",
+          "ContactsLabel": "Contacts Info",
+          "FileSettingsLabel": "Files Upload Settings",
           "FullLogo": "Full Logo",
+          "IdentityLabel": "Identity Settings",
           "Logo": "Logo",
           "Name": "Name",
+          "PasswordPolicyLabel": "Password Policy Settings",
           "PhoneNumber": "Phone Number",
           "Slogan": "Slogan",
           "ThemeColor": "Theme Color",

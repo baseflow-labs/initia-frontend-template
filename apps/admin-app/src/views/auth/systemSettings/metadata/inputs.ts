@@ -2,6 +2,11 @@ import type { TFunction } from "i18next";
 
 export const inputs = (t: TFunction) => () => [
   {
+    name: "identityLabel",
+    label: t("Auth.Settings.Admin.Metadata.IdentityLabel"),
+    type: "label",
+  },
+  {
     name: "name",
     label: t("Auth.Settings.Admin.Metadata.Name"),
     type: "text",
@@ -30,17 +35,22 @@ export const inputs = (t: TFunction) => () => [
     double: true,
   },
   {
-    name: "phoneNumber",
-    label: t("Auth.Settings.Admin.Metadata.PhoneNumber"),
-    type: "numberText",
-    required: false,
-    double: true,
-  },
-  {
     name: "defaultThemeColor",
     label: t("Auth.Settings.Admin.Metadata.ThemeColor"),
     type: "color",
     required: true,
+    double: true,
+  },
+  {
+    name: "contactsLabel",
+    label: t("Auth.Settings.Admin.Metadata.ContactsLabel"),
+    type: "label",
+  },
+  {
+    name: "phoneNumber",
+    label: t("Auth.Settings.Admin.Metadata.PhoneNumber"),
+    type: "numberText",
+    required: false,
     double: true,
   },
   {
@@ -100,6 +110,11 @@ export const inputs = (t: TFunction) => () => [
     double: true,
   },
   {
+    name: "passwordPolicyLabel",
+    label: t("Auth.Settings.Admin.Metadata.PasswordPolicyLabel"),
+    type: "label",
+  },
+  {
     name: "passwordMinLength",
     label: "Password Min Length",
     type: "number",
@@ -109,30 +124,39 @@ export const inputs = (t: TFunction) => () => [
   {
     name: "passwordRequireUppercase",
     label: "Password Require Uppercase",
-    type: "switch",
+    type: "boolean",
+    layout: "switch",
     required: false,
     double: true,
   },
   {
     name: "passwordRequireLowercase",
     label: "Password Require Lowercase",
-    type: "switch",
+    type: "boolean",
+    layout: "switch",
     required: false,
     double: true,
   },
   {
     name: "passwordRequireNumber",
     label: "Password Require Number",
-    type: "switch",
+    type: "boolean",
+    layout: "switch",
     required: false,
     double: true,
   },
   {
     name: "passwordRequireSpecialChar",
-    label: "Password Require Special Char",
-    type: "switch",
+    label: "Password Require Special Character",
+    type: "boolean",
+    layout: "switch",
     required: false,
     double: true,
+  },
+  {
+    name: "authSettingsLabel",
+    label: t("Auth.Settings.Admin.Metadata.AuthSettingsLabel"),
+    type: "label",
   },
   {
     name: "sessionTimeoutMinutes",
@@ -147,6 +171,11 @@ export const inputs = (t: TFunction) => () => [
     type: "number",
     required: true,
     double: true,
+  },
+  {
+    name: "fileSettingsLabel",
+    label: t("Auth.Settings.Admin.Metadata.FileSettingsLabel"),
+    type: "label",
   },
   {
     name: "fileUploadMaxSizeMb",

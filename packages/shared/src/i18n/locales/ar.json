@@ -292,9 +292,14 @@
           "Title": "سجل النظام"
         },
         "Metadata": {
+          "AuthSettingsLabel": "إعدادات تسجيل الدخول",
+          "ContactsLabel": "معلومات الاتصال",
+          "FileSettingsLabel": "إعدادات تحميل الملفات",
           "FullLogo": "الشعار الكامل",
+          "IdentityLabel": "إعدادات هوية النظام",
           "Logo": "الشعار",
           "Name": "اسم النظام",
+          "PasswordPolicyLabel": "إعدادات سياسة كلمة المرور",
           "PhoneNumber": "رقم الهاتف",
           "Slogan": "الشعار اللفظي",
           "ThemeColor": "لون النظام",
