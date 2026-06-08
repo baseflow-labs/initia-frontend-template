@@ -20,7 +20,8 @@ const nextConfig = {
     ],
   },
   env: {
-    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || "",
+    NEXT_PUBLIC_API_URL:
+      process.env.NEXT_PUBLIC_API_URL || process.env.API_URL || "http://localhost:8000/api",
   },
   sassOptions: {
     includePaths: [path.resolve(process.cwd(), "../../node_modules")],
