@@ -7,9 +7,9 @@ type FinalInput = Omit<React.InputHTMLAttributes<HTMLInputElement>, "value"> & {
   value?: React.InputHTMLAttributes<HTMLInputElement>["value"] | boolean;
 } & InputProps;
 
-const CheckboxInput: React.FC<FinalInput> = ({ ...input }) => {
+const CheckboxInput: React.FC<FinalInput> = ({ value, ...input }) => {
   const { t } = useTranslation();
-  const isChecked = typeof input.value === "string" ? input.value === "true" : Boolean(input.value);
+  const isChecked = typeof value === "string" ? value === "true" : Boolean(value);
 
   return (
     <div className="form-check my-1">

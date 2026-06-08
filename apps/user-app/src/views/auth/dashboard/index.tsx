@@ -22,7 +22,7 @@ import { useAppSelector } from "../../../store/hooks";
 const DashboardView = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { name, logoFull } = useAppSelector((state) => state.settings);
+  const { logoFull } = useAppSelector((state) => state.settings);
   const { user } = useAppSelector((state) => state.auth);
   const [data, setData] = useState<{
     notifications?: Notification[];
