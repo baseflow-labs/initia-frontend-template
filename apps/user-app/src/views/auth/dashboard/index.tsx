@@ -61,52 +61,68 @@ const DashboardView = () => {
 
   return (
     <PageTemplate title={t("Auth.Dashboard.Title")}>
-      <div className="row">
-        <div className="col-lg-4">
-          <DashboardCard>
-            <h5 className="mb-3">Account Info</h5>
-            <div className="mb-2">
-              <small className="text-muted d-block">Email</small>
-              <div>{user.email || "-"}</div>
-            </div>
-            <div className="mb-2">
-              <small className="text-muted d-block">Role</small>
-              <div>{user.role || "-"}</div>
-            </div>
-            <div>
-              <small className="text-muted d-block">Status</small>
-              <div>{user.status || "-"}</div>
-            </div>
-          </DashboardCard>
-        </div>
+      <div className="row g-4 align-items-stretch">
+        <div className="col-12 col-xl-4 d-flex">
+          <DashboardCard className="h-100 my-0">
+            <div className="d-flex h-100 flex-column">
+              <h5 className="mb-4">Account Info</h5>
 
-        <div className="col-lg-4">
-          <DashboardCard>
-            <h5 className="mb-3">Calendar</h5>
-            <div className="row g-1 text-center">
-              {currentMonthDays.map((day) => (
-                <div className="col-2" key={day}>
-                  <small className="d-inline-block rounded border px-2 py-1">{day}</small>
+              <div className="d-grid gap-3">
+                <div className="border-bottom pb-3">
+                  <small className="text-muted d-block mb-1">Email</small>
+                  <div className="fw-semibold text-break">{user.email || "-"}</div>
                 </div>
-              ))}
+
+                <div className="border-bottom pb-3">
+                  <small className="text-muted d-block mb-1">Role</small>
+                  <div className="fw-semibold text-capitalize">{user.role || "-"}</div>
+                </div>
+
+                <div>
+                  <small className="text-muted d-block mb-1">Status</small>
+                  <div className="fw-semibold text-capitalize">{user.status || "-"}</div>
+                </div>
+              </div>
             </div>
           </DashboardCard>
         </div>
 
-        <div className="col-lg-4">
-          <DashboardCard>
-            <div className="text-primary text-center py-5">
-              <h1 className="mb-4">{t("Auth.Dashboard.Welcome.Title")}</h1>
+        <div className="col-12 col-xl-4 d-flex">
+          <DashboardCard className="h-100 my-0">
+            <div className="d-flex h-100 flex-column">
+              <h5 className="mb-4">Calendar</h5>
 
-              <img src={logoFull || tempLogo} alt="logo" className="my-5 w-100" />
-
-              <h4 className="display-4 mt-5 text-dark">{name}</h4>
+              <div className="row g-2 text-center">
+                {currentMonthDays.map((day) => (
+                  <div className="col-2" key={day}>
+                    <small
+                      className="d-inline-flex align-items-center justify-content-center rounded border w-100"
+                      style={{ minHeight: 32 }}
+                    >
+                      {day}
+                    </small>
+                  </div>
+                ))}
+              </div>
             </div>
           </DashboardCard>
         </div>
 
-        <div className="col-lg-12 mt-4">
-          <DashboardCard>
+        <div className="col-12 col-xl-4 d-flex">
+          <DashboardCard className="h-100 my-0">
+            <div className="text-center py-0">
+              <img
+                src={logoFull || tempLogo}
+                alt="logo"
+                className="mb-1 img-fluid"
+                style={{ maxHeight: 250, objectFit: "contain" }}
+              />
+            </div>
+          </DashboardCard>
+        </div>
+
+        <div className="col-12">
+          <DashboardCard className="my-0">
             <div className="row">
               <div className="col-12 mb-5">
                 <h4>

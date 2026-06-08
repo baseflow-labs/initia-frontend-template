@@ -25,8 +25,6 @@ import { Fragment, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
-import { useAppSelector } from "../../../store/hooks";
-
 interface HealthInfo {
   status: string;
   load?: number;
@@ -52,7 +50,6 @@ interface HealthCheckResponse {
 const DashboardView = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { logoFull } = useAppSelector((state) => state.settings);
   const [data, setData] = useState<{
     notifications?: Notification[];
     users?: Array<{ id: string; email?: string; role?: string; createdAt?: string }>;
@@ -185,14 +182,34 @@ const DashboardView = () => {
 
       <div className="row">
         <div className="col-lg-5 mb-4">
-          <DashboardCard title={t("Auth.Dashboard.Welcome.Title")} className="h-100">
-            {t("Auth.Dashboard.Welcome.Message", { name: t("CopyRight.AppName") })}
-
-            <img
-              src={logoFull || "@initia/shared/assets/images/brand/logo-full.png"}
-              alt="Welcome"
-              className="img-fluid mt-5"
-            />
+          <DashboardCard title="Latest Users" className="h-100">
+            <div className="table-responsive">
+              <table className="table table-sm">
+                <thead>
+                  <tr>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Created</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {(data.users || []).map((user) => (
+                    <tr key={user.id}>
+                      <td>{user.email || "-"}</td>
+                      <td>{user.role || "-"}</td>
+                      <td>{user.createdAt ? moment(user.createdAt).fromNow() : "-"}</td>
+                    </tr>
+                  ))}
+                  {!(data.users || []).length && (
+                    <tr>
+                      <td colSpan={3} className="text-center text-muted">
+                        {t("Global.Labels.NoData")}
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
           </DashboardCard>
         </div>
 
@@ -244,38 +261,6 @@ const DashboardView = () => {
                 </div>
               </div>
             ))}
-          </DashboardCard>
-        </div>
-
-        <div className="col-lg-12 mb-4">
-          <DashboardCard title="Latest Users" className="h-100">
-            <div className="table-responsive">
-              <table className="table table-sm">
-                <thead>
-                  <tr>
-                    <th>Email</th>
-                    <th>Role</th>
-                    <th>Created</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {(data.users || []).map((user) => (
-                    <tr key={user.id}>
-                      <td>{user.email || "-"}</td>
-                      <td>{user.role || "-"}</td>
-                      <td>{user.createdAt ? moment(user.createdAt).fromNow() : "-"}</td>
-                    </tr>
-                  ))}
-                  {!(data.users || []).length && (
-                    <tr>
-                      <td colSpan={3} className="text-center text-muted">
-                        {t("Global.Labels.NoData")}
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
           </DashboardCard>
         </div>
       </div>
