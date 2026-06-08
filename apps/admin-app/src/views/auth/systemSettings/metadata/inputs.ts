@@ -23,6 +23,7 @@ export const inputs = (t: TFunction) => () => [
   {
     name: "logoFull",
     label: t("Auth.Settings.Admin.Metadata.FullLogo"),
+    labelNote: t("Auth.Settings.Admin.Metadata.FullLogoHelperText"),
     type: "text",
     required: true,
     double: true,

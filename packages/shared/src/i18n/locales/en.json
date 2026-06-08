@@ -296,6 +296,7 @@
           "ContactsLabel": "Contacts Info",
           "FileSettingsLabel": "Files Upload Settings",
           "FullLogo": "Full Logo",
+          "FullLogoHelperText": "Full Logo Recommended to be in horizontal layout and transparent background",
           "IdentityLabel": "Identity Settings",
           "Logo": "Logo",
           "Name": "Name",

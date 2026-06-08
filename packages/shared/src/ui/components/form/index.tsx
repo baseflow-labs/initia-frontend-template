@@ -1,4 +1,6 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FormikErrors, Form as FormikForm, FormikProps, FormikProvider, useFormik } from "formik";
 import React, { Fragment, useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -6,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import Button from "../core/button";
 import Spinner from "../core/spinner";
 import { MoneyUnit } from "../table";
+import TooltipComp from "../tooltip";
 
 import InputComp from "./Input";
 
@@ -120,15 +123,14 @@ interface Props<
 export const LabelView = ({ labelNote, label, required }: Partial<InputSingleProps>) => (
   <label className={`form-label ${label ? "" : "text-white"}`}>
     <small>
-      {label ? label : "."}{" "}
+      {label ? label : "."} {label && required ? <span className="text-danger">*</span> : null}
       {labelNote && (
-        <span className="text-muted">
-          {"("}
-          {labelNote}
-          {")"}{" "}
+        <span className="text-muted ms-2">
+          <TooltipComp label={labelNote}>
+            <FontAwesomeIcon icon={faCircleInfo} />
+          </TooltipComp>
         </span>
       )}
-      {label && required ? <span className="text-danger">*</span> : null}
     </small>
   </label>
 );
