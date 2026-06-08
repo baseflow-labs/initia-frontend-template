@@ -25,5 +25,7 @@ Coding rules live in `.github/instructions/` and are auto-loaded by Copilot for 
 
 - After every task, run `corepack pnpm typecheck` and `corepack pnpm lint` for touched scope.
 - Validate command for full check: `corepack pnpm validate`.
+- Use TypeScript-first patterns with modern ES6+ syntax in generated code.
+- Prefer arrow functions for callbacks and helper functions unless hoisting requires a `function` declaration.
 - Prefer `packages/shared` and `packages/user-services` before creating app-local duplicates.
 - Full workflow skills: see `SKILLS.md`. Agent workflow guide: see `AGENTS.md`.

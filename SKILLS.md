@@ -53,7 +53,8 @@ Ship a new resource across admin/user/mobile surfaces with typed services, list 
 11. If admin-oriented only, keep in admin app and guard via permissions.
 12. Add help/documentation display integration for seeded FAQ/manual content.
 13. If resource has marketing value, add/update landing page features content entries.
-14. Run lint and typecheck for touched frontend scope before finalizing.
+14. Use TypeScript-first, ES6+ syntax in touched files and prefer arrow functions for callbacks/helpers unless hoisting is required.
+15. Run lint and typecheck for touched frontend scope before finalizing.
 
 ### Analysis Data Rendering Pattern
 
@@ -130,6 +131,7 @@ Make all key product and technical decisions before implementation for a new res
 - Promote reusable parts into packages/shared.
 - Keep API calls centralized via shared service layer.
 - Keep .tsx files view-first and move logic into framework-agnostic modules.
+- Use TypeScript-first, ES6+ syntax and prefer arrow functions for callbacks/helpers unless hoisting is required.
 - Run lint and typecheck after each completed task.
 
 ## Skill F3: Rebuild/Refine Theme Design And Layout

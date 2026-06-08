@@ -54,6 +54,8 @@ Run from frontend directory.
 ## Coding Standards
 
 - TypeScript strict mode is enabled; do not use any.
+- Use TypeScript-first patterns and modern ECMAScript (ES6+) syntax for all new code.
+- Prefer arrow functions for callbacks and helper functions; use `function` declarations only when hoisting or framework conventions require them.
 - Prefer typed props, service responses, request bodies, and selector outputs via centralized shared types.
 - Keep components small and composable; move non-UI logic to hooks/util modules.
 - Preserve import order and existing naming conventions.
