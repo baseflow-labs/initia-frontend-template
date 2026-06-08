@@ -67,15 +67,17 @@ const getOAuthProvidersConfig = async (): Promise<
   return await api.get<OAuthProvidersConfigPayload>(mainPath + "/oauth/providers");
 };
 
-const getOAuthAdminProvidersConfig = async (): Promise<EnvelopeResponse<OAuthProviderState[]>> => {
-  return await api.get<OAuthProviderState[]>(mainPath + "/oauth/admin/providers");
+const getOAuthAdminProvidersConfig = async (): Promise<
+  EnvelopeResponse<OAuthProvidersConfigPayload>
+> => {
+  return await api.get<OAuthProvidersConfigPayload>(mainPath + "/oauth/admin/providers");
 };
 
 const updateOAuthAdminProvidersConfig = async (
   providers: OAuthProviderState[],
   registrationEnabled?: boolean
-): Promise<EnvelopeResponse<OAuthProviderState[]>> => {
-  return await api.put<OAuthProviderState[]>(mainPath + "/oauth/admin/providers", {
+): Promise<EnvelopeResponse<OAuthProvidersConfigPayload>> => {
+  return await api.put<OAuthProvidersConfigPayload>(mainPath + "/oauth/admin/providers", {
     providers,
     registrationEnabled,
   });

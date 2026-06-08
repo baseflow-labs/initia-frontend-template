@@ -1,9 +1,9 @@
-import { useTranslation } from "react-i18next";
+import { addNotification } from "@initia/shared/types/notifications.js";
 import { useEffect, useState } from "react";
-// import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 
-// import { AuthResponse, login } from "../../../../user-app/src/store/actions/auth";
-// import { addNotification } from "../../../../user-app/src/store/actions/notifications";
 import * as authApi from "../..//api/auth";
 import Form from "../..//ui/components/form";
 import { apiCatchGlobalHandler } from "../..//utils/function";
@@ -12,6 +12,8 @@ import { formInputs } from "./inputs";
 
 const RegisterView = () => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [registrationEnabled, setRegistrationEnabled] = useState(true);
   // const dispatch = useDispatch();
 
@@ -29,21 +31,16 @@ const RegisterView = () => {
   const onSubmit = (values?: Record<string, unknown>) => {
     authApi
       .register(values as unknown as authApi.registerProps)
-      .then(() =>
-        // res
-        {
-          // const apiData = res?.payload;
-          // const payload = (apiData?.payload || apiData) as AuthResponse;
-          // dispatch(
-          //   addNotification({
-          //     msg: t("Public.Register.Labels.Success", {
-          //       name: payload?.user?.name,
-          //     }),
-          //   })
-          // );
-          // dispatch(login(payload));
-        }
-      )
+      .then((res) => {
+        dispatch(
+          addNotification({
+            msg: t("Public.Login.Labels.Success", {
+              name: res?.payload?.email || "",
+            }),
+          })
+        );
+        navigate(`/login`);
+      })
       .catch(apiCatchGlobalHandler);
   };
 

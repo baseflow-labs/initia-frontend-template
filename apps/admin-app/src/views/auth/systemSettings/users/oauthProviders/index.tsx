@@ -12,7 +12,7 @@ export const OAuthProvidersSettingsContent = () => {
   const dispatch = useDispatch();
 
   const [providers, setProviders] = useState<
-    Array<AuthApi.OAuthProviderState & { initialEnabled: boolean }>
+    Array<AuthApi.OAuthProviderState & { initialEnabled: boolean; effectiveEnabled: boolean }>
   >([]);
   const [registrationEnabled, setRegistrationEnabled] = useState(true);
   const [initialRegistrationEnabled, setInitialRegistrationEnabled] = useState(true);
@@ -25,18 +25,25 @@ export const OAuthProvidersSettingsContent = () => {
     [initialRegistrationEnabled, providers, registrationEnabled]
   );
 
-  const loadData = async () => {
-    const [adminRes, publicRes] = await Promise.all([
-      AuthApi.getOAuthAdminProvidersConfig(),
-      AuthApi.getOAuthProvidersConfig(),
-    ]);
-    const mapped = (adminRes.payload || []).map((provider) => ({
+  const applyConfig = (config?: AuthApi.OAuthProvidersConfigPayload) => {
+    const enabledOAuthProviders = new Set(config?.enabledProviders || []);
+    const mapped = (config?.providers || []).map((provider) => ({
       ...provider,
       initialEnabled: provider.enabled,
+      effectiveEnabled:
+        provider.provider === "email"
+          ? (config?.emailLoginEnabled ?? provider.enabled)
+          : enabledOAuthProviders.has(provider.provider),
     }));
+
     setProviders(mapped);
-    setRegistrationEnabled(publicRes.payload?.registrationEnabled ?? true);
-    setInitialRegistrationEnabled(publicRes.payload?.registrationEnabled ?? true);
+    setRegistrationEnabled(config?.registrationEnabled ?? true);
+    setInitialRegistrationEnabled(config?.registrationEnabled ?? true);
+  };
+
+  const loadData = async () => {
+    const adminRes = await AuthApi.getOAuthAdminProvidersConfig();
+    applyConfig(adminRes.payload);
   };
 
   useEffect(() => {
@@ -61,12 +68,8 @@ export const OAuthProvidersSettingsContent = () => {
         registrationEnabled
       );
 
-      const updated = (res.payload || []).map((provider) => ({
-        ...provider,
-        initialEnabled: provider.enabled,
-      }));
-      setProviders(updated);
-      setInitialRegistrationEnabled(registrationEnabled);
+      applyConfig(res.payload);
+      dispatch(addNotification("warning", "Login provider settings updated"));
     } catch {
       dispatch(addNotification("err", "Failed to update OAuth providers settings"));
     } finally {
@@ -74,11 +77,59 @@ export const OAuthProvidersSettingsContent = () => {
     }
   };
 
-  const labelByProvider: Record<AuthApi.AuthProvider, string> = {
-    email: "Email / Password",
-    google: "Google",
-    apple: "Apple",
-    microsoft: "Microsoft",
+  const providerMeta: Record<AuthApi.AuthProvider, { label: string; help: string }> = {
+    email: {
+      label: "Email / Password",
+      help: "Show the email and password login form",
+    },
+    google: {
+      label: "Google",
+      help: "Allow Google OAuth login",
+    },
+    apple: {
+      label: "Apple",
+      help: "Allow Apple OAuth login",
+    },
+    microsoft: {
+      label: "Microsoft",
+      help: "Allow Microsoft OAuth login",
+    },
+  };
+  const emailProvider = providers.find((provider) => provider.provider === "email");
+  const oauthProviders = providers.filter((provider) => provider.provider !== "email");
+
+  const renderProviderToggle = (
+    provider: AuthApi.OAuthProviderState & {
+      initialEnabled: boolean;
+      effectiveEnabled: boolean;
+    }
+  ) => {
+    const isEnvironmentLimited = provider.enabled && !provider.effectiveEnabled;
+    const meta = providerMeta[provider.provider];
+
+    return (
+      <div
+        key={provider.provider}
+        className="d-flex justify-content-between align-items-center border rounded-3 p-3"
+      >
+        <div>
+          <div className="fw-semibold">{meta.label}</div>
+          <small className={isEnvironmentLimited ? "text-warning" : "text-muted"}>
+            {isEnvironmentLimited ? "Enabled here, unavailable by environment config" : meta.help}
+          </small>
+        </div>
+
+        <div className="form-check form-switch m-0">
+          <input
+            className="form-check-input"
+            type="checkbox"
+            checked={provider.enabled}
+            onChange={() => toggleProvider(provider.provider)}
+            id={`oauth-provider-${provider.provider}`}
+          />
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -91,9 +142,10 @@ export const OAuthProvidersSettingsContent = () => {
       </p>
 
       <div className="d-flex flex-column gap-3">
+        <div className="fw-semibold text-uppercase small text-muted">Public access</div>
         <div className="d-flex justify-content-between align-items-center border rounded-3 p-3">
           <div>
-            <div className="fw-semibold">Registration</div>
+            <div className="fw-semibold">Public Registration</div>
             <small className="text-muted">Allow public account creation</small>
           </div>
 
@@ -108,27 +160,11 @@ export const OAuthProvidersSettingsContent = () => {
           </div>
         </div>
 
-        {providers.map((provider) => (
-          <div
-            key={provider.provider}
-            className="d-flex justify-content-between align-items-center border rounded-3 p-3"
-          >
-            <div>
-              <div className="fw-semibold">{labelByProvider[provider.provider]}</div>
-              <small className="text-muted">{provider.provider}</small>
-            </div>
+        <div className="fw-semibold text-uppercase small text-muted mt-2">Login methods</div>
+        {emailProvider ? renderProviderToggle(emailProvider) : null}
 
-            <div className="form-check form-switch m-0">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                checked={provider.enabled}
-                onChange={() => toggleProvider(provider.provider)}
-                id={`oauth-provider-${provider.provider}`}
-              />
-            </div>
-          </div>
-        ))}
+        <div className="fw-semibold text-uppercase small text-muted mt-2">OAuth providers</div>
+        {oauthProviders.map(renderProviderToggle)}
       </div>
 
       <div className="mt-4 d-flex justify-content-end">
