@@ -24,9 +24,9 @@
   - [ ] Tickets
     - [ ] Form Submission
     - [ ] Review submitted data
-- [ ] Metadata
-  - [ ] Store @ Admin
-  - [ ] Reflect across the system apps
+- [x] Metadata
+  - [x] Store @ Admin
+  - [x] Reflect across the system apps
 - [ ] System logger
 - [ ] User Activity
 - [ ] Backup service

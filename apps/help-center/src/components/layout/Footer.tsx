@@ -1,6 +1,15 @@
 import Link from "next/link";
+import { Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
 
 import type { SystemIdentity } from "@/lib/api/identity";
+
+function TikTokIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="h-5 w-5">
+      <path d="M14 3c.2 1.7 1.4 3.4 3 4.2a6 6 0 0 0 3 .8v3a9 9 0 0 1-3-.6v5.8a6.8 6.8 0 1 1-6.8-6.8c.4 0 .8 0 1.2.1v3.1a3.7 3.7 0 1 0 2.6 3.6V3h3z" />
+    </svg>
+  );
+}
 
 export function Footer({ identity }: { identity: SystemIdentity }) {
   const currentYear = new Date().getFullYear();
@@ -15,6 +24,75 @@ export function Footer({ identity }: { identity: SystemIdentity }) {
             <p className="text-sm text-gray-600 dark:text-gray-400">
               {identity.slogan || "Find answers and support for all your questions."}
             </p>
+
+            <div className="flex gap-3 mt-5">
+              {identity?.socialTwitter && (
+                <a
+                  href={identity.socialTwitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-icon"
+                  aria-label="Twitter"
+                >
+                  <Twitter className="h-5 w-5" aria-hidden="true" />
+                </a>
+              )}
+              {identity?.socialLinkedin && (
+                <a
+                  href={identity.socialLinkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-icon"
+                  aria-label="LinkedIn"
+                >
+                  <Linkedin className="h-5 w-5" aria-hidden="true" />
+                </a>
+              )}
+              {identity?.socialFacebook && (
+                <a
+                  href={identity.socialFacebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-icon"
+                  aria-label="Facebook"
+                >
+                  <Facebook className="h-5 w-5" aria-hidden="true" />
+                </a>
+              )}
+              {identity?.socialInstagram && (
+                <a
+                  href={identity.socialInstagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-icon"
+                  aria-label="Instagram"
+                >
+                  <Instagram className="h-5 w-5" aria-hidden="true" />
+                </a>
+              )}
+              {identity?.socialYoutube && (
+                <a
+                  href={identity.socialYoutube}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-icon"
+                  aria-label="YouTube"
+                >
+                  <Youtube className="h-5 w-5" aria-hidden="true" />
+                </a>
+              )}
+              {identity?.socialTiktok && (
+                <a
+                  href={identity.socialTiktok}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-icon"
+                  aria-label="TikTok"
+                >
+                  <TikTokIcon />
+                </a>
+              )}
+            </div>
           </div>
 
           {/* Quick Links */}
