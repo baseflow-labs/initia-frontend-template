@@ -36,9 +36,14 @@ function unwrapPayload<T>(response: unknown): T[] {
  * Uses cache() to enable deduplication within SSR render
  */
 export const getContactSubmissions = async (): Promise<HelpCenterContact[]> => {
-  const url = "/support/contact-submissions";
-  const response = await fetchAPI(url);
-  return unwrapPayload<HelpCenterContact>(response);
+  try {
+    const url = "/support/contact-submissions";
+    const response = await fetchAPI(url);
+    return unwrapPayload<HelpCenterContact>(response);
+  } catch (error) {
+    console.error("Error fetching contact submissions:", error);
+    return [];
+  }
 };
 
 export type { HelpCenterContact };

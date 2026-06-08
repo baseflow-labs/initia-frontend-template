@@ -36,9 +36,14 @@ function unwrapPayload<T>(response: unknown): T[] {
  * Uses cache() to enable deduplication within SSR render
  */
 export const getTickets = async (): Promise<HelpCenterTicket[]> => {
-  const url = "/support/tickets";
-  const response = await fetchAPI(url);
-  return unwrapPayload<HelpCenterTicket>(response);
+  try {
+    const url = "/support/tickets";
+    const response = await fetchAPI(url);
+    return unwrapPayload<HelpCenterTicket>(response);
+  } catch (error) {
+    console.error("Error fetching tickets:", error);
+    return [];
+  }
 };
 
 export type { HelpCenterTicket };

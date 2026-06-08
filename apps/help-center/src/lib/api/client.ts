@@ -29,7 +29,12 @@ export async function fetchAPI<T>(endpoint: string, options: FetchOptions = {}):
   });
 
   if (!response.ok) {
-    throw new Error(`API Error: ${response.status} ${response.statusText}`);
+    const body = await response.text().catch(() => "");
+    const details = body ? ` - ${body.slice(0, 300)}` : "";
+
+    throw new Error(
+      `API Error for ${endpoint}: ${response.status} ${response.statusText}${details}`
+    );
   }
 
   return response.json();
