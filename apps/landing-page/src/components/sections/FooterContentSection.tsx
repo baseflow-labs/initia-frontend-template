@@ -10,7 +10,7 @@ const getLinks = (content?: Record<string, unknown>): LinkItem[] => {
   });
 };
 
-export default function FooterContentSection({ title, subtitle, content }: Props) {
+const FooterContentSection = ({ title, subtitle, content }: Props) => {
   const links = getLinks(content);
   const copyright = String(content?.copyright || "");
   return (
@@ -29,4 +29,6 @@ export default function FooterContentSection({ title, subtitle, content }: Props
       </div>
     </section>
   );
-}
+};
+
+export default FooterContentSection;

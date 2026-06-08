@@ -17,7 +17,7 @@ interface SubsectionPageProps {
 export const revalidate = 3600;
 
 // Generate static paths
-export async function generateStaticParams() {
+export const generateStaticParams = async () => {
   const sections = await getSections();
   const paths = [];
 
@@ -32,10 +32,10 @@ export async function generateStaticParams() {
   }
 
   return paths;
-}
+};
 
 // Generate metadata
-export async function generateMetadata({ params }: SubsectionPageProps): Promise<Metadata> {
+export const generateMetadata = async ({ params }: SubsectionPageProps): Promise<Metadata> => {
   const section = await getSection(params.sectionSlug);
   const subsection = section ? await getSubsection(section.id, params.subsectionSlug) : null;
 
@@ -49,9 +49,9 @@ export async function generateMetadata({ params }: SubsectionPageProps): Promise
     title: `${subsection.title} - ${section?.title}`,
     description: subsection.description,
   };
-}
+};
 
-export default async function SubsectionPage({ params }: SubsectionPageProps) {
+const SubsectionPage = async ({ params }: SubsectionPageProps) => {
   const section = await getSection(params.sectionSlug);
 
   if (!section) {
@@ -89,4 +89,6 @@ export default async function SubsectionPage({ params }: SubsectionPageProps) {
       <ArticleList articles={articles} />
     </div>
   );
-}
+};
+
+export default SubsectionPage;

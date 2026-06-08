@@ -9,7 +9,7 @@ interface ArticleContentProps {
   article: Article;
 }
 
-export function ArticleContent({ article }: ArticleContentProps) {
+export const ArticleContent = ({ article }: ArticleContentProps) => {
   const [helpful, setHelpful] = useState<boolean | null>(null);
 
   const updatedDate = new Date(article.updatedAt).toLocaleDateString("en-US", {
@@ -104,4 +104,4 @@ export function ArticleContent({ article }: ArticleContentProps) {
       </div>
     </article>
   );
-}
+};

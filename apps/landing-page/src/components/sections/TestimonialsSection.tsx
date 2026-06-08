@@ -9,11 +9,7 @@ interface TestimonialsSectionProps {
   content: TestimonialsContent;
 }
 
-export default function TestimonialsSection({
-  title,
-  subtitle,
-  content,
-}: TestimonialsSectionProps) {
+const TestimonialsSection = ({ title, subtitle, content }: TestimonialsSectionProps) => {
   const { variant = "fixed", layout = "horizontal", testimonials } = content;
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -135,4 +131,6 @@ export default function TestimonialsSection({
       </div>
     </section>
   );
-}
+};
+
+export default TestimonialsSection;

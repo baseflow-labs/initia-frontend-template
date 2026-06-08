@@ -6,7 +6,7 @@ interface GoogleMapSectionProps {
   };
 }
 
-export default function GoogleMapSection({ title, subtitle, content }: GoogleMapSectionProps) {
+const GoogleMapSection = ({ title, subtitle, content }: GoogleMapSectionProps) => {
   const embedUrl = typeof content?.embedUrl === "string" ? content.embedUrl.trim() : "";
 
   if (!embedUrl) {
@@ -24,4 +24,6 @@ export default function GoogleMapSection({ title, subtitle, content }: GoogleMap
       </div>
     </section>
   );
-}
+};
+
+export default GoogleMapSection;

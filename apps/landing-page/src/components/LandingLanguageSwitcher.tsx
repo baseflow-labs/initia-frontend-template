@@ -8,10 +8,10 @@ interface LanguageSwitcherProps {
   className?: string;
 }
 
-export function LandingLanguageSwitcher({
+export const LandingLanguageSwitcher = ({
   variant = "button",
   className = "",
-}: LanguageSwitcherProps) {
+}: LanguageSwitcherProps) => {
   const router = useRouter();
   const pathname = usePathname();
   const currentLocale = useLocale();
@@ -75,4 +75,4 @@ export function LandingLanguageSwitcher({
       </button>
     </div>
   );
-}
+};

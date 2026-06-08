@@ -5,7 +5,7 @@ import { endLoading, startLoading } from "../store/actions/loading";
 import { addNotification } from "../store/actions/notifications";
 import store, { RootState } from "../store/store";
 
-export function initializeApi() {
+export const initializeApi = () => {
   initializeApiClient({
     getAccessToken: () => (store.getState() as RootState).auth.accessToken || null,
     getRefreshToken: () => (store.getState() as RootState).auth.refreshToken || null,
@@ -25,4 +25,4 @@ export function initializeApi() {
       store.dispatch(addNotification(notification));
     },
   });
-}
+};

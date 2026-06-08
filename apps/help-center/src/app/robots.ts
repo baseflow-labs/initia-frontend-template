@@ -1,6 +1,6 @@
 import { MetadataRoute } from "next";
 
-export default function robots(): MetadataRoute.Robots {
+const robots = (): MetadataRoute.Robots => {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://help.yourproduct.com";
 
   return {
@@ -11,4 +11,6 @@ export default function robots(): MetadataRoute.Robots {
     },
     sitemap: `${baseUrl}/sitemap.xml`,
   };
-}
+};
+
+export default robots;

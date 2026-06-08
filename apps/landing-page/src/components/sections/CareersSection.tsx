@@ -6,7 +6,7 @@ interface CareersSectionProps {
   content: CareersContent;
 }
 
-export default function CareersSection({ title, subtitle, content }: CareersSectionProps) {
+const CareersSection = ({ title, subtitle, content }: CareersSectionProps) => {
   const { jobOpenings } = content;
 
   return (
@@ -54,4 +54,6 @@ export default function CareersSection({ title, subtitle, content }: CareersSect
       </div>
     </section>
   );
-}
+};
+
+export default CareersSection;

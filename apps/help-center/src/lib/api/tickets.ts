@@ -15,7 +15,7 @@ interface HelpCenterTicket {
 /**
  * Unwrap the API response envelope to get the payload
  */
-function unwrapPayload<T>(response: unknown): T[] {
+const unwrapPayload = <T>(response: unknown): T[] => {
   if (typeof response !== "object" || response === null) return [];
 
   const envelope = response as {
@@ -29,7 +29,7 @@ function unwrapPayload<T>(response: unknown): T[] {
   if (Array.isArray(envelope.message)) return envelope.message as T[];
 
   return [];
-}
+};
 
 /**
  * Fetch all support tickets from the backend

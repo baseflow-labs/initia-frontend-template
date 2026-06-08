@@ -19,7 +19,7 @@ interface ArticlePageProps {
 export const revalidate = 3600;
 
 // Generate static paths
-export async function generateStaticParams() {
+export const generateStaticParams = async () => {
   const sections = await getSections();
   const paths = [];
 
@@ -38,10 +38,10 @@ export async function generateStaticParams() {
   }
 
   return paths;
-}
+};
 
 // Generate metadata
-export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
+export const generateMetadata = async ({ params }: ArticlePageProps): Promise<Metadata> => {
   const section = await getSection(params.sectionSlug);
   const subsection = section ? await getSubsection(section.id, params.subsectionSlug) : null;
   const article = subsection ? await getArticle(subsection.id, params.articleSlug) : null;
@@ -60,9 +60,9 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
       description: article.summary || article.title,
     },
   };
-}
+};
 
-export default async function ArticlePage({ params }: ArticlePageProps) {
+const ArticlePage = async ({ params }: ArticlePageProps) => {
   const section = await getSection(params.sectionSlug);
 
   if (!section) {
@@ -111,4 +111,6 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       </div>
     </div>
   );
-}
+};
+
+export default ArticlePage;

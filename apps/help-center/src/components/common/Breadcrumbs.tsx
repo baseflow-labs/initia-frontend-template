@@ -10,7 +10,7 @@ interface BreadcrumbsProps {
   items: BreadcrumbItem[];
 }
 
-export function Breadcrumbs({ items }: BreadcrumbsProps) {
+export const Breadcrumbs = ({ items }: BreadcrumbsProps) => {
   return (
     <nav className="mb-6 flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
       {items.map((item, index) => (
@@ -27,4 +27,4 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
       ))}
     </nav>
   );
-}
+};

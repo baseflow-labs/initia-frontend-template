@@ -6,7 +6,7 @@ import { getSections } from "@/lib/api/sections";
 
 export const revalidate = 3600; // Revalidate every hour
 
-export default async function HomePage() {
+const HomePage = async () => {
   // Fetch sections from API at build time
   const sections = await getSections();
 
@@ -74,9 +74,11 @@ export default async function HomePage() {
       </div>
     </div>
   );
-}
+};
 
-function QuickLink({
+export default HomePage;
+
+const QuickLink = ({
   icon,
   title,
   description,
@@ -86,7 +88,7 @@ function QuickLink({
   title: string;
   description: string;
   href: string;
-}) {
+}) => {
   return (
     <a
       href={href}
@@ -97,4 +99,4 @@ function QuickLink({
       <p className="text-sm text-gray-600 dark:text-gray-400">{description}</p>
     </a>
   );
-}
+};

@@ -7,7 +7,7 @@ interface LanguageSwitcherProps {
   className?: string;
 }
 
-export function LanguageSwitcher({ variant = "button", className = "" }: LanguageSwitcherProps) {
+export const LanguageSwitcher = ({ variant = "button", className = "" }: LanguageSwitcherProps) => {
   const { i18n } = useTranslation();
 
   const handleLanguageChange = (lang: string) => {
@@ -70,4 +70,4 @@ export function LanguageSwitcher({ variant = "button", className = "" }: Languag
       </button>
     </div>
   );
-}
+};

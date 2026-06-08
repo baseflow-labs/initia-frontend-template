@@ -11,7 +11,7 @@ const getItems = (content?: Record<string, unknown>): Item[] => {
   });
 };
 
-export default function AccordionSection({ title, subtitle, content }: Props) {
+const AccordionSection = ({ title, subtitle, content }: Props) => {
   const items = getItems(content);
   return (
     <section className="py-5">
@@ -27,4 +27,6 @@ export default function AccordionSection({ title, subtitle, content }: Props) {
       </div>
     </section>
   );
-}
+};
+
+export default AccordionSection;

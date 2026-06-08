@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export const revalidate = 3600;
 
-export default async function FaqPage() {
+const FaqPage = async () => {
   const faqs = await getFaqs();
 
   return (
@@ -56,4 +56,6 @@ export default async function FaqPage() {
       )}
     </div>
   );
-}
+};
+
+export default FaqPage;

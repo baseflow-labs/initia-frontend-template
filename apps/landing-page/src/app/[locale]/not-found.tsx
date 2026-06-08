@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 
-export default function NotFound() {
+const NotFound = () => {
   const t = useTranslations("NotFound");
 
   return (
@@ -14,4 +14,6 @@ export default function NotFound() {
       </Link>
     </div>
   );
-}
+};
+
+export default NotFound;

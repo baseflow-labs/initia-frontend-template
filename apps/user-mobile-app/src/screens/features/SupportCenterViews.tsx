@@ -42,7 +42,7 @@ const base = StyleSheet.create({
   btnText: { color: "white", fontWeight: "700" },
 });
 
-export function SupportFaqView() {
+export const SupportFaqView = () => {
   const [items, setItems] = useState<{ id: string; title: string; content: string }[]>([]);
   useEffect(() => {
     void getPublishedFaqs()
@@ -62,9 +62,9 @@ export function SupportFaqView() {
       </ScrollView>
     </SafeAreaView>
   );
-}
+};
 
-export function SupportManualView() {
+export const SupportManualView = () => {
   const [items, setItems] = useState<{ id: string; title: string; description?: string }[]>([]);
   useEffect(() => {
     void getPublishedUserManual()
@@ -84,9 +84,9 @@ export function SupportManualView() {
       </ScrollView>
     </SafeAreaView>
   );
-}
+};
 
-export function SupportContactView() {
+export const SupportContactView = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
@@ -119,9 +119,9 @@ export function SupportContactView() {
       </ScrollView>
     </SafeAreaView>
   );
-}
+};
 
-export function SupportTicketsView() {
+export const SupportTicketsView = () => {
   const { user } = useAppSelector((s) => s.auth);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -168,4 +168,4 @@ export function SupportTicketsView() {
       </ScrollView>
     </SafeAreaView>
   );
-}
+};

@@ -5,7 +5,7 @@ import { colors } from "../../theme/colors";
 
 import { SectionCard } from "./SharedBlocks";
 
-export default function ProfileMobileView() {
+const ProfileMobileView = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={styles.wrap}>
@@ -16,7 +16,9 @@ export default function ProfileMobileView() {
       </ScrollView>
     </SafeAreaView>
   );
-}
+};
+
+export default ProfileMobileView;
 
 const styles = StyleSheet.create({
   safeArea: { flex: 1, backgroundColor: colors.background },

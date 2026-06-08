@@ -13,7 +13,7 @@ interface ContactFormData {
   message: string;
 }
 
-export function ContactForm({ identity }: { identity: SystemIdentity }) {
+export const ContactForm = ({ identity }: { identity: SystemIdentity }) => {
   const [formData, setFormData] = useState<ContactFormData>({
     name: "",
     email: "",
@@ -247,4 +247,4 @@ export function ContactForm({ identity }: { identity: SystemIdentity }) {
       </div>
     </div>
   );
-}
+};

@@ -6,7 +6,7 @@ interface FetchOptions extends RequestInit {
   useAuth?: boolean;
 }
 
-export async function fetchAPI<T>(endpoint: string, options: FetchOptions = {}): Promise<T> {
+export const fetchAPI = async <T>(endpoint: string, options: FetchOptions = {}): Promise<T> => {
   const { useAuth = false, ...fetchOptions } = options;
 
   const headers: Record<string, string> = {
@@ -38,4 +38,4 @@ export async function fetchAPI<T>(endpoint: string, options: FetchOptions = {}):
   }
 
   return response.json();
-}
+};

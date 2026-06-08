@@ -31,6 +31,7 @@ import VideoBlocksSection from "./VideoBlocksSection";
 
 import {
   Section,
+  SystemMetadata,
   HeroContent,
   FeaturesContent,
   PricingContent,
@@ -48,9 +49,10 @@ import {
 
 interface SectionRendererProps {
   section: Section;
+  systemMetadata?: SystemMetadata;
 }
 
-export default function SectionRenderer({ section }: SectionRendererProps) {
+const SectionRenderer = ({ section, systemMetadata }: SectionRendererProps) => {
   const { type, title, subtitle, content } = section;
 
   switch (type) {
@@ -78,7 +80,12 @@ export default function SectionRenderer({ section }: SectionRendererProps) {
       return <BlogSection title={title} subtitle={subtitle} content={content as BlogContent} />;
     case "contact":
       return (
-        <ContactSection title={title} subtitle={subtitle} content={content as ContactContent} />
+        <ContactSection
+          title={title}
+          subtitle={subtitle}
+          content={content as ContactContent}
+          systemMetadata={systemMetadata}
+        />
       );
     case "clients":
       return (
@@ -202,6 +209,7 @@ export default function SectionRenderer({ section }: SectionRendererProps) {
           title={title}
           subtitle={subtitle}
           content={content as Record<string, unknown>}
+          systemMetadata={systemMetadata}
         />
       );
     case "accordion":
@@ -248,4 +256,6 @@ export default function SectionRenderer({ section }: SectionRendererProps) {
       // Unknown section type - silently skip rendering
       return null;
   }
-}
+};
+
+export default SectionRenderer;

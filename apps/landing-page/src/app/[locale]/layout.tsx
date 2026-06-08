@@ -14,7 +14,7 @@ import "@/styles/rtl.css";
 export const dynamic = "force-dynamic";
 export const revalidate = 3600;
 
-export async function generateMetadata({ params }: RootLayoutProps): Promise<Metadata> {
+export const generateMetadata = async ({ params }: RootLayoutProps): Promise<Metadata> => {
   const { locale } = await params;
   const identity = await landingApi.getSystemMetadata(locale);
 
@@ -29,18 +29,18 @@ export async function generateMetadata({ params }: RootLayoutProps): Promise<Met
       images: identity.logoFull ? [identity.logoFull] : identity.logo ? [identity.logo] : undefined,
     },
   };
-}
+};
 
 interface RootLayoutProps {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 }
 
-export function generateStaticParams() {
+export const generateStaticParams = () => {
   return locales.map((locale) => ({ locale }));
-}
+};
 
-export default async function RootLayout({ children, params }: RootLayoutProps) {
+const RootLayout = async ({ children, params }: RootLayoutProps) => {
   const { locale } = await params;
 
   // Validate locale
@@ -85,4 +85,6 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;

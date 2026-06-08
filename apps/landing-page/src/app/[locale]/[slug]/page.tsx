@@ -16,7 +16,7 @@ interface PageProps {
 }
 
 // Generate metadata for each page
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export const generateMetadata = async ({ params }: PageProps): Promise<Metadata> => {
   const { slug, locale } = await params;
   const page = await landingApi.getPageBySlug(slug, locale);
 
@@ -36,11 +36,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       images: page.metadata.ogImage ? [page.metadata.ogImage] : [],
     },
   };
-}
+};
 
-export default async function LandingPage({ params }: PageProps) {
+const LandingPage = async ({ params }: PageProps) => {
   const { slug, locale } = await params;
-  const page = await landingApi.getPageBySlug(slug, locale);
+  const [page, systemMetadata] = await Promise.all([
+    landingApi.getPageBySlug(slug, locale),
+    landingApi.getSystemMetadata(locale),
+  ]);
 
   if (!page) {
     return (
@@ -61,8 +64,10 @@ export default async function LandingPage({ params }: PageProps) {
   return (
     <main>
       {sortedSections.map((section) => (
-        <SectionRenderer key={section.id} section={section} />
+        <SectionRenderer key={section.id} section={section} systemMetadata={systemMetadata} />
       ))}
     </main>
   );
-}
+};
+
+export default LandingPage;

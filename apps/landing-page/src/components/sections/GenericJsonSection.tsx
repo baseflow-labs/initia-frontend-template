@@ -4,7 +4,7 @@ interface GenericJsonSectionProps {
   content: Record<string, unknown>;
 }
 
-export default function GenericJsonSection({ title, subtitle, content }: GenericJsonSectionProps) {
+const GenericJsonSection = ({ title, subtitle, content }: GenericJsonSectionProps) => {
   return (
     <section className="py-5 border-top">
       <div className="container">
@@ -16,4 +16,6 @@ export default function GenericJsonSection({ title, subtitle, content }: Generic
       </div>
     </section>
   );
-}
+};
+
+export default GenericJsonSection;

@@ -16,7 +16,7 @@ type RootStackParamList = {
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-export default function AppNavigator() {
+const AppNavigator = () => {
   const { accessToken, permissions, user } = useAppSelector((state) => state.auth);
   const isAuthenticated = Boolean(accessToken && accessToken !== "null");
   const isAdmin = user?.role === "admin";
@@ -64,4 +64,6 @@ export default function AppNavigator() {
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
+};
+
+export default AppNavigator;

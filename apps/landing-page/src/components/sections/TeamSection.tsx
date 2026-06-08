@@ -6,7 +6,7 @@ interface TeamSectionProps {
   content: TeamContent;
 }
 
-export default function TeamSection({ title, subtitle, content }: TeamSectionProps) {
+const TeamSection = ({ title, subtitle, content }: TeamSectionProps) => {
   const { members } = content;
 
   return (
@@ -58,4 +58,6 @@ export default function TeamSection({ title, subtitle, content }: TeamSectionPro
       </div>
     </section>
   );
-}
+};
+
+export default TeamSection;

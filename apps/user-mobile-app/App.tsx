@@ -12,7 +12,7 @@ import store from "./src/store/store";
 import { useAppSelector } from "./src/store/hooks";
 import { setPermissions } from "./src/store/actions/auth";
 
-function AppBootstrap() {
+const AppBootstrap = () => {
   const dispatch = useDispatch();
   const { accessToken } = useAppSelector((state) => state.auth);
   const isAuthenticated = Boolean(accessToken && accessToken !== "null");
@@ -31,9 +31,9 @@ function AppBootstrap() {
   }, [dispatch, isAuthenticated]);
 
   return <AppNavigator />;
-}
+};
 
-export default function App() {
+const App = () => {
   useEffect(() => {
     initializeApi();
     setAnalysisProvider({
@@ -53,4 +53,6 @@ export default function App() {
       </I18nextProvider>
     </Provider>
   );
-}
+};
+
+export default App;

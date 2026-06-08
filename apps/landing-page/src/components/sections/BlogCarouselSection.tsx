@@ -2,7 +2,7 @@ import CarouselSection from "./CarouselSection";
 
 type Props = { title?: string; subtitle?: string; content?: Record<string, unknown> };
 
-export default function BlogCarouselSection({ title, subtitle, content }: Props) {
+const BlogCarouselSection = ({ title, subtitle, content }: Props) => {
   const posts = Array.isArray(content?.posts) ? content?.posts : [];
   const slides = posts.map((p) => {
     const obj = typeof p === "object" && p !== null ? (p as Record<string, unknown>) : {};
@@ -14,4 +14,6 @@ export default function BlogCarouselSection({ title, subtitle, content }: Props)
   });
 
   return <CarouselSection title={title} subtitle={subtitle} content={{ slides }} />;
-}
+};
+
+export default BlogCarouselSection;

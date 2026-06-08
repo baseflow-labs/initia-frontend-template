@@ -6,7 +6,7 @@ interface PricingSectionProps {
   content: PricingContent;
 }
 
-export default function PricingSection({ title, subtitle, content }: PricingSectionProps) {
+const PricingSection = ({ title, subtitle, content }: PricingSectionProps) => {
   const { plans } = content;
 
   return (
@@ -58,4 +58,6 @@ export default function PricingSection({ title, subtitle, content }: PricingSect
       </div>
     </section>
   );
-}
+};
+
+export default PricingSection;

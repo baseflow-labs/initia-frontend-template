@@ -7,7 +7,7 @@ interface ArticleListProps {
   articles: Article[];
 }
 
-export function ArticleList({ articles }: ArticleListProps) {
+export const ArticleList = ({ articles }: ArticleListProps) => {
   if (articles.length === 0) {
     return (
       <div className="rounded-lg border border-gray-200 bg-gray-50 p-8 text-center dark:border-gray-700 dark:bg-gray-800">
@@ -23,9 +23,9 @@ export function ArticleList({ articles }: ArticleListProps) {
       ))}
     </div>
   );
-}
+};
 
-function ArticleListItem({ article }: { article: Article }) {
+const ArticleListItem = ({ article }: { article: Article }) => {
   const updatedDate = new Date(article.updatedAt).toLocaleDateString("en-US", {
     month: "short",
     day: "numeric",
@@ -54,4 +54,4 @@ function ArticleListItem({ article }: { article: Article }) {
       </Link>
     </div>
   );
-}
+};

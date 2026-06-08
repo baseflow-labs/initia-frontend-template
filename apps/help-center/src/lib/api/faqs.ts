@@ -21,7 +21,7 @@ const unwrapPayload = <T>(response: ApiEnvelope<T> | T): T => {
   return response as T;
 };
 
-export async function getFaqs(): Promise<HelpCenterFaq[]> {
+export const getFaqs = async (): Promise<HelpCenterFaq[]> => {
   try {
     const response = await fetchAPI<ApiEnvelope<HelpCenterFaq[]>>("/support/faqs");
     return unwrapPayload<HelpCenterFaq[]>(response) || [];
@@ -29,4 +29,4 @@ export async function getFaqs(): Promise<HelpCenterFaq[]> {
     console.error("Error fetching FAQs:", error);
     return [];
   }
-}
+};

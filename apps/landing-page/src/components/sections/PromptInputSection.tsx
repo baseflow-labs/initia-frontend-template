@@ -1,5 +1,5 @@
 type Props = { title?: string; subtitle?: string; content?: Record<string, unknown> };
-export default function PromptInputSection({ title, subtitle, content }: Props) {
+const PromptInputSection = ({ title, subtitle, content }: Props) => {
   const placeholder = String(content?.placeholder || "");
   const submitText = String(content?.submitText || "Send");
   return (
@@ -14,4 +14,6 @@ export default function PromptInputSection({ title, subtitle, content }: Props) 
       </div>
     </section>
   );
-}
+};
+
+export default PromptInputSection;

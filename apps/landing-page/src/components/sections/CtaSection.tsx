@@ -1,6 +1,6 @@
 type Props = { title?: string; subtitle?: string; content?: Record<string, unknown> };
 
-export default function CtaSection({ title, subtitle, content }: Props) {
+const CtaSection = ({ title, subtitle, content }: Props) => {
   const heading = String(content?.heading || title || "");
   const description = String(content?.description || "");
   const buttonLink = String(content?.buttonLink || "#");
@@ -18,4 +18,6 @@ export default function CtaSection({ title, subtitle, content }: Props) {
       </div>
     </section>
   );
-}
+};
+
+export default CtaSection;

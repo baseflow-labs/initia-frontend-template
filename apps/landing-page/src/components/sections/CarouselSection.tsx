@@ -14,7 +14,7 @@ const getSlides = (content?: Record<string, unknown>): Slide[] => {
   });
 };
 
-export default function CarouselSection({ title, subtitle, content }: Props) {
+const CarouselSection = ({ title, subtitle, content }: Props) => {
   const slides = getSlides(content);
   return (
     <section className="py-5">
@@ -37,4 +37,6 @@ export default function CarouselSection({ title, subtitle, content }: Props) {
       </div>
     </section>
   );
-}
+};
+
+export default CarouselSection;

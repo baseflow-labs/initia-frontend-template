@@ -1,5 +1,5 @@
 type Props = { title?: string; subtitle?: string; content?: Record<string, unknown> };
-export default function PrivacyPolicySection({ title, subtitle, content }: Props) {
+const PrivacyPolicySection = ({ title, subtitle, content }: Props) => {
   const text = String(content?.content || "");
   return (
     <section className="py-5">
@@ -10,4 +10,6 @@ export default function PrivacyPolicySection({ title, subtitle, content }: Props
       </div>
     </section>
   );
-}
+};
+
+export default PrivacyPolicySection;

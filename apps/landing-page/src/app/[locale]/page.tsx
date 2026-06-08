@@ -11,7 +11,7 @@ interface HomePageProps {
   }>;
 }
 
-export default async function HomePage({ params }: HomePageProps) {
+const HomePage = async ({ params }: HomePageProps) => {
   const { locale } = await params;
 
   // Get all pages and redirect to the first one (typically 'home')
@@ -28,4 +28,6 @@ export default async function HomePage({ params }: HomePageProps) {
       <p>No pages configured yet.</p>
     </div>
   );
-}
+};
+
+export default HomePage;

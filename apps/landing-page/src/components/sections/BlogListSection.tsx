@@ -14,7 +14,7 @@ const getPosts = (content?: Record<string, unknown>): Post[] => {
   });
 };
 
-export default function BlogListSection({ title, subtitle, content }: Props) {
+const BlogListSection = ({ title, subtitle, content }: Props) => {
   const posts = getPosts(content);
   return (
     <section className="py-5">
@@ -36,4 +36,6 @@ export default function BlogListSection({ title, subtitle, content }: Props) {
       </div>
     </section>
   );
-}
+};
+
+export default BlogListSection;

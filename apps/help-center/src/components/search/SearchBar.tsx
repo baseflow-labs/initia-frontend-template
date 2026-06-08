@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Search } from "lucide-react";
 
-export function SearchBar() {
+export const SearchBar = () => {
   const [query, setQuery] = useState("");
   const router = useRouter();
 
@@ -29,4 +29,4 @@ export function SearchBar() {
       </div>
     </form>
   );
-}
+};

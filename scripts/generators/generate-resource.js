@@ -7,7 +7,7 @@ const { spawnSync } = require("child_process");
 const ROOT = process.cwd();
 const SPEC_DIR = path.join(ROOT, "scripts/specs");
 
-function toServiceCode(value) {
+const toServiceCode = (value) => {
   return String(value || "")
     .trim()
     .replace(/[^a-zA-Z0-9]+/g, " ")
@@ -19,13 +19,13 @@ function toServiceCode(value) {
         : item.charAt(0).toUpperCase() + item.slice(1)
     )
     .join("");
-}
+};
 
-function toServiceKey(serviceCode) {
+const toServiceKey = (serviceCode) => {
   return serviceCode.charAt(0).toUpperCase() + serviceCode.slice(1);
-}
+};
 
-function main() {
+const main = () => {
   const rawName = process.argv[2];
   if (!rawName) {
     throw new Error("Usage: node scripts/generators/generate-resource.js <resource-name>");
@@ -87,7 +87,7 @@ function main() {
   if (generated.status !== 0) {
     throw new Error("Resource generation failed");
   }
-}
+};
 
 try {
   main();

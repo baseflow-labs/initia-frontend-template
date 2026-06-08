@@ -2,14 +2,14 @@ import { StyleSheet, Text, View } from "react-native";
 
 import { colors } from "../../theme/colors";
 
-export function SectionCard({ title, body }: { title: string; body: string }) {
+export const SectionCard = ({ title, body }: { title: string; body: string }) => {
   return (
     <View style={styles.card}>
       <Text style={styles.cardTitle}>{title}</Text>
       <Text style={styles.cardBody}>{body}</Text>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   card: {

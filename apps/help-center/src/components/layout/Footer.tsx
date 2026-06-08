@@ -3,15 +3,15 @@ import { Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
 
 import type { SystemIdentity } from "@/lib/api/identity";
 
-function TikTokIcon() {
+const TikTokIcon = () => {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="h-5 w-5">
       <path d="M14 3c.2 1.7 1.4 3.4 3 4.2a6 6 0 0 0 3 .8v3a9 9 0 0 1-3-.6v5.8a6.8 6.8 0 1 1-6.8-6.8c.4 0 .8 0 1.2.1v3.1a3.7 3.7 0 1 0 2.6 3.6V3h3z" />
     </svg>
   );
-}
+};
 
-export function Footer({ identity }: { identity: SystemIdentity }) {
+export const Footer = ({ identity }: { identity: SystemIdentity }) => {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -244,4 +244,4 @@ export function Footer({ identity }: { identity: SystemIdentity }) {
       </div>
     </footer>
   );
-}
+};

@@ -10,12 +10,12 @@ interface ArticleSidebarProps {
   subsectionSlug: string;
 }
 
-export function ArticleSidebar({
+export const ArticleSidebar = ({
   article,
   relatedArticles,
   sectionSlug,
   subsectionSlug,
-}: ArticleSidebarProps) {
+}: ArticleSidebarProps) => {
   return (
     <aside className="space-y-6">
       {/* Article Stats */}
@@ -74,4 +74,4 @@ export function ArticleSidebar({
       </div>
     </aside>
   );
-}
+};

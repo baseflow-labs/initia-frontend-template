@@ -6,7 +6,7 @@ interface FeaturesSectionProps {
   content: FeaturesContent;
 }
 
-export default function FeaturesSection({ title, subtitle, content }: FeaturesSectionProps) {
+const FeaturesSection = ({ title, subtitle, content }: FeaturesSectionProps) => {
   const { variant = "horizontal", features } = content;
 
   return (
@@ -47,4 +47,6 @@ export default function FeaturesSection({ title, subtitle, content }: FeaturesSe
       </div>
     </section>
   );
-}
+};
+
+export default FeaturesSection;

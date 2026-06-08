@@ -5,7 +5,7 @@ import { colors } from "../../theme/colors";
 
 import { SectionCard } from "./SharedBlocks";
 
-export default function DashboardMobileView() {
+const DashboardMobileView = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={styles.wrap}>
@@ -25,7 +25,9 @@ export default function DashboardMobileView() {
       </ScrollView>
     </SafeAreaView>
   );
-}
+};
+
+export default DashboardMobileView;
 
 const styles = StyleSheet.create({
   safeArea: { flex: 1, backgroundColor: colors.background },

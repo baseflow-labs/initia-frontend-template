@@ -8,7 +8,7 @@ const getVideos = (content?: Record<string, unknown>): Video[] => {
     return { url: String(obj.url || ""), title: String(obj.title || `video-${i}`) };
   });
 };
-export default function VideoBlocksSection({ title, subtitle, content }: Props) {
+const VideoBlocksSection = ({ title, subtitle, content }: Props) => {
   const videos = getVideos(content);
   return (
     <section className="py-5">
@@ -27,4 +27,6 @@ export default function VideoBlocksSection({ title, subtitle, content }: Props) 
       </div>
     </section>
   );
-}
+};
+
+export default VideoBlocksSection;

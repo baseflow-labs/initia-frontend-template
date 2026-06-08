@@ -6,17 +6,19 @@ import { getSystemIdentity } from "@/lib/api/identity";
 
 export const revalidate = 3600;
 
-export async function generateMetadata(): Promise<Metadata> {
+export const generateMetadata = async (): Promise<Metadata> => {
   const identity = await getSystemIdentity();
 
   return {
     title: `Contact ${identity.name}`,
     description: identity.slogan || `Contact ${identity.name} support`,
   };
-}
+};
 
-export default async function ContactPage() {
+const ContactPage = async () => {
   const identity = await getSystemIdentity();
 
   return <ContactForm identity={identity} />;
-}
+};
+
+export default ContactPage;

@@ -21,7 +21,7 @@ interface Ticket {
   updatedAt: string;
 }
 
-export default async function TicketsPage() {
+const TicketsPage = async () => {
   const tickets = await getTickets();
 
   // Group tickets by status
@@ -145,4 +145,6 @@ export default async function TicketsPage() {
       </div>
     </div>
   );
-}
+};
+
+export default TicketsPage;

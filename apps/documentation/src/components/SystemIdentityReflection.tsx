@@ -6,7 +6,7 @@ import {
   fetchSystemIdentity,
 } from '../lib/systemIdentity';
 
-function applyIdentity(identity: SystemIdentity) {
+const applyIdentity = (identity: SystemIdentity) => {
   document.title = `${identity.name} Documentation`;
   document.documentElement.style.setProperty('--docs-brand-primary', identity.defaultThemeColor);
   document.documentElement.style.setProperty('--color-primary', identity.defaultThemeColor);
@@ -22,9 +22,9 @@ function applyIdentity(identity: SystemIdentity) {
   }
 
   favicon.href = faviconUrl;
-}
+};
 
-export function SystemIdentityReflection() {
+export const SystemIdentityReflection = () => {
   const [identity, setIdentity] = useState<SystemIdentity>(DEFAULT_SYSTEM_IDENTITY);
 
   useEffect(() => {
@@ -72,4 +72,4 @@ export function SystemIdentityReflection() {
       </div>
     </div>
   );
-}
+};

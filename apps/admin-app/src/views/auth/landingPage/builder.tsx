@@ -47,7 +47,7 @@ const SECTION_TYPES: { label: string; value: SectionType }[] = [
   { label: "Blog Carousel", value: "blog_carousel" },
 ];
 
-function getSectionContentSchema(type?: SectionType): InputProps[] {
+const getSectionContentSchema = (type?: SectionType): InputProps[] => {
   switch (type) {
     case "hero":
       return [
@@ -382,9 +382,9 @@ function getSectionContentSchema(type?: SectionType): InputProps[] {
     default:
       return [];
   }
-}
+};
 
-function parseJsonContent(raw: Record<string, unknown>): Record<string, unknown> {
+const parseJsonContent = (raw: Record<string, unknown>): Record<string, unknown> => {
   const result: Record<string, unknown> = {};
   for (const [k, v] of Object.entries(raw)) {
     if (typeof v === "string") {
@@ -398,9 +398,9 @@ function parseJsonContent(raw: Record<string, unknown>): Record<string, unknown>
     }
   }
   return result;
-}
+};
 
-function serializeContentForForm(content: Record<string, unknown>): Record<string, unknown> {
+const serializeContentForForm = (content: Record<string, unknown>): Record<string, unknown> => {
   const result: Record<string, unknown> = {};
   for (const [k, v] of Object.entries(content)) {
     result[k] =
@@ -409,7 +409,7 @@ function serializeContentForForm(content: Record<string, unknown>): Record<strin
         : (v ?? "");
   }
   return result;
-}
+};
 
 // ─── Section editor ────────────────────────────────────────────────────────────
 

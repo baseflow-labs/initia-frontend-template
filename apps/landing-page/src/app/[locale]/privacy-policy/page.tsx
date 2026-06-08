@@ -5,7 +5,7 @@ interface PrivacyPolicyPageProps {
   params: Promise<{ locale: string }>;
 }
 
-export default async function PrivacyPolicyPage({ params }: PrivacyPolicyPageProps) {
+const PrivacyPolicyPage = async ({ params }: PrivacyPolicyPageProps) => {
   const { locale } = await params;
   const document = await landingApi.getLatestLegalDocument("privacy-policy", locale);
 
@@ -16,4 +16,6 @@ export default async function PrivacyPolicyPage({ params }: PrivacyPolicyPagePro
       fallbackDescription="This page explains how we collect, use, and protect your data."
     />
   );
-}
+};
+
+export default PrivacyPolicyPage;

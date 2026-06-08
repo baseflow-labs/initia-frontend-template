@@ -5,7 +5,7 @@ import { useLocale } from "next-intl";
 
 const CONSENT_KEY = "landingConsent.v1";
 
-export default function ConsentPopup() {
+const ConsentPopup = () => {
   const locale = useLocale();
   const [open, setOpen] = useState(false);
 
@@ -72,4 +72,6 @@ export default function ConsentPopup() {
       </div>
     </div>
   );
-}
+};
+
+export default ConsentPopup;

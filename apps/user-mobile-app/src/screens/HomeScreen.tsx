@@ -12,7 +12,7 @@ type Props = {
   navigateTo: (routeKey: string) => void;
 };
 
-export default function HomeScreen({ routes, navigateTo }: Props) {
+const HomeScreen = ({ routes, navigateTo }: Props) => {
   const { t } = useTranslation();
   const items = useMemo(() => routes, [routes]);
 
@@ -41,7 +41,9 @@ export default function HomeScreen({ routes, navigateTo }: Props) {
       />
     </SafeAreaView>
   );
-}
+};
+
+export default HomeScreen;
 
 const styles = StyleSheet.create({
   safeArea: { flex: 1, backgroundColor: colors.background },

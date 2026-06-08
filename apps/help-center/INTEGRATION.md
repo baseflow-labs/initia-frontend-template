@@ -129,14 +129,14 @@ Uncomment the API fetch calls and remove/comment the mock data:
 
 ```typescript
 // Before (mock data)
-export async function getSections(): Promise<Section[]> {
+export const getSections = async (): Promise<Section[]> => {
   return Promise.resolve(MOCK_SECTIONS);
-}
+};
 
 // After (real API)
-export async function getSections(): Promise<Section[]> {
+export const getSections = async (): Promise<Section[]> => {
   return await fetchAPI<Section[]>("/help/sections");
-}
+};
 ```
 
 ## Static Site Generation

@@ -10,16 +10,16 @@ interface SearchPageProps {
   };
 }
 
-export async function generateMetadata({ searchParams }: SearchPageProps): Promise<Metadata> {
+export const generateMetadata = async ({ searchParams }: SearchPageProps): Promise<Metadata> => {
   const query = searchParams.q || "";
 
   return {
     title: query ? `Search results for "${query}"` : "Search",
     description: "Search our help center for answers",
   };
-}
+};
 
-export default async function SearchPage({ searchParams }: SearchPageProps) {
+const SearchPage = async ({ searchParams }: SearchPageProps) => {
   const query = searchParams.q || "";
   const results = query ? await searchArticles(query) : [];
 
@@ -54,4 +54,6 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
       ) : null}
     </div>
   );
-}
+};
+
+export default SearchPage;

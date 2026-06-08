@@ -6,7 +6,7 @@ import { colors } from "../../theme/colors";
 
 type Props = { goLogin: () => void };
 
-export default function RegisterScreen({ goLogin }: Props) {
+const RegisterScreen = ({ goLogin }: Props) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -35,7 +35,9 @@ export default function RegisterScreen({ goLogin }: Props) {
       </Pressable>
     </View>
   );
-}
+};
+
+export default RegisterScreen;
 const styles = StyleSheet.create({
   wrap: { gap: 10 },
   title: { fontSize: 26, fontWeight: "800", color: colors.textPrimary, marginBottom: 8 },

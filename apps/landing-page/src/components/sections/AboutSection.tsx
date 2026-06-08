@@ -6,7 +6,7 @@ interface AboutSectionProps {
   content: AboutContent;
 }
 
-export default function AboutSection({ title, subtitle, content }: AboutSectionProps) {
+const AboutSection = ({ title, subtitle, content }: AboutSectionProps) => {
   const { content: aboutText, statistics, image } = content;
 
   return (
@@ -45,4 +45,6 @@ export default function AboutSection({ title, subtitle, content }: AboutSectionP
       </div>
     </section>
   );
-}
+};
+
+export default AboutSection;

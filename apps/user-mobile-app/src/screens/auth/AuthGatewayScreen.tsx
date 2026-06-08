@@ -11,7 +11,7 @@ import ResetPasswordScreen from "./ResetPasswordScreen";
 
 type Mode = "login" | "register" | "forgot" | "reset";
 
-export default function AuthGatewayScreen() {
+const AuthGatewayScreen = () => {
   const [mode, setMode] = useState<Mode>("login");
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -27,7 +27,9 @@ export default function AuthGatewayScreen() {
       </View>
     </SafeAreaView>
   );
-}
+};
+
+export default AuthGatewayScreen;
 
 const styles = StyleSheet.create({
   safeArea: { flex: 1, backgroundColor: colors.background, justifyContent: "center", padding: 16 },

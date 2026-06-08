@@ -4,7 +4,7 @@ import { Resource } from "i18next";
  * Deep merge i18n resources
  * App-specific translations override shared ones
  */
-export function mergeResources(shared: Resource, appSpecific: Resource): Resource {
+export const mergeResources = (shared: Resource, appSpecific: Resource): Resource => {
   const merged: Resource = {};
 
   const languages = new Set([...Object.keys(shared), ...Object.keys(appSpecific)]);
@@ -18,4 +18,4 @@ export function mergeResources(shared: Resource, appSpecific: Resource): Resourc
   });
 
   return merged;
-}
+};

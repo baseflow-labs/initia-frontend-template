@@ -30,9 +30,9 @@ interface StoreCallbacks {
 
 let storeCallbacks: StoreCallbacks | null = null;
 
-export function initializeApiClient(callbacks: StoreCallbacks) {
+export const initializeApiClient = (callbacks: StoreCallbacks) => {
   storeCallbacks = callbacks;
-}
+};
 
 export const baseURL = import.meta.env.VITE_APP_BACKEND_URL || "http://localhost:8000/api";
 

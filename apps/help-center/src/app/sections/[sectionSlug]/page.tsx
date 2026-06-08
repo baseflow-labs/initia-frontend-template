@@ -15,15 +15,15 @@ interface SectionPageProps {
 export const revalidate = 3600;
 
 // Generate static paths for all sections
-export async function generateStaticParams() {
+export const generateStaticParams = async () => {
   const sections = await getSections();
   return sections.map((section) => ({
     sectionSlug: section.slug,
   }));
-}
+};
 
 // Generate metadata for SEO
-export async function generateMetadata({ params }: SectionPageProps): Promise<Metadata> {
+export const generateMetadata = async ({ params }: SectionPageProps): Promise<Metadata> => {
   const section = await getSection(params.sectionSlug);
 
   if (!section) {
@@ -40,9 +40,9 @@ export async function generateMetadata({ params }: SectionPageProps): Promise<Me
       description: section.description,
     },
   };
-}
+};
 
-export default async function SectionPage({ params }: SectionPageProps) {
+const SectionPage = async ({ params }: SectionPageProps) => {
   const section = await getSection(params.sectionSlug);
 
   if (!section) {
@@ -84,4 +84,6 @@ export default async function SectionPage({ params }: SectionPageProps) {
       )}
     </div>
   );
-}
+};
+
+export default SectionPage;

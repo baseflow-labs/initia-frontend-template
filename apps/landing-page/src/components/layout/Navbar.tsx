@@ -11,7 +11,7 @@ interface NavbarProps {
   systemMetadata?: SystemMetadata;
 }
 
-export default function Navbar({ pages = [], systemMetadata }: NavbarProps) {
+const Navbar = ({ pages = [], systemMetadata }: NavbarProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const locale = useLocale();
@@ -123,4 +123,6 @@ export default function Navbar({ pages = [], systemMetadata }: NavbarProps) {
       />
     </nav>
   );
-}
+};
+
+export default Navbar;

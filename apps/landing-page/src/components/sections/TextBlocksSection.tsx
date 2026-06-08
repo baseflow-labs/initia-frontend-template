@@ -8,7 +8,7 @@ const getBlocks = (content?: Record<string, unknown>): Block[] => {
     return { title: String(obj.title || ""), text: String(obj.text || "") };
   });
 };
-export default function TextBlocksSection({ title, subtitle, content }: Props) {
+const TextBlocksSection = ({ title, subtitle, content }: Props) => {
   const blocks = getBlocks(content);
   return (
     <section className="py-5">
@@ -24,4 +24,6 @@ export default function TextBlocksSection({ title, subtitle, content }: Props) {
       </div>
     </section>
   );
-}
+};
+
+export default TextBlocksSection;

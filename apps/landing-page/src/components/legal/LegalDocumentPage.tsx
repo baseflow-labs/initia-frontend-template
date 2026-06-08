@@ -6,11 +6,11 @@ interface LegalDocumentPageProps {
   fallbackDescription: string;
 }
 
-export default function LegalDocumentPage({
+const LegalDocumentPage = ({
   document,
   fallbackTitle,
   fallbackDescription,
-}: LegalDocumentPageProps) {
+}: LegalDocumentPageProps) => {
   return (
     <section className="legal-shell py-5">
       <div className="container">
@@ -75,4 +75,6 @@ export default function LegalDocumentPage({
       />
     </section>
   );
-}
+};
+
+export default LegalDocumentPage;

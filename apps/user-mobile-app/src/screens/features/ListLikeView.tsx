@@ -5,7 +5,7 @@ import { colors } from "../../theme/colors";
 
 import { SectionCard } from "./SharedBlocks";
 
-export default function ListLikeView({ title, lines }: { title: string; lines: string[] }) {
+const ListLikeView = ({ title, lines }: { title: string; lines: string[] }) => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={styles.wrap}>
@@ -16,7 +16,9 @@ export default function ListLikeView({ title, lines }: { title: string; lines: s
       </ScrollView>
     </SafeAreaView>
   );
-}
+};
+
+export default ListLikeView;
 
 const styles = StyleSheet.create({
   safeArea: { flex: 1, backgroundColor: colors.background },

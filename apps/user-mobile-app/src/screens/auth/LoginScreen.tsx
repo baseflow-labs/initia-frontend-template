@@ -8,7 +8,7 @@ import { colors } from "../../theme/colors";
 
 type Props = { goRegister: () => void; goForgot: () => void };
 
-export default function LoginScreen({ goRegister, goForgot }: Props) {
+const LoginScreen = ({ goRegister, goForgot }: Props) => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("user@initia.dev");
   const [password, setPassword] = useState("password123");
@@ -44,7 +44,9 @@ export default function LoginScreen({ goRegister, goForgot }: Props) {
       </Pressable>
     </View>
   );
-}
+};
+
+export default LoginScreen;
 
 const styles = StyleSheet.create({
   wrap: { gap: 10 },

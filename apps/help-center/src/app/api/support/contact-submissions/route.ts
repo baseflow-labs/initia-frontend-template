@@ -4,20 +4,20 @@ const RAW_API_BASE_URL =
   process.env.API_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
 const API_BASE_URL = RAW_API_BASE_URL.replace(/\/$/, "");
 
-async function submitToBackend(
+const submitToBackend = async (
   body: unknown,
   headers: Record<string, string>,
   endpoint: string
-): Promise<Response> {
+): Promise<Response> => {
   return fetch(`${API_BASE_URL}${endpoint}`, {
     method: "POST",
     headers,
     body: JSON.stringify(body),
     cache: "no-store",
   });
-}
+};
 
-export async function POST(request: NextRequest) {
+export const POST = async (request: NextRequest) => {
   try {
     const body = await request.json();
 
@@ -68,4 +68,4 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
-}
+};

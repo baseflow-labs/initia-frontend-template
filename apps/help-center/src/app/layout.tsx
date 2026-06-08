@@ -7,7 +7,7 @@ import { getSystemIdentity } from "@/lib/api/identity";
 import "./globals.css";
 import "@/styles/rtl.css";
 
-export async function generateMetadata(): Promise<Metadata> {
+export const generateMetadata = async (): Promise<Metadata> => {
   const identity = await getSystemIdentity();
 
   return {
@@ -38,9 +38,9 @@ export async function generateMetadata(): Promise<Metadata> {
       follow: true,
     },
   };
-}
+};
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
+const RootLayout = async ({ children }: { children: React.ReactNode }) => {
   const identity = await getSystemIdentity();
 
   return (
@@ -56,4 +56,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;

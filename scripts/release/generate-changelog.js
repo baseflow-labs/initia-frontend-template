@@ -2,15 +2,15 @@
 /* eslint-disable no-console */
 const { execSync } = require("child_process");
 
-function run(command) {
+const run = (command) => {
   try {
     return execSync(command, { encoding: "utf8", stdio: ["pipe", "pipe", "pipe"] }).trim();
   } catch {
     return "";
   }
-}
+};
 
-function parseCommits(raw) {
+const parseCommits = (raw) => {
   if (!raw) return [];
   return raw
     .split("\n")
@@ -20,16 +20,16 @@ function parseCommits(raw) {
       const [hash, authorDate, subject] = line.split("\t");
       return { hash, authorDate: Number(authorDate || 0), subject: subject || "" };
     });
-}
+};
 
-function getType(subject) {
+const getType = (subject) => {
   const conventional = subject.match(/^([a-z]+)(\(.+\))?:\s+/i);
   if (conventional) return conventional[1].toLowerCase();
   if (/^merge pull request/i.test(subject)) return "merge";
   return "other";
-}
+};
 
-function sectionLabel(type) {
+const sectionLabel = (type) => {
   const map = {
     feat: "Features",
     fix: "Fixes",
@@ -44,13 +44,13 @@ function sectionLabel(type) {
     other: "Other",
   };
   return map[type] || "Other";
-}
+};
 
-function shouldInclude(subject) {
+const shouldInclude = (subject) => {
   return !/(^chore\(code\): bump version to|ci skip|^merge branch)/i.test(subject);
-}
+};
 
-function main() {
+const main = () => {
   const fromArg = process.argv.find((arg) => arg.startsWith("--from="));
   const toArg = process.argv.find((arg) => arg.startsWith("--to="));
   const from = fromArg ? fromArg.replace("--from=", "") : "";
@@ -102,7 +102,7 @@ function main() {
   });
 
   console.log(lines.join("\n").trim());
-}
+};
 
 main();
 

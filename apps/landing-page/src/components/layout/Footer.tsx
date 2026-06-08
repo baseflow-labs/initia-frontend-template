@@ -6,7 +6,7 @@ interface FooterProps {
   locale?: string;
 }
 
-export default function Footer({ pages = [], systemMetadata, locale = "en" }: FooterProps) {
+const Footer = ({ pages = [], systemMetadata, locale = "en" }: FooterProps) => {
   const currentYear = new Date().getFullYear();
 
   const apps = [
@@ -106,6 +106,28 @@ export default function Footer({ pages = [], systemMetadata, locale = "en" }: Fo
                   <i className="bi bi-instagram"></i>
                 </a>
               )}
+              {systemMetadata?.socialYoutube && (
+                <a
+                  href={systemMetadata.socialYoutube}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-icon"
+                  aria-label="YouTube"
+                >
+                  <i className="bi bi-youtube"></i>
+                </a>
+              )}
+              {systemMetadata?.socialTiktok && (
+                <a
+                  href={systemMetadata.socialTiktok}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-icon"
+                  aria-label="TikTok"
+                >
+                  <i className="bi bi-tiktok"></i>
+                </a>
+              )}
             </div>
           </div>
 
@@ -191,4 +213,6 @@ export default function Footer({ pages = [], systemMetadata, locale = "en" }: Fo
       />
     </footer>
   );
-}
+};
+
+export default Footer;

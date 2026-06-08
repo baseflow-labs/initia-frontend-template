@@ -4,7 +4,7 @@ import { getSections } from "@/lib/api/sections";
 import { getSubsections } from "@/lib/api/subsections";
 import { getArticlesBySubsection } from "@/lib/api/articles";
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://help.yourproduct.com";
   const sections = await getSections();
 
@@ -68,4 +68,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }
 
   return routes;
-}
+};
+
+export default sitemap;

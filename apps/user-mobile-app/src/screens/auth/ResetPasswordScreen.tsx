@@ -5,7 +5,7 @@ import { resetPassword } from "@initia/shared/api/auth";
 import { colors } from "../../theme/colors";
 
 type Props = { goLogin: () => void };
-export default function ResetPasswordScreen({ goLogin }: Props) {
+const ResetPasswordScreen = ({ goLogin }: Props) => {
   const [email, setEmail] = useState("");
   const [token, setToken] = useState("");
   const [password, setPassword] = useState("");
@@ -42,7 +42,9 @@ export default function ResetPasswordScreen({ goLogin }: Props) {
       </Pressable>
     </View>
   );
-}
+};
+
+export default ResetPasswordScreen;
 const styles = StyleSheet.create({
   wrap: { gap: 10 },
   title: { fontSize: 26, fontWeight: "800", color: colors.textPrimary, marginBottom: 8 },

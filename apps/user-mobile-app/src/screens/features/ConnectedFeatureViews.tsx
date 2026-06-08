@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   btnText: { color: "white", fontWeight: "700" },
 });
 
-export function DashboardConnectedView() {
+export const DashboardConnectedView = () => {
   const [status, setStatus] = useState<string>("-");
   const [notificationsCount, setNotificationsCount] = useState<number>(0);
   useEffect(() => {
@@ -64,9 +64,9 @@ export function DashboardConnectedView() {
       </ScrollView>
     </SafeAreaView>
   );
-}
+};
 
-export function ProfileConnectedView() {
+export const ProfileConnectedView = () => {
   const [profile, setProfile] = useState<{
     fullName?: string;
     username?: string;
@@ -94,9 +94,9 @@ export function ProfileConnectedView() {
       </ScrollView>
     </SafeAreaView>
   );
-}
+};
 
-export function NotificationsConnectedView() {
+export const NotificationsConnectedView = () => {
   const [items, setItems] = useState<
     { id: string; title: string; message: string; isRead?: boolean }[]
   >([]);
@@ -128,9 +128,9 @@ export function NotificationsConnectedView() {
       </ScrollView>
     </SafeAreaView>
   );
-}
+};
 
-export function MessagingConnectedView() {
+export const MessagingConnectedView = () => {
   const { user } = useAppSelector((s) => s.auth);
   const [conversations, setConversations] = useState<{ id: string; title?: string }[]>([]);
   const [selectedConversationId, setSelectedConversationId] = useState<string>("");
@@ -197,9 +197,9 @@ export function MessagingConnectedView() {
       </ScrollView>
     </SafeAreaView>
   );
-}
+};
 
-export function SettingsConnectedView() {
+export const SettingsConnectedView = () => {
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
 
@@ -229,4 +229,4 @@ export function SettingsConnectedView() {
       </ScrollView>
     </SafeAreaView>
   );
-}
+};

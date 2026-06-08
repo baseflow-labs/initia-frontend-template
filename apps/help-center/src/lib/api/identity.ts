@@ -26,14 +26,14 @@ export const DEFAULT_SYSTEM_IDENTITY: SystemIdentity = {
   contactEmail: "support@example.com",
 };
 
-function unwrapPayload<TPayload>(data: unknown): TPayload {
+const unwrapPayload = <TPayload>(data: unknown): TPayload => {
   if (data && typeof data === "object" && "payload" in (data as Record<string, unknown>)) {
     return (data as { payload: TPayload }).payload;
   }
   return data as TPayload;
-}
+};
 
-export async function getSystemIdentity(): Promise<SystemIdentity> {
+export const getSystemIdentity = async (): Promise<SystemIdentity> => {
   try {
     const response = await fetchAPI<SystemIdentity | { payload: SystemIdentity }>("/metadata");
     const identity = unwrapPayload<SystemIdentity>(response);
@@ -47,4 +47,4 @@ export async function getSystemIdentity(): Promise<SystemIdentity> {
     console.error("Error fetching system identity:", error);
     return DEFAULT_SYSTEM_IDENTITY;
   }
-}
+};

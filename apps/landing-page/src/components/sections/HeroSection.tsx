@@ -6,7 +6,7 @@ interface HeroSectionProps {
   content: HeroContent;
 }
 
-export default function HeroSection({ content }: HeroSectionProps) {
+const HeroSection = ({ content }: HeroSectionProps) => {
   const {
     heading,
     subheading,
@@ -51,4 +51,6 @@ export default function HeroSection({ content }: HeroSectionProps) {
       </div>
     </section>
   );
-}
+};
+
+export default HeroSection;

@@ -2,7 +2,7 @@ import { getManualTree } from "./userManual";
 
 import { Section } from "@/types/documentation";
 
-export async function getSections(): Promise<Section[]> {
+export const getSections = async (): Promise<Section[]> => {
   try {
     const tree = await getManualTree();
 
@@ -29,9 +29,9 @@ export async function getSections(): Promise<Section[]> {
     console.error("Error fetching sections:", error);
     return [];
   }
-}
+};
 
-export async function getSection(slug: string): Promise<Section | null> {
+export const getSection = async (slug: string): Promise<Section | null> => {
   try {
     const sections = await getSections();
     return sections.find((section) => section.slug === slug) || null;
@@ -39,4 +39,4 @@ export async function getSection(slug: string): Promise<Section | null> {
     console.error("Error fetching section:", error);
     return null;
   }
-}
+};

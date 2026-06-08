@@ -8,7 +8,7 @@ import { LanguageSwitcher } from "@initia/shared/ui/components/button/language-s
 
 import type { SystemIdentity } from "@/lib/api/identity";
 
-export function Header({ identity }: { identity: SystemIdentity }) {
+export const Header = ({ identity }: { identity: SystemIdentity }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { t, i18n } = useTranslation();
   const isRtl = i18n.language === "ar";
@@ -130,4 +130,4 @@ export function Header({ identity }: { identity: SystemIdentity }) {
       )}
     </header>
   );
-}
+};

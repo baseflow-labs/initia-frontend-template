@@ -5,7 +5,7 @@ interface TermsPageProps {
   params: Promise<{ locale: string }>;
 }
 
-export default async function TermsAndConditionsPage({ params }: TermsPageProps) {
+const TermsAndConditionsPage = async ({ params }: TermsPageProps) => {
   const { locale } = await params;
   const document = await landingApi.getLatestLegalDocument("terms-and-conditions", locale);
 
@@ -16,4 +16,6 @@ export default async function TermsAndConditionsPage({ params }: TermsPageProps)
       fallbackDescription="These terms define the rules for using our platform and services."
     />
   );
-}
+};
+
+export default TermsAndConditionsPage;

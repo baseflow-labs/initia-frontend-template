@@ -9,7 +9,7 @@ interface DemoRequestSectionProps {
   content: DemoRequestContent;
 }
 
-export default function DemoRequestSection({ title, subtitle, content }: DemoRequestSectionProps) {
+const DemoRequestSection = ({ title, subtitle, content }: DemoRequestSectionProps) => {
   const { formFields, submitText = "Request Demo" } = content;
   const [formData, setFormData] = useState<Record<string, string>>({});
 
@@ -92,4 +92,6 @@ export default function DemoRequestSection({ title, subtitle, content }: DemoReq
       </div>
     </section>
   );
-}
+};
+
+export default DemoRequestSection;

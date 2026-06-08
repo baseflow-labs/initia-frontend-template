@@ -8,7 +8,7 @@ const getItems = (content?: Record<string, unknown>): Item[] => {
     return { image: String(obj.image || ""), title: String(obj.title || "partner") };
   });
 };
-export default function PartnersSection({ title, subtitle, content }: Props) {
+const PartnersSection = ({ title, subtitle, content }: Props) => {
   const items = getItems(content);
   return (
     <section className="py-5">
@@ -25,4 +25,6 @@ export default function PartnersSection({ title, subtitle, content }: Props) {
       </div>
     </section>
   );
-}
+};
+
+export default PartnersSection;

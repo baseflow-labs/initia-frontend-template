@@ -10,7 +10,7 @@ type Props = {
   routeKey: string;
 };
 
-export default function FeatureScreen({ title, routeKey }: Props) {
+const FeatureScreen = ({ title, routeKey }: Props) => {
   const featureView = FEATURE_VIEW_BY_KEY[routeKey];
   if (featureView) return <>{featureView}</>;
 
@@ -26,7 +26,9 @@ export default function FeatureScreen({ title, routeKey }: Props) {
       </View>
     </SafeAreaView>
   );
-}
+};
+
+export default FeatureScreen;
 
 const styles = StyleSheet.create({
   safeArea: { flex: 1, backgroundColor: colors.background },

@@ -6,7 +6,7 @@ interface ClientsSectionProps {
   content: ClientsContent;
 }
 
-export default function ClientsSection({ title, subtitle, content }: ClientsSectionProps) {
+const ClientsSection = ({ title, subtitle, content }: ClientsSectionProps) => {
   const logos = Array.isArray(content?.logos) ? content.logos : [];
 
   const safeLogos = logos.filter(
@@ -65,4 +65,6 @@ export default function ClientsSection({ title, subtitle, content }: ClientsSect
       </section>
     </>
   );
-}
+};
+
+export default ClientsSection;

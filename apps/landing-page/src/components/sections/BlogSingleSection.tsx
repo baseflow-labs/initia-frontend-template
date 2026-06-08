@@ -1,6 +1,6 @@
 type Props = { title?: string; subtitle?: string; content?: Record<string, unknown> };
 
-export default function BlogSingleSection({ title, subtitle, content }: Props) {
+const BlogSingleSection = ({ title, subtitle, content }: Props) => {
   const heading = String(content?.title || "");
   const excerpt = String(content?.excerpt || "");
   const body = String(content?.content || "");
@@ -17,4 +17,6 @@ export default function BlogSingleSection({ title, subtitle, content }: Props) {
       </div>
     </section>
   );
-}
+};
+
+export default BlogSingleSection;

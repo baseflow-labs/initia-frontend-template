@@ -10,7 +10,7 @@ interface BlogSectionProps {
   content: BlogContent;
 }
 
-export default function BlogSection({ title, subtitle, content }: BlogSectionProps) {
+const BlogSection = ({ title, subtitle, content }: BlogSectionProps) => {
   const { variant = "fixed", posts = [] } = content;
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -121,4 +121,6 @@ export default function BlogSection({ title, subtitle, content }: BlogSectionPro
       </div>
     </section>
   );
-}
+};
+
+export default BlogSection;

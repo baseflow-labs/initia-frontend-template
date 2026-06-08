@@ -7,7 +7,7 @@ interface SectionCardProps {
   section: Section;
 }
 
-export function SectionCard({ section }: SectionCardProps) {
+export const SectionCard = ({ section }: SectionCardProps) => {
   return (
     <Link
       href={`/sections/${section.slug}`}
@@ -29,4 +29,4 @@ export function SectionCard({ section }: SectionCardProps) {
       )}
     </Link>
   );
-}
+};

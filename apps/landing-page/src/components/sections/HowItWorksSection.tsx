@@ -6,7 +6,7 @@ interface HowItWorksSectionProps {
   content: HowItWorksContent;
 }
 
-export default function HowItWorksSection({ title, subtitle, content }: HowItWorksSectionProps) {
+const HowItWorksSection = ({ title, subtitle, content }: HowItWorksSectionProps) => {
   const { steps } = content;
 
   return (
@@ -54,4 +54,6 @@ export default function HowItWorksSection({ title, subtitle, content }: HowItWor
       </div>
     </section>
   );
-}
+};
+
+export default HowItWorksSection;

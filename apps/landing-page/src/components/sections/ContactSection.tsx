@@ -1,16 +1,40 @@
 "use client";
 import { useState } from "react";
 
-import { ContactContent } from "@/types/landing";
+import { ContactContent, SystemMetadata } from "@/types/landing";
 
 interface ContactSectionProps {
   title: string;
   subtitle?: string;
   content: ContactContent;
+  systemMetadata?: SystemMetadata;
 }
 
-export default function ContactSection({ title, subtitle, content }: ContactSectionProps) {
-  const { email, phone, address, mapLocation, socialLinks } = content;
+const ContactSection = ({ title, subtitle, content, systemMetadata }: ContactSectionProps) => {
+  const email = systemMetadata?.contactEmail || content.email;
+  const phone = systemMetadata?.phoneNumber || content.phone;
+  const address = content.address;
+  const mapLocation = content.mapLocation;
+  const metadataSocialLinks = [
+    {
+      platform: "Facebook",
+      url: systemMetadata?.socialFacebook || systemMetadata?.socialLinks?.facebook,
+    },
+    {
+      platform: "Instagram",
+      url: systemMetadata?.socialInstagram || systemMetadata?.socialLinks?.instagram,
+    },
+    {
+      platform: "LinkedIn",
+      url: systemMetadata?.socialLinkedin || systemMetadata?.socialLinks?.linkedin,
+    },
+    { platform: "X", url: systemMetadata?.socialTwitter || systemMetadata?.socialLinks?.twitter },
+    { platform: "YouTube", url: systemMetadata?.socialYoutube },
+    { platform: "TikTok", url: systemMetadata?.socialTiktok },
+    { platform: "GitHub", url: systemMetadata?.socialLinks?.github },
+  ].filter((link): link is { platform: string; url: string } => Boolean(link.url));
+  const socialLinks =
+    metadataSocialLinks.length > 0 ? metadataSocialLinks : content.socialLinks || [];
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -138,4 +162,6 @@ export default function ContactSection({ title, subtitle, content }: ContactSect
       </div>
     </section>
   );
-}
+};
+
+export default ContactSection;

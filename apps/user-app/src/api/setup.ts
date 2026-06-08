@@ -7,7 +7,7 @@ import store, { RootState } from "../store/store";
 import { logActivity } from "../utils/activityLogger";
 
 // Initialize the shared API client with user-app's store
-export function initializeApi() {
+export const initializeApi = () => {
   initializeApiClient({
     getAccessToken: () => {
       const state = store.getState() as RootState;
@@ -41,4 +41,4 @@ export function initializeApi() {
       });
     },
   });
-}
+};

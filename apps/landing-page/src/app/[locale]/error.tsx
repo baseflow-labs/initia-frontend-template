@@ -1,12 +1,6 @@
 "use client";
 
-export default function Error({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string };
-  reset: () => void;
-}) {
+const Error = ({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) => {
   return (
     <div className="container py-5 text-center">
       <h1 className="display-4 mb-4">Something went wrong!</h1>
@@ -16,4 +10,6 @@ export default function Error({
       </button>
     </div>
   );
-}
+};
+
+export default Error;

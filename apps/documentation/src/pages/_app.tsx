@@ -6,7 +6,7 @@ import type { AppProps } from 'next/app';
 import { SystemIdentityReflection } from '../components/SystemIdentityReflection';
 import { API_BASE_URL } from '../lib/systemIdentity';
 
-function logSystemError(message: string, stack?: string) {
+const logSystemError = (message: string, stack?: string) => {
   const body = JSON.stringify({
     level: 'error',
     message,
@@ -31,9 +31,9 @@ function logSystemError(message: string, stack?: string) {
   } catch {
     // logging must not impact docs UX
   }
-}
+};
 
-export default function App({ Component, pageProps }: AppProps) {
+const App = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
 
   useEffect(() => {
@@ -57,4 +57,6 @@ export default function App({ Component, pageProps }: AppProps) {
       <SystemIdentityReflection />
     </>
   );
-}
+};
+
+export default App;

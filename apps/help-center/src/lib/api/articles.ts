@@ -2,7 +2,7 @@ import { getManualTree, searchManualArticles } from "./userManual";
 
 import { Article } from "@/types/documentation";
 
-export async function getArticlesBySubsection(subsectionId: string): Promise<Article[]> {
+export const getArticlesBySubsection = async (subsectionId: string): Promise<Article[]> => {
   try {
     const tree = await getManualTree();
 
@@ -23,9 +23,9 @@ export async function getArticlesBySubsection(subsectionId: string): Promise<Art
     console.error("Error fetching articles:", error);
     return [];
   }
-}
+};
 
-export async function getArticle(subsectionId: string, slug: string): Promise<Article | null> {
+export const getArticle = async (subsectionId: string, slug: string): Promise<Article | null> => {
   try {
     const articles = await getArticlesBySubsection(subsectionId);
     return articles.find((article) => article.slug === slug) || null;
@@ -33,9 +33,9 @@ export async function getArticle(subsectionId: string, slug: string): Promise<Ar
     console.error("Error fetching article:", error);
     return null;
   }
-}
+};
 
-export async function searchArticles(query: string): Promise<Article[]> {
+export const searchArticles = async (query: string): Promise<Article[]> => {
   try {
     const tree = await getManualTree();
     const filtered = searchManualArticles(tree.articles, query);
@@ -55,4 +55,4 @@ export async function searchArticles(query: string): Promise<Article[]> {
     console.error("Error searching articles:", error);
     return [];
   }
-}
+};

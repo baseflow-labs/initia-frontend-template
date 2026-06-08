@@ -10,7 +10,7 @@ interface FAQSectionProps {
   content: FAQContent;
 }
 
-export default function FAQSection({ title, subtitle, content }: FAQSectionProps) {
+const FAQSection = ({ title, subtitle, content }: FAQSectionProps) => {
   const { faqs } = content;
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
@@ -55,4 +55,6 @@ export default function FAQSection({ title, subtitle, content }: FAQSectionProps
       </div>
     </section>
   );
-}
+};
+
+export default FAQSection;
