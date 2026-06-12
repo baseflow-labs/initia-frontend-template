@@ -79,14 +79,14 @@ export const ticketTableColumns: (t: TFunction) => TableColumn[] = (t: TFunction
     name: "createdAt",
     label: t("Auth.SupportCenter.Admin.Tickets.Columns.CreatedAt", "Created At"),
     sortable: true,
-    type: "date",
+    type: "datetime",
     excludeInForm: true,
   },
   {
     name: "updatedAt",
     label: t("Auth.SupportCenter.Admin.Tickets.Columns.UpdatedAt", "Updated At"),
     sortable: true,
-    type: "date",
+    type: "datetime",
     excludeInForm: true,
   },
 ];

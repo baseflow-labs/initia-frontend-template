@@ -67,7 +67,7 @@ export const contactSubmissionColumns: (t: TFunction) => TableColumn[] = (t: TFu
     name: "createdAt",
     label: t("Auth.SupportCenter.Admin.ContactSubmissions.Columns.CreatedAt", "Submitted At"),
     sortable: true,
-    type: "date",
+    type: "datetime",
     excludeInForm: true,
   },
 ];

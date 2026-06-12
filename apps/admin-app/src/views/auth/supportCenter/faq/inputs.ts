@@ -31,14 +31,14 @@ export const faqTableColumns: (t: TFunction) => TableColumn[] = (t: TFunction) =
     name: "createdAt",
     label: t("Auth.SupportCenter.Admin.Faq.Columns.CreatedAt", "Created At"),
     sortable: true,
-    type: "date",
+    type: "datetime",
     excludeInForm: true,
   },
   {
     name: "updatedAt",
     label: t("Auth.SupportCenter.Admin.Faq.Columns.UpdatedAt", "Updated At"),
     sortable: true,
-    type: "date",
+    type: "datetime",
     excludeInForm: true,
   },
 ];

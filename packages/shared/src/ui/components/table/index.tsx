@@ -314,6 +314,14 @@ export const DataRender = ({
         </div>
       );
     }
+    case "boolean":
+      return (
+        <h5>
+          <div className={"badge bg-" + (data === "true" ? "success" : "danger")}>
+            {data === "true" ? "Yes" : "No"}
+          </div>
+        </h5>
+      );
     case "custom":
       return wrap(render && row ? render(row) : data);
     default:
