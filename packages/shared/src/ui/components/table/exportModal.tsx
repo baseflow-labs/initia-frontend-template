@@ -110,7 +110,7 @@ const ExportModal: React.FC<Props> = ({ columns, exportOptions }) => {
         <Form
           inputs={() => [
             {
-              type: "checkbox",
+              type: "checkboxes",
               name: "fields",
               fullWidth: true,
               label: t("Global.Table.Export.SelectFieldsToExport"),

@@ -46,6 +46,21 @@ interface PersistedState {
   paginationMode?: "pagination" | "scroll";
 }
 
+const toFormInput = (input: TableColumn): TableColumn => {
+  const {
+    render: _render,
+    timestampFormat: _timestampFormat,
+    sortable: _sortable,
+    defaultFilterValue: _defaultFilterValue,
+    defaultFilterOperator: _defaultFilterOperator,
+    defaultFilterDataType: _defaultFilterDataType,
+    defaultHide: _defaultHide,
+    ...formInput
+  } = input;
+
+  return formInput;
+};
+
 const ApiDataTable: React.FC<Props> = ({
   dataApiEndpoint,
   inputs,
@@ -404,7 +419,7 @@ const ApiDataTable: React.FC<Props> = ({
         <Form
           inputs={() =>
             inputs.map((item) => ({
-              ...item,
+              ...toFormInput(item),
               disabled: modal.action === "view" || modal.action === "delete" || item.name === "id",
               double: true,
             }))
