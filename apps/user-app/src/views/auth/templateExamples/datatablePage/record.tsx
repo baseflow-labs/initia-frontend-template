@@ -5,7 +5,7 @@ import PageTemplate from "@initia/shared/ui/layouts/auth/pages/pageTemplate";
 import { apiCatchGlobalHandler } from "@initia/shared/utils/function";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useParams, useSearchParams } from "react-router";
+import { useLocation, useNavigate, useParams, useSearchParams } from "react-router";
 
 import { inputs } from "./inputs";
 
@@ -14,6 +14,7 @@ type RecordMode = "create" | "view" | "edit" | "delete";
 const TemplateDataTableRecordView = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const location = useLocation();
   const { id } = useParams<{ id: string }>();
   const [searchParams] = useSearchParams();
   const [initialValues, setInitialValues] = useState<Record<string, unknown>>({});
@@ -46,7 +47,8 @@ const TemplateDataTableRecordView = () => {
 
   useEffect(() => {
     if (!id) {
-      setInitialValues({});
+      const state = location.state as { initialValues?: Record<string, unknown> } | null;
+      setInitialValues(state?.initialValues || {});
       return;
     }
 
@@ -58,7 +60,7 @@ const TemplateDataTableRecordView = () => {
       })
       .catch(apiCatchGlobalHandler)
       .finally(() => setLoading(false));
-  }, [id]);
+  }, [id, location.state]);
 
   const goBack = () => navigate("/template-examples/data-table");
 

@@ -347,33 +347,41 @@ const ApiDataTable: React.FC<Props> = ({
       .catch(apiCatchGlobalHandler);
   };
 
+  const duplicateInitialValues = (id: string) => {
+    const row = data.find((item) => `${item.id || ""}` === id);
+    if (!row) return {};
+
+    const { id: _id, createdAt: _createdAt, updatedAt: _updatedAt, ...values } = row;
+    return values;
+  };
+
   const handleDuplicate = (id: string) => {
     if (!id) return;
-    const tryDuplicate = async () => {
-      try {
-        await service.post(`${dataApiEndpoint}/${id}/duplicate`);
-      } catch {
-        const item = await service.get<Record<string, unknown>>(`${dataApiEndpoint}/${id}`);
-        const payload = { ...(item.payload || item.data || {}) } as Record<string, unknown>;
-        delete payload.id;
-        await service.post(dataApiEndpoint, payload);
-      }
-    };
-    tryDuplicate()
-      .then(() => fetchData())
-      .catch(apiCatchGlobalHandler);
+
+    const initialValues = duplicateInitialValues(id);
+
+    if (isRouteCrud) {
+      navigate(`${location.pathname.replace(/\/$/, "")}/new`, {
+        state: { initialValues },
+      });
+      return;
+    }
+
+    setModal({ action: "create", open: true, data: initialValues });
   };
 
   const mergedExtraActions = (id?: string) => {
-    const base: actionProps[] = [
-      {
-        label: t("Global.Labels.Duplicate"),
-        icon: faCopy,
-        spread: true,
-        color: "secondary",
-        onClick: (targetId: string) => handleDuplicate(targetId || id || ""),
-      },
-    ];
+    const base: actionProps[] = includeCreate
+      ? [
+          {
+            label: t("Global.Labels.Duplicate"),
+            icon: faCopy,
+            spread: true,
+            color: "secondary",
+            onClick: (targetId: string) => handleDuplicate(targetId || id || ""),
+          },
+        ]
+      : [];
     const userActions = extraActions ? extraActions(id) : [];
     return [...base, ...userActions];
   };
