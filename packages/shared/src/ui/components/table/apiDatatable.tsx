@@ -87,7 +87,7 @@ const ApiDataTable: React.FC<Props> = ({
   const [searchField, setSearchField] = useState("");
   const [filters, setFilters] = useState<customFilterProps[]>([]);
   const [sortBy, setSortBy] = useState<string | undefined>();
-  const [reverse, setReverse] = useState(false);
+  const [reverse, setReverse] = useState<boolean | undefined>();
   const [selectedRowIds, setSelectedRowIds] = useState<string[]>([]);
   const [paginationMode, setPaginationMode] = useState<"pagination" | "scroll">("pagination");
 
@@ -233,7 +233,9 @@ const ApiDataTable: React.FC<Props> = ({
       if (typeof parsed.searchField === "string") setSearchField(parsed.searchField);
       if (Array.isArray(parsed.filters)) setFilters(parsed.filters);
       if (typeof parsed.sortBy === "string") setSortBy(parsed.sortBy);
-      if (typeof parsed.reverse === "boolean") setReverse(parsed.reverse);
+      if (typeof parsed.sortBy === "string" && typeof parsed.reverse === "boolean") {
+        setReverse(parsed.reverse);
+      }
       if (parsed.paginationMode === "pagination" || parsed.paginationMode === "scroll") {
         setPaginationMode(parsed.paginationMode);
       }
