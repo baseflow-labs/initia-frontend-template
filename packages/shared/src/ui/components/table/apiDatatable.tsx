@@ -8,6 +8,7 @@ import service, { customFilterProps, formatGetFilters } from "../../../api";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import Button from "../core/button";
 import Form from "../form";
+import Modal from "../modal";
 
 import DynamicTable, { actionProps, TableColumn } from ".";
 
@@ -413,38 +414,35 @@ const ApiDataTable: React.FC<Props> = ({
             : "";
 
   const formSection = (
-    <div className="card border-0 shadow-sm mt-4">
-      <div className="card-body">
-        <h5 className="mb-3">{modalTitle}</h5>
-        <Form
-          inputs={() =>
-            inputs.map((item) => ({
-              ...toFormInput(item),
-              disabled: modal.action === "view" || modal.action === "delete" || item.name === "id",
-              double: true,
-            }))
-          }
-          initialValues={modal.data}
-          onFormSubmit={
-            modal.action === "view"
-              ? undefined
-              : (onFormSubmit as (values?: Record<string, unknown>, reset?: () => void) => void)
-          }
-          submitText={
-            modal.action === "delete" ? t("Global.Labels.Delete", { item: singleItem }) : undefined
-          }
-          submitColor={
-            modal.action === "delete" ? "danger" : modal.action === "update" ? "warning" : "success"
-          }
-        />
-        <div className="text-end mt-3">
-          <Button
-            color="secondary"
-            onClick={() => setModal({ open: false, data: {}, action: "view" })}
-          >
-            {t("Global.Labels.Close")}
-          </Button>
-        </div>
+    <div>
+      <Form
+        inputs={() =>
+          inputs.map((item) => ({
+            ...toFormInput(item),
+            disabled: modal.action === "view" || modal.action === "delete" || item.name === "id",
+            double: true,
+          }))
+        }
+        initialValues={modal.data}
+        onFormSubmit={
+          modal.action === "view"
+            ? undefined
+            : (onFormSubmit as (values?: Record<string, unknown>, reset?: () => void) => void)
+        }
+        submitText={
+          modal.action === "delete" ? t("Global.Labels.Delete", { item: singleItem }) : undefined
+        }
+        submitColor={
+          modal.action === "delete" ? "danger" : modal.action === "update" ? "warning" : "success"
+        }
+      />
+      <div className="text-end mt-3">
+        <Button
+          color="secondary"
+          onClick={() => setModal({ open: false, data: {}, action: "view" })}
+        >
+          {t("Global.Labels.Close")}
+        </Button>
       </div>
     </div>
   );
@@ -549,7 +547,17 @@ const ApiDataTable: React.FC<Props> = ({
         )}
       />
 
-      {modal.open && !isRouteCrud ? formSection : null}
+      {!isRouteCrud ? (
+        <Modal
+          name={`crud-${dataApiEndpoint.replace(/[^\w-]/g, "-")}`}
+          title={modalTitle}
+          className="modal-lg"
+          isOpen={modal.open}
+          onClose={() => setModal({ open: false, data: {}, action: "view" })}
+        >
+          {formSection}
+        </Modal>
+      ) : null}
     </div>
   );
 };

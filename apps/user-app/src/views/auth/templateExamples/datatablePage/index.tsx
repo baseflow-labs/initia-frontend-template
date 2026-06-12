@@ -19,7 +19,6 @@ const TemplateDataTableExampleView = () => {
         includeView
         includeUpdate
         includeDelete
-        crudMode="routes"
       />
     </PageTemplate>
   );
