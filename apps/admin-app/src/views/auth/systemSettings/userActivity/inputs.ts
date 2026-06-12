@@ -1,7 +1,7 @@
-import { Row } from "@initia/shared/ui/components/table";
+import { Row, TableColumn } from "@initia/shared/ui/components/table";
 import type { TFunction } from "i18next";
 
-export const inputs = (t: TFunction) => [
+export const inputs: (t: TFunction) => TableColumn[] = (t: TFunction) => [
   {
     name: "actorId",
     label: t("Auth.Settings.Admin.UserActivity.UserId"),
@@ -92,7 +92,7 @@ export const inputs = (t: TFunction) => [
   },
   {
     name: "createdAt",
+    type: "datetime",
     label: t("Auth.Settings.Admin.UserActivity.Timestamp"),
-    defaultHide: true,
   },
 ];

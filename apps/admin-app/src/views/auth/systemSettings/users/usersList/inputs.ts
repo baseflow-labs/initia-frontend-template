@@ -1,7 +1,10 @@
-import { SelectOption } from "@initia/shared/ui/components/table";
+import { SelectOption, TableColumn } from "@initia/shared/ui/components/table";
 import type { TFunction } from "i18next";
 
-export const inputs = (t: TFunction, roles: SelectOption[]) => [
+export const inputs: (t: TFunction, roles: SelectOption[]) => TableColumn[] = (
+  t: TFunction,
+  roles: SelectOption[]
+) => [
   {
     name: "username",
     label: t("Auth.Settings.Admin.Users.Username"),

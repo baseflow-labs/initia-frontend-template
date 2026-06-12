@@ -1,6 +1,7 @@
+import { TableColumn } from "@initia/shared/ui/components/table";
 import type { TFunction } from "i18next";
 
-export const contactSubmissionColumns = (t: TFunction) => [
+export const contactSubmissionColumns: (t: TFunction) => TableColumn[] = (t: TFunction) => [
   {
     name: "id",
     label: t("Auth.SupportCenter.Admin.ContactSubmissions.Columns.Id", "ID"),

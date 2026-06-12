@@ -59,11 +59,43 @@ export interface SelectOption {
   label?: string;
 }
 
+export interface InputType {
+  type?:
+    | "text"
+    | "textarea"
+    | "richText"
+    | "password"
+    | "email"
+    | "number"
+    | "numberText"
+    | "range"
+    | "phoneNumber"
+    | "otp"
+    | "date"
+    | "year"
+    | "month"
+    | "weekday"
+    | "time"
+    | "datetime"
+    | "file"
+    | "select"
+    | "selectMany"
+    | "checkbox"
+    | "checkboxes"
+    | "radio"
+    | "boolean"
+    | "color"
+    | "location"
+    | "rating"
+    | "multipleEntries"
+    | "label"
+    | "custom";
+}
 export interface TableColumn extends InputProps {
   label: string;
   name: string;
   render?: (row: Row) => string | React.ReactNode;
-  type?: string;
+  type?: InputType["type"];
   timestampFormat?: string;
   options?: SelectOption[];
   moneyUnit?: boolean;
@@ -91,7 +123,7 @@ interface DataRenderProps {
   row?: Row;
   data: string;
   render?: (row: Row) => string | React.ReactNode;
-  type?: string;
+  type?: InputType["type"];
   timestampFormat?: string;
   options?: { value: string | number; label?: string }[];
   name: string;
@@ -171,6 +203,12 @@ export const DataRender = ({
           .locale(i18n.language)
           .format(timestampFormat || viewDateFormat)
       );
+    case "datetime":
+      return wrap(
+        moment(data)
+          .locale(i18n.language)
+          .format(timestampFormat || (viewDateFormat + ", " + viewTimeFormat).trim())
+      );
     case "time":
       return wrap(
         moment("2025-06-08T" + data)
@@ -233,36 +271,36 @@ export const DataRender = ({
           <FontAwesomeIcon icon={faLocationPin} />
         </a>
       );
-    case "image":
-      return wrap(
-        <FontAwesomeIcon icon={faEye} role="button" onClick={() => triggerFilePreview(data)} />
-      );
-    case "avatar":
-      return wrap(
-        <img
-          src={data}
-          alt={name}
-          style={{ width: "32px", height: "32px", borderRadius: "50%", objectFit: "cover" }}
-        />
-      );
-    case "badge":
-      return wrap(<span className="badge bg-primary">{data}</span>);
-    case "progress": {
-      const value = Math.max(0, Math.min(100, Number(data) || 0));
-      return wrap(
-        <div className="progress" style={{ height: "8px", minWidth: "120px" }}>
-          <div
-            className="progress-bar"
-            role="progressbar"
-            style={{ width: `${value}%` }}
-            aria-valuenow={value}
-            aria-valuemin={0}
-            aria-valuemax={100}
-          />
-        </div>
-      );
-    }
-    case "stars": {
+    // case "image":
+    //   return wrap(
+    //     <FontAwesomeIcon icon={faEye} role="button" onClick={() => triggerFilePreview(data)} />
+    //   );
+    // case "avatar":
+    //   return wrap(
+    //     <img
+    //       src={data}
+    //       alt={name}
+    //       style={{ width: "32px", height: "32px", borderRadius: "50%", objectFit: "cover" }}
+    //     />
+    //   );
+    // case "badge":
+    //   return wrap(<span className="badge bg-primary">{data}</span>);
+    // case "progress": {
+    //   const value = Math.max(0, Math.min(100, Number(data) || 0));
+    //   return wrap(
+    //     <div className="progress" style={{ height: "8px", minWidth: "120px" }}>
+    //       <div
+    //         className="progress-bar"
+    //         role="progressbar"
+    //         style={{ width: `${value}%` }}
+    //         aria-valuenow={value}
+    //         aria-valuemin={0}
+    //         aria-valuemax={100}
+    //       />
+    //     </div>
+    //   );
+    // }
+    case "rating": {
       const starsToDisplay = [1, 2, 3, 4, 5];
       return wrap(
         <div className="d-flex">
@@ -1032,7 +1070,7 @@ const DynamicTable: React.FC<Props> = ({
                                 onClick={() => onPageChange(1)}
                                 disabled={currentPage === 1}
                               >
-                                <FontAwesomeIcon icon={faAnglesRight} />
+                                <FontAwesomeIcon icon={faAnglesLeft} />
                               </button>
                             </li>
 
@@ -1044,7 +1082,7 @@ const DynamicTable: React.FC<Props> = ({
                                 onClick={() => onPageChange(currentPage - 1)}
                                 disabled={currentPage === 1}
                               >
-                                <FontAwesomeIcon icon={faAngleRight} />
+                                <FontAwesomeIcon icon={faAngleLeft} />
                               </button>
                             </li>
 
@@ -1084,7 +1122,7 @@ const DynamicTable: React.FC<Props> = ({
                                 onClick={() => onPageChange(currentPage + 1)}
                                 disabled={currentPage === pagesCount}
                               >
-                                <FontAwesomeIcon icon={faAngleLeft} />
+                                <FontAwesomeIcon icon={faAngleRight} />
                               </button>
                             </li>
 
@@ -1096,7 +1134,7 @@ const DynamicTable: React.FC<Props> = ({
                                 onClick={() => onPageChange(pagesCount)}
                                 disabled={currentPage === pagesCount}
                               >
-                                <FontAwesomeIcon icon={faAnglesLeft} />
+                                <FontAwesomeIcon icon={faAnglesRight} />
                               </button>
                             </li>
                           </ul>

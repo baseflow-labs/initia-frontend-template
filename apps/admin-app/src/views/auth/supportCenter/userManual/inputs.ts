@@ -1,7 +1,8 @@
+import { TableColumn } from "@initia/shared/ui/components/table";
 import type { TFunction } from "i18next";
 
 // Sections Management
-export const sectionTableColumns = (t: TFunction) => [
+export const sectionTableColumns: (t: TFunction) => TableColumn[] = (t: TFunction) => [
   {
     name: "id",
     label: t("Auth.SupportCenter.Admin.UserManual.Sections.Columns.Id", "ID"),
@@ -37,7 +38,7 @@ export const sectionTableColumns = (t: TFunction) => [
 ];
 
 // Subsections Management
-export const subsectionTableColumns = (t: TFunction) => [
+export const subsectionTableColumns: (t: TFunction) => TableColumn[] = (t: TFunction) => [
   {
     name: "id",
     label: t("Auth.SupportCenter.Admin.UserManual.Subsections.Columns.Id", "ID"),
@@ -78,7 +79,7 @@ export const subsectionTableColumns = (t: TFunction) => [
 ];
 
 // Contents Management
-export const contentTableColumns = (t: TFunction) => [
+export const contentTableColumns: (t: TFunction) => TableColumn[] = (t: TFunction) => [
   {
     name: "id",
     label: t("Auth.SupportCenter.Admin.UserManual.Contents.Columns.Id", "ID"),

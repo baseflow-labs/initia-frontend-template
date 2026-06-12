@@ -1,5 +1,5 @@
 export const dataDateFormat = "yyyy-MM-DD";
-export const viewDateFormat = "Do MMM YYYY";
+export const viewDateFormat = "D MMM YYYY";
 export const viewDayDateFormat = "dddd Do MMM YYYY";
 export const viewDayFormat = "dddd";
 export const viewTimeFormat = "hh:mm a";
