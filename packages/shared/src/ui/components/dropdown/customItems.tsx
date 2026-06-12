@@ -7,11 +7,12 @@ interface Props {
   header?: React.ReactNode;
   button: React.ReactNode;
   start?: boolean;
+  menuClassName?: string;
   link?: { text: string; route: string };
   list: React.ReactNode[];
 }
 
-const CustomItemsDropdownComp = ({ header, button, list, start, link }: Props) => {
+const CustomItemsDropdownComp = ({ header, button, list, start, menuClassName, link }: Props) => {
   const navigate = useNavigate();
 
   const [open, setOpen] = useState(false);
@@ -41,7 +42,14 @@ const CustomItemsDropdownComp = ({ header, button, list, start, link }: Props) =
       </Button>
 
       <ul
-        className={`dropdown-menu dropdown-menu-${start ? "start" : "end"} ${open ? "show" : ""}`}
+        className={`dropdown-menu dropdown-menu-${start ? "start" : "end"} ${
+          open ? "show" : ""
+        } ${menuClassName || ""}`}
+        style={{
+          maxWidth: "calc(100vw - 1rem)",
+          maxHeight: "min(24rem, calc(100vh - 4rem))",
+          overflowY: "auto",
+        }}
         aria-labelledby="dropdown"
       >
         {header}

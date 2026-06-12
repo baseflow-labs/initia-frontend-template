@@ -669,6 +669,19 @@ const DynamicTable: React.FC<Props> = ({
   const effectiveViewMode =
     manualViewMode === "auto" ? (isSmallScreen ? "cards" : "table") : manualViewMode;
   const visibleColumns = orderedColumns.filter((c) => columnsToShow.includes(c.name));
+  const hasActionsColumn = Boolean((extraActions && extraActions()?.length) || haveDefaultActions);
+  const tableColumnCount =
+    visibleColumns.length + 2 + (detailsPanelRender ? 1 : 0) + (hasActionsColumn ? 1 : 0);
+  const compactColumnStyle: React.CSSProperties = {
+    width: "1%",
+    minWidth: "2.75rem",
+    whiteSpace: "nowrap",
+  };
+  const rowNumberColumnStyle: React.CSSProperties = {
+    width: "1%",
+    minWidth: "3.25rem",
+    whiteSpace: "nowrap",
+  };
 
   const toggleExpandedRow = (rowId: string) => {
     setExpandedRowIds((prev) =>
@@ -678,8 +691,8 @@ const DynamicTable: React.FC<Props> = ({
 
   return (
     <div
-      className="overflow-x-auto mx-auto"
-      style={{ maxWidth: "90vw", minHeight: fitHeight ? undefined : "60vh" }}
+      className="w-100 mx-auto"
+      style={{ maxWidth: "100%", minHeight: fitHeight ? undefined : "60vh" }}
     >
       <div className="d-flex justify-content-end gap-2 mb-2">
         <div className="btn-group btn-group-sm" role="group" aria-label="view-mode">
@@ -741,7 +754,7 @@ const DynamicTable: React.FC<Props> = ({
           <table className="table mt-2 w-100">
             <thead className="table-light">
               <tr>
-                <th colSpan={columnsToShow.length + 2}>
+                <th colSpan={Math.max(tableColumnCount - 1, 1)}>
                   <div className="d-flex gap-2 align-items-center">
                     {(searchProp || columns.length > 0) && (
                       <InputComp
@@ -800,12 +813,12 @@ const DynamicTable: React.FC<Props> = ({
                   </div>
                 </th>
 
-                <th colSpan={haveDefaultActions ? 2 : 1}>
+                <th colSpan={1}>
                   <div className="d-flex justify-content-end align-items-center">
                     <ExportModal data={data} columns={columns} exportOptions={exportOptions} />
 
                     <CustomItemsDropdownComp
-                      start
+                      menuClassName="text-wrap"
                       button={<FontAwesomeIcon icon={faColumns} className="ms-1 text-muted" />}
                       list={orderedColumns.map((col, index) => {
                         const draggable = columnsToShow.includes(col.name);
@@ -813,7 +826,7 @@ const DynamicTable: React.FC<Props> = ({
                         return (
                           <li
                             key={col.name} // use stable key
-                            className="dropdown-item d-flex align-items-center"
+                            className="dropdown-item d-flex align-items-center text-wrap"
                             draggable={draggable}
                             onDragStart={() => handleDragStart(index)}
                             onDragEnter={() => handleDragEnter(index)}
@@ -858,15 +871,17 @@ const DynamicTable: React.FC<Props> = ({
               </tr>
 
               <tr>
-                {detailsPanelRender ? <th className="py-3" scope="col"></th> : null}
-                <th className="py-3" scope="col">
+                {detailsPanelRender ? (
+                  <th className="py-3 text-center" scope="col" style={compactColumnStyle}></th>
+                ) : null}
+                <th className="py-3 text-center" scope="col" style={compactColumnStyle}>
                   <input
                     type="checkbox"
                     checked={allPageSelected}
                     onChange={(e) => toggleSelectAllCurrentPage(e.target.checked)}
                   />
                 </th>
-                <th className="py-3" scope="col">
+                <th className="py-3 text-center" scope="col" style={rowNumberColumnStyle}>
                   #
                 </th>
 
@@ -884,7 +899,7 @@ const DynamicTable: React.FC<Props> = ({
                   </th>
                 ))}
 
-                {(extraActions && extraActions()?.length) || haveDefaultActions ? (
+                {hasActionsColumn ? (
                   <th className="py-3" scope="col">
                     {t("Global.Labels.Action")}
                   </th>
@@ -895,10 +910,7 @@ const DynamicTable: React.FC<Props> = ({
             <tbody>
               {data.length === 0 && (
                 <tr>
-                  <td
-                    colSpan={columnsToShow.length + 3 + (detailsPanelRender ? 1 : 0)}
-                    className="text-center py-4"
-                  >
+                  <td colSpan={tableColumnCount} className="text-center py-4">
                     {t("Global.Labels.NoData")}
                   </td>
                 </tr>
@@ -911,9 +923,9 @@ const DynamicTable: React.FC<Props> = ({
                   <Fragment key={rowId}>
                     <tr className="align-middle">
                       {detailsPanelRender ? (
-                        <td className="py-3">
+                        <td className="py-3 text-center" style={compactColumnStyle}>
                           <button
-                            className="btn btn-sm btn-link text-decoration-none"
+                            className="btn btn-sm btn-link text-decoration-none p-0"
                             onClick={() => toggleExpandedRow(rowId)}
                             type="button"
                           >
@@ -921,14 +933,16 @@ const DynamicTable: React.FC<Props> = ({
                           </button>
                         </td>
                       ) : null}
-                      <td className="py-3">
+                      <td className="py-3 text-center" style={compactColumnStyle}>
                         <input
                           type="checkbox"
                           checked={row.id ? selectedRowIds.includes(`${row.id}`) : false}
                           onChange={(e) => toggleSelectOne(`${row.id || ""}`, e.target.checked)}
                         />
                       </td>
-                      <td className="py-3">{i + pageSize * (currentPage - 1) + 1}</td>
+                      <td className="py-3 text-center" style={rowNumberColumnStyle}>
+                        {i + pageSize * (currentPage - 1) + 1}
+                      </td>
 
                       {visibleColumns.map(
                         ({ name, type, options, render, timestampFormat, moneyUnit }, y) => (
@@ -947,7 +961,7 @@ const DynamicTable: React.FC<Props> = ({
                         )
                       )}
 
-                      {(extraActions && extraActions()?.length) || haveDefaultActions ? (
+                      {hasActionsColumn ? (
                         <td className="py-3">
                           <div className="d-flex">
                             {extraActions &&
@@ -1028,10 +1042,7 @@ const DynamicTable: React.FC<Props> = ({
                     </tr>
                     {detailsPanelRender && expanded ? (
                       <tr>
-                        <td
-                          colSpan={visibleColumns.length + (haveDefaultActions ? 4 : 3)}
-                          className="bg-light"
-                        >
+                        <td colSpan={tableColumnCount} className="bg-light">
                           <div className="p-3">{detailsPanelRender(row)}</div>
                         </td>
                       </tr>
@@ -1044,13 +1055,7 @@ const DynamicTable: React.FC<Props> = ({
             {data.length !== 0 && localPaginationMode === "pagination" && (
               <tfoot>
                 <tr>
-                  <th
-                    colSpan={
-                      columnsToShow.length +
-                      (haveDefaultActions ? 3 : 2) +
-                      (detailsPanelRender ? 1 : 0)
-                    }
-                  >
+                  <th colSpan={tableColumnCount}>
                     <div className="d-flex justify-content-between">
                       <div className="my-auto text-muted me-3">
                         <small>

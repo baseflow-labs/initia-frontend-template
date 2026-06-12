@@ -39,6 +39,6 @@ export const inputs: (t: TFunction) => TableColumn[] = (t: TFunction) => [
   {
     name: "createdAt",
     label: t("Auth.Settings.Admin.Logger.Timestamp"),
-    type: "date",
+    type: "datetime",
   },
 ];
