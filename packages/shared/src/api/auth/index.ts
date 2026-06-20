@@ -88,8 +88,8 @@ const getOAuthPopupStartUrl = (provider: OAuthProvider, origin: string) => {
   return `${baseURL}${mainPath}/oauth/${provider}/start?${params.toString()}`;
 };
 
-const logout = async (email: string) => {
-  return await api.post(mainPath + "/logout", { email });
+const logout = async () => {
+  return await api.post(mainPath + "/logout");
 };
 
 const requestPasswordReset = async (email: string) => {

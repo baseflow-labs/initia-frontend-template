@@ -1,5 +1,5 @@
 import type { UserProps } from "@initia/shared/types/auth";
-import { getCookie, setCookie } from "@initia/shared/utils/cookieStorage";
+import { getCookie, removeCookie, setCookie } from "@initia/shared/utils/cookieStorage";
 
 export interface AuthState {
   accessToken: string | null;
@@ -73,7 +73,14 @@ const auth = (state: AuthState = initialState, action: AuthAction): AuthState =>
     }
 
     case "logout": {
-      window.location.assign(action.resp || "/");
+      removeCookie("accessToken");
+      removeCookie("refreshToken");
+      removeCookie("user");
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      localStorage.removeItem("user");
+
+      // window.location.assign(action.resp || "/");
 
       return {
         accessToken: null,

@@ -2,7 +2,7 @@
 
 - [ ] Auth
   - [x] Login
-  - [ ] Logout
+  - [x] Logout
   - [x] Register
   - [ ] Password Email
   - [ ] Password Reset

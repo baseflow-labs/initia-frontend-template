@@ -1,6 +1,6 @@
 import { faApple, faGoogle, faMicrosoft } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import * as authApi from "../../api/auth";
@@ -152,28 +152,30 @@ const LoginView = ({ onLoginSuccess }: LoginViewProps) => {
       ) : null}
 
       {emailLoginEnabled ? (
-        <Form
-          inputs={formInputs}
-          submitText={t("Public.Login.Labels.Login")}
-          onFormSubmit={onSubmit}
-        />
-      ) : null}
+        <Fragment>
+          <Form
+            inputs={formInputs}
+            submitText={t("Public.Login.Labels.Login")}
+            onFormSubmit={onSubmit}
+          />
 
-      {emailLoginEnabled && import.meta.env.VITE_APP_ENVIRONMENT === "staging" ? (
-        <Button
-          className="w-100 mt-3"
-          onClick={() =>
-            onSubmit({
-              email: "example@example.com",
-              password: "s5Rsa2?#sd1154",
-            })
-          }
-        >
-          {t("Public.Login.Labels.DummyLogin")}
-        </Button>
-      ) : (
-        ""
-      )}
+          {import.meta.env.VITE_APP_ENVIRONMENT === "staging" ? (
+            <Button
+              className="w-100 mt-3"
+              onClick={() =>
+                onSubmit({
+                  email: "example@example.com",
+                  password: "s5Rsa2?#sd1154",
+                })
+              }
+            >
+              {t("Public.Login.Labels.DummyLogin")}
+            </Button>
+          ) : (
+            ""
+          )}
+        </Fragment>
+      ) : null}
     </div>
   );
 };

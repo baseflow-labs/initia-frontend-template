@@ -28,6 +28,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 
+import * as AuthApi from "../../../api/auth";
 import { useAppSelector } from "../../../store/hooks";
 import { logout } from "../../../store/actions/auth";
 
@@ -88,6 +89,16 @@ const DashboardNavbar = ({
   }, [user?.id]);
 
   const unreadCount = useMemo(() => notifications.filter((n) => !n.isRead).length, [notifications]);
+
+  const handleLogout = async () => {
+    try {
+      await AuthApi.logout();
+    } catch (error) {
+      apiCatchGlobalHandler(error);
+    }
+
+    dispatch(logout());
+  };
 
   // const toggleTheme = () => {
   //   const current = document.documentElement.getAttribute("data-bs-theme");
@@ -224,7 +235,7 @@ const DashboardNavbar = ({
                     icon: faInfoCircle,
                   },
                   {
-                    onClick: () => dispatch(logout()),
+                    onClick: handleLogout,
                     label: t("Global.Labels.Logout"),
                     icon: faRightFromBracket,
                   },

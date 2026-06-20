@@ -96,7 +96,7 @@ const auth = (state: AuthState = initialState, action: AuthAction): AuthState =>
       localStorage.removeItem("refreshToken");
       localStorage.removeItem("user");
 
-      window.location.assign(action.resp || "/");
+      // window.location.assign(action.resp || "/");
 
       return {
         accessToken: null,
