@@ -30,10 +30,10 @@
 - [x] System logger
 - [x] User Activity
 - [ ] Backup service
-- [ ] Users mgmt
-  - [ ] Users
-  - [ ] Roles
-  - [ ] Permissions
+- [x] Users mgmt
+  - [x] Users
+  - [x] Roles
+  - [x] Permissions
 - [ ] Landing page contents
 - [ ] Notifications
   - [ ] Send

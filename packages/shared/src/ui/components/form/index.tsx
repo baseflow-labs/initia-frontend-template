@@ -52,7 +52,7 @@ interface InputBasicProps extends InputTypeProps {
   stacked?: boolean;
   accept?: string;
   excludeInForm?: boolean;
-  defaultValue?: string | number | string[] | boolean;
+  defaultValue?: string | number | string[];
   placeholder?: string;
   searchable?: boolean;
   clearable?: boolean;
@@ -162,8 +162,9 @@ const Form: React.FC<Props> = ({
   const generatedInitialValues = dynamicInputs
     .filter((i) => i.type !== "label")
     .reduce<Record<string, unknown>>((acc, input) => {
-      if (input.defaultValue) {
-        acc[input.name] = input.defaultValue;
+      if (input.defaultValue !== undefined) {
+        acc[input.name] =
+          input.type === "boolean" ? String(input.defaultValue) === "true" : input.defaultValue;
         return acc;
       }
 

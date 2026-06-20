@@ -197,6 +197,7 @@
       "Admin": {
         "Backup": {
           "AutoSettings": {
+            "Enabled": "Enable automatic backups",
             "KeptBackups": "Kept Backups Count",
             "Period": "Period",
             "Title": "Auto Backup Settings",

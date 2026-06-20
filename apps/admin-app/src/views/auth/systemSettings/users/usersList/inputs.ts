@@ -28,7 +28,7 @@ export const inputs: (t: TFunction, roles: SelectOption[]) => TableColumn[] = (
     name: "isActive",
     label: t("Auth.Settings.Admin.Users.IsActive"),
     type: "boolean",
-    defaultValue: true,
+    defaultValue: "true",
     booleanLabels: {
       trueLabel: t("Auth.Settings.Admin.Users.Active"),
       falseLabel: t("Auth.Settings.Admin.Users.Inactive"),

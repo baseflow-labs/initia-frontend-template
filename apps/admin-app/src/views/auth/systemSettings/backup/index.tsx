@@ -24,10 +24,12 @@ const BackupSettingsView = () => {
 
   const currentBackups = useMemo(
     () =>
-      backups.map((record) => ({
-        value: record.id,
-        label: renderBackupTimestamp(record.filename || record.createdAt),
-      })),
+      backups
+        .filter((record) => record.status === "success")
+        .map((record) => ({
+          value: record.id,
+          label: renderBackupTimestamp(record.filename || record.createdAt),
+        })),
     [backups]
   );
 
@@ -54,6 +56,7 @@ const BackupSettingsView = () => {
       period: Number(values.period),
       unit: values.unit as BackupApi.BackupUnit,
       keptBackups: Number(values.keptBackups),
+      enabled: values.enabled === true || values.enabled === "true",
     };
 
     try {

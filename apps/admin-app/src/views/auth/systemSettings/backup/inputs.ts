@@ -2,6 +2,13 @@ import type { TFunction } from "i18next";
 
 export const inputs = (t: TFunction) => [
   {
+    name: "enabled",
+    label: t("Auth.Settings.Admin.Backup.AutoSettings.Enabled"),
+    type: "boolean",
+    layout: "switch",
+    fullWidth: true,
+  },
+  {
     name: "period",
     label: t("Auth.Settings.Admin.Backup.AutoSettings.Period"),
     type: "number",
