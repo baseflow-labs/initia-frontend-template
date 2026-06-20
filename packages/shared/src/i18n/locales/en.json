@@ -361,6 +361,8 @@
           "Inactive": "Inactive",
           "IsActive": "User Status",
           "Name": "Name",
+          "Password": "Password",
+          "PasswordConfirmation": "Password Confirmation",
           "Role": "Role",
           "Title": "Users",
           "User": "User",

@@ -52,7 +52,7 @@ interface InputBasicProps extends InputTypeProps {
   stacked?: boolean;
   accept?: string;
   excludeInForm?: boolean;
-  defaultValue?: string | number | string[];
+  defaultValue?: string | number | string[] | boolean;
   placeholder?: string;
   searchable?: boolean;
   clearable?: boolean;

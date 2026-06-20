@@ -127,12 +127,13 @@ const ApiDataTable: React.FC<Props> = ({
   // };
 
   const onSuccess = () => {
-    // TODO: Add notification callback prop
-    // addNotification({
-    //   msg: t("Global.Notifications.Successful", {
-    //     action: renderActionLabel(modal.action),
-    //   }),
-    // });
+    // dispatch(
+    //   addNotification({
+    //     msg: t("Global.Notifications.Successful", {
+    //       action: renderActionLabel(modal.action),
+    //     }),
+    //   })
+    // );
     // refresh data
     fetchData();
     setModal({ action: "view", open: false, data: {} });
@@ -145,7 +146,7 @@ const ApiDataTable: React.FC<Props> = ({
         case "create":
           return await service.post(dataApiEndpoint, formData);
         case "update":
-          return await service.put(dataApiEndpoint + `/${formData.id}`, formData);
+          return await service.patch(dataApiEndpoint + `/${formData.id}`, formData);
         case "delete":
           return await service.delete(dataApiEndpoint + `/${formData.id}`);
         default:
@@ -260,7 +261,10 @@ const ApiDataTable: React.FC<Props> = ({
       if (!hasPersistedFilters) {
         const defaultFilters = inputs
           .filter(
-            (item) => item.defaultFilterValue !== undefined && item.defaultFilterValue !== null
+            (item) =>
+              item.defaultFilterValue !== undefined &&
+              item.defaultFilterValue !== null &&
+              !item.excludeInTable
           )
           .map((item) => ({
             field: item.name,
@@ -474,7 +478,7 @@ const ApiDataTable: React.FC<Props> = ({
 
       <DynamicTable
         data={(data || []) as { id: string }[]}
-        columns={inputs}
+        columns={inputs.filter((input) => !input.excludeInTable)}
         onRowClick={(rowData = {}, action = "") => {
           if (isRouteCrud && rowData.id) {
             const mode = action === "update" ? "edit" : action || "view";

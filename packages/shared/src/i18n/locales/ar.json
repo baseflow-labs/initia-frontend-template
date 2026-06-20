@@ -361,6 +361,8 @@
           "Inactive": "غير نشط",
           "IsActive": "حالة المستخدم",
           "Name": "الاسم",
+          "Password": "كلمة المرور",
+          "PasswordConfirmation": "تأكيد كلمة المرور",
           "Role": "الدور",
           "Title": "المستخدمون",
           "User": "مستخدم",

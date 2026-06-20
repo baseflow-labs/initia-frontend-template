@@ -103,6 +103,7 @@ export interface TableColumn extends InputProps {
   defaultFilterValue?: string | number | boolean;
   defaultFilterOperator?: string;
   defaultFilterDataType?: string;
+  excludeInTable?: boolean;
 }
 
 export interface TableProps {

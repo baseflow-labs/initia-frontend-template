@@ -6,7 +6,13 @@ import { inputs } from "./inputs";
 const UsersView = () => {
   const { t } = useTranslation();
 
-  const roles = [{ value: "admin" }, { value: "editor" }, { value: "viewer" }];
+  const roles = [
+    { value: "admin" },
+    { value: "public" },
+    { value: "customer" },
+    { value: "owner" },
+    { value: "assistant" },
+  ]; // This should ideally come from an API or a constants file, but hardcoding for now based on be/src/enums/userRole.enum.ts
 
   return (
     <ApiDataTable
