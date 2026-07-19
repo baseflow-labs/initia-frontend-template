@@ -335,6 +335,8 @@ Implement only the “must-have knobs” first:
 
 ## To Plan / Backlog (Post-Roadmap)
 
+- [ ] Build public system status dashboard
+- [ ] Build public brand usage dashboard (consent, legal docs, requests submission, ...etc)
 - [ ] Turn into SaaS solution (Backend-controlled frontend, including navigation menu, localization, theming, dashboard contents, user-level authorization)
 - [ ] Engage tRPC (for type-safe APIs between frontend and backend)
 - [ ] Real-time collaboration features (multiple users editing same form/dashboard)
