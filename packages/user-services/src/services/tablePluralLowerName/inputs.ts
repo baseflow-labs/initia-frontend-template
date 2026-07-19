@@ -1,6 +1,12 @@
 import type { TFunction } from "i18next";
 
-type Row = Record<string, unknown>;
+type Row = Record<string, string | number | boolean> & { id?: string };
+type ServiceTableInput = {
+  type?: "custom" | "phoneNumber" | "email";
+  name: string;
+  label: string;
+  render?: (row: Row) => string;
+};
 
 const renderDataFromOptions = (data: string, options: { label?: string; value: string }[]) => {
   const option = options.find(({ value }) => value === data);
@@ -38,7 +44,7 @@ export const getTablePluralLowerNameRolesOptions = (t: TFunction) => [
   },
 ];
 
-export const getTablePluralLowerNameInputs = (t: TFunction) => [
+export const getTablePluralLowerNameInputs = (t: TFunction): ServiceTableInput[] => [
   {
     type: "custom",
     name: "name",

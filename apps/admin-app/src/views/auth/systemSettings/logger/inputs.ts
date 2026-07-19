@@ -1,7 +1,7 @@
-import { Row } from "@initia/shared/ui/components/table";
+import { Row, TableColumn } from "@initia/shared/ui/components/table";
 import type { TFunction } from "i18next";
 
-export const inputs = (t: TFunction) => [
+export const inputs: (t: TFunction) => TableColumn[] = (t: TFunction) => [
   {
     name: "level",
     label: t("Auth.Settings.Admin.Logger.Level.Title"),
@@ -39,6 +39,6 @@ export const inputs = (t: TFunction) => [
   {
     name: "createdAt",
     label: t("Auth.Settings.Admin.Logger.Timestamp"),
-    type: "date",
+    type: "datetime",
   },
 ];

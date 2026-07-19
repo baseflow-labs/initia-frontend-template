@@ -2,7 +2,7 @@ import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment } from "react/jsx-runtime";
 
-import { commaNumbers } from "../../../utils/function";
+import { columnsLgWidth, columnsMdWidth, commaNumbers } from "../../../utils/function";
 
 import DashboardCard from "./dashboardCard";
 
@@ -20,30 +20,6 @@ interface Props {
     }[];
   }[];
 }
-
-const columnsLgWidth = (count: number) => {
-  switch (count) {
-    case 1:
-      return 12;
-    case 2:
-      return 6;
-    case 3:
-      return 4;
-    case 4:
-      return 3;
-    default:
-      return 2;
-  }
-};
-
-const columnsMdWidth = (count: number) => {
-  switch (count) {
-    case 1:
-      return 12;
-    default:
-      return 6;
-  }
-};
 
 const StatisticCards = ({ statistics }: Props) => {
   return (

@@ -2,7 +2,7 @@
 
 - [ ] Auth
   - [x] Login
-  - [ ] Logout
+  - [x] Logout
   - [x] Register
   - [ ] Password Email
   - [ ] Password Reset
@@ -27,13 +27,13 @@
 - [x] Metadata
   - [x] Store @ Admin
   - [x] Reflect across the system apps
-- [ ] System logger
-- [ ] User Activity
+- [x] System logger
+- [x] User Activity
 - [ ] Backup service
-- [ ] Users mgmt
-  - [ ] Users
-  - [ ] Roles
-  - [ ] Permissions
+- [x] Users mgmt
+  - [x] Users
+  - [x] Roles
+  - [x] Permissions
 - [ ] Landing page contents
 - [ ] Notifications
   - [ ] Send

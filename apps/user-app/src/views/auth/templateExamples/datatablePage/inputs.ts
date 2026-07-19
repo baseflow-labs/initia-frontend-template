@@ -1,6 +1,7 @@
+import type { TableColumn } from "@initia/shared/ui/components/table";
 import type { TFunction } from "i18next";
 
-export const inputs = (t: TFunction) => [
+export const inputs: (t: TFunction) => TableColumn[] = (t: TFunction) => [
   {
     type: "custom",
     name: "name",

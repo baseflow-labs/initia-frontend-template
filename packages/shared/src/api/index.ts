@@ -275,14 +275,21 @@ const api = {
     data?: unknown,
     config?: AxiosRequestConfig
   ): Promise<EnvelopeResponse<TPayload>> {
-    return service.post(url, data, config) as Promise<EnvelopeResponse<TPayload>>;
+    const {
+      id: _,
+      createdAt: __,
+      updatedAt: ___,
+      ...restData
+    } = (data as Record<string, unknown>) || {};
+    return service.post(url, restData, config) as Promise<EnvelopeResponse<TPayload>>;
   },
   put<TPayload = Record<string, unknown>>(
     url: string,
     data?: unknown,
     config?: AxiosRequestConfig
   ): Promise<EnvelopeResponse<TPayload>> {
-    return service.put(url, data, config) as Promise<EnvelopeResponse<TPayload>>;
+    const { createdAt: __, updatedAt: ___, ...restData } = (data as Record<string, unknown>) || {};
+    return service.put(url, restData, config) as Promise<EnvelopeResponse<TPayload>>;
   },
   patch<TPayload = Record<string, unknown>>(
     url: string,

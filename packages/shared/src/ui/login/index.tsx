@@ -1,6 +1,6 @@
 import { faApple, faGoogle, faMicrosoft } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import * as authApi from "../../api/auth";
@@ -8,7 +8,7 @@ import type { AuthResponse } from "../../types/auth";
 import BelowInputButton from "../../ui/components/button/belowInput";
 import Button from "../../ui/components/core/button";
 import Form from "../../ui/components/form";
-import { apiCatchGlobalHandler } from "../../utils/function";
+import { apiCatchGlobalHandler, columnsLgWidth } from "../../utils/function";
 
 interface LoginViewProps {
   onLoginSuccess?: (auth: AuthResponse) => void;
@@ -130,45 +130,52 @@ const LoginView = ({ onLoginSuccess }: LoginViewProps) => {
   return (
     <div>
       {enabledOAuthProviders.length ? (
-        <div className="d-flex flex-column gap-2 mb-3">
+        <div className="row mb-3 d-flex align-items-stretch">
           {enabledOAuthProviders.map((provider) => (
-            <Button
+            <div
               key={provider}
-              className="w-100"
-              outline
-              color="dark"
-              onClick={() => onOAuthLogin(provider)}
+              className={`col-12 col-md-${columnsLgWidth(enabledOAuthProviders.length)} mb-2 d-flex flex-column`}
             >
-              <FontAwesomeIcon icon={providerMeta[provider].icon} className="me-2" />
-              {providerMeta[provider].label}
-            </Button>
+              <Button
+                className="w-100 h-100"
+                outline
+                size="sm"
+                color="dark"
+                onClick={() => onOAuthLogin(provider)}
+              >
+                <FontAwesomeIcon icon={providerMeta[provider].icon} className="me-2" />
+                {providerMeta[provider].label}
+              </Button>
+            </div>
           ))}
         </div>
       ) : null}
 
       {emailLoginEnabled ? (
-        <Form
-          inputs={formInputs}
-          submitText={t("Public.Login.Labels.Login")}
-          onFormSubmit={onSubmit}
-        />
-      ) : null}
+        <Fragment>
+          <Form
+            inputs={formInputs}
+            submitText={t("Public.Login.Labels.Login")}
+            onFormSubmit={onSubmit}
+          />
 
-      {emailLoginEnabled && import.meta.env.VITE_APP_ENVIRONMENT === "staging" ? (
-        <Button
-          className="w-100 mt-3"
-          onClick={() =>
-            onSubmit({
-              email: "example@example.com",
-              password: "s5Rsa2?#sd1154",
-            })
-          }
-        >
-          {t("Public.Login.Labels.DummyLogin")}
-        </Button>
-      ) : (
-        ""
-      )}
+          {import.meta.env.VITE_APP_ENVIRONMENT === "staging" ? (
+            <Button
+              className="w-100 mt-3"
+              onClick={() =>
+                onSubmit({
+                  email: "example@example.com",
+                  password: "s5Rsa2?#sd1154",
+                })
+              }
+            >
+              {t("Public.Login.Labels.DummyLogin")}
+            </Button>
+          ) : (
+            ""
+          )}
+        </Fragment>
+      ) : null}
     </div>
   );
 };

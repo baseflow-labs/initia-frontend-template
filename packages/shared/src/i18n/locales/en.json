@@ -210,6 +210,7 @@
       "Admin": {
         "Backup": {
           "AutoSettings": {
+            "Enabled": "Enable automatic backups",
             "KeptBackups": "Kept Backups Count",
             "Period": "Period",
             "Title": "Auto Backup Settings",
@@ -361,6 +362,8 @@
           "Inactive": "Inactive",
           "IsActive": "User Status",
           "Name": "Name",
+          "Password": "Password",
+          "PasswordConfirmation": "Password Confirmation",
           "Role": "Role",
           "Title": "Users",
           "User": "User",

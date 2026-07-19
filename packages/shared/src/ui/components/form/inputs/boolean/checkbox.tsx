@@ -7,7 +7,7 @@ type FinalInput = Omit<React.InputHTMLAttributes<HTMLInputElement>, "value"> & {
   value?: React.InputHTMLAttributes<HTMLInputElement>["value"] | boolean;
 } & InputProps;
 
-const CheckboxInput: React.FC<FinalInput> = ({ value, ...input }) => {
+const CheckboxInput: React.FC<FinalInput> = ({ value, booleanLabels, ...input }) => {
   const { t } = useTranslation();
   const isChecked = typeof value === "string" ? value === "true" : Boolean(value);
 
@@ -23,8 +23,8 @@ const CheckboxInput: React.FC<FinalInput> = ({ value, ...input }) => {
 
       <label className="form-check-label">
         {(input.checked ?? isChecked)
-          ? input.booleanLabels?.trueLabel || t("Global.Form.Labels.Yes")
-          : input.booleanLabels?.falseLabel || t("Global.Form.Labels.No")}
+          ? booleanLabels?.trueLabel || t("Global.Form.Labels.Yes")
+          : booleanLabels?.falseLabel || t("Global.Form.Labels.No")}
       </label>
     </div>
   );

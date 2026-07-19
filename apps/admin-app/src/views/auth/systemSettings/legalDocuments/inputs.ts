@@ -1,4 +1,4 @@
-import { Row } from "@initia/shared/ui/components/table";
+import { Row, TableColumn } from "@initia/shared/ui/components/table";
 import type { TFunction } from "i18next";
 
 const typeLabel = (value?: string) => {
@@ -7,7 +7,7 @@ const typeLabel = (value?: string) => {
   return value || "";
 };
 
-export const inputs = (t: TFunction) => [
+export const inputs: (t: TFunction) => TableColumn[] = (t: TFunction) => [
   {
     name: "documentType",
     label: t("Auth.Settings.Admin.LegalDocuments.DocumentType"),
@@ -59,6 +59,7 @@ export const inputs = (t: TFunction) => [
   },
   {
     name: "createdAt",
+    type: "datetime",
     label: t("Auth.Settings.Admin.LegalDocuments.CreatedAt"),
   },
 ];

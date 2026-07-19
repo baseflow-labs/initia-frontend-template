@@ -26,8 +26,8 @@ const login = async (credentials: loginCredentials): Promise<EnvelopeResponse<Au
   return await api.post<AuthResponse>(mainPath + "/login", credentials);
 };
 
-const logout = async (email: string) => {
-  return await api.post(mainPath + "/logout", { email });
+const logout = async () => {
+  return await api.post(mainPath + "/logout");
 };
 
 const requestPasswordReset = async (email: string) => {

@@ -1,3 +1,4 @@
+import { Modal as BootstrapModal } from "bootstrap";
 import { useEffect, useRef } from "react";
 import { Fragment } from "react/jsx-runtime";
 
@@ -15,24 +16,7 @@ interface Props {
   onClose: () => void;
 }
 
-declare global {
-  interface Window {
-    bootstrap: {
-      Modal: {
-        getOrCreateInstance: (
-          el: Element,
-          options?: { backdrop?: boolean; keyboard?: boolean; focus?: boolean }
-        ) => BootstrapModal;
-      };
-    };
-  }
-}
-
-interface BootstrapModal {
-  show: () => void;
-  hide: () => void;
-  dispose?: () => void;
-}
+type BootstrapModalInstance = InstanceType<typeof BootstrapModal>;
 
 const Modal = ({
   name = "modal",
@@ -47,24 +31,29 @@ const Modal = ({
   ...rest
 }: Props) => {
   const modalRef = useRef<HTMLDivElement | null>(null);
-  const instanceRef = useRef<BootstrapModal | null>(null);
+  const instanceRef = useRef<BootstrapModalInstance | null>(null);
   const hiddenHandlerRef = useRef<(() => void) | null>(null);
+  const onCloseRef = useRef(onClose);
+
+  useEffect(() => {
+    onCloseRef.current = onClose;
+  }, [onClose]);
 
   const ensureInstance = () => {
     if (!modalRef.current) return false;
     if (instanceRef.current) return true;
-    if (typeof window === "undefined" || typeof window.bootstrap === "undefined") {
+    if (typeof window === "undefined") {
       return false;
     }
 
-    instanceRef.current = window.bootstrap.Modal.getOrCreateInstance(modalRef.current, {
+    instanceRef.current = BootstrapModal.getOrCreateInstance(modalRef.current, {
       backdrop: true,
       keyboard: true,
       focus: true,
     });
 
     const handleHidden = () => {
-      onClose();
+      onCloseRef.current();
     };
     hiddenHandlerRef.current = handleHidden;
     modalRef.current.addEventListener("hidden.bs.modal", handleHidden);
@@ -91,7 +80,7 @@ const Modal = ({
       document.body.classList.remove("modal-open");
       document.querySelectorAll(".modal-backdrop").forEach((el) => el.remove());
     };
-  }, [onClose]);
+  }, []);
 
   useEffect(() => {
     if (!ensureInstance()) return;

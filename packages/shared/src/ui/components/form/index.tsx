@@ -162,8 +162,9 @@ const Form: React.FC<Props> = ({
   const generatedInitialValues = dynamicInputs
     .filter((i) => i.type !== "label")
     .reduce<Record<string, unknown>>((acc, input) => {
-      if (input.defaultValue) {
-        acc[input.name] = input.defaultValue;
+      if (input.defaultValue !== undefined) {
+        acc[input.name] =
+          input.type === "boolean" ? String(input.defaultValue) === "true" : input.defaultValue;
         return acc;
       }
 
@@ -338,6 +339,7 @@ const Form: React.FC<Props> = ({
                   required,
                   min,
                   max,
+                  defaultValue: _defaultValue,
                   // minLength,
                   // maxLength,
                   moneyUnit,
@@ -348,6 +350,8 @@ const Form: React.FC<Props> = ({
                 const triggerError = formik.errors[input.name] && formik.touched[input.name];
 
                 const prefixTexts = prefixText || (type === "phoneNumber" ? "+966" : undefined);
+                const inputProps =
+                  type === "title" ? { ...input, defaultValue: _defaultValue } : input;
 
                 const ErrorView = () => (
                   <small className={triggerError ? "text-danger" : "text-white"}>
@@ -380,7 +384,13 @@ const Form: React.FC<Props> = ({
                         >
                           <InlineElement content={prefixTexts} flip />
 
-                          <InputComp id={input.name} type={type} min={min} max={max} {...input} />
+                          <InputComp
+                            id={input.name}
+                            type={type}
+                            min={min}
+                            max={max}
+                            {...inputProps}
+                          />
 
                           <InlineElement content={moneyUnit ? <MoneyUnit /> : postfixText} />
                         </div>
@@ -429,7 +439,7 @@ const Form: React.FC<Props> = ({
                     >
                       <InlineElement content={prefixTexts} flip />
 
-                      <InputComp id={input.name} type={type} min={min} max={max} {...input} />
+                      <InputComp id={input.name} type={type} min={min} max={max} {...inputProps} />
 
                       <InlineElement content={moneyUnit ? <MoneyUnit /> : postfixText} />
                     </div>

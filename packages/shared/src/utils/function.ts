@@ -124,3 +124,27 @@ export const capitalizeSentence = (sentence: string) => {
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
 };
+
+export const columnsLgWidth = (count: number) => {
+  switch (count) {
+    case 1:
+      return 12;
+    case 2:
+      return 6;
+    case 3:
+      return 4;
+    case 4:
+      return 3;
+    default:
+      return 2;
+  }
+};
+
+export const columnsMdWidth = (count: number) => {
+  switch (count) {
+    case 1:
+      return 12;
+    default:
+      return 6;
+  }
+};

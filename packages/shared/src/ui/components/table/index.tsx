@@ -59,11 +59,43 @@ export interface SelectOption {
   label?: string;
 }
 
+export interface InputType {
+  type?:
+    | "text"
+    | "textarea"
+    | "richText"
+    | "password"
+    | "email"
+    | "number"
+    | "numberText"
+    | "range"
+    | "phoneNumber"
+    | "otp"
+    | "date"
+    | "year"
+    | "month"
+    | "weekday"
+    | "time"
+    | "datetime"
+    | "file"
+    | "select"
+    | "selectMany"
+    | "checkbox"
+    | "checkboxes"
+    | "radio"
+    | "boolean"
+    | "color"
+    | "location"
+    | "rating"
+    | "multipleEntries"
+    | "label"
+    | "custom";
+}
 export interface TableColumn extends InputProps {
   label: string;
   name: string;
   render?: (row: Row) => string | React.ReactNode;
-  type?: string;
+  type?: InputType["type"];
   timestampFormat?: string;
   options?: SelectOption[];
   moneyUnit?: boolean;
@@ -71,6 +103,7 @@ export interface TableColumn extends InputProps {
   defaultFilterValue?: string | number | boolean;
   defaultFilterOperator?: string;
   defaultFilterDataType?: string;
+  excludeInTable?: boolean;
 }
 
 export interface TableProps {
@@ -91,7 +124,7 @@ interface DataRenderProps {
   row?: Row;
   data: string;
   render?: (row: Row) => string | React.ReactNode;
-  type?: string;
+  type?: InputType["type"];
   timestampFormat?: string;
   options?: { value: string | number; label?: string }[];
   name: string;
@@ -171,6 +204,12 @@ export const DataRender = ({
           .locale(i18n.language)
           .format(timestampFormat || viewDateFormat)
       );
+    case "datetime":
+      return wrap(
+        moment(data)
+          .locale(i18n.language)
+          .format(timestampFormat || (viewDateFormat + ", " + viewTimeFormat).trim())
+      );
     case "time":
       return wrap(
         moment("2025-06-08T" + data)
@@ -233,36 +272,36 @@ export const DataRender = ({
           <FontAwesomeIcon icon={faLocationPin} />
         </a>
       );
-    case "image":
-      return wrap(
-        <FontAwesomeIcon icon={faEye} role="button" onClick={() => triggerFilePreview(data)} />
-      );
-    case "avatar":
-      return wrap(
-        <img
-          src={data}
-          alt={name}
-          style={{ width: "32px", height: "32px", borderRadius: "50%", objectFit: "cover" }}
-        />
-      );
-    case "badge":
-      return wrap(<span className="badge bg-primary">{data}</span>);
-    case "progress": {
-      const value = Math.max(0, Math.min(100, Number(data) || 0));
-      return wrap(
-        <div className="progress" style={{ height: "8px", minWidth: "120px" }}>
-          <div
-            className="progress-bar"
-            role="progressbar"
-            style={{ width: `${value}%` }}
-            aria-valuenow={value}
-            aria-valuemin={0}
-            aria-valuemax={100}
-          />
-        </div>
-      );
-    }
-    case "stars": {
+    // case "image":
+    //   return wrap(
+    //     <FontAwesomeIcon icon={faEye} role="button" onClick={() => triggerFilePreview(data)} />
+    //   );
+    // case "avatar":
+    //   return wrap(
+    //     <img
+    //       src={data}
+    //       alt={name}
+    //       style={{ width: "32px", height: "32px", borderRadius: "50%", objectFit: "cover" }}
+    //     />
+    //   );
+    // case "badge":
+    //   return wrap(<span className="badge bg-primary">{data}</span>);
+    // case "progress": {
+    //   const value = Math.max(0, Math.min(100, Number(data) || 0));
+    //   return wrap(
+    //     <div className="progress" style={{ height: "8px", minWidth: "120px" }}>
+    //       <div
+    //         className="progress-bar"
+    //         role="progressbar"
+    //         style={{ width: `${value}%` }}
+    //         aria-valuenow={value}
+    //         aria-valuemin={0}
+    //         aria-valuemax={100}
+    //       />
+    //     </div>
+    //   );
+    // }
+    case "rating": {
       const starsToDisplay = [1, 2, 3, 4, 5];
       return wrap(
         <div className="d-flex">
@@ -276,6 +315,14 @@ export const DataRender = ({
         </div>
       );
     }
+    case "boolean":
+      return (
+        <h5>
+          <div className={"badge bg-" + (data === "true" ? "success" : "danger")}>
+            {data === "true" ? "Yes" : "No"}
+          </div>
+        </h5>
+      );
     case "custom":
       return wrap(render && row ? render(row) : data);
     default:
@@ -631,6 +678,19 @@ const DynamicTable: React.FC<Props> = ({
   const effectiveViewMode =
     manualViewMode === "auto" ? (isSmallScreen ? "cards" : "table") : manualViewMode;
   const visibleColumns = orderedColumns.filter((c) => columnsToShow.includes(c.name));
+  const hasActionsColumn = Boolean((extraActions && extraActions()?.length) || haveDefaultActions);
+  const tableColumnCount =
+    visibleColumns.length + 2 + (detailsPanelRender ? 1 : 0) + (hasActionsColumn ? 1 : 0);
+  const compactColumnStyle: React.CSSProperties = {
+    width: "1%",
+    minWidth: "2.75rem",
+    whiteSpace: "nowrap",
+  };
+  const rowNumberColumnStyle: React.CSSProperties = {
+    width: "1%",
+    minWidth: "3.25rem",
+    whiteSpace: "nowrap",
+  };
 
   const toggleExpandedRow = (rowId: string) => {
     setExpandedRowIds((prev) =>
@@ -640,8 +700,8 @@ const DynamicTable: React.FC<Props> = ({
 
   return (
     <div
-      className="overflow-x-auto mx-auto"
-      style={{ maxWidth: "90vw", minHeight: fitHeight ? undefined : "60vh" }}
+      className="w-100 mx-auto"
+      style={{ maxWidth: "100%", minHeight: fitHeight ? undefined : "60vh" }}
     >
       <div className="d-flex justify-content-end gap-2 mb-2">
         <div className="btn-group btn-group-sm" role="group" aria-label="view-mode">
@@ -703,7 +763,7 @@ const DynamicTable: React.FC<Props> = ({
           <table className="table mt-2 w-100">
             <thead className="table-light">
               <tr>
-                <th colSpan={columnsToShow.length + 2}>
+                <th colSpan={Math.max(tableColumnCount - 1, 1)}>
                   <div className="d-flex gap-2 align-items-center">
                     {(searchProp || columns.length > 0) && (
                       <InputComp
@@ -762,12 +822,12 @@ const DynamicTable: React.FC<Props> = ({
                   </div>
                 </th>
 
-                <th colSpan={haveDefaultActions ? 2 : 1}>
+                <th colSpan={1}>
                   <div className="d-flex justify-content-end align-items-center">
                     <ExportModal data={data} columns={columns} exportOptions={exportOptions} />
 
                     <CustomItemsDropdownComp
-                      start
+                      menuClassName="text-wrap"
                       button={<FontAwesomeIcon icon={faColumns} className="ms-1 text-muted" />}
                       list={orderedColumns.map((col, index) => {
                         const draggable = columnsToShow.includes(col.name);
@@ -775,7 +835,7 @@ const DynamicTable: React.FC<Props> = ({
                         return (
                           <li
                             key={col.name} // use stable key
-                            className="dropdown-item d-flex align-items-center"
+                            className="dropdown-item d-flex align-items-center text-wrap"
                             draggable={draggable}
                             onDragStart={() => handleDragStart(index)}
                             onDragEnter={() => handleDragEnter(index)}
@@ -820,15 +880,17 @@ const DynamicTable: React.FC<Props> = ({
               </tr>
 
               <tr>
-                {detailsPanelRender ? <th className="py-3" scope="col"></th> : null}
-                <th className="py-3" scope="col">
+                {detailsPanelRender ? (
+                  <th className="py-3 text-center" scope="col" style={compactColumnStyle}></th>
+                ) : null}
+                <th className="py-3 text-center" scope="col" style={compactColumnStyle}>
                   <input
                     type="checkbox"
                     checked={allPageSelected}
                     onChange={(e) => toggleSelectAllCurrentPage(e.target.checked)}
                   />
                 </th>
-                <th className="py-3" scope="col">
+                <th className="py-3 text-center" scope="col" style={rowNumberColumnStyle}>
                   #
                 </th>
 
@@ -846,7 +908,7 @@ const DynamicTable: React.FC<Props> = ({
                   </th>
                 ))}
 
-                {(extraActions && extraActions()?.length) || haveDefaultActions ? (
+                {hasActionsColumn ? (
                   <th className="py-3" scope="col">
                     {t("Global.Labels.Action")}
                   </th>
@@ -857,10 +919,7 @@ const DynamicTable: React.FC<Props> = ({
             <tbody>
               {data.length === 0 && (
                 <tr>
-                  <td
-                    colSpan={columnsToShow.length + 3 + (detailsPanelRender ? 1 : 0)}
-                    className="text-center py-4"
-                  >
+                  <td colSpan={tableColumnCount} className="text-center py-4">
                     {t("Global.Labels.NoData")}
                   </td>
                 </tr>
@@ -873,9 +932,9 @@ const DynamicTable: React.FC<Props> = ({
                   <Fragment key={rowId}>
                     <tr className="align-middle">
                       {detailsPanelRender ? (
-                        <td className="py-3">
+                        <td className="py-3 text-center" style={compactColumnStyle}>
                           <button
-                            className="btn btn-sm btn-link text-decoration-none"
+                            className="btn btn-sm btn-link text-decoration-none p-0"
                             onClick={() => toggleExpandedRow(rowId)}
                             type="button"
                           >
@@ -883,14 +942,16 @@ const DynamicTable: React.FC<Props> = ({
                           </button>
                         </td>
                       ) : null}
-                      <td className="py-3">
+                      <td className="py-3 text-center" style={compactColumnStyle}>
                         <input
                           type="checkbox"
                           checked={row.id ? selectedRowIds.includes(`${row.id}`) : false}
                           onChange={(e) => toggleSelectOne(`${row.id || ""}`, e.target.checked)}
                         />
                       </td>
-                      <td className="py-3">{i + pageSize * (currentPage - 1) + 1}</td>
+                      <td className="py-3 text-center" style={rowNumberColumnStyle}>
+                        {i + pageSize * (currentPage - 1) + 1}
+                      </td>
 
                       {visibleColumns.map(
                         ({ name, type, options, render, timestampFormat, moneyUnit }, y) => (
@@ -909,7 +970,7 @@ const DynamicTable: React.FC<Props> = ({
                         )
                       )}
 
-                      {(extraActions && extraActions()?.length) || haveDefaultActions ? (
+                      {hasActionsColumn ? (
                         <td className="py-3">
                           <div className="d-flex">
                             {extraActions &&
@@ -990,10 +1051,7 @@ const DynamicTable: React.FC<Props> = ({
                     </tr>
                     {detailsPanelRender && expanded ? (
                       <tr>
-                        <td
-                          colSpan={visibleColumns.length + (haveDefaultActions ? 4 : 3)}
-                          className="bg-light"
-                        >
+                        <td colSpan={tableColumnCount} className="bg-light">
                           <div className="p-3">{detailsPanelRender(row)}</div>
                         </td>
                       </tr>
@@ -1006,13 +1064,7 @@ const DynamicTable: React.FC<Props> = ({
             {data.length !== 0 && localPaginationMode === "pagination" && (
               <tfoot>
                 <tr>
-                  <th
-                    colSpan={
-                      columnsToShow.length +
-                      (haveDefaultActions ? 3 : 2) +
-                      (detailsPanelRender ? 1 : 0)
-                    }
-                  >
+                  <th colSpan={tableColumnCount}>
                     <div className="d-flex justify-content-between">
                       <div className="my-auto text-muted me-3">
                         <small>
@@ -1032,7 +1084,7 @@ const DynamicTable: React.FC<Props> = ({
                                 onClick={() => onPageChange(1)}
                                 disabled={currentPage === 1}
                               >
-                                <FontAwesomeIcon icon={faAnglesRight} />
+                                <FontAwesomeIcon icon={faAnglesLeft} />
                               </button>
                             </li>
 
@@ -1044,7 +1096,7 @@ const DynamicTable: React.FC<Props> = ({
                                 onClick={() => onPageChange(currentPage - 1)}
                                 disabled={currentPage === 1}
                               >
-                                <FontAwesomeIcon icon={faAngleRight} />
+                                <FontAwesomeIcon icon={faAngleLeft} />
                               </button>
                             </li>
 
@@ -1084,7 +1136,7 @@ const DynamicTable: React.FC<Props> = ({
                                 onClick={() => onPageChange(currentPage + 1)}
                                 disabled={currentPage === pagesCount}
                               >
-                                <FontAwesomeIcon icon={faAngleLeft} />
+                                <FontAwesomeIcon icon={faAngleRight} />
                               </button>
                             </li>
 
@@ -1096,7 +1148,7 @@ const DynamicTable: React.FC<Props> = ({
                                 onClick={() => onPageChange(pagesCount)}
                                 disabled={currentPage === pagesCount}
                               >
-                                <FontAwesomeIcon icon={faAnglesLeft} />
+                                <FontAwesomeIcon icon={faAnglesRight} />
                               </button>
                             </li>
                           </ul>

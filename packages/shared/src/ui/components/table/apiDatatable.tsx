@@ -8,6 +8,7 @@ import service, { customFilterProps, formatGetFilters } from "../../../api";
 import { apiCatchGlobalHandler } from "../../../utils/function";
 import Button from "../core/button";
 import Form from "../form";
+import Modal from "../modal";
 
 import DynamicTable, { actionProps, TableColumn } from ".";
 
@@ -45,6 +46,21 @@ interface PersistedState {
   reverse?: boolean;
   paginationMode?: "pagination" | "scroll";
 }
+
+const toFormInput = (input: TableColumn): TableColumn => {
+  const {
+    render: _render,
+    timestampFormat: _timestampFormat,
+    sortable: _sortable,
+    defaultFilterValue: _defaultFilterValue,
+    defaultFilterOperator: _defaultFilterOperator,
+    defaultFilterDataType: _defaultFilterDataType,
+    defaultHide: _defaultHide,
+    ...formInput
+  } = input;
+
+  return formInput;
+};
 
 const ApiDataTable: React.FC<Props> = ({
   dataApiEndpoint,
@@ -87,7 +103,7 @@ const ApiDataTable: React.FC<Props> = ({
   const [searchField, setSearchField] = useState("");
   const [filters, setFilters] = useState<customFilterProps[]>([]);
   const [sortBy, setSortBy] = useState<string | undefined>();
-  const [reverse, setReverse] = useState(false);
+  const [reverse, setReverse] = useState<boolean | undefined>();
   const [selectedRowIds, setSelectedRowIds] = useState<string[]>([]);
   const [paginationMode, setPaginationMode] = useState<"pagination" | "scroll">("pagination");
 
@@ -111,12 +127,13 @@ const ApiDataTable: React.FC<Props> = ({
   // };
 
   const onSuccess = () => {
-    // TODO: Add notification callback prop
-    // addNotification({
-    //   msg: t("Global.Notifications.Successful", {
-    //     action: renderActionLabel(modal.action),
-    //   }),
-    // });
+    // dispatch(
+    //   addNotification({
+    //     msg: t("Global.Notifications.Successful", {
+    //       action: renderActionLabel(modal.action),
+    //     }),
+    //   })
+    // );
     // refresh data
     fetchData();
     setModal({ action: "view", open: false, data: {} });
@@ -129,7 +146,7 @@ const ApiDataTable: React.FC<Props> = ({
         case "create":
           return await service.post(dataApiEndpoint, formData);
         case "update":
-          return await service.put(dataApiEndpoint + `/${formData.id}`, formData);
+          return await service.patch(dataApiEndpoint + `/${formData.id}`, formData);
         case "delete":
           return await service.delete(dataApiEndpoint + `/${formData.id}`);
         default:
@@ -233,7 +250,9 @@ const ApiDataTable: React.FC<Props> = ({
       if (typeof parsed.searchField === "string") setSearchField(parsed.searchField);
       if (Array.isArray(parsed.filters)) setFilters(parsed.filters);
       if (typeof parsed.sortBy === "string") setSortBy(parsed.sortBy);
-      if (typeof parsed.reverse === "boolean") setReverse(parsed.reverse);
+      if (typeof parsed.sortBy === "string" && typeof parsed.reverse === "boolean") {
+        setReverse(parsed.reverse);
+      }
       if (parsed.paginationMode === "pagination" || parsed.paginationMode === "scroll") {
         setPaginationMode(parsed.paginationMode);
       }
@@ -242,7 +261,10 @@ const ApiDataTable: React.FC<Props> = ({
       if (!hasPersistedFilters) {
         const defaultFilters = inputs
           .filter(
-            (item) => item.defaultFilterValue !== undefined && item.defaultFilterValue !== null
+            (item) =>
+              item.defaultFilterValue !== undefined &&
+              item.defaultFilterValue !== null &&
+              !item.excludeInTable
           )
           .map((item) => ({
             field: item.name,
@@ -345,33 +367,41 @@ const ApiDataTable: React.FC<Props> = ({
       .catch(apiCatchGlobalHandler);
   };
 
+  const duplicateInitialValues = (id: string) => {
+    const row = data.find((item) => `${item.id || ""}` === id);
+    if (!row) return {};
+
+    const { id: _id, createdAt: _createdAt, updatedAt: _updatedAt, ...values } = row;
+    return values;
+  };
+
   const handleDuplicate = (id: string) => {
     if (!id) return;
-    const tryDuplicate = async () => {
-      try {
-        await service.post(`${dataApiEndpoint}/${id}/duplicate`);
-      } catch {
-        const item = await service.get<Record<string, unknown>>(`${dataApiEndpoint}/${id}`);
-        const payload = { ...(item.payload || item.data || {}) } as Record<string, unknown>;
-        delete payload.id;
-        await service.post(dataApiEndpoint, payload);
-      }
-    };
-    tryDuplicate()
-      .then(() => fetchData())
-      .catch(apiCatchGlobalHandler);
+
+    const initialValues = duplicateInitialValues(id);
+
+    if (isRouteCrud) {
+      navigate(`${location.pathname.replace(/\/$/, "")}/new`, {
+        state: { initialValues },
+      });
+      return;
+    }
+
+    setModal({ action: "create", open: true, data: initialValues });
   };
 
   const mergedExtraActions = (id?: string) => {
-    const base: actionProps[] = [
-      {
-        label: t("Global.Labels.Duplicate"),
-        icon: faCopy,
-        spread: true,
-        color: "secondary",
-        onClick: (targetId: string) => handleDuplicate(targetId || id || ""),
-      },
-    ];
+    const base: actionProps[] = includeCreate
+      ? [
+          {
+            label: t("Global.Labels.Duplicate"),
+            icon: faCopy,
+            spread: true,
+            color: "secondary",
+            onClick: (targetId: string) => handleDuplicate(targetId || id || ""),
+          },
+        ]
+      : [];
     const userActions = extraActions ? extraActions(id) : [];
     return [...base, ...userActions];
   };
@@ -388,38 +418,35 @@ const ApiDataTable: React.FC<Props> = ({
             : "";
 
   const formSection = (
-    <div className="card border-0 shadow-sm mt-4">
-      <div className="card-body">
-        <h5 className="mb-3">{modalTitle}</h5>
-        <Form
-          inputs={() =>
-            inputs.map((item) => ({
-              ...item,
-              disabled: modal.action === "view" || modal.action === "delete" || item.name === "id",
-              double: true,
-            }))
-          }
-          initialValues={modal.data}
-          onFormSubmit={
-            modal.action === "view"
-              ? undefined
-              : (onFormSubmit as (values?: Record<string, unknown>, reset?: () => void) => void)
-          }
-          submitText={
-            modal.action === "delete" ? t("Global.Labels.Delete", { item: singleItem }) : undefined
-          }
-          submitColor={
-            modal.action === "delete" ? "danger" : modal.action === "update" ? "warning" : "success"
-          }
-        />
-        <div className="text-end mt-3">
-          <Button
-            color="secondary"
-            onClick={() => setModal({ open: false, data: {}, action: "view" })}
-          >
-            {t("Global.Labels.Close")}
-          </Button>
-        </div>
+    <div>
+      <Form
+        inputs={() =>
+          inputs.map((item) => ({
+            ...toFormInput(item),
+            disabled: modal.action === "view" || modal.action === "delete" || item.name === "id",
+            double: true,
+          }))
+        }
+        initialValues={modal.data}
+        onFormSubmit={
+          modal.action === "view"
+            ? undefined
+            : (onFormSubmit as (values?: Record<string, unknown>, reset?: () => void) => void)
+        }
+        submitText={
+          modal.action === "delete" ? t("Global.Labels.Delete", { item: singleItem }) : undefined
+        }
+        submitColor={
+          modal.action === "delete" ? "danger" : modal.action === "update" ? "warning" : "success"
+        }
+      />
+      <div className="text-end mt-3">
+        <Button
+          color="secondary"
+          onClick={() => setModal({ open: false, data: {}, action: "view" })}
+        >
+          {t("Global.Labels.Close")}
+        </Button>
       </div>
     </div>
   );
@@ -451,7 +478,7 @@ const ApiDataTable: React.FC<Props> = ({
 
       <DynamicTable
         data={(data || []) as { id: string }[]}
-        columns={inputs}
+        columns={inputs.filter((input) => !input.excludeInTable)}
         onRowClick={(rowData = {}, action = "") => {
           if (isRouteCrud && rowData.id) {
             const mode = action === "update" ? "edit" : action || "view";
@@ -524,7 +551,17 @@ const ApiDataTable: React.FC<Props> = ({
         )}
       />
 
-      {modal.open && !isRouteCrud ? formSection : null}
+      {!isRouteCrud ? (
+        <Modal
+          name={`crud-${dataApiEndpoint.replace(/[^\w-]/g, "-")}`}
+          title={modalTitle}
+          className="modal-lg"
+          isOpen={modal.open}
+          onClose={() => setModal({ open: false, data: {}, action: "view" })}
+        >
+          {formSection}
+        </Modal>
+      ) : null}
     </div>
   );
 };

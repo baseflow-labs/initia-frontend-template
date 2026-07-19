@@ -1,6 +1,7 @@
+import { TableColumn } from "@initia/shared/ui/components/table";
 import type { TFunction } from "i18next";
 
-export const faqTableColumns = (t: TFunction) => [
+export const faqTableColumns: (t: TFunction) => TableColumn[] = (t: TFunction) => [
   {
     name: "id",
     label: t("Auth.SupportCenter.Admin.Faq.Columns.Id", "ID"),
@@ -30,14 +31,14 @@ export const faqTableColumns = (t: TFunction) => [
     name: "createdAt",
     label: t("Auth.SupportCenter.Admin.Faq.Columns.CreatedAt", "Created At"),
     sortable: true,
-    type: "date",
+    type: "datetime",
     excludeInForm: true,
   },
   {
     name: "updatedAt",
     label: t("Auth.SupportCenter.Admin.Faq.Columns.UpdatedAt", "Updated At"),
     sortable: true,
-    type: "date",
+    type: "datetime",
     excludeInForm: true,
   },
 ];
