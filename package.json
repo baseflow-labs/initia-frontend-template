@@ -21,6 +21,7 @@
     "generate:user-service": "node scripts/generators/generate-user-service.js",
     "generate:resource": "node scripts/generators/generate-resource.js",
     "generate:user-service:example": "node scripts/generators/generate-user-service.js --spec scripts/specs/user-service.example.json",
+    "template:check": "node ../generator/check-template-readiness.js",
     "dev": "corepack pnpm --filter @initia/user-app --filter @initia/admin-app --filter @initia/landing-page --filter @initia/help-center --filter @initia/documentation --parallel dev",
     "build:user": "corepack pnpm --filter @initia/user-app build",
     "build:admin": "corepack pnpm --filter @initia/admin-app build",

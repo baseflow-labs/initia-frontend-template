@@ -51,6 +51,8 @@ import MailingSettingsView from "@/views/auth/systemSettings/mailing";
 import SystemMetadataSettingsView from "@/views/auth/systemSettings/metadata";
 import UserActivityView from "@/views/auth/systemSettings/userActivity";
 import UsersView from "@/views/auth/systemSettings/users";
+// <initia-generated-admin-app-view-imports>
+// </initia-generated-admin-app-view-imports>
 
 interface AuthRoute {
   name: string;
@@ -187,6 +189,8 @@ const AuthLayout = () => {
       route: "/messaging",
       view: <MessagingView />,
     },
+    // <initia-generated-admin-app-routes>
+    // </initia-generated-admin-app-routes>
   ];
 
   const showSidebar = !location.pathname.includes("apply");

@@ -32,6 +32,8 @@ import UserProfileView from "../../views/auth/user/profile";
 import UserSettingsView from "../../views/auth/user/settings";
 import AuthFooter from "../common/footer";
 import { useAppSelector } from "../../store/hooks";
+// <initia-generated-user-app-view-imports>
+// </initia-generated-user-app-view-imports>
 
 import { FilePreviewModal } from "./globalModal";
 import DashboardNavbar from "./navs/navbar";
@@ -87,6 +89,8 @@ const AuthLayout = () => {
     "template-examples-data-table-id": <TemplateDataTableRecordView />,
     "template-examples-forms": <TemplateFormExamplesView />,
     "template-examples-form-of-forms": <FormOfFormsView />,
+    // <initia-generated-user-app-view-map>
+    // </initia-generated-user-app-view-map>
   };
   const iconMap: Record<string, IconProp> = {
     dashboard: faDashboard,
@@ -105,6 +109,8 @@ const AuthLayout = () => {
     "template-examples-data-table-id": faTable,
     "template-examples-forms": faWpforms,
     chatbot: faGear,
+    // <initia-generated-user-app-icon-map>
+    // </initia-generated-user-app-icon-map>
   };
   const authRoutes: AuthRoute[] = USER_FEATURES.map((feature) => ({
     name: t(feature.titleKey),

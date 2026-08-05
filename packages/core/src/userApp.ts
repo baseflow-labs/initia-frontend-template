@@ -99,6 +99,8 @@ export const USER_FEATURES: UserFeatureDefinition[] = [
     showInNav: true,
     fixed: true,
   },
+  // <initia-generated-user-features>
+  // </initia-generated-user-features>
 ];
 
 export const canAccessUserFeature = (
