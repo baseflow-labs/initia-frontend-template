@@ -4,6 +4,7 @@ import { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import * as authApi from "../../api/auth";
+import { getDemoModeStatus } from "../../api/demoMode";
 import type { AuthResponse } from "../../types/auth";
 import BelowInputButton from "../../ui/components/button/belowInput";
 import Button from "../../ui/components/core/button";
@@ -22,6 +23,9 @@ const LoginView = ({ onLoginSuccess }: LoginViewProps) => {
     "microsoft",
   ]);
   const [emailLoginEnabled, setEmailLoginEnabled] = useState(true);
+  const [demoModeEnabled, setDemoModeEnabled] = useState(
+    import.meta.env.VITE_APP_ENVIRONMENT === "staging"
+  );
 
   const formInputs = () => [
     {
@@ -54,6 +58,17 @@ const LoginView = ({ onLoginSuccess }: LoginViewProps) => {
     };
     authApi
       .login(credentials)
+      .then((res) => {
+        if (res.payload) {
+          onLoginSuccess?.(res.payload);
+        }
+      })
+      .catch(apiCatchGlobalHandler);
+  };
+
+  const onDemoLogin = () => {
+    authApi
+      .demoLogin("admin")
       .then((res) => {
         if (res.payload) {
           onLoginSuccess?.(res.payload);
@@ -118,6 +133,16 @@ const LoginView = ({ onLoginSuccess }: LoginViewProps) => {
       });
   }, []);
 
+  useEffect(() => {
+    getDemoModeStatus()
+      .then((res) => {
+        setDemoModeEnabled(Boolean(res.payload?.enabled));
+      })
+      .catch(() => {
+        setDemoModeEnabled(import.meta.env.VITE_APP_ENVIRONMENT === "staging");
+      });
+  }, []);
+
   const providerMeta: Record<
     authApi.OAuthProvider,
     { label: string; icon: typeof faGoogle | typeof faApple | typeof faMicrosoft }
@@ -159,16 +184,8 @@ const LoginView = ({ onLoginSuccess }: LoginViewProps) => {
             onFormSubmit={onSubmit}
           />
 
-          {import.meta.env.VITE_APP_ENVIRONMENT === "staging" ? (
-            <Button
-              className="w-100 mt-3"
-              onClick={() =>
-                onSubmit({
-                  email: "example@example.com",
-                  password: "s5Rsa2?#sd1154",
-                })
-              }
-            >
+          {demoModeEnabled ? (
+            <Button className="w-100 mt-3" onClick={onDemoLogin}>
               {t("Public.Login.Labels.DummyLogin")}
             </Button>
           ) : (

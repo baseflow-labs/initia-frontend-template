@@ -26,6 +26,10 @@ const login = async (credentials: loginCredentials): Promise<EnvelopeResponse<Au
   return await api.post<AuthResponse>(mainPath + "/login", credentials);
 };
 
+const demoLogin = async (role: string = "admin"): Promise<EnvelopeResponse<AuthResponse>> => {
+  return await api.post<AuthResponse>(mainPath + "/dummy-login", { role });
+};
+
 const logout = async () => {
   return await api.post(mainPath + "/logout");
 };
@@ -54,6 +58,7 @@ const register = async (userData: registerProps) => {
 
 export {
   isAuthorized,
+  demoLogin,
   login,
   logout,
   register,
